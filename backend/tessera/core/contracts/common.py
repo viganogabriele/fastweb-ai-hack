@@ -1,9 +1,17 @@
 """Shared boundary types. All instants are aware and serialized in UTC."""
 
 from datetime import UTC, datetime
-from typing import Annotated, Literal
+from typing import Annotated, Literal, Self
 
-from pydantic import AfterValidator, AwareDatetime, BaseModel, ConfigDict, Field, FiniteFloat
+from pydantic import (
+    AfterValidator,
+    AwareDatetime,
+    BaseModel,
+    ConfigDict,
+    Field,
+    FiniteFloat,
+    model_validator,
+)
 
 SCHEMA_VERSION = "1.0"
 
@@ -61,6 +69,12 @@ class StockFact(SourceRecord):
     reservations_included: bool | None
     quality_holds_included: bool | None
     source_ref: SourceRef
+
+    @model_validator(mode="after")
+    def consistent_source(self) -> Self:
+        if self.source_refs != (self.source_ref,):
+            raise ValueError("stock source_refs must contain exactly its source_ref")
+        return self
 
 
 def ordered(start: datetime | float | None, end: datetime | float | None) -> None:

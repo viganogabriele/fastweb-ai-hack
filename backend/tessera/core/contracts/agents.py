@@ -11,7 +11,6 @@ from .common import (
     Mode,
     NonNegative,
     Text,
-    ordered,
     require_pair,
 )
 
@@ -47,6 +46,16 @@ class Decision(DerivedRecord):
     request_ref: ArtifactRef | None = None
     response_ref: ArtifactRef | None = None
 
+    @model_validator(mode="after")
+    def rejected_has_no_dispatch(self) -> Self:
+        if self.decision == "rejected" and (
+            self.dispatch_status != "draft"
+            or self.request_ref is not None
+            or self.response_ref is not None
+        ):
+            raise ValueError("rejected decisions cannot be dispatched or hold dispatch references")
+        return self
+
 
 class Clarification(DerivedRecord):
     case_id: Text
@@ -61,7 +70,6 @@ class Clarification(DerivedRecord):
     @model_validator(mode="after")
     def answer(self) -> Self:
         require_pair(self.answer_document_id, self.answered_at)
-        ordered(self.asked_at, self.answered_at)
         if self.answered_at is not None and self.answered_at <= self.asked_at:
             raise ValueError("answer must become available strictly after the question")
         if (self.status == "answered") != (self.answered_at is not None):

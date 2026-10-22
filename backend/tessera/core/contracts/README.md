@@ -39,7 +39,8 @@ PLT-06 adds API routes and generates web types. Schema files are derived output.
   interval. Structural Pydantic validation alone cannot resolve external records.
 - Artifact references contain the exact `kind` (public DTO class name), `id` and
   `version`. Source references contain URI, content hash and an optional row/cell
-  locator. Stable IDs/hashes, referential integrity, input availability maxima and
+  locator. A stock fact's singular source and common source collection must agree.
+  Stable IDs/hashes, referential integrity, input availability maxima and
   run/scenario isolation are computed or checked by producers/repository, not invented
   by model defaults. Empty reference collections remain explicit rather than omitted.
 - An unresolved link has no selected target or level; candidates retain their level
@@ -47,9 +48,13 @@ PLT-06 adds API routes and generates web types. Schema files are derived output.
   target a whole `SourceDocument`.
 - Missing forecast and scenario values remain null. Computed/unchanged forecasts
   require complete daily coverage; unchanged scenarios equal baseline. Scenarios
-  are ordered, nonnegative and distinguish latent from servable demand.
+  are ordered, nonnegative and distinguish latent from servable demand. A
+  `not_estimable` adjustment can retain known baseline points but no quantified
+  scenarios. Computed forecasts require explanatory components.
 - Movement recommendations reject mandatory failed/unknown checks and missing
-  comparison outcomes or cost. The options engine must still generate the full
+  comparison outcomes or cost. Option and baseline outcomes use matching, unique
+  scenario IDs. Rejected decisions cannot carry dispatch effects or references.
+  The options engine must still generate the full
   required check set, validate policy, size allocation and shared resources, and rank
   scenarios. DTO validation does not authorize approval or dispatch. Informational
   options can retain `outcomes=null`.

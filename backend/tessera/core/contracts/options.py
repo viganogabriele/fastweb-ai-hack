@@ -79,6 +79,18 @@ class ActionOption(DerivedRecord):
 
     @model_validator(mode="after")
     def movement(self) -> Self:
+        for outcomes in (self.outcomes, self.baseline_outcomes):
+            if outcomes is not None:
+                ids = [outcome.scenario_id for outcome in outcomes]
+                if len(ids) != len(set(ids)):
+                    raise ValueError("scenario outcomes must have unique scenario ids")
+        if (
+            self.outcomes is not None
+            and self.baseline_outcomes is not None
+            and {outcome.scenario_id for outcome in self.outcomes}
+            != {outcome.scenario_id for outcome in self.baseline_outcomes}
+        ):
+            raise ValueError("option and baseline outcomes must cover the same scenarios")
         is_movement = self.kind in ("replenish_dc", "transfer", "combo")
         if is_movement != bool(self.legs):
             raise ValueError(

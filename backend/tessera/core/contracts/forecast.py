@@ -91,6 +91,12 @@ class ForecastAdjustment(DerivedRecord):
         if any(not self.horizon_start <= day <= self.horizon_end for day in days):
             raise ValueError("forecast dates must lie within the horizon")
         require_reason(self.status, self.reason, ("unchanged", "not_estimable"))
+        if self.status == "not_estimable" and any(
+            point.latent is not None or point.servable is not None for point in self.series
+        ):
+            raise ValueError("not_estimable forecast must not assert quantified scenarios")
+        if self.status == "computed" and not self.components:
+            raise ValueError("computed forecast requires explanatory components")
         if self.status in ("computed", "unchanged"):
             if (
                 self.baseline_ref is None

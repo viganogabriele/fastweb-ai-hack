@@ -58,3 +58,6 @@ def test_stock_unknown_is_not_zero(source_fields):
     assert StockFact(**{**payload, "qty": 0}).qty == 0
     with pytest.raises(ValidationError):
         StockFact(**{**payload, "qty": float("nan")})
+    for refs in ([], [{"uri": "test://other", "content_hash": "other-hash"}]):
+        with pytest.raises(ValidationError, match="source_refs"):
+            StockFact(**{**payload, "source_refs": refs})

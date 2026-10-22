@@ -5,6 +5,7 @@ from tessera.core.contracts import (
     ActionOption,
     Case,
     Clarification,
+    Decision,
     EntityLink,
     EvidenceRelation,
     ForecastAdjustment,
@@ -209,6 +210,103 @@ def test_scenario_order_and_exposure():
         ForecastPoint(
             date="2026-10-23", baseline=None, latent=dict(low=1, base=1, high=1), servable=None
         )
+
+
+def test_not_estimable_preserves_known_baseline_but_cannot_assert_scenarios(derived_fields):
+    payload = forecast_payload(derived_fields)
+    payload.update(status="not_estimable", reason="incomplete vintage")
+    with pytest.raises(ValidationError, match="quantified scenarios"):
+        ForecastAdjustment(**payload)
+    payload["series"] = [dict(date="2026-10-23", baseline=2, latent=None, servable=None)]
+    assert ForecastAdjustment(**payload).series[0].baseline == 2
+
+
+def test_computed_forecast_requires_explanatory_components(derived_fields):
+    payload = forecast_payload(derived_fields)
+    payload["status"] = "computed"
+    with pytest.raises(ValidationError, match="explanatory components"):
+        ForecastAdjustment(**payload)
+    payload["components"] = [
+        dict(
+            type="daily_disaggregation",
+            episode_refs=[],
+            evidence_refs=[REF],
+            params={"weight": 0.2},
+            unit="units",
+            effective_from="2026-10-23T00:00:00Z",
+            effective_until="2026-10-25T00:00:00Z",
+            reference_time="2026-10-22T17:00:00Z",
+            formula_version="uniform-v1",
+            explanation="Uniform weights over open days",
+        )
+    ]
+    assert ForecastAdjustment(**payload).status == "computed"
+
+
+@pytest.mark.parametrize(
+    "changes",
+    [
+        {"dispatch_status": "accepted"},
+        {"dispatch_status": "pending"},
+        {"request_ref": REF},
+        {"response_ref": REF},
+    ],
+)
+def test_rejected_decision_cannot_have_dispatch_effects(derived_fields, changes):
+    payload = dict(
+        **derived_fields,
+        option_id="option-1",
+        input_version_hash="inputs-v1",
+        decision="rejected",
+        by="operator",
+        at="2026-10-22T20:00:00Z",
+        idempotency_key="decision-key-1",
+        dispatch_status="draft",
+    )
+    assert Decision(**payload).decision == "rejected"
+    with pytest.raises(ValidationError, match="cannot be dispatched"):
+        Decision(**{**payload, **changes})
+
+
+def test_outcome_comparisons_require_matching_unique_scenarios(derived_fields):
+    outcome = dict(
+        scenario_id="base",
+        lost_units_dest=1,
+        lost_units_donor=0,
+        leftover_units_dest=0,
+        leftover_units_donor=5,
+        transport_cost_eur=10,
+        demand_basis="servable scenario",
+        size_allocation_basis="declared policy weights",
+    )
+    payload = dict(
+        **derived_fields,
+        case_id="case-1",
+        kind="transfer",
+        forecast_ref=REF,
+        legs=[{**leg_payload(), "cost_eur": 10}],
+        checks=[
+            dict(
+                name="size_demand",
+                status="pass",
+                mandatory=True,
+                detail="verified size curve",
+                source_refs=[REF],
+            )
+        ],
+        outcomes=[outcome],
+        baseline_outcomes=[outcome],
+        assumptions=[],
+        valid_until="2026-10-23T08:00:00Z",
+        recommended=True,
+        rationale="validated comparison",
+        input_version_hash="inputs-v1",
+    )
+    assert ActionOption(**payload).recommended
+    with pytest.raises(ValidationError, match="same scenarios"):
+        ActionOption(**{**payload, "baseline_outcomes": [{**outcome, "scenario_id": "high"}]})
+    with pytest.raises(ValidationError, match="unique scenario ids"):
+        ActionOption(**{**payload, "outcomes": [outcome, outcome]})
 
 
 def test_clarification_answer_has_its_own_later_availability(derived_fields):
