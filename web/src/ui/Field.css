@@ -1,0 +1,30 @@
+.sd-field { display: grid; align-content: start; gap: var(--sd-space-2); min-width: 0; font-size: var(--sd-font-size-body-sm); }
+.sd-field__label { color: var(--sd-color-text-secondary); font-weight: var(--sd-font-weight-medium); }
+.sd-field__wrap { position: relative; min-width: 0; }
+.sd-field__control {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: var(--sd-local-control-height);
+  padding: var(--sd-space-2) var(--sd-space-3);
+  border: 1px solid var(--sd-local-control-border);
+  border-radius: var(--sd-radius-control);
+  color: var(--sd-color-text-primary);
+  background: var(--sd-color-surface-card);
+  font-size: var(--sd-font-size-body-sm);
+  line-height: var(--sd-local-line-height);
+  transition: border-color var(--sd-local-duration) var(--sd-local-ease), background-color var(--sd-local-duration) var(--sd-local-ease);
+}
+.sd-field__control::placeholder { color: var(--sd-color-text-muted); opacity: 1; }
+.sd-field__control:not(:disabled):hover { border-color: var(--sd-color-text-secondary); }
+.sd-field__control[aria-invalid='true'] { border-color: var(--sd-color-state-danger); }
+.sd-field__control:disabled { color: var(--sd-color-text-muted); background: var(--sd-local-disabled-surface); cursor: not-allowed; }
+.sd-field__wrap--has-icon .sd-field__control { padding-inline-start: var(--sd-space-7); }
+.sd-field__icon, .sd-field__chevron { position: absolute; top: 50%; transform: translateY(-50%); color: var(--sd-color-text-secondary); pointer-events: none; }
+.sd-field__icon { inset-inline-start: var(--sd-space-3); display: inline-flex; }
+.sd-field__icon svg, .sd-field__chevron, .sd-field__error svg { width: 1.15em; height: 1.15em; flex-shrink: 0; }
+.sd-field__chevron { inset-inline-end: var(--sd-space-3); }
+.sd-field__select { appearance: none; padding-inline-end: var(--sd-space-7); cursor: pointer; }
+.sd-field__hint { color: var(--sd-color-text-muted); font-size: var(--sd-font-size-caption); }
+.sd-field__error { display: flex; align-items: center; gap: var(--sd-space-2); color: var(--sd-color-state-danger); font-size: var(--sd-font-size-caption); }
+@media (prefers-reduced-motion: reduce) { .sd-field__control { transition: none; } }
