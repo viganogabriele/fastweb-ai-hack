@@ -90,7 +90,7 @@ def test_sap_stock_keeps_only_main_location_and_parses_decimal_commas() -> None:
     assert seen[0].params["date"] == "2026-10-15"  # end of day D-1, certified on D
     assert dict(s.sellable_by_size) == {"0": 3, "1": 1204}
     assert s.snapshot_at == datetime(2026, 10, 15, 23, 59, 59, tzinfo=ROME)
-    assert s.available_at == datetime(2026, 10, 16, 0, 0, tzinfo=ROME)
+    assert s.available_at == datetime(2026, 10, 16, 6, 0, tzinfo=ROME)  # RFC §4.3
     facts = s.stock_facts()
     assert [(f.size, f.qty, f.basis, f.ean) for f in facts] == [
         ("0", 3.0, "sellable", "800001276101"),
@@ -137,6 +137,53 @@ def test_hk_3pl_feed_sums_pick_and_reserve_by_barcode() -> None:
     assert dict(s.sellable_by_size) == {"0": 187}
     assert s.snapshot_at == s.available_at == datetime(2026, 10, 16, 6, 17, tzinfo=HKT)
     assert s.stock_facts()[0].reservations_included is False
+
+
+def test_hk_morning_snapshot_covers_previous_day_and_repeats_are_stale() -> None:
+    # Live mock: date 2026-10-20 -> snapshot 2026-10-21 06:24 HKT; on a missing day (date
+    # 2026-10-18) the feed repeats 2026-10-18 06:18, which is the end of 2026-10-17.
+    fresh = [hk_row("PICK", "5", when="2026-10-21 06:24")]
+    s = client({"/warehouse/v1/stock": (200, {"positions": fresh})}).dc_stock(
+        "HK30", SKU, date(2026, 10, 21)
+    )
+    assert (s.stock_date, s.stale) == (date(2026, 10, 20), False)
+    repeated = [hk_row("PICK", "5", when="2026-10-18 06:18")]
+    s = client({"/warehouse/v1/stock": (200, {"positions": repeated})}).dc_stock(
+        "HK30", SKU, date(2026, 10, 19)
+    )
+    assert (s.stock_date, s.stale) == (date(2026, 10, 17), True)
+
+
+def test_hk_fractional_quantity_is_unparseable() -> None:
+    rows = [hk_row("PICK", "5.5", when="2026-10-16 06:17")]
+    c = client({"/warehouse/v1/stock": (200, {"positions": rows})})
+    assert c.dc_stock("HK30", SKU, date(2026, 10, 16)).reason == "unparseable"
+
+
+def test_atp_without_a_row_for_the_size_is_unknown_not_zero() -> None:
+    # Live mock: zero stock comes back as an explicit row with atp 0; no row = no record.
+    snapshot = {"snapshot": "2026-10-19T06:00:00", "stale": False, "totalAtp": 0}
+    c = client({"/warehouse/v1/atp": (200, snapshot | {"positions": []})})
+    assert c.atp("IT10", SKU, date(2026, 10, 20), size="9").reason == "no_position"
+    row = {
+        "plant": "IT10",
+        "size": "1",
+        "unrestricted": 0,
+        "openDeliveries": 0,
+        "ecomReserve": 0,
+        "blocked": 0,
+        "atp": 0,
+    }
+    c = client({"/warehouse/v1/atp": (200, snapshot | {"positions": [row]})})
+    assert c.atp("IT10", SKU, date(2026, 10, 20), size="0").reason == "no_position"
+    zero = c.atp("IT10", SKU, date(2026, 10, 20), size="1")
+    assert [f.qty for f in zero.stock_facts()] == [0.0]  # explicit zero stays zero
+
+
+def test_no_lane_is_its_own_reason() -> None:
+    # Live mock: GET /logistics/v1/lanes?origin=IT10&dest=IT10 -> 200 {"error": "NO_LANE"}
+    c = client({"/logistics/v1/lanes": (200, {"error": "NO_LANE"})})
+    assert c.lane("IT10", "MIL01", date(2026, 10, 20)).reason == "no_lane"
 
 
 def test_hk_snapshot_after_as_of_is_rejected() -> None:

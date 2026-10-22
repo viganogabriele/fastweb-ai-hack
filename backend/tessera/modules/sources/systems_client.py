@@ -10,7 +10,11 @@ Each system has its own quirks, handled here and nowhere else:
 - 3PL feed (HK30): one row per location type (`PICK`, `RESERVE`, `ECOM`, `RETURNS`), size from
   the barcode, snapshot time in HKT.
 - ATP: `asOf` returns the last snapshot on or before that day; snapshot times are plant-local.
-- Errors can come back as HTTP 200 with an `error` field (`NO_SNAPSHOT`).
+- Errors can come back as HTTP 200 with an `error` field (`NO_SNAPSHOT`, `NO_LANE`).
+- ATP lists zero-stock sizes as explicit rows, so a missing row means "no record", not zero.
+- SAP end-of-day stock is published at 06:00 local the next day (RFC §4.3 prototype convention).
+  The 3PL snapshot taken on the morning of D+1 is the stock at the end of D; on missing days the
+  feed repeats the previous snapshot, flagged `stale`.
 - Lanes have no time filter: a lane reviewed after `as_of` is `unknown`. Observed P50/P90 cover
   the whole period, so they are not knowable in a replay and are dropped (contract days only).
 
@@ -37,12 +41,16 @@ DC_ALIASES = {"DC-IT-CSG": "IT10", "DC-US-NJ": "US20", "DC-HK-TKO": "HK30"}
 SAP_SELLABLE_LGORT = "0001"
 HK_SELLABLE_TYPES = frozenset({"PICK", "RESERVE"})
 WEEKDAYS = ("MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN")
+EOD_PUBLISHED_AT = time(6, 0)  # local time on the next day, RFC §4.3
+BODY_ERRORS: dict[str, "UnknownReason"] = {"NO_SNAPSHOT": "no_snapshot", "NO_LANE": "no_lane"}
 
 UnknownReason = Literal[
     "bad_request",
     "lane_reviewed_after_as_of",
     "no_extraction",
+    "no_lane",
     "no_pickup_day",
+    "no_position",
     "no_snapshot",
     "not_found",
     "rate_limited",
@@ -160,6 +168,7 @@ class DcStockSnapshot:
     sellable_by_size: Mapping[str, int]
     ean_by_size: Mapping[str, str]
     source_ref: SourceRef
+    stale: bool = False  # the feed repeated an older snapshot than the requested day
 
     def stock_facts(self) -> tuple[StockFact, ...]:
         # SAP unrestricted still includes open deliveries; the 3PL "Available" is net of them.
@@ -273,6 +282,8 @@ class SystemsClient:
             positions = tuple(self._atp_position(p, sku) for p in body["positions"])
             if any(p.plant != plant for p in positions):
                 return Unknown("unparseable", f"ATP positions for another plant than {plant}")
+            if not positions or (size is not None and all(p.size != size for p in positions)):
+                return Unknown("no_position", f"{plant} {sku} size={size}")
             snapshot_at = datetime.fromisoformat(body["snapshot"]).replace(tzinfo=tz)
         except (KeyError, TypeError, ValueError) as e:
             return Unknown("unparseable", repr(e))
@@ -368,9 +379,7 @@ class SystemsClient:
         if not isinstance(body, dict):
             return Unknown("unparseable", "response is not a JSON object")
         if "error" in body:
-            reason: UnknownReason = (
-                "no_snapshot" if body["error"] == "NO_SNAPSHOT" else "bad_request"
-            )
+            reason = BODY_ERRORS.get(body["error"], "bad_request")
             return Unknown(reason, str(body.get("message", body["error"])))
         uri = f"systems:{path}?{urlencode(sorted(params.items()))}"
         return body, SourceRef(uri=uri, content_hash=hashlib.sha256(r.content).hexdigest())
@@ -412,7 +421,7 @@ class SystemsClient:
             if row["LGORT"] == SAP_SELLABLE_LGORT:
                 sellable[size] += _sap_qty(row["LABST"], plant)
         snapshot_at = datetime.combine(stock_date, time(23, 59, 59), tz)
-        available_at = datetime.combine(stock_date + timedelta(days=1), time(0), tz)
+        available_at = datetime.combine(stock_date + timedelta(days=1), EOD_PUBLISHED_AT, tz)
         return DcStockSnapshot(
             plant, sku, stock_date, snapshot_at, available_at, sellable, eans, ref
         )
@@ -439,14 +448,15 @@ class SystemsClient:
             sellable.setdefault(size, 0)
             times.add(row["Snapshot Time (HKT)"])
             if row["Location Type"] in HK_SELLABLE_TYPES:
-                sellable[size] += int(float(row["Available Qty"]))
+                sellable[size] += _whole_units(row["Available Qty"])
         if len(times) != 1:
             return Unknown("unparseable", f"{len(times)} snapshot times in one feed")
         snapshot_at = datetime.strptime(times.pop(), "%Y-%m-%d %H:%M").replace(tzinfo=tz)
         if snapshot_at.date() > as_of:
             return Unknown("snapshot_after_as_of", snapshot_at.isoformat())
+        covers = snapshot_at.date() - timedelta(days=1)  # morning of D+1 = end of day D
         return DcStockSnapshot(
-            plant, sku, stock_date, snapshot_at, snapshot_at, sellable, eans, ref
+            plant, sku, covers, snapshot_at, snapshot_at, sellable, eans, ref, covers < stock_date
         )
 
 
@@ -496,6 +506,13 @@ def _sap_qty(value: str, plant: str) -> int:
     if frac.strip("0"):
         raise ValueError(f"fractional stock quantity {value!r}")
     return int(whole or "0")
+
+
+def _whole_units(value: object) -> int:
+    qty = float(str(value).replace(",", ""))
+    if qty < 0 or qty != int(qty):
+        raise ValueError(f"stock quantity must be a whole number >= 0, got {value!r}")
+    return int(qty)
 
 
 def _pickup_days(value: object) -> frozenset[int]:
