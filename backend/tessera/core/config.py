@@ -5,7 +5,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Literal
 
-from pydantic import SecretStr, field_validator
+from pydantic import Field, SecretStr, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -27,8 +27,12 @@ class Settings(BaseSettings):
     # Fastweb. The URL is part of every transcription cache key, so keep the shared default.
     asr_base_url: str = "https://hack-sst.lorenzocorallo.net/v1"
     asr_api_key: SecretStr | None = None
-    asr_model: str = "whisper-large-v3-turbo"
-    asr_timeout_seconds: float = 120
+    # Enters the cache key; the server ignores it and runs its own model. Keep the name the
+    # earlier .env.example already set, or existing .env files would miss every recording.
+    asr_model: str = "openai/whisper-large-v3-turbo"
+    asr_timeout_seconds: float = Field(default=120, gt=0, allow_inf_nan=False)
+    # Server limit (tools/asr-server ASR_MAX_UPLOAD_MB): refuse before uploading.
+    asr_max_upload_mb: int = Field(default=25, gt=0)
     llm_mode: Literal["live", "record", "replay"] = "replay"
     # Per-run provider allowance (RFC §4.7.2); raise via env for full record runs.
     llm_max_calls: int = 100

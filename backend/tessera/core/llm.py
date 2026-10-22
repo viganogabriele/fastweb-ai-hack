@@ -67,6 +67,13 @@ class Transcript(BaseModel):
     duration: float | None = Field(default=None, ge=0, allow_inf_nan=False)
     segments: tuple[TranscriptSegment, ...]
 
+    @model_validator(mode="after")
+    def in_order(self) -> "Transcript":
+        starts = [segment.start for segment in self.segments]
+        if starts != sorted(starts):
+            raise ValueError("segments out of order")
+        return self
+
 
 @dataclass
 class CallBudget:
@@ -292,7 +299,8 @@ class LLMClient:
                         self.traces.append(trace)
                         if status not in (429, 503) or attempt == self._max_retries:
                             raise LLMCallFailed(f"LLM provider failure (status={status})") from None
-                        delay = 2**attempt
+                        # A busy ASR server is running a transcription of several seconds.
+                        delay = (5 if asr else 1) * 2**attempt
                         if delay >= self._remaining():
                             raise BudgetExceeded("LLM retry exceeds deadline") from None
                         self._sleep(delay)
@@ -460,6 +468,10 @@ class LLMClient:
         audio = path.read_bytes()
         if not audio:
             raise ValueError("empty audio file")
+        if len(audio) > self.settings.asr_max_upload_mb * 2**20:
+            raise ValueError(f"audio larger than {self.settings.asr_max_upload_mb} MB")
+        language = (language or "").strip().lower() or None
+        prompt = prompt or None
         audio_format = path.suffix.lower().lstrip(".")
         payload = {
             "model": model or self.settings.asr_model,
