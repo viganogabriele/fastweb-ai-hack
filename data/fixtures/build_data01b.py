@@ -7,9 +7,10 @@ Run from the repo root after DATA-01a (rewrites `data/fixtures/{links,cases,fore
 Everything is derived from the DATA-01a documents and observations, the ERP catalog and the
 forecast vintages in `generated/sources/erp/`, and `config/domain.yaml`. Links, relations and
 cases are written by hand here: they are what correct INT-01/02/03 modules should return, not
-model output. Baselines are computed with FC-01 `disaggregate` from the vintage available at the
-time. Only dev stores, only `generated/sources/`, no look-ahead: each record is available at the
-latest availability of its inputs.
+model output. Baselines belong to the fixture run: D is the run's `as_of` in the store's time zone,
+the horizon is D+1..D+7 and the vintage is the latest one available at `as_of` (RFC §4.9), split per
+day with FC-01 `disaggregate`. Only dev stores, only `generated/sources/`, no look-ahead: each
+record is available at the latest availability of its inputs, forecast vintage included.
 """
 
 import csv
@@ -446,21 +447,25 @@ def weekly_units(path: Path, store: str, sku: str) -> dict[date, float]:
     return {week: values.pop() for week, values in rows.items()}
 
 
-def build_forecasts(cases: list[Case]) -> list[ForecastAdjustment]:
+def build_forecasts(cases: list[Case], as_of: datetime) -> list[ForecastAdjustment]:
+    """Baselines of the run at `as_of`: D+1..D+7 from the vintage available at `as_of`."""
     by_id = {c.id: c for c in cases}
     days = POLICY["horizon"]["days"]["value"]
+    stores = {r["store_id"]: r for r in read_csv(MASTER / "stores.csv")}
     adjustments = []
     for label in CASES:
         case = by_id[label["id"]]
         assert case.store_id is not None and case.available_at is not None
+        assert case.available_at <= as_of
         store = case.store_id
-        path, available = vintage(store, case.available_at)
+        assert stores[store]["timezone"] == TZ[store]
+        assert not stores[store]["closed_dow"], store  # every day open: uniform 1/7
+        path, available = vintage(store, as_of)
         run_date = path.stem.removeprefix("fcst_sku_store_run_")
-        d = case.available_at.astimezone(ZoneInfo(TZ[store])).date()
-        start = d + timedelta(days=1)
+        start = as_of.astimezone(ZoneInfo(TZ[store])).date() + timedelta(days=1)
         for sku in label["forecast_skus"]:
             weekly = weekly_units(path, store, sku)
-            daily = disaggregate(weekly, start, days)  # MIL01 has no closed weekday
+            daily = disaggregate(weekly, start, days)
             assert daily.status == "computed", daily.reasons
             weeks = sorted({p.week_start for p in daily.points})
             locator = f"store_id={store};sku={sku};week_start=" + "|".join(map(str, weeks))
@@ -468,7 +473,7 @@ def build_forecasts(cases: list[Case]) -> list[ForecastAdjustment]:
                 kind="ForecastVintage", id=f"{path.stem}/{store}/{sku}", version=run_date
             )
             fields = derived([case], [file_ref(path, locator)], [baseline])
-            assert fields["available_at"] >= available
+            fields["available_at"] = max(fields["available_at"], available)
             series = []
             for p in daily.points:
                 assert p.baseline is not None
@@ -566,18 +571,31 @@ def build_report(
                     names = " or ".join(c.target_id for c in link.candidates)
                     body.append(f"product is {names} {cite(link, 'candidates')}")
             if case.n_documents > case.n_origin_groups:
+                scope = {"store_id": str(case.store_id)}
                 body.append(
-                    f"{case.n_documents} documents from {case.n_origin_groups} origin "
-                    + cite(case, "n_origin_groups")
+                    f"{case.n_documents} documents {cite(case, 'n_documents', scope=scope)} "
+                    f"from {case.n_origin_groups} origin "
+                    + cite(case, "n_origin_groups", scope=scope)
                 )
             for fc in forecasts:
                 if case.id not in fc.case_ids:
                     continue
                 total = sum(p.baseline or 0.0 for p in fc.series)
+                horizon = {
+                    "period_start": local_midnight(fc.horizon_start, fc.store_id),
+                    "period_end": local_midnight(fc.horizon_end + timedelta(days=1), fc.store_id)
+                    - timedelta(seconds=1),
+                }
                 body.append(
                     f"baseline {fc.sku} {fc.horizon_start:%m-%d}..{fc.horizon_end:%m-%d} "
                     f"{fmt(total)} units, {fc.status} "
-                    + cite(fc, "series.baseline", "units", scope={"sku": fc.sku})
+                    + cite(
+                        fc,
+                        "series.baseline",
+                        "units",
+                        scope={"store_id": fc.store_id, "sku": fc.sku},
+                        **horizon,
+                    )
                 )
             for u in case.blocking_uncertainties:
                 body.append(f"open: {u}")
@@ -616,9 +634,10 @@ def main() -> None:
     cases = build_cases(
         observations, documents, {k.id: k for k in links}, {r.id: r for r in relations}
     )
-    forecasts = build_forecasts(cases)
-    # The fixture run's as_of is the latest availability among all fixtures (PLT-03).
+    # The fixture run's as_of is the latest availability among all fixtures (PLT-03); every
+    # derived record is available by then, so it is the latest document or observation.
     as_of = max(r.available_at for r in [*documents.values(), *observations.values()])
+    forecasts = build_forecasts(cases, as_of)
     report = build_report(
         cases,
         forecasts,

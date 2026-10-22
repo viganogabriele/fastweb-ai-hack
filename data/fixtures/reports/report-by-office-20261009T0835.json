@@ -48,9 +48,9 @@
           "locator": "sku=J20931A00012-999"
         },
         {
-          "uri": "dataset://erp/forecast/sku_store_weekly/fcst_sku_store_run_2026-09-28.csv",
-          "content_hash": "sha256:2b54b6584313b8379601878f21e9527661c37cc94c0144e289e8d35487e571b3",
-          "locator": "store_id=MIL01;sku=J20931A00012-999;week_start=2026-09-28|2026-10-05"
+          "uri": "dataset://erp/forecast/sku_store_weekly/fcst_sku_store_run_2026-10-05.csv",
+          "content_hash": "sha256:af9b2acbac16d489798e6b10592e361890e30612d50092f1a9282476445aaa19",
+          "locator": "store_id=MIL01;sku=J20931A00012-999;week_start=2026-10-05|2026-10-12"
         },
         {
           "uri": "dataset://store_emails/MIL01/20261001_1124_MIL01_fwd.eml",
@@ -119,7 +119,7 @@
         },
         {
           "kind": "ForecastAdjustment",
-          "id": "fc-mil01-j20931a00012-999-20261003",
+          "id": "fc-mil01-j20931a00012-999-20261010",
           "version": "v1"
         },
         {
@@ -152,7 +152,7 @@
       "producer_version": "1",
       "as_of": "2026-10-09T08:35:52Z",
       "view": "by_office",
-      "markdown": "# Brief by office, as of 2026-10-09 08:35 UTC\n\n## allocation\n\n- **MIL01 · LOGO CARDIGAN (I10919B00011)**: open, priority high [1].\n  - stockout 0 units [2]\n  - unmet demand, quantity vague [3]\n  - baseline I10919B00011-999 10-10..10-16 11.1 units, unchanged [4]\n  - baseline I10919B00011-742 10-10..10-16 10.6 units, unchanged [5]\n  - open: Unmet demand is vague ('in continuazione'): no count of requests or units.\n  - open: Stock-out is the store's statement; ERP stock for size M not checked yet.\n  - open: No verified size curve: the share of size M in the colour forecast is unknown.\n- **MIL01 · MAIRE black (J20931A00012-999)**: open, priority medium [6].\n  - unmet demand 7 requests [7]\n  - 2 documents from 1 origin [8]\n  - baseline J20931A00012-999 10-03..10-09 12.6 units, unchanged [9]\n  - open: Requests are not units: no conversion to demand without evidence.\n\n## product_quality\n\n- **MIL01 · TIB navy size 4 (J10911A00305-742-4)**: open, priority medium [10].\n  - product feedback 1 units [11]\n  - open: One customer complaint; the store's 'same problem as recent returns' is not counted here.\n  - open: Purchase and defect dates come from the customer, not from POS.\n- **NYC01 · product not identified**: verify, priority low [12].\n  - product feedback 1 units [13]\n  - product is I10918G00045 or I10918G00031 [14]\n  - open: Product ambiguous: CREWNECK SWEATSHIRT or LOGO HOODIE, colour and size unknown.\n",
+      "markdown": "# Brief by office, as of 2026-10-09 08:35 UTC\n\n## allocation\n\n- **MIL01 · LOGO CARDIGAN (I10919B00011)**: open, priority high [1].\n  - stockout 0 units [2]\n  - unmet demand, quantity vague [3]\n  - baseline I10919B00011-999 10-10..10-16 11.1 units, unchanged [4]\n  - baseline I10919B00011-742 10-10..10-16 10.6 units, unchanged [5]\n  - open: Unmet demand is vague ('in continuazione'): no count of requests or units.\n  - open: Stock-out is the store's statement; ERP stock for size M not checked yet.\n  - open: No verified size curve: the share of size M in the colour forecast is unknown.\n- **MIL01 · MAIRE black (J20931A00012-999)**: open, priority medium [6].\n  - unmet demand 7 requests [7]\n  - 2 documents [8] from 1 origin [9]\n  - baseline J20931A00012-999 10-10..10-16 14.2 units, unchanged [10]\n  - open: Requests are not units: no conversion to demand without evidence.\n\n## product_quality\n\n- **MIL01 · TIB navy size 4 (J10911A00305-742-4)**: open, priority medium [11].\n  - product feedback 1 units [12]\n  - open: One customer complaint; the store's 'same problem as recent returns' is not counted here.\n  - open: Purchase and defect dates come from the customer, not from POS.\n- **NYC01 · product not identified**: verify, priority low [13].\n  - product feedback 1 units [14]\n  - product is I10918G00045 or I10918G00031 [15]\n  - open: Product ambiguous: CREWNECK SWEATSHIRT or LOGO HOODIE, colour and size unknown.\n",
       "citations": [
         {
           "ref": {
@@ -203,10 +203,11 @@
           "field": "series.baseline",
           "unit": "units",
           "scope": {
+            "store_id": "MIL01",
             "sku": "I10919B00011-999"
           },
-          "period_start": null,
-          "period_end": null
+          "period_start": "2026-10-09T22:00:00Z",
+          "period_end": "2026-10-16T21:59:59Z"
         },
         {
           "ref": {
@@ -217,10 +218,11 @@
           "field": "series.baseline",
           "unit": "units",
           "scope": {
+            "store_id": "MIL01",
             "sku": "I10919B00011-742"
           },
-          "period_start": null,
-          "period_end": null
+          "period_start": "2026-10-09T22:00:00Z",
+          "period_end": "2026-10-16T21:59:59Z"
         },
         {
           "ref": {
@@ -254,25 +256,42 @@
             "id": "case-mil01-j20931a00012-999-20261002",
             "version": "v1"
           },
+          "field": "n_documents",
+          "unit": null,
+          "scope": {
+            "store_id": "MIL01"
+          },
+          "period_start": null,
+          "period_end": null
+        },
+        {
+          "ref": {
+            "kind": "Case",
+            "id": "case-mil01-j20931a00012-999-20261002",
+            "version": "v1"
+          },
           "field": "n_origin_groups",
           "unit": null,
-          "scope": null,
+          "scope": {
+            "store_id": "MIL01"
+          },
           "period_start": null,
           "period_end": null
         },
         {
           "ref": {
             "kind": "ForecastAdjustment",
-            "id": "fc-mil01-j20931a00012-999-20261003",
+            "id": "fc-mil01-j20931a00012-999-20261010",
             "version": "v1"
           },
           "field": "series.baseline",
           "unit": "units",
           "scope": {
+            "store_id": "MIL01",
             "sku": "J20931A00012-999"
           },
-          "period_start": null,
-          "period_end": null
+          "period_start": "2026-10-09T22:00:00Z",
+          "period_end": "2026-10-16T21:59:59Z"
         },
         {
           "ref": {
@@ -340,7 +359,7 @@
         }
       ],
       "generated_by": "template:fixture.data01b.v1",
-      "input_version_hash": "sha256:ccbfa808eed36e07c88ef4167c794a01fb5d019c60f7e07a6b903f1bff91d4b4"
+      "input_version_hash": "sha256:25b433f1587e5ad5e170f4d83df6cde9a0c92f0b1a2e554a9da4318ae2b1280c"
     }
   }
 ]
