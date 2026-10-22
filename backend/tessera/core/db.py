@@ -115,6 +115,8 @@ erp_rows = Table(
 def _sqlite_pragmas(dbapi_connection, _record) -> None:
     cursor = dbapi_connection.cursor()
     cursor.execute("PRAGMA foreign_keys=ON")
+    # WAL: API reads and short writes proceed while a pipeline module transaction is open.
+    cursor.execute("PRAGMA journal_mode=WAL")
     cursor.close()
 
 
