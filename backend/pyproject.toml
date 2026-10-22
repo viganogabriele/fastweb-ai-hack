@@ -36,9 +36,12 @@ select = ["E", "F", "I", "B", "UP"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+# Test files in different folders may share a basename (no __init__.py needed).
+addopts = "--import-mode=importlib"
 
 [dependency-groups]
 dev = [
+    "jsonschema>=4.26.0",
     "pytest>=9.1.1",
     "ruff>=0.17.2",
 ]
