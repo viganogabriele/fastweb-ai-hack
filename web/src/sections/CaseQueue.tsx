@@ -39,6 +39,11 @@ const date = (value: string | null | undefined) =>
     ? `${new Date(value).toLocaleString('it-IT', { timeZone: 'UTC' })} UTC`
     : 'Non disponibile'
 
+const dueTime = (item: Case) => {
+  const time = item.decision_due_at ? Date.parse(item.decision_due_at) : NaN
+  return Number.isFinite(time) ? time : Infinity
+}
+
 const deadlineLabel = (value: string | null | undefined) =>
   value ? date(value) : 'Senza scadenza'
 
@@ -140,16 +145,13 @@ export function CaseQueue({
               .includes(query))
         )
       })
-      .sort((a, b) =>
-        filters.sort === 'deadline'
-          ? (a.decision_due_at ?? '9999').localeCompare(
-              b.decision_due_at ?? '9999'
-            ) || priorityOrder[a.priority] - priorityOrder[b.priority]
-          : priorityOrder[a.priority] - priorityOrder[b.priority] ||
-            (a.decision_due_at ?? '9999').localeCompare(
-              b.decision_due_at ?? '9999'
-            )
-      )
+      .sort((a, b) => {
+        const byPriority = priorityOrder[a.priority] - priorityOrder[b.priority]
+        const byDeadline = dueTime(a) - dueTime(b)
+        return filters.sort === 'deadline'
+          ? byDeadline || byPriority
+          : byPriority || byDeadline
+      })
   }, [asOf, cases, filters])
 
   const updateFilter = (key: keyof CaseQueueFilters, value: string) =>
