@@ -4,7 +4,7 @@ FastwebAI Hackathon 2026, **Moncler track**. We build a pipeline that reads mult
 closing emails, turns them into SKU-linked demand signals, corrects the short-term forecast and
 proposes stock actions as decision cards for a human. Rule: **AI reads, code counts, humans decide.**
 
-State: docs + a synthetic test dataset. No product code yet, so no build/test commands exist.
+State: docs, a synthetic test dataset and the PLT-01 scaffold (`backend/` FastAPI, `web/` React+Vite).
 Repo "today" = **Thu 2026-10-22**.
 
 ## Read this, skip the rest
@@ -13,7 +13,8 @@ The repo has ~3,150 tracked files (~200 MB), almost all data. Don't list, grep o
 
 | Need | Read | Don't read |
 |---|---|---|
-| What we build, modules M0–M14, data contracts, math | `docs/project-design.md` (use its §-headings, read the section you need) | `docs/drafts/fastweb.md` (superseded) |
+| What we build, modules, data contracts, math | `docs/RFC-001-piattaforma.md` (Italian; read the § you need) | `docs/project-design.md` §3–§8, `docs/drafts/fastweb.md` (superseded) |
+| Who owns which paths, task order, dependencies | `docs/PLAN.md` | — |
 | Brief, scoring, pitfalls | `docs/findings.md` | `docs/sources/**` (raw verbatim sources; `findings.md` already digests them) |
 | Dataset layout, formats, traps, time rules, scenarios | `generated/README.md` (§2 map, §3 parsing, §4 no look-ahead, §5 dev/hold-out) | — |
 | Store list, ids, tz, currency, language | `generated/sources/erp/master_data/stores.csv` | — |
@@ -22,6 +23,19 @@ When you need a data file, find it via the table in `generated/README.md` §2, t
 (`head -n 20`, one `.eml`, `python -c` on a single CSV). Never `cat` whole CSVs or read every email
 of a store. Partitioned folders (`sales/daily_store_sku/`, `inventory/store_stock_daily/`,
 `forecast/sku_store_weekly/`) share one schema: read one file.
+
+## Commands
+
+Requires `uv` and Node >= 22. Run from the repo root.
+
+- `make setup`: install backend (`backend/.venv`) and web deps from the lockfiles.
+- `make dev`: backend :8000, web :5173 (proxies `/api`), dataset mock systems :8088.
+- `make check`: ruff, pytest, oxlint, tsc. Must pass before every PR (CI runs it too).
+- `make fmt`: auto-fix Python lint and formatting.
+- Add deps with `cd backend && uv add <pkg>` or `cd web && npm install <pkg>`; never hand-merge lockfiles.
+
+Secrets: copy `.env.example` to `.env` (gitignored). Never print, log or commit `FASTWEB_API_KEY`.
+Work on a branch `<TASK-ID>-<slug>` and stay inside your lane's paths (`docs/PLAN.md` §1–§2).
 
 ## Hard rules (answer leakage)
 
@@ -39,6 +53,6 @@ of a store. Partitioned folders (`sales/daily_store_sku/`, `inventory/store_stoc
 
 - Store id (`MIL01`…) is the master key. SKU = `<style_code>-<colour_code>`, SKU-size adds `-<size>`.
 - ERP money is net of VAT and returns, in local currency; emails/reports often are not.
-- Python env: `.venv/` (uv). Mock agents server: `.venv/bin/python generator/systems/mock_agents/server.py --port 8088`
-  (run it, don't import or read it).
+- Python env: `backend/.venv/` (uv). Mock agents server: `make mocks` (runs
+  `generator/systems/mock_agents/server.py` with that env; run it, don't import or read it).
 - Docs in English. Don't edit files under `docs/sources/`.
