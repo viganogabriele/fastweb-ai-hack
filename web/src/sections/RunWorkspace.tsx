@@ -91,7 +91,12 @@ export function RunWorkspace({
                   )
             ]).then(([cases, documents]) => {
               const caseRefs: Record<string, Omit<CaseEvidence, 'evidence'>[]> = {}
+              const latest = new Map<string, Case>()
               for (const item of cases) {
+                const seen = latest.get(item.id)
+                if (!seen || Number(item.version) > Number(seen.version)) latest.set(item.id, item)
+              }
+              for (const item of latest.values()) {
                 for (const [relation, refs] of [
                   ['supporting', item.supporting],
                   ['contradicting', item.contradicting]
