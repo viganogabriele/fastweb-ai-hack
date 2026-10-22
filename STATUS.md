@@ -14,6 +14,7 @@ One line per task. Edit only the lines of your own task.
 - EVL-01 (D, done by Bianca) `eval/`: frozen-export harness (manifest hashes before any answer key), Linux Landlock launcher denying product reads of answer keys/generator/eval
 - ING-02 pure (A, done by Bianca) `modules/ingestion/email_parser.py`: `.eml` → canonical text, segments with code-point offsets, quotes and attachments flagged
 - DATA-01a (A, done by Bianca) `data/fixtures/{documents,observations}/`: D1 positive, ambiguous mention, forward/duplicate, correction; built from dev emails, validated in `make check`
+- ACT-04 pure (E, done by Bianca) `modules/sources/systems_client.py`: DC stock/ATP → `StockFact`, lanes with crosswalk, ETA from cut-off and pickup days, `Unknown` instead of zero
 - ING-01 pure (B, Bianca) `modules/sources/erp.py`: typed ERP rows with provenance, `available_at` (next-day 06:00 local), latest forecast vintage per store
 - PLT-07 (A) `scripts/smoke_fastweb.py` + `docs/smoke-fastweb.md`: key per model, tool calls on 5 chat models, Gemma chosen, embeddings OK, no ASR (OQ-2 closed)
 
@@ -23,7 +24,6 @@ One line per task. Edit only the lines of your own task.
 
 - PLT-05 (C) `core/llm.py` + `core/cache.py`: `chat/extract/embed`, recipe in `docs/smoke-fastweb.md`
 - DATA-03 (A) 2–3 voice recordings + sidecar JSON + manual transcript
-- ACT-04 pure (E) Systems client (stock/ATP, lanes/ETA) against `make mocks`
 - AG-01 pure (E) Agent loop with budget, trace, fallback; fake model
 - WEB-01 (D) App shell on hand-written JSON
 - DATA-01b (B) Fixtures: links (linked and ambiguous), cases, baseline with unchanged scenarios, report
