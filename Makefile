@@ -26,11 +26,11 @@ mocks:  ## dataset mock agents server: run it, never import or read its code
 	$(PY) generator/systems/mock_agents/server.py --port 8088
 
 check:  ## must pass before every PR
-	cd $(BACKEND) && uv run ruff check . && uv run ruff format --check . && uv run pytest -q
+	cd $(BACKEND) && uv run ruff check . ../eval && uv run ruff format --check . ../eval && uv run pytest -q
 	cd $(WEB) && npm run lint && npm run typecheck
 
 fmt:
-	cd $(BACKEND) && uv run ruff check --fix . && uv run ruff format .
+	cd $(BACKEND) && uv run ruff check --fix . ../eval && uv run ruff format . ../eval
 
 test:
 	cd $(BACKEND) && uv run pytest -q
