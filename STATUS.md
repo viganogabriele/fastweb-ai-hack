@@ -7,6 +7,7 @@ One line per task. Edit only the lines of your own task.
 
 - PLT-01 (C) Scaffold: `backend/` FastAPI, `web/` React+Vite, `make setup/dev/check`, CI, `.env.example`
 - ACT-01 pure (E, done by Bianca) `modules/actions/simulation.py`: recursive daily stock simulation per scenario, RFC §7.3 test 5
+- ING-02 pure (A, done by Bianca) `modules/ingestion/email_parser.py`: `.eml` → canonical text, segments with code-point offsets, quotes and attachments flagged
 
 ## In progress
 
@@ -17,7 +18,6 @@ One line per task. Edit only the lines of your own task.
 - PLT-02 (C) Contracts in `core/contracts/`. **Gates G0**: everyone reviews within 30 min
 - PLT-07 (A) Fastweb smoke test: chat, tool call, embeddings, ASR. Needs `FASTWEB_API_KEY` in `.env`
 - DATA-02 (A) `config/eval_split.yaml`, `domain.yaml`, `aliases.yaml`
-- ING-02 pure (A) `.eml` → canonical text + segments with offsets
 - DATA-03 (A) 2–3 voice recordings + sidecar JSON
 - ING-01 pure (B) ERP loaders with `available_at`
 - INT-01 pure (B) Product mention → ranked candidates (alias + rapidfuzz)
