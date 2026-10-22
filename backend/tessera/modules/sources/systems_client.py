@@ -19,22 +19,34 @@ Each system has its own quirks, handled here and nowhere else:
   the whole period, so they are not knowable in a replay and are dropped (contract days only).
 
 Anything missing, late, rate-limited or unparseable is `Unknown(reason)`, never zero or a guess.
-Pure adapter: no DB, no repo. Wiring it to the repo is the ACT-04 module step.
+
+ACT-04 module (`sys.client`, bottom of this file): `run(ctx)` builds the crosswalk from the ERP
+master rows known at `as_of` (so it requires `src.erp`), asks each supplying DC of the run's
+stores for DC stock and ATP of the run's assortment, and stores the facts already available at
+`as_of` as `StockFact`. `SystemsReader` is the read side for the investigator tools: stock per
+location from the repo (DC facts, store stock from the ERP rows), lanes and ETA from the client,
+both seen at the run's `as_of`. Clients are always built from the crosswalk of the run's `as_of`
+(`ctx.clients["systems"]` is a factory, not a client), so no master data leaks across runs.
 """
 
+import csv
 import hashlib
 import json
 import re
-from collections.abc import Iterable, Mapping
+from collections.abc import Callable, Iterable, Mapping
 from dataclasses import dataclass
 from datetime import date, datetime, time, timedelta
-from typing import Any, Literal
+from pathlib import Path
+from time import sleep as _sleep
+from typing import Any, Literal, Protocol
 from urllib.parse import urlencode
 from zoneinfo import ZoneInfo
 
 import httpx
 
-from tessera.core.contracts import SourceRef, StockFact
+from tessera.core import repo
+from tessera.core.config import get_settings
+from tessera.core.contracts import ModuleManifest, ModuleResult, RunSpec, SourceRef, StockFact
 
 DC_TIMEZONES = {"IT10": "Europe/Rome", "US20": "America/New_York", "HK30": "Asia/Hong_Kong"}
 DC_ALIASES = {"DC-IT-CSG": "IT10", "DC-US-NJ": "US20", "DC-HK-TKO": "HK30"}
@@ -42,10 +54,15 @@ SAP_SELLABLE_LGORT = "0001"
 HK_SELLABLE_TYPES = frozenset({"PICK", "RESERVE"})
 WEEKDAYS = ("MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN")
 EOD_PUBLISHED_AT = time(6, 0)  # local time on the next day, RFC §4.3
-BODY_ERRORS: dict[str, "UnknownReason"] = {"NO_SNAPSHOT": "no_snapshot", "NO_LANE": "no_lane"}
+BODY_ERRORS: dict[str, "UnknownReason"] = {
+    "NO_SNAPSHOT": "no_snapshot",
+    "NO_LANE": "no_lane",
+    "NO_FILE": "no_extraction",  # 3PL feed of that day not (yet) delivered
+}
 
 UnknownReason = Literal[
     "bad_request",
+    "not_loaded",
     "lane_reviewed_after_as_of",
     "no_extraction",
     "no_lane",
@@ -540,3 +557,386 @@ def _opt_int(value: object) -> int | None:
 
 def _opt_float(value: object) -> float | None:
     return None if value is None else float(value)
+
+
+# ACT-04 module (`sys.client`): DC stock and ATP of the run's scope, stored as `StockFact`.
+
+CROSSWALK_FILE = Path("systems") / "reference" / "store_code_crosswalk_MDM.csv"
+DEFAULT_LOOKBACK_DAYS = 3
+RATE_LIMIT_RETRIES = 2
+MAX_RETRY_AFTER_S = 5.0
+# Reasons worth asking an earlier day for: the day exists but is not (yet) usable.
+_EARLIER_DAY = frozenset({"no_extraction", "snapshot_after_as_of"})
+# The service failed or answered garbage: errors (run degraded), distinct from "no record".
+_FAILURES = frozenset(
+    {"unavailable", "rate_limited", "server_error", "bad_request", "not_found", "unparseable"}
+)
+_RESULT_LINE = re.compile(r"(dc_stock|atp) (\S+) (\S+): (\w+)")
+
+ClientFactory = Callable[[Crosswalk], "SystemsClient"]
+
+MANIFEST = ModuleManifest(
+    id="sys.client",
+    version="1",
+    layer="sources",
+    description=(
+        "DC stock and ATP from the simulated warehouse systems for the run's assortment and "
+        "supplying DCs, stored as StockFact when available at as_of"
+    ),
+    requires=("src.erp",),
+    optional_inputs=(),
+    produces=("StockFact",),
+    enabled=True,
+    mode="live",
+    boundary="simulated",
+    params_schema={
+        "type": "object",
+        "properties": {
+            "skus": {"type": "array", "items": {"type": "string"}, "uniqueItems": True},
+            "plants": {
+                "type": "array",
+                "items": {"enum": sorted(DC_TIMEZONES)},
+                "uniqueItems": True,
+            },
+            "lookback_days": {"type": "integer", "minimum": 0, "maximum": 14},
+        },
+        "additionalProperties": False,
+    },
+)
+
+
+class Context(Protocol):
+    """The part of PLT-04's `RunContext` this module uses."""
+
+    @property
+    def spec(self) -> RunSpec: ...
+    @property
+    def repo(self) -> repo.Repo: ...
+    @property
+    def params(self) -> Mapping[str, Any]: ...
+    @property
+    def clients(self) -> Mapping[str, Any]: ...
+
+
+def crosswalk_rows(sources_dir: Path) -> tuple[list[dict[str, str]], dict[str, str]]:
+    """MDM crosswalk rows and each store's supplying DC plant (`DC-IT-CSG` → `IT10`)."""
+    with open(sources_dir / CROSSWALK_FILE, newline="", encoding="utf-8") as f:
+        rows = list(csv.DictReader(f))
+    supplying = {
+        r["store_id"]: DC_ALIASES.get(r["supplying_dc"], r["supplying_dc"])
+        for r in rows
+        if r.get("supplying_dc")
+    }
+    return rows, supplying
+
+
+def default_client(crosswalk: Crosswalk) -> "SystemsClient":
+    return SystemsClient(crosswalk, base_url=get_settings().mocks_base_url)
+
+
+def crosswalk_at(run_repo: repo.Repo, rows: Iterable[Mapping[str, str]]) -> Crosswalk | Unknown:
+    """Crosswalk from the MDM rows plus the ERP stores and EANs known at the run's `as_of`."""
+    stores = [{k: str(v) for k, v in r.data.items()} for r in run_repo.erp("stores")]
+    sizes = [{k: str(v) for k, v in r.data.items()} for r in run_repo.erp("sku_size_ean")]
+    if not stores or not sizes:
+        return Unknown("not_loaded", "ERP stores / sku_size_ean not available at as_of")
+    return Crosswalk.from_rows(rows, stores, sizes)
+
+
+def latest_facts(
+    fetch: Callable[[str, str, date], "AtpSnapshot | DcStockSnapshot | Unknown"],
+    plant: str,
+    sku: str,
+    as_of: datetime,
+    tz: ZoneInfo,
+    lookback_days: int = DEFAULT_LOOKBACK_DAYS,
+) -> tuple[tuple[StockFact, ...], bool] | Unknown:
+    """Facts of the latest day already available at the instant `as_of`, and its stale flag.
+
+    The client works on plant-local days; a day whose snapshot is published after `as_of`
+    (early morning replays), or that has no extraction, falls back to an earlier day, at most
+    `lookback_days` back. Facts keep their own `snapshot_at`: consumers see how old they are.
+    """
+    day = as_of.astimezone(tz).date()
+    last: Unknown = Unknown("not_loaded", f"{plant} {sku}")
+    for back in range(lookback_days + 1):
+        got = fetch(plant, sku, day - timedelta(days=back))
+        if isinstance(got, Unknown):
+            if got.reason not in _EARLIER_DAY:
+                return got
+            last = got
+            continue
+        facts = tuple(f for f in got.stock_facts() if f.available_at <= as_of)
+        if facts:
+            return facts, got.stale
+        last = Unknown("snapshot_after_as_of", f"{plant} {sku} {got.snapshot_at.isoformat()}")
+    return last
+
+
+def patient(
+    fetch: Callable[[str, str, date], Any],
+    sleep: Callable[[float], None] = _sleep,
+    retries: int = RATE_LIMIT_RETRIES,
+) -> Callable[[str, str, date], Any]:
+    """Retry a rate-limited request a bounded number of times, honouring `Retry-After`."""
+
+    def call(plant: str, sku: str, day: date) -> Any:
+        for attempt in range(retries + 1):
+            got = fetch(plant, sku, day)
+            limited = isinstance(got, Unknown) and got.reason == "rate_limited"
+            if not limited or attempt == retries:
+                return got
+            try:
+                wait = float(got.detail or 1.0)
+            except ValueError:
+                wait = 1.0
+            sleep(min(max(wait, 0.0), MAX_RETRY_AFTER_S))
+        raise AssertionError("unreachable")
+
+    return call
+
+
+def load_stock(
+    run_repo: repo.Repo,
+    client: SystemsClient,
+    skus: Iterable[str],
+    plants: Iterable[str],
+    lookback_days: int = DEFAULT_LOOKBACK_DAYS,
+    sleep: Callable[[float], None] = _sleep,
+) -> ModuleResult:
+    """DC stock and ATP for every plant × SKU, stored in the run when known at `as_of`.
+
+    A plant still rate-limited after the retries is not asked again in this run: its remaining
+    SKUs are recorded as `rate_limited` errors without a request.
+    """
+    as_of = run_repo.spec.as_of
+    facts: list[StockFact] = []
+    abstentions: list[str] = []
+    errors: list[str] = []
+    calls = stale = 0
+    for plant in sorted(set(plants)):
+        tz = client.crosswalk.timezone(plant)
+        if tz is None:
+            errors.append(f"{plant}: unknown_location")
+            continue
+        limited = False
+        fetches = (
+            ("dc_stock", patient(client.dc_stock, sleep)),
+            ("atp", patient(client.atp, sleep)),
+        )
+        for sku in sorted(set(skus)):
+            for name, fetch in fetches:
+                if limited:
+                    got: Any = Unknown("rate_limited", "not requested")
+                else:
+                    calls += 1
+                    got = latest_facts(fetch, plant, sku, as_of, tz, lookback_days)
+                if isinstance(got, Unknown):
+                    line = f"{name} {plant} {sku}: {got.reason}"
+                    (errors if got.reason in _FAILURES else abstentions).append(line)
+                    limited = limited or got.reason == "rate_limited"
+                    continue
+                facts.extend(got[0])
+                stale += got[1]
+    new = run_repo.put(*facts) if facts else 0
+    status = "degraded" if errors or not facts else "succeeded"
+    return ModuleResult(
+        module_id=MANIFEST.id,
+        module_version=MANIFEST.version,
+        status=status,
+        counts={
+            "requests": calls,
+            "stock_facts": len(facts),
+            "stock_facts_new": new,
+            "stale_snapshots": stale,
+            "unknown": len(abstentions) + len(errors),
+        },
+        errors=tuple(errors),
+        abstentions=tuple(abstentions),
+    )
+
+
+def run(ctx: Context) -> ModuleResult:
+    params = ctx.params
+    rows, supplying = crosswalk_rows(get_settings().sources_dir)
+    crosswalk = crosswalk_at(ctx.repo, rows)
+    if isinstance(crosswalk, Unknown):
+        return _blocked(crosswalk.detail)
+    plants = params.get("plants") or sorted(
+        {supplying[s] for s in ctx.spec.stores if s in supplying}
+    )
+    skus = params.get("skus") or sorted(
+        {str(r.data["sku"]) for store in ctx.spec.stores for r in _assortment(ctx.repo, store)}
+    )
+    if not plants or not skus:
+        return _blocked(f"no supplying DC ({len(plants)}) or assortment SKU ({len(skus)}) at as_of")
+    factory: ClientFactory = ctx.clients.get("systems", default_client)
+    client = factory(crosswalk)
+    try:
+        return load_stock(
+            ctx.repo, client, skus, plants, params.get("lookback_days", DEFAULT_LOOKBACK_DAYS)
+        )
+    finally:
+        client.close()
+
+
+def _assortment(run_repo: repo.Repo, store: str) -> list[repo.ErpRecord]:
+    return run_repo.erp("assortment", store_id=store)
+
+
+def _blocked(reason: str) -> ModuleResult:
+    return ModuleResult(
+        module_id=MANIFEST.id,
+        module_version=MANIFEST.version,
+        status="blocked",
+        counts={},
+        errors=(reason,),
+        abstentions=(),
+    )
+
+
+# Read side for the investigator tools (`get_available_stock`, `get_lane_and_eta`).
+
+
+@dataclass(frozen=True)
+class LaneEta:
+    lane: Lane
+    eta: Eta
+    on_time: bool | None  # contract ETA by `required_by` (dest-local day); None if not asked
+    on_time_p90: bool | None
+
+
+class SystemsReader:
+    """Stock and lanes as seen at the run's `as_of`. Never writes, never reads past `as_of`.
+
+    DC stock and ATP come from the `StockFact` stored by `sys.client`; store stock from the ERP
+    `stock` rows (end-of-day `on_hand`), only for the run's stores. When a DC has no fact, the
+    reason recorded by `sys.client` (e.g. `unavailable`, `rate_limited`, `no_position`) is
+    returned, so a service failure never reads like "no stock". Lanes are read through the
+    client, which drops a lane reviewed after `as_of` and the observed P50/P90.
+    """
+
+    def __init__(self, run_repo: repo.Repo, client: SystemsClient) -> None:
+        self.repo = run_repo
+        self.client = client
+        self._reasons: dict[tuple[str, str], str] | None = None
+
+    @classmethod
+    def open(
+        cls, run_repo: repo.Repo, factory: ClientFactory = default_client
+    ) -> "SystemsReader | Unknown":
+        """Reader with a client built from the crosswalk known at the run's `as_of`."""
+        rows, _ = crosswalk_rows(get_settings().sources_dir)
+        crosswalk = crosswalk_at(run_repo, rows)
+        return crosswalk if isinstance(crosswalk, Unknown) else cls(run_repo, factory(crosswalk))
+
+    @property
+    def as_of(self) -> datetime:
+        return self.repo.spec.as_of
+
+    def stock(
+        self, sku: str, size: str, locations: Iterable[str]
+    ) -> dict[str, tuple[StockFact, ...] | Unknown]:
+        """Latest fact per basis for each location; `Unknown` if this run holds none."""
+        out: dict[str, tuple[StockFact, ...] | Unknown] = {}
+        for location in locations:
+            plant = DC_ALIASES.get(location, location)
+            if plant in DC_TIMEZONES:
+                # DCs are not run stores: filter on the payload, not on the store index.
+                where = {"location_id": plant, "size": size}
+                facts = self.repo.list(StockFact, sku=sku, where=where)
+            elif location in self.repo.spec.stores:
+                facts = self._store_facts(location, sku, size)
+                if isinstance(facts, Unknown):
+                    out[location] = facts
+                    continue
+            else:
+                out[location] = Unknown("unknown_location", f"{location} is not a DC or run store")
+                continue
+            latest: dict[str, StockFact] = {}
+            for f in facts:
+                if f.basis not in latest or f.snapshot_at > latest[f.basis].snapshot_at:
+                    latest[f.basis] = f
+            out[location] = (
+                tuple(latest[b] for b in sorted(latest)) if latest else self._missing(plant, sku)
+            )
+        return out
+
+    def _missing(self, location: str, sku: str) -> Unknown:
+        detail = f"{location} {sku} at {self.as_of.isoformat()}"
+        reason = self._recorded_reasons().get((location, sku))
+        return Unknown(reason or "not_loaded", detail)
+
+    def _recorded_reasons(self) -> dict[tuple[str, str], str]:
+        """Why `sys.client` stored no fact, per (plant, SKU): failures win over abstentions."""
+        if self._reasons is None:
+            self._reasons = {}
+            for module_run in repo.list_module_runs(self.repo.engine, self.repo.run_id):
+                if module_run.module_id != MANIFEST.id or module_run.result is None:
+                    continue
+                result = module_run.result
+                for line in (*result.abstentions, *result.errors):
+                    if match := _RESULT_LINE.fullmatch(line):
+                        _, plant, sku, reason = match.groups()
+                        self._reasons[(plant, sku)] = reason
+        return self._reasons
+
+    def lane_and_eta(
+        self,
+        origin: str,
+        dest: str,
+        requested_at: datetime,
+        required_by: datetime | None = None,
+    ) -> LaneEta | Unknown:
+        """Lane valid at `as_of` and the first pickup at or after `requested_at`."""
+        if requested_at.tzinfo is None or (required_by and required_by.tzinfo is None):
+            raise ValueError("requested_at and required_by must be timezone-aware")
+        if requested_at < self.as_of:
+            requested_at = self.as_of  # nothing can leave before the decision is taken
+        origin_tz = self.client.crosswalk.timezone(origin)
+        if origin_tz is None:
+            return Unknown("unknown_location", origin)
+        lane = self.client.lane(origin, dest, self.as_of.astimezone(origin_tz).date())
+        if isinstance(lane, Unknown):
+            return lane
+        got = eta(lane, requested_at)
+        if isinstance(got, Unknown):
+            return got
+        if required_by is None:
+            return LaneEta(lane, got, None, None)
+        dest_tz = self.client.crosswalk.timezone(dest)
+        if dest_tz is None:
+            return Unknown("unknown_location", f"{dest}: no time zone at as_of")
+        due = required_by.astimezone(dest_tz).date()
+        p90 = None if got.eta_p90_date is None else got.eta_p90_date <= due
+        return LaneEta(lane, got, got.eta_date <= due, p90)
+
+    def _store_facts(self, store: str, sku: str, size: str) -> list[StockFact] | Unknown:
+        tz = self.client.crosswalk.timezone(store)
+        if tz is None:
+            return Unknown("unknown_location", f"{store}: no time zone at as_of")
+        facts = []
+        for row in self.repo.erp("stock", store_id=store, sku=sku):
+            if str(row.data["size"]) != size or row.data.get("on_hand") is None:
+                continue
+            day = row.data["snapshot_date"]
+            ref = row.source_refs[0]
+            facts.append(
+                StockFact(
+                    id=f"stock:{store}:{sku}-{size}:on_hand:{day.isoformat()}",
+                    version=row.version,
+                    available_at=row.available_at,
+                    availability_basis=row.availability_basis,
+                    source_refs=(ref,),
+                    location_id=store,
+                    sku=sku,
+                    size=size,
+                    snapshot_at=datetime.combine(day, time(23, 59, 59), tz),
+                    qty=float(row.data["on_hand"]),
+                    basis="on_hand",
+                    reservations_included=None,
+                    quality_holds_included=None,
+                    source_ref=ref,
+                )
+            )
+        return facts
