@@ -1,5 +1,6 @@
 import json
 from datetime import UTC, datetime
+from decimal import Decimal
 
 import pytest
 from pydantic import BaseModel
@@ -370,6 +371,32 @@ def test_tool_errors_do_not_crash_the_loop() -> None:
     assert run.trace.steps[0].error == "tool error: unknown case_id case-X"
     assert run.trace.steps[1].error == "tool failed: RuntimeError: mock server down"
     assert run.stop_reason == "finished"
+
+
+def test_tool_results_with_decimal_and_datetime_are_rendered_not_crashing() -> None:
+    class Rich(Recorder):
+        def stock(self, args):
+            return ToolResult({"qty": Decimal("1.5"), "at": AS_OF, "bad": object()}, (), (STOCK,))
+
+    loop, model, _ = make_loop(
+        [reply(call("get_available_stock", {"sku": "A-1", "location": "MIL02"})), reply(finish())],
+        recorder=Rich(),
+    )
+    run = loop.run(MESSAGES, META)
+    assert run.stop_reason == "finished"
+    assert "not serializable" in (run.trace.steps[0].error or "")
+
+    class Ok(Recorder):
+        def stock(self, args):
+            return ToolResult({"qty": Decimal("1.5"), "at": AS_OF}, (), (STOCK,))
+
+    loop, model, _ = make_loop(
+        [reply(call("get_available_stock", {"sku": "A-1", "location": "MIL02"})), reply(finish())],
+        recorder=Ok(),
+    )
+    run = loop.run(MESSAGES, META)
+    assert run.trace.steps[0].error is None
+    assert json.loads(tool_messages(model, 1)[0]["content"])["data"]["qty"] == "1.5"
 
 
 def test_custom_fallback_is_validated_like_the_model() -> None:

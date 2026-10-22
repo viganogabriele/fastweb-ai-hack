@@ -31,6 +31,7 @@ from datetime import datetime
 from typing import Any, Literal, Protocol, Self
 
 from pydantic import BaseModel, ConfigDict, Field, JsonValue, ValidationError, model_validator
+from pydantic_core import PydanticSerializationError, to_jsonable_python
 
 from tessera.core.contracts import AgentStep, AgentTrace, ArtifactRef
 from tessera.core.contracts.common import Mode
@@ -320,6 +321,15 @@ class AgentLoop:
                     except Exception as exc:  # a broken tool must not crash the run
                         error = f"tool failed: {type(exc).__name__}: {exc}"
 
+        payload: str | None = None
+        if error is None and accepted is None and call.name != FINISH:
+            try:  # Decimal, datetime, ... from a handler are rendered; anything else is an error
+                payload = json.dumps(
+                    {"ok": True, "data": to_jsonable_python(result.data)}, ensure_ascii=False
+                )
+            except (PydanticSerializationError, TypeError, ValueError) as exc:
+                error = f"tool failed: result is not serializable: {exc}"
+
         state.steps.append(
             AgentStep(
                 tool=call.name or "?",
@@ -333,7 +343,7 @@ class AgentLoop:
         state.visible.update(ref.id for ref in result.output_refs)
         if error is not None:
             return json.dumps({"ok": False, "error": error}, ensure_ascii=False), None
-        return json.dumps({"ok": True, "data": result.data}, ensure_ascii=False), accepted
+        return payload or json.dumps({"ok": True, "data": None}), accepted
 
     def _check_finish(self, choice: Finish, visible: set[str]) -> str | None:
         unseen = [ref for ref in choice.evidence_refs if ref not in visible]
