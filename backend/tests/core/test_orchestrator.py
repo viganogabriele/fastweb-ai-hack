@@ -391,3 +391,46 @@ def test_cli_executes_snapshot_and_as_of_override_creates_fresh_run(tmp_path, mo
     main(["run", "--run-spec", str(path), "--as-of", "2026-10-21T18:00:00+02:00"])
     second = json.loads(capsys.readouterr().out)
     assert second["run_id"] != request.run_id and second["status"] == "succeeded"
+
+
+def test_parent_child_batch_put_is_atomic_and_resolves_earlier_parent(engine):
+    from tessera.core.contracts import Segment
+
+    request = spec(manifest("source"))
+    document = SourceDocument(
+        id="batch-doc",
+        version="v1",
+        available_at=request.as_of,
+        availability_basis="test",
+        source_refs=(),
+        source_type="email",
+        connector="source",
+        uri="synthetic://batch",
+        content_hash="batch",
+        origin=None,
+        text="hello",
+        text_version="text-v1",
+        meta={"store_id": "MIL01"},
+    )
+    segment = Segment(
+        id="batch-segment",
+        version="v1",
+        available_at=request.as_of,
+        availability_basis="document",
+        source_refs=(),
+        document_id=document.id,
+        text_version=document.text_version,
+        idx=0,
+        text="hello",
+        char_start=0,
+        char_end=5,
+        is_quoted=False,
+    )
+    with repo_session(engine, request) as repo:
+        assert repo.put(document, segment, document) == 2
+        assert repo.get(Segment, segment.id) == segment
+        other = document.model_copy(update={"id": "rollback-doc"})
+        invalid = segment.model_copy(update={"id": "invalid", "document_id": "absent"})
+        with pytest.raises(ValueError, match="unavailable"):
+            repo.put(other, invalid)
+        assert repo.get(SourceDocument, other.id) is None
