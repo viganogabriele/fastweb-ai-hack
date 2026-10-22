@@ -1,0 +1,140 @@
+[
+  {
+    "kind": "Observation",
+    "payload": {
+      "id": "obs-20261009-1035-mil01-stockout",
+      "version": "v1",
+      "available_at": "2026-10-09T08:35:52Z",
+      "availability_basis": "document_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261009_1035_MIL01.eml",
+          "content_hash": "sha256:173f031967d236d50951cd1ad52ea2692c28ed005eb8fe68e68105b422927144",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "SourceDocument",
+          "id": "doc-20261009-1035-mil01",
+          "version": "v1"
+        },
+        {
+          "kind": "Segment",
+          "id": "doc-20261009-1035-mil01-seg0",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01a",
+      "producer_version": "1",
+      "document_id": "doc-20261009-1035-mil01",
+      "kind": "stockout",
+      "store_id": "MIL01",
+      "period_start": "2026-10-07T22:00:00Z",
+      "period_end": null,
+      "time_text": "da ieri",
+      "product_mention": "cardigan logo in M, sia nero che blu",
+      "quantity": {
+        "kind": "exact",
+        "value": 0.0,
+        "low": null,
+        "high": null,
+        "unit": "units",
+        "currency": null,
+        "raw": "a zero",
+        "evidence_ref": null
+      },
+      "direction": "down",
+      "reason": null,
+      "reason_text": null,
+      "funnel_stage": null,
+      "attribution": "store_staff",
+      "negated": false,
+      "evidence": [
+        {
+          "document_id": "doc-20261009-1035-mil01",
+          "document_version": "v1",
+          "segment_id": "doc-20261009-1035-mil01-seg0",
+          "quote": "da ieri siamo a zero cardigan logo in M, sia nero che blu",
+          "char_start": 14,
+          "char_end": 71,
+          "t_start_s": null,
+          "t_end_s": null
+        }
+      ],
+      "extractor_version": "manual-data01a-v1"
+    }
+  },
+  {
+    "kind": "Observation",
+    "payload": {
+      "id": "obs-20261009-1035-mil01-unmet-demand",
+      "version": "v1",
+      "available_at": "2026-10-09T08:35:52Z",
+      "availability_basis": "document_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261009_1035_MIL01.eml",
+          "content_hash": "sha256:173f031967d236d50951cd1ad52ea2692c28ed005eb8fe68e68105b422927144",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "SourceDocument",
+          "id": "doc-20261009-1035-mil01",
+          "version": "v1"
+        },
+        {
+          "kind": "Segment",
+          "id": "doc-20261009-1035-mil01-seg0",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01a",
+      "producer_version": "1",
+      "document_id": "doc-20261009-1035-mil01",
+      "kind": "unmet_demand",
+      "store_id": "MIL01",
+      "period_start": "2026-10-07T22:00:00Z",
+      "period_end": null,
+      "time_text": null,
+      "product_mention": "cardigan logo in M",
+      "quantity": {
+        "kind": "vague",
+        "value": null,
+        "low": null,
+        "high": null,
+        "unit": "requests",
+        "currency": null,
+        "raw": "in continuazione",
+        "evidence_ref": null
+      },
+      "direction": "up",
+      "reason": null,
+      "reason_text": null,
+      "funnel_stage": null,
+      "attribution": "store_staff",
+      "negated": false,
+      "evidence": [
+        {
+          "document_id": "doc-20261009-1035-mil01",
+          "document_version": "v1",
+          "segment_id": "doc-20261009-1035-mil01-seg0",
+          "quote": "ce lo chiedono in continuazione",
+          "char_start": 220,
+          "char_end": 251,
+          "t_start_s": null,
+          "t_end_s": null
+        }
+      ],
+      "extractor_version": "manual-data01a-v1"
+    }
+  }
+]
