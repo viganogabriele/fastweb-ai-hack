@@ -3,6 +3,9 @@ export type RunView = components['schemas']['RunView']
 export type Case = components['schemas']['Case']
 export type SourceDocument = components['schemas']['SourceDocument']
 export type ModuleManifest = components['schemas']['ModuleManifest']
+export type DocumentDetail = components['schemas']['DocumentDetail']
+export type Evidence = components['schemas']['Evidence']
+export type ArtifactRef = components['schemas']['ArtifactRef']
 
 export async function readApi<T>(
   path: string,

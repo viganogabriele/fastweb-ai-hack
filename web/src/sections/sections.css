@@ -81,6 +81,10 @@
 .sd-run-card dd { margin: 0 0 var(--sd-space-3); }
 .sd-run-card dt, .sd-run-card p { color: var(--sd-color-text-secondary); }
 .sd-source-text { white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; }
+.sd-source-evidence-label { margin-block: var(--sd-space-3) var(--sd-space-2); font-size: var(--sd-font-size-caption); }
+.sd-source-evidence { border-radius: 2px; padding-inline: 1px; color: inherit; background: color-mix(in srgb, var(--sd-color-state-warning) 26%, transparent); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.sd-source-evidence--contradicting { background: color-mix(in srgb, var(--sd-color-state-danger) 26%, transparent); }
+.sd-source-evidence--mixed { background: color-mix(in srgb, var(--sd-color-state-info) 30%, transparent); }
 @media (max-width: 719px) { .sd-run-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 359px) { .sd-run-metrics { grid-template-columns: 1fr; } }
 
