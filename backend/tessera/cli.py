@@ -53,7 +53,9 @@ def _run(args: argparse.Namespace) -> None:
         )
     if (spec.mode == "fixture") != settings.fixture_mode:
         raise ValueError("Fixture runs require an explicitly selected fixture namespace")
-    if not any(m.manifest.enabled and m.manifest.mode != "unavailable" for m in spec.modules):
+    if args.modules is None and not any(
+        m.manifest.enabled and m.manifest.mode != "unavailable" for m in spec.modules
+    ):
         raise ValueError("Run requires at least one enabled module")
     engine = _engine(settings)
     try:

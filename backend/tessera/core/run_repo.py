@@ -9,7 +9,7 @@ Fixture separation remains physical: the caller chooses the fixture database.
 from collections.abc import Iterator
 from contextlib import contextmanager
 
-from sqlalchemy import Connection, Engine, select
+from sqlalchemy import Connection, Engine, delete, select
 
 from tessera.core.contracts import ModuleRun, RunSpec, Segment, SourceDocument
 from tessera.core.contracts.common import DerivedRecord, SourceRecord
@@ -42,10 +42,19 @@ class _BoundEngine:
 class RunRepo(Repo):
     """Canonical Repo with immutable spec and worker lifecycle conveniences."""
 
-    def __init__(self, connection: Connection, spec: RunSpec, *, fixture_mode: bool = False):
+    def __init__(
+        self,
+        connection: Connection,
+        spec: RunSpec,
+        *,
+        fixture_mode: bool = False,
+        module_scope: bool = False,
+    ):
         if (spec.mode == "fixture") != fixture_mode:
             raise ValueError("Fixture runs require an explicitly isolated fixture database")
         self.session = connection
+        # Modules write artifacts only; run lifecycle belongs to the orchestrator.
+        self._module_scope = module_scope
         self.namespace = "fixture" if fixture_mode else "product"
         bound = _BoundEngine(connection)
         snapshot = RunSpec.model_validate(spec.model_dump(mode="json"))
@@ -192,7 +201,17 @@ class RunRepo(Repo):
                 status = "blocked"
         return {"spec": self.spec, "status": status, "published": self.status() == "published"}
 
+    def _lifecycle(self) -> None:
+        if self._module_scope:
+            raise PermissionError("modules cannot change run or module lifecycle state")
+
+    def discard_artifacts(self) -> None:
+        """Drop unpublished outputs of a run that will never be published."""
+        self._lifecycle()
+        self.session.execute(delete(artifacts).where(artifacts.c.run_id == self.run_id))
+
     def set_run_status(self, status: str, *, published: bool = False) -> None:
+        self._lifecycle()
         if published:
             if status not in {"succeeded", "degraded"}:
                 raise ValueError("Only successful/degraded complete runs can be published")
@@ -207,6 +226,7 @@ class RunRepo(Repo):
         self.set_run_status(status, published=True)
 
     def save_module_run(self, module: ModuleRun) -> None:
+        self._lifecycle()
         if module.run_id != self.run_id:
             raise ValueError("Module state belongs to another run")
         module = ModuleRun.model_validate(module.model_dump(mode="json"))
@@ -217,7 +237,9 @@ class RunRepo(Repo):
 
 
 @contextmanager
-def repo_session(engine: Engine, spec: RunSpec, *, fixture_mode: bool = False) -> Iterator[RunRepo]:
+def repo_session(
+    engine: Engine, spec: RunSpec, *, fixture_mode: bool = False, module_scope: bool = False
+) -> Iterator[RunRepo]:
     with engine.begin() as connection:
         # sqlite3 legacy transaction mode does not start BEGIN for reads or
         # SAVEPOINT. Force the outer transaction before a first module savepoint
@@ -226,4 +248,4 @@ def repo_session(engine: Engine, spec: RunSpec, *, fixture_mode: bool = False) -
             driver = connection.connection.driver_connection
             if not driver.in_transaction:
                 connection.exec_driver_sql("BEGIN")
-        yield RunRepo(connection, spec, fixture_mode=fixture_mode)
+        yield RunRepo(connection, spec, fixture_mode=fixture_mode, module_scope=module_scope)
