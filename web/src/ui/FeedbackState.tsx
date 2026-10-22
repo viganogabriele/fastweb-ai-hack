@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { Inbox, CircleAlert, RotateCcw } from 'lucide-react'
 import { Button } from './Button'
 import { VisuallyHidden } from './VisuallyHidden'
+import { messages } from '../i18n'
 import './FeedbackState.css'
 
 export interface EmptyStateProps {
@@ -57,7 +58,7 @@ export function ErrorState({ title, description, onRetry, compact, announce = tr
       <CircleAlert className="sd-feedback__icon" aria-hidden="true" />
       <p className="sd-feedback__title">{title}</p>
       {description && <p className="sd-feedback__description">{description}</p>}
-      {onRetry && <Button onClick={onRetry} icon={<RotateCcw />}>Riprova</Button>}
+      {onRetry && <Button onClick={onRetry} icon={<RotateCcw />}>{messages.common.retry}</Button>}
     </div>
   )
 }

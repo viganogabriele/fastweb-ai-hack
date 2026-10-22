@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { formatNumber, formatPercent } from '../ui'
 import type { CategoryPoint, TimePoint } from '../demo/data'
+import { fmt, messages } from '../i18n'
 import './widgets.css'
 function usePlotWidth() {
   const ref = useRef<HTMLDivElement>(null)
@@ -18,7 +19,7 @@ function usePlotWidth() {
 }
 const compactNumber = (value: number) =>
   formatNumber(value, { notation: 'compact', maximumFractionDigits: 1 })
-export function LineChart({ points, unit = 'req' }: { points: TimePoint[]; unit?: string }) {
+export function LineChart({ points, unit = messages.dashboard.metrics.requestUnit }: { points: TimePoint[]; unit?: string }) {
   const { ref, width } = usePlotWidth()
   const [active, setActive] = useState<number | null>(null)
   const tooltipId = useId()
@@ -47,7 +48,7 @@ export function LineChart({ points, unit = 'req' }: { points: TimePoint[]; unit?
         className="sd-focus-plot"
         tabIndex={0}
         role="group"
-        aria-label="Andamento richieste. Usa freccia sinistra e destra per esplorare i punti, Inizio e Fine per gli estremi."
+        aria-label={messages.dashboard.charts.trendA11y}
         aria-describedby={tooltipId}
         onFocus={() => setActive(0)}
         onBlur={() => setActive(null)}
@@ -128,18 +129,23 @@ export function LineChart({ points, unit = 'req' }: { points: TimePoint[]; unit?
           )}
         </svg>
       </div>
-      <p id={tooltipId} className="sd-chart-tooltip" role="status" aria-live="polite">
+      <p id={tooltipId} className="sd-chart-tooltip">
         {selected
-          ? `${selected.fullLabel} · ${formatNumber(selected.value)} ${unit} · precedente: ${formatNumber(selected.comparison)} ${unit}`
-          : 'Esplora il grafico con il puntatore o le frecce della tastiera.'}
+          ? fmt(messages.dashboard.charts.tooltip, {
+              date: selected.fullLabel,
+              value: formatNumber(selected.value),
+              previous: formatNumber(selected.comparison),
+              unit
+            })
+          : messages.dashboard.charts.explore}
       </p>
     </div>
   )
 }
-export function BarChart({ points, unit = 'req' }: { points: CategoryPoint[]; unit?: string }) {
+export function BarChart({ points, unit = messages.dashboard.metrics.requestUnit }: { points: CategoryPoint[]; unit?: string }) {
   const max = Math.max(...points.map((point) => point.value), 1)
   return (
-    <ul className="sd-comparison-bars" aria-label={`Richieste per servizio in ${unit}`}>
+    <ul className="sd-comparison-bars" aria-label={fmt(messages.dashboard.charts.requestsByService, { unit })}>
       {points.map((point) => (
         <li key={point.label}>
           <span>{point.label}</span>
@@ -157,7 +163,7 @@ export function BarChart({ points, unit = 'req' }: { points: CategoryPoint[]; un
 }
 export function DistributionChart({
   points,
-  unit = 'req'
+  unit = messages.dashboard.metrics.requestUnit
 }: {
   points: CategoryPoint[]
   unit?: string
@@ -170,7 +176,7 @@ export function DistributionChart({
       <svg
         viewBox="0 0 360 80"
         role="img"
-        aria-label={`Distribuzione regionale: ${formatNumber(total)} ${unit} totali. Dettaglio nelle etichette sottostanti.`}
+        aria-label={fmt(messages.dashboard.charts.regionalDistribution, { total: formatNumber(total), unit })}
       >
         <defs>
           <pattern id={`${id}-stripe`} patternUnits="userSpaceOnUse" width="8" height="8">

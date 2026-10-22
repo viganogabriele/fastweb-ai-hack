@@ -1,12 +1,13 @@
 import { ArrowDownRight, ArrowRight, ArrowUpRight } from 'lucide-react'
 import { ErrorState, LoadingState, formatDelta } from '../ui'
 import type { DemoScenario } from '../demo/scenario'
+import { fmt, messages } from '../i18n'
 import './widgets.css'
 export interface KpiCardProps {
   label: string
   value: string
   unit: string
-  period: string
+  period?: string
   delta: number
   higherIsBetter?: boolean
   sparkline?: number[]
@@ -36,20 +37,20 @@ export function KpiCard({
     <article className="sd-kpi sd-panel" aria-label={label}>
       <h2 className="sd-kpi-label">{label}</h2>
       {state === 'loading' ? (
-        <LoadingState label={`Caricamento: ${label}`} lines={2} compact announce={false} />
+          <LoadingState label={fmt(messages.dashboard.metrics.loading, { label })} lines={2} compact announce={false} />
       ) : state === 'error' ? (
-        <ErrorState title="Metrica non disponibile" compact announce={false} />
+        <ErrorState title={messages.dashboard.metrics.unavailable} compact announce={false} />
       ) : (
         <>
           <p className="sd-kpi-value">
             {state === 'empty' ? '—' : value} <span>{unit}</span>
           </p>
-          <p className="sd-kpi-period">{period}</p>
+          {period && <p className="sd-kpi-period">{period}</p>}
           {state === 'data' && (
             <p className={`sd-kpi-delta sd-kpi-delta--${tone}`}>
               <Direction aria-hidden="true" />
               <strong>{formatDelta(shown)}</strong>
-              <span>vs periodo precedente</span>
+              <span>{messages.dashboard.metrics.vsPrevious}</span>
             </p>
           )}
           {state === 'data' && points && (

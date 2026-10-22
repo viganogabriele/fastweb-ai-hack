@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Activity, CircleHelp } from 'lucide-react'
+import { CircleHelp } from 'lucide-react'
 import { Button, StatusBadge, formatNumber, formatPercent } from '../ui'
 import { ChartCard } from '../widgets/ChartCard'
 import { DataTable } from '../widgets/DataTable'
@@ -12,47 +12,48 @@ import type { DashboardResponse } from './api'
 import { DEFAULT_FILTERS, PERIOD_LABELS } from './data'
 import type { DashboardFilters, ServiceRow } from './data'
 import type { DemoScenario } from './scenario'
+import { fmt, messages } from '../i18n'
 import '../widgets/widgets.css'
 export { DASHBOARD_META, DEMO_UPDATED_AT } from './data'
 const delta = (value: number, previous: number) => (previous ? (value - previous) / previous : 0)
 const columns: DataColumn<ServiceRow>[] = [
   {
     key: 'name',
-    label: 'Servizio',
+    label: messages.dashboard.table.service,
     render: (row) => <strong>{row.name}</strong>,
     sortValue: (row) => row.name
   },
-  { key: 'region', label: 'Regione', render: (row) => row.region, sortValue: (row) => row.region },
+  { key: 'region', label: messages.dashboard.table.region, render: (row) => row.region, sortValue: (row) => row.region },
   {
     key: 'status',
-    label: 'Stato attuale',
+    label: messages.dashboard.table.status,
     render: (row) => <StatusBadge tone={row.status} label={row.statusLabel} />,
     sortValue: (row) => row.incidents
   },
   {
     key: 'requests',
-    label: 'Richieste (req)',
+    label: messages.dashboard.table.requests,
     numeric: true,
-    render: (row) => `${formatNumber(row.requests)} req`,
+    render: (row) => `${formatNumber(row.requests)} ${messages.dashboard.metrics.requestUnit}`,
     sortValue: (row) => row.requests
   },
   {
     key: 'latency',
-    label: 'Latenza p95 (ms)',
+    label: messages.dashboard.table.latency,
     numeric: true,
-    render: (row) => `${formatNumber(row.latency)} ms`,
+    render: (row) => `${formatNumber(row.latency)} ${messages.dashboard.metrics.milliseconds}`,
     sortValue: (row) => row.latency
   },
   {
     key: 'errors',
-    label: 'Errori (%)',
+    label: messages.dashboard.table.errors,
     numeric: true,
     render: (row) => formatPercent(row.errorRate, 2),
     sortValue: (row) => row.errorRate
   },
   {
     key: 'incidents',
-    label: 'Incidenti aperti (n)',
+    label: messages.dashboard.table.incidents,
     numeric: true,
     render: (row) => formatNumber(row.incidents),
     sortValue: (row) => row.incidents
@@ -62,7 +63,7 @@ export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
   const [filters, setFilters] = useState<DashboardFilters>({ ...DEFAULT_FILTERS })
   const [response, setResponse] = useState<DashboardResponse>({
     state: 'loading',
-    message: 'Caricamento metriche'
+    message: messages.dashboard.states.loading
   })
   const [attempt, setAttempt] = useState(0)
   useEffect(() => {
@@ -73,18 +74,18 @@ export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
       })
       .catch(() => {
         if (!cancelled)
-          setResponse({ state: 'error', message: 'Errore imprevisto nel caricamento demo' })
+          setResponse({ state: 'error', message: messages.dashboard.states.unexpectedError })
       })
     return () => {
       cancelled = true
     }
   }, [filters, scenario, attempt])
   const retry = () => {
-    setResponse({ state: 'loading', message: 'Caricamento metriche' })
+    setResponse({ state: 'loading', message: messages.dashboard.states.loading })
     setAttempt((value) => value + 1)
   }
   const updateFilters = (next: DashboardFilters) => {
-    setResponse({ state: 'loading', message: 'Caricamento metriche' })
+    setResponse({ state: 'loading', message: messages.dashboard.states.loading })
     setFilters(next)
   }
   const state = scenario === 'data' ? response.state : scenario
@@ -93,17 +94,17 @@ export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
   const metrics = data?.metrics
   const previous = data?.previous
   const lineDelta = metrics && previous ? delta(metrics.requests, previous.requests) : 0
-  const trend = lineDelta === 0 ? 'stabili' : lineDelta > 0 ? 'in aumento' : 'in calo'
-  const common = { period, state, onRetry: retry }
+  const trend = lineDelta === 0 ? messages.dashboard.trend.stable : lineDelta > 0 ? messages.dashboard.trend.up : messages.dashboard.trend.down
+  const common = { state, onRetry: retry }
   // One polite announcer for the whole page; widgets render their states silently. Errors are
   // announced once by the assertive alert below.
   const announcement =
     state === 'loading'
-      ? 'Caricamento metriche in corso'
+      ? messages.dashboard.states.loadingInProgress
       : state === 'empty'
-        ? 'Nessun risultato per i filtri selezionati'
+        ? messages.dashboard.states.empty
         : state === 'data' && data
-          ? `Metriche aggiornate: ${formatNumber(data.rows.length)} servizi · ${period}`
+          ? fmt(messages.dashboard.states.updated, { count: formatNumber(data.rows.length), period })
           : ''
   return (
     <div className="sd-dashboard">
@@ -111,29 +112,22 @@ export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
       <p className="sd-visually-hidden" role="status" aria-live="polite">
         {announcement}
       </p>
-      <div className="sd-demo-context">
-        <span>
-          <Activity aria-hidden="true" /> Dati demo · piattaforma SaaS fittizia
-        </span>
-        <span>Finestra fino al 22 ott 2026, 20:00 CEST</span>
-      </div>
       {state === 'error' && (
         <div className="sd-dashboard-alert" role="alert">
           <span>
             {response.state === 'error'
               ? response.message
-              : 'Il servizio demo non è raggiungibile. Riprova.'}
+              : messages.dashboard.states.unreachable}
           </span>
-          <Button onClick={retry}>Riprova</Button>
+          <Button size="sm" onClick={retry}>{messages.dashboard.states.retry}</Button>
         </div>
       )}
       <div className="sd-dashboard-grid">
         <div className="sd-kpi-slot">
           <KpiCard
-            label="Richieste"
+            label={messages.dashboard.metrics.requests}
             value={metrics ? formatNumber(metrics.requests) : '—'}
-            unit="req"
-            period={period}
+            unit={messages.dashboard.metrics.requestUnit}
             delta={metrics && previous ? delta(metrics.requests, previous.requests) : 0}
             sparkline={data?.timeline.map((point) => point.value)}
             state={state}
@@ -141,10 +135,9 @@ export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
         </div>
         <div className="sd-kpi-slot">
           <KpiCard
-            label="Latenza p95"
+            label={messages.dashboard.metrics.latency}
             value={metrics ? formatNumber(metrics.latency) : '—'}
-            unit="ms"
-            period={period}
+            unit={messages.dashboard.metrics.milliseconds}
             delta={metrics && previous ? delta(metrics.latency, previous.latency) : 0}
             higherIsBetter={false}
             state={state}
@@ -152,7 +145,7 @@ export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
         </div>
         <div className="sd-kpi-slot">
           <KpiCard
-            label="Tasso di errore"
+            label={messages.dashboard.metrics.errorRate}
             value={
               metrics
                 ? formatNumber(metrics.errorRate * 100, {
@@ -162,7 +155,6 @@ export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
                 : '—'
             }
             unit="%"
-            period={period}
             delta={metrics && previous ? delta(metrics.errorRate, previous.errorRate) : 0}
             higherIsBetter={false}
             state={state}
@@ -170,10 +162,10 @@ export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
         </div>
         <div className="sd-kpi-slot">
           <KpiCard
-            label="Incidenti aperti"
+            label={messages.dashboard.metrics.incidents}
             value={metrics ? formatNumber(metrics.incidents) : '—'}
-            unit="incidenti"
-            period={`Al termine · ${period.toLocaleLowerCase('it-IT')}`}
+            unit={messages.dashboard.metrics.incidentUnit}
+            period={messages.dashboard.data.periodEnd}
             delta={metrics && previous ? delta(metrics.incidents, previous.incidents) : 0}
             higherIsBetter={false}
             state={state}
@@ -182,23 +174,26 @@ export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
         <ChartCard
           {...common}
           className="sd-trend-slot"
-          title="Traffico della piattaforma"
+          title={messages.dashboard.charts.traffic}
           legend={[
-            { label: 'Periodo selezionato', style: 'primary' },
-            { label: 'Periodo precedente', style: 'comparison' }
+            { label: messages.dashboard.charts.selectedPeriod, style: 'primary' },
+            { label: messages.dashboard.charts.previousPeriod, style: 'comparison' }
           ]}
-          summary={`Richieste ${trend} ${lineDelta ? `del ${formatPercent(Math.abs(lineDelta))}` : ''} rispetto al periodo precedente. Totale: ${formatNumber(metrics?.requests ?? 0)} req.`}
+          summary={fmt(messages.dashboard.charts.requestTrendSummary, {
+            trend,
+            delta: lineDelta ? fmt(messages.dashboard.charts.deltaSuffix, { value: formatPercent(Math.abs(lineDelta)) }) : '',
+            total: formatNumber(metrics?.requests ?? 0)
+          })}
           table={
             <table>
               <caption>
-                Richieste · {period}. Date di inizio degli intervalli; confronto con intervalli
-                corrispondenti del periodo precedente.
+                {fmt(messages.dashboard.charts.timelineCaption, { period })}
               </caption>
               <thead>
                 <tr>
-                  <th scope="col">Intervallo</th>
-                  <th scope="col">Attuale (req)</th>
-                  <th scope="col">Precedente (req)</th>
+                  <th scope="col">{messages.dashboard.charts.interval}</th>
+                  <th scope="col">{messages.dashboard.charts.current}</th>
+                  <th scope="col">{messages.dashboard.charts.previous}</th>
                 </tr>
               </thead>
               <tbody>
@@ -218,22 +213,26 @@ export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
         <ChartCard
           {...common}
           className="sd-distribution-slot"
-          title="Traffico per regione"
+          title={messages.dashboard.charts.byRegion}
           legend={(
-            data?.distribution ?? [{ label: 'Europa' }, { label: 'America' }, { label: 'Asia' }]
+            data?.distribution ?? [
+              { label: messages.dashboard.filters.regions.europe },
+              { label: messages.dashboard.filters.regions.america },
+              { label: messages.dashboard.filters.regions.asia }
+            ]
           ).map((point, index) => ({
             label: point.label,
             style: (['primary', 'comparison', 'third'] as const)[index]
           }))}
-          summary={`Le regioni ripartiscono tutte le ${formatNumber(metrics?.requests ?? 0)} req del periodo selezionato.`}
+          summary={fmt(messages.dashboard.charts.regionsSummary, { total: formatNumber(metrics?.requests ?? 0) })}
           table={
             <table>
-              <caption>Richieste per regione · {period}</caption>
+              <caption>{fmt(messages.dashboard.charts.byRegionCaption, { period })}</caption>
               <thead>
                 <tr>
-                  <th scope="col">Regione</th>
-                  <th scope="col">Richieste (req)</th>
-                  <th scope="col">Quota (%)</th>
+                  <th scope="col">{messages.dashboard.charts.region}</th>
+                  <th scope="col">{messages.dashboard.charts.requestUnit}</th>
+                  <th scope="col">{messages.dashboard.charts.share}</th>
                 </tr>
               </thead>
               <tbody>
@@ -253,16 +252,16 @@ export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
         <ChartCard
           {...common}
           className="sd-comparison-slot"
-          title="Richieste per servizio"
-          legend={[{ label: 'Richieste · req', style: 'primary' }]}
-          summary={`${data?.rows.length ?? 0} servizi nel periodo. I valori corrispondono alle righe della tabella di dettaglio.`}
+          title={messages.dashboard.charts.byService}
+          legend={[{ label: messages.dashboard.charts.unitRequestsLegend, style: 'primary' }]}
+          summary={fmt(messages.dashboard.charts.servicesInPeriod, { count: data?.rows.length ?? 0 })}
           table={
             <table>
-              <caption>Richieste per servizio · {period}</caption>
+              <caption>{fmt(messages.dashboard.charts.byServiceCaption, { period })}</caption>
               <thead>
                 <tr>
-                  <th scope="col">Servizio</th>
-                  <th scope="col">Richieste (req)</th>
+                  <th scope="col">{messages.dashboard.table.service}</th>
+                  <th scope="col">{messages.dashboard.charts.requestUnit}</th>
                 </tr>
               </thead>
               <tbody>
@@ -280,28 +279,17 @@ export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
         </ChartCard>
         <aside className="sd-method-slot sd-panel">
           <CircleHelp aria-hidden="true" />
-          <h2>Come leggere i segnali</h2>
-          <p>
-            Le richieste sono conteggi assoluti. Il tasso di errore è il rapporto tra richieste
-            fallite e richieste totali.
-          </p>
-          <p>
-            La latenza p95 è calcolata dall’istogramma aggregato delle richieste, senza mediare i
-            percentili dei servizi.
-          </p>
-          <p>
-            Gli incidenti aperti sono una fotografia a fine finestra. Il delta confronta la
-            fotografia precedente.
-          </p>
-          <span className="sd-method-label">Simulazione deterministica · nessun dato reale</span>
+          <h2>{messages.dashboard.method.title}</h2>
+          <p>{messages.dashboard.method.requests}</p>
+          <p>{messages.dashboard.method.latency}</p>
+          <p>{messages.dashboard.method.incidents}</p>
         </aside>
         <section className="sd-detail-slot sd-panel" aria-labelledby="sd-services-heading">
           <div className="sd-detail-heading">
             <div>
-              <h2 id="sd-services-heading">Dettaglio servizi</h2>
-              <p>{period} · stessi filtri di KPI e grafici</p>
+              <h2 id="sd-services-heading">{messages.dashboard.table.detailTitle}</h2>
+              <p>{fmt(messages.dashboard.table.sameFilters, { period })}</p>
             </div>
-            <StatusBadge tone="neutral" label="Dati demo" />
           </div>
           <DataTable
             key={`${filters.search}-${filters.region}-${filters.service}-${filters.period}-${scenario}`}
@@ -309,7 +297,7 @@ export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
             columns={columns}
             rowKey={(row) => row.id}
             rowLabel={(row) => row.name}
-            caption={`Metriche per servizio · ${period}. Incidenti: fotografia al termine della finestra.`}
+            caption={fmt(messages.dashboard.table.caption, { period })}
             state={state}
             onRetry={retry}
           />

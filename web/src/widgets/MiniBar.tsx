@@ -1,5 +1,6 @@
 import { formatNumber } from '../ui'
 import type { CategoryPoint } from '../demo/data'
+import { fmt, messages } from '../i18n'
 import './widgets.css'
 export function MiniBar({
   items,
@@ -14,7 +15,7 @@ export function MiniBar({
   return (
     <div className="sd-mini-ranking">
       <p className="sd-mini-period">{period}</p>
-      <ul className="sd-mini-list" aria-label={`Classifica · ${period}`}>
+      <ul className="sd-mini-list" aria-label={fmt(messages.dashboard.charts.ranking, { period })}>
         {items.map((item) => (
           <li key={item.label}>
             <div>

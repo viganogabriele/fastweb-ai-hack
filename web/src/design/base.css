@@ -10,6 +10,7 @@
   color: var(--sd-color-text-primary);
   background: var(--sd-color-surface-canvas);
   scrollbar-color: var(--sd-color-text-muted) var(--sd-color-surface-canvas);
+  scrollbar-width: thin;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -23,6 +24,10 @@ img { max-width: 100%; }
 a { color: var(--sd-color-action-primary); }
 :focus-visible { outline: var(--sd-local-focus-ring); outline-offset: var(--sd-local-focus-offset); }
 ::selection { color: var(--sd-color-text-on-accent); background: var(--sd-color-action-primary); }
+::-webkit-scrollbar { width: var(--sd-space-2); height: var(--sd-space-2); }
+::-webkit-scrollbar-track { background: var(--sd-color-surface-canvas); }
+::-webkit-scrollbar-thumb { border: 1px solid var(--sd-color-surface-canvas); border-radius: var(--sd-local-radius-pill); background: var(--sd-color-text-muted); }
+::-webkit-scrollbar-thumb:hover { background: var(--sd-color-text-secondary); }
 
 .sd-visually-hidden {
   position: absolute;

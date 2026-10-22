@@ -5,6 +5,8 @@
   --sd-local-focus-offset: 3px;
   /* Implementation decision: 44px controls support touch and compact desktop layouts. */
   --sd-local-control-height: 44px;
+  /* Implementation decision: compact toolbar controls stay dense while their hit areas can extend. */
+  --sd-local-control-height-sm: 40px;
   /* Implementation decision: reserve a minimum 44px square interactive target. */
   --sd-local-hit-min: 44px;
   /* Implementation decision: short transitions acknowledge actions without delaying them. */

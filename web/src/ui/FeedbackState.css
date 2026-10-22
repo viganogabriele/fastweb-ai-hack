@@ -1,6 +1,6 @@
-.sd-feedback { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--sd-space-3); padding: var(--sd-space-7) var(--sd-space-card-padding); text-align: center; color: var(--sd-color-text-secondary); }
+.sd-feedback { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--sd-space-3); padding: var(--sd-space-6) var(--sd-space-card-padding); text-align: center; color: var(--sd-color-text-secondary); }
 .sd-feedback--compact { gap: var(--sd-space-2); padding: var(--sd-space-4); }
-.sd-feedback__icon { width: 2em; height: 2em; color: var(--sd-color-text-muted); }
+.sd-feedback__icon { width: 1.5em; height: 1.5em; color: var(--sd-color-text-muted); }
 .sd-feedback__title { color: var(--sd-color-text-primary); font-weight: var(--sd-font-weight-semibold); }
 .sd-feedback__description { font-size: var(--sd-font-size-body-sm); overflow-wrap: anywhere; }
 .sd-feedback--error .sd-feedback__icon { color: var(--sd-color-state-danger); }

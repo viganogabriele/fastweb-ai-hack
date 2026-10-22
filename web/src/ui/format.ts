@@ -1,4 +1,4 @@
-const LOCALE = 'it-IT'
+import { LOCALE } from '../i18n'
 
 export function formatNumber(n: number, opts?: Intl.NumberFormatOptions): string {
   return new Intl.NumberFormat(LOCALE, opts).format(n)

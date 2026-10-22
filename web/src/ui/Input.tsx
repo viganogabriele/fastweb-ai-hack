@@ -8,10 +8,11 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   hint?: string
   error?: string
   icon?: ReactNode
+  size?: 'md' | 'sm'
 }
 
 export function Input({
-  label, hideLabel, hint, error, icon, id, className = '',
+  label, hideLabel, hint, error, icon, id, className = '', size = 'md',
   'aria-describedby': describedBy, 'aria-invalid': invalid, ...rest
 }: InputProps) {
   const autoId = useId()
@@ -26,7 +27,7 @@ export function Input({
         <input
           {...rest}
           id={fieldId}
-          className={`sd-field__control ${className}`}
+          className={`sd-field__control sd-field__control--${size} ${className}`}
           aria-invalid={error ? true : invalid}
           aria-describedby={descriptions}
         />

@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 import { ArrowDown, ArrowUp, ArrowUpDown, CheckCheck } from 'lucide-react'
 import { Button, EmptyState, ErrorState, LoadingState, formatNumber } from '../ui'
 import type { DemoScenario } from '../demo/scenario'
+import { LOCALE, fmt, messages } from '../i18n'
 import './widgets.css'
 export interface DataColumn<T> {
   key: string
@@ -44,7 +45,7 @@ export function DataTable<T>({
           return (
             (typeof av === 'number' && typeof bv === 'number'
               ? av - bv
-              : String(av).localeCompare(String(bv), 'it-IT')) * (sort.ascending ? 1 : -1)
+              : String(av).localeCompare(String(bv), LOCALE)) * (sort.ascending ? 1 : -1)
           )
         })
       : rows
@@ -57,43 +58,40 @@ export function DataTable<T>({
       return next
     })
   }
-  if (state === 'loading') return <LoadingState label="Caricamento servizi" lines={6} announce={false} />
+  if (state === 'loading') return <LoadingState label={messages.dashboard.table.loading} lines={6} announce={false} />
   if (state === 'error')
-    return <ErrorState title="Impossibile caricare i servizi" onRetry={onRetry} announce={false} />
+    return <ErrorState title={messages.dashboard.table.error} onRetry={onRetry} announce={false} />
   if (state === 'empty' || !rows.length)
     return (
       <EmptyState
-        title="Nessun servizio trovato"
-        description="Modifica ricerca, regione o servizio per ampliare i risultati."
+        title={messages.dashboard.table.empty}
+        description={messages.dashboard.table.emptyDescription}
       />
     )
   return (
     <div className="sd-data-table">
-      <div className="sd-table-toolbar">
-        <span role="status" aria-live="polite">
-          {formatNumber(selectedCount)} servizi selezionati
-        </span>
-        <Button
-          size="sm"
-          icon={<CheckCheck />}
-          disabled={!selectedCount}
-          onClick={() => {
-            setMessage(
-              `Azione demo: ${selectedCount} servizi contrassegnati come esaminati. Nessuna modifica remota.`
-            )
-            setSelected(new Set())
-          }}
-        >
-          Segna esaminati · demo
-        </Button>
-      </div>
-      <p className="sd-table-message" role="status" aria-live="polite">
+      {selectedCount > 0 && (
+        <div className="sd-table-toolbar">
+          <span>{fmt(messages.dashboard.table.selected, { count: formatNumber(selectedCount) })}</span>
+          <Button
+            size="sm"
+            icon={<CheckCheck />}
+            onClick={() => {
+              setMessage(fmt(messages.dashboard.table.actionResult, { count: selectedCount }))
+              setSelected(new Set())
+            }}
+          >
+            {messages.dashboard.table.actionDemo}
+          </Button>
+        </div>
+      )}
+      <p className="sd-table-message">
         {message}
       </p>
       <div
         className="sd-table-scroll"
         role="region"
-        aria-label="Dettaglio servizi, scorrimento orizzontale"
+        aria-label={messages.dashboard.table.scrollLabel}
         tabIndex={0}
       >
         <table>
@@ -105,7 +103,7 @@ export function DataTable<T>({
                 <input
                   className="sd-row-checkbox"
                   type="checkbox"
-                  aria-label="Seleziona tutti i servizi visibili"
+                  aria-label={messages.dashboard.table.selectAll}
                   checked={selectedCount === rows.length}
                   ref={(element) => {
                     if (element)
@@ -169,7 +167,7 @@ export function DataTable<T>({
                     <input
                       className="sd-row-checkbox"
                       type="checkbox"
-                      aria-label={`Seleziona ${rowLabel(row)}`}
+                      aria-label={fmt(messages.dashboard.table.selectRow, { service: rowLabel(row) })}
                       checked={selected.has(rowKey(row))}
                       onChange={() => toggle(rowKey(row))}
                     />
@@ -186,8 +184,7 @@ export function DataTable<T>({
         </table>
       </div>
       <p className="sd-table-footnote">
-        {formatNumber(rows.length)} servizi · Usa i pulsanti nelle intestazioni per ordinare. Su
-        schermi piccoli scorri la tabella.
+        {fmt(messages.dashboard.table.footnote, { count: formatNumber(rows.length) })}
       </p>
     </div>
   )

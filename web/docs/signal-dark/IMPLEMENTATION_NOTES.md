@@ -14,6 +14,8 @@ inspected NexaDash frame and a text description; nothing here is "pixel-perfect"
 | Shell | `src/shell/` (AppShell, SidebarNav, PageHeader, `useShell`) | [B](decisions/B-shell.md) |
 | Widgets + demo | `src/widgets/` (FilterBar, KpiCard, ChartCard, SVG charts, MiniBar, DataTable), `src/demo/` (data, API stub, scenarios, DashboardPage) | [C](decisions/C-widgets.md) |
 | Composition | `src/App.tsx` | this file |
+| Plan sections | `src/sections/PendingSection.tsx`: one "waiting for backend" view per planned page (Casi, Fonti, Report, Pipeline, Prodotti, Chiarimenti), driven by `messages.sections.items` (summary, API endpoints, plan tasks) | this file |
+| UI copy | `src/i18n/`: `messages` (one file per namespace in `it/`), `fmt()` for `{name}` placeholders, `LOCALE` | this file |
 | Contract between lanes | [`CONTRACT.md`](CONTRACT.md) | |
 
 Commands (from `web/`): `node scripts/build-tokens.mjs` regenerates `tokens.css` after editing
@@ -62,8 +64,31 @@ loading / empty / error states and should go with it.
 
 ## Known limits
 
-- Only "Panoramica" is a working view; the other nav entries show an empty state by design.
+- Only "Panoramica" is a working view (synthetic demo data). The plan views (RFC §3.4) show
+  what they will contain, the endpoints they will read (RFC §4.6) and the tasks they wait for; no
+  fake data. The run / `as_of` selector in the top bar is a disabled placeholder until
+  `GET /api/runs` exists. When a view gets its API, replace its `PendingSection` in `App.tsx`.
 - No real screen-reader session (NVDA/VoiceOver) was run; announcements were checked via the DOM.
 - Browser zoom was approximated with equivalent CSS viewports, not native browser-UI zoom.
 - Token values are proposals from one frame; if better screenshots arrive, update `tokens.json`
   first, regenerate, then adjust components (no disconnected overrides).
+
+## Polish pass (2026-10-23)
+
+- **Strings:** every user-facing string, aria-label and title comes from `src/i18n/it/*.ts`; no
+  literal `'it-IT'` outside `src/i18n/index.ts`. A new locale adds a sibling folder with the same
+  shape.
+- **Select:** custom select-only combobox (button + portalled listbox) instead of the native
+  `<select>`: arrows/Home/End/typeahead, Enter/Space, Esc returns focus, Tab and outside click
+  close, disabled options skipped, popover clamped to the viewport. API: `onValueChange(value)`,
+  `size: 'md' | 'sm'`. Native look also removed from search inputs, checkboxes/radios, autofill,
+  number spinners and scrollbars (`base.css`, `local.css`).
+- **Navigation:** groups Demo / Flusso di lavoro / Approfondimenti; the section lives in the URL
+  hash (`#/casi`), so views are linkable and back/forward works. Mode badge in the top bar
+  (`Dati sintetici` on Panoramica, `Non disponibile` on plan views); the scenario select only
+  appears on Panoramica; the run placeholder is hidden below 768px.
+- **Panoramica:** compact filter toolbar, no decorative ` · ` separators, period stated once by
+  the filter, update time in the page header, demo bulk action labelled as demo.
+- **Verified:** lint, typecheck, build; Playwright (Chromium) at 320–1440px with no horizontal
+  overflow and no console errors; keyboard select, hash back/forward, drawer navigation, error
+  scenario alert.

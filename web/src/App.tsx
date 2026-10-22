@@ -1,84 +1,141 @@
-import { useState } from 'react'
-import { Activity, BellRing, FileText, Server, Settings } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Activity, ClipboardList, FileSearch, FileText, MessageCircleQuestion, Package, Workflow } from 'lucide-react'
+import { fmt, messages } from './i18n'
 import { DASHBOARD_META, DashboardPage } from './demo/DashboardPage'
 import { DEMO_SCENARIOS } from './demo/scenario'
 import type { DemoScenario } from './demo/scenario'
 import { AppShell, PageHeader, SidebarNav } from './shell'
 import type { NavGroup } from './shell'
-import { EmptyState, Select } from './ui'
+import { PendingSection } from './sections/PendingSection'
+import { Select, StatusBadge } from './ui'
 
-// Signal Dark demo dashboard (docs/signal-dark/). Only "Panoramica" is a working view; the other
-// entries show that navigation works and are labelled as outside the demo.
 const NAV: NavGroup[] = [
   {
-    id: 'monitor',
-    label: 'Monitoraggio',
+    id: 'demo',
+    label: messages.shell.groups.demo,
+    items: [{ id: 'overview', label: messages.shell.nav.overview, icon: Activity }],
+  },
+  {
+    id: 'core',
+    label: messages.shell.groups.core,
     items: [
-      { id: 'overview', label: 'Panoramica', icon: Activity },
-      { id: 'services', label: 'Servizi', icon: Server },
-      { id: 'incidents', label: 'Incidenti', icon: BellRing, badge: '2' },
+      { id: 'cases', label: messages.shell.nav.cases, icon: ClipboardList },
+      { id: 'sources', label: messages.shell.nav.sources, icon: FileSearch },
+      { id: 'reports', label: messages.shell.nav.reports, icon: FileText },
+      { id: 'modules', label: messages.shell.nav.modules, icon: Workflow },
     ],
   },
   {
-    id: 'workspace',
-    label: 'Area di lavoro',
+    id: 'should',
+    label: messages.shell.groups.should,
     items: [
-      { id: 'reports', label: 'Report', icon: FileText },
-      { id: 'settings', label: 'Impostazioni', icon: Settings, disabled: true },
+      { id: 'products', label: messages.shell.nav.products, icon: Package },
+      { id: 'clarifications', label: messages.shell.nav.clarifications, icon: MessageCircleQuestion },
     ],
   },
 ]
 
-// The label is visually hidden in the compact top bar, so each option carries the context.
-const SCENARIO_OPTIONS = DEMO_SCENARIOS.map((o) => ({ ...o, label: `Demo: ${o.label}` }))
+const ROUTES = {
+  overview: 'panoramica',
+  cases: 'casi',
+  sources: 'fonti',
+  reports: 'report',
+  modules: 'pipeline',
+  products: 'prodotti',
+  clarifications: 'chiarimenti',
+} as const
 
-const titleOf = (id: string) =>
-  NAV.flatMap((g) => g.items).find((item) => item.id === id)?.label ?? 'Panoramica'
+type SectionId = keyof typeof ROUTES
+const idFromHash = (): SectionId => {
+  const slug = window.location.hash.replace(/^#\/?/, '')
+  return (Object.entries(ROUTES).find(([, route]) => route === slug)?.[0] as SectionId | undefined) ?? 'overview'
+}
+const pathFor = (id: string) => ROUTES[id as SectionId] ?? ROUTES.overview
+const titleOf = (id: string) => NAV.flatMap(group => group.items).find(item => item.id === id)?.label ?? messages.shell.nav.overview
+const SCENARIO_OPTIONS = DEMO_SCENARIOS.map(option => ({
+  ...option,
+  label: fmt(messages.shell.controls.scenarioOption, { scenario: option.label }),
+}))
 
 export default function App() {
-  const [currentId, setCurrentId] = useState('overview')
+  const [currentId, setCurrentId] = useState<SectionId>(idFromHash)
   const [scenario, setScenario] = useState<DemoScenario>('data')
+
+  useEffect(() => {
+    const syncRoute = () => setCurrentId(idFromHash())
+    if (!window.location.hash) window.history.replaceState(null, '', `#/${pathFor(currentId)}`)
+    window.addEventListener('hashchange', syncRoute)
+    window.addEventListener('popstate', syncRoute)
+    return () => {
+      window.removeEventListener('hashchange', syncRoute)
+      window.removeEventListener('popstate', syncRoute)
+    }
+  }, [currentId])
+
+  const navigate = (id: string) => {
+    const nextId = id as SectionId
+    if (!(nextId in ROUTES)) return
+    if (nextId !== currentId) window.history.pushState(null, '', `#/${pathFor(nextId)}`)
+    setCurrentId(nextId)
+  }
+
+  const sectionKey = currentId === 'overview' ? null : currentId
+  const section = sectionKey ? messages.sections.items.find(item => item.id === sectionKey) ?? null : null
 
   return (
     <AppShell
-      brand="Signal Dark"
+      brand={messages.shell.brand}
       sidebar={
         <SidebarNav
-          label="Navigazione principale"
+          label={messages.shell.navigationLabel}
           groups={NAV}
           currentId={currentId}
-          onNavigate={setCurrentId}
+          onNavigate={navigate}
         />
       }
-      sidebarFooter={<span>Ambiente dimostrativo</span>}
+      sidebarFooter={<span>{messages.shell.environment}</span>}
       topbar={
-        <Select
-          label="Scenario demo"
-          hideLabel
-          value={scenario}
-          options={SCENARIO_OPTIONS}
-          onChange={(e) => setScenario(e.target.value as DemoScenario)}
-        />
+        <div className="sd-shell__view-controls">
+          {/* Placeholder for the run / as_of selector (WEB-01); hidden on phones, where it only costs space. */}
+          <div className="sd-shell__run">
+            <Select
+              label={messages.shell.controls.runLabel}
+              hideLabel
+              size="sm"
+              disabled
+              value=""
+              options={[{ value: '', label: messages.shell.controls.runPlaceholder }]}
+              onValueChange={() => undefined}
+            />
+          </div>
+          {currentId === 'overview' && (
+            <Select
+              label={messages.shell.controls.scenarioLabel}
+              hideLabel
+              size="sm"
+              value={scenario}
+              options={SCENARIO_OPTIONS}
+              onValueChange={value => setScenario(value as DemoScenario)}
+            />
+          )}
+          <StatusBadge
+            tone={currentId === 'overview' ? 'neutral' : 'info'}
+            label={currentId === 'overview' ? messages.shell.controls.modeSynthetic : messages.shell.controls.modeUnavailable}
+          />
+        </div>
       }
     >
       {currentId === 'overview' ? (
         <>
-          <PageHeader
-            title="Panoramica"
-            subtitle="Traffico, latenza ed errori dei servizi della piattaforma"
-            meta={DASHBOARD_META}
-          />
+          <PageHeader title={messages.shell.nav.overview} subtitle={messages.shell.overview.subtitle} meta={DASHBOARD_META} />
           <DashboardPage scenario={scenario} />
         </>
-      ) : (
+      ) : section ? (
         <>
-          <PageHeader title={titleOf(currentId)} meta="Dati demo" />
-          <EmptyState
-            title="Vista non inclusa nella demo"
-            description="Questa sezione dimostra solo la navigazione. I dati sono nella Panoramica."
-          />
+          <PageHeader title={titleOf(currentId)} />
+          <PendingSection section={section} />
         </>
-      )}
+      ) : null}
     </AppShell>
   )
 }

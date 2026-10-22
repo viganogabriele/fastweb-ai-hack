@@ -2,6 +2,7 @@ import { useCallback, useId, useLayoutEffect, useMemo, useRef, useState, useSync
 import type { ReactNode } from 'react'
 import { Menu, X } from 'lucide-react'
 import { Button } from '../ui'
+import { messages } from '../i18n'
 import { ShellContext } from './ShellContext'
 import './shell.css'
 
@@ -92,7 +93,7 @@ export function AppShell({ brand, sidebar, sidebarFooter, topbar, children }: Ap
   return (
     <ShellContext.Provider value={context}>
       <div className="sd-shell" data-drawer-open={drawerOpen || undefined}>
-        <a className="sd-shell__skip" href="#main" inert={drawerOpen} onClick={() => mainRef.current?.focus()}>Vai al contenuto</a>
+        <a className="sd-shell__skip" href="#main" inert={drawerOpen} onClick={() => mainRef.current?.focus()}>{messages.shell.skipToContent}</a>
         {drawerOpen && <div className="sd-shell__scrim" aria-hidden="true" onClick={closeDrawer} />}
         <div
           ref={drawerRef}
@@ -107,7 +108,7 @@ export function AppShell({ brand, sidebar, sidebarFooter, topbar, children }: Ap
         >
           <div className="sd-shell__sidebar-heading">
             <div id={titleId} className="sd-shell__brand">{brand}</div>
-            <Button className="sd-shell__close" variant="ghost" iconOnly aria-label="Chiudi menu" icon={<X aria-hidden="true" />} onClick={closeDrawer} />
+            <Button className="sd-shell__close" variant="ghost" iconOnly aria-label={messages.shell.closeMenu} icon={<X aria-hidden="true" />} onClick={closeDrawer} />
           </div>
           <div className="sd-shell__navigation">{sidebar}</div>
           {sidebarFooter && <div className="sd-shell__sidebar-footer">{sidebarFooter}</div>}
@@ -116,7 +117,7 @@ export function AppShell({ brand, sidebar, sidebarFooter, topbar, children }: Ap
           <header className="sd-shell__topbar">
             <div className="sd-shell__mobile-identity">
               <span ref={menuRef}>
-                <Button variant="ghost" iconOnly aria-label="Apri menu" aria-expanded={drawerOpen} aria-controls={sidebarId} icon={<Menu aria-hidden="true" />} onClick={() => setRequestedOpen(true)} />
+                <Button variant="ghost" iconOnly aria-label={messages.shell.openMenu} aria-expanded={drawerOpen} aria-controls={sidebarId} icon={<Menu aria-hidden="true" />} onClick={() => setRequestedOpen(true)} />
               </span>
               <div className="sd-shell__brand">{brand}</div>
             </div>

@@ -11,13 +11,16 @@ export const DEFAULT_FILTERS: DashboardFilters = {
   region: 'all',
   service: 'all'
 }
-export const PERIOD_LABELS: Record<Period, string> = {
-  '24h': 'Ultime 24 ore',
-  '7d': 'Ultimi 7 giorni',
-  '30d': 'Ultimi 30 giorni'
-}
+import { LOCALE, fmt, messages } from '../i18n'
+export const PERIOD_LABELS: Record<Period, string> = messages.dashboard.filters.periods
 export const DEMO_UPDATED_AT = '2026-10-22T18:00:00Z'
-export const DASHBOARD_META = 'Dati demo · aggiornamento 22 ott 2026, 20:00 CEST'
+export const DASHBOARD_META = fmt(messages.dashboard.context.updatedAt, {
+  date: new Intl.DateTimeFormat(LOCALE, {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+    timeZone: 'Europe/Rome'
+  }).format(new Date(DEMO_UPDATED_AT))
+})
 export interface Service {
   id: string
   name: string
@@ -26,12 +29,12 @@ export interface Service {
   previousIncidents: number
 }
 export const SERVICES: Service[] = [
-  { id: 'gateway', name: 'API Gateway', region: 'Europa', incidents: 0, previousIncidents: 1 },
-  { id: 'identity', name: 'Identity', region: 'Europa', incidents: 0, previousIncidents: 0 },
-  { id: 'payments', name: 'Payments', region: 'Europa', incidents: 1, previousIncidents: 2 },
-  { id: 'storage', name: 'Object Storage', region: 'America', incidents: 0, previousIncidents: 0 },
-  { id: 'search', name: 'Search', region: 'America', incidents: 1, previousIncidents: 1 },
-  { id: 'notifications', name: 'Notifications', region: 'Asia', incidents: 0, previousIncidents: 1 }
+  { id: 'gateway', name: 'API Gateway', region: messages.dashboard.filters.regions.europe, incidents: 0, previousIncidents: 1 },
+  { id: 'identity', name: 'Identity', region: messages.dashboard.filters.regions.europe, incidents: 0, previousIncidents: 0 },
+  { id: 'payments', name: 'Payments', region: messages.dashboard.filters.regions.europe, incidents: 1, previousIncidents: 2 },
+  { id: 'storage', name: 'Object Storage', region: messages.dashboard.filters.regions.america, incidents: 0, previousIncidents: 0 },
+  { id: 'search', name: 'Search', region: messages.dashboard.filters.regions.america, incidents: 1, previousIncidents: 1 },
+  { id: 'notifications', name: 'Notifications', region: messages.dashboard.filters.regions.asia, incidents: 0, previousIncidents: 1 }
 ]
 const LATENCIES = [60, 90, 120, 180, 240, 320, 480]
 interface Observation {
@@ -120,8 +123,8 @@ export function buildDashboard(filters: DashboardFilters): DashboardData {
       (filters.region === 'all' || service.region === filters.region) &&
       (filters.service === 'all' || service.id === filters.service) &&
       `${service.name} ${service.region}`
-        .toLocaleLowerCase('it-IT')
-        .includes(filters.search.trim().toLocaleLowerCase('it-IT'))
+        .toLocaleLowerCase(LOCALE)
+        .includes(filters.search.trim().toLocaleLowerCase(LOCALE))
   )
   const ids = new Set(services.map((service) => service.id))
   const selected = observations.filter((row) => ids.has(row.serviceId))
@@ -136,7 +139,7 @@ export function buildDashboard(filters: DashboardFilters): DashboardData {
       service.incidents
     ),
     status: service.incidents ? 'warning' : 'success',
-    statusLabel: service.incidents ? 'Da verificare' : 'Operativo'
+    statusLabel: service.incidents ? messages.dashboard.statuses.warning : messages.dashboard.statuses.success
   }))
   const bins = filters.period === '24h' ? 24 : filters.period === '7d' ? 7 : 30
   const timeline = Array.from({ length: bins }, (_, index) => {
@@ -145,12 +148,12 @@ export function buildDashboard(filters: DashboardFilters): DashboardData {
     const date = new Date(start)
     return {
       label: new Intl.DateTimeFormat(
-        'it-IT',
+        LOCALE,
         filters.period === '24h'
           ? { hour: '2-digit', timeZone: 'Europe/Rome' }
           : { day: 'numeric', month: 'short', timeZone: 'Europe/Rome' }
       ).format(date),
-      fullLabel: new Intl.DateTimeFormat('it-IT', {
+      fullLabel: new Intl.DateTimeFormat(LOCALE, {
         dateStyle: 'medium',
         timeStyle: 'short',
         timeZone: 'Europe/Rome'
@@ -177,7 +180,7 @@ export function buildDashboard(filters: DashboardFilters): DashboardData {
       previous,
       services.reduce((sum, service) => sum + service.previousIncidents, 0)
     ),
-    distribution: ['Europa', 'America', 'Asia']
+    distribution: [messages.dashboard.filters.regions.europe, messages.dashboard.filters.regions.america, messages.dashboard.filters.regions.asia]
       .map((label) => ({
         label,
         value: rows

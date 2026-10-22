@@ -1,8 +1,9 @@
 import { StrictMode, useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import { Activity, Layers, Settings } from 'lucide-react'
+import { Activity, Layers } from 'lucide-react'
 import { AppShell, PageHeader, SidebarNav } from './index'
 import { Button, Input, Select, StatusBadge } from '../ui'
+import { fmt, messages } from '../i18n'
 import '../design/tokens.css'
 import '../design/local.css'
 
@@ -10,22 +11,21 @@ export function Playground() {
   const [currentId, setCurrentId] = useState('overview')
   return (
     <AppShell
-      brand="Signal Dark"
-      sidebar={<SidebarNav label="Navigazione principale" currentId={currentId} onNavigate={setCurrentId} groups={[
-        { id: 'monitor', label: 'Monitoraggio', items: [
-          { id: 'overview', label: 'Panoramica', icon: Activity },
-          { id: 'sources', label: 'Sorgenti', icon: Layers, badge: '12' },
+      brand={messages.shell.brand}
+      sidebar={<SidebarNav label={messages.shell.playground.navigationLabel} currentId={currentId} onNavigate={setCurrentId} groups={[
+        { id: 'monitor', label: messages.shell.playground.group, items: [
+          { id: 'overview', label: messages.shell.playground.overview, icon: Activity },
+          { id: 'sources', label: messages.shell.playground.sources, icon: Layers },
         ] },
-        { id: 'workspace', label: 'Area di lavoro', items: [{ id: 'settings', label: 'Impostazioni', icon: Settings, disabled: true }] },
       ]} />}
-      sidebarFooter={<span>Ambiente dimostrativo</span>}
-      topbar={<Button>Area demo</Button>}
+      sidebarFooter={<span>{messages.shell.playground.footer}</span>}
+      topbar={<Button>{messages.shell.playground.topbar}</Button>}
     >
-      <PageHeader title={currentId === 'overview' ? 'Panoramica' : 'Sorgenti'} subtitle="Metriche e attività del tuo ambiente, ultimi 7 giorni." meta={<StatusBadge tone="neutral" label="Dati demo" />} actions={<><Button>Aggiorna</Button><Button variant="primary">Esporta</Button></>}>
-        <Input label="Cerca attività" placeholder="Nome o sorgente" />
-        <Select label="Periodo" options={[{ value: 'week', label: 'Ultimi 7 giorni' }]} />
+      <PageHeader title={currentId === 'overview' ? messages.shell.playground.overview : messages.shell.playground.sources} subtitle={messages.shell.playground.subtitle} meta={<StatusBadge tone="neutral" label={messages.shell.playground.demoData} />} actions={<><Button>{messages.shell.playground.refresh}</Button><Button variant="primary">{messages.shell.playground.export}</Button></>}>
+        <Input label={messages.shell.playground.search} placeholder={messages.shell.playground.searchPlaceholder} />
+        <Select label={messages.shell.playground.period} options={[{ value: 'week', label: messages.shell.playground.periodLastWeek }]} onValueChange={() => undefined} />
       </PageHeader>
-      {Array.from({ length: 24 }, (_, index) => <p key={index}>Attività demo {index + 1} · Ultimi 7 giorni</p>)}
+      {Array.from({ length: 24 }, (_, index) => <p key={index}>{fmt(messages.shell.playground.activity, { number: index + 1 })} {messages.shell.playground.periodLastWeek}</p>)}
     </AppShell>
   )
 }

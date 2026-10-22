@@ -22,24 +22,37 @@
   display: flex;
   flex-wrap: wrap;
   align-items: end;
-  gap: var(--sd-space-3);
+  gap: var(--sd-space-3) var(--sd-space-2);
   min-width: 0;
 }
-.sd-filterbar > :first-child {
-  flex: 2 1 calc(var(--sd-space-7) * 5);
+.sd-filterbar > .sd-field:first-child {
+  flex: 2 1 220px;
+  min-width: min(100%, 220px);
 }
-.sd-filterbar > :not(:first-child) {
-  flex: 1 1 calc(var(--sd-space-7) * 4 + var(--sd-space-4));
+.sd-filterbar > .sd-field:not(:first-child) {
+  flex: 0 1 auto;
+  min-width: 132px;
+  max-width: 220px;
 }
-.sd-filterbar input,
-.sd-filterbar select {
+.sd-filterbar > .sd-field:not(:first-child) .sd-field__wrap {
+  width: max-content;
+  min-width: 132px;
+  max-width: 220px;
+}
+.sd-filterbar .sd-field__select-trigger {
   width: 100%;
   min-width: 0;
 }
-.sd-filter-count {
-  color: var(--sd-color-text-secondary);
+.sd-filterbar .sd-field__select-value {
+  max-width: 100%;
+}
+.sd-filterbar-reset {
+  align-self: end;
+  white-space: nowrap;
+  min-height: 36px;
+}
+.sd-filterbar .sd-field__label {
   font-size: var(--sd-font-size-caption);
-  align-self: center;
 }
 .sd-demo-context {
   display: flex;
@@ -289,7 +302,8 @@
 .sd-table-scroll {
   /* Keeps a focused header's outline clear of the region edge when scrolled into view. */
   scroll-padding-inline: var(--sd-space-2);
-  overflow-x: auto;
+  overflow: auto;
+  max-height: min(65vh, 520px);
   max-width: 100%;
   border-radius: var(--sd-radius-control);
 }
@@ -428,6 +442,30 @@
   background: var(--sd-color-surface-elevated);
   font-weight: var(--sd-font-weight-medium);
 }
+.sd-table-scroll thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.sd-table-scroll {
+  scrollbar-color: var(--sd-color-text-muted) var(--sd-color-surface-elevated);
+  scrollbar-width: thin;
+  overscroll-behavior-inline: contain;
+}
+.sd-table-scroll::-webkit-scrollbar,
+.sd-chart-data::-webkit-scrollbar {
+  height: var(--sd-space-2);
+}
+.sd-table-scroll::-webkit-scrollbar-track,
+.sd-chart-data::-webkit-scrollbar-track {
+  background: var(--sd-color-surface-elevated);
+  border-radius: var(--sd-local-radius-pill);
+}
+.sd-table-scroll::-webkit-scrollbar-thumb,
+.sd-chart-data::-webkit-scrollbar-thumb {
+  background: var(--sd-color-text-muted);
+  border-radius: var(--sd-local-radius-pill);
+}
 .sd-table-scroll .sd-numeric {
   text-align: end;
   font-variant-numeric: tabular-nums;
@@ -465,6 +503,7 @@
   width: 1.25em;
   height: 1.25em;
   margin: 0;
+  color: var(--sd-color-text-on-accent);
   accent-color: var(--sd-color-action-primary);
   cursor: pointer;
 }
@@ -560,14 +599,41 @@
   }
 }
 @media (max-width: 719px) {
-  .sd-filterbar > * {
+  .sd-filterbar > .sd-field:first-child {
     flex-basis: 100%;
+  }
+  .sd-filterbar > .sd-field:not(:first-child) {
+    flex: 1 1 calc(50% - var(--sd-space-2));
+    max-width: none;
+  }
+  .sd-filterbar > .sd-field:not(:first-child) .sd-field__wrap {
+    width: 100%;
+    max-width: none;
+  }
+  .sd-filterbar-reset {
+    flex: 1 0 100%;
+    justify-content: center;
   }
   .sd-kpi-delta > span {
     flex-basis: auto;
   }
   .sd-detail-heading {
     flex-wrap: wrap;
+  }
+}
+@media (max-width: 359px) {
+  .sd-filterbar > .sd-field:not(:first-child),
+  .sd-filterbar-reset {
+    flex-basis: 100%;
+  }
+}
+@media (max-width: 480px) {
+  .sd-sparkline {
+    position: static;
+    display: block;
+    width: 100%;
+    height: var(--sd-space-5);
+    margin-top: var(--sd-space-2);
   }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -18,6 +18,8 @@
   transition: background-color var(--sd-local-duration) var(--sd-local-ease), border-color var(--sd-local-duration) var(--sd-local-ease);
 }
 .sd-button--sm { padding-inline: var(--sd-space-3); }
+.sd-button--sm { min-height: var(--sd-local-control-height-sm); position: relative; }
+.sd-button--sm::after { content: ''; position: absolute; inset-block: -4px; inset-inline: 0; }
 .sd-button--primary { color: var(--sd-color-text-on-accent); background: var(--sd-color-action-primary); border-color: var(--sd-color-action-primary); }
 .sd-button--ghost { border-color: transparent; background: transparent; color: var(--sd-color-text-secondary); }
 .sd-button:not(:disabled):hover { background: var(--sd-local-hover-surface); }
@@ -26,7 +28,8 @@
 .sd-button--primary:not(:disabled):active, .sd-button--primary[aria-pressed='true'] { background: var(--sd-local-accent-pressed); color: var(--sd-color-text-on-accent); }
 .sd-button:disabled { background: var(--sd-local-disabled-surface); color: var(--sd-color-text-muted); border-color: var(--sd-color-border-subtle); cursor: not-allowed; }
 .sd-button[aria-busy='true'] { cursor: progress; }
-.sd-button--icon-only { padding: var(--sd-space-2); }
+.sd-button--icon-only { width: var(--sd-local-control-height-sm); min-width: var(--sd-local-control-height-sm); height: var(--sd-local-control-height-sm); min-height: var(--sd-local-control-height-sm); padding: 0; position: relative; }
+.sd-button--icon-only::after { content: ''; position: absolute; inset: -4px; }
 .sd-button__icon { display: inline-flex; }
 .sd-button__icon svg { width: 1.15em; height: 1.15em; }
 .sd-button__label { overflow-wrap: anywhere; }

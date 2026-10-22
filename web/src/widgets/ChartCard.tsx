@@ -2,6 +2,7 @@ import { useId } from 'react'
 import type { ReactNode } from 'react'
 import { EmptyState, ErrorState, LoadingState } from '../ui'
 import type { DemoScenario } from '../demo/scenario'
+import { fmt, messages } from '../i18n'
 import './widgets.css'
 export interface ChartLegend {
   label: string
@@ -9,7 +10,6 @@ export interface ChartLegend {
 }
 export interface ChartCardProps {
   title: string
-  period: string
   legend: ChartLegend[]
   summary: string
   children: ReactNode
@@ -21,7 +21,6 @@ export interface ChartCardProps {
 }
 export function ChartCard({
   title,
-  period,
   legend,
   summary,
   children,
@@ -37,11 +36,10 @@ export function ChartCard({
       <figcaption className="sd-chart-heading">
         <div>
           <h2 id={id}>{title}</h2>
-          <p>{period}</p>
         </div>
         {actions}
       </figcaption>
-      <ul className="sd-chart-legend" aria-label="Legenda">
+      <ul className="sd-chart-legend" aria-label={messages.dashboard.charts.legend}>
         {legend.map((item) => (
           <li key={item.label}>
             <span className={`sd-legend-mark sd-legend-mark--${item.style}`} aria-hidden="true" />
@@ -50,17 +48,17 @@ export function ChartCard({
         ))}
       </ul>
       {state === 'loading' ? (
-        <LoadingState label={`Caricamento: ${title}`} lines={5} announce={false} />
+        <LoadingState label={fmt(messages.dashboard.metrics.loading, { label: title })} lines={5} announce={false} />
       ) : state === 'empty' ? (
         <EmptyState
-          title="Nessun dato da mostrare"
-          description="Prova a modificare i filtri."
+          title={messages.dashboard.charts.noData}
+          description={messages.dashboard.charts.changeFilters}
           compact
         />
       ) : state === 'error' ? (
         <ErrorState
-          title="Grafico non disponibile"
-          description="Connessione demo interrotta."
+          title={messages.dashboard.charts.unavailable}
+          description={messages.dashboard.charts.disconnected}
           onRetry={onRetry}
           compact
           announce={false}
@@ -70,8 +68,8 @@ export function ChartCard({
           <div className="sd-chart-region">{children}</div>
           <p className="sd-chart-summary">{summary}</p>
           <details className="sd-chart-disclosure">
-            <summary>Mostra dati</summary>
-            <div className="sd-chart-data" role="region" aria-label={`Dati: ${title}`} tabIndex={0}>
+            <summary>{messages.dashboard.charts.showData}</summary>
+            <div className="sd-chart-data" role="region" aria-label={fmt(messages.dashboard.charts.dataFor, { title })} tabIndex={0}>
               {table}
             </div>
           </details>
