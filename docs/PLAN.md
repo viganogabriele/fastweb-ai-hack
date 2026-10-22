@@ -188,9 +188,10 @@ Real speech-to-text is **out of the MVP path** and moved to the reserve pool as 
 - **Why:** the Fastweb key list has no Whisper key (the guide documents `openai/whisper-large-v3-turbo` on `/v1/audio/transcriptions`, but every model needs its own key). ASR is not needed for the text path (RFC §6.2).
 - **What changes:** PLT-07 tests chat, tool calls and embeddings only; PLT-05 ships without `transcribe`; DATA-03 adds a manual transcript; ING-03 reads that transcript with no audio intervals; lane A gets 1 h back.
 - **How to resume (ASR-01, lane A, after G2):** pick one, then add `transcribe` to `core/llm.py` and switch `src.voice` to `mode: recorded`.
-  1. Fastweb endpoint, if one of the hackathon keys is accepted for Whisper (test first).
+  1. Fastweb endpoint, if one of the hackathon keys is accepted for Whisper. Tested 2026-10-22: all 6 keys get 403 on `/audio/transcriptions`, and every chat model rejects audio input.
   2. OpenAI `whisper-1` on `https://api.openai.com/v1` with a team member's own key (about $0.006/min, cents for 2–3 notes; `verbose_json` gives segment timestamps). Needs separate `ASR_BASE_URL` / `ASR_API_KEY` in `.env`, never committed. Call once with `LLM_MODE=record`, then everyone replays from cache without the key. Audio leaves the EU: declare it in `docs/smoke-fastweb.md` and in the pitch (RFC §4.12).
   3. Local Whisper (`faster-whisper`), free and offline, slower on CPU.
+  4. **Chosen:** our own OpenAI-compatible server on the team Mac mini M4 (`tools/asr-server/`, ASR-01a): `whisper-large-v3-turbo` on mlx-whisper, team subdomain, per-consumer API keys. Same `ASR_BASE_URL` / `ASR_API_KEY` wiring as option 2, audio stays on our hardware. Measured faster-whisper turbo on 4 threads of a 5950X: 1.8× realtime, so CPU-only hosts are too slow for a live demo.
 
 ## 5. Dependency graph
 
