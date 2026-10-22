@@ -393,6 +393,29 @@ def test_cli_executes_snapshot_and_as_of_override_creates_fresh_run(tmp_path, mo
     assert second["run_id"] != request.run_id and second["status"] == "succeeded"
 
 
+def test_default_llm_client_is_bound_to_run_and_fixture_cannot_call_live(engine, tmp_path):
+    from tessera.core.config import Settings
+
+    module = manifest("fixture-source", mode="fixture")
+    request = spec(module, mode="fixture")
+
+    def execute(ctx):
+        assert ctx.clients["llm"].settings.llm_mode == "replay"
+        context = ctx.clients["llm"]._context({})
+        assert context["run"]["as_of"] == request.model_dump(mode="json")["as_of"]
+        assert context["run"]["stores"] == ["MIL01"]
+        return result(ctx)
+
+    settings = Settings(_env_file=None, data_dir=tmp_path, llm_mode="live")
+    statuses = run(
+        request,
+        engine=engine,
+        registry=Registry((RegisteredModule(module, execute),)),
+        settings=settings,
+    )
+    assert statuses[0].status == "succeeded"
+
+
 def test_parent_child_batch_put_is_atomic_and_resolves_earlier_parent(engine):
     from tessera.core.contracts import Segment
 

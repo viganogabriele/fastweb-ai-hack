@@ -59,7 +59,7 @@ def _run(args: argparse.Namespace) -> None:
         raise ValueError("Run requires at least one enabled module")
     engine = _engine(settings)
     try:
-        statuses = run(spec, engine=engine, modules=args.modules)
+        statuses = run(spec, engine=engine, modules=args.modules, settings=settings)
         with repo_session(engine, spec, fixture_mode=settings.fixture_mode) as repo:
             status = repo.run_state()["status"]
         print(

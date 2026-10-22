@@ -1,0 +1,365 @@
+[
+  {
+    "kind": "Report",
+    "payload": {
+      "id": "report-by-office-20261009T0835",
+      "version": "v1",
+      "available_at": "2026-10-09T08:35:52Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261009_1035_MIL01.eml",
+          "content_hash": "sha256:173f031967d236d50951cd1ad52ea2692c28ed005eb8fe68e68105b422927144",
+          "locator": null
+        },
+        {
+          "uri": "dataset://erp/master_data/styles.csv",
+          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "locator": "style_code=I10919B00011"
+        },
+        {
+          "uri": "dataset://erp/master_data/styles.csv",
+          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "locator": "style_code=I10919B00042"
+        },
+        {
+          "uri": "dataset://erp/forecast/sku_store_weekly/fcst_sku_store_run_2026-10-05.csv",
+          "content_hash": "sha256:af9b2acbac16d489798e6b10592e361890e30612d50092f1a9282476445aaa19",
+          "locator": "store_id=MIL01;sku=I10919B00011-999;week_start=2026-10-05|2026-10-12"
+        },
+        {
+          "uri": "dataset://erp/forecast/sku_store_weekly/fcst_sku_store_run_2026-10-05.csv",
+          "content_hash": "sha256:af9b2acbac16d489798e6b10592e361890e30612d50092f1a9282476445aaa19",
+          "locator": "store_id=MIL01;sku=I10919B00011-742;week_start=2026-10-05|2026-10-12"
+        },
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2112_MIL01.eml",
+          "content_hash": "sha256:42ba599825b726743a870909947f1046005d4f0d715a79922b4ff43cef313a93",
+          "locator": null
+        },
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2113_MIL01_dup.eml",
+          "content_hash": "sha256:41f447a28b601371cb206f1e711749ac962803332d0dcd05e2c2f77d2154d88e",
+          "locator": null
+        },
+        {
+          "uri": "dataset://erp/master_data/sku_colour.csv",
+          "content_hash": "sha256:bd40e343533ae4226a100a5ec0e743933a8c3b37656963165d1bc7a8942e2400",
+          "locator": "sku=J20931A00012-999"
+        },
+        {
+          "uri": "dataset://erp/forecast/sku_store_weekly/fcst_sku_store_run_2026-10-05.csv",
+          "content_hash": "sha256:af9b2acbac16d489798e6b10592e361890e30612d50092f1a9282476445aaa19",
+          "locator": "store_id=MIL01;sku=J20931A00012-999;week_start=2026-10-05|2026-10-12"
+        },
+        {
+          "uri": "dataset://store_emails/MIL01/20261001_1124_MIL01_fwd.eml",
+          "content_hash": "sha256:31aeadf95302b30ec9d28e4f3d359b2603a9629bb6de741467410d3ba89a29bf",
+          "locator": null
+        },
+        {
+          "uri": "dataset://erp/master_data/sku_size_ean.csv",
+          "content_hash": "sha256:0e3810a27f3a7190bbd7d6d0607dd4004191dd5e56d3ecc62489f3bc1280b20a",
+          "locator": "sku_size=J10911A00305-742-4"
+        },
+        {
+          "uri": "dataset://store_emails/NYC01/20260906_1837_NYC01.eml",
+          "content_hash": "sha256:a6f7d261277d822de9812fd0abaa94ab8ad2f5b854b6d218d0d45fe65022cfc7",
+          "locator": null
+        },
+        {
+          "uri": "dataset://erp/master_data/styles.csv",
+          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "locator": "style_code=I10918G00045"
+        },
+        {
+          "uri": "dataset://erp/master_data/styles.csv",
+          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "locator": "style_code=I10918G00031"
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "Case",
+          "id": "case-mil01-i10919b00011-20261008",
+          "version": "v1"
+        },
+        {
+          "kind": "Observation",
+          "id": "obs-20261009-1035-mil01-stockout",
+          "version": "v1"
+        },
+        {
+          "kind": "Observation",
+          "id": "obs-20261009-1035-mil01-unmet-demand",
+          "version": "v1"
+        },
+        {
+          "kind": "ForecastAdjustment",
+          "id": "fc-mil01-i10919b00011-999-20261010",
+          "version": "v1"
+        },
+        {
+          "kind": "ForecastAdjustment",
+          "id": "fc-mil01-i10919b00011-742-20261010",
+          "version": "v1"
+        },
+        {
+          "kind": "Case",
+          "id": "case-mil01-j20931a00012-999-20261002",
+          "version": "v1"
+        },
+        {
+          "kind": "Observation",
+          "id": "obs-20261002-2112-mil01-maire-requests",
+          "version": "v1"
+        },
+        {
+          "kind": "ForecastAdjustment",
+          "id": "fc-mil01-j20931a00012-999-20261010",
+          "version": "v1"
+        },
+        {
+          "kind": "Case",
+          "id": "case-mil01-j10911a00305-742-4-20261001",
+          "version": "v1"
+        },
+        {
+          "kind": "Observation",
+          "id": "obs-20261001-1124-mil01-fwd-tib-zip",
+          "version": "v1"
+        },
+        {
+          "kind": "Case",
+          "id": "case-nyc01-unknown-20260906",
+          "version": "v1"
+        },
+        {
+          "kind": "Observation",
+          "id": "obs-20260906-1837-nyc01-sweatshirt-return",
+          "version": "v1"
+        },
+        {
+          "kind": "EntityLink",
+          "id": "link-20260906-1837-nyc01-sweatshirt-return",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01b",
+      "producer_version": "1",
+      "as_of": "2026-10-09T08:35:52Z",
+      "view": "by_office",
+      "markdown": "# Brief by office, as of 2026-10-09 08:35 UTC\n\n## allocation\n\n- **MIL01 · LOGO CARDIGAN (I10919B00011)**: open, priority high [1].\n  - stockout 0 units [2]\n  - unmet demand, quantity vague [3]\n  - baseline I10919B00011-999 10-10..10-16 11.1 units, unchanged [4]\n  - baseline I10919B00011-742 10-10..10-16 10.6 units, unchanged [5]\n  - open: Unmet demand is vague ('in continuazione'): no count of requests or units.\n  - open: Stock-out is the store's statement; ERP stock for size M not checked yet.\n  - open: No verified size curve: the share of size M in the colour forecast is unknown.\n- **MIL01 · MAIRE black (J20931A00012-999)**: open, priority medium [6].\n  - unmet demand 7 requests [7]\n  - 2 documents [8] from 1 origin [9]\n  - baseline J20931A00012-999 10-10..10-16 14.2 units, unchanged [10]\n  - open: Requests are not units: no conversion to demand without evidence.\n\n## product_quality\n\n- **MIL01 · TIB navy size 4 (J10911A00305-742-4)**: open, priority medium [11].\n  - product feedback 1 units [12]\n  - open: One customer complaint; the store's 'same problem as recent returns' is not counted here.\n  - open: Purchase and defect dates come from the customer, not from POS.\n- **NYC01 · product not identified**: verify, priority low [13].\n  - product feedback 1 units [14]\n  - product is I10918G00045 or I10918G00031 [15]\n  - open: Product ambiguous: CREWNECK SWEATSHIRT or LOGO HOODIE, colour and size unknown.\n",
+      "citations": [
+        {
+          "ref": {
+            "kind": "Case",
+            "id": "case-mil01-i10919b00011-20261008",
+            "version": "v1"
+          },
+          "field": null,
+          "unit": null,
+          "scope": null,
+          "period_start": null,
+          "period_end": null
+        },
+        {
+          "ref": {
+            "kind": "Observation",
+            "id": "obs-20261009-1035-mil01-stockout",
+            "version": "v1"
+          },
+          "field": "quantity.value",
+          "unit": "units",
+          "scope": {
+            "store_id": "MIL01"
+          },
+          "period_start": "2026-10-07T22:00:00Z",
+          "period_end": null
+        },
+        {
+          "ref": {
+            "kind": "Observation",
+            "id": "obs-20261009-1035-mil01-unmet-demand",
+            "version": "v1"
+          },
+          "field": "quantity.kind",
+          "unit": null,
+          "scope": {
+            "store_id": "MIL01"
+          },
+          "period_start": "2026-10-07T22:00:00Z",
+          "period_end": null
+        },
+        {
+          "ref": {
+            "kind": "ForecastAdjustment",
+            "id": "fc-mil01-i10919b00011-999-20261010",
+            "version": "v1"
+          },
+          "field": "series.baseline",
+          "unit": "units",
+          "scope": {
+            "store_id": "MIL01",
+            "sku": "I10919B00011-999"
+          },
+          "period_start": "2026-10-09T22:00:00Z",
+          "period_end": "2026-10-16T21:59:59Z"
+        },
+        {
+          "ref": {
+            "kind": "ForecastAdjustment",
+            "id": "fc-mil01-i10919b00011-742-20261010",
+            "version": "v1"
+          },
+          "field": "series.baseline",
+          "unit": "units",
+          "scope": {
+            "store_id": "MIL01",
+            "sku": "I10919B00011-742"
+          },
+          "period_start": "2026-10-09T22:00:00Z",
+          "period_end": "2026-10-16T21:59:59Z"
+        },
+        {
+          "ref": {
+            "kind": "Case",
+            "id": "case-mil01-j20931a00012-999-20261002",
+            "version": "v1"
+          },
+          "field": null,
+          "unit": null,
+          "scope": null,
+          "period_start": null,
+          "period_end": null
+        },
+        {
+          "ref": {
+            "kind": "Observation",
+            "id": "obs-20261002-2112-mil01-maire-requests",
+            "version": "v1"
+          },
+          "field": "quantity.value",
+          "unit": "requests",
+          "scope": {
+            "store_id": "MIL01"
+          },
+          "period_start": "2026-10-01T22:00:00Z",
+          "period_end": "2026-10-02T21:59:59Z"
+        },
+        {
+          "ref": {
+            "kind": "Case",
+            "id": "case-mil01-j20931a00012-999-20261002",
+            "version": "v1"
+          },
+          "field": "n_documents",
+          "unit": null,
+          "scope": {
+            "store_id": "MIL01"
+          },
+          "period_start": null,
+          "period_end": null
+        },
+        {
+          "ref": {
+            "kind": "Case",
+            "id": "case-mil01-j20931a00012-999-20261002",
+            "version": "v1"
+          },
+          "field": "n_origin_groups",
+          "unit": null,
+          "scope": {
+            "store_id": "MIL01"
+          },
+          "period_start": null,
+          "period_end": null
+        },
+        {
+          "ref": {
+            "kind": "ForecastAdjustment",
+            "id": "fc-mil01-j20931a00012-999-20261010",
+            "version": "v1"
+          },
+          "field": "series.baseline",
+          "unit": "units",
+          "scope": {
+            "store_id": "MIL01",
+            "sku": "J20931A00012-999"
+          },
+          "period_start": "2026-10-09T22:00:00Z",
+          "period_end": "2026-10-16T21:59:59Z"
+        },
+        {
+          "ref": {
+            "kind": "Case",
+            "id": "case-mil01-j10911a00305-742-4-20261001",
+            "version": "v1"
+          },
+          "field": null,
+          "unit": null,
+          "scope": null,
+          "period_start": null,
+          "period_end": null
+        },
+        {
+          "ref": {
+            "kind": "Observation",
+            "id": "obs-20261001-1124-mil01-fwd-tib-zip",
+            "version": "v1"
+          },
+          "field": "quantity.value",
+          "unit": "units",
+          "scope": {
+            "store_id": "MIL01"
+          },
+          "period_start": null,
+          "period_end": null
+        },
+        {
+          "ref": {
+            "kind": "Case",
+            "id": "case-nyc01-unknown-20260906",
+            "version": "v1"
+          },
+          "field": null,
+          "unit": null,
+          "scope": null,
+          "period_start": null,
+          "period_end": null
+        },
+        {
+          "ref": {
+            "kind": "Observation",
+            "id": "obs-20260906-1837-nyc01-sweatshirt-return",
+            "version": "v1"
+          },
+          "field": "quantity.value",
+          "unit": "units",
+          "scope": {
+            "store_id": "NYC01"
+          },
+          "period_start": "2026-09-06T04:00:00Z",
+          "period_end": "2026-09-07T03:59:59Z"
+        },
+        {
+          "ref": {
+            "kind": "EntityLink",
+            "id": "link-20260906-1837-nyc01-sweatshirt-return",
+            "version": "v1"
+          },
+          "field": "candidates",
+          "unit": null,
+          "scope": null,
+          "period_start": null,
+          "period_end": null
+        }
+      ],
+      "generated_by": "template:fixture.data01b.v1",
+      "input_version_hash": "sha256:25b433f1587e5ad5e170f4d83df6cde9a0c92f0b1a2e554a9da4318ae2b1280c"
+    }
+  }
+]
