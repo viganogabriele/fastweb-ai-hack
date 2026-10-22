@@ -10,12 +10,12 @@ One line per task. Edit only the lines of your own task.
 ## In progress
 
 <!-- - ID (lane, person) one-line goal · branch `ID-slug` -->
+- DATA-02 (A) `config/eval_split.yaml`, `domain.yaml`, `aliases.yaml` · branch `DATA-02-config`
 
 ## Ready (all hard dependencies merged)
 
 - PLT-02 (C) Contracts in `core/contracts/`. **Gates G0**: everyone reviews within 30 min
 - PLT-07 (A) Fastweb smoke test: chat, tool call, embeddings, ASR. Needs `FASTWEB_API_KEY` in `.env`
-- DATA-02 (A) `config/eval_split.yaml`, `domain.yaml`, `aliases.yaml`
 - ING-02 pure (A) `.eml` → canonical text + segments with offsets
 - ACT-01 pure (B) Recursive daily stock simulation + RFC §7.3 test 5
 - FC-01 pure (B) Weekly → daily forecast disaggregation
