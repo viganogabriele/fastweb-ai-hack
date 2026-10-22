@@ -1,0 +1,346 @@
+# config/aliases.yaml: how store staff name products and colours, beyond the catalog names.
+# Owner: lane A (DATA-02). Consumer: int.link (INT-01) via style/colour alias maps.
+#
+# Provenance rule (RFC §5.1): every alias was seen in a closing email of a DEV store
+# (config/eval_split.yaml), outside quoted reply lines. `source` is the first such file,
+# relative to generated/sources/. Nothing here comes from generator/, ground_truth/ or
+# hold-out / unassigned stores. Catalog names (style_name, color_name_it/en) are NOT
+# repeated: the linker already reads them from erp/master_data/.
+#
+# `lang` is the language of the store the source email comes from (stores.csv), not
+# necessarily the language of the word (staff mix English names into every language).
+#
+# Sections:
+#   styles:  style_code -> aliases that name exactly one style.
+#   shared:  aliases that name several styles. The linker must keep them ambiguous
+#            unless colour/size/context narrows the set; never pick one silently.
+#   colours: colour_code -> aliases. A word may map to several codes when no style
+#            carries both (white words -> 001 and 20D): the style's colour run decides.
+#
+# Not aliased on purpose: generic category words (piumino, doudoune, Daunenjacke,
+# 숏패딩, ダウン, 短款/长款...) and bare "oversize" (also a fit adjective) name too many
+# styles; leave them to descriptive matching.
+# Freeze this file before hold-out metrics (RFC §7.1).
+
+version: 1
+styles:
+  G20921A00901:  # POLARIS CAPE
+    - {alias: "斗篷", lang: zh-CN, source: store_emails/SHA01/20260922_2243_SHA01.eml}
+    - {alias: "cape", lang: fr, source: store_emails/PAR01/20260924_2103_PAR01.eml}
+    - {alias: "capa", lang: es, source: store_emails/MAD01/20260924_2140_MAD01.eml}
+  G20921A00902:  # POLARIS OVERSIZED
+    - {alias: "폴라리스 오버사이즈", lang: ko, source: store_emails/SEL01/20261003_2216_SEL01.eml}
+    - {alias: "polaris oversize", lang: es, source: store_emails/MAD01/20261018_2110_MAD01.eml}
+    - {alias: "doudoune oversize", lang: fr, source: store_emails/PAR01/20260924_2103_PAR01.eml}
+  G20921A00903:  # POLARIS BALACLAVA
+    - {alias: "头套", lang: zh-CN, source: store_emails/SHA01/20260922_2243_SHA01.eml}
+    - {alias: "cagoule", lang: fr, source: store_emails/PAR01/20260924_2103_PAR01.eml}
+  H20981A00020:  # VALBOURG
+    - {alias: "발부르", lang: ko, source: store_emails/SEL01/20260913_2148_SEL01.eml}
+  I10913A00004:  # CASHMERE SCARF
+    - {alias: "カシミアマフラー", lang: ja, source: store_emails/TYO01/20260910_2122_TYO01.eml}
+    - {alias: "캐시미어 머플러", lang: ko, source: store_emails/SEL01/20260920_2130_SEL01.eml}
+    - {alias: "围巾", lang: zh-CN, source: store_emails/SHA01/20260904_2229_SHA01.eml}
+    - {alias: "scarf", lang: en, source: store_emails/LON01/20260914_2105_LON01.eml}
+    - {alias: "écharpe", lang: fr, source: store_emails/PAR01/20261001_2115_PAR01.eml}
+    - {alias: "schal", lang: de, source: store_emails/MUN01/20260903_2005_MUN01.eml}
+  I10913B00001:  # LOGO BEANIE
+    - {alias: "ビーニー", lang: ja, source: store_emails/TYO01/20260926_2057_TYO01.eml}
+    - {alias: "비니", lang: ko, source: store_emails/SEL01/20260908_2044_SEL01.eml}
+    - {alias: "毛线帽", lang: zh-CN, source: store_emails/SHA01/20260913_2249_SHA01.eml}
+    - {alias: "beanie", lang: it, source: store_emails/MIL01/20260902_2058_MIL01.eml}
+    - {alias: "bonnet", lang: fr, source: store_emails/PAR01/20260907_2005_PAR01.eml}
+    - {alias: "gorro", lang: es, source: store_emails/MAD01/20260906_2112_MAD01.eml}
+  I10913D00012:  # LOGO CAP
+    - {alias: "캡", lang: ko, source: store_emails/SEL01/20260901_2052_SEL01.eml}
+    - {alias: "棒球帽", lang: zh-CN, source: store_emails/SHA01/20260904_2229_SHA01.eml}
+    - {alias: "cap", lang: en, source: store_emails/LON01/20260909_2126_LON01.eml}
+    - {alias: "casquette", lang: fr, source: store_emails/PAR01/20260907_2005_PAR01.eml}
+    - {alias: "gorra", lang: es, source: store_emails/MAD01/20260906_2112_MAD01.eml}
+    - {alias: "cappellino", lang: it, source: store_emails/MIL01/20260915_2047_MIL01.eml}
+  I10913E00007:  # TECH GLOVES
+    - {alias: "테크 글러브", lang: ko, source: store_emails/SEL01/20260920_2130_SEL01.eml}
+    - {alias: "gloves", lang: en, source: store_emails/LON01/20260916_2112_LON01.eml}
+    - {alias: "guanti", lang: it, source: store_emails/MIL01/20261001_2130_MIL01.eml}
+    - {alias: "gants", lang: fr, source: store_emails/PAR01/20260921_2016_PAR01.eml}
+    - {alias: "handschuhe", lang: de, source: store_emails/MUN01/20260831_1941_MUN01.eml}
+    - {alias: "guantes", lang: es, source: store_emails/MAD01/20260907_2136_MAD01.eml}
+  I10914M00061:  # TRAILGRIP GTX
+    - {alias: "gtx", lang: it, source: store_emails/MIL02/20260902_2205_MIL02.eml}
+    - {alias: "トレイルグリップGTX", lang: ja, source: store_emails/TYO01/20260905_2044_TYO01.eml}
+    - {alias: "trailgrip homme", lang: fr, source: store_emails/PAR01/20260905_2120_PAR01.eml}
+    - {alias: "트레일그립 남성", lang: ko, source: store_emails/SEL01/20260831_2108_SEL01.eml}
+  I10915C00021:  # LEGERE BELT BAG
+    - {alias: "레제르", lang: ko, source: store_emails/SEL01/20260902_2115_SEL01.eml}
+    - {alias: "벨트백", lang: ko, source: store_emails/SEL01/20260902_2115_SEL01.eml}
+    - {alias: "腰包", lang: zh-CN, source: store_emails/SHA01/20260901_2251_SHA01.eml}
+    - {alias: "marsupio", lang: it, source: store_emails/MIL02/20260904_2247_MIL02.eml}
+    - {alias: "riñonera", lang: es, source: store_emails/MAD01/20260907_2136_MAD01.eml}
+    - {alias: "belt bag", lang: it, source: store_emails/MIL01/20261007_2058_MIL01.eml}
+  I10915D00030:  # MAKAIO BACKPACK
+    - {alias: "마카이오", lang: ko, source: store_emails/SEL01/20260909_2112_SEL01.eml}
+    - {alias: "백팩", lang: ko, source: store_emails/SEL01/20260909_2112_SEL01.eml}
+    - {alias: "backpack", lang: en, source: store_emails/NYC01/20260911_1935_NYC01.eml}
+    - {alias: "zaino", lang: it, source: store_emails/MIL01/20261019_2039_MIL01.eml}
+    - {alias: "sac à dos", lang: fr, source: store_emails/PAR01/20260908_2047_PAR01.eml}
+    - {alias: "rucksack", lang: de, source: store_emails/MUN01/20260831_1941_MUN01.eml}
+  I10918A00034:  # POLO
+    - {alias: "ポロ", lang: ja, source: store_emails/TYO01/20260901_2052_TYO01.eml}
+    - {alias: "폴로", lang: ko, source: store_emails/SEL01/20260905_2140_SEL01.eml}
+  I10918C00012:  # LOGO T-SHIRT
+    - {alias: "t-shirt logo", lang: it, source: store_emails/MIL01/20260901_2025_MIL01.eml}
+    - {alias: "logo tee", lang: en, source: store_emails/LON01/20260901_2110_LON01.eml}
+    - {alias: "로고티", lang: ko, source: store_emails/SEL01/20260904_2131_SEL01.eml}
+    - {alias: "티셔츠", lang: ko, source: store_emails/SEL01/20260901_2052_SEL01.eml}
+    - {alias: "ロゴT", lang: ja, source: store_emails/TYO01/20260905_2044_TYO01.eml}
+    - {alias: "logo t", lang: zh-CN, source: store_emails/SHA01/20260902_2244_SHA01.eml}
+    - {alias: "tshirt", lang: it, source: store_emails/MIL01/20260911_2055_MIL01.eml}
+    - {alias: "t-shirt", lang: it, source: store_emails/MIL01/20260901_2025_MIL01.eml}
+    - {alias: "T恤", lang: zh-CN, source: store_emails/SHA01/20260831_2237_SHA01.eml}
+  I10918G00031:  # LOGO HOODIE
+    - {alias: "フーディ", lang: ja, source: store_emails/TYO01/20260912_2055_TYO01.eml}
+    - {alias: "후디", lang: ko, source: store_emails/SEL01/20260902_2115_SEL01.eml}
+    - {alias: "로고 후디", lang: ko, source: store_emails/SEL01/20260902_2115_SEL01.eml}
+    - {alias: "hoodie logo", lang: fr, source: store_emails/PAR01/20260901_2034_PAR01.eml}
+    - {alias: "hoodie", lang: it, source: store_emails/MIL01/20260906_2015_MIL01.eml}
+    - {alias: "felpa hoodie", lang: it, source: store_emails/MIL01/20260906_2015_MIL01.eml}
+  I10918G00045:  # CREWNECK SWEATSHIRT
+    - {alias: "crew", lang: en, source: store_emails/LON01/20260912_2211_LON01.eml}
+    - {alias: "크루넥 스웨트셔츠", lang: ko, source: store_emails/SEL01/20260902_2115_SEL01.eml}
+    - {alias: "크루넥", lang: ko, source: store_emails/SEL01/20260902_2115_SEL01.eml}
+    - {alias: "圆领卫衣", lang: zh-CN, source: store_emails/SHA01/20260929_2254_SHA01.eml}
+    - {alias: "sweat col rond", lang: fr, source: store_emails/PAR01/20260905_2120_PAR01.eml}
+  I10919B00011:  # LOGO CARDIGAN
+    - {alias: "cardigan logo", lang: it, source: store_emails/MIL01/20260901_2025_MIL01.eml}
+    - {alias: "ロゴカーデ", lang: ja, source: store_emails/TYO01/20260904_2058_TYO01.eml}
+    - {alias: "로고 가디건", lang: ko, source: store_emails/SEL01/20260904_2131_SEL01.eml}
+  I10919B00042:  # TRICOT PADDED CARDIGAN
+    - {alias: "tricot cardigan", lang: en, source: store_emails/LON01/20260912_2211_LON01.eml}
+    - {alias: "tricot padded", lang: it, source: store_emails/MIL01/20260912_2140_MIL01.eml}
+    - {alias: "cardi matelassé", lang: fr, source: store_emails/PAR01/20260903_2105_PAR01.eml}
+    - {alias: "ニットダウンカーデ", lang: ja, source: store_emails/TYO01/20260906_2140_TYO01.eml}
+    - {alias: "트리코 패딩 가디건", lang: ko, source: store_emails/SEL01/20260904_2131_SEL01.eml}
+    - {alias: "트리코", lang: ko, source: store_emails/SEL01/20260904_2131_SEL01.eml}
+    - {alias: "tricot", lang: it, source: store_emails/MIL01/20260912_2140_MIL01.eml}
+  I10919C00067:  # WOOL TURTLENECK
+    - {alias: "ウールタートル", lang: ja, source: store_emails/TYO01/20260906_2140_TYO01.eml}
+    - {alias: "터틀넥", lang: ko, source: store_emails/SEL01/20260913_2148_SEL01.eml}
+    - {alias: "高领羊毛衫", lang: zh-CN, source: store_emails/SHA01/20260903_2308_SHA01.eml}
+    - {alias: "高领", lang: zh-CN, source: store_emails/SHA01/20260903_2308_SHA01.eml}
+    - {alias: "turtleneck", lang: en, source: store_emails/LON01/20260905_2147_LON01.eml}
+    - {alias: "rollkragen", lang: de, source: store_emails/MUN01/20260911_1950_MUN01.eml}
+    - {alias: "cuello alto", lang: es, source: store_emails/MAD01/20260915_2139_MAD01.eml}
+  I20924H00080:  # INSOLUX
+    - {alias: "인솔룩스", lang: ko, source: store_emails/SEL01/20261003_2216_SEL01.eml}
+    - {alias: "雪地靴", lang: zh-CN, source: store_emails/SHA01/20260930_2241_SHA01.eml}
+  I20924M00062:  # TRAILGRIP W
+    - {alias: "trailgrip femme", lang: fr, source: store_emails/PAR01/20260901_2034_PAR01.eml}
+  I20939C00008:  # CABLE KNIT SWEATER
+    - {alias: "ケーブルニット", lang: ja, source: store_emails/TYO01/20260831_2047_TYO01.eml}
+    - {alias: "케이블니트", lang: ko, source: store_emails/SEL01/20260909_2112_SEL01.eml}
+    - {alias: "cable knit", lang: it, source: store_emails/MIL01/20260906_2015_MIL01.eml}
+    - {alias: "jersey de ochos", lang: es, source: store_emails/MAD01/20260904_2147_MAD01.eml}
+  J10911A00034:  # MAYA
+    - {alias: "마야", lang: ko, source: store_emails/SEL01/20260907_2105_SEL01.eml}
+  J10911A00088:  # MONTCLA
+    - {alias: "몽클라", lang: ko, source: store_emails/SEL01/20260921_2049_SEL01.eml}
+  J10911A00142:  # KARAKORUM
+    - {alias: "카라코룸", lang: ko, source: store_emails/SEL01/20260902_2115_SEL01.eml}
+  J10911A00190:  # ECRINS
+    - {alias: "에크랑", lang: ko, source: store_emails/SEL01/20260919_2145_SEL01.eml}
+  J10911A00213:  # MONTGENEVRE
+    - {alias: "몽제네브르", lang: ko, source: store_emails/SEL01/20260905_2140_SEL01.eml}
+  J10911A00577:  # ARNEB
+    - {alias: "아르넵", lang: ko, source: store_emails/SEL01/20260907_2105_SEL01.eml}
+    - {alias: "롱파카", lang: ko, source: store_emails/SEL01/20260907_2105_SEL01.eml}
+  J10911A00581:  # ROSIERE
+    - {alias: "로지에르", lang: ko, source: store_emails/SEL01/20260920_2130_SEL01.eml}
+  J20931A00012:  # MAIRE
+    - {alias: "마이레", lang: ko, source: store_emails/SEL01/20260831_2108_SEL01.eml}
+  J20931A00087:  # HERMINE
+    - {alias: "에르민", lang: ko, source: store_emails/SEL01/20260831_2108_SEL01.eml}
+  J20931A00144:  # BADY
+    - {alias: "바디", lang: ko, source: store_emails/SEL01/20260902_2115_SEL01.eml}
+  J20931A00203:  # FLAMMETTE
+    - {alias: "플라메트", lang: ko, source: store_emails/SEL01/20260903_2047_SEL01.eml}
+  J20931A00560:  # CHAMBRE
+    - {alias: "샹브르", lang: ko, source: store_emails/SEL01/20260905_2140_SEL01.eml}
+  J20931A00618:  # ILVARO
+    - {alias: "일바로", lang: ko, source: store_emails/SEL01/20260912_2136_SEL01.eml}
+  J20931A00622:  # AMBRINE
+    - {alias: "앰브린", lang: ko, source: store_emails/SEL01/20260906_2122_SEL01.eml}
+
+shared:
+  - alias: "cardi"
+    lang: fr
+    styles: [I10919B00011, I10919B00042]  # LOGO CARDIGAN / TRICOT PADDED CARDIGAN
+    source: store_emails/PAR01/20260831_2012_PAR01.eml
+  - alias: "가디건"
+    lang: ko
+    styles: [I10919B00011, I10919B00042]  # LOGO CARDIGAN / TRICOT PADDED CARDIGAN
+    source: store_emails/SEL01/20260904_2131_SEL01.eml
+  - alias: "开衫"
+    lang: zh-CN
+    styles: [I10919B00011, I10919B00042]  # LOGO CARDIGAN / TRICOT PADDED CARDIGAN
+    source: store_emails/SHA01/20260911_2255_SHA01.eml
+  - alias: "卫衣"
+    lang: zh-CN
+    styles: [I10918G00031, I10918G00045]  # LOGO HOODIE / CREWNECK SWEATSHIRT
+    source: store_emails/SHA01/20260831_2237_SHA01.eml
+  - alias: "スウェット"
+    lang: ja
+    styles: [I10918G00031, I10918G00045]  # LOGO HOODIE / CREWNECK SWEATSHIRT
+    source: store_emails/TYO01/20260902_2115_TYO01.eml
+  - alias: "sweat"
+    lang: fr
+    styles: [I10918G00031, I10918G00045]  # LOGO HOODIE / CREWNECK SWEATSHIRT
+    source: store_emails/PAR01/20260905_2120_PAR01.eml
+  - alias: "felpa"
+    lang: it
+    styles: [I10918G00031, I10918G00045]  # LOGO HOODIE / CREWNECK SWEATSHIRT
+    source: store_emails/MIL01/20260906_2015_MIL01.eml
+  - alias: "sudadera"
+    lang: es
+    styles: [I10918G00031, I10918G00045]  # LOGO HOODIE / CREWNECK SWEATSHIRT
+    source: store_emails/MAD01/20260901_2134_MAD01.eml
+  - alias: "trailgrip"
+    lang: it
+    styles: [I10914M00061, I20924M00062]  # TRAILGRIP GTX / TRAILGRIP W
+    source: store_emails/MIL01/20260905_2135_MIL01.eml
+  - alias: "トレイルグリップ"
+    lang: ja
+    styles: [I10914M00061, I20924M00062]  # TRAILGRIP GTX / TRAILGRIP W
+    source: store_emails/TYO01/20260905_2044_TYO01.eml
+  - alias: "트레일그립"
+    lang: ko
+    styles: [I10914M00061, I20924M00062]  # TRAILGRIP GTX / TRAILGRIP W
+    source: store_emails/SEL01/20260831_2108_SEL01.eml
+  - alias: "polaris"
+    lang: it
+    styles: [G20921A00901, G20921A00902, G20921A00903]  # POLARIS CAPE / POLARIS OVERSIZED / POLARIS BALACLAVA
+    source: store_emails/MIL01/20260924_2205_MIL01.eml
+  - alias: "폴라리스"
+    lang: ko
+    styles: [G20921A00901, G20921A00902, G20921A00903]  # POLARIS CAPE / POLARIS OVERSIZED / POLARIS BALACLAVA
+    source: store_emails/SEL01/20261003_2216_SEL01.eml
+  - alias: "ウィンドブレーカー"
+    lang: ja
+    styles: [J10911A00720, J10911A00745]  # ETIACHE / MARIN
+    source: store_emails/TYO01/20260831_2047_TYO01.eml
+
+colours:
+  "999":
+    - {alias: "nera", lang: it, source: store_emails/MIL01/20260904_2110_MIL01.eml}
+    - {alias: "neri", lang: it, source: store_emails/MIL01/20261015_2050_MIL01.eml}
+    - {alias: "nere", lang: it, source: store_emails/MIL01/20260905_2135_MIL01.eml}
+    - {alias: "noir", lang: fr, source: store_emails/PAR01/20260901_2034_PAR01.eml}
+    - {alias: "noire", lang: fr, source: store_emails/PAR01/20260919_2125_PAR01.eml}
+    - {alias: "noires", lang: fr, source: store_emails/PAR01/20261008_2119_PAR01.eml}
+    - {alias: "schwarz", lang: de, source: store_emails/MUN01/20260831_1941_MUN01.eml}
+    - {alias: "schwarze", lang: de, source: store_emails/MUN01/20261001_2011_MUN01.eml}
+    - {alias: "schwarzen", lang: de, source: store_emails/MUN01/20260902_1947_MUN01.eml}
+    - {alias: "negro", lang: es, source: store_emails/MAD01/20260831_2152_MAD01.eml}
+    - {alias: "negra", lang: es, source: store_emails/MAD01/20260901_2134_MAD01.eml}
+    - {alias: "negros", lang: es, source: store_emails/MAD01/20260912_2218_MAD01.eml}
+    - {alias: "negras", lang: es, source: store_emails/MAD01/20260903_2128_MAD01.eml}
+    - {alias: "黒", lang: ja, source: store_emails/TYO01/20260831_2047_TYO01.eml}
+    - {alias: "블랙", lang: ko, source: store_emails/SEL01/20260831_2108_SEL01.eml}
+    - {alias: "黑", lang: zh-CN, source: store_emails/SHA01/20260831_2237_SHA01.eml}
+    - {alias: "黑色", lang: zh-CN, source: store_emails/SHA01/20260831_2237_SHA01.eml}
+  "742":
+    - {alias: "blu", lang: it, source: store_emails/MIL01/20260831_2042_MIL01.eml}
+    - {alias: "marine", lang: fr, source: store_emails/PAR01/20260831_2012_PAR01.eml}
+    - {alias: "navy", lang: en, source: store_emails/LON01/20260901_2110_LON01.eml}
+    - {alias: "dunkelblau", lang: de, source: store_emails/MUN01/20261009_1105_MUN01_fwd.eml}
+    - {alias: "azul marino", lang: es, source: store_emails/MAD01/20260902_2141_MAD01.eml}
+    - {alias: "marino", lang: es, source: store_emails/MAD01/20260902_2141_MAD01.eml}
+    - {alias: "ネイビー", lang: ja, source: store_emails/TYO01/20260901_2052_TYO01.eml}
+    - {alias: "네이비", lang: ko, source: store_emails/SEL01/20260903_2047_SEL01.eml}
+    - {alias: "藏青", lang: zh-CN, source: store_emails/SHA01/20260831_2237_SHA01.eml}
+  "001":
+    - {alias: "bianca", lang: it, source: store_emails/MIL01/20260904_2110_MIL01.eml}
+    - {alias: "bianchi", lang: it, source: store_emails/MIL01/20261016_2035_MIL01.eml}
+    - {alias: "blanc", lang: fr, source: store_emails/PAR01/20260831_2012_PAR01.eml}
+    - {alias: "blanche", lang: fr, source: store_emails/PAR01/20260917_2058_PAR01.eml}
+    - {alias: "weiß", lang: de, source: store_emails/MUN01/20260910_1944_MUN01.eml}
+    - {alias: "blanco", lang: es, source: store_emails/MAD01/20260902_2141_MAD01.eml}
+    - {alias: "blanca", lang: es, source: store_emails/MAD01/20261005_2140_MAD01.eml}
+    - {alias: "ホワイト", lang: ja, source: store_emails/TYO01/20260913_2148_TYO01.eml}
+    - {alias: "白", lang: ja, source: store_emails/TYO01/20261002_2108_TYO01.eml}
+    - {alias: "화이트", lang: ko, source: store_emails/SEL01/20260918_2126_SEL01.eml}
+    - {alias: "白色", lang: zh-CN, source: store_emails/SHA01/20260923_2231_SHA01.eml}
+  "20D":
+    - {alias: "panna", lang: it, source: store_emails/MIL02/20260904_2247_MIL02.eml}
+    - {alias: "off white", lang: en, source: store_emails/LON01/20260912_2211_LON01.eml}
+    - {alias: "cream", lang: en, source: store_emails/NYC01/20260831_1924_NYC01.eml}
+    - {alias: "offwhite", lang: de, source: store_emails/MUN01/20260901_1958_MUN01.eml}
+    - {alias: "blanco roto", lang: es, source: store_emails/MAD01/20260904_2147_MAD01.eml}
+    - {alias: "オフホワイト", lang: ja, source: store_emails/TYO01/20260913_2148_TYO01.eml}
+    - {alias: "오프화이트", lang: ko, source: store_emails/SEL01/20260918_2126_SEL01.eml}
+    - {alias: "米白", lang: zh-CN, source: store_emails/SHA01/20260908_2247_SHA01.eml}
+    - {alias: "bianco", lang: it, source: store_emails/MIL01/20260907_2030_MIL01.eml}
+    - {alias: "white", lang: en, source: store_emails/LON01/20260831_2052_LON01.eml}
+    - {alias: "bianca", lang: it, source: store_emails/MIL01/20260904_2110_MIL01.eml}
+    - {alias: "bianchi", lang: it, source: store_emails/MIL01/20261016_2035_MIL01.eml}
+    - {alias: "blanc", lang: fr, source: store_emails/PAR01/20260831_2012_PAR01.eml}
+    - {alias: "blanche", lang: fr, source: store_emails/PAR01/20260917_2058_PAR01.eml}
+    - {alias: "weiß", lang: de, source: store_emails/MUN01/20260910_1944_MUN01.eml}
+    - {alias: "blanco", lang: es, source: store_emails/MAD01/20260902_2141_MAD01.eml}
+    - {alias: "blanca", lang: es, source: store_emails/MAD01/20261005_2140_MAD01.eml}
+    - {alias: "ホワイト", lang: ja, source: store_emails/TYO01/20260913_2148_TYO01.eml}
+    - {alias: "白", lang: ja, source: store_emails/TYO01/20261002_2108_TYO01.eml}
+    - {alias: "화이트", lang: ko, source: store_emails/SEL01/20260918_2126_SEL01.eml}
+    - {alias: "白色", lang: zh-CN, source: store_emails/SHA01/20260923_2231_SHA01.eml}
+  "034":
+    - {alias: "ベージュ", lang: ja, source: store_emails/TYO01/20260908_2105_TYO01.eml}
+    - {alias: "베이지", lang: ko, source: store_emails/SEL01/20260901_2052_SEL01.eml}
+    - {alias: "米色", lang: zh-CN, source: store_emails/SHA01/20260920_2258_SHA01.eml}
+  "23R":
+    - {alias: "marrone", lang: it, source: store_emails/MIL01/20260910_2105_MIL01.eml}
+    - {alias: "marroni", lang: it, source: store_emails/MIL01/20260910_2231_MIL01_re1.eml}
+    - {alias: "marron", lang: fr, source: store_emails/PAR01/20260911_2055_PAR01.eml}
+    - {alias: "chocolat", lang: fr, source: store_emails/PAR01/20260911_2055_PAR01.eml}
+    - {alias: "marrón", lang: es, source: store_emails/MAD01/20260910_2131_MAD01.eml}
+    - {alias: "chocolate", lang: en, source: store_emails/LON01/20261021_2122_LON01.eml}
+    - {alias: "brown", lang: en, source: store_emails/LON01/20260926_2248_LON01.eml}
+    - {alias: "ブラウン", lang: ja, source: store_emails/TYO01/20260906_2140_TYO01.eml}
+    - {alias: "브라운", lang: ko, source: store_emails/SEL01/20260926_2133_SEL01.eml}
+    - {alias: "啡色", lang: zh-HK, source: store_emails/HKG01/20260927_2259_HKG01.eml}
+    - {alias: "啡", lang: zh-HK, source: store_emails/HKG01/20260927_2259_HKG01.eml}
+  "41F":
+    - {alias: "红", lang: zh-CN, source: store_emails/SHA01/20260926_2317_SHA01.eml}
+  "510":
+    - {alias: "rosa", lang: it, source: store_emails/MIL01/20260905_2135_MIL01.eml}
+    - {alias: "rose", lang: fr, source: store_emails/PAR01/20260910_2038_PAR01.eml}
+    - {alias: "rose poudré", lang: fr, source: store_emails/PAR01/20260910_2038_PAR01.eml}
+    - {alias: "pink", lang: en, source: store_emails/LON01/20260903_2204_LON01.eml}
+    - {alias: "ピンク", lang: ja, source: store_emails/TYO01/20260907_2050_TYO01.eml}
+    - {alias: "パウダーピンク", lang: ja, source: store_emails/TYO01/20260907_2050_TYO01.eml}
+    - {alias: "핑크", lang: ko, source: store_emails/SEL01/20260912_2136_SEL01.eml}
+    - {alias: "인디핑크", lang: ko, source: store_emails/SEL01/20260912_2136_SEL01.eml}
+    - {alias: "粉", lang: zh-CN, source: store_emails/SHA01/20260903_2308_SHA01.eml}
+    - {alias: "粉色", lang: zh-CN, source: store_emails/SHA01/20260903_2308_SHA01.eml}
+    - {alias: "粉紅", lang: zh-HK, source: store_emails/HKG01/20261002_2325_HKG01.eml}
+  "73A":
+    - {alias: "hellblau", lang: de, source: store_emails/MUN01/20260924_2008_MUN01.eml}
+    - {alias: "淺藍", lang: zh-HK, source: store_emails/HKG01/20261015_2252_HKG01.eml}
+  "82D":
+    - {alias: "oliva", lang: it, source: store_emails/MIL01/20260907_2030_MIL01.eml}
+    - {alias: "verde", lang: it, source: store_emails/MIL01/20260907_2030_MIL01.eml}
+    - {alias: "olive", lang: fr, source: store_emails/PAR01/20260912_2112_PAR01.eml}
+    - {alias: "oliv", lang: de, source: store_emails/MUN01/20261002_1939_MUN01.eml}
+    - {alias: "オリーブ", lang: ja, source: store_emails/TYO01/20260916_2119_TYO01.eml}
+    - {alias: "올리브", lang: ko, source: store_emails/SEL01/20260909_2112_SEL01.eml}
+    - {alias: "橄榄绿", lang: zh-CN, source: store_emails/SHA01/20260831_2237_SHA01.eml}
+    - {alias: "橄榄", lang: zh-CN, source: store_emails/SHA01/20260831_2237_SHA01.eml}
+    - {alias: "绿", lang: zh-CN, source: store_emails/SHA01/20260831_2237_SHA01.eml}
+  "90X":
+    - {alias: "grigio", lang: it, source: store_emails/MIL01/20260924_2205_MIL01.eml}
+    - {alias: "grigia", lang: it, source: store_emails/MIL01/20260905_2135_MIL01.eml}
+    - {alias: "gris", lang: fr, source: store_emails/PAR01/20260831_2012_PAR01.eml}
+    - {alias: "grau", lang: de, source: store_emails/MUN01/20260904_1952_MUN01.eml}
+    - {alias: "grey", lang: en, source: store_emails/LON01/20260919_2237_LON01.eml}
+    - {alias: "グレー", lang: ja, source: store_emails/TYO01/20260908_2105_TYO01.eml}
+    - {alias: "그레이", lang: ko, source: store_emails/SEL01/20260902_2115_SEL01.eml}
+    - {alias: "灰", lang: zh-CN, source: store_emails/SHA01/20260905_2258_SHA01.eml}
+    - {alias: "灰色", lang: zh-CN, source: store_emails/SHA01/20260905_2258_SHA01.eml}
