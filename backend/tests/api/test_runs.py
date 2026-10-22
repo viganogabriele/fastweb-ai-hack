@@ -133,7 +133,9 @@ def test_published_reads_are_bound_to_run_namespace_store_and_clock(service):
     assert client.get("/api/runs/earlier/documents").json() == []
     assert client.get("/api/runs/no-run/documents/doc-1").status_code == 404
     assert client.get("/api/runs/run-1/documents/doc-1").json()["segments"] == []
-    assert client.get("/api/runs/run-1/documents/../../etc/passwd").status_code == 404
+    # Encoded dots survive client normalization and reach the handler as a run id.
+    traversal = client.get("/api/runs/%2e%2e/documents")
+    assert traversal.status_code == 404 and traversal.json()["detail"] == "Run not found"
     assert len(client.get("/api/runs").json()) == 3
     assert len(client.get("/api/runs?fixture=true").json()) == 1
 
@@ -348,3 +350,42 @@ def test_default_engines_physically_isolate_fixture_and_product_with_same_id(tmp
     finally:
         product.dispose()
         fixture.dispose()
+
+
+def test_submission_accepts_disabled_uninstalled_snapshot_and_503s_on_held_lock(tmp_path):
+    from sqlalchemy import create_engine, event
+
+    from tessera.core.db import _sqlite_pragmas
+
+    url = f"sqlite:///{tmp_path / 'locked.db'}"
+    connect(url).dispose()
+    engine = create_engine(url, connect_args={"timeout": 0.2})
+    event.listen(engine, "connect", _sqlite_pragmas)
+    source = ModuleManifest(
+        id="src.test",
+        version="v1",
+        layer="sources",
+        description="Test source",
+        requires=(),
+        optional_inputs=(),
+        produces=("SourceDocument",),
+        enabled=True,
+        mode="recorded",
+        params_schema={},
+    )
+    missing = source.model_copy(update={"id": "src.missing", "enabled": False})
+    registry = Registry([RegisteredModule(source, lambda ctx: None)])
+    app = create_app(engine=engine, registry=registry, settings=Settings(_env_file=None))
+    payload = body()
+    payload["modules"] = [
+        {"manifest": m.model_dump(mode="json"), "params": {}} for m in (source, missing)
+    ]
+    holder = create_engine(url)
+    with TestClient(app) as client, holder.connect() as connection:
+        connection.exec_driver_sql("BEGIN IMMEDIATE")
+        busy = client.post("/api/runs", json=payload)
+        assert busy.status_code == 503 and busy.headers["retry-after"] == "5"
+        connection.exec_driver_sql("ROLLBACK")
+        assert client.post("/api/runs", json=payload).status_code == 202
+    holder.dispose()
+    engine.dispose()

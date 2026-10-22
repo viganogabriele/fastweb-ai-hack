@@ -1,5 +1,6 @@
 """Run submission, metadata and published artifact reads."""
 
+import logging
 from collections.abc import Iterator
 from typing import Annotated
 from uuid import uuid4
@@ -7,6 +8,7 @@ from uuid import uuid4
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Request
 from jsonschema.exceptions import ValidationError as SchemaError
 from pydantic import ValidationError
+from sqlalchemy.exc import OperationalError
 
 from tessera.api.models import CreateRun, DocumentDetail, RunView
 from tessera.core.config import Settings, get_settings
@@ -28,6 +30,7 @@ from tessera.core.run_repo import RunRepo as Repo
 from tessera.core.run_repo import repo_session
 
 router = APIRouter(prefix="/api")
+logger = logging.getLogger("tessera.api")
 
 
 def engine_for(request: Request, ns: str = "product"):
@@ -87,8 +90,9 @@ def execute(spec: RunSpec, engine, registry: Registry, settings: Settings) -> No
     try:
         run(spec, engine=engine, registry=registry, settings=settings)
     except Exception:
+        logger.exception("run %s failed outside module execution", spec.run_id)
         # An infrastructure failure must not leave a job claiming to be running.
-        with repo_session(engine, spec, fixture_mode=spec.mode == "fixture") as repo:
+        with repo_session(engine, spec, fixture_mode=spec.mode == "fixture", write=True) as repo:
             if repo.run_state()["status"] in {"pending", "running"}:
                 repo.set_run_status("failed")
 
@@ -112,14 +116,22 @@ def create_run(request: Request, body: CreateRun, tasks: BackgroundTasks, ns: Na
         if not any(m.manifest.enabled and m.manifest.mode != "unavailable" for m in spec.modules):
             raise ValueError("At least one enabled, available module is required")
         for snapshot in spec.modules:
-            registry.resolve(snapshot)
+            if snapshot.manifest.enabled and snapshot.manifest.mode != "unavailable":
+                # Disabled/unavailable snapshots run as blocked and need no installed code.
+                registry.resolve(snapshot)
             if ns == "product" and snapshot.manifest.mode == "fixture":
                 raise ValueError("Fixture modules require a fixture run")
     except (ValueError, ValidationError, SchemaError) as error:
         raise HTTPException(422, str(error)) from None
     engine = engine_for(request, ns)
-    with repo_session(engine, spec, fixture_mode=ns == "fixture") as repo:
-        result = view(repo)
+    try:
+        with repo_session(engine, spec, fixture_mode=ns == "fixture", write=True) as repo:
+            result = view(repo)
+    except OperationalError as error:
+        if "locked" not in str(error.orig):
+            raise
+        # A module transaction held the write lock past the busy timeout.
+        raise HTTPException(503, "Pipeline is writing; retry", {"Retry-After": "5"}) from None
     tasks.add_task(execute, spec, engine, registry, request.app.state.settings or get_settings())
     return result
 
