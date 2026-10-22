@@ -238,8 +238,18 @@ class RunRepo(Repo):
 
 @contextmanager
 def repo_session(
-    engine: Engine, spec: RunSpec, *, fixture_mode: bool = False, module_scope: bool = False
+    engine: Engine,
+    spec: RunSpec,
+    *,
+    fixture_mode: bool = False,
+    module_scope: bool = False,
+    write: bool = False,
 ) -> Iterator[RunRepo]:
+    """``write=True`` takes the SQLite write lock up front (BEGIN IMMEDIATE).
+
+    A deferred read transaction that later writes fails at once if another writer
+    committed meanwhile; an immediate one waits the busy timeout instead.
+    """
     with engine.begin() as connection:
         # sqlite3 legacy transaction mode does not start BEGIN for reads or
         # SAVEPOINT. Force the outer transaction before a first module savepoint
@@ -247,5 +257,5 @@ def repo_session(
         if connection.dialect.name == "sqlite":
             driver = connection.connection.driver_connection
             if not driver.in_transaction:
-                connection.exec_driver_sql("BEGIN")
+                connection.exec_driver_sql("BEGIN IMMEDIATE" if write else "BEGIN")
         yield RunRepo(connection, spec, fixture_mode=fixture_mode, module_scope=module_scope)
