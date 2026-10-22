@@ -20,6 +20,8 @@ One line per task. Edit only the lines of your own task.
 
 ## In progress
 
+- PLT-03 (C, Lorenzo, `PLT-03-repo`) `core/db.py`, `core/repo.py`: SQLite artifact store, `as_of` filter, fixtures load
+
 ## Ready (all hard dependencies merged)
 
 - PLT-05 (C) `core/llm.py` + `core/cache.py`: `chat/extract/embed`, recipe in `docs/smoke-fastweb.md`
@@ -28,7 +30,6 @@ One line per task. Edit only the lines of your own task.
 - WEB-01 (D) App shell on hand-written JSON
 - DATA-01b (B) Fixtures: links (linked and ambiguous), cases, baseline with unchanged scenarios, report
 - ING-09 (A) Physical quantities (exact/range/vague/unknown) with units, from span text
-- PLT-03 (C) `core/db.py`, `core/repo.py`: SQLite artifact store, `as_of` filter, fixtures load
 
 ## Blocked (waiting on)
 
