@@ -22,7 +22,6 @@ One line per task. Edit only the lines of your own task.
 - DATA-03 (A) 2–3 voice recordings + sidecar JSON
 - ING-01 pure (B) ERP loaders with `available_at`
 - ACT-04 pure (E) Systems client (stock/ATP, lanes/ETA) against `make mocks`
-- AG-01 pure (E) Agent loop with budget, trace, fallback; fake model
 - WEB-01 (D) App shell on hand-written JSON
 - EVL-01 (D) `eval/` harness + "product cannot open ground truth" test
 - DATA-01a (A) Fixtures: D1 positive doc + observation, ambiguous mention, forward/duplicate, correction
