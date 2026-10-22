@@ -6,6 +6,7 @@ One line per task. Edit only the lines of your own task.
 ## Done
 
 - PLT-01 (C) Scaffold: `backend/` FastAPI, `web/` React+Vite, `make setup/dev/check`, CI, `.env.example`
+- INT-01 pure (B, Bianca) `modules/integration/candidates.py`: mention → ranked candidates, size vs size run, linked/ambiguous/unlinked
 
 ## In progress
 
@@ -19,7 +20,6 @@ One line per task. Edit only the lines of your own task.
 - ING-02 pure (A) `.eml` → canonical text + segments with offsets
 - DATA-03 (A) 2–3 voice recordings + sidecar JSON
 - ING-01 pure (B) ERP loaders with `available_at`
-- INT-01 pure (B) Product mention → ranked candidates (alias + rapidfuzz)
 - FC-01 pure (B) Weekly → daily forecast disaggregation
 - ACT-01 pure (E) Recursive daily stock simulation + RFC §7.3 test 5
 - ACT-04 pure (E) Systems client (stock/ATP, lanes/ETA) against `make mocks`
