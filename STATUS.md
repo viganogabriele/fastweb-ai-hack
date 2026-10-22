@@ -12,9 +12,9 @@ One line per task. Edit only the lines of your own task.
 - INT-01 pure (B, Bianca) `modules/integration/candidates.py`: mention → ranked candidates, size vs size run, linked/ambiguous/unlinked
 - PLT-02 (C) `tessera/core/contracts/`: MVP DTO contracts, JSON Schema export, invariant tests
 - ING-02 pure (A, done by Bianca) `modules/ingestion/email_parser.py`: `.eml` → canonical text, segments with code-point offsets, quotes and attachments flagged
+- AG-01 pure (E, Alessandro) `modules/agents/runtime.py`: bounded loop (allowlist, 6 calls / 8 turns / 90 s incl. retries), `AgentTrace`, validated `finish`, deterministic fallback; fake-model tests incl. RFC §7.3 test 9
 
 ## In progress
-- AG-01 pure (E, Alessandro, `AG-01-agent-loop`) Agent loop with budget, trace, fallback; fake model
 
 ## Ready (all hard dependencies merged)
 
