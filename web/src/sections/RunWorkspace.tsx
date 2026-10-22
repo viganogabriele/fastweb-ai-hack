@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Search } from 'lucide-react'
 import { readApi } from '../api/client'
-import type { Case, ModuleManifest, SourceDocument } from '../api/client'
+import type { Case, SourceDocument } from '../api/client'
 import {
   Button,
   EmptyState,
@@ -54,7 +54,6 @@ export function RunWorkspace({
   const [data, setData] = useState<{
     cases: Case[]
     documents: SourceDocument[]
-    modules: ModuleManifest[]
   } | null>(null)
   const [error, setError] = useState('')
   const [revision, setRevision] = useState(0)
@@ -67,26 +66,19 @@ export function RunWorkspace({
     const controller = new AbortController()
     const base = `/runs/${encodeURIComponent(runId ?? '')}`
     const request =
-      section === 'modules'
-        ? (run
-            ? Promise.resolve(
-                run.spec.modules.map((snapshot) => snapshot.manifest)
-              )
-            : readApi<ModuleManifest[]>('/modules', controller.signal)
-          ).then((modules) => ({ cases: [], documents: [], modules }))
-        : published && runId
-          ? Promise.all([
-              section === 'sources'
-                ? Promise.resolve([] as Case[])
-                : readApi<Case[]>(`${base}/cases`, controller.signal),
-              section === 'cases'
-                ? Promise.resolve([] as SourceDocument[])
-                : readApi<SourceDocument[]>(
-                    `${base}/documents`,
-                    controller.signal
-                  )
-            ]).then(([cases, documents]) => ({ cases, documents, modules: [] }))
-          : null
+      published && runId
+        ? Promise.all([
+            section === 'sources'
+              ? Promise.resolve([] as Case[])
+              : readApi<Case[]>(`${base}/cases`, controller.signal),
+            section === 'cases'
+              ? Promise.resolve([] as SourceDocument[])
+              : readApi<SourceDocument[]>(
+                  `${base}/documents`,
+                  controller.signal
+                )
+          ]).then(([cases, documents]) => ({ cases, documents }))
+        : null
     request
       ?.then((result) => {
         if (!controller.signal.aborted) setData(result)
@@ -303,48 +295,6 @@ export function RunWorkspace({
             title="Nessuna fonte trovata"
             description="Nessun documento pubblicato corrisponde alla selezione."
           />
-        ))}
-      {section === 'modules' &&
-        (data.modules.length ? (
-          <div className="sd-run-list">
-            {data.modules.map((item) => {
-              const execution = run?.module_runs.find(
-                (value) => value.module_id === item.id
-              )
-              return (
-                <article className="sd-run-card" key={item.id}>
-                  <h2>{item.id}</h2>
-                  <p>{item.description}</p>
-                  <StatusBadge
-                    label={
-                      execution
-                        ? statuses[execution.status]
-                        : 'Non eseguito nel run'
-                    }
-                    tone="neutral"
-                  />
-                  <p>Modalità: {execution?.mode ?? item.mode}</p>
-                  {execution?.result && (
-                    <>
-                      <p>
-                        {Object.entries(execution.result.counts)
-                          .map(([key, count]) => `${key}: ${count}`)
-                          .join(' · ')}
-                      </p>
-                      {[
-                        ...execution.result.errors,
-                        ...execution.result.abstentions
-                      ].map((text) => (
-                        <p key={text}>{text}</p>
-                      ))}
-                    </>
-                  )}
-                </article>
-              )
-            })}
-          </div>
-        ) : (
-          <EmptyState title="Nessun modulo disponibile" />
         ))}
     </div>
   )

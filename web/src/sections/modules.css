@@ -1,0 +1,41 @@
+.sd-modules-intro,
+.sd-module {
+  display: grid;
+  gap: var(--sd-space-3);
+}
+.sd-module-heading,
+.sd-modules-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sd-space-3);
+}
+.sd-module-heading {
+  justify-content: space-between;
+}
+.sd-module-heading h2 {
+  margin: 0;
+}
+.sd-module h3 {
+  font-size: var(--sd-font-size-body-sm);
+}
+.sd-module dl,
+.sd-module ul {
+  margin: 0;
+}
+.sd-module-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--sd-space-3);
+  min-height: var(--sd-local-hit-min);
+  width: fit-content;
+  cursor: pointer;
+}
+.sd-module-toggle input {
+  accent-color: var(--sd-color-action-primary);
+  flex: 0 0 auto;
+}
+.sd-module-toggle:has(input:disabled) {
+  cursor: default;
+  color: var(--sd-color-text-secondary);
+}
