@@ -19,6 +19,9 @@ and segment before relating facts.
   covers a conservative set of Italian/English phrases; unresolvable correction
   targets, negation, hypothetical statements and questions produce an abstention
   and a degraded result. Only affirmative supported statements can suppress facts.
+  Withdrawals must name the report/fact as their direct object, optionally qualified
+  by its product and matching count/unit; withdrawing an objection or another
+  product's report does not withdraw the fact. Unsupported object wording abstains.
   Other wording/languages remain separate observations for human verification.
 
 Every relation retains endpoint versions, evidence references and all inspected
@@ -28,6 +31,8 @@ therefore invisible to earlier snapshots. Repeated execution is idempotent.
 Segments resolve through the observation's versioned input references, and entity
 links apply only to the exact observation version they reference. Missing or
 ambiguous version pins abstain; a newer version never silently replaces a pin.
+Certain copies are resolved before correction intent. Resending a correction or
+withdrawal creates a duplicate relation, without a new correction or refreshed age.
 
 The pure `state_at` helper demonstrates the consumer rules: union only certain
 copies; choose the earliest member as the representative and keep its original

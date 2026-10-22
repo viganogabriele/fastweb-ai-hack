@@ -111,6 +111,55 @@ def _correction_intent(text: str) -> tuple[str | None, bool]:
     return None, True
 
 
+def _withdraws_fact(text: str, observation: Observation) -> bool:
+    """Bind the grammatical object to a supported report/fact, never an objection.
+
+    Only a bare report reference, optionally qualified by this observation's
+    literal product and a count, is supported. An unknown object or additional
+    qualifiers require human verification rather than guessing their referent.
+    """
+    prefix = AFFIRMATIVE_RETRACT.match(text)
+    if prefix is None or re.search(
+        r"\b(?:confirm\w*|conferm\w*|unchanged|invariat\w*)\b", text, re.IGNORECASE
+    ):
+        return False
+    direct_object = text[prefix.end() :].strip()
+    product = re.escape(_norm(observation.product_mention))
+    qualifier = rf"(?:{product}\s+)?" if product else ""
+    suffix = rf"(?:\s+{product})?" if product else ""
+    article = r"(?:(?:the|this|that|my|our|la|questa|quella|mia|nostra|il|questo|quel)\s+)*"
+    noun = (
+        r"(?:report|statement|claim|figure|estimate|requests?|segnalazione|richiest[ae]"
+        r"|dato|stima|affermazione|nota)"
+    )
+    count = (
+        r"(?:(?:\s+(?:of|di)\s+|\s*:\s*)(?P<count>\d+(?:[.,]\d+)?)\s+"
+        r"(?P<unit>requests?|richiest[ae]|units?|unità|customers?|clienti))?"
+    )
+    match = re.fullmatch(
+        article + qualifier + noun + suffix + count + r"[.!]?",
+        _norm(direct_object),
+        re.IGNORECASE,
+    )
+    if match is None:
+        return False
+    if match["count"] is None:
+        return True
+    unit = match["unit"]
+    unit = (
+        "requests"
+        if unit.startswith(("request", "richiest"))
+        else "units"
+        if unit.startswith(("unit", "unità"))
+        else "customers"
+    )
+    return (
+        observation.quantity.kind == "exact"
+        and observation.quantity.unit == unit
+        and observation.quantity.value == float(match["count"].replace(",", "."))
+    )
+
+
 def ref(record: SourceRecord) -> ArtifactRef:
     return ArtifactRef(kind=type(record).__name__, id=record.id, version=record.version)
 
@@ -289,61 +338,17 @@ def build_relations(
         fact_docs[_key(ref(obs))] = evidence_docs[0]
         fact_segs[_key(ref(obs))] = tuple(evidence_segs)
 
+    # Establish certain copies before interpreting correction language. A resend
+    # of a correction is evidence of the same fact, not another correction event.
     relations = []
-    corrected = set()
-    for new in facts:
-        new_key = _key(ref(new))
-        doc = fact_docs[new_key]
-        own_quotes = [
-            e.quote
-            for e, s in zip(new.evidence, fact_segs[new_key], strict=True)
-            if not s.is_quoted
-        ]
-        text = "\n".join(own_quotes)
-        intent, uncertain = _correction_intent(text)
-        if uncertain:
-            errors.append(f"{new.id}: uncertain correction intent; facts retained")
-        if intent is None:
-            continue
-        candidates = [
-            old
-            for old in facts
-            if old.document_id == doc.parent_document_id
-            and old.available_at < new.available_at
-            and _same_scope(new, old, link_map)
-            and new.period_start is not None
-            and new.period_end is not None
-            and (new.period_start, new.period_end) == (old.period_start, old.period_end)
-        ]
-        if len(candidates) != 1:
-            errors.append(
-                f"{new.id}: {intent} needs one explicit parent fact; found {len(candidates)}"
-            )
-            continue
-        old = candidates[0]
-        inputs = [doc, fact_docs[_key(ref(old))], *fact_segs[new_key], *fact_segs[_key(ref(old))]]
-        inputs += [lk for o in (new, old) if (lk := link_map.get(_key(ref(o)))) is not None]
-        relations.append(
-            _relation(
-                new,
-                old,
-                intent,
-                "Explicit correction in fact evidence; unique parent fact",
-                inputs,
-                spec,
-            )
-        )
-        corrected.add(frozenset((new_key, _key(ref(old)))))
-
-    # Bucket by store/kind instead of comparing unrelated stores or fact types.
     buckets = defaultdict(list)
     for fact in facts:
         buckets[(fact.store_id, fact.kind)].append(fact)
+    possible_pairs = []
+    copied = set()
     for bucket in buckets.values():
         for old, new in combinations(bucket, 2):
             old_key, new_key = _key(ref(old)), _key(ref(new))
-            if frozenset((old_key, new_key)) in corrected:
-                continue
             a, b = fact_docs[old_key], fact_docs[new_key]
             inputs = [a, b, *fact_segs[old_key], *fact_segs[new_key]]
             inputs += [lk for o in (old, new) if (lk := link_map.get(_key(ref(o)))) is not None]
@@ -387,33 +392,91 @@ def build_relations(
                         spec,
                     )
                 )
-                continue
-            if not _possible_scope(old, new, link_map):
-                continue
-            # Same store/product/day is only possible overlap, including differing
-            # quantities or negation. Disjoint known periods are separate episodes.
-            if all(
-                t is not None
-                for t in (old.period_start, old.period_end, new.period_start, new.period_end)
-            ):
-                overlap = max(old.period_start, new.period_start) <= min(
-                    old.period_end, new.period_end
-                )
+                copied.add(new_key)
             else:
-                # Unknown event dates cannot prove episodes disjoint, even if the
-                # documents arrived on different days.
-                overlap = True
-            if overlap:
-                relations.append(
-                    _relation(
-                        new,
-                        old,
-                        "possibly_same_episode",
-                        "Compatible scope and overlapping/unknown period; independence unproven",
-                        inputs,
-                        spec,
-                    )
+                possible_pairs.append((old, new, inputs))
+
+    corrected = set()
+    for new in facts:
+        new_key = _key(ref(new))
+        if new_key in copied:
+            continue
+        doc = fact_docs[new_key]
+        own_quotes = [
+            e.quote
+            for e, s in zip(new.evidence, fact_segs[new_key], strict=True)
+            if not s.is_quoted
+        ]
+        text = "\n".join(own_quotes)
+        intent, uncertain = _correction_intent(text)
+        if uncertain:
+            errors.append(f"{new.id}: uncertain correction intent; facts retained")
+        if intent is None:
+            continue
+        candidates = [
+            old
+            for old in facts
+            if old.document_id == doc.parent_document_id
+            and old.available_at < new.available_at
+            and _same_scope(new, old, link_map)
+            and new.period_start is not None
+            and new.period_end is not None
+            and (new.period_start, new.period_end) == (old.period_start, old.period_end)
+        ]
+        if len(candidates) != 1:
+            errors.append(
+                f"{new.id}: {intent} needs one explicit parent fact; found {len(candidates)}"
+            )
+            continue
+        old = candidates[0]
+        if intent == "retracts" and not _withdraws_fact(text, old):
+            errors.append(f"{new.id}: uncertain withdrawal target; facts retained")
+            continue
+        if intent == "supersedes" and _same_fact(new, old):
+            errors.append(f"{new.id}: replacement does not change the parent fact; facts retained")
+            continue
+        inputs = [doc, fact_docs[_key(ref(old))], *fact_segs[new_key], *fact_segs[_key(ref(old))]]
+        inputs += [lk for o in (new, old) if (lk := link_map.get(_key(ref(o)))) is not None]
+        relations.append(
+            _relation(
+                new,
+                old,
+                intent,
+                "Explicit correction in fact evidence; unique parent fact",
+                inputs,
+                spec,
+            )
+        )
+        corrected.add(frozenset((new_key, _key(ref(old)))))
+
+    for old, new, inputs in possible_pairs:
+        old_key, new_key = _key(ref(old)), _key(ref(new))
+        if frozenset((old_key, new_key)) in corrected:
+            continue
+        if not _possible_scope(old, new, link_map):
+            continue
+        # Same store/product/day is only possible overlap, including differing
+        # quantities or negation. Disjoint known periods are separate episodes.
+        if all(
+            t is not None
+            for t in (old.period_start, old.period_end, new.period_start, new.period_end)
+        ):
+            overlap = max(old.period_start, new.period_start) <= min(old.period_end, new.period_end)
+        else:
+            # Unknown event dates cannot prove episodes disjoint, even if the
+            # documents arrived on different days.
+            overlap = True
+        if overlap:
+            relations.append(
+                _relation(
+                    new,
+                    old,
+                    "possibly_same_episode",
+                    "Compatible scope and overlapping/unknown period; independence unproven",
+                    inputs,
+                    spec,
                 )
+            )
     return tuple(sorted(relations, key=lambda r: r.id)), tuple(errors)
 
 
@@ -464,7 +527,7 @@ def state_at(
     for relation in visible:
         if relation.relation == "duplicates":
             parents[root(_key(relation.from_ref))] = root(_key(relation.to_ref))
-    inactive, non_additive = set(), set()
+    inactive, overlaps = set(), []
     for relation in visible:
         a, b = root(_key(relation.from_ref)), root(_key(relation.to_ref))
         if relation.relation in ("supersedes", "retracts"):
@@ -472,7 +535,10 @@ def state_at(
             if relation.relation == "retracts":
                 inactive.add(a)
         elif relation.relation == "possibly_same_episode" and a != b:
-            non_additive.update((a, b))
+            overlaps.append((a, b))
+    non_additive = {
+        key for a, b in overlaps if a not in inactive and b not in inactive for key in (a, b)
+    }
     grouped = defaultdict(list)
     for key, obs in facts.items():
         grouped[root(key)].append(obs)

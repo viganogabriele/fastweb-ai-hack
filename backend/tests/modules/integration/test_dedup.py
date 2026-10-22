@@ -401,6 +401,75 @@ def test_correction_suppresses_every_certain_copy_and_chain_does_not_resurrect()
 
 
 @pytest.mark.parametrize(
+    "text",
+    [
+        "I withdraw my objection: the Maire nera report of 7 requests is confirmed.",
+        "I withdraw my objection about the Maire nera report of 7 requests.",
+        "Ritiro la mia obiezione: la segnalazione Maire nera di 7 richieste è confermata.",
+        "Ritiro la segnalazione Tib: Maire nera, 7 richieste.",
+        "I withdraw the report about Tib: Maire nera, 7 requests.",
+        "I withdraw the Maire nera report of 3 requests.",
+        "I withdraw the Maire nera report of 7 customers.",
+    ],
+)
+def test_withdrawal_of_another_object_or_count_does_not_retract_confirmed_fact(tmp_path, text):
+    a = fact("a")
+    b = fact("b", at=T2, text=text, parent=a[0].id)
+    engine = connect(f"sqlite:///{tmp_path / 'target.db'}")
+    with repo_session(engine, spec(), fixture_mode=True, write=True) as repo:
+        repo.put(*a[:2], *b[:2], a[2], b[2])
+        result = dedup.run(SimpleNamespace(spec=repo.spec, repo=repo))
+        relations = repo.list(EvidenceRelation)
+    assert result.status == "degraded"
+    assert result.abstentions == ("obs-b: uncertain withdrawal target; facts retained",)
+    assert result.counts["active_origins"] == 2
+    assert [r.relation for r in relations] == ["possibly_same_episode"]
+
+
+@pytest.mark.parametrize("parent", ["doc-a", "doc-b"])
+@pytest.mark.parametrize("quoted", [False, True])
+@pytest.mark.parametrize(
+    "intent,text,value",
+    [
+        ("supersedes", "Correction: Maire nera, 9 requests instead of 7.", 9),
+        ("retracts", "I withdraw the Maire nera report of 7 requests.", 7),
+    ],
+)
+def test_copied_correction_is_deduplicated_before_intent_and_keeps_age(
+    tmp_path, parent, quoted, intent, text, value
+):
+    a = fact("a")
+    b = fact("b", at=T2, text=text, value=value, parent=a[0].id)
+    c = fact("c", at=T3, text=text, value=value, parent=parent, quoted=quoted)
+    engine = connect(f"sqlite:///{tmp_path / 'correction-copy.db'}")
+    with repo_session(engine, spec(), fixture_mode=True, write=True) as repo:
+        repo.put(*a[:2], *b[:2], *c[:2], a[2], b[2], c[2])
+        result = dedup.run(SimpleNamespace(spec=repo.spec, repo=repo))
+        relations = repo.list(EvidenceRelation)
+    assert result.status == "succeeded", result
+    assert {
+        (r.from_ref.id, r.to_ref.id, r.relation)
+        for r in relations
+        if r.relation != "possibly_same_episode"
+    } == {
+        (b[2].id, a[2].id, intent),
+        (c[2].id, b[2].id, "duplicates"),
+    }
+    before = dedup.state_at([a[2], b[2], c[2]], relations, T2)
+    after = dedup.state_at([a[2], b[2], c[2]], relations, T3)
+    assert (
+        before.active_refs
+        == after.active_refs
+        == ((dedup.ref(b[2]),) if intent == "supersedes" else ())
+    )
+    group = next(g for g in after.groups if dedup.ref(b[2]) in g.members)
+    assert group.representative == dedup.ref(b[2])
+    assert group.first_available_at == T2
+    assert after.non_additive_refs == ()
+    assert dedup.state_at([a[2], b[2], c[2]], relations, T2) == before
+
+
+@pytest.mark.parametrize(
     "change", [{"available_at": None}, {"available_at": T3 + timedelta(seconds=1)}]
 )
 def test_unknown_or_future_relation_availability_cannot_change_state(change):
