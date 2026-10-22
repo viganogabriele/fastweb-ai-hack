@@ -73,7 +73,8 @@ def test_run_publishes_only_mails_available_at_as_of(tmp_path):
     engine, status = execute(tmp_path, request)
     assert status.status == "succeeded"
     counts = status.result.counts
-    assert counts["documents"] > 0 and counts["after_as_of"] > 0
+    assert counts["documents"] > 0
+    assert "after_as_of" not in counts  # how many later mails exist is future information
     with repo_session(engine, request) as repo:
         documents = repo.list(SourceDocument)
         assert len(documents) == counts["documents"]
@@ -84,7 +85,7 @@ def test_run_publishes_only_mails_available_at_as_of(tmp_path):
     engine.dispose()
 
 
-def eml(message_id, date, body, *, in_reply_to=None, subject="chiusura"):
+def eml(message_id, date, body, *, in_reply_to=None, references=None, subject="chiusura"):
     headers = [
         "From: Store <mil01.store@moncler-retail.example>",
         "To: hq@moncler-retail.example",
@@ -96,7 +97,7 @@ def eml(message_id, date, body, *, in_reply_to=None, subject="chiusura"):
         headers.append(f"Date: {date}")
     if in_reply_to:
         headers.append(f"In-Reply-To: {in_reply_to}")
-        headers.append(f"References: {in_reply_to}")
+        headers.append(f"References: {references or in_reply_to}")
     return ("\r\n".join(headers) + "\r\n\r\n" + body + "\r\n").encode()
 
 
@@ -116,6 +117,14 @@ def sources(tmp_path):
         eml("<r@x>", "Fri, 02 Oct 2026 22:30:00 +0200", "Re: ok", in_reply_to="<p@x>")
     )
     (mil / "b_parent.eml").write_bytes(eml("<p@x>", "Fri, 02 Oct 2026 21:00:00 +0200", "Ciao"))
+    # Second reply whose References: lists only its direct parent, not the thread root.
+    (mil / "a_reply2.eml").write_bytes(
+        eml("<r2@x>", "Fri, 02 Oct 2026 22:40:00 +0200", "Re: re", in_reply_to="<r@x>")
+    )
+    # Auto-reply dated seconds before the mail it answers.
+    (mil / "e_ooo.eml").write_bytes(
+        eml("<o2@x>", "Fri, 02 Oct 2026 20:59:30 +0200", "Out of office", in_reply_to="<p@x>")
+    )
     (mil / "c_undated.eml").write_bytes(eml("<u@x>", None, "senza data"))
     (mil / "d_future.eml").write_bytes(eml("<f@x>", "Sat, 03 Oct 2026 21:00:00 +0200", "dopo"))
     (par / "other.eml").write_bytes(eml("<o@x>", "Fri, 02 Oct 2026 21:00:00 +0200", "Salut"))
@@ -128,16 +137,22 @@ def test_replies_undated_future_and_other_stores(tmp_path, sources):
     engine, status = execute(tmp_path, request, sources)
     result = status.result
     assert status.status == "degraded"
-    assert result.counts == {"documents": 2, "segments": 2, "after_as_of": 1, "skipped": 1}
+    assert result.counts == {"documents": 4, "segments": 4, "skipped": 1}
     assert result.abstentions == (
         "dataset://store_emails/MIL01/c_undated.eml: no usable Date header",
     )
     assert result.errors == ("no mailbox for store NYC01",)
     with repo_session(engine, request) as repo:
         documents = {d.id: d for d in repo.list(SourceDocument)}
-        assert set(documents) == {"doc-a-reply", "doc-b-parent"}
-        assert documents["doc-a-reply"].parent_document_id == "doc-b-parent"
-        assert documents["doc-a-reply"].thread_key == "<p@x>"
+        assert set(documents) == {"doc-a-reply", "doc-a-reply2", "doc-b-parent", "doc-e-ooo"}
+        parents = {k: d.parent_document_id for k, d in documents.items()}
+        assert parents == {
+            "doc-a-reply": "doc-b-parent",
+            "doc-a-reply2": "doc-a-reply",
+            "doc-b-parent": None,
+            "doc-e-ooo": "doc-b-parent",
+        }
+        assert {d.thread_key for d in documents.values()} == {"<p@x>"}
         assert documents["doc-b-parent"].business_date.isoformat() == "2026-10-02"
         assert documents["doc-b-parent"].language == "it"
     engine.dispose()

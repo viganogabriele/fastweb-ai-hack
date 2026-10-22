@@ -7,8 +7,11 @@ and mails without a usable date are skipped and reported, never dated by guess.
 
 Ids, text and fields are those of the DATA-01a fixtures for the same file, so fixtures and real
 runs are interchangeable at this boundary: ``doc-<file stem>`` and ``<doc id>-seg<idx>``.
-Replies point to the parent mail of the same run through ``In-Reply-To``; the thread key is the
-thread root message id. Language is the store's language from the master data.
+Replies point to the parent mail of the same run through ``In-Reply-To`` (any mail available at
+``as_of``: auto-replies can be dated seconds before the mail they answer). The thread key is the
+root of that parent chain, so a reply whose ``References:`` lists only its direct parent stays
+in the parent's thread; without a parent in the run it falls back to the mail's own headers.
+Language is the store's language from the master data.
 """
 
 import csv
@@ -49,7 +52,6 @@ class Batch:
     """Documents in publication order (parents first) and what was left out, with reasons."""
 
     documents: list[tuple[SourceDocument, list[Segment]]] = field(default_factory=list)
-    after_as_of: int = 0
     skipped: list[str] = field(default_factory=list)  # "<uri>: <reason>"
     missing_mailboxes: list[str] = field(default_factory=list)
 
@@ -72,7 +74,12 @@ def thread_root(parsed: ParsedEmail) -> str | None:
 
 
 def build_document(
-    relative: str, parsed: ParsedEmail, store_id: str, store: Store, parent_id: str | None
+    relative: str,
+    parsed: ParsedEmail,
+    store_id: str,
+    store: Store,
+    parent_id: str | None,
+    thread_key: str | None = None,
 ) -> tuple[SourceDocument, list[Segment]]:
     """``relative`` is the path under ``store_emails/``, e.g. ``MIL01/20261009_1035_MIL01.eml``."""
     if parsed.sent_at is None:
@@ -97,7 +104,7 @@ def build_document(
         author_ref=parsed.sender_name,
         language=store.language,
         business_date=parsed.sent_at.astimezone(ZoneInfo(store.timezone)).date(),
-        thread_key=thread_root(parsed),
+        thread_key=thread_key or thread_root(parsed),
         parent_document_id=parent_id,
         text=parsed.text,
         text_version=parsed.parser_version,
@@ -157,17 +164,36 @@ def collect(sources_dir: Path, store_ids: Iterable[str], as_of: datetime) -> Bat
             parsed = parse_eml(path.read_bytes())
             if parsed.sent_at is None:
                 batch.skipped.append(f"dataset://store_emails/{relative}: no usable Date header")
-            elif parsed.sent_at > as_of:
-                batch.after_as_of += 1
-            else:
+            elif parsed.sent_at <= as_of:
+                # Later mails are not counted either: their number is future information.
                 available.append((parsed.sent_at, relative, store_id, parsed))
-    # Parents before replies, so a reply can point to a document already in the run.
-    by_message_id: dict[str, str] = {}
-    for _, relative, store_id, parsed in sorted(available, key=lambda item: item[:2]):
-        parent_id = by_message_id.get(parsed.in_reply_to or "")
-        document, segments = build_document(relative, parsed, store_id, stores[store_id], parent_id)
+    available.sort(key=lambda item: item[:2])
+    by_message_id: dict[str, int] = {}
+    for index, (_, _, _, parsed) in enumerate(available):
         if parsed.message_id:
-            by_message_id.setdefault(parsed.message_id, document.id)
+            by_message_id.setdefault(parsed.message_id, index)
+    parents = {
+        index: by_message_id.get(parsed.in_reply_to or "")
+        for index, (_, _, _, parsed) in enumerate(available)
+    }
+
+    def root(index: int) -> int:
+        seen = {index}
+        while (parent := parents[index]) is not None and parent not in seen:
+            seen.add(parent)
+            index = parent
+        return index
+
+    for index, (_, relative, store_id, parsed) in enumerate(available):
+        parent = parents[index]
+        document, segments = build_document(
+            relative,
+            parsed,
+            store_id,
+            stores[store_id],
+            doc_id(available[parent][1]) if parent is not None and parent != index else None,
+            thread_root(available[root(index)][3]),
+        )
         batch.documents.append((document, segments))
     return batch
 
@@ -184,7 +210,6 @@ def run(ctx, *, sources_dir: Path | None = None) -> ModuleResult:
         counts={
             "documents": len(batch.documents),
             "segments": sum(len(segments) for _, segments in batch.documents),
-            "after_as_of": batch.after_as_of,
             "skipped": len(batch.skipped),
         },
         errors=errors,
