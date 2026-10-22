@@ -137,7 +137,9 @@ def run(
     fixture_mode = spec.mode == "fixture"
 
     def session(*, module_scope: bool = False):
-        return repo_session(engine, spec, fixture_mode=fixture_mode, module_scope=module_scope)
+        return repo_session(
+            engine, spec, fixture_mode=fixture_mode, module_scope=module_scope, write=True
+        )
 
     statuses: dict[str, ModuleRun] = {}
 
