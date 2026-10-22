@@ -193,8 +193,8 @@ CASES = [
         "relations": ["rel-20261002-mil01-maire-duplicates"],
         "status": "open",
         "priority": "medium",
-        "priority_reason": "Exact count of requests in one day for MAIRE black; two copies of the same email "
-        "count as one origin.",
+        "priority_reason": "Exact count of requests in one day for MAIRE black; two copies of the "
+        "same email count as one origin.",
         "decision_due": None,
         "valid_until": True,
         "blocking_uncertainties": [
@@ -295,7 +295,9 @@ class Catalog:
         self.styles = {r["style_code"]: r for r in read_csv(MASTER / "styles.csv")}
         self.skus = {r["sku"]: r for r in read_csv(MASTER / "sku_colour.csv")}
         self.sku_sizes = {r["sku_size"]: r for r in read_csv(MASTER / "sku_size_ean.csv")}
-        self.assortment = {(r["store_id"], r["sku"]) for r in read_csv(MASTER / "store_assortment.csv")}
+        self.assortment = {
+            (r["store_id"], r["sku"]) for r in read_csv(MASTER / "store_assortment.csv")
+        }
 
     def check(self, store: str, target: str, level: str) -> SourceRef:
         """The target exists at its level and the store carries it; returns its catalog row ref."""

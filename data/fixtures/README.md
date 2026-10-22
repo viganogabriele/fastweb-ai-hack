@@ -32,3 +32,24 @@ observation with several evidences, not several observations.
 
 Dedup, supersedes and linking are not encoded here: both copies and both sides of the correction
 keep their own observation. Relations and links are DATA-01b (lane B).
+
+## DATA-01b: links, relations, cases, forecast, report (lane B)
+
+Built on the DATA-01a records above by `build_data01b.py` (hand labels for links, relations and
+cases; baselines computed with FC-01 `disaggregate`). Rebuild from the repo root after DATA-01a:
+
+```sh
+backend/.venv/bin/python data/fixtures/build_data01b.py
+```
+
+| Folder | Records | What it exercises |
+|---|---|---|
+| `links/link-*.json` | one `EntityLink` per DATA-01a observation | `linked` at style (cardigan logo, both colours), SKU (Maire nera) and SKU-size (Tib blu 4); `ambiguous` "a sweatshirt" with tied candidates (crewneck, hoodie); `not_product` for the net sales figures. Scores are 0–1 string-match scores, not probabilities |
+| `links/relations.json` | `EvidenceRelation`s | `duplicates`: the copy's Maire requests → the original (count once). `supersedes`: corrected net sales → the original fact, not the whole email |
+| `cases/` | 4 `Case`s | D1 cardigan M (style scope, `open`, high); Maire black from two copies (`n_documents=2`, `n_origin_groups=1`); Tib quality defect (SKU-size); NYC01 ambiguous return (`scope=unknown`, `verify`). Owner from `config/domain.yaml` |
+| `forecast/` | 3 `ForecastAdjustment`s, `unchanged` | D+1..D+7 daily baseline from the forecast vintage available at the case (run date + 1 day 06:00 local); vague demand, a stock-out and a request count give no numeric uplift, so every scenario equals the baseline |
+| `reports/` | 1 `Report`, view `by_office` | Brief per owner at the fixture run's `as_of` (latest fixture `available_at`); every number is cited, `input_version_hash` is the SHA-256 of the sorted input refs |
+
+Every derived record is available at the latest `available_at` of its inputs and carries their
+`source_refs`. The baseline is referenced as `ForecastVintage` (`<file stem>/<store>/<sku>`,
+version = run date): a source row, not a stored artifact.
