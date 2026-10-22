@@ -1,16 +1,22 @@
 """INT-01 module: ``int.link`` links each observation's product mention to the catalog.
 
 For every ``Observation`` of the run it builds ranked catalog candidates with the INT-01 pure
-linker (catalog names from the ERP master rows known at ``as_of``, aliases from
-``config/aliases.yaml``, the store's assortment preferred) and writes one ``EntityLink``:
+linker (catalog names from the ERP master rows known at ``as_of``, without SKUs launched after
+the observation's day, aliases from ``config/aliases.yaml``, the store's assortment preferred) and
+writes one ``EntityLink``:
 
 - no product mention → ``not_product``;
 - the pure linker decides ``linked`` or ``unlinked`` → kept as is (``rule:link_mention``);
 - ``ambiguous`` only because several colours of one style fit ("nero e blu") → linked at style
   level (``rule:same_style``): the style is certain, the colour is not;
-- otherwise ``ambiguous`` → one constrained LLM choice among the candidates without blocking
-  flags (prompt ``link_choice.v1``). An id outside that set, no id, or any LLM failure keeps the
-  link ``ambiguous`` with its candidates: the module never guesses and never drops a mention.
+- otherwise ``ambiguous`` → one constrained LLM choice (prompt ``link_choice.v1``) among the
+  candidates within ``min_margin`` of the top one, only if none of them carries a blocking flag.
+  The tool schema enumerates the offered ids. No id, an invalid answer or any LLM failure keeps
+  the link ``ambiguous`` with its candidates: the module never guesses and never drops a mention.
+
+A size is used only when the mention names exactly one, after an explicit size word. Ended SKUs
+stay in the catalog (a customer may still name them): they can only add ambiguity. A link is
+available once both its observation and the catalog rows it was decided on are.
 
 Candidate scores keep the linker's 0–100 similarity scale; they are not probabilities.
 """
@@ -19,14 +25,16 @@ import hashlib
 import json
 import re
 from collections.abc import Iterable, Mapping, Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from datetime import date, datetime
 from pathlib import Path
-from typing import Any, Protocol
+from typing import Any, Literal, Protocol
 
 import yaml
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, create_model
 
 from tessera.core import repo
+from tessera.core.cache import CacheCorrupt, ReplayMiss
 from tessera.core.config import REPO_ROOT, get_settings
 from tessera.core.contracts import (
     ArtifactRef,
@@ -36,8 +44,8 @@ from tessera.core.contracts import (
     ModuleResult,
     Observation,
     RunSpec,
-    SourceRef,
 )
+from tessera.core.llm import BudgetExceeded, ExtractionFailed, LLMCallFailed
 from tessera.modules.integration.candidates import (
     BLOCKING_FLAGS,
     Candidate,
@@ -50,11 +58,13 @@ from tessera.modules.integration.candidates import (
 PROMPT_ID = "link_choice.v1"
 PROMPT_PATH = REPO_ROOT / "backend" / "prompts" / f"{PROMPT_ID}.md"
 SCORE_MIN, SCORE_MAX = 0.0, 100.0
-# "taglia 4", "tg. 3", "size M", "taille 2": an explicit size word, never a bare letter.
+# "taglia 4", "tg. 3", "size M", "Größe 2", "サイズ1": an explicit size word, never a bare letter.
+SIZE_WORDS = r"taglia|tg\.?|size|taille|talla|gr(?:ö|oe)(?:ss|ß)e|サイズ|尺码|사이즈"
 SIZE_IN_MENTION = re.compile(
-    r"(?<!\w)(?:taglia|tg\.?|size|taille|talla|gr(?:ö|oe)sse)\s*(\d{1,2}|xxs|xs|s|m|l|xl|xxl)(?!\w)",
-    re.IGNORECASE,
+    rf"(?<!\w)(?:{SIZE_WORDS})\s*(\d{{1,2}}|xxs|xs|s|m|l|xl|xxl)(?![a-z0-9])", re.IGNORECASE
 )
+# Failures of the LLM call or of its output. Anything else is a bug and fails the module.
+LLM_ERRORS = (ExtractionFailed, BudgetExceeded, LLMCallFailed, ReplayMiss, CacheCorrupt)
 
 MANIFEST = ModuleManifest(
     id="int.link",
@@ -105,6 +115,15 @@ class LinkChoice(BaseModel):
     rationale: str = Field(min_length=1, max_length=500)
 
 
+def choice_schema(ids: Sequence[str]) -> type[LinkChoice]:
+    """`LinkChoice` whose `target_id` is an enum of the offered ids (or null)."""
+    return create_model(
+        "LinkChoice",
+        __base__=LinkChoice,
+        target_id=(Literal[tuple(ids)] | None, ...),  # type: ignore[valid-type]
+    )
+
+
 @dataclass(frozen=True)
 class Decision:
     status: str
@@ -115,13 +134,32 @@ class Decision:
     rationale: str
 
 
-@dataclass(frozen=True)
+@dataclass
 class CatalogSnapshot:
-    catalog: Catalog
-    source_refs: Mapping[str, tuple[SourceRef, ...]]  # SKU → refs of its sku_colour row
+    """Catalog rows known at the run's `as_of`; `catalog_on(day)` drops SKUs not launched yet."""
+
+    colour_rows: Sequence[repo.ErpRecord]
+    size_rows: Sequence[Mapping[str, str]]
+    style_aliases: Mapping[str, list[str]]
+    colour_aliases: Mapping[str, list[str]]
     assortment: Mapping[str, frozenset[str]]  # store id → SKUs
-    style_names: Mapping[str, str]
-    colour_names: Mapping[str, tuple[str, ...]]
+    available_at: datetime  # latest catalog/assortment row: no link is known before it
+    _by_day: dict[date, Catalog] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        self.rows_by_sku = {str(r.data["sku"]): r for r in self.colour_rows}
+
+    def catalog_on(self, day: date) -> Catalog:
+        if day not in self._by_day:
+            launched = [
+                {k: "" if v is None else str(v) for k, v in r.data.items()}
+                for r in self.colour_rows
+                if not isinstance(r.data.get("launch_date"), date) or r.data["launch_date"] <= day
+            ]
+            self._by_day[day] = Catalog.from_rows(
+                launched, self.size_rows, self.style_aliases, self.colour_aliases
+            )
+        return self._by_day[day]
 
 
 def load_aliases(path: Path) -> tuple[dict[str, list[str]], dict[str, list[str]]]:
@@ -147,25 +185,28 @@ def catalog_at(run_repo: repo.Repo, aliases_path: Path) -> CatalogSnapshot | Non
     size_rows = run_repo.erp("sku_size_ean")
     if not colour_rows or not size_rows:
         return None
-    as_text = [{k: "" if v is None else str(v) for k, v in r.data.items()} for r in colour_rows]
     sizes = [{k: "" if v is None else str(v) for k, v in r.data.items()} for r in size_rows]
     style_aliases, colour_aliases = load_aliases(aliases_path)
-    catalog = Catalog.from_rows(as_text, sizes, style_aliases, colour_aliases)
-    assortment: dict[str, set[str]] = {}
+    assortment: dict[str, frozenset[str]] = {}
+    rows = [*colour_rows, *size_rows]
     for store in run_repo.spec.stores:
-        assortment[store] = {str(r.data["sku"]) for r in run_repo.erp("assortment", store_id=store)}
+        store_rows = run_repo.erp("assortment", store_id=store)
+        rows += store_rows
+        assortment[store] = frozenset(str(r.data["sku"]) for r in store_rows)
     return CatalogSnapshot(
-        catalog=catalog,
-        source_refs={str(r.data["sku"]): r.source_refs for r in colour_rows},
-        assortment={s: frozenset(skus) for s, skus in assortment.items()},
-        style_names={code: style.name for code, style in catalog.styles.items()},
-        colour_names=catalog.colour_names,
+        colour_rows=colour_rows,
+        size_rows=sizes,
+        style_aliases=style_aliases,
+        colour_aliases=colour_aliases,
+        assortment=assortment,
+        available_at=max(r.available_at for r in rows),
     )
 
 
 def size_in(mention: str) -> str | None:
-    match = SIZE_IN_MENTION.search(mention)
-    return match.group(1).upper() if match else None
+    """The one size named after a size word; None if there is none or more than one."""
+    sizes = {s.upper() for s in SIZE_IN_MENTION.findall(mention)}
+    return sizes.pop() if len(sizes) == 1 else None
 
 
 def decide(
@@ -180,7 +221,8 @@ def decide(
     if not mention:
         return Decision("not_product", None, None, (), "rule:no_mention", "No product mention.")
     store_skus = snapshot.assortment.get(obs.store_id) if obs.store_id else None
-    result = link_mention(mention, snapshot.catalog, size_in(mention), store_skus, params)
+    catalog = snapshot.catalog_on(obs.available_at.date())
+    result = link_mention(mention, catalog, size_in(mention), store_skus, params)
     reasons = ", ".join(result.reasons) or "unique candidate above threshold"
     if result.status != "ambiguous":
         return Decision(
@@ -204,12 +246,12 @@ def decide(
     ambiguous = Decision(
         "ambiguous", None, None, result.candidates, "rule:link_mention", f"ambiguous: {reasons}"
     )
-    allowed = [c for c in result.candidates if not set(c.flags) & BLOCKING_FLAGS]
+    allowed = offered(result, params)
     if llm is None or len(allowed) < 2:
         return ambiguous
     try:
-        choice = _ask(llm, obs, mention, allowed, snapshot)
-    except Exception as exc:  # LLM down, budget, replay miss, invalid output: stay ambiguous
+        choice = _ask(llm, obs, mention, allowed, catalog)
+    except LLM_ERRORS as exc:  # LLM down, budget, replay miss, invalid output: stay ambiguous
         errors.append(f"{obs.id}: llm {type(exc).__name__}")
         return ambiguous
     picked = next((c for c in allowed if c.target_id == choice.target_id), None)
@@ -233,19 +275,34 @@ def decide(
     )
 
 
+def offered(result: LinkResult, params: LinkParams) -> list[Candidate]:
+    """Candidates the LLM may choose from: within `min_margin` of the top one, and only if none
+    of those carries a blocking flag (a flagged top candidate is never bypassed)."""
+    if not result.candidates:
+        return []
+    top = result.candidates[0]
+    close = [c for c in result.candidates if top.score - c.score < params.min_margin]
+    if any(set(c.flags) & BLOCKING_FLAGS for c in close):
+        return []
+    return close
+
+
 def to_link(obs: Observation, decision: Decision, spec: RunSpec, snapshot: CatalogSnapshot):
     sku = _sku_of(decision.target_id, decision.level)
-    catalog_refs = tuple(snapshot.source_refs.get(sku, ())) if sku else ()
+    row = snapshot.rows_by_sku.get(sku) if sku else None
+    inputs = [ArtifactRef(kind="Observation", id=obs.id, version=obs.version)]
+    if row is not None:
+        inputs.append(ArtifactRef(kind="erp.sku_colour", id=row.id, version=row.version))
     return EntityLink(
         id="link-" + obs.id.removeprefix("obs-"),
         version=_version(obs, decision),
-        available_at=obs.available_at,
-        availability_basis="observation_available_at",
-        source_refs=tuple(dict.fromkeys((*obs.source_refs, *catalog_refs))),
+        available_at=max(obs.available_at, snapshot.available_at),
+        availability_basis="max(observation, catalog)",
+        source_refs=tuple(dict.fromkeys((*obs.source_refs, *(row.source_refs if row else ())))),
         run_id=spec.run_id,
         scenario_id=spec.scenario_id,
         computed_at=spec.as_of,
-        input_refs=(ArtifactRef(kind="Observation", id=obs.id, version=obs.version),),
+        input_refs=tuple(inputs),
         producer=MANIFEST.id,
         producer_version=MANIFEST.version,
         observation_id=obs.id,
@@ -336,27 +393,27 @@ def _ask(
     obs: Observation,
     mention: str,
     allowed: Sequence[Candidate],
-    snapshot: CatalogSnapshot,
+    catalog: Catalog,
 ) -> LinkChoice:
-    offered = []
+    choices = []
     for c in allowed:
         style, _, rest = c.target_id.partition("-")
         colour = rest.split("-")[0] if rest else None
-        offered.append(
+        choices.append(
             {
                 "target_id": c.target_id,
                 "level": c.level,
-                "style_name": snapshot.style_names.get(style, ""),
-                "colour_names": list(snapshot.colour_names.get(colour, ())) if colour else [],
+                "style_name": catalog.styles[style].name if style in catalog.styles else "",
+                "colour_names": list(catalog.colour_names.get(colour, ())) if colour else [],
             }
         )
-    payload = {"mention": mention, "quotes": [e.quote for e in obs.evidence], "candidates": offered}
+    payload = {"mention": mention, "quotes": [e.quote for e in obs.evidence], "candidates": choices}
     messages = [
         {"role": "system", "content": PROMPT_PATH.read_text(encoding="utf-8")},
         {"role": "user", "content": _json(payload)},
     ]
     return llm.extract(
-        LinkChoice,
+        choice_schema([c.target_id for c in allowed]),
         messages,
         cache_context={
             "prompt_version": PROMPT_ID,
@@ -386,11 +443,10 @@ def _sku_of(target_id: str | None, level: str | None) -> str | None:
 
 
 def _version(obs: Observation, decision: Decision) -> str:
-    h = hashlib.sha256(
-        _json(
-            [obs.id, obs.version, decision.status, decision.target_id, decision.decided_by]
-        ).encode()
-    )
+    candidates = [(c.target_id, c.level, c.score, c.flags) for c in decision.candidates]
+    fields = [obs.id, obs.version, decision.status, decision.level, decision.target_id]
+    fields += [decision.decided_by, decision.rationale, candidates]
+    h = hashlib.sha256(_json(fields).encode())
     return h.hexdigest()[:16]
 
 

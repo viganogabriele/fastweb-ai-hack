@@ -5,21 +5,23 @@ through PLT-04's `RunRepo` so parent and store-scope checks apply. The LLM is a 
 """
 
 import json
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
+from pydantic import ValidationError
 
 from tessera.core.config import REPO_ROOT
 from tessera.core.contracts import EntityLink, Observation, RunSpec
 from tessera.core.db import connect
 from tessera.core.fixtures import read_fixtures
+from tessera.core.llm import ExtractionFailed, LLMCallFailed
 from tessera.core.registry import Registry
 from tessera.core.repo import put_erp
 from tessera.core.run_repo import repo_session
 from tessera.modules.integration import link
-from tessera.modules.integration.link import LinkChoice
+from tessera.modules.integration.candidates import Candidate, LinkParams, LinkResult
 from tessera.modules.sources import erp
 
 SOURCES = REPO_ROOT / "generated" / "sources"
@@ -30,6 +32,9 @@ SWEATSHIRT = "obs-20260906-1837-nyc01-sweatshirt-return"
 
 
 class FakeLLM:
+    """Answers `{"target_id", "rationale"}`; validates it with the offered schema like the client
+    (an id outside the enum is an `ExtractionFailed`)."""
+
     def __init__(self, answer=None, error: Exception | None = None) -> None:
         self.answer, self.error, self.calls = answer, error, []
 
@@ -38,11 +43,12 @@ class FakeLLM:
                            "generation": generation})  # fmt: skip
         if self.error is not None:
             raise self.error
-        return (
-            self.answer(json.loads(messages[-1]["content"]))
-            if callable(self.answer)
-            else (self.answer)
-        )
+        payload = json.loads(messages[-1]["content"])
+        target = self.answer(payload) if callable(self.answer) else self.answer
+        try:
+            return schema.model_validate({"target_id": target, "rationale": "r"})
+        except ValidationError:
+            raise ExtractionFailed("invalid") from None
 
 
 def spec() -> RunSpec:
@@ -127,7 +133,7 @@ def test_links_keep_candidates_scale_and_provenance(engine) -> None:
 
 
 def test_llm_breaks_a_tie_only_among_offered_candidates(engine) -> None:
-    llm = FakeLLM(lambda p: LinkChoice(target_id=p["candidates"][0]["target_id"], rationale="r"))
+    llm = FakeLLM(lambda p: p["candidates"][0]["target_id"])
     result, links = run(engine, llm=llm)
     (call,) = llm.calls  # only the ambiguous observation reaches the LLM
     payload = json.loads(call["messages"][-1]["content"])
@@ -137,6 +143,8 @@ def test_llm_breaks_a_tie_only_among_offered_candidates(engine) -> None:
     assert call["messages"][0]["content"] == link.PROMPT_PATH.read_text(encoding="utf-8")
     assert call["context"]["prompt_version"] == "link_choice.v1"
     assert call["generation"] == {"temperature": 0}
+    enum = call["schema"].model_json_schema()["properties"]["target_id"]["anyOf"][0]["enum"]
+    assert enum == offered  # the provider sees only the offered ids
     chosen = links[SWEATSHIRT]
     assert (chosen.status, chosen.target_id, chosen.decided_by) == (
         "linked", offered[0], "llm:link_choice.v1",
@@ -144,23 +152,31 @@ def test_llm_breaks_a_tie_only_among_offered_candidates(engine) -> None:
     assert result.counts["llm_linked"] == 1
 
 
-@pytest.mark.parametrize("answer", [None, "J20931A00012-999"])  # null, or an id not offered
-def test_llm_without_a_valid_choice_keeps_the_link_ambiguous(engine, answer) -> None:
-    result, links = run(engine, llm=FakeLLM(LinkChoice(target_id=answer, rationale="r")))
+def test_llm_null_keeps_the_link_ambiguous(engine) -> None:
+    result, links = run(engine, llm=FakeLLM(None))
     assert links[SWEATSHIRT].status == "ambiguous"
     assert links[SWEATSHIRT].decided_by == "llm:link_choice.v1"
     assert result.status == "succeeded"
 
 
-def test_llm_failure_keeps_ambiguous_and_degrades(engine) -> None:
-    result, links = run(engine, llm=FakeLLM(error=RuntimeError("replay miss")))
+@pytest.mark.parametrize(
+    "llm",
+    [FakeLLM("J20931A00012-999"), FakeLLM(error=LLMCallFailed("503"))],  # id not offered / down
+)
+def test_llm_invalid_answer_or_failure_keeps_ambiguous_and_degrades(engine, llm) -> None:
+    result, links = run(engine, llm=llm)
     assert links[SWEATSHIRT].status == "ambiguous"
     assert result.status == "degraded"
-    assert result.errors == (f"{SWEATSHIRT}: llm RuntimeError",)
+    assert len(result.errors) == 1 and result.errors[0].startswith(f"{SWEATSHIRT}: llm ")
+
+
+def test_a_bug_in_the_llm_path_is_not_hidden_as_degraded(engine) -> None:
+    with pytest.raises(KeyError):
+        run(engine, llm=FakeLLM(error=KeyError("bug")))
 
 
 def test_llm_can_be_switched_off(engine) -> None:
-    llm = FakeLLM(LinkChoice(target_id=None, rationale="r"))
+    llm = FakeLLM(None)
     _, links = run(engine, params={"llm": False}, llm=llm)
     assert llm.calls == [] and links[SWEATSHIRT].decided_by == "rule:link_mention"
 
@@ -169,7 +185,7 @@ def test_size_outside_the_size_run_never_reaches_the_llm(engine) -> None:
     base = observation(engine, "obs-20261002-2112-mil01-maire-requests")
     mention = "Maire nera taglia 9"
     odd = base.model_copy(update={"id": "obs-maire-size-9", "product_mention": mention})
-    llm = FakeLLM(LinkChoice(target_id="J20931A00012-999", rationale="r"))
+    llm = FakeLLM("J20931A00012-999")
     _, links = run(engine, llm=llm, observations=[odd])
     assert links["obs-maire-size-9"].status == "ambiguous"
     assert any("size_not_in_size_run" in c.method for c in links["obs-maire-size-9"].candidates)
@@ -186,7 +202,8 @@ def test_missing_catalog_blocks(tmp_path) -> None:
 @pytest.mark.parametrize(
     ("mention", "size"),
     [("gilet Tib blu taglia 4", "4"), ("Maire tg. 3", "3"), ("size M please", "M"),
-     ("cardigan logo in M", None), ("Maire nera", None)],
+     ("Größe 2 Maire", "2"), ("マイレ サイズ1", "1"), ("cardigan logo in M", None),
+     ("Maire nera", None), ("Ecrins tg 1 e tg 7", None), ("Maire tg 2, tg. 2", "2")],
 )  # fmt: skip
 def test_size_in_mention_needs_an_explicit_size_word(mention, size) -> None:
     assert link.size_in(mention) == size
@@ -196,3 +213,60 @@ def test_shared_aliases_go_to_every_style_they_name() -> None:
     styles, colours = link.load_aliases(REPO_ROOT / "config" / "aliases.yaml")
     assert "sweat" in styles["I10918G00031"] and "sweat" in styles["I10918G00045"]
     assert "nera" in colours["999"]
+
+
+def variant(engine, obs_id: str, mention: str) -> Observation:
+    base = observation(engine, "obs-20261002-2112-mil01-maire-requests")
+    return base.model_copy(update={"id": obs_id, "product_mention": mention})
+
+
+def test_two_sizes_or_a_foreign_colour_never_link_below_the_sku(engine) -> None:
+    obs = [variant(engine, "obs-two-sizes", "Maire nera tg 1 e tg 3"),
+           variant(engine, "obs-foreign-colour", "Maire nera e verde")]  # fmt: skip
+    _, links = run(engine, observations=obs)
+    assert (links["obs-two-sizes"].level, links["obs-two-sizes"].target_id) == (
+        "sku", "J20931A00012-999",
+    )  # fmt: skip
+    assert links["obs-foreign-colour"].status == "ambiguous"
+
+
+def test_link_is_available_after_observation_and_catalog_and_cites_the_row(engine) -> None:
+    _, links = run(engine)
+    maire = links["obs-20261002-2112-mil01-maire-requests"]
+    assert maire.available_at >= MASTER_AT
+    assert [r.kind for r in maire.input_refs] == ["Observation", "erp.sku_colour"]
+
+
+def test_skus_launched_after_the_observation_day_are_not_candidates(engine) -> None:
+    with repo_session(engine, spec(), fixture_mode=True) as repo:
+        snapshot = link.catalog_at(repo, REPO_ROOT / "config" / "aliases.yaml")
+    late = next(r for r in snapshot.colour_rows if r.data.get("launch_date") == date(2026, 9, 24))
+    style, colour = str(late.data["style_code"]), str(late.data["color_code"])
+    assert colour not in snapshot.catalog_on(date(2026, 9, 6)).styles.get(style, _NO).colours
+    assert colour in snapshot.catalog_on(date(2026, 9, 24)).styles[style].colours
+
+
+class _NO:
+    colours = ()
+
+
+def candidate(target: str, score: float, flags: tuple[str, ...] = ()) -> Candidate:
+    return Candidate(target, "sku", score, "fuzzy", "x", flags)
+
+
+def test_llm_is_offered_only_close_clean_candidates() -> None:
+    p = LinkParams()
+    close = LinkResult("ambiguous", None, None, (candidate("A-1", 85), candidate("B-1", 80),
+                       candidate("C-1", 60)))  # fmt: skip
+    assert [c.target_id for c in link.offered(close, p)] == ["A-1", "B-1"]
+    flagged = LinkResult("ambiguous", None, None, (candidate("A-1", 95, ("size_not_in_size_run",)),
+                         candidate("B-1", 90), candidate("C-1", 90)))  # fmt: skip
+    assert link.offered(flagged, p) == []  # a blocked top candidate is never bypassed
+
+
+def test_choice_schema_rejects_ids_not_offered() -> None:
+    schema = link.choice_schema(["A-1", "B-1"])
+    assert schema.model_validate({"target_id": "B-1", "rationale": "r"}).target_id == "B-1"
+    assert schema.model_validate({"target_id": None, "rationale": "r"}).target_id is None
+    with pytest.raises(ValidationError):
+        schema.model_validate({"target_id": "Z-9", "rationale": "r"})
