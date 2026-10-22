@@ -11,11 +11,11 @@ One line per task. Edit only the lines of your own task.
 - FC-01 pure (B, Bianca) `modules/intelligence/disaggregation.py`: weekly → daily baseline, `not_estimable` on missing/incoherent weeks, vintage at `as_of`
 - INT-01 pure (B, Bianca) `modules/integration/candidates.py`: mention → ranked candidates, size vs size run, linked/ambiguous/unlinked
 - PLT-02 (C) `tessera/core/contracts/`: MVP DTO contracts, JSON Schema export, invariant tests
+- EVL-01 (D, done by Bianca) `eval/`: frozen-export harness (manifest hashes before any answer key), Linux Landlock launcher denying product reads of answer keys/generator/eval
 - ING-02 pure (A, done by Bianca) `modules/ingestion/email_parser.py`: `.eml` → canonical text, segments with code-point offsets, quotes and attachments flagged
+- DATA-01a (A, done by Bianca) `data/fixtures/{documents,observations}/`: D1 positive, ambiguous mention, forward/duplicate, correction; built from dev emails, validated in `make check`
 
 ## In progress
-
-- DATA-01a (A, Bianca) Fixtures: D1 positive doc + observation, ambiguous mention, forward/duplicate, correction · branch `DATA-01a-fixtures`
 
 ## Ready (all hard dependencies merged)
 
@@ -25,13 +25,12 @@ One line per task. Edit only the lines of your own task.
 - ACT-04 pure (E) Systems client (stock/ATP, lanes/ETA) against `make mocks`
 - AG-01 pure (E) Agent loop with budget, trace, fallback; fake model
 - WEB-01 (D) App shell on hand-written JSON
-- EVL-01 (D) `eval/` harness + "product cannot open ground truth" test
+- DATA-01b (B) Fixtures: links (linked and ambiguous), cases, baseline with unchanged scenarios, report
 - ING-09 (A) Physical quantities (exact/range/vague/unknown) with units, from span text
 - PLT-03 (C) `core/db.py`, `core/repo.py`: SQLite artifact store, `as_of` filter, fixtures load
 
 ## Blocked (waiting on)
 
-- DATA-01b (B) ← DATA-01a
 - DATA-01c (E) ← DATA-01b
 - PLT-05 (C) ← PLT-07
 - PLT-04, PLT-06 (C), ING-01 module (B), ACT-04 module (E) ← PLT-03
