@@ -379,7 +379,7 @@ MVP: coda/dettaglio, pannello fonti, breve report per owner e lista dei moduli. 
 
 | Uso | Endpoint | Modello iniziale | Note |
 |---|---|---|---|
-| Estrazione osservazioni, linking vincolato, testi di report e chiarimenti | `/v1/chat/completions` | `google/gemma-4-26B-A4B-it` (hosting EU) | Alternativa `Qwen/Qwen3.6-35B-A3B-FP8`; scelta dopo il bake-off PLT-07 (OQ-2) |
+| Estrazione osservazioni, linking vincolato, testi di report e chiarimenti | `/v1/chat/completions` | `google/gemma-4-26B-A4B-it` (hosting EU) | Confermato da PLT-07 (`docs/smoke-fastweb.md`). Fallback `glm-5.3-flash` o `Qwen/Qwen3.5-397B-A17B-FP8` (hosting extra-EU) |
 | Agenti (tool calling) | `/v1/chat/completions` con `tools` | Come sopra | Chat Completions e Responses sono documentati; si sceglie il primo per un solo adapter e stato gestito localmente |
 | Retrieval candidati prodotto | `/v1/embeddings` | `Qwen/Qwen3-VL-Embedding-2B`, `dimensions=512` | Catalogo pre-calcolato una volta; confronto con 2048 solo se il recall è basso |
 | Note vocali | `/v1/audio/transcriptions` | `openai/whisper-large-v3-turbo` | `verbose_json` documentato; presenza/precisione dei segmenti da verificare. `language` solo se nota per la registrazione, non dedotta rigidamente dal negozio (OQ-3) |
@@ -388,11 +388,11 @@ MVP: coda/dettaglio, pannello fonti, breve report per owner e lista dei moduli. 
 #### 4.7.2 Client `tessera.core.llm`
 
 - `chat(messages, tools=None, model=None)`, `extract(schema: type[BaseModel], messages)`, `embed(texts, dimensions=512)`, `transcribe(path, language)`.
-- **Output strutturato.** `extract()` espone lo schema Pydantic come unico tool (`submit_<schema>`) e valida gli argomenti con Pydantic. Se mancano o non sono validi, riprova una volta passando l'errore. Se fallisce ancora, solleva `ExtractionFailed`: il modulo registra l'astensione e non inventa. La guida documenta `tool_choice=auto`, non garantisce forzatura di una funzione né JSON Schema strict. Il client deve tollerare risposta senza tool: retry entro budget, poi astensione. Alternative JSON attivate solo dopo smoke test e sempre validate.
+- **Output strutturato.** `extract()` espone lo schema Pydantic come unico tool (`submit_<schema>`), con `$defs` espansi inline (Gemma ignora i `$ref` annidati) e `tool_choice="required"` (con `auto` i Qwen a volte rispondono in testo; PLT-07), e valida gli argomenti con Pydantic. Se mancano o non sono validi, riprova una volta passando l'errore. Se fallisce ancora, solleva `ExtractionFailed`: il modulo registra l'astensione e non inventa. La guida documenta solo `tool_choice=auto`; PLT-07 ha verificato `required` su tutti i modelli chat, la forzatura per nome non è affidabile e il JSON Schema strict non è garantito. Il client deve tollerare risposta senza tool: retry entro budget, poi astensione. Alternative JSON attivate solo dopo smoke test e sempre validate.
 - **Cache.** Cache persistente fuori dalle proiezioni, con chiave su provider/base URL, model ID/revisione nota, prompt/schema/tool e versioni, parametri di generazione, payload e hash/versioni delle fonti e del contesto ammissibile. Per ASR includere hash dei byte audio, lingua e formato; per embedding dimensioni e versione catalogo. Segreti esclusi dalla chiave e dai log. `LLM_MODE=live|record|replay`: `replay` non chiama mai la rete; un miss è un errore esplicito, e la demo gira così.
 - **Robustezza.** Semaforo di concorrenza (default 4), backoff esponenziale su 429 e 503, timeout di 60 secondi, log di token e latenza per chiamata. La guida dice che le chiavi dello stesso account condividono il saldo; verificare l’assetto del team. Limiti globali di chiamate/token, massimo 2 retry e backoff entro deadline; 400 budget_exceeded e 401/403 non si ritentano. Selezionare campione dev e test prima dei risultati (OQ-9).
 - **Prompt versionati** in `backend/prompts/<id>.v<N>.md` (Jinja). La versione entra nella chiave di cache e nel campo `extractor_version`.
-- **Configurazione** da `.env`: `FASTWEB_API_KEY`, `FASTWEB_BASE_URL`, `CHAT_MODEL`, `EMBED_MODEL`, `ASR_MODEL`. La chiave non va mai committata; `.env.example` è versionato.
+- **Configurazione** da `.env`: `FASTWEB_BASE_URL`, `FASTWEB_KEYS_FILE`, `CHAT_MODEL`, `EMBED_MODEL`, `ASR_MODEL`. Fastweb rilascia **una chiave per modello** (con un altro modello risponde 404): stanno in `.secrets/fastweb_keys.json` (`{model_id: key}`, gitignored) e `Settings.api_key_for(model)` sceglie quella giusta. Le chiavi non vanno mai committate né loggate; `.env.example` è versionato. Le chiavi attuali scadono il 2026-10-25 00:00 UTC: registrare la cache della demo prima.
 
 #### 4.7.3 Dove conviene altro (vantaggi concreti)
 
@@ -553,7 +553,7 @@ Le fixture manuali servono a test e sviluppo UI. Il gate finale usa fonti reali 
 
 ## 6. Piano di lavoro rivisto
 
-> **Piano operativo:** fasi, owner per lane, dipendenze "needs merged" contro "builds against" e regole anti-conflitto sono in [`PLAN.md`](PLAN.md), che sostituisce §6.3–§6.5 per ordine e assegnazione. Budget (§6.1), gate (§6.2), tagli (§6.6) e convenzioni (§6.7) restano validi.
+> **Piano operativo:** fasi, owner per lane, dipendenze "needs merged" contro "builds against" e regole anti-conflitto sono in [`PLAN.md`](PLAN.md), che sostituisce §6.3–§6.5 per ordine e assegnazione e §6.1 per la ripartizione: il team è di **5 persone** (80 ore utili, stesso scope Core, più riserva). Gate (§6.2), tagli (§6.6) e convenzioni (§6.7) restano validi.
 
 ### 6.1 Capacità e scelta dello scope
 
@@ -747,8 +747,8 @@ I default permettono di partire; le verifiche mancanti limitano i claim, non aut
 | ID | Questione | Default / criterio di chiusura |
 |---|---|---|
 | OQ-1 | Stack | **Deciso:** Python 3.12/uv/FastAPI/SQLite + React/Vite/TypeScript; versioni bloccate nei lockfile di PLT-01 |
-| OQ-2 | Chat e output strutturato | Gemma candidato iniziale dalla guida; al massimo Qwen come confronto dev. Tool singolo validato, nessuna assunzione di strict JSON/forced tools; smoke e registrazione del modello usato |
-| OQ-3 | ASR e segmenti | Accesso **non confermato** finché testato; `verbose_json` documentato, qualità/allineamento da misurare. Fallback fixture dichiarato |
+| OQ-2 | Chat e output strutturato | **Chiuso da PLT-07** (`docs/smoke-fastweb.md`): Gemma, tool singolo con schema inline e `tool_choice="required"`, validazione Pydantic e un retry |
+| OQ-3 | ASR e segmenti | Accesso **non disponibile** (nessuna chiave Whisper, PLT-07): rinviato ad ASR-01 (`docs/PLAN.md` §4); `verbose_json` documentato, qualità/allineamento da misurare. Fallback fixture dichiarato |
 | OQ-4 | Vincoli infrastruttura | Fastweb nel percorso minimo, coerente col criterio scritto. Un provider alternativo richiede adapter/accesso e proprietà documentate, non solo cambio URL |
 | OQ-5 | Azioni per taglia | Nessun movimento quantitativo nel MVP senza curva/assunzione documentata e sensibilità per destinazione e donatore (§4.9). Altrimenti verify |
 | OQ-6 | Analista alternativo | Fuori MVP. Se introdotto, una sola proposta selezionata alimenta opzioni versionate |

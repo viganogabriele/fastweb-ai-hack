@@ -1,0 +1,147 @@
+[
+  {
+    "kind": "SourceDocument",
+    "payload": {
+      "id": "doc-20260918-2115-mil01",
+      "version": "v1",
+      "available_at": "2026-09-18T19:15:56Z",
+      "availability_basis": "email_date_header",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20260918_2115_MIL01.eml",
+          "content_hash": "sha256:0429e5ab4d15f5ac8f3f41210ec9f1386e1e9766102da372b1eb331a75cdc9b8",
+          "locator": null
+        }
+      ],
+      "source_type": "email",
+      "connector": "src.email",
+      "uri": "dataset://store_emails/MIL01/20260918_2115_MIL01.eml",
+      "content_hash": "sha256:0429e5ab4d15f5ac8f3f41210ec9f1386e1e9766102da372b1eb331a75cdc9b8",
+      "origin": "giulia.ferrandi@moncler-retail.example",
+      "author_ref": "Giulia Ferrandi",
+      "language": "it",
+      "business_date": "2026-09-18",
+      "event_start": null,
+      "event_end": null,
+      "thread_key": "<ca847db8e00a.5487b537@moncler-retail.example>",
+      "parent_document_id": null,
+      "text": "MIL01 - CHIUSURA 18/09\n\nFatturato: 58,0k (bdg 70,2) +21%\nIngressi 463 | scontrini 44 | conv 9,5%\n\nVenerdi ottimo! Maya nera 12 pezzi, record della stagione per ora. Bene anche il cable knit bianco (5) e la hoodie grigia.\nParecchi giapponesi.\nUn solo reso (hoodie S).\n\nGiulia",
+      "text_version": "email-v1",
+      "meta": {
+        "store_id": "MIL01",
+        "message_id": "<ca847db8e00a.5487b537@moncler-retail.example>",
+        "in_reply_to": null,
+        "subject": "Chiusura MIL01 - 18/09",
+        "thread_subject": "Chiusura MIL01 - 18/09",
+        "is_reply": false,
+        "is_forward": false,
+        "body_source": "plain",
+        "fixture_case": "correction"
+      }
+    }
+  },
+  {
+    "kind": "Segment",
+    "payload": {
+      "id": "doc-20260918-2115-mil01-seg0",
+      "version": "v1",
+      "available_at": "2026-09-18T19:15:56Z",
+      "availability_basis": "email_date_header",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20260918_2115_MIL01.eml",
+          "content_hash": "sha256:0429e5ab4d15f5ac8f3f41210ec9f1386e1e9766102da372b1eb331a75cdc9b8",
+          "locator": null
+        }
+      ],
+      "document_id": "doc-20260918-2115-mil01",
+      "text_version": "email-v1",
+      "idx": 0,
+      "text": "MIL01 - CHIUSURA 18/09",
+      "char_start": 0,
+      "char_end": 22,
+      "locator": null,
+      "t_start_s": null,
+      "t_end_s": null,
+      "is_quoted": false
+    }
+  },
+  {
+    "kind": "Segment",
+    "payload": {
+      "id": "doc-20260918-2115-mil01-seg1",
+      "version": "v1",
+      "available_at": "2026-09-18T19:15:56Z",
+      "availability_basis": "email_date_header",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20260918_2115_MIL01.eml",
+          "content_hash": "sha256:0429e5ab4d15f5ac8f3f41210ec9f1386e1e9766102da372b1eb331a75cdc9b8",
+          "locator": null
+        }
+      ],
+      "document_id": "doc-20260918-2115-mil01",
+      "text_version": "email-v1",
+      "idx": 1,
+      "text": "Fatturato: 58,0k (bdg 70,2) +21%\nIngressi 463 | scontrini 44 | conv 9,5%",
+      "char_start": 24,
+      "char_end": 96,
+      "locator": null,
+      "t_start_s": null,
+      "t_end_s": null,
+      "is_quoted": false
+    }
+  },
+  {
+    "kind": "Segment",
+    "payload": {
+      "id": "doc-20260918-2115-mil01-seg2",
+      "version": "v1",
+      "available_at": "2026-09-18T19:15:56Z",
+      "availability_basis": "email_date_header",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20260918_2115_MIL01.eml",
+          "content_hash": "sha256:0429e5ab4d15f5ac8f3f41210ec9f1386e1e9766102da372b1eb331a75cdc9b8",
+          "locator": null
+        }
+      ],
+      "document_id": "doc-20260918-2115-mil01",
+      "text_version": "email-v1",
+      "idx": 2,
+      "text": "Venerdi ottimo! Maya nera 12 pezzi, record della stagione per ora. Bene anche il cable knit bianco (5) e la hoodie grigia.\nParecchi giapponesi.\nUn solo reso (hoodie S).",
+      "char_start": 98,
+      "char_end": 266,
+      "locator": null,
+      "t_start_s": null,
+      "t_end_s": null,
+      "is_quoted": false
+    }
+  },
+  {
+    "kind": "Segment",
+    "payload": {
+      "id": "doc-20260918-2115-mil01-seg3",
+      "version": "v1",
+      "available_at": "2026-09-18T19:15:56Z",
+      "availability_basis": "email_date_header",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20260918_2115_MIL01.eml",
+          "content_hash": "sha256:0429e5ab4d15f5ac8f3f41210ec9f1386e1e9766102da372b1eb331a75cdc9b8",
+          "locator": null
+        }
+      ],
+      "document_id": "doc-20260918-2115-mil01",
+      "text_version": "email-v1",
+      "idx": 3,
+      "text": "Giulia",
+      "char_start": 268,
+      "char_end": 274,
+      "locator": null,
+      "t_start_s": null,
+      "t_end_s": null,
+      "is_quoted": false
+    }
+  }
+]

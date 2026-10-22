@@ -1,0 +1,147 @@
+[
+  {
+    "kind": "SourceDocument",
+    "payload": {
+      "id": "doc-20261002-2112-mil01",
+      "version": "v1",
+      "available_at": "2026-10-02T19:12:11Z",
+      "availability_basis": "email_date_header",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2112_MIL01.eml",
+          "content_hash": "sha256:42ba599825b726743a870909947f1046005d4f0d715a79922b4ff43cef313a93",
+          "locator": null
+        }
+      ],
+      "source_type": "email",
+      "connector": "src.email",
+      "uri": "dataset://store_emails/MIL01/20261002_2112_MIL01.eml",
+      "content_hash": "sha256:42ba599825b726743a870909947f1046005d4f0d715a79922b4ff43cef313a93",
+      "origin": "giulia.ferrandi@moncler-retail.example",
+      "author_ref": "Giulia Ferrandi",
+      "language": "it",
+      "business_date": "2026-10-02",
+      "event_start": null,
+      "event_end": null,
+      "thread_key": "<7b3e8b297f25.3d98742b@moncler-retail.example>",
+      "parent_document_id": null,
+      "text": "Ciao a tutti,\ngiornata record, vi incollo il riepilogo.\n\nMIL01 MONTENAPOLEONE - 02/10/2026\nFatturato netto\t136.135 EUR\nBudget\t83.080 EUR\nvs bdg\t+63,9%\nIngressi\t828\nScontrini\t63\nConv.\t7,6%\nUPT\t1,94\nTop\tMaya nera, Legere nero, Bady nera, Ilvaro bianco\nNote\tGolden week, 40% CN. Tax free in tilt 16-17. Maire nera 7 richieste.\n\nIl terminale del tax free si e' bloccato per quasi un'ora, coda fino all'ingresso, abbiamo fatto i moduli a mano e alcuni cinesi li abbiamo mandati a fare il rimborso in aeroporto. Fei sfinita.\nMaire nera: 7 richieste (2 2 2, 1 1, 0, 4). Anche un Ilvaro bianco 00.\n1 Tib zip.\n\nGiulia",
+      "text_version": "email-v1",
+      "meta": {
+        "store_id": "MIL01",
+        "message_id": "<7b3e8b297f25.3d98742b@moncler-retail.example>",
+        "in_reply_to": null,
+        "subject": "Chiusura MIL01 - 02/10",
+        "thread_subject": "Chiusura MIL01 - 02/10",
+        "is_reply": false,
+        "is_forward": false,
+        "body_source": "plain",
+        "fixture_case": "duplicate"
+      }
+    }
+  },
+  {
+    "kind": "Segment",
+    "payload": {
+      "id": "doc-20261002-2112-mil01-seg0",
+      "version": "v1",
+      "available_at": "2026-10-02T19:12:11Z",
+      "availability_basis": "email_date_header",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2112_MIL01.eml",
+          "content_hash": "sha256:42ba599825b726743a870909947f1046005d4f0d715a79922b4ff43cef313a93",
+          "locator": null
+        }
+      ],
+      "document_id": "doc-20261002-2112-mil01",
+      "text_version": "email-v1",
+      "idx": 0,
+      "text": "Ciao a tutti,\ngiornata record, vi incollo il riepilogo.",
+      "char_start": 0,
+      "char_end": 55,
+      "locator": null,
+      "t_start_s": null,
+      "t_end_s": null,
+      "is_quoted": false
+    }
+  },
+  {
+    "kind": "Segment",
+    "payload": {
+      "id": "doc-20261002-2112-mil01-seg1",
+      "version": "v1",
+      "available_at": "2026-10-02T19:12:11Z",
+      "availability_basis": "email_date_header",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2112_MIL01.eml",
+          "content_hash": "sha256:42ba599825b726743a870909947f1046005d4f0d715a79922b4ff43cef313a93",
+          "locator": null
+        }
+      ],
+      "document_id": "doc-20261002-2112-mil01",
+      "text_version": "email-v1",
+      "idx": 1,
+      "text": "MIL01 MONTENAPOLEONE - 02/10/2026\nFatturato netto\t136.135 EUR\nBudget\t83.080 EUR\nvs bdg\t+63,9%\nIngressi\t828\nScontrini\t63\nConv.\t7,6%\nUPT\t1,94\nTop\tMaya nera, Legere nero, Bady nera, Ilvaro bianco\nNote\tGolden week, 40% CN. Tax free in tilt 16-17. Maire nera 7 richieste.",
+      "char_start": 57,
+      "char_end": 323,
+      "locator": null,
+      "t_start_s": null,
+      "t_end_s": null,
+      "is_quoted": false
+    }
+  },
+  {
+    "kind": "Segment",
+    "payload": {
+      "id": "doc-20261002-2112-mil01-seg2",
+      "version": "v1",
+      "available_at": "2026-10-02T19:12:11Z",
+      "availability_basis": "email_date_header",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2112_MIL01.eml",
+          "content_hash": "sha256:42ba599825b726743a870909947f1046005d4f0d715a79922b4ff43cef313a93",
+          "locator": null
+        }
+      ],
+      "document_id": "doc-20261002-2112-mil01",
+      "text_version": "email-v1",
+      "idx": 2,
+      "text": "Il terminale del tax free si e' bloccato per quasi un'ora, coda fino all'ingresso, abbiamo fatto i moduli a mano e alcuni cinesi li abbiamo mandati a fare il rimborso in aeroporto. Fei sfinita.\nMaire nera: 7 richieste (2 2 2, 1 1, 0, 4). Anche un Ilvaro bianco 00.\n1 Tib zip.",
+      "char_start": 325,
+      "char_end": 600,
+      "locator": null,
+      "t_start_s": null,
+      "t_end_s": null,
+      "is_quoted": false
+    }
+  },
+  {
+    "kind": "Segment",
+    "payload": {
+      "id": "doc-20261002-2112-mil01-seg3",
+      "version": "v1",
+      "available_at": "2026-10-02T19:12:11Z",
+      "availability_basis": "email_date_header",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2112_MIL01.eml",
+          "content_hash": "sha256:42ba599825b726743a870909947f1046005d4f0d715a79922b4ff43cef313a93",
+          "locator": null
+        }
+      ],
+      "document_id": "doc-20261002-2112-mil01",
+      "text_version": "email-v1",
+      "idx": 3,
+      "text": "Giulia",
+      "char_start": 602,
+      "char_end": 608,
+      "locator": null,
+      "t_start_s": null,
+      "t_end_s": null,
+      "is_quoted": false
+    }
+  }
+]
