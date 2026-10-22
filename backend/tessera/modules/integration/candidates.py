@@ -31,6 +31,13 @@ STYLE_WEIGHT = 0.75
 # One word of a multi-word name: a candidate, never enough to link on its own.
 PARTIAL_NAME_SCORE = 80.0
 
+# Colour names are matched per word, exactly or as a Romance-language inflection of the same word
+# (nero/nera/neri, bianco/bianchi), never by fuzzy ratio or by one word of a multi-word name:
+# short colour words are one edit away from unrelated words ("zero"/"nero"), and a single word of
+# a colour name is often an ordinary word ("notte" in "blu notte", "latte" in "bianco latte").
+INFLECTED_COLOUR_SCORE = 90.0
+INFLECTION_ENDING = re.compile(r"h?[aeiou]{1,2}")
+
 # Flags that keep a candidate from being linked automatically.
 BLOCKING_FLAGS = frozenset({"colour_not_in_style", "size_not_in_size_run"})
 
@@ -142,7 +149,7 @@ def link_mention(
             style_hits[code] = hit
     colour_hits: dict[str, tuple[float, Method, str]] = {}
     for code, names in catalog.colour_names.items():
-        hit = _best_match(text, names, p)
+        hit = _colour_match(text, names)
         if hit:
             colour_hits[code] = hit
 
@@ -271,6 +278,42 @@ def _best_match(text: str, names: Iterable[str], p: LinkParams) -> tuple[float, 
                 if score >= p.candidate_min and (best is None or score > best[0]):
                     best = (score, "fuzzy", name)
     return best
+
+
+def _colour_match(text: str, names: Iterable[str]) -> tuple[float, Method, str] | None:
+    """Every word of a colour name, in order: exact (100) or inflected (INFLECTED_COLOUR_SCORE).
+    Non-Latin names (CJK aliases) match as substrings."""
+    words = text.split()
+    best: tuple[float, Method, str] | None = None
+    for name in names:
+        n = normalize(name)
+        if not n:
+            continue
+        if not n.isascii():
+            if n in text.replace(" ", "") or n in text:
+                return (100.0, "exact", name)
+            continue
+        name_words = n.split()
+        k = len(name_words)
+        for i in range(len(words) - k + 1):
+            window = words[i : i + k]
+            if window == name_words:
+                return (100.0, "exact", name)
+            if best is None and all(map(_inflects, window, name_words)):
+                best = (INFLECTED_COLOUR_SCORE, "fuzzy", name)
+    return best
+
+
+def _inflects(word: str, name_word: str) -> bool:
+    """Same word with another gender/number ending: nera/neri for nero, bianchi for bianco."""
+    if word == name_word:
+        return True
+    stem = name_word[:-1]
+    return (
+        len(name_word) >= 4
+        and word.startswith(stem)
+        and INFLECTION_ENDING.fullmatch(word[len(stem) :]) is not None
+    )
 
 
 def _normalize_size(size: str) -> str:

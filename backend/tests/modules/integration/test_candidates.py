@@ -3,7 +3,13 @@ import csv
 import pytest
 
 from tessera.core.config import REPO_ROOT
-from tessera.modules.integration.candidates import Catalog, LinkParams, link_mention, normalize
+from tessera.modules.integration.candidates import (
+    Catalog,
+    LinkParams,
+    _inflects,
+    link_mention,
+    normalize,
+)
 
 W_SIZES = ["00", "0", "1", "2", "3", "4"]
 ALPHA = ["XS", "S", "M", "L", "XL", "XXL"]
@@ -114,6 +120,37 @@ def test_partial_multiword_name_is_ambiguous() -> None:
     assert r.candidates[0].score == r.candidates[1].score < 90
 
 
+@pytest.mark.parametrize(
+    ("mention", "target", "level"),
+    [
+        ("ieri notte la Maya è andata a ruba", "MAY", "style"),  # "notte" alone is not navy
+        ("zero Maire rimaste", "MAI", "style"),  # "zero" is not a typo of "nero"
+        ("due Maya nere", "MAY-999", "sku"),  # inflection of "nero"
+        ("Maya blu notte", "MAY-742", "sku"),
+    ],
+)
+def test_colour_words_match_whole_names_or_inflections_only(mention, target, level) -> None:
+    r = link_mention(mention, CATALOG)
+    assert (r.status, r.target_id, r.level) == ("linked", target, level)
+
+
+@pytest.mark.parametrize(
+    ("word", "name", "expected"),
+    [
+        ("nera", "nero", True),
+        ("neri", "nero", True),
+        ("bianchi", "bianco", True),
+        ("rossa", "rosso", True),
+        ("zero", "nero", False),
+        ("nervo", "nero", False),
+        ("rosa", "rosso", False),
+        ("blue", "blu", False),
+    ],
+)
+def test_inflects(word, name, expected) -> None:
+    assert _inflects(word, name) is expected
+
+
 def test_colour_only_and_unknown_are_unlinked() -> None:
     assert link_mention("the long black one", CATALOG).reasons == ("colour_only",)
     assert link_mention("una borsa", CATALOG).reasons == ("no_candidate",)
@@ -145,6 +182,8 @@ MASTER = REPO_ROOT / "generated" / "sources" / "erp" / "master_data"
         ("la Maire nera", None, "J20931A00012-999"),
         ("Maire black", "2", "J20931A00012-999-2"),
         ("ILVARO powder pink", None, None),  # resolved below from the catalog
+        ("ieri notte la Maya", None, "J10911A00034"),  # style level, not the navy SKU
+        ("zero Maire rimaste", None, "J20931A00012"),  # style level, not the black SKU
     ],
 )
 def test_real_catalog(mention, size, target) -> None:
