@@ -5,8 +5,9 @@ from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
+from sqlalchemy import insert
 
-from tessera.api.main import create_app
+from tessera.api.main import app_engine, create_app
 from tessera.core.config import Settings
 from tessera.core.contracts import (
     Case,
@@ -17,9 +18,9 @@ from tessera.core.contracts import (
     RunSpec,
     SourceDocument,
 )
-from tessera.core.db import create_schema, make_engine
+from tessera.core.db import artifacts, connect
 from tessera.core.registry import RegisteredModule, Registry
-from tessera.core.repo import repo_session
+from tessera.core.run_repo import repo_session
 
 ROOT = Path(__file__).resolve().parents[3]
 
@@ -60,9 +61,13 @@ def document(id="doc-1", at="2026-10-22T19:00:00Z", store="MIL01"):
 
 @pytest.fixture
 def service(tmp_path):
-    engine = make_engine(f"sqlite:///{tmp_path / 'test.db'}")
-    create_schema(engine)
-    app = create_app(engine=engine, registry=Registry(), settings=Settings(fixture_mode=True))
+    engine = connect(f"sqlite:///{tmp_path / 'test.db'}")
+    app = create_app(
+        engine=engine,
+        registry=Registry(),
+        fixture_engine=engine,
+        settings=Settings(fixture_mode=True),
+    )
     with TestClient(app) as client:
         yield client, engine, app
     engine.dispose()
@@ -74,8 +79,38 @@ def seed(engine, run_id="run-1", *, published=True, mode="recorded", as_of=None)
         values["as_of"] = as_of
     spec = RunSpec(run_id=run_id, **values)
     with repo_session(engine, spec, fixture_mode=mode == "fixture") as repo:
-        repo.put(document())
-        repo.put(document("future", "2026-10-23T00:00:00Z"))
+        if not as_of:
+            repo.put(document())
+        # Canonical persistence rejects future writes before the API can expose them.
+        with pytest.raises(ValueError):
+            repo.put(document("future", "2026-10-23T00:00:00Z"))
+        # Bypass the write guard to independently prove the HTTP read clock filter.
+        future = document("future", "2026-10-23T00:00:00Z")
+        repo.session.execute(
+            insert(artifacts).values(
+                run_id=spec.run_id,
+                kind="SourceDocument",
+                id=future.id,
+                version=future.version,
+                store_id="MIL01",
+                available_at=future.available_at,
+                payload=future.model_dump(mode="json"),
+                input_refs=[],
+            )
+        )
+        foreign = document("foreign", store="NYC01")
+        repo.session.execute(
+            insert(artifacts).values(
+                run_id=spec.run_id,
+                kind="SourceDocument",
+                id=foreign.id,
+                version=foreign.version,
+                store_id="NYC01",
+                available_at=foreign.available_at,
+                payload=foreign.model_dump(mode="json"),
+                input_refs=[],
+            )
+        )
         if published:
             repo.publish()
     return spec
@@ -89,6 +124,7 @@ def test_published_reads_are_bound_to_run_namespace_store_and_clock(service):
     seed(engine, "earlier", as_of="2026-10-22T18:00:00Z")
     assert [d["id"] for d in client.get("/api/runs/run-1/documents").json()] == ["doc-1"]
     assert client.get("/api/runs/run-1/documents/future").status_code == 404
+    assert client.get("/api/runs/run-1/documents/foreign").status_code == 404
     assert client.get("/api/runs/run-1/documents?store=NYC01").status_code == 422
     assert client.get("/api/runs/pending/documents").status_code == 409
     assert client.get("/api/runs/pending/cases").status_code == 409
@@ -108,11 +144,8 @@ def test_fixture_access_requires_configuration(service):
     assert client.get("/api/runs?fixture=true").status_code == 403
 
 
-def test_submission_validates_snapshot_and_executes_persisted_run(service, tmp_path):
+def test_submission_validates_snapshot_and_executes_persisted_run(service):
     client, engine, app = service
-    app.state.settings = Settings(
-        _env_file=None, fixture_mode=True, data_dir=tmp_path, llm_mode="live"
-    )
     manifest = ModuleManifest(
         id="src.test",
         version="v1",
@@ -127,8 +160,6 @@ def test_submission_validates_snapshot_and_executes_persisted_run(service, tmp_p
     )
 
     def produce(ctx):
-        assert ctx.clients["llm"].settings.data_dir == tmp_path
-        assert ctx.clients["llm"].settings.llm_mode == "replay"
         ctx.repo.put(document())
         return ModuleResult(
             module_id="src.test",
@@ -296,3 +327,19 @@ def test_health_and_schema_export_do_not_create_database(tmp_path):
     assert TestClient(app).get("/api/health").status_code == 200
     assert "/api/runs" in app.openapi()["paths"]
     assert not (tmp_path / "absent").exists()
+
+
+def test_default_engines_physically_isolate_fixture_and_product_with_same_id(tmp_path):
+    app = create_app(settings=Settings(data_dir=tmp_path, fixture_mode=True), registry=Registry())
+    product = app_engine(app, "product")
+    fixture = app_engine(app, "fixture")
+    try:
+        assert product.url.database != fixture.url.database
+        seed(product, "same-id")
+        seed(fixture, "same-id", mode="fixture")
+        client = TestClient(app)
+        assert client.get("/api/runs/same-id").json()["spec"]["mode"] == "recorded"
+        assert client.get("/api/runs/same-id?fixture=true").json()["spec"]["mode"] == "fixture"
+    finally:
+        product.dispose()
+        fixture.dispose()

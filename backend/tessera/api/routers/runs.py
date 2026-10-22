@@ -7,11 +7,9 @@ from uuid import uuid4
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Request
 from jsonschema.exceptions import ValidationError as SchemaError
 from pydantic import ValidationError
-from sqlalchemy import select
-from sqlalchemy.orm import Session
 
 from tessera.api.models import CreateRun, DocumentDetail, RunView
-from tessera.core.config import Settings, get_settings
+from tessera.core.config import get_settings
 from tessera.core.contracts import (
     Case,
     EntityLink,
@@ -21,18 +19,21 @@ from tessera.core.contracts import (
     Segment,
     SourceDocument,
 )
-from tessera.core.db import RunRow
 from tessera.core.orchestrator import run
 from tessera.core.registry import Registry
-from tessera.core.repo import Repo, repo_session
+from tessera.core.repo import Repo as StoredRepo
+from tessera.core.repo import RunNotFound
+from tessera.core.repo import list_runs as stored_runs
+from tessera.core.run_repo import RunRepo as Repo
+from tessera.core.run_repo import repo_session
 
 router = APIRouter(prefix="/api")
 
 
-def engine_for(request: Request):
+def engine_for(request: Request, ns: str = "product"):
     from tessera.api.main import app_engine
 
-    return app_engine(request.app)
+    return app_engine(request.app, ns)
 
 
 def registry_for(request: Request) -> Registry:
@@ -58,11 +59,15 @@ def view(repo: Repo) -> RunView:
 
 
 def run_repo(request: Request, run_id: str, ns: Namespace) -> Iterator[Repo]:
-    with Session(engine_for(request)) as session:
-        row = session.get(RunRow, (ns, run_id))
-        if row is None:
-            raise HTTPException(404, "Run not found")
-        yield Repo(RunSpec.model_validate(row.spec), session, fixture_mode=ns == "fixture")
+    engine = engine_for(request, ns)
+    try:
+        stored = StoredRepo.open(engine, run_id)
+    except RunNotFound:
+        raise HTTPException(404, "Run not found") from None
+    if (stored.spec.mode == "fixture") != (ns == "fixture"):
+        raise HTTPException(404, "Run not found")
+    with repo_session(engine, stored.spec, fixture_mode=ns == "fixture") as repo:
+        yield repo
 
 
 RunRepo = Annotated[Repo, Depends(run_repo)]
@@ -78,13 +83,13 @@ def published_repo(repo: RunRepo) -> Repo:
 PublishedRepo = Annotated[Repo, Depends(published_repo)]
 
 
-def execute(spec: RunSpec, engine, registry: Registry, settings: Settings) -> None:
+def execute(spec: RunSpec, engine, registry: Registry) -> None:
     try:
-        run(spec, engine=engine, registry=registry, settings=settings)
+        run(spec, engine=engine, registry=registry)
     except Exception:
         # An infrastructure failure must not leave a job claiming to be running.
         with repo_session(engine, spec, fixture_mode=spec.mode == "fixture") as repo:
-            if not repo.run_state()["published"]:
+            if repo.run_state()["status"] in {"pending", "running"}:
                 repo.set_run_status("failed")
 
 
@@ -104,29 +109,31 @@ def create_run(request: Request, body: CreateRun, tasks: BackgroundTasks, ns: Na
         if ns == "product" and spec.authorized_fixture_refs:
             raise ValueError("Product runs cannot authorize fixtures")
         registry = registry_for(request)
-        if not any(m.manifest.enabled for m in spec.modules):
-            raise ValueError("At least one enabled module is required")
+        if not any(m.manifest.enabled and m.manifest.mode != "unavailable" for m in spec.modules):
+            raise ValueError("At least one enabled, available module is required")
         for snapshot in spec.modules:
             registry.resolve(snapshot)
             if ns == "product" and snapshot.manifest.mode == "fixture":
                 raise ValueError("Fixture modules require a fixture run")
     except (ValueError, ValidationError, SchemaError) as error:
         raise HTTPException(422, str(error)) from None
-    engine = engine_for(request)
+    engine = engine_for(request, ns)
     with repo_session(engine, spec, fixture_mode=ns == "fixture") as repo:
         result = view(repo)
-    tasks.add_task(execute, spec, engine, registry, request.app.state.settings or get_settings())
+    tasks.add_task(execute, spec, engine, registry)
     return result
 
 
 @router.get("/runs", response_model=tuple[RunView, ...])
 def list_runs(request: Request, ns: Namespace):
-    with Session(engine_for(request)) as session:
-        rows = session.scalars(select(RunRow).where(RunRow.namespace == ns).order_by(RunRow.run_id))
-        return tuple(
-            view(Repo(RunSpec.model_validate(row.spec), session, fixture_mode=ns == "fixture"))
-            for row in rows
-        )
+    engine = engine_for(request, ns)
+    result = []
+    for spec, _status in stored_runs(engine):
+        if (spec.mode == "fixture") != (ns == "fixture"):
+            continue
+        with repo_session(engine, spec, fixture_mode=ns == "fixture") as repo:
+            result.append(view(repo))
+    return tuple(result)
 
 
 @router.get("/runs/{run_id}", response_model=RunView)

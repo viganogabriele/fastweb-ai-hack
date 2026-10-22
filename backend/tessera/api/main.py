@@ -9,18 +9,19 @@ from tessera import __version__
 from tessera.api.models import Health
 from tessera.api.routers.runs import router
 from tessera.core.config import Settings, get_settings
-from tessera.core.db import create_schema, make_engine
+from tessera.core.db import connect
 from tessera.core.registry import Registry
 
 
 def create_app(
     *,
     engine: Engine | None = None,
+    fixture_engine: Engine | None = None,
     registry: Registry | None = None,
     settings: Settings | None = None,
 ) -> FastAPI:
     app = FastAPI(title="Tessera", version=__version__)
-    app.state.engine = engine
+    app.state.engines = {"product": engine, "fixture": fixture_engine}
     app.state.engine_lock = Lock()
     app.state.registry = registry
     app.state.settings = settings
@@ -40,15 +41,14 @@ def create_app(
     return app
 
 
-def app_engine(app: FastAPI) -> Engine:
+def app_engine(app: FastAPI, namespace: str = "product") -> Engine:
     with app.state.engine_lock:
-        if app.state.engine is None:
+        if app.state.engines[namespace] is None:
             settings = app.state.settings or get_settings()
             settings.data_dir.mkdir(parents=True, exist_ok=True)
-            engine = make_engine(settings.db_url)
-            create_schema(engine)
-            app.state.engine = engine
-    return app.state.engine
+            isolated = settings.model_copy(update={"fixture_mode": namespace == "fixture"})
+            app.state.engines[namespace] = connect(isolated.db_url)
+    return app.state.engines[namespace]
 
 
 app = create_app()
