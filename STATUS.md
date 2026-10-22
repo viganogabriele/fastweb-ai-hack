@@ -9,7 +9,7 @@ One line per task. Edit only the lines of your own task.
 
 ## In progress
 
-- PLT-02 (C, Codex) MVP contracts, JSON Schema export and invariant tests; automated review fixes under verification, A/B/D G0 review pending · branch `PLT-02-contracts`
+- PLT-02 (C, Codex) MVP contracts, JSON Schema export and invariant tests; Opus 5.5 review passed, A/B/D G0 review and merge pending · branch `PLT-02-contracts`
 
 ## Ready (all hard dependencies merged)
 

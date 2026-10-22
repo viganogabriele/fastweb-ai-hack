@@ -54,8 +54,8 @@ PLT-06 adds API routes and generates web types. Schema files are derived output.
 - Movement recommendations reject mandatory failed/unknown checks and missing
   comparison outcomes or cost. Option and baseline outcomes use matching, unique
   scenario IDs. Rejected decisions cannot carry dispatch effects or references.
-  The options engine must still generate the full
-  required check set, validate policy, size allocation and shared resources, and rank
+  The options engine must still generate the full required check set, validate policy,
+  size allocation and shared resources, and rank
   scenarios. DTO validation does not authorize approval or dispatch. Informational
   options can retain `outcomes=null`.
 - Trace steps store validated tool arguments and artifact references, never raw
