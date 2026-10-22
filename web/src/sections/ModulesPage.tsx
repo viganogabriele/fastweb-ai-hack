@@ -103,7 +103,7 @@ export function ModulesPage({ runs }: { runs: ReturnType<typeof useRuns> }) {
         await nextRunRequest(run, selection)
       )
       // The server has accepted the snapshot, even if the user navigated away.
-      runs.acceptRun(created)
+      runs.acceptRun(created, mounted.current ? run.spec.run_id : undefined)
     } catch (error) {
       if (mounted.current)
         setSubmitError(
@@ -149,7 +149,17 @@ export function ModulesPage({ runs }: { runs: ReturnType<typeof useRuns> }) {
           </p>
         )}
         <div className="sd-modules-actions">
-          <Button onClick={runs.retry} disabled={submitting}>
+          <Button
+            onClick={() => {
+              if (!run) {
+                setCatalog(null)
+                setCatalogError('')
+                setRevision((value) => value + 1)
+              }
+              runs.retry()
+            }}
+            disabled={submitting}
+          >
             Aggiorna stato
           </Button>
           {canConfigure && (
@@ -212,7 +222,7 @@ export function ModulesPage({ runs }: { runs: ReturnType<typeof useRuns> }) {
               <article className="sd-run-card sd-module" key={item.id}>
                 <div className="sd-module-heading">
                   <h2>
-                    {item.id} · v{item.version}
+                    {item.id} · {item.version}
                   </h2>
                   <StatusBadge {...status} />
                 </div>

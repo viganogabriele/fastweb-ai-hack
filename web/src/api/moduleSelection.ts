@@ -3,12 +3,24 @@ import type { RunView } from './client'
 
 type CreateRun = components['schemas']['CreateRun']
 
+// Object key order must not change configuration identity (including nested params).
+function canonical(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(canonical)
+  if (value !== null && typeof value === 'object')
+    return Object.fromEntries(
+      Object.entries(value)
+        .sort(([a], [b]) => a.localeCompare(b, 'en'))
+        .map(([key, entry]) => [key, canonical(entry)])
+    )
+  return value
+}
+
 // Reuse the selected immutable snapshot; only enabled flags and their hash change.
 export async function nextRunRequest(
   run: RunView,
   selection: Record<string, boolean>
 ): Promise<CreateRun> {
-  const { run_id: _runId, ...spec } = run.spec
+  const { run_id: _runId, config_hash: _previousHash, ...spec } = run.spec
   const modules = spec.modules.map((snapshot) => ({
     ...snapshot,
     manifest: {
@@ -16,10 +28,8 @@ export async function nextRunRequest(
       enabled: selection[snapshot.manifest.id] ?? snapshot.manifest.enabled
     }
   }))
-  const fingerprint = JSON.stringify({
-    base_config_hash: spec.config_hash,
-    modules
-  })
+  // CreateRun content excluding server identity and the previous hash; no lineage chaining.
+  const fingerprint = JSON.stringify(canonical({ ...spec, modules }))
   const digest = await crypto.subtle.digest(
     'SHA-256',
     new TextEncoder().encode(fingerprint)

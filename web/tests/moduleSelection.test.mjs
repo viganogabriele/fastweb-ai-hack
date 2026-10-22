@@ -57,3 +57,14 @@ test('submission persists the complete selection and surfaces server rejection',
   globalThis.fetch.mock.mockImplementation(async () => new Response('', { status: 422 }))
   await assert.rejects(submitModuleRun(body), /422/)
 })
+
+test('configuration identity is canonical and independent of prior toggle history', async () => {
+  const firstOff = await nextRunRequest(run, { 'ing.extract': false })
+  const backOn = await nextRunRequest({ ...run, spec: { ...firstOff, run_id: 'second' } }, { 'ing.extract': true })
+  const secondOff = await nextRunRequest({ ...run, spec: { ...backOn, run_id: 'third' } }, { 'ing.extract': false })
+  assert.equal(firstOff.config_hash, secondOff.config_hash)
+  const reordered = structuredClone(run)
+  reordered.spec = Object.fromEntries(Object.entries(reordered.spec).reverse())
+  reordered.spec.modules[0].manifest = Object.fromEntries(Object.entries(reordered.spec.modules[0].manifest).reverse())
+  assert.equal(firstOff.config_hash, (await nextRunRequest(reordered, { 'ing.extract': false })).config_hash)
+})
