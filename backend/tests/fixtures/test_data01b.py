@@ -5,7 +5,8 @@ reference only existing DATA-01a/b records and respect availability (rebuild wit
 import csv
 import hashlib
 import json
-from datetime import UTC, date, datetime, timedelta
+import re
+from datetime import UTC, date, datetime, time, timedelta
 from functools import cache
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -16,22 +17,24 @@ import yaml
 from tessera.core.contracts import (
     ArtifactRef,
     Case,
+    Citation,
     EntityLink,
     EvidenceRelation,
     ForecastAdjustment,
     Observation,
     Report,
+    ScenarioValues,
     Segment,
     SourceDocument,
 )
 from tessera.core.contracts.common import DerivedRecord, SourceRecord
 from tessera.core.fixtures import FIXTURE_RUN_ID, FIXTURE_SCENARIO_ID, read_fixtures
-from tessera.modules.intelligence.disaggregation import disaggregate
 
 ROOT = Path(__file__).resolve().parents[3]
 FIXTURES = ROOT / "data" / "fixtures"
 SOURCES = ROOT / "generated" / "sources"
 MASTER = SOURCES / "erp" / "master_data"
+FORECASTS = SOURCES / "erp" / "forecast" / "sku_store_weekly"
 FOLDERS = {
     "documents": (SourceDocument, Segment),
     "observations": (Observation,),
@@ -98,8 +101,12 @@ def test_derived_records_reference_existing_inputs_and_are_not_early() -> None:
             assert (record.run_id, record.scenario_id) == (FIXTURE_RUN_ID, FIXTURE_SCENARIO_ID)
             inputs = [resolve(r) for r in record.input_refs if r.kind not in EXTERNAL_KINDS]
             assert inputs, record.id
-            latest = max(i.available_at for i in inputs if i.available_at is not None)
-            assert record.available_at == latest, record.id
+            known = [i.available_at for i in inputs if i.available_at is not None]
+            for r in record.input_refs:  # a vintage is known from its publication instant
+                if r.kind == "ForecastVintage":
+                    assert isinstance(record, ForecastAdjustment)
+                    known.append(vintage_published(date.fromisoformat(r.version), record.store_id))
+            assert record.available_at == max(known), record.id
             for i in inputs:  # every input's provenance is carried along
                 assert set(i.source_refs) <= set(record.source_refs), (record.id, i.id)
 
@@ -200,62 +207,289 @@ def test_cases_are_consistent_with_their_evidence() -> None:
             assert {link.level for link in links} == {case.scope_level}
 
 
-def vintage_rows(uri: str, store: str, sku: str) -> dict[date, float]:
-    rows = read_csv(SOURCES / uri.removeprefix("dataset://"))
-    return {
-        date.fromisoformat(r["week_start"]): float(r["fcst_units"])
-        for r in rows
-        if r["store_id"] == store and r["sku"] == sku
-    }
+def run_as_of() -> datetime:
+    """The fixture run's as_of, as `tessera fixtures load` sets it: the latest `available_at`."""
+    return max(r.available_at for r in everything().values() if r.available_at is not None)
 
 
-def test_forecasts_are_the_available_vintage_disaggregated_and_unchanged() -> None:
+def vintage_published(run: date, store: str) -> datetime:
+    """A vintage with only `run_date` is out at 06:00 local the next day (RFC §4.3 convention)."""
+    tz = ZoneInfo(stores()[store]["timezone"])
+    return datetime.combine(run + timedelta(days=1), time(6), tz).astimezone(UTC)
+
+
+def local_day_bounds(first: date, last: date, store: str) -> tuple[datetime, datetime]:
+    tz = ZoneInfo(stores()[store]["timezone"])
+    start = datetime.combine(first, time(0), tz)
+    end = datetime.combine(last + timedelta(days=1), time(0), tz) - timedelta(seconds=1)
+    return start.astimezone(UTC), end.astimezone(UTC)
+
+
+def expected_baseline(
+    store: str, sku: str, as_of: datetime
+) -> tuple[date, list[tuple[date, float]]]:
+    """Run date of the latest vintage out by `as_of` and its D+1..D+7 daily baseline, D = `as_of`
+    in the store's time zone (RFC §4.9). Plain arithmetic on the source CSV, not FC-01: every day
+    of these stores is open, so each day is its ISO week's forecast / 7."""
+    runs = [
+        date.fromisoformat(p.stem.removeprefix("fcst_sku_store_run_"))
+        for p in FORECASTS.glob("fcst_sku_store_run_*.csv")
+    ]
+    run = max(r for r in runs if vintage_published(r, store) <= as_of)
+    assert not stores()[store]["closed_dow"], store
+    weekly: dict[date, set[float]] = {}
+    for r in read_csv(FORECASTS / f"fcst_sku_store_run_{run}.csv"):
+        if r["store_id"] == store and r["sku"] == sku:
+            weekly.setdefault(date.fromisoformat(r["week_start"]), set()).add(
+                float(r["fcst_units"])
+            )
+    d = as_of.astimezone(ZoneInfo(stores()[store]["timezone"])).date()
+    series = []
+    for k in range(1, domain()["policy"]["horizon"]["days"]["value"] + 1):
+        day = d + timedelta(days=k)
+        (units,) = weekly[day - timedelta(days=day.weekday())]  # one value per week
+        series.append((day, units / 7))
+    return run, series
+
+
+def check_forecast(fc: ForecastAdjustment, as_of: datetime) -> None:
+    """`fc` is the run's D+1..D+7 baseline from the vintage admissible at `as_of`, unchanged."""
+    assert fc.status == "unchanged" and fc.reason and not fc.components
+    cases = [everything()[("Case", case_id)] for case_id in fc.case_ids]
+    assert cases
+    for case in cases:
+        assert isinstance(case, Case) and case.store_id == fc.store_id
+        assert case.scope_id is not None and fc.sku.startswith(case.scope_id.split("-")[0])
+    run, series = expected_baseline(fc.store_id, fc.sku, as_of)
+    assert fc.baseline_ref == ArtifactRef(
+        kind="ForecastVintage",
+        id=f"fcst_sku_store_run_{run}/{fc.store_id}/{fc.sku}",
+        version=str(run),
+    )
+    assert fc.baseline_ref in fc.input_refs
+    (src,) = [s for s in fc.source_refs if s.uri.startswith("dataset://erp/forecast/")]
+    path = FORECASTS / f"fcst_sku_store_run_{run}.csv"
+    assert src.uri == "dataset://" + path.relative_to(SOURCES).as_posix()
+    assert src.content_hash == "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()
+    assert (fc.horizon_start, fc.horizon_end) == (series[0][0], series[-1][0])
+    assert [p.date for p in fc.series] == [day for day, _ in series]
+    for p, (_, units) in zip(fc.series, series, strict=True):
+        assert p.baseline == pytest.approx(units)
+        for scenario in (p.latent, p.servable):  # no uplift: every scenario is the baseline
+            assert scenario is not None
+            assert (scenario.low, scenario.base, scenario.high) == pytest.approx((units,) * 3)
+    # No look-ahead: known once both the case and the vintage are, and within the run.
+    published = vintage_published(run, fc.store_id)
+    assert fc.available_at == max(published, *(c.available_at for c in cases))
+    assert fc.available_at <= as_of
+
+
+def test_forecasts_are_the_run_horizon_from_the_admissible_vintage() -> None:
     assert of(ForecastAdjustment)
     for fc in of(ForecastAdjustment):
-        assert fc.status == "unchanged" and fc.reason
-        for case_id in fc.case_ids:
-            case = everything()[("Case", case_id)]
-            assert isinstance(case, Case) and case.store_id == fc.store_id
-            assert case.scope_id is not None and fc.sku.startswith(case.scope_id.split("-")[0])
-        assert fc.baseline_ref is not None and fc.baseline_ref in fc.input_refs
-        (src,) = [s for s in fc.source_refs if s.uri.startswith("dataset://erp/forecast/")]
-        path = SOURCES / src.uri.removeprefix("dataset://")
-        assert src.content_hash == "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()
-        run = date.fromisoformat(fc.baseline_ref.version)
-        assert path.name == f"fcst_sku_store_run_{run}.csv"
-        # No look-ahead: the vintage is out (06:00 local the next day, RFC §4.3) before D+1,
-        # and D+1 is the day after the case's availability in the store's time zone.
-        tz = ZoneInfo(stores()[fc.store_id]["timezone"])
-        published = datetime.combine(run + timedelta(days=1), datetime.min.time(), tz)
-        assert fc.available_at is not None
-        assert published + timedelta(hours=6) <= fc.available_at
-        assert fc.horizon_start == fc.available_at.astimezone(tz).date() + timedelta(days=1)
-        assert (fc.horizon_end - fc.horizon_start).days + 1 == domain()["policy"]["horizon"][
-            "days"
-        ]["value"]
-        expected = disaggregate(
-            vintage_rows(src.uri, fc.store_id, fc.sku), fc.horizon_start, len(fc.series)
-        )
-        assert [p.baseline for p in fc.series] == pytest.approx(
-            [p.baseline for p in expected.points]
-        )
+        check_forecast(fc, run_as_of())
 
 
-def test_report_cites_existing_records_at_the_fixture_as_of() -> None:
-    (report,) = of(Report)
-    as_of = max(r.available_at for r in everything().values() if r.available_at is not None)
+def test_maire_baseline_is_hand_checked() -> None:
+    """Anchor computed by hand from fcst_sku_store_run_2026-10-05.csv: run at 2026-10-09 08:35 UTC,
+    D+1..D+7 = 10-10..10-16 = 2 days of W41 (13.66) + 5 days of W42 (14.42), /7 each."""
+    (fc,) = [f for f in of(ForecastAdjustment) if f.sku == "J20931A00012-999"]
+    assert fc.baseline_ref is not None and fc.baseline_ref.version == "2026-10-05"
+    assert (fc.horizon_start, fc.horizon_end) == (date(2026, 10, 10), date(2026, 10, 16))
+    total = sum(p.baseline or 0.0 for p in fc.series)
+    assert total == pytest.approx((2 * 13.66 + 5 * 14.42) / 7) and round(total, 1) == 14.2
+
+
+def stale_forecast(fc: ForecastAdjustment, as_of: datetime) -> ForecastAdjustment:
+    """`fc` rebuilt as if the run were at `as_of`: other vintage, horizon and values."""
+    run, series = expected_baseline(fc.store_id, fc.sku, as_of)
+    path = FORECASTS / f"fcst_sku_store_run_{run}.csv"
+    (src,) = [s for s in fc.source_refs if s.uri.startswith("dataset://erp/forecast/")]
+    stale_src = src.model_copy(
+        update={
+            "uri": "dataset://" + path.relative_to(SOURCES).as_posix(),
+            "content_hash": "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest(),
+        }
+    )
+    baseline = ArtifactRef(
+        kind="ForecastVintage",
+        id=f"fcst_sku_store_run_{run}/{fc.store_id}/{fc.sku}",
+        version=str(run),
+    )
+    points = []
+    for (day, units), p in zip(series, fc.series, strict=True):
+        flat = ScenarioValues(low=units, base=units, high=units)
+        points.append(
+            p.model_copy(update={"date": day, "baseline": units, "latent": flat, "servable": flat})
+        )
+    return fc.model_copy(
+        update={
+            "baseline_ref": baseline,
+            "input_refs": tuple(
+                baseline if r.kind == "ForecastVintage" else r for r in fc.input_refs
+            ),
+            "source_refs": tuple(stale_src if s == src else s for s in fc.source_refs),
+            "horizon_start": series[0][0],
+            "horizon_end": series[-1][0],
+            "series": tuple(points),
+            "available_at": max(vintage_published(run, fc.store_id), as_of),
+        }
+    )
+
+
+def test_forecast_check_rejects_a_case_dated_vintage_and_horizon() -> None:
+    """The review's mutation: Maire's baseline taken at the case date (2026-10-02), i.e. the
+    2026-09-28 vintage for 10-03..10-09, is self-consistent but not the run's horizon."""
+    (fc,) = [f for f in of(ForecastAdjustment) if f.sku == "J20931A00012-999"]
+    case = everything()[("Case", fc.case_ids[0])]
+    assert case.available_at is not None
+    stale = stale_forecast(fc, case.available_at)
+    assert stale.baseline_ref is not None and stale.baseline_ref.version == "2026-09-28"
+    assert stale.horizon_start == date(2026, 10, 3)
+    with pytest.raises(AssertionError, match="2026-09-28"):
+        check_forecast(stale, run_as_of())
+    # Right vintage reference and horizon, but the stale values: fails on the values.
+    points = [
+        p.model_copy(update={"date": q.date}) for p, q in zip(stale.series, fc.series, strict=True)
+    ]
+    with pytest.raises(AssertionError, match="comparison failed"):
+        check_forecast(fc.model_copy(update={"series": tuple(points)}), run_as_of())
+
+
+MARKER = re.compile(r"\[(\d+)\]")
+NUMBER = re.compile(r"\d+(?:\.\d+)?")
+
+
+def cited_segments(markdown: str) -> dict[int, str]:
+    """Citation number → the text it closes: from the line start or the previous marker."""
+    segments: dict[int, str] = {}
+    for line in markdown.splitlines():
+        line = re.sub(r"^\s*- ", "", line)
+        prev = 0
+        for m in MARKER.finditer(line):
+            n = int(m.group(1))
+            assert n not in segments, f"[{n}] cited twice"
+            segments[n] = line[prev : m.start()]
+            prev = m.end()
+    return segments
+
+
+def check_citation(c: Citation, text: str, as_of: datetime) -> None:
+    """The rendered text says what the cited field holds, with the cited unit, scope and period
+    (RFC §4.8.1). Expected values come from the cited record or the sources, not the report."""
+    record = resolve(c.ref)
+    numbers = [float(n) for n in NUMBER.findall(text)]
+    if isinstance(record, Observation):
+        q = record.quantity
+        assert c.scope == {"store_id": record.store_id}
+        assert (c.period_start, c.period_end) == (record.period_start, record.period_end)
+        if c.field == "quantity.value":
+            assert q.kind == "exact" and q.value is not None and c.unit == q.unit
+            assert numbers == [q.value], text  # the value, and no other uncited number
+            assert text.rstrip().endswith(f" {q.unit}"), text
+        else:
+            assert c.field == "quantity.kind" and c.unit is None
+            assert numbers == [] and f"quantity {q.kind}" in text, text
+    elif isinstance(record, ForecastAdjustment):
+        run, series = expected_baseline(record.store_id, record.sku, as_of)
+        first, last = series[0][0], series[-1][0]
+        assert (c.field, c.unit) == ("series.baseline", "units")
+        assert c.scope == {"store_id": record.store_id, "sku": record.sku}
+        assert (c.period_start, c.period_end) == local_day_bounds(first, last, record.store_id)
+        m = re.fullmatch(
+            rf"baseline {re.escape(record.sku)} (\d\d)-(\d\d)\.\.(\d\d)-(\d\d) "
+            rf"(\d+\.\d) units, {record.status} ",
+            text,
+        )
+        assert m, text
+        assert tuple(map(int, m.groups()[:4])) == (first.month, first.day, last.month, last.day)
+        assert float(m.group(5)) == pytest.approx(sum(u for _, u in series), abs=0.05)
+    elif isinstance(record, Case):
+        if c.field is None:
+            assert f"{record.status}, priority {record.priority} " in text, text
+        else:
+            assert c.field in ("n_documents", "n_origin_groups") and c.unit is None
+            assert c.scope == {"store_id": record.store_id}
+            assert numbers == [getattr(record, c.field)], text
+    elif isinstance(record, EntityLink):
+        assert c.field == "candidates" and record.status == "ambiguous"
+        assert text.strip() == "product is " + " or ".join(x.target_id for x in record.candidates)
+    else:
+        raise AssertionError(f"unexpected citation {c}")
+
+
+def check_report(report: Report) -> None:
+    as_of = run_as_of()
     assert report.as_of == as_of == report.available_at
-    assert report.as_of.tzinfo is UTC or report.as_of.utcoffset() == timedelta(0)
+    assert report.as_of.utcoffset() == timedelta(0)
     cited = [resolve(c.ref) for c in report.citations]
     assert all(r.available_at is not None and r.available_at <= report.as_of for r in cited)
     assert {c.ref for c in report.citations} == set(report.input_refs)
     keys = sorted(f"{r.kind}:{r.id}@{r.version}" for r in report.input_refs)
     digest = hashlib.sha256("\n".join(keys).encode()).hexdigest()
     assert report.input_version_hash == f"sha256:{digest}"
-    for i in range(1, len(report.citations) + 1):
-        assert f"[{i}]" in report.markdown
-    for case in of(Case):
-        assert case.id in {c.ref.id for c in report.citations}
+    segments = cited_segments(report.markdown)
+    assert sorted(segments) == list(range(1, len(report.citations) + 1))
+    for n, c in enumerate(report.citations, start=1):
+        check_citation(c, segments[n], as_of)
+    # Every quantity is cited: a bullet holds numbers only inside cited segments, and the open
+    # questions are the cases' own text, with no number.
+    uncertainties = {u for case in of(Case) for u in case.blocking_uncertainties}
+    for line in report.markdown.splitlines():
+        if line.startswith("  - open: "):
+            assert line.removeprefix("  - open: ") in uncertainties
+            assert not NUMBER.search(line), line
+        elif line.startswith("  - "):
+            assert MARKER.search(line) and not NUMBER.search(MARKER.split(line)[-1]), line
+    # Coverage: every case, every forecast and every counted (non-copy) observation is cited.
+    copies = {r.from_ref.id for r in of(EvidenceRelation) if r.relation == "duplicates"}
+    ids = {c.ref.id for c in report.citations}
+    assert {c.id for c in of(Case)} <= ids
+    assert {f.id for f in of(ForecastAdjustment)} <= ids
+    counted = {r.id for case in of(Case) for r in case.supporting if r.id not in copies}
+    assert {i for i in ids if i.startswith("obs-")} == counted
+
+
+def test_report_renders_cited_values_at_the_fixture_as_of() -> None:
+    (report,) = of(Report)
+    check_report(report)
+
+
+@pytest.mark.parametrize(
+    ("old", "new"),
+    [
+        ("unmet demand 7 requests [", "unmet demand 700 requests ["),  # the review's mutation
+        ("10-10..10-16 14.2 units", "10-10..10-16 12.6 units"),  # stale vintage total
+        ("J20931A00012-999 10-10..10-16", "J20931A00012-999 10-03..10-09"),  # stale horizon
+        ("stockout 0 units [", "stockout 0 units, 3 asked ["),  # extra, uncited number
+        ("2 documents [", "3 documents ["),
+        ("priority high [", "priority low ["),
+    ],
+)
+def test_report_check_rejects_wrong_rendered_values(old: str, new: str) -> None:
+    (report,) = of(Report)
+    assert report.markdown.count(old) == 1
+    mutated = report.model_copy(update={"markdown": report.markdown.replace(old, new)})
+    with pytest.raises(AssertionError):
+        check_report(mutated)
+
+
+@pytest.mark.parametrize(
+    "update",
+    [
+        {"unit": "units"},  # requests are not units
+        {"scope": {"store_id": "NYC01"}},  # the right number of the wrong store
+        {"field": "quantity.kind"},
+        {"period_end": None},
+    ],
+)
+def test_report_check_rejects_wrong_citation_semantics(update: dict) -> None:
+    (report,) = of(Report)
+    citations = list(report.citations)
+    (i,) = [i for i, c in enumerate(citations) if c.ref.id.endswith("mil01-maire-requests")]
+    citations[i] = citations[i].model_copy(update=update)
+    with pytest.raises(AssertionError):
+        check_report(report.model_copy(update={"citations": tuple(citations)}))
 
 
 def test_all_fixtures_load_as_one_run() -> None:
