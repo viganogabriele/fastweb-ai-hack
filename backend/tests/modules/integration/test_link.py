@@ -203,7 +203,9 @@ def test_missing_catalog_blocks(tmp_path) -> None:
     ("mention", "size"),
     [("gilet Tib blu taglia 4", "4"), ("Maire tg. 3", "3"), ("size M please", "M"),
      ("Größe 2 Maire", "2"), ("マイレ サイズ1", "1"), ("cardigan logo in M", None),
-     ("Maire nera", None), ("Ecrins tg 1 e tg 7", None), ("Maire tg 2, tg. 2", "2")],
+     ("Maire nera", None), ("Ecrins tg 1 e tg 7", None), ("Maire tg 2, tg. 2", "2"),
+     ("Maire tg 3 o 4", None), ("Maire size S/M", None), ("Maire tg 3, 4", None),
+     ("Maire taglia l'altra", None), ("Maire tg 3 e basta", "3")],
 )  # fmt: skip
 def test_size_in_mention_needs_an_explicit_size_word(mention, size) -> None:
     assert link.size_in(mention) == size
