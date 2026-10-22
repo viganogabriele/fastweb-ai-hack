@@ -1,0 +1,69 @@
+[
+  {
+    "kind": "SourceDocument",
+    "payload": {
+      "id": "doc-20260918-2207-mil01-corr",
+      "version": "v1",
+      "available_at": "2026-09-18T20:07:29Z",
+      "availability_basis": "email_date_header",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20260918_2207_MIL01_corr.eml",
+          "content_hash": "sha256:7b68a50cbfe691819a1148697f1597065fc7a438403202a302dd03f71a31db3f",
+          "locator": null
+        }
+      ],
+      "source_type": "email",
+      "connector": "src.email",
+      "uri": "dataset://store_emails/MIL01/20260918_2207_MIL01_corr.eml",
+      "content_hash": "sha256:7b68a50cbfe691819a1148697f1597065fc7a438403202a302dd03f71a31db3f",
+      "origin": "giulia.ferrandi@moncler-retail.example",
+      "author_ref": "Giulia Ferrandi",
+      "language": "it",
+      "business_date": "2026-09-18",
+      "event_start": null,
+      "event_end": null,
+      "thread_key": "<ca847db8e00a.5487b537@moncler-retail.example>",
+      "parent_document_id": "doc-20260918-2115-mil01",
+      "text": "Scusate, ho invertito le cifre: il fatturato di oggi e' 85,0k e non 58. Il +21% e' giusto.\nG.",
+      "text_version": "email-v1",
+      "meta": {
+        "store_id": "MIL01",
+        "message_id": "<a745f9062431.c5c163c5@moncler-retail.example>",
+        "in_reply_to": "<ca847db8e00a.5487b537@moncler-retail.example>",
+        "subject": "R: Chiusura MIL01 - 18/09 - CORREZIONE",
+        "thread_subject": "Chiusura MIL01 - 18/09 - CORREZIONE",
+        "is_reply": true,
+        "is_forward": false,
+        "body_source": "plain",
+        "fixture_case": "correction"
+      }
+    }
+  },
+  {
+    "kind": "Segment",
+    "payload": {
+      "id": "doc-20260918-2207-mil01-corr-seg0",
+      "version": "v1",
+      "available_at": "2026-09-18T20:07:29Z",
+      "availability_basis": "email_date_header",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20260918_2207_MIL01_corr.eml",
+          "content_hash": "sha256:7b68a50cbfe691819a1148697f1597065fc7a438403202a302dd03f71a31db3f",
+          "locator": null
+        }
+      ],
+      "document_id": "doc-20260918-2207-mil01-corr",
+      "text_version": "email-v1",
+      "idx": 0,
+      "text": "Scusate, ho invertito le cifre: il fatturato di oggi e' 85,0k e non 58. Il +21% e' giusto.\nG.",
+      "char_start": 0,
+      "char_end": 93,
+      "locator": null,
+      "t_start_s": null,
+      "t_end_s": null,
+      "is_quoted": false
+    }
+  }
+]
