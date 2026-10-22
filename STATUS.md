@@ -18,6 +18,7 @@ One line per task. Edit only the lines of your own task.
 - ACT-04 pure (E, done by Bianca) `modules/sources/systems_client.py`: DC stock/ATP → `StockFact`, lanes with crosswalk, ETA from cut-off and pickup days, `Unknown` instead of zero
 - ING-01 pure (B, Bianca) `modules/sources/erp.py`: typed ERP rows with provenance, `available_at` (next-day 06:00 local), latest forecast vintage per store
 - PLT-07 (A) `scripts/smoke_fastweb.py` + `docs/smoke-fastweb.md`: key per model, tool calls on 5 chat models, Gemma chosen, embeddings OK, no ASR (OQ-2 closed)
+- PLT-03 (C, Lorenzo) `core/db.py`, `core/repo.py`, `core/fixtures.py`: run-scoped SQLite artifact store + `erp_rows`, `as_of` filter inside the repo, `tessera fixtures load` / `reset --run`, RFC §7.3 test 1
 
 ## In progress
 
@@ -29,11 +30,13 @@ One line per task. Edit only the lines of your own task.
 - WEB-01 (D) App shell on hand-written JSON
 - DATA-01b (B) Fixtures: links (linked and ambiguous), cases, baseline with unchanged scenarios, report
 - ING-09 (A) Physical quantities (exact/range/vague/unknown) with units, from span text
-- PLT-03 (C) `core/db.py`, `core/repo.py`: SQLite artifact store, `as_of` filter, fixtures load
+- PLT-04 (C) `core/registry.py`, `core/orchestrator.py`: declared deps, statuses, atomic publication, `tessera run --as-of`
+- PLT-06 (C) API thin: `/api/runs`, `/documents`, `/cases`; `make types`
+- ING-01 module (B) `src.erp` writes `erp_rows` via `repo.put_erp`
+- ACT-04 module (E) `sys.client` wired to the repo as `StockFact`, time-filtered at `as_of`
 
 ## Blocked (waiting on)
 
 - DATA-01c (E) ← DATA-01b
-- PLT-04, PLT-06 (C), ING-01 module (B), ACT-04 module (E) ← PLT-03
 - Rest of Phase 1–2 ← PLT-04 / PLT-05 (see `docs/PLAN.md` §4)
 - ASR-01 (A) real transcription, deferred to the reserve pool ← G2 (see `docs/PLAN.md` §4 "Deferred: ASR")
