@@ -351,3 +351,43 @@ def test_existing_pending_run_savepoint_does_not_commit_before_outer_job(engine)
             raise RuntimeError("job fails after nested successful put")
     with repo_session(engine, request) as repo:
         assert repo.get(SourceDocument, "rolled-back") is None
+
+
+def test_module_cannot_mutate_frozen_snapshot(engine):
+    module = manifest("source")
+    request = spec(module)
+
+    def execute(ctx):
+        ctx.spec.model_versions["changed"] = "bad"
+        ctx.params["changed"] = "bad"
+        ctx.manifest.params_schema["changed"] = "bad"
+        return result(ctx)
+
+    run(request, engine=engine, registry=Registry((RegisteredModule(module, execute),)))
+    with repo_session(engine, request) as repo:
+        assert repo.spec == request
+    assert request.model_versions == {}
+    assert request.modules[0].params == {}
+    assert request.modules[0].manifest.params_schema == {}
+
+
+def test_cli_executes_snapshot_and_as_of_override_creates_fresh_run(tmp_path, monkeypatch, capsys):
+    import json
+
+    from tessera.cli import main
+    from tessera.core.config import Settings
+
+    module = manifest("source")
+    request = spec(module)
+    path = tmp_path / "run.json"
+    path.write_text(request.model_dump_json())
+    settings = Settings(_env_file=None, data_dir=tmp_path)
+    registry = Registry((RegisteredModule(module, result),))
+    monkeypatch.setattr("tessera.cli.get_settings", lambda: settings)
+    monkeypatch.setattr(Registry, "discover", lambda: registry)
+    main(["run", "--run-spec", str(path), "--modules", "source"])
+    first = json.loads(capsys.readouterr().out)
+    assert first["run_id"] == request.run_id and first["status"] == "succeeded"
+    main(["run", "--run-spec", str(path), "--as-of", "2026-10-21T18:00:00+02:00"])
+    second = json.loads(capsys.readouterr().out)
+    assert second["run_id"] != request.run_id and second["status"] == "succeeded"

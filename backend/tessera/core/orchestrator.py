@@ -2,6 +2,7 @@
 
 import logging
 from collections.abc import Mapping, Sequence
+from copy import deepcopy
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from threading import Lock
@@ -95,6 +96,7 @@ def run(
     ``modules`` selects roots and includes their declared prerequisites. No output
     from another run and no fixture is used to satisfy a missing prerequisite.
     """
+    spec = RunSpec.model_validate(spec.model_dump(mode="json"))
     registry = registry if registry is not None else Registry.discover()
     snapshots = {snapshot.manifest.id: snapshot for snapshot in spec.modules}
     plan = _plan(spec, modules)
@@ -177,12 +179,12 @@ def run(
                     with repo.session.begin_nested():
                         result = entries[module_id].run(
                             RunContext(
-                                spec=spec,
+                                spec=spec.model_copy(deep=True),
                                 repo=repo,
                                 clients=clients or {},
                                 logger=logger or logging.getLogger("tessera.pipeline"),
-                                manifest=manifest,
-                                params=snapshot.params,
+                                manifest=manifest.model_copy(deep=True),
+                                params=deepcopy(snapshot.params),
                                 missing_optional_inputs=missing_optional,
                             )
                         )
