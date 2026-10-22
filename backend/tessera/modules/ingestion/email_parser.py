@@ -10,9 +10,16 @@ Quoted material is flagged, not removed: `>` lines, and everything from a reply/
 A forward's quoted part can still carry new facts (a customer's mail); deciding that is dedup's
 job (INT-02), not the parser's. Attachments are listed with type and size, never parsed here.
 
+Bodies are decoded strictly with the declared charset. If that fails (unknown or wrong charset),
+the parser tries a superset of the declared charset, then UTF-8, then Windows-1252 for Latin
+declarations, and records the fallback in `warnings`, so that the canonical text never silently
+contains U+FFFD and evidence quotes stay exact. Undecodable bytes are replaced only as a last
+resort, with a warning.
+
 Pure code: bytes in, dataclasses out. No DB, no LLM, no dataset paths.
 """
 
+import codecs
 import hashlib
 import re
 from dataclasses import dataclass
@@ -58,6 +65,27 @@ _SENT_LINE = re.compile(
     r"发送时间|發送時間|日期|送信日時|보낸 날짜)\s*[:：]",
     re.IGNORECASE,
 )
+# An Outlook header block also has a recipient or subject line. "Da:"/"Data:" alone are ordinary
+# words at the top of a store report and must not turn the sender's own text into a quote.
+_TO_OR_SUBJECT_LINE = re.compile(
+    r"^(to|a|an|à|para|aan|til|cc|收件人|宛先|받는 사람|"
+    r"subject|oggetto|betreff|objet|asunto|onderwerp|emne|主题|主旨|件名|제목)\s*[:：]",
+    re.IGNORECASE,
+)
+_HEADER_BLOCK_LINES = 5
+
+# Charsets often declared for text that needs their superset.
+_SUPERSETS = {
+    "gb2312": "gb18030",
+    "gbk": "gb18030",
+    "ks_c_5601-1987": "cp949",
+    "euc-kr": "cp949",
+    "shift_jis": "cp932",
+    "iso-2022-jp": "iso2022_jp_ext",
+    "big5": "big5hkscs",
+    "us-ascii": "utf-8",
+}
+_LATIN = {"us-ascii", "ascii", "utf-8", "iso-8859-1", "latin-1", "iso-8859-15", "windows-1252"}
 
 
 @dataclass(frozen=True)
@@ -96,6 +124,7 @@ class ParsedEmail:
     attachments: tuple[Attachment, ...]
     body_source: BodySource
     content_hash: str  # sha256 of the raw bytes
+    warnings: tuple[str, ...] = ()  # e.g. "charset_fallback:utf-8->windows-1252"
     parser_version: str = PARSER_VERSION
 
     @property
@@ -111,7 +140,7 @@ def parse_eml(raw: bytes) -> ParsedEmail:
     prefix = _PREFIX.match(subject)
     prefixes = prefix.group(0) if prefix else ""
     first = re.split(r"\s*[:：]", prefixes.strip(), maxsplit=1)[0].lower()
-    text, source = _body(msg)
+    text, source, warnings = _body(msg)
     name, address = parseaddr(_header(msg, "from") or "")
     return ParsedEmail(
         message_id=_header(msg, "message-id"),
@@ -131,6 +160,7 @@ def parse_eml(raw: bytes) -> ParsedEmail:
         attachments=_attachments(msg),
         body_source=source,
         content_hash=hashlib.sha256(raw).hexdigest(),
+        warnings=tuple(warnings),
     )
 
 
@@ -177,19 +207,53 @@ def _quote_start(lines: list[str]) -> int:
             continue
         if any(p.match(s) for p in _QUOTE_HEADERS):
             return i
-        if _FROM_LINE.match(s) and any(_SENT_LINE.match(n.strip()) for n in lines[i + 1 : i + 4]):
-            return i
+        if _FROM_LINE.match(s):
+            block = [n.strip() for n in lines[i + 1 : i + 1 + _HEADER_BLOCK_LINES]]
+            if any(_SENT_LINE.match(n) for n in block) and any(
+                _TO_OR_SUBJECT_LINE.match(n) for n in block
+            ):
+                return i
     return len(lines)
 
 
-def _body(msg: EmailMessage) -> tuple[str, BodySource]:
+def _body(msg: EmailMessage) -> tuple[str, BodySource, list[str]]:
     part = msg.get_body(preferencelist=("plain",))
     if part is not None:
-        return canonicalize(part.get_content()), "plain"
+        text, warnings = _decode(part)
+        return canonicalize(text), "plain", warnings
     part = msg.get_body(preferencelist=("html",))
     if part is not None:
-        return canonicalize(html_to_text(part.get_content())), "html"
-    return "", "none"
+        text, warnings = _decode(part)
+        return canonicalize(html_to_text(text)), "html", warnings
+    return "", "none", []
+
+
+def _decode(part: EmailMessage) -> tuple[str, list[str]]:
+    """Strict decode with the declared charset, then declared fallbacks (see module docstring)."""
+    payload = part.get_payload(decode=True) or b""
+    declared = (part.get_content_charset() or "us-ascii").lower()
+    tries = [declared]
+    if declared in _SUPERSETS:
+        tries.append(_SUPERSETS[declared])
+    tries.append("utf-8")
+    if declared in _LATIN or not _known(declared):
+        tries.append("windows-1252")
+    for charset in dict.fromkeys(tries):
+        try:
+            text = payload.decode(charset)
+        except (LookupError, UnicodeDecodeError):
+            continue
+        return text, [] if charset == declared else [f"charset_fallback:{declared}->{charset}"]
+    charset = declared if _known(declared) else "utf-8"
+    return payload.decode(charset, errors="replace"), [f"charset_replaced:{declared}"]
+
+
+def _known(charset: str) -> bool:
+    try:
+        codecs.lookup(charset)
+    except LookupError:
+        return False
+    return True
 
 
 def _attachments(msg: EmailMessage) -> tuple[Attachment, ...]:

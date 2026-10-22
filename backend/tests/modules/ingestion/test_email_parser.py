@@ -168,3 +168,38 @@ def test_html_to_text_strips_scripts() -> None:
         "uno",
         "due",
     ]
+
+
+def test_header_like_lines_in_own_report_are_not_a_quote() -> None:
+    e = parse_eml(eml("Da: Giulia (MIL01)\nData: 22/10\nFatturato 85k, 3 Maire nere perse"))
+    assert not any(s.is_quoted for s in e.segments)
+    assert "3 Maire nere perse" in e.own_text
+
+
+def raw_eml(body: bytes, charset: str) -> bytes:
+    return (
+        b"From: a@example.com\r\nSubject: Chiusura\r\nDate: Thu, 22 Oct 2026 21:05:00 +0200\r\n"
+        b"MIME-Version: 1.0\r\nContent-Type: text/plain; charset=" + charset.encode() + b"\r\n"
+        b"Content-Transfer-Encoding: 8bit\r\n\r\n" + body
+    )
+
+
+@pytest.mark.parametrize(
+    ("body", "charset", "text", "warning"),
+    [
+        ("perché 3 Maire".encode(), "utf-8", "perché 3 Maire", None),
+        ("perché 3 Maire".encode("cp1252"), "utf-8", "perché 3 Maire", "utf-8->windows-1252"),
+        ("perché".encode(), "x-unknown", "perché", "x-unknown->utf-8"),
+        ("perché".encode(), "us-ascii", "perché", "us-ascii->utf-8"),
+        ("粉色 Ilvaro 䶮".encode("gb18030"), "gb2312", "粉色 Ilvaro 䶮", "gb2312->gb18030"),
+    ],
+)
+def test_charset_fallback_keeps_exact_text_and_warns(body, charset, text, warning) -> None:
+    e = parse_eml(raw_eml(body, charset))
+    assert e.text == text and "�" not in e.text
+    assert e.warnings == ((f"charset_fallback:{warning}",) if warning else ())
+
+
+def test_undecodable_bytes_are_replaced_with_a_warning() -> None:
+    e = parse_eml(raw_eml(b"ok \xff\xfe", "iso-2022-jp"))
+    assert e.text.startswith("ok") and e.warnings == ("charset_replaced:iso-2022-jp",)
