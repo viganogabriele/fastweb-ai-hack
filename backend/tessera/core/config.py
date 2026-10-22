@@ -23,7 +23,12 @@ class Settings(BaseSettings):
     fastweb_keys_file: Path = REPO_ROOT / ".secrets" / "fastweb_keys.json"
     chat_model: str = "google/gemma-4-26B-A4B-it"
     embed_model: str = "Qwen/Qwen3-VL-Embedding-2B"
-    asr_model: str = "openai/whisper-large-v3-turbo"
+    # ASR-01: our OpenAI-compatible server on the team Mac mini (`tools/asr-server/`), not
+    # Fastweb. The URL is part of every transcription cache key, so keep the shared default.
+    asr_base_url: str = "https://hack-sst.lorenzocorallo.net/v1"
+    asr_api_key: SecretStr | None = None
+    asr_model: str = "whisper-large-v3-turbo"
+    asr_timeout_seconds: float = 120
     llm_mode: Literal["live", "record", "replay"] = "replay"
     # Per-run provider allowance (RFC §4.7.2); raise via env for full record runs.
     llm_max_calls: int = 100
@@ -61,6 +66,11 @@ class Settings(BaseSettings):
             return self.fastweb_keys()[model]
         except KeyError:
             raise MissingApiKey(f"no key for model {model!r} in {self.fastweb_keys_file}") from None
+
+    def asr_key(self) -> SecretStr:
+        if self.asr_api_key is None or not self.asr_api_key.get_secret_value():
+            raise MissingApiKey("no ASR_API_KEY in .env (one per consumer, see tools/asr-server)")
+        return self.asr_api_key
 
 
 @lru_cache
