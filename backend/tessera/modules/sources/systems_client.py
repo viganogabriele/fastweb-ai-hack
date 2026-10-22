@@ -25,7 +25,8 @@ master rows known at `as_of` (so it requires `src.erp`), asks each supplying DC 
 stores for DC stock and ATP of the run's assortment, and stores the facts already available at
 `as_of` as `StockFact`. `SystemsReader` is the read side for the investigator tools: stock per
 location from the repo (DC facts, store stock from the ERP rows), lanes and ETA from the client,
-both seen at the run's `as_of`.
+both seen at the run's `as_of`. Clients are always built from the crosswalk of the run's `as_of`
+(`ctx.clients["systems"]` is a factory, not a client), so no master data leaks across runs.
 """
 
 import csv
@@ -34,8 +35,9 @@ import json
 import re
 from collections.abc import Callable, Iterable, Mapping
 from dataclasses import dataclass
-from datetime import UTC, date, datetime, time, timedelta
+from datetime import date, datetime, time, timedelta
 from pathlib import Path
+from time import sleep as _sleep
 from typing import Any, Literal, Protocol
 from urllib.parse import urlencode
 from zoneinfo import ZoneInfo
@@ -52,7 +54,11 @@ SAP_SELLABLE_LGORT = "0001"
 HK_SELLABLE_TYPES = frozenset({"PICK", "RESERVE"})
 WEEKDAYS = ("MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN")
 EOD_PUBLISHED_AT = time(6, 0)  # local time on the next day, RFC §4.3
-BODY_ERRORS: dict[str, "UnknownReason"] = {"NO_SNAPSHOT": "no_snapshot", "NO_LANE": "no_lane"}
+BODY_ERRORS: dict[str, "UnknownReason"] = {
+    "NO_SNAPSHOT": "no_snapshot",
+    "NO_LANE": "no_lane",
+    "NO_FILE": "no_extraction",  # 3PL feed of that day not (yet) delivered
+}
 
 UnknownReason = Literal[
     "bad_request",
@@ -557,10 +563,17 @@ def _opt_float(value: object) -> float | None:
 
 CROSSWALK_FILE = Path("systems") / "reference" / "store_code_crosswalk_MDM.csv"
 DEFAULT_LOOKBACK_DAYS = 3
+RATE_LIMIT_RETRIES = 2
+MAX_RETRY_AFTER_S = 5.0
 # Reasons worth asking an earlier day for: the day exists but is not (yet) usable.
 _EARLIER_DAY = frozenset({"no_extraction", "snapshot_after_as_of"})
-# The service itself failed: distinct from "the system has no record".
-_SERVICE_ERRORS = frozenset({"unavailable", "rate_limited", "server_error", "bad_request"})
+# The service failed or answered garbage: errors (run degraded), distinct from "no record".
+_FAILURES = frozenset(
+    {"unavailable", "rate_limited", "server_error", "bad_request", "not_found", "unparseable"}
+)
+_RESULT_LINE = re.compile(r"(dc_stock|atp) (\S+) (\S+): (\w+)")
+
+ClientFactory = Callable[[Crosswalk], "SystemsClient"]
 
 MANIFEST = ModuleManifest(
     id="sys.client",
@@ -617,6 +630,10 @@ def crosswalk_rows(sources_dir: Path) -> tuple[list[dict[str, str]], dict[str, s
     return rows, supplying
 
 
+def default_client(crosswalk: Crosswalk) -> "SystemsClient":
+    return SystemsClient(crosswalk, base_url=get_settings().mocks_base_url)
+
+
 def crosswalk_at(run_repo: repo.Repo, rows: Iterable[Mapping[str, str]]) -> Crosswalk | Unknown:
     """Crosswalk from the MDM rows plus the ERP stores and EANs known at the run's `as_of`."""
     stores = [{k: str(v) for k, v in r.data.items()} for r in run_repo.erp("stores")]
@@ -656,14 +673,42 @@ def latest_facts(
     return last
 
 
+def patient(
+    fetch: Callable[[str, str, date], Any],
+    sleep: Callable[[float], None] = _sleep,
+    retries: int = RATE_LIMIT_RETRIES,
+) -> Callable[[str, str, date], Any]:
+    """Retry a rate-limited request a bounded number of times, honouring `Retry-After`."""
+
+    def call(plant: str, sku: str, day: date) -> Any:
+        for attempt in range(retries + 1):
+            got = fetch(plant, sku, day)
+            limited = isinstance(got, Unknown) and got.reason == "rate_limited"
+            if not limited or attempt == retries:
+                return got
+            try:
+                wait = float(got.detail or 1.0)
+            except ValueError:
+                wait = 1.0
+            sleep(min(max(wait, 0.0), MAX_RETRY_AFTER_S))
+        raise AssertionError("unreachable")
+
+    return call
+
+
 def load_stock(
     run_repo: repo.Repo,
     client: SystemsClient,
     skus: Iterable[str],
     plants: Iterable[str],
     lookback_days: int = DEFAULT_LOOKBACK_DAYS,
+    sleep: Callable[[float], None] = _sleep,
 ) -> ModuleResult:
-    """DC stock and ATP for every plant × SKU, stored in the run when known at `as_of`."""
+    """DC stock and ATP for every plant × SKU, stored in the run when known at `as_of`.
+
+    A plant still rate-limited after the retries is not asked again in this run: its remaining
+    SKUs are recorded as `rate_limited` errors without a request.
+    """
     as_of = run_repo.spec.as_of
     facts: list[StockFact] = []
     abstentions: list[str] = []
@@ -674,13 +719,22 @@ def load_stock(
         if tz is None:
             errors.append(f"{plant}: unknown_location")
             continue
+        limited = False
+        fetches = (
+            ("dc_stock", patient(client.dc_stock, sleep)),
+            ("atp", patient(client.atp, sleep)),
+        )
         for sku in sorted(set(skus)):
-            for name, fetch in (("dc_stock", client.dc_stock), ("atp", client.atp)):
-                calls += 1
-                got = latest_facts(fetch, plant, sku, as_of, tz, lookback_days)
+            for name, fetch in fetches:
+                if limited:
+                    got: Any = Unknown("rate_limited", "not requested")
+                else:
+                    calls += 1
+                    got = latest_facts(fetch, plant, sku, as_of, tz, lookback_days)
                 if isinstance(got, Unknown):
                     line = f"{name} {plant} {sku}: {got.reason}"
-                    (errors if got.reason in _SERVICE_ERRORS else abstentions).append(line)
+                    (errors if got.reason in _FAILURES else abstentions).append(line)
+                    limited = limited or got.reason == "rate_limited"
                     continue
                 facts.extend(got[0])
                 stale += got[1]
@@ -716,21 +770,14 @@ def run(ctx: Context) -> ModuleResult:
     )
     if not plants or not skus:
         return _blocked(f"no supplying DC ({len(plants)}) or assortment SKU ({len(skus)}) at as_of")
-    client = ctx.clients.get("systems")
-    owned = client is None
-    if owned:
-        client = SystemsClient(crosswalk, base_url=get_settings().mocks_base_url)
+    factory: ClientFactory = ctx.clients.get("systems", default_client)
+    client = factory(crosswalk)
     try:
         return load_stock(
-            ctx.repo,
-            client,
-            skus,
-            plants,
-            params.get("lookback_days", DEFAULT_LOOKBACK_DAYS),
+            ctx.repo, client, skus, plants, params.get("lookback_days", DEFAULT_LOOKBACK_DAYS)
         )
     finally:
-        if owned:
-            client.close()
+        client.close()
 
 
 def _assortment(run_repo: repo.Repo, store: str) -> list[repo.ErpRecord]:
@@ -763,13 +810,25 @@ class SystemsReader:
     """Stock and lanes as seen at the run's `as_of`. Never writes, never reads past `as_of`.
 
     DC stock and ATP come from the `StockFact` stored by `sys.client`; store stock from the ERP
-    `stock` rows (end-of-day `on_hand`). Lanes are read through the client, which drops a lane
-    reviewed after `as_of` and the observed P50/P90.
+    `stock` rows (end-of-day `on_hand`), only for the run's stores. When a DC has no fact, the
+    reason recorded by `sys.client` (e.g. `unavailable`, `rate_limited`, `no_position`) is
+    returned, so a service failure never reads like "no stock". Lanes are read through the
+    client, which drops a lane reviewed after `as_of` and the observed P50/P90.
     """
 
     def __init__(self, run_repo: repo.Repo, client: SystemsClient) -> None:
         self.repo = run_repo
         self.client = client
+        self._reasons: dict[tuple[str, str], str] | None = None
+
+    @classmethod
+    def open(
+        cls, run_repo: repo.Repo, factory: ClientFactory = default_client
+    ) -> "SystemsReader | Unknown":
+        """Reader with a client built from the crosswalk known at the run's `as_of`."""
+        rows, _ = crosswalk_rows(get_settings().sources_dir)
+        crosswalk = crosswalk_at(run_repo, rows)
+        return crosswalk if isinstance(crosswalk, Unknown) else cls(run_repo, factory(crosswalk))
 
     @property
     def as_of(self) -> datetime:
@@ -783,24 +842,44 @@ class SystemsReader:
         for location in locations:
             plant = DC_ALIASES.get(location, location)
             if plant in DC_TIMEZONES:
-                facts = [
-                    f for f in self.repo.list(StockFact, store_id=plant, sku=sku) if f.size == size
-                ]
-            elif location in self.client.crosswalk.store_plant:
+                # DCs are not run stores: filter on the payload, not on the store index.
+                where = {"location_id": plant, "size": size}
+                facts = self.repo.list(StockFact, sku=sku, where=where)
+            elif location in self.repo.spec.stores:
                 facts = self._store_facts(location, sku, size)
+                if isinstance(facts, Unknown):
+                    out[location] = facts
+                    continue
             else:
-                out[location] = Unknown("unknown_location", location)
+                out[location] = Unknown("unknown_location", f"{location} is not a DC or run store")
                 continue
             latest: dict[str, StockFact] = {}
             for f in facts:
                 if f.basis not in latest or f.snapshot_at > latest[f.basis].snapshot_at:
                     latest[f.basis] = f
             out[location] = (
-                tuple(latest[b] for b in sorted(latest))
-                if latest
-                else Unknown("not_loaded", f"{location} {sku}-{size} at {self.as_of.isoformat()}")
+                tuple(latest[b] for b in sorted(latest)) if latest else self._missing(plant, sku)
             )
         return out
+
+    def _missing(self, location: str, sku: str) -> Unknown:
+        detail = f"{location} {sku} at {self.as_of.isoformat()}"
+        reason = self._recorded_reasons().get((location, sku))
+        return Unknown(reason or "not_loaded", detail)
+
+    def _recorded_reasons(self) -> dict[tuple[str, str], str]:
+        """Why `sys.client` stored no fact, per (plant, SKU): failures win over abstentions."""
+        if self._reasons is None:
+            self._reasons = {}
+            for module_run in repo.list_module_runs(self.repo.engine, self.repo.run_id):
+                if module_run.module_id != MANIFEST.id or module_run.result is None:
+                    continue
+                result = module_run.result
+                for line in (*result.abstentions, *result.errors):
+                    if match := _RESULT_LINE.fullmatch(line):
+                        _, plant, sku, reason = match.groups()
+                        self._reasons[(plant, sku)] = reason
+        return self._reasons
 
     def lane_and_eta(
         self,
@@ -825,17 +904,21 @@ class SystemsReader:
             return got
         if required_by is None:
             return LaneEta(lane, got, None, None)
-        dest_tz = self.client.crosswalk.timezone(dest) or UTC
+        dest_tz = self.client.crosswalk.timezone(dest)
+        if dest_tz is None:
+            return Unknown("unknown_location", f"{dest}: no time zone at as_of")
         due = required_by.astimezone(dest_tz).date()
         p90 = None if got.eta_p90_date is None else got.eta_p90_date <= due
         return LaneEta(lane, got, got.eta_date <= due, p90)
 
-    def _store_facts(self, store: str, sku: str, size: str) -> list[StockFact]:
+    def _store_facts(self, store: str, sku: str, size: str) -> list[StockFact] | Unknown:
+        tz = self.client.crosswalk.timezone(store)
+        if tz is None:
+            return Unknown("unknown_location", f"{store}: no time zone at as_of")
         facts = []
         for row in self.repo.erp("stock", store_id=store, sku=sku):
             if str(row.data["size"]) != size or row.data.get("on_hand") is None:
                 continue
-            tz = self.client.crosswalk.timezone(store) or UTC
             day = row.data["snapshot_date"]
             ref = row.source_refs[0]
             facts.append(
