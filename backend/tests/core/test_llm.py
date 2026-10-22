@@ -545,3 +545,17 @@ def test_run_bound_extract_and_embed_share_scope_and_replay_mode_independence(tm
     assert bound.extract(Envelope, MESSAGES).item.sku == "A-B"
     assert bound.embed(["text"], dimensions=1) == [[1.0]]
     assert replay.budget.calls == 0
+
+
+def test_fixture_recordings_never_satisfy_product_replay(tmp_path):
+    recorder, requests, _ = client(tmp_path, [completion()])
+    fixture = run_spec(mode="fixture")
+    recorder.for_run(fixture).chat(MESSAGES)
+    assert len(requests) == 1
+    replay = LLMClient(recorder.settings.model_copy(update={"llm_mode": "replay"}))
+    assert replay.for_run(fixture).chat(MESSAGES).choices[0].message.content == "ok"
+    with pytest.raises(ReplayMiss):
+        replay.for_run(run_spec(mode="recorded")).chat(MESSAGES)
+    with pytest.raises(ReplayMiss):
+        replay.for_run(run_spec(mode="live")).chat(MESSAGES)
+    assert len(requests) == 1

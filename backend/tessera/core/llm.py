@@ -146,6 +146,7 @@ class LLMClient:
         semantic manifest/version/configuration contributes to cache identity.
         """
         scope = spec.model_dump(mode="json", exclude={"run_id", "mode"})
+        scope["namespace"] = "fixture" if spec.mode == "fixture" else "product"
         scope["stores"] = sorted(scope["stores"])
         for module in scope["modules"]:
             module["manifest"].pop("mode", None)

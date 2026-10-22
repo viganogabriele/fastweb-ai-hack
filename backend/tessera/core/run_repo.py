@@ -147,7 +147,10 @@ class RunRepo(Repo):
         self._put_indexes = {"store_id": store_id, "sku": sku, "case_id": case_id}
         try:
             with self.session.begin_nested():
-                return super().put(*records)
+                # The canonical Repo prepares an entire batch before inserting.
+                # Insert in caller order inside our one savepoint so a child can
+                # resolve an earlier parent while the batch remains all-or-none.
+                return sum(super(RunRepo, self).put(record) for record in records)
         finally:
             self._put_indexes = {}
 
