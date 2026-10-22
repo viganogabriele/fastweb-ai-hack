@@ -1,0 +1,155 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #0A0C11; overflow: hidden; }
+    #s2-cv { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    .s2-line {
+      position: absolute; left: 120px; top: 430px; width: 640px;
+      font-family: Montserrat, sans-serif; font-weight: 800; font-size: 68px; line-height: 1.05;
+      color: #F4F4F1;
+    }
+    .s2-line .w { display: inline-block; margin-right: 0.24em; }
+    .s2-line .red { color: #D7141A; }
+  </style>
+  <div data-hf-id="hf-3o8i" id="root" data-composition-id="s2-storm" data-width="1920" data-height="1080">
+    <canvas data-hf-id="hf-ivex" id="s2-cv" width="1920" height="1080"></canvas>
+    <div data-hf-id="hf-1vuu" id="s2-l1" class="s2-line clip" data-start="0.2" data-duration="2.5" data-layout-allow-overlap>
+      <span data-hf-id="hf-lkdi" class="w">Free</span><span data-hf-id="hf-2lnj" class="w">text</span><br data-hf-id="hf-x5px" /><span data-hf-id="hf-gpzr" class="w">in</span><span data-hf-id="hf-akjk" class="w">8</span><span data-hf-id="hf-q51f" class="w">languages</span>
+    </div>
+    <div data-hf-id="hf-pfuo" id="s2-l2" class="s2-line clip" data-start="2.8" data-duration="1.9" data-layout-allow-overlap>
+      <span data-hf-id="hf-vjqo" class="w">with</span><span data-hf-id="hf-u1ga" class="w">zero</span><br data-hf-id="hf-rsrt" /><span data-hf-id="hf-94av" class="w">product</span><span data-hf-id="hf-1ex6" class="w">codes</span>
+    </div>
+    <div data-hf-id="hf-obab" id="s2-l3" class="s2-line clip" data-start="4.8" data-duration="1.5" data-layout-allow-overlap>
+      <span data-hf-id="hf-aay8" class="w">Sales</span><span data-hf-id="hf-p5sw" class="w">data</span><span data-hf-id="hf-iflw" class="w">arrives</span><br data-hf-id="hf-szow" /><span data-hf-id="hf-jzuv" class="w">tomorrow</span>
+    </div>
+    <div data-hf-id="hf-eaxb" id="s2-l4" class="s2-line clip" data-start="6.4" data-duration="1.6" data-layout-allow-overlap>
+      <span data-hf-id="hf-6ozy" class="w">Lost</span><span data-hf-id="hf-qksr" class="w">demand</span><br data-hf-id="hf-sldv" /><span data-hf-id="hf-xrk9" class="w red">never</span><span data-hf-id="hf-s3wc" class="w">arrives</span>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const NOTES = [
+        ["TYO01","20:58","ja","黒のMAIRE、サイズ2の","問い合わせ3件。在庫なし。"],
+        ["SEL01","21:04","ko","검은색 롱패딩 문의가","계속 들어옵니다."],
+        ["SHA01","21:10","zh","很多客人询问","黑色短款羽绒服。"],
+        ["HKG01","21:02","zh","Hermine 黑色 1號","已售罄。"],
+        ["SIN01","21:15","en","Quiet day,","rain all afternoon."],
+        ["DXB01","21:30","en","Two clients asked","for white Bady."],
+        ["MIL01","21:06","it","Traffico dimezzato","per i lavori in via."],
+        ["MIL02","21:12","it","Due clienti cercavano","quello lungo nero."],
+        ["PAR01","21:05","fr","Maire noir T2 épuisé","depuis ce midi."],
+        ["ROM01","20:55","it","Bella giornata,","tanti turisti."],
+        ["PAR02","21:20","fr","Beaucoup de touristes","coréens ce soir."],
+        ["MUN01","20:48","de","Viele Anfragen nach","schwarzer Maire."],
+        ["BER01","21:01","de","Kalt heute,","Daunenjacken gefragt."],
+        ["ZRH01","20:52","de","Kundin wollte Flammette","in Größe 3."],
+        ["LON01","21:09","en","Black Maire size 2,","three walk-outs."],
+        ["MAD01","21:14","es","Mucho interés en","el Maire negro."],
+        ["AMS01","21:03","en","Steady footfall,","tourists from Seoul."],
+        ["CPH01","20:59","en","Snow tomorrow,","beanies flying."],
+        ["GVA01","21:11","fr","Valbourg blanc T4","encore demandé."],
+        ["CAN01","20:50","fr","Calme.","Peu de passage."],
+        ["TPE01","21:07","zh","黑色 Maire 2號","詢問度很高。"],
+        ["OSA01","21:00","ja","雨のため","客足少なめ。"],
+        ["SEL02","21:13","ko","Maire 블랙 2사이즈 품절,","고객 3명 돌아감."],
+        ["STM01","20:46","de","Ski-Saison startet,","Peyre gefragt."],
+        ["VEN01","20:44","it","Acqua alta,","chiuso alle 17."],
+        ["COU01","20:57","it","Prima neve, richieste","di Montgenevre."],
+        ["CRT01","21:08","it","Clienti chiedono","la Polaris Cape."],
+        ["LON02","21:16","en","Harrods busy,","Trailgrip sold well."],
+        ["BJS01","21:05","zh","客人想要","红色 Maire？"],
+        ["TYO02","21:01","ja","表参道、若い客層が","多い一日でした。"]
+      ];
+      const HERO = 8; // PAR01
+      const COLS = 6, ROWS = 5, CW = 300, CH = 160, GAP = 26;
+      const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+      const expo = (x) => (x >= 1 ? 1 : 1 - Math.pow(2, -10 * clamp(x, 0, 1)));
+      const eio = (x) => { x = clamp(x, 0, 1); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+      let seed = 1337;
+      const rnd = () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+      const TH = -22 * Math.PI / 180, XC = 560, ZC = 1180, F = 1100;
+      const W = COLS * CW + (COLS - 1) * GAP, H = ROWS * CH + (ROWS - 1) * GAP;
+      // landing order: hero lands early so the eye has met it
+      const order = NOTES.map((_, i) => i);
+      const CARDS = NOTES.map((n, i) => {
+        const col = i % COLS, row = Math.floor(i / COLS);
+        return { n, col, row, u0: -W / 2 + col * (CW + GAP), v0: -H / 2 + row * (CH + GAP),
+          land: 0.25 + order.indexOf(i) * 0.075 + rnd() * 0.05,
+          dx: (rnd() - 0.5) * 900, dy: (rnd() - 0.5) * 700, rot: (rnd() - 0.5) * 0.8 };
+      });
+      function proj(X, Y, Z) { return [960 + (X * F) / Z, 540 + (Y * F) / Z]; }
+      function worldOf(u, v, k, c) {
+        // k: 0 = landed, 1 = start of flight
+        const X = XC + u * Math.cos(TH) + c.dx * k, Z = ZC + u * Math.sin(TH) - 950 * k, Y = v + c.dy * k;
+        return proj(X, Y, Math.max(Z, 120));
+      }
+      const cv = document.getElementById("s2-cv");
+      const ctx = cv.getContext("2d");
+      const SHEET = [110, 150, 1060, 800];
+
+      function cardPaint(c, alpha, contentA) {
+        const n = c.n;
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = "#F6F6F3"; ctx.fillRect(0, 0, CW, CH);
+        ctx.globalAlpha = alpha * contentA;
+        ctx.fillStyle = "#14213D"; ctx.font = "700 22px Montserrat";
+        ctx.fillText(n[0], 18, 36);
+        ctx.font = "500 18px 'IBM Plex Mono'"; ctx.fillStyle = "#6B7280";
+        ctx.fillText(n[1] + "  ·  " + n[2], 104, 36);
+        ctx.fillStyle = "#E3E4E8"; ctx.fillRect(18, 52, CW - 36, 2);
+        ctx.fillStyle = "#1F2430"; ctx.font = "500 21px Montserrat, 'Noto Sans CJK JP'";
+        ctx.fillText(n[3], 18, 92); ctx.fillText(n[4], 18, 124);
+        ctx.globalAlpha = 1;
+      }
+
+      function draw(t) {
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.fillStyle = "#0A0C11"; ctx.fillRect(0, 0, 1920, 1080);
+        const dim = eio((t - 6.3) / 0.5);           // others step back
+        const lift = eio((t - 7.25) / 0.95);        // hero becomes the sheet
+        const heroFirst = [];
+        for (let i = 0; i < CARDS.length; i++) {
+          const c = CARDS[i];
+          const ft = (t - c.land + 0.6) / 0.6;      // flight progress
+          if (ft <= 0) continue;
+          const k = 1 - expo(ft);
+          const a = clamp(ft * 3, 0, 1);
+          const rot = c.rot * k;
+          const cu = c.u0 + CW / 2, cvv = c.v0 + CH / 2;
+          const rc = (du, dv) => [cu + du * Math.cos(rot) - dv * Math.sin(rot), cvv + du * Math.sin(rot) + dv * Math.cos(rot)];
+          const A = rc(-CW / 2, -CH / 2), B = rc(CW / 2, -CH / 2), Cc = rc(-CW / 2, CH / 2);
+          let p0 = worldOf(A[0], A[1], k, c), p1 = worldOf(B[0], B[1], k, c), p3 = worldOf(Cc[0], Cc[1], k, c);
+          if (i === HERO) { heroFirst.push([p0, p1, p3, a]); continue; }
+          ctx.setTransform((p1[0] - p0[0]) / CW, (p1[1] - p0[1]) / CW, (p3[0] - p0[0]) / CH, (p3[1] - p0[1]) / CH, p0[0], p0[1]);
+          cardPaint(c, a * (1 - 0.72 * dim) * (1 - lift), 1);
+        }
+        // the hero card, drawn last; it lifts off the wall into the reading sheet
+        if (heroFirst.length) {
+          let [p0, p1, p3, a] = heroFirst[0];
+          const s0 = [SHEET[0], SHEET[1]], s1 = [SHEET[0] + SHEET[2], SHEET[1]], s3 = [SHEET[0], SHEET[1] + SHEET[3]];
+          const L = (p, q) => [p[0] + (q[0] - p[0]) * lift, p[1] + (q[1] - p[1]) * lift];
+          p0 = L(p0, s0); p1 = L(p1, s1); p3 = L(p3, s3);
+          ctx.setTransform((p1[0] - p0[0]) / CW, (p1[1] - p0[1]) / CW, (p3[0] - p0[0]) / CH, (p3[1] - p0[1]) / CH, p0[0], p0[1]);
+          cardPaint(CARDS[HERO], a, 1 - clamp(lift * 2.2, 0, 1));
+          // red stockout mark on the hero once the others dim
+          if (dim > 0 && lift < 0.4) {
+            ctx.globalAlpha = dim * (1 - lift * 2.5);
+            ctx.fillStyle = "#D7141A"; ctx.fillRect(0, 0, 8, CH);
+            ctx.globalAlpha = 1;
+          }
+        }
+      }
+
+      const P = { t: 0 };
+      const tl = gsap.timeline({ paused: true });
+      tl.to(P, { t: 8.4, duration: 8.4, ease: "none", onUpdate: () => draw(P.t) }, 0);
+      const lineIn = (id, at) => tl.fromTo(`${id} .w`, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.14, stagger: 0.07, ease: "power2.out" }, at);
+      const lineOut = (id, at) => tl.to(`${id} .w`, { opacity: 0, filter: "blur(8px)", duration: 0.16, stagger: 0.03, ease: "power3.in" }, at);
+      lineIn("#s2-l1", 0.2); lineOut("#s2-l1", 2.45);
+      lineIn("#s2-l2", 2.8); lineOut("#s2-l2", 4.45);
+      lineIn("#s2-l3", 4.8); lineOut("#s2-l3", 6.05);
+      lineIn("#s2-l4", 6.4); lineOut("#s2-l4", 7.75);
+      draw(0);
+      window.__timelines["s2-storm"] = tl;
+    })();
+  </script>
+</template>

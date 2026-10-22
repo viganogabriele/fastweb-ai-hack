@@ -1,0 +1,193 @@
+{
+  "ok": true,
+  "strict": false,
+  "browserSkipped": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "filesScanned": 9
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "layout": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 1,
+    "findings": [
+      {
+        "code": "canvas_content_at_edge",
+        "severity": "info",
+        "time": 10,
+        "selector": "#s2-cv",
+        "message": "Canvas content touches the frame edge (right).",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 1080,
+          "width": 1920,
+          "height": 1080
+        },
+        "containerSelector": "#root",
+        "fixHint": "Keep drawn text inside the visible part of the canvas, or mark intentional full-bleed art with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 1080,
+          "width": 1920,
+          "height": 1080
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s2-storm.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "firstSeen": 10,
+        "lastSeen": 10,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          10
+        ]
+      }
+    ],
+    "duration": 73,
+    "samples": [
+      2,
+      6,
+      10,
+      14,
+      18,
+      22,
+      26,
+      30,
+      34
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 1,
+    "truncated": false
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "samples": 0
+  },
+  "contrast": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 2,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "contrast_aa_failure",
+        "severity": "warning",
+        "message": "Contrast is 4.47:1; WCAG AA requires 4.5:1.",
+        "text": "From Camille Lefèvre · PAR01 Paris Saint-Honoré",
+        "fg": "rgb(107,114,128)",
+        "bg": "rgb(246,246,243)",
+        "ratio": 4.47,
+        "requiredRatio": 4.5,
+        "suggestedColor": "rgb(106,113,127)",
+        "large": false,
+        "selector": "div > div:nth-of-type(3) > div > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3-read.html",
+        "bbox": {
+          "x": 174,
+          "y": 206,
+          "width": 932,
+          "height": 35.1875
+        },
+        "time": 18,
+        "times": [
+          18
+        ]
+      },
+      {
+        "code": "contrast_aa_failure",
+        "severity": "warning",
+        "message": "Contrast is 4.47:1; WCAG AA requires 4.5:1.",
+        "text": "Subject PAR01 – Closing 22/10 · 21:05 CEST",
+        "fg": "rgb(107,114,128)",
+        "bg": "rgb(246,246,243)",
+        "ratio": 4.47,
+        "requiredRatio": 4.5,
+        "suggestedColor": "rgb(106,113,127)",
+        "large": false,
+        "selector": "div > div:nth-of-type(3) > div > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2)",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3-read.html",
+        "bbox": {
+          "x": 174,
+          "y": 241.1875,
+          "width": 932,
+          "height": 35.1875
+        },
+        "time": 18,
+        "times": [
+          18
+        ]
+      }
+    ],
+    "enabled": true,
+    "samples": [
+      2,
+      10,
+      18,
+      26,
+      34
+    ],
+    "checked": 29,
+    "passed": 27
+  },
+  "craft": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "step": 0,
+    "samples": 0
+  },
+  "hdr": {
+    "autoPromotion": null,
+    "inspection": "available"
+  },
+  "snapshots": {
+    "enabled": false,
+    "files": [],
+    "times": [],
+    "findingFiles": []
+  },
+  "scope": {
+    "range": [
+      0,
+      36
+    ],
+    "hiddenFindings": 0,
+    "notes": [
+      "Static lint and unscoped runtime failures remain project-wide.",
+      "Whole-timeline motion assertions, frozen-sweep detection and craft warnings are skipped for range checks."
+    ]
+  }
+}

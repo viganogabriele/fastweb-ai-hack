@@ -1,0 +1,212 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #E7E5E0; overflow: hidden; }
+    #s4-cv { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    .s4-q {
+      position: absolute; left: 120px; top: 64px; height: 150px; padding: 26px 36px 0 30px;
+      background: #14213D; color: #F4F4F1; border-left: 8px solid #D7141A;
+    }
+    .s4-q .lab { font-family: Montserrat, sans-serif; font-weight: 800; font-size: 20px; letter-spacing: 0.14em; color: #8FB4DB; }
+    .s4-q .txt { font-family: Montserrat, sans-serif; font-weight: 700; font-size: 52px; margin-top: 10px; white-space: nowrap; }
+    #s4-res {
+      position: absolute; left: 600px; top: 900px; width: 720px; height: 140px; background: #FFFFFF;
+      padding: 20px 32px; border-left: 8px solid #14213D; box-shadow: 0 10px 30px rgba(20, 33, 61, 0.18);
+    }
+    #s4-res .code { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 36px; color: #14213D; }
+    #s4-res .sub { font-family: Montserrat, sans-serif; font-weight: 600; font-size: 28px; color: #4B5563; margin-top: 10px; }
+    #s4-res .ok { color: #1E7A46; font-weight: 800; }
+    .s4-b {
+      position: absolute; padding: 20px 28px; font-family: Montserrat, sans-serif; font-weight: 600; font-size: 32px;
+      white-space: nowrap; box-shadow: 0 10px 30px rgba(20, 33, 61, 0.2);
+    }
+    .s4-b .who { display: inline; margin-right: 14px; font-family: "IBM Plex Mono", monospace; font-weight: 500; font-size: 20px; margin-bottom: 6px; opacity: 0.75; }
+    #s4-ask { left: 520px; top: 905px; padding: 14px 26px; background: #14213D; color: #F4F4F1; }
+    #s4-reply { left: 1330px; top: 960px; background: #FFFFFF; color: #14213D; padding: 14px 26px; }
+    #s4-reply .who { display: inline; margin-right: 14px; }
+  </style>
+  <div data-hf-id="hf-xzub" id="root" data-composition-id="s4-link" data-width="1920" data-height="1080">
+    <canvas data-hf-id="hf-t4lv" id="s4-cv" width="1920" height="1080"></canvas>
+    <div data-hf-id="hf-3230" id="s4-q1" class="s4-q clip" data-start="0" data-duration="4.7">
+      <div data-hf-id="hf-ya8j" class="lab">CLAIM · PAR01 → CATALOG</div>
+      <div data-hf-id="hf-s82q" class="txt">«Maire noir T2»</div>
+    </div>
+    <div data-hf-id="hf-xujv" id="s4-q2" class="s4-q clip" data-start="4.6" data-duration="3.8">
+      <div data-hf-id="hf-7slb" class="lab">CLAIM · MIL02 → CATALOG</div>
+      <div data-hf-id="hf-cxlh" class="txt">«quello lungo nero»</div>
+    </div>
+    <div data-hf-id="hf-dvj1" id="s4-res" class="clip" data-start="3.0" data-duration="1.7">
+      <div data-hf-id="hf-9jwd" class="code">J20931A00012-999-2</div>
+      <div data-hf-id="hf-og5s" class="sub">MAIRE · black · size 2 &nbsp;<span data-hf-id="hf-gh9t" class="ok">✓ linked 0.97</span></div>
+    </div>
+    <div data-hf-id="hf-wfct" id="s4-ask" class="s4-b clip" data-start="6.2" data-duration="2.2">
+      <span data-hf-id="hf-6jp8" class="who">agent → MIL02 · it</span>«Quello lungo nero»: Hermine o Flammette?
+    </div>
+    <div data-hf-id="hf-9lio" id="s4-reply" class="s4-b clip" data-start="6.9" data-duration="1.5">
+      <span data-hf-id="hf-2ojd" class="who">MIL02</span>Hermine, taglia 1.
+    </div>
+  </div>
+  <script>
+    (function () {
+      const RACK = [["J10911A00034-999","MAYA","black"],["J10911A00034-742","MAYA","navy"],["J10911A00034-82D","MAYA","olive"],["J10911A00088-999","MONTCLA","black"],["J10911A00088-742","MONTCLA","navy"],["J10911A00142-999","KARAKORUM","black"],["J10911A00142-742","KARAKORUM","navy"],["J10911A00142-90X","KARAKORUM","grey melange"],["J10911A00190-999","ECRINS","black"],["J10911A00213-999","MONTGENEVRE","black"],["J10911A00213-742","MONTGENEVRE","navy"],["J10911A00213-90X","MONTGENEVRE","grey melange"],["J10911A00305-999","TIB","black"],["J10911A00305-742","TIB","navy"],["J10911A00305-20D","TIB","off-white"],["J10911A00577-999","ARNEB","black"],["J10911A00577-742","ARNEB","navy"],["J10911A00581-999","ROSIERE","black"],["J10911A00581-82D","ROSIERE","olive"],["J10911A00499-999","LANS","black"],["J10911A00499-742","LANS","navy"],["J10911A00402-999","VEZERE","black"],["J20931A00012-999","MAIRE","black"],["J20931A00012-034","MAIRE","beige"],["J20931A00012-20D","MAIRE","off-white"],["J20931A00012-742","MAIRE","navy"],["J20931A00087-999","HERMINE","black"],["J20931A00087-742","HERMINE","navy"],["J20931A00087-20D","HERMINE","off-white"],["J20931A00144-999","BADY","black"],["J20931A00144-20D","BADY","off-white"],["J20931A00144-510","BADY","powder pink"],["J20931A00203-999","FLAMMETTE","black"],["J20931A00203-742","FLAMMETTE","navy"],["J20931A00618-999","ILVARO","black"],["J20931A00618-510","ILVARO","powder pink"],["J20931A00618-20D","ILVARO","off-white"],["J20931A00622-999","AMBRINE","black"],["J20931A00622-23R","AMBRINE","chocolate brown"],["J20931A00655-999","VALLENTE","black"],["J20931A00655-034","VALLENTE","beige"],["J20931A00655-82D","VALLENTE","olive"],["J20931A00410-999","BOUREY","black"],["J20931A00410-742","BOUREY","navy"],["J20931A00410-41F","BOUREY","red"],["J20931A00711-999","LAIS","black"],["J20931A00711-73A","LAIS","light blue"],["J20931A00711-034","LAIS","beige"],["J20931A00733-999","ALBENGA","black"],["J20931A00733-034","ALBENGA","beige"],["J20931A00733-73A","ALBENGA","light blue"],["J20931A00560-999","CHAMBRE","black"],["J20931A00560-20D","CHAMBRE","off-white"],["H20981A00020-999","VALBOURG","black"],["H20981A00020-20D","VALBOURG","off-white"]];
+      const COL = { "999": "#17181C", "034": "#CBB696", "20D": "#ECE6DA", "742": "#1E2A47", "510": "#E7C3C6", "23R": "#5A3A2C", "82D": "#59613F", "41F": "#B5222A", "73A": "#A9C6DE", "90X": "#8C8F94", "001": "#F5F5F2" };
+      const LONG = { HERMINE: 1, FLAMMETTE: 1, AMBRINE: 1, ARNEB: 1 };
+      const VEST = { TIB: 1, CHAMBRE: 1 };
+      const SHELL = { LAIS: 1, ALBENGA: 1 };
+      const SP = 220, RAILY = 290, IM = 22, IH = 26, IF = 32;
+      const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+      const p3o = (x) => 1 - Math.pow(1 - clamp(x, 0, 1), 4);
+      const eio = (x) => { x = clamp(x, 0, 1); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+      const cv = document.getElementById("s4-cv");
+      const ctx = cv.getContext("2d");
+
+      function shade(hex, k) {
+        const n = parseInt(hex.slice(1), 16);
+        let r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+        const f = (c) => Math.round(k >= 0 ? c + (255 - c) * k : c * (1 + k));
+        return `rgb(${f(r)},${f(g)},${f(b)})`;
+      }
+      function rr(x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); }
+      function jacket(x, top, item, lift, scale, dimA) {
+        const [sku, name] = item; const code = sku.split("-")[1]; const base = COL[code] || "#333";
+        const long = !!LONG[name], vest = !!VEST[name], shell = !!SHELL[name];
+        const h = long ? 330 : 220, w = 132;
+        ctx.save();
+        ctx.translate(x, top - lift);
+        ctx.scale(scale * 1.3, scale * 1.3);
+        ctx.globalAlpha = dimA;
+        // hanger
+        ctx.strokeStyle = "#8E939B"; ctx.lineWidth = 4;
+        ctx.beginPath(); ctx.arc(0, -8, 10, Math.PI, Math.PI * 2.3); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0, 2); ctx.lineTo(-58, 30); ctx.moveTo(0, 2); ctx.lineTo(58, 30); ctx.stroke();
+        // sleeves
+        if (!vest) {
+          const sg = ctx.createLinearGradient(-w / 2 - 24, 0, -w / 2 + 6, 0);
+          sg.addColorStop(0, shade(base, -0.35)); sg.addColorStop(1, shade(base, 0.08));
+          ctx.fillStyle = sg;
+          ctx.save(); ctx.translate(-w / 2 + 8, 34); ctx.rotate(0.1); rr(-26, 0, 30, (long ? 230 : 190), 12); ctx.fill(); ctx.restore();
+          ctx.save(); ctx.translate(w / 2 - 8, 34); ctx.rotate(-0.1); rr(-4, 0, 30, (long ? 230 : 190), 12); ctx.fill(); ctx.restore();
+        }
+        // body with volume
+        const bg = ctx.createLinearGradient(-w / 2, 0, w / 2, 0);
+        bg.addColorStop(0, shade(base, -0.3)); bg.addColorStop(0.45, shade(base, 0.16)); bg.addColorStop(1, shade(base, -0.25));
+        ctx.fillStyle = bg; rr(-w / 2 + 10, 22, w - 20, h, 16); ctx.fill();
+        // hood / collar
+        ctx.fillStyle = shade(base, -0.12); rr(-30, 12, 60, 30, 12); ctx.fill();
+        // quilted baffles with lacquer sheen
+        if (!shell) {
+          for (let y = 52; y < h + 12; y += 30) {
+            ctx.fillStyle = "rgba(0,0,0,0.28)"; ctx.fillRect(-w / 2 + 12, y, w - 24, 2.5);
+            ctx.fillStyle = "rgba(255,255,255,0.16)"; ctx.fillRect(-w / 2 + 22, y + 6, w - 44, 3);
+          }
+        }
+        // zip
+        ctx.fillStyle = "rgba(0,0,0,0.35)"; ctx.fillRect(-1.5, 40, 3, h - 22);
+        ctx.globalAlpha = 1;
+        ctx.restore();
+        return h;
+      }
+      function tag(x, y, item, dimA, hi) {
+        const [sku, name, colour] = item;
+        ctx.globalAlpha = dimA;
+        ctx.fillStyle = hi ? "#14213D" : "#FFFFFF"; ctx.fillRect(x - 74, y, 148, 66);
+        ctx.fillStyle = hi ? "#F4F4F1" : "#14213D"; ctx.font = "800 19px Montserrat";
+        ctx.fillText(name.length > 11 ? name.slice(0, 10) + "." : name, x - 62, y + 28);
+        ctx.font = "500 15px 'IBM Plex Mono'"; ctx.fillStyle = hi ? "#BFD9EE" : "#6B7280";
+        ctx.fillText(sku.split("-")[1] + " · " + colour, x - 62, y + 52);
+        ctx.globalAlpha = 1;
+      }
+      function score(x, y, val, label, col) {
+        ctx.font = "600 30px 'IBM Plex Mono'"; ctx.fillStyle = col;
+        ctx.fillText(label, x - 60, y);
+        ctx.fillStyle = "rgba(20,33,61,0.15)"; ctx.fillRect(x - 60, y + 14, 120, 10);
+        ctx.fillStyle = col; ctx.fillRect(x - 60, y + 14, 120 * val, 10);
+      }
+      // camera: index at screen centre over time
+      function camIdx(t) {
+        if (t < 4.6) return 22 + 34 * (1 - p3o(t / 2.3));
+        return 22 + 7 * eio((t - 4.6) / 1.0);
+      }
+      function draw(t) {
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.fillStyle = "#E7E5E0"; ctx.fillRect(0, 0, 1920, 1080);
+        // wall light: a soft key from upper left
+        const lg = ctx.createRadialGradient(560, 120, 40, 560, 120, 1300);
+        lg.addColorStop(0, "rgba(255,255,255,0.55)"); lg.addColorStop(1, "rgba(255,255,255,0)");
+        ctx.fillStyle = lg; ctx.fillRect(0, 0, 1920, 1080);
+        // floor
+        ctx.fillStyle = "#D6D2CA"; ctx.fillRect(0, 930, 1920, 150);
+        const ci = camIdx(t);
+        // rail
+        const rg = ctx.createLinearGradient(0, RAILY - 7, 0, RAILY + 7);
+        rg.addColorStop(0, "#9DA2AA"); rg.addColorStop(0.45, "#F4F5F7"); rg.addColorStop(1, "#7E838B");
+        ctx.fillStyle = rg; ctx.fillRect(0, RAILY - 7, 1920, 14);
+        // motion smear while the rack runs fast
+        const v = Math.abs(camIdx(t + 0.02) - ci) * SP / 0.02;
+        const blur = clamp(v / 900, 0, 14);
+        ctx.filter = blur > 0.5 ? `blur(${blur.toFixed(1)}px)` : "none";
+        const lockA = eio((t - 2.95) / 0.35) * (1 - eio((t - 4.4) / 0.3));
+        const amb = eio((t - 5.7) / 0.35);
+        const resolve = eio((t - 7.35) / 0.3);
+        for (let i = 0; i < RACK.length; i++) {
+          const x = 960 + (i - ci) * SP;
+          if (x < -120 || x > 2040) continue;
+          let lift = 0, sc = 1, dimA = 1, hi = false;
+          // first case: MAIRE black wins
+          const cand1 = { [IM]: 0.97, [IM + 1]: 0.21, [IH]: 0.38 };
+          if (t > 2.2 && t < 4.7 && cand1[i] !== undefined) lift = 28 * eio((t - 2.2) / 0.4);
+          if (lockA > 0) { if (i === IM) { sc = 1 + 0.16 * lockA; hi = true; } else dimA = 1 - 0.55 * lockA; }
+          // second case: two long black candidates
+          if (t > 5.6 && (i === IH || i === IF)) { lift = 28 * amb; }
+          if (t > 5.6 && i !== IH && i !== IF) dimA = Math.min(dimA, 1 - 0.55 * amb);
+          if (resolve > 0) { if (i === IH) { sc = 1 + 0.16 * resolve; hi = true; } if (i === IF) { dimA = 1 - 0.55 * resolve; lift *= 1 - resolve; } }
+          jacket(x, RAILY + 8, RACK[i], lift, sc, dimA);
+          tag(x, 752 - lift * 0.5, RACK[i], dimA, hi);
+        }
+        ctx.filter = "none";
+        // scores
+        if (t > 2.3 && t < 4.6) {
+          const g = eio((t - 2.3) / 0.5);
+          const xs = (i) => 960 + (i - ci) * SP;
+          score(xs(IM), 872, 0.97 * g, (0.97 * g).toFixed(2), "#1E7A46");
+          score(xs(IM + 1), 872, 0.21 * g, (0.21 * g).toFixed(2), "#6B7280");
+          score(xs(IH), 872, 0.38 * g, (0.38 * g).toFixed(2), "#6B7280");
+        }
+        if (t > 5.75) {
+          const g = eio((t - 5.75) / 0.45);
+          const xs = (i) => 960 + (i - ci) * SP;
+          score(xs(IH), 872, 0.48 * g, (0.48 * g).toFixed(2), resolve > 0.5 ? "#1E7A46" : "#B07415");
+          score(xs(IF), 872, 0.46 * g * (1 - resolve), (0.46 * g).toFixed(2), "#B07415");
+          if (t > 5.95 && t < 7.35) {
+            ctx.globalAlpha = eio((t - 5.95) / 0.2) * (1 - eio((t - 7.2) / 0.15));
+            ctx.font = "800 30px Montserrat"; ctx.fillStyle = "#B07415";
+            const txt = "TOO CLOSE TO CALL → ASK THE STORE";
+            ctx.fillText(txt, 960 - ctx.measureText(txt).width / 2, 250);
+            ctx.globalAlpha = 1;
+          }
+          if (resolve > 0) {
+            ctx.globalAlpha = resolve; ctx.font = "800 30px Montserrat"; ctx.fillStyle = "#1E7A46";
+            const txt = "J20931A00087-999-1 ✓ linked";
+            ctx.fillText(txt, 960 - ctx.measureText(txt).width / 2, 250);
+            ctx.globalAlpha = 1;
+          }
+        }
+        // dip before the cut
+        const dip = clamp((t - 8.25) / 0.1, 0, 1) * 0.45;
+        if (dip > 0) { ctx.fillStyle = `rgba(10,12,17,${dip})`; ctx.fillRect(0, 0, 1920, 1080); }
+      }
+      const P = { t: 0 };
+      const tl = gsap.timeline({ paused: true });
+      tl.to(P, { t: 8.4, duration: 8.4, ease: "none", onUpdate: () => draw(P.t) }, 0);
+      tl.fromTo("#s4-q1", { opacity: 0, x: -80, filter: "blur(12px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.35, ease: "expo.out" }, 0.0);
+      tl.to("#s4-q1", { opacity: 0, filter: "blur(8px)", duration: 0.15, ease: "power3.in" }, 4.5);
+      tl.fromTo("#s4-q2", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power2.out" }, 4.65);
+      tl.fromTo("#s4-res", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" }, 3.05);
+      tl.to("#s4-res", { opacity: 0, y: 20, duration: 0.2, ease: "power3.in" }, 4.45);
+      tl.fromTo("#s4-ask", { opacity: 0, scale: 0.6, transformOrigin: "0% 100%" }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.4)" }, 6.2);
+      tl.fromTo("#s4-reply", { opacity: 0, scale: 0.6, transformOrigin: "100% 100%" }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.4)" }, 6.9);
+      draw(0);
+      document.fonts.ready.then(() => draw(P.t));
+      window.__timelines["s4-link"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,200 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #0A0C11; overflow: hidden; font-family: Montserrat, sans-serif; }
+    #s7-stamp {
+      position: absolute; left: 0; top: 0; width: 1920px; text-align: center; font-family: Montserrat, sans-serif;
+      font-weight: 900; font-size: 176px; color: #D7141A; white-space: nowrap;
+    }
+    #s7-cam { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+    #s7-dash { position: absolute; inset: 0; background: #EEF0F3; font-family: Montserrat, sans-serif; color: #14213D; }
+    #s7-top { position: absolute; left: 0; top: 0; width: 1920px; height: 88px; background: #14213D; color: #F4F4F1; }
+    #s7-logo { position: absolute; left: 36px; top: 24px; font-weight: 800; font-size: 34px; letter-spacing: 0.32em; }
+    #s7-logo i { font-style: normal; color: #D7141A; }
+    #s7-when { position: absolute; left: 640px; top: 30px; font-weight: 600; font-size: 24px; color: #C9D3E3; }
+    #s7-zones { position: absolute; right: 36px; top: 32px; font-family: "IBM Plex Mono", monospace; font-size: 21px; color: #C9D3E3; }
+    #s7-zones b { color: #5BD68A; font-weight: 600; } #s7-zones em { font-style: normal; color: #F2B544; }
+    .s7-panel { position: absolute; background: #FFFFFF; box-shadow: 0 2px 10px rgba(20, 33, 61, 0.08); }
+    .s7-h { font-weight: 800; font-size: 19px; letter-spacing: 0.14em; color: #47546E; }
+    /* left: signals */
+    #s7-left { left: 28px; top: 112px; width: 520px; height: 940px; padding: 26px 24px; }
+    .s7-row { position: relative; height: 134px; padding: 16px 18px 0 22px; margin-top: 12px; background: #F6F7F9; border-left: 6px solid #C9D0DB; }
+    .s7-row .id { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 22px; }
+    .s7-row .id span { font-weight: 400; color: #525A68; margin-left: 10px; }
+    .s7-row .sn { font-size: 23px; font-weight: 500; color: #1F2430; margin-top: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .s7-row .tg { font-size: 18px; font-weight: 800; letter-spacing: 0.06em; margin-top: 10px; }
+    #s7-r1 { border-left-color: #D7141A; background: #FFF3F3; }
+    /* centre: decision card */
+    #s7-card { left: 572px; top: 112px; width: 800px; height: 940px; padding: 30px 36px; }
+    #s7-case { font-family: "IBM Plex Mono", monospace; font-size: 20px; color: #525A68; }
+    #s7-case b { color: #D7141A; font-weight: 600; }
+    #s7-title { font-weight: 800; font-size: 42px; margin-top: 8px; }
+    #s7-code { font-family: "IBM Plex Mono", monospace; font-size: 22px; color: #47546E; margin-top: 4px; }
+    #s7-ev { margin-top: 24px; padding: 20px 24px; background: #F6F7F9; border-left: 6px solid #14213D; height: 196px; }
+    #s7-quote { font-size: 27px; font-weight: 500; line-height: 1.45; margin-top: 10px; color: #1F2430; }
+    #s7-quote .m { background-image: linear-gradient(#F7C4C4, #F7C4C4); background-repeat: no-repeat; background-size: 0% 60%; background-position: 0 85%; }
+    #s7-src { font-family: "IBM Plex Mono", monospace; font-size: 19px; color: #525A68; margin-top: 10px; }
+    #s7-fc { position: relative; margin-top: 20px; height: 150px; }
+    #s7-fcn { position: absolute; left: 0; top: 34px; font-weight: 800; font-size: 64px; white-space: nowrap; }
+    #s7-fcn small { font-size: 22px; font-weight: 600; color: #525A68; margin-left: 12px; }
+    #s7-spark { position: absolute; left: 500px; top: 30px; }
+    #s7-opts { margin-top: 10px; }
+    .s7-opt { position: relative; height: 66px; margin-top: 10px; padding: 0 20px; display: flex; align-items: center; background: #F6F7F9; font-size: 26px; font-weight: 600; }
+    .s7-opt .rd { width: 26px; height: 26px; border-radius: 50%; border: 3px solid #9AA3B2; margin-right: 18px; flex: none; }
+    .s7-opt .v { margin-left: auto; font-family: "IBM Plex Mono", monospace; font-size: 22px; color: #47546E; }
+    #s7-oa { background: #E9F1F9; outline: 3px solid #14213D; }
+    #s7-oa .rd { border-color: #14213D; background: radial-gradient(#14213D 45%, transparent 50%); }
+    #s7-btns { position: absolute; left: 36px; top: 820px; display: flex; gap: 16px; }
+    .s7-btn { height: 78px; padding: 0 34px; display: flex; align-items: center; font-weight: 800; font-size: 28px; border: 3px solid #14213D; }
+    #s7-approve { position: relative; background: #14213D; color: #FFFFFF; width: 290px; justify-content: center; overflow: hidden; }
+    #s7-approve-done { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: #1E7A46; color: #FFFFFF; clip-path: circle(0% at 50% 50%); }
+    #s7-edit { background: #FFFFFF; color: #14213D; }
+    #s7-reject { border-color: transparent; color: #525A68; }
+    /* right: investigator */
+    #s7-right { left: 1396px; top: 112px; width: 496px; height: 600px; padding: 26px 26px; background: #101A2E; color: #C9D3E3; }
+    #s7-right .s7-h { color: #8FB4DB; }
+    .s7-tr { font-family: "IBM Plex Mono", monospace; font-size: 20px; line-height: 30px; white-space: nowrap; clip-path: inset(0 100% 0 0); }
+    .s7-tr.c { color: #F4F4F1; margin-top: 8px; } .s7-tr.r { color: #8FB4DB; padding-left: 26px; }
+    .s7-tr.v { color: #5BD68A; font-weight: 600; margin-top: 14px; font-size: 22px; }
+    #s7-pat { left: 1396px; top: 732px; width: 496px; height: 320px; padding: 24px 26px; }
+    .s7-pi { margin-top: 14px; padding: 12px 16px; background: #F6F7F9; font-size: 22px; font-weight: 600; line-height: 1.35; border-left: 6px solid #BFD9EE; }
+    .s7-pi span { display: block; font-family: "IBM Plex Mono", monospace; font-weight: 400; font-size: 18px; color: #525A68; }
+    /* overlays in screen space */
+    #s7-toast {
+      position: absolute; left: 520px; top: 960px; width: 880px; height: 84px; background: #1E7A46; color: #FFFFFF;
+      display: flex; align-items: center; padding: 0 28px; font-weight: 700; font-size: 26px; white-space: nowrap;
+    }
+    #s7-toast span { font-family: "IBM Plex Mono", monospace; font-weight: 500; font-size: 21px; margin-left: 16px; opacity: 0.85; }
+    #s7-loop {
+      position: absolute; left: 1290px; top: 760px; width: 600px; padding: 22px 26px; background: #14213D; color: #F4F4F1;
+      border-left: 8px solid #D7141A; box-shadow: 0 16px 40px rgba(10, 12, 17, 0.35);
+    }
+    #s7-loop .who { font-family: "IBM Plex Mono", monospace; font-size: 20px; color: #8FB4DB; }
+    #s7-loop .msg { font-size: 30px; font-weight: 600; line-height: 1.35; margin-top: 8px; }
+    #s7-cursor { position: absolute; left: 0; top: 0; width: 64px; height: 64px; }
+    #s7-dip { position: absolute; inset: 0; background: #0A0C11; }
+  </style>
+  <div data-hf-id="hf-5k1j" id="root" data-composition-id="s7-room" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-vxac" id="s7-stamp" class="clip" data-start="0.1" data-duration="1.8" data-layout-allow-overlap>HUMANS DECIDE</div>
+    <div data-hf-id="hf-acx0" id="s7-cam" data-layout-allow-overflow>
+      <div data-hf-id="hf-ecoo" id="s7-dash">
+        <div data-hf-id="hf-3pa5" id="s7-top">
+          <div data-hf-id="hf-fb34" id="s7-logo">VESPER<i data-hf-id="hf-74k6">.</i></div>
+          <div data-hf-id="hf-ru44" id="s7-when">Evening of Thu 22 Oct 2026 · 21:42 CET</div>
+          <div data-hf-id="hf-e10b" id="s7-zones">APAC <b data-hf-id="hf-736t">closed</b> · EMEA <em data-hf-id="hf-uadi">closing</em> · AMER open</div>
+        </div>
+        <div data-hf-id="hf-1483" id="s7-left" class="s7-panel">
+          <div data-hf-id="hf-u8jt" class="s7-h">TONIGHT · 31 NOTES · 6 OPEN</div>
+          <div data-hf-id="hf-ibc9" class="s7-row" id="s7-r1"><div data-hf-id="hf-314d" class="id">PAR01<span data-hf-id="hf-koum">fr · 21:05</span></div><div data-hf-id="hf-z107" class="sn">Maire noir T2 épuisé depuis ce midi…</div><div data-hf-id="hf-09rf" class="tg" style="color:#D7141A">STOCKOUT · UNMET 2–4 · CASE 0042</div></div>
+          <div data-hf-id="hf-oh22" class="s7-row" id="s7-r2"><div data-hf-id="hf-e4xj" class="id">SEL02<span data-hf-id="hf-02zv">ko · 21:13</span></div><div data-hf-id="hf-31ln" class="sn">Maire 블랙 2사이즈 품절, 고객 3명…</div><div data-hf-id="hf-djjk" class="tg" style="color:#D7141A">STOCKOUT · UNMET 3</div></div>
+          <div data-hf-id="hf-sf63" class="s7-row" id="s7-r3"><div data-hf-id="hf-481g" class="id">PAR02<span data-hf-id="hf-wyfz">fr · 21:20</span></div><div data-hf-id="hf-9kgh" class="sn">Beaucoup de touristes coréens…</div><div data-hf-id="hf-e8yv" class="tg" style="color:#2F5F9E">PATTERN · 4 EU STORES</div></div>
+          <div data-hf-id="hf-4xok" class="s7-row" id="s7-r4"><div data-hf-id="hf-fcqh" class="id">MIL02<span data-hf-id="hf-xb2v">it · 21:12</span></div><div data-hf-id="hf-mahe" class="sn">Due clienti cercavano quello lungo nero</div><div data-hf-id="hf-5x5c" class="tg" style="color:#1E7A46">ASKED STORE → HERMINE 1 ✓</div></div>
+          <div data-hf-id="hf-5pcd" class="s7-row" id="s7-r5"><div data-hf-id="hf-gjnk" class="id">MIL01<span data-hf-id="hf-wjf2">it · 21:06</span></div><div data-hf-id="hf-tmih" class="sn">Traffico dimezzato per i lavori</div><div data-hf-id="hf-9lpo" class="tg" style="color:#8A5A0E">TRAFFIC ×0.5 · NO STOCK PULLED</div></div>
+          <div data-hf-id="hf-9nge" class="s7-row" id="s7-r6"><div data-hf-id="hf-o4bg" class="id">ROM01<span data-hf-id="hf-basj">it · 20:55</span></div><div data-hf-id="hf-90ru" class="sn">Bella giornata, tanti turisti.</div><div data-hf-id="hf-ds7r" class="tg" style="color:#525A68">NOISE · IGNORED</div></div>
+        </div>
+        <div data-hf-id="hf-gd56" id="s7-card" class="s7-panel">
+          <div data-hf-id="hf-35bn" id="s7-case">CASE 0042 · verdict <b data-hf-id="hf-tbd7">ACT</b> · <span data-hf-id="hf-10ya" id="s7-st1">awaiting approval</span><span data-hf-id="hf-h2qc" id="s7-st2" style="color:#1E7A46;font-weight:600">approved 21:43 · draft sent</span></div>
+          <div data-hf-id="hf-ku48" id="s7-title">PAR01 · MAIRE black · size 2</div>
+          <div data-hf-id="hf-ul0e" id="s7-code">J20931A00012-999-2 · on hand 0</div>
+          <div data-hf-id="hf-q5xp" id="s7-ev">
+            <div data-hf-id="hf-2fv0" class="s7-h">EVIDENCE</div>
+            <div data-hf-id="hf-taf3" id="s7-quote">«Maire noir T2 <span data-hf-id="hf-ch37" class="m" id="s7-m1">épuisé depuis ce midi</span>, <span data-hf-id="hf-ogh0" class="m" id="s7-m2">plusieurs clientes reparties</span> sans rien.»</div>
+            <div data-hf-id="hf-xbmy" id="s7-src">Camille Lefèvre · store manager · 21:05 CEST</div>
+          </div>
+          <div data-hf-id="hf-fnwl" id="s7-fc">
+            <div data-hf-id="hf-qtg8" class="s7-h">NEXT 7 DAYS</div>
+            <div data-hf-id="hf-1v4l" id="s7-fcn">8.6–10.2<small data-hf-id="hf-apjr">vs 7.0 baseline</small></div>
+            <svg data-hf-id="hf-27fi" id="s7-spark" width="230" height="110" viewBox="0 0 320 130" preserveAspectRatio="none">
+              <line data-hf-id="hf-ha79" x1="0" y1="96" x2="320" y2="96" stroke="#9AA3B2" stroke-width="3" stroke-dasharray="8 6" />
+              <path data-hf-id="hf-k0o3" id="s7-band" d="M0 54 L53 59 L107 63 L160 67 L213 70 L267 73 L320 76 L320 86 L267 85 L213 84 L160 82 L107 80 L53 79 L0 77 Z" fill="#BFD9EE" />
+              <path data-hf-id="hf-ro6n" d="M0 54 L53 59 L107 63 L160 67 L213 70 L267 73 L320 76" fill="none" stroke="#2F5F9E" stroke-width="3" />
+            </svg>
+          </div>
+          <div data-hf-id="hf-qevi" id="s7-opts">
+            <div data-hf-id="hf-1fm0" class="s7-h">OPTIONS · 6/6 CHECKS</div>
+            <div data-hf-id="hf-iekx" class="s7-opt" id="s7-oa"><div data-hf-id="hf-27yq" class="rd"></div>A · 6 DC-IT-CSG + 5 MIL01<div data-hf-id="hf-k0c2" class="v">0.4 unserved</div></div>
+            <div data-hf-id="hf-ea2d" class="s7-opt" id="s7-ob"><div data-hf-id="hf-8opi" class="rd"></div>B · 8 MIL01 + 3 DC-IT-CSG<div data-hf-id="hf-xbf0" class="v">0.6 unserved</div></div>
+            <div data-hf-id="hf-ecw0" class="s7-opt" id="s7-oc"><div data-hf-id="hf-930j" class="rd"></div>C · Hold<div data-hf-id="hf-d67n" class="v">10 unserved</div></div>
+          </div>
+          <div data-hf-id="hf-wtzj" id="s7-btns">
+            <div data-hf-id="hf-y9rp" class="s7-btn" id="s7-approve">Approve A<div data-hf-id="hf-bg9m" id="s7-approve-done">Approved ✓</div></div>
+            <div data-hf-id="hf-239c" class="s7-btn" id="s7-edit">What-if</div>
+            <div data-hf-id="hf-yklg" class="s7-btn" id="s7-reject">Reject</div>
+          </div>
+        </div>
+        <div data-hf-id="hf-wnm6" id="s7-right" class="s7-panel">
+          <div data-hf-id="hf-g08f" class="s7-h">INVESTIGATOR AGENT · TOOL TRACE</div>
+          <div data-hf-id="hf-n9ql" class="s7-tr c" id="s7-t1">› get_signals(PAR01, MAIRE-999)</div>
+          <div data-hf-id="hf-e053" class="s7-tr r" id="s7-t2">3 claims · 1 store</div>
+          <div data-hf-id="hf-164u" class="s7-tr c" id="s7-t3">› get_stock(PAR01)</div>
+          <div data-hf-id="hf-bkrq" class="s7-tr r" id="s7-t4">0 on hand · 0 inbound</div>
+          <div data-hf-id="hf-1qo8" class="s7-tr c" id="s7-t5">› correct_forecast(7d)</div>
+          <div data-hf-id="hf-8ell" class="s7-tr r" id="s7-t6">7.0 → 8.6–10.2</div>
+          <div data-hf-id="hf-c3r4" class="s7-tr c" id="s7-t7">› get_stock(MIL01, DC-IT-CSG)</div>
+          <div data-hf-id="hf-j4kp" class="s7-tr r" id="s7-t8">8 free · 6 free</div>
+          <div data-hf-id="hf-gcjc" class="s7-tr c" id="s7-t9">› propose_options()</div>
+          <div data-hf-id="hf-4f05" class="s7-tr r" id="s7-t10">3 options · 6/6 checks</div>
+          <div data-hf-id="hf-5a47" class="s7-tr v" id="s7-t11">verdict ACT · 5 of 8 calls</div>
+        </div>
+        <div data-hf-id="hf-1m6v" id="s7-pat" class="s7-panel">
+          <div data-hf-id="hf-a7kr" class="s7-h">ALSO TONIGHT</div>
+          <div data-hf-id="hf-etfl" class="s7-pi">Black MAIRE up in 4 EU stores<span data-hf-id="hf-mmo7">pattern · Korean tourists · S2</span></div>
+          <div data-hf-id="hf-h2lh" class="s7-pi">MIL01 footfall halved by roadworks<span data-hf-id="hf-kzvh">anomaly · no demand cut</span></div>
+          <div data-hf-id="hf-d984" class="s7-pi">"M finita", ERP says 3 on hand<span data-hf-id="hf-fndy">data check → retail ops</span></div>
+        </div>
+      </div>
+    </div>
+    <div data-hf-id="hf-44hd" id="s7-toast" class="clip" data-start="8.9" data-duration="2.6">Transfer draft created<span data-hf-id="hf-fsgq">TRF-0042 · logistics MCP · draft only</span></div>
+    <div data-hf-id="hf-3929" id="s7-loop" data-layout-allow-occlusion class="clip" data-start="10.6" data-duration="3.8">
+      <div data-hf-id="hf-2rmy" class="who">agent → PAR01 · fr</div>
+      <div data-hf-id="hf-165b" class="msg">Merci Camille : grâce à votre note, 11 pièces arrivent jeudi.</div>
+    </div>
+    <svg data-hf-id="hf-6xw4" id="s7-cursor" class="clip" data-start="7.3" data-duration="3.2" viewBox="0 0 64 64">
+      <path data-hf-id="hf-f1o0" d="M8 4 L8 52 L20 41 L29 60 L37 56 L28 38 L44 38 Z" fill="#0A0C11" stroke="#FFFFFF" stroke-width="3.5" stroke-linejoin="round" />
+    </svg>
+    <div data-hf-id="hf-et6c" id="s7-dip" class="clip" data-start="13.8" data-duration="0.6"></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      // stamp on the dark, then the room floods up over it
+      tl.fromTo("#s7-stamp", { y: 440, scale: 1.12, opacity: 0, filter: "blur(10px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.12, ease: "power4.out" }, 0.1);
+      tl.fromTo("#s7-cam", { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", duration: 0.55, ease: "power2.inOut" }, 1.15);
+      tl.fromTo("#s7-dash", { y: 60 }, { y: 0, duration: 0.7, ease: "expo.out" }, 1.2);
+      // feed rows arrive one by one
+      for (let i = 1; i <= 6; i++) tl.fromTo("#s7-r" + i, { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.4, ease: "expo.out" }, 1.7 + i * 0.12);
+      // card builds
+      tl.fromTo(["#s7-case", "#s7-title", "#s7-code", "#s7-ev", "#s7-fc", "#s7-opts", "#s7-btns"], { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, stagger: 0.09, ease: "power2.out" }, 2.0);
+      tl.fromTo(["#s7-right", "#s7-pat"], { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.45, stagger: 0.1, ease: "expo.out" }, 1.8);
+      // the agent's trace types in
+      for (let i = 1; i <= 11; i++) {
+        const n = document.getElementById("s7-t" + i).textContent.length;
+        tl.fromTo("#s7-t" + i, { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: Math.min(0.35, n * 0.012), ease: "steps(" + n + ")" }, 2.1 + i * 0.24);
+      }
+      tl.fromTo("#s7-band", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 2.7);
+      // camera: punch into the evidence, then down to the decision
+      tl.fromTo("#s7-cam", { x: 0, y: 0, scale: 1 }, { x: -498, y: -150, scale: 1.5, duration: 0.6, ease: "power2.inOut" }, 4.9);
+      tl.fromTo("#s7-m1", { backgroundSize: "0% 60%" }, { backgroundSize: "100% 60%", duration: 0.4, ease: "power2.inOut" }, 5.6);
+      tl.fromTo("#s7-m2", { backgroundSize: "0% 60%" }, { backgroundSize: "100% 60%", duration: 0.4, ease: "power2.inOut" }, 5.95);
+      tl.to("#s7-cam", { x: -498, y: -700, scale: 1.5, duration: 0.6, ease: "power2.inOut" }, 6.9);
+      // cursor travels in and approves (button centre on screen ≈ 652, 696)
+      tl.fromTo("#s7-cursor", { x: 1500, y: 1100 }, { x: 640, y: 690, duration: 1.15, ease: "power2.inOut" }, 7.3);
+      tl.to("#s7-cursor", { scale: 0.86, duration: 0.07, ease: "power2.out", transformOrigin: "12% 8%" }, 8.5);
+      tl.to("#s7-cursor", { scale: 1, duration: 0.12, ease: "power2.out" }, 8.57);
+      tl.to("#s7-approve", { scale: 0.96, duration: 0.07 }, 8.5);
+      tl.to("#s7-approve", { scale: 1, duration: 0.14 }, 8.57);
+      tl.fromTo("#s7-approve-done", { clipPath: "circle(0% at 40% 50%)" }, { clipPath: "circle(150% at 40% 50%)", duration: 0.3, ease: "power2.out" }, 8.52);
+      tl.fromTo("#s7-toast", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" }, 8.9);
+      tl.to("#s7-toast", { opacity: 0, y: 20, duration: 0.2, ease: "power3.in" }, 11.2);
+      tl.to("#s7-cursor", { x: 820, y: 1160, duration: 0.5, ease: "power3.in" }, 9.8);
+      // pull back to the whole room; the case closes
+      tl.to("#s7-cam", { x: 0, y: 0, scale: 1, duration: 0.7, ease: "power2.inOut" }, 9.7);
+      tl.fromTo("#s7-st1", { display: "inline" }, { display: "none", duration: 0.01 }, 9.0);
+      tl.fromTo("#s7-st2", { display: "none" }, { display: "inline", duration: 0.01 }, 9.0);
+      tl.to("#s7-r1", { backgroundColor: "#EEF7F1", borderLeftColor: "#1E7A46", duration: 0.3 }, 10.2);
+      // the loop closes back to the store, in French
+      tl.fromTo("#s7-loop", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, 10.6);
+      tl.fromTo("#s7-dip", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.in" }, 13.8);
+      window.__timelines["s7-room"] = tl;
+    })();
+  </script>
+</template>

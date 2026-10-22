@@ -1,0 +1,142 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #0A0C11; overflow: hidden; }
+    #s3-stage { position: absolute; inset: 0; }
+    #s3-sheet {
+      position: absolute; left: 110px; top: 150px; width: 1060px; height: 800px;
+      background: #F6F6F3; padding: 56px 64px; color: #1F2430;
+    }
+    #s3-head { font-family: "IBM Plex Mono", monospace; font-size: 22px; line-height: 1.6; color: #6B7280; }
+    #s3-head b { color: #14213D; font-weight: 600; }
+    #s3-rule { height: 2px; background: #E3E4E8; margin: 26px 0 18px; }
+    #s3-body { position: relative; font-family: Montserrat, sans-serif; font-weight: 500; font-size: 34px; line-height: 80px; }
+    #s3-body p { margin: 0; }
+    .s3-hl {
+      background-repeat: no-repeat; background-position: 0 85%; background-size: 0% 62%;
+      padding: 0 3px; border-radius: 2px;
+    }
+    #s3-prod { background-image: linear-gradient(#CFE0F5, #CFE0F5); }
+    #s3-size { background-image: linear-gradient(#E2D7F5, #E2D7F5); }
+    #s3-stock { background-image: linear-gradient(#F7C4C4, #F7C4C4); }
+    #s3-unmet { background-image: linear-gradient(#FBE0AE, #FBE0AE); }
+    #s3-ctx { background-image: linear-gradient(#D2ECD9, #D2ECD9); }
+    #s3-noise, #s3-money { background-image: linear-gradient(#9AA0AA, #9AA0AA); background-position: 0 58%; background-size: 0% 3px; }
+    .s3-tag {
+      position: absolute; height: 30px; padding: 0 10px 0 12px; display: flex; align-items: center;
+      font-family: Montserrat, sans-serif; font-weight: 800; font-size: 19px; letter-spacing: 0.08em;
+      background: #FFFFFF; border-left: 5px solid currentColor; white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(20, 33, 61, 0.18);
+    }
+    #s3-panel {
+      position: absolute; left: 1230px; top: 150px; width: 590px; height: 800px; background: #101A2E;
+      padding: 44px 40px; font-family: "IBM Plex Mono", monospace; font-size: 24px; line-height: 44px; color: #C9D3E3;
+    }
+    #s3-panel .k { color: #8FB4DB; }
+    #s3-panel .s { color: #F4F4F1; }
+    #s3-panel .n { color: #F2B544; }
+    #s3-panel .cm { color: #6E7C95; }
+    #s3-panel .jl { white-space: pre; clip-path: inset(0 100% 0 0); }
+    #s3-ptitle { font-family: Montserrat, sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 0.14em; color: #8FB4DB; margin-bottom: 18px; }
+    #s3-stamp {
+      position: absolute; left: 0; top: 0; font-family: Montserrat, sans-serif; font-weight: 900;
+      font-size: 200px; letter-spacing: 0.02em; color: #D7141A; white-space: nowrap; transform-origin: 0 0;
+    }
+    #s3-scan { position: absolute; left: 110px; top: 150px; width: 1060px; height: 4px; background: #14213D; opacity: 0; }
+  </style>
+  <div data-hf-id="hf-7n1o" id="root" data-composition-id="s3-read" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-pocu" id="s3-stage" data-layout-allow-overlap>
+      <div data-hf-id="hf-3rk9" id="s3-sheet">
+        <div data-hf-id="hf-ktpi" id="s3-head">
+          <div data-hf-id="hf-zd6z" class="s3-row"><b data-hf-id="hf-22k5">From</b> Camille Lefèvre · PAR01 Paris Saint-Honoré</div>
+          <div data-hf-id="hf-ywx9" class="s3-row"><b data-hf-id="hf-ptn3">Subject</b> PAR01 – Closing 22/10 · 21:05 CEST</div>
+        </div>
+        <div data-hf-id="hf-9bga" id="s3-rule"></div>
+        <div data-hf-id="hf-1618" id="s3-body">
+          <p data-hf-id="hf-5i4g" class="s3-row">Bonsoir,</p>
+          <p data-hf-id="hf-jauo" class="s3-row"><span data-hf-id="hf-8r0v" id="s3-money" class="s3-hl">CA 38,2 k€</span> / bud 41 (−7%).</p>
+          <p data-hf-id="hf-svv6" class="s3-row"><span data-hf-id="hf-yiy2" id="s3-prod" class="s3-hl">Maire noir</span> <span data-hf-id="hf-yi98" id="s3-size" class="s3-hl">T2</span> <span data-hf-id="hf-pby7" id="s3-stock" class="s3-hl">épuisé depuis ce midi</span>,</p>
+          <p data-hf-id="hf-8dqp" class="s3-row"><span data-hf-id="hf-kf4g" id="s3-unmet" class="s3-hl">plusieurs clientes reparties</span> sans rien.</p>
+          <p data-hf-id="hf-eubf" class="s3-row"><span data-hf-id="hf-85ar" id="s3-noise" class="s3-hl">Belle journée</span>, beaucoup de <span data-hf-id="hf-edub" id="s3-ctx" class="s3-hl">touristes coréens</span>.</p>
+          <p data-hf-id="hf-7zjb" class="s3-row">Camille</p>
+        </div>
+        <div data-hf-id="hf-nd8b" id="s3-tags"></div>
+      </div>
+      <div data-hf-id="hf-zx3n" id="s3-scan"></div>
+      <div data-hf-id="hf-anwy" id="s3-panel">
+        <div data-hf-id="hf-n5dq" id="s3-ptitle">CLAIM · M3 EXTRACTION</div>
+        <div data-hf-id="hf-axem" class="jl" id="s3-j0">{</div>
+        <div data-hf-id="hf-3aru" class="jl" id="s3-j1">  <span data-hf-id="hf-vdkg" class="k">"type"</span>: <span data-hf-id="hf-x3uu" class="s">"stockout"</span>,</div>
+        <div data-hf-id="hf-y893" class="jl" id="s3-j2">  <span data-hf-id="hf-dz89" class="k">"product"</span>: <span data-hf-id="hf-uyac" class="s">"Maire noir"</span>,</div>
+        <div data-hf-id="hf-fjto" class="jl" id="s3-j3">  <span data-hf-id="hf-fnfv" class="k">"size"</span>: <span data-hf-id="hf-y9v2" class="s">"2"</span>,</div>
+        <div data-hf-id="hf-ouep" class="jl" id="s3-j4">  <span data-hf-id="hf-3ahe" class="k">"since"</span>: <span data-hf-id="hf-w1dy" class="s">"12:00 CEST"</span>,</div>
+        <div data-hf-id="hf-e7tu" class="jl" id="s3-j5">  <span data-hf-id="hf-sc6d" class="k">"unmet"</span>: [<span data-hf-id="hf-cx0x" class="n">2</span>, <span data-hf-id="hf-c4ev" class="n">4</span>],  <span data-hf-id="hf-62ih" class="cm">// plusieurs</span></div>
+        <div data-hf-id="hf-039z" class="jl" id="s3-j6">  <span data-hf-id="hf-b6c3" class="k">"evidence"</span>: <span data-hf-id="hf-ubxz" class="s">"épuisé depuis</span></div>
+        <div data-hf-id="hf-atby" class="jl" id="s3-j7"><span data-hf-id="hf-q4s9" class="s">               ce midi"</span>,</div>
+        <div data-hf-id="hf-tar9" class="jl" id="s3-j8">  <span data-hf-id="hf-olb1" class="k">"context"</span>: <span data-hf-id="hf-oue8" class="s">"KR tourists"</span>,</div>
+        <div data-hf-id="hf-6qla" class="jl" id="s3-j9">  <span data-hf-id="hf-c048" class="k">"confidence"</span>: <span data-hf-id="hf-s9iq" class="n">0.94</span></div>
+        <div data-hf-id="hf-wolj" class="jl" id="s3-j10">}</div>
+        <div data-hf-id="hf-jrgp" class="jl" id="s3-j11"><span data-hf-id="hf-k31g" class="cm">ignored: "Belle journée" (noise)</span></div>
+        <div data-hf-id="hf-npkq" class="jl" id="s3-j12"><span data-hf-id="hf-fd80" class="cm">ignored: "CA 38,2 k€" (gross)</span></div>
+      </div>
+    </div>
+    <div data-hf-id="hf-yyqc" id="s3-stamp" class="clip" data-start="0.5" data-duration="9.9" data-layout-allow-overlap>AI READS</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const TAGS = [
+        ["s3-prod", "PRODUCT", "#2F5F9E", 2.7],
+        ["s3-size", "SIZE", "#6A4BA8", 3.1],
+        ["s3-stock", "STOCKOUT", "#D7141A", 3.5],
+        ["s3-unmet", "UNMET 2–4", "#B07415", 4.0],
+        ["s3-ctx", "CONTEXT", "#2E7D4F", 4.5],
+        ["s3-noise", "NOISE", "#6B7280", 5.0],
+        ["s3-money", "GROSS € · NOT COUNTED", "#6B7280", 5.4]
+      ];
+      function build() {
+        const sheet = document.getElementById("s3-sheet");
+        const sr = sheet.getBoundingClientRect();
+        const box = document.getElementById("s3-tags");
+        const placed = [];
+        TAGS.forEach(([id, label, col, at], i) => {
+          const el = document.getElementById(id);
+          const r = el.getClientRects()[0];
+          const tag = document.createElement("div");
+          tag.className = "s3-tag"; tag.id = id + "-tag"; tag.textContent = label; tag.style.color = col;
+          let x = r.left - sr.left, y = r.top - sr.top - 22;
+          // nudge right if it would collide with a tag on the same line
+          box.appendChild(tag);
+          const w = tag.getBoundingClientRect().width;
+          for (const p of placed) if (Math.abs(p.y - y) < 10 && x < p.x + p.w + 8 && x + w > p.x - 8) x = p.x + p.w + 8;
+          tag.style.left = x + "px"; tag.style.top = y + "px";
+          placed.push({ x, y, w: tag.getBoundingClientRect().width });
+          const isStrike = id === "s3-noise" || id === "s3-money";
+          tl.fromTo(el, { backgroundSize: isStrike ? "0% 3px" : "0% 62%" }, { backgroundSize: isStrike ? "100% 3px" : "100% 62%", duration: 0.32, ease: "power2.inOut" }, at);
+          tl.fromTo(tag, { opacity: 0, y: 10, filter: "blur(4px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.22, ease: "expo.out" }, at + 0.22);
+          if (isStrike) tl.to(el, { color: "#9AA0AA", duration: 0.3 }, at + 0.1);
+        });
+        // content arrives on the blank sheet carried from the wall
+        tl.fromTo(".s3-row", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, stagger: 0.07, ease: "power2.out" }, 0.1);
+        tl.fromTo("#s3-rule", { scaleX: 0, transformOrigin: "0 50%" }, { scaleX: 1, duration: 0.4, ease: "expo.out" }, 0.2);
+        tl.fromTo("#s3-panel", { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, 1.9);
+        // the stamp prints, then shrinks to the chapter label above the sheet
+        tl.fromTo("#s3-stamp", { x: 300, y: 430, scale: 1.12, opacity: 0, filter: "blur(10px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.12, ease: "power4.out" }, 0.5);
+        tl.to("#s3-stamp", { x: 110, y: 52, scale: 0.36, duration: 0.55, ease: "power2.inOut" }, 1.45);
+        // scan pass
+        tl.fromTo("#s3-scan", { opacity: 0, y: 0 }, { opacity: 0.9, duration: 0.1 }, 2.05);
+        tl.to("#s3-scan", { y: 796, duration: 0.85, ease: "power1.inOut" }, 2.1);
+        tl.to("#s3-scan", { opacity: 0, duration: 0.12 }, 2.95);
+        // JSON lines type in
+        for (let i = 0; i <= 12; i++) {
+          const n = document.getElementById("s3-j" + i).textContent.length;
+          tl.fromTo("#s3-j" + i, { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: Math.min(0.4, n * 0.016), ease: "steps(" + Math.max(4, n) + ")" }, 2.6 + i * 0.3);
+        }
+        // whip out to the left
+        tl.to("#s3-stage", { x: -520, opacity: 0, filter: "blur(18px)", duration: 0.36, ease: "power3.in" }, 9.95);
+        tl.to("#s3-stamp", { x: -400, opacity: 0, filter: "blur(18px)", duration: 0.36, ease: "power3.in" }, 9.95);
+        window.__timelines["s3-read"] = tl;
+      }
+      document.fonts.ready.then(build);
+    })();
+  </script>
+</template>

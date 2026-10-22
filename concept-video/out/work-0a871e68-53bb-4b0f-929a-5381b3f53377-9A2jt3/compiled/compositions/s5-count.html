@@ -1,0 +1,156 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #0E1626; overflow: hidden; }
+    #s5-stage { position: absolute; inset: 0; }
+    #s5-cv { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    #s5-stamp {
+      position: absolute; left: 0; top: 0; font-family: Montserrat, sans-serif; font-weight: 900;
+      font-size: 200px; color: #D7141A; white-space: nowrap; transform-origin: 0 0;
+    }
+    #s5-panel { position: absolute; left: 1350px; top: 210px; width: 480px; color: #F4F4F1; }
+    #s5-panel .lab { font-family: Montserrat, sans-serif; font-weight: 800; font-size: 20px; letter-spacing: 0.14em; color: #8FB4DB; }
+    #s5-base { font-family: "IBM Plex Mono", monospace; font-size: 32px; color: #9AA3B2; margin-top: 18px; }
+    #s5-corr { font-family: Montserrat, sans-serif; font-weight: 800; font-size: 96px; line-height: 1; margin-top: 14px; color: #BFD9EE; white-space: nowrap; }
+    #s5-corr small { font-size: 34px; font-weight: 600; color: #9AA3B2; margin-left: 10px; }
+    .s5-f { font-family: "IBM Plex Mono", monospace; font-size: 27px; line-height: 1.5; color: #C9D3E3; white-space: nowrap; margin-top: 14px; }
+    .s5-f .hl { color: #F2B544; }
+    #s5-forms { margin-top: 46px; padding-top: 26px; border-top: 2px solid rgba(191, 217, 238, 0.25); }
+    #s5-tagline { position: absolute; left: 1350px; top: 900px; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 32px; color: #F4F4F1; width: 500px; }
+  </style>
+  <div data-hf-id="hf-4fzl" id="root" data-composition-id="s5-count" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-yi1k" id="s5-stage" data-layout-allow-overlap>
+      <canvas data-hf-id="hf-zw96" id="s5-cv" width="1920" height="1080"></canvas>
+      <div data-hf-id="hf-4vxk" id="s5-panel">
+        <div data-hf-id="hf-goyl" class="lab" id="s5-lab">PAR01 · MAIRE BLACK 2 · NEXT 7 DAYS</div>
+        <div data-hf-id="hf-g513" id="s5-base">baseline forecast <b data-hf-id="hf-npl4">7.0</b></div>
+        <div data-hf-id="hf-52pl" id="s5-corr"><span data-hf-id="hf-jj2v" id="s5-lo">7.0</span>–<span data-hf-id="hf-xd3x" id="s5-hi">7.0</span><small data-hf-id="hf-brln">units</small></div>
+        <div data-hf-id="hf-wjm7" id="s5-forms">
+          <div data-hf-id="hf-hemp" class="s5-f" id="s5-f1">r = (D + α) / (Σf + α) = <span data-hf-id="hf-xrz5" class="hl">1.33–1.67</span></div>
+          <div data-hf-id="hf-obcb" class="s5-f" id="s5-f2">uₜ = w · (r − 1) · 0.5^(t/7)</div>
+          <div data-hf-id="hf-m6d3" class="s5-f" id="s5-f3">f′ₜ = fₜ · (1 + Σuₜ) · φₜ</div>
+        </div>
+      </div>
+      <div data-hf-id="hf-87q1" id="s5-tagline" class="clip" data-start="7.6" data-duration="2.8">No new model. Every number traceable.</div>
+    </div>
+    <div data-hf-id="hf-rmz4" id="s5-stamp" class="clip" data-start="0.1" data-duration="10.3" data-layout-allow-overlap>CODE COUNTS</div>
+  </div>
+  <script>
+    (function () {
+      const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+      const eo = (x) => 1 - Math.pow(1 - clamp(x, 0, 1), 4);
+      const eio = (x) => { x = clamp(x, 0, 1); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+      const cv = document.getElementById("s5-cv");
+      const ctx = cv.getContext("2d");
+      const X0 = 150, X1 = 1260, Y0 = 880, YT = 250, YMAX = 5.4;
+      const DAYS = ["15","16","17","18","19","20","21","22","23","24","25","26","27","28","29"];
+      const SALES = [1, 0, 1, 2, 1, 1, 1, 1];
+      const SW = (X1 - X0) / DAYS.length;
+      const yv = (v) => Y0 - (v / YMAX) * (Y0 - YT);
+      const xd = (i) => X0 + i * SW + SW / 2;
+      const lo = (k) => 1 + 0.333 * Math.pow(0.5, k / 7), hi = (k) => 1 + 0.667 * Math.pow(0.5, k / 7);
+      let hatch = null;
+      function hatchPattern() {
+        const c = document.createElement("canvas"); c.width = 14; c.height = 14;
+        const g = c.getContext("2d"); g.strokeStyle = "rgba(215,20,26,0.9)"; g.lineWidth = 3;
+        g.beginPath(); g.moveTo(-2, 16); g.lineTo(16, -2); g.moveTo(-2, 30); g.lineTo(30, -2); g.stroke();
+        return ctx.createPattern(c, "repeat");
+      }
+      function draw(t) {
+        if (!hatch) hatch = hatchPattern();
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.clearRect(0, 0, 1920, 1080);
+        const ax = eo((t - 1.6) / 0.6);
+        // axis + gridlines
+        ctx.strokeStyle = "rgba(191,217,238,0.18)"; ctx.lineWidth = 1.5;
+        for (let v = 1; v <= 5; v++) { ctx.beginPath(); ctx.moveTo(X0, yv(v)); ctx.lineTo(X0 + (X1 - X0) * ax, yv(v)); ctx.stroke(); }
+        ctx.strokeStyle = "rgba(191,217,238,0.55)"; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(X0, Y0); ctx.lineTo(X0 + (X1 - X0) * ax, Y0); ctx.stroke();
+        ctx.globalAlpha = ax; ctx.font = "500 22px 'IBM Plex Mono'"; ctx.fillStyle = "#9AA3B2";
+        DAYS.forEach((d, i) => ctx.fillText(d, xd(i) - 13, Y0 + 36));
+        ctx.fillText("OCT", X0, Y0 + 70);
+        for (let v = 1; v <= 5; v++) ctx.fillText(String(v), X0 - 34, yv(v) + 8);
+        ctx.globalAlpha = 1;
+        // sales bars
+        SALES.forEach((s, i) => {
+          const g = eo((t - 1.9 - i * 0.07) / 0.45);
+          if (g <= 0 || s === 0) return;
+          ctx.fillStyle = "#F4F4F1";
+          const h = (yv(0) - yv(s)) * g;
+          ctx.fillRect(xd(i) - SW * 0.3, Y0 - h, SW * 0.6, h);
+        });
+        // tonight
+        const tn = eo((t - 2.7) / 0.4);
+        if (tn > 0) {
+          const x = X0 + 8 * SW;
+          ctx.strokeStyle = `rgba(244,244,241,${0.8 * tn})`; ctx.setLineDash([6, 6]); ctx.lineWidth = 2;
+          ctx.beginPath(); ctx.moveTo(x, Y0); ctx.lineTo(x, YT - 30 + (1 - tn) * 200); ctx.stroke(); ctx.setLineDash([]);
+          ctx.globalAlpha = tn; ctx.font = "700 22px Montserrat"; ctx.fillStyle = "#F4F4F1";
+          ctx.fillText("TONIGHT 21:05", x + 10, YT - 14); ctx.globalAlpha = 1;
+        }
+        // censored demand on the 22nd: sold 1 by noon, 2-4 walked out
+        const cg = eo((t - 3.1) / 0.6);
+        if (cg > 0) {
+          const x = xd(7) - SW * 0.3, w = SW * 0.6;
+          const yA = yv(1), yB = yv(1 + 2 * cg), yC = yv(1 + 4 * cg);
+          ctx.fillStyle = hatch; ctx.fillRect(x, yB, w, yA - yB);
+          ctx.strokeStyle = "rgba(215,20,26,0.9)"; ctx.setLineDash([7, 5]); ctx.lineWidth = 2.5;
+          ctx.strokeRect(x, yC, w, yB - yC); ctx.setLineDash([]);
+          ctx.globalAlpha = eo((t - 3.4) / 0.3);
+          ctx.font = "800 26px Montserrat"; ctx.fillStyle = "#FF5A5F";
+          ctx.fillText("2–4 WALKED OUT", xd(7) - 300, yv(4.6));
+          ctx.font = "500 22px 'IBM Plex Mono'"; ctx.fillStyle = "#C9D3E3";
+          ctx.fillText("censored: sales will never show it", xd(7) - 470, yv(4.6) + 34);
+          ctx.globalAlpha = 1;
+        }
+        // baseline across the whole window
+        const bl = eo((t - 3.9) / 0.8);
+        if (bl > 0) {
+          ctx.strokeStyle = "#9AA3B2"; ctx.lineWidth = 3; ctx.setLineDash([10, 8]);
+          ctx.beginPath(); ctx.moveTo(xd(0), yv(1)); ctx.lineTo(xd(0) + (xd(14) - xd(0)) * bl, yv(1)); ctx.stroke(); ctx.setLineDash([]);
+          ctx.globalAlpha = bl; ctx.font = "500 22px 'IBM Plex Mono'"; ctx.fillStyle = "#9AA3B2";
+          ctx.fillText("baseline 1.0/day", xd(10), yv(1) + 36); ctx.globalAlpha = 1;
+        }
+        // corrected band grows into the future
+        const bg = eio((t - 4.5) / 1.2);
+        if (bg > 0) {
+          const xEnd = xd(8) + (xd(14) - xd(8)) * bg;
+          const pts = [];
+          for (let k = 0; k <= 6; k++) pts.push([xd(8 + k), lo(k + 1), hi(k + 1)]);
+          ctx.save(); ctx.beginPath(); ctx.rect(xd(8) - 2, 0, xEnd - xd(8) + 2, 1080); ctx.clip();
+          ctx.beginPath();
+          pts.forEach((p, i) => (i ? ctx.lineTo(p[0], yv(p[2])) : ctx.moveTo(p[0], yv(p[2]))));
+          for (let i = pts.length - 1; i >= 0; i--) ctx.lineTo(pts[i][0], yv(pts[i][1]));
+          ctx.closePath(); ctx.fillStyle = "rgba(191,217,238,0.42)"; ctx.fill();
+          ctx.strokeStyle = "#BFD9EE"; ctx.lineWidth = 3;
+          ctx.beginPath(); pts.forEach((p, i) => (i ? ctx.lineTo(p[0], yv(p[2])) : ctx.moveTo(p[0], yv(p[2])))); ctx.stroke();
+          ctx.beginPath(); pts.forEach((p, i) => (i ? ctx.lineTo(p[0], yv(p[1])) : ctx.moveTo(p[0], yv(p[1])))); ctx.stroke();
+          ctx.restore();
+          ctx.globalAlpha = eo((t - 5.4) / 0.3); ctx.font = "800 26px Montserrat"; ctx.fillStyle = "#BFD9EE";
+          ctx.fillText("CORRECTED BAND", xd(10), yv(2.15)); ctx.globalAlpha = 1;
+        }
+      }
+      const P = { t: 0 };
+      const tl = gsap.timeline({ paused: true });
+      tl.to(P, { t: 10.4, duration: 10.4, ease: "none", onUpdate: () => draw(P.t) }, 0);
+      tl.fromTo("#s5-stamp", { x: 220, y: 430, scale: 1.12, opacity: 0, filter: "blur(10px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.12, ease: "power4.out" }, 0.1);
+      tl.to("#s5-stamp", { x: 150, y: 60, scale: 0.36, duration: 0.55, ease: "power2.inOut" }, 1.25);
+      tl.fromTo("#s5-lab", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 4.4);
+      tl.fromTo("#s5-base", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2 }, 4.6);
+      tl.fromTo("#s5-corr", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2 }, 4.9);
+      const C = { lo: 7.0, hi: 7.0 };
+      tl.to(C, { lo: 8.6, hi: 10.2, duration: 1.2, ease: "expo.out", onUpdate: () => {
+        document.getElementById("s5-lo").textContent = C.lo.toFixed(1);
+        document.getElementById("s5-hi").textContent = C.hi.toFixed(1);
+      } }, 5.0);
+      ["#s5-f1", "#s5-f2", "#s5-f3"].forEach((id, i) =>
+        tl.fromTo(id, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power2.out" }, 6.2 + i * 0.4));
+      tl.fromTo("#s5-forms", { borderTopColor: "rgba(191,217,238,0)" }, { borderTopColor: "rgba(191,217,238,0.25)", duration: 0.3 }, 6.0);
+      tl.fromTo("#s5-tagline", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2 }, 7.6);
+      // whip up into the map
+      tl.to("#s5-stage", { y: -420, opacity: 0, filter: "blur(16px)", duration: 0.36, ease: "power3.in" }, 9.95);
+      tl.to("#s5-stamp", { y: -360, opacity: 0, duration: 0.3, ease: "power3.in" }, 9.95);
+      draw(0);
+      window.__timelines["s5-count"] = tl;
+    })();
+  </script>
+</template>

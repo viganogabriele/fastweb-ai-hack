@@ -1,0 +1,362 @@
+{
+  "ok": false,
+  "strict": false,
+  "browserSkipped": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "filesScanned": 9
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "layout": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 1,
+    "infoCount": 5,
+    "findings": [
+      {
+        "code": "canvas_content_at_edge",
+        "severity": "warning",
+        "time": 66.833,
+        "selector": "#s8-cv",
+        "message": "Canvas content touches the frame edge (right, top, bottom).",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 1080,
+          "width": 1920,
+          "height": 1080
+        },
+        "containerSelector": "#root",
+        "fixHint": "Keep drawn text inside the visible part of the canvas, or mark intentional full-bleed art with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 1080,
+          "width": 1920,
+          "height": 1080
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s8-end.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "firstSeen": 66.833,
+        "lastSeen": 70.944,
+        "occurrences": 2,
+        "heldMs": 0,
+        "times": [
+          66.833,
+          70.944
+        ]
+      },
+      {
+        "code": "text_box_overflow",
+        "severity": "info",
+        "time": 42.167,
+        "selector": "span.hl",
+        "message": "Text extends outside its nearest visual/container box.",
+        "rect": {
+          "left": 1755,
+          "top": 518,
+          "right": 1900.81,
+          "bottom": 553,
+          "width": 145.81,
+          "height": 35
+        },
+        "containerSelector": "#s5-forms",
+        "text": "1.33–1.67",
+        "fixHint": "Text is 146px x 35px inside 480px x 192px and overflows by up to 71px; widen the container to at least ~551px, or allow wrapping with max-width/fitTextFontSize.",
+        "containerRect": {
+          "left": 1350,
+          "top": 474,
+          "right": 1830,
+          "bottom": 665.5,
+          "width": 480,
+          "height": 191.5
+        },
+        "overflow": {
+          "right": 70.81
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s5-count.html",
+        "bbox": {
+          "x": 1755,
+          "y": 518,
+          "width": 145.81,
+          "height": 35
+        },
+        "firstSeen": 42.167,
+        "lastSeen": 42.167,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          42.167
+        ]
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 58.611,
+        "selector": "#s7-cursor",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": 1438.93,
+          "top": 1070.89,
+          "right": 1502.93,
+          "bottom": 1134.89,
+          "width": 64,
+          "height": 64
+        },
+        "containerSelector": "#s7-room > div:nth-of-type(1)",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 1080,
+          "width": 1920,
+          "height": 1080
+        },
+        "overflow": {
+          "bottom": 54.89
+        },
+        "dataAttributes": {
+          "data-start": "7.3",
+          "data-duration": "3.2"
+        },
+        "sourceFile": "compositions/s7-room.html",
+        "bbox": {
+          "x": 1438.93,
+          "y": 1070.89,
+          "width": 64,
+          "height": 64
+        },
+        "firstSeen": 58.611,
+        "lastSeen": 58.611,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          58.611
+        ]
+      },
+      {
+        "code": "text_occluded",
+        "severity": "info",
+        "time": 62.722,
+        "selector": "#s7-ob > div:nth-of-type(2)",
+        "message": "Text is hidden beneath an opaque element.",
+        "rect": {
+          "left": 1157.59,
+          "top": 789.5,
+          "right": 1316,
+          "bottom": 818.5,
+          "width": 158.41,
+          "height": 29
+        },
+        "containerSelector": "#s7-loop",
+        "text": "0.6 unserved",
+        "fixHint": "Give the text its own zone, raise its stacking order above the covering element, or mark intentional layering with data-layout-allow-occlusion.",
+        "coveredFraction": 0.22,
+        "dataAttributes": {},
+        "sourceFile": "compositions/s7-room.html",
+        "bbox": {
+          "x": 1157.59,
+          "y": 789.5,
+          "width": 158.41,
+          "height": 29
+        },
+        "firstSeen": 62.722,
+        "lastSeen": 62.722,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          62.722
+        ]
+      },
+      {
+        "code": "text_occluded",
+        "severity": "info",
+        "time": 62.722,
+        "selector": "#s7-oc > div:nth-of-type(2)",
+        "message": "Text is hidden beneath an opaque element.",
+        "rect": {
+          "left": 1170.8,
+          "top": 865.5,
+          "right": 1316,
+          "bottom": 894.5,
+          "width": 145.2,
+          "height": 29
+        },
+        "containerSelector": "#s7-loop",
+        "text": "10 unserved",
+        "fixHint": "Give the text its own zone, raise its stacking order above the covering element, or mark intentional layering with data-layout-allow-occlusion.",
+        "coveredFraction": 0.22,
+        "dataAttributes": {},
+        "sourceFile": "compositions/s7-room.html",
+        "bbox": {
+          "x": 1170.8,
+          "y": 865.5,
+          "width": 145.2,
+          "height": 29
+        },
+        "firstSeen": 62.722,
+        "lastSeen": 62.722,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          62.722
+        ]
+      },
+      {
+        "code": "text_occluded",
+        "severity": "info",
+        "time": 62.722,
+        "selector": "#s7-pat > div:nth-of-type(3)",
+        "message": "Text is hidden beneath an opaque element.",
+        "rect": {
+          "left": 1444,
+          "top": 897.98,
+          "right": 1834.97,
+          "bottom": 924.98,
+          "width": 390.97,
+          "height": 27
+        },
+        "containerSelector": "#s7-loop",
+        "text": "MIL01 footfall halved by roadworks",
+        "fixHint": "Give the text its own zone, raise its stacking order above the covering element, or mark intentional layering with data-layout-allow-occlusion.",
+        "coveredFraction": 1,
+        "dataAttributes": {},
+        "sourceFile": "compositions/s7-room.html",
+        "bbox": {
+          "x": 1444,
+          "y": 897.98,
+          "width": 390.97,
+          "height": 27
+        },
+        "firstSeen": 62.722,
+        "lastSeen": 62.722,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          62.722
+        ]
+      }
+    ],
+    "duration": 73,
+    "samples": [
+      38.056,
+      42.167,
+      46.278,
+      50.389,
+      54.5,
+      58.611,
+      62.722,
+      66.833,
+      70.944
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 6,
+    "truncated": false
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "samples": 0
+  },
+  "contrast": {
+    "ok": false,
+    "errorCount": 1,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "contrast_aa_failure",
+        "severity": "error",
+        "message": "Contrast is 3.66:1; WCAG AA requires 4.5:1.",
+        "text": "TRAFFIC ×0.5 · NO STOCK PULLED",
+        "fg": "rgb(176,116,21)",
+        "bg": "rgb(246,247,249)",
+        "ratio": 3.66,
+        "requiredRatio": 4.5,
+        "suggestedColor": "rgb(155,102,19)",
+        "large": false,
+        "selector": "div > div:nth-of-type(7) > div > div:nth-of-type(2) > div > div:nth-of-type(2) > div:nth-of-type(6) > div:nth-of-type(3)",
+        "dataAttributes": {},
+        "sourceFile": "compositions/s7-room.html",
+        "bbox": {
+          "x": 80,
+          "y": 848,
+          "width": 426,
+          "height": 22
+        },
+        "time": 54.5,
+        "times": [
+          54.5,
+          62.722
+        ]
+      }
+    ],
+    "enabled": true,
+    "samples": [
+      38.056,
+      46.278,
+      54.5,
+      62.722,
+      70.944
+    ],
+    "checked": 155,
+    "passed": 153
+  },
+  "craft": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "step": 0,
+    "samples": 0
+  },
+  "hdr": {
+    "autoPromotion": null,
+    "inspection": "available"
+  },
+  "snapshots": {
+    "enabled": false,
+    "files": [],
+    "times": [],
+    "findingFiles": []
+  },
+  "scope": {
+    "range": [
+      36,
+      73
+    ],
+    "hiddenFindings": 0,
+    "notes": [
+      "Static lint and unscoped runtime failures remain project-wide.",
+      "Whole-timeline motion assertions, frozen-sweep detection and craft warnings are skipped for range checks."
+    ]
+  }
+}

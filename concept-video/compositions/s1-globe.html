@@ -1,0 +1,177 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; background: #0A0C11; overflow: hidden; }
+    #s1-cv { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    .s1-line {
+      position: absolute; left: 132px; top: 360px; width: 760px;
+      font-family: Montserrat, sans-serif; font-weight: 800; font-size: 74px; line-height: 1.04;
+      letter-spacing: -0.01em; color: #F4F4F1;
+    }
+    .s1-line .w { display: inline-block; margin-right: 0.24em; }
+    #s1-count {
+      position: absolute; left: 136px; top: 640px; font-family: "IBM Plex Mono", monospace;
+      font-size: 30px; color: #9AA3B2; letter-spacing: 0.04em;
+    }
+    #s1-count b { color: #F4F4F1; font-weight: 600; }
+  </style>
+  <div data-hf-id="hf-a8ab" id="root" data-composition-id="s1-globe" data-width="1920" data-height="1080">
+    <canvas data-hf-id="hf-9z66" id="s1-cv" width="1920" height="1080"></canvas>
+    <div data-hf-id="hf-ci6f" id="s1-l1" class="s1-line clip" data-start="0" data-duration="3.3" data-layout-allow-overlap>
+      <span data-hf-id="hf-4q4b" class="w">Every</span><span data-hf-id="hf-a4bc" class="w">evening,</span><br data-hf-id="hf-x5px" /><span data-hf-id="hf-qn20" class="w">39</span><span data-hf-id="hf-9htq" class="w">stores</span><span data-hf-id="hf-yvn0" class="w">close</span>
+    </div>
+    <div data-hf-id="hf-k6in" id="s1-l2" class="s1-line clip" data-start="3.4" data-duration="4.0" data-layout-allow-overlap>
+      <span data-hf-id="hf-difl" class="w">and</span><span data-hf-id="hf-eafb" class="w">write</span><span data-hf-id="hf-vvdw" class="w">down</span><br data-hf-id="hf-rsrt" /><span data-hf-id="hf-8yca" class="w">what</span><span data-hf-id="hf-tg9q" class="w">they</span><span data-hf-id="hf-l04l" class="w">saw</span>
+    </div>
+    <div data-hf-id="hf-tift" id="s1-count" class="clip" data-start="0.6" data-duration="6.8">NOTES TONIGHT&nbsp;&nbsp;<b data-hf-id="hf-93dl" id="s1-n">0</b> / 39</div>
+  </div>
+  <script>
+    (function () {
+      const STORES = [["MIL01",45.4685,9.1955],["MIL02",45.4655,9.1912],["ROM01",41.9055,12.48],["VEN01",45.4337,12.3363],["COU01",45.7969,6.969],["CRT01",46.5405,12.1357],["PAR01",48.8686,2.3224],["PAR02",48.8738,2.332],["CAN01",43.5503,7.0225],["GVA01",46.2033,6.1478],["LON01",51.5122,-0.145],["LON02",51.4994,-0.1632],["MUN01",48.1394,11.5823],["BER01",52.5016,13.3411],["ZRH01",47.37,8.539],["STM01",46.4983,9.839],["MAD01",40.426,-3.687],["AMS01",52.359,4.878],["CPH01",55.679,12.58],["DXB01",25.1985,55.2796],["NYC01",40.768,-73.966],["NYC02",40.724,-74.001],["MIA01",25.813,-80.193],["BHS01",34.068,-118.401],["ASP01",39.189,-106.818],["TOR01",43.671,-79.393],["TYO01",35.6717,139.765],["TYO02",35.6655,139.712],["OSA01",34.674,135.501],["SEL01",37.5245,127.047],["SEL02",37.5272,127.028],["BUS01",35.169,129.129],["SHA01",31.229,121.455],["BJS01",39.909,116.481],["CDU01",30.653,104.082],["HKG01",22.296,114.169],["TPE01",25.034,121.5645],["SIN01",1.2834,103.8607],["SYD01",-33.869,151.208]];
+      const LABELS = { SYD01: 1, TYO01: 1, SEL01: 1, SHA01: 1, SIN01: 1, DXB01: 1, MIL01: 1, PAR01: 1, LON01: 1, MAD01: 1 };
+      const LAND = [
+        [[-168,66],[-160,71],[-140,70],[-125,72],[-95,75],[-80,73],[-62,60],[-55,52],[-66,45],[-70,42],[-76,38],[-81,31],[-80,25],[-84,30],[-90,29],[-97,27],[-97,22],[-92,18],[-87,21],[-88,16],[-83,10],[-79,9],[-86,13],[-92,15],[-105,20],[-110,24],[-112,30],[-117,32],[-122,37],[-124,42],[-124,48],[-130,54],[-137,58],[-150,60],[-158,57],[-165,60]],
+        [[-55,60],[-43,60],[-20,70],[-18,77],[-30,83],[-60,82],[-70,78],[-55,70]],
+        [[-80,9],[-72,12],[-62,11],[-52,5],[-35,-5],[-38,-13],[-40,-22],[-48,-26],[-58,-35],[-65,-41],[-68,-50],[-72,-54],[-75,-48],[-73,-38],[-71,-28],[-70,-18],[-76,-14],[-81,-5],[-80,1],[-77,8]],
+        [[-10,36],[-9,43],[-2,44],[-5,48],[2,51],[5,53],[8,57],[5,62],[14,68],[25,71],[40,68],[60,70],[80,73],[100,77],[115,73],[140,72],[160,70],[180,68],[178,62],[163,58],[156,51],[142,54],[140,47],[130,42],[127,39],[126,35],[122,40],[121,31],[120,25],[110,20],[108,16],[105,9],[100,13],[100,6],[104,1],[98,8],[97,16],[92,21],[88,22],[80,15],[78,8],[73,18],[67,25],[57,25],[52,28],[48,30],[56,26],[59,22],[52,16],[43,13],[39,21],[35,28],[34,31],[36,36],[28,37],[26,40],[23,36],[20,40],[16,41],[18,40],[16,38],[12,42],[10,44],[3,43],[-5,36]],
+        [[-17,21],[-17,15],[-12,7],[-4,5],[9,4],[10,-2],[13,-12],[12,-17],[15,-27],[18,-34],[25,-34],[32,-28],[35,-20],[40,-15],[40,-5],[51,11],[43,12],[37,20],[33,31],[20,32],[10,37],[0,36],[-6,36],[-10,30]],
+        [[114,-22],[114,-34],[118,-35],[130,-32],[138,-35],[146,-39],[150,-37],[153,-28],[146,-19],[142,-11],[136,-12],[130,-12],[122,-17]],
+        [[-6,50],[2,51],[0,53],[-2,56],[-3,58.6],[-6,58],[-5,55],[-3,54],[-5,52]],
+        [[130,31],[132,34],[135,34],[140,35],[142,40],[141,45],[145,44],[140,42],[139,38],[136,37],[132,35]],
+        [[95,5],[106,-6],[115,-8],[120,-9],[119,-3],[118,4],[110,2],[103,-1]],
+        [[44,-25],[47,-25],[50,-15],[49,-12],[44,-16]],
+        [[-24,64],[-14,64],[-14,66],[-22,66.5]]
+      ];
+      function inPoly(x, y, poly) {
+        let c = false;
+        for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+          const xi = poly[i][0], yi = poly[i][1], xj = poly[j][0], yj = poly[j][1];
+          if ((yi > y) !== (yj > y) && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) c = !c;
+        }
+        return c;
+      }
+      // Fibonacci sphere, land only (plus Antarctica band).
+      const PTS = [];
+      const N = 42000, GA = Math.PI * (3 - Math.sqrt(5));
+      for (let i = 0; i < N; i++) {
+        const y = 1 - (i / (N - 1)) * 2;
+        const lat = Math.asin(y) * 180 / Math.PI;
+        let lon = ((i * GA) * 180 / Math.PI) % 360; if (lon > 180) lon -= 360;
+        let land = lat < -70;
+        for (let k = 0; !land && k < LAND.length; k++) land = inPoly(lon, lat, LAND[k]);
+        if (land) PTS.push([lat * Math.PI / 180, lon]);
+      }
+      const D2R = Math.PI / 180;
+      const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+      const eo = (x) => 1 - Math.pow(1 - clamp(x, 0, 1), 3);
+      const eio = (x) => { x = clamp(x, 0, 1); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+      const cv = document.getElementById("s1-cv");
+      const ctx = cv.getContext("2d");
+      const lineLon = (t) => 152 - t * 24;
+      const fireAt = (lon) => (152 - lon) / 24;
+      const nEl = document.getElementById("s1-n");
+
+      function draw(t) {
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.fillStyle = "#0A0C11"; ctx.fillRect(0, 0, 1920, 1080);
+        const zoom = 1 + 5 * Math.pow(clamp((t - 6.6) / 0.8, 0, 1), 3);
+        const L = lineLon(t), lon0 = L - 24, lat0 = 24 * D2R;
+        const sl0 = Math.sin(lat0), cl0 = Math.cos(lat0);
+        // anchor the zoom-through on Paris
+        const pd = (2.32 - lon0) * D2R, pl = 48.87 * D2R;
+        const pxo = 470 * Math.cos(pl) * Math.sin(pd), pyo = -470 * (cl0 * Math.sin(pl) - sl0 * Math.cos(pl) * Math.cos(pd));
+        const zu = eio((t - 6.6) / 0.8);
+        const tx = (1210 + pxo) * (1 - zu) + 960 * zu, ty = (560 + pyo) * (1 - zu) + 540 * zu;
+        const cx = tx - pxo * zoom, cy = ty - pyo * zoom, R = 470 * zoom;
+        const proj = (latR, lon) => {
+          const d = (lon - lon0) * D2R, cl = Math.cos(latR), sl = Math.sin(latR);
+          return [cx + R * cl * Math.sin(d), cy - R * (cl0 * sl - sl0 * cl * Math.cos(d)), sl0 * sl + cl0 * cl * Math.cos(d)];
+        };
+        // planet body
+        const g = ctx.createRadialGradient(cx - R * 0.3, cy - R * 0.35, R * 0.1, cx, cy, R);
+        g.addColorStop(0, "#151B27"); g.addColorStop(1, "#0C1018");
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = "rgba(170,190,220,0.28)"; ctx.lineWidth = 2; ctx.stroke();
+        // land dots: east of the 21:00 line = evening passed (cool), west = still open (warm)
+        const ds = 3.2 * Math.min(zoom, 2.2);
+        for (let i = 0; i < PTS.length; i++) {
+          const p = PTS[i]; const q = proj(p[0], p[1]);
+          if (q[2] <= 0.02) continue;
+          const diff = ((p[1] - L + 540) % 360) - 180;
+          const a = 0.3 + 0.7 * q[2];
+          ctx.fillStyle = diff > 0 ? `rgba(176,192,218,${a})` : `rgba(160,132,92,${a * 0.85})`;
+          ctx.fillRect(q[0] - ds / 2, q[1] - ds / 2, ds, ds);
+        }
+        // the 21:00 meridian
+        ctx.beginPath(); let started = false; let top = null;
+        for (let la = -62; la <= 78; la += 2) {
+          const q = proj(la * D2R, L);
+          if (q[2] <= 0) { started = false; continue; }
+          if (!started) { ctx.moveTo(q[0], q[1]); started = true; } else ctx.lineTo(q[0], q[1]);
+          top = q;
+        }
+        ctx.strokeStyle = "rgba(244,244,241,0.85)"; ctx.lineWidth = 2.5; ctx.stroke();
+        if (top && zoom < 1.2) {
+          ctx.font = "600 26px 'IBM Plex Mono'"; ctx.fillStyle = "#F4F4F1";
+          ctx.fillText("21:00 local", top[0] + 12, top[1] - 6);
+        }
+        // stores
+        let fired = 0;
+        const inbox = [136, 680];
+        for (const s of STORES) {
+          const tf = fireAt(s[2]);
+          const q = proj(s[1] * D2R, s[2]);
+          const has = t >= tf;
+          if (has) fired++;
+          if (q[2] > 0.05) {
+            if (!has) {
+              ctx.fillStyle = "#F2B544"; ctx.beginPath(); ctx.arc(q[0], q[1], 4.5 * Math.min(zoom, 2), 0, Math.PI * 2); ctx.fill();
+            } else {
+              const k = t - tf;
+              if (k < 0.7) {
+                ctx.strokeStyle = `rgba(244,244,241,${1 - k / 0.7})`; ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.arc(q[0], q[1], 6 + k * 46, 0, Math.PI * 2); ctx.stroke();
+              }
+              ctx.fillStyle = "#F4F4F1"; ctx.beginPath(); ctx.arc(q[0], q[1], 4 * Math.min(zoom, 2), 0, Math.PI * 2); ctx.fill();
+              if (LABELS[s[0]] && k < 1.4 && zoom < 1.2) {
+                ctx.globalAlpha = clamp(Math.min(k / 0.15, (1.4 - k) / 0.3), 0, 1);
+                ctx.font = "600 24px 'IBM Plex Mono'"; ctx.fillStyle = "#F4F4F1";
+                ctx.fillText(s[0], q[0] + 14, q[1] - 10);
+                ctx.globalAlpha = 1;
+              }
+            }
+          }
+          // the note travels from the store to the counter
+          const k = t - tf - 0.15;
+          if (k > 0 && k < 1.1 && q[2] > 0.05) {
+            const u = eio(k / 1.1);
+            const mx = (q[0] + inbox[0] + 200) / 2, my = Math.min(q[1], inbox[1]) - 260;
+            const x = (1 - u) * (1 - u) * q[0] + 2 * (1 - u) * u * mx + u * u * (inbox[0] + 330);
+            const y = (1 - u) * (1 - u) * q[1] + 2 * (1 - u) * u * my + u * u * (inbox[1] - 22);
+            const sc = 1 + Math.sin(u * Math.PI) * 0.8;
+            ctx.save(); ctx.translate(x, y); ctx.rotate((1 - u) * 0.5); ctx.scale(sc, sc);
+            ctx.fillStyle = "#F4F4F1"; ctx.fillRect(-13, -9, 26, 18);
+            ctx.fillStyle = "#14213D"; ctx.fillRect(-9, -4, 18, 2); ctx.fillRect(-9, 1, 12, 2);
+            ctx.restore();
+          }
+        }
+        nEl.textContent = String(fired);
+        // dip at the zoom-through
+        const dip = clamp((t - 7.0) / 0.4, 0, 1);
+        if (dip > 0) { ctx.fillStyle = `rgba(10,12,17,${dip})`; ctx.fillRect(0, 0, 1920, 1080); }
+      }
+
+      const P = { t: 0 };
+      const tl = gsap.timeline({ paused: true });
+      tl.to(P, { t: 7.4, duration: 7.4, ease: "none", onUpdate: () => draw(P.t) }, 0);
+      const words = (sel) => document.querySelectorAll(sel + " .w");
+      tl.fromTo(words("#s1-l1"), { opacity: 0.35, filter: "blur(3px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.14, stagger: 0.07, ease: "power2.out" }, 0);
+      tl.to("#s1-l1 .w", { opacity: 0, filter: "blur(8px)", duration: 0.18, stagger: 0.03, ease: "power3.in" }, 3.0);
+      tl.fromTo(words("#s1-l2"), { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.14, stagger: 0.07, ease: "power2.out" }, 3.45);
+      tl.to("#s1-l2 .w", { opacity: 0, filter: "blur(8px)", duration: 0.18, stagger: 0.03, ease: "power3.in" }, 6.6);
+      tl.fromTo("#s1-count", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.6);
+      tl.to("#s1-count", { opacity: 0, duration: 0.2 }, 6.7);
+      draw(0);
+      window.__timelines["s1-globe"] = tl;
+    })();
+  </script>
+</template>
