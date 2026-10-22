@@ -1,9 +1,11 @@
 """DATA-01a: document and observation fixtures validate against their contracts and their
 dev source emails (rebuild with `data/fixtures/build_data01a.py`)."""
 
+import csv
 import json
 from functools import cache
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import pytest
 import yaml
@@ -54,6 +56,12 @@ def test_documents_match_their_source_email() -> None:
         assert doc.content_hash == f"sha256:{parsed.content_hash}"
         assert doc.text == parsed.text and doc.text_version == parsed.parser_version
         assert doc.available_at == parsed.sent_at
+        own = sorted(
+            (s for s in segments().values() if s.document_id == doc.id), key=lambda s: s.idx
+        )
+        assert [(s.text, s.char_start, s.char_end, s.is_quoted) for s in own] == [
+            (s.text, s.char_start, s.char_end, s.is_quoted) for s in parsed.segments
+        ]
         assert doc.parent_document_id is None or doc.parent_document_id in documents()
 
 
@@ -108,3 +116,31 @@ def test_duplicate_and_correction_shapes() -> None:
     (fwd,) = by_case["forward"]
     (obs,) = [o for o in observations() if o.document_id == fwd.id]
     assert all(segments()[e.segment_id].is_quoted for e in obs.evidence)
+
+
+@cache
+def store_tz() -> dict[str, str]:
+    with open(ROOT / "generated/sources/erp/master_data/stores.csv", newline="") as f:
+        return {r["store_id"]: r["timezone"] for r in csv.DictReader(f)}
+
+
+def test_observation_periods_do_not_outrun_the_document() -> None:
+    # A fact cannot start after we learned it. An end after `available_at` is only allowed for
+    # the business day the email reports on (a closing report covers its whole day).
+    for obs in observations():
+        doc = documents()[obs.document_id]
+        if obs.period_start is not None:
+            assert obs.period_start <= doc.available_at, obs.id
+        if obs.period_end is not None and obs.period_end > doc.available_at:
+            local_end = obs.period_end.astimezone(ZoneInfo(store_tz()[obs.store_id]))
+            assert local_end.date() == doc.business_date, obs.id
+
+
+def test_restated_fact_in_one_document_is_one_observation() -> None:
+    dups = [o for o in observations() if o.id.endswith("maire-requests")]
+    assert len(dups) == 2  # one per duplicate email, not one per mention
+    for obs in dups:
+        assert [e.quote for e in obs.evidence] == [
+            "Maire nera: 7 richieste (2 2 2, 1 1, 0, 4)",
+            "Maire nera 7 richieste.",
+        ]

@@ -103,7 +103,7 @@
       "kind": "unmet_demand",
       "store_id": "MIL01",
       "period_start": "2026-10-07T22:00:00Z",
-      "period_end": "2026-10-09T21:59:59Z",
+      "period_end": null,
       "time_text": null,
       "product_mention": "cardigan logo in M",
       "quantity": {

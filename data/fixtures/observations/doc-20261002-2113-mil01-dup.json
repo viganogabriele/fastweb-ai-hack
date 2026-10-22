@@ -26,6 +26,11 @@
           "kind": "Segment",
           "id": "doc-20261002-2113-mil01-dup-seg2",
           "version": "v1"
+        },
+        {
+          "kind": "Segment",
+          "id": "doc-20261002-2113-mil01-dup-seg1",
+          "version": "v1"
         }
       ],
       "producer": "fixture.data01a",
@@ -61,6 +66,16 @@
           "quote": "Maire nera: 7 richieste (2 2 2, 1 1, 0, 4)",
           "char_start": 519,
           "char_end": 561,
+          "t_start_s": null,
+          "t_end_s": null
+        },
+        {
+          "document_id": "doc-20261002-2113-mil01-dup",
+          "document_version": "v1",
+          "segment_id": "doc-20261002-2113-mil01-dup-seg1",
+          "quote": "Maire nera 7 richieste.",
+          "char_start": 300,
+          "char_end": 323,
           "t_start_s": null,
           "t_end_s": null
         }

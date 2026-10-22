@@ -50,7 +50,9 @@ def local_day(day: str, tz: str) -> tuple[datetime, datetime]:
     return start, start.replace(hour=23, minute=59, second=59)
 
 
-# Hand labels. `quote` must occur exactly once in the document text.
+# Hand labels. `quote` (and each of `also_quotes`, the same fact restated in the same document)
+# must occur exactly once in the document text. `period` is the fact's own period in store-local
+# days; None as end means ongoing at send time (never a guessed end after `available_at`).
 OBSERVATIONS = {
     "MIL01/20261009_1035_MIL01.eml": [
         {
@@ -72,7 +74,7 @@ OBSERVATIONS = {
             "quantity": {"kind": "vague", "unit": "requests", "raw": "in continuazione"},
             "direction": "up",
             "time_text": None,
-            "period": ("2026-10-08", "2026-10-09"),
+            "period": ("2026-10-08", None),
             "attribution": "store_staff",
         },
     ],
@@ -81,6 +83,7 @@ OBSERVATIONS = {
             "slug": "maire-requests",
             "kind": "unmet_demand",
             "quote": "Maire nera: 7 richieste (2 2 2, 1 1, 0, 4)",
+            "also_quotes": ["Maire nera 7 richieste."],  # same fact in the Note row
             "product_mention": "Maire nera",
             "quantity": {"kind": "exact", "value": 7, "unit": "requests", "raw": "7 richieste"},
             "direction": "up",
@@ -94,6 +97,7 @@ OBSERVATIONS = {
             "slug": "maire-requests",
             "kind": "unmet_demand",
             "quote": "Maire nera: 7 richieste (2 2 2, 1 1, 0, 4)",
+            "also_quotes": ["Maire nera 7 richieste."],  # same fact in the Note row
             "product_mention": "Maire nera",
             "quantity": {"kind": "exact", "value": 7, "unit": "requests", "raw": "7 richieste"},
             "direction": "up",
@@ -241,8 +245,7 @@ def build_document(rel: str, store: str, by_message_id: dict[str, str]) -> tuple
     return document, segments
 
 
-def build_observation(document: SourceDocument, segments: list, label: dict, store: str) -> dict:
-    quote = label["quote"]
+def build_evidence(document: SourceDocument, segments: list, quote: str) -> Evidence:
     assert document.text.count(quote) == 1, (document.id, quote)
     start = document.text.index(quote)
     end = start + len(quote)
@@ -256,6 +259,13 @@ def build_observation(document: SourceDocument, segments: list, label: dict, sto
         char_end=end,
     )
     evidence.validate_against(document, segment)
+    return evidence
+
+
+def build_observation(document: SourceDocument, segments: list, label: dict, store: str) -> dict:
+    quotes = [label["quote"], *label.get("also_quotes", ())]
+    evidence = [build_evidence(document, segments, q) for q in quotes]
+    segment = next(s for s in segments if s.id == evidence[0].segment_id)
     tz = STORES[store][1]
     period_start = period_end = None
     if label["period"]:
@@ -263,7 +273,11 @@ def build_observation(document: SourceDocument, segments: list, label: dict, sto
         period_start = local_day(first, tz)[0]
         period_end = local_day(last, tz)[1] if last else None
     ref = {"kind": "SourceDocument", "id": document.id, "version": document.version}
-    seg_ref = {"kind": "Segment", "id": segment.id, "version": segment.version}
+    used = dict.fromkeys(e.segment_id for e in evidence)
+    seg_refs = [
+        {"kind": "Segment", "id": sid, "version": next(x for x in segments if x.id == sid).version}
+        for sid in used
+    ]
     return Observation(
         id=f"obs-{document.id.removeprefix('doc-')}-{label['slug']}",
         version="v1",
@@ -273,7 +287,7 @@ def build_observation(document: SourceDocument, segments: list, label: dict, sto
         run_id=RUN_ID,
         scenario_id=SCENARIO_ID,
         computed_at=COMPUTED_AT,
-        input_refs=[ref, seg_ref],
+        input_refs=[ref, *seg_refs],
         producer=PRODUCER,
         producer_version=PRODUCER_VERSION,
         document_id=document.id,
@@ -289,7 +303,7 @@ def build_observation(document: SourceDocument, segments: list, label: dict, sto
         reason_text=label.get("reason_text"),
         attribution=label["attribution"],
         negated=False,
-        evidence=[evidence],
+        evidence=evidence,
         extractor_version=EXTRACTOR_VERSION,
     )
 

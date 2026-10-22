@@ -25,5 +25,10 @@ backend/.venv/bin/python data/fixtures/build_data01a.py
 | `forward` | `MIL01/20261001_1124_MIL01_fwd.eml` | Evidence in the quoted (forwarded) customer mail, `attribution=customer` |
 | `ambiguous_mention` | `NYC01/20260906_1837_NYC01.eml` | "a sweatshirt": hoodie or crewneck, colour unknown (EN) |
 
+Labels are **partial**: each email holds more facts than the ones labelled (traffic, top
+sellers, customer profile...). Use these files to build and test seams, never as recall labels
+for extraction (EVL-02 has its own annotations). A fact restated in the same email is one
+observation with several evidences, not several observations.
+
 Dedup, supersedes and linking are not encoded here: both copies and both sides of the correction
 keep their own observation. Relations and links are DATA-01b (lane B).
