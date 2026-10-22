@@ -21,6 +21,7 @@ One line per task. Edit only the lines of your own task.
 ## In progress
 
 - PLT-03 (C, Bianca) SQLite repository, temporal isolation and fixture CLI · branch `PLT-03-artifact-repository`
+- PLT-04 (C, Bianca, `PLT-04-pipeline-orchestrator`) Module discovery, declared dependency execution and atomic run publication
 
 ## Ready (all hard dependencies merged)
 
@@ -34,6 +35,6 @@ One line per task. Edit only the lines of your own task.
 ## Blocked (waiting on)
 
 - DATA-01c (E) ← DATA-01b
-- PLT-04, PLT-06 (C), ING-01 module (B), ACT-04 module (E) ← PLT-03
+- PLT-06 (C), ING-01 module (B), ACT-04 module (E) ← PLT-03
 - Rest of Phase 1–2 ← PLT-04 / PLT-05 (see `docs/PLAN.md` §4)
 - ASR-01 (A) real transcription, deferred to the reserve pool ← G2 (see `docs/PLAN.md` §4 "Deferred: ASR")
