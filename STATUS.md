@@ -6,6 +6,7 @@ One line per task. Edit only the lines of your own task.
 ## Done
 
 - PLT-01 (C) Scaffold: `backend/` FastAPI, `web/` React+Vite, `make setup/dev/check`, CI, `.env.example`
+- DATA-02 (A) `config/eval_split.yaml` (12 dev / 10 hold-out / 17 unassigned), `domain.yaml` (+ §4.9 policy with units), `aliases.yaml` (dev-email provenance, tested)
 - ACT-01 pure (E, done by Bianca) `modules/actions/simulation.py`: recursive daily stock simulation per scenario, RFC §7.3 test 5
 - FC-01 pure (B, Bianca) `modules/intelligence/disaggregation.py`: weekly → daily baseline, `not_estimable` on missing/incoherent weeks, vintage at `as_of`
 - INT-01 pure (B, Bianca) `modules/integration/candidates.py`: mention → ranked candidates, size vs size run, linked/ambiguous/unlinked
@@ -17,7 +18,6 @@ One line per task. Edit only the lines of your own task.
 ## Ready (all hard dependencies merged)
 
 - PLT-07 (A) Fastweb smoke test: chat, tool call, embeddings, ASR. Needs `FASTWEB_API_KEY` in `.env`
-- DATA-02 (A) `config/eval_split.yaml`, `domain.yaml`, `aliases.yaml`
 - ING-02 pure (A) `.eml` → canonical text + segments with offsets
 - DATA-03 (A) 2–3 voice recordings + sidecar JSON
 - ING-01 pure (B) ERP loaders with `available_at`
