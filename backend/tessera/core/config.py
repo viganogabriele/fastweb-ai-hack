@@ -25,6 +25,7 @@ class Settings(BaseSettings):
     embed_model: str = "Qwen/Qwen3-VL-Embedding-2B"
     asr_model: str = "openai/whisper-large-v3-turbo"
     llm_mode: Literal["live", "record", "replay"] = "replay"
+    fixture_mode: bool = False
 
     sources_dir: Path = REPO_ROOT / "generated" / "sources"
     data_dir: Path = REPO_ROOT / "data"
