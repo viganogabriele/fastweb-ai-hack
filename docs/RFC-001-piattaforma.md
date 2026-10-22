@@ -553,7 +553,7 @@ Le fixture manuali servono a test e sviluppo UI. Il gate finale usa fonti reali 
 
 ## 6. Piano di lavoro rivisto
 
-> **Piano operativo:** fasi, owner per lane, dipendenze "needs merged" contro "builds against" e regole anti-conflitto sono in [`PLAN.md`](PLAN.md), che sostituisce §6.3–§6.5 per ordine e assegnazione. Budget (§6.1), gate (§6.2), tagli (§6.6) e convenzioni (§6.7) restano validi.
+> **Piano operativo:** fasi, owner per lane, dipendenze "needs merged" contro "builds against" e regole anti-conflitto sono in [`PLAN.md`](PLAN.md), che sostituisce §6.3–§6.5 per ordine e assegnazione e §6.1 per la ripartizione: il team è di **5 persone** (80 ore utili, stesso scope Core, più riserva). Gate (§6.2), tagli (§6.6) e convenzioni (§6.7) restano validi.
 
 ### 6.1 Capacità e scelta dello scope
 
