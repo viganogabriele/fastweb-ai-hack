@@ -33,13 +33,13 @@ Usable capacity is 5 × 16 = 80 person-hours (RFC §6.1 assumed 4 × 16 = 64). T
 
 | Lane | MVP package (budget includes local checks) |
 |---|---|
-| A | Smoke test 1 h; email parser 2 h; extraction, evidence, quantities 3 h; report and external feed 2 h; voice recordings with manual transcript 0.5 h (ASR deferred, §4 "Deferred: ASR"); reading labels and eval 2.5 h = **11 h** |
+| A | Smoke test 1 h; email parser 2 h; extraction, evidence, quantities 3 h; report and external feed 2 h; voice recordings with manual transcript 0.5 h; ASR client and `src.voice` on real transcripts 2 h (§4 "ASR"); reading labels and eval 2.5 h = **13 h** |
 | B | ERP loader 1.5 h; linking, dedup, cases 4 h; context 0.5 h; baseline and scenarios 2 h; report per owner 1 h; temporal regressions 1 h = **10 h** |
 | C | Contracts, repo, runs, API 4 h; LLM client and cache 1.5 h; isolation and offline replay 2 h; contract reviews and integration support 2 h = **9.5 h** |
 | D | Queue, detail, sources views 4 h; modules list and brief view 1 h; eval harness and frozen comparison 3 h; bundle, pitch, rehearsal, video 3.5 h = **11.5 h** |
 | E | Stock simulation and options with checks 4 h; systems adapter 1 h; agent runtime and investigator 2.5 h; approval and ledger 1 h; stock/concurrency regressions 1 h = **9.5 h** |
 
-That makes **52.5 h planned and 27.5 h reserve**. C and E get less planned work because they own most of the critical path and C reviews every contract change. Spend the reserve in this order: (1) unblock the critical path, (2) RFC §7.3 tests, (3) the S pool in RFC §6.6 order.
+That makes **54.5 h planned and 25.5 h reserve**. C and E get less planned work because they own most of the critical path and C reviews every contract change. Spend the reserve in this order: (1) unblock the critical path, (2) RFC §7.3 tests, (3) the S pool in RFC §6.6 order.
 
 ## 2. Rules that keep us out of each other's way
 
@@ -133,7 +133,8 @@ Goal: the full Core path on dev stores (RFC §6.2 G2): dedup/correction, a real 
 | ING-05 | A | PLT-04 | – | `src.docs`: one CSV/XLSX report from `sources/reports/` with locators and availability |
 | ING-06 | A | ING-05 | – | `ing.metrics`: one approved, versioned mapping → `MetricFact` with definition, period, currency/VAT, comparability |
 | ING-08 | A | PLT-04 | – | `src.external`: one external feed relevant to the slice → `ContextEvent`, with no future weather backdated |
-| ING-03 | A | PLT-05, DATA-03 | DATA-03 | `src.voice`: declared fixture transcript (manual, `mode: fixture`), no audio intervals. Real ASR deferred to ASR-01 |
+| ASR-01 | A | PLT-05, ASR-01a | Mac mini server (`tools/asr-server/`) | `ASR_BASE_URL` / `ASR_API_KEY` in `Settings` and `.env.example`; `transcribe(path, language, prompt)` in `core/llm.py`: `verbose_json`, its own base URL and key, cache key on audio sha256 + format + language + prompt, replay miss = explicit error, retry only on 429. `core/llm.py` is lane C's path: C reviews |
+| ING-03 | A | ASR-01, DATA-03 | DATA-03, fake ASR response | `src.voice`: Whisper transcript (`mode: recorded`), one `Segment` per ASR segment with the real `t_start_s`/`t_end_s`. The DATA-03 manual transcript stays as declared fallback (`mode: fixture`, no intervals) and as reference to check the ASR |
 | INT-04 | B | INT-03 | – | Conflicts with structured facts and dates; no closing a case because of silence or old stock; `decision_due_at` when estimable |
 | INT-06 | B | ING-08 | ContextEvent fixture | `int.context`: geo/time association, corroborating vs context-only |
 | FC-01 | B | ING-01 | FC-01 pure | `fc.baseline` module: valid vintage at `as_of`, 7-day horizon |
@@ -178,10 +179,12 @@ No new features. Fix bugs, write the RFC §7.3 tests, then freeze prompts, confi
 
 ### Reserve pool (after G2, only if the reserve allows; RFC §6.6 order)
 
-S: INT-05 embeddings (B), FC-02 residuals (B), INS-01 product insights (B), AG-02 analyst (E), OUT-02 + WEB-09 clarification loop (E + D), WEB-06 pipeline graph (D), WEB-08 product view (D), EVL-03 forecast error (D), ASR-01 real transcription (A).
+S: INT-05 embeddings (B), FC-02 residuals (B), INS-01 product insights (B), AG-02 analyst (E), OUT-02 + WEB-09 clarification loop (E + D), WEB-06 pipeline graph (D), WEB-08 product view (D), EVL-03 forecast error (D).
 C: ING-07 chat exports (A), AG-04 MCP (C), DEMO-04 live voice (A).
 
-### Deferred: ASR (decided 2026-10-22)
+### ASR (deferred 2026-10-22, back in the MVP 2026-10-23)
+
+**Back in the MVP (decided 2026-10-23).** Option 4 below is merged (ASR-01a, #60) and reachable on the team subdomain behind Traefik. Measured on the Mac mini: a 60 s note in about 4 s, 5 min of speech in about 18 s, 0.8% WER on Italian TTS speech, Japanese and French recognised. ASR-01 moves from the reserve pool to Phase 2 without the G2 gate, and ING-03 consumes it. The manual transcript stays as declared fallback when the Mac mini is unreachable. The rest of this section records the original deferral.
 
 Real speech-to-text is **out of the MVP path** and moved to the reserve pool as **ASR-01**. The voice note stays in the demo with a manual transcript declared as `fixture` (RFC §2.4, §5.2), so OBJ1 ("a voice note with verified ASR **or declared fallback**") is still met.
 
@@ -250,7 +253,7 @@ flowchart LR
   subgraph P2[Phase 2]
     PLT04 --> ING05[ING-05 report]:::A --> ING06[ING-06 metrics]:::A
     PLT04 --> ING08[ING-08 external]:::A --> INT06[INT-06 context]:::B
-    PLT05 --> ING03[ING-03 voice]:::A
+    PLT05 --> ASR01[ASR-01 transcribe]:::A --> ING03[ING-03 voice]:::A
     DATA03 --> ING03
     INT03 --> INT04[INT-04 conflicts]:::B
     ING01 --> FC01[FC-01 baseline]:::B
