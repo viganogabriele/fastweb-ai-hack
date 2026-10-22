@@ -5,7 +5,7 @@
 | **What** | Who builds what, in which order, and how five people work in parallel without collisions |
 | **Design** | `RFC-001-piattaforma.md` (what and why). This plan replaces RFC §6.3–§6.5 for order and ownership, and RFC §6.1 for the per-person split (§1.1). RFC §6.2 gates, §6.6 cut order and §6.7 conventions still apply |
 | **Stack (OQ-1, decided)** | Python 3.12 + uv + FastAPI + Pydantic v2 + SQLAlchemy 2 on SQLite; React 19 + Vite + TypeScript. Fastweb API via the `openai` SDK |
-| **Status** | Live in `../STATUS.md` (done, in progress, ready, blocked). Not tracked here |
+| **Status** | Live in GitHub issues (workflow in `../AGENTS.md`). Not tracked here |
 
 Hours are offsets from kickoff (T0). Task IDs are the RFC backlog IDs (RFC §6.5). The class of each task (M = MVP, S = after G2 if reserve, C = roadmap) is unchanged.
 
