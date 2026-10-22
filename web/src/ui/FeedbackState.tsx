@@ -1,8 +1,10 @@
 import type { ReactNode } from 'react'
 import { Inbox, CircleAlert, RotateCcw } from 'lucide-react'
+import { motion, useReducedMotion } from 'motion/react'
 import { Button } from './Button'
 import { VisuallyHidden } from './VisuallyHidden'
 import { messages } from '../i18n'
+import { transition } from './motion'
 import './FeedbackState.css'
 
 export interface EmptyStateProps {
@@ -30,13 +32,19 @@ export interface ErrorStateProps {
 }
 
 export function EmptyState({ title, description, action, compact }: EmptyStateProps) {
+  const reduceMotion = useReducedMotion()
   return (
-    <div className={`sd-feedback${compact ? ' sd-feedback--compact' : ''}`}>
+    <motion.div
+      className={`sd-feedback${compact ? ' sd-feedback--compact' : ''}`}
+      initial={{ opacity: 0, ...(reduceMotion ? {} : { y: 4 }) }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={transition.view}
+    >
       <Inbox className="sd-feedback__icon" aria-hidden="true" />
       <p className="sd-feedback__title">{title}</p>
       {description && <p className="sd-feedback__description">{description}</p>}
       {action && <div className="sd-feedback__action">{action}</div>}
-    </div>
+    </motion.div>
   )
 }
 
@@ -53,12 +61,19 @@ export function LoadingState({ label, lines = 3, compact, announce = true }: Loa
 }
 
 export function ErrorState({ title, description, onRetry, compact, announce = true }: ErrorStateProps) {
+  const reduceMotion = useReducedMotion()
   return (
-    <div role={announce ? 'alert' : undefined} className={`sd-feedback sd-feedback--error${compact ? ' sd-feedback--compact' : ''}`}>
+    <motion.div
+      role={announce ? 'alert' : undefined}
+      className={`sd-feedback sd-feedback--error${compact ? ' sd-feedback--compact' : ''}`}
+      initial={{ opacity: 0, ...(reduceMotion ? {} : { y: 4 }) }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={transition.view}
+    >
       <CircleAlert className="sd-feedback__icon" aria-hidden="true" />
       <p className="sd-feedback__title">{title}</p>
       {description && <p className="sd-feedback__description">{description}</p>}
       {onRetry && <Button onClick={onRetry} icon={<RotateCcw />}>{messages.common.retry}</Button>}
-    </div>
+    </motion.div>
   )
 }

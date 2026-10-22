@@ -17,6 +17,7 @@ export function Playground() {
   const [period, setPeriod] = useState('week')
   const [area, setArea] = useState('')
   const [source, setSource] = useState('demo')
+  const [service, setService] = useState('all')
   const [checked, setChecked] = useState(true)
   const [radio, setRadio] = useState('yes')
   const copy = messages.common.playground
@@ -50,6 +51,17 @@ export function Playground() {
           <Select label={copy.period} value={period} onValueChange={setPeriod} hint={copy.demoRange} options={[{ value: 'week', label: copy.last7Days }, { value: 'month', label: copy.last30Days }]} />
           <Select label={copy.area} value={area} onValueChange={setArea} error={copy.chooseAreaError} options={[{ value: '', label: copy.chooseArea, disabled: true }, { value: 'north', label: copy.north }, { value: 'south', label: copy.south }]} />
           <Select label={copy.source} value={source} onValueChange={setSource} disabled size="sm" options={[{ value: 'demo', label: copy.demoData }]} />
+          <Select label={copy.service} value={service} onValueChange={setService} options={[
+            { value: 'all', label: copy.allServices },
+            { value: 'stores', label: copy.storeEvents },
+            { value: 'inventory', label: copy.inventoryEvents },
+            { value: 'forecast', label: copy.forecastEvents },
+            { value: 'signals', label: copy.signalEvents },
+            { value: 'planning', label: copy.planningEvents },
+            { value: 'campaigns', label: copy.campaignEvents },
+            { value: 'returns', label: copy.returnsEvents },
+            { value: 'transfers', label: copy.transferEvents },
+          ]} />
           <div className="sd-playground__checks">
             <label className="sd-playground__check"><input type="checkbox" checked={checked} onChange={event => setChecked(event.target.checked)} />{copy.checkbox}</label>
             <label className="sd-playground__check"><input type="radio" name="demo-radio" checked={radio === 'yes'} onChange={() => setRadio('yes')} />{copy.on}</label>

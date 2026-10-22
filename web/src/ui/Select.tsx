@@ -1,8 +1,10 @@
 import { createPortal } from 'react-dom'
-import { useEffect, useId, useLayoutEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react'
-import { CircleAlert, ChevronDown } from 'lucide-react'
+import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
+import { Check, CircleAlert, ChevronDown } from 'lucide-react'
 import './Field.css'
 import { LOCALE } from '../i18n'
+import { transition } from './motion'
 
 export interface SelectOption {
   value: string
@@ -29,6 +31,7 @@ interface PopoverPosition {
   top: number
   width: number
   maxHeight: number
+  placeAbove: boolean
 }
 
 export function Select({
@@ -44,6 +47,7 @@ export function Select({
   const [open, setOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState(selectedIndex)
   const [position, setPosition] = useState<PopoverPosition | null>(null)
+  const reduceMotion = useReducedMotion()
   const triggerRef = useRef<HTMLButtonElement>(null)
   const listboxRef = useRef<HTMLDivElement>(null)
   const typeahead = useRef('')
@@ -58,18 +62,25 @@ export function Select({
     return -1
   }
 
-  const updatePosition = () => {
+  const updatePosition = useCallback(() => {
     const rect = triggerRef.current?.getBoundingClientRect()
     if (!rect) return
     const margin = 8
-    const width = Math.min(rect.width, window.innerWidth - margin * 2)
+    const canvas = document.createElement('canvas')
+    const context = canvas.getContext('2d')
+    const triggerStyle = getComputedStyle(triggerRef.current!)
+    if (context) context.font = triggerStyle.font
+    const widestOption = options.reduce((widest, option) => Math.max(widest, context?.measureText(option.label).width ?? 0), 0)
+    const desiredWidth = Math.max(rect.width, Math.ceil(widestOption + 56))
+    const width = Math.min(desiredWidth, window.innerWidth - margin * 2)
     const left = Math.max(margin, Math.min(rect.left, window.innerWidth - width - margin))
     const below = window.innerHeight - rect.bottom - margin
     const above = rect.top - margin
     const maxHeight = Math.max(0, Math.min(288, Math.max(below, above)))
     const placeAbove = below < 176 && above > below
-    setPosition({ left, top: placeAbove ? Math.max(margin, rect.top - Math.min(maxHeight, listboxRef.current?.scrollHeight ?? 288) - 4) : rect.bottom + 4, width, maxHeight })
-  }
+    const popoverHeight = Math.min(maxHeight, options.length * 44 + 10)
+    setPosition({ left, top: placeAbove ? Math.max(margin, rect.top - popoverHeight - 4) : rect.bottom + 4, width, maxHeight, placeAbove })
+  }, [options])
 
   useLayoutEffect(() => {
     if (!open) return
@@ -81,7 +92,7 @@ export function Select({
       window.removeEventListener('resize', onViewportChange)
       window.removeEventListener('scroll', onViewportChange, true)
     }
-  }, [open, options.length])
+  }, [open, updatePosition])
 
   useEffect(() => {
     if (!open) return
@@ -104,7 +115,7 @@ export function Select({
       document.removeEventListener('pointerdown', onPointerDown)
       document.removeEventListener('keydown', onKeyDown)
     }
-  }, [open])
+  }, [open, updatePosition])
 
   useEffect(() => () => window.clearTimeout(typeaheadTimer.current), [])
 
@@ -112,7 +123,7 @@ export function Select({
     const active = listboxRef.current?.querySelector<HTMLElement>(`[data-option-index="${activeIndex}"]`)
     active?.scrollIntoView({ block: 'nearest' })
     updatePosition()
-  }, [activeIndex])
+  }, [activeIndex, updatePosition])
 
   const openAt = (index: number) => {
     setActiveIndex(index >= 0 ? index : enabledFrom(-1, 1))
@@ -183,29 +194,41 @@ export function Select({
           <span className="sd-field__select-value" title={selected?.label}>{selected?.label ?? ''}</span>
           <ChevronDown className="sd-field__chevron" aria-hidden="true" />
         </button>
-        {open && position && createPortal(
-          <div
-            ref={listboxRef}
-            id={listboxId}
-            role="listbox"
-            aria-labelledby={`${fieldId}-label`}
-            className="sd-select-popover"
-            style={{ left: position.left, top: position.top, width: position.width, maxHeight: position.maxHeight }}
-          >
-            {options.map((option, index) => (
-              <div
-                key={option.value}
-                id={`${listboxId}-option-${index}`}
-                role="option"
-                aria-selected={option.value === value}
-                aria-disabled={option.disabled || undefined}
-                data-option-index={index}
-                className={`sd-select-option${activeIndex === index ? ' is-active' : ''}${option.disabled ? ' is-disabled' : ''}`}
-                onMouseMove={() => !option.disabled && setActiveIndex(index)}
-                onClick={() => choose(index)}
-              >{option.label}</div>
-            ))}
-          </div>, document.body,
+        {position && createPortal(
+          <AnimatePresence>
+            {open && (
+              <motion.div
+                key="select-popover"
+                ref={listboxRef}
+                id={listboxId}
+                role="listbox"
+                aria-labelledby={`${fieldId}-label`}
+                className="sd-select-popover"
+                style={{ left: position.left, top: position.top, width: position.width, maxHeight: position.maxHeight, transformOrigin: position.placeAbove ? 'bottom center' : 'top center' }}
+                initial={{ opacity: 0, ...(reduceMotion ? {} : { scale: 0.96, y: position.placeAbove ? 4 : -4 }) }}
+                animate={{ opacity: 1, ...(reduceMotion ? {} : { scale: 1, y: 0 }) }}
+                exit={{ opacity: 0, ...(reduceMotion ? {} : { scale: 0.98, y: position.placeAbove ? 2 : -2 }), transition: transition.exit }}
+                transition={transition.popover}
+              >
+                {options.map((option, index) => (
+                  <div
+                    key={option.value}
+                    id={`${listboxId}-option-${index}`}
+                    role="option"
+                    aria-selected={option.value === value}
+                    aria-disabled={option.disabled || undefined}
+                    data-option-index={index}
+                    className={`sd-select-option${activeIndex === index ? ' is-active' : ''}${option.disabled ? ' is-disabled' : ''}`}
+                    onMouseMove={() => !option.disabled && setActiveIndex(index)}
+                    onClick={() => choose(index)}
+                  >
+                    <span className="sd-select-option__label">{option.label}</span>
+                    <Check className="sd-select-option__check" aria-hidden="true" />
+                  </div>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>, document.body,
         )}
       </div>
       {hint && <p className="sd-field__hint" id={`${fieldId}-hint`}>{hint}</p>}

@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import type { ReactNode } from 'react'
+import { AnimatePresence, MotionConfig, motion, useReducedMotion } from 'motion/react'
 import { Activity, ClipboardList, FileSearch, FileText, MessageCircleQuestion, Package, Workflow } from 'lucide-react'
 import { fmt, messages } from './i18n'
 import { DASHBOARD_META, DashboardPage } from './demo/DashboardPage'
@@ -8,6 +10,7 @@ import { AppShell, PageHeader, SidebarNav } from './shell'
 import type { NavGroup } from './shell'
 import { PendingSection } from './sections/PendingSection'
 import { Select, StatusBadge } from './ui'
+import { transition } from './ui/motion'
 
 const NAV: NavGroup[] = [
   {
@@ -57,12 +60,31 @@ const SCENARIO_OPTIONS = DEMO_SCENARIOS.map(option => ({
   label: fmt(messages.shell.controls.scenarioOption, { scenario: option.label }),
 }))
 
+function SectionView({ currentId, focusOnMount, children }: { currentId: SectionId; focusOnMount: boolean; children: ReactNode }) {
+  const reduceMotion = useReducedMotion()
+  useEffect(() => {
+    if (focusOnMount) document.querySelector<HTMLElement>('.sd-page-header__title')?.focus({ preventScroll: true })
+  }, [focusOnMount])
+  const offset = reduceMotion ? 0 : 5
+  return (
+    // No exit: the old view leaves at once, so a click never shows an empty frame between views.
+    <motion.div key={currentId} className="sd-shell__view" initial={{ opacity: 0, y: offset }} animate={{ opacity: 1, y: 0 }} transition={transition.view}>
+      {children}
+    </motion.div>
+  )
+}
+
 export default function App() {
   const [currentId, setCurrentId] = useState<SectionId>(idFromHash)
+  const [focusRouteId, setFocusRouteId] = useState<SectionId | null>(null)
   const [scenario, setScenario] = useState<DemoScenario>('data')
 
   useEffect(() => {
-    const syncRoute = () => setCurrentId(idFromHash())
+    const syncRoute = () => {
+      const nextId = idFromHash()
+      setCurrentId(nextId)
+      setFocusRouteId(nextId)
+    }
     if (!window.location.hash) window.history.replaceState(null, '', `#/${pathFor(currentId)}`)
     window.addEventListener('hashchange', syncRoute)
     window.addEventListener('popstate', syncRoute)
@@ -75,7 +97,10 @@ export default function App() {
   const navigate = (id: string) => {
     const nextId = id as SectionId
     if (!(nextId in ROUTES)) return
-    if (nextId !== currentId) window.history.pushState(null, '', `#/${pathFor(nextId)}`)
+    if (nextId !== currentId) {
+      window.history.pushState(null, '', `#/${pathFor(nextId)}`)
+      setFocusRouteId(nextId)
+    }
     setCurrentId(nextId)
   }
 
@@ -83,6 +108,7 @@ export default function App() {
   const section = sectionKey ? messages.sections.items.find(item => item.id === sectionKey) ?? null : null
 
   return (
+    <MotionConfig reducedMotion="user">
     <AppShell
       brand={messages.shell.brand}
       sidebar={
@@ -108,34 +134,46 @@ export default function App() {
               onValueChange={() => undefined}
             />
           </div>
-          {currentId === 'overview' && (
-            <Select
-              label={messages.shell.controls.scenarioLabel}
-              hideLabel
-              size="sm"
-              value={scenario}
-              options={SCENARIO_OPTIONS}
-              onValueChange={value => setScenario(value as DemoScenario)}
-            />
-          )}
-          <StatusBadge
-            tone={currentId === 'overview' ? 'neutral' : 'info'}
-            label={currentId === 'overview' ? messages.shell.controls.modeSynthetic : messages.shell.controls.modeUnavailable}
-          />
+          <AnimatePresence initial={false} mode="popLayout">
+            {currentId === 'overview' && (
+              <motion.div key="scenario" layout className="sd-shell__control-slot" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: transition.exit }} transition={transition.popover}>
+                <Select
+                  label={messages.shell.controls.scenarioLabel}
+                  hideLabel
+                  size="sm"
+                  value={scenario}
+                  options={SCENARIO_OPTIONS}
+                  onValueChange={value => setScenario(value as DemoScenario)}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+          <AnimatePresence initial={false} mode="popLayout">
+            <motion.div key={currentId === 'overview' ? 'synthetic' : 'unavailable'} layout className="sd-shell__mode-slot" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: transition.exit }} transition={transition.popover}>
+              <StatusBadge
+                tone={currentId === 'overview' ? 'neutral' : 'info'}
+                label={currentId === 'overview' ? messages.shell.controls.modeSynthetic : messages.shell.controls.modeUnavailable}
+              />
+            </motion.div>
+          </AnimatePresence>
         </div>
       }
     >
-      {currentId === 'overview' ? (
-        <>
-          <PageHeader title={messages.shell.nav.overview} subtitle={messages.shell.overview.subtitle} meta={DASHBOARD_META} />
-          <DashboardPage scenario={scenario} />
-        </>
-      ) : section ? (
-        <>
-          <PageHeader title={titleOf(currentId)} />
-          <PendingSection section={section} />
-        </>
-      ) : null}
+      {/* Back/forward uses the same short entrance: navigation is occasional and the cue confirms the hash change. */}
+      <SectionView key={currentId} currentId={currentId} focusOnMount={focusRouteId === currentId}>
+        {currentId === 'overview' ? (
+          <>
+            <PageHeader title={messages.shell.nav.overview} subtitle={messages.shell.overview.subtitle} meta={DASHBOARD_META} />
+            <DashboardPage scenario={scenario} />
+          </>
+        ) : section ? (
+          <>
+            <PageHeader title={titleOf(currentId)} />
+            <PendingSection section={section} />
+          </>
+        ) : null}
+      </SectionView>
     </AppShell>
+    </MotionConfig>
   )
 }

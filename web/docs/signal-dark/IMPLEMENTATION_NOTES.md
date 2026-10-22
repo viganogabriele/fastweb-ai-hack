@@ -92,3 +92,19 @@ loading / empty / error states and should go with it.
 - **Verified:** lint, typecheck, build; Playwright (Chromium) at 320–1440px with no horizontal
   overflow and no console errors; keyboard select, hash back/forward, drawer navigation, error
   scenario alert.
+
+## Motion pass (2026-10-23)
+
+- **Library:** `motion` (`motion/react`) for enter/exit, shared elements and the drawer gesture;
+  CSS transitions for hover, press, focus and colour. Shared presets in `src/ui/motion.ts`
+  (custom ease-out curves, 120–300ms, springs with bounce 0), mirrored as `--sd-local-ease-*` /
+  `--sd-local-duration-*` in `local.css`. `<MotionConfig reducedMotion="user">` wraps the app.
+- **Where:** Select popover (origin-aware scale+fade, shorter exit); button press `scale(0.97)`;
+  animated checkbox/radio marks; sidebar active indicator as a shared `layoutId`; section
+  entrance (fade + 5px, no exit so there is never an empty frame); mobile drawer with
+  swipe-to-dismiss (72px or 500px/s); first-load stagger of KPI and chart cards, line draw-in and
+  bar growth (not on refetch); "Mostra dati" height animation; table bulk bar enter/exit.
+- **Reduced motion:** movement removed everywhere, opacity kept where it carries state; skeleton
+  pulse and spinner stop.
+- **Not animated on purpose:** keyboard highlight in listboxes, chart keyboard navigation,
+  filter changes and refetches.

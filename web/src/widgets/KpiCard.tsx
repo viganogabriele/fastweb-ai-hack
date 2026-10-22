@@ -45,7 +45,7 @@ export function KpiCard({
           <p className="sd-kpi-value">
             {state === 'empty' ? '—' : value} <span>{unit}</span>
           </p>
-          {period && <p className="sd-kpi-period">{period}</p>}
+          <p className="sd-kpi-period">{period ?? '\u00a0'}</p>
           {state === 'data' && (
             <p className={`sd-kpi-delta sd-kpi-delta--${tone}`}>
               <Direction aria-hidden="true" />

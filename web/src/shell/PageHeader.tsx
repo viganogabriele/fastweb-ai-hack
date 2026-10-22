@@ -14,7 +14,7 @@ export function PageHeader({ title, subtitle, meta, actions, children }: PageHea
     <header className="sd-page-header">
       <div className="sd-page-header__row">
         <div className="sd-page-header__intro">
-          <h1 className="sd-page-header__title">{title}</h1>
+          <h1 className="sd-page-header__title" tabIndex={-1}>{title}</h1>
           {subtitle && <p className="sd-page-header__subtitle">{subtitle}</p>}
           {meta && <div className="sd-page-header__meta">{meta}</div>}
         </div>

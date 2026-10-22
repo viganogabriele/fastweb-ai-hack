@@ -9,12 +9,17 @@
   --sd-local-control-height-sm: 40px;
   /* Implementation decision: reserve a minimum 44px square interactive target. */
   --sd-local-hit-min: 44px;
-  /* Implementation decision: short transitions acknowledge actions without delaying them. */
+  /* Shared timing vocabulary mirrors src/ui/motion.ts. */
   --sd-local-duration: 160ms;
-  /* Implementation decision: a slower spinner remains legible while loading. */
-  --sd-local-spin-duration: 900ms;
-  /* Implementation decision: restrained easing keeps interactions predictable. */
-  --sd-local-ease: ease-out;
+  --sd-local-duration-press: 150ms;
+  --sd-local-duration-hover: 120ms;
+  --sd-local-duration-popover: 180ms;
+  --sd-local-spin-duration: 650ms;
+  --sd-local-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --sd-local-ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --sd-local-ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --sd-local-ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --sd-local-ease: var(--sd-local-ease-out);
   /* Implementation decision: lighten the raised surface for hover without a new accent. */
   --sd-local-hover-surface: color-mix(in srgb, var(--sd-color-surface-elevated) 90%, var(--sd-color-text-primary));
   /* Implementation decision: a muted cyan surface communicates selection. */
@@ -37,6 +42,7 @@
   --sd-local-disabled-surface: var(--sd-color-surface-canvas);
   /* Implementation decision: pill rounding is limited to status labels and spinners. */
   --sd-local-radius-pill: 999px;
+  --sd-local-radius-control-inset: max(0px, calc(var(--sd-radius-control) - var(--sd-space-1)));
   /* Implementation decision: line height balances dense UI and multiline Italian labels. */
   --sd-local-line-height: 1.5;
   /* Implementation decision: single-pixel clipping keeps hidden labels available to AT. */
@@ -54,6 +60,9 @@
 @media (prefers-reduced-motion: reduce) {
   :root {
     --sd-local-duration: 0ms;
+    --sd-local-duration-press: 0ms;
+    --sd-local-duration-hover: 0ms;
+    --sd-local-duration-popover: 0ms;
     --sd-local-spin-duration: 0ms;
   }
 }

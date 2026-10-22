@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { motion, useReducedMotion } from 'motion/react'
 import { CircleHelp } from 'lucide-react'
 import { Button, StatusBadge, formatNumber, formatPercent } from '../ui'
 import { ChartCard } from '../widgets/ChartCard'
@@ -12,8 +13,9 @@ import type { DashboardResponse } from './api'
 import { DEFAULT_FILTERS, PERIOD_LABELS } from './data'
 import type { DashboardFilters, ServiceRow } from './data'
 import type { DemoScenario } from './scenario'
-import { fmt, messages } from '../i18n'
+import { LOCALE, fmt, messages } from '../i18n'
 import '../widgets/widgets.css'
+import { ease, stagger, transition } from '../ui/motion'
 export { DASHBOARD_META, DEMO_UPDATED_AT } from './data'
 const delta = (value: number, previous: number) => (previous ? (value - previous) / previous : 0)
 const columns: DataColumn<ServiceRow>[] = [
@@ -60,6 +62,7 @@ const columns: DataColumn<ServiceRow>[] = [
   }
 ]
 export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
+  const reduceMotion = useReducedMotion()
   const [filters, setFilters] = useState<DashboardFilters>({ ...DEFAULT_FILTERS })
   const [response, setResponse] = useState<DashboardResponse>({
     state: 'loading',
@@ -113,17 +116,28 @@ export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
         {announcement}
       </p>
       {state === 'error' && (
-        <div className="sd-dashboard-alert" role="alert">
+        <motion.div className="sd-dashboard-alert" role="alert"
+          initial={{ opacity: 0, transform: reduceMotion ? 'translateY(0px)' : 'translateY(5px)' }}
+          animate={{ opacity: 1, transform: 'translateY(0px)' }}
+          transition={transition.view}>
           <span>
             {response.state === 'error'
               ? response.message
               : messages.dashboard.states.unreachable}
           </span>
           <Button size="sm" onClick={retry}>{messages.dashboard.states.retry}</Button>
-        </div>
+        </motion.div>
       )}
-      <div className="sd-dashboard-grid">
-        <div className="sd-kpi-slot">
+      <motion.div
+        className="sd-dashboard-grid"
+        initial="hidden"
+        animate="shown"
+        variants={{
+          hidden: {},
+          shown: {}
+        }}
+      >
+        <motion.div className="sd-kpi-slot" variants={dashboardCardMotion(reduceMotion, 0)}>
           <KpiCard
             label={messages.dashboard.metrics.requests}
             value={metrics ? formatNumber(metrics.requests) : '—'}
@@ -132,8 +146,8 @@ export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
             sparkline={data?.timeline.map((point) => point.value)}
             state={state}
           />
-        </div>
-        <div className="sd-kpi-slot">
+        </motion.div>
+        <motion.div className="sd-kpi-slot" variants={dashboardCardMotion(reduceMotion, 1)}>
           <KpiCard
             label={messages.dashboard.metrics.latency}
             value={metrics ? formatNumber(metrics.latency) : '—'}
@@ -142,8 +156,8 @@ export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
             higherIsBetter={false}
             state={state}
           />
-        </div>
-        <div className="sd-kpi-slot">
+        </motion.div>
+        <motion.div className="sd-kpi-slot" variants={dashboardCardMotion(reduceMotion, 2)}>
           <KpiCard
             label={messages.dashboard.metrics.errorRate}
             value={
@@ -159,8 +173,8 @@ export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
             higherIsBetter={false}
             state={state}
           />
-        </div>
-        <div className="sd-kpi-slot">
+        </motion.div>
+        <motion.div className="sd-kpi-slot" variants={dashboardCardMotion(reduceMotion, 3)}>
           <KpiCard
             label={messages.dashboard.metrics.incidents}
             value={metrics ? formatNumber(metrics.incidents) : '—'}
@@ -170,8 +184,8 @@ export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
             higherIsBetter={false}
             state={state}
           />
-        </div>
-        <ChartCard
+        </motion.div>
+        <motion.div className="sd-chart-motion-slot" variants={dashboardCardMotion(reduceMotion, 4)}><ChartCard
           {...common}
           className="sd-trend-slot"
           title={messages.dashboard.charts.traffic}
@@ -209,8 +223,8 @@ export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
           }
         >
           <LineChart points={data?.timeline ?? []} />
-        </ChartCard>
-        <ChartCard
+        </ChartCard></motion.div>
+        <motion.div className="sd-chart-motion-slot" variants={dashboardCardMotion(reduceMotion, 5)}><ChartCard
           {...common}
           className="sd-distribution-slot"
           title={messages.dashboard.charts.byRegion}
@@ -248,8 +262,8 @@ export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
           }
         >
           <DistributionChart points={data?.distribution ?? []} />
-        </ChartCard>
-        <ChartCard
+        </ChartCard></motion.div>
+        <motion.div className="sd-chart-motion-slot" variants={dashboardCardMotion(reduceMotion, 6)}><ChartCard
           {...common}
           className="sd-comparison-slot"
           title={messages.dashboard.charts.byService}
@@ -276,19 +290,18 @@ export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
           }
         >
           <BarChart points={data?.comparison ?? []} />
-        </ChartCard>
-        <aside className="sd-method-slot sd-panel">
+        </ChartCard></motion.div>
+        <motion.aside className="sd-method-slot sd-panel" variants={dashboardCardMotion(reduceMotion, 7)}>
           <CircleHelp aria-hidden="true" />
           <h2>{messages.dashboard.method.title}</h2>
           <p>{messages.dashboard.method.requests}</p>
           <p>{messages.dashboard.method.latency}</p>
           <p>{messages.dashboard.method.incidents}</p>
-        </aside>
-        <section className="sd-detail-slot sd-panel" aria-labelledby="sd-services-heading">
+        </motion.aside>
+        <motion.section className="sd-detail-slot sd-panel" aria-labelledby="sd-services-heading" variants={dashboardCardMotion(reduceMotion, 8)}>
           <div className="sd-detail-heading">
             <div>
               <h2 id="sd-services-heading">{messages.dashboard.table.detailTitle}</h2>
-              <p>{fmt(messages.dashboard.table.sameFilters, { period })}</p>
             </div>
           </div>
           <DataTable
@@ -297,12 +310,24 @@ export function DashboardPage({ scenario }: { scenario: DemoScenario }) {
             columns={columns}
             rowKey={(row) => row.id}
             rowLabel={(row) => row.name}
-            caption={fmt(messages.dashboard.table.caption, { period })}
+            caption={fmt(messages.dashboard.table.caption, { period: period.toLocaleLowerCase(LOCALE) })}
             state={state}
             onRetry={retry}
           />
-        </section>
-      </div>
+        </motion.section>
+      </motion.div>
     </div>
   )
+}
+
+function dashboardCardMotion(reduceMotion: boolean | null, index: number) {
+  if (index > 6) return { hidden: { opacity: 1, transform: 'translateY(0px)' }, shown: { opacity: 1, transform: 'translateY(0px)' } }
+  return {
+    hidden: { opacity: 0, transform: reduceMotion ? 'translateY(0px)' : 'translateY(6px)' },
+    shown: {
+      opacity: 1,
+      transform: 'translateY(0px)',
+      transition: { ...transition.view, delay: index * stagger, ease: ease.out }
+    }
+  }
 }

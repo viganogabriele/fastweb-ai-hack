@@ -1,7 +1,9 @@
 import { useCallback, useId, useLayoutEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react'
 import type { ReactNode } from 'react'
 import { Menu, X } from 'lucide-react'
+import { AnimatePresence, motion, useMotionValue, useReducedMotion, useTransform } from 'motion/react'
 import { Button } from '../ui'
+import { transition } from '../ui/motion'
 import { messages } from '../i18n'
 import { ShellContext } from './ShellContext'
 import './shell.css'
@@ -26,7 +28,10 @@ const getServerWide = () => false
 const focusableSelector = 'a[href], button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex="-1"])'
 
 export function AppShell({ brand, sidebar, sidebarFooter, topbar, children }: AppShellProps) {
+  const reduceMotion = useReducedMotion()
   const [requestedOpen, setRequestedOpen] = useState(false)
+  const drawerX = useMotionValue(0)
+  const scrimOpacity = useTransform(drawerX, [-280, 0], [0, 1])
   const sidebarId = useId()
   const titleId = useId()
   const drawerRef = useRef<HTMLDivElement>(null)
@@ -94,11 +99,23 @@ export function AppShell({ brand, sidebar, sidebarFooter, topbar, children }: Ap
     <ShellContext.Provider value={context}>
       <div className="sd-shell" data-drawer-open={drawerOpen || undefined}>
         <a className="sd-shell__skip" href="#main" inert={drawerOpen} onClick={() => mainRef.current?.focus()}>{messages.shell.skipToContent}</a>
-        {drawerOpen && <div className="sd-shell__scrim" aria-hidden="true" onClick={closeDrawer} />}
-        <div
+        <AnimatePresence>
+          {drawerOpen && <motion.div key="drawer-scrim" className="sd-shell__scrim" aria-hidden="true" onClick={closeDrawer} initial={{ opacity: 0 }} exit={{ opacity: 0, transition: transition.exit }} transition={transition.drawer} style={{ opacity: scrimOpacity }} />}
+        </AnimatePresence>
+        <motion.div
           ref={drawerRef}
           id={sidebarId}
           className="sd-shell__sidebar"
+          drag={!wide && drawerOpen ? 'x' : false}
+          dragConstraints={{ left: -280, right: 0 }}
+          dragElastic={0.12}
+          dragMomentum={false}
+          onDragEnd={(_event, info) => {
+            if (info.offset.x < -72 || info.velocity.x < -500) closeDrawer()
+          }}
+          animate={{ ...(reduceMotion ? {} : { x: wide || drawerOpen ? 0 : -280 }), opacity: !wide && !drawerOpen && reduceMotion ? 0 : 1 }}
+          transition={reduceMotion ? transition.exit : transition.drawer}
+          style={{ x: reduceMotion ? 0 : drawerX, touchAction: 'pan-y' }}
           role={drawerOpen ? 'dialog' : undefined}
           aria-modal={drawerOpen || undefined}
           aria-labelledby={drawerOpen ? titleId : undefined}
@@ -112,7 +129,7 @@ export function AppShell({ brand, sidebar, sidebarFooter, topbar, children }: Ap
           </div>
           <div className="sd-shell__navigation">{sidebar}</div>
           {sidebarFooter && <div className="sd-shell__sidebar-footer">{sidebarFooter}</div>}
-        </div>
+        </motion.div>
         <div className="sd-shell__workspace" inert={drawerOpen} aria-hidden={drawerOpen || undefined}>
           <header className="sd-shell__topbar">
             <div className="sd-shell__mobile-identity">

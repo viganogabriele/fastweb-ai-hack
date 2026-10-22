@@ -3,14 +3,14 @@
   align-items: center;
   gap: var(--sd-space-1);
   max-width: 100%;
-  padding: var(--sd-space-1) var(--sd-space-2);
+  padding: 3px 10px;
   border: 1px solid var(--sd-color-border-subtle);
   border-radius: var(--sd-local-radius-pill);
   background: var(--sd-color-surface-card);
   color: var(--sd-color-text-secondary);
   font-size: var(--sd-font-size-caption);
   font-weight: var(--sd-font-weight-medium);
-  line-height: 1.2;
+  line-height: 1.15;
 }
 .sd-status-badge svg { width: 1em; height: 1em; flex-shrink: 0; }
 .sd-status-badge--success { color: var(--sd-color-state-success); }

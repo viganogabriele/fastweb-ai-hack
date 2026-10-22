@@ -14,7 +14,7 @@
 }
 .sd-pending-section .sd-feedback {
   border: 1px solid var(--sd-color-border-subtle);
-  border-radius: var(--sd-radius-control);
+  border-radius: max(0px, calc(var(--sd-radius-card) - var(--sd-space-card-padding)));
   background: var(--sd-color-surface-canvas);
 }
 .sd-pending-section__details {
@@ -26,6 +26,7 @@
   min-width: 0;
   padding-block-start: var(--sd-space-3);
   border-block-start: 1px solid var(--sd-color-border-subtle);
+  align-self: stretch;
 }
 .sd-pending-section__detail h3 {
   margin: 0 0 var(--sd-space-2);
@@ -48,12 +49,16 @@
   max-width: 100%;
   padding: var(--sd-space-1) var(--sd-space-2);
   border: 1px solid var(--sd-color-border-subtle);
-  border-radius: var(--sd-radius-control);
+  border-radius: max(2px, calc(var(--sd-radius-control) - var(--sd-space-2)));
   background: var(--sd-color-surface-elevated);
   color: var(--sd-color-text-primary);
   font-family: var(--sd-font-family-metric);
   font-size: var(--sd-font-size-caption);
   overflow-wrap: anywhere;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sd-pending-section__summary,
+  .sd-pending-section__details { transform: none; }
 }
 @media (max-width: 560px) {
   .sd-pending-section {

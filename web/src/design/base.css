@@ -9,7 +9,7 @@
   line-height: var(--sd-local-line-height);
   color: var(--sd-color-text-primary);
   background: var(--sd-color-surface-canvas);
-  scrollbar-color: var(--sd-color-text-muted) var(--sd-color-surface-canvas);
+  scrollbar-color: var(--sd-color-text-muted) transparent;
   scrollbar-width: thin;
 }
 
@@ -24,10 +24,11 @@ img { max-width: 100%; }
 a { color: var(--sd-color-action-primary); }
 :focus-visible { outline: var(--sd-local-focus-ring); outline-offset: var(--sd-local-focus-offset); }
 ::selection { color: var(--sd-color-text-on-accent); background: var(--sd-color-action-primary); }
-::-webkit-scrollbar { width: var(--sd-space-2); height: var(--sd-space-2); }
-::-webkit-scrollbar-track { background: var(--sd-color-surface-canvas); }
-::-webkit-scrollbar-thumb { border: 1px solid var(--sd-color-surface-canvas); border-radius: var(--sd-local-radius-pill); background: var(--sd-color-text-muted); }
-::-webkit-scrollbar-thumb:hover { background: var(--sd-color-text-secondary); }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { border: 2px solid transparent; border-radius: var(--sd-local-radius-pill); background: var(--sd-color-text-muted); background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background-color: var(--sd-color-text-secondary); }
+::-webkit-scrollbar-button, ::-webkit-scrollbar-corner, ::-webkit-resizer { display: none; width: 0; height: 0; }
 
 .sd-visually-hidden {
   position: absolute;

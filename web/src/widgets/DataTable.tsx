@@ -1,5 +1,6 @@
 import { useId, useState } from 'react'
 import type { ReactNode } from 'react'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { ArrowDown, ArrowUp, ArrowUpDown, CheckCheck } from 'lucide-react'
 import { Button, EmptyState, ErrorState, LoadingState, formatNumber } from '../ui'
 import type { DemoScenario } from '../demo/scenario'
@@ -33,6 +34,7 @@ export function DataTable<T>({
   const [sort, setSort] = useState<{ key: string; ascending: boolean } | null>(null)
   const [selected, setSelected] = useState<Set<string>>(new Set())
   const [message, setMessage] = useState('')
+  const reduceMotion = useReducedMotion()
   const id = useId()
   const visibleSelected = rows.filter((row) => selected.has(rowKey(row)))
   const selectedCount = visibleSelected.length
@@ -70,21 +72,27 @@ export function DataTable<T>({
     )
   return (
     <div className="sd-data-table">
+      <AnimatePresence initial={false} mode="popLayout">
       {selectedCount > 0 && (
-        <div className="sd-table-toolbar">
-          <span>{fmt(messages.dashboard.table.selected, { count: formatNumber(selectedCount) })}</span>
+        <motion.div className="sd-table-toolbar"
+          initial={{ opacity: 0, transform: reduceMotion ? 'translateY(0px)' : 'translateY(5px)' }}
+          animate={{ opacity: 1, transform: 'translateY(0px)' }}
+          exit={{ opacity: 0, transform: reduceMotion ? 'translateY(0px)' : 'translateY(-3px)' }}
+          transition={{ duration: 0.18, ease: [0.23, 1, 0.32, 1] }}>
+          <span>{selectedCount === 1 ? messages.dashboard.table.selectedOne : fmt(messages.dashboard.table.selected, { count: formatNumber(selectedCount) })}</span>
           <Button
             size="sm"
             icon={<CheckCheck />}
             onClick={() => {
-              setMessage(fmt(messages.dashboard.table.actionResult, { count: selectedCount }))
+              setMessage(selectedCount === 1 ? messages.dashboard.table.actionResultOne : fmt(messages.dashboard.table.actionResult, { count: formatNumber(selectedCount) }))
               setSelected(new Set())
             }}
           >
             {messages.dashboard.table.actionDemo}
           </Button>
-        </div>
+        </motion.div>
       )}
+      </AnimatePresence>
       <p className="sd-table-message">
         {message}
       </p>
@@ -184,7 +192,7 @@ export function DataTable<T>({
         </table>
       </div>
       <p className="sd-table-footnote">
-        {fmt(messages.dashboard.table.footnote, { count: formatNumber(rows.length) })}
+        {rows.length === 1 ? messages.dashboard.table.footnoteOne : fmt(messages.dashboard.table.footnote, { count: formatNumber(rows.length) })}
       </p>
     </div>
   )

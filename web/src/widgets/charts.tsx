@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState } from 'react'
+import { motion, useReducedMotion } from 'motion/react'
 import { formatNumber, formatPercent } from '../ui'
 import type { CategoryPoint, TimePoint } from '../demo/data'
 import { fmt, messages } from '../i18n'
@@ -20,6 +21,7 @@ function usePlotWidth() {
 const compactNumber = (value: number) =>
   formatNumber(value, { notation: 'compact', maximumFractionDigits: 1 })
 export function LineChart({ points, unit = messages.dashboard.metrics.requestUnit }: { points: TimePoint[]; unit?: string }) {
+  const reduceMotion = useReducedMotion()
   const { ref, width } = usePlotWidth()
   const [active, setActive] = useState<number | null>(null)
   const tooltipId = useId()
@@ -89,7 +91,14 @@ export function LineChart({ points, unit = messages.dashboard.metrics.requestUni
             {unit}
           </text>
           <path className="sd-line-comparison" d={path('comparison')} />
-          <path className="sd-line-primary" d={path('value')} />
+          <motion.path
+            className="sd-line-primary"
+            d={path('value')}
+            pathLength="100"
+            initial={{ strokeDasharray: '100 100', strokeDashoffset: reduceMotion ? 0 : 100 }}
+            animate={{ strokeDashoffset: 0 }}
+            transition={{ duration: reduceMotion ? 0.16 : 0.46, ease: [0.23, 1, 0.32, 1] }}
+          />
           {points.map((point, index) => (
             <g key={point.fullLabel} onMouseEnter={() => setActive(index)}>
               <circle
@@ -143,6 +152,7 @@ export function LineChart({ points, unit = messages.dashboard.metrics.requestUni
   )
 }
 export function BarChart({ points, unit = messages.dashboard.metrics.requestUnit }: { points: CategoryPoint[]; unit?: string }) {
+  const reduceMotion = useReducedMotion()
   const max = Math.max(...points.map((point) => point.value), 1)
   return (
     <ul className="sd-comparison-bars" aria-label={fmt(messages.dashboard.charts.requestsByService, { unit })}>
@@ -154,7 +164,9 @@ export function BarChart({ points, unit = messages.dashboard.metrics.requestUnit
           </strong>
           <svg viewBox="0 0 500 12" preserveAspectRatio="none" aria-hidden="true">
             <rect className="sd-bar-track" width="500" height="12" rx="2" />
-            <rect className="sd-bar-fill" width={(point.value / max) * 500} height="12" rx="2" />
+            <motion.rect className="sd-bar-fill" width={(point.value / max) * 500} height="12" rx="2"
+              initial={{ transformBox: 'fill-box', transformOrigin: 'left center', transform: reduceMotion ? 'scaleX(1)' : 'scaleX(0)' }}
+              animate={{ transform: 'scaleX(1)' }} transition={{ duration: reduceMotion ? 0.16 : 0.38, ease: [0.23, 1, 0.32, 1] }} />
           </svg>
         </li>
       ))}
@@ -168,6 +180,7 @@ export function DistributionChart({
   points: CategoryPoint[]
   unit?: string
 }) {
+  const reduceMotion = useReducedMotion()
   const id = useId().replaceAll(':', '')
   const total = points.reduce((sum, point) => sum + point.value, 0)
   const styles = ['primary', 'comparison', 'third']
@@ -193,12 +206,15 @@ export function DistributionChart({
           const length = total ? (point.value / total) * 360 : 0
           return (
             <g key={point.label}>
-              <rect
+              <motion.rect
                 className={`sd-distribution-segment sd-distribution-segment--${styles[index]}`}
                 x={start}
                 y={8}
                 width={length}
                 height={56}
+                initial={{ transformBox: 'fill-box', transformOrigin: 'left center', transform: reduceMotion ? 'scaleX(1)' : 'scaleX(0)' }}
+                animate={{ transform: 'scaleX(1)' }}
+                transition={{ duration: reduceMotion ? 0.16 : 0.42, delay: index * 0.035, ease: [0.23, 1, 0.32, 1] }}
               />
               {index > 0 && (
                 <rect

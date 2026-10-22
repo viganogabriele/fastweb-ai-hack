@@ -1,4 +1,5 @@
 import { RotateCcw, Search } from 'lucide-react'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { Button, Input, Select } from '../ui'
 import { DEFAULT_FILTERS, SERVICES } from '../demo/data'
 import type { DashboardFilters, Period } from '../demo/data'
@@ -18,6 +19,7 @@ export function FilterBar({
     Number(filters.region !== 'all') +
     Number(filters.service !== 'all')
   const copy = messages.dashboard.filters
+  const reduceMotion = useReducedMotion()
 
   return (
     <form
@@ -75,7 +77,17 @@ export function FilterBar({
         disabled={!active}
         onClick={() => onChange({ ...DEFAULT_FILTERS })}
       >
-        {active ? fmt(copy.resetWithCount, { count: active }) : copy.reset}
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.span
+            key={active ? `active-${active}` : 'reset'}
+            initial={{ opacity: 0, transform: reduceMotion ? 'scale(1)' : 'scale(0.96)' }}
+            animate={{ opacity: 1, transform: 'scale(1)' }}
+            exit={{ opacity: 0, transform: reduceMotion ? 'scale(1)' : 'scale(0.98)' }}
+            transition={{ duration: 0.16, ease: [0.23, 1, 0.32, 1] }}
+          >
+            {active ? fmt(copy.resetWithCount, { count: active }) : copy.reset}
+          </motion.span>
+        </AnimatePresence>
       </Button>
     </form>
   )
