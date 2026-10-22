@@ -11,13 +11,13 @@ One line per task. Edit only the lines of your own task.
 - FC-01 pure (B, Bianca) `modules/intelligence/disaggregation.py`: weekly → daily baseline, `not_estimable` on missing/incoherent weeks, vintage at `as_of`
 - INT-01 pure (B, Bianca) `modules/integration/candidates.py`: mention → ranked candidates, size vs size run, linked/ambiguous/unlinked
 - PLT-02 (C) `tessera/core/contracts/`: MVP DTO contracts, JSON Schema export, invariant tests
+- ING-02 pure (A, done by Bianca) `modules/ingestion/email_parser.py`: `.eml` → canonical text, segments with code-point offsets, quotes and attachments flagged
 
 ## In progress
 
 ## Ready (all hard dependencies merged)
 
 - PLT-07 (A) Fastweb smoke test: chat, tool call, embeddings, ASR. Needs `FASTWEB_API_KEY` in `.env`
-- ING-02 pure (A) `.eml` → canonical text + segments with offsets
 - DATA-03 (A) 2–3 voice recordings + sidecar JSON
 - ING-01 pure (B) ERP loaders with `available_at`
 - ACT-04 pure (E) Systems client (stock/ATP, lanes/ETA) against `make mocks`
