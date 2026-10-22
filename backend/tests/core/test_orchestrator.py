@@ -416,7 +416,6 @@ def test_default_llm_client_is_bound_to_run_and_fixture_cannot_call_live(engine,
     assert statuses[0].status == "succeeded"
 
 
-
 def test_parent_child_batch_put_is_atomic_and_resolves_earlier_parent(engine):
     from tessera.core.contracts import Segment
 
