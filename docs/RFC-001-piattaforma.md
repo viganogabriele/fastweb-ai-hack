@@ -18,7 +18,7 @@
 - **Principio.** *L'AI legge, il codice conta, l'umano decide.* I modelli Fastweb estraggono, collegano, trascrivono, indagano e scrivono. Ogni numero (forecast, quantità, ETA, unità perse) è calcolato da codice deterministico e tracciabile.
 - **Demo verificabile.** Parser, estrazione, linking, dedup, casi e controlli operano sui file sintetici. Il replay riusa risposte AI realmente registrate; fixture scritte a mano restano nei test. UI e trace distinguono `live`, `recorded`, `fixture` e `unavailable`. Canali, risposte dei negozi e azioni sono simulati; approvare crea di default una bozza locale.
 - **Piano sostenibile.** Quattro persone, una vertical slice entro +12 h, freeze a +16 h, ultime 8 ore per valutazione, correzioni e demo. Budget pianificato: 48 ore-persona su 64 utili; 16 di riserva. I 58 ID originari restano un backlog tracciabile, non 58 PR obbligatorie (§6).
-- **Stack consigliato.** Backend Python (FastAPI, Pydantic, SQLite, pandas). Frontend React con Vite e componenti già noti al team. SDK `openai` puntato all'endpoint Fastweb. Motivazioni e vincoli in §4.1; scelta da congelare a G0 (OQ-1).
+- **Stack deciso (OQ-1).** Backend Python (FastAPI, Pydantic, SQLite, pandas). Frontend React con Vite e TypeScript. SDK `openai` puntato all'endpoint Fastweb. Motivazioni in §4.1; scaffold creato (PLT-01). Piano operativo a fasi, owner e dipendenze in [`PLAN.md`](PLAN.md).
 
 ---
 
@@ -231,20 +231,20 @@ reason_taxonomy: [fit, size_availability, colour, fabric_material, quality_defec
 | LLM | SDK **`openai`** con `base_url=https://spod.ai-factory.fastweb.it/v1` | L'API Fastweb è OpenAI-compatible: un solo client per chat, tools, embedding e trascrizione |
 | Matching | `rapidfuzz` più numpy in memoria (embedding) | Il catalogo ha 114 SKU-colore e 643 SKU-taglia: nessun vector DB necessario |
 | Frontend | **React + Vite + TypeScript**, CSS/componenti già noti al team; un grafico semplice | Versioni compatibili fissate nel lockfile a G0. Tipi da OpenAPI; niente router, libreria di grafo o design system obbligatori per tre viste |
-| Qualità | `ruff`, `pytest`, `tsc --noEmit`, `eslint` | Un comando `make check` prima di ogni PR |
+| Qualità | `ruff`, `pytest`, `tsc -b`, `oxlint` (default del template Vite) | Un comando `make check` prima di ogni PR, eseguito anche in CI |
 | Esecuzione | `make dev`: backend `uvicorn` su :8000, web su :5173, mock server su :8088 | Nessun Docker obbligatorio |
 
-**Motivazione della scelta.** Python riusa competenze e strumenti del dataset; il MVP richiede poche viste, quindi il team può usare componenti che conosce. Full-stack TypeScript o Streamlit restano alternative se riducono il tempo reale di consegna. Non è dimostrato un vantaggio generale di un framework sugli altri; nessun cambio stack dopo G1 per ragioni estetiche.
+**Motivazione della scelta.** Python riusa competenze e strumenti del dataset; il MVP richiede poche viste, quindi il team può usare componenti che conosce. **Deciso (OQ-1):** nessun cambio stack; le alternative (full-stack TypeScript, Streamlit) sono scartate.
 
 ### 4.2 Struttura prevista del repository
 
-Al momento il repository contiene documentazione e dataset: questi percorsi sono da creare solo per i moduli effettivamente attivati.
+PLT-01 ha creato lo scaffold (pacchetti vuoti per layer, app Vite, `Makefile`, CI). Gli altri file si creano solo per i moduli effettivamente attivati; proprietà dei percorsi per lane in `PLAN.md` §1.
 
 ```
 backend/
   pyproject.toml
   tessera/
-    core/           config.py clock.py contracts.py tables.py db.py repo.py
+    core/           config.py clock.py contracts/ db.py repo.py
                     registry.py orchestrator.py llm.py cache.py prompts.py
     modules/
       sources/      erp.py email.py voice.py docs.py chat.py external.py systems_client.py
@@ -553,6 +553,8 @@ Le fixture manuali servono a test e sviluppo UI. Il gate finale usa fonti reali 
 
 ## 6. Piano di lavoro rivisto
 
+> **Piano operativo:** fasi, owner per lane, dipendenze "needs merged" contro "builds against" e regole anti-conflitto sono in [`PLAN.md`](PLAN.md), che sostituisce §6.3–§6.5 per ordine e assegnazione. Budget (§6.1), gate (§6.2), tagli (§6.6) e convenzioni (§6.7) restano validi.
+
 ### 6.1 Capacità e scelta dello scope
 
 Il vecchio backlog contiene **58 task, 106 ore-persona**: 74,5 Core (incluso Core thin), 24 Should, 7,5 Could. La somma Core supera già le **64 ore utili** ipotizzate (4 persone × 16 ore). Due agenti per persona non rendono automaticamente disponibili 85–95 ore umane; contratti, merge, debug e review restano colli di bottiglia. Il precedente impegno non era sostenibile senza tagli.
@@ -744,7 +746,7 @@ I default permettono di partire; le verifiche mancanti limitano i claim, non aut
 
 | ID | Questione | Default / criterio di chiusura |
 |---|---|---|
-| OQ-1 | Stack | Python/FastAPI/SQLite + React/Vite; versioni compatibili bloccate a G0. UI alternativa solo se già conosciuta dal team |
+| OQ-1 | Stack | **Deciso:** Python 3.12/uv/FastAPI/SQLite + React/Vite/TypeScript; versioni bloccate nei lockfile di PLT-01 |
 | OQ-2 | Chat e output strutturato | Gemma candidato iniziale dalla guida; al massimo Qwen come confronto dev. Tool singolo validato, nessuna assunzione di strict JSON/forced tools; smoke e registrazione del modello usato |
 | OQ-3 | ASR e segmenti | Accesso **non confermato** finché testato; `verbose_json` documentato, qualità/allineamento da misurare. Fallback fixture dichiarato |
 | OQ-4 | Vincoli infrastruttura | Fastweb nel percorso minimo, coerente col criterio scritto. Un provider alternativo richiede adapter/accesso e proprietà documentate, non solo cambio URL |

@@ -9,6 +9,7 @@
 | `research-data-fusion.md` | Research on heterogeneous sources, entity matching, source dependence, multimodal retrieval and scalable evidence handling |
 | `research-methods.md` | Scientific methods for short-horizon decisions: robust residuals, nowcasting, abstention, uncertainty, censored demand and temporal evaluation; mathematical design audit |
 | `research-fastweb-assets.md` | Assets verified against the supplied PDFs and linked API guide; exact model IDs, hosting, limitations and recommended roles; no credentials |
+| **`PLAN.md`** | **Execution plan**: lanes and path ownership, anti-collision rules, artifact seams, phases with hard vs fixture dependencies, what can start now |
 | **`RFC-001-piattaforma.md`** | **Current revised plan**: audited modular platform, temporal/data contracts, conditional scenarios, feasible decisions, 48 person-hour MVP plus reserve; 58 backlog IDs, gates, evaluation and source-by-source audit. Supersedes the operative architecture/math/plan and demo of `project-design.md` |
 | `findings.md` | What we know: the official brief, what the Moncler rep added in Q&A, scoring, domain notes, pitfalls, open questions |
 | `project-design.md` | What we build: locked problem statement, candidate shapes, modular pipeline (Build/Thin/Mock/Cut per module), contracts, math, scenarios, cut plan, demo script |
