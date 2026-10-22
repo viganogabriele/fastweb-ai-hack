@@ -21,7 +21,9 @@ class CacheCorrupt(ValueError):
 
 
 def cache_key(request: dict[str, Any]) -> str:
-    canonical = json.dumps(request, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    canonical = json.dumps(
+        request, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False
+    )
     return hashlib.sha256(canonical.encode()).hexdigest()
 
 
@@ -49,7 +51,13 @@ class ResponseCache:
         except (ValueError, KeyError, TypeError):
             raise CacheCorrupt(f"invalid LLM recording for {key}") from None
 
-    def put(self, key: str, response: dict[str, Any]) -> None:
+    def put(self, key: str, response: dict[str, Any]) -> dict[str, Any]:
+        """Publish once and return the winning recording, including across processes.
+
+        A hard link exposes the fully-written temporary file atomically and fails
+        if the destination exists. Never replace an earlier recording: frozen
+        replay must keep the same response for a given request/context hash.
+        """
         path = self._path(key)
         path.parent.mkdir(parents=True, exist_ok=True)
         envelope = {"version": 1, "key": key, "response": response, "checksum": cache_key(response)}
@@ -57,8 +65,12 @@ class ResponseCache:
         try:
             with tempfile.NamedTemporaryFile(mode="w", dir=path.parent, delete=False) as stream:
                 temporary = stream.name
-                json.dump(envelope, stream, ensure_ascii=False, sort_keys=True)
-            os.replace(temporary, path)
+                json.dump(envelope, stream, ensure_ascii=False, sort_keys=True, allow_nan=False)
+            try:
+                os.link(temporary, path)
+            except FileExistsError:
+                pass
+            return self.get(key)
         finally:
             if temporary and os.path.exists(temporary):
                 os.unlink(temporary)

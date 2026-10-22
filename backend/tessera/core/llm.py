@@ -6,6 +6,7 @@ always enter the key. Do not include credentials or unsanitized personal data.
 """
 
 import json
+import math
 import re
 import threading
 import time
@@ -19,7 +20,7 @@ from openai.types.chat import ChatCompletion
 from openai.types.create_embedding_response import CreateEmbeddingResponse
 from pydantic import BaseModel, ValidationError
 
-from tessera.core.cache import ResponseCache, cache_key
+from tessera.core.cache import ReplayMiss, ResponseCache, cache_key
 from tessera.core.config import Settings, get_settings
 
 T = TypeVar("T", bound=BaseModel)
@@ -84,7 +85,9 @@ class LLMClient:
     """Synchronous, thread-safe call allowance shared by chat/extract/embed.
 
     Use one client per bounded run (its deadline starts at construction), or pass
-    the same CallBudget to multiple clients to share a larger allowance. Provider
+    the same CallBudget to multiple clients to share a larger allowance.
+    Record mode reuses existing responses before accessing keys or the network.
+    Racing first writers return the same immutable winning recording. Provider
     failures retain their conservative token reservation because billed usage is
     unknown; successful calls settle to reported usage. Replay costs no budget.
 
@@ -150,20 +153,26 @@ class LLMClient:
                 "context": dict(context or {}),
             }
         )
-        if self.settings.llm_mode == "replay":
-            response = self.cache.get(key)
-            self.traces.append(
-                {
-                    "key": key,
-                    "operation": operation,
-                    "model": payload["model"],
-                    "mode": "replay",
-                    "latency_seconds": 0,
-                    "attempt": 0,
-                    "tokens": (response.get("usage") or {}).get("total_tokens", 0),
-                }
-            )
-            return response
+        if self.settings.llm_mode in ("record", "replay"):
+            try:
+                response = self.cache.get(key)
+            except ReplayMiss:
+                if self.settings.llm_mode == "replay":
+                    raise
+            else:
+                self.traces.append(
+                    {
+                        "key": key,
+                        "operation": operation,
+                        "model": payload["model"],
+                        "mode": self.settings.llm_mode,
+                        "cache_hit": True,
+                        "latency_seconds": 0,
+                        "attempt": 0,
+                        "tokens": (response.get("usage") or {}).get("total_tokens", 0),
+                    }
+                )
+                return response
         # Byte count is a conservative upper bound for ordinary text tokenization.
         reserved = len(json.dumps(payload, ensure_ascii=False).encode()) + payload.get(
             "max_tokens", 0
@@ -208,12 +217,27 @@ class LLMClient:
                         self._sleep(delay)
                         continue
                     response = result.model_dump(mode="json")
+                    try:
+                        # Reject invalid numeric JSON before writing any recording.
+                        json.dumps(response, allow_nan=False)
+                    except ValueError:
+                        raise LLMCallFailed(
+                            "LLM provider returned nonfinite JSON numbers"
+                        ) from None
                     tokens = (response.get("usage") or {}).get("total_tokens", reserved)
                     trace.update(tokens=tokens, latency_seconds=self._clock() - start, status=200)
                     self.traces.append(trace)
                     self.budget.settle(reserved, tokens)
+                    try:
+                        # Reject invalid numeric JSON before writing any recording.
+                        json.dumps(response, allow_nan=False)
+                    except ValueError:
+                        trace["error"] = "nonfinite_json_numbers"
+                        raise LLMCallFailed(
+                            "LLM provider returned nonfinite JSON numbers"
+                        ) from None
                     if self.settings.llm_mode == "record":
-                        self.cache.put(key, response)
+                        response = self.cache.put(key, response)
                     return response
         finally:
             self._semaphore.release()
@@ -331,7 +355,9 @@ class LLMClient:
         )
         data = sorted(response.data, key=lambda item: item.index)
         if [item.index for item in data] != list(range(len(texts))) or any(
-            len(item.embedding) != dimensions for item in data
+            len(item.embedding) != dimensions
+            or any(not math.isfinite(value) for value in item.embedding)
+            for item in data
         ):
-            raise LLMCallFailed("invalid embedding count, indices or dimensions")
+            raise LLMCallFailed("invalid embedding count, indices, dimensions or finite values")
         return [item.embedding for item in data]

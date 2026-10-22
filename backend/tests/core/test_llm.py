@@ -324,3 +324,92 @@ def test_expired_deadline_blocks_provider_construction(tmp_path):
     with pytest.raises(BudgetExceeded, match="deadline"):
         llm.chat(MESSAGES)
     assert requests == factories == []
+
+
+def test_repeated_record_reuses_frozen_response_before_network(tmp_path):
+    first = completion()
+    second = completion()
+    second["choices"][0]["message"]["content"] = "different nondeterministic output"
+    replies = [first, second]
+    recorder, requests, _ = client(tmp_path, replies)
+    original = recorder.chat(MESSAGES)
+    assert recorder.chat(MESSAGES) == original
+    assert len(requests) == recorder.budget.calls == 1
+    assert replies == [second]
+    assert recorder.traces[-1]["cache_hit"] is True
+    replay, _, _ = client(tmp_path, [], mode="replay")
+    assert replay.chat(MESSAGES) == original
+    # Changing admissible context/version creates a different recording.
+    changed = recorder.chat(MESSAGES, cache_context={"source_hash": "changed"})
+    assert changed.choices[0].message.content == "different nondeterministic output"
+    assert recorder.chat(MESSAGES) == original
+
+
+def test_simultaneous_record_misses_return_one_immutable_winner(tmp_path):
+    from threading import Barrier
+
+    rendezvous = Barrier(2)
+    lock = Lock()
+    requests = []
+
+    def respond(request):
+        with lock:
+            index = len(requests)
+            requests.append(request)
+        result = completion()
+        result["choices"][0]["message"]["content"] = f"candidate-{index}"
+        rendezvous.wait(timeout=5)
+        return httpx.Response(200, json=result)
+
+    def factory(**kwargs):
+        return OpenAI(**kwargs, http_client=httpx.Client(transport=httpx.MockTransport(respond)))
+
+    settings = TestSettings(_env_file=None, llm_mode="record", data_dir=tmp_path)
+    recorder = LLMClient(settings, client_factory=factory)
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        results = list(pool.map(lambda _: recorder.chat(MESSAGES), range(2)))
+    assert len(requests) == 2
+    assert results[0] == results[1]
+    replay = LLMClient(settings.model_copy(update={"llm_mode": "replay"}))
+    assert replay.chat(MESSAGES) == results[0]
+    assert recorder.chat(MESSAGES) == results[0]
+    assert len(requests) == 2
+
+
+@pytest.mark.parametrize("value", [float("nan"), float("inf"), float("-inf")])
+@pytest.mark.parametrize("mode", ["record", "live"])
+def test_nonfinite_embeddings_fail_before_cache_write(tmp_path, value, mode):
+    response = {
+        "object": "list",
+        "model": "embed-model",
+        "data": [{"index": 0, "object": "embedding", "embedding": [value]}],
+        "usage": {"prompt_tokens": 1, "total_tokens": 1},
+    }
+
+    def factory(**kwargs):
+        def respond(request):
+            # Deliberately malformed numeric JSON from an untrusted provider.
+            return httpx.Response(
+                200, content=json.dumps(response), headers={"content-type": "application/json"}
+            )
+
+        return OpenAI(**kwargs, http_client=httpx.Client(transport=httpx.MockTransport(respond)))
+
+    settings = TestSettings(_env_file=None, llm_mode=mode, data_dir=tmp_path)
+    llm = LLMClient(settings, client_factory=factory)
+    with pytest.raises(LLMCallFailed, match="nonfinite|finite values"):
+        llm.embed(["text"], dimensions=1)
+    assert not list(tmp_path.rglob("*.json"))
+
+
+def test_cache_refuses_nonfinite_json_and_never_overwrites_existing_response(tmp_path):
+    cache = ResponseCache(tmp_path)
+    key = cache_key({"source": "stable"})
+    assert cache.put(key, {"answer": "A"}) == {"answer": "A"}
+    assert cache.put(key, {"answer": "B"}) == {"answer": "A"}
+    assert cache.get(key) == {"answer": "A"}
+    with pytest.raises(ValueError):
+        cache_key({"number": float("nan")})
+    with pytest.raises(ValueError):
+        cache.put(cache_key({"source": "other"}), {"number": float("inf")})
+    assert len(list(tmp_path.rglob("*.json"))) == 1
