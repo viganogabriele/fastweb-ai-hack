@@ -153,6 +153,17 @@ def test_put_is_idempotent_and_immutable(engine, records) -> None:
     assert run.get(SourceDocument, ORIGINAL, version="v1") == doc
 
 
+def test_put_same_record_twice_in_one_call(engine, records) -> None:
+    doc = next(r for r in records if r.id == ORIGINAL)
+    run = open_run(engine, "r", doc.available_at)
+    assert run.put(doc, doc) == 1
+    assert len(run.list(SourceDocument)) == 1
+    other = doc.model_copy(update={"id": "doc-other"})
+    with pytest.raises(ImmutableArtifact):
+        run.put(other, other.model_copy(update={"text": "changed"}))
+    assert [d.id for d in run.list(SourceDocument)] == [ORIGINAL]
+
+
 def test_put_is_all_or_nothing(engine, records) -> None:
     doc = next(r for r in records if r.id == ORIGINAL)
     late = next(r for r in records if r.id == CORRECTION)

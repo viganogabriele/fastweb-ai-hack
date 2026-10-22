@@ -249,7 +249,14 @@ class Repo:
         rows = [self._row(record) for record in records]
         with self.engine.begin() as conn:
             new = []
+            batch: dict[tuple[str, str, str], Any] = {}
             for row in rows:
+                key = (row["kind"], row["id"], row["version"])
+                if key in batch:  # same record twice in one call: identical is a no-op
+                    if batch[key] != row["payload"]:
+                        raise ImmutableArtifact(f"{row['kind']} {row['id']}@{row['version']}")
+                    continue
+                batch[key] = row["payload"]
                 stored = conn.execute(
                     select(artifacts.c.payload).where(
                         artifacts.c.run_id == row["run_id"],
