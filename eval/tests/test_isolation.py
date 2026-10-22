@@ -1,5 +1,6 @@
 """Real child processes, fake secret files: no hidden dataset content is accessed."""
 
+import platform
 import subprocess
 import sys
 import tempfile
@@ -9,6 +10,11 @@ from unittest.mock import patch
 
 from eval.isolation import restrict_reads, run_product
 
+# CI runs on Linux, so these never silently skip there; on macOS dev machines they cannot run.
+needs_landlock = unittest.skipUnless(
+    platform.system() == "Linux", "Landlock isolation is Linux-only (runs in CI)"
+)
+
 
 class IsolationTests(unittest.TestCase):
     def test_unsupported_platform_fails_closed(self):
@@ -16,6 +22,7 @@ class IsolationTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "requires Linux Landlock"):
                 restrict_reads([])
 
+    @needs_landlock
     def test_native_reads_symlinks_and_descendants_are_denied(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -66,6 +73,26 @@ assert child.returncode != 0 and "PermissionError" in child.stderr
             )
             self.assertEqual(result.returncode, 0, result.stderr)
 
+    @needs_landlock
+    def test_sqlite_can_spill_to_temp_files(self):
+        root = Path(__file__).resolve().parents[2]
+        code = """
+import sqlite3, tempfile
+con = sqlite3.connect(":memory:")
+con.execute("PRAGMA temp_store=FILE")
+con.execute("PRAGMA cache_size=-64")
+con.execute(
+    "CREATE TABLE big AS WITH RECURSIVE c(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM c "
+    "WHERE x<50000) SELECT x, hex(randomblob(32)) AS y FROM c"
+)
+con.execute("SELECT y FROM big ORDER BY y").fetchall()
+with tempfile.NamedTemporaryFile("w", delete=False) as f:
+    f.write("ok")
+assert open(f.name).read() == "ok"
+"""
+        self.assertEqual(run_product(root, ["-c", code]), 0)
+
+    @needs_landlock
     def test_product_starts_and_cannot_import_eval(self):
         root = Path(__file__).resolve().parents[2]
         code = """

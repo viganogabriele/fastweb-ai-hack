@@ -67,12 +67,24 @@ def run_product(root: Path, arguments: list[str]) -> int:
         path = root / relative
         if path.exists():
             allowed.append(path)
+    # Temp files must be readable too: SQLite spills sorts and index builds to its temp dir
+    # (/var/tmp by default, outside the allowlist), and they fail with "unable to open
+    # database file". Point Python and SQLite at a scratch dir under data/ instead.
+    scratch = root / "data" / "tmp"
+    scratch.mkdir(parents=True, exist_ok=True)
+    if scratch.resolve() not in {p.resolve() for p in allowed}:
+        allowed.append(scratch)
     # Run this CLI in a single-threaded process: preexec_fn installs the kernel
     # policy in the child before any product code or Python startup hooks run.
     return subprocess.run(
         [str(python), *arguments],
         cwd=root / "backend",
-        env={**os.environ, "PYTHONPATH": str(root / "backend")},
+        env={
+            **os.environ,
+            "PYTHONPATH": str(root / "backend"),
+            "TMPDIR": str(scratch),
+            "SQLITE_TMPDIR": str(scratch),
+        },
         preexec_fn=lambda: restrict_reads(allowed),
         check=False,
     ).returncode

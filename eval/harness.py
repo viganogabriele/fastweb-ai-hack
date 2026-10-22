@@ -4,11 +4,13 @@ import hashlib
 import json
 import shutil
 from datetime import datetime
+from functools import cache
 from pathlib import Path
 from typing import Any
 
-DEV = frozenset("MIL01 MIL02 PAR01 LON01 MUN01 MAD01 NYC01 TYO01 SEL01 SHA01 HKG01 SYD01".split())
-HOLDOUT = frozenset("ROM01 PAR02 LON02 ZRH01 NYC02 TYO02 SEL02 BJS01 TPE01 DXB01".split())
+import yaml
+
+SPLIT_FILE = Path(__file__).resolve().parent.parent / "config" / "eval_split.yaml"
 ARTIFACTS = ("predictions", "cases", "options")
 
 
@@ -27,6 +29,13 @@ def _timestamp(value: str) -> datetime:
     return result
 
 
+@cache
+def split_stores() -> dict[str, frozenset[str]]:
+    """Dev and holdout stores from `config/eval_split.yaml` (DATA-02), the single source."""
+    split = yaml.safe_load(SPLIT_FILE.read_text(encoding="utf-8"))
+    return {name: frozenset(split[name]) for name in ("dev", "holdout")}
+
+
 def validate_protocol(protocol: dict) -> None:
     """Validate the preselected sample; no oracle-derived defaults."""
     for field in ("run_id", "sampling_criterion", "models", "parameters"):
@@ -34,7 +43,7 @@ def validate_protocol(protocol: dict) -> None:
             raise ValueError(f"Missing protocol field: {field}")
     stores = protocol.get("stores", [])
     split = protocol.get("split")
-    permitted = {"dev": DEV, "holdout": HOLDOUT}.get(split)
+    permitted = split_stores().get(split)
     if not permitted or not stores or not set(stores) <= permitted:
         raise ValueError("Stores must belong to the explicitly selected dev/holdout split")
     origins = protocol.get("origins", [])
