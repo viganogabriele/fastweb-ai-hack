@@ -1,0 +1,51 @@
+[
+  {
+    "kind": "EntityLink",
+    "payload": {
+      "id": "link-20261002-2113-mil01-dup-maire-requests",
+      "version": "v1",
+      "available_at": "2026-10-02T19:13:52Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2113_MIL01_dup.eml",
+          "content_hash": "sha256:41f447a28b601371cb206f1e711749ac962803332d0dcd05e2c2f77d2154d88e",
+          "locator": null
+        },
+        {
+          "uri": "dataset://erp/master_data/sku_colour.csv",
+          "content_hash": "sha256:bd40e343533ae4226a100a5ec0e743933a8c3b37656963165d1bc7a8942e2400",
+          "locator": "sku=J20931A00012-999"
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "Observation",
+          "id": "obs-20261002-2113-mil01-dup-maire-requests",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01b",
+      "producer_version": "1",
+      "observation_id": "obs-20261002-2113-mil01-dup-maire-requests",
+      "status": "linked",
+      "level": "sku",
+      "target_id": "J20931A00012-999",
+      "candidates": [
+        {
+          "target_id": "J20931A00012-999",
+          "level": "sku",
+          "method": "catalog_name_colour",
+          "score": 1.0,
+          "score_min": 0.0,
+          "score_max": 1.0
+        }
+      ],
+      "decided_by": "rule:unique_catalog_match",
+      "rationale": "'Maire' is the catalog name of style J20931A00012; 'nera' is colour 999."
+    }
+  }
+]
