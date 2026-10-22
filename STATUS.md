@@ -22,10 +22,10 @@ One line per task. Edit only the lines of your own task.
 
 - PLT-03 (C, Bianca) SQLite repository, temporal isolation and fixture CLI · branch `PLT-03-artifact-repository`
 - PLT-04 (C, Bianca, `PLT-04-pipeline-orchestrator`) Module discovery, declared dependency execution and atomic run publication
+- PLT-05 (C, Bianca, `PLT-05-llm-runtime`) `core/llm.py` + `core/cache.py`: bounded chat/extract/embed and record/replay cache
 
 ## Ready (all hard dependencies merged)
 
-- PLT-05 (C) `core/llm.py` + `core/cache.py`: `chat/extract/embed`, recipe in `docs/smoke-fastweb.md`
 - DATA-03 (A) 2–3 voice recordings + sidecar JSON + manual transcript
 - AG-01 pure (E) Agent loop with budget, trace, fallback; fake model
 - WEB-01 (D) App shell on hand-written JSON
