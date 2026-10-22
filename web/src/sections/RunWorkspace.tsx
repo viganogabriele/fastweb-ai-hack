@@ -56,7 +56,8 @@ export function RunWorkspace({
 }) {
   const [data, setData] = useState<{
     cases: Case[]
-    documents: (SourceDocument & { caseEvidence: CaseEvidence[] })[]
+    documents: SourceDocument[]
+    caseRefs: Record<string, Omit<CaseEvidence, 'evidence'>[]>
     modules: ModuleManifest[]
   } | null>(null)
   const [error, setError] = useState('')
@@ -76,7 +77,7 @@ export function RunWorkspace({
                 run.spec.modules.map((snapshot) => snapshot.manifest)
               )
             : readApi<ModuleManifest[]>('/modules', controller.signal)
-          ).then((modules) => ({ cases: [], documents: [], modules }))
+          ).then((modules) => ({ cases: [], documents: [], caseRefs: {}, modules }))
         : published && runId
           ? Promise.all([
               section === 'sources' || section === 'overview'
@@ -88,22 +89,8 @@ export function RunWorkspace({
                     `${base}/documents`,
                     controller.signal
                   )
-            ]).then(async ([cases, documents]) => {
-              if (section !== 'sources')
-                return {
-                  cases,
-                  documents: documents.map((document) => ({ ...document, caseEvidence: [] })),
-                  modules: []
-                }
-              const details = await Promise.all(
-                documents.map((document) =>
-                  readApi<DocumentDetail>(
-                    `${base}/documents/${encodeURIComponent(document.id)}?version=${encodeURIComponent(document.version)}`,
-                    controller.signal
-                  )
-                )
-              )
-              const caseRefs = new Map<string, { caseId: string; caseType: string; relation: CaseEvidence['relation'] }[]>()
+            ]).then(([cases, documents]) => {
+              const caseRefs: Record<string, Omit<CaseEvidence, 'evidence'>[]> = {}
               for (const item of cases) {
                 for (const [relation, refs] of [
                   ['supporting', item.supporting],
@@ -111,19 +98,14 @@ export function RunWorkspace({
                 ] as const) {
                   for (const ref of refs) {
                     const key = refKey(ref)
-                    caseRefs.set(key, [...(caseRefs.get(key) ?? []), { caseId: item.id, caseType: item.case_type, relation }])
+                    caseRefs[key] = [...(caseRefs[key] ?? []), { caseId: item.id, caseType: item.case_type, relation }]
                   }
                 }
               }
               return {
                 cases,
-                documents: details.map(({ document, observations }) => ({
-                  ...document,
-                  caseEvidence: observations.flatMap((observation) => {
-                    const refs = caseRefs.get(`Observation:${observation.id}:${observation.version}`) ?? []
-                    return refs.flatMap((ref) => observation.evidence.map((evidence) => ({ ...ref, evidence })))
-                  })
-                })),
+                documents,
+                caseRefs,
                 modules: []
               }
             })
@@ -323,49 +305,12 @@ export function RunWorkspace({
         (documents.length ? (
           <div className="sd-run-list">
             {documents.map((item) => (
-              <details
-                className="sd-run-card"
+              <SourceDocumentCard
+                item={item}
+                runId={run?.spec.run_id ?? ''}
+                caseRefs={data.caseRefs}
                 key={`${item.id}-${item.version}`}
-              >
-                <summary>
-                  <span>{item.id}</span>
-                  <StatusBadge label={item.source_type} tone="neutral" />
-                </summary>
-                <p>
-                  {item.language ?? 'Lingua non disponibile'} · Disponibile dal{' '}
-                  {date(item.available_at)}
-                </p>
-                {(() => {
-                  const ranges = evidenceRanges(item.text, item, item.caseEvidence)
-                  const parts: ReactNode[] = []
-                  let cursor = 0
-                  for (const [index, range] of ranges.entries()) {
-                    if (range.start < cursor) continue
-                    if (range.start > cursor) parts.push(item.text.slice(cursor, range.start))
-                    parts.push(
-                      <mark
-                        className={`sd-source-evidence sd-source-evidence--${range.relation}`}
-                        key={`${range.caseId}-${range.evidence.segment_id}-${range.start}-${index}`}
-                        title={`${range.caseId} · ${range.caseType} · ${range.relation === 'supporting' ? 'A supporto' : 'In contrasto'}`}
-                      >
-                        {item.text.slice(range.start, range.end)}
-                      </mark>
-                    )
-                    cursor = range.end
-                  }
-                  if (cursor < item.text.length) parts.push(item.text.slice(cursor))
-                  return (
-                    <>
-                      {ranges.length > 0 && (
-                        <p className="sd-source-evidence-label">
-                          Evidenze collegate al caso · passa sul testo evidenziato per i riferimenti
-                        </p>
-                      )}
-                      <pre className="sd-source-text">{parts}</pre>
-                    </>
-                  )
-                })()}
-              </details>
+              />
             ))}
           </div>
         ) : (
@@ -417,5 +362,87 @@ export function RunWorkspace({
           <EmptyState title="Nessun modulo disponibile" />
         ))}
     </div>
+  )
+}
+
+function SourceDocumentCard({
+  item,
+  runId,
+  caseRefs
+}: {
+  item: SourceDocument
+  runId: string
+  caseRefs: Record<string, Omit<CaseEvidence, 'evidence'>[]>
+}) {
+  const [open, setOpen] = useState(false)
+  const [detail, setDetail] = useState<DocumentDetail | null>(null)
+  const [error, setError] = useState('')
+  useEffect(() => {
+    if (!open || detail) return
+    const controller = new AbortController()
+    readApi<DocumentDetail>(
+      `/runs/${encodeURIComponent(runId)}/documents/${encodeURIComponent(item.id)}?version=${encodeURIComponent(item.version)}`,
+      controller.signal
+    )
+      .then((result) => {
+        if (!controller.signal.aborted) setDetail(result)
+      })
+      .catch((reason) => {
+        if (!controller.signal.aborted) setError(String(reason.message))
+      })
+    return () => controller.abort()
+  }, [open, detail, item.id, item.version, runId])
+
+  const caseEvidence = (detail?.observations ?? []).flatMap((observation) => {
+    const refs =
+      caseRefs[`Observation:${observation.id}:${observation.version}`] ?? []
+    return refs.flatMap((ref) =>
+      observation.evidence.map((evidence) => ({ ...ref, evidence }))
+    )
+  })
+  const ranges = evidenceRanges(item.text, item, caseEvidence)
+  const parts: ReactNode[] = []
+  let cursor = 0
+  for (const [index, range] of ranges.entries()) {
+    if (range.start < cursor) continue
+    if (range.start > cursor) parts.push(item.text.slice(cursor, range.start))
+    parts.push(
+      <mark
+        className={`sd-source-evidence sd-source-evidence--${range.relation}`}
+        key={`${range.caseId}-${range.evidence.segment_id}-${range.start}-${index}`}
+        title={`${range.caseId} · ${range.caseType} · ${range.relation === 'supporting' ? 'A supporto' : 'In contrasto'}`}
+      >
+        {item.text.slice(range.start, range.end)}
+      </mark>
+    )
+    cursor = range.end
+  }
+  if (cursor < item.text.length) parts.push(item.text.slice(cursor))
+
+  return (
+    <details
+      className="sd-run-card"
+      onToggle={(event) => {
+        setOpen(event.currentTarget.open)
+        if (event.currentTarget.open) setError('')
+      }}
+    >
+      <summary>
+        <span>{item.id}</span>
+        <StatusBadge label={item.source_type} tone="neutral" />
+      </summary>
+      <p>
+        {item.language ?? 'Lingua non disponibile'} · Disponibile dal{' '}
+        {date(item.available_at)}
+      </p>
+      {open && !detail && !error && <p>Caricamento evidenze…</p>}
+      {error && <p role="status">Evidenze non disponibili: {error}</p>}
+      {ranges.length > 0 && (
+        <p className="sd-source-evidence-label">
+          Evidenze collegate al caso · passa sul testo evidenziato per i riferimenti
+        </p>
+      )}
+      <pre className="sd-source-text">{detail ? parts : item.text}</pre>
+    </details>
   )
 }
