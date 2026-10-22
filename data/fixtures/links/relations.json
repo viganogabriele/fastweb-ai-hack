@@ -1,0 +1,126 @@
+[
+  {
+    "kind": "EvidenceRelation",
+    "payload": {
+      "id": "rel-20261002-mil01-maire-duplicates",
+      "version": "v1",
+      "available_at": "2026-10-02T19:13:52Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2113_MIL01_dup.eml",
+          "content_hash": "sha256:41f447a28b601371cb206f1e711749ac962803332d0dcd05e2c2f77d2154d88e",
+          "locator": null
+        },
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2112_MIL01.eml",
+          "content_hash": "sha256:42ba599825b726743a870909947f1046005d4f0d715a79922b4ff43cef313a93",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "Observation",
+          "id": "obs-20261002-2113-mil01-dup-maire-requests",
+          "version": "v1"
+        },
+        {
+          "kind": "Observation",
+          "id": "obs-20261002-2112-mil01-maire-requests",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01b",
+      "producer_version": "1",
+      "from_ref": {
+        "kind": "Observation",
+        "id": "obs-20261002-2113-mil01-dup-maire-requests",
+        "version": "v1"
+      },
+      "to_ref": {
+        "kind": "Observation",
+        "id": "obs-20261002-2112-mil01-maire-requests",
+        "version": "v1"
+      },
+      "relation": "duplicates",
+      "basis": "Same text sent twice 1 min apart by the same sender, different Message-ID: a certain copy, the 7 requests count once.",
+      "evidence_refs": [
+        {
+          "kind": "SourceDocument",
+          "id": "doc-20261002-2112-mil01",
+          "version": "v1"
+        },
+        {
+          "kind": "SourceDocument",
+          "id": "doc-20261002-2113-mil01-dup",
+          "version": "v1"
+        }
+      ]
+    }
+  },
+  {
+    "kind": "EvidenceRelation",
+    "payload": {
+      "id": "rel-20260918-mil01-net-sales-supersedes",
+      "version": "v1",
+      "available_at": "2026-09-18T20:07:29Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20260918_2207_MIL01_corr.eml",
+          "content_hash": "sha256:7b68a50cbfe691819a1148697f1597065fc7a438403202a302dd03f71a31db3f",
+          "locator": null
+        },
+        {
+          "uri": "dataset://store_emails/MIL01/20260918_2115_MIL01.eml",
+          "content_hash": "sha256:0429e5ab4d15f5ac8f3f41210ec9f1386e1e9766102da372b1eb331a75cdc9b8",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "Observation",
+          "id": "obs-20260918-2207-mil01-corr-net-sales",
+          "version": "v1"
+        },
+        {
+          "kind": "Observation",
+          "id": "obs-20260918-2115-mil01-net-sales",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01b",
+      "producer_version": "1",
+      "from_ref": {
+        "kind": "Observation",
+        "id": "obs-20260918-2207-mil01-corr-net-sales",
+        "version": "v1"
+      },
+      "to_ref": {
+        "kind": "Observation",
+        "id": "obs-20260918-2115-mil01-net-sales",
+        "version": "v1"
+      },
+      "relation": "supersedes",
+      "basis": "Reply to the closing email: 'il fatturato di oggi e' 85,0k e non 58'. Only the net sales fact is corrected, not the rest of the email.",
+      "evidence_refs": [
+        {
+          "kind": "SourceDocument",
+          "id": "doc-20260918-2115-mil01",
+          "version": "v1"
+        },
+        {
+          "kind": "SourceDocument",
+          "id": "doc-20260918-2207-mil01-corr",
+          "version": "v1"
+        }
+      ]
+    }
+  }
+]

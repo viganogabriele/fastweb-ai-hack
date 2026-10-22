@@ -1,0 +1,64 @@
+[
+  {
+    "kind": "EntityLink",
+    "payload": {
+      "id": "link-20261009-1035-mil01-unmet-demand",
+      "version": "v1",
+      "available_at": "2026-10-09T08:35:52Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261009_1035_MIL01.eml",
+          "content_hash": "sha256:173f031967d236d50951cd1ad52ea2692c28ed005eb8fe68e68105b422927144",
+          "locator": null
+        },
+        {
+          "uri": "dataset://erp/master_data/styles.csv",
+          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "locator": "style_code=I10919B00011"
+        },
+        {
+          "uri": "dataset://erp/master_data/styles.csv",
+          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "locator": "style_code=I10919B00042"
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "Observation",
+          "id": "obs-20261009-1035-mil01-unmet-demand",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01b",
+      "producer_version": "1",
+      "observation_id": "obs-20261009-1035-mil01-unmet-demand",
+      "status": "linked",
+      "level": "style",
+      "target_id": "I10919B00011",
+      "candidates": [
+        {
+          "target_id": "I10919B00011",
+          "level": "style",
+          "method": "alias_exact",
+          "score": 1.0,
+          "score_min": 0.0,
+          "score_max": 1.0
+        },
+        {
+          "target_id": "I10919B00042",
+          "level": "style",
+          "method": "category_word",
+          "score": 0.3,
+          "score_min": 0.0,
+          "score_max": 1.0
+        }
+      ],
+      "decided_by": "rule:unique_alias",
+      "rationale": "Same sentence as the stock-out: 'cardigan logo in M', no single colour."
+    }
+  }
+]
