@@ -1,74 +1,74 @@
-"""Explicit, authorized fixture loading into a separate namespace only."""
+"""`tessera fixtures load`: hand-written fixtures as one published run in the fixture namespace.
 
+Fixture files are `data/fixtures/<area>/*.json`, each a list of `{"kind", "payload"}` records
+(`data/fixtures/README.md`). They load as run `fixture`, scenario `historical`, with `as_of` at
+the latest `available_at` among them, into the fixture DB only (RFC §4.6): real runs never see
+them. Loading again replaces the previous fixture run.
+"""
+
+import hashlib
 import json
 from pathlib import Path
 
-from tessera.core.contracts import Segment, SourceDocument
-from tessera.core.contracts.common import DerivedRecord
-from tessera.core.repo import ARTIFACT_TYPES, Repo
+from sqlalchemy import Engine
+
+from tessera import __version__
+from tessera.core.contracts import RunSpec
+from tessera.core.contracts.common import SourceRecord
+from tessera.core.repo import KINDS, Repo, RunNotFound, create_run, reset_run, set_run_status
+
+FIXTURE_RUN_ID = "fixture"
+FIXTURE_SCENARIO_ID = "historical"
 
 
-def load_fixtures(repo: Repo, files: list[str], *, root: Path) -> dict[str, int]:
-    """Load authorized paths relative to data/fixtures; never discover files.
+def _digest(paths: list[Path], root: Path) -> str:
+    h = hashlib.sha256()
+    for path in paths:
+        h.update(path.relative_to(root).as_posix().encode() + b"\0" + path.read_bytes() + b"\0")
+    return "sha256:" + h.hexdigest()
 
-    Derived fixtures are rebound to the target fixture run/scenario. Unknown or
-    future artifacts are counted as excluded, not moved back in time. The caller
-    owns the outer transaction; a savepoint also prevents partial imports if an
-    error is caught by that caller.
-    """
-    if repo.namespace != "fixture" or repo.spec.mode != "fixture":
-        raise ValueError("Fixtures may be loaded only in the fixture namespace")
-    root = root.resolve(strict=True)
-    allowed = set(repo.spec.authorized_fixture_refs)
+
+def read_fixtures(fixtures_dir: Path) -> tuple[list[Path], list[SourceRecord]]:
+    paths = sorted(fixtures_dir.glob("*/*.json"))
     records = []
-    for name in files:
-        if name not in allowed:
-            raise ValueError(f"Fixture is not authorized by RunSpec: {name}")
-        path = (root / name).resolve(strict=True)
-        if not path.is_relative_to(root) or path.suffix != ".json":
-            raise ValueError("Fixture path escapes the fixture directory")
-        content = json.loads(path.read_text(encoding="utf-8"))
-        if not isinstance(content, list):
-            raise ValueError("Fixture files must contain arrays of kind/payload records")
-        for item in content:
-            if not isinstance(item, dict) or set(item) != {"kind", "payload"}:
-                raise ValueError("Invalid fixture envelope")
-            kind = ARTIFACT_TYPES.get(item["kind"])
-            if kind is None:
-                raise ValueError("Unknown fixture artifact kind")
-            payload = dict(item["payload"])
-            if issubclass(kind, DerivedRecord):
-                payload.update(run_id=repo.spec.run_id, scenario_id=repo.spec.scenario_id)
-            records.append(kind.model_validate(payload))
-    eligible = [
-        record
-        for record in records
-        if record.available_at is not None and record.available_at <= repo.spec.as_of
-    ]
-    pending = sorted(
-        eligible,
-        key=lambda row: (
-            0 if isinstance(row, SourceDocument) else 1 if isinstance(row, Segment) else 2,
-            type(row).__name__,
-            row.id,
-            row.version,
-        ),
+    for path in paths:
+        for i, rec in enumerate(json.loads(path.read_text(encoding="utf-8"))):
+            if rec["kind"] not in KINDS:
+                raise ValueError(f"{path}[{i}]: {rec['kind']!r} is not a storable contract")
+            records.append(KINDS[rec["kind"]].model_validate(rec["payload"]))
+    return paths, records
+
+
+def load_fixtures(engine: Engine, fixtures_dir: Path, config_dir: Path) -> tuple[RunSpec, int]:
+    """Replace the fixture run with the fixtures on disk; returns its spec and record count."""
+    paths, records = read_fixtures(fixtures_dir)
+    known = [r.available_at for r in records if r.available_at is not None]
+    if not known:
+        raise ValueError(f"no fixture with a known available_at under {fixtures_dir}")
+    configs = sorted(config_dir.glob("*.yaml"))
+    spec = RunSpec(
+        run_id=FIXTURE_RUN_ID,
+        scenario_id=FIXTURE_SCENARIO_ID,
+        as_of=max(known),
+        stores=tuple(sorted({s for r in records if (s := getattr(r, "store_id", None))})),
+        source_manifest_hash=_digest(paths, fixtures_dir),
+        config_hash=_digest(configs, config_dir),
+        code_version=__version__,
+        mode="fixture",
+        modules=(),
+        prompt_versions={},
+        model_versions={},
+        authorized_fixture_refs=tuple(p.relative_to(fixtures_dir).as_posix() for p in paths),
     )
-    count = 0
-    with repo.session.begin_nested():
-        while pending:
-            deferred = []
-            for row in pending:
-                if isinstance(row, DerivedRecord) and any(
-                    repo.get(ARTIFACT_TYPES[ref.kind], ref.id, ref.version) is None
-                    for ref in row.input_refs
-                    if ref.kind in ARTIFACT_TYPES
-                ):
-                    deferred.append(row)
-                    continue
-                repo.put(row)
-                count += 1
-            if len(deferred) == len(pending):
-                raise ValueError("Fixture dependencies are missing, future, or cyclic")
-            pending = deferred
-    return {"loaded": count, "excluded": len(records) - len(eligible)}
+    try:
+        reset_run(engine, FIXTURE_RUN_ID)
+    except RunNotFound:
+        pass
+    create_run(engine, spec)
+    try:
+        n = Repo(engine, spec).put(*records)
+    except Exception:
+        set_run_status(engine, FIXTURE_RUN_ID, "failed")
+        raise
+    set_run_status(engine, FIXTURE_RUN_ID, "published")
+    return spec, n

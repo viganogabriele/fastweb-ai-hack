@@ -15,7 +15,7 @@ The repo has ~3,150 tracked files (~200 MB), almost all data. Don't list, grep o
 |---|---|---|
 | What we build, modules, data contracts, math | `docs/RFC-001-piattaforma.md` (Italian; read the § you need) | `docs/project-design.md` §3–§8, `docs/drafts/fastweb.md` (superseded) |
 | Who owns which paths, task order, dependencies | `docs/PLAN.md` | — |
-| What is done, in progress, ready to pick up | `STATUS.md` | — |
+| What is done, in progress, ready to pick up | GitHub issues (`gh issue list`), see "Task workflow" | — |
 | Brief, scoring, pitfalls | `docs/findings.md` | `docs/sources/**` (raw verbatim sources; `findings.md` already digests them) |
 | Dataset layout, formats, traps, time rules, scenarios | `generated/README.md` (§2 map, §3 parsing, §4 no look-ahead, §5 dev/hold-out) | — |
 | Store list, ids, tz, currency, language | `generated/sources/erp/master_data/stores.csv` | — |
@@ -36,19 +36,44 @@ Requires `uv` and Node >= 22. Run from the repo root.
 - Add deps with `cd backend && uv add <pkg>` or `cd web && npm install <pkg>`; never hand-merge lockfiles.
 
 Secrets: copy `.env.example` to `.env` (gitignored). Never print, log or commit `FASTWEB_API_KEY`.
-Work on a branch `<TASK-ID>-<slug>` and stay inside your lane's paths (`docs/PLAN.md` §1–§2).
+Stay inside your lane's paths (`docs/PLAN.md` §1–§2).
 
-## Keep `STATUS.md` updated
+## Task workflow (GitHub issues)
 
-`STATUS.md` (repo root) is the live task board: Done, In progress, Ready, Blocked. Read it before
-picking a task. Update it **in the same PR** that changes a task's state:
+GitHub issues are the **only** task board. One issue per task, title `<TASK-ID> (<lane>): <summary>`,
+label `lane:A`…`lane:E`. Open + no assignee = ready. Open + assignee = in progress. Label `blocked` +
+"Blocked by" relationship = waiting. Closed = done. Spec of each task: `docs/PLAN.md` §4.
 
-- Starting a task: move its line to "In progress", add lane, person and branch.
-- Merging a task: move it to "Done" (one line: what now exists). Then move every task it unblocked
-  from "Blocked" to "Ready" (check hard dependencies in `docs/PLAN.md` §4).
-- Found a new blocker or dependency: add it under "Blocked" as `ID ← what it waits for`.
-- Edit only your task's lines and the ones it unblocks; one line per task, no prose. On a merge
-  conflict keep both sides' lines.
+Follow these steps in order, every time. Do not skip or reorder them.
+
+1. **Pick.** `gh issue list --state open --label lane:<X> --json number,title,assignees,labels`.
+   Take only an issue that has **no assignee** and **no `blocked` label**. Never work on an issue
+   assigned to someone else, even if it looks stale: ask them in the team chat.
+2. **Claim before any code.** `gh issue edit <N> --add-assignee @me`, then re-read the issue
+   (`gh issue view <N> --json assignees`). If anyone else is assigned too, the one who claimed first
+   keeps it: unassign yourself and pick another issue.
+3. **Branch** from up-to-date `main`, named `<TASK-ID>-<slug>` (e.g. `PLT-04-orchestrator`), exactly
+   the task ID from the issue title.
+4. **Draft PR at once.** Make a first commit (even empty: `git commit --allow-empty -m "<TASK-ID>: start"`),
+   push, and open a **draft** PR: `gh pr create --draft --title "<TASK-ID>: <summary>"
+   --body "Closes #<N>"`. Then push small commits often: every push is a checkpoint others can see.
+5. **Finish.** `make check` passes. Then ask an **adversarial review from a different agent**
+   (other model or a fresh session that did not write the code; give it the issue and the diff, not
+   your conclusions). Fix or explicitly answer every finding, summarize them in a PR comment.
+6. **Ready.** Only after step 5: `gh pr ready <PR>`. Squash-merge after review; `Closes #<N>` closes
+   the issue.
+7. **Unblock.** After merge, for every issue blocked by yours: if all its blockers are closed,
+   remove the `blocked` label.
+
+Creating and splitting issues:
+
+- New task, blocker or dependency discovered: open an issue (or comment on the existing one). Set
+  dependencies with GitHub's "Blocked by" relationship and add the `blocked` label.
+- A task too large for one PR: split it into **sub-issues** of the parent issue (e.g. `(pure)` and
+  `module` parts). Each sub-issue follows the steps above; close the parent when all are closed.
+- Before opening an issue, search for duplicates (`gh issue list --state all --search "<TASK-ID>"`).
+  If one exists, use it; if you created a duplicate, close yours as "not planned" with
+  `Duplicate of #<N>`.
 
 ## Hard rules (answer leakage)
 

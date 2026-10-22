@@ -13,7 +13,8 @@ from sqlalchemy import Engine
 from tessera.core.config import Settings, get_settings
 from tessera.core.contracts import ModuleManifest, ModuleResult, ModuleRun, RunSpec
 from tessera.core.registry import Registry
-from tessera.core.repo import Repo, repo_session
+from tessera.core.run_repo import RunRepo as Repo
+from tessera.core.run_repo import repo_session
 
 _WORKER = Lock()
 _SUCCESS = {"succeeded", "degraded"}
