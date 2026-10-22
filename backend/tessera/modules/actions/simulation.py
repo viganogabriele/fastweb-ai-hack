@@ -9,14 +9,20 @@ For each day h of the horizon:
 
 The starting stock is used once, never reset per day. Lost sales are not backlog: a later arrival
 does not recover them. An arrival is sellable on its day only if it lands before opening; a
-closing arrival becomes sellable the next day. Outbound larger than available stock makes the
-plan infeasible: the simulation stops there instead of clamping.
+closing arrival becomes sellable the next day. Outbound leaves before the day's sales (conservative
+for the donor; the RFC does not fix the intra-day order). Outbound larger than available stock
+makes the plan infeasible: the simulation stops there instead of clamping. Because earlier sales
+drain stock, the same outbound can be feasible in one demand scenario and not in another.
+
+Counts accept any integer type (numpy/pandas included) and are normalised to `int`; demand accepts
+any real number and is normalised to `float`.
 
 Pure code: no DB, no API, no LLM. Building the initial stock and the demand series (snapshot
 bridge, scenarios, size curve) is the caller's job.
 """
 
 import math
+import numbers
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from datetime import date, timedelta
@@ -87,26 +93,26 @@ def simulate_stock(
     Closed days are demand 0. Arrivals sellable before `start` belong in `initial_stock` and are
     rejected; those sellable after the horizon are counted in `arrivals_after_horizon`.
     """
-    _check_count("initial_stock", initial_stock, allow_zero=True)
-    for i, d in enumerate(demand):
-        if isinstance(d, bool) or not isinstance(d, int | float) or not math.isfinite(d) or d < 0:
-            raise ValueError(f"demand[{i}] must be a finite number >= 0, got {d!r}")
-    outbound = dict(outbound or {})
+    initial_stock = _check_count("initial_stock", initial_stock, allow_zero=True)
+    demand = [_check_demand(i, d) for i, d in enumerate(demand)]
+    outbound = {
+        day: _check_count(f"outbound on {day}", qty, allow_zero=True)
+        for day, qty in (outbound or {}).items()
+    }
     horizon = [start + timedelta(days=i) for i in range(len(demand))]
     end = horizon[-1] if horizon else start - timedelta(days=1)
 
     arriving: dict[date, int] = {}
     after_horizon = 0
     for a in arrivals:
-        _check_count("arrival qty", a.qty, allow_zero=False)
+        qty = _check_count("arrival qty", a.qty, allow_zero=False)
         if a.sellable_on < start:
             raise ValueError(f"arrival sellable on {a.sellable_on} precedes the horizon start")
         if a.sellable_on > end:
-            after_horizon += a.qty
+            after_horizon += qty
         else:
-            arriving[a.sellable_on] = arriving.get(a.sellable_on, 0) + a.qty
-    for day, qty in outbound.items():
-        _check_count(f"outbound on {day}", qty, allow_zero=True)
+            arriving[a.sellable_on] = arriving.get(a.sellable_on, 0) + qty
+    for day in outbound:
         if not start <= day <= end:
             raise ValueError(f"outbound on {day} is outside the horizon {start}..{end}")
 
@@ -118,7 +124,7 @@ def simulate_stock(
         if out > ending + arr:
             return StockSimulation(initial_stock, tuple(days), False, day, after_horizon)
         available = ending + arr - out
-        served = min(float(dem), available)
+        served = min(dem, available)
         days.append(
             StockDay(
                 day=day,
@@ -126,7 +132,7 @@ def simulate_stock(
                 arrivals=arr,
                 outbound=out,
                 available=available,
-                demand=float(dem),
+                demand=dem,
                 served=served,
                 lost=dem - served,
                 ending=available - served,
@@ -153,7 +159,23 @@ def simulate_scenarios(
     }
 
 
-def _check_count(name: str, value: object, *, allow_zero: bool) -> None:
-    if isinstance(value, bool) or not isinstance(value, int) or value < (0 if allow_zero else 1):
+def _check_count(name: str, value: object, *, allow_zero: bool) -> int:
+    if (
+        isinstance(value, bool)
+        or not isinstance(value, numbers.Integral)
+        or value < (0 if allow_zero else 1)
+    ):
         bound = ">= 0" if allow_zero else ">= 1"
         raise ValueError(f"{name} must be an integer {bound}, got {value!r}")
+    return int(value)
+
+
+def _check_demand(i: int, value: object) -> float:
+    if (
+        isinstance(value, bool)
+        or not isinstance(value, numbers.Real)
+        or not math.isfinite(value)
+        or value < 0
+    ):
+        raise ValueError(f"demand[{i}] must be a finite number >= 0, got {value!r}")
+    return float(value)

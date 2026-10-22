@@ -1,5 +1,7 @@
 from datetime import date, timedelta
 
+import numpy as np
+import pandas as pd
 import pytest
 
 from tessera.modules.actions.simulation import Arrival, simulate_scenarios, simulate_stock
@@ -125,3 +127,31 @@ def test_scenarios_share_stock_and_keep_order() -> None:
 def test_scenarios_with_different_horizons_are_rejected() -> None:
     with pytest.raises(ValueError, match="different horizons"):
         simulate_scenarios(1, D0, {"low": [1], "high": [1, 1]})
+
+
+def test_numpy_and_pandas_inputs_are_accepted_and_normalised() -> None:
+    stock = pd.DataFrame({"on_hand": [2]}).on_hand.iloc[0]
+    demand = pd.Series([1, 1, 1], dtype="int64")
+    sim = simulate_stock(
+        stock,
+        D0,
+        list(demand.to_numpy()),
+        arrivals=[Arrival(day(2), np.int64(1))],
+        outbound={day(0): np.int32(1)},
+    )
+    assert (sim.served, sim.lost, sim.ending) == (2, 1, 0)
+    assert type(sim.initial_stock) is int
+    assert all(type(d.demand) is float and type(d.arrivals) is int for d in sim.days)
+    assert_conserved(sim, arrived=1, shipped=1)
+
+
+@pytest.mark.parametrize("bad", [np.float64(1.0), np.bool_(True)])
+def test_non_integer_numpy_counts_are_rejected(bad) -> None:
+    with pytest.raises(ValueError):
+        simulate_stock(bad, D0, [1])
+
+
+def test_outbound_can_be_feasible_in_one_scenario_only() -> None:
+    sims = simulate_scenarios(3, D0, {"low": [0, 0], "high": [2, 0]}, outbound={day(1): 2})
+    assert sims["low"].feasible
+    assert not sims["high"].feasible and sims["high"].infeasible_on == day(1)
