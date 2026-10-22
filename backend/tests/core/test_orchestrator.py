@@ -447,13 +447,16 @@ def test_uninstalled_disabled_required_dependency_blocks_instead_of_crashing(eng
 
 
 def test_progress_is_committed_while_a_module_runs(engine, tmp_path):
+    from sqlalchemy import create_engine
+
     from tessera.core.repo import Repo as CanonicalRepo
     from tessera.core.repo import list_module_runs
 
     seen = {}
 
     def execute(ctx):
-        other = connect(f"sqlite:///{tmp_path / 'pipeline.db'}")
+        # Read-only observer: connect() would also migrate, i.e. write.
+        other = create_engine(f"sqlite:///{tmp_path / 'pipeline.db'}")
         try:
             observer = CanonicalRepo.open(other, ctx.spec.run_id)
             seen["status"] = observer.status()
