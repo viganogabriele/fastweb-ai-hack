@@ -10,10 +10,9 @@ One line per task. Edit only the lines of your own task.
 - ACT-01 pure (E, done by Bianca) `modules/actions/simulation.py`: recursive daily stock simulation per scenario, RFC §7.3 test 5
 - FC-01 pure (B, Bianca) `modules/intelligence/disaggregation.py`: weekly → daily baseline, `not_estimable` on missing/incoherent weeks, vintage at `as_of`
 - INT-01 pure (B, Bianca) `modules/integration/candidates.py`: mention → ranked candidates, size vs size run, linked/ambiguous/unlinked
+- PLT-02 (C) `tessera/core/contracts/`: MVP DTO contracts, JSON Schema export, invariant tests
 
 ## In progress
-
-- PLT-02 (C, Codex) MVP contracts, JSON Schema export and invariant tests; Opus 5.5 review passed, A/B/D G0 review and merge pending · branch `PLT-02-contracts`
 
 ## Ready (all hard dependencies merged)
 
@@ -25,13 +24,14 @@ One line per task. Edit only the lines of your own task.
 - AG-01 pure (E) Agent loop with budget, trace, fallback; fake model
 - WEB-01 (D) App shell on hand-written JSON
 - EVL-01 (D) `eval/` harness + "product cannot open ground truth" test
+- DATA-01a (A) Fixtures: D1 positive doc + observation, ambiguous mention, forward/duplicate, correction
+- ING-09 (A) Physical quantities (exact/range/vague/unknown) with units, from span text
+- PLT-03 (C) `core/db.py`, `core/repo.py`: SQLite artifact store, `as_of` filter, fixtures load
 
 ## Blocked (waiting on)
 
-- DATA-01a (A), ING-09 (A) ← PLT-02
 - DATA-01b (B) ← DATA-01a
 - DATA-01c (E) ← DATA-01b
-- PLT-03 (C) ← PLT-02
-- PLT-05 (C) ← PLT-02, PLT-07
+- PLT-05 (C) ← PLT-07
 - PLT-04, PLT-06 (C), ING-01 module (B), ACT-04 module (E) ← PLT-03
 - Rest of Phase 1–2 ← PLT-04 / PLT-05 (see `docs/PLAN.md` §4)
