@@ -12,6 +12,9 @@ import {
   StatusBadge
 } from '../ui'
 import { useRuns } from '../api/useRuns'
+import { CaseQueue } from './CaseQueue'
+import { latestCaseVersions } from './caseUtils'
+import type { CaseQueueFilters, CaseSelection } from './caseUtils'
 import './sections.css'
 import '../widgets/widgets.css'
 
@@ -46,10 +49,20 @@ const date = (value: string | null | undefined) =>
 
 export function RunWorkspace({
   section,
-  runs
+  runs,
+  caseSelection,
+  onCaseSelect,
+  onCaseReturn,
+  caseQueueFilters,
+  onCaseQueueFiltersChange
 }: {
   section: string
   runs: ReturnType<typeof useRuns>
+  caseSelection: CaseSelection | null
+  onCaseSelect: (item: Case) => void
+  onCaseReturn: () => void
+  caseQueueFilters: CaseQueueFilters
+  onCaseQueueFiltersChange: (filters: CaseQueueFilters) => void
 }) {
   const [data, setData] = useState<{
     cases: Case[]
@@ -129,7 +142,8 @@ export function RunWorkspace({
     )
   if (!data) return <LoadingState label="Caricamento dati" />
   const query = search.trim().toLocaleLowerCase('it-IT')
-  const cases = data.cases
+  const currentCases = latestCaseVersions(data.cases)
+  const cases = currentCases
     .filter(
       (item) =>
         (store === 'all' || item.store_id === store) &&
@@ -154,7 +168,7 @@ export function RunWorkspace({
       query === '' ||
       `${item.id} ${item.text}`.toLocaleLowerCase('it-IT').includes(query)
   )
-  const active = data.cases.filter(
+  const active = currentCases.filter(
     (item) => item.status !== 'closed' && item.status !== 'decided'
   )
   return (
@@ -180,9 +194,7 @@ export function RunWorkspace({
           <h2>Segnalazioni da valutare</h2>
         </>
       ) : null}
-      {(section === 'cases' ||
-        section === 'overview' ||
-        section === 'sources') && (
+      {(section === 'overview' || section === 'sources') && (
         <form
           className="sd-filterbar"
           role="search"
@@ -201,7 +213,7 @@ export function RunWorkspace({
             value={search}
             onChange={(event) => setSearch(event.target.value)}
           />
-          {section !== 'sources' && (
+          {section === 'overview' && (
             <Select
               size="sm"
               label="Negozio"
@@ -218,7 +230,19 @@ export function RunWorkspace({
           )}
         </form>
       )}
-      {(section === 'cases' || section === 'overview') &&
+      {section === 'cases' && (
+        <CaseQueue
+          cases={currentCases}
+          stores={run?.spec.stores ?? []}
+          asOf={run?.spec.as_of ?? ''}
+          selection={caseSelection}
+          onSelect={onCaseSelect}
+          onReturn={onCaseReturn}
+          filters={caseQueueFilters}
+          onFiltersChange={onCaseQueueFiltersChange}
+        />
+      )}
+      {section === 'overview' &&
         (cases.length ? (
           <div className="sd-run-list">
             {cases.map((item) => (

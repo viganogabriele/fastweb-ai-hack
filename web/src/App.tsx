@@ -13,6 +13,9 @@ import {
 import { messages } from './i18n'
 import { ModulesPage } from './sections/ModulesPage'
 import { RunWorkspace } from './sections/RunWorkspace'
+import type { Case } from './api/client'
+import { DEFAULT_CASE_QUEUE_FILTERS } from './sections/caseUtils'
+import type { CaseQueueFilters, CaseSelection } from './sections/caseUtils'
 import { useRuns } from './api/useRuns'
 import { AppShell, PageHeader, SidebarNav } from './shell'
 import type { NavGroup } from './shell'
@@ -63,13 +66,26 @@ const ROUTES = {
 
 type SectionId = keyof typeof ROUTES
 const idFromHash = (): SectionId => {
-  const slug = window.location.hash.replace(/^#\/?/, '')
+  const slug = window.location.hash.replace(/^#\/?/, '').split('/')[0]
   return (
     (Object.entries(ROUTES).find(([, route]) => route === slug)?.[0] as
       SectionId | undefined) ?? 'overview'
   )
 }
 const pathFor = (id: string) => ROUTES[id as SectionId] ?? ROUTES.overview
+const caseSelectionFromHash = (): CaseSelection | null => {
+  const [section, id, version] = window.location.hash
+    .replace(/^#\/?/, '')
+    .split('/')
+  if (section !== ROUTES.cases || !id || !version) return null
+  try {
+    return { id: decodeURIComponent(id), version: decodeURIComponent(version) }
+  } catch {
+    return null
+  }
+}
+const casePath = ({ id, version }: CaseSelection) =>
+  `#/${pathFor('cases')}/${encodeURIComponent(id)}/${encodeURIComponent(version)}`
 const titleOf = (id: string) =>
   NAV.flatMap((group) => group.items).find((item) => item.id === id)?.label ??
   messages.shell.nav.overview
@@ -107,13 +123,17 @@ function SectionView({
 export default function App() {
   const [currentId, setCurrentId] = useState<SectionId>(idFromHash)
   const [focusRouteId, setFocusRouteId] = useState<SectionId | null>(null)
+  const [caseSelection, setCaseSelection] = useState<CaseSelection | null>(caseSelectionFromHash)
+  const [caseQueueFilters, setCaseQueueFilters] = useState<CaseQueueFilters>(DEFAULT_CASE_QUEUE_FILTERS)
   const runs = useRuns()
 
   useEffect(() => {
     const syncRoute = () => {
       const nextId = idFromHash()
+      const nextCaseSelection = caseSelectionFromHash()
+      if (nextId !== currentId) setFocusRouteId(nextId)
       setCurrentId(nextId)
-      setFocusRouteId(nextId)
+      setCaseSelection(nextCaseSelection)
     }
     if (!window.location.hash)
       window.history.replaceState(null, '', `#/${pathFor(currentId)}`)
@@ -128,11 +148,27 @@ export default function App() {
   const navigate = (id: string) => {
     const nextId = id as SectionId
     if (!(nextId in ROUTES)) return
+    if (nextId === currentId && nextId === 'cases' && caseSelection) {
+      window.history.pushState(null, '', `#/${pathFor('cases')}`)
+      setCaseSelection(null)
+      return
+    }
     if (nextId !== currentId) {
       window.history.pushState(null, '', `#/${pathFor(nextId)}`)
       setFocusRouteId(nextId)
+      setCaseSelection(null)
     }
     setCurrentId(nextId)
+  }
+
+  const openCase = (item: Case) => {
+    const selection = { id: item.id, version: item.version }
+    window.history.pushState(null, '', casePath(selection))
+    setCaseSelection(selection)
+  }
+  const returnToQueue = () => {
+    window.history.replaceState(null, '', `#/${pathFor('cases')}`)
+    setCaseSelection(null)
   }
 
   const sectionKey = currentId === 'overview' ? null : currentId
@@ -205,6 +241,11 @@ export default function App() {
               key={`${currentId}-${runs.selectedId}`}
               section={currentId}
               runs={runs}
+              caseSelection={caseSelection}
+              onCaseSelect={openCase}
+              onCaseReturn={returnToQueue}
+              caseQueueFilters={caseQueueFilters}
+              onCaseQueueFiltersChange={setCaseQueueFilters}
             />
           ) : section ? (
             <PendingSection section={section} />
