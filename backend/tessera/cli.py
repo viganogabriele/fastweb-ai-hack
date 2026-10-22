@@ -26,7 +26,10 @@ def main(argv: list[str] | None = None) -> None:
     load.add_argument("--file", action="append", help="Authorized path relative to data/fixtures")
     reset = commands.add_parser("reset", help="Reset only projections of an existing run")
     reset.add_argument("--run", required=True)
-    for command in (load, reset):
+    run = commands.add_parser("run", help="Execute an immutable module snapshot")
+    run.add_argument("--run-spec", type=Path, required=True)
+    run.add_argument("--modules", nargs="+", help="Selected module IDs, including prerequisites")
+    for command in (load, reset, run):
         command.add_argument("--db-url", help="SQLite URL; default comes from DATA_DIR")
         command.add_argument("--fixture-mode", action="store_true", default=None)
     args = parser.parse_args(argv)
@@ -54,6 +57,27 @@ def main(argv: list[str] | None = None) -> None:
                     repo, files, root=Path(__file__).resolve().parents[2] / "data/fixtures"
                 )
             print(json.dumps({"run_id": spec.run_id, "namespace": "fixture", **result}))
+        elif args.command == "run":
+            from tessera.core.orchestrator import run as execute
+
+            spec = RunSpec.model_validate_json(args.run_spec.read_text(encoding="utf-8"))
+            if (spec.mode == "fixture") != fixture_mode:
+                parser.error("fixture run requires the explicit fixture namespace")
+            if not any(
+                m.manifest.enabled and m.manifest.mode != "unavailable" for m in spec.modules
+            ):
+                parser.error("run requires at least one enabled module")
+            statuses = execute(spec, engine=engine, modules=args.modules)
+            print(
+                json.dumps(
+                    {
+                        "run_id": spec.run_id,
+                        "modules": [module.model_dump(mode="json") for module in statuses],
+                    }
+                )
+            )
+            if any(module.status in {"failed", "blocked"} for module in statuses):
+                raise SystemExit(1)
         else:
             namespace = "fixture" if fixture_mode else "product"
             with Session(engine) as session:

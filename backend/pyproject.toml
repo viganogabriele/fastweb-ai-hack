@@ -6,6 +6,7 @@ requires-python = ">=3.12,<3.13"
 dependencies = [
     "fastapi>=0.161.0",
     "httpx>=0.28.1",
+    "jsonschema>=4.26.0",
     "openai>=3.37.0",
     "openpyxl>=3.1.5",
     "pandas>=3.1.0",
@@ -41,7 +42,6 @@ addopts = "--import-mode=importlib"
 
 [dependency-groups]
 dev = [
-    "jsonschema>=4.26.0",
     "pytest>=9.1.1",
     "ruff>=0.17.2",
 ]

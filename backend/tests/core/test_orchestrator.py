@@ -89,6 +89,43 @@ def test_selection_adds_required_modules_and_publishes_only_after_last(engine):
         run(request, engine=engine, registry=registry)
 
 
+def test_module_context_mutations_do_not_change_frozen_snapshot(engine):
+    module = manifest("source")
+    request = spec(module)
+
+    def execute(ctx):
+        ctx.spec.model_versions["mutated"] = "bad"
+        ctx.params["mutated"] = "bad"
+        ctx.manifest.params_schema["mutated"] = "bad"
+        return result(ctx)
+
+    run(request, engine=engine, registry=Registry((RegisteredModule(module, execute),)))
+    with repo_session(engine, request) as repo:
+        assert repo.spec == request
+    assert request.model_versions == {}
+    assert request.modules[0].params == {}
+    assert request.modules[0].manifest.params_schema == {}
+
+
+def test_cli_run_executes_selected_snapshot(engine, tmp_path, monkeypatch, capsys):
+    import json
+
+    from tessera.cli import main
+
+    module = manifest("source")
+    request = spec(module)
+    path = tmp_path / "run.json"
+    path.write_text(request.model_dump_json())
+    registry = Registry((RegisteredModule(module, result),))
+    monkeypatch.setattr(Registry, "discover", lambda: registry)
+    main(["run", "--run-spec", str(path), "--db-url", str(engine.url), "--modules", "source"])
+    receipt = json.loads(capsys.readouterr().out)
+    assert receipt["run_id"] == request.run_id
+    assert receipt["modules"][0]["status"] == "succeeded"
+    with repo_session(engine, request) as repo:
+        assert repo.run_state()["published"]
+
+
 def test_failed_module_rolls_back_its_artifacts_and_blocks_dependents(engine):
     source, consumer = manifest("source"), manifest("consumer", requires=("source",))
     called = []
