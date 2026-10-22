@@ -1,7 +1,10 @@
 """`tessera` command line. Subcommands (run, export, smoke) are added by their tasks."""
 
 import argparse
+import json
+from datetime import datetime
 from pathlib import Path
+from uuid import uuid4
 
 from tessera import __version__
 from tessera.core.config import Settings, get_settings
@@ -35,6 +38,45 @@ def _reset(args: argparse.Namespace) -> None:
     print(f"deleted run {args.run!r} ({n} artifacts) from {settings.db_path}")
 
 
+def _run(args: argparse.Namespace) -> None:
+    from tessera.core.contracts import RunSpec
+    from tessera.core.orchestrator import run
+    from tessera.core.run_repo import repo_session
+
+    settings = get_settings()
+    if args.fixture_mode:
+        settings = settings.model_copy(update={"fixture_mode": True})
+    spec = RunSpec.model_validate_json(args.run_spec.read_text(encoding="utf-8"))
+    if args.as_of is not None:
+        spec = RunSpec.model_validate(
+            {**spec.model_dump(), "as_of": args.as_of, "run_id": str(uuid4())}
+        )
+    if (spec.mode == "fixture") != settings.fixture_mode:
+        raise ValueError("Fixture runs require an explicitly selected fixture namespace")
+    if args.modules is None and not any(
+        m.manifest.enabled and m.manifest.mode != "unavailable" for m in spec.modules
+    ):
+        raise ValueError("Run requires at least one enabled module")
+    engine = _engine(settings)
+    try:
+        statuses = run(spec, engine=engine, modules=args.modules, settings=settings)
+        with repo_session(engine, spec, fixture_mode=settings.fixture_mode) as repo:
+            status = repo.run_state()["status"]
+        print(
+            json.dumps(
+                {
+                    "run_id": spec.run_id,
+                    "status": status,
+                    "modules": [m.model_dump(mode="json") for m in statuses],
+                }
+            )
+        )
+        if status not in {"succeeded", "degraded"}:
+            raise SystemExit(1)
+    finally:
+        engine.dispose()
+
+
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(prog="tessera")
     parser.add_argument("--version", action="version", version=__version__)
@@ -49,6 +91,15 @@ def main(argv: list[str] | None = None) -> None:
     reset = sub.add_parser("reset", help="delete one run's projections (ERP rows stay)")
     reset.add_argument("--run", required=True, help="run id")
     reset.set_defaults(func=_reset)
+
+    run = sub.add_parser("run", help="execute an immutable module snapshot")
+    run.add_argument("--run-spec", type=Path, required=True)
+    run.add_argument(
+        "--as-of", type=datetime.fromisoformat, help="override the clock and assign a new run ID"
+    )
+    run.add_argument("--modules", nargs="+", help="selected module IDs plus prerequisites")
+    run.add_argument("--fixture-mode", action="store_true")
+    run.set_defaults(func=_run)
 
     args = parser.parse_args(argv)
     if args.command is None:
