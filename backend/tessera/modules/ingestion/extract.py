@@ -257,19 +257,31 @@ _CURRENCY_MARKS = {
 }
 
 
+def _token_values(token: str) -> set[float]:
+    """Readings of one digit run: thousands groups need exactly three digits, a decimal
+    separator may appear once. "58,0" is 58.0, never 580; "1.234" is 1234 or 1.234."""
+    groups = re.split(r"[.,'’]", token)
+    if len(groups) == 1:
+        return {float(token)}
+    values: set[float] = set()
+    if (
+        1 <= len(groups[0]) <= 3
+        and not groups[0].startswith("0")
+        and all(len(g) == 3 for g in groups[1:])
+    ):
+        values.add(float("".join(groups)))
+    last = max(token.rfind("."), token.rfind(","))
+    if last != -1 and token.count(token[last]) == 1 and token[last + 1 :].isdigit():
+        values.add(float(f"{re.sub(r"[.,'’]", '', token[:last]) or 0}.{token[last + 1 :]}"))
+    return values
+
+
 def readings(raw: str) -> set[float]:
     """Every value the email's words can mean; ambiguous separators give both readings."""
     values: set[float] = set()
     for match in _NUMBER.finditer(raw):
-        token = match.group(1).rstrip(".,'’")
-        digits = re.sub(r"[.,'’]", "", token)
-        candidates = {float(digits)}
-        last = max(token.rfind("."), token.rfind(","))
-        if last != -1:
-            whole = re.sub(r"[.,'’]", "", token[:last])
-            candidates.add(float(f"{whole or 0}.{token[last + 1 :]}"))
         multiplier = _MULTIPLIERS.get((match.group(2) or "").casefold(), 1)
-        values |= {c * multiplier for c in candidates}
+        values |= {c * multiplier for c in _token_values(match.group(1).rstrip(".,'’"))}
     if not values:
         values = {float(_WORDS[w]) for w in re.findall(r"\w+", raw.casefold()) if w in _WORDS}
     return values
@@ -284,6 +296,13 @@ def _reads_as(value: float | None, raw: str, values: set[float]) -> bool:
     return any(abs(abs(value) - v) <= 1e-9 * max(1.0, v) for v in values)
 
 
+def _stated_in(raw: str, text: str) -> bool:
+    """`raw` occurs in `text` as its own words: "2" is not found in "12" or "2,5"."""
+    before = r"(?<!\d)(?<!\d[.,'’])" if raw[:1].isdigit() else ""
+    after = r"(?!\d)(?![.,'’]\d)" if raw[-1:].isdigit() else ""
+    return re.search(f"{before}{re.escape(raw)}{after}", text) is not None
+
+
 def quantity(
     candidate: Candidate,
     segment: Segment,
@@ -293,7 +312,7 @@ def quantity(
     """The model's quantity, kept only as far as the evidence segment's own words support it."""
     raw = (candidate.quantity_raw or "").strip() or None
     text = _collapse(segment.text)[0].casefold()
-    if raw is not None and _collapse(raw)[0].casefold() not in text:
+    if raw is not None and not _stated_in(_collapse(raw)[0].casefold(), text):
         raw = None
     kind = candidate.quantity_kind
     if raw is not None and any(_mentions(raw.casefold(), word) for word in vague):

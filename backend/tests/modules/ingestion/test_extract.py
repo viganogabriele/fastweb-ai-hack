@@ -428,3 +428,26 @@ def test_documents_that_cannot_be_read_are_logged(tmp_path):
     status, _, _, llm = execute(tmp_path, records, {})
     assert llm.calls == []
     assert status.result.abstentions == ("doc-synthetic: not read (unknown store)",)
+
+
+@pytest.mark.parametrize(
+    ("raw", "wrong"),
+    [("58,0k", 580_000), ("1.5", 15), ("2,5", 25), ("12,50", 1250), ("1.234.567", 1234.567)],
+)
+def test_readings_do_not_invent_thousands_or_decimals(raw, wrong):
+    assert not any(abs(v - wrong) < 1e-6 for v in extract.readings(raw))
+
+
+@pytest.mark.parametrize(
+    ("raw", "text", "found"),
+    [
+        ("2", "12 pezzi", False),
+        ("2", "2,5 pezzi", False),
+        ("5", "venduti 2,5", False),
+        ("2", "venduti 2 pezzi", True),
+        ("2", "venduti 2.", True),
+        ("3 pezzi", "tib finito, 3 pezzi venduti", True),
+    ],
+)
+def test_quantity_words_must_stand_alone_in_the_segment(raw, text, found):
+    assert extract._stated_in(raw, text) is found
