@@ -12,6 +12,7 @@ import {
   StatusBadge
 } from '../ui'
 import { useRuns } from '../api/useRuns'
+import { CaseQueue } from './CaseQueue'
 import './sections.css'
 import '../widgets/widgets.css'
 
@@ -188,9 +189,7 @@ export function RunWorkspace({
           <h2>Segnalazioni da valutare</h2>
         </>
       ) : null}
-      {(section === 'cases' ||
-        section === 'overview' ||
-        section === 'sources') && (
+      {(section === 'overview' || section === 'sources') && (
         <form
           className="sd-filterbar"
           role="search"
@@ -209,7 +208,7 @@ export function RunWorkspace({
             value={search}
             onChange={(event) => setSearch(event.target.value)}
           />
-          {section !== 'sources' && (
+          {section === 'overview' && (
             <Select
               size="sm"
               label="Negozio"
@@ -226,7 +225,14 @@ export function RunWorkspace({
           )}
         </form>
       )}
-      {(section === 'cases' || section === 'overview') &&
+      {section === 'cases' && (
+        <CaseQueue
+          cases={data.cases}
+          stores={run?.spec.stores ?? []}
+          asOf={run?.spec.as_of ?? ''}
+        />
+      )}
+      {section === 'overview' &&
         (cases.length ? (
           <div className="sd-run-list">
             {cases.map((item) => (
