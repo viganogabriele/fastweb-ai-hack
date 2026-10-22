@@ -6,6 +6,7 @@ One line per task. Edit only the lines of your own task.
 ## Done
 
 - PLT-01 (C) Scaffold: `backend/` FastAPI, `web/` React+Vite, `make setup/dev/check`, CI, `.env.example`
+- ACT-01 pure (B, Bianca) `modules/actions/simulation.py`: recursive daily stock simulation per scenario, RFC §7.3 test 5
 
 ## In progress
 
@@ -17,7 +18,6 @@ One line per task. Edit only the lines of your own task.
 - PLT-07 (A) Fastweb smoke test: chat, tool call, embeddings, ASR. Needs `FASTWEB_API_KEY` in `.env`
 - DATA-02 (A) `config/eval_split.yaml`, `domain.yaml`, `aliases.yaml`
 - ING-02 pure (A) `.eml` → canonical text + segments with offsets
-- ACT-01 pure (B) Recursive daily stock simulation + RFC §7.3 test 5
 - FC-01 pure (B) Weekly → daily forecast disaggregation
 - INT-01 pure (B) Product mention → ranked candidates (alias + rapidfuzz)
 - WEB-01 (D) App shell on hand-written JSON
