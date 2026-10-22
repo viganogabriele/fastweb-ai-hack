@@ -80,7 +80,7 @@ export function RunWorkspace({
           ).then((modules) => ({ cases: [], documents: [], caseRefs: {}, modules }))
         : published && runId
           ? Promise.all([
-              section === 'sources' || section === 'overview'
+              section === 'sources' || section === 'cases' || section === 'overview'
                 ? readApi<Case[]>(`${base}/cases`, controller.signal)
                 : Promise.resolve([] as Case[]),
               section === 'cases'
