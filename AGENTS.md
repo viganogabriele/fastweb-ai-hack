@@ -15,6 +15,7 @@ The repo has ~3,150 tracked files (~200 MB), almost all data. Don't list, grep o
 |---|---|---|
 | What we build, modules, data contracts, math | `docs/RFC-001-piattaforma.md` (Italian; read the § you need) | `docs/project-design.md` §3–§8, `docs/drafts/fastweb.md` (superseded) |
 | Who owns which paths, task order, dependencies | `docs/PLAN.md` | — |
+| What is done, in progress, ready to pick up | `STATUS.md` | — |
 | Brief, scoring, pitfalls | `docs/findings.md` | `docs/sources/**` (raw verbatim sources; `findings.md` already digests them) |
 | Dataset layout, formats, traps, time rules, scenarios | `generated/README.md` (§2 map, §3 parsing, §4 no look-ahead, §5 dev/hold-out) | — |
 | Store list, ids, tz, currency, language | `generated/sources/erp/master_data/stores.csv` | — |
@@ -36,6 +37,18 @@ Requires `uv` and Node >= 22. Run from the repo root.
 
 Secrets: copy `.env.example` to `.env` (gitignored). Never print, log or commit `FASTWEB_API_KEY`.
 Work on a branch `<TASK-ID>-<slug>` and stay inside your lane's paths (`docs/PLAN.md` §1–§2).
+
+## Keep `STATUS.md` updated
+
+`STATUS.md` (repo root) is the live task board: Done, In progress, Ready, Blocked. Read it before
+picking a task. Update it **in the same PR** that changes a task's state:
+
+- Starting a task: move its line to "In progress", add lane, person and branch.
+- Merging a task: move it to "Done" (one line: what now exists). Then move every task it unblocked
+  from "Blocked" to "Ready" (check hard dependencies in `docs/PLAN.md` §4).
+- Found a new blocker or dependency: add it under "Blocked" as `ID ← what it waits for`.
+- Edit only your task's lines and the ones it unblocks; one line per task, no prose. On a merge
+  conflict keep both sides' lines.
 
 ## Hard rules (answer leakage)
 
