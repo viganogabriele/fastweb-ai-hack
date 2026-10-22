@@ -33,7 +33,7 @@ Usable capacity is 5 × 16 = 80 person-hours (RFC §6.1 assumed 4 × 16 = 64). T
 
 | Lane | MVP package (budget includes local checks) |
 |---|---|
-| A | Smoke test 1 h; email parser 2 h; extraction, evidence, quantities 3 h; report and external feed 2 h; voice recordings and ASR/fallback 1.5 h; reading labels and eval 2.5 h = **12 h** |
+| A | Smoke test 1 h; email parser 2 h; extraction, evidence, quantities 3 h; report and external feed 2 h; voice recordings with manual transcript 0.5 h (ASR deferred, §4 "Deferred: ASR"); reading labels and eval 2.5 h = **11 h** |
 | B | ERP loader 1.5 h; linking, dedup, cases 4 h; context 0.5 h; baseline and scenarios 2 h; report per owner 1 h; temporal regressions 1 h = **10 h** |
 | C | Contracts, repo, runs, API 4 h; LLM client and cache 1.5 h; isolation and offline replay 2 h; contract reviews and integration support 2 h = **9.5 h** |
 | D | Queue, detail, sources views 4 h; modules list and brief view 1 h; eval harness and frozen comparison 3 h; bundle, pitch, rehearsal, video 3.5 h = **11.5 h** |
@@ -83,9 +83,9 @@ Goal: contracts frozen, fixtures for every seam, Fastweb access verified, every 
 |---|---|---|---|---|
 | PLT-01 | C | – | – | ✅ Scaffold, `make setup/dev/check`, CI, `.env.example`, dataset rules in `AGENTS.md` |
 | PLT-02 | C | PLT-01 | RFC §4.5 | `core/contracts/` MVP subset as Pydantic v2; JSON Schema export; tests for null/unknown, units, quote offsets (`doc.text[start:end] == quote`). **Review by A, B, D, E within 30 min, then freeze = G0** |
-| PLT-07 | A | PLT-01, API key | – | `scripts/smoke_fastweb.py`: chat, a tool-call round trip (does the model actually return `tool_calls`?), embeddings, ASR on a test WAV. Writes `docs/smoke-fastweb.md` with no secrets: what works, latency, chosen chat model (closes OQ-2/OQ-3) |
+| PLT-07 | A | PLT-01, API key | – | `scripts/smoke_fastweb.py`: chat, a tool-call round trip (does the model actually return `tool_calls`?), embeddings. **No ASR** (deferred to ASR-01). Writes `docs/smoke-fastweb.md` with no secrets: what works, latency, chosen chat model (closes OQ-2; OQ-3 stays open) |
 | DATA-02 | A | PLT-01 | Dataset README | `config/eval_split.yaml` (dev/hold-out from RFC §5.1), `config/domain.yaml` (RFC §3.3), `config/aliases.yaml` written from dev sources and the catalog only, with provenance |
-| DATA-03 | A | – | – | 2–3 recordings of 20–60 s in IT/EN plus sidecar JSON in `data/fixtures/voice/` (RFC §5.2). Paraphrase and independent note are labeled separately |
+| DATA-03 | A | – | – | 2–3 recordings of 20–60 s in IT/EN plus sidecar JSON and a **manual transcript** in `data/fixtures/voice/` (RFC §5.2). Paraphrase and independent note are labeled separately |
 | ING-02 (pure) | A | PLT-01 | Dev `.eml` files | `.eml` → canonical text + segments with code-point offsets, quotes and attachments flagged; 2 dev languages; tests on 3 real dev emails |
 | ING-01 (pure) | B | PLT-01 | ERP CSVs | Loaders for catalog, assortment, daily sales, stock, forecast vintages, each row with `available_at` and `availability_basis` per RFC §4.3 |
 | INT-01 (pure) | B | PLT-01 | Catalog CSV, `config/aliases.yaml` once merged | Mention → ranked candidates (alias + `rapidfuzz`), abstention threshold, size consistent with family |
@@ -108,7 +108,7 @@ Goal: **one real dev email → observation with verified evidence → link or ab
 | ID | Lane | Needs merged | Builds against | Delivers / done when |
 |---|---|---|---|---|
 | PLT-03 | C | PLT-02 | – | `core/db.py`, `core/repo.py`: SQLite, artifact store (§2 rule 4), `RunSpec`, `as_of` filter inside the repo, `tessera fixtures load`, `tessera reset --run`; RFC §7.3 test 1 (T1 → T2 → T1) for the repo |
-| PLT-05 | C | PLT-02, PLT-07 | PLT-07 findings | `core/llm.py` + `core/cache.py`: `chat/extract/embed/transcribe`, single-tool structured output with one retry, `LLM_MODE=live/record/replay`, replay miss = explicit error, budget and backoff (RFC §4.7.2) |
+| PLT-05 | C | PLT-02, PLT-07 | PLT-07 findings | `core/llm.py` + `core/cache.py`: `chat/extract/embed` (`transcribe` comes with ASR-01), single-tool structured output with one retry, `LLM_MODE=live/record/replay`, replay miss = explicit error, budget and backoff (RFC §4.7.2) |
 | PLT-04 | C | PLT-03 | – | `core/registry.py` (auto-discovery), `core/orchestrator.py`: declared dependencies, one worker, statuses `succeeded/degraded/blocked/failed`, atomic publication; `tessera run --as-of ...` |
 | PLT-06 | C | PLT-03 | Fixtures | API thin: `/api/runs`, `/api/runs/{id}/documents`, `/api/runs/{id}/cases` (RFC §4.6); `make types` generates `web/src/api/schema.d.ts` |
 | ING-02 | A | PLT-04 | ING-02 pure | `src.email` module writes `SourceDocument`/`Segment` for the selected dev mailboxes |
@@ -133,7 +133,7 @@ Goal: the full Core path on dev stores (RFC §6.2 G2): dedup/correction, a real 
 | ING-05 | A | PLT-04 | – | `src.docs`: one CSV/XLSX report from `sources/reports/` with locators and availability |
 | ING-06 | A | ING-05 | – | `ing.metrics`: one approved, versioned mapping → `MetricFact` with definition, period, currency/VAT, comparability |
 | ING-08 | A | PLT-04 | – | `src.external`: one external feed relevant to the slice → `ContextEvent`, with no future weather backdated |
-| ING-03 | A | PLT-05, DATA-03 | DATA-03 | `src.voice`: ASR (recorded) or declared fixture transcript; intervals only if real |
+| ING-03 | A | PLT-05, DATA-03 | DATA-03 | `src.voice`: declared fixture transcript (manual, `mode: fixture`), no audio intervals. Real ASR deferred to ASR-01 |
 | INT-04 | B | INT-03 | – | Conflicts with structured facts and dates; no closing a case because of silence or old stock; `decision_due_at` when estimable |
 | INT-06 | B | ING-08 | ContextEvent fixture | `int.context`: geo/time association, corroborating vs context-only |
 | FC-01 | B | ING-01 | FC-01 pure | `fc.baseline` module: valid vintage at `as_of`, 7-day horizon |
@@ -178,8 +178,19 @@ No new features. Fix bugs, write the RFC §7.3 tests, then freeze prompts, confi
 
 ### Reserve pool (after G2, only if the reserve allows; RFC §6.6 order)
 
-S: INT-05 embeddings (B), FC-02 residuals (B), INS-01 product insights (B), AG-02 analyst (E), OUT-02 + WEB-09 clarification loop (E + D), WEB-06 pipeline graph (D), WEB-08 product view (D), EVL-03 forecast error (D).
+S: INT-05 embeddings (B), FC-02 residuals (B), INS-01 product insights (B), AG-02 analyst (E), OUT-02 + WEB-09 clarification loop (E + D), WEB-06 pipeline graph (D), WEB-08 product view (D), EVL-03 forecast error (D), ASR-01 real transcription (A).
 C: ING-07 chat exports (A), AG-04 MCP (C), DEMO-04 live voice (A).
+
+### Deferred: ASR (decided 2026-10-22)
+
+Real speech-to-text is **out of the MVP path** and moved to the reserve pool as **ASR-01**. The voice note stays in the demo with a manual transcript declared as `fixture` (RFC §2.4, §5.2), so OBJ1 ("a voice note with verified ASR **or declared fallback**") is still met.
+
+- **Why:** the Fastweb key list has no Whisper key (the guide documents `openai/whisper-large-v3-turbo` on `/v1/audio/transcriptions`, but every model needs its own key). ASR is not needed for the text path (RFC §6.2).
+- **What changes:** PLT-07 tests chat, tool calls and embeddings only; PLT-05 ships without `transcribe`; DATA-03 adds a manual transcript; ING-03 reads that transcript with no audio intervals; lane A gets 1 h back.
+- **How to resume (ASR-01, lane A, after G2):** pick one, then add `transcribe` to `core/llm.py` and switch `src.voice` to `mode: recorded`.
+  1. Fastweb endpoint, if one of the hackathon keys is accepted for Whisper (test first).
+  2. OpenAI `whisper-1` on `https://api.openai.com/v1` with a team member's own key (about $0.006/min, cents for 2–3 notes; `verbose_json` gives segment timestamps). Needs separate `ASR_BASE_URL` / `ASR_API_KEY` in `.env`, never committed. Call once with `LLM_MODE=record`, then everyone replays from cache without the key. Audio leaves the EU: declare it in `docs/smoke-fastweb.md` and in the pitch (RFC §4.12).
+  3. Local Whisper (`faster-whisper`), free and offline, slower on CPU.
 
 ## 5. Dependency graph
 
@@ -278,7 +289,7 @@ Each of these needs nothing but `main` as it is today. Pick one per person and o
 
 | Lane | First PR | Second PR (still unblocked) |
 |---|---|---|
-| A | **PLT-07** Fastweb smoke test: needs the API key in `.env`, and its result decides the extraction design | **DATA-02** split, domain, aliases → **ING-02 (pure)** email parser; record **DATA-03** audio in between |
+| A | **PLT-07** Fastweb smoke test: needs the API key in `.env`, and its result decides the extraction design | **DATA-02** split, domain, aliases → **ING-02 (pure)** email parser; record **DATA-03** audio + manual transcript in between |
 | B | **ING-01 (pure)** ERP loaders with `available_at` | **INT-01 (pure)** candidate generation → **FC-01 (pure)** disaggregation |
 | C | **PLT-02** contracts. Everyone reviews it within 30 min: it gates G0 | **PLT-03** repo and artifact store |
 | D | **WEB-01** app shell on hand-written JSON | **EVL-01** harness skeleton |

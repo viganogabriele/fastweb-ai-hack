@@ -16,9 +16,9 @@ One line per task. Edit only the lines of your own task.
 
 ## Ready (all hard dependencies merged)
 
-- PLT-07 (A) Fastweb smoke test: chat, tool call, embeddings, ASR. Needs `FASTWEB_API_KEY` in `.env`
+- PLT-07 (A) Fastweb smoke test: chat, tool call, embeddings (no ASR, see ASR-01). Needs the Fastweb keys in `.env`
 - ING-02 pure (A) `.eml` → canonical text + segments with offsets
-- DATA-03 (A) 2–3 voice recordings + sidecar JSON
+- DATA-03 (A) 2–3 voice recordings + sidecar JSON + manual transcript
 - ING-01 pure (B) ERP loaders with `available_at`
 - ACT-04 pure (E) Systems client (stock/ATP, lanes/ETA) against `make mocks`
 - AG-01 pure (E) Agent loop with budget, trace, fallback; fake model
@@ -35,3 +35,4 @@ One line per task. Edit only the lines of your own task.
 - PLT-05 (C) ← PLT-07
 - PLT-04, PLT-06 (C), ING-01 module (B), ACT-04 module (E) ← PLT-03
 - Rest of Phase 1–2 ← PLT-04 / PLT-05 (see `docs/PLAN.md` §4)
+- ASR-01 (A) real transcription, deferred to the reserve pool ← G2 (see `docs/PLAN.md` §4 "Deferred: ASR")
