@@ -6,11 +6,14 @@ the single-tool structured output of ``core.llm``; it never returns ids or offse
 - locates the quote in the canonical document text, exactly or with runs of whitespace collapsed
   (offsets are mapped back to the canonical text, RFC §4.5); it must occur once, inside one
   segment, or the candidate is rejected and logged as an abstention;
-- keeps a number only when the email's own words for it (``quantity_raw``) occur in the
-  document and are not a vague quantifier from ``config/domain.yaml``: otherwise the quantity
-  becomes ``vague`` or ``unknown`` without an imputed value;
-- turns store-local period dates into instants, and drops a period that starts after the mail
-  was sent, except for kinds that announce the future (events, operations).
+- keeps a number only when the email's own words for it (``quantity_raw``) lie in the
+  evidence segment, are not a vague quantifier from ``config/domain.yaml`` and actually read as
+  that number (decimal comma or point, thousands separators, k/mila/万 suffixes, a few number
+  words); money keeps its currency only when the segment shows it or it is the store's own.
+  Otherwise the quantity becomes ``vague`` or ``unknown`` without an imputed value. Full
+  multilingual quantity parsing is ING-09; until then unparsed numbers are dropped, not trusted;
+- turns store-local period dates into instants, drops a period that starts after the mail was
+  sent and treats a future end as still ongoing, except for kinds that announce the future.
 
 A document whose extraction fails twice (``ExtractionFailed``) is an abstention, never a guess.
 Provider errors and replay misses are module errors (status ``degraded``); an exhausted budget
@@ -42,7 +45,7 @@ from tessera.core.contracts import (
     SourceDocument,
 )
 from tessera.core.llm import BudgetExceeded, ExtractionFailed, LLMCallFailed
-from tessera.modules.sources.emails import load_stores
+from tessera.modules.sources.emails import Store, load_stores
 
 PROMPT_PATH = Path(__file__).resolve().parents[3] / "prompts" / "extract_observations.v1.md"
 EXTRACTOR_VERSION = "llm-extract-v1"
@@ -147,16 +150,21 @@ def _collapse(text: str) -> tuple[str, list[int]]:
     return "".join(out), index
 
 
+def _occurrences(needle: str, text: str) -> list[int]:
+    """Every start index, overlapping ones included ("aa" occurs twice in "aaa")."""
+    return [m.start() for m in re.finditer(f"(?={re.escape(needle)})", text)] if needle else []
+
+
 def locate(document: SourceDocument, segments: list[Segment], candidate: Candidate) -> Evidence:
     """Evidence for the quote: one occurrence, inside one segment, offsets in the canonical text."""
     quote = candidate.quote.strip()
-    spans = [(m.start(), m.end()) for m in re.finditer(re.escape(quote), document.text)]
+    spans = [(start, start + len(quote)) for start in _occurrences(quote, document.text)]
     if not spans:
         collapsed, index = _collapse(document.text)
         needle, _ = _collapse(quote)
         spans = [
-            (index[m.start()], index[m.end() - 1] + 1)
-            for m in re.finditer(re.escape(needle), collapsed)
+            (index[start], index[start + len(needle) - 1] + 1)
+            for start in _occurrences(needle, collapsed)
         ]
     if not spans:
         raise Rejected("quote not found in the document")
@@ -192,19 +200,118 @@ def _mentions(text: str, word: str) -> bool:
     return word in text
 
 
-def quantity(candidate: Candidate, document: SourceDocument, vague: tuple[str, ...]) -> Quantity:
-    """The model's quantity, kept only as far as the email's own words support it."""
+_MULTIPLIERS = {
+    "k": 1e3,
+    "mila": 1e3,
+    "mln": 1e6,
+    "千": 1e3,
+    "万": 1e4,
+    "萬": 1e4,
+    "천": 1e3,
+    "만": 1e4,
+    "억": 1e8,
+}
+_NUMBER = re.compile(r"(\d[\d.,'’]*)\s*(k|mila|mln|千|万|萬|천|만|억)?(?![a-z])", re.IGNORECASE)
+_WORDS = {
+    "zero": 0,
+    "nessun": 0,
+    "nessuno": 0,
+    "none": 0,
+    "no": 0,
+    "aucun": 0,
+    "ningún": 0,
+    "un": 1,
+    "uno": 1,
+    "una": 1,
+    "one": 1,
+    "a": 1,
+    "an": 1,
+    "une": 1,
+    "ein": 1,
+    "eine": 1,
+    "due": 2,
+    "two": 2,
+    "deux": 2,
+    "dos": 2,
+    "zwei": 2,
+    "tre": 3,
+    "three": 3,
+    "trois": 3,
+    "tres": 3,
+    "drei": 3,
+}
+_CURRENCY_MARKS = {
+    "EUR": ("€", "eur", "euro"),
+    "USD": ("$", "usd", "dollar"),
+    "GBP": ("£", "gbp"),
+    "JPY": ("¥", "円", "jpy", "yen"),
+    "CNY": ("¥", "元", "rmb", "cny"),
+    "KRW": ("₩", "원", "krw"),
+    "CHF": ("chf",),
+    "HKD": ("hk$", "hkd"),
+    "AUD": ("a$", "aud"),
+    "SGD": ("s$", "sgd"),
+    "AED": ("aed",),
+    "DKK": ("dkk", "kr"),
+    "TWD": ("nt$", "twd"),
+}
+
+
+def readings(raw: str) -> set[float]:
+    """Every value the email's words can mean; ambiguous separators give both readings."""
+    values: set[float] = set()
+    for match in _NUMBER.finditer(raw):
+        token = match.group(1).rstrip(".,'’")
+        digits = re.sub(r"[.,'’]", "", token)
+        candidates = {float(digits)}
+        last = max(token.rfind("."), token.rfind(","))
+        if last != -1:
+            whole = re.sub(r"[.,'’]", "", token[:last])
+            candidates.add(float(f"{whole or 0}.{token[last + 1 :]}"))
+        multiplier = _MULTIPLIERS.get((match.group(2) or "").casefold(), 1)
+        values |= {c * multiplier for c in candidates}
+    if not values:
+        values = {float(_WORDS[w]) for w in re.findall(r"\w+", raw.casefold()) if w in _WORDS}
+    return values
+
+
+def _reads_as(value: float | None, raw: str, values: set[float]) -> bool:
+    if value is None:
+        return False
+    signed = value < 0
+    if signed and not re.search(r"[-−]", raw):
+        return False
+    return any(abs(abs(value) - v) <= 1e-9 * max(1.0, v) for v in values)
+
+
+def quantity(
+    candidate: Candidate,
+    segment: Segment,
+    store_currency: str,
+    vague: tuple[str, ...],
+) -> Quantity:
+    """The model's quantity, kept only as far as the evidence segment's own words support it."""
     raw = (candidate.quantity_raw or "").strip() or None
-    if (
-        raw is not None
-        and _collapse(raw)[0].casefold() not in _collapse(document.text)[0].casefold()
-    ):
+    text = _collapse(segment.text)[0].casefold()
+    if raw is not None and _collapse(raw)[0].casefold() not in text:
         raw = None
     kind = candidate.quantity_kind
     if raw is not None and any(_mentions(raw.casefold(), word) for word in vague):
         kind = "vague"
-    if kind in ("exact", "range") and raw is None:
-        kind = "unknown"  # a number the email does not state is never kept
+    if kind in ("exact", "range"):
+        values = readings(raw) if raw is not None else set()
+        stated = (
+            _reads_as(candidate.value, raw, values)
+            if kind == "exact"
+            else _reads_as(candidate.low, raw, values) and _reads_as(candidate.high, raw, values)
+        )
+        if not stated:
+            kind = "unknown"  # a number the email does not state is never kept
+    currency = (candidate.currency or "").upper() or None
+    if currency is not None and currency != store_currency.upper():
+        marks = _CURRENCY_MARKS.get(currency, (currency.casefold(),))
+        if not any(mark in text for mark in marks):
+            currency = None
     numeric = kind in ("exact", "range")
     try:
         return Quantity(
@@ -213,11 +320,11 @@ def quantity(candidate: Candidate, document: SourceDocument, vague: tuple[str, .
             low=candidate.low if kind == "range" else None,
             high=candidate.high if kind == "range" else None,
             unit=candidate.unit,
-            currency=((candidate.currency or "").upper() or None) if numeric else None,
+            currency=currency if numeric else None,
             raw=raw,
         )
     except ValidationError:
-        # e.g. money without a currency: the words stay, the number does not.
+        # e.g. money without a supported currency: the words stay, the number does not.
         return Quantity(kind="unknown", unit=candidate.unit, raw=raw)
 
 
@@ -229,8 +336,12 @@ def period(
     end = candidate.period_end
     if start is None or (end is not None and end < start):
         return None, None
-    if start > sent_at.astimezone(zone).date() and candidate.kind not in FUTURE_KINDS:
-        return None, None
+    sent = sent_at.astimezone(zone).date()
+    if candidate.kind not in FUTURE_KINDS:
+        if start > sent:
+            return None, None
+        if end is not None and end > sent:
+            end = None  # a claim about later days is not observed: still ongoing at send time
     begin = datetime.combine(start, time.min, zone)
     finish = (
         datetime.combine(end + timedelta(days=1), time.min, zone) - timedelta(seconds=1)
@@ -265,11 +376,12 @@ def observe(
     segments: list[Segment],
     candidate: Candidate,
     number: int,
-    timezone: str,
+    store: Store,
     vague: tuple[str, ...],
 ) -> Observation:
     evidence = locate(document, segments, candidate)
-    start, end = period(candidate, document.available_at, timezone)
+    segment = next(s for s in segments if s.id == evidence.segment_id)
+    start, end = period(candidate, document.available_at, store.timezone)
     return Observation(
         id=f"obs-{document.id.removeprefix('doc-')}-{number}",
         version=OBSERVATION_VERSION,
@@ -282,11 +394,7 @@ def observe(
         computed_at=ctx_spec.as_of,
         input_refs=(
             ArtifactRef(kind="SourceDocument", id=document.id, version=document.version),
-            ArtifactRef(
-                kind="Segment",
-                id=evidence.segment_id,
-                version=next(s.version for s in segments if s.id == evidence.segment_id),
-            ),
+            ArtifactRef(kind="Segment", id=segment.id, version=segment.version),
         ),
         producer=MANIFEST.id,
         producer_version=MANIFEST.version,
@@ -297,7 +405,7 @@ def observe(
         period_end=end,
         time_text=candidate.time_text,
         product_mention=candidate.product_mention,
-        quantity=quantity(candidate, document, vague),
+        quantity=quantity(candidate, segment, store.currency, vague),
         direction=candidate.direction,
         reason=candidate.reason,
         reason_text=candidate.reason_text,
@@ -321,9 +429,18 @@ def run(ctx) -> ModuleResult:
     errors: list[str] = []
     abstentions: list[str] = []
     for document in ctx.repo.list(SourceDocument):
-        segments = sorted(by_document.get(document.id, []), key=lambda s: s.idx)
+        segments = sorted(
+            (
+                s
+                for s in by_document.get(document.id, [])
+                if s.text_version == document.text_version
+            ),
+            key=lambda s: s.idx,
+        )
         store = stores.get(document.meta.get("store_id"))
         if not segments or store is None:
+            reason = "no segments for its text version" if not segments else "unknown store"
+            abstentions.append(f"{document.id}: not read ({reason})")
             counts["documents_skipped"] += 1
             continue
         try:
@@ -358,10 +475,10 @@ def run(ctx) -> ModuleResult:
                     segments,
                     candidate,
                     len(observations),
-                    store.timezone,
+                    store,
                     vague,
                 )
-            except (Rejected, ValidationError) as error:
+            except ValueError as error:  # Rejected, ValidationError, validate_against
                 reason = str(error) if isinstance(error, Rejected) else "invalid observation"
                 abstentions.append(f"{document.id}: {candidate.kind} rejected ({reason})")
                 counts["candidates_rejected"] += 1

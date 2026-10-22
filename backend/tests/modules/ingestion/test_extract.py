@@ -65,21 +65,27 @@ def synthetic(text, doc="doc-synthetic", sent="2026-10-02T19:00:00Z"):
         text_version="email-v1",
         meta={"store_id": "MIL01", "subject": "chiusura"},
     )
-    segment = Segment(
-        id=f"{doc}-seg0",
-        version="v1",
-        available_at=sent,
-        availability_basis="email_date_header",
-        source_refs=document.source_refs,
-        document_id=doc,
-        text_version="email-v1",
-        idx=0,
-        text=text,
-        char_start=0,
-        char_end=len(text),
-        is_quoted=False,
-    )
-    return [document, segment]
+    # One segment per paragraph, as the parser does for blank-line separated blocks.
+    segments, offset = [], 0
+    for idx, paragraph in enumerate(text.split("\n\n")):
+        segments.append(
+            Segment(
+                id=f"{doc}-seg{idx}",
+                version="v1",
+                available_at=sent,
+                availability_basis="email_date_header",
+                source_refs=document.source_refs,
+                document_id=doc,
+                text_version="email-v1",
+                idx=idx,
+                text=paragraph,
+                char_start=offset,
+                char_end=offset + len(paragraph),
+                is_quoted=False,
+            )
+        )
+        offset += len(paragraph) + 2
+    return [document, *segments]
 
 
 class FakeLLM:
@@ -296,3 +302,129 @@ def test_budget_exhaustion_stops_remaining_documents(tmp_path):
 def test_vague_words_without_spaces_are_recognised(raw):
     vague = extract.vague_quantifiers(ROOT / "config")
     assert any(extract._mentions(raw.casefold(), word) for word in vague)
+
+
+def test_value_must_read_from_raw_words_inside_the_evidence_segment(tmp_path):
+    text = "Oggi 2 clienti per il Tib.\n\nTib finito, 3 pezzi venduti.\n\nVenduto 58,0k € netto."
+    replies = {
+        "doc-synthetic": [
+            # raw "2" is in the email but does not say 12.
+            Candidate(
+                quote="Oggi 2 clienti per il Tib",
+                kind="unmet_demand",
+                quantity_kind="exact",
+                value=12,
+                unit="customers",
+                quantity_raw="2",
+            ),
+            # raw "3" is true, but in another segment than the quote.
+            Candidate(
+                quote="Oggi 2 clienti per il Tib",
+                kind="unmet_demand",
+                quantity_kind="exact",
+                value=3,
+                unit="customers",
+                quantity_raw="3 pezzi",
+            ),
+            # Correct reading of "58,0k" with the € of the segment.
+            Candidate(
+                quote="Venduto 58,0k € netto",
+                kind="sales_figure",
+                quantity_kind="exact",
+                value=58000,
+                unit="money",
+                currency="eur",
+                quantity_raw="58,0k",
+            ),
+            # Negative money and a currency the segment does not show.
+            Candidate(
+                quote="Venduto 58,0k € netto",
+                kind="sales_figure",
+                quantity_kind="exact",
+                value=-58000,
+                unit="money",
+                currency="JPY",
+                quantity_raw="58,0k",
+            ),
+            Candidate(
+                quote="Tib finito, 3 pezzi venduti",
+                kind="stockout",
+                quantity_kind="range",
+                low=1,
+                high=3,
+                unit="units",
+                quantity_raw="3 pezzi",
+            ),
+        ]
+    }
+    status, observations, _, _ = execute(tmp_path, synthetic(text), replies)
+    assert [(o.quantity.kind, o.quantity.value, o.quantity.currency) for o in observations] == [
+        ("unknown", None, None),
+        ("unknown", None, None),
+        ("exact", 58000, "EUR"),
+        ("unknown", None, None),
+        ("unknown", None, None),
+    ]
+    assert status.result.counts["numbers_dropped"] == 4
+
+
+def test_store_currency_is_accepted_without_a_symbol(tmp_path):
+    text = "Fatturato: 8.465"
+    candidate = Candidate(
+        quote="Fatturato: 8.465",
+        kind="sales_figure",
+        quantity_kind="exact",
+        value=8465,
+        unit="money",
+        currency="EUR",
+        quantity_raw="8.465",
+    )
+    _, observations, _, _ = execute(tmp_path, synthetic(text), {"doc-synthetic": [candidate]})
+    assert (observations[0].quantity.value, observations[0].quantity.currency) == (8465, "EUR")
+
+
+@pytest.mark.parametrize(
+    ("raw", "value"),
+    [
+        ("58,0k", 58000),
+        ("8.465", 8465),
+        ("8.465", 8.465),
+        ("24'620", 24620),
+        ("12.3万", 123000),
+        ("a zero", 0),
+        ("un gilet", 1),
+        ("+15%", 15),
+    ],
+)
+def test_readings(raw, value):
+    assert any(abs(v - value) < 1e-6 for v in extract.readings(raw))
+
+
+def test_future_end_is_ongoing_and_overlapping_quotes_are_ambiguous(tmp_path):
+    text = "Cardigan finito\nzz aaa"
+    replies = {
+        "doc-synthetic": [
+            Candidate(
+                quote="Cardigan finito",
+                kind="stockout",
+                period_start="2026-10-01",
+                period_end="2026-12-31",
+            ),
+            Candidate(quote="aa", kind="other"),
+        ]
+    }
+    status, observations, _, _ = execute(tmp_path, synthetic(text), replies)
+    (stockout,) = observations
+    assert stockout.period_start == datetime(2026, 9, 30, 22, 0, tzinfo=UTC)
+    assert stockout.period_end is None
+    assert status.result.abstentions == (
+        "doc-synthetic: other rejected (quote occurs more than once)",
+    )
+
+
+def test_documents_that_cannot_be_read_are_logged(tmp_path):
+    records = synthetic("Ciao.")
+    records[0] = records[0].model_copy(update={"meta": {}})
+    status, _, _, llm = execute(tmp_path, records, {})
+    assert llm.calls == []
+    assert status.result.abstentions == ("doc-synthetic: not read (unknown store)",)
