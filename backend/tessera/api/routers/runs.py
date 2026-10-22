@@ -9,7 +9,7 @@ from jsonschema.exceptions import ValidationError as SchemaError
 from pydantic import ValidationError
 
 from tessera.api.models import CreateRun, DocumentDetail, RunView
-from tessera.core.config import get_settings
+from tessera.core.config import Settings, get_settings
 from tessera.core.contracts import (
     Case,
     EntityLink,
@@ -83,9 +83,9 @@ def published_repo(repo: RunRepo) -> Repo:
 PublishedRepo = Annotated[Repo, Depends(published_repo)]
 
 
-def execute(spec: RunSpec, engine, registry: Registry) -> None:
+def execute(spec: RunSpec, engine, registry: Registry, settings: Settings) -> None:
     try:
-        run(spec, engine=engine, registry=registry)
+        run(spec, engine=engine, registry=registry, settings=settings)
     except Exception:
         # An infrastructure failure must not leave a job claiming to be running.
         with repo_session(engine, spec, fixture_mode=spec.mode == "fixture") as repo:
@@ -120,7 +120,7 @@ def create_run(request: Request, body: CreateRun, tasks: BackgroundTasks, ns: Na
     engine = engine_for(request, ns)
     with repo_session(engine, spec, fixture_mode=ns == "fixture") as repo:
         result = view(repo)
-    tasks.add_task(execute, spec, engine, registry)
+    tasks.add_task(execute, spec, engine, registry, request.app.state.settings or get_settings())
     return result
 
 

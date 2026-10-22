@@ -144,8 +144,11 @@ def test_fixture_access_requires_configuration(service):
     assert client.get("/api/runs?fixture=true").status_code == 403
 
 
-def test_submission_validates_snapshot_and_executes_persisted_run(service):
+def test_submission_validates_snapshot_and_executes_persisted_run(service, tmp_path):
     client, engine, app = service
+    app.state.settings = Settings(
+        _env_file=None, fixture_mode=True, data_dir=tmp_path, llm_mode="live"
+    )
     manifest = ModuleManifest(
         id="src.test",
         version="v1",
@@ -160,6 +163,8 @@ def test_submission_validates_snapshot_and_executes_persisted_run(service):
     )
 
     def produce(ctx):
+        assert ctx.clients["llm"].settings.data_dir == tmp_path
+        assert ctx.clients["llm"].settings.llm_mode == "replay"
         ctx.repo.put(document())
         return ModuleResult(
             module_id="src.test",
