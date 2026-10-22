@@ -25,12 +25,13 @@ class Settings(BaseSettings):
     embed_model: str = "Qwen/Qwen3-VL-Embedding-2B"
     asr_model: str = "openai/whisper-large-v3-turbo"
     llm_mode: Literal["live", "record", "replay"] = "replay"
-    fixture_mode: bool = False
 
     sources_dir: Path = REPO_ROOT / "generated" / "sources"
     data_dir: Path = REPO_ROOT / "data"
     config_dir: Path = REPO_ROOT / "config"
     mocks_base_url: str = "http://127.0.0.1:8088"
+    # Fixture namespace (RFC §4.6): its own DB file, never mixed with real runs.
+    fixture_mode: bool = False
 
     @field_validator("fastweb_keys_file")
     @classmethod
@@ -38,8 +39,12 @@ class Settings(BaseSettings):
         return v if v.is_absolute() else REPO_ROOT / v
 
     @property
+    def db_path(self) -> Path:
+        return self.data_dir / ("tessera_fixture.db" if self.fixture_mode else "tessera.db")
+
+    @property
     def db_url(self) -> str:
-        return f"sqlite:///{self.data_dir / 'tessera.db'}"
+        return f"sqlite:///{self.db_path}"
 
     def fastweb_keys(self) -> dict[str, SecretStr]:
         if not self.fastweb_keys_file.is_file():
