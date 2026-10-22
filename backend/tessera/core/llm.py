@@ -1,10 +1,11 @@
-"""Bounded Fastweb OpenAI-compatible calls and deterministic offline replay.
+"""Bounded OpenAI-compatible calls (Fastweb, team ASR server) and deterministic offline replay.
 
 Pass prompt/schema/tool versions, model revision, source/context hashes and catalog
 version in ``cache_context``. Full payload, model, provider and generation parameters
 always enter the key. Do not include credentials or unsanitized personal data.
 """
 
+import hashlib
 import json
 import math
 import re
@@ -12,13 +13,14 @@ import threading
 import time
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any, TypeVar
 from urllib.parse import urlsplit
 
 from openai import APIError, OpenAI
 from openai.types.chat import ChatCompletion
 from openai.types.create_embedding_response import CreateEmbeddingResponse
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
 
 from tessera.core.cache import ReplayMiss, ResponseCache, cache_key
 from tessera.core.config import Settings, get_settings
@@ -37,6 +39,40 @@ class BudgetExceeded(RuntimeError):
 
 class LLMCallFailed(RuntimeError):
     """Provider failure; intentionally excludes provider bodies and credentials."""
+
+
+class TranscriptSegment(BaseModel):
+    """One ASR segment: the interval is what the server returned, never estimated."""
+
+    model_config = ConfigDict(frozen=True)
+
+    start: float = Field(ge=0, allow_inf_nan=False)
+    end: float = Field(ge=0, allow_inf_nan=False)
+    text: str
+
+    @model_validator(mode="after")
+    def ordered(self) -> "TranscriptSegment":
+        if self.end < self.start:
+            raise ValueError("segment ends before it starts")
+        return self
+
+
+class Transcript(BaseModel):
+    """``verbose_json`` reduced to what ``src.voice`` needs; extra provider fields are dropped."""
+
+    model_config = ConfigDict(frozen=True)
+
+    text: str
+    language: str | None = None
+    duration: float | None = Field(default=None, ge=0, allow_inf_nan=False)
+    segments: tuple[TranscriptSegment, ...]
+
+    @model_validator(mode="after")
+    def in_order(self) -> "Transcript":
+        starts = [segment.start for segment in self.segments]
+        if starts != sorted(starts):
+            raise ValueError("segments out of order")
+        return self
 
 
 @dataclass
@@ -89,7 +125,7 @@ def _plain(message: Mapping[str, Any] | BaseModel) -> dict[str, Any]:
 
 
 class LLMClient:
-    """Synchronous, thread-safe call allowance shared by chat/extract/embed.
+    """Synchronous, thread-safe call allowance shared by chat/extract/embed/transcribe.
 
     Use one client per bounded run (its deadline starts at construction), or pass
     the same CallBudget to multiple clients to share a larger allowance.
@@ -132,9 +168,10 @@ class LLMClient:
             deadline_seconds = self.settings.llm_deadline_seconds
         if concurrency < 1 or timeout <= 0 or not 0 <= max_retries <= 2 or deadline_seconds <= 0:
             raise ValueError("invalid LLM limits")
-        url = urlsplit(self.settings.fastweb_base_url)
-        if url.username or url.password or url.query or url.fragment:
-            raise ValueError("provider URL must not contain credentials, query or fragment")
+        for base_url in (self.settings.fastweb_base_url, self.settings.asr_base_url):
+            url = urlsplit(base_url)
+            if url.username or url.password or url.query or url.fragment:
+                raise ValueError("provider URL must not contain credentials, query or fragment")
         self.cache = cache or ResponseCache(self.settings.data_dir / "llm_cache")
         self.budget = budget or CallBudget(
             max_calls=self.settings.llm_max_calls, max_tokens=self.settings.llm_max_tokens
@@ -170,11 +207,21 @@ class LLMClient:
             raise BudgetExceeded("LLM deadline exhausted")
         return remaining
 
-    def _request(self, operation: str, payload: dict, context: Mapping[str, Any] | None) -> dict:
+    def _request(
+        self,
+        operation: str,
+        payload: dict,
+        context: Mapping[str, Any] | None,
+        upload: tuple[str, bytes] | None = None,
+    ) -> dict:
+        """``upload`` is the audio of a transcription: its hash is in ``payload``, not its bytes."""
+        asr = operation == "transcribe"
+        base_url = self.settings.asr_base_url if asr else self.settings.fastweb_base_url
+        timeout = self.settings.asr_timeout_seconds if asr else self._timeout
         key = cache_key(
             {
                 "version": 1,
-                "provider": self.settings.fastweb_base_url.rstrip("/"),
+                "provider": base_url.rstrip("/"),
                 "operation": operation,
                 "request": payload,
                 "context": dict(context or {}),
@@ -208,10 +255,12 @@ class LLMClient:
             raise BudgetExceeded("LLM concurrency wait exhausted deadline")
         try:
             # Lazy construction: replay does not read keys or construct any network client.
+            settings = self.settings
+            api_key = settings.asr_key() if asr else settings.api_key_for(payload["model"])
             with self._factory(
-                api_key=self.settings.api_key_for(payload["model"]).get_secret_value(),
-                base_url=self.settings.fastweb_base_url,
-                timeout=self._timeout,
+                api_key=api_key.get_secret_value(),
+                base_url=base_url,
+                timeout=timeout,
                 max_retries=0,
             ) as client:
                 for attempt in range(self._max_retries + 1):
@@ -226,10 +275,22 @@ class LLMClient:
                         "attempt": attempt + 1,
                     }
                     try:
-                        endpoint = (
-                            client.chat.completions if operation == "chat" else client.embeddings
-                        )
-                        result = endpoint.create(**payload, timeout=min(self._timeout, remaining))
+                        if asr:
+                            form = {
+                                name: payload[name]
+                                for name in ("model", "language", "prompt", "response_format")
+                                if payload[name] is not None
+                            }
+                            result = client.audio.transcriptions.create(
+                                file=upload, **form, timeout=min(timeout, remaining)
+                            )
+                        else:
+                            endpoint = (
+                                client.chat.completions
+                                if operation == "chat"
+                                else client.embeddings
+                            )
+                            result = endpoint.create(**payload, timeout=min(timeout, remaining))
                     except APIError as error:
                         status = getattr(error, "status_code", None)
                         trace.update(
@@ -238,7 +299,8 @@ class LLMClient:
                         self.traces.append(trace)
                         if status not in (429, 503) or attempt == self._max_retries:
                             raise LLMCallFailed(f"LLM provider failure (status={status})") from None
-                        delay = 2**attempt
+                        # A busy ASR server is running a transcription of several seconds.
+                        delay = (5 if asr else 1) * 2**attempt
                         if delay >= self._remaining():
                             raise BudgetExceeded("LLM retry exceeds deadline") from None
                         self._sleep(delay)
@@ -387,6 +449,46 @@ class LLMClient:
             raise LLMCallFailed("invalid embedding count, indices, dimensions or finite values")
         return [item.embedding for item in data]
 
+    def transcribe(
+        self,
+        path: str | Path,
+        language: str | None = None,
+        prompt: str | None = None,
+        *,
+        model: str | None = None,
+        cache_context: Mapping[str, Any] | None = None,
+    ) -> Transcript:
+        """Speech to text on the team ASR server, recorded and replayed like any other call.
+
+        Pass ``language`` only when it is known for this recording (RFC §4.7, OQ-3), not
+        inferred from the store. ``prompt`` is a spelling hint (product names), not context.
+        The key holds the audio hash, size and format, never the bytes or the file name.
+        """
+        path = Path(path)
+        audio = path.read_bytes()
+        if not audio:
+            raise ValueError("empty audio file")
+        if len(audio) > self.settings.asr_max_upload_mb * 2**20:
+            raise ValueError(f"audio larger than {self.settings.asr_max_upload_mb} MB")
+        language = (language or "").strip().lower() or None
+        prompt = prompt or None
+        audio_format = path.suffix.lower().lstrip(".")
+        payload = {
+            "model": model or self.settings.asr_model,
+            "audio_sha256": hashlib.sha256(audio).hexdigest(),
+            "audio_bytes": len(audio),
+            "format": audio_format,
+            "language": language,
+            "prompt": prompt,
+            "response_format": "verbose_json",
+        }
+        upload = (f"audio.{audio_format}" if audio_format else "audio", audio)
+        response = self._request("transcribe", payload, cache_context, upload)
+        try:
+            return Transcript.model_validate(response)
+        except ValidationError:
+            raise LLMCallFailed("invalid transcription: text, segments or intervals") from None
+
 
 @dataclass(frozen=True, slots=True)
 class RunLLMClient:
@@ -455,4 +557,17 @@ class RunLLMClient:
     ) -> list[list[float]]:
         return self._client.embed(
             texts, dimensions, model=model, cache_context=self._context(cache_context)
+        )
+
+    def transcribe(
+        self,
+        path: str | Path,
+        language: str | None = None,
+        prompt: str | None = None,
+        *,
+        model: str | None = None,
+        cache_context: Mapping[str, Any] | None = None,
+    ) -> Transcript:
+        return self._client.transcribe(
+            path, language, prompt, model=model, cache_context=self._context(cache_context)
         )
