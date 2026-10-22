@@ -1,0 +1,835 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Ricerca e raccomandazioni per un agente decisionale retail: dati eterogenei, paper scientifici, asset Fastweb e piano hackathon 24h."><title>Dal rumore alla decisione — Ricerca FastwebAI</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:transparent;color:var(--foreground,#192b35);font:16px/1.7 var(--font-sans,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif)}main{max-width:1120px;margin:0 auto;padding:0}a{color:var(--primary,#126a82);text-underline-offset:3px;overflow-wrap:anywhere}p{margin:0 0 16px}h1{font-size:clamp(29px,5vw,44px);line-height:1.13;letter-spacing:-.035em;margin:12px 0 18px;max-width:900px}h2{font-size:25px;line-height:1.25;margin:12px 0}h3{font-size:19px;line-height:1.4;margin:26px 0 12px}.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-foreground,#59717d);margin-top:24px}.deck{font-size:19px;max-width:860px;color:var(--muted-foreground,#59717d)}.intro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}.intro-grid>div{padding:18px;border-radius:12px;background:var(--secondary,#edf5f5)}.intro-grid b{display:block;margin-bottom:8px}.intro-grid p{font-size:14px;margin:0}.nav{display:flex;flex-wrap:wrap;gap:8px;border-bottom:1px solid var(--border,#d1dfe4);padding:12px 0 18px;margin-bottom:20px}button{font:inherit;line-height:1.4;padding:10px 14px;border:1px solid var(--border,#c4d5dc);border-radius:8px;background:transparent;color:inherit;cursor:pointer}button:hover{background:var(--secondary,#edf5f5)}button[aria-selected=true]{background:var(--primary,#126a82);border-color:var(--primary,#126a82);color:var(--primary-foreground,#fff)}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--ring,#39a4ba);outline-offset:3px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.toolbar button{font-size:13px;padding:7px 10px}.chapter-label{font-size:13px;color:var(--muted-foreground,#59717d);margin-bottom:16px}.chapter[hidden]{display:none}details{border:1px solid var(--border,#d1dfe4);border-radius:10px;margin:12px 0;overflow:hidden}summary{cursor:pointer;padding:16px 18px;font-size:17px;line-height:1.4;font-weight:650;background:var(--card,transparent)}details[open]>summary{border-bottom:1px solid var(--border,#d1dfe4);background:var(--secondary,#edf5f5)}.section-body{padding:22px;min-width:0}.table-wrap{overflow-x:auto;margin:20px 0;max-width:100%;border:1px solid var(--border,#d1dfe4);border-radius:8px}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.55}th,td{padding:13px 15px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border,#d1dfe4);min-width:160px}th{background:var(--secondary,#edf5f5);font-weight:650}tr:last-child td{border-bottom:0}code{font: .86em/1.5 var(--font-mono,ui-monospace,monospace);background:var(--secondary,#edf5f5);padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}pre{background:var(--secondary,#edf5f5);padding:18px;overflow-x:auto;border-radius:8px;line-height:1.6}pre code{padding:0;background:transparent;white-space:pre;overflow-wrap:normal}li{margin:8px 0}ul,ol{padding-left:24px}blockquote{border-left:3px solid var(--primary,#126a82);padding-left:16px;margin-left:0}.footer{border-top:1px solid var(--border,#d1dfe4);font-size:13px;color:var(--muted-foreground,#59717d);padding:20px 0;margin-top:28px}.notice{font-size:13px;color:var(--muted-foreground,#59717d)}.skip{position:absolute;left:-9999px}.skip:focus{position:static}@media(max-width:650px){.intro-grid{grid-template-columns:1fr}.section-body{padding:16px}summary{padding:14px}.deck{font-size:17px}.nav button{font-size:14px}th,td{padding:10px;min-width:150px}}@media print{body{font-size:10pt;color:#111!important}.nav,.toolbar,.skip{display:none!important}.chapter[hidden]{display:block!important}.chapter{break-before:page}details{border:0;overflow:visible}details>summary{background:none!important;border:0!important;padding:16px 0 4px}details>.section-body{display:block!important;padding:8px 0}.table-wrap{overflow:visible;border:0}table{font-size:8pt;table-layout:fixed}th,td{min-width:0;overflow-wrap:anywhere;padding:7px}pre{white-space:pre-wrap}pre code{white-space:pre-wrap}a{color:#111!important}h1{font-size:26pt}.intro-grid{display:block}.intro-grid>div{padding:8px 0}main{max-width:none}h3,summary{break-after:avoid}}
+</style></head><body><main><a class="skip" href="#focus">Vai ai contenuti</a><header><p class="eyebrow">FastwebAI · Ricerca di progetto · 22 ottobre 2026</p><h1>Dal rumore alla prossima decisione</h1><p class="deck">Una guida per scegliere cosa costruire in 24 ore: rendere utilizzabili segnali eterogenei, incerti e rumorosi per le decisioni operative della sede.</p></header><div class="intro-grid"><div><b>Il valore da dimostrare</b><p>Riconoscere domanda non soddisfatta e problemi operativi prima che i numeri certificati ne diano una visione completa.</p></div><div><b>La porzione su cui investire</b><p>Prove verificabili → prodotto e periodo corretti → indagine mirata → opzioni fattibili.</p></div><div><b>Il limite da rispettare</b><p>Forecast esistente come baseline; scenari dichiarati, responsabilità umana e nessun miglioramento quantitativo ancora misurato.</p></div></div><nav class="nav" role="tablist" aria-label="Capitoli della ricerca"><button id="tab-focus" role="tab" aria-controls="focus" aria-selected="true">Scelte di progetto</button><button id="tab-data" role="tab" aria-controls="data" aria-selected="false">Dati e segnali</button><button id="tab-methods" role="tab" aria-controls="methods" aria-selected="false">Metodi e paper</button><button id="tab-assets" role="tab" aria-controls="assets" aria-selected="false">Asset Fastweb</button></nav><p class="notice">Inizia da “Scelte di progetto”. Apri le sezioni che ti interessano, poi consulta i paper e le schede tecniche. Tutto il testo è incluso nel file; solo i collegamenti alle fonti esterne richiedono Internet.</p><div class="toolbar"><button id="expand">Apri tutte le sezioni del capitolo</button><button id="collapse">Chiudi le sezioni</button><button id="print">Stampa / salva tutto in PDF</button></div><article class="chapter" id="focus" role="tabpanel" aria-labelledby="tab-focus"><h2>Scelte di progetto</h2><p class="chapter-label">Focus, sell-point, architettura e piano delle 24 ore</p><p><em>22 ottobre 2026. Proposta da discutere; non sostituisce automaticamente il design. Analisi di docs, dataset sintetico, allegati Fastweb e ricerca su fonti primarie. Non sono stati eseguiti benchmark né misurati miglioramenti del prodotto.</em></p>
+<details id="focus-la-scelta-in-due-minuti" open><summary>La scelta in due minuti</summary><div class="section-body">
+<p><strong>Costruire un agente che individua le poche decisioni operative da prendere ora, raccoglie le prove necessarie e propone opzioni fattibili con limiti espliciti.</strong> Primo utente: responsabile allocation/merchandising HQ. Orizzonte: prossime 24–72 ore per agire, 7 giorni per confrontare gli effetti; eventuale estensione a 14 giorni. Questi orizzonti sono una scelta di prototipo, da allineare ai lead time.</p>
+<p><strong>Sell-point:</strong> «Trasformiamo ciò che i negozi vedono oggi nelle decisioni verificabili che la sede deve prendere domani, compresa la domanda che non arriva mai agli scontrini».</p>
+<p>Il tratto su cui andare in profondità è <strong>affermazione → prodotto/tempo corretti → prove indipendenti e conflitti → verifica mirata → opzioni operative</strong>. Il forecast esistente è un input e un termine di confronto. Il successo è anticipare o migliorare una decisione, compresa la scelta di verificare lo stock prima di trasferirlo.</p>
+<p>Tre elementi da mostrare:</p>
+<ol>
+<li><strong>Una domanda invisibile alle vendite.</strong> L'articolo richiesto è finito o non è in assortimento; il sistema collega note, catalogo e disponibilità.</li>
+<li><strong>Un'indagine che cambia percorso.</strong> Scoperto un conflitto sullo stock, l'agente interroga la disponibilità vendibile o chiede chiarimento; decide poi se trasferire, monitorare o fermarsi.</li>
+<li><strong>Una decisione che resiste al rumore.</strong> Aggiungere forward o notizie irrilevanti non deve moltiplicare domanda e priorità. Togliere una prova decisiva deve cambiare lo stato in «da verificare».</li>
+</ol>
+<p>Leggere <a href="#assets">asset Fastweb</a> per scegliere i servizi, <a href="#data">data fusion</a> per la letteratura su fonti e matching, <a href="#methods">metodi quantitativi</a> per forecasting breve, incertezza e valutazione.</p>
+</div></details><details id="focus-1-cosa-e-gia-forte-e-cosa-cambierei-nei-docs"><summary>1. Cosa è già forte e cosa cambierei nei docs</summary><div class="section-body">
+<p>Il brief ricostruito (<code>findings.md</code>, documento del repository) e il design (<code>project-design.md</code>, documento del repository) hanno già buone fondamenta: fonti originali, lingue, product linking, domanda censurata, opzioni vincolate, responsabilità umana e un dataset con replay temporale. La proposta C è sensata; restringerei però il cuore tecnico di C ad A più un decisore semplice.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Tabella scorribile"><table>
+<thead>
+<tr>
+<th>Punto attuale</th>
+<th>Valutazione e modifica proposta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>«AI reads, code counts, humans decide»</td>
+<td>Da mantenere. Rendere visibile cosa è osservato, inferito, ipotizzato e approvato.</td>
+</tr>
+<tr>
+<td>M9 correzione forecast come passaggio obbligato</td>
+<td>Renderlo uno <strong>scenario quantitativo opzionale</strong>. Uno stock contraddittorio può richiedere un controllo senza inventare un uplift.</td>
+</tr>
+<tr>
+<td>15+ moduli, 4 schermate, 3 ruoli agentici</td>
+<td>Troppo ampio per il nucleo di 24h. Un investigatore, una coda di casi e una scheda dettaglio.</td>
+</tr>
+<tr>
+<td>Candidati limitati all'assortimento</td>
+<td>Usare l'assortimento come priorità, con recupero dal catalogo globale. Le richieste fuori assortimento sono parte del valore.</td>
+</tr>
+<tr>
+<td>«tanti» → [4,8], strength → +50%</td>
+<td>Assunzioni non apprese. Preferire quantità sconosciuta e verifica; eventuali range sono scenari dichiarati, non stime calibrate.</td>
+</tr>
+<tr>
+<td>Forecast × somma uplift</td>
+<td>Sovrapposizioni, duplicati e cause comuni possono sommare più volte lo stesso fenomeno. Un caso aggregato per prodotto/periodo, con contributi verificabili.</td>
+</tr>
+<tr>
+<td>Meteo concorde aumenta automaticamente strength</td>
+<td>Affinità narrativa non basta. Separare contesto da conferma osservazionale; nessun boost numerico automatico senza validazione.</td>
+</tr>
+<tr>
+<td>Note che «vedono tutto» e unmet demand come «unica fonte»</td>
+<td>Ridimensionare: le note sono selettive e possono omettere fenomeni; waitlist, ricerche ecommerce e customer care possono confermare domanda non soddisfatta.</td>
+</tr>
+<tr>
+<td>Zero menzioni per alcuni giorni → decadimento</td>
+<td>Distinguere assenza di segnalazioni da assenza di report. Un negozio che non invia mail non è un segnale di risoluzione.</td>
+</tr>
+<tr>
+<td>Stock ERP positivo → chiusura stockout</td>
+<td>Confrontare disponibilità vendibile, timestamp, prenotazioni e taglia. Uno snapshot vecchio non risolve una nota nuova.</td>
+</tr>
+<tr>
+<td>Q da interpolazione low/high chiamato service quantile</td>
+<td>È una politica sotto ipotesi uniforme, non un quantile empiricamente calibrato. Mostrare sensibilità a scenari/costi.</td>
+</tr>
+<tr>
+<td>Scoring «allineamento tecnologico» = bisogno di mercato</td>
+<td>Il kickoff allegato specifica infrastruttura Fastweb. Conservare l'interpretazione orale come evidenza separata e dimostrare entrambi.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Anche il framing sul forecast va circoscritto: «il loro sistema attuale usa soprattutto lo storico» è coerente con il Q&A; «i forecast non possono usare informazioni recenti» sarebbe una generalizzazione scorretta. La letteratura sul nowcasting e sui modelli dinamici esiste già; la differenza progettuale è collegare nuove evidenze a decisioni verificabili.</p>
+</div></details><details id="focus-2-quale-novita-vale-davvero-la-pena-costruire"><summary>2. Quale novità vale davvero la pena costruire</summary><div class="section-body">
+<p><strong>Informazioni utili in funzione dell'azione.</strong> Un picco social può essere interessante ma non cambiare alcuna scelta. Una sola rettifica sull'ETA può rendere inutile un trasferimento. Il ranking dovrebbe privilegiare la possibilità di intervenire, la scadenza e la solidità della prova, non il volume dei documenti.</p>
+<p><strong>Verifiche scelte per il loro valore.</strong> Se l'azione cambia a seconda che lo stock reale sia 0 oppure 3, verificare lo stock ha valore. Se due interpretazioni del colore producono comunque «nessuna disponibilità prima dell'evento», chiedere il colore non è necessariamente la prossima verifica migliore. In 24h bastano scenari discreti e regole; il value of information probabilistico è un'evoluzione. Il fondamento e i limiti sono nei <a href="#methods">metodi quantitativi</a>.</p>
+<p><strong>Una memoria delle prove, non dei riassunti soltanto.</strong> Conservare affermazioni, citazioni, origine, rettifiche e stato. Dal lavoro di <a href="https://www.vldb.org/pvldb/vol2/vldb09-pvldb47.pdf">Dong et al. sulla dipendenza delle fonti</a> prendiamo il principio che dieci copie non sono dieci conferme; non pretendiamo di implementarne l'intero modello probabilistico.</p>
+<p><strong>Robustezza dell'azione prima della precisione apparente.</strong> Mostrare se la stessa opzione è ragionevole con domanda bassa/centrale/alta e con tempi di consegna diversi. Se l'esito cambia, il manager vede quale ipotesi deve verificare. Questo è più credibile che mostrare un +37% senza una base empirica. La letteratura <a href="https://arxiv.org/abs/1710.08005">Smart Predict, then Optimize</a> motiva la centralità dell'errore decisionale; qui ne adottiamo il criterio di valutazione, senza addestrare un modello SPO.</p>
+</div></details><details id="focus-3-mappa-delle-tecniche-scegliere-senza-inseguire-la-complessita"><summary>3. Mappa delle tecniche: scegliere senza inseguire la complessità</summary><div class="section-body">
+<div class="table-wrap" tabindex="0" role="region" aria-label="Tabella scorribile"><table>
+<thead>
+<tr>
+<th>Problema</th>
+<th>Metodo classico</th>
+<th>Variante recente</th>
+<th>Scelta per questo hackathon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Schemi e metriche diversi</td>
+<td>Mapping, unità canoniche, record linkage, provenienza</td>
+<td>LLM propone mapping e interpreta testo</td>
+<td>Parser deterministici + un contratto di evidenza; una sola coppia di metriche in conflitto se c'è tempo.</td>
+</tr>
+<tr>
+<td>Nomi prodotto multilingua</td>
+<td>Alias/fuzzy matching e attributi</td>
+<td>LLM matching; embedding multimodali Qwen 2026</td>
+<td>Retrieval di candidati + reranking vincolato + astensione. <a href="#data">Fonti</a>.</td>
+</tr>
+<tr>
+<td>Rumore e fonti dipendenti</td>
+<td>Dedup, regole, data fusion</td>
+<td>Weak supervision / teacher-student</td>
+<td>Dedup di origine e regole trasparenti; Snorkel e distillazione come roadmap.</td>
+</tr>
+<tr>
+<td>Cambio recente rispetto al piano</td>
+<td>Residui, EWMA/CUSUM, modello di stato</td>
+<td>Change-point bayesiano, nowcasting aggiornabile</td>
+<td>Baseline immutata; piccolo rilevatore sui dati osservabili e scenari di correzione solo con evidenze sufficienti. <a href="#methods">Fonti</a>.</td>
+</tr>
+<tr>
+<td>Incertezza</td>
+<td>Scenari e analisi di sensibilità</td>
+<td>Conformal adattivo, selective prediction</td>
+<td>Astensione e scenari espliciti ora; intervalli calibrati dopo disponibilità di feedback adeguato.</td>
+</tr>
+<tr>
+<td>Prossima indagine</td>
+<td>Regole di costo/beneficio</td>
+<td>Agente con tools e value of information</td>
+<td>Un ciclo limitato, che sceglie fra 3–4 verifiche e sa fermarsi. <a href="https://arxiv.org/abs/2210.03629">ReAct</a>.</td>
+</tr>
+<tr>
+<td>Riassunto cross-fonte</td>
+<td>Join/aggregazioni per prodotto, negozio, periodo</td>
+<td>GraphRAG</td>
+<td>Relazioni in SQLite e schede con citazioni; GraphRAG completo aggiunge poco al primo caso operativo.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Non addestrare un foundation model di serie temporali né un modello causale generale. <a href="https://arxiv.org/abs/2403.07815">Chronos</a> è un riferimento rilevante per forecasting preaddestrato anche a breve, ma confrontarlo qui sottrarrebbe tempo al problema distintivo: rendere osservabile e utilizzabile l'evidenza non tabellare.</p>
+</div></details><details id="focus-4-pipeline-minima-concreta-e-scalabile"><summary>4. Pipeline minima, concreta e scalabile</summary><div class="section-body">
+<pre><code class="language-text">EML/testo + CSV stock/forecast/catalogo + 1 fonte esterna contestuale
+  → parser e normalizzazione temporale
+  → LLM: affermazioni atomiche con citazioni
+  → alias + embedding: candidati prodotto; link o astensione
+  → registro: dedup, correzioni, conflitti, stato e scadenza
+  → selezione casi: impatto potenziale, urgenza, evidenza
+  → investigatore: verifica disponibilità/ETA o chiede chiarimento
+  → codice: opzioni + simulazione giornaliera + controlli
+  → scheda manager: agisci / verifica / monitora / archivia
+</code></pre>
+<p><strong>Campi da aggiungere ai contratti attuali:</strong> <code>event_time</code>, <code>available_at</code>, <code>valid_until</code>, <code>origin_group_id</code>, <code>supersedes</code>, <code>metric_definition</code>, <code>unit</code>, <code>observation_status</code>, <code>decision_deadline</code>, <code>blocking_uncertainties</code>. <code>available_at</code> governa ciò che l'agente può sapere durante il replay; un documento datato ieri può essere disponibile soltanto oggi.</p>
+<p><strong>Tool minimi:</strong> <code>get_available_stock</code>, <code>get_lane_and_eta</code>, <code>evaluate_options</code>, <code>request_clarification</code>. L'agente accede alle prove del caso già selezionate; budget iniziale di 4 chiamate, con soglia configurabile. Mostrare chiamate, esiti e motivazione breve. La richiesta al negozio è simulata nell'interfaccia, non inviata a persone reali.</p>
+<p><strong>Asset consigliati:</strong> Gemma come primo candidato chat da misurare; Qwen3-VL-Embedding-2B per matching; Qwen 3.6 come alternativa sui dati sintetici. La guida indica Gemma/embedding EU e Qwen 3.6 extra-EU. Il 397B è opzionale. Dettagli e discrepanze in <a href="#assets">asset Fastweb</a>.</p>
+<p><strong>Persistenza:</strong> SQLite con tabelle <code>documents</code>, <code>claims</code>, <code>entities</code>, <code>evidence_links</code>, <code>cases</code>, <code>options</code>, <code>decisions</code>. Embedding del catalogo precalcolati. Cache per documento nuovo e versione di estrazione. LLM solo su nuovi input e casi selezionati: il costo cresce con il lavoro incrementale, senza rileggere tutto l'archivio a ogni domanda.</p>
+<p>I mock esistenti hanno contratti REST/OpenAPI e agent cards: riutilizzarli senza promettere un'integrazione reale A2A/MCP. Il POST logistico documenta validazione/prenotazione: per la demo creare una <strong>bozza locale</strong> o un wrapper esplicitamente simulato, senza chiamarlo «draft» se l'endpoint sottostante prenota davvero.</p>
+</div></details><details id="focus-5-come-selezionare-le-informazioni-utili"><summary>5. Come selezionare le informazioni utili</summary><div class="section-body">
+<p>Separare <strong>rilevanza</strong>, <strong>solidità dell'evidenza</strong> e <strong>priorità operativa</strong>. Non comprimerle in una percentuale di confidenza inventata dall'LLM.</p>
+<ol>
+<li><strong>Gate di ammissibilità:</strong> fonte disponibile al tempo di replay; citazione valida; entità e periodo sufficientemente risolti; niente duplicate contribution. Un caso ambiguo resta lavorabile come «verifica», non come trasferimento.</li>
+<li><strong>Gate di fattibilità:</strong> esiste un'azione che arriva in tempo e rispetta i vincoli? Altrimenti routing a monitoraggio, customer care o marketing senza promettere stock impossibile.</li>
+<li><strong>Ordinamento:</strong> prima scadenza decisionale, poi livello di impatto, poi solidità delle prove. Mostrare le tre dimensioni e un motivo leggibile. Nessun punteggio economico se mancano costi e margini.</li>
+<li><strong>Budget di attenzione:</strong> top 3 casi per la demo, coda separata di richieste di verifica, un caso unico condiviso fra funzioni. Un'anomalia bassa probabilità/alto impatto può meritare verifica urgente, non un'azione automatica.</li>
+<li><strong>Stop:</strong> fermare l'indagine quando ulteriori informazioni non cambiano le opzioni nel set di scenari considerato, o il budget è esaurito; nel secondo caso dichiarare cosa resta ignoto.</li>
+</ol>
+<p>Per una valutazione economica futura: <code>beneficio(a) = margine salvato(a) − costo trasferimento(a) − perdita al donatore(a) − altri costi(a)</code>. Il confronto va fatto rispetto a <code>hold</code>. Margine unitario non è prezzo retail; il danno reputazionale non va monetizzato arbitrariamente. In assenza di dati, usare unità potenzialmente non servite e costi documentati, con sensibilità.</p>
+</div></details><details id="focus-6-forecast-breve-senza-falsa-precisione"><summary>6. Forecast breve senza falsa precisione</summary><div class="section-body">
+<p><strong>Tre prodotti distinti:</strong> nowcast dello stato presente (stock vendibile/domanda non soddisfatta), scenario sui prossimi 7 giorni, scelta dell'azione. Non tutti i casi richiedono tutti e tre.</p>
+<ul>
+<li>Se la nota contiene un conteggio esplicito di richieste uniche perse e la finestra è coerente, può integrare l'evidenza. Vendite + richieste non equivale sempre a domanda: clienti ripetuti, sostituzioni, prenotazioni e acquisti successivi richiedono dedup.</li>
+<li>Se c'è solo «tanti», estrarre direzione e motivazione; niente conteggio ricavato automaticamente da una tabella universale.</li>
+<li>Se la nota segnala solo stockout, le vendite sono un dato censurato. Non inventare la domanda latente e non aggiornare al ribasso sulla base di zero vendite.</li>
+<li>Se ci sono domanda sufficiente e osservazioni confrontabili, provare aggiornamento dei residui o shrinkage conservativo verso la baseline; descrivere assunzioni e confrontarlo con baseline immutata.</li>
+<li>Per la demo usare tre scenari espliciti. Chiamarli «scenari», non «intervallo all'80%», salvo calibrazione reale documentata.</li>
+</ul>
+<p>Nel decisore simulare <strong>giorno per giorno</strong>, perché un arrivo al giorno 7 non evita vendite perse al giorno 2. Un'unità del donatore non può essere promessa a due destinazioni: anche con poche schede serve una disponibilità condivisa e una prenotazione simulata dopo approvazione.</p>
+<p>La domanda sottostante e la domanda servibile dal negozio sono diverse: un cantiere può ridurre passaggio e vendite senza dimostrare perdita di interesse nel prodotto. Produrre un caso retail ops e una stima condizionata della domanda servibile, non una conclusione causale generale sul brand.</p>
+</div></details><details id="focus-7-la-porzione-da-sviluppare-davvero"><summary>7. La porzione da sviluppare davvero</summary><div class="section-body">
+<p><strong>Allocazione dello sforzo proposta:</strong> circa 50% evidenze/linking/stato, 25% verifica agentica e opzioni, 25% valutazione e presentazione. Il sistema deve comunque arrivare fino a una decisione concreta.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Tabella scorribile"><table>
+<thead>
+<tr>
+<th>Costruire bene</th>
+<th>Tenere semplice</th>
+<th>Rinviare</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claim con citazioni; entità; dedup/correzioni; conflitti</td>
+<td>Parser EML + CSV; una fonte esterna</td>
+<td>Parsing universale PDF/PPTX/immagini</td>
+</tr>
+<tr>
+<td>Un investigatore con scelta reale del prossimo tool</td>
+<td>Un caso di stock, 2–3 opzioni e hold</td>
+<td>Coordinamento autonomo di molti agenti</td>
+</tr>
+<tr>
+<td>Controlli stock, donatore, ETA e prenotazioni</td>
+<td>Scenari quantitativi dichiarati</td>
+<td>Nuovo forecast, conformal senza dati, training SPO</td>
+</tr>
+<tr>
+<td>Scheda con prova, scadenza, owner e incertezza</td>
+<td>Una coda casi e dettaglio</td>
+<td>Mappa mondiale, 4 viste, GraphRAG completo</td>
+</tr>
+<tr>
+<td>Eval con rumore e hold-out</td>
+<td>Replay locale e mock dei sistemi aziendali</td>
+<td>Integrazioni enterprise reali</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Estensione ad alto appeal, solo dopo:</strong> una foto allegata alla nota viene usata per restringere i candidati prodotto con embedding/vision Fastweb; la taglia resta da testo o chiarimento. Ha una ragione operativa quando il cliente mostra una foto, ma non giustifica costruire tutta l'ingestion multimodale.</p>
+</div></details><details id="focus-8-piano-24h-con-punti-di-arresto"><summary>8. Piano 24h con punti di arresto</summary><div class="section-body">
+<p>Ipotesi: quattro persone, attività in parallelo. I numeri sono ore trascorse dall'avvio; se parte della finestra è già passata, comprimere lo scope, non la verifica finale.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Tabella scorribile"><table>
+<thead>
+<tr>
+<th>Finestra</th>
+<th>Risultato verificabile</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–2h</td>
+<td>Un caso, contratti minimi, set dev, chiamata Fastweb e tool round-trip. Se accesso instabile, attivare cache/replay e segnalarlo.</td>
+</tr>
+<tr>
+<td>2–6h</td>
+<td>Parser + estrazione + candidati prodotto; scheda end-to-end già attraversabile.</td>
+</tr>
+<tr>
+<td>6–11h</td>
+<td>Dedup, correzioni e conflitti; investigatore sceglie una verifica; decisore valuta trasferimento/hold.</td>
+</tr>
+<tr>
+<td>11–15h</td>
+<td>Simulazione giornaliera; rumore, caso ambiguo, modifica live di ETA/stock; fonte esterna di contesto.</td>
+</tr>
+<tr>
+<td>15–18h</td>
+<td>Valutazione su dati separati, ablation, revisione delle prove; freeze funzionalità.</td>
+</tr>
+<tr>
+<td>18–24h</td>
+<td>Correzioni, replay deterministico, pitch, prova generale e registrazione backup.</td>
+</tr>
+</tbody>
+</table></div>
+<p>P1: estrazione/linking. P2: stato/provenienza e decisore. P3: schede/UI. P4: tools, eval e pitch con supporto del team. Nessuno sviluppa un secondo prodotto indipendente.</p>
+<p><strong>Se restano circa 12 ore:</strong> input testuale/EML, 2 lingue, una coppia donatore-destinazione, stock/forecast CSV, un tool di verifica reale e tre opzioni. Tagliare prima immagini, clustering cross-store e riconciliazione report; preservare caso dubbio, caso senza azione, citazioni e test temporale.</p>
+</div></details><details id="focus-9-demo-di-45-minuti"><summary>9. Demo di 4–5 minuti</summary><div class="section-body">
+<ol>
+<li><strong>30s — La decisione bloccata.</strong> Il piano dice una cosa, il negozio segnala domanda che le vendite non registrano. Mostrare istante di conoscenza e dati sintetici.</li>
+<li><strong>60s — Dalle fonti al caso.</strong> Nota in lingua → estratto → prodotto/taglia → un solo caso, anche se la mail è inoltrata tre volte.</li>
+<li><strong>60s — L'agente indaga.</strong> Stock contabile e nota divergono; verifica disponibilità/ETA. Un fatto smentisce l'opzione iniziale e l'agente cambia proposta.</li>
+<li><strong>60s — La decisione.</strong> Trasferimento/riassortimento/hold, vincoli e conseguenze sotto scenari. Modificare live ETA o domanda del donatore produce un ricalcolo.</li>
+<li><strong>30s — Sa fermarsi.</strong> Un nome prodotto ambiguo produce chiarimento; un trend social senza riscontro resta monitoraggio.</li>
+<li><strong>30–60s — Evidenza del valore.</strong> Metriche calcolate, limiti, asset Fastweb usati e bozza approvabile. Nessun ROI inventato.</li>
+</ol>
+<p>Scheda minima: <strong>cosa è cambiato · perché conta ora · scadenza · owner · opzioni · evidenze a favore/contro · cosa potrebbe cambiare la raccomandazione</strong>. L'HQ vede anche implicazioni coordinate: allocation controlla disponibilità, logistica verifica arrivo, marketing evita una comunicazione su prodotti indisponibili. Non servono tre motori separati.</p>
+</div></details><details id="focus-10-come-dimostrare-valore-e-non-soltanto-una-bella-storia"><summary>10. Come dimostrare valore e non soltanto una bella storia</summary><div class="section-body">
+<p>Usare le regole del dataset (<code>../generated/README.md</code>, documento del repository): input solo da <code>sources</code>, oracolo solo nell'eval, split dev/hold-out, timestamp di disponibilità. Il generatore non è stato letto per questa ricerca. Gli esempi nel README sono scenari noti al team, non una validazione indipendente.</p>
+<p>Confrontare tre versioni sullo stesso tempo di osservazione e sugli stessi casi:</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Tabella scorribile"><table>
+<thead>
+<tr>
+<th>Variante</th>
+<th>Cosa misura</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>B0: dati strutturati disponibili + regole stock/forecast</strong></td>
+<td>Baseline operativa onesta; non privarla di inventario o informazioni che avrebbe davvero.</td>
+</tr>
+<tr>
+<td><strong>B1: B0 + estrazione LLM senza gestione di prove/conflitti</strong></td>
+<td>Se aggiungere testo ingenuamente aumenta anche falsi allarmi.</td>
+</tr>
+<tr>
+<td><strong>B2: pipeline proposta</strong></td>
+<td>Valore aggiunto di dedup, verifiche mirate, astensione e vincoli.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Metriche prioritarie: precisione delle schede azionabili, recall dei casi utili, link errati accettati <strong>insieme alla quota di astensioni</strong>, violazioni dei vincoli, alert per manager/giorno, tempo fino a una raccomandazione valida, chiamate/token per caso. Lead time = <code>tempo primo alert valido baseline − tempo primo alert valido sistema</code>; usare lo stesso budget di falsi allarmi quando possibile.</p>
+<p>Quando la baseline non rileva il fenomeno entro il replay, riportare «non rilevato entro la finestra», non anticipo infinito. Per unmet demand distinguere rilevare lo stockout da stimare il volume di domanda persa. L'anticipo non è necessariamente di settimane: dipende dal caso e dai timestamp effettivi.</p>
+<p><strong>Ablation minima:</strong> duplicare le fonti, aggiungere rumore, rimuovere la prova più importante, inserire una rettifica e ritardare un report. Verificare che il caso reagisca coerentemente. WAPE della previsione è secondaria; quando valutabile, affiancarla al costo delle decisioni o alle unità non servite sotto ipotesi comuni. Non equiparare simulazione a fatturato recuperato realmente.</p>
+<p>Target per demo: nessuna violazione dei vincoli implementati e citazioni verificabili; sono obiettivi di accettazione, <strong>non risultati già raggiunti</strong>. Mostrare il numero di esempi e gli errori, non solo una percentuale.</p>
+</div></details><details id="focus-11-decisioni-da-prendere-adesso"><summary>11. Decisioni da prendere adesso</summary><div class="section-body">
+<ol>
+<li><strong>Confermare allocation HQ come primo buyer</strong>, con retail ops come percorso di verifica e marketing come conseguenza dello stesso caso.</li>
+<li><strong>Scegliere un caso di domanda non soddisfatta + conflitto di disponibilità</strong>, preferibilmente domestico per ridurre vincoli logistici nel primo percorso.</li>
+<li><strong>Congelare un modello chat e l'endpoint embedding</strong> dopo un confronto piccolo e reale; una sola escalation opzionale.</li>
+<li><strong>Accettare scenari espliciti al posto di un forecast “corretto” a tutti i costi.</strong> La qualità della decisione è il criterio principale.</li>
+<li><strong>Riservare almeno un quarto del tempo alla verifica e alla demo.</strong> Il kickoff premia soprattutto fattibilità (40%) e innovazione agentica (20%).</li>
+</ol>
+<p>Il differenziale sostenibile, da validare dopo l'hackathon, è il collegamento fra evidenze locali e vincoli operativi, con feedback sulle decisioni. Non è dimostrato che nessun concorrente lo faccia: evitare claim di unicità di mercato senza un'analisi competitiva dedicata.</p></div></details></article><article class="chapter" id="data" role="tabpanel" aria-labelledby="tab-data" hidden><h2>Dati e segnali</h2><p class="chapter-label">Metodi per collegare le fonti e distinguere le prove dal rumore</p><p><em>22 ottobre 2026. Approfondimento della <a href="#focus">raccomandazione di progetto</a>. Fonti primarie; le applicazioni proposte sono nostre inferenze, non risultati già ottenuti sul dataset.</em></p>
+<details id="data-il-problema-corretto" open><summary>Il problema corretto</summary><div class="section-body">
+<p>«Dati non correlati» qui significa soprattutto dati <strong>non ancora collegati</strong>: una mail parla di un colore, il magazzino usa un codice materiale, il CRM un altro identificativo negozio, un report una diversa settimana commerciale. Prima di cercare correlazioni statistiche servono identità, tempo, granularità, definizione della metrica e provenienza comuni. Fonti realmente prive di relazione con la decisione possono restare fuori.</p>
+<p>Una rappresentazione utile è una tabella di affermazioni atomiche: chi sostiene cosa, su quale entità, quando è successo, quando lo abbiamo saputo, con quale prova e quali conflitti. Non occorre trasformare tutto in un grafo generalista.</p>
+</div></details><details id="data-paper-selezionati-e-scelta-pratica"><summary>Paper selezionati e scelta pratica</summary><div class="section-body">
+<p>Le stime di sforzo riguardano un prototipo limitato, con API già funzionanti; non la riproduzione completa dei paper.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Tabella scorribile"><table>
+<thead>
+<tr>
+<th>Riferimento primario</th>
+<th>Contributo effettivo</th>
+<th>Applicazione proposta</th>
+<th>Limite e scelta 24h</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dong, Berti-Equille, Srivastava, <strong>Integrating Conflicting Data: The Role of Source Dependence</strong>, PVLDB 2009 (<a href="https://www.vldb.org/pvldb/vol2/vldb09-pvldb47.pdf">paper</a>)</td>
+<td>Modella dipendenza e accuratezza delle fonti: informazioni copiate possono falsare il voto di maggioranza.</td>
+<td>Conservare <code>origin_id</code>, thread, duplicati, <code>supports</code>/<code>contradicts</code>; contare origini distinte.</td>
+<td>Una maggioranza non garantisce verità. Fare dedup e gruppi di provenienza, non stimare tutta la rete bayesiana. Circa 2–3h.</td>
+</tr>
+<tr>
+<td>Ratner et al., <strong>Snorkel: Rapid Training Data Creation with Weak Supervision</strong>, PVLDB 2017 (<a href="https://arxiv.org/abs/1711.10160">paper</a>)</td>
+<td>Combina funzioni di etichettatura rumorose per costruire dati di training, modellando accuratezze e correlazioni.</td>
+<td>Regole per negazioni, quantità esplicite, correzioni e disponibilità; loggare disaccordi con l'LLM.</td>
+<td>Non è un sistema che scopre automaticamente la verità delle mail. In 24h usare regole esplicite e astensione; il label model è una roadmap. 1–2h per le regole.</td>
+</tr>
+<tr>
+<td>Li et al., <strong>Deep Entity Matching with Pre-Trained Language Models (Ditto)</strong>, preprint 2020 / VLDB 2021 (<a href="https://arxiv.org/abs/2004.00584">paper</a>)</td>
+<td>Fine-tuning di transformer per classificare coppie di record, con conoscenza di dominio e augmentation.</td>
+<td>Separare generazione dei candidati e verifica della corrispondenza; inserire attributi di catalogo.</td>
+<td>Il matching di record dei benchmark non è identico a «quello nero lungo» in una mail. Non addestrare Ditto in hackathon.</td>
+</tr>
+<tr>
+<td>Peeters, Steiner, Bizer, <strong>Entity Matching using Large Language Models</strong>, preprint 2023, revisione 2024 (<a href="https://arxiv.org/abs/2310.11244">paper</a>)</td>
+<td>Confronta matching zero/few-shot, sensibilità ai prompt e generalizzazione a entità nuove.</td>
+<td>LLM sceglie fra pochi candidati, oppure dichiara ambiguità; prompt verificati per modello e lingua.</td>
+<td>Nessun prompt universalmente migliore. Una spiegazione plausibile non certifica il link. Circa 2–4h con valutazione manuale.</td>
+</tr>
+<tr>
+<td>Chen et al., <strong>M3-Embedding</strong>, preprint 2024, revisione 2025 (<a href="https://arxiv.org/abs/2402.03216">paper</a>)</td>
+<td>Retrieval multilingua con rappresentazioni dense, sparse e multi-vector.</td>
+<td>Combinare alias/codici esatti e similarità semantica; usare la ricerca semantica per recuperare candidati.</td>
+<td>Similarità non equivale a identità, accordo o rilevanza economica. Riferimento metodologico; usare l'endpoint embedding già fornito.</td>
+</tr>
+<tr>
+<td>Li et al., <strong>Qwen3-VL-Embedding and Qwen3-VL-Reranker</strong>, technical report 2026 (<a href="https://arxiv.org/abs/2601.04720">paper</a>, <a href="https://github.com/QwenLM/Qwen3-VL-Embedding">codice degli autori</a>)</td>
+<td>Spazio di rappresentazione condiviso per testo e immagini; modelli embedding e reranker distinti, nelle taglie 2B/8B.</td>
+<td>Recuperare prodotto/evidenza da una descrizione multilingua o da una foto; il 2B è nell'offerta hackathon.</td>
+<td>Il reranker non risulta fra gli endpoint assegnati. Nessun trasferimento automatico dei risultati dell'8B al 2B. MVP testo; immagine solo come estensione dopo la demo base.</td>
+</tr>
+<tr>
+<td>Edge et al., <strong>From Local to Global: A Graph RAG Approach to Query-Focused Summarization</strong>, preprint 2024, revisione 2025 (<a href="https://arxiv.org/abs/2404.16130">paper</a>)</td>
+<td>Grafo di entità e riassunti di comunità per rispondere a domande globali su corpora.</td>
+<td>Ispirazione per collegare prove e casi e riassumere un portafoglio di problemi.</td>
+<td>Misura qualità dei riassunti, non validità di trasferimenti o previsioni. Non implementare GraphRAG completo; bastano tabelle relazionali con riferimenti.</td>
+</tr>
+<tr>
+<td>Yao et al., <strong>ReAct: Synergizing Reasoning and Acting in Language Models</strong>, preprint 2022 / ICLR 2023 (<a href="https://arxiv.org/abs/2210.03629">paper</a>)</td>
+<td>Alterna pianificazione e interazione con strumenti in task di QA e ambienti interattivi.</td>
+<td>Un investigatore sceglie la prossima verifica: stock, disponibilità, lead time, chiarimento.</td>
+<td>I benchmark non dimostrano sicurezza o redditività retail. Tool con schema, budget di chiamate e verifiche deterministiche. Circa 2–4h.</td>
+</tr>
+<tr>
+<td>Steiner, Bizer, <strong>Labeling Training Data for Entity Matching Using Large Language Models</strong>, preprint giugno 2026, revisione 5 ottobre (<a href="https://arxiv.org/abs/2606.28823v2">v2</a>)</td>
+<td>Distillazione da LLM a matcher compatto; vantaggi di inferenza sui benchmark, ma difficoltà sugli articoli mai visti.</td>
+<td>Dopo il prototipo usare correzioni umane e teacher LLM per addestrare un matcher economico; mantenere escalation per novità.</td>
+<td>Non è un guadagno già misurato qui. La revisione riporta 34–459× meno tempo di inferenza in quei test, non una garanzia operativa. Roadmap.</td>
+</tr>
+<tr>
+<td>Liu et al., <strong>Lost in the Middle: How Language Models Use Long Contexts</strong>, preprint 2023, TACL (<a href="https://arxiv.org/abs/2307.03172">paper</a>)</td>
+<td>Nei modelli testati, il recupero dell'informazione dipende anche dalla posizione nel contesto.</td>
+<td>Inviare evidenze selezionate e strutturate, non l'intero archivio in un prompt.</td>
+<td>Non prova che tutti i modelli del 2026 abbiano lo stesso difetto; motiva un test locale di sensibilità a rumore e posizione.</td>
+</tr>
+</tbody>
+</table></div>
+</div></details><details id="data-come-fondere-le-fonti"><summary>Come fondere le fonti</summary><div class="section-body">
+<ol>
+<li><strong>Parser per formato.</strong> CSV e XLSX con parser tabellari, EML con decoder MIME; vision solo per pagine raster o immagini. Salvare unità, formula della metrica, perimetro, valuta e date. Un embedding di tabella non sostituisce la lettura delle celle.</li>
+<li><strong>Estrazione atomica.</strong> Una mail può contenere arrivi, vendite, richieste, stockout e una previsione personale. Sono affermazioni distinte con diversi livelli di evidenza.</li>
+<li><strong>Link al catalogo.</strong> ID/alias → candidati semantici → verifica attributi. L'assortimento locale migliora il ranking ma non deve escludere tutto il catalogo: la domanda per un prodotto assente è centrale.</li>
+<li><strong>Stato e provenienza.</strong> Collegare ripetizioni, rettifiche e chiusure. Un forward non aggiunge una fonte indipendente; un nuovo evento uguale a quello di ieri può invece essere nuova evidenza.</li>
+<li><strong>Conflitti espliciti.</strong> Stock contabile di ieri e osservazione sullo scaffale di oggi possono descrivere tempi diversi. Prima di marcare un errore, allineare timestamp, prenotazioni, SKU-taglia, stock vendibile e arrivi.</li>
+<li><strong>Priorità per decisione.</strong> Il motore considera soltanto prove pertinenti alla specifica azione e al suo orizzonte. Un report di turismo vecchio non conferma da solo un picco questa sera.</li>
+</ol>
+</div></details><details id="data-tre-innovazioni-implementabili"><summary>Tre innovazioni implementabili</summary><div class="section-body">
+<p><strong>Prove indipendenti, non numero di menzioni.</strong> Un post, cinque repost e il recap del manager possono essere una sola origine. Visualizzare «7 documenti, 1 origine» rende comprensibile la protezione contro il rumore. La dipendenza non sempre è osservabile: indicare «origine sconosciuta» invece di garantire indipendenza.</p>
+<p><strong>Robustezza della decisione alla rimozione di una prova.</strong> Ricalcolare le opzioni togliendo a turno ogni gruppo di origine. Se basta eliminare una mail dubbia per cambiare azione, chiedere verifica. È un test di sensibilità, non un'identificazione causale e non una probabilità di correttezza.</p>
+<p><strong>Clustering dell'ignoto con budget.</strong> Tenere le affermazioni non collegate in una coda a bassa priorità. Un piccolo cluster di richieste simili provenienti da negozi diversi può segnalare un bisogno fuori catalogo. La categoria <code>unknown</code> evita di forzare tutto nelle etichette esistenti; soglie, copertura e rumore vanno valutati. Estensione, non prerequisito della demo.</p>
+</div></details><details id="data-scalabilita-concreta"><summary>Scalabilità concreta</summary><div class="section-body">
+<ul>
+<li>Una estrazione per documento nuovo o corretto; cache su hash + versione modello/prompt/schema.</li>
+<li>Alias e codici prima degli embedding; catalogo indicizzato una volta, aggiornato per delta.</li>
+<li>LLM su top-k candidati e casi selezionati, mai confronto di ogni documento con ogni prodotto.</li>
+<li>Dedup e raggruppamenti prima del ragionamento costoso; batch controllati e gestione 429.</li>
+<li>Conservare le evidenze originali insieme al risultato strutturato, così una correzione non richiede reinterpretare tutto.</li>
+<li>Per il catalogo del dataset, una matrice di embedding in memoria e SQLite possono bastare; non serve partire con un nuovo database a grafo o un cluster distribuito.</li>
+</ul>
+<p>L'idea di usare 512 dimensioni invece di 2048 viene dalla guida Fastweb: riduce di 4× i byte dei soli vettori a parità di precisione numerica, <strong>non</strong> garantisce 4× velocità né qualità invariata. Misurare recall@k su menzioni etichettate prima di scegliere.</p></div></details></article><article class="chapter" id="methods" role="tabpanel" aria-labelledby="tab-methods" hidden><h2>Metodi e paper</h2><p class="chapter-label">Previsione breve, incertezza, decisioni e audit delle formule</p><p><em>Ricerca al 22 ottobre 2026. Orizzonte operativo: 1–14 giorni. Budget: hackathon di 24 ore.</em></p>
+<p><strong>Raccomandazione:</strong> costruire un triage verificabile di casi, seguito da confronto fra poche azioni logistiche fattibili. Mantenere il forecast esistente come baseline versionata; aggiungere diagnostica dei residui, evidenze testuali e scenari temporanei. L’uscita utile è «verificare lo stock / chiedere quale prodotto / proporre un trasferimento entro una scadenza / monitorare», anche quando non è possibile stimare un nuovo numero di domanda.</p>
+<p>Questa nota usa come contesto esclusivamente <code>docs/findings.md</code>, <code>docs/project-design.md</code> e <code>generated/README.md</code>. Non sono stati aperti <code>generated/ground_truth/</code>, <code>generator/</code> o hidden answers. Il README contiene già anticipazioni dei casi: non vanno trasformate in regole del prodotto, esempi di prompt o evidenza sperimentale. Non sono stati eseguiti esperimenti sul dataset: costi, architettura e soglie proposti qui sono valutazioni progettuali, non risultati misurati.</p>
+<details id="methods-1-le-distinzioni-che-devono-comparire-nella-demo" open><summary>1. Le distinzioni che devono comparire nella demo</summary><div class="section-body">
+<div class="table-wrap" tabindex="0" role="region" aria-label="Tabella scorribile"><table>
+<thead>
+<tr>
+<th>Oggetto</th>
+<th>Significato corretto</th>
+<th>Cosa non promettere</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Regola euristica</td>
+<td>Mapping esplicito, ad esempio «molti» → scenario di intensità, decadimento a sette giorni, soglia di alert</td>
+<td>Che i parametri siano appresi o che il punteggio sia una probabilità</td>
+</tr>
+<tr>
+<td>Stima statistica</td>
+<td>Parametri ricavati da osservazioni: mediana dei residui, regressione robusta, posterior Gamma-Poisson</td>
+<td>Che l’esecuzione deterministica significhi «nessun modello»</td>
+</tr>
+<tr>
+<td>Modello addestrato</td>
+<td>Parametri ottimizzati su un training set con obiettivo dichiarato</td>
+<td>Che un LLM preaddestrato sia stato addestrato sui dati retail del team</td>
+</tr>
+<tr>
+<td>Scenario low/base/high</td>
+<td>Esito condizionato a ipotesi diverse, anche non probabilistiche</td>
+<td>«Intervallo all’80%», confidenza o frequenza di copertura</td>
+</tr>
+<tr>
+<td>Intervallo predittivo bayesiano</td>
+<td>Distribuzione della futura osservazione sotto prior e likelihood specificate</td>
+<td>Calibrazione empirica automatica, soprattutto con censura e misspecificazione</td>
+</tr>
+<tr>
+<td>Intervallo conformal</td>
+<td>Insieme predittivo costruito da score e dati di calibrazione, con garanzie precise sotto ipotesi precise</td>
+<td>Copertura per ogni negozio, sotto qualsiasi drift, o della domanda latente usando solo vendite</td>
+</tr>
+<tr>
+<td>Priorità</td>
+<td>Ordine di lavorazione basato su conseguenze, urgenza e fattibilità</td>
+<td>Probabilità dell’evento, effetto causale o ROI dimostrato</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Due diverse coverage:</strong> nella selective prediction è la quota di casi su cui si risponde; nella previsione intervallare è la quota di esiti contenuti nell’intervallo. Servono nomi distinti nei risultati. Le qualifiche scientifiche sono motivate da R4–R7; le etichette di prodotto sono una nostra proposta.</p>
+</div></details><details id="methods-2-dodici-riferimenti-selezionati-e-loro-uso-concreto"><summary>2. Dodici riferimenti selezionati e loro uso concreto</summary><div class="section-body">
+<p>Solo lavori originali, pagine degli autori/istituzioni, editori o proceedings. Dove il testo integrale non era accessibile, il risultato riportato resta al livello dell’abstract primario. Le ore sono stime per una persona con input già normalizzati, comprendono verifica essenziale ma non ingestione e UI; <strong>non si sommano in un piano di implementazione di tutti i metodi</strong>.</p>
+<h3 id="methods-r1-huber-1964-robustezza-rispetto-a-osservazioni-anomale">R1 — Huber, 1964: robustezza rispetto a osservazioni anomale</h3>
+<p><a href="https://doi.org/10.1214/aoms/1177703732">Robust Estimation of a Location Parameter, Annals of Mathematical Statistics</a>; <a href="https://link.springer.com/chapter/10.1007/978-1-4612-4380-9_35">riedizione dell’originale con abstract verificato, Springer 1992</a>.</p>
+<ul>
+<li><strong>Risultato:</strong> sviluppa stimatori di posizione intermedi fra media e mediana con proprietà di robustezza asintotica per normali contaminate.</li>
+<li><strong>Non dimostra:</strong> robustezza a ogni drift, correzione della censura o validità dei testi dei negozi. Un cambiamento reale persistente non è necessariamente un outlier da eliminare.</li>
+<li><strong>Qui:</strong> stimare il bias dei residui del forecast su periodi comparabili e non censurati; limitare l’effetto di errori numerici isolati.</li>
+<li><strong>24h:</strong> fit Huber e controllo dei residui, 2–4h; <strong>alternativa:</strong> mediana e MAD, 1–2h. Sono stime dai dati; clipping e soglie rimangono scelte euristiche.</li>
+</ul>
+<h3 id="methods-r2-adams-e-mackay-2007-cambiamenti-online">R2 — Adams e MacKay, 2007: cambiamenti online</h3>
+<p><a href="https://arxiv.org/abs/0710.3742">Bayesian Online Changepoint Detection, preprint originale</a>, <a href="https://arxiv.org/pdf/0710.3742">testo</a>.</p>
+<ul>
+<li><strong>Risultato:</strong> inferenza ricorsiva della distribuzione del tempo dall’ultimo cambiamento, sotto un modello a segmenti con osservazioni i.i.d. entro segmento e parametri indipendenti fra segmenti.</li>
+<li><strong>Non dimostra:</strong> causa del cambiamento, calibrazione sotto un modello errato o superiorità su domanda luxury intermittente.</li>
+<li><strong>Qui:</strong> applicazione opzionale ai residui aggregati, separando bias stabile e rottura recente; non alle menzioni duplicate trattate come osservazioni indipendenti.</li>
+<li><strong>24h:</strong> 4–8h con hazard e likelihood da validare; <strong>alternativa:</strong> accumulatore CUSUM o EWMA con soglie fissate sul dev, 1–2h. La variante troncata della ricorsione è un’approssimazione, non l’inferenza esatta del paper.</li>
+</ul>
+<h3 id="methods-r3-giannone-reichlin-e-small-2008-nowcasting-e-calendario-delle-pubblicazioni">R3 — Giannone, Reichlin e Small, 2008: nowcasting e calendario delle pubblicazioni</h3>
+<p><a href="https://sites.krieger.jhu.edu/domenico-giannone/publications/">Nowcasting: The real-time informational content of macroeconomic data, pubblicazione verificata dall’autore</a>; <a href="https://www.ecb.europa.eu/pub/pdf/scpwps/ecbwp633.pdf">working paper originale BCE, 2006</a>.</p>
+<ul>
+<li><strong>Risultato:</strong> aggiornamento del nowcast macroeconomico e valutazione del contributo marginale delle nuove pubblicazioni, gestendo molte serie con date di rilascio sfalsate.</li>
+<li><strong>Non dimostra:</strong> trasferibilità quantitativa dal PIL a SKU/taglie o capacità delle email di anticipare qualsiasi shock.</li>
+<li><strong>Qui:</strong> adottare il principio dei vintage e dell’aggiornamento quando una fonte diventa disponibile. La domanda odierna non ancora certificata è un nowcast; i successivi 1–14 giorni sono una previsione operativa.</li>
+<li><strong>24h:</strong> un modello fattoriale completo non è prioritario, &gt;1 giornata; <strong>alternativa:</strong> replay temporale e overlay sul forecast, 2–4h. L’overlay è un adattamento progettuale, non una replica del paper.</li>
+</ul>
+<h3 id="methods-r4-chow-1970-classificare-oppure-astenersi">R4 — Chow, 1970: classificare oppure astenersi</h3>
+<p><a href="https://research.ibm.com/publications/on-optimum-recognition-error-and-reject-tradeoff">On Optimum Recognition Error and Reject Tradeoff, IEEE Transactions on Information Theory; scheda primaria IBM</a>, <a href="https://doi.org/10.1109/TIT.1970.1054406">paper DOI</a>.</p>
+<ul>
+<li><strong>Risultato:</strong> caratterizza la regola ottima di rifiuto e il compromesso fra errori e rifiuti nel riconoscimento probabilistico.</li>
+<li><strong>Non dimostra:</strong> che score fuzzy, margini di reranking o confidence dichiarata da un LLM siano posterior affidabili.</li>
+<li><strong>Qui:</strong> un collegamento prodotto errato costa più di una richiesta di chiarimento; misurare errore sui casi accettati e quota accettata, includendo prodotti fuori catalogo/assortimento.</li>
+<li><strong>24h:</strong> policy di astensione e valutazione, 2–3h; <strong>alternativa:</strong> chiedere sempre quando due candidati restano plausibili. Addestrare/calibrare un classificatore selettivo richiede etichette adeguate; una soglia manuale è una policy euristica.</li>
+</ul>
+<h3 id="methods-r5-gibbs-e-candes-2021-adaptive-conformal-inference">R5 — Gibbs e Candès, 2021: adaptive conformal inference</h3>
+<p><a href="https://proceedings.neurips.cc/paper_files/paper/2021/hash/0d441de75945e5acbc865406fc9a2559-Abstract.html">Adaptive Conformal Inference Under Distribution Shift, NeurIPS</a>, <a href="https://papers.nips.cc/paper/2021/file/0d441de75945e5acbc865406fc9a2559-Paper.pdf">testo, proposizione 4.1</a>.</p>
+<ul>
+<li><strong>Risultato:</strong> un aggiornamento online del livello nominale controlla la frequenza empirica degli errori sul lungo periodo anche con distribuzione variabile.</li>
+<li><strong>Non dimostra:</strong> copertura condizionale domani per questo SKU, intervalli stretti o affidabilità dopo pochi esempi. La formalizzazione ammette insiemi estremi, anche non informativi.</li>
+<li><strong>Qui:</strong> possibile wrapper futuro del forecast, con aggiornamenti solo quando arriva l’esito; i target a 14 giorni non sono disponibili domani.</li>
+<li><strong>24h:</strong> prototipo 3–5h con feedback semplice; ritardi e censura richiedono lavoro ulteriore. <strong>Alternativa:</strong> scenari dichiarati e monitoraggio degli errori, senza percentuali di copertura promesse.</li>
+</ul>
+<h3 id="methods-r6-barber-candes-ramdas-e-tibshirani-2023-oltre-lexchangeability">R6 — Barber, Candès, Ramdas e Tibshirani, 2023: oltre l’exchangeability</h3>
+<p><a href="https://doi.org/10.1214/23-AOS2276">Conformal prediction beyond exchangeability, Annals of Statistics</a>, <a href="https://arxiv.org/abs/2202.13415">manoscritto originale, preprint 2022</a>.</p>
+<ul>
+<li><strong>Risultato:</strong> conformal pesato e randomizzazione con limiti alla perdita di copertura legati alla non-exchangeability, espressa mediante distanze fra distribuzioni.</li>
+<li><strong>Non dimostra:</strong> che assegnare più peso ai dati recenti dia automaticamente copertura nominale sotto drift arbitrario; il bound può essere poco informativo.</li>
+<li><strong>Qui:</strong> giustifica distinguere calibrazione marginale, drift e segmenti operativi. Pooling fra paesi/stagioni richiede verifica, non soltanto più righe.</li>
+<li><strong>24h:</strong> score e quantili pesati 3–5h, validazione sostanziale oltre il budget; <strong>alternativa:</strong> quantili storici descrittivi con numerosità e finestra esposte. Non chiamarli garantiti.</li>
+</ul>
+<h3 id="methods-r7-gibbs-e-candes-2024-adattamento-locale-piu-recente">R7 — Gibbs e Candès, 2024: adattamento locale più recente</h3>
+<p><a href="https://www.jmlr.org/papers/v25/22-1218.html">Conformal Inference for Online Prediction with Arbitrary Distribution Shifts, JMLR 25(162)</a>, <a href="https://www.jmlr.org/papers/volume25/22-1218/22-1218.pdf">testo</a>.</p>
+<ul>
+<li><strong>Risultato:</strong> DtACI adatta il passo di aggiornamento; il lavoro fornisce garanzie di regret su intervalli locali e sperimentazioni sotto cambiamento di distribuzione.</li>
+<li><strong>Non dimostra:</strong> copertura esatta su ciascun periodo di 1–14 giorni, né risolve feedback censurato o prodotto nuovo senza etichette. Regret e copertura condizionale sono proprietà diverse.</li>
+<li><strong>Qui:</strong> roadmap dopo aver costruito feedback temporale e benchmark; nessun vantaggio del paper va riportato come risultato del prototipo.</li>
+<li><strong>24h:</strong> integrazione/validazione 6–10h o più; <strong>alternativa:</strong> nessun adattamento sofisticato, ma indicatore di errore recente e astensione quando i dati non sostengono una stima.</li>
+</ul>
+<h3 id="methods-r8-howard-1966-valore-dellinformazione">R8 — Howard, 1966: valore dell’informazione</h3>
+<p><a href="https://ieeexplore.ieee.org/document/4082064/">Information Value Theory, IEEE Transactions on Systems Science and Cybernetics</a>, <a href="https://doi.org/10.1109/TSSC.1966.300074">DOI</a>. Verificato l’abstract dell’editore indicizzato; accesso diretto integrale limitato.</p>
+<ul>
+<li><strong>Risultato:</strong> il valore di ridurre l’incertezza dipende congiuntamente da probabilità e conseguenze economiche; i valori delle informazioni non sono necessariamente additivi.</li>
+<li><strong>Non dimostra:</strong> che una domanda al negozio sia utile solo perché riduce l’entropia, né fornisce probabilità/costi per questo caso.</li>
+<li><strong>Qui:</strong> chiedere «quale taglia?» o «stock fisico confermato?» se la risposta può cambiare un’azione ancora eseguibile prima del cutoff.</li>
+<li><strong>24h:</strong> EVSI su pochi stati con probabilità esplicite, 2–4h; <strong>alternativa:</strong> confrontare le decisioni nei diversi scenari e chiedere quando cambiano. Quest’ultimo è triage per sensibilità, non EVSI stimato.</li>
+</ul>
+<h3 id="methods-r9-elmachtoub-e-grigas-2022-apprendere-per-la-decisione">R9 — Elmachtoub e Grigas, 2022: apprendere per la decisione</h3>
+<p><a href="https://doi.org/10.1287/mnsc.2020.3922">Smart “Predict, then Optimize”, Management Science 68(1)</a>, <a href="https://arxiv.org/abs/1710.08005">manoscritto degli autori</a>, <a href="https://par.nsf.gov/servlets/purl/10339524">versione pubblicata nel repository NSF</a>.</p>
+<ul>
+<li><strong>Risultato:</strong> propone una loss sull’errore decisionale e il surrogato convesso SPO+, con risultati di consistenza sotto ipotesi e confronti sperimentali su cammini e portafogli.</li>
+<li><strong>Non dimostra:</strong> miglioramento universale per logistica retail, né equivalenza fra minimizzare WAPE e minimizzare danno operativo.</li>
+<li><strong>Qui:</strong> usare costi e vincoli per valutare le opzioni; eventualmente in futuro apprendere l’overlay sui residui usando una loss decisionale.</li>
+<li><strong>24h:</strong> training SPO+ con ottimizzatore e dati appropriati, &gt;1 giornata; <strong>alternativa:</strong> enumerare azioni e confrontare costi per scenario, 2–4h. Un solver deterministico senza training non è decision-focused learning.</li>
+</ul>
+<h3 id="methods-r10-besbes-e-muharremoglu-2013-il-valore-di-sapere-che-la-domanda-e-censurata">R10 — Besbes e Muharremoglu, 2013: il valore di sapere che la domanda è censurata</h3>
+<p><a href="https://business.columbia.edu/faculty/research/implications-demand-censoring-newsvendor-problem">On Implications of Demand Censoring in the Newsvendor Problem, Management Science; fonte degli autori Columbia</a>.</p>
+<ul>
+<li><strong>Risultato:</strong> nel loro newsvendor ripetuto con domanda discreta, confrontano domanda osservata, sole vendite e vendite con indicatore di lost sales. Nei setting analizzati il miglior regret passa da crescita logaritmica con sole vendite a limitato con informazione aggiuntiva.</li>
+<li><strong>Non dimostra:</strong> che basti qualsiasi email rumorosa, o che i risultati valgano senza ipotesi in un sistema multi-negozio non stazionario.</li>
+<li><strong>Qui:</strong> trattare il flag di censura come informazione utile anche senza inventare quante unità siano state perse.</li>
+<li><strong>24h:</strong> flag, provenienza e policy conservativa 1–2h; algoritmo di apprendimento del paper non prioritario. <strong>Alternativa:</strong> non aggiornare verso il basso la domanda usando giorni sicuramente censurati.</li>
+</ul>
+<h3 id="methods-r11-sachs-e-minner-2014-stimare-lost-sales-usando-tempi-di-vendita">R11 — Sachs e Minner, 2014: stimare lost sales usando tempi di vendita</h3>
+<p><a href="https://www.sciencedirect.com/science/article/abs/pii/S092552731300203X">The data-driven newsvendor with censored demand observations, International Journal of Production Economics 149</a>.</p>
+<ul>
+<li><strong>Risultato:</strong> combina pattern intragiornalieri, variabili esogene e programmazione lineare per stimare vendite perse e livelli di scorta; riporta vantaggi nei confronti numerici e su dati retail studiati.</li>
+<li><strong>Non dimostra:</strong> identificazione della domanda da soli saldi serali, né validità dei pattern intraday nel luxury a basso volume.</li>
+<li><strong>Qui:</strong> estensione possibile se POS orario e momento dello stockout sono affidabili. «Esaurito da mezzogiorno» informa il tempo di esposizione, non un moltiplicatore universale.</li>
+<li><strong>24h:</strong> 6–10h con dati adeguati, altrimenti da rimandare; <strong>alternativa:</strong> annotare la censura e mostrare scenari, mantenendo separati i conteggi espliciti delle richieste.</li>
+</ul>
+<h3 id="methods-r12-tashman-2000-valutazione-fuori-campione-temporale">R12 — Tashman, 2000: valutazione fuori campione temporale</h3>
+<p><a href="https://www.sciencedirect.com/science/article/pii/S0169207000000650">Out-of-sample tests of forecasting accuracy: an analysis and review, International Journal of Forecasting 16(4)</a>.</p>
+<ul>
+<li><strong>Risultato:</strong> analizza scelte di valutazione fuori campione e raccomanda origini mobili e più periodi per ridurre la dipendenza da una singola origine; distingue aggiornamento, ricalibrazione e selezione del metodo.</li>
+<li><strong>Non dimostra:</strong> che un generico split temporale elimini leakage da revisioni, report pubblicati tardi o tuning sul test.</li>
+<li><strong>Qui:</strong> replay a timestamp fissati, target per orizzonte e separazione di sviluppo, calibrazione e test; aggiungere la separazione per negozio prevista dal README.</li>
+<li><strong>24h:</strong> harness minimo 3–5h; <strong>alternativa:</strong> poche origini congelate e auditabile selezione delle fonti. È un test limitato, non una stima della performance in produzione.</li>
+</ul>
+</div></details><details id="methods-3-fronte-1-residui-e-nowcasting-senza-sostituire-il-forecast"><summary>3. Fronte 1 — residui e nowcasting senza sostituire il forecast</summary><div class="section-body">
+<h3 id="methods-baseline-e-granularita">Baseline e granularità</h3>
+<p>Il dataset documenta forecast <strong>SKU-colore × negozio × settimana</strong>, mentre il design calcola per giorno e taglia. Prima di qualsiasi correzione fissare: vintage disponibile, unità fisiche o valore, settimana di riferimento, calendario di apertura e granularità. Non sommare livelli regione/store/SKU che il README dichiara non riconciliati.</p>
+<p>Per una disaggregazione dimostrativa, usare pesi giornalieri non negativi <code>p_d</code> che sommano a 1 nella settimana e pesi taglia <code>p_size</code> che sommano a 1 per articolo-colore. Stimare questi pesi solo sul passato disponibile e in condizioni di disponibilità adeguata; in alternativa usare una policy uniforme sui giorni aperti e dichiarare l’assunzione. Senza curva taglie credibile, lasciare la previsione al livello colore e proporre azioni di taglia solo su evidenze specifiche. Non moltiplicare la quantità totale per ciascuna taglia.</p>
+<h3 id="methods-diagnostica-minima-proposta">Diagnostica minima proposta</h3>
+<p>Per osservazioni con vendite di unità non censurate, complete e disponibili, confrontare <code>e_t = y_t − f_{v(t),t}</code>: il forecast deve essere quello utilizzabile al momento della decisione, non l’ultimo file del repository. Per confrontare serie con scale diverse:</p>
+<pre><code class="language-text">m = mediana dei residui nel passato ammissibile
+s = max(epsilon, 1.4826 * mediana(|e - m|))
+z_t = (e_t - m) / s
+C_t = max(0, C_(t-1) + clip(z_t, -c, c) - k)
+alert se C_t &gt; h
+</code></pre>
+<p>È un <strong>CUSUM robustificato proposto per il prototipo</strong>, non una garanzia statistica derivata da R1/R2. <code>epsilon</code>, <code>c</code>, <code>k</code>, <code>h</code>, finestra e reset vanno fissati sul dev. Conservare separatamente <code>m</code>: centrare i residui nasconde al detector un bias stabile, che è comunque informazione utile. Con molte serie quasi sempre zero, MAD può essere zero e i giorni pochi: aggregare a colore/store o a una finestra più lunga; non usare z-score come probabilità o p-value. Su dati mancanti non inserire uno zero; su dati censurati sospendere l’aggiornamento e mantenere l’età dello stato.</p>
+<p>Per un overlay quantitativo minimo, usare un solo offset robusto smorzato, stimato dal passato non censurato, oppure un unico fattore scenario per caso; non sommare correzioni diverse derivate dagli stessi fatti. Ad esempio <code>f_scenario(T+h) = max(0, f_base(T+h) + b_scenario * decay(h))</code>, con <code>b</code> in unità/giorno e scadenza esplicita. Una nota qualitativa senza quantità può aprire un caso e modificarne la priorità senza cambiare il forecast.</p>
+<p>La nota arriva prima della certificazione, quindi può produrre un nowcast informativo anche senza un residuo odierno. Non fabbricare <code>y_D</code> usando il dato di domani. Un’affermazione di fatturato nella mail è una misura provvisoria distinta, non la vendita certificata e non necessariamente una quantità di SKU.</p>
+</div></details><details id="methods-4-fronte-2-incertezza-astensione-e-valore-delle-verifiche"><summary>4. Fronte 2 — incertezza, astensione e valore delle verifiche</summary><div class="section-body">
+<h3 id="methods-quattro-incertezze-separate">Quattro incertezze separate</h3>
+<p>Conservare distintamente: identità del prodotto; attendibilità e completezza della fonte; variabilità della domanda; stato e tempi logistici. Tre mail che citano lo stesso messaggio originario non sono tre conferme indipendenti. Il meteo coerente con una nota può essere contesto utile, ma alzare automaticamente la confidence di un livello resta un’euristica, non un aggiornamento bayesiano.</p>
+<p>Per M4: usare candidati dal catalogo con priorità all’assortimento, ma mantenere un fallback fuori assortimento e l’opzione «nessuno dei candidati». Il README documenta richieste per prodotti non venduti dal negozio: restringere rigidamente all’assortimento impedisce il match corretto. Separare assenza di prodotto, prodotto ignoto e ambiguità. Nessuna soglia del reranker va presentata come «90% sicuro» senza verifica indipendente. R4 motiva l’astensione, non certifica questi score.</p>
+<h3 id="methods-quando-avrebbe-senso-conformal">Quando avrebbe senso conformal</h3>
+<p>Per un predictor congelato e score assoluti di calibrazione, lo split conformal usa l’ordine <code>ceil((n+1)*(1-alpha))</code> degli <code>n</code> errori; se l’indice supera <code>n</code>, il caso formale non si risolve tagliandolo arbitrariamente all’ultimo elemento. La copertura marginale standard richiede exchangeability. R6 descrive sia questo quadro sia i limiti oltre tale ipotesi.</p>
+<p><strong>Qui manca spesso il target:</strong> se calibrato su vendite censurate, l’intervallo riguarda vendite, non domanda latente. Se si selezionano solo giorni in-stock, cambia la popolazione di calibrazione. Inoltre gli orizzonti sovrapposti sono dipendenti: sommare intervalli giornalieri all’80% non produce un intervallo all’80% per il totale settimanale. Calibrare direttamente il target dell’orizzonte e registrare numerosità, periodo, gruppi ed errori; sotto drift esporre copertura empirica e ampiezza, senza promessa nominale automatica. Per la demo è preferibile una banda di scenario onesta a una calibrazione non sostenuta dai dati. R5–R7 sono roadmap, non requisito della vertical slice.</p>
+<h3 id="methods-priorita-operativa-e-domanda-al-negozio">Priorità operativa e domanda al negozio</h3>
+<p>Proposta euristica leggibile: prima casi con rischio di violare una policy o stock non verificato; poi casi con finestra d’azione in chiusura e beneficio plausibile; infine monitoraggio. Dentro ogni classe ordinare per conseguenza stimata, mostrando ipotesi e dati mancanti. Non inventare un unico score probabilistico da fattori non calibrati.</p>
+<p>Una scadenza operativa è <code>decision_due_at = required_arrival_at − lead_time − handling_buffer</code>, corretta per cutoff, weekend e dogane. Una domanda che riceverà risposta dopo questa scadenza non ha lo stesso valore di una verifica immediata.</p>
+<p>Se esistono probabilità e costi difendibili, la riduzione attesa di perdita prima del costo della verifica è:</p>
+<pre><code class="language-text">EVSI = min_a E[L(a, theta)]
+       - E_z[min_a E[L(a, theta) | z]]
+valore netto = EVSI - costo_verifica - costo_ritardo
+</code></pre>
+<p>È una specializzazione decisionale coerente con R8. Il ritardo può anche cambiare l’insieme delle azioni fattibili: in tal caso va modellato dentro la seconda ottimizzazione, evitando un doppio conteggio. Senza probabilità, valutare se l’azione migliore cambia fra scenari plausibili: se cambia per identità della taglia, stock fisico o ETA, chiedere quel dato. Se non cambia, la verifica può avere bassa priorità. Chiamarlo <strong>sensibilità della decisione</strong>, non valore atteso misurato.</p>
+</div></details><details id="methods-5-fronte-3-censura-e-simulazione-delle-azioni"><summary>5. Fronte 3 — censura e simulazione delle azioni</summary><div class="section-body">
+<h3 id="methods-domanda-vendite-e-richieste-non-sono-lo-stesso-oggetto">Domanda, vendite e richieste non sono lo stesso oggetto</h3>
+<p>Nel modello semplificato <code>Y = min(D, A)</code>, <code>A</code> è disponibilità vendibile durante il periodo, non saldo ERP serale. Se si esauriscono le scorte, si osserva un vincolo sulla domanda, non il suo valore. Arrivi intraday, prenotazioni, resi, sostituzioni e inventario fantasma rendono la situazione più complessa. I resi vanno separati dalle vendite lorde di unità: il net sales economico può essere negativo e non è un conteggio Poisson.</p>
+<p>Una richiesta insoddisfatta documentata può essere utile come limite inferiore <strong>solo</strong> se corrisponde a intenzione di acquisto, quantità e periodo definiti, senza duplicati o successiva conversione già contata. Un generico «molti chiedono il nero» non è tale limite e non dà un limite superiore finito. Assenza di note non equivale ad assenza di domanda. R10–R11 sostengono l’importanza dell’osservazione della censura; non autorizzano a imputare automaticamente tutte le vendite perse.</p>
+<p>Per una futura likelihood censurata discreta, una vendita non censurata <code>y</code> contribuisce <code>P(D=y | theta)</code>; una vendita al limite <code>A</code> contribuisce <code>P(D&gt;=A | theta)</code> quando si sa solo che l’inventario è esaurito. Un indicatore affidabile di domanda persa strettamente positiva implica invece <code>P(D&gt;A | theta)</code>. Con <code>A=0</code>, il primo evento non informa sulla quantità. Sostituire tutto con <code>P(D=A)</code> sottostima la coda. Questa è una derivazione dal modello semplificato, non un algoritmo validato sul dataset.</p>
+<h3 id="methods-confronto-fattibile-delle-opzioni">Confronto fattibile delle opzioni</h3>
+<p>Per ciascuno scenario <code>s</code>, destinazione e donatore, simulare una <strong>sequenza giornaliera</strong> di domanda <code>d_(s,h)</code> e arrivi, non soltanto un totale:</p>
+<pre><code class="language-text">available_(s,h) = ending_stock_(s,h-1) + sellable_arrivals_(s,h) - outbound_(s,h)
+served_(s,h)    = min(demand_(s,h), max(0, available_(s,h)))
+lost_(s,h)      = demand_(s,h) - served_(s,h)
+ending_stock   = max(0, available_(s,h) - served_(s,h))
+</code></pre>
+<p>Le quantità iniziali sono già al netto delle prenotazioni non disponibili; non sottrarle due volte. Definire l’ordine intraday: nello schema gli arrivi precedono le vendite; un arrivo a chiusura va al giorno seguente. Per lost sales la domanda non servita non si accumula come backlog, salvo un modello separato di waitlist confermata.</p>
+<p>Controllare stock fisico/ATP, quality hold, taglia ed EAN, ID cross-system, lead time della lane, cutoff, dogana, ricevimenti parziali, riserve e policy di scarsità. Il donatore va protetto lungo tutto il periodo, non solo tramite il saldo finale. Riservare le unità anche fra più proposte contemporanee: ogni card isolata può essere fattibile e l’insieme impossibile.</p>
+<p>Enumerare <code>hold</code>, verifica, DC, trasferimento e combinazione. Per ogni scenario confrontare perdita da mancato servizio, costo trasporto, rischio imposto al donatore ed eccedenza. Senza probabilità riportare «unità non servite nello scenario s»; con probabilità esplicite si può calcolare un’attesa. Una scelta robusta può minimizzare il peggior costo o regret sul piccolo insieme di scenari, ma resta robusta <strong>rispetto a quell’insieme</strong>, non rispetto a qualsiasi futuro. Il punto di R9 è l’obiettivo decisionale; qui non si addestra SPO.</p>
+</div></details><details id="methods-6-audit-di-project-designmd"><summary>6. Audit di project-design.md</summary><div class="section-body">
+<p>Le seguenti sono osservazioni sul design letto, non modifiche al file.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Tabella scorribile"><table>
+<thead>
+<tr>
+<th>Punto</th>
+<th>Diagnosi</th>
+<th>Correzione minima proposta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>§5.1, esempio del decadimento</td>
+<td><strong>Aritmetica corretta:</strong> somma per t=1…7 = 4.803557845; estremi 8.601185948 e 10.202371897. Q con peso 0.8 = 9.882134707, arrotondato a 10; con SS=1 il fabbisogno illustrato è 11.</td>
+<td>Conservare i conti; chiarire che sono scenari sotto assunzioni.</td>
+</tr>
+<tr>
+<td>§5.1, <code>D = sales + reported unmet</code></td>
+<td>«Realized demand» è troppo forte: richieste incomplete, vague o duplicate; finestre delle note e delle vendite possono differire. Il dato odierno certificato non esiste ancora.</td>
+<td>Chiamare proxy/scenario; allineare periodo, granularità e disponibilità. Se impossibile, niente rapporto numerico.</td>
+</tr>
+<tr>
+<td>§5.1, prior <code>alpha = F</code></td>
+<td>Se F=0, denominatore nullo. Con F&gt;0, <code>r=(D/F+1)/2</code>: dà sempre metà peso al rapporto osservato, non una shrinkage progressivamente minore al crescere dei conteggi.</td>
+<td>Caso cold-start separato; pseudo-esposizione fissa positiva oppure dichiarare esplicitamente il blending al 50%.</td>
+</tr>
+<tr>
+<td>§5.1, somma degli uplift</td>
+<td>Il clamp dei singoli ratio non limita la somma: più segnali negativi possono rendere <code>1+sum(u)&lt;0</code>; duplicati o fattori correlati gonfiano l’aumento.</td>
+<td>Fusione per caso/fatto, una correzione per informazione; vincolo finale di non negatività e cap di policy sul totale.</td>
+</tr>
+<tr>
+<td>§5.1, <code>last_seen</code></td>
+<td>Forward e ripetizioni possono ringiovanire indefinitamente un segnale.</td>
+<td>Separare ultima ricezione, nuova conferma indipendente e validità del fatto; dedup prima del decadimento.</td>
+</tr>
+<tr>
+<td>§5.1, traffico</td>
+<td>Se le vendite già ridotte producono ratio &lt;1 e si moltiplica anche per 0.5, il danno viene contato due volte. Assumere vendite proporzionali al traffico ignora conversione e mix.</td>
+<td>Separare opportunità di vendita locale e domanda/preferenza latente; usare il 50% come scenario di esposizione.</td>
+</tr>
+<tr>
+<td>§5.1, «exclude from learning»</td>
+<td>Escludere ogni disruption è una policy forte; in futuro si potrebbe imparare a prevederne l’effetto tramite covariate.</td>
+<td>Annotare e mascherare nel fit semplice attuale, senza affermare che l’esclusione sia universalmente ottima.</td>
+</tr>
+<tr>
+<td>§5.2, quantile uniforme</td>
+<td><code>low + CR*(high-low)</code> è il quantile di una <strong>uniforme assunta</strong>. Un range qualitativo non definisce una distribuzione; un intervallo all’80% non è il supporto completo di una uniforme.</td>
+<td>Chiamare il peso «prudenza» e fare analisi di scenario; usare «service quantile» solo con una distribuzione giustificata.</td>
+</tr>
+<tr>
+<td>§5.2, critical ratio e SS</td>
+<td>CR è la soluzione newsvendor con specifici costi marginali e ipotesi; non prova ottimalità multi-periodo/con trasporti. Un SS aggiuntivo può contare due volte il buffer di rischio.</td>
+<td>Separare costo sottoscorta, sovrascorta e trasporto; SS come vincolo di policy, con effetto visibile. CR non equivale al fill rate.</td>
+</tr>
+<tr>
+<td>§5.2, «stock + arrivals − Q per day»</td>
+<td>Q nel contratto è un totale su H: sottrarlo ogni giorno moltiplica il consumo per H.</td>
+<td>Definire <code>q_h</code> o traiettorie di domanda e garantire che sommino al totale H.</td>
+</tr>
+<tr>
+<td>§5.2, inbound entro H</td>
+<td>Un arrivo il giorno H non soddisfa la domanda persa il giorno 1. Perdita attesa non si ottiene da una sola traiettoria di quantili.</td>
+<td>Simulazione giornaliera, semantica lost sales/backorder, etichette per scenario.</td>
+</tr>
+<tr>
+<td>§5.2, donatori e raccomandazione</td>
+<td>La formula finale non prova fattibilità temporale; minimizzare sole unità perse ignora costo trasporto e danno agli altri negozi.</td>
+<td>Controllare intera traiettoria, stock condiviso e costi; mostrare trade-off anche quando non monetizzabile.</td>
+</tr>
+<tr>
+<td>§5.3, Gamma-Poisson</td>
+<td><code>Gamma(2,4)</code> → <code>Gamma(11,11)</code> dopo 9 osservazioni in 7 giorni è corretto <strong>per conteggi Poisson completi</strong>. Conteggi inventati da testo/censurati violano il modello.</td>
+<td>Solo dimostrazione condizionata al modello; non presentare l’inviluppo dei posterior low/high come intervallo calibrato.</td>
+</tr>
+<tr>
+<td>§5.3, distribuzione predittiva</td>
+<td>Per un futuro totale di H giorni: NB con shape a', parametro p=b'/(b'+H), media H*a'/b'. Quantili di lambda e di domanda futura non sono intercambiabili.</td>
+<td>Dichiarare parametrizzazione, orizzonte e likelihood; evitare una banda sulla sola intensità etichettata come domanda.</td>
+</tr>
+<tr>
+<td>§3.2 M4/M5</td>
+<td>Candidate set ristretto esclude richieste fuori assortimento; dedup senza taglia/episodio può fondere eventi distinti. Stock ERP vecchio positivo non prova phantom inventory attuale.</td>
+<td>Fallback catalogo, dedup per fatto/taglia/periodo; «possibile discrepanza» con timestamp e verifica fisica.</td>
+</tr>
+<tr>
+<td>§1.1 e §7</td>
+<td>«Le note vedono tutto» e «il forecast non vede nulla di nuovo» sono generalizzazioni. «Mai rilevato» non è osservabile da un test finito.</td>
+<td>Trattarle come ipotesi locali; riportare omissioni e «non rilevato entro la fine del replay».</td>
+</tr>
+<tr>
+<td>§7.2, baseline sales-only</td>
+<td>Tre giorni &gt;1.5× forecast possono essere un comparatore arbitrariamente lento. Zero vendite non prova stockout, e stockout non rivela la sua domanda persa.</td>
+<td>Aggiungere un comparatore robusto e uno operativo con stock, a pari budget di falsi alert; distinguere tipo di informazione.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Un ulteriore limite: substring valida al 100% verifica la provenienza testuale, <strong>non</strong> la correttezza dell’interpretazione o del collegamento. Zero errori osservati su venti note non dimostra rischio zero in produzione.</p>
+</div></details><details id="methods-7-vertical-slice-raccomandata-per-24-ore"><summary>7. Vertical slice raccomandata per 24 ore</summary><div class="section-body">
+<p><strong>Percorso:</strong> email multilingue rumorosa + tabella ERP + un report con definizione esplicita + contesto esterno disponibile → claim con prove → caso deduplicato → priorità e scadenza → interrogazione di stock/logistica → confronto di scenari → card di decisione 1–14 giorni.</p>
+<ol>
+<li><strong>Intake ristretto ma eterogeneo.</strong> Supportare davvero <code>.eml</code> e un formato strutturato CSV/XLSX. Per il report, conservare periodo, definizione, valuta/IVA e data di pubblicazione; se incompatibile, mostrare il conflitto senza fondere i numeri. Una fonte esterna serve come contesto versionato. Dichiarare eventuali adapter mocked.</li>
+<li><strong>Estrazione e astensione.</strong> LLM estrae span, tipo, periodo e attributi; codice valida. Collegamento con candidati e possibilità di domanda. Fonti ripetute non aumentano automaticamente la forza.</li>
+<li><strong>Caso operativo.</strong> Un episodio con stato, autore/fonte, fatti indipendenti, prima conoscibilità, stock da verificare, deadline. Separare domanda, impedimento operativo e qualità del dato.</li>
+<li><strong>Baseline e scenari.</strong> Forecast dato in ingresso, nessun retraining long-term. Diagnostica robusta se il passato è osservabile; assenza di dati produce astensione, non precisione fittizia.</li>
+<li><strong>Agente investigatore.</strong> Sceglie quale verifica è utile fra identità, stock, ETA e policy; tool deterministici restituiscono dati filtrati <code>as_of</code>. Massimo di chiamate, trace e fallback a flusso fisso. La domanda al negozio è simulata nella demo, nessuna comunicazione reale.</li>
+<li><strong>Azioni.</strong> Verifica/monitoraggio/hold hanno dignità di risultati. Trasferimento e DC compaiono solo dopo controlli; output draft sottoposto a decisione umana.</li>
+</ol>
+<p><strong>Card minima:</strong> cosa sappiamo; cosa è incerto; da quando lo sappiamo; baseline e ipotesi dei tre scenari; azioni ammesse; quantità/arrivo e unità perse per scenario; danno possibile al donatore; prossima verifica; termine utile; evidenze e timestamp. Evitare termini implementativi nell’esperienza del planner.</p>
+<p><strong>Ordine di lavoro consigliato:</strong> ore 0–3 contratti temporali e un flusso completo; 3–8 parsing/claim/linking; 8–12 casi e residui/scenari; 12–16 disponibilità/ETA e simulazione; 16–18 replay e ablation; 18–24 verifica, congelamento e demo. È un piano indicativo per il team, con attività in parallelo, non una promessa di completare tutti i moduli del design. Tagliare prima BOCPD, training SPO, conformal adattivo, cold start bayesiano e riconciliazione universale. Conservare ingestione eterogenea minima, astensione, disponibilità temporale, fattibilità e audit.</p>
+</div></details><details id="methods-8-protocollo-temporale-senza-leakage"><summary>8. Protocollo temporale senza leakage</summary><div class="section-body">
+<h3 id="methods-due-date-piu-la-scadenza-operativa">Due date, più la scadenza operativa</h3>
+<p>Ogni fatto deve avere almeno <strong>quando vale/è accaduto</strong> (<code>event_time</code> o intervallo e <code>business_date</code>) e <strong>quando il sistema poteva conoscerlo</strong> (<code>available_at</code>, UTC). Per evitare equivoci, <code>decision_due_at</code> è una terza nozione: scadenza dell’azione, non pubblicazione del dato.</p>
+<p>Campi aggiuntivi utili: <code>issued_at</code>, <code>received_at</code>, <code>version</code>, <code>supersedes</code>, <code>availability_basis</code>, <code>source_id</code>, <code>as_of</code>. Una previsione meteo per domani è ammissibile se emessa oggi: il target futuro non la rende leakage. Un report su settembre uscito il 6 ottobre non è ammissibile il 30 settembre.</p>
+<p>Regola del replay: filtrare prima del retrieval e dei tool, non solo nella UI, per <code>available_at &lt;= T</code>. Scegliere fra le versioni ammissibili la più recente. Una rettifica arrivata dopo T non cancella retroattivamente il dato che vedeva il decisore a T. Dati derivati hanno disponibilità almeno pari al massimo dei loro input e all’effettivo tempo di elaborazione. Un chiarimento simulato deve essere disponibile dopo la domanda, non recuperato dal futuro.</p>
+<p>Applicazione alle fonti documentate nel README:</p>
+<ul>
+<li>Vendite, KPI, traffico e inventario: rispettare almeno il ritardo D−1 indicato; un posting più tardivo prevale. Per dati di fine giornata la data non basta a rappresentare un cutoff intraday.</li>
+<li>Email: data di ricezione se affidabile; nel dataset usare il proxy <code>Date:</code> prescritto dal README, conservando questa limitazione. Non usare mtime del filesystem come pubblicazione storica.</li>
+<li>Forecast: run/vintage già emesso, con ipotesi conservativa se manca l’ora. Mai applicare un run futuro a un’origine passata.</li>
+<li>Turismo e report: data di pubblicazione, non mese di riferimento. Per social/news distinguere pubblicazione e raccolta: se il sistema raccoglie dopo, non era disponibile prima.</li>
+<li>Sistemi/logistica: distinguere pianificato, previsto e realizzato. Un ETA noto allora è utilizzabile; l’actual arrival conosciuto dopo non è una feature retroattiva.</li>
+<li>Quando la disponibilità è ignota, escludere dal replay rigoroso oppure dichiarare una convenzione conservativa. Non retrodatare la fonte per completare la demo.</li>
+</ul>
+<h3 id="methods-split-origini-e-confronti">Split, origini e confronti</h3>
+<p>Il protocollo seguente è una nostra applicazione al repository dei principi di R3/R12, non una procedura già eseguita.</p>
+<ol>
+<li>Congelare gli store dev/hold-out del README. Lo split per negozio non basta: fissare anche finestre temporali di sviluppo, eventuale calibrazione e test. Nessuna consultazione delle risposte nascoste da parte di prompt, agenti o prodotto.</li>
+<li>Congelare mapping dei quantificatori, soglie, prompt e costi prima del test. I casi nel README sono materiale di progettazione, non scoperta cieca. Aggiungere note indipendenti scritte senza conoscere eventi/piantature e dichiarare comunque il limite sintetico.</li>
+<li>A ogni origine T calcolare solo feature conoscibili a T. Per training/calibrazione usare target di H giorni solo quando l’intero target e il relativo ritardo di certificazione sono maturati. Un gap fisso di 14 giorni non sostituisce questa verifica.</li>
+<li>Valutare H=1, 3, 7, 14 separatamente; le ultime origini con target incompleto restano pending. Origini sovrapposte non sono repliche indipendenti: non produrre error bar i.i.d. aggregando tutte le righe.</li>
+<li>Confrontare: forecast invariato + policy stock; numeri con detector robusto; numeri + note; numeri + note + contesto/report; pipeline con chiarimento. Mantenere identici disponibilità, vincoli e costi, salvo la fonte aggiunta. Il confronto con stock va chiamato baseline operativa, non sales-only.</li>
+<li>Per il tempo di anticipo, confrontare detector sullo <strong>stesso evento/obiettivo</strong> e a carico di falsi alert comparabile sul dev. Riportare <code>t_baseline_detect - t_pipeline_detect</code> in tempo UTC e il tempo residuo per agire; separare conoscenza dell’esaurimento e quantificazione di domanda persa.</li>
+<li>Se un evento non viene rilevato entro T_end, riportare «non rilevato entro T_end» e, se pertinente, un limite inferiore all’anticipo, senza assegnargli infinito o inserirlo come numero in una media.</li>
+<li>Solo il valutatore separato M14 può confrontare output congelati con ground truth. Per stimare l’esito di una diversa azione serve una simulazione controfattuale coerente: non si possono cambiare trasferimenti e contemporaneamente riutilizzare come immutabili gli stock storici. Se manca il simulatore, limitarsi a fattibilità e ranking su scenari.</li>
+</ol>
+<h3 id="methods-metriche-che-rispondono-alla-challenge">Metriche che rispondono alla challenge</h3>
+<ul>
+<li><strong>Lettura e linking:</strong> precision/recall claim, validità span, errore fra link accettati, quota accettata, quota e latenza dei chiarimenti; conteggi e risultati per lingua/tipo di ambiguità.</li>
+<li><strong>Triage:</strong> precisione dei primi K casi, eventi mancati, falsi alert per store-day, tempo umano necessario, quota di verifiche che cambiano la decisione.</li>
+<li><strong>Anticipo utile:</strong> tempo di rilevazione e margine prima della deadline logistica; arrivare prima ma dopo il cutoff può non produrre beneficio.</li>
+<li><strong>Previsione:</strong> WAPE <code>sum(abs(D-f))/sum(D)</code> sullo stesso target/unità, separato per scenario e orizzonte, solo con domanda disponibile al valutatore. Se il denominatore è zero, WAPE è indefinito: riportare MAE e quantità. Distinguere domanda realizzata e intensità media, e non selezionare post hoc il punto migliore dentro la banda.</li>
+<li><strong>Incertezza:</strong> se gli intervalli sono davvero implementati, copertura e ampiezza per orizzonte e segmento, numerosità ed esiti esclusi. Per scenari: sensibilità della decisione, senza coverage nominale.</li>
+<li><strong>Decisioni:</strong> vincoli violati, costo e unità perse in simulazione per destinatario <strong>e donatore</strong>, confronto con hold/baseline; eventuale regret rispetto a un oracle con gli stessi vincoli e informazioni future dichiarate come privilegio del solo valutatore.</li>
+<li><strong>No harm:</strong> frequenza di azioni errate sui decoy, spostamenti inutili e costo incrementale. Forecast invariato da solo non dimostra assenza di danno.</li>
+</ul>
+<p><strong>Claim sostenibile al pitch:</strong> «Su replay sintetici con fonti disponibili al momento della decisione, colleghiamo evidenze eterogenee a casi prioritizzati e confrontiamo opzioni fattibili per i prossimi 1–14 giorni. Misuriamo anticipo utile, errori e astensioni; i range manuali restano scenari. Non abbiamo addestrato un nuovo forecast long-term né dimostrato un ROI reale». I risultati numerici vanno aggiunti soltanto dopo l’esecuzione del valutatore.</p></div></details></article><article class="chapter" id="assets" role="tabpanel" aria-labelledby="tab-assets" hidden><h2>Asset Fastweb</h2><p class="chapter-label">Modelli, capacità, hosting e scelte di integrazione</p><p><em>Verifica documentale: 22 ottobre 2026. Non sono state effettuate chiamate autenticate ai modelli; disponibilità, latenza, quote e qualità sono ancora da misurare.</em></p>
+<details id="assets-fonti-e-priorita" open><summary>Fonti e priorità</summary><div class="section-body">
+<ul>
+<li><strong>Mail «Hackathon FastwebAI – accesso ai modelli Fastweb AI Factory», 14 ottobre</strong>, allegato <code>fastweb-ai-1.pdf</code>, pp. 1–2: modelli assegnati e accesso a FastwebAI Agents. L'originale contiene credenziali: non è copiato nel repository.</li>
+<li><strong>Kickoff Agent Forge h24, 12 ottobre</strong>, pagina PDF 31 (slide numerata 32) per i criteri; pagina PDF 33 (slide 34) per gli strumenti: FastwebAI Agents, Romp, API/endpoint SuperPod.</li>
+<li><strong><a href="https://drive.google.com/file/d/14IQEKxrxzUFBeamvazCG50BZjADArdPG/view">API Models Guide / ManagedInferenceFastweb.pdf</a></strong>, collegata dalla mail e letta integralmente: p. 3 API, p. 4 modelli e hosting, pp. 5–8 tools, p. 10 embedding e trascrizione, p. 11 errori. Questa è più precisa della mail su hosting e base URL.</li>
+</ul>
+<p>L'offerta pubblica MIIA/ROSS non identifica automaticamente gli strumenti assegnati al team. La <a href="https://www.fastweb.it/grandi-aziende/artificial-intelligence/fastweb-miia/">pagina pubblica MIIA</a> descrive un prodotto diverso; non è il motivo per aggiungerlo alla pipeline.</p>
+</div></details><details id="assets-mappa-degli-asset"><summary>Mappa degli asset</summary><div class="section-body">
+<div class="table-wrap" tabindex="0" role="region" aria-label="Tabella scorribile"><table>
+<thead>
+<tr>
+<th>Asset / model ID esatto</th>
+<th>Evidenza di disponibilità</th>
+<th>Uso consigliato</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>google/gemma-4-26B-A4B-it</code></td>
+<td>Mail + guida; chat, vision, tool calling; hosting <strong>EU</strong> nella guida</td>
+<td>Primo candidato per estrazione e investigatore, da confrontare su un piccolo set dev. Permette un percorso con modelli dichiarati EU.</td>
+</tr>
+<tr>
+<td><code>Qwen/Qwen3.6-35B-A3B-FP8</code></td>
+<td>Mail + guida; chat, vision, tools; già configurato in Agents; hosting <strong>extra-EU</strong>, listing fino a dicembre 2026 nella guida</td>
+<td>Alternativa pratica per la demo sintetica se passa meglio i test; adapter sostituibile.</td>
+</tr>
+<tr>
+<td><code>Qwen/Qwen3.5-397B-A17B-FP8</code></td>
+<td>Mail e configurazione Agents; assente dalla tabella della guida</td>
+<td>Eventuale escalation per ambiguità difficili. Endpoint, hosting, costo/latenza non stabiliti dalla guida: non dipendere da questo modello.</td>
+</tr>
+<tr>
+<td><code>glm-5.3-flash</code></td>
+<td>Mail + guida; chat, vision, tools; hosting extra-EU</td>
+<td>Alternativa da misurare; «flash» non dimostra latenza migliore sul servizio condiviso.</td>
+</tr>
+<tr>
+<td><code>Qwen/Qwen3.8-27B</code></td>
+<td>Mail + guida; chat, vision, tools; hosting extra-EU</td>
+<td>Ulteriore alternativa; non fare un torneo fra tutti i modelli nelle 24 ore.</td>
+</tr>
+<tr>
+<td><code>Qwen/Qwen3-VL-Embedding-2B</code></td>
+<td>Mail + guida; testo e immagini; hosting EU</td>
+<td>Matching semantico delle menzioni e retrieval delle prove. Prima testo; eventuale foto/catalogo come estensione.</td>
+</tr>
+<tr>
+<td><code>openai/whisper-large-v3-turbo</code></td>
+<td>Presente nella guida, non nella lista delle chiavi della mail</td>
+<td>Audio solo se accesso confermato e utile al caso. Non aggiungerlo al percorso obbligatorio.</td>
+</tr>
+<tr>
+<td><strong>FastwebAI Agents</strong></td>
+<td>Workspace team/comune e due modelli configurati, secondo la mail</td>
+<td>Usarlo se accelera esposizione dei tool e demo; verificare connettività al backend e supporto richiesto. API dirette come alternativa.</td>
+</tr>
+<tr>
+<td><strong>Romp</strong></td>
+<td>Elencato nel kickoff</td>
+<td>Nessuna capacità tecnica verificata nei materiali letti: non attribuirgli funzioni e non renderlo una dipendenza.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Scelta proposta:</strong> embedding Qwen + un modello chat principale. Gemma è il primo candidato documentato EU; Qwen 3.6 è un'alternativa già configurata per dati sintetici. Il 397B è un esperimento opzionale, non una prova di maggiore qualità per questo task. I ruoli sopra sono scelte progettuali, non benchmark dei modelli.</p>
+</div></details><details id="assets-quattro-dettagli-che-evitano-lavoro-perso"><summary>Quattro dettagli che evitano lavoro perso</summary><div class="section-body">
+<ol>
+<li><strong>Host discordanti.</strong> La mail indica <code>https://spod.ai-factory.fastweb.it/v1</code>, ma il suo esempio curl usa <code>bpod1</code>. La guida usa <code>spod</code> in modo coerente: usarlo come configurazione iniziale e verificare l'accesso. Non concatenare due volte <code>/v1</code>.</li>
+<li><strong>Supporto tools ≠ JSON garantito.</strong> La guida documenta tool calling; non garantisce un particolare <code>response_format</code> con schema rigido. Validazione applicativa, un retry e poi astensione. Non assumere compatibilità completa con ogni opzione di SDK terzi.</li>
+<li><strong>Hosting per modello.</strong> Il marchio Fastweb sull'endpoint non implica che ogni inferenza avvenga in Italia o in UE. Per un futuro percorso EU scegliere esplicitamente modelli indicati EU e verificare anche app, log e storage. È una proprietà da verificare sull'intera configurazione, non una certificazione del prototipo.</li>
+<li><strong>Limiti mancanti.</strong> Non sono specificati RPM/TPM, concorrenza, budget assegnato, latenza garantita o contesto massimo per ciascun deployment. La guida descrive 429, crediti esauriti e 503: cache e replay sono necessari alla demo.</li>
+</ol>
+</div></details><details id="assets-embedding-vantaggio-concreto-disponibile"><summary>Embedding: vantaggio concreto disponibile</summary><div class="section-body">
+<p>La guida offre <code>dimensions</code> da 64 a 2048 (default 2048) e input testuale in batch. Iniziare a 512 e confrontare recall@5 con 2048 su menzioni ambigue; mantenere fisso il numero di candidati per un confronto leggibile. Il formato completo dell'input immagine per <code>/embeddings</code> non è mostrato: la vision chat è documentata più dettagliatamente. Non confondere disponibilità del modello con verifica del payload multimodale.</p>
+<p>Il <a href="https://arxiv.org/abs/2601.04720">report Qwen3-VL-Embedding, 2026</a> descrive retrieval multimodale e multilingua; non dimostra che un'immagine identifichi in modo certo SKU, colore e taglia. Il <a href="https://github.com/QwenLM/Qwen3-VL-Embedding">repository degli autori</a> distingue embedding e reranker: il secondo non risulta assegnato dal materiale hackathon.</p>
+</div></details><details id="assets-test-di-selezione-da-fare-in-4560-minuti"><summary>Test di selezione da fare in 45–60 minuti</summary><div class="section-body">
+<p>Confrontare <strong>al massimo due modelli chat</strong> su circa 20–30 note dev con negazioni, correzioni, prodotti ambigui e più lingue. Riportare JSON valido, precisione dei claim, link errati accettati, astensioni e latenza osservata. Fare almeno una chiamata tools completa andata/ritorno. Usare un set separato per le metriche finali.</p>
+<p>Congelare la scelta e la versione del prompt dopo il test. Un piccolo campione serve a selezionare una configurazione, non a dichiarare superiorità generale o probabilità calibrate. Prevedere fallback a parsing/regole e replay chiaramente indicati.</p>
+</div></details><details id="assets-valutazione-aggiornamento-rispetto-ai-docs"><summary>Valutazione: aggiornamento rispetto ai docs</summary><div class="section-body">
+<p>Il kickoff scrive <strong>«Allineamento tecnologico con l'infrastruttura Fastweb – peso 10%»</strong>. <code>findings.md</code> §4 riporta invece una spiegazione orale in termini di bisogno di mercato. Le due evidenze vanno mantenute distinte: mostrare sia utilità economica sia uso effettivo degli endpoint Fastweb. I pesi 40% fattibilità e 20% innovazione agentica sono confermati dal kickoff.</p>
+<p>Per il pitch: una traccia di chiamate reali a modello + embedding e tool di disponibilità/logistica rende l'allineamento verificabile. Non occorre usare ogni asset disponibile.</p></div></details></article><footer class="footer">Documento di lavoro per il team. Include integralmente i quattro approfondimenti di ricerca, con riferimenti primari e limiti delle conclusioni. Le fonti del repository citate per contesto non sono allegate. Nessuna credenziale è inclusa.</footer></main><script>
+const tabs=[...document.querySelectorAll('[role=tab]')];
+const chapters=[...document.querySelectorAll('.chapter')];
+function select(id,updateHash=false){const target=document.getElementById(id);if(!target)return;const chapter=target.classList.contains('chapter')?target:target.closest('.chapter');if(!chapter)return;chapters.forEach(x=>x.hidden=x!==chapter);tabs.forEach(x=>{const active=x.getAttribute('aria-controls')===chapter.id;x.setAttribute('aria-selected',String(active));x.tabIndex=active?0:-1});if(target.tagName==='DETAILS')target.open=true;let parent=target.parentElement;while(parent){if(parent.tagName==='DETAILS')parent.open=true;parent=parent.parentElement}if(updateHash)history.replaceState(null,'','#'+id)}
+tabs.forEach(t=>t.addEventListener('click',()=>select(t.getAttribute('aria-controls'),true)));
+document.querySelector('[role=tablist]').addEventListener('keydown',e=>{let i=tabs.indexOf(document.activeElement);if(i<0)return;if(e.key==='ArrowRight')i=(i+1)%tabs.length;else if(e.key==='ArrowLeft')i=(i+tabs.length-1)%tabs.length;else return;e.preventDefault();tabs[i].click();tabs[i].focus()});
+document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(a)select(a.hash.slice(1))});
+document.getElementById('expand').onclick=()=>document.querySelectorAll('.chapter:not([hidden]) details').forEach(x=>x.open=true);
+document.getElementById('collapse').onclick=()=>document.querySelectorAll('.chapter:not([hidden]) details').forEach(x=>x.open=false);
+document.getElementById('print').onclick=()=>window.print();
+let openBeforePrint=[];window.addEventListener('beforeprint',()=>{openBeforePrint=[...document.querySelectorAll('details')].map(x=>x.open);document.querySelectorAll('details').forEach(x=>x.open=true)});window.addEventListener('afterprint',()=>document.querySelectorAll('details').forEach((x,i)=>x.open=openBeforePrint[i]));
+window.addEventListener('hashchange',()=>select(location.hash.slice(1)));
+select(location.hash.slice(1)||'focus');
+console.log('report-check',JSON.stringify({chapters:chapters.length,sections:document.querySelectorAll('details').length,brokenAnchors:[...document.querySelectorAll('a[href^="#"]')].filter(a=>!document.getElementById(a.hash.slice(1))).map(a=>a.hash)}));
+</script></body></html>
