@@ -15,13 +15,17 @@ Demo PoC, not production: one transcription at a time, in-memory rate limit, key
 | `GET` | `/v1/models` | key | the one served model |
 | `POST` | `/v1/audio/transcriptions` | key | multipart: `file`, `model` (ignored), `language`, `prompt`, `response_format` = `json` / `text` / `verbose_json` (segments with `start`/`end`, used as audio evidence) |
 
-Errors: `401` bad or missing key, `429` per-key rate limit or queue full, `413` file or audio too
-long, `400` undecodable audio or unsupported format.
+Accepted audio: wav, mp3, ogg/opus, flac, m4a, webm, aac, caf (checked with `ffprobe`; playlists
+such as HLS are refused). `language` takes a code (`it`) or a name (`italian`).
+
+Errors: `401` bad or missing key (checked before the body is read), `411` no `Content-Length`,
+`413` file or audio too long, `429` per-key rate limit or server busy, `400` undecodable audio,
+unknown language or unsupported `response_format`.
 
 ## Setup on the Mac
 
 ```sh
-brew install uv ffmpeg                     # ffmpeg decodes wav/mp3/m4a/ogg/opus
+brew install uv ffmpeg                     # ffmpeg + ffprobe decode the uploads
 cd tools/asr-server
 uv sync --frozen
 uv run python server.py add-key backend    # prints the key ONCE: store it, it is not recoverable
@@ -36,22 +40,32 @@ log line `model ... ready` means it is serving.
 
 **Settings** (env vars): `ASR_MODEL` (default `mlx-community/whisper-large-v3-turbo`),
 `ASR_KEYS_FILE`, `ASR_MAX_UPLOAD_MB` (25), `ASR_MAX_AUDIO_S` (600), `ASR_RATE_PER_MIN` (20 per
-key), `ASR_MAX_QUEUE` (4 waiting requests).
+key), `ASR_MAX_QUEUE` (4 requests in flight: 1 transcribing, the rest decoding or
+waiting).
 
 ## Reverse proxy
 
 TLS terminates at the proxy; the app listens on `127.0.0.1:8100` only. Raise the body limit to the
-upload limit and the read timeout above the longest transcription. nginx:
+upload limit plus multipart overhead, and the read timeout above the longest transcription. nginx:
 
 ```nginx
 location / {
     proxy_pass http://127.0.0.1:8100;
-    client_max_body_size 25m;
+    client_max_body_size 26m;
     proxy_read_timeout 300s;
 }
 ```
 
-Caddy: `reverse_proxy 127.0.0.1:8100` (no body limit by default).
+Caddy:
+
+```caddy
+asr.example.com {
+    request_body {
+        max_size 26MB
+    }
+    reverse_proxy 127.0.0.1:8100
+}
+```
 
 ## Check it
 
