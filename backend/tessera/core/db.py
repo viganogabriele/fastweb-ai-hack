@@ -1,124 +1,133 @@
-"""SQLite schema for immutable run snapshots and their artifacts (PLT-03).
+"""SQLite tables (PLAN §2 rule 4). Read and write them only through `tessera.core.repo`.
 
-Schema creation initializes a new database; it is not a migration mechanism.
-Each job owns its Session/transaction. No global connection or mutable replay clock.
+One generic `artifacts` table holds every DTO, partitioned by `run_id`, so a new field or DTO
+never needs a migration. ERP rows live in `erp_rows`, shared by all runs and filtered by
+`available_at`. `create_all` does not alter existing tables: a schema change bumps
+`SCHEMA_VERSION` and an old DB file is refused instead of being silently reused (RFC §4.3).
 """
 
-from sqlalchemy import JSON, Boolean, ForeignKeyConstraint, Index, String, create_engine, event
-from sqlalchemy.engine import Engine
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from sqlalchemy.pool import StaticPool
+from datetime import UTC, datetime
+
+from sqlalchemy import (
+    JSON,
+    Column,
+    DateTime,
+    Engine,
+    ForeignKey,
+    Index,
+    Integer,
+    MetaData,
+    String,
+    Table,
+    TypeDecorator,
+    UniqueConstraint,
+    create_engine,
+    event,
+    inspect,
+    text,
+)
+
+SCHEMA_VERSION = 1
 
 
-class Base(DeclarativeBase):
-    pass
+class SchemaMismatch(RuntimeError):
+    """The DB file was created by another schema version: export what is durable, then delete it."""
 
 
-class RunRow(Base):
-    __tablename__ = "runs"
-    namespace: Mapped[str] = mapped_column(String, primary_key=True)
-    run_id: Mapped[str] = mapped_column(String, primary_key=True)
-    spec: Mapped[dict] = mapped_column(JSON)
-    status: Mapped[str] = mapped_column(String, default="pending")
-    published: Mapped[bool] = mapped_column(Boolean, default=False)
+class UTCDateTime(TypeDecorator):
+    """Aware datetimes in, aware UTC datetimes out; stored naive UTC so SQL comparisons work."""
+
+    impl = DateTime
+    cache_ok = True
+
+    def process_bind_param(self, value: datetime | None, dialect) -> datetime | None:
+        if value is None:
+            return None
+        if value.tzinfo is None:
+            raise ValueError("naive datetime: every instant must be timezone-aware")
+        return value.astimezone(UTC).replace(tzinfo=None)
+
+    def process_result_value(self, value: datetime | None, dialect) -> datetime | None:
+        return None if value is None else value.replace(tzinfo=UTC)
 
 
-class ArtifactRow(Base):
-    __tablename__ = "artifacts"
-    namespace: Mapped[str] = mapped_column(String, primary_key=True)
-    run_id: Mapped[str] = mapped_column(String, primary_key=True)
-    kind: Mapped[str] = mapped_column(String, primary_key=True)
-    id: Mapped[str] = mapped_column(String, primary_key=True)
-    version: Mapped[str] = mapped_column(String, primary_key=True)
-    store_id: Mapped[str | None] = mapped_column(String)
-    sku: Mapped[str | None] = mapped_column(String)
-    case_id: Mapped[str | None] = mapped_column(String)
-    available_at: Mapped[str | None] = mapped_column(String)
-    computed_at: Mapped[str | None] = mapped_column(String)
-    producer: Mapped[str | None] = mapped_column(String)
-    input_refs: Mapped[list] = mapped_column(JSON)
-    payload: Mapped[dict] = mapped_column(JSON)
-    __table_args__ = (
-        ForeignKeyConstraint(["namespace", "run_id"], ["runs.namespace", "runs.run_id"]),
-        Index("ix_artifacts_replay", "namespace", "run_id", "kind", "available_at"),
-        Index("ix_artifacts_store", "namespace", "run_id", "store_id", "sku"),
-    )
+metadata = MetaData()
+
+runs = Table(
+    "runs",
+    metadata,
+    Column("run_id", String, primary_key=True),
+    Column("scenario_id", String, nullable=False),
+    Column("as_of", UTCDateTime, nullable=False),
+    # pending -> running -> published | failed. Only published runs are complete (RFC §4.3).
+    Column("status", String, nullable=False),
+    Column("spec", JSON, nullable=False),
+    Column("created_at", UTCDateTime, nullable=False),
+    Column("finished_at", UTCDateTime),
+)
+
+module_runs = Table(
+    "module_runs",
+    metadata,
+    Column("run_id", String, ForeignKey("runs.run_id"), primary_key=True),
+    Column("module_id", String, primary_key=True),
+    Column("payload", JSON, nullable=False),
+)
+
+artifacts = Table(
+    "artifacts",
+    metadata,
+    Column("seq", Integer, primary_key=True, autoincrement=True),
+    Column("run_id", String, ForeignKey("runs.run_id"), nullable=False),
+    Column("kind", String, nullable=False),
+    Column("id", String, nullable=False),
+    Column("version", String, nullable=False),
+    Column("store_id", String),
+    Column("sku", String),
+    Column("case_id", String),
+    Column("available_at", UTCDateTime),
+    Column("payload", JSON, nullable=False),
+    Column("input_refs", JSON, nullable=False),
+    Column("producer", String),
+    Column("computed_at", UTCDateTime),
+    UniqueConstraint("run_id", "kind", "id", "version"),
+    Index("ix_artifacts_run_kind", "run_id", "kind", "available_at"),
+)
+
+erp_rows = Table(
+    "erp_rows",
+    metadata,
+    Column("seq", Integer, primary_key=True, autoincrement=True),
+    Column("tbl", String, nullable=False),
+    Column("id", String, nullable=False),
+    Column("version", String, nullable=False),
+    Column("store_id", String),
+    Column("sku", String),
+    Column("available_at", UTCDateTime),
+    Column("availability_basis", String, nullable=False),
+    Column("source_refs", JSON, nullable=False),
+    Column("data", JSON, nullable=False),
+    UniqueConstraint("tbl", "id", "version"),
+    Index("ix_erp_rows_tbl", "tbl", "store_id", "sku", "available_at"),
+)
 
 
-class ArtifactScopeRow(Base):
-    __tablename__ = "artifact_stores"
-    namespace: Mapped[str] = mapped_column(String, primary_key=True)
-    run_id: Mapped[str] = mapped_column(String, primary_key=True)
-    kind: Mapped[str] = mapped_column(String, primary_key=True)
-    id: Mapped[str] = mapped_column(String, primary_key=True)
-    version: Mapped[str] = mapped_column(String, primary_key=True)
-    store_id: Mapped[str] = mapped_column(String, primary_key=True)
-    __table_args__ = (
-        ForeignKeyConstraint(
-            ["namespace", "run_id", "kind", "id", "version"],
-            [
-                "artifacts.namespace",
-                "artifacts.run_id",
-                "artifacts.kind",
-                "artifacts.id",
-                "artifacts.version",
-            ],
-            ondelete="CASCADE",
-        ),
-    )
+def _sqlite_pragmas(dbapi_connection, _record) -> None:
+    cursor = dbapi_connection.cursor()
+    cursor.execute("PRAGMA foreign_keys=ON")
+    cursor.close()
 
 
-class ModuleRunRow(Base):
-    __tablename__ = "module_runs"
-    namespace: Mapped[str] = mapped_column(String, primary_key=True)
-    run_id: Mapped[str] = mapped_column(String, primary_key=True)
-    module_id: Mapped[str] = mapped_column(String, primary_key=True)
-    payload: Mapped[dict] = mapped_column(JSON)
-    __table_args__ = (
-        ForeignKeyConstraint(
-            ["namespace", "run_id"],
-            ["runs.namespace", "runs.run_id"],
-        ),
-    )
-
-
-class ERPRow(Base):
-    __tablename__ = "erp_facts"
-    namespace: Mapped[str] = mapped_column(String, primary_key=True)
-    run_id: Mapped[str] = mapped_column(String, primary_key=True)
-    table_name: Mapped[str] = mapped_column(String, primary_key=True)
-    id: Mapped[str] = mapped_column(String, primary_key=True)
-    version: Mapped[str] = mapped_column(String, primary_key=True)
-    store_id: Mapped[str | None] = mapped_column(String)
-    sku: Mapped[str | None] = mapped_column(String)
-    available_at: Mapped[str | None] = mapped_column(String)
-    payload: Mapped[dict] = mapped_column(JSON)
-    __table_args__ = (
-        ForeignKeyConstraint(["namespace", "run_id"], ["runs.namespace", "runs.run_id"]),
-        Index("ix_erp_replay", "namespace", "run_id", "table_name", "available_at", "store_id"),
-    )
-
-
-def make_engine(url: str) -> Engine:
-    """Create a SQLite engine with real transactions and foreign keys enabled."""
-    if not url.startswith("sqlite:"):
-        raise ValueError("PLT-03 supports SQLite databases only")
-    options = {"connect_args": {"autocommit": False, "check_same_thread": False, "timeout": 30}}
-    if url in {"sqlite://", "sqlite:///:memory:"}:
-        options["poolclass"] = StaticPool
-    engine = create_engine(url, **options)
-
-    @event.listens_for(engine, "connect")
-    def configure(connection, _record):
-        previous = connection.autocommit
-        connection.autocommit = True
-        try:
-            connection.execute("PRAGMA foreign_keys=ON")
-        finally:
-            connection.autocommit = previous
-
+def connect(url: str) -> Engine:
+    """Engine with the schema created, or `SchemaMismatch` for a DB of another version."""
+    engine = create_engine(url)
+    event.listen(engine, "connect", _sqlite_pragmas)
+    with engine.begin() as conn:
+        found = conn.execute(text("PRAGMA user_version")).scalar_one()
+        if found != SCHEMA_VERSION and inspect(conn).get_table_names():
+            raise SchemaMismatch(
+                f"{engine.url.database} has schema {found}, code expects {SCHEMA_VERSION}"
+            )
+        metadata.create_all(conn)
+        conn.execute(text(f"PRAGMA user_version={SCHEMA_VERSION}"))
     return engine
-
-
-def create_schema(engine: Engine) -> None:
-    Base.metadata.create_all(engine)
