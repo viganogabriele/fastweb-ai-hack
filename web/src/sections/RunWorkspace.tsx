@@ -409,8 +409,17 @@ function SourceDocumentCard({
     parts.push(
       <mark
         className={`sd-source-evidence sd-source-evidence--${range.relation}`}
-        key={`${range.caseId}-${range.evidence.segment_id}-${range.start}-${index}`}
-        title={`${range.caseId} · ${range.caseType} · ${range.relation === 'supporting' ? 'A supporto' : 'In contrasto'}`}
+        key={`${range.references.map(({ caseId }) => caseId).join('-')}-${range.start}-${index}`}
+        title={range.references
+          .map(({ caseId, caseType, relation }) =>
+            `${caseId} · ${caseType} · ${relation === 'supporting' ? 'A supporto' : 'In contrasto'}`
+          )
+          .join(' | ')}
+        aria-label={range.references
+          .map(({ caseId, caseType, relation }) =>
+            `${caseId}, ${caseType}, ${relation === 'supporting' ? 'a supporto' : 'in contrasto'}`
+          )
+          .join('; ')}
       >
         {item.text.slice(range.start, range.end)}
       </mark>
