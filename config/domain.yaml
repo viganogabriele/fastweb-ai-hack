@@ -1,0 +1,60 @@
+# config/domain.yaml: what the signals mean for this business. The pipeline stays the same.
+# Owner: lane A (DATA-02). Source: docs/RFC-001-piattaforma.md §3.3 (owners, views,
+# quantifiers, reasons) and §4.9 (policy parameters). Freeze before hold-out metrics (RFC §7.1).
+
+version: 1
+domain: fashion_retail_direct
+
+owners:  # who receives which signal type
+  unmet_demand: allocation
+  stock_discrepancy: retail_ops
+  product_feedback: product_quality
+  traffic_change: retail_ops
+  demand_shift: merchandising
+  operational_issue: retail_ops
+  customer_profile: marketing
+  unknown: retail_ops
+
+views:  # the dashboard groupings asked for in Idea_Gabri
+  - { id: by_office, group_by: owner }
+  - { id: by_priority, group_by: priority }
+  - { id: by_product, group_by: [category, season_group] }
+
+# Words that state "more than one" without a number. A mention with one of these is
+# Quantity(kind=vague): no imputed value, no numeric uplift (RFC §4.5, §4.9 step 5).
+# That includes "un paio" / "a couple" / "un par de": vague, not 2.
+# Keys are stores.csv languages. Every word was seen in a dev-store closing email;
+# extend only from dev sources.
+vague_quantifiers:
+  it: [tanti, tante, molti, molte, parecchi, diverse, alcuni, qualche, qlc, un sacco, pochi, poche, un paio]
+  fr: [plusieurs, beaucoup, pas mal, quelques, peu]
+  en: [several, lots, lots of, loads, many, a few, few, quite a few, a couple, couple of, a handful, tons, bunch of, heaps]
+  de: [viele, einige, ein paar]
+  es: [varias, muchos, bastantes, algunos, algunas, pocas, un par de]
+  ja: [多数, 多く, 数点, 数件, かなり, 少し, 多め]
+  ko: [많이, 여러, 몇, 다수, 엄청, 조금]
+  zh-CN: [很多, 好多, 不少, 几个, 好几, 几件]
+  zh-HK: [好多, 多咗, 幾個, 幾件]
+
+reason_taxonomy: [fit, size_availability, colour, fabric_material, quality_defect, price, style, other]
+
+# Scenario policy (RFC §4.9). These are declared policy choices, not calibrated estimates.
+# Every entry carries its unit; modules read values from here instead of hard-coding them.
+policy:
+  horizon:
+    days: { value: 7, unit: local_days, note: "D+1..D+7 covered by the available forecast vintage" }
+  residual:  # step 2, off by default
+    enabled: { value: false, unit: bool }
+    window: { value: 14, unit: days, note: "last admissible days before the forecast day" }
+    min_complete_obs: { value: 5, unit: days }
+    kappa: { value: 5, unit: units, note: "smoothing added to sales and baseline sums" }
+    clip: { value: [0.5, 2.0], unit: ratio }
+  incremental:  # step 5, opt-in; u = n/g in units/day
+    delta_low: { value: 0.0, unit: fraction_of_u }
+    delta_base: { value: 0.5, unit: fraction_of_u }
+    delta_high: { value: 1.0, unit: fraction_of_u }
+  decay:  # step 6, w_d = 2^(-age_d / half_life)
+    half_life: { value: 7, unit: days }
+    max_validity: { value: 7, unit: days, note: "from last independent confirmation when the fact has no end" }
+  latent:  # step 7
+    cap: { value: 3.0, unit: multiple_of_baseline }

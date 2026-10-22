@@ -1,0 +1,21 @@
+# config/eval_split.yaml: which stores we tune on and which we only report on.
+# Owner: lane A (DATA-02). Source: docs/RFC-001-piattaforma.md §5.1.
+#
+# dev:        prompts, thresholds, aliases, fixtures, few-shot examples and debugging.
+# holdout:    final metrics only. Never open their sources for tuning before the freeze.
+# unassigned: every other store in stores.csv. Not tuning data (RFC §5.1 overrides the
+#             "plus whatever else is not in hold-out" line of generated/README.md §5).
+#             Use them only as decision context (e.g. transfer donors), under the same
+#             frozen protocol as hold-out.
+#
+# The three lists are disjoint and together cover stores.csv (tested in make check).
+
+version: 1
+stores_file: generated/sources/erp/master_data/stores.csv
+
+dev: [MIL01, MIL02, PAR01, LON01, MUN01, MAD01, NYC01, TYO01, SEL01, SHA01, HKG01, SYD01]
+
+holdout: [ROM01, PAR02, LON02, ZRH01, NYC02, TYO02, SEL02, BJS01, TPE01, DXB01]
+
+unassigned: [VEN01, COU01, CRT01, CAN01, GVA01, BER01, STM01, AMS01, CPH01, MIA01, BHS01,
+  ASP01, TOR01, OSA01, BUS01, CDU01, SIN01]

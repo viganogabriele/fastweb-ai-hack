@@ -6,11 +6,11 @@ One line per task. Edit only the lines of your own task.
 ## Done
 
 - PLT-01 (C) Scaffold: `backend/` FastAPI, `web/` React+Vite, `make setup/dev/check`, CI, `.env.example`
+- DATA-02 (A) `config/eval_split.yaml` (12 dev / 10 hold-out / 17 unassigned), `domain.yaml` (+ §4.9 policy with units), `aliases.yaml` (dev-email provenance, tested)
 
 ## In progress
 
 <!-- - ID (lane, person) one-line goal · branch `ID-slug` -->
-- DATA-02 (A) `config/eval_split.yaml`, `domain.yaml`, `aliases.yaml` · branch `DATA-02-config`
 
 ## Ready (all hard dependencies merged)
 
