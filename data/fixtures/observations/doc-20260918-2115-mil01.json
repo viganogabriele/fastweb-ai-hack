@@ -1,0 +1,71 @@
+[
+  {
+    "kind": "Observation",
+    "payload": {
+      "id": "obs-20260918-2115-mil01-net-sales",
+      "version": "v1",
+      "available_at": "2026-09-18T19:15:56Z",
+      "availability_basis": "document_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20260918_2115_MIL01.eml",
+          "content_hash": "sha256:0429e5ab4d15f5ac8f3f41210ec9f1386e1e9766102da372b1eb331a75cdc9b8",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "SourceDocument",
+          "id": "doc-20260918-2115-mil01",
+          "version": "v1"
+        },
+        {
+          "kind": "Segment",
+          "id": "doc-20260918-2115-mil01-seg1",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01a",
+      "producer_version": "1",
+      "document_id": "doc-20260918-2115-mil01",
+      "kind": "sales_figure",
+      "store_id": "MIL01",
+      "period_start": "2026-09-17T22:00:00Z",
+      "period_end": "2026-09-18T21:59:59Z",
+      "time_text": null,
+      "product_mention": null,
+      "quantity": {
+        "kind": "exact",
+        "value": 58000.0,
+        "low": null,
+        "high": null,
+        "unit": "money",
+        "currency": "EUR",
+        "raw": "58,0k",
+        "evidence_ref": null
+      },
+      "direction": "none",
+      "reason": null,
+      "reason_text": null,
+      "funnel_stage": null,
+      "attribution": "store_staff",
+      "negated": false,
+      "evidence": [
+        {
+          "document_id": "doc-20260918-2115-mil01",
+          "document_version": "v1",
+          "segment_id": "doc-20260918-2115-mil01-seg1",
+          "quote": "Fatturato: 58,0k",
+          "char_start": 24,
+          "char_end": 40,
+          "t_start_s": null,
+          "t_end_s": null
+        }
+      ],
+      "extractor_version": "manual-data01a-v1"
+    }
+  }
+]

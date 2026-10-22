@@ -15,6 +15,8 @@ One line per task. Edit only the lines of your own task.
 
 ## In progress
 
+- DATA-01a (A, Bianca) Fixtures: D1 positive doc + observation, ambiguous mention, forward/duplicate, correction · branch `DATA-01a-fixtures`
+
 ## Ready (all hard dependencies merged)
 
 - PLT-07 (A) Fastweb smoke test: chat, tool call, embeddings, ASR. Needs `FASTWEB_API_KEY` in `.env`
@@ -24,7 +26,6 @@ One line per task. Edit only the lines of your own task.
 - AG-01 pure (E) Agent loop with budget, trace, fallback; fake model
 - WEB-01 (D) App shell on hand-written JSON
 - EVL-01 (D) `eval/` harness + "product cannot open ground truth" test
-- DATA-01a (A) Fixtures: D1 positive doc + observation, ambiguous mention, forward/duplicate, correction
 - ING-09 (A) Physical quantities (exact/range/vague/unknown) with units, from span text
 - PLT-03 (C) `core/db.py`, `core/repo.py`: SQLite artifact store, `as_of` filter, fixtures load
 

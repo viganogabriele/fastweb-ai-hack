@@ -1,0 +1,71 @@
+[
+  {
+    "kind": "Observation",
+    "payload": {
+      "id": "obs-20261002-2113-mil01-dup-maire-requests",
+      "version": "v1",
+      "available_at": "2026-10-02T19:13:52Z",
+      "availability_basis": "document_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2113_MIL01_dup.eml",
+          "content_hash": "sha256:41f447a28b601371cb206f1e711749ac962803332d0dcd05e2c2f77d2154d88e",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "SourceDocument",
+          "id": "doc-20261002-2113-mil01-dup",
+          "version": "v1"
+        },
+        {
+          "kind": "Segment",
+          "id": "doc-20261002-2113-mil01-dup-seg2",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01a",
+      "producer_version": "1",
+      "document_id": "doc-20261002-2113-mil01-dup",
+      "kind": "unmet_demand",
+      "store_id": "MIL01",
+      "period_start": "2026-10-01T22:00:00Z",
+      "period_end": "2026-10-02T21:59:59Z",
+      "time_text": null,
+      "product_mention": "Maire nera",
+      "quantity": {
+        "kind": "exact",
+        "value": 7.0,
+        "low": null,
+        "high": null,
+        "unit": "requests",
+        "currency": null,
+        "raw": "7 richieste",
+        "evidence_ref": null
+      },
+      "direction": "up",
+      "reason": null,
+      "reason_text": null,
+      "funnel_stage": null,
+      "attribution": "store_staff",
+      "negated": false,
+      "evidence": [
+        {
+          "document_id": "doc-20261002-2113-mil01-dup",
+          "document_version": "v1",
+          "segment_id": "doc-20261002-2113-mil01-dup-seg2",
+          "quote": "Maire nera: 7 richieste (2 2 2, 1 1, 0, 4)",
+          "char_start": 519,
+          "char_end": 561,
+          "t_start_s": null,
+          "t_end_s": null
+        }
+      ],
+      "extractor_version": "manual-data01a-v1"
+    }
+  }
+]
