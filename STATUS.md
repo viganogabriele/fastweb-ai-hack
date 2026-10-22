@@ -12,6 +12,8 @@ One line per task. Edit only the lines of your own task.
 
 <!-- - ID (lane, person) one-line goal · branch `ID-slug` -->
 
+- EVL-01 (D, Bianca) Frozen-export evaluation harness and product file isolation · branch `EVL-01-evaluation-harness`
+
 ## Ready (all hard dependencies merged)
 
 - PLT-02 (C) Contracts in `core/contracts/`. **Gates G0**: everyone reviews within 30 min
@@ -25,7 +27,6 @@ One line per task. Edit only the lines of your own task.
 - ACT-04 pure (E) Systems client (stock/ATP, lanes/ETA) against `make mocks`
 - AG-01 pure (E) Agent loop with budget, trace, fallback; fake model
 - WEB-01 (D) App shell on hand-written JSON
-- EVL-01 (D) `eval/` harness + "product cannot open ground truth" test
 
 ## Blocked (waiting on)
 
