@@ -1,5 +1,108 @@
-# eval
+# Offline evaluation (EVL-01)
 
-The only code allowed to read `generated/ground_truth/` (RFC §7.1). It reads the frozen export of a
-product run and the answer key, and writes metrics. Product code (`backend/`) never imports from
-here, and nothing here is used to build prompts, fixtures or aliases. Package created by EVL-01.
+This package is the only code allowed to read `generated/ground_truth/` (RFC §7.1).
+The backend never imports it. It consumes a **frozen product export**, not a running
+pipeline or database. EVL-02/04 will add scoring; `verify` currently records input
+hashes and artifact counts, with an empty `metrics` object. These are not results.
+
+Run commands below from the repository root with `backend/.venv/bin/python`.
+There are no additional dependencies and no answer-key access during tests.
+
+## 1. Run the product with isolated inputs
+
+```sh
+backend/.venv/bin/python -m eval product -- -m tessera.cli --version
+# API, when needed:
+backend/.venv/bin/python -m eval product -- -m uvicorn tessera.api.main:app --port 8000
+```
+
+The launcher installs Linux Landlock restrictions **before Python starts**. It
+allows reads from `backend/`, `generated/sources/`, `config/`, `data/`, `.env`, and
+the interpreter/system runtime. Reads of `generated/ground_truth/`, `generator/`,
+`eval/` and other repository paths are denied by the kernel, including `open()`,
+native reads, symlinks and child processes. The mock server remains a separate
+process, launched with `make mocks`; do not import its code.
+
+Requires Linux with Landlock enabled, on x86_64 or aarch64; unsupported hosts fail
+closed. This is read isolation, not a complete security sandbox: it does not
+restrict network or writes. Use a fresh `data/` namespace, free of oracle material,
+for product runs. `make dev` remains a development command and does not install
+these restrictions; use this launcher for evaluated product runs.
+
+## 2. Preselect the protocol, then freeze the run
+
+Before running holdout, fix the source sample, model versions, prompts, aliases,
+parameters, temporal origins and store/SKU universe, including no-alert examples.
+Split membership follows RFC §5.1; unlisted stores are not implicitly dev stores.
+Create `data/protocol.json`, for example:
+
+```json
+{
+  "run_id": "synthetic-example",
+  "split": "dev",
+  "stores": ["MIL01"],
+  "origins": ["2026-10-08T20:00:00+02:00"],
+  "universe": [{"store_id": "MIL01", "sku": "SYNTHETIC-999"}],
+  "sampling_criterion": "All documents in a preselected store/day, including no alerts",
+  "models": {"extract": "record-the-exact-model-version"},
+  "parameters": {"threshold": 0.8}
+}
+```
+
+The SKU above is a synthetic example, not a dataset label. Export predictions,
+cases and options as three JSON arrays of objects under `data/`. Empty arrays
+are valid. Records remain opaque until PLT-02 and the scoring tasks define DTOs.
+
+```sh
+backend/.venv/bin/python -m eval freeze data/frozen/run-001 \
+  --protocol data/protocol.json \
+  --predictions data/exports/predictions.json \
+  --cases data/exports/cases.json \
+  --options data/exports/options.json \
+  --source generated/sources/erp/master_data/stores.csv \
+  --configuration config/pipeline.yaml
+```
+
+Use existing configuration paths; the scaffold may not yet contain
+`config/pipeline.yaml`. Repeat `--source` for **every selected input file**, and
+`--configuration` for every config, prompt, alias and split file used in the run.
+Configuration paths must be under `config/` or `backend/`. Source files must be
+under `generated/sources/`, checked after resolving symlinks. No directory crawl
+or oracle discovery is performed. Row-level availability remains the product's
+responsibility; a file hash does not establish no look-ahead.
+
+The bundle copies artifacts and configuration snapshots and records source paths
+and SHA-256 hashes in `manifest.json`. Existing bundles are never overwritten.
+Save the printed **manifest SHA-256 outside the bundle before oracle access**
+(for example, in the frozen experiment record). The harness checks integrity
+against that digest; it cannot prove when a researcher selected or ran inputs.
+
+## 3. Verify, then read explicitly selected answer keys
+
+```sh
+backend/.venv/bin/python -m eval verify data/frozen/run-001 \
+  --sha256 '<previously recorded manifest SHA-256>' \
+  --key scenario/events.json \
+  --output data/run-001-evaluation-inputs.json
+```
+
+`verify` checks the manifest and all snapshots before opening an answer key. It
+reads only the requested key paths, hashes them and writes a receipt using
+exclusive creation, so previous records are preserved. No oracle contents appear
+in the receipt. For future scorers, `FrozenRun.read_answer_key()` returns bytes;
+callers parse their chosen CSV/JSON format. Traversal and symlink escapes from the
+oracle root or bundle are rejected. Scorers must stay in `eval/`, never provide
+product inputs, and report exclusions and limits required by RFC §7.2.
+
+## Checks
+
+```sh
+backend/.venv/bin/python -m unittest discover -s eval/tests -v
+backend/.venv/bin/ruff check --config backend/pyproject.toml eval
+backend/.venv/bin/ruff format --check --config backend/pyproject.toml eval
+make check
+```
+
+`backend/tests/eval/test_suite.py` also runs these oracle-free regressions in a
+separate process during `make check` and CI. All answer material in tests is
+temporary synthetic sentinel data. No actual holdout evaluation has been run.
