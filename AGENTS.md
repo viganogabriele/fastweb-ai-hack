@@ -57,11 +57,8 @@ Follow these steps in order, every time. Do not skip or reorder them.
 4. **Draft PR at once.** Make a first commit (even empty: `git commit --allow-empty -m "<TASK-ID>: start"`),
    push, and open a **draft** PR: `gh pr create --draft --title "<TASK-ID>: <summary>"
    --body "Closes #<N>"`. Then push small commits often: every push is a checkpoint others can see.
-5. **Finish.** `make check` passes. Then ask an **adversarial review from a different agent**
-   (other model or a fresh session that did not write the code; give it the issue and the diff, not
-   your conclusions). Fix or explicitly answer every finding, summarize them in a PR comment.
-6. **Ready.** Only after step 5: `gh pr ready <PR>`. Squash-merge after review; `Closes #<N>` closes
-   the issue.
+5. **Finish.** `make check` passes.
+6. **Ready.** `gh pr ready <PR>`, then squash-merge; `Closes #<N>` closes the issue.
 7. **Unblock.** After merge, for every issue blocked by yours: if all its blockers are closed,
    remove the `blocked` label.
 

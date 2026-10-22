@@ -2,7 +2,7 @@
 
 OpenAI-compatible speech-to-text for the demo, running `whisper-large-v3-turbo` with
 [mlx-whisper](https://pypi.org/project/mlx-whisper/) on Apple Silicon (our Mac mini M4). It stands
-in for the Fastweb Whisper endpoint we have no key for (`docs/PLAN.md` §4 "Deferred: ASR"). Any
+in for the Fastweb Whisper endpoint we have no key for (`docs/PLAN.md` §4 "ASR"). Any
 OpenAI client works by changing only base URL and key.
 
 Demo PoC, not production: one transcription at a time, in-memory rate limit, keys in a flat file.

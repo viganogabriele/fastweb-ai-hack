@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 import { Search } from 'lucide-react'
 import { readApi } from '../api/client'
-import type { Case, DocumentDetail, ModuleManifest, SourceDocument } from '../api/client'
+import type { Case, DocumentDetail, SourceDocument } from '../api/client'
 import {
   Button,
   EmptyState,
@@ -13,10 +13,10 @@ import {
   StatusBadge
 } from '../ui'
 import { useRuns } from '../api/useRuns'
-import { evidenceRanges, refKey } from './sourceEvidence'
-import type { CaseEvidence } from './sourceEvidence'
 import './sections.css'
 import '../widgets/widgets.css'
+import { evidenceRanges, refKey } from './sourceEvidence'
+import type { CaseEvidence } from './sourceEvidence'
 
 const statuses: Record<string, string> = {
   open: 'Aperto',
@@ -58,7 +58,6 @@ export function RunWorkspace({
     cases: Case[]
     documents: SourceDocument[]
     caseRefs: Record<string, Omit<CaseEvidence, 'evidence'>[]>
-    modules: ModuleManifest[]
   } | null>(null)
   const [error, setError] = useState('')
   const [revision, setRevision] = useState(0)
@@ -71,30 +70,23 @@ export function RunWorkspace({
     const controller = new AbortController()
     const base = `/runs/${encodeURIComponent(runId ?? '')}`
     const request =
-      section === 'modules'
-        ? (run
-            ? Promise.resolve(
-                run.spec.modules.map((snapshot) => snapshot.manifest)
-              )
-            : readApi<ModuleManifest[]>('/modules', controller.signal)
-          ).then((modules) => ({ cases: [], documents: [], caseRefs: {}, modules }))
-        : published && runId
-          ? Promise.all([
-              section === 'sources' || section === 'cases' || section === 'overview'
-                ? readApi<Case[]>(`${base}/cases`, controller.signal)
-                : Promise.resolve([] as Case[]),
-              section === 'cases'
-                ? Promise.resolve([] as SourceDocument[])
-                : readApi<SourceDocument[]>(
-                    `${base}/documents`,
-                    controller.signal
-                  )
-            ]).then(([cases, documents]) => {
+      published && runId
+        ? Promise.all([
+            section === 'sources' || section === 'cases' || section === 'overview'
+              ? readApi<Case[]>(`${base}/cases`, controller.signal)
+              : Promise.resolve([] as Case[]),
+            section === 'cases'
+              ? Promise.resolve([] as SourceDocument[])
+              : readApi<SourceDocument[]>(
+                  `${base}/documents`,
+                  controller.signal
+                )
+          ]).then(([cases, documents]) => {
               const caseRefs: Record<string, Omit<CaseEvidence, 'evidence'>[]> = {}
               const latest = new Map<string, Case>()
               for (const item of cases) {
                 const seen = latest.get(item.id)
-                if (!seen || Number(item.version) > Number(seen.version)) latest.set(item.id, item)
+                if (!seen || versionNumber(item.version) > versionNumber(seen.version)) latest.set(item.id, item)
               }
               for (const item of latest.values()) {
                 for (const [relation, refs] of [
@@ -110,11 +102,10 @@ export function RunWorkspace({
               return {
                 cases,
                 documents,
-                caseRefs,
-                modules: []
+                caseRefs
               }
             })
-          : null
+        : null
     request
       ?.then((result) => {
         if (!controller.signal.aborted) setData(result)
@@ -324,51 +315,13 @@ export function RunWorkspace({
             description="Nessun documento pubblicato corrisponde alla selezione."
           />
         ))}
-      {section === 'modules' &&
-        (data.modules.length ? (
-          <div className="sd-run-list">
-            {data.modules.map((item) => {
-              const execution = run?.module_runs.find(
-                (value) => value.module_id === item.id
-              )
-              return (
-                <article className="sd-run-card" key={item.id}>
-                  <h2>{item.id}</h2>
-                  <p>{item.description}</p>
-                  <StatusBadge
-                    label={
-                      execution
-                        ? statuses[execution.status]
-                        : 'Non eseguito nel run'
-                    }
-                    tone="neutral"
-                  />
-                  <p>Modalità: {execution?.mode ?? item.mode}</p>
-                  {execution?.result && (
-                    <>
-                      <p>
-                        {Object.entries(execution.result.counts)
-                          .map(([key, count]) => `${key}: ${count}`)
-                          .join(' · ')}
-                      </p>
-                      {[
-                        ...execution.result.errors,
-                        ...execution.result.abstentions
-                      ].map((text) => (
-                        <p key={text}>{text}</p>
-                      ))}
-                    </>
-                  )}
-                </article>
-              )
-            })}
-          </div>
-        ) : (
-          <EmptyState title="Nessun modulo disponibile" />
-        ))}
     </div>
   )
 }
+
+// Versions are opaque strings like "v2"; compare by their numeric part.
+const versionNumber = (version: string) =>
+  Number(/\d+/.exec(version)?.[0] ?? 0)
 
 function SourceDocumentCard({
   item,

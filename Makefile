@@ -28,7 +28,7 @@ mocks:  ## dataset mock agents server: run it, never import or read its code
 
 check:  ## must pass before every PR
 	cd $(BACKEND) && uv run ruff check . ../eval ../scripts/export_openapi.py && uv run ruff format --check . ../eval ../scripts/export_openapi.py && uv run pytest -q
-	cd $(WEB) && npm run lint && npm run typecheck
+	cd $(WEB) && npm run lint && npm run typecheck && npm test
 	$(MAKE) --no-print-directory types && git diff --exit-code -- web/src/api/schema.d.ts
 
 fmt:

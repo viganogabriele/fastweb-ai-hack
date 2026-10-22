@@ -40,6 +40,17 @@ export function useRuns() {
     selected: items.find((run) => run.spec.run_id === selectedId),
     loading,
     error,
+    acceptRun: (run: RunView, originRunId?: string) => {
+      setItems((current) => [
+        run,
+        ...current.filter((item) => item.spec.run_id !== run.spec.run_id)
+      ])
+      select((current) =>
+        originRunId !== undefined && current === originRunId
+          ? run.spec.run_id
+          : current
+      )
+    },
     retry: () => {
       setLoading(true)
       setError('')

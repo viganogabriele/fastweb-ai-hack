@@ -92,6 +92,14 @@ def test_colour_the_style_does_not_come_in_is_ambiguous() -> None:
     assert "colour_not_in_style" in r.reasons
 
 
+def test_a_second_colour_the_style_does_not_come_in_blocks_the_link() -> None:
+    r = link_mention("Maire nera e pink", CATALOG)
+    assert r.status == "ambiguous"
+    assert "colour_not_in_style" in r.reasons
+    # The same word naming an in-style and an out-of-style code is not a second colour.
+    assert link_mention("Maya nera", CATALOG).status == "linked"
+
+
 def test_two_styles_named_is_ambiguous() -> None:
     r = link_mention("Maire o Maya nera", CATALOG)
     assert r.status == "ambiguous"

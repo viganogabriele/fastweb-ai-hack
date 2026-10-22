@@ -11,6 +11,7 @@ import {
   Workflow
 } from 'lucide-react'
 import { messages } from './i18n'
+import { ModulesPage } from './sections/ModulesPage'
 import { RunWorkspace } from './sections/RunWorkspace'
 import { useRuns } from './api/useRuns'
 import { AppShell, PageHeader, SidebarNav } from './shell'
@@ -65,8 +66,7 @@ const idFromHash = (): SectionId => {
   const slug = window.location.hash.replace(/^#\/?/, '')
   return (
     (Object.entries(ROUTES).find(([, route]) => route === slug)?.[0] as
-      | SectionId
-      | undefined) ?? 'overview'
+      SectionId | undefined) ?? 'overview'
   )
 }
 const pathFor = (id: string) => ROUTES[id as SectionId] ?? ROUTES.overview
@@ -198,7 +198,9 @@ export default function App() {
                 : undefined
             }
           />
-          {['overview', 'cases', 'sources', 'modules'].includes(currentId) ? (
+          {currentId === 'modules' ? (
+            <ModulesPage key={runs.selectedId} runs={runs} />
+          ) : ['overview', 'cases', 'sources'].includes(currentId) ? (
             <RunWorkspace
               key={`${currentId}-${runs.selectedId}`}
               section={currentId}

@@ -167,6 +167,9 @@ def link_mention(
         flags: list[str] = []
         if colour_hits and not colours:
             flags.append("colour_not_in_style")
+        elif colours and _foreign_colour(colour_hits, colours):
+            # "Maire nera e verde": one colour fits, another named colour is not in the style.
+            flags.append("colour_not_in_style")
         size_ok = size_norm is None or size_norm in style.sizes
         if not size_ok:
             flags.append("size_not_in_size_run")
@@ -278,6 +281,17 @@ def _best_match(text: str, names: Iterable[str], p: LinkParams) -> tuple[float, 
                 if score >= p.candidate_min and (best is None or score > best[0]):
                     best = (score, "fuzzy", name)
     return best
+
+
+def _foreign_colour(
+    colour_hits: Mapping[str, tuple[float, Method, str]], colours: list[str]
+) -> bool:
+    """A named colour outside the style. The same word may name several codes (white → 001
+    and 20D): a hit counts as foreign only if its matched name differs from every in-style one."""
+    own = {normalize(colour_hits[c][2]) for c in colours if c in colour_hits}
+    return any(
+        normalize(hit[2]) not in own for code, hit in colour_hits.items() if code not in colours
+    )
 
 
 def _colour_match(text: str, names: Iterable[str]) -> tuple[float, Method, str] | None:
