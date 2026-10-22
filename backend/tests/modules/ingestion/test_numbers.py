@@ -1,6 +1,8 @@
 """ING-09: span text → Quantity. Phrasings are taken from dev-store closing emails
 (MIL01, MIL02 in Italian; LON01, NYC01, SYD01 in English), see config/eval_split.yaml."""
 
+import random
+
 import pytest
 
 from tessera.core.config import REPO_ROOT
@@ -71,6 +73,14 @@ def parse(span: str, lang: str):
         ("en", "- 5 units", 5, "units", "5 units"),
         ("en", "on 10/22: 3 clients asked", 3, "customers", "3 clients"),
         ("en", "3 clients at 5pm", 3, "customers", "3 clients"),
+        # A word that names the whole before "of"/"di"; words after the count that do not touch it.
+        ("en", "a total of 32 units", 32, "units", "32 units"),
+        ("it", "un gruppo di 5 persone", 5, "customers", "5 persone"),
+        ("en", "5 units out of stock", 5, "units", "5 units"),
+        ("en", "3 clients, about the Maire", 3, "customers", "3 clients"),
+        ("en", "3 clients asked about the Maire", 3, "customers", "3 clients"),
+        ("en", "3 clients\u2014we had none left", 3, "customers", "3 clients"),
+        ("en", "10000000 units", 10_000_000, "units", "10000000 units"),
     ],
 )
 def test_exact(lang: str, span: str, value: int, unit: str, raw: str | None) -> None:
@@ -88,8 +98,6 @@ def test_exact(lang: str, span: str, value: int, unit: str, raw: str | None) -> 
         ("it", "gruppi da 4-6 persone", 4, 6, "customers", "4-6 persone"),
         ("it", "3 o 4 clienti l'hanno chiesta", 3, 4, "customers", "3 o 4 clienti"),
         ("it", "tra 5 e 8 clienti", 5, 8, "customers", "tra 5 e 8 clienti"),
-        ("it", "Se riuscite a riservarci almeno 25-30 pezzi", 25, 30, "units", "25-30 pezzi"),
-        ("en", "Maybe 8 to 10 clients tried pieces", 8, 10, "customers", "8 to 10 clients"),
         ("en", "3 or 4 people today said they saw the ads", 3, 4, "customers", "3 or 4 people"),
         ("en", "people buying 2-3 pieces", 2, 3, "units", "2-3 pieces"),
         ("en", "between 5 and 8 requests", 5, 8, "requests", "between 5 and 8 requests"),
@@ -98,6 +106,10 @@ def test_exact(lang: str, span: str, value: int, unit: str, raw: str | None) -> 
         ("it", "uno o due clienti", 1, 2, "customers", "uno o due clienti"),
         ("it", "da 3 a 5 pezzi", 3, 5, "units", "3 a 5 pezzi"),
         ("en", "five-six clients", 5, 6, "customers", "five-six clients"),
+        # Unicode dashes and hyphens are read as "-".
+        ("en", "3\u20105 units", 3, 5, "units", "3\u20105 units"),
+        ("en", "3\u20125 units", 3, 5, "units", "3\u20125 units"),
+        ("en", "3 \u2013 5 units", 3, 5, "units", "3 \u2013 5 units"),
     ],
 )
 def test_range(lang: str, span: str, low: int, high: int, unit: str, raw: str) -> None:
@@ -164,6 +176,9 @@ def test_vague_quantifier(lang: str, span: str, unit: str | None, raw: str) -> N
         ("en", "not over 5 units", "at_most", 5, "units", "not over 5 units"),
         ("en", "no more than 5 units", "at_most", 5, "units", "no more than 5 units"),
         ("it", "non meno di 5 pezzi", "at_least", 5, "units", "non meno di 5 pezzi"),
+        ("en", "a maximum of 5 units", "at_most", 5, "units", "a maximum of 5 units"),
+        ("it", "un massimo di 5 pezzi", "at_most", 5, "units", "un massimo di 5 pezzi"),
+        ("en", "5 units more or less", "approx", 5, "units", "5 units more or less"),
     ],
 )
 def test_hedged_number_is_vague_with_stated_value(
@@ -260,6 +275,9 @@ def test_unknown(lang: str, span: str, unit: str | None) -> None:
         ("it", "non almeno 3 clienti", "customers"),
         ("en", "3-5 or more units", "units"),
         ("en", "3-5+ units", "units"),
+        # A hedge before a range: `stated` holds one number, and dropping the hedge changes it.
+        ("it", "Se riuscite a riservarci almeno 25-30 pezzi", "units"),
+        ("en", "Maybe 8 to 10 clients tried pieces", "customers"),
     ],
 )
 def test_abstains_rather_than_guess(lang: str, span: str, unit: str | None) -> None:
@@ -294,3 +312,172 @@ def test_cjk_quantifier_matches_without_spaces() -> None:
 def test_unsupported_language_never_invents_a_unit() -> None:
     q = parse_quantity("7 Anfragen", "de", VAGUE["de"]).quantity
     assert (q.kind, q.unit) == ("unknown", None)
+
+
+# Round-2 adversarial review: each group is a reproduced finding, then close variants.
+@pytest.mark.parametrize(
+    ("lang", "span", "unit"),
+    [
+        # 1. Digits inside identifiers.
+        ("en", "style A123 units", "units"),
+        ("it", "stile ABC123 pezzi", "units"),
+        ("en", "AB12-34 units", "units"),
+        ("en", "SKU12 5 units", "units"),
+        ("en", "ref #5 units", "units"),
+        ("en", "item_5 units", "units"),
+        ("en", "x5 units", "units"),
+        ("it", "art.123 pezzi", "units"),
+        ("en", "123abc 5 units", "units"),
+        ("en", "No. 5 units", "units"),
+        ("it", "almeno3 pezzi", "units"),
+        # 2. Proportions, partitives and fractions.
+        ("en", "3 out of 5 units", "units"),
+        ("it", "3 su 5 pezzi", "units"),
+        ("en", "5% of 100 units were missing", "units"),
+        ("en", "half a unit", "units"),
+        ("it", "3 clienti su 10", "customers"),
+        ("en", "5 units out of 10", "units"),
+        ("en", "half of the 8 units", "units"),
+        ("it", "metà dei 10 pezzi", "units"),
+        ("en", "every 5 clients", "customers"),
+        ("en", "5 units x 3", "units"),
+        ("en", "rather than 5 units", "units"),
+        ("en", "increased by 5 units", "units"),
+        ("en", "down 5 units vs LY", "units"),
+        ("it", "più 5 pezzi rispetto a ieri", "units"),
+        # 3. A hedge or a negation that does not touch the number.
+        ("en", "at least another 5 units", "units"),
+        ("it", "almeno altri 3 pezzi", "units"),
+        ("en", "not exactly 5 units", "units"),
+        ("it", "non proprio 5 pezzi", "units"),
+        ("en", "about another 5 units", "units"),
+        ("it", "circa altri 3 pezzi", "units"),
+        ("en", "at least, like, 5 units", "units"),
+        ("en", "we didn't get 5 units", "units"),
+        ("it", "non abbiamo 5 pezzi", "units"),
+        ("en", "about 5 units or more", "units"),
+        ("en", "5 units approximately", "units"),
+        ("en", "5 units (approx)", "units"),
+        ("en", "5 units, at least", "units"),
+        ("it", "5 pezzi forse", "units"),
+        ("it", "5 pezzi, più o meno", "units"),
+        # 4. Separated percent and other symbols after a noun-first count.
+        ("en", "requests: 100 %", "requests"),
+        ("it", "richieste: 100 %", "requests"),
+        ("en", "requests: 100 &", "requests"),
+        ("en", "requests: 7 x 2", "requests"),
+        # 5. Expressions that used to collapse to their last number.
+        ("en", "twenty\u2011one units", "units"),
+        ("en", "one hundred & five units", "units"),
+        ("en", "3 & 4 units", "units"),
+        ("en", "3 + 4 units", "units"),
+        ("en", "one or no requests", "requests"),
+        ("it", "due o un pezzo", "units"),
+        ("it", "tre e un pezzo", "units"),
+        ("en", "10 through 20 clients", "customers"),
+        ("it", "dal 10 al 20 clienti", "customers"),
+        # 6. A hedge before a range.
+        ("en", "under 3-5 units", "units"),
+        ("it", "almeno 25-30 pezzi", "units"),
+        ("en", "about 3 to 5 units", "units"),
+        ("it", "circa 3-5 pezzi", "units"),
+        # 7. A sign after a comma or a colon.
+        ("en", "change,-5 units", "units"),
+        ("it", "rettifica,-5 pezzi", "units"),
+        ("en", "stock:-5 units", "units"),
+        ("en", "3 -5 units", "units"),
+        # 8. Decimals, whole or not, and times.
+        ("en", "at 10.00 clients asked", "customers"),
+        ("it", "alle 10,00 clienti", "customers"),
+        ("en", "5.0 units", "units"),
+        ("it", "alle 10 clienti", "customers"),
+        # 9. Numbers parsed losslessly, within MAX_COUNT, ASCII digits only.
+        ("en", "9007199254740993 units", "units"),
+        ("en", "about " + "9" * 310 + " units", "units"),
+        ("en", "9" * 5000 + " units", "units"),
+        ("en", "10000001 units", "units"),
+        ("en", "007 units", "units"),
+        ("en", "\uff13 units", "units"),
+        ("en", "\u0663 units", "units"),
+    ],
+)
+def test_review_round_2_abstains(lang: str, span: str, unit: str | None) -> None:
+    r = parse(span, lang)
+    q = r.quantity
+    assert (q.kind, q.value, q.low, q.high, q.unit) == ("unknown", None, None, None, unit)
+    assert r.qualifier is None and r.stated is None
+    assert r.note
+
+
+BASES = [
+    ("en", "5 units", 5),
+    ("en", "12 clients", 12),
+    ("en", "1,200 visitors", 1200),
+    ("en", "two requests", 2),
+    ("it", "7 richieste", 7),
+    ("it", "3 pezzi", 3),
+    ("it", "tre clienti", 3),
+    ("it", "1.200 visitatori", 1200),
+]
+INVISIBLE = ["\u200b", "\u00ad", "\u2060"]
+# Glued to the number or to the noun, none of these leaves a count. Not here: a trailing
+# apostrophe, part of the word ("piu'"), and "+" after the noun, the "or more" hedge.
+ODD_DIGITS = ["²", "\u0663", "\uff13"]  # superscript, Arabic-Indic and fullwidth digits
+GLUED_JUNK_BEFORE = list("AZqx_#&%@+=<>^|\\*/.,'’-") + INVISIBLE + ODD_DIGITS + ["\u2010", "\u2212"]
+GLUED_JUNK_AFTER = list("AZq9_#&%@=<>^|\\*/~") + INVISIBLE + ODD_DIGITS
+
+
+@pytest.mark.parametrize(("lang", "base", "value"), BASES)
+def test_glued_decorations_never_leave_a_count(lang: str, base: str, value: int) -> None:
+    rng = random.Random(f"{lang}:{base}")
+    for _ in range(300):
+        before = "".join(rng.choices(GLUED_JUNK_BEFORE, k=rng.randint(1, 3)))
+        after = "".join(rng.choices(GLUED_JUNK_AFTER, k=rng.randint(1, 3)))
+        for span in (before + base, base + after, f"Maire {before}{base} today"):
+            r = parse(span, lang)
+            assert r.quantity.kind == "unknown" and r.stated is None, span
+
+
+# Numbers in this pool are never readable counts, so no other count may come out.
+CONTEXT = (
+    "A123 SKU-12 #4 x2 3/4 10:05 2.5 007 99999999 hundred ABC123 AB12-34 & % + = / - ( ) , . : "
+    "of su out the Maire nera oggi today not non at least almeno about circa or o and e EUR € tg "
+    "size x"
+).split()
+
+
+@pytest.mark.parametrize(("lang", "base", "value"), BASES)
+def test_spaced_decorations_never_change_the_number(lang: str, base: str, value: int) -> None:
+    rng = random.Random(f"{lang}:{base}:spaced")
+    for _ in range(500):
+        before = " ".join(rng.choices(CONTEXT, k=rng.randint(0, 3)))
+        after = " ".join(rng.choices(CONTEXT, k=rng.randint(0, 3)))
+        span = f"{before} {base} {after}"
+        r = parse(span, lang)
+        q = r.quantity
+        assert q.kind in ("exact", "vague", "unknown"), span
+        assert q.value in (None, value) and r.stated in (None, value), span
+
+
+# Phrases next to a count that make it something else: it must never come out as a count.
+POISON = {
+    "en": (
+        "not|never|3 out of|of|half|half of the|at least another|about another|not exactly|&|%|"
+        "+|=|3 &|size|x|#|No.|style|at|rather than|3 plus|10 through|increased by|9999 or|"
+        "didn't get|A1",
+        "out of 10|of 10|or 99|%|& 4|x 2|- 3|/ 4|EUR|(approx)|, roughly|maybe|, at least",
+    ),
+    "it": (
+        "non|mai|su|3 su|metà dei|almeno altri|circa altri|non proprio|alle|tg|9999 o|3 e|&|più|"
+        "dal 2 al|senza|%|+",
+        "su 10|o 99|e 4|%|x 2|euro|forse|(circa)|, più o meno|/ 4",
+    ),
+}
+
+
+@pytest.mark.parametrize(("lang", "base", "value"), BASES)
+def test_poisoned_context_never_yields_a_count(lang: str, base: str, value: int) -> None:
+    before, after = (phrases.split("|") for phrases in POISON[lang])
+    for span in [f"{p} {base}" for p in before] + [f"{base} {a}" for a in after]:
+        q = parse(span, lang).quantity
+        assert q.kind not in ("exact", "range"), span
