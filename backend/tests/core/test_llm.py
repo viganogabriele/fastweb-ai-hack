@@ -559,3 +559,43 @@ def test_fixture_recordings_never_satisfy_product_replay(tmp_path):
     with pytest.raises(ReplayMiss):
         replay.for_run(run_spec(mode="live")).chat(MESSAGES)
     assert len(requests) == 1
+
+
+def test_sdk_assistant_message_can_continue_agent_conversation(tmp_path):
+    llm, requests, _ = client(tmp_path, [completion(), completion()])
+    first = llm.chat(MESSAGES)
+    follow_up = [*MESSAGES, first.choices[0].message, {"role": "user", "content": "more"}]
+    llm.chat(follow_up)
+    sent = json.loads(requests[1].content)["messages"]
+    assert sent[-2] == {"role": "assistant", "content": "ok"}
+
+
+def test_usage_overrun_keeps_recording_and_blocks_next_call(tmp_path):
+    reply = completion()
+    reply["usage"]["total_tokens"] = 10**9
+    llm, requests, _ = client(tmp_path, [reply], budget=CallBudget(max_tokens=100_000))
+    assert llm.chat(MESSAGES).choices[0].message.content == "ok"
+    replay = LLMClient(llm.settings.model_copy(update={"llm_mode": "replay"}))
+    assert replay.chat(MESSAGES).choices[0].message.content == "ok"
+    with pytest.raises(BudgetExceeded):
+        llm.chat([{"role": "user", "content": "next"}])
+    assert len(requests) == 1
+
+
+def test_null_or_invalid_usage_settles_to_reservation(tmp_path):
+    reply = completion()
+    reply["usage"]["total_tokens"] = None
+    llm, _, _ = client(tmp_path, [reply])
+    llm.chat(MESSAGES)
+    assert llm.budget.tokens > 0
+    assert llm.traces[-1]["tokens"] == llm.budget.tokens
+
+
+def test_budget_and_deadline_come_from_settings(tmp_path):
+    llm, _, _ = client(tmp_path, [])
+    settings = llm.settings.model_copy(
+        update={"llm_max_calls": 7, "llm_max_tokens": 9, "llm_deadline_seconds": 5}
+    )
+    bounded = LLMClient(settings, clock=lambda: 0)
+    assert (bounded.budget.max_calls, bounded.budget.max_tokens) == (7, 9)
+    assert bounded._remaining() == 5

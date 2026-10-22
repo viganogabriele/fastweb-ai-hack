@@ -122,128 +122,168 @@ def run(
 
     for module_id in roots:
         require(module_id)
-    entries = {module_id: registry.resolve(snapshots[module_id]) for module_id in plan}
+    runnable = [
+        module_id
+        for module_id in plan
+        if snapshots[module_id].manifest.enabled
+        and snapshots[module_id].manifest.mode != "unavailable"
+    ]
+    # Disabled/unavailable snapshots become blocked; they need no installed code.
+    entries = {module_id: registry.resolve(snapshots[module_id]) for module_id in runnable}
     if spec.mode != "fixture" and any(
         snapshots[module_id].manifest.mode == "fixture" for module_id in plan
     ):
         raise ValueError("fixture modules require a fixture run")
-    statuses: dict[str, ModuleRun] = {}
-    with _WORKER, repo_session(engine, spec, fixture_mode=spec.mode == "fixture") as repo:
-        state = repo.run_state()
-        if state["status"] != "pending":
-            raise ValueError("run has already been executed; create a new run_id")
-        if clients is None:
-            from tessera.core.llm import LLMClient
+    fixture_mode = spec.mode == "fixture"
 
-            llm_settings = settings or get_settings()
-            if spec.mode != "live":
-                llm_settings = llm_settings.model_copy(update={"llm_mode": "replay"})
-            clients = {"llm": LLMClient(llm_settings).for_run(spec)}
-        repo.set_run_status("running")
-        for module_id in plan:
-            manifest = snapshots[module_id].manifest
-            statuses[module_id] = ModuleRun(
-                run_id=spec.run_id, module_id=module_id, mode=manifest.mode, status="pending"
-            )
-            repo.save_module_run(statuses[module_id])
-        for module_id in plan:
-            snapshot = snapshots[module_id]
-            manifest = snapshot.manifest
-            started = datetime.now(UTC)
-            blockers = [
-                dependency
-                for dependency in manifest.requires
-                if dependency not in statuses or statuses[dependency].status not in _SUCCESS
-            ]
-            missing_optional = tuple(
-                dependency
-                for dependency in manifest.optional_inputs
-                if dependency not in statuses or statuses[dependency].status not in _SUCCESS
-            )
-            if not manifest.enabled or manifest.mode == "unavailable" or blockers:
-                reason = (
-                    "module disabled or unavailable"
-                    if not manifest.enabled or manifest.mode == "unavailable"
-                    else f"required modules unavailable: {', '.join(blockers)}"
-                )
-                result = ModuleResult(
+    def session(*, module_scope: bool = False):
+        return repo_session(engine, spec, fixture_mode=fixture_mode, module_scope=module_scope)
+
+    statuses: dict[str, ModuleRun] = {}
+
+    def record(status: ModuleRun) -> None:
+        # Lifecycle rows commit at once: progress is visible and the write lock is short.
+        statuses[status.module_id] = status
+        with session() as repo:
+            repo.save_module_run(status)
+
+    with _WORKER:
+        with session() as repo:
+            if repo.run_state()["status"] != "pending":
+                raise ValueError("run has already been executed; create a new run_id")
+            if clients is None:
+                from tessera.core.llm import LLMClient
+
+                llm_settings = settings or get_settings()
+                if spec.mode != "live":
+                    llm_settings = llm_settings.model_copy(update={"llm_mode": "replay"})
+                clients = {"llm": LLMClient(llm_settings).for_run(spec)}
+            repo.set_run_status("running")
+            for module_id in plan:
+                statuses[module_id] = ModuleRun(
+                    run_id=spec.run_id,
                     module_id=module_id,
-                    module_version=manifest.version,
-                    status="blocked",
-                    counts={},
-                    errors=(reason,),
-                    abstentions=(),
+                    mode=snapshots[module_id].manifest.mode,
+                    status="pending",
                 )
+                repo.save_module_run(statuses[module_id])
+        try:
+            for module_id in plan:
+                _execute(
+                    module_id,
+                    snapshots[module_id],
+                    entries,
+                    statuses,
+                    record,
+                    session,
+                    spec,
+                    clients,
+                    logger,
+                )
+        except BaseException:
+            with session() as repo:
+                repo.discard_artifacts()
+                repo.set_run_status("failed")
+            raise
+        final = {statuses[module_id].status for module_id in required}
+        with session() as repo:
+            if final & {"failed", "blocked"}:
+                # Unpublished partial outputs of earlier modules are not kept.
+                repo.discard_artifacts()
+                repo.set_run_status("failed" if "failed" in final else "blocked")
             else:
-                repo.save_module_run(
-                    ModuleRun(
-                        run_id=spec.run_id,
-                        module_id=module_id,
-                        mode=manifest.mode,
-                        status="running",
-                        started_at=started,
-                    )
-                )
-                try:
-                    with repo.session.begin_nested():
-                        result = entries[module_id].run(
-                            RunContext(
-                                spec=spec.model_copy(deep=True),
-                                repo=repo,
-                                clients=clients or {},
-                                logger=logger or logging.getLogger("tessera.pipeline"),
-                                manifest=manifest.model_copy(deep=True),
-                                params=deepcopy(snapshot.params),
-                                missing_optional_inputs=missing_optional,
-                            )
-                        )
-                        if not isinstance(result, ModuleResult):
-                            raise TypeError("module must return ModuleResult")
-                        if (result.module_id, result.module_version) != (
-                            module_id,
-                            manifest.version,
-                        ):
-                            raise ValueError("module result identity/version differs from snapshot")
-                        if result.status not in _SUCCESS:
-                            raise _UnsuccessfulResult(result)
-                        if missing_optional:
-                            result = result.model_copy(
-                                update={
-                                    "status": "degraded",
-                                    "abstentions": (
-                                        *result.abstentions,
-                                        "optional modules unavailable: "
-                                        + ", ".join(missing_optional),
-                                    ),
-                                }
-                            )
-                except _UnsuccessfulResult as exc:
-                    result = exc.result
-                except Exception as exc:
-                    result = ModuleResult(
-                        module_id=module_id,
-                        module_version=manifest.version,
-                        status="failed",
-                        counts={},
-                        errors=(f"module raised {type(exc).__name__}",),
-                        abstentions=(),
-                    )
-            statuses[module_id] = ModuleRun(
+                degraded = any(status.status != "succeeded" for status in statuses.values())
+                repo.publish(status="degraded" if degraded else "succeeded")
+    return tuple(statuses.values())
+
+
+def _execute(module_id, snapshot, entries, statuses, record, session, spec, clients, logger):
+    """Run one module in its own transaction; any non-success rolls its writes back."""
+    manifest = snapshot.manifest
+    started = datetime.now(UTC)
+    blockers = [
+        dependency
+        for dependency in manifest.requires
+        if dependency not in statuses or statuses[dependency].status not in _SUCCESS
+    ]
+    missing_optional = tuple(
+        dependency
+        for dependency in manifest.optional_inputs
+        if dependency not in statuses or statuses[dependency].status not in _SUCCESS
+    )
+    if not manifest.enabled or manifest.mode == "unavailable" or blockers:
+        reason = (
+            "module disabled or unavailable"
+            if not manifest.enabled or manifest.mode == "unavailable"
+            else f"required modules unavailable: {', '.join(blockers)}"
+        )
+        result = ModuleResult(
+            module_id=module_id,
+            module_version=manifest.version,
+            status="blocked",
+            counts={},
+            errors=(reason,),
+            abstentions=(),
+        )
+    else:
+        record(
+            ModuleRun(
                 run_id=spec.run_id,
                 module_id=module_id,
                 mode=manifest.mode,
-                status=result.status,
+                status="running",
                 started_at=started,
-                finished_at=datetime.now(UTC),
-                result=result,
             )
-            repo.save_module_run(statuses[module_id])
-        final = {statuses[module_id].status for module_id in required}
-        if "failed" in final:
-            repo.set_run_status("failed")
-        elif "blocked" in final:
-            repo.set_run_status("blocked")
-        else:
-            degraded = any(status.status != "succeeded" for status in statuses.values())
-            repo.publish(status="degraded" if degraded else "succeeded")
-    return tuple(statuses.values())
+        )
+        try:
+            with session(module_scope=True) as repo:
+                result = entries[module_id].run(
+                    RunContext(
+                        spec=spec.model_copy(deep=True),
+                        repo=repo,
+                        clients=clients or {},
+                        logger=logger or logging.getLogger("tessera.pipeline"),
+                        manifest=manifest.model_copy(deep=True),
+                        params=deepcopy(snapshot.params),
+                        missing_optional_inputs=missing_optional,
+                    )
+                )
+                if not isinstance(result, ModuleResult):
+                    raise TypeError("module must return ModuleResult")
+                if (result.module_id, result.module_version) != (module_id, manifest.version):
+                    raise ValueError("module result identity/version differs from snapshot")
+                if result.status not in _SUCCESS:
+                    raise _UnsuccessfulResult(result)
+                if missing_optional:
+                    result = result.model_copy(
+                        update={
+                            "status": "degraded",
+                            "abstentions": (
+                                *result.abstentions,
+                                "optional modules unavailable: " + ", ".join(missing_optional),
+                            ),
+                        }
+                    )
+        except _UnsuccessfulResult as exc:
+            result = exc.result
+        except Exception as exc:
+            logging.getLogger("tessera.pipeline").exception("module %s failed", module_id)
+            result = ModuleResult(
+                module_id=module_id,
+                module_version=manifest.version,
+                status="failed",
+                counts={},
+                errors=(f"module raised {type(exc).__name__}",),
+                abstentions=(),
+            )
+    record(
+        ModuleRun(
+            run_id=spec.run_id,
+            module_id=module_id,
+            mode=manifest.mode,
+            status=result.status,
+            started_at=started,
+            finished_at=datetime.now(UTC),
+            result=result,
+        )
+    )

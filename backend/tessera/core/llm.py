@@ -55,10 +55,9 @@ class CallBudget:
             self.tokens += tokens
 
     def settle(self, reserved: int, actual: int) -> None:
+        """Account billed usage; an overrun blocks the next reservation, not this result."""
         with self._lock:
             self.tokens += actual - reserved
-            if self.tokens > self.max_tokens:
-                raise BudgetExceeded("provider usage exceeded LLM token budget")
 
 
 def inline_schema(schema: dict[str, Any]) -> dict[str, Any]:
@@ -80,6 +79,13 @@ def inline_schema(schema: dict[str, Any]) -> dict[str, Any]:
         return {k: visit(v, parents) for k, v in value.items() if k != "$defs"}
 
     return visit(schema)
+
+
+def _plain(message: Mapping[str, Any] | BaseModel) -> dict[str, Any]:
+    """Accept SDK messages (e.g. ``choices[0].message``) in agent round trips."""
+    if isinstance(message, BaseModel):
+        return message.model_dump(mode="json", exclude_none=True)
+    return dict(message)
 
 
 class LLMClient:
@@ -117,18 +123,22 @@ class LLMClient:
         concurrency: int = 4,
         timeout: float = 60,
         max_retries: int = 2,
-        deadline_seconds: float = 180,
+        deadline_seconds: float | None = None,
         sleep: Callable[[float], None] = time.sleep,
         clock: Callable[[], float] = time.monotonic,
     ):
+        self.settings = settings or get_settings()
+        if deadline_seconds is None:
+            deadline_seconds = self.settings.llm_deadline_seconds
         if concurrency < 1 or timeout <= 0 or not 0 <= max_retries <= 2 or deadline_seconds <= 0:
             raise ValueError("invalid LLM limits")
-        self.settings = settings or get_settings()
         url = urlsplit(self.settings.fastweb_base_url)
         if url.username or url.password or url.query or url.fragment:
             raise ValueError("provider URL must not contain credentials, query or fragment")
         self.cache = cache or ResponseCache(self.settings.data_dir / "llm_cache")
-        self.budget = budget or CallBudget()
+        self.budget = budget or CallBudget(
+            max_calls=self.settings.llm_max_calls, max_tokens=self.settings.llm_max_tokens
+        )
         self._factory = client_factory
         self._semaphore = threading.BoundedSemaphore(concurrency)
         self._timeout = timeout
@@ -238,21 +248,19 @@ class LLMClient:
                         # Reject invalid numeric JSON before writing any recording.
                         json.dumps(response, allow_nan=False)
                     except ValueError:
+                        trace.update(error="nonfinite_json_numbers", tokens=reserved)
+                        self.traces.append(trace)
                         raise LLMCallFailed(
                             "LLM provider returned nonfinite JSON numbers"
                         ) from None
-                    tokens = (response.get("usage") or {}).get("total_tokens", reserved)
+                    tokens = (response.get("usage") or {}).get("total_tokens")
+                    if not isinstance(tokens, int) or isinstance(tokens, bool) or tokens < 0:
+                        # Unusable usage (e.g. null counts) would fail SDK validation on replay.
+                        response["usage"] = None
+                        tokens = reserved
                     trace.update(tokens=tokens, latency_seconds=self._clock() - start, status=200)
                     self.traces.append(trace)
                     self.budget.settle(reserved, tokens)
-                    try:
-                        # Reject invalid numeric JSON before writing any recording.
-                        json.dumps(response, allow_nan=False)
-                    except ValueError:
-                        trace["error"] = "nonfinite_json_numbers"
-                        raise LLMCallFailed(
-                            "LLM provider returned nonfinite JSON numbers"
-                        ) from None
                     if self.settings.llm_mode == "record":
                         response = self.cache.put(key, response)
                     return response
@@ -262,7 +270,7 @@ class LLMClient:
 
     def chat(
         self,
-        messages: Sequence[Mapping[str, Any]],
+        messages: Sequence[Mapping[str, Any] | BaseModel],
         tools: list[dict] | None = None,
         model: str | None = None,
         *,
@@ -284,7 +292,7 @@ class LLMClient:
             raise ValueError("unsupported generation parameter")
         payload = {
             "model": model or self.settings.chat_model,
-            "messages": list(messages),
+            "messages": [_plain(message) for message in messages],
             "max_tokens": 2048,
             **generation,
         }

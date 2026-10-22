@@ -25,6 +25,10 @@ class Settings(BaseSettings):
     embed_model: str = "Qwen/Qwen3-VL-Embedding-2B"
     asr_model: str = "openai/whisper-large-v3-turbo"
     llm_mode: Literal["live", "record", "replay"] = "replay"
+    # Per-run provider allowance (RFC §4.7.2); raise via env for full record runs.
+    llm_max_calls: int = 100
+    llm_max_tokens: int = 200_000
+    llm_deadline_seconds: float = 180
 
     sources_dir: Path = REPO_ROOT / "generated" / "sources"
     data_dir: Path = REPO_ROOT / "data"
