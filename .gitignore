@@ -6,6 +6,7 @@ __pycache__/
 generator/systems/_cache/
 .DS_Store
 .env
+.secrets/
 # Derived data is rebuilt by the pipeline; only hand-written fixtures are versioned.
 data/*
 !data/fixtures/

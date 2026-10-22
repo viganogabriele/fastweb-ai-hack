@@ -15,6 +15,6 @@ def health() -> dict:
         "status": "ok",
         "version": __version__,
         "llm_mode": s.llm_mode,
-        "fastweb_key_configured": s.fastweb_api_key is not None,
+        "fastweb_models_configured": sorted(s.fastweb_keys()),
         "sources_present": s.sources_dir.is_dir(),
     }
