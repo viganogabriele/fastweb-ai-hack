@@ -60,8 +60,12 @@ PROMPT_PATH = REPO_ROOT / "backend" / "prompts" / f"{PROMPT_ID}.md"
 SCORE_MIN, SCORE_MAX = 0.0, 100.0
 # "taglia 4", "tg. 3", "size M", "Größe 2", "サイズ1": an explicit size word, never a bare letter.
 SIZE_WORDS = r"taglia|tg\.?|size|taille|talla|gr(?:ö|oe)(?:ss|ß)e|サイズ|尺码|사이즈"
+SIZE_TOKEN = r"\d{1,2}|xxs|xs|s|m|l|xl|xxl"
 SIZE_IN_MENTION = re.compile(
-    rf"(?<!\w)(?:{SIZE_WORDS})\s*(\d{{1,2}}|xxs|xs|s|m|l|xl|xxl)(?![a-z0-9])", re.IGNORECASE
+    rf"(?<!\w)(?:{SIZE_WORDS})\s*({SIZE_TOKEN})(?![a-z0-9'’])"
+    # "tg 3 o 4", "size S/M": a second size after a connector is a second size.
+    rf"(?:\s*(?:,|/|-|&|e|o|y|ou|or|and|oder|und)\s*(?:(?:{SIZE_WORDS})\s*)?({SIZE_TOKEN})(?![a-z0-9'’]))?",
+    re.IGNORECASE,
 )
 # Failures of the LLM call or of its output. Anything else is a bug and fails the module.
 LLM_ERRORS = (ExtractionFailed, BudgetExceeded, LLMCallFailed, ReplayMiss, CacheCorrupt)
@@ -205,7 +209,7 @@ def catalog_at(run_repo: repo.Repo, aliases_path: Path) -> CatalogSnapshot | Non
 
 def size_in(mention: str) -> str | None:
     """The one size named after a size word; None if there is none or more than one."""
-    sizes = {s.upper() for s in SIZE_IN_MENTION.findall(mention)}
+    sizes = {s.upper() for pair in SIZE_IN_MENTION.findall(mention) for s in pair if s}
     return sizes.pop() if len(sizes) == 1 else None
 
 
