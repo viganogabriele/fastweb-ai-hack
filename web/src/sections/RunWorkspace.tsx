@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
+import type { ReactNode } from 'react'
 import { Search } from 'lucide-react'
 import { readApi } from '../api/client'
-import type { Case, ModuleManifest, SourceDocument } from '../api/client'
+import type { Case, DocumentDetail, ModuleManifest, SourceDocument } from '../api/client'
 import {
   Button,
   EmptyState,
@@ -12,6 +13,8 @@ import {
   StatusBadge
 } from '../ui'
 import { useRuns } from '../api/useRuns'
+import { evidenceRanges, refKey } from './sourceEvidence'
+import type { CaseEvidence } from './sourceEvidence'
 import './sections.css'
 import '../widgets/widgets.css'
 
@@ -53,7 +56,7 @@ export function RunWorkspace({
 }) {
   const [data, setData] = useState<{
     cases: Case[]
-    documents: SourceDocument[]
+    documents: (SourceDocument & { caseEvidence: CaseEvidence[] })[]
     modules: ModuleManifest[]
   } | null>(null)
   const [error, setError] = useState('')
@@ -76,16 +79,54 @@ export function RunWorkspace({
           ).then((modules) => ({ cases: [], documents: [], modules }))
         : published && runId
           ? Promise.all([
-              section === 'sources'
-                ? Promise.resolve([] as Case[])
-                : readApi<Case[]>(`${base}/cases`, controller.signal),
+              section === 'sources' || section === 'overview'
+                ? readApi<Case[]>(`${base}/cases`, controller.signal)
+                : Promise.resolve([] as Case[]),
               section === 'cases'
                 ? Promise.resolve([] as SourceDocument[])
                 : readApi<SourceDocument[]>(
                     `${base}/documents`,
                     controller.signal
                   )
-            ]).then(([cases, documents]) => ({ cases, documents, modules: [] }))
+            ]).then(async ([cases, documents]) => {
+              if (section !== 'sources')
+                return {
+                  cases,
+                  documents: documents.map((document) => ({ ...document, caseEvidence: [] })),
+                  modules: []
+                }
+              const details = await Promise.all(
+                documents.map((document) =>
+                  readApi<DocumentDetail>(
+                    `${base}/documents/${encodeURIComponent(document.id)}?version=${encodeURIComponent(document.version)}`,
+                    controller.signal
+                  )
+                )
+              )
+              const caseRefs = new Map<string, { caseId: string; caseType: string; relation: CaseEvidence['relation'] }[]>()
+              for (const item of cases) {
+                for (const [relation, refs] of [
+                  ['supporting', item.supporting],
+                  ['contradicting', item.contradicting]
+                ] as const) {
+                  for (const ref of refs) {
+                    const key = refKey(ref)
+                    caseRefs.set(key, [...(caseRefs.get(key) ?? []), { caseId: item.id, caseType: item.case_type, relation }])
+                  }
+                }
+              }
+              return {
+                cases,
+                documents: details.map(({ document, observations }) => ({
+                  ...document,
+                  caseEvidence: observations.flatMap((observation) => {
+                    const refs = caseRefs.get(`Observation:${observation.id}:${observation.version}`) ?? []
+                    return refs.flatMap((ref) => observation.evidence.map((evidence) => ({ ...ref, evidence })))
+                  })
+                })),
+                modules: []
+              }
+            })
           : null
     request
       ?.then((result) => {
@@ -294,7 +335,36 @@ export function RunWorkspace({
                   {item.language ?? 'Lingua non disponibile'} · Disponibile dal{' '}
                   {date(item.available_at)}
                 </p>
-                <pre className="sd-source-text">{item.text}</pre>
+                {(() => {
+                  const ranges = evidenceRanges(item.text, item, item.caseEvidence)
+                  const parts: ReactNode[] = []
+                  let cursor = 0
+                  for (const [index, range] of ranges.entries()) {
+                    if (range.start < cursor) continue
+                    if (range.start > cursor) parts.push(item.text.slice(cursor, range.start))
+                    parts.push(
+                      <mark
+                        className={`sd-source-evidence sd-source-evidence--${range.relation}`}
+                        key={`${range.caseId}-${range.evidence.segment_id}-${range.start}-${index}`}
+                        title={`${range.caseId} · ${range.caseType} · ${range.relation === 'supporting' ? 'A supporto' : 'In contrasto'}`}
+                      >
+                        {item.text.slice(range.start, range.end)}
+                      </mark>
+                    )
+                    cursor = range.end
+                  }
+                  if (cursor < item.text.length) parts.push(item.text.slice(cursor))
+                  return (
+                    <>
+                      {ranges.length > 0 && (
+                        <p className="sd-source-evidence-label">
+                          Evidenze collegate al caso · passa sul testo evidenziato per i riferimenti
+                        </p>
+                      )}
+                      <pre className="sd-source-text">{parts}</pre>
+                    </>
+                  )
+                })()}
               </details>
             ))}
           </div>
