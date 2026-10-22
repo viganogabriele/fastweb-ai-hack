@@ -218,15 +218,20 @@ def parse_quantity(span: str, lang: str, vague: Iterable[str] = ()) -> ParsedQua
         return _unknown(span, None, "several counts in one span")
     if counts:
         return _from_count(counts[0], span)
-    for i, t in enumerate(tokens):
-        if t.kind == "vague":
-            noun = _noun_after(tokens, i + 1, lex)
-            unit = lex.nouns[tokens[noun].key] if noun is not None else _only_unit(tokens, lex)
-            end = tokens[noun].end if noun is not None else t.end
-            return ParsedQuantity(
-                Quantity(kind="vague", unit=unit, raw=span[t.start : end]),
-                note="vague quantifier",
-            )
+    # A quantifier that qualifies a unit noun wins over a loose one ("molte coreane, tante
+    # richieste"); a loose one takes the span's unit only if the span names just one.
+    vague_at = [
+        (i, _noun_after(tokens, i + 1, lex)) for i, t in enumerate(tokens) if t.kind == "vague"
+    ]
+    if vague_at:
+        i, noun = next(((i, n) for i, n in vague_at if n is not None), vague_at[0])
+        t = tokens[i]
+        if noun is None:
+            unit, end = _only_unit(tokens, lex), t.end
+        else:
+            unit, end = _unit(tokens[noun], span, lex), tokens[noun].end
+        q = Quantity(kind="vague", unit=unit, raw=span[t.start : end])
+        return ParsedQuantity(q, note="vague quantifier")
     has_number = any(t.kind == "num" or t.key in lex.numbers for t in tokens)
     return _unknown(
         span, _only_unit(tokens, lex), "no count next to a unit noun" if has_number else "no count"
