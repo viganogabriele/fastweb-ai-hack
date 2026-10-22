@@ -3,11 +3,12 @@ BACKEND := backend
 WEB := web
 PY := $(BACKEND)/.venv/bin/python
 
-.PHONY: setup dev backend web mocks check fmt test
+.PHONY: setup dev backend web mocks check fmt test types
 
-setup:  ## install backend and web dependencies from the lockfiles
+setup:  ## install backend, web and type-generator dependencies from the lockfiles
 	cd $(BACKEND) && uv sync --frozen
 	cd $(WEB) && npm ci
+	cd scripts/openapi && npm ci
 
 dev:  ## backend :8000 + web :5173 + dataset mock systems :8088 (Ctrl-C stops all)
 	@trap 'kill 0' INT TERM; \
@@ -26,11 +27,18 @@ mocks:  ## dataset mock agents server: run it, never import or read its code
 	$(PY) generator/systems/mock_agents/server.py --port 8088
 
 check:  ## must pass before every PR
-	cd $(BACKEND) && uv run ruff check . ../eval && uv run ruff format --check . ../eval && uv run pytest -q
+	cd $(BACKEND) && uv run ruff check . ../eval ../scripts/export_openapi.py && uv run ruff format --check . ../eval ../scripts/export_openapi.py && uv run pytest -q
 	cd $(WEB) && npm run lint && npm run typecheck
+	$(MAKE) --no-print-directory types && git diff --exit-code -- web/src/api/schema.d.ts
 
 fmt:
-	cd $(BACKEND) && uv run ruff check --fix . ../eval && uv run ruff format . ../eval
+	cd $(BACKEND) && uv run ruff check --fix . ../eval ../scripts/export_openapi.py && uv run ruff format . ../eval ../scripts/export_openapi.py
 
 test:
 	cd $(BACKEND) && uv run pytest -q
+
+types:  ## regenerate TypeScript contracts from FastAPI OpenAPI (no running server needed)
+	@schema_dir=$$(mktemp -d) || exit 1; schema="$$schema_dir/openapi.json"; \
+	trap 'rm -f "$$schema"; rmdir "$$schema_dir"' EXIT; \
+	$(PY) scripts/export_openapi.py > "$$schema" && \
+	scripts/openapi/node_modules/.bin/openapi-typescript "$$schema" -o web/src/api/schema.d.ts

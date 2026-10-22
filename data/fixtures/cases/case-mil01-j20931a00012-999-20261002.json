@@ -1,0 +1,111 @@
+[
+  {
+    "kind": "Case",
+    "payload": {
+      "id": "case-mil01-j20931a00012-999-20261002",
+      "version": "v1",
+      "available_at": "2026-10-02T19:13:52Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2112_MIL01.eml",
+          "content_hash": "sha256:42ba599825b726743a870909947f1046005d4f0d715a79922b4ff43cef313a93",
+          "locator": null
+        },
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2113_MIL01_dup.eml",
+          "content_hash": "sha256:41f447a28b601371cb206f1e711749ac962803332d0dcd05e2c2f77d2154d88e",
+          "locator": null
+        },
+        {
+          "uri": "dataset://erp/master_data/sku_colour.csv",
+          "content_hash": "sha256:bd40e343533ae4226a100a5ec0e743933a8c3b37656963165d1bc7a8942e2400",
+          "locator": "sku=J20931A00012-999"
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "Observation",
+          "id": "obs-20261002-2112-mil01-maire-requests",
+          "version": "v1"
+        },
+        {
+          "kind": "Observation",
+          "id": "obs-20261002-2113-mil01-dup-maire-requests",
+          "version": "v1"
+        },
+        {
+          "kind": "EntityLink",
+          "id": "link-20261002-2112-mil01-maire-requests",
+          "version": "v1"
+        },
+        {
+          "kind": "EntityLink",
+          "id": "link-20261002-2113-mil01-dup-maire-requests",
+          "version": "v1"
+        },
+        {
+          "kind": "EvidenceRelation",
+          "id": "rel-20261002-mil01-maire-duplicates",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01b",
+      "producer_version": "1",
+      "case_type": "unmet_demand",
+      "store_id": "MIL01",
+      "scope_level": "sku",
+      "scope_id": "J20931A00012-999",
+      "window_start": "2026-10-01T22:00:00Z",
+      "window_end": "2026-10-02T21:59:59Z",
+      "status": "open",
+      "owner": "allocation",
+      "priority": "medium",
+      "priority_reason": "Exact count of requests in one day for MAIRE black; two copies of the same email count as one origin.",
+      "decision_due_at": null,
+      "first_available_at": "2026-10-02T19:12:11Z",
+      "last_received_at": "2026-10-02T19:13:52Z",
+      "last_independent_evidence_at": "2026-10-02T19:12:11Z",
+      "valid_until": "2026-10-09T19:12:11Z",
+      "supporting": [
+        {
+          "kind": "Observation",
+          "id": "obs-20261002-2112-mil01-maire-requests",
+          "version": "v1"
+        },
+        {
+          "kind": "Observation",
+          "id": "obs-20261002-2113-mil01-dup-maire-requests",
+          "version": "v1"
+        }
+      ],
+      "contradicting": [],
+      "n_documents": 2,
+      "n_origin_groups": 1,
+      "n_unknown_origins": 0,
+      "blocking_uncertainties": [
+        "Requests are not units: no conversion to demand without evidence."
+      ],
+      "context_refs": [
+        {
+          "kind": "EntityLink",
+          "id": "link-20261002-2112-mil01-maire-requests",
+          "version": "v1"
+        },
+        {
+          "kind": "EntityLink",
+          "id": "link-20261002-2113-mil01-dup-maire-requests",
+          "version": "v1"
+        },
+        {
+          "kind": "EvidenceRelation",
+          "id": "rel-20261002-mil01-maire-duplicates",
+          "version": "v1"
+        }
+      ]
+    }
+  }
+]

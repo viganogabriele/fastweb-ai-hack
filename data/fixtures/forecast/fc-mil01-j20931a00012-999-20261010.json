@@ -1,0 +1,174 @@
+[
+  {
+    "kind": "ForecastAdjustment",
+    "payload": {
+      "id": "fc-mil01-j20931a00012-999-20261010",
+      "version": "v1",
+      "available_at": "2026-10-06T04:00:00Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2112_MIL01.eml",
+          "content_hash": "sha256:42ba599825b726743a870909947f1046005d4f0d715a79922b4ff43cef313a93",
+          "locator": null
+        },
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2113_MIL01_dup.eml",
+          "content_hash": "sha256:41f447a28b601371cb206f1e711749ac962803332d0dcd05e2c2f77d2154d88e",
+          "locator": null
+        },
+        {
+          "uri": "dataset://erp/master_data/sku_colour.csv",
+          "content_hash": "sha256:bd40e343533ae4226a100a5ec0e743933a8c3b37656963165d1bc7a8942e2400",
+          "locator": "sku=J20931A00012-999"
+        },
+        {
+          "uri": "dataset://erp/forecast/sku_store_weekly/fcst_sku_store_run_2026-10-05.csv",
+          "content_hash": "sha256:af9b2acbac16d489798e6b10592e361890e30612d50092f1a9282476445aaa19",
+          "locator": "store_id=MIL01;sku=J20931A00012-999;week_start=2026-10-05|2026-10-12"
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "Case",
+          "id": "case-mil01-j20931a00012-999-20261002",
+          "version": "v1"
+        },
+        {
+          "kind": "ForecastVintage",
+          "id": "fcst_sku_store_run_2026-10-05/MIL01/J20931A00012-999",
+          "version": "2026-10-05"
+        }
+      ],
+      "producer": "fixture.data01b",
+      "producer_version": "1",
+      "case_ids": [
+        "case-mil01-j20931a00012-999-20261002"
+      ],
+      "store_id": "MIL01",
+      "sku": "J20931A00012-999",
+      "baseline_ref": {
+        "kind": "ForecastVintage",
+        "id": "fcst_sku_store_run_2026-10-05/MIL01/J20931A00012-999",
+        "version": "2026-10-05"
+      },
+      "forecast_target": "sales_baseline",
+      "horizon_start": "2026-10-10",
+      "horizon_end": "2026-10-16",
+      "status": "unchanged",
+      "reason": "A count of past requests is not units of future demand (RFC §4.9 steps 3 and 5): scenarios equal the baseline.",
+      "series": [
+        {
+          "date": "2026-10-10",
+          "baseline": 1.9514285714285715,
+          "latent": {
+            "low": 1.9514285714285715,
+            "base": 1.9514285714285715,
+            "high": 1.9514285714285715
+          },
+          "servable": {
+            "low": 1.9514285714285715,
+            "base": 1.9514285714285715,
+            "high": 1.9514285714285715
+          },
+          "actual": null
+        },
+        {
+          "date": "2026-10-11",
+          "baseline": 1.9514285714285715,
+          "latent": {
+            "low": 1.9514285714285715,
+            "base": 1.9514285714285715,
+            "high": 1.9514285714285715
+          },
+          "servable": {
+            "low": 1.9514285714285715,
+            "base": 1.9514285714285715,
+            "high": 1.9514285714285715
+          },
+          "actual": null
+        },
+        {
+          "date": "2026-10-12",
+          "baseline": 2.06,
+          "latent": {
+            "low": 2.06,
+            "base": 2.06,
+            "high": 2.06
+          },
+          "servable": {
+            "low": 2.06,
+            "base": 2.06,
+            "high": 2.06
+          },
+          "actual": null
+        },
+        {
+          "date": "2026-10-13",
+          "baseline": 2.06,
+          "latent": {
+            "low": 2.06,
+            "base": 2.06,
+            "high": 2.06
+          },
+          "servable": {
+            "low": 2.06,
+            "base": 2.06,
+            "high": 2.06
+          },
+          "actual": null
+        },
+        {
+          "date": "2026-10-14",
+          "baseline": 2.06,
+          "latent": {
+            "low": 2.06,
+            "base": 2.06,
+            "high": 2.06
+          },
+          "servable": {
+            "low": 2.06,
+            "base": 2.06,
+            "high": 2.06
+          },
+          "actual": null
+        },
+        {
+          "date": "2026-10-15",
+          "baseline": 2.06,
+          "latent": {
+            "low": 2.06,
+            "base": 2.06,
+            "high": 2.06
+          },
+          "servable": {
+            "low": 2.06,
+            "base": 2.06,
+            "high": 2.06
+          },
+          "actual": null
+        },
+        {
+          "date": "2026-10-16",
+          "baseline": 2.06,
+          "latent": {
+            "low": 2.06,
+            "base": 2.06,
+            "high": 2.06
+          },
+          "servable": {
+            "low": 2.06,
+            "base": 2.06,
+            "high": 2.06
+          },
+          "actual": null
+        }
+      ],
+      "components": [],
+      "proposal_source": "code"
+    }
+  }
+]
