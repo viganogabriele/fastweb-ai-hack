@@ -352,7 +352,7 @@
   /* Keeps a focused header's outline clear of the region edge when scrolled into view. */
   scroll-padding-inline: var(--sd-space-2);
   overflow: auto;
-  max-height: min(65vh, 520px);
+
   max-width: 100%;
   border-radius: var(--sd-radius-control);
   scrollbar-color: var(--sd-color-text-muted) transparent;

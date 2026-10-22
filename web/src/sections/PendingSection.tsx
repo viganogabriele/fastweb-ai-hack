@@ -25,20 +25,7 @@ export function PendingSection({ section }: { section: PendingSectionConfig }) {
       <motion.div variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: transition.popover } }}>
         <EmptyState title={messages.sections.stateTitle} description={messages.sections.stateDescription} compact />
       </motion.div>
-      <motion.div className="sd-pending-section__details" variants={{ hidden: {}, visible: { transition: { staggerChildren: stagger } } }}>
-        <motion.div className="sd-pending-section__detail" variants={{ hidden: { opacity: 0, y: reduceMotion ? 0 : 3 }, visible: { opacity: 1, y: 0, transition: transition.view } }}>
-          <h3>{messages.sections.apiLabel}</h3>
-          <ul className="sd-pending-section__endpoints">
-            {section.endpoints.map((endpoint) => <li key={endpoint}><code>{endpoint}</code></li>)}
-          </ul>
-        </motion.div>
-        <motion.div className="sd-pending-section__detail" variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: transition.popover } }}>
-          <h3>{messages.sections.tasksLabel}</h3>
-          <ul className="sd-pending-section__tasks">
-            {section.tasks.map((task) => <li key={task}><code>{task}</code></li>)}
-          </ul>
-        </motion.div>
-      </motion.div>
+
     </motion.section>
   )
 }

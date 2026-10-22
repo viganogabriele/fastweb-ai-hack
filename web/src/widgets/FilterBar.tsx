@@ -30,6 +30,7 @@ export function FilterBar({
     >
       <Input
         className="sd-filterbar-search"
+        size="sm"
         type="search"
         label={copy.searchLabel}
         placeholder={copy.searchPlaceholder}
