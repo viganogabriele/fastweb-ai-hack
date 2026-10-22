@@ -13,10 +13,9 @@ One line per task. Edit only the lines of your own task.
 - PLT-02 (C) `tessera/core/contracts/`: MVP DTO contracts, JSON Schema export, invariant tests
 - EVL-01 (D, done by Bianca) `eval/`: frozen-export harness (manifest hashes before any answer key), Linux Landlock launcher denying product reads of answer keys/generator/eval
 - ING-02 pure (A, done by Bianca) `modules/ingestion/email_parser.py`: `.eml` → canonical text, segments with code-point offsets, quotes and attachments flagged
+- ING-01 pure (B, Bianca) `modules/sources/erp.py`: typed ERP rows with provenance, `available_at` (next-day 06:00 local), latest forecast vintage per store
 
 ## In progress
-
-- ING-01 pure (B, Bianca) ERP loaders with provenance and replay availability · branch `ING-01-erp-loaders`
 
 ## Ready (all hard dependencies merged)
 

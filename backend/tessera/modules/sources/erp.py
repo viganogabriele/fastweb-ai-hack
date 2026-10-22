@@ -10,11 +10,17 @@ Launch/valid-from dates describe products/prices, not when their files were know
 Daily facts use next-day 06:00 in the store timezone; later posting wins. Forecast
 uses explicit issued_at when present, otherwise run-date 06:00 local. These 06:00
 times are prototype conventions, recorded in availability_basis, not source facts.
+
+Money stays ``Decimal``. Forecast units are fractional quantities fed to FC-01, so
+they are ``float`` (FC-01 accepts any real number, which ``Decimal`` is not).
+Source URIs are relative to ``generated/sources`` (``erp/...``), so row ids are the
+same in every checkout, worktree and CI run.
 """
 
 import csv
 import hashlib
 import json
+import math
 from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
 from datetime import UTC, date, datetime, time, timedelta
@@ -37,7 +43,7 @@ Table = Literal[
     "stock",
     "forecast",
 ]
-Value = str | int | Decimal | date | datetime | None
+Value = str | int | float | Decimal | date | datetime | None
 
 # Identifier fields remain strings: leading zero sizes, colours and EANs survive.
 _KEYS = {
@@ -81,8 +87,8 @@ _DECIMALS = {
     "discount_lc",
     "returns_lc",
     "net_sales_lc",
-    "fcst_units",
 }
+_FLOATS = {"fcst_units"}
 _INSTANTS = {"posted_at", "issued_at", "available_at"}
 
 
@@ -118,6 +124,14 @@ def _parse(field: str, value: str) -> Value:
         result = int(value)
         if result < 0:
             raise ValueError(f"{field} must be nonnegative")
+        return result
+    if field in _FLOATS:
+        try:
+            result = float(value)
+        except ValueError as exc:
+            raise ValueError(f"Invalid number for {field}") from exc
+        if not math.isfinite(result) or result < 0:
+            raise ValueError(f"Invalid finite amount for {field}")
         return result
     if field in _DECIMALS:
         try:
@@ -234,21 +248,22 @@ def rows_at_as_of(rows: Iterable[ERPRow], as_of: datetime) -> tuple[ERPRow, ...]
 
 
 def latest_forecast(rows: Iterable[ERPRow], as_of: datetime) -> tuple[ERPRow, ...]:
-    """Latest eligible vintage per store × SKU, preserving its target coverage.
+    """Latest eligible vintage per store, preserving its target coverage.
 
-    Missing weeks in that vintage remain missing, never filled from older runs.
+    The vintage is chosen per store (runs become available at 06:00 store-local time),
+    not per store × SKU: a SKU or week absent from the latest run stays missing and is
+    never filled from an older run (the dataset drops SKUs between runs).
     """
     eligible = rows_at_as_of(rows, as_of)
     newest = {}
     for row in eligible:
         if row.table != "forecast":
             raise ValueError("latest_forecast accepts forecast rows only")
-        pair = (row.data["store_id"], row.data["sku"])
-        newest[pair] = max(newest.get(pair, date.min), row.data["run_date"])
+        store = row.data["store_id"]
+        newest[store] = max(newest.get(store, date.min), row.data["run_date"])
     selected = {}
     for row in eligible:
-        pair = (row.data["store_id"], row.data["sku"])
-        if row.data["run_date"] != newest[pair]:
+        if row.data["run_date"] != newest[row.data["store_id"]]:
             continue
         key = tuple(row.data[k] for k in ("store_id", "sku", "week_start"))
         previous = selected.get(key)
@@ -299,7 +314,9 @@ def load_csv(
         rows = parse_rows(
             table,
             reader,
-            source=SourceRef(uri=path.as_uri(), content_hash=content_hash),
+            source=SourceRef(
+                uri=path.relative_to(sources_dir).as_posix(), content_hash=content_hash
+            ),
             store_timezones=store_timezones,
             master_available_at=master_available_at,
             store_ids=store_ids,

@@ -145,7 +145,7 @@ def test_forecast_vintages_and_replay_rollback():
     second = latest_forecast(reversed(rows), t2)
     selected = next(row for row in second if row.data["sku"] == "STYLE-001")
     assert selected.data["run_date"] == date(2026, 10, 12)
-    assert selected.data["fcst_units"] == Decimal("0")
+    assert selected.data["fcst_units"] == 0.0 and type(selected.data["fcst_units"]) is float
     assert latest_forecast(rows, T1) == first
     assert len(rows) == 3  # No overwrite of older vintage.
     assert latest_forecast(rows, datetime(2026, 10, 5, 3, 59, tzinfo=UTC)) == ()
@@ -304,7 +304,9 @@ def test_csv_loader_hash_and_strict_cutoff_without_source_changes(tmp_path):
     assert len(loaded) == 1
     assert loaded[0].data["business_date"] == date(2026, 10, 7)
     assert loaded[0].source_refs[0] == SourceRef(
-        uri=path.as_uri(), content_hash=hashlib.sha256(before).hexdigest(), locator="record=2"
+        uri="erp/sales/sample.csv",
+        content_hash=hashlib.sha256(before).hexdigest(),
+        locator="record=2",
     )
     assert path.read_bytes() == before
 
@@ -326,3 +328,39 @@ def test_csv_loader_rejects_missing_or_duplicate_columns(tmp_path, header):
     path.write_text(header)
     with pytest.raises(ValueError, match="CSV columns"):
         load_csv("sales/sample.csv", "stores", sources_dir=root, as_of=T1, store_timezones=ZONES)
+
+
+def test_sku_dropped_from_latest_run_is_not_filled_from_older_run():
+    # Real data: 54 dev store x SKU pairs disappear from the 2026-09-07 run.
+    rows = parse(
+        "forecast",
+        [
+            forecast(),
+            forecast(sku="DROPPED-001"),
+            forecast(run_date="2026-10-12"),
+        ],
+    )
+    selected = latest_forecast(rows, datetime(2026, 10, 12, 4, tzinfo=UTC))
+    assert {row.data["sku"] for row in selected} == {"STYLE-001"}
+    assert {row.data["run_date"] for row in selected} == {date(2026, 10, 12)}
+
+
+def test_forecast_units_feed_fc01_disaggregation():
+    from tessera.modules.intelligence.disaggregation import disaggregate
+
+    (row,) = parse("forecast", [forecast(fcst_units="13.66")])
+    week = row.data["week_start"]
+    baseline = disaggregate({week: row.data["fcst_units"]}, week)
+    assert baseline.status == "computed"
+    assert baseline.total == pytest.approx(13.66)
+
+
+def test_row_ids_do_not_depend_on_checkout_path(tmp_path):
+    loaded = []
+    for checkout in ("a", "b"):
+        root, _ = write_csv(tmp_path / checkout, [sale(business_date="2026-10-07")])
+        loaded.append(
+            load_csv("sales/sample.csv", "sales", sources_dir=root, as_of=T1, store_timezones=ZONES)
+        )
+    assert loaded[0][0].id == loaded[1][0].id
+    assert loaded[0][0].source_refs == loaded[1][0].source_refs
