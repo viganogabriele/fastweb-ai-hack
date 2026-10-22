@@ -413,3 +413,135 @@ def test_cache_refuses_nonfinite_json_and_never_overwrites_existing_response(tmp
     with pytest.raises(ValueError):
         cache.put(cache_key({"source": "other"}), {"number": float("inf")})
     assert len(list(tmp_path.rglob("*.json"))) == 1
+
+
+def run_spec(**changes):
+    from tessera.core.contracts.runs import ModuleManifest, ModuleSnapshot, RunSpec
+
+    module = ModuleSnapshot(
+        manifest=ModuleManifest(
+            id="ing.extract",
+            version="1",
+            layer="ingestion",
+            description="Extract source",
+            requires=(),
+            optional_inputs=(),
+            produces=("observations",),
+            enabled=True,
+            mode="live",
+            params_schema={},
+        ),
+        params={"threshold": 0.5},
+    )
+    return RunSpec(
+        **{
+            "run_id": "run-original",
+            "scenario_id": "dev",
+            "as_of": "2026-10-21T20:00:00Z",
+            "stores": ("MIL01",),
+            "source_manifest_hash": "sources-1",
+            "config_hash": "configuration-1",
+            "code_version": "revision-1",
+            "mode": "live",
+            "modules": (module,),
+            "prompt_versions": {"extract": "v1"},
+            "model_versions": {"chat-model": "r1"},
+            "authorized_fixture_refs": (),
+            **changes,
+        }
+    )
+
+
+def test_run_binding_isolates_as_of_and_reuses_same_snapshot_across_run_ids(tmp_path):
+    llm, requests, _ = client(tmp_path, [completion(), completion()])
+    spec = run_spec()
+    original = llm.for_run(spec)
+    original.chat(MESSAGES)
+    assert original.cache is llm.cache
+    assert original.budget is llm.budget
+    assert original.traces is llm.traces
+    original_calls = llm.budget.calls
+    equivalent = llm.for_run(run_spec(run_id="another-execution", mode="recorded"))
+    assert equivalent.chat(MESSAGES).choices[0].message.content == "ok"
+    assert llm.budget.calls == original_calls
+    future = llm.for_run(run_spec(as_of="2026-10-22T20:00:00Z"))
+    future.chat(MESSAGES)
+    assert llm.budget.calls == len(requests) == 2
+    assert original.traces[0]["key"] != original.traces[-1]["key"]
+    settings = Settings(
+        _env_file=None,
+        data_dir=tmp_path,
+        chat_model="chat-model",
+        llm_mode="replay",
+        fastweb_keys_file=tmp_path / "absent.json",
+    )
+    replay = LLMClient(settings, client_factory=lambda **kw: pytest.fail("network client"))
+    assert replay.for_run(spec).chat(MESSAGES).choices[0].message.content == "ok"
+    assert replay.budget.calls == 0
+
+
+@pytest.mark.parametrize(
+    "changes",
+    [
+        {"stores": ("PAR01",)},
+        {"scenario_id": "other-scenario"},
+        {"source_manifest_hash": "sources-2"},
+        {"config_hash": "configuration-2"},
+        {"code_version": "revision-2"},
+        {"prompt_versions": {"extract": "v2"}},
+        {"model_versions": {"chat-model": "r2"}},
+        {"authorized_fixture_refs": ("new-fixture",)},
+    ],
+)
+def test_run_scope_versions_and_provenance_isolate_recordings(tmp_path, changes):
+    llm, _, _ = client(tmp_path, [completion()])
+    llm.for_run(run_spec()).chat(MESSAGES)
+    replay, _, _ = client(tmp_path, [], mode="replay")
+    with pytest.raises(ReplayMiss):
+        replay.for_run(run_spec(**changes)).chat(MESSAGES)
+
+
+def test_run_binding_freezes_nested_snapshot_and_namespaces_caller_context(tmp_path):
+    llm, requests, _ = client(tmp_path, [completion(), completion(), completion()])
+    spec = run_spec()
+    bound = llm.for_run(spec)
+    original = bound.chat(MESSAGES, cache_context={"catalog_version": "one"})
+    spec.prompt_versions["extract"] = "mutated-after-binding"
+    spec.modules[0].params["threshold"] = 0.75
+    assert bound.chat(MESSAGES, cache_context={"catalog_version": "one"}) == original
+    assert len(requests) == 1
+    llm.for_run(spec).chat(MESSAGES, cache_context={"catalog_version": "one"})
+    assert len(requests) == 2
+    bound.chat(MESSAGES, cache_context={"run": {"as_of": "future"}})
+    assert len(requests) == 3
+    replay, _, _ = client(tmp_path, [], mode="replay")
+    # A caller-provided run key cannot impersonate another bound run's scope.
+    with pytest.raises(ReplayMiss):
+        replay.for_run(run_spec(as_of="2026-10-22T20:00:00Z")).chat(
+            MESSAGES, cache_context={"run": {"as_of": "future"}}
+        )
+
+
+def test_run_bound_extract_and_embed_share_scope_and_replay_mode_independence(tmp_path):
+    embedding = {
+        "object": "list",
+        "model": "embed-model",
+        "data": [{"index": 0, "object": "embedding", "embedding": [1.0]}],
+        "usage": {"prompt_tokens": 1, "total_tokens": 1},
+    }
+    llm, requests, _ = client(tmp_path, [completion({"item": {"sku": "A-B"}}), embedding])
+    spec = run_spec()
+    llm.for_run(spec).extract(Envelope, MESSAGES)
+    llm.for_run(spec).embed(["text"], dimensions=1)
+    assert llm.budget.calls == len(requests) == 2
+    replay, _, _ = client(tmp_path, [], mode="replay")
+    snapshot = spec.model_dump()
+    snapshot["modules"][0]["manifest"]["mode"] = "recorded"
+    snapshot["run_id"] = "replay-execution"
+    snapshot["mode"] = "recorded"
+    from tessera.core.contracts.runs import RunSpec
+
+    bound = replay.for_run(RunSpec.model_validate(snapshot))
+    assert bound.extract(Envelope, MESSAGES).item.sku == "A-B"
+    assert bound.embed(["text"], dimensions=1) == [[1.0]]
+    assert replay.budget.calls == 0

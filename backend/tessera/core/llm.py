@@ -22,6 +22,7 @@ from pydantic import BaseModel, ValidationError
 
 from tessera.core.cache import ReplayMiss, ResponseCache, cache_key
 from tessera.core.config import Settings, get_settings
+from tessera.core.contracts.runs import RunSpec
 
 T = TypeVar("T", bound=BaseModel)
 
@@ -136,6 +137,21 @@ class LLMClient:
         self._sleep = sleep
         self._deadline = clock() + deadline_seconds
         self.traces: list[dict[str, Any]] = []
+
+    def for_run(self, spec: RunSpec) -> "RunLLMClient":
+        """Bind immutable admissible provenance; replay identity excludes execution mode.
+
+        Run IDs distinguish executions, not eligible input data. Module execution
+        mode likewise changes between live recording and replay, so only its
+        semantic manifest/version/configuration contributes to cache identity.
+        """
+        scope = spec.model_dump(mode="json", exclude={"run_id", "mode"})
+        scope["stores"] = sorted(scope["stores"])
+        for module in scope["modules"]:
+            module["manifest"].pop("mode", None)
+        return RunLLMClient(
+            self, json.dumps(scope, sort_keys=True, ensure_ascii=False, allow_nan=False)
+        )
 
     def _remaining(self) -> float:
         remaining = self._deadline - self._clock()
@@ -361,3 +377,73 @@ class LLMClient:
         ):
             raise LLMCallFailed("invalid embedding count, indices, dimensions or finite values")
         return [item.embedding for item in data]
+
+
+@dataclass(frozen=True, slots=True)
+class RunLLMClient:
+    """Run-bound façade sharing the base client's cache, allowance and traces.
+
+    The frozen JSON snapshot cannot change when the caller later mutates nested
+    RunSpec dictionaries. Caller context is always namespaced under ``inputs``;
+    even an input named ``run`` cannot replace admissibility/version provenance.
+    """
+
+    _client: LLMClient
+    _scope_json: str
+
+    @property
+    def cache(self) -> ResponseCache:
+        return self._client.cache
+
+    @property
+    def budget(self) -> CallBudget:
+        return self._client.budget
+
+    @property
+    def traces(self) -> list[dict[str, Any]]:
+        return self._client.traces
+
+    @property
+    def settings(self) -> Settings:
+        return self._client.settings
+
+    def _context(self, inputs: Mapping[str, Any] | None) -> dict[str, Any]:
+        return {"run": json.loads(self._scope_json), "inputs": dict(inputs or {})}
+
+    def chat(
+        self,
+        messages: Sequence[Mapping[str, Any]],
+        tools: list[dict] | None = None,
+        model: str | None = None,
+        *,
+        cache_context: Mapping[str, Any] | None = None,
+        **generation: Any,
+    ) -> ChatCompletion:
+        return self._client.chat(
+            messages, tools, model, cache_context=self._context(cache_context), **generation
+        )
+
+    def extract(
+        self,
+        schema: type[T],
+        messages: Sequence[Mapping[str, Any]],
+        *,
+        model: str | None = None,
+        cache_context: Mapping[str, Any] | None = None,
+        **generation: Any,
+    ) -> T:
+        return self._client.extract(
+            schema, messages, model=model, cache_context=self._context(cache_context), **generation
+        )
+
+    def embed(
+        self,
+        texts: Sequence[str],
+        dimensions: int = 512,
+        *,
+        model: str | None = None,
+        cache_context: Mapping[str, Any] | None = None,
+    ) -> list[list[float]]:
+        return self._client.embed(
+            texts, dimensions, model=model, cache_context=self._context(cache_context)
+        )
