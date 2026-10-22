@@ -72,15 +72,17 @@ Line references point to `sources/transcripts/Poke House 2.md` unless stated oth
 | **Completezza e realizzabilità** (completeness and feasibility) | **40** | Does it work end to end, and is it believable? **Also the first tie-breaker.** |
 | Innovazione agenti AI (AI-agent innovation) | 20 | Is there a genuinely agentic part (tools, choosing the next step, talking to other agents)? |
 | Potenziale applicativo (application potential) | 10 | Could it be used for real? |
-| Allineamento tecnologico (technology alignment) | 10 | **Per the organizers: how well it fills a real market need.** |
+| Allineamento tecnologico (technology alignment) | 10 | **Written kickoff: alignment with Fastweb infrastructure.** An earlier oral explanation recorded by the team framed it as filling a real market need; these are distinct pieces of evidence. See the update below. |
 | Qualità dell'esposizione (presentation quality) | 10 | The pitch |
 
 - Each juror gives one integer vote from 1 to 5 per category. The sub-criteria are guidance only. Missing votes don't count as zero.
 - These are the weights from the rules. The ones actually in force appear in the organizers' leaderboard, so check them on the day.
+**Update, 2026-10-22 — newly supplied kickoff PDF.** `FastwebAI Hackathon_Kickoff Agent Forge h24_12OTT2026.pdf`, PDF page 31 (printed slide 32), explicitly says "Allineamento tecnologico con l'infrastruttura Fastweb" and confirms the weights above. Demonstrate both market usefulness and actual Fastweb model/tool integration; do not present the oral interpretation as the written criterion. The supplied access email and its linked API guide are summarized without credentials in [research-fastweb-assets.md](research-fastweb-assets.md).
+
 - **Implications:**
   - 40% rewards a narrow path that demonstrably works over a broad one that's half mocked.
   - 20% means at least one LLM component must *act* (call tools, decide, ask), not only extract.
-  - The market-need 10% means we must name the buyer, the pain, and why existing tools don't cover it.
+  - The infrastructure-alignment 10% calls for visible use of the Fastweb assets. Name the buyer, pain and adoption path to support application potential and the pitch as well.
 
 ---
 
