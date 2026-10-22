@@ -1,0 +1,18 @@
+{
+  "_request": {
+    "method": "GET",
+    "ts": "2026-10-18T03:30:12+02:00",
+    "url": "/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod"
+  },
+  "error": {
+    "code": "/IWFND/CM_BEC/026",
+    "message": {
+      "lang": "en",
+      "value": "SAP backend system maintenance window (Sun 02:00-05:00 CET). Retry later."
+    },
+    "innererror": {
+      "transactionid": "7A1C3E99F0E10000E00611AB2D0F2C11",
+      "timestamp": "20261018013012.4410000"
+    }
+  }
+}

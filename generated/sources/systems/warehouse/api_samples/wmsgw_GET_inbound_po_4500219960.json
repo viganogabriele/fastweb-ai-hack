@@ -1,0 +1,57 @@
+{
+  "_request": {
+    "method": "GET",
+    "url": "https://wms-gw.moncler-int.example/v1/inbound/purchase-orders/4500219960",
+    "ts": "2026-10-22T07:05:00Z"
+  },
+  "purchaseOrder": "4500219960",
+  "vendor": {
+    "id": "V100418",
+    "name": "Hanoi Down Garment Co., Ltd. (VN)"
+  },
+  "createdOn": "2026-07-20",
+  "lines": [
+    {
+      "item": "00010",
+      "plant": "HK30",
+      "material": "J20931A00618510",
+      "sizes": "ALL",
+      "qty": 330,
+      "currentDeliveryDate": "2026-10-08",
+      "goodsReceiptDate": "2026-10-08",
+      "status": "RECEIVED"
+    },
+    {
+      "item": "00020",
+      "plant": "IT10",
+      "material": "J20931A00618510",
+      "sizes": "ALL",
+      "qty": 190,
+      "currentDeliveryDate": "2026-10-08",
+      "goodsReceiptDate": "2026-10-08",
+      "status": "RECEIVED"
+    },
+    {
+      "item": "00030",
+      "plant": "US20",
+      "material": "J20931A00618510",
+      "sizes": "ALL",
+      "qty": 80,
+      "currentDeliveryDate": "2026-10-08",
+      "goodsReceiptDate": "2026-10-08",
+      "status": "RECEIVED"
+    }
+  ],
+  "deliveryDateHistory": [
+    {
+      "changedOn": "2026-07-20",
+      "newDate": "2026-10-08",
+      "comment": "Second delivery of launch buy (top-up 600 pcs)"
+    },
+    {
+      "changedOn": "2026-10-02",
+      "newDate": "2026-10-08",
+      "comment": "Merch asked to expedite: vendor says no earlier than Oct 8 (already on water/air)"
+    }
+  ]
+}

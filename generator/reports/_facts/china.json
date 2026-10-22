@@ -1,0 +1,29 @@
+{
+ "stores_tax": 41487973,
+ "stores_ex_vat": 36715020,
+ "stores_growth": 18.3,
+ "tmall": {
+  "2026-09": 11870000,
+  "2025-09": 10940000,
+  "2026-10-01..07": 3215000,
+  "2025-10-01..07": 2480000
+ },
+ "wechat_sep": 5504835,
+ "online_cy": 17374835,
+ "online_growth_shown": 58.8,
+ "online_growth_like_for_like_tmall": 8.5,
+ "total_cy": 58862808,
+ "total_growth": 27.9,
+ "polaris_sellthrough_units": {
+  "POLARIS CAPE|SHA01": 22.6,
+  "POLARIS CAPE|BJS01": 42.6,
+  "POLARIS CAPE|CDU01": 33.3,
+  "POLARIS OVERSIZED|SHA01": 27.7,
+  "POLARIS OVERSIZED|BJS01": 20.0,
+  "POLARIS OVERSIZED|CDU01": 33.3,
+  "POLARIS BALACLAVA|SHA01": 28.9,
+  "POLARIS BALACLAVA|BJS01": 35.8,
+  "POLARIS BALACLAVA|CDU01": 21.1
+ },
+ "gw_store_growth": 41.5
+}

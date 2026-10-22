@@ -1,0 +1,74 @@
+AUTHORING RULES for group emails_it (read fully before writing)
+
+Project root: /home/lorenzo/dev/hackathons/fastweb-2026  (python: .venv/bin/python)
+
+0. Read: generator/WORLD_BRIEF.md, generator/EMAIL_SPEC.md (both fully), generator/events.py (skim),
+   generator/emails_it/build_eml.py (module docstring = the data schema), generator/emails_it/check.py.
+   Get the per-day facts of your store with:  .venv/bin/python generator/emails_it/digest.py <STORE>
+   (full detail in generated/ground_truth/writer_inputs/email_context/<STORE>.json). These facts are WHAT THE STAFF EXPERIENCED.
+
+1. Output: write generator/emails_it/bodies/<STORE>.py defining PERSONAS, DEFAULT_TO, DEFAULT_CC, EMAILS (schema
+   in build_eml.py docstring). Every email is one dict literal with a hand-written body. NO loops/templates/f-strings
+   that generate body text from data. Code only wraps (build_eml.py). You may split very long files by writing the
+   list in several chunks (EMAILS += [...]) to keep edits manageable.
+   Then run:  .venv/bin/python generator/emails_it/build_eml.py <STORE>   and   .venv/bin/python generator/emails_it/check.py <STORE>
+   Fix forbidden strings and REPEAT shingles (8 identical words in a row in two bodies) unless deliberate store habit
+   (fixed form header / signature / disclaimer) - keep habits short.
+   Do NOT touch other stores' files, generated/sources/erp/, world.py, events.py.
+
+2. Notes (answer key): write generator/emails_it/notes/<STORE>.md (markdown, concise, factual) with:
+   - writers/personas and their habits, who writes when;
+   - table/list of planted signals: date(s) -> what the email says -> what is true per data;
+   - traps: deliberately wrong numbers (state the true KPI), wrong product name/colour/size, wrong date in subject,
+     duplicate sends, corrections, missing days (list the open days with no email), emails sent next morning,
+     misleading claims, stuff that contradicts other sources, emails to the wrong list, etc.
+   This file is NOT in sources so it may use event descriptions plainly.
+
+3. Volume: one closing email per open day (business_date = that day), minus ~2-3 deliberately missing days
+   (or covered by a later "recap" email whose business_date lists both days, e.g. "2026-10-10,2026-10-11"),
+   plus ~5-10 extras (area-manager replies and store answers, a duplicate send kind="dup" with identical body,
+   a correction kind="correction", an out-of-office auto-reply kind="ooo", a forwarded customer message kind="fwd",
+   an email to the wrong list, one sent next morning, one with the wrong date in the subject...). Not all in every store - vary.
+
+4. Headers conventions:
+   - domain moncler-retail.example; people firstname.lastname@moncler-retail.example (no accents in addresses);
+     store mailbox <store lowercase>.store@moncler-retail.example (sometimes used as From, e.g. on a shared iPad).
+   - Italy DL: retail-ops-italy@moncler-retail.example ; Spain DL: retail-ops-spain@moncler-retail.example
+   - Area manager Italy+Spain: Roberto Galli <roberto.galli@moncler-retail.example> (usually Cc).
+     Roberto is out of office Aug 31 -> Sep 4 (back Mon Sep 7): his auto-reply text (Italian/English) if you use it:
+     "Sono fuori ufficio con accesso limitato alla posta fino a venerdì 4 settembre. Per urgenze contattare
+     retail-ops-italy@moncler-retail.example. / I am out of office ..." (keep it short; may vary).
+     Roberto's style when replying: short, direct, from his phone, Italian, signs "R." or "Roberto", sometimes asks
+     for numbers/photos/sizes, sometimes promises to escalate to merch-planning / DC. He never mentions internal codes.
+   - Other lists: merch-planning@moncler-retail.example, vm-team@moncler-retail.example,
+     dc-replenishment@moncler-retail.example (Castel San Giovanni DC, "il magazzino", "CSG"), it-helpdesk@moncler-retail.example,
+     facility-italy@moncler-retail.example.
+   - sent = local time "YYYY-MM-DD HH:MM", typically 15-90 min after closing; occasionally next morning.
+   - Subjects: store-specific habit that drifts over time; typos sometimes; "Re:" for replies.
+
+5. Style (the most important part):
+   - Write as real retail staff on a phone at night after a long day: Italian (or Spanish for MAD01) colloquial,
+     abbreviations ("x" per, "cmq", "nn", "tt", "qlc", "xke", "pz" pezzi, "tg" taglia, "cli" clienti), missing accents
+     ("perche", "piu", "e'" for è), typos, lowercase starts, English retail jargon (sell-out, stock, traffic,
+     conversion, UPT, VIC, client book, walk-in, try-on, replenishment, transfer, back-office), dialect touches where it
+     fits the writer. Mix: many short routine emails (2-4 lines), some medium, a few long venting ones, and one
+     store-specific structured habit (e.g. a mini form) used SOME days and dropped/modified on others.
+   - Each writer has a stable voice; styles drift a bit over weeks (e.g. the form gets lazier, frustration grows).
+   - Use the facts as experience, NOT as paraphrase of the lists: report only some things, approximations
+     ("una decina", "tanti coreani"), lag ("da giovedi"), nicknames ("la Maire nera", "il cardigan logo",
+     "l'Ambrine marrone/cioccolato", "il Tib", "il corto rosa"), occasionally a wrong size/colour/name, sometimes
+     numbers that slightly disagree with KPI (rounded, gross vs net, k€). The key scenario unmet requests for your
+     store must appear often but humanly. Mention returns (e.g. Tib zip defect from end of Sept, Arneb fits big ->
+     exchanges) only when the staff would notice them.
+   - KPI: net_sales_lc is net; staff often write "fatturato 62k" or "62.6" or "62.620" or vs budget "+12%"; a few times
+     they don't give numbers at all. Visitors from the door counter; conversion sometimes quoted.
+   - Language mix: the store language only (plus jargon). Italian stores: Italian. MAD01: Spanish.
+   - Signatures: vary ("Giulia", "G.", "Inviato da iPhone", full corporate signature with a legal disclaimer on some
+     emails - short, the same disclaimer may repeat as a deliberate habit).
+   - FORBIDDEN: event codes (E01...), the words synthetic/ground truth, AI-ish prose ("I hope this email finds you
+     well", "Overall", "In summary", tidy symmetrical bullet lists every day, em-dashes everywhere).
+   - Don't invent hard facts that contradict the scenario (e.g. don't say the black Maire arrived before it did),
+     except deliberate, documented traps.
+
+6. Final answer to the caller: <= 200 words: number of emails (and files), personas, main planted signals/traps,
+   any problems. Do not paste bodies.

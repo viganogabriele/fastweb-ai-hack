@@ -1,0 +1,142 @@
+{
+  "_request": {
+    "method": "GET",
+    "url": "https://portal.pacificcrest-3pl.example/api/v2/inventory?client=MONC01&style=1A00012&color=999"
+  },
+  "status": "OK",
+  "site": "TKO-3",
+  "client": "MONC01",
+  "generatedAt": "2026-10-18T06:09:12+08:00",
+  "dataAsOf": "2026-10-17T23:59:59+08:00",
+  "items": [
+    {
+      "itemCode": "MC31A0001299901",
+      "barcode": "800001276100",
+      "lotNo": null,
+      "locations": [
+        {
+          "locType": "PICK",
+          "onHand": 24
+        },
+        {
+          "locType": "RESERVE",
+          "onHand": 55
+        },
+        {
+          "locType": "ECOM",
+          "onHand": 6
+        }
+      ],
+      "allocated": 0,
+      "available": 79
+    },
+    {
+      "itemCode": "MC31A0001299902",
+      "barcode": "800001276101",
+      "lotNo": null,
+      "locations": [
+        {
+          "locType": "PICK",
+          "onHand": 61
+        },
+        {
+          "locType": "RESERVE",
+          "onHand": 142
+        },
+        {
+          "locType": "ECOM",
+          "onHand": 12
+        }
+      ],
+      "allocated": 0,
+      "available": 203
+    },
+    {
+      "itemCode": "MC31A0001299903",
+      "barcode": "800001276102",
+      "lotNo": null,
+      "locations": [
+        {
+          "locType": "PICK",
+          "onHand": 68
+        },
+        {
+          "locType": "RESERVE",
+          "onHand": 157
+        },
+        {
+          "locType": "ECOM",
+          "onHand": 15
+        }
+      ],
+      "allocated": 0,
+      "available": 225
+    },
+    {
+      "itemCode": "MC31A0001299904",
+      "barcode": "800001276103",
+      "lotNo": null,
+      "locations": [
+        {
+          "locType": "PICK",
+          "onHand": 44
+        },
+        {
+          "locType": "RESERVE",
+          "onHand": 102
+        },
+        {
+          "locType": "ECOM",
+          "onHand": 8
+        }
+      ],
+      "allocated": 0,
+      "available": 146
+    },
+    {
+      "itemCode": "MC31A0001299905",
+      "barcode": "800001276104",
+      "lotNo": null,
+      "locations": [
+        {
+          "locType": "PICK",
+          "onHand": 19
+        },
+        {
+          "locType": "RESERVE",
+          "onHand": 44
+        },
+        {
+          "locType": "ECOM",
+          "onHand": 4
+        }
+      ],
+      "allocated": 0,
+      "available": 63
+    },
+    {
+      "itemCode": "MC31A0001299906",
+      "barcode": "800001276105",
+      "lotNo": null,
+      "locations": [
+        {
+          "locType": "PICK",
+          "onHand": 7
+        },
+        {
+          "locType": "RESERVE",
+          "onHand": 16
+        },
+        {
+          "locType": "ECOM",
+          "onHand": 3
+        }
+      ],
+      "allocated": 0,
+      "available": 23
+    }
+  ],
+  "warnings": [
+    "SNAPSHOT_NOT_REFRESHED: last successful WMS extract 2026-10-17 23:59 HKT"
+  ]
+}

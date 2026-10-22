@@ -1,0 +1,1261 @@
+{
+ "feed": "luxury-retail-monitor",
+ "provider": "NewsHarvester v2.3",
+ "query": "luxury OR moncler OR outerwear OR tourism OR strike OR weather (custom watchlist #12)",
+ "generated_at": "2026-10-22T05:12:44Z",
+ "count": 83,
+ "items": [
+  {
+   "id": "nw-010932fb",
+   "source": "서울패션데일리 Seoul Fashion Daily",
+   "lang": "ko",
+   "published": "2026.09.09 11:00",
+   "title": "압구정 백화점 리뉴얼 완료…명품관 1층 확장",
+   "url": "https://www.seoulfashiondaily.example/news/articleView.html?idxno=4243",
+   "summary": "압구정의 한 대형 백화점이 6개월간의 리뉴얼 공사를 마치고 9일 명품관을 새로 공개했다.",
+   "tags": [
+    "백화점",
+    "리뉴얼"
+   ],
+   "file": "by_source/seoul_fashion_daily/sfd_20260909_67890.txt"
+  },
+  {
+   "id": "nw-02728d95",
+   "source": "Meridian Markets",
+   "lang": "en",
+   "published": "2026-10-21T15:40:03.000Z",
+   "title": "Luxury stocks split as investors weigh China recovery against Europe tourism",
+   "url": "https://meridianmarkets.example/2026/10/21/luxury-stocks-split-as-investors-weigh-china-recovery-agains",
+   "summary": "European luxury shares ended mixed on Wednesday.",
+   "tags": [
+    "equities",
+    "luxury",
+    "China"
+   ],
+   "file": "articles/2026-10/mm_2026-10-21_luxury-stocks-split-as-investors-weigh-china-recov.json"
+  },
+  {
+   "id": "nw-0d2f7159",
+   "source": "Sportivo 24",
+   "lang": "it",
+   "published": "19/10/2026",
+   "title": "Inter, rimonta e sorpasso: 2-1 all'Atalanta, decide un colpo di testa al 88'",
+   "url": "https://sportivo24.example/2026/10/19/inter-rimonta-e-sorpasso-2-1-all-atalanta-decide-un-colpo-di",
+   "summary": null,
+   "tags": [
+    "calcio",
+    "Serie A"
+   ],
+   "file": "articles/2026-10/s24_2026-10-19_inter-rimonta-e-sorpasso-2-1-all-atalanta-decide-u.txt"
+  },
+  {
+   "id": "nw-0ec3e8e6",
+   "source": "Retail Asia Wire",
+   "lang": "en",
+   "published": "Mon, 05 Oct 2026 09:14:00 +0800",
+   "title": "Pink puffer frenzy: idol's Paris look empties shelves from Seoul to Singapore",
+   "url": "https://www.retailasiawire.example/2026/10/05/pink-puffer-frenzy-idol-s-paris-look-empties-shelves-from-se",
+   "summary": "Store managers across Asia have spent the weekend turning customers away.",
+   "tags": [
+    "K-pop",
+    "Moncler",
+    "Ilvaro",
+    "sell-out",
+    "Asia"
+   ],
+   "file": "articles/2026-10/raw_2026-10-05_pink-puffer-frenzy-idol-s-paris-look-empties-shelv.html"
+  },
+  {
+   "id": "nw-0ec07ee3",
+   "source": "ファッション通信デイリー",
+   "lang": "ja",
+   "published": "2026/10/08 12:30 JST",
+   "title": "「ユン・ハウン効果」　モンクレール「イルヴァロ」パウダーピンク、国内でも完売",
+   "url": "https://fashiontsushin.example/2026/10/08/a0ec07ee33f",
+   "summary": "韓国のガールズグループLUMIEREのユン・ハウンがパリ・ファッションウィークで着用したモンクレールのクロップド丈ダウン「イルヴァロ」のパウダーピンクが、国内でも完売状態となっている。",
+   "tags": [
+    "モンクレール",
+    "イルヴァロ",
+    "K-POP",
+    "完売"
+   ],
+   "file": "articles/2026-10/fsd_20261008_966782.json"
+  },
+  {
+   "id": "nw-17428f9f",
+   "source": "Gazzetta Economica",
+   "lang": "it",
+   "published": "2026-09-03T06:55:00+02:00",
+   "title": "Via Montenapoleone resta la strada più cara del mondo: 20.000 euro al metro quadro",
+   "url": "https://www.gazzettaeconomica.example/2026/09/03/via-montenapoleone-resta-la-strada-piu-cara-del-mondo-20-000",
+   "summary": "Per il terzo anno consecutivo via Montenapoleone si conferma la via dello shopping più cara al mondo per canoni d'affitto.",
+   "tags": [
+    "immobiliare",
+    "retail",
+    "Milano"
+   ],
+   "file": "articles/2026-09/gazeco_2026-09-03_via-montenapoleone-resta-la-strada-piu-cara-del-mo.json"
+  },
+  {
+   "id": "nw-1bd14911",
+   "source": "ファッション通信デイリー",
+   "lang": "ja",
+   "published": "2026/10/23 05:00 JST",
+   "title": "値上げ前の駆け込み需要、高級ダウンに　「マヤ」「マイレ」予約相次ぐ",
+   "url": "https://fashiontsushin.example/2026/10/23/a1bd149119a",
+   "summary": "11月1日の価格改定を前に、高級ダウンブランドで駆け込み購入が広がっている。",
+   "tags": [
+    "値上げ",
+    "駆け込み",
+    "モンクレール",
+    "百貨店"
+   ],
+   "file": "articles/2026-10/fsd_20261023_1823049.json"
+  },
+  {
+   "id": "nw-1ec02907",
+   "source": "APN Asia Pacific Newswire",
+   "lang": "en",
+   "published": "2026-09-18T06:25:00Z",
+   "title": "Hong Kong lowers typhoon signal, shops and transport resume",
+   "url": "https://apn-newswire.example/2026/09/18/hong-kong-lowers-typhoon-signal-shops-and-transport-resume",
+   "summary": "HONG KONG, Sept 18 (APN) - Hong Kong's weather observatory replaced the No.",
+   "tags": [
+    "Hong Kong",
+    "typhoon",
+    "Yamaneko"
+   ],
+   "file": "by_source/apn_newswire/APN_202609180625_hong-kong-lowers-typhoon-signal-shops-an.json"
+  },
+  {
+   "id": "nw-1edea2c1",
+   "source": "The Straits Herald",
+   "lang": "en",
+   "published": "Sep 29, 2026, 6:00 am SGT",
+   "title": "Chinese travellers set to flood Europe this Golden Week",
+   "url": "https://www.straitsherald.example/2026/09/29/chinese-travellers-set-to-flood-europe-this-golden-week",
+   "summary": "Chinese travellers are expected to make a record number of outbound trips during the National Day \"Golden Week\" holiday, with Europe emerging as the fastest-growing long-haul destination, according to booking data fro...",
+   "tags": [
+    "travel",
+    "China"
+   ],
+   "file": "articles/2026-09/sth_2026-09-29_chinese-travellers-set-to-flood-europe-this-golden.html"
+  },
+  {
+   "id": "nw-1e4026aa",
+   "source": "Retail Asia Wire",
+   "lang": "en",
+   "published": "Wed, 30 Sep 2026 10:12:00 +0800",
+   "title": "China's Golden Week: Europe braces for record outbound wave",
+   "url": "https://www.retailasiawire.example/2026/09/30/china-s-golden-week-europe-braces-for-record-outbound-wave",
+   "summary": "BEIJING, Sept 28 (Retail Asia Wire / APN) - Chinese travellers are expected to make a record number of outbound trips during the National Day \"Golden Week\" holiday, with Europe emerging as the fastest-growing long-hau...",
+   "tags": [
+    "China",
+    "Golden Week",
+    "travel retail"
+   ],
+   "file": "articles/2026-09/raw_2026-09-30_china-s-golden-week-europe-braces-for-record-outbo.html"
+  },
+  {
+   "id": "nw-294c0c51",
+   "source": "Harbour City Herald",
+   "lang": "en",
+   "published": "7 October 2026 10:00 AEDT",
+   "title": "Warm spring weekend lifts Sydney fashion sales",
+   "url": "https://harbourcityherald.example/2026/10/07/warm-spring-weekend-lifts-sydney-fashion-sales",
+   "summary": "Sydney retailers enjoyed a strong long weekend as temperatures climbed to 28 degrees, with shoppers snapping up linen shirts, polos, swimwear and sandals.",
+   "tags": [
+    "Sydney",
+    "retail",
+    "weather"
+   ],
+   "file": "articles/2026-10/hch_2026-10-07_warm-spring-weekend-lifts-sydney-fashion-sales.txt"
+  },
+  {
+   "id": "nw-2b36963f",
+   "source": "Meridian Markets",
+   "lang": "en",
+   "published": "2026-10-14T07:05:12.000Z",
+   "title": "Weak yen keeps Japan's tax-free shopping boom going",
+   "url": "https://meridianmarkets.example/2026/10/14/weak-yen-keeps-japan-s-tax-free-shopping-boom-going",
+   "summary": "The yen hovered near 162 per dollar on Wednesday, close to its weakest level this year, extending a run that has made Japan one of the cheapest places in the world to buy luxury goods.",
+   "tags": [
+    "Japan",
+    "yen",
+    "tax-free",
+    "tourism"
+   ],
+   "file": "articles/2026-10/mm_2026-10-14_weak-yen-keeps-japan-s-tax-free-shopping-boom-goin.json"
+  },
+  {
+   "id": "nw-2c9216ce",
+   "source": "财经观察",
+   "lang": "zh-CN",
+   "published": "2026-10-20 22:05:00",
+   "title": "双11预售今晚开启 奢侈品牌坚持不打折 门店遭遇\"比价\"",
+   "url": "https://www.caijingguancha.example/news/20261020/747771598.html",
+   "summary": "10月20日晚8点，天猫、京东\"双11\"预售正式开启。",
+   "tags": [
+    "双11",
+    "预售",
+    "奢侈品",
+    "价格"
+   ],
+   "file": "articles/2026-10/cjgc_20261020_2920982.json"
+  },
+  {
+   "id": "nw-2dd30264",
+   "source": "Luxury Wire",
+   "lang": "en",
+   "published": "Thu, 24 Sep 2026 09:00:00 GMT",
+   "title": "Moncler Genius unveils 'Polaris' capsule with oversized cape and balaclava",
+   "url": "https://luxurywire.example/2026/09/24/moncler-genius-unveils-polaris-capsule-with-oversized-cape-a",
+   "summary": "Moncler's Genius platform on Thursday released Polaris, a capsule built around extreme volume: a down cape priced at 2,900 euros, an oversized puffer at 2,400 euros and a knitted balaclava at 450 euros, in black, whit...",
+   "tags": [
+    "Moncler",
+    "Genius",
+    "launch"
+   ],
+   "file": "by_source/luxury_wire/lw-20260924-11731.json"
+  },
+  {
+   "id": "nw-314e72e7",
+   "source": "LA Basin Daily",
+   "lang": "en",
+   "published": "Sep 10, 2026",
+   "title": "Heat wave peaks: 106 in Beverly Hills, 109 in Woodland Hills",
+   "url": "https://labasindaily.example/2026/09/10/heat-wave-peaks-106-in-beverly-hills-109-in-woodland-hills",
+   "summary": "Southern California's September heat wave hit its peak on Thursday, with temperatures reaching 106 degrees in Beverly Hills and 109 in Woodland Hills.",
+   "tags": [
+    "heat wave",
+    "Los Angeles",
+    "weather"
+   ],
+   "file": "articles/2026-09/lab_2026-09-10_heat-wave-peaks-106-in-beverly-hills-109-in-woodla.html"
+  },
+  {
+   "id": "nw-339b2773",
+   "source": "서울패션데일리 Seoul Fashion Daily",
+   "lang": "ko",
+   "published": "2026.10.15 18:30",
+   "title": "캐나다 아우터 '노스피크', 청담동 팝업 첫날 300명 대기",
+   "url": "https://www.seoulfashiondaily.example/news/articleView.html?idxno=211378",
+   "summary": "캐나다 아웃도어 브랜드 노스피크(Northpeak)가 15일 서울 청담동에 첫 국내 팝업스토어를 열었다.",
+   "tags": [
+    "노스피크",
+    "팝업",
+    "청담동",
+    "아우터"
+   ],
+   "file": "by_source/seoul_fashion_daily/sfd_20261015_3382055.html"
+  },
+  {
+   "id": "nw-38c55e15",
+   "source": "港聞快訊 HK Daily Pulse",
+   "lang": "zh-HK",
+   "published": "2026年10月4日 13:20",
+   "title": "韓星同款粉紅羽絨 廣東道門店一日賣清 內地客排隊登記",
+   "url": "https://hkdailypulse.example/2026/10/04/a38c55e1533",
+   "summary": "國慶黃金周內地旅客訪港人次上升，尖沙咀廣東道一帶名店重現人龍。",
+   "tags": "國慶黃金周, 內地旅客, 羽絨, 名店",
+   "file": "articles/2026-10/hkdp_20261004_3720542.html"
+  },
+  {
+   "id": "nw-3ad7d613",
+   "source": "Le Journal du Luxe",
+   "lang": "fr",
+   "published": "11 octobre 2026 à 8h30",
+   "title": "Semaine d'or : la détaxe chinoise bondit de 52 % à Paris",
+   "url": "https://www.journalduluxe.example/2026/10/11/semaine-d-or-la-detaxe-chinoise-bondit-de-52-a-paris",
+   "summary": "Les touristes chinois sont revenus en force à Paris pendant la « semaine d'or » de la fête nationale.",
+   "tags": [
+    "tourisme",
+    "Chine",
+    "détaxe",
+    "Paris"
+   ],
+   "file": "articles/2026-10/jdl_2026-10-11_semaine-d-or-la-detaxe-chinoise-bondit-de-52-a-par.html"
+  },
+  {
+   "id": "nw-3b9e1d01",
+   "source": "财经观察",
+   "lang": "zh-CN",
+   "published": "2026-09-27 09:12:00",
+   "title": "Moncler Genius新系列POLARIS上市三天 斗篷款多地售罄",
+   "url": "https://www.caijingguancha.example/news/20260927/1000217857.html",
+   "summary": "9月24日全球发售的Moncler Genius POLARIS系列在国内反响热烈。",
+   "tags": [
+    "奢侈品",
+    "Moncler",
+    "Genius",
+    "新品"
+   ],
+   "file": "articles/2026-09/cjgc_20260927_3907101.json"
+  },
+  {
+   "id": "nw-3c4038c5",
+   "source": "Meridian Markets",
+   "lang": "en",
+   "published": "2026-09-18T13:22:41.000Z",
+   "title": "US widens tariff review to European leather goods and apparel",
+   "url": "https://meridianmarkets.example/2026/09/18/us-widens-tariff-review-to-european-leather-goods-and-appare",
+   "summary": "The US Trade Representative opened a review that could see higher tariffs on certain European leather goods, apparel and footwear, according to a notice published on Thursday.",
+   "tags": [
+    "tariffs",
+    "trade",
+    "US",
+    "EU"
+   ],
+   "file": "articles/2026-09/mm_2026-09-18_us-widens-tariff-review-to-european-leather-goods-.json"
+  },
+  {
+   "id": "nw-3d3b5823",
+   "source": "Marketing Trade Weekly",
+   "lang": "en",
+   "published": "Oct 19, 2026",
+   "title": "Agency says luxury outerwear campaign drove 22% sales lift in US and UK",
+   "url": "https://www.mktradeweekly.example/2026/10/19/agency-says-luxury-outerwear-campaign-drove-22-sales-lift-in",
+   "summary": "Independent agency Halcyon & Reed says its fall/winter 2026 campaign for Moncler delivered a 22 percent attributed sales uplift in the US and UK in its first four weeks, one of the strongest results the agency has rep...",
+   "tags": [
+    "advertising",
+    "attribution",
+    "OOH",
+    "luxury"
+   ],
+   "file": "articles/2026-10/mtw_2026-10-19_agency-says-luxury-outerwear-campaign-drove-22-sal.html"
+  },
+  {
+   "id": "nw-3f9f0c2c",
+   "source": "東京ビジネスタイムズ Tokyo Business Times",
+   "lang": "ja",
+   "published": "2026年10月1日 15:00",
+   "title": "9月の百貨店売上高、前年比2.1%増　免税売上が下支え",
+   "url": "https://www.tokyobiztimes.example/article/DGXZQO3F9F0C2C8575/",
+   "summary": "大手百貨店5社が1日発表した9月の売上高(速報値)は、前年同月比2.",
+   "tags": [
+    "百貨店",
+    "売上高",
+    "インバウンド"
+   ],
+   "file": "articles/2026-10/tbt_20261001_4169484.txt"
+  },
+  {
+   "id": "nw-438ec2d2",
+   "source": "K-Ent Now",
+   "lang": "en",
+   "published": "2026-10-01T11:20:00-07:00",
+   "title": "LUMIERE's Yoon Ha-eun just won Paris Fashion Week in a pink puffer",
+   "url": "https://kentnow.example/2026/10/01/lumiere-s-yoon-ha-eun-just-won-paris-fashion-week-in-a-pink",
+   "summary": "Yoon Ha-eun did not walk a single runway in Paris and still owned the day.",
+   "tags": [
+    "LUMIERE",
+    "Yoon Ha-eun",
+    "Paris Fashion Week",
+    "fashion"
+   ],
+   "file": "articles/2026-10/ken_2026-10-01_lumiere-s-yoon-ha-eun-just-won-paris-fashion-week-.html"
+  },
+  {
+   "id": "nw-451ca0a0",
+   "source": "東京ビジネスタイムズ Tokyo Business Times",
+   "lang": "ja",
+   "published": "2026年10月6日 6:00",
+   "title": "10月なのに真夏日、冬物衣料が苦戦　百貨店「ダウンが動かない」",
+   "url": "https://www.tokyobiztimes.example/article/DGXZQO451CA0A0293F/",
+   "summary": "10月に入っても季節外れの暑さが続いている。5日は東京都心で最高気温29.1度、大阪市で29.6度を観測し、各地で10月としては記録的な高温となった。",
+   "tags": [
+    "天候",
+    "百貨店",
+    "衣料品"
+   ],
+   "file": "articles/2026-10/tbt_20261006_4529312.html"
+  },
+  {
+   "id": "nw-4bea3153",
+   "source": "東京ビジネスタイムズ Tokyo Business Times",
+   "lang": "ja",
+   "published": "2026年10月10日 6:00",
+   "title": "モンクレール、11月から国内価格を約10%引き上げへ　関係者",
+   "url": "https://www.tokyobiztimes.example/article/DGXZQO4BEA31533C25/",
+   "summary": "イタリアの高級ダウンブランド、モンクレールが11月1日から日本国内の販売価格を平均で約10%引き上げることが分かった。",
+   "tags": [
+    "値上げ",
+    "ラグジュアリー",
+    "円安"
+   ],
+   "file": "articles/2026-10/tbt_20261010_4975153.html",
+   "paywalled": true
+  },
+  {
+   "id": "nw-4b9fa1db",
+   "source": "Retail Asia Wire",
+   "lang": "en",
+   "published": "Mon, 12 Oct 2026 08:00:00 +0800",
+   "title": "Moncler to raise Japan prices by 8% from Nov 1, shoppers rush to buy",
+   "url": "https://www.retailasiawire.example/2026/10/12/moncler-to-raise-japan-prices-by-8-from-nov-1-shoppers-rush",
+   "summary": "Moncler will raise retail prices in Japan by an average of 8 percent from Nov 1, according to a notice sent to clients and confirmed by store staff, as luxury brands continue to pass on the effect of a weak yen.",
+   "tags": [
+    "Japan",
+    "price increase",
+    "Moncler",
+    "yen"
+   ],
+   "file": "articles/2026-10/raw_2026-10-12_moncler-to-raise-japan-prices-by-8-from-nov-1-shop.html"
+  },
+  {
+   "id": "nw-4eeb8050",
+   "source": "财经观察",
+   "lang": "zh-CN",
+   "published": "2026-10-08 20:10:00",
+   "title": "黄金周成都太古里、北京SKP客流创新高 \"逛的多买的少\"",
+   "url": "https://www.caijingguancha.example/news/20261008/1324056656.html",
+   "summary": "国庆黄金周期间，成都太古里、北京SKP等高端商圈客流明显增长。",
+   "tags": [
+    "黄金周",
+    "商场",
+    "客流"
+   ],
+   "file": "articles/2026-10/cjgc_20261008_5172096.json"
+  },
+  {
+   "id": "nw-56de2f11",
+   "source": "财经观察",
+   "lang": "zh-CN",
+   "published": "2026-10-06 11:45:00",
+   "title": "韩国女团成员同款粉色羽绒服遭疯抢 闲鱼溢价近八成",
+   "url": "https://www.caijingguancha.example/news/20261006/1457401617.html",
+   "summary": "韩国女团LUMIERE成员尹夏恩10月1日在巴黎时装周现身时所穿的Moncler粉色短款羽绒服ILVARO，在国内迅速走红。",
+   "tags": [
+    "明星同款",
+    "羽绒服",
+    "二手平台",
+    "Moncler"
+   ],
+   "file": "articles/2026-10/cjgc_20261006_5692975.json"
+  },
+  {
+   "id": "nw-612010a0",
+   "source": "Gazzetta Economica",
+   "lang": "it",
+   "published": "2026-08-06T07:40:00+02:00",
+   "title": "Chengdu-Malpensa, il primo mese del volo diretto: riempimento all'88%",
+   "url": "https://www.gazzettaeconomica.example/2026/08/06/chengdu-malpensa-il-primo-mese-del-volo-diretto-riempimento",
+   "summary": "Il collegamento diretto tra Chengdu Tianfu e Milano Malpensa, inaugurato il 2 luglio con tre frequenze settimanali, chiude il primo mese con un coefficiente di riempimento medio dell'88%.",
+   "tags": [
+    "trasporto aereo",
+    "turismo",
+    "Cina",
+    "Milano"
+   ],
+   "file": "articles/2026-08/gazeco_2026-08-06_chengdu-malpensa-il-primo-mese-del-volo-diretto-ri.json"
+  },
+  {
+   "id": "nw-62890f9f",
+   "source": "Le Journal du Luxe",
+   "lang": "fr",
+   "published": "21 octobre 2026 à 17h50",
+   "title": "Maison Arlenne : un troisième trimestre en recul, la Chine pèse toujours",
+   "url": "https://www.journalduluxe.example/2026/10/21/maison-arlenne-un-troisieme-trimestre-en-recul-la-chine-pese",
+   "summary": "Le groupe Maison Arlenne a publié mardi soir un chiffre d'affaires de 4,12 milliards d'euros pour le troisième trimestre, en baisse organique de 2 %.",
+   "tags": [
+    "résultats",
+    "luxe",
+    "Bourse"
+   ],
+   "file": "articles/2026-10/jdl_2026-10-21_maison-arlenne-un-troisieme-trimestre-en-recul-la-.json"
+  },
+  {
+   "id": "nw-63715a09",
+   "source": "Drop Culture",
+   "lang": "en",
+   "published": "1790699400",
+   "title": "We tried on Moncler Genius Polaris. Size up. Then size up again.",
+   "url": "https://dropculture.example/2026/09/we-tried-on-moncler-genius-polaris-size-up-then-size-up-agai/",
+   "summary": "Polaris is a big idea: puffers so oversized they become architecture.",
+   "tags": [
+    "review",
+    "Moncler Genius",
+    "Polaris"
+   ],
+   "file": "articles/2026-09/drop_2026-09-29_we-tried-on-moncler-genius-polaris-size-up-then-si.json"
+  },
+  {
+   "id": "nw-662c1129",
+   "source": "Cronache di Roma",
+   "lang": "it",
+   "published": "2026-10-05",
+   "title": "Condotti, il grido dei negozi: \"Con il cantiere clienti dimezzati\"",
+   "url": "https://cronachediroma.example/2026/10/05/condotti-il-grido-dei-negozi-con-il-cantiere-clienti-dimezza",
+   "summary": "Tre settimane dopo l'apertura del cantiere in via dei Condotti, i negozianti fanno i conti.",
+   "tags": [
+    "Roma",
+    "commercio",
+    "lavori"
+   ],
+   "file": "articles/2026-10/cdr_2026-10-05_condotti-il-grido-dei-negozi-con-il-cantiere-clien.html"
+  },
+  {
+   "id": "nw-66b624a1",
+   "source": "Le Journal du Luxe",
+   "lang": "fr",
+   "published": "13 octobre 2026 à 18h02",
+   "title": "Grève : journée fantôme rue du Faubourg-Saint-Honoré",
+   "url": "https://www.journalduluxe.example/2026/10/13/greve-journee-fantome-rue-du-faubourg-saint-honore",
+   "summary": "Rideaux levés, vendeurs présents, mais très peu de clients.",
+   "tags": [
+    "grève",
+    "commerce",
+    "Paris"
+   ],
+   "file": "articles/2026-10/jdl_2026-10-13_greve-journee-fantome-rue-du-faubourg-saint-honore.txt"
+  },
+  {
+   "id": "nw-67e759b4",
+   "source": "Retail Asia Wire",
+   "lang": "en",
+   "published": "Fri, 18 Sep 2026 19:40:00 +0800",
+   "title": "Typhoon Yamaneko shuts Hong Kong retail for a day and a half",
+   "url": "https://www.retailasiawire.example/2026/09/18/typhoon-yamaneko-shuts-hong-kong-retail-for-a-day-and-a-half",
+   "summary": "Hong Kong's main shopping districts were shut for most of Thursday and Friday morning as Typhoon Yamaneko brought hurricane-force gusts to the city.",
+   "tags": [
+    "Hong Kong",
+    "typhoon",
+    "retail"
+   ],
+   "file": "articles/2026-09/raw_2026-09-18_typhoon-yamaneko-shuts-hong-kong-retail-for-a-day-.html"
+  },
+  {
+   "id": "nw-6adcd1a5",
+   "source": "Il Quotidiano della Moda",
+   "lang": "it",
+   "published": "28/08/2026 12:10",
+   "title": "Ferrante 1953 lancia la borsa \"Lira\" e punta sui negozi monomarca",
+   "url": "https://www.quotidianodellamoda.example/2026/08/28/ferrante-1953-lancia-la-borsa-lira-e-punta-sui-negozi-monoma",
+   "summary": "La maison fiorentina Ferrante 1953 presenta la nuova borsa Lira, una shopper in vitello martellato prodotta interamente nel suo laboratorio di Scandicci.",
+   "tags": [
+    "accessori",
+    "lanci",
+    "pelletteria"
+   ],
+   "file": "articles/2026-08/qdm_2026-08-28_ferrante-1953-lancia-la-borsa-lira-e-punta-sui-neg.html"
+  },
+  {
+   "id": "nw-6a58d701",
+   "source": "Luxury Wire",
+   "lang": "en",
+   "published": "Mon, 28 Sep 2026 18:30:00 GMT",
+   "title": "Milan Fashion Week wraps with strong buyer turnout from Korea and the Gulf",
+   "url": "https://luxurywire.example/2026/09/28/milan-fashion-week-wraps-with-strong-buyer-turnout-from-kore",
+   "summary": "Milan Fashion Week closed on Monday after six days of shows, with organisers reporting buyer registrations up 9 percent on last September, led by South Korea, Japan and the Gulf states.",
+   "tags": [
+    "Milan Fashion Week",
+    "buyers"
+   ],
+   "file": "by_source/luxury_wire/lw-20260928-27224.json"
+  },
+  {
+   "id": "nw-6c3e4c8a",
+   "source": "Luxury Wire",
+   "lang": "en",
+   "published": "Thu, 01 Oct 2026 21:10:00 GMT",
+   "title": "Paris Fashion Week day three: street-style crowds swell outside the Tuileries",
+   "url": "https://luxurywire.example/2026/10/01/paris-fashion-week-day-three-street-style-crowds-swell-outsi",
+   "summary": "Crowds of fans outside the Tuileries gardens forced police to briefly close part of rue de Rivoli on Thursday as K-pop and Thai drama stars arrived for the afternoon shows.",
+   "tags": [
+    "Paris Fashion Week",
+    "street style",
+    "K-pop"
+   ],
+   "file": "by_source/luxury_wire/lw-20261001-27710.json"
+  },
+  {
+   "id": "nw-6d961cb7",
+   "source": "Travel Retail Insider",
+   "lang": "en",
+   "published": "Sep 12 2026",
+   "title": "Hainan offshore duty-free sales fall 11% in August",
+   "url": "https://travelretailinsider.example/2026/09/12/hainan-offshore-duty-free-sales-fall-11-in-august",
+   "summary": "Offshore duty-free sales in Hainan fell 11 percent year on year in August to about 2.",
+   "tags": [
+    "Hainan",
+    "travel retail",
+    "China"
+   ],
+   "file": "articles/2026-09/tri_2026-09-12_hainan-offshore-duty-free-sales-fall-11-in-august.txt"
+  },
+  {
+   "id": "nw-71bb0c5f",
+   "source": "Paris Matin",
+   "lang": "fr",
+   "published": "21/10/2026 12:00",
+   "title": "Art Basel Paris s'installe au Grand Palais : 195 galeries et des embouteillages à prévoir",
+   "url": "https://www.parismatin.example/2026/10/21/art-basel-paris-s-installe-au-grand-palais-195-galeries-et-d",
+   "summary": "La foire Art Basel Paris ouvre ses portes aux collectionneurs mercredi avant d'accueillir le grand public du vendredi 23 au dimanche 25 octobre au Grand Palais.",
+   "tags": [
+    "art",
+    "Paris",
+    "événements"
+   ],
+   "file": "articles/2026-10/pm_2026-10-21_art-basel-paris-s-installe-au-grand-palais-195-gal.html"
+  },
+  {
+   "id": "nw-73b472b1",
+   "source": "Il Quotidiano della Moda",
+   "lang": "it",
+   "published": "08/09/2026 09:30",
+   "title": "Lusso, nel retail mancano 4.000 addetti alle vendite",
+   "url": "https://www.quotidianodellamoda.example/2026/09/08/lusso-nel-retail-mancano-4-000-addetti-alle-vendite",
+   "summary": "Mancano almeno 4.000 sales associate nei negozi del lusso italiani. La stima arriva da un'indagine condotta su 60 marchi e presentata ieri a Milano da un'associazione di categoria.",
+   "tags": [
+    "lavoro",
+    "retail"
+   ],
+   "file": "articles/2026-09/qdm_2026-09-08_lusso-nel-retail-mancano-4-000-addetti-alle-vendit.txt"
+  },
+  {
+   "id": "nw-7446bb6a",
+   "source": "Manhattan Dispatch",
+   "lang": "en",
+   "published": "09/20/2026 8:00 AM",
+   "title": "UNGA week: frozen zones, street closures across Upper East Side",
+   "url": "https://manhattandispatch.example/2026/09/20/unga-week-frozen-zones-street-closures-across-upper-east-sid",
+   "summary": null,
+   "tags": [
+    "UNGA",
+    "traffic",
+    "NYC"
+   ],
+   "file": "articles/2026-09/md_2026-09-20_unga-week-frozen-zones-street-closures-across-uppe.txt"
+  },
+  {
+   "id": "nw-7c1e0a92",
+   "source": "東京ビジネスタイムズ Tokyo Business Times",
+   "lang": "ja",
+   "published": "2026年10月16日 6:00",
+   "title": "高級ブランド、相次ぐ日本値上げ　内外価格差は1割未満に",
+   "url": "https://www.tokyobiztimes.example/article/DGXZQO7C1E0A92F3B1/",
+   "summary": "欧州の高級ブランドが日本での値上げを相次ぎ実施している。円安で拡大した欧州との価格差は",
+   "tags": [
+    "値上げ",
+    "円安"
+   ],
+   "file": null,
+   "paywalled": true,
+   "fetch_status": "403"
+  },
+  {
+   "id": "nw-7f37ab76",
+   "source": "APN Asia Pacific Newswire",
+   "lang": "en",
+   "published": "2026-09-28T02:10:00Z",
+   "title": "China's Golden Week outbound travel set for record, Europe bookings jump",
+   "url": "https://apn-newswire.example/2026/09/28/china-golden-week-outbound",
+   "summary": "BEIJING, Sept 28 (APN) - Chinese travellers are expected to make a record number of outbound trips during the National Day \"Golden Week\" holiday, with Europe emerging as the fastest-growing long-haul destination, acco...",
+   "tags": [
+    "China",
+    "travel",
+    "Golden Week",
+    "Europe"
+   ],
+   "file": "by_source/apn_newswire/APN_202609280210_china-golden-week-outbound.json"
+  },
+  {
+   "id": "nw-807ee06d",
+   "source": "El Observador del Lujo",
+   "lang": "es",
+   "published": "09/10/2026 - 09:00 CEST",
+   "title": "El gasto tax free en España crece un 14% en septiembre, impulsado por los latinoamericanos",
+   "url": "https://observadordellujo.example/2026/10/09/el-gasto-tax-free-en-espana-crece-un-14-en-septiembre-impuls",
+   "summary": "Las compras libres de impuestos de turistas extracomunitarios en España aumentaron un 14% en septiembre en comparación con el mismo mes del año anterior.",
+   "tags": [
+    "turismo",
+    "tax free",
+    "España"
+   ],
+   "file": "articles/2026-10/obl_2026-10-09_el-gasto-tax-free-en-espana-crece-un-14-en-septiem.json"
+  },
+  {
+   "id": "nw-861f2880",
+   "source": "APN Asia Pacific Newswire",
+   "lang": "en",
+   "published": "2026-10-14T16:00:00Z",
+   "title": "Early winter grips central Europe, Munich sees first snow",
+   "url": "https://apn-newswire.example/2026/10/14/early-winter-grips-central-europe-munich-sees-first-snow",
+   "summary": "BERLIN, Oct 14 (APN) - An unusually early blast of polar air brought the first snow of the season to Munich on Tuesday and pushed daytime temperatures in much of Germany, Switzerland and Austria down to between 2 and...",
+   "tags": [
+    "weather",
+    "Germany",
+    "Switzerland",
+    "Europe"
+   ],
+   "file": "by_source/apn_newswire/APN_202610141600_early-winter-grips-central-europe-munich.json"
+  },
+  {
+   "id": "nw-8c443969",
+   "source": "Cronache di Roma",
+   "lang": "it",
+   "published": "2026-09-15",
+   "title": "Via Condotti, partito il cantiere: sampietrini rifatti e ponteggi fino al 6 novembre",
+   "url": "https://cronachediroma.example/2026/09/15/via-condotti-partito-il-cantiere-sampietrini-rifatti-e-ponte",
+   "summary": "È partito ieri mattina il cantiere per il rifacimento della pavimentazione di via dei Condotti, nel tratto tra piazza di Spagna e via Bocca di Leone.",
+   "tags": [
+    "Roma",
+    "lavori",
+    "centro storico",
+    "commercio"
+   ],
+   "file": "articles/2026-09/cdr_2026-09-15_via-condotti-partito-il-cantiere-sampietrini-rifat.html"
+  },
+  {
+   "id": "nw-8c75448c",
+   "source": "Le Journal du Luxe",
+   "lang": "fr",
+   "published": "30 septembre 2026 à 18h40",
+   "title": "Après Chuseok, les touristes coréens traquent la doudoune noire vue dans un drama",
+   "url": "https://www.journalduluxe.example/2026/09/30/apres-chuseok-les-touristes-coreens-traquent-la-doudoune-noi",
+   "summary": "Depuis une dizaine de jours, les vendeuses du Faubourg Saint-Honoré entendent la même question, souvent posée téléphone à la main : « Vous avez la Maire en noir ?",
+   "tags": [
+    "Corée",
+    "tourisme",
+    "doudoune",
+    "drama"
+   ],
+   "file": "articles/2026-09/jdl_2026-09-30_apres-chuseok-les-touristes-coreens-traquent-la-do.html"
+  },
+  {
+   "id": "nw-8e2947a0",
+   "source": "서울패션데일리 Seoul Fashion Daily",
+   "lang": "ko",
+   "published": "2026.09.22 10:40",
+   "title": "'자정의 아틀리에' 한서연 블랙 패딩, 몽클레르 '마이레'로 확인…검색량 7배",
+   "url": "https://www.seoulfashiondaily.example/news/articleView.html?idxno=582292",
+   "summary": "채널K 수목드라마 '자정의 아틀리에'에서 배우 한서연이 입고 나온 블랙 숏패딩이 몽클레르의 '마이레(MAIRE)'로 확인되면서 온라인 검색량이 급증하고 있다.",
+   "tags": [
+    "드라마",
+    "몽클레르",
+    "마이레",
+    "패딩"
+   ],
+   "file": "by_source/seoul_fashion_daily/sfd_20260922_9316679.html"
+  },
+  {
+   "id": "nw-94b3a131",
+   "source": "Zürcher Abendpost",
+   "lang": "de",
+   "published": "14.10.2026 06:12",
+   "title": "Schnee bis auf 1000 Meter: Der Winter kommt drei Wochen zu früh",
+   "url": "https://www.zuercher-abendpost.example/2026/10/14/schnee-bis-auf-1000-meter-der-winter-kommt-drei-wochen-zu-fr",
+   "summary": "Eine Kaltfront mit polarer Luft hat in der Nacht auf Mittwoch den Winter in die Schweiz gebracht.",
+   "tags": "Wetter, Schweiz, Schnee",
+   "file": "articles/2026-10/zap_2026-10-14_schnee-bis-auf-1000-meter-der-winter-kommt-drei-wo.txt"
+  },
+  {
+   "id": "nw-96c69d2b",
+   "source": "Il Quotidiano della Moda",
+   "lang": "it",
+   "published": "19/10/2026 08:00",
+   "title": "Settimana difficile per i negozi italiani tra sciopero, freddo e cantieri",
+   "url": "https://www.quotidianodellamoda.example/2026/10/19/settimana-difficile-per-i-negozi-italiani-tra-sciopero-fredd",
+   "summary": "Settimana a due velocità per il commercio di fascia alta in Italia.",
+   "tags": [
+    "retail",
+    "Italia"
+   ],
+   "file": "articles/2026-10/qdm_2026-10-19_settimana-difficile-per-i-negozi-italiani-tra-scio.txt"
+  },
+  {
+   "id": "nw-979c0ffa",
+   "source": "The Toronto Ledger",
+   "lang": "en",
+   "published": "September 19, 2026 6:45 p.m. ET",
+   "title": "TIFF's final weekend keeps Yorkville buzzing",
+   "url": "https://torontoledger.example/2026/09/19/tiff-s-final-weekend-keeps-yorkville-buzzing",
+   "summary": "As the Toronto International Film Festival heads into its closing weekend (it ends Sunday, Sept 20), Yorkville's restaurants and boutiques are reporting one of their strongest Septembers in years.",
+   "tags": [
+    "TIFF",
+    "Toronto",
+    "Yorkville"
+   ],
+   "file": "articles/2026-09/tl_2026-09-19_tiff-s-final-weekend-keeps-yorkville-buzzing.html"
+  },
+  {
+   "id": "nw-9810e130",
+   "source": "Wirtschaftskurier",
+   "lang": "de",
+   "published": "15.10.2026, 17:45 Uhr",
+   "title": "Wintereinbruch beschert Modehändlern unerwarteten Umsatzschub",
+   "url": "https://www.wirtschaftskurier.example/2026/10/15/wintereinbruch-beschert-modehandlern-unerwarteten-umsatzschu",
+   "summary": "Der frühe Wintereinbruch sorgt im deutschen Modehandel für volle Kassen.",
+   "tags": "Handel, Wetter, Mode, München",
+   "file": "articles/2026-10/wk_2026-10-15_wintereinbruch-beschert-modehandlern-unerwarteten-.html"
+  },
+  {
+   "id": "nw-98d31a1f",
+   "source": "Il Quotidiano della Moda",
+   "lang": "it",
+   "published": "17/10/2026 11:05",
+   "title": "Neve precoce, Cervinia anticipa l'apertura degli impianti al 24 ottobre",
+   "url": "https://www.quotidianodellamoda.example/2026/10/17/neve-precoce-cervinia-anticipa-l-apertura-degli-impianti-al",
+   "summary": "Le nevicate dei giorni scorsi sull'arco alpino occidentale hanno convinto la società degli impianti di Breuil-Cervinia ad anticipare l'apertura della stagione invernale a sabato 24 ottobre, una settimana prima del pre...",
+   "tags": [
+    "montagna",
+    "sci",
+    "meteo"
+   ],
+   "file": "articles/2026-10/qdm_2026-10-17_neve-precoce-cervinia-anticipa-l-apertura-degli-im.html"
+  },
+  {
+   "id": "nw-a394a1c9",
+   "source": "The Straits Herald",
+   "lang": "en",
+   "published": "Oct 12, 2026, 6:00 am SGT",
+   "title": "F1 weekend fills Marina Bay hotels, luxury boutiques report busiest days of the year",
+   "url": "https://www.straitsherald.example/2026/10/12/f1-weekend-fills-marina-bay-hotels-luxury-boutiques-report-b",
+   "summary": "The Singapore Grand Prix drew an estimated 280,000 spectators over three days, and retailers around Marina Bay say they felt it.",
+   "tags": [
+    "Singapore",
+    "Formula One",
+    "tourism",
+    "retail"
+   ],
+   "file": "articles/2026-10/sth_2026-10-12_f1-weekend-fills-marina-bay-hotels-luxury-boutique.html"
+  },
+  {
+   "id": "nw-a45993c0",
+   "source": "El Observador del Lujo",
+   "lang": "es",
+   "published": "17/09/2026 - 11:20 CEST",
+   "title": "La calle Serrano suma tres aperturas de lujo antes de Navidad",
+   "url": "https://observadordellujo.example/2026/09/17/la-calle-serrano-suma-tres-aperturas-de-lujo-antes-de-navida",
+   "summary": "La milla de oro madrileña sigue atrayendo firmas internacionales.",
+   "tags": [
+    "Madrid",
+    "retail",
+    "aperturas"
+   ],
+   "file": "articles/2026-09/obl_2026-09-17_la-calle-serrano-suma-tres-aperturas-de-lujo-antes.html"
+  },
+  {
+   "id": "nw-a79c9993",
+   "source": "港聞快訊 HK Daily Pulse",
+   "lang": "zh-HK",
+   "published": "2026年9月17日 07:45",
+   "title": "颱風山貓襲港 八號風球持續 全港商舖暫停營業",
+   "url": "https://hkdailypulse.example/2026/09/17/aa79c9993dc",
+   "summary": "天文台昨晚11時40分發出八號東北烈風或暴風信號，颱風山貓今日繼續靠近本港。",
+   "tags": "颱風, 山貓, 八號風球, 零售",
+   "file": "articles/2026-09/hkdp_20260917_10984601.html"
+  },
+  {
+   "id": "nw-a93b4b79",
+   "source": "K-Ent Now",
+   "lang": "en",
+   "published": "2026-10-03T08:00:00-07:00",
+   "title": "BIFF 2026 red carpet: the best (and boldest) looks from Busan",
+   "url": "https://kentnow.example/2026/10/03/biff-2026-red-carpet-the-best-and-boldest-looks-from-busan",
+   "summary": "The 31st Busan International Film Festival opened on Thursday, Oct 1, and runs through Oct 10 at the Busan Cinema Center in Centum City.",
+   "tags": [
+    "BIFF",
+    "Busan",
+    "red carpet"
+   ],
+   "file": "articles/2026-10/ken_2026-10-03_biff-2026-red-carpet-the-best-and-boldest-looks-fr.html"
+  },
+  {
+   "id": "nw-aac92030",
+   "source": "서울패션데일리 Seoul Fashion Daily",
+   "lang": "ko",
+   "published": "2026.10.02 03:05",
+   "title": "뤼미에르 윤하은, 오늘 파리패션위크서 '인디 핑크' 숏패딩…\"완판 예감\"",
+   "url": "https://www.seoulfashiondaily.example/news/articleView.html?idxno=699538",
+   "summary": "걸그룹 뤼미에르(LUMIERE) 멤버 윤하은이 오늘 오후 프랑스 파리 튈르리 정원에서 열린 패션쇼에 참석해 핑크빛 크롭 패딩으로 시선을 사로잡았다.",
+   "tags": [
+    "윤하은",
+    "뤼미에르",
+    "파리패션위크",
+    "몽클레르"
+   ],
+   "file": "by_source/seoul_fashion_daily/sfd_20261002_11192608.html"
+  },
+  {
+   "id": "nw-adbadf0d",
+   "source": "Luxury Wire",
+   "lang": "en",
+   "published": "Tue, 20 Oct 2026 12:05:00 GMT",
+   "title": "Venice floods as tide hits 120 cm, MOSE barriers not raised",
+   "url": "https://luxurywire.example/2026/10/20/venice-floods-as-tide-hits-120-cm-mose-barriers-not-raised",
+   "summary": "High water flooded St Mark's Square in Venice on Tuesday morning after the tide reached around 120 centimetres, catching shopkeepers and tourists off guard.",
+   "tags": [
+    "Venice",
+    "flooding",
+    "acqua alta"
+   ],
+   "file": "by_source/luxury_wire/lw-20261020-44474.json"
+  },
+  {
+   "id": "nw-aed08145",
+   "source": "서울패션데일리 Seoul Fashion Daily",
+   "lang": "ko",
+   "published": "2026.10.05 14:20",
+   "title": "윤하은 패딩 '일바로 핑크' 사흘 만에 완판…\"다음 주 재입고 예정\"",
+   "url": "https://www.seoulfashiondaily.example/news/articleView.html?idxno=716040",
+   "summary": "윤하은 효과가 매장을 휩쓸었다. 몽클레르 '일바로' 인디 핑크 컬러가 국내 주요 매장에서 사흘 만에 모두 팔려나갔다.",
+   "tags": [
+    "몽클레르",
+    "일바로",
+    "완판",
+    "윤하은"
+   ],
+   "file": "by_source/seoul_fashion_daily/sfd_20261005_11456641.html"
+  },
+  {
+   "id": "nw-b03658f3",
+   "source": "Le Journal du Luxe",
+   "lang": "fr",
+   "published": "3 octobre 2026 à 11h05",
+   "title": "Yoon Ha-eun et la doudoune rose poudré : l'effet K-pop en 48 heures",
+   "url": "https://www.journalduluxe.example/2026/10/03/yoon-ha-eun-et-la-doudoune-rose-poudre-l-effet-k-pop-en-48-h",
+   "summary": "Il aura suffi d'une photo.",
+   "tags": [
+    "K-pop",
+    "célébrités",
+    "Asie",
+    "rupture"
+   ],
+   "file": "articles/2026-10/jdl_2026-10-03_yoon-ha-eun-et-la-doudoune-rose-poudre-l-effet-k-p.txt"
+  },
+  {
+   "id": "nw-b610703d",
+   "source": "Il Gazzettino Lagunare",
+   "lang": "it",
+   "published": "20 ottobre 2026, ore 10:25",
+   "title": "Acqua alta a 118 centimetri, San Marco sott'acqua. Il Mose alzato in ritardo",
+   "url": "https://www.gazzettinolagunare.example/2026/10/20/acqua-alta-a-118-centimetri-san-marco-sott-acqua-il-mose-alz",
+   "summary": "Risveglio con gli stivali per Venezia.",
+   "tags": [
+    "Venezia",
+    "acqua alta",
+    "Mose",
+    "maree"
+   ],
+   "file": "articles/2026-10/gzl_2026-10-20_acqua-alta-a-118-centimetri-san-marco-sott-acqua-i.html"
+  },
+  {
+   "id": "nw-b774aa54",
+   "source": "Retail Asia Wire",
+   "lang": "en",
+   "published": "Wed, 21 Oct 2026 11:30:00 +0800",
+   "title": "Double 11 presales start: luxury holds the line on discounts, shoppers ask stores to match",
+   "url": "https://www.retailasiawire.example/2026/10/21/double-11-presales-start-luxury-holds-the-line-on-discounts",
+   "summary": "Presales for China's Singles' Day shopping festival kicked off on Tmall and JD.",
+   "tags": [
+    "China",
+    "Double 11",
+    "e-commerce",
+    "pricing"
+   ],
+   "file": "articles/2026-10/raw_2026-10-21_double-11-presales-start-luxury-holds-the-line-on-.html"
+  },
+  {
+   "id": "nw-b90450aa",
+   "source": "Paris Matin",
+   "lang": "fr",
+   "published": "11/10/2026 19:40",
+   "title": "Grève mardi 13 octobre : métro, RER et Transilien très perturbés",
+   "url": "https://www.parismatin.example/2026/10/11/greve-mardi-13-octobre-metro-rer-et-transilien-tres-perturbe",
+   "summary": "Les syndicats de la RATP et de la SNCF appellent à une journée de grève mardi 13 octobre contre la réforme du financement des transports franciliens.",
+   "tags": [
+    "grève",
+    "RATP",
+    "SNCF",
+    "transports"
+   ],
+   "file": "articles/2026-10/pm_2026-10-11_greve-mardi-13-octobre-metro-rer-et-transilien-tre.html"
+  },
+  {
+   "id": "nw-bf194eb9",
+   "source": "Paris Matin",
+   "lang": "fr",
+   "published": "29/09/2026 07:15",
+   "title": "Fashion Week : neuf jours de défilés et des rues fermées autour du Louvre",
+   "url": "https://www.parismatin.example/2026/09/29/fashion-week-neuf-jours-de-defiles-et-des-rues-fermees-autou",
+   "summary": "La semaine de la mode parisienne s'ouvre ce mardi et durera jusqu'au mercredi 7 octobre.",
+   "tags": [
+    "fashion week",
+    "Paris",
+    "circulation"
+   ],
+   "file": "articles/2026-09/pm_2026-09-29_fashion-week-neuf-jours-de-defiles-et-des-rues-fer.html"
+  },
+  {
+   "id": "nw-c296395f",
+   "source": "财经观察",
+   "lang": "zh-CN",
+   "published": "2026-10-09 08:30:00",
+   "title": "国庆黄金周出境游人次创新高 米兰巴黎中国游客消费同比增长65%",
+   "url": "https://www.caijingguancha.example/news/20261009/3264624991.html",
+   "summary": "据某在线旅游平台\"途程旅行\"发布的数据，今年国庆黄金周出境游人次同比增长21%，其中欧洲方向增长最快。",
+   "tags": [
+    "黄金周",
+    "出境游",
+    "消费",
+    "欧洲"
+   ],
+   "file": "articles/2026-10/cjgc_20261009_12752441.json"
+  },
+  {
+   "id": "nw-c9278bcd",
+   "source": "Le Journal du Luxe",
+   "lang": "fr",
+   "published": "2 octobre 2026 à 9h20",
+   "title": "Genius Polaris : la capsule divise, trop petite et trop chère pour l'Europe ?",
+   "url": "https://www.journalduluxe.example/2026/10/02/genius-polaris-la-capsule-divise-trop-petite-et-trop-chere-p",
+   "summary": "Lancée le 24 septembre, la capsule Polaris de Moncler Genius suscite des réactions contrastées.",
+   "tags": [
+    "Moncler",
+    "Genius",
+    "Polaris",
+    "lancement",
+    "critique"
+   ],
+   "file": "articles/2026-10/jdl_2026-10-02_genius-polaris-la-capsule-divise-trop-petite-et-tr.html"
+  },
+  {
+   "id": "nw-caca2e9e",
+   "source": "K-Ent Now",
+   "lang": "en",
+   "published": "2026-10-16T09:45:00-07:00",
+   "title": "Northpeak's Seoul pop-up has a 4-hour line and free beanies",
+   "url": "https://kentnow.example/2026/10/16/northpeak-s-seoul-pop-up-has-a-4-hour-line-and-free-beanies",
+   "summary": "Canadian outerwear label Northpeak opened its first Korean pop-up store on Friday in Cheongdam-dong, Seoul, and the line has not gone away since.",
+   "tags": [
+    "Northpeak",
+    "Seoul",
+    "pop-up",
+    "outerwear"
+   ],
+   "file": "articles/2026-10/ken_2026-10-16_northpeak-s-seoul-pop-up-has-a-4-hour-line-and-fre.html"
+  },
+  {
+   "id": "nw-d2503c28",
+   "source": "港聞快訊 HK Daily Pulse",
+   "lang": "zh-HK",
+   "published": "2026年10月2日 17:00",
+   "title": "8月零售銷貨價值按年跌3.4%　珠寶鐘錶跌幅最大",
+   "url": "https://hkdailypulse.example/2026/10/02/ad2503c28c1",
+   "summary": "政府統計處公布，8月零售業總銷貨價值臨時估計為305億元，按年下跌3.",
+   "tags": "零售, 統計, 經濟",
+   "file": "articles/2026-10/hkdp_20261002_13783100.txt"
+  },
+  {
+   "id": "nw-d5daa5e2",
+   "source": "财经观察",
+   "lang": "zh-CN",
+   "published": "2026-09-15 10:31:00",
+   "title": "申根签证提速至5个工作日 成都直飞米兰航线客座率近九成",
+   "url": "https://www.caijingguancha.example/news/20260915/3587876322.html",
+   "summary": "记者从多家签证中心获悉，今年以来意大利、法国驻华使领馆推出的签证快速通道已全面铺开，个人旅游签证平均办理时间缩短至5个工作日左右，部分城市最快3个工作日出签。",
+   "tags": [
+    "签证",
+    "出境游",
+    "米兰",
+    "成都"
+   ],
+   "file": "articles/2026-09/cjgc_20260915_14015141.json"
+  },
+  {
+   "id": "nw-da5addd0",
+   "source": "MilanoCity News",
+   "lang": "it",
+   "published": "14 ott 2026 16:02",
+   "title": "Sciopero generale venerdì: metro, tram e bus a rischio. Le fasce di garanzia ATM",
+   "url": "https://www.milanocitynews.example/2026/10/14/sciopero-generale-venerdi-metro-tram-e-bus-a-rischio-le-fasc",
+   "summary": "Nuovo venerdì nero per chi si muove con i mezzi pubblici.",
+   "tags": [
+    "sciopero",
+    "trasporti",
+    "Milano",
+    "ATM"
+   ],
+   "file": "articles/2026-10/mcn_2026-10-14_sciopero-generale-venerdi-metro-tram-e-bus-a-risch.txt"
+  },
+  {
+   "id": "nw-dc20ee31",
+   "source": "서울패션데일리 Seoul Fashion Daily",
+   "lang": "ko",
+   "published": "2026.10.07 09:10",
+   "title": "크림서 '일바로 핑크' 465만원…정가 대비 71% 웃돈",
+   "url": "https://www.seoulfashiondaily.example/news/articleView.html?idxno=901646",
+   "summary": "리셀 플랫폼 크림(KREAM)에서 몽클레르 일바로 인디 핑크의 거래가가 465만원까지 올랐다.",
+   "tags": [
+    "리셀",
+    "크림",
+    "일바로"
+   ],
+   "file": "by_source/seoul_fashion_daily/sfd_20261007_14426350.json"
+  },
+  {
+   "id": "nw-dc58c3f8",
+   "source": "Zürcher Abendpost",
+   "lang": "de",
+   "published": "20.10.2026 07:30",
+   "title": "Weltcup-Auftakt in Sölden: Neuschnee lässt die Veranstalter jubeln",
+   "url": "https://www.zuercher-abendpost.example/2026/10/20/weltcup-auftakt-in-solden-neuschnee-lasst-die-veranstalter-j",
+   "summary": "Die Bedingungen auf dem Rettenbachferner könnten kaum besser sein.",
+   "tags": "Ski, Sport, Weltcup",
+   "file": "articles/2026-10/zap_2026-10-20_weltcup-auftakt-in-solden-neuschnee-lasst-die-vera.html"
+  },
+  {
+   "id": "nw-dddc2eca",
+   "source": "Wirtschaftskurier",
+   "lang": "de",
+   "published": "08.10.2026, 10:15 Uhr",
+   "title": "Brennhaus AG senkt Prognose, Aktie bricht ein",
+   "url": "https://www.wirtschaftskurier.example/2026/10/08/brennhaus-ag-senkt-prognose-aktie-bricht-ein",
+   "summary": "Der Premium-Bekleidungshersteller Brennhaus AG hat seine Jahresprognose gesenkt.",
+   "tags": "Unternehmen, Mode, Börse",
+   "file": "articles/2026-10/wk_2026-10-08_brennhaus-ag-senkt-prognose-aktie-bricht-ein.json"
+  },
+  {
+   "id": "nw-ddf48d13",
+   "source": "Gazzetta Economica",
+   "lang": "it",
+   "published": "2026-10-16T13:45:00+02:00",
+   "title": "Sciopero generale, città a piedi. Nel Quadrilatero vetrine accese ma pochi clienti",
+   "url": "https://www.gazzettaeconomica.example/2026/10/16/sciopero-generale-citta-a-piedi-nel-quadrilatero-vetrine-acc",
+   "summary": "Metro chiuse a Milano dalle 8:45, bus e tram con poche corse, a Roma la metro A e la B ferme dopo le 8:30.",
+   "tags": [
+    "sciopero",
+    "commercio",
+    "Milano",
+    "Roma"
+   ],
+   "file": "articles/2026-10/gazeco_2026-10-16_sciopero-generale-citta-a-piedi-nel-quadrilatero-v.json"
+  },
+  {
+   "id": "nw-e8960b65",
+   "source": "Luxury Wire",
+   "lang": "en",
+   "published": "Tue, 06 Oct 2026 07:45:00 GMT",
+   "title": "Idol effect: pink Ilvaro puffer sells out across Asia within days",
+   "url": "https://luxurywire.example/2026/10/06/idol-effect-pink-ilvaro-puffer-sells-out-across-asia-within",
+   "summary": "A powder pink cropped down jacket worn by K-pop singer Yoon Ha-eun at Paris Fashion Week has sold out in stores and online across much of Asia, according to store staff and resale platforms.",
+   "tags": [
+    "Moncler",
+    "Ilvaro",
+    "K-pop",
+    "Asia",
+    "sell-out"
+   ],
+   "file": "by_source/luxury_wire/lw-20261006-59542.json"
+  },
+  {
+   "id": "nw-ea648afc",
+   "source": "Il Gazzettino Lagunare",
+   "lang": "it",
+   "published": "20 ottobre 2026, ore 13:10",
+   "title": "AGGIORNATO - Acqua alta a 118 centimetri, San Marco sott'acqua. Il Mose alzato in ritardo",
+   "url": "https://www.gazzettinolagunare.example/2026/10/20/acqua-alta-a-118-centimetri-san-marco-sott-acqua-il-mose-alz",
+   "summary": "Risveglio con gli stivali per Venezia.",
+   "tags": [
+    "Venezia",
+    "acqua alta",
+    "Mose",
+    "maree"
+   ],
+   "file": "articles/2026-10/gzl_2026-10-20_acqua-alta-a-118-centimetri-san-marco-sott-acqua-i.html"
+  },
+  {
+   "id": "nw-edf810d0",
+   "source": "Luxury Wire",
+   "lang": "en",
+   "published": "Thu, 15 Oct 2026 16:20:00 GMT",
+   "title": "Frieze London opens with cautious mood among collectors",
+   "url": "https://luxurywire.example/2026/10/15/frieze-london-opens-with-cautious-mood-among-collectors",
+   "summary": "Frieze London and Frieze Masters opened to VIPs in Regent's Park on Wednesday, with dealers describing a measured market in which buyers took longer to commit.",
+   "tags": [
+    "art",
+    "London",
+    "Frieze"
+   ],
+   "file": "by_source/luxury_wire/lw-20261015-60920.json"
+  },
+  {
+   "id": "nw-effe42e1",
+   "source": "Luxury Wire",
+   "lang": "en",
+   "published": "Thu, 22 Oct 2026 05:00:00 GMT",
+   "title": "EMBARGOED: Valcourt Group Q3 revenue down 4% organically, Asia weak",
+   "url": "https://luxurywire.example/2026/10/22/embargoed-valcourt-group-q3-revenue-down-4-organically-asia",
+   "summary": "EMBARGOED UNTIL 23 OCT 2026 06:00 CET.",
+   "tags": [
+    "earnings",
+    "Valcourt"
+   ],
+   "file": "by_source/luxury_wire/lw-20261022-61438.json"
+  },
+  {
+   "id": "nw-f5916067",
+   "source": "Gazzetta Economica",
+   "lang": "it",
+   "published": "2026-10-10T07:30:00+02:00",
+   "title": "Golden Week, a Milano spesa tax free dei turisti cinesi +38%",
+   "url": "https://www.gazzettaeconomica.example/2026/10/10/golden-week-a-milano-spesa-tax-free-dei-turisti-cinesi-38",
+   "summary": "Una Golden Week da record per lo shopping cinese a Milano.",
+   "tags": [
+    "turismo",
+    "Cina",
+    "tax free",
+    "Milano",
+    "lusso"
+   ],
+   "file": "articles/2026-10/gazeco_2026-10-10_golden-week-a-milano-spesa-tax-free-dei-turisti-ci.json"
+  },
+  {
+   "id": "nw-f69244ba",
+   "source": "Drop Culture",
+   "lang": "en",
+   "published": "1791122400",
+   "title": "The pink Moncler Maire is the most wanted jacket on the internet right now",
+   "url": "https://dropculture.example/2026/10/the-pink-moncler-maire-is-the-most-wanted-jacket-on-the-inte/",
+   "summary": "If you've opened any social app this week, you've seen it: Yoon Ha-eun in Paris, in a puffy, cropped, very pink jacket.",
+   "tags": [
+    "resale",
+    "Moncler",
+    "K-pop",
+    "hype"
+   ],
+   "file": "articles/2026-10/drop_2026-10-04_the-pink-moncler-maire-is-the-most-wanted-jacket-o.json"
+  },
+  {
+   "id": "nw-f8fbbbe9",
+   "source": "Il Quotidiano della Moda",
+   "lang": "it",
+   "published": "21/09/2026 18:30",
+   "title": "Milano Moda Donna, si parte domani: 58 sfilate e il ritorno dei buyer asiatici",
+   "url": "https://www.quotidianodellamoda.example/2026/09/21/milano-moda-donna-si-parte-domani-58-sfilate-e-il-ritorno-de",
+   "summary": "Prende il via domani, martedì 22 settembre, la settimana della moda donna di Milano dedicata alla primavera-estate 2027.",
+   "tags": [
+    "fashion week",
+    "Milano",
+    "sfilate"
+   ],
+   "file": "articles/2026-09/qdm_2026-09-21_milano-moda-donna-si-parte-domani-58-sfilate-e-il-.html"
+  },
+  {
+   "id": "nw-fac052b9",
+   "source": "财经观察",
+   "lang": "zh-CN",
+   "published": "2026-09-25 16:00:00",
+   "title": "8月消费者信心指数小幅回升 高端消费仍待提振",
+   "url": "https://www.caijingguancha.example/news/20260925/4206908089.html",
+   "summary": "国家统计局相关数据显示，消费者信心指数8月小幅回升至88.",
+   "tags": [
+    "宏观",
+    "消费",
+    "信心指数"
+   ],
+   "file": "articles/2026-09/cjgc_20260925_16433234.json"
+  }
+ ]
+}

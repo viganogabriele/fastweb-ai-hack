@@ -1,0 +1,172 @@
+{
+  "_request": {
+    "method": "GET",
+    "url": "https://wms-gw.moncler-int.example/v1/atp?plant=IT10&material=J20931A00012999",
+    "ts": "2026-09-21T06:30:00Z"
+  },
+  "plant": "IT10",
+  "material": "J20931A00012999",
+  "sku": "J20931A00012-999",
+  "styleName": "MAIRE",
+  "asOf": "2026-09-21T06:00:00+02:00",
+  "uom": "PC",
+  "sizes": [
+    {
+      "size": "00",
+      "ean": "800001276100",
+      "onHandUnrestricted": 0,
+      "openDeliveries": 0,
+      "ecomReserve": 2,
+      "blocked": 0,
+      "returnsUngraded": 0,
+      "atp": 0,
+      "nextReceipts": [
+        {
+          "purchaseOrder": "4500218734",
+          "item": "00010",
+          "eta": "2026-10-02",
+          "qtyAllSizes": 420,
+          "confirmation": "VENDOR_CONFIRMED"
+        },
+        {
+          "purchaseOrder": "4500218734",
+          "item": "00040",
+          "eta": "2026-10-30",
+          "qtyAllSizes": 300,
+          "confirmation": "VENDOR_CONFIRMED"
+        }
+      ]
+    },
+    {
+      "size": "0",
+      "ean": "800001276101",
+      "onHandUnrestricted": 0,
+      "openDeliveries": 0,
+      "ecomReserve": 1,
+      "blocked": 0,
+      "returnsUngraded": 0,
+      "atp": 0,
+      "nextReceipts": [
+        {
+          "purchaseOrder": "4500218734",
+          "item": "00010",
+          "eta": "2026-10-02",
+          "qtyAllSizes": 420,
+          "confirmation": "VENDOR_CONFIRMED"
+        },
+        {
+          "purchaseOrder": "4500218734",
+          "item": "00040",
+          "eta": "2026-10-30",
+          "qtyAllSizes": 300,
+          "confirmation": "VENDOR_CONFIRMED"
+        }
+      ]
+    },
+    {
+      "size": "1",
+      "ean": "800001276102",
+      "onHandUnrestricted": 0,
+      "openDeliveries": 0,
+      "ecomReserve": 6,
+      "blocked": 0,
+      "returnsUngraded": 1,
+      "atp": 0,
+      "nextReceipts": [
+        {
+          "purchaseOrder": "4500218734",
+          "item": "00010",
+          "eta": "2026-10-02",
+          "qtyAllSizes": 420,
+          "confirmation": "VENDOR_CONFIRMED"
+        },
+        {
+          "purchaseOrder": "4500218734",
+          "item": "00040",
+          "eta": "2026-10-30",
+          "qtyAllSizes": 300,
+          "confirmation": "VENDOR_CONFIRMED"
+        }
+      ]
+    },
+    {
+      "size": "2",
+      "ean": "800001276103",
+      "onHandUnrestricted": 0,
+      "openDeliveries": 0,
+      "ecomReserve": 0,
+      "blocked": 0,
+      "returnsUngraded": 1,
+      "atp": 0,
+      "nextReceipts": [
+        {
+          "purchaseOrder": "4500218734",
+          "item": "00010",
+          "eta": "2026-10-02",
+          "qtyAllSizes": 420,
+          "confirmation": "VENDOR_CONFIRMED"
+        },
+        {
+          "purchaseOrder": "4500218734",
+          "item": "00040",
+          "eta": "2026-10-30",
+          "qtyAllSizes": 300,
+          "confirmation": "VENDOR_CONFIRMED"
+        }
+      ]
+    },
+    {
+      "size": "3",
+      "ean": "800001276104",
+      "onHandUnrestricted": 0,
+      "openDeliveries": 0,
+      "ecomReserve": 4,
+      "blocked": 0,
+      "returnsUngraded": 1,
+      "atp": 0,
+      "nextReceipts": [
+        {
+          "purchaseOrder": "4500218734",
+          "item": "00010",
+          "eta": "2026-10-02",
+          "qtyAllSizes": 420,
+          "confirmation": "VENDOR_CONFIRMED"
+        },
+        {
+          "purchaseOrder": "4500218734",
+          "item": "00040",
+          "eta": "2026-10-30",
+          "qtyAllSizes": 300,
+          "confirmation": "VENDOR_CONFIRMED"
+        }
+      ]
+    },
+    {
+      "size": "4",
+      "ean": "800001276105",
+      "onHandUnrestricted": 0,
+      "openDeliveries": 0,
+      "ecomReserve": 0,
+      "blocked": 0,
+      "returnsUngraded": 0,
+      "atp": 0,
+      "nextReceipts": [
+        {
+          "purchaseOrder": "4500218734",
+          "item": "00010",
+          "eta": "2026-10-02",
+          "qtyAllSizes": 420,
+          "confirmation": "VENDOR_CONFIRMED"
+        },
+        {
+          "purchaseOrder": "4500218734",
+          "item": "00040",
+          "eta": "2026-10-30",
+          "qtyAllSizes": 300,
+          "confirmation": "VENDOR_CONFIRMED"
+        }
+      ]
+    }
+  ],
+  "source": "wms-gateway/v1 (SAP + PCL feed)"
+}

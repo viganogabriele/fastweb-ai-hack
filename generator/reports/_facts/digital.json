@@ -1,0 +1,38 @@
+{
+ "notify": {
+  "J20931A00618-510": {
+   "requests": 1666,
+   "unique_emails": 1591
+  },
+  "J20931A00012-999": {
+   "requests": 148,
+   "unique_emails": 135
+  },
+  "J20931A00622-23R": {
+   "requests": 6,
+   "unique_emails": 6
+  },
+  "J20931A00618-999": {
+   "requests": 4,
+   "unique_emails": 4
+  },
+  "I10919B00011-999": {
+   "requests": 3,
+   "unique_emails": 3
+  },
+  "J10911A00213-999": {
+   "requests": 3,
+   "unique_emails": 3
+  },
+  "I10918G00031-90X": {
+   "requests": 2,
+   "unique_emails": 2
+  },
+  "J10911A00213-742": {
+   "requests": 2,
+   "unique_emails": 2
+  }
+ },
+ "w42_demand": 2422753,
+ "w42_net": 2282214
+}

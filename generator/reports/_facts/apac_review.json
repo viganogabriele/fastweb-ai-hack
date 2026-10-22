@@ -1,0 +1,65 @@
+{
+ "total_cy": 15912255,
+ "total_ly": 14111207,
+ "growth": 12.8,
+ "vs_bud": -1.6,
+ "markets": {
+  "Japan": {
+   "cy": 5320550,
+   "ly": 4569317,
+   "growth": 16.4,
+   "true_net_sep_monthly_fx": 4023498,
+   "bi_eur_budget_rate": 4281550
+  },
+  "Korea": {
+   "cy": 3719371,
+   "ly": 3160681,
+   "growth": 17.7,
+   "true_net_sep_monthly_fx": 3686136,
+   "bi_eur_budget_rate": 4059185
+  },
+  "Mainland China": {
+   "cy": 4649118,
+   "ly": 3889337,
+   "growth": 19.5,
+   "true_net_sep_monthly_fx": 4501431,
+   "bi_eur_budget_rate": 4707059
+  },
+  "HK & Taiwan": {
+   "cy": 1188163,
+   "ly": 1350159,
+   "growth": -12.0,
+   "true_net_sep_monthly_fx": 1120679,
+   "bi_eur_budget_rate": 1192091
+  },
+  "South-East Asia": {
+   "cy": 785635,
+   "ly": 798900,
+   "growth": -1.7,
+   "true_net_sep_monthly_fx": 518992,
+   "bi_eur_budget_rate": 538716
+  },
+  "Oceania": {
+   "cy": 249417,
+   "ly": 342812,
+   "growth": -27.2,
+   "true_net_sep_monthly_fx": 239330,
+   "bi_eur_budget_rate": 256849
+  }
+ },
+ "sin_shown_sgd": 785635,
+ "sin_correct_eur_constfx": 533792,
+ "total_if_sin_correct": 15660412,
+ "apac_true_net_sep_monthly_fx": 14090065,
+ "apac_bi_eur_budget_rate": 15035450,
+ "polaris_units_24_30sep": {
+  "HK/Macau/TW": 8,
+  "Japan": 16,
+  "Korea": 16,
+  "Mainland China": 129,
+  "Oceania": 3,
+  "South-East Asia": 4
+ },
+ "polaris_units_emea": 77,
+ "gw_cn_growth_lc": 41.5
+}

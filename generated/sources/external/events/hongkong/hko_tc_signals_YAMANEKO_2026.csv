@@ -1,0 +1,10 @@
+tc_name_en,tc_name_zh,seq,signal_code,signal_desc_en,signal_desc_zh,issued_hkt,ended_hkt,end_type,duration_hhmm,remarks
+YAMANEKO,山貓,1,TC1,Standby Signal No. 1,一號戒備信號,2026-09-15 21:40,2026-09-16 10:20,replaced,12:40,
+YAMANEKO,山貓,2,TC3,Strong Wind Signal No. 3,三號強風信號,2026-09-16 10:20,2026-09-16 23:40,replaced,13:20,
+YAMANEKO,山貓,3,TC8NE,No. 8 Northeast Gale or Storm Signal,八號東北烈風或暴風信號,2026-09-16 23:40,2026-09-17 16:15,replaced,16:35,Typhoon Yamaneko ~180 km SE of HK at issuance; schools/exchange closed 17 Sep
+YAMANEKO,山貓,4,TC8SE,No. 8 Southeast Gale or Storm Signal,八號東南烈風或暴風信號,2026-09-17 16:15,2026-09-18 13:40,replaced,21:25,Wind direction change as Yamaneko passed ~140 km SSW of HK (closest approach ~14:00 17 Sep)
+YAMANEKO,山貓,5,TC3,Strong Wind Signal No. 3,三號強風信號,2026-09-18 13:40,2026-09-18 19:20,replaced,5:40,No. 8 replaced by No. 3; public transport resuming progressively
+YAMANEKO,山貓,6,TC1,Standby Signal No. 1,一號戒備信號,2026-09-18 19:20,2026-09-19 07:45,cancelled,12:25,All signals cancelled 07:45 19 Sep
+YAMANEKO,山貓,,RAIN_AMBER,Amber Rainstorm Warning Signal,黃色暴雨警告信號,2026-09-17 05:10,2026-09-17 11:30,cancelled,6:20,warning in force during TC
+YAMANEKO,山貓,,RAIN_AMBER,Amber Rainstorm Warning Signal,黃色暴雨警告信號,2026-09-17 19:55,2026-09-17 23:05,cancelled,3:10,warning in force during TC
+YAMANEKO,山貓,,SURGE,"Storm surge advisory (low-lying areas, Tai O / Lei Yue Mun)",風暴潮提示,2026-09-17 09:00,2026-09-17 18:00,cancelled,9:00,warning in force during TC

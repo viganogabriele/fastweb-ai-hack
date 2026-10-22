@@ -1,0 +1,23 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/warehouse/v1/reservations",
+    "body": {
+      "plant": "HK30",
+      "material": "J20931A00618510",
+      "size": "0",
+      "qty": 1,
+      "purpose": "PR_SAMPLE"
+    }
+  },
+  "response": {
+    "status": "REJECTED_NO_STOCK",
+    "atp": 0,
+    "purpose": "PR_SAMPLE",
+    "nextReceipt": {
+      "date": "2026-10-08",
+      "qty": 82,
+      "po": "4500219960"
+    }
+  }
+}

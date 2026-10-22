@@ -1,0 +1,3954 @@
+{
+ "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams('...')/channels('...')/messages",
+ "exportedDateTime": "2026-10-22T07:12:44Z",
+ "exportedBy": "Retail Ops EMEA - eDiscovery export (M. Colombo)",
+ "team": {
+  "id": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+  "displayName": "Retail Ops EMEA"
+ },
+ "channel": {
+  "id": "19:retailopsemea-stock@thread.tacv2",
+  "displayName": "Stock & Transfers"
+ },
+ "value": [
+  {
+   "id": "1788764700284",
+   "replyToId": null,
+   "etag": "1788764700284",
+   "messageType": "message",
+   "createdDateTime": "2026-09-07T07:05:08.444Z",
+   "lastModifiedDateTime": "2026-09-07T07:05:08.444Z",
+   "lastEditedDateTime": null,
+   "deletedDateTime": null,
+   "subject": null,
+   "summary": null,
+   "chatId": null,
+   "importance": "normal",
+   "locale": "en-us",
+   "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1788764700284",
+   "channelIdentity": {
+    "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+    "channelId": "19:retailopsemea-stock@thread.tacv2"
+   },
+   "from": {
+    "application": null,
+    "device": null,
+    "user": {
+     "id": "cf4d6af8-271e-9800-c733-e8641e8ccae3",
+     "displayName": "Luca Ferrari",
+     "userIdentityType": "aadUser",
+     "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+    }
+   },
+   "body": {
+    "contentType": "html",
+    "content": "<p>Good morning all, reminder for the new season: replenishment requests by <b>Wednesday 12:00</b> for Friday delivery (EU mainland), Thursday 12:00 for Monday (UK, CH, DXB). Transfers between stores: post here with store from/to, SKU, size, qty. No WhatsApp requests to my team please 🙏</p>"
+   },
+   "attachments": [],
+   "mentions": [],
+   "reactions": [
+    {
+     "reactionType": "like",
+     "createdDateTime": "2026-09-07T07:05:08.444Z",
+     "user": {
+      "user": {
+       "id": "fd0f8697-0f5d-706b-21d0-d62923fccdee",
+       "displayName": null
+      }
+     }
+    },
+    {
+     "reactionType": "like",
+     "createdDateTime": "2026-09-07T07:05:08.444Z",
+     "user": {
+      "user": {
+       "id": "372345d5-e68c-101f-3e4b-383941296d81",
+       "displayName": null
+      }
+     }
+    },
+    {
+     "reactionType": "like",
+     "createdDateTime": "2026-09-07T07:05:08.444Z",
+     "user": {
+      "user": {
+       "id": "7d960fd2-baa4-ea93-86e5-73a09b242662",
+       "displayName": null
+      }
+     }
+    },
+    {
+     "reactionType": "like",
+     "createdDateTime": "2026-09-07T07:05:08.444Z",
+     "user": {
+      "user": {
+       "id": "c8a69c52-a0f7-d272-6309-b00f69a2a780",
+       "displayName": null
+      }
+     }
+    },
+    {
+     "reactionType": "like",
+     "createdDateTime": "2026-09-07T07:05:08.444Z",
+     "user": {
+      "user": {
+       "id": "63bb9237-ba53-2620-6457-22f3f867b800",
+       "displayName": null
+      }
+     }
+    },
+    {
+     "reactionType": "like",
+     "createdDateTime": "2026-09-07T07:05:08.444Z",
+     "user": {
+      "user": {
+       "id": "17c039c0-eb47-7128-dbbe-4885199217c4",
+       "displayName": null
+      }
+     }
+    }
+   ],
+   "replies": [
+    {
+     "id": "1788766260076",
+     "replyToId": "1788764700284",
+     "etag": "1788766260076",
+     "messageType": "message",
+     "createdDateTime": "2026-09-07T07:31:52.407Z",
+     "lastModifiedDateTime": "2026-09-07T07:31:52.407Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1788766260076",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "e16336e3-b1f1-2790-9534-67d37e509954",
+       "displayName": "Priya Raman",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Noted. UK deliveries are still arriving Tuesday instead of Monday by the way</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1788768120073",
+     "replyToId": "1788764700284",
+     "etag": "1788768120073",
+     "messageType": "message",
+     "createdDateTime": "2026-09-07T08:02:31.444Z",
+     "lastModifiedDateTime": "2026-09-07T08:02:31.444Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1788768120073",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "cf4d6af8-271e-9800-c733-e8641e8ccae3",
+       "displayName": "Luca Ferrari",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p><at id=\"0\">Priya Raman</at> known issue with the new carrier on the UK lane, we're on it</p>"
+     },
+     "attachments": [],
+     "mentions": [
+      {
+       "id": 0,
+       "mentionText": "Priya Raman",
+       "mentioned": {
+        "user": {
+         "id": "e16336e3-b1f1-2790-9534-67d37e509954",
+         "displayName": "Priya Raman",
+         "userIdentityType": "aadUser"
+        }
+       }
+      }
+     ],
+     "reactions": []
+    }
+   ]
+  },
+  {
+   "id": "1789031640114",
+   "replyToId": null,
+   "etag": "1789031640114",
+   "messageType": "message",
+   "createdDateTime": "2026-09-10T09:14:18.444Z",
+   "lastModifiedDateTime": "2026-09-10T09:14:18.444Z",
+   "lastEditedDateTime": null,
+   "deletedDateTime": null,
+   "subject": null,
+   "summary": null,
+   "chatId": null,
+   "importance": "normal",
+   "locale": "en-us",
+   "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1789031640114",
+   "channelIdentity": {
+    "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+    "channelId": "19:retailopsemea-stock@thread.tacv2"
+   },
+   "from": {
+    "application": null,
+    "device": null,
+    "user": {
+     "id": "4004f926-ea04-dbf0-4220-64432da50033",
+     "displayName": "Chiara Bassi",
+     "userIdentityType": "aadUser",
+     "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+    }
+   },
+   "body": {
+    "contentType": "html",
+    "content": "<p>Hi stores, quick pulse on AMBRINE brown (23R) after the first week. How is it selling vs black? Any missing sizes?</p>"
+   },
+   "attachments": [],
+   "mentions": [],
+   "reactions": [],
+   "replies": [
+    {
+     "id": "1789033200116",
+     "replyToId": "1789031640114",
+     "etag": "1789033200116",
+     "messageType": "message",
+     "createdDateTime": "2026-09-10T09:40:32.555Z",
+     "lastModifiedDateTime": "2026-09-10T09:40:32.555Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1789033200116",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "50c471b1-04b4-3faa-4dc5-c50d4b54af37",
+       "displayName": "Giulia Ferrandi",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Brown is by far the one people ask for. Sold out in 1 and 2, we have 3/4 only. Black sells 1 for every 3 brown asked</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": [
+      {
+       "reactionType": "like",
+       "createdDateTime": "2026-09-10T09:40:32.555Z",
+       "user": {
+        "user": {
+         "id": "2326e5d0-8cbd-07d4-e60a-429f54a829ea",
+         "displayName": null
+        }
+       }
+      },
+      {
+       "reactionType": "like",
+       "createdDateTime": "2026-09-10T09:40:32.555Z",
+       "user": {
+        "user": {
+         "id": "55ca5ebc-4799-4d38-ae5f-679ef9c1a5fb",
+         "displayName": null
+        }
+       }
+      }
+     ]
+    },
+    {
+     "id": "1789034700069",
+     "replyToId": "1789031640114",
+     "etag": "1789034700069",
+     "messageType": "message",
+     "createdDateTime": "2026-09-10T10:05:03.555Z",
+     "lastModifiedDateTime": "2026-09-10T10:05:03.555Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1789034700069",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "93e988d6-221d-a8d2-63f5-c5fad5b14beb",
+       "displayName": "Camille Lefèvre",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Pareil à St-Honoré. Les 0-1-2 marron sont parties la première semaine</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1789035720048",
+     "replyToId": "1789031640114",
+     "etag": "1789035720048",
+     "messageType": "message",
+     "createdDateTime": "2026-09-10T10:22:36.518Z",
+     "lastModifiedDateTime": "2026-09-10T10:22:36.518Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1789035720048",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "d51bbad3-9fd7-3c1c-b927-fa80271104e4",
+       "displayName": "Olivia Hartley",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Bond St: brown 2 left (size 4). Lots of interest</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1789040880046",
+     "replyToId": "1789031640114",
+     "etag": "1789040880046",
+     "messageType": "message",
+     "createdDateTime": "2026-09-10T11:48:22.814Z",
+     "lastModifiedDateTime": "2026-09-10T11:48:22.814Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1789040880046",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "0aa16731-e1ab-99dd-b4de-320aca273e95",
+       "displayName": "Lucía Fernández Ortega",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Madrid: marrón muy pedido en 1 y 2, no tenemos</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1789050600122",
+     "replyToId": "1789031640114",
+     "etag": "1789050600122",
+     "messageType": "message",
+     "createdDateTime": "2026-09-10T14:30:14.444Z",
+     "lastModifiedDateTime": "2026-09-10T14:30:14.444Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1789050600122",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "4004f926-ea04-dbf0-4220-64432da50033",
+       "displayName": "Chiara Bassi",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Thanks all. Brown buy was small, I'm checking if the factory can do a top-up but no promises. Please keep proposing black.</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    }
+   ]
+  },
+  {
+   "id": "1789477320091",
+   "replyToId": null,
+   "etag": "1789477320091",
+   "messageType": "message",
+   "createdDateTime": "2026-09-15T13:02:37.555Z",
+   "lastModifiedDateTime": "2026-09-15T13:02:37.555Z",
+   "lastEditedDateTime": null,
+   "deletedDateTime": null,
+   "subject": null,
+   "summary": null,
+   "chatId": null,
+   "importance": "normal",
+   "locale": "en-us",
+   "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1789477320091",
+   "channelIdentity": {
+    "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+    "channelId": "19:retailopsemea-stock@thread.tacv2"
+   },
+   "from": {
+    "application": null,
+    "device": null,
+    "user": {
+     "id": "367a28c5-f820-95e1-d2bf-59346f24f04b",
+     "displayName": "Sofia Marchetti",
+     "userIdentityType": "aadUser",
+     "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+    }
+   },
+   "body": {
+    "contentType": "html",
+    "content": "<p>W2 window pack: please send photos of windows by Wednesday EOD in the VM folder, not here 🙂</p>"
+   },
+   "attachments": [],
+   "mentions": [],
+   "reactions": [
+    {
+     "reactionType": "like",
+     "createdDateTime": "2026-09-15T13:02:37.555Z",
+     "user": {
+      "user": {
+       "id": "34c80bda-3c03-08a9-3ab2-f5bccfa39397",
+       "displayName": null
+      }
+     }
+    },
+    {
+     "reactionType": "like",
+     "createdDateTime": "2026-09-15T13:02:37.555Z",
+     "user": {
+      "user": {
+       "id": "3e509852-07b6-3a1b-7ed2-9b529fba805c",
+       "displayName": null
+      }
+     }
+    },
+    {
+     "reactionType": "like",
+     "createdDateTime": "2026-09-15T13:02:37.555Z",
+     "user": {
+      "user": {
+       "id": "e480e75e-bdfd-df74-b2fc-319697ba1b9d",
+       "displayName": null
+      }
+     }
+    }
+   ],
+   "replies": [
+    {
+     "id": "1789486800155",
+     "replyToId": "1789477320091",
+     "etag": "1789486800155",
+     "messageType": "message",
+     "createdDateTime": "2026-09-15T15:40:05.740Z",
+     "lastModifiedDateTime": "2026-09-15T15:40:05.740Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1789486800155",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "0561cc6a-b754-f345-b144-a726a15998e9",
+       "displayName": "Alessandra De Santis",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>ROM01: we have a construction site in front of the entrance since yesterday, two windows are covered. Photos in the folder. What do we do with the W2 pack?</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1789488300082",
+     "replyToId": "1789477320091",
+     "etag": "1789488300082",
+     "messageType": "message",
+     "createdDateTime": "2026-09-15T16:05:34.555Z",
+     "lastModifiedDateTime": "2026-09-15T16:05:34.555Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1789488300082",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "367a28c5-f820-95e1-d2bf-59346f24f04b",
+       "displayName": "Sofia Marchetti",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p><at id=\"0\">Alessandra De Santis</at> ouch. Install anyway the central one, I'll call you tomorrow</p>"
+     },
+     "attachments": [],
+     "mentions": [
+      {
+       "id": 0,
+       "mentionText": "Alessandra De Santis",
+       "mentioned": {
+        "user": {
+         "id": "0561cc6a-b754-f345-b144-a726a15998e9",
+         "displayName": "Alessandra De Santis",
+         "userIdentityType": "aadUser"
+        }
+       }
+      }
+     ],
+     "reactions": []
+    }
+   ]
+  },
+  {
+   "id": "1789978800196",
+   "replyToId": null,
+   "etag": "1789978800196",
+   "messageType": "message",
+   "createdDateTime": "2026-09-21T08:20:52.444Z",
+   "lastModifiedDateTime": "2026-09-21T08:20:52.444Z",
+   "lastEditedDateTime": null,
+   "deletedDateTime": null,
+   "subject": null,
+   "summary": null,
+   "chatId": null,
+   "importance": "normal",
+   "locale": "en-us",
+   "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1789978800196",
+   "channelIdentity": {
+    "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+    "channelId": "19:retailopsemea-stock@thread.tacv2"
+   },
+   "from": {
+    "application": null,
+    "device": null,
+    "user": {
+     "id": "4004f926-ea04-dbf0-4220-64432da50033",
+     "displayName": "Chiara Bassi",
+     "userIdentityType": "aadUser",
+     "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+    }
+   },
+   "body": {
+    "contentType": "html",
+    "content": "<p>MAIRE black (999): I'm getting reports of strong demand from Korean tourists in Paris/Milan/London. Can PAR01, PAR02, MIL01, LON02 post current stock by size and how many requests you are logging?</p>"
+   },
+   "attachments": [],
+   "mentions": [],
+   "reactions": [],
+   "replies": [
+    {
+     "id": "1789980720053",
+     "replyToId": "1789978800196",
+     "etag": "1789980720053",
+     "messageType": "message",
+     "createdDateTime": "2026-09-21T08:52:11.555Z",
+     "lastModifiedDateTime": "2026-09-21T08:52:11.555Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1789980720053",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "569a0892-e7af-5696-79df-76df69ea7530",
+       "displayName": "Sophie Marchand",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>PAR02: zéro depuis hier. ~25 demandes depuis vendredi</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1789981380120",
+     "replyToId": "1789978800196",
+     "etag": "1789981380120",
+     "messageType": "message",
+     "createdDateTime": "2026-09-21T09:03:00.555Z",
+     "lastModifiedDateTime": "2026-09-21T09:03:00.555Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1789981380120",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "50c471b1-04b4-3faa-4dc5-c50d4b54af37",
+       "displayName": "Giulia Ferrandi",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>MIL01: 1 left (size 0) and one size 3. Requests: 15-20 since Friday, mostly KR tourists with the same photo from a drama</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1789981800076",
+     "replyToId": "1789978800196",
+     "etag": "1789981800076",
+     "messageType": "message",
+     "createdDateTime": "2026-09-21T09:10:52.555Z",
+     "lastModifiedDateTime": "2026-09-21T09:10:52.555Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1789981800076",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "93e988d6-221d-a8d2-63f5-c5fad5b14beb",
+       "displayName": "Camille Lefèvre",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>PAR01: 00x1, 1x1, 2x1, 4x1 et ça part vite. Je dirais 10 demandes ce weekend</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1789983060064",
+     "replyToId": "1789978800196",
+     "etag": "1789983060064",
+     "messageType": "message",
+     "createdDateTime": "2026-09-21T09:31:28.407Z",
+     "lastModifiedDateTime": "2026-09-21T09:31:28.407Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1789983060064",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "e16336e3-b1f1-2790-9534-67d37e509954",
+       "displayName": "Priya Raman",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>LON02: 4 left, sizes 0/2/2/3. Requests logged: 11 since Thursday</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1789985700145",
+     "replyToId": "1789978800196",
+     "etag": "1789985700145",
+     "messageType": "message",
+     "createdDateTime": "2026-09-21T10:15:55.444Z",
+     "lastModifiedDateTime": "2026-09-21T10:15:55.444Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1789985700145",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "cf4d6af8-271e-9800-c733-e8641e8ccae3",
+       "displayName": "Luca Ferrari",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>DC has no black Maire: re-order on the laqué nylon is late at the supplier. Expected at CSG on <b>16 October</b>. Sorry, nothing I can do before.</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": [
+      {
+       "reactionType": "sad",
+       "createdDateTime": "2026-09-21T10:15:55.444Z",
+       "user": {
+        "user": {
+         "id": "ed9eff84-97be-15a5-d206-9d934df0134a",
+         "displayName": null
+        }
+       }
+      },
+      {
+       "reactionType": "sad",
+       "createdDateTime": "2026-09-21T10:15:55.444Z",
+       "user": {
+        "user": {
+         "id": "015a0286-2e01-cb4b-b850-b31b98a22c54",
+         "displayName": null
+        }
+       }
+      },
+      {
+       "reactionType": "sad",
+       "createdDateTime": "2026-09-21T10:15:55.444Z",
+       "user": {
+        "user": {
+         "id": "99e9cb00-b654-12bb-38bb-7111b9946f5b",
+         "displayName": null
+        }
+       }
+      },
+      {
+       "reactionType": "sad",
+       "createdDateTime": "2026-09-21T10:15:55.444Z",
+       "user": {
+        "user": {
+         "id": "0d4d6258-99ec-3486-4b0d-8f81945b0aa1",
+         "displayName": null
+        }
+       }
+      }
+     ]
+    },
+    {
+     "id": "1789985880074",
+     "replyToId": "1789978800196",
+     "etag": "1789985880074",
+     "messageType": "message",
+     "createdDateTime": "2026-09-21T10:18:38.481Z",
+     "lastModifiedDateTime": "2026-09-21T10:18:38.481Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1789985880074",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "c8d0336d-e94e-d535-e048-6d88d3c8193d",
+       "displayName": "Roberto Galli",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Ok. Per me non facciamo allarmismo, sono turiste che girano tutti i negozi</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1789987200119",
+     "replyToId": "1789978800196",
+     "etag": "1789987200119",
+     "messageType": "message",
+     "createdDateTime": "2026-09-21T10:40:53.555Z",
+     "lastModifiedDateTime": "2026-09-21T10:40:53.555Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1789987200119",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "4037a265-80a9-09e6-305f-79ce88bad3c3",
+       "displayName": "Isabelle Moreau",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Roberto, à Paris ce n'est pas que des touristes de passage. On a aussi des clientes résidentes coréennes et japonaises.</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    }
+   ]
+  },
+  {
+   "id": "1790352600121",
+   "replyToId": null,
+   "etag": "1790352600121",
+   "messageType": "message",
+   "createdDateTime": "2026-09-25T16:10:07.444Z",
+   "lastModifiedDateTime": "2026-09-25T16:10:07.444Z",
+   "lastEditedDateTime": null,
+   "deletedDateTime": null,
+   "subject": null,
+   "summary": null,
+   "chatId": null,
+   "importance": "normal",
+   "locale": "en-us",
+   "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790352600121",
+   "channelIdentity": {
+    "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+    "channelId": "19:retailopsemea-stock@thread.tacv2"
+   },
+   "from": {
+    "application": null,
+    "device": null,
+    "user": {
+     "id": "3bcb6500-d45a-4390-1089-aa94472e58a4",
+     "displayName": "Davide Longo",
+     "userIdentityType": "aadUser",
+     "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+    }
+   },
+   "body": {
+    "contentType": "html",
+    "content": "<p>POLARIS day 2: feedback from the floor please. Fit, price, what clients say. Asia is very positive, curious about Europe.</p>"
+   },
+   "attachments": [],
+   "mentions": [],
+   "reactions": [],
+   "replies": [
+    {
+     "id": "1790353980121",
+     "replyToId": "1790352600121",
+     "etag": "1790353980121",
+     "messageType": "message",
+     "createdDateTime": "2026-09-25T16:33:07.592Z",
+     "lastModifiedDateTime": "2026-09-25T16:33:07.592Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790353980121",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "332cb64b-bc2b-f154-4a57-f61b85249ea1",
+       "displayName": "Marco Pellizzari",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>MIL01: 3 pieces in 2 days. Clients try the oversized and say it's small on the shoulders. Price is the issue for Italians</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1790355720106",
+     "replyToId": "1790352600121",
+     "etag": "1790355720106",
+     "messageType": "message",
+     "createdDateTime": "2026-09-25T17:02:22.555Z",
+     "lastModifiedDateTime": "2026-09-25T17:02:22.555Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790355720106",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "d4bdbfe6-c3ba-0d67-ce76-047dc21b2d38",
+       "displayName": "Katharina Huber",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>MUN01: 1 Balaclava. Jacke zu klein laut Kunden, man müsste eine Nummer größer nehmen und XL haben wir kaum</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1790356800071",
+     "replyToId": "1790352600121",
+     "etag": "1790356800071",
+     "messageType": "message",
+     "createdDateTime": "2026-09-25T17:20:17.518Z",
+     "lastModifiedDateTime": "2026-09-25T17:20:17.518Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790356800071",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "d51bbad3-9fd7-3c1c-b927-fa80271104e4",
+       "displayName": "Olivia Hartley",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Bond St: lots of looks, no sales yet. Cape is gorgeous on the mannequin</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1790359500064",
+     "replyToId": "1790352600121",
+     "etag": "1790359500064",
+     "messageType": "message",
+     "createdDateTime": "2026-09-25T18:05:28.555Z",
+     "lastModifiedDateTime": "2026-09-25T18:05:28.555Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790359500064",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "93e988d6-221d-a8d2-63f5-c5fad5b14beb",
+       "displayName": "Camille Lefèvre",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>PAR01: zéro vente. 'Trop cher pour ce que c'est' et taille petit</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1790361000128",
+     "replyToId": "1790352600121",
+     "etag": "1790361000128",
+     "messageType": "message",
+     "createdDateTime": "2026-09-25T18:30:56.444Z",
+     "lastModifiedDateTime": "2026-09-25T18:30:56.444Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790361000128",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "3bcb6500-d45a-4390-1089-aa94472e58a4",
+       "displayName": "Davide Longo",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Thanks. The brief says true to size, but noted, I'll check with product. If you have clients between sizes, let them try one up.</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    }
+   ]
+  },
+  {
+   "id": "1790754300171",
+   "replyToId": null,
+   "etag": "1790754300171",
+   "messageType": "message",
+   "createdDateTime": "2026-09-30T07:45:57.407Z",
+   "lastModifiedDateTime": "2026-09-30T07:45:57.407Z",
+   "lastEditedDateTime": null,
+   "deletedDateTime": null,
+   "subject": null,
+   "summary": null,
+   "chatId": null,
+   "importance": "normal",
+   "locale": "en-us",
+   "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790754300171",
+   "channelIdentity": {
+    "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+    "channelId": "19:retailopsemea-stock@thread.tacv2"
+   },
+   "from": {
+    "application": null,
+    "device": null,
+    "user": {
+     "id": "e16336e3-b1f1-2790-9534-67d37e509954",
+     "displayName": "Priya Raman",
+     "userIdentityType": "aadUser",
+     "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+    }
+   },
+   "body": {
+    "contentType": "html",
+    "content": "<p>LON02 Harrods: Golden Week starts today and we are not in the Mandarin speaker list from the memo. Harrods says they get 30%+ Chinese clients these days. Can someone help?</p>"
+   },
+   "attachments": [],
+   "mentions": [],
+   "reactions": [],
+   "replies": [
+    {
+     "id": "1790755920086",
+     "replyToId": "1790754300171",
+     "etag": "1790755920086",
+     "messageType": "message",
+     "createdDateTime": "2026-09-30T08:12:02.407Z",
+     "lastModifiedDateTime": "2026-09-30T08:12:02.407Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790755920086",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "bc0468c3-cbf8-2655-d1a7-e027e10d576a",
+       "displayName": "Reto Ammann",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Same for ZRH01, we had 2 Chinese tour groups yesterday already. Not in the list either</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1790760000192",
+     "replyToId": "1790754300171",
+     "etag": "1790760000192",
+     "messageType": "message",
+     "createdDateTime": "2026-09-30T09:20:24.518Z",
+     "lastModifiedDateTime": "2026-09-30T09:20:24.518Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790760000192",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "d93fd2a0-71de-6a7d-cfec-df4a0fc8ad82",
+       "displayName": "Matteo Colombo",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Sorry <at id=\"0\">Priya Raman</at> <at id=\"1\">Reto Ammann</at>, the list was built on last year's data. Agency has nobody left for this week. Priya, Harrods can lend their people? Reto, I'll try with the Zurich student pool</p>"
+     },
+     "attachments": [],
+     "mentions": [
+      {
+       "id": 0,
+       "mentionText": "Priya Raman",
+       "mentioned": {
+        "user": {
+         "id": "e16336e3-b1f1-2790-9534-67d37e509954",
+         "displayName": "Priya Raman",
+         "userIdentityType": "aadUser"
+        }
+       }
+      },
+      {
+       "id": 1,
+       "mentionText": "Reto Ammann",
+       "mentioned": {
+        "user": {
+         "id": "bc0468c3-cbf8-2655-d1a7-e027e10d576a",
+         "displayName": "Reto Ammann",
+         "userIdentityType": "aadUser"
+        }
+       }
+      }
+     ],
+     "reactions": []
+    },
+    {
+     "id": "1790760300054",
+     "replyToId": "1790754300171",
+     "etag": "1790760300054",
+     "messageType": "message",
+     "createdDateTime": "2026-09-30T09:25:18.407Z",
+     "lastModifiedDateTime": "2026-09-30T09:25:18.407Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790760300054",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "e16336e3-b1f1-2790-9534-67d37e509954",
+       "displayName": "Priya Raman",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Harrods gives us someone 3h a day. Better than nothing</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    }
+   ]
+  },
+  {
+   "id": "1790851800189",
+   "replyToId": null,
+   "etag": "1790851800189",
+   "messageType": "message",
+   "createdDateTime": "2026-10-01T10:50:03.481Z",
+   "lastModifiedDateTime": "2026-10-01T10:50:03.481Z",
+   "lastEditedDateTime": null,
+   "deletedDateTime": null,
+   "subject": null,
+   "summary": null,
+   "chatId": null,
+   "importance": "normal",
+   "locale": "en-us",
+   "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790851800189",
+   "channelIdentity": {
+    "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+    "channelId": "19:retailopsemea-stock@thread.tacv2"
+   },
+   "from": {
+    "application": null,
+    "device": null,
+    "user": {
+     "id": "7fe41674-77b5-a4cd-8425-002da88bd6db",
+     "displayName": "Javier Molina",
+     "userIdentityType": "aadUser",
+     "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+    }
+   },
+   "body": {
+    "contentType": "html",
+    "content": "<p>MAD01: second wrong delivery. Today again MAYA navy (742) instead of black (999), sizes 2-5. That's ~20 navy pieces now. Black almost zero. Ticket CSG-INC-2026-3381 opened 26/09, no answer.</p>"
+   },
+   "attachments": [],
+   "mentions": [],
+   "reactions": [
+    {
+     "reactionType": "surprised",
+     "createdDateTime": "2026-10-01T10:50:03.481Z",
+     "user": {
+      "user": {
+       "id": "b7c63e31-0a44-1b08-1526-d0cc3d1ffab9",
+       "displayName": null
+      }
+     }
+    },
+    {
+     "reactionType": "surprised",
+     "createdDateTime": "2026-10-01T10:50:03.481Z",
+     "user": {
+      "user": {
+       "id": "28049a27-08df-c1ed-409c-2c7b7ec72f45",
+       "displayName": null
+      }
+     }
+    }
+   ],
+   "replies": [
+    {
+     "id": "1790854200127",
+     "replyToId": "1790851800189",
+     "etag": "1790854200127",
+     "messageType": "message",
+     "createdDateTime": "2026-10-01T11:30:49.444Z",
+     "lastModifiedDateTime": "2026-10-01T11:30:49.444Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790854200127",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "cf4d6af8-271e-9800-c733-e8641e8ccae3",
+       "displayName": "Luca Ferrari",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p><at id=\"0\">Javier Molina</at> checking with the warehouse. Looks like a location swap in picking. Replacement black will go with next shipment</p>"
+     },
+     "attachments": [],
+     "mentions": [
+      {
+       "id": 0,
+       "mentionText": "Javier Molina",
+       "mentioned": {
+        "user": {
+         "id": "7fe41674-77b5-a4cd-8425-002da88bd6db",
+         "displayName": "Javier Molina",
+         "userIdentityType": "aadUser"
+        }
+       }
+      }
+     ],
+     "reactions": []
+    },
+    {
+     "id": "1790959200101",
+     "replyToId": "1790851800189",
+     "etag": "1790959200101",
+     "messageType": "message",
+     "createdDateTime": "2026-10-02T16:40:47.481Z",
+     "lastModifiedDateTime": "2026-10-02T16:40:47.481Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790959200101",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "c8d0336d-e94e-d535-e048-6d88d3c8193d",
+       "displayName": "Roberto Galli",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Visto oggi a Madrid, confermo. Luca serve la nera entro settimana prossima, il navy lo riprendete voi</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1791533700029",
+     "replyToId": "1790851800189",
+     "etag": "1791533700029",
+     "messageType": "message",
+     "createdDateTime": "2026-10-09T08:15:23.481Z",
+     "lastModifiedDateTime": "2026-10-09T08:15:23.481Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1791533700029",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "7fe41674-77b5-a4cd-8425-002da88bd6db",
+       "displayName": "Javier Molina",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Any news? still no black Maya</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1791536520041",
+     "replyToId": "1790851800189",
+     "etag": "1791536520041",
+     "messageType": "message",
+     "createdDateTime": "2026-10-09T09:02:47.444Z",
+     "lastModifiedDateTime": "2026-10-09T09:02:47.444Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1791536520041",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "cf4d6af8-271e-9800-c733-e8641e8ccae3",
+       "displayName": "Luca Ferrari",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Leaves CSG today, delivery Saturday 10/10</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1791713100075",
+     "replyToId": "1790851800189",
+     "etag": "1791713100075",
+     "messageType": "message",
+     "createdDateTime": "2026-10-11T10:05:45.481Z",
+     "lastModifiedDateTime": "2026-10-11T10:05:45.481Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1791713100075",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "7fe41674-77b5-a4cd-8425-002da88bd6db",
+       "displayName": "Javier Molina",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Received today (Sunday!), 20 black. Thanks. Navy return goes back this week</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": [
+      {
+       "reactionType": "like",
+       "createdDateTime": "2026-10-11T10:05:45.481Z",
+       "user": {
+        "user": {
+         "id": "d6bdc4fb-9d2b-5e82-a2d0-5c4c9d3ec508",
+         "displayName": null
+        }
+       }
+      },
+      {
+       "reactionType": "like",
+       "createdDateTime": "2026-10-11T10:05:45.481Z",
+       "user": {
+        "user": {
+         "id": "d8f7762e-7753-5028-84d5-ba59ed0c262e",
+         "displayName": null
+        }
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1790944200257",
+   "replyToId": null,
+   "etag": "1790944200257",
+   "messageType": "message",
+   "createdDateTime": "2026-10-02T12:30:59.481Z",
+   "lastModifiedDateTime": "2026-10-02T12:30:59.481Z",
+   "lastEditedDateTime": null,
+   "deletedDateTime": null,
+   "subject": null,
+   "summary": null,
+   "chatId": null,
+   "importance": "normal",
+   "locale": "en-us",
+   "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790944200257",
+   "channelIdentity": {
+    "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+    "channelId": "19:retailopsemea-stock@thread.tacv2"
+   },
+   "from": {
+    "application": null,
+    "device": null,
+    "user": {
+     "id": "def2b8be-c19e-1460-a7a7-d5d7e22079d9",
+     "displayName": "Elena Rinaldi",
+     "userIdentityType": "aadUser",
+     "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+    }
+   },
+   "body": {
+    "contentType": "html",
+    "content": "<p>Hello all, we have reports of TIB vests coming back with a zipper problem (slider coming off the chain). Before we issue a formal alert, could each store reply with the number of TIB returned for zip since 28/09 and the purchase month if you have it? Thanks</p>"
+   },
+   "attachments": [],
+   "mentions": [],
+   "reactions": [],
+   "replies": [
+    {
+     "id": "1790945280037",
+     "replyToId": "1790944200257",
+     "etag": "1790945280037",
+     "messageType": "message",
+     "createdDateTime": "2026-10-02T12:48:19.592Z",
+     "lastModifiedDateTime": "2026-10-02T12:48:19.592Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790945280037",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "332cb64b-bc2b-f154-4a57-f61b85249ea1",
+       "displayName": "Marco Pellizzari",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>MIL01: 11, purchased late Aug and Sep</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1790945700033",
+     "replyToId": "1790944200257",
+     "etag": "1790945700033",
+     "messageType": "message",
+     "createdDateTime": "2026-10-02T12:55:51.444Z",
+     "lastModifiedDateTime": "2026-10-02T12:55:51.444Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790945700033",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "1503ea80-ef5e-7702-30bf-b7f5a6458d54",
+       "displayName": "Karim Benali",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>PAR02 : 9 (achats août/septembre)</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1790946060039",
+     "replyToId": "1790944200257",
+     "etag": "1790946060039",
+     "messageType": "message",
+     "createdDateTime": "2026-10-02T13:01:33.518Z",
+     "lastModifiedDateTime": "2026-10-02T13:01:33.518Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790946060039",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "d51bbad3-9fd7-3c1c-b927-fa80271104e4",
+       "displayName": "Olivia Hartley",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>LON01: 8. Two of them bought mid-August</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1790946600008",
+     "replyToId": "1790944200257",
+     "etag": "1790946600008",
+     "messageType": "message",
+     "createdDateTime": "2026-10-02T13:10:56.407Z",
+     "lastModifiedDateTime": "2026-10-02T13:10:56.407Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790946600008",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "bc0468c3-cbf8-2655-d1a7-e027e10d576a",
+       "displayName": "Reto Ammann",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>ZRH01: 5</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1790946720028",
+     "replyToId": "1790944200257",
+     "etag": "1790946720028",
+     "messageType": "message",
+     "createdDateTime": "2026-10-02T13:12:16.518Z",
+     "lastModifiedDateTime": "2026-10-02T13:12:16.518Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790946720028",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "3ebb9a30-203c-f76c-6459-d9f5742e8e6d",
+       "displayName": "Chiara Zennaro",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>VEN01: 4, tutti di settembre</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1790947200008",
+     "replyToId": "1790944200257",
+     "etag": "1790947200008",
+     "messageType": "message",
+     "createdDateTime": "2026-10-02T13:20:56.407Z",
+     "lastModifiedDateTime": "2026-10-02T13:20:56.407Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790947200008",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "e16336e3-b1f1-2790-9534-67d37e509954",
+       "displayName": "Priya Raman",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>LON02: 3</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1790948640009",
+     "replyToId": "1790944200257",
+     "etag": "1790948640009",
+     "messageType": "message",
+     "createdDateTime": "2026-10-02T13:44:03.555Z",
+     "lastModifiedDateTime": "2026-10-02T13:44:03.555Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790948640009",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "93e988d6-221d-a8d2-63f5-c5fad5b14beb",
+       "displayName": "Camille Lefèvre",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>PAR01 : 7</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1790949720008",
+     "replyToId": "1790944200257",
+     "etag": "1790949720008",
+     "messageType": "message",
+     "createdDateTime": "2026-10-02T14:02:56.481Z",
+     "lastModifiedDateTime": "2026-10-02T14:02:56.481Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790949720008",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "7fe41674-77b5-a4cd-8425-002da88bd6db",
+       "displayName": "Javier Molina",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>MAD01: 2</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1790951400008",
+     "replyToId": "1790944200257",
+     "etag": "1790951400008",
+     "messageType": "message",
+     "createdDateTime": "2026-10-02T14:30:56.518Z",
+     "lastModifiedDateTime": "2026-10-02T14:30:56.518Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790951400008",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "20e4d3c0-6e75-8219-f452-4cab915ef9df",
+       "displayName": "Stefano Rocchi",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>MIL02: 4</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1790953500107",
+     "replyToId": "1790944200257",
+     "etag": "1790953500107",
+     "messageType": "message",
+     "createdDateTime": "2026-10-02T15:05:29.481Z",
+     "lastModifiedDateTime": "2026-10-02T15:05:29.481Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790953500107",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "def2b8be-c19e-1460-a7a7-d5d7e22079d9",
+       "displayName": "Elena Rinaldi",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Thank you, very helpful. Alert coming early next week. In the meantime keep the pieces aside, don't repair.</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1790953800117",
+     "replyToId": "1790944200257",
+     "etag": "1790953800117",
+     "messageType": "message",
+     "createdDateTime": "2026-10-02T15:10:39.555Z",
+     "lastModifiedDateTime": "2026-10-02T15:10:39.555Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790953800117",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "0265a0a4-9fb6-3054-060f-5d3c49c90aa0",
+       "displayName": "Francesca Valli",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Elena, early next week is late, stores are handling it since Monday. Can we have at least a 3-line instruction today?</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1790955720057",
+     "replyToId": "1790944200257",
+     "etag": "1790955720057",
+     "messageType": "message",
+     "createdDateTime": "2026-10-02T15:42:39.481Z",
+     "lastModifiedDateTime": "2026-10-02T15:42:39.481Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1790955720057",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "def2b8be-c19e-1460-a7a7-d5d7e22079d9",
+       "displayName": "Elena Rinaldi",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Understood, working on it with legal, formal alert Monday</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    }
+   ]
+  },
+  {
+   "id": "1791533100206",
+   "replyToId": null,
+   "etag": "1791533100206",
+   "messageType": "message",
+   "createdDateTime": "2026-10-09T08:05:02.592Z",
+   "lastModifiedDateTime": "2026-10-09T08:05:02.592Z",
+   "lastEditedDateTime": null,
+   "deletedDateTime": null,
+   "subject": null,
+   "summary": null,
+   "chatId": null,
+   "importance": "normal",
+   "locale": "en-us",
+   "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1791533100206",
+   "channelIdentity": {
+    "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+    "channelId": "19:retailopsemea-stock@thread.tacv2"
+   },
+   "from": {
+    "application": null,
+    "device": null,
+    "user": {
+     "id": "332cb64b-bc2b-f154-4a57-f61b85249ea1",
+     "displayName": "Marco Pellizzari",
+     "userIdentityType": "aadUser",
+     "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+    }
+   },
+   "body": {
+    "contentType": "html",
+    "content": "<p>TRANSFER REQUEST: LOGO CARDIGAN navy (I10919B00011-742) size M x3 from ROM01 to MIL01. MIL01 sold out of M in both colours since yesterday (8/10), clients asking every day. DC has no M until end of October.</p>"
+   },
+   "attachments": [],
+   "mentions": [],
+   "reactions": [],
+   "replies": [
+    {
+     "id": "1791534600015",
+     "replyToId": "1791533100206",
+     "etag": "1791534600015",
+     "messageType": "message",
+     "createdDateTime": "2026-10-09T08:30:45.592Z",
+     "lastModifiedDateTime": "2026-10-09T08:30:45.592Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1791534600015",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "43b6272c-c597-1ea7-e093-179bdd8dfa96",
+       "displayName": "Fabio Cardarelli",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>ROM01 ok for us</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": [
+      {
+       "reactionType": "like",
+       "createdDateTime": "2026-10-09T08:30:45.592Z",
+       "user": {
+        "user": {
+         "id": "cc1d0cd3-3ad3-4134-664a-f02b7b0b5fc8",
+         "displayName": null
+        }
+       }
+      }
+     ]
+    },
+    {
+     "id": "1791539040075",
+     "replyToId": "1791533100206",
+     "etag": "1791539040075",
+     "messageType": "message",
+     "createdDateTime": "2026-10-09T09:44:45.592Z",
+     "lastModifiedDateTime": "2026-10-09T09:44:45.592Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1791539040075",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "332cb64b-bc2b-f154-4a57-f61b85249ea1",
+       "displayName": "Marco Pellizzari",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p><at id=\"0\">Luca Ferrari</at> can you approve? Also any M in VEN01? (they have 1+1 I think)</p>"
+     },
+     "attachments": [],
+     "mentions": [
+      {
+       "id": 0,
+       "mentionText": "Luca Ferrari",
+       "mentioned": {
+        "user": {
+         "id": "cf4d6af8-271e-9800-c733-e8641e8ccae3",
+         "displayName": "Luca Ferrari",
+         "userIdentityType": "aadUser"
+        }
+       }
+      }
+     ],
+     "reactions": []
+    },
+    {
+     "id": "1791814800084",
+     "replyToId": "1791533100206",
+     "etag": "1791814800084",
+     "messageType": "message",
+     "createdDateTime": "2026-10-12T14:20:48.444Z",
+     "lastModifiedDateTime": "2026-10-12T14:20:48.444Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1791814800084",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "cf4d6af8-271e-9800-c733-e8641e8ccae3",
+       "displayName": "Luca Ferrari",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Approved ROM01 → MIL01 x3. Courier pickup booked for 13/10. VEN01 keep yours for now</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1791997320049",
+     "replyToId": "1791533100206",
+     "etag": "1791997320049",
+     "messageType": "message",
+     "createdDateTime": "2026-10-14T17:02:43.592Z",
+     "lastModifiedDateTime": "2026-10-14T17:02:43.592Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1791997320049",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "332cb64b-bc2b-f154-4a57-f61b85249ea1",
+       "displayName": "Marco Pellizzari",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Nothing arrived. Rome says the courier never came</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1792053600079",
+     "replyToId": "1791533100206",
+     "etag": "1792053600079",
+     "messageType": "message",
+     "createdDateTime": "2026-10-15T08:40:13.444Z",
+     "lastModifiedDateTime": "2026-10-15T08:40:13.444Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792053600079",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "cf4d6af8-271e-9800-c733-e8641e8ccae3",
+       "displayName": "Luca Ferrari",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Rebooked for Monday, sorry, the carrier had issues with the ZTL in via Condotti</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1792517400052",
+     "replyToId": "1791533100206",
+     "etag": "1792517400052",
+     "messageType": "message",
+     "createdDateTime": "2026-10-20T17:30:04.592Z",
+     "lastModifiedDateTime": "2026-10-20T17:30:04.592Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792517400052",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "43b6272c-c597-1ea7-e093-179bdd8dfa96",
+       "displayName": "Fabio Cardarelli",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Still no pickup today 😕 package ready since the 12th</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1792608600108",
+     "replyToId": "1791533100206",
+     "etag": "1792608600108",
+     "messageType": "message",
+     "createdDateTime": "2026-10-21T18:50:36.592Z",
+     "lastModifiedDateTime": "2026-10-21T18:50:36.592Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792608600108",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "332cb64b-bc2b-f154-4a57-f61b85249ea1",
+       "displayName": "Marco Pellizzari",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>M still at zero in all of Milan (MIL02 finished black M on Saturday). We are losing 2-3 cardigan sales a day</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    }
+   ]
+  },
+  {
+   "id": "1791797700252",
+   "replyToId": null,
+   "etag": "1791797700252",
+   "messageType": "message",
+   "createdDateTime": "2026-10-12T09:35:24.444Z",
+   "lastModifiedDateTime": "2026-10-12T09:35:24.444Z",
+   "lastEditedDateTime": null,
+   "deletedDateTime": null,
+   "subject": null,
+   "summary": null,
+   "chatId": null,
+   "importance": "normal",
+   "locale": "en-us",
+   "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1791797700252",
+   "channelIdentity": {
+    "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+    "channelId": "19:retailopsemea-stock@thread.tacv2"
+   },
+   "from": {
+    "application": null,
+    "device": null,
+    "user": {
+     "id": "4004f926-ea04-dbf0-4220-64432da50033",
+     "displayName": "Chiara Bassi",
+     "userIdentityType": "aadUser",
+     "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+    }
+   },
+   "body": {
+    "contentType": "html",
+    "content": "<p>ILVARO powder pink (510): the production top-up arrived at CSG and part was allocated to EMEA flagships (MIL01, PAR01, LON01 12 pcs each). Can you tell me how it's selling? APAC colleagues are asking for it, they had huge demand after the K-pop photos.</p>"
+   },
+   "attachments": [],
+   "mentions": [],
+   "reactions": [],
+   "replies": [
+    {
+     "id": "1791799320110",
+     "replyToId": "1791797700252",
+     "etag": "1791799320110",
+     "messageType": "message",
+     "createdDateTime": "2026-10-12T10:02:50.555Z",
+     "lastModifiedDateTime": "2026-10-12T10:02:50.555Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1791799320110",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "50c471b1-04b4-3faa-4dc5-c50d4b54af37",
+       "displayName": "Giulia Ferrandi",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>MIL01: arrived Saturday, 1 sold so far. Honestly in Milan nobody asks for pink since the Chinese tourists left</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1791800100090",
+     "replyToId": "1791797700252",
+     "etag": "1791800100090",
+     "messageType": "message",
+     "createdDateTime": "2026-10-12T10:15:30.555Z",
+     "lastModifiedDateTime": "2026-10-12T10:15:30.555Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1791800100090",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "93e988d6-221d-a8d2-63f5-c5fad5b14beb",
+       "displayName": "Camille Lefèvre",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>PAR01 : reçues samedi, zéro vente. Les clientes asiatiques qui la voulaient sont reparties</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1791802800032",
+     "replyToId": "1791797700252",
+     "etag": "1791802800032",
+     "messageType": "message",
+     "createdDateTime": "2026-10-12T11:00:44.518Z",
+     "lastModifiedDateTime": "2026-10-12T11:00:44.518Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1791802800032",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "d51bbad3-9fd7-3c1c-b927-fa80271104e4",
+       "displayName": "Olivia Hartley",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>LON01: arriving today apparently</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1791804000153",
+     "replyToId": "1791797700252",
+     "etag": "1791804000153",
+     "messageType": "message",
+     "createdDateTime": "2026-10-12T11:20:51.444Z",
+     "lastModifiedDateTime": "2026-10-12T11:20:51.444Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1791804000153",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "4004f926-ea04-dbf0-4220-64432da50033",
+       "displayName": "Chiara Bassi",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Thanks. Why did they come to Europe first? the allocation was set before the photo (launch split) and nobody updated it. I'm asking to move them to Asia.</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1791804240035",
+     "replyToId": "1791797700252",
+     "etag": "1791804240035",
+     "messageType": "message",
+     "createdDateTime": "2026-10-12T11:24:05.555Z",
+     "lastModifiedDateTime": "2026-10-12T11:24:05.555Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1791804240035",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "50c471b1-04b4-3faa-4dc5-c50d4b54af37",
+       "displayName": "Giulia Ferrandi",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Take them, we keep 2 for the window</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": [
+      {
+       "reactionType": "like",
+       "createdDateTime": "2026-10-12T11:24:05.555Z",
+       "user": {
+        "user": {
+         "id": "4935819a-02a9-fb48-a0a2-750143b57c60",
+         "displayName": null
+        }
+       }
+      },
+      {
+       "reactionType": "like",
+       "createdDateTime": "2026-10-12T11:24:05.555Z",
+       "user": {
+        "user": {
+         "id": "bcb1531e-71f9-db74-1ded-5b47ca3044b6",
+         "displayName": null
+        }
+       }
+      },
+      {
+       "reactionType": "like",
+       "createdDateTime": "2026-10-12T11:24:05.555Z",
+       "user": {
+        "user": {
+         "id": "f639286c-f113-ec12-4f5a-c9f33a83cfcc",
+         "displayName": null
+        }
+       }
+      }
+     ]
+    },
+    {
+     "id": "1791904200118",
+     "replyToId": "1791797700252",
+     "etag": "1791904200118",
+     "messageType": "message",
+     "createdDateTime": "2026-10-13T15:10:46.444Z",
+     "lastModifiedDateTime": "2026-10-13T15:10:46.444Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1791904200118",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "cf4d6af8-271e-9800-c733-e8641e8ccae3",
+       "displayName": "Luca Ferrari",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Inter-region transfer EMEA → APAC needs Francesca's sign-off + export docs, 7-10 days min. On hold until I get the OK.</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1792141920155",
+     "replyToId": "1791797700252",
+     "etag": "1792141920155",
+     "messageType": "message",
+     "createdDateTime": "2026-10-16T09:12:05.444Z",
+     "lastModifiedDateTime": "2026-10-16T09:12:05.444Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792141920155",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "4004f926-ea04-dbf0-4220-64432da50033",
+       "displayName": "Chiara Bassi",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p><at id=\"0\">Francesca Valli</at> any decision on the pink ILVARO move to APAC? Seoul and Tokyo are getting their own top-up today/this weekend but CDU and BJS have nothing</p>"
+     },
+     "attachments": [],
+     "mentions": [
+      {
+       "id": 0,
+       "mentionText": "Francesca Valli",
+       "mentioned": {
+        "user": {
+         "id": "0265a0a4-9fb6-3054-060f-5d3c49c90aa0",
+         "displayName": "Francesca Valli",
+         "userIdentityType": "aadUser"
+        }
+       }
+      }
+     ],
+     "reactions": []
+    },
+    {
+     "id": "1792176000033",
+     "replyToId": "1791797700252",
+     "etag": "1792176000033",
+     "messageType": "message",
+     "createdDateTime": "2026-10-16T18:40:51.555Z",
+     "lastModifiedDateTime": "2026-10-16T18:40:51.555Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792176000033",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "0265a0a4-9fb6-3054-060f-5d3c49c90aa0",
+       "displayName": "Francesca Valli",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Let me align with Andrew tomorrow</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1792400100043",
+     "replyToId": "1791797700252",
+     "etag": "1792400100043",
+     "messageType": "message",
+     "createdDateTime": "2026-10-19T08:55:01.518Z",
+     "lastModifiedDateTime": "2026-10-19T08:55:01.518Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792400100043",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "d51bbad3-9fd7-3c1c-b927-fa80271104e4",
+       "displayName": "Olivia Hartley",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>LON01 update: 12 received, 3 sold in a week</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1792577400046",
+     "replyToId": "1791797700252",
+     "etag": "1792577400046",
+     "messageType": "message",
+     "createdDateTime": "2026-10-21T10:10:22.444Z",
+     "lastModifiedDateTime": "2026-10-21T10:10:22.444Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792577400046",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "4004f926-ea04-dbf0-4220-64432da50033",
+       "displayName": "Chiara Bassi",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Still on hold. I'll take it to Thursday's call</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    }
+   ]
+  },
+  {
+   "id": "1791874680164",
+   "replyToId": null,
+   "etag": "1791874680164",
+   "messageType": "message",
+   "createdDateTime": "2026-10-13T06:58:08.555Z",
+   "lastModifiedDateTime": "2026-10-13T06:58:08.555Z",
+   "lastEditedDateTime": null,
+   "deletedDateTime": null,
+   "subject": null,
+   "summary": null,
+   "chatId": null,
+   "importance": "normal",
+   "locale": "en-us",
+   "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1791874680164",
+   "channelIdentity": {
+    "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+    "channelId": "19:retailopsemea-stock@thread.tacv2"
+   },
+   "from": {
+    "application": null,
+    "device": null,
+    "user": {
+     "id": "d4bdbfe6-c3ba-0d67-ce76-047dc21b2d38",
+     "displayName": "Katharina Huber",
+     "userIdentityType": "aadUser",
+     "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+    }
+   },
+   "body": {
+    "contentType": "html",
+    "content": "<p>MUN01: Wintereinbruch angekündigt (Schnee ab Mittwoch). We need beanies (black/navy), Tech Gloves, MAYA black 3-4, MONTGENEVRE grey. Anything possible for Thursday?</p>"
+   },
+   "attachments": [],
+   "mentions": [],
+   "reactions": [],
+   "replies": [
+    {
+     "id": "1791876000082",
+     "replyToId": "1791874680164",
+     "etag": "1791876000082",
+     "messageType": "message",
+     "createdDateTime": "2026-10-13T07:20:34.407Z",
+     "lastModifiedDateTime": "2026-10-13T07:20:34.407Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1791876000082",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "bc0468c3-cbf8-2655-d1a7-e027e10d576a",
+       "displayName": "Reto Ammann",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>ZRH01 too: beanies and gloves, and HERMINE navy. Snow down to 1000m from Wednesday</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1791877500055",
+     "replyToId": "1791874680164",
+     "etag": "1791877500055",
+     "messageType": "message",
+     "createdDateTime": "2026-10-13T07:45:25.370Z",
+     "lastModifiedDateTime": "2026-10-13T07:45:25.370Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1791877500055",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "6eb31077-c25f-1033-2316-f14c4a72c38f",
+       "displayName": "Mette Kjær",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>CPH01 same, 3 degrees this morning. Beanies nearly gone</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1791880200222",
+     "replyToId": "1791874680164",
+     "etag": "1791880200222",
+     "messageType": "message",
+     "createdDateTime": "2026-10-13T08:30:54.444Z",
+     "lastModifiedDateTime": "2026-10-13T08:30:54.444Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1791880200222",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "cf4d6af8-271e-9800-c733-e8641e8ccae3",
+       "displayName": "Luca Ferrari",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Accessories: yes, Wednesday shipment for Thursday/Friday. Heavy down: no extra allocation planned before end of October, only transfers between stores. Stefan proposes STM01 stock (closing 19/10) to MUN01/ZRH01, I support.</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1791880380050",
+     "replyToId": "1791874680164",
+     "etag": "1791880380050",
+     "messageType": "message",
+     "createdDateTime": "2026-10-13T08:33:50.481Z",
+     "lastModifiedDateTime": "2026-10-13T08:33:50.481Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1791880380050",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "45deecc8-6e1c-2627-cd32-ca4eac663387",
+       "displayName": "Stefan Wagner",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>List from Sabrina (STM01) will be here by tomorrow</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1791972720048",
+     "replyToId": "1791874680164",
+     "etag": "1791972720048",
+     "messageType": "message",
+     "createdDateTime": "2026-10-14T10:12:36.555Z",
+     "lastModifiedDateTime": "2026-10-14T10:12:36.555Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1791972720048",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "d4bdbfe6-c3ba-0d67-ce76-047dc21b2d38",
+       "displayName": "Katharina Huber",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Erster Schnee heute. Kunden warten vor der Tür 😅</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": [
+      {
+       "reactionType": "like",
+       "createdDateTime": "2026-10-14T10:12:36.555Z",
+       "user": {
+        "user": {
+         "id": "c7913bb6-8432-4d96-0dce-7fbb7d97633d",
+         "displayName": null
+        }
+       }
+      },
+      {
+       "reactionType": "like",
+       "createdDateTime": "2026-10-14T10:12:36.555Z",
+       "user": {
+        "user": {
+         "id": "c959e2d7-bcf8-7d9f-3821-8b5d3d65f07f",
+         "displayName": null
+        }
+       }
+      },
+      {
+       "reactionType": "like",
+       "createdDateTime": "2026-10-14T10:12:36.555Z",
+       "user": {
+        "user": {
+         "id": "a11e2a05-e11d-ffe7-446f-b29e306cada9",
+         "displayName": null
+        }
+       }
+      },
+      {
+       "reactionType": "like",
+       "createdDateTime": "2026-10-14T10:12:36.555Z",
+       "user": {
+        "user": {
+         "id": "792e3cb7-5df5-808a-4e2e-f0621c480df9",
+         "displayName": null
+        }
+       }
+      },
+      {
+       "reactionType": "like",
+       "createdDateTime": "2026-10-14T10:12:36.555Z",
+       "user": {
+        "user": {
+         "id": "6650e1f1-36b0-dec6-8061-b4a7c676f582",
+         "displayName": null
+        }
+       }
+      },
+      {
+       "reactionType": "like",
+       "createdDateTime": "2026-10-14T10:12:36.555Z",
+       "user": {
+        "user": {
+         "id": "93af72dc-2f06-c2eb-786c-975d59be59ed",
+         "displayName": null
+        }
+       }
+      },
+      {
+       "reactionType": "like",
+       "createdDateTime": "2026-10-14T10:12:36.555Z",
+       "user": {
+        "user": {
+         "id": "badb9e0b-cb83-c3c9-2211-009e514003e0",
+         "displayName": null
+        }
+       }
+      },
+      {
+       "reactionType": "heart",
+       "createdDateTime": "2026-10-14T10:12:36.555Z",
+       "user": {
+        "user": {
+         "id": "9346bfc3-ce8a-e250-c092-e365a8792f47",
+         "displayName": null
+        }
+       }
+      },
+      {
+       "reactionType": "heart",
+       "createdDateTime": "2026-10-14T10:12:36.555Z",
+       "user": {
+        "user": {
+         "id": "6986134e-a90e-fe1b-fea5-40068283df12",
+         "displayName": null
+        }
+       }
+      }
+     ]
+    },
+    {
+     "id": "1792152000046",
+     "replyToId": "1791874680164",
+     "etag": "1792152000046",
+     "messageType": "message",
+     "createdDateTime": "2026-10-16T12:00:22.444Z",
+     "lastModifiedDateTime": "2026-10-16T12:00:22.444Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792152000046",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "4c5fbfdc-8cdc-be80-a62c-fda9c3d39263",
+       "displayName": "Jana Schulte",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>BER01: also need beanies. We sold 40 this week</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1792394100064",
+     "replyToId": "1791874680164",
+     "etag": "1792394100064",
+     "messageType": "message",
+     "createdDateTime": "2026-10-19T07:15:28.481Z",
+     "lastModifiedDateTime": "2026-10-19T07:15:28.481Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792394100064",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "45deecc8-6e1c-2627-cd32-ca4eac663387",
+       "displayName": "Stefan Wagner",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>STM01 closed since today. Transfer to MUN01/ZRH01 leaves Tuesday</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    }
+   ]
+  },
+  {
+   "id": "1792163100231",
+   "replyToId": null,
+   "etag": "1792163100231",
+   "messageType": "message",
+   "createdDateTime": "2026-10-16T15:05:57.444Z",
+   "lastModifiedDateTime": "2026-10-16T15:05:57.444Z",
+   "lastEditedDateTime": null,
+   "deletedDateTime": null,
+   "subject": null,
+   "summary": null,
+   "chatId": null,
+   "importance": "normal",
+   "locale": "en-us",
+   "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792163100231",
+   "channelIdentity": {
+    "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+    "channelId": "19:retailopsemea-stock@thread.tacv2"
+   },
+   "from": {
+    "application": null,
+    "device": null,
+    "user": {
+     "id": "cf4d6af8-271e-9800-c733-e8641e8ccae3",
+     "displayName": "Luca Ferrari",
+     "userIdentityType": "aadUser",
+     "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+    }
+   },
+   "body": {
+    "contentType": "html",
+    "content": "<p>MAIRE black (999) is in at CSG. Allocation goes out in waves by lane: <b>Italy on Wed 21/10</b>, France/Spain/Germany Thu 22/10, UK/CH/NL/DK Fri 23/10. US and APAC from their DCs next week. Quantities by store in the attached file.</p>"
+   },
+   "attachments": [
+    {
+     "id": "2cb3c009-bc1c-cd26-b891-0f94c7efe571",
+     "contentType": "reference",
+     "contentUrl": "https://moncler.sharepoint.example/sites/RetailOpsEMEA/Shared%20Documents/Allocation/MAIRE_999_alloc_wave_1610.xlsx",
+     "name": "MAIRE_999_alloc_wave_1610.xlsx"
+    }
+   ],
+   "mentions": [],
+   "reactions": [
+    {
+     "reactionType": "like",
+     "createdDateTime": "2026-10-16T15:05:57.444Z",
+     "user": {
+      "user": {
+       "id": "43db5717-963f-e9a6-66bb-f7a3fde2c09d",
+       "displayName": null
+      }
+     }
+    },
+    {
+     "reactionType": "like",
+     "createdDateTime": "2026-10-16T15:05:57.444Z",
+     "user": {
+      "user": {
+       "id": "5532ff8e-5bc1-bc48-4169-2a7b8bc680a3",
+       "displayName": null
+      }
+     }
+    },
+    {
+     "reactionType": "like",
+     "createdDateTime": "2026-10-16T15:05:57.444Z",
+     "user": {
+      "user": {
+       "id": "4944228b-e03e-d027-48ca-7675d62fa85e",
+       "displayName": null
+      }
+     }
+    },
+    {
+     "reactionType": "like",
+     "createdDateTime": "2026-10-16T15:05:57.444Z",
+     "user": {
+      "user": {
+       "id": "5b890556-a7c3-8375-35ab-096c4a784ecb",
+       "displayName": null
+      }
+     }
+    },
+    {
+     "reactionType": "like",
+     "createdDateTime": "2026-10-16T15:05:57.444Z",
+     "user": {
+      "user": {
+       "id": "85e2d10a-ae6f-0509-4fba-7770e962649d",
+       "displayName": null
+      }
+     }
+    }
+   ],
+   "replies": [
+    {
+     "id": "1792164000102",
+     "replyToId": "1792163100231",
+     "etag": "1792164000102",
+     "messageType": "message",
+     "createdDateTime": "2026-10-16T15:20:54.555Z",
+     "lastModifiedDateTime": "2026-10-16T15:20:54.555Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792164000102",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "93e988d6-221d-a8d2-63f5-c5fad5b14beb",
+       "displayName": "Camille Lefèvre",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Pourquoi l'Italie en premier ?? Paris a 100+ demandes depuis le 19 septembre. Les Galeries encore plus</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": [
+      {
+       "reactionType": "like",
+       "createdDateTime": "2026-10-16T15:20:54.555Z",
+       "user": {
+        "user": {
+         "id": "e5084432-b854-c508-1228-83a8bfa95342",
+         "displayName": null
+        }
+       }
+      },
+      {
+       "reactionType": "like",
+       "createdDateTime": "2026-10-16T15:20:54.555Z",
+       "user": {
+        "user": {
+         "id": "11dc5909-8573-d821-b681-591c05c3a4cc",
+         "displayName": null
+        }
+       }
+      },
+      {
+       "reactionType": "like",
+       "createdDateTime": "2026-10-16T15:20:54.555Z",
+       "user": {
+        "user": {
+         "id": "c909151a-d81d-21b6-0021-3f777a1770d1",
+         "displayName": null
+        }
+       }
+      },
+      {
+       "reactionType": "like",
+       "createdDateTime": "2026-10-16T15:20:54.555Z",
+       "user": {
+        "user": {
+         "id": "f7667111-a255-6bb0-8b12-99848f9bf7dc",
+         "displayName": null
+        }
+       }
+      }
+     ]
+    },
+    {
+     "id": "1792164660078",
+     "replyToId": "1792163100231",
+     "etag": "1792164660078",
+     "messageType": "message",
+     "createdDateTime": "2026-10-16T15:31:06.407Z",
+     "lastModifiedDateTime": "2026-10-16T15:31:06.407Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792164660078",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "e16336e3-b1f1-2790-9534-67d37e509954",
+       "displayName": "Priya Raman",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Same question for Harrods. We've been at zero since 25/09, 30+ requests a week</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1792165440125",
+     "replyToId": "1792163100231",
+     "etag": "1792165440125",
+     "messageType": "message",
+     "createdDateTime": "2026-10-16T15:44:35.444Z",
+     "lastModifiedDateTime": "2026-10-16T15:44:35.444Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792165440125",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "cf4d6af8-271e-9800-c733-e8641e8ccae3",
+       "displayName": "Luca Ferrari",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Transit times. Italy goes by our own truck same day, FR/DE next day, UK needs customs. It's 1-2 days of difference, not more.</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1792166520128",
+     "replyToId": "1792163100231",
+     "etag": "1792166520128",
+     "messageType": "message",
+     "createdDateTime": "2026-10-16T16:02:56.555Z",
+     "lastModifiedDateTime": "2026-10-16T16:02:56.555Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792166520128",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "4037a265-80a9-09e6-305f-79ce88bad3c3",
+       "displayName": "Isabelle Moreau",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Et ROM01 reçoit 40 pièces avec un chantier devant la porte et -50% de trafic ? Il y a quelque chose qui ne va pas dans ce split.</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1792167300121",
+     "replyToId": "1792163100231",
+     "etag": "1792167300121",
+     "messageType": "message",
+     "createdDateTime": "2026-10-16T16:15:07.481Z",
+     "lastModifiedDateTime": "2026-10-16T16:15:07.481Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792167300121",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "c8d0336d-e94e-d535-e048-6d88d3c8193d",
+       "displayName": "Roberto Galli",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>ROM01 ha una lista clienti da richiamare, la Maire nera serve per farli tornare. E comunque Milano ha la domanda più alta</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1792168800087",
+     "replyToId": "1792163100231",
+     "etag": "1792168800087",
+     "messageType": "message",
+     "createdDateTime": "2026-10-16T16:40:09.555Z",
+     "lastModifiedDateTime": "2026-10-16T16:40:09.555Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792168800087",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "0265a0a4-9fb6-3054-060f-5d3c49c90aa0",
+       "displayName": "Francesca Valli",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Let's not fight here. Luca, can we move 15 from ROM01 to PAR02 before the trucks leave?</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1792170300121",
+     "replyToId": "1792163100231",
+     "etag": "1792170300121",
+     "messageType": "message",
+     "createdDateTime": "2026-10-16T17:05:07.444Z",
+     "lastModifiedDateTime": "2026-10-16T17:05:07.444Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792170300121",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "cf4d6af8-271e-9800-c733-e8641e8ccae3",
+       "displayName": "Luca Ferrari",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Italy pick is already done, trucks loaded tomorrow morning. I can rebalance after delivery with a store-to-store transfer</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1792582800053",
+     "replyToId": "1792163100231",
+     "etag": "1792582800053",
+     "messageType": "message",
+     "createdDateTime": "2026-10-21T11:40:11.555Z",
+     "lastModifiedDateTime": "2026-10-21T11:40:11.555Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792582800053",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "93e988d6-221d-a8d2-63f5-c5fad5b14beb",
+       "displayName": "Camille Lefèvre",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>MIL01 a reçu 62 pièces ce matin. Nous, toujours zéro.</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    },
+    {
+     "id": "1792584300106",
+     "replyToId": "1792163100231",
+     "etag": "1792584300106",
+     "messageType": "message",
+     "createdDateTime": "2026-10-21T12:05:22.444Z",
+     "lastModifiedDateTime": "2026-10-21T12:05:22.444Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792584300106",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "cf4d6af8-271e-9800-c733-e8641e8ccae3",
+       "displayName": "Luca Ferrari",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>PAR01 55 and PAR02 74 left CSG this morning, ETA tomorrow 22/10 before noon. LON01 73 / LON02 62 on Friday</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": [
+      {
+       "reactionType": "like",
+       "createdDateTime": "2026-10-21T12:05:22.444Z",
+       "user": {
+        "user": {
+         "id": "b46083ec-82c8-4fa7-8532-d7410c45d25a",
+         "displayName": null
+        }
+       }
+      },
+      {
+       "reactionType": "like",
+       "createdDateTime": "2026-10-21T12:05:22.444Z",
+       "user": {
+        "user": {
+         "id": "81c0a255-090c-8414-89b0-f8664e13a5aa",
+         "displayName": null
+        }
+       }
+      }
+     ]
+    },
+    {
+     "id": "1792584600084",
+     "replyToId": "1792163100231",
+     "etag": "1792584600084",
+     "messageType": "message",
+     "createdDateTime": "2026-10-21T12:10:48.555Z",
+     "lastModifiedDateTime": "2026-10-21T12:10:48.555Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792584600084",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "569a0892-e7af-5696-79df-76df69ea7530",
+       "displayName": "Sophie Marchand",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>Merci. Les touristes coréennes de septembre sont rentrées depuis longtemps, mais bon</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    }
+   ]
+  },
+  {
+   "id": "1792416600116",
+   "replyToId": null,
+   "etag": "1792416600116",
+   "messageType": "message",
+   "createdDateTime": "2026-10-19T13:30:32.407Z",
+   "lastModifiedDateTime": "2026-10-19T13:30:32.407Z",
+   "lastEditedDateTime": null,
+   "deletedDateTime": null,
+   "subject": null,
+   "summary": null,
+   "chatId": null,
+   "importance": "normal",
+   "locale": "en-us",
+   "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792416600116",
+   "channelIdentity": {
+    "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+    "channelId": "19:retailopsemea-stock@thread.tacv2"
+   },
+   "from": {
+    "application": null,
+    "device": null,
+    "user": {
+     "id": "bc0468c3-cbf8-2655-d1a7-e027e10d576a",
+     "displayName": "Reto Ammann",
+     "userIdentityType": "aadUser",
+     "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+    }
+   },
+   "body": {
+    "contentType": "html",
+    "content": "<p>Received 3 ILVARO pink at ZRH01 on Friday (sizes 00, 0, 1). We never asked for them. Does someone in Asia need them?</p>"
+   },
+   "attachments": [],
+   "mentions": [],
+   "reactions": [],
+   "replies": [
+    {
+     "id": "1792418100080",
+     "replyToId": "1792416600116",
+     "etag": "1792418100080",
+     "messageType": "message",
+     "createdDateTime": "2026-10-19T13:55:20.444Z",
+     "lastModifiedDateTime": "2026-10-19T13:55:20.444Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792418100080",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "4004f926-ea04-dbf0-4220-64432da50033",
+       "displayName": "Chiara Bassi",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p><at id=\"0\">Reto Ammann</at> please hold them, part of the same discussion, waiting for decision</p>"
+     },
+     "attachments": [],
+     "mentions": [
+      {
+       "id": 0,
+       "mentionText": "Reto Ammann",
+       "mentioned": {
+        "user": {
+         "id": "bc0468c3-cbf8-2655-d1a7-e027e10d576a",
+         "displayName": "Reto Ammann",
+         "userIdentityType": "aadUser"
+        }
+       }
+      }
+     ],
+     "reactions": []
+    }
+   ]
+  },
+  {
+   "id": "1792486920096",
+   "replyToId": null,
+   "etag": "1792486920096",
+   "messageType": "message",
+   "createdDateTime": "2026-10-20T09:02:12.518Z",
+   "lastModifiedDateTime": "2026-10-20T09:02:12.518Z",
+   "lastEditedDateTime": null,
+   "deletedDateTime": null,
+   "subject": null,
+   "summary": null,
+   "chatId": null,
+   "importance": "normal",
+   "locale": "en-us",
+   "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792486920096",
+   "channelIdentity": {
+    "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+    "channelId": "19:retailopsemea-stock@thread.tacv2"
+   },
+   "from": {
+    "application": null,
+    "device": null,
+    "user": {
+     "id": "b72bc1d0-315d-6fe8-538d-a7e1db4c626a",
+     "displayName": "Sanne de Vries",
+     "userIdentityType": "aadUser",
+     "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+    }
+   },
+   "body": {
+    "contentType": "html",
+    "content": "<p>AMS01: the stock lookup app shows 4 black Maire in LON01 but Olivia says zero. Is the app wrong?</p>"
+   },
+   "attachments": [],
+   "mentions": [],
+   "reactions": [],
+   "replies": [
+    {
+     "id": "1792488600084",
+     "replyToId": "1792486920096",
+     "etag": "1792488600084",
+     "messageType": "message",
+     "createdDateTime": "2026-10-20T09:30:48.444Z",
+     "lastModifiedDateTime": "2026-10-20T09:30:48.444Z",
+     "lastEditedDateTime": null,
+     "deletedDateTime": null,
+     "subject": null,
+     "summary": null,
+     "chatId": null,
+     "importance": "normal",
+     "locale": "en-us",
+     "webUrl": "https://teams.microsoft.com/l/message/19%3Aretailopsemea-stock%40thread.tacv2/1792488600084",
+     "channelIdentity": {
+      "teamId": "d0c90f31-d5da-6ee6-ed12-081b8011e9ce",
+      "channelId": "19:retailopsemea-stock@thread.tacv2"
+     },
+     "from": {
+      "application": null,
+      "device": null,
+      "user": {
+       "id": "cf4d6af8-271e-9800-c733-e8641e8ccae3",
+       "displayName": "Luca Ferrari",
+       "userIdentityType": "aadUser",
+       "tenantId": "adfb6898-97b2-b525-5adc-aee72945c791"
+      }
+     },
+     "body": {
+      "contentType": "html",
+      "content": "<p>the app shows in-transit as available, known bug. LON01 is zero on hand until Friday</p>"
+     },
+     "attachments": [],
+     "mentions": [],
+     "reactions": []
+    }
+   ]
+  }
+ ]
+}

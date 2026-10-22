@@ -1,0 +1,57 @@
+{
+  "_request": {
+    "method": "GET",
+    "url": "https://wms-gw.moncler-int.example/v1/inbound/purchase-orders/4500222417",
+    "ts": "2026-10-22T07:05:00Z"
+  },
+  "purchaseOrder": "4500222417",
+  "vendor": {
+    "id": "V100418",
+    "name": "Hanoi Down Garment Co., Ltd. (VN)"
+  },
+  "createdOn": "2026-10-05",
+  "lines": [
+    {
+      "item": "00010",
+      "plant": "HK30",
+      "material": "J20931A00618510",
+      "sizes": "ALL",
+      "qty": 800,
+      "currentDeliveryDate": "2026-11-20",
+      "goodsReceiptDate": null,
+      "status": "OPEN"
+    },
+    {
+      "item": "00020",
+      "plant": "IT10",
+      "material": "J20931A00618510",
+      "sizes": "ALL",
+      "qty": 300,
+      "currentDeliveryDate": "2026-11-20",
+      "goodsReceiptDate": null,
+      "status": "OPEN"
+    },
+    {
+      "item": "00030",
+      "plant": "US20",
+      "material": "J20931A00618510",
+      "sizes": "ALL",
+      "qty": 100,
+      "currentDeliveryDate": "2026-11-24",
+      "goodsReceiptDate": null,
+      "status": "OPEN"
+    }
+  ],
+  "deliveryDateHistory": [
+    {
+      "changedOn": "2026-10-05",
+      "newDate": "2026-11-27",
+      "comment": "Emergency re-order after social spike, vendor capacity limited"
+    },
+    {
+      "changedOn": "2026-10-16",
+      "newDate": "2026-11-20",
+      "comment": "Vendor confirmed earlier slot; fabric in stock"
+    }
+  ]
+}

@@ -1,0 +1,2438 @@
+{
+ "store": {
+  "store_id": "MAD01",
+  "store_name": "Madrid Calle Serrano",
+  "store_type": "Boutique",
+  "city": "Madrid",
+  "country_code": "ES",
+  "country": "Spain",
+  "region": "EMEA",
+  "subregion": "Spain",
+  "language": "es",
+  "timezone": "Europe/Madrid",
+  "currency": "EUR",
+  "lat": 40.426,
+  "lon": -3.687,
+  "sqm": 310,
+  "opening_date": "2015-11-12",
+  "hemi": "N",
+  "closed_dow": [],
+  "store_manager": "Lucía Fernández Ortega",
+  "assistant_manager": "Javier Molina"
+ },
+ "days": [
+  {
+   "date": "2026-08-31",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 4830.0,
+   "budget_lc": 11190.0,
+   "vs_budget_pct": -56.8,
+   "units": 6,
+   "receipts": 6,
+   "visitors": 75,
+   "conversion": 0.08,
+   "top_sellers": [
+    "LEGERE BELT BAG black x1",
+    "CREWNECK SWEATSHIRT white x1",
+    "INSOLUX off-white x1",
+    "TRAILGRIP W off-white x1",
+    "KARAKORUM navy x1"
+   ],
+   "customer_mix": {
+    "ES": 0.5,
+    "MX": 0.17,
+    "OTHER": 0.17,
+    "CN": 0.17
+   },
+   "unmet_requests": [
+    "ALBENGA black size 2 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 1",
+    "HERMINE navy 0",
+    "ALBENGA black 0",
+    "ALBENGA black 1",
+    "ALBENGA black 2",
+    "MONTGENEVRE black 5",
+    "MARIN black 3",
+    "MARIN black 5",
+    "LOGO HOODIE black M",
+    "CREWNECK SWEATSHIRT black M"
+   ],
+   "returns": [
+    "CREWNECK SWEATSHIRT M reason=SIZE"
+   ],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-01",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 7790.0,
+   "budget_lc": 10530.0,
+   "vs_budget_pct": -26.0,
+   "units": 11,
+   "receipts": 8,
+   "visitors": 77,
+   "conversion": 0.1039,
+   "top_sellers": [
+    "LOGO BEANIE navy x2",
+    "LOGO CARDIGAN black x2",
+    "TRAILGRIP GTX black x1",
+    "LOGO T-SHIRT black x1",
+    "LOGO T-SHIRT navy x1"
+   ],
+   "customer_mix": {
+    "ES": 0.45,
+    "OTHER": 0.18,
+    "US": 0.09,
+    "CN": 0.09
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 1",
+    "HERMINE navy 0",
+    "MONTGENEVRE black 5",
+    "LOGO HOODIE black M",
+    "CREWNECK SWEATSHIRT black M",
+    "TRAILGRIP GTX black 43"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-02",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 12920.0,
+   "budget_lc": 11990.0,
+   "vs_budget_pct": 7.8,
+   "units": 12,
+   "receipts": 7,
+   "visitors": 71,
+   "conversion": 0.0986,
+   "top_sellers": [
+    "LOGO CAP black x1",
+    "LOGO HOODIE navy x1",
+    "LOGO HOODIE grey melange x1",
+    "LOGO HOODIE black x1",
+    "TRAILGRIP W off-white x1"
+   ],
+   "customer_mix": {
+    "ES": 0.33,
+    "OTHER": 0.17,
+    "US": 0.17,
+    "MX": 0.17
+   },
+   "unmet_requests": [
+    "HERMINE navy size 0 x1",
+    "PEYRE black size 2 x1",
+    "POLO white size XS x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 1",
+    "HERMINE navy 0",
+    "MONTGENEVRE black 5",
+    "LOGO HOODIE black M",
+    "CREWNECK SWEATSHIRT black M",
+    "TRAILGRIP GTX black 43"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-03",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 7140.0,
+   "budget_lc": 16700.0,
+   "vs_budget_pct": -57.2,
+   "units": 7,
+   "receipts": 6,
+   "visitors": 90,
+   "conversion": 0.0667,
+   "top_sellers": [
+    "TRAILGRIP GTX black x1",
+    "WOOL TURTLENECK black x1",
+    "TRAILGRIP W black x1",
+    "MAYA black x1",
+    "MONTCLA black x1"
+   ],
+   "customer_mix": {
+    "ES": 0.57,
+    "OTHER": 0.14,
+    "US": 0.14,
+    "CN": 0.14
+   },
+   "unmet_requests": [
+    "TRAILGRIP W black size 37 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [
+    "TIB 3 reason=CHANGE_MIND"
+   ],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600201",
+     "lines": 81,
+     "units": 120,
+     "planned": "2026-09-03",
+     "delay_days": 0,
+     "wrong_items": false
+    }
+   ],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-04",
+   "weekday": "Friday",
+   "open": 1.0,
+   "net_sales_lc": 16635.0,
+   "budget_lc": 19710.0,
+   "vs_budget_pct": -15.6,
+   "units": 21,
+   "receipts": 14,
+   "visitors": 129,
+   "conversion": 0.1085,
+   "top_sellers": [
+    "LOGO BEANIE black x3",
+    "BADY black x3",
+    "TRICOT PADDED CARDIGAN grey melange x2",
+    "MAIRE black x2",
+    "LOGO T-SHIRT black x2"
+   ],
+   "customer_mix": {
+    "ES": 0.52,
+    "OTHER": 0.24,
+    "CO": 0.1,
+    "AR": 0.05
+   },
+   "unmet_requests": [
+    "ILVARO off-white size 4 x1",
+    "CABLE KNIT SWEATER off-white size XS x1"
+   ],
+   "zero_stock_key_sizes": [
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-05",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 16075.0,
+   "budget_lc": 26170.0,
+   "vs_budget_pct": -38.6,
+   "units": 20,
+   "receipts": 12,
+   "visitors": 178,
+   "conversion": 0.0674,
+   "top_sellers": [
+    "POLO navy x3",
+    "LOGO BEANIE black x2",
+    "LOGO CAP navy x2",
+    "CREWNECK SWEATSHIRT black x2",
+    "ARNEB black x2"
+   ],
+   "customer_mix": {
+    "ES": 0.5,
+    "OTHER": 0.25,
+    "CN": 0.1,
+    "MX": 0.1
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "ARNEB black 5",
+    "LOGO HOODIE black S",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-06",
+   "weekday": "Sunday",
+   "open": 1.0,
+   "net_sales_lc": 9820.0,
+   "budget_lc": 19000.0,
+   "vs_budget_pct": -48.3,
+   "units": 13,
+   "receipts": 9,
+   "visitors": 110,
+   "conversion": 0.0818,
+   "top_sellers": [
+    "LOGO T-SHIRT navy x3",
+    "LOGO HOODIE navy x1",
+    "CREWNECK SWEATSHIRT black x1",
+    "LOGO CARDIGAN navy x1",
+    "TRAILGRIP W black x1"
+   ],
+   "customer_mix": {
+    "ES": 0.31,
+    "OTHER": 0.23,
+    "CN": 0.23,
+    "US": 0.15
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MONTCLA black 3",
+    "ARNEB black 5",
+    "LOGO HOODIE black S",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [
+    "MAIRE 3 reason=QUALITY",
+    "LOGO BEANIE TU reason=SIZE",
+    "LOGO CAP TU reason=SIZE"
+   ],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-07",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 9490.0,
+   "budget_lc": 13890.0,
+   "vs_budget_pct": -31.7,
+   "units": 11,
+   "receipts": 6,
+   "visitors": 96,
+   "conversion": 0.0625,
+   "top_sellers": [
+    "PEYRE black x1",
+    "TECH GLOVES black x1",
+    "TRAILGRIP GTX black x1",
+    "LEGERE BELT BAG black x1",
+    "LOGO HOODIE grey melange x1"
+   ],
+   "customer_mix": {
+    "ES": 0.73,
+    "CO": 0.18,
+    "AR": 0.09
+   },
+   "unmet_requests": [
+    "MAIRE black size 0 x1",
+    "KARAKORUM black size 2 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MONTCLA black 3",
+    "ARNEB black 5",
+    "LOGO HOODIE black S",
+    "TRAILGRIP GTX black 42",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-08",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 21860.0,
+   "budget_lc": 14560.0,
+   "vs_budget_pct": 50.1,
+   "units": 18,
+   "receipts": 12,
+   "visitors": 95,
+   "conversion": 0.1263,
+   "top_sellers": [
+    "LOGO CARDIGAN black x3",
+    "VALBOURG black x1",
+    "LEGERE BELT BAG black x1",
+    "TECH GLOVES black x1",
+    "CREWNECK SWEATSHIRT black x1"
+   ],
+   "customer_mix": {
+    "ES": 0.72,
+    "OTHER": 0.17,
+    "CN": 0.06,
+    "US": 0.06
+   },
+   "unmet_requests": [
+    "MAIRE black size 0 x1",
+    "ARNEB black size 5 x1",
+    "INSOLUX off-white size 40 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MONTCLA black 3",
+    "ARNEB black 5",
+    "LOGO HOODIE black S",
+    "TRAILGRIP GTX black 42",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-09",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 12210.0,
+   "budget_lc": 15850.0,
+   "vs_budget_pct": -23.0,
+   "units": 13,
+   "receipts": 9,
+   "visitors": 107,
+   "conversion": 0.0841,
+   "top_sellers": [
+    "LOGO CARDIGAN navy x2",
+    "VALBOURG black x1",
+    "LOGO T-SHIRT navy x1",
+    "LOGO BEANIE black x1",
+    "LOGO T-SHIRT black x1"
+   ],
+   "customer_mix": {
+    "ES": 0.38,
+    "OTHER": 0.15,
+    "CO": 0.15,
+    "MX": 0.08
+   },
+   "unmet_requests": [
+    "TRAILGRIP GTX black size 42 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MONTCLA black 3",
+    "MONTCLA black 5",
+    "ARNEB black 5",
+    "LOGO HOODIE black S",
+    "LOGO HOODIE navy L",
+    "TRAILGRIP GTX black 42",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-10",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 21310.0,
+   "budget_lc": 18590.0,
+   "vs_budget_pct": 14.6,
+   "units": 20,
+   "receipts": 17,
+   "visitors": 123,
+   "conversion": 0.1382,
+   "top_sellers": [
+    "LOGO CARDIGAN black x3",
+    "TRAILGRIP W black x2",
+    "MAIRE black x2",
+    "PEYRE black x1",
+    "POLO white x1"
+   ],
+   "customer_mix": {
+    "ES": 0.4,
+    "US": 0.2,
+    "OTHER": 0.2,
+    "AR": 0.1
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MONTCLA black 5"
+   ],
+   "returns": [
+    "LEGERE BELT BAG TU reason=CHANGE_MIND"
+   ],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600247",
+     "lines": 112,
+     "units": 142,
+     "planned": "2026-09-10",
+     "delay_days": 0,
+     "wrong_items": false
+    }
+   ],
+   "active_events": [
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-11",
+   "weekday": "Friday",
+   "open": 1.0,
+   "net_sales_lc": 11380.0,
+   "budget_lc": 21390.0,
+   "vs_budget_pct": -46.8,
+   "units": 13,
+   "receipts": 11,
+   "visitors": 123,
+   "conversion": 0.0894,
+   "top_sellers": [
+    "LOGO HOODIE navy x3",
+    "TRAILGRIP GTX black x2",
+    "POLO white x1",
+    "LOGO T-SHIRT black x1",
+    "LOGO CARDIGAN black x1"
+   ],
+   "customer_mix": {
+    "ES": 0.69,
+    "OTHER": 0.23,
+    "US": 0.08
+   },
+   "unmet_requests": [
+    "LOGO CARDIGAN black size XL x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MONTCLA black 5"
+   ],
+   "returns": [
+    "LOGO CARDIGAN S reason=CHANGE_MIND"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-12",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 33870.0,
+   "budget_lc": 30470.0,
+   "vs_budget_pct": 11.2,
+   "units": 33,
+   "receipts": 20,
+   "visitors": 174,
+   "conversion": 0.1149,
+   "top_sellers": [
+    "BADY black x4",
+    "TRAILGRIP W black x3",
+    "LOGO BEANIE black x2",
+    "TIB black x2",
+    "CREWNECK SWEATSHIRT black x2"
+   ],
+   "customer_mix": {
+    "OTHER": 0.39,
+    "ES": 0.33,
+    "AR": 0.09,
+    "US": 0.06
+   },
+   "unmet_requests": [
+    "LOGO CARDIGAN black size XL x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MONTCLA black 5",
+    "TRAILGRIP W black 39"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-13",
+   "weekday": "Sunday",
+   "open": 1.0,
+   "net_sales_lc": 23540.0,
+   "budget_lc": 19340.0,
+   "vs_budget_pct": 21.7,
+   "units": 24,
+   "receipts": 15,
+   "visitors": 117,
+   "conversion": 0.1282,
+   "top_sellers": [
+    "LOGO T-SHIRT black x4",
+    "WOOL TURTLENECK navy x3",
+    "LOGO BEANIE navy x2",
+    "CREWNECK SWEATSHIRT white x2",
+    "TIB black x2"
+   ],
+   "customer_mix": {
+    "ES": 0.75,
+    "US": 0.08,
+    "OTHER": 0.08,
+    "AR": 0.04
+   },
+   "unmet_requests": [
+    "AMBRINE chocolate brown size 1 x1",
+    "ROSIERE black size 1 x1",
+    "POLO white size M x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MONTCLA black 5",
+    "LOGO T-SHIRT black M",
+    "TRAILGRIP W black 39"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-14",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 14900.0,
+   "budget_lc": 16040.0,
+   "vs_budget_pct": -7.1,
+   "units": 12,
+   "receipts": 7,
+   "visitors": 115,
+   "conversion": 0.0609,
+   "top_sellers": [
+    "LOGO BEANIE black x1",
+    "TRAILGRIP GTX black x1",
+    "LEGERE BELT BAG black x1",
+    "LOGO HOODIE black x1",
+    "INSOLUX off-white x1"
+   ],
+   "customer_mix": {
+    "ES": 0.42,
+    "OTHER": 0.25,
+    "CO": 0.17,
+    "US": 0.17
+   },
+   "unmet_requests": [
+    "ROSIERE black size 3 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MONTCLA black 5",
+    "LOGO T-SHIRT black M",
+    "TRAILGRIP W black 39"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 24805.0,
+   "budget_lc": 15390.0,
+   "vs_budget_pct": 61.2,
+   "units": 21,
+   "receipts": 14,
+   "visitors": 102,
+   "conversion": 0.1373,
+   "top_sellers": [
+    "LOGO BEANIE black x3",
+    "TRICOT PADDED CARDIGAN grey melange x2",
+    "ARNEB black x2",
+    "MAIRE off-white x2",
+    "LOGO T-SHIRT white x1"
+   ],
+   "customer_mix": {
+    "ES": 0.67,
+    "OTHER": 0.19,
+    "AR": 0.05,
+    "US": 0.05
+   },
+   "unmet_requests": [
+    "WOOL TURTLENECK navy size L x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MONTCLA black 5",
+    "ARNEB black 3",
+    "ARNEB black 5",
+    "LOGO T-SHIRT black M",
+    "TRAILGRIP W black 39"
+   ],
+   "returns": [
+    "WOOL TURTLENECK XL reason=CHANGE_MIND"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-16",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 18591.0,
+   "budget_lc": 16580.0,
+   "vs_budget_pct": 12.1,
+   "units": 18,
+   "receipts": 10,
+   "visitors": 118,
+   "conversion": 0.0847,
+   "top_sellers": [
+    "LOGO T-SHIRT black x2",
+    "PEYRE black x1",
+    "LOGO BEANIE white x1",
+    "LOGO CAP black x1",
+    "POLO navy x1"
+   ],
+   "customer_mix": {
+    "ES": 0.39,
+    "OTHER": 0.28,
+    "MX": 0.17,
+    "US": 0.17
+   },
+   "unmet_requests": [
+    "MONTGENEVRE navy size 2 x1",
+    "VALBOURG black size 1 x1",
+    "WOOL TURTLENECK navy size L x1",
+    "POLO white size M x1"
+   ],
+   "zero_stock_key_sizes": [
+    "HERMINE navy 2",
+    "MAYA olive 5",
+    "MONTCLA black 5",
+    "ARNEB black 3",
+    "ARNEB black 5",
+    "LOGO HOODIE navy S",
+    "LOGO T-SHIRT black M",
+    "TRAILGRIP W black 39",
+    "INSOLUX black 38"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-17",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 5480.0,
+   "budget_lc": 20330.0,
+   "vs_budget_pct": -73.0,
+   "units": 10,
+   "receipts": 5,
+   "visitors": 107,
+   "conversion": 0.0467,
+   "top_sellers": [
+    "LOGO CAP black x3",
+    "LOGO BEANIE navy x1",
+    "LOGO T-SHIRT black x1",
+    "CREWNECK SWEATSHIRT black x1",
+    "WOOL TURTLENECK navy x1"
+   ],
+   "customer_mix": {
+    "ES": 0.6,
+    "OTHER": 0.3,
+    "CN": 0.1
+   },
+   "unmet_requests": [
+    "CREWNECK SWEATSHIRT black size XXL x1"
+   ],
+   "zero_stock_key_sizes": [],
+   "returns": [
+    "TRICOT PADDED CARDIGAN M reason=SIZE",
+    "TRAILGRIP W 37 reason=CHANGE_MIND"
+   ],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600292",
+     "lines": 113,
+     "units": 153,
+     "planned": "2026-09-17",
+     "delay_days": 0,
+     "wrong_items": false
+    }
+   ],
+   "active_events": [
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-18",
+   "weekday": "Friday",
+   "open": 1.0,
+   "net_sales_lc": 14790.0,
+   "budget_lc": 24050.0,
+   "vs_budget_pct": -38.5,
+   "units": 18,
+   "receipts": 12,
+   "visitors": 140,
+   "conversion": 0.0857,
+   "top_sellers": [
+    "CASHMERE SCARF grey melange x2",
+    "LOGO HOODIE black x2",
+    "TIB black x2",
+    "LOGO T-SHIRT black x1",
+    "TRICOT PADDED CARDIGAN navy x1"
+   ],
+   "customer_mix": {
+    "ES": 0.44,
+    "OTHER": 0.39,
+    "US": 0.06,
+    "CO": 0.06
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [],
+   "returns": [
+    "ARNEB 5 reason=SIZE"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-19",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 36465.0,
+   "budget_lc": 33670.0,
+   "vs_budget_pct": 8.3,
+   "units": 34,
+   "receipts": 17,
+   "visitors": 214,
+   "conversion": 0.0794,
+   "top_sellers": [
+    "MAYA black x4",
+    "LOGO CARDIGAN black x4",
+    "MONTCLA black x3",
+    "WOOL TURTLENECK navy x2",
+    "LOGO T-SHIRT black x2"
+   ],
+   "customer_mix": {
+    "ES": 0.53,
+    "OTHER": 0.21,
+    "MX": 0.09,
+    "US": 0.09
+   },
+   "unmet_requests": [
+    "AMBRINE chocolate brown size 2 x1",
+    "LOGO HOODIE black size XS x1"
+   ],
+   "zero_stock_key_sizes": [
+    "HERMINE navy 2",
+    "MONTCLA black 5",
+    "LOGO T-SHIRT black S"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-20",
+   "weekday": "Sunday",
+   "open": 1.0,
+   "net_sales_lc": 19100.0,
+   "budget_lc": 22740.0,
+   "vs_budget_pct": -16.0,
+   "units": 18,
+   "receipts": 9,
+   "visitors": 136,
+   "conversion": 0.0662,
+   "top_sellers": [
+    "LOGO BEANIE white x2",
+    "MONTGENEVRE black x2",
+    "LOGO T-SHIRT navy x1",
+    "LOGO BEANIE black x1",
+    "LOGO CARDIGAN navy x1"
+   ],
+   "customer_mix": {
+    "ES": 0.44,
+    "OTHER": 0.22,
+    "MX": 0.17,
+    "US": 0.11
+   },
+   "unmet_requests": [
+    "HERMINE off-white size 2 x1",
+    "KARAKORUM black size 6 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAIRE off-white 0",
+    "HERMINE navy 2",
+    "MONTCLA black 5",
+    "LOGO T-SHIRT black S"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-21",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 12030.0,
+   "budget_lc": 17120.0,
+   "vs_budget_pct": -29.7,
+   "units": 13,
+   "receipts": 11,
+   "visitors": 93,
+   "conversion": 0.1183,
+   "top_sellers": [
+    "LOGO T-SHIRT white x2",
+    "BADY black x2",
+    "LOGO BEANIE navy x1",
+    "CREWNECK SWEATSHIRT black x1",
+    "LOGO CARDIGAN navy x1"
+   ],
+   "customer_mix": {
+    "ES": 0.54,
+    "OTHER": 0.31,
+    "CN": 0.08,
+    "US": 0.08
+   },
+   "unmet_requests": [
+    "AMBRINE chocolate brown size 2 x1",
+    "MONTCLA black size 5 x1",
+    "TRICOT PADDED CARDIGAN navy size XXL x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAIRE off-white 0",
+    "HERMINE navy 2",
+    "ILVARO black 0",
+    "MAYA black 3",
+    "MONTCLA black 5",
+    "LOGO T-SHIRT black S"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-22",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 11100.0,
+   "budget_lc": 17890.0,
+   "vs_budget_pct": -38.0,
+   "units": 12,
+   "receipts": 10,
+   "visitors": 106,
+   "conversion": 0.0943,
+   "top_sellers": [
+    "PEYRE black x1",
+    "TRAILGRIP GTX black x1",
+    "POLO navy x1",
+    "LOGO HOODIE navy x1",
+    "LOGO HOODIE grey melange x1"
+   ],
+   "customer_mix": {
+    "ES": 0.58,
+    "US": 0.25,
+    "OTHER": 0.17
+   },
+   "unmet_requests": [
+    "CABLE KNIT SWEATER off-white size XXL x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAIRE off-white 0",
+    "HERMINE navy 2",
+    "ILVARO black 0",
+    "MAYA black 3",
+    "MONTCLA black 5",
+    "LOGO T-SHIRT black S",
+    "TRAILGRIP GTX black 43"
+   ],
+   "returns": [
+    "TIB 3 reason=GIFT",
+    "ARNEB 3 reason=EXCHANGE_SIZE"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E14b: MAD01 wrong delivery - MAYA navy received instead of black",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-23",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 26060.0,
+   "budget_lc": 19140.0,
+   "vs_budget_pct": 36.2,
+   "units": 26,
+   "receipts": 12,
+   "visitors": 122,
+   "conversion": 0.0984,
+   "top_sellers": [
+    "CREWNECK SWEATSHIRT black x3",
+    "LOGO HOODIE black x2",
+    "PEYRE black x1",
+    "LOGO CAP black x1",
+    "LEGERE BELT BAG black x1"
+   ],
+   "customer_mix": {
+    "ES": 0.46,
+    "OTHER": 0.23,
+    "CN": 0.15,
+    "CO": 0.08
+   },
+   "unmet_requests": [
+    "MAIRE off-white size 4 x1",
+    "AMBRINE chocolate brown size 2 x1",
+    "TIB navy size 2 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAIRE off-white 0",
+    "HERMINE navy 2",
+    "ILVARO black 0",
+    "MAYA black 3",
+    "MAYA black 4",
+    "MONTCLA black 5",
+    "LOGO T-SHIRT black S",
+    "TRAILGRIP GTX black 43"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E14b: MAD01 wrong delivery - MAYA navy received instead of black",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-24",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 17910.0,
+   "budget_lc": 22710.0,
+   "vs_budget_pct": -21.1,
+   "units": 18,
+   "receipts": 8,
+   "visitors": 110,
+   "conversion": 0.0727,
+   "top_sellers": [
+    "MAKAIO BACKPACK navy x2",
+    "POLARIS CAPE black x1",
+    "PEYRE red x1",
+    "TRAILGRIP GTX black x1",
+    "LOGO CAP black x1"
+   ],
+   "customer_mix": {
+    "ES": 0.56,
+    "OTHER": 0.28,
+    "US": 0.11,
+    "MX": 0.06
+   },
+   "unmet_requests": [
+    "MAYA navy size 2 x1",
+    "TRICOT PADDED CARDIGAN grey melange size L x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAIRE off-white 0",
+    "HERMINE navy 2",
+    "ILVARO black 0",
+    "MAYA black 3",
+    "MAYA black 4",
+    "MONTCLA black 5",
+    "KARAKORUM black 5",
+    "LOGO T-SHIRT black S",
+    "TRAILGRIP GTX black 43"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E14b: MAD01 wrong delivery - MAYA navy received instead of black",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-25",
+   "weekday": "Friday",
+   "open": 1.0,
+   "net_sales_lc": 21205.0,
+   "budget_lc": 26270.0,
+   "vs_budget_pct": -19.3,
+   "units": 23,
+   "receipts": 12,
+   "visitors": 137,
+   "conversion": 0.0876,
+   "top_sellers": [
+    "WOOL TURTLENECK black x3",
+    "LOGO BEANIE black x2",
+    "LOGO HOODIE navy x2",
+    "LOGO T-SHIRT black x2",
+    "ROSIERE black x2"
+   ],
+   "customer_mix": {
+    "ES": 0.48,
+    "MX": 0.22,
+    "OTHER": 0.22,
+    "AR": 0.04
+   },
+   "unmet_requests": [
+    "BADY black size 4 x1",
+    "MAYA black size 3 x1",
+    "TRAILGRIP W black size 40 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAIRE off-white 0",
+    "HERMINE navy 2",
+    "ILVARO black 0",
+    "MAYA black 3",
+    "MAYA black 4",
+    "MONTCLA black 5",
+    "KARAKORUM black 5",
+    "LOGO T-SHIRT black S",
+    "LOGO T-SHIRT black M"
+   ],
+   "returns": [
+    "LOGO CARDIGAN L reason=CHANGE_MIND"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E14b: MAD01 wrong delivery - MAYA navy received instead of black",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-26",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 26630.0,
+   "budget_lc": 36900.0,
+   "vs_budget_pct": -27.8,
+   "units": 29,
+   "receipts": 20,
+   "visitors": 175,
+   "conversion": 0.1143,
+   "top_sellers": [
+    "LOGO HOODIE black x3",
+    "CREWNECK SWEATSHIRT black x3",
+    "LOGO BEANIE black x2",
+    "MAYA navy x2",
+    "LOGO BEANIE white x1"
+   ],
+   "customer_mix": {
+    "ES": 0.45,
+    "OTHER": 0.28,
+    "MX": 0.14,
+    "AR": 0.03
+   },
+   "unmet_requests": [
+    "MAYA black size 3 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAYA black 3",
+    "MAYA black 4",
+    "KARAKORUM black 5",
+    "LOGO HOODIE black L"
+   ],
+   "returns": [],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600337",
+     "lines": 115,
+     "units": 165,
+     "planned": "2026-09-24",
+     "delay_days": 2,
+     "wrong_items": true
+    }
+   ],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E14b: MAD01 wrong delivery - MAYA navy received instead of black",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-27",
+   "weekday": "Sunday",
+   "open": 1.0,
+   "net_sales_lc": 26135.0,
+   "budget_lc": 26400.0,
+   "vs_budget_pct": -1.0,
+   "units": 27,
+   "receipts": 13,
+   "visitors": 129,
+   "conversion": 0.1008,
+   "top_sellers": [
+    "LOGO HOODIE navy x3",
+    "TIB black x3",
+    "CHAMBRE black x2",
+    "MAYA olive x2",
+    "LOGO BEANIE white x1"
+   ],
+   "customer_mix": {
+    "ES": 0.33,
+    "OTHER": 0.22,
+    "MX": 0.19,
+    "US": 0.11
+   },
+   "unmet_requests": [
+    "LOGO HOODIE black size L x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAYA black 3",
+    "MAYA black 4",
+    "KARAKORUM black 5",
+    "WOOL TURTLENECK black M",
+    "LOGO HOODIE black L",
+    "LOGO HOODIE navy M"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E14b: MAD01 wrong delivery - MAYA navy received instead of black",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-28",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 23905.0,
+   "budget_lc": 20040.0,
+   "vs_budget_pct": 19.3,
+   "units": 26,
+   "receipts": 14,
+   "visitors": 104,
+   "conversion": 0.1346,
+   "top_sellers": [
+    "LOGO BEANIE black x3",
+    "LOGO CARDIGAN black x2",
+    "MAIRE navy x2",
+    "LOGO BEANIE white x1",
+    "CASHMERE SCARF black x1"
+   ],
+   "customer_mix": {
+    "ES": 0.65,
+    "MX": 0.12,
+    "AR": 0.08,
+    "OTHER": 0.04
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAYA black 3",
+    "MAYA black 4",
+    "KARAKORUM black 5",
+    "TIB black 5",
+    "WOOL TURTLENECK black M",
+    "LOGO HOODIE black L",
+    "LOGO HOODIE navy M"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E14b: MAD01 wrong delivery - MAYA navy received instead of black",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-29",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 27481.0,
+   "budget_lc": 20170.0,
+   "vs_budget_pct": 36.2,
+   "units": 23,
+   "receipts": 14,
+   "visitors": 120,
+   "conversion": 0.1167,
+   "top_sellers": [
+    "ROSIERE black x3",
+    "HERMINE navy x2",
+    "MONTCLA navy x2",
+    "CREWNECK SWEATSHIRT black x2",
+    "MONTCLA black x2"
+   ],
+   "customer_mix": {
+    "ES": 0.43,
+    "OTHER": 0.17,
+    "MX": 0.17,
+    "CN": 0.13
+   },
+   "unmet_requests": [
+    "HERMINE navy size 3 x1",
+    "LOGO CARDIGAN navy size XXL x1",
+    "LOGO HOODIE black size L x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAYA black 3",
+    "MAYA black 4",
+    "KARAKORUM black 5",
+    "TIB black 5",
+    "WOOL TURTLENECK black M",
+    "LOGO HOODIE black L",
+    "LOGO HOODIE navy M"
+   ],
+   "returns": [
+    "LOGO HOODIE XS reason=SIZE",
+    "TIB 3 reason=DEF"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E14b: MAD01 wrong delivery - MAYA navy received instead of black",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-30",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 21675.0,
+   "budget_lc": 22170.0,
+   "vs_budget_pct": -2.2,
+   "units": 23,
+   "receipts": 15,
+   "visitors": 129,
+   "conversion": 0.1163,
+   "top_sellers": [
+    "POLARIS CAPE black x2",
+    "LOGO T-SHIRT navy x2",
+    "LOGO CARDIGAN navy x2",
+    "WOOL TURTLENECK navy x2",
+    "TIB black x2"
+   ],
+   "customer_mix": {
+    "ES": 0.52,
+    "OTHER": 0.13,
+    "CN": 0.13,
+    "US": 0.09
+   },
+   "unmet_requests": [
+    "ILVARO powder pink size 0 x1",
+    "MAYA black size 4 x1",
+    "ROSIERE black size 3 x1",
+    "ROSIERE black size 5 x1",
+    "WOOL TURTLENECK black size M x1",
+    "TRAILGRIP GTX black size 45 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAYA black 3",
+    "MAYA black 4",
+    "KARAKORUM black 5",
+    "TIB black 5",
+    "WOOL TURTLENECK black M",
+    "LOGO HOODIE black L",
+    "LOGO HOODIE navy M",
+    "CREWNECK SWEATSHIRT black L"
+   ],
+   "returns": [
+    "MAYA 5 reason=SIZE",
+    "TIB 4 reason=DEF",
+    "TIB 3 reason=DEF"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E14b: MAD01 wrong delivery - MAYA navy received instead of black",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-01",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 11000.0,
+   "budget_lc": 24460.0,
+   "vs_budget_pct": -55.0,
+   "units": 12,
+   "receipts": 8,
+   "visitors": 0,
+   "conversion": null,
+   "top_sellers": [
+    "KARAKORUM black x3",
+    "LOGO HOODIE navy x2",
+    "TRAILGRIP W black x2",
+    "TECH GLOVES black x1",
+    "TIB black x1"
+   ],
+   "customer_mix": {
+    "ES": 0.5,
+    "OTHER": 0.42,
+    "CO": 0.08
+   },
+   "unmet_requests": [
+    "FLAMMETTE black size 3 x1",
+    "WOOL TURTLENECK navy size S x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAYA black 3",
+    "MAYA black 4"
+   ],
+   "returns": [
+    "TIB 4 reason=DEF",
+    "TIB 5 reason=DEF"
+   ],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600382",
+     "lines": 134,
+     "units": 208,
+     "planned": "2026-10-01",
+     "delay_days": 0,
+     "wrong_items": true
+    }
+   ],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E14b: MAD01 wrong delivery - MAYA navy received instead of black",
+    "E40: MAD01 door counter broken (zeros)",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-02",
+   "weekday": "Friday",
+   "open": 1.0,
+   "net_sales_lc": 27610.0,
+   "budget_lc": 29190.0,
+   "vs_budget_pct": -5.4,
+   "units": 26,
+   "receipts": 16,
+   "visitors": 0,
+   "conversion": null,
+   "top_sellers": [
+    "BADY black x2",
+    "MAYA navy x2",
+    "KARAKORUM black x2",
+    "MONTGENEVRE black x2",
+    "CASHMERE SCARF black x1"
+   ],
+   "customer_mix": {
+    "ES": 0.42,
+    "OTHER": 0.19,
+    "US": 0.12,
+    "MX": 0.12
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAYA black 3",
+    "MAYA black 4",
+    "LOGO HOODIE navy L",
+    "LOGO T-SHIRT white L"
+   ],
+   "returns": [
+    "HERMINE 1 reason=CHANGE_MIND"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E14b: MAD01 wrong delivery - MAYA navy received instead of black",
+    "E40: MAD01 door counter broken (zeros)",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-03",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 26300.0,
+   "budget_lc": 41550.0,
+   "vs_budget_pct": -36.7,
+   "units": 27,
+   "receipts": 12,
+   "visitors": 0,
+   "conversion": null,
+   "top_sellers": [
+    "LEGERE BELT BAG black x2",
+    "MAKAIO BACKPACK navy x2",
+    "KARAKORUM black x2",
+    "TIB black x2",
+    "CREWNECK SWEATSHIRT black x2"
+   ],
+   "customer_mix": {
+    "ES": 0.37,
+    "OTHER": 0.3,
+    "US": 0.11,
+    "MX": 0.11
+   },
+   "unmet_requests": [
+    "FLAMMETTE black size 3 x1",
+    "MAYA black size 3 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAYA black 3",
+    "MAYA black 4",
+    "LOGO HOODIE navy L",
+    "LOGO T-SHIRT white L"
+   ],
+   "returns": [
+    "MAYA 3 reason=GIFT"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E14b: MAD01 wrong delivery - MAYA navy received instead of black",
+    "E40: MAD01 door counter broken (zeros)",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-04",
+   "weekday": "Sunday",
+   "open": 1.0,
+   "net_sales_lc": 34870.0,
+   "budget_lc": 27080.0,
+   "vs_budget_pct": 28.8,
+   "units": 35,
+   "receipts": 19,
+   "visitors": 0,
+   "conversion": null,
+   "top_sellers": [
+    "MONTGENEVRE black x5",
+    "LOGO HOODIE grey melange x3",
+    "LOGO CARDIGAN black x3",
+    "CREWNECK SWEATSHIRT black x2",
+    "MAYA black x2"
+   ],
+   "customer_mix": {
+    "ES": 0.54,
+    "OTHER": 0.26,
+    "MX": 0.09,
+    "CO": 0.06
+   },
+   "unmet_requests": [
+    "AMBRINE chocolate brown size 0 x2",
+    "MAYA black size 1 x1",
+    "MAYA black size 2 x1",
+    "MAYA black size 3 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAYA black 3",
+    "MAYA black 4",
+    "MAYA black 5",
+    "MONTGENEVRE black 4",
+    "LOGO HOODIE navy L",
+    "CREWNECK SWEATSHIRT black S",
+    "LOGO T-SHIRT white L",
+    "LOGO T-SHIRT navy M"
+   ],
+   "returns": [
+    "KARAKORUM 3 reason=CHANGE_MIND"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E14b: MAD01 wrong delivery - MAYA navy received instead of black",
+    "E40: MAD01 door counter broken (zeros)",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-05",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 14120.0,
+   "budget_lc": 21920.0,
+   "vs_budget_pct": -35.6,
+   "units": 14,
+   "receipts": 12,
+   "visitors": 0,
+   "conversion": null,
+   "top_sellers": [
+    "BADY black x2",
+    "CASHMERE SCARF black x1",
+    "LOGO BEANIE black x1",
+    "POLO white x1",
+    "CHAMONIX black x1"
+   ],
+   "customer_mix": {
+    "ES": 0.57,
+    "US": 0.21,
+    "CN": 0.07,
+    "MX": 0.07
+   },
+   "unmet_requests": [
+    "ROSIERE black size 4 x1",
+    "PEYRE black size 1 x1",
+    "LOGO HOODIE navy size L x1",
+    "LOGO T-SHIRT white size L x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAYA black 3",
+    "MAYA black 4",
+    "MAYA black 5",
+    "MONTGENEVRE black 4",
+    "LOGO HOODIE navy L",
+    "CREWNECK SWEATSHIRT black S",
+    "LOGO T-SHIRT white L",
+    "LOGO T-SHIRT navy M"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E14b: MAD01 wrong delivery - MAYA navy received instead of black",
+    "E40: MAD01 door counter broken (zeros)",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-06",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 24410.0,
+   "budget_lc": 22060.0,
+   "vs_budget_pct": 10.7,
+   "units": 22,
+   "receipts": 18,
+   "visitors": 0,
+   "conversion": null,
+   "top_sellers": [
+    "ILVARO off-white x2",
+    "WOOL TURTLENECK black x2",
+    "VALBOURG black x1",
+    "CASHMERE SCARF grey melange x1",
+    "LOGO BEANIE navy x1"
+   ],
+   "customer_mix": {
+    "ES": 0.59,
+    "OTHER": 0.14,
+    "US": 0.09,
+    "CN": 0.09
+   },
+   "unmet_requests": [
+    "MAYA black size 1 x1",
+    "MAYA black size 3 x1",
+    "MAYA black size 4 x1",
+    "KARAKORUM black size 6 x1",
+    "LOGO T-SHIRT white size L x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAYA black 3",
+    "MAYA black 4",
+    "MAYA black 5",
+    "MONTGENEVRE black 4",
+    "LOGO HOODIE navy L",
+    "CREWNECK SWEATSHIRT black S",
+    "LOGO T-SHIRT white L",
+    "LOGO T-SHIRT navy M"
+   ],
+   "returns": [
+    "ARNEB 3 reason=CHANGE_MIND"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E14b: MAD01 wrong delivery - MAYA navy received instead of black",
+    "E40: MAD01 door counter broken (zeros)",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-07",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 18720.0,
+   "budget_lc": 24250.0,
+   "vs_budget_pct": -22.8,
+   "units": 24,
+   "receipts": 17,
+   "visitors": 0,
+   "conversion": null,
+   "top_sellers": [
+    "LOGO BEANIE white x3",
+    "LOGO BEANIE navy x2",
+    "LOGO T-SHIRT navy x2",
+    "LOGO BEANIE black x2",
+    "LOGO CARDIGAN black x2"
+   ],
+   "customer_mix": {
+    "ES": 0.58,
+    "MX": 0.12,
+    "CO": 0.08,
+    "CN": 0.08
+   },
+   "unmet_requests": [
+    "MAYA black size 2 x2",
+    "MAIRE black size 1 x1",
+    "MONTGENEVRE black size 4 x1",
+    "TIB black size 3 x1",
+    "POLARIS CAPE black size S x1",
+    "CREWNECK SWEATSHIRT black size S x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAYA black 3",
+    "MAYA black 4",
+    "MAYA black 5",
+    "MONTGENEVRE black 4",
+    "TIB black 3",
+    "LOGO HOODIE navy L",
+    "CREWNECK SWEATSHIRT black S",
+    "LOGO T-SHIRT white L",
+    "LOGO T-SHIRT navy M"
+   ],
+   "returns": [
+    "LOGO BEANIE TU reason=SIZE"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E40: MAD01 door counter broken (zeros)",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-08",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 26680.0,
+   "budget_lc": 28230.0,
+   "vs_budget_pct": -5.5,
+   "units": 26,
+   "receipts": 18,
+   "visitors": 155,
+   "conversion": 0.1161,
+   "top_sellers": [
+    "CREWNECK SWEATSHIRT black x4",
+    "LOGO BEANIE navy x3",
+    "MAYA navy x3",
+    "BADY black x2",
+    "ILVARO off-white x2"
+   ],
+   "customer_mix": {
+    "ES": 0.58,
+    "OTHER": 0.23,
+    "CN": 0.08,
+    "CO": 0.08
+   },
+   "unmet_requests": [
+    "LOGO CARDIGAN black size XS x1",
+    "CREWNECK SWEATSHIRT black size S x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAYA black 3",
+    "MAYA black 4",
+    "MAYA black 5",
+    "MONTGENEVRE black 3",
+    "MONTGENEVRE black 4",
+    "TIB black 3",
+    "LOGO HOODIE navy S",
+    "LOGO HOODIE navy L",
+    "CREWNECK SWEATSHIRT black S"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-09",
+   "weekday": "Friday",
+   "open": 1.0,
+   "net_sales_lc": 23840.0,
+   "budget_lc": 31880.0,
+   "vs_budget_pct": -25.2,
+   "units": 21,
+   "receipts": 13,
+   "visitors": 199,
+   "conversion": 0.0653,
+   "top_sellers": [
+    "LOGO BEANIE black x3",
+    "LOGO CARDIGAN black x2",
+    "MONTCLA black x2",
+    "ARNEB black x2",
+    "MAKAIO BACKPACK navy x1"
+   ],
+   "customer_mix": {
+    "ES": 0.57,
+    "OTHER": 0.24,
+    "MX": 0.14,
+    "US": 0.05
+   },
+   "unmet_requests": [
+    "MAYA black size 3 x1",
+    "CREWNECK SWEATSHIRT black size L x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAYA black 3",
+    "MAYA black 4",
+    "MAYA black 5",
+    "MONTGENEVRE black 3",
+    "MONTGENEVRE black 4",
+    "TIB black 3",
+    "LOGO HOODIE navy S",
+    "LOGO HOODIE navy L",
+    "CREWNECK SWEATSHIRT black S"
+   ],
+   "returns": [
+    "LOGO HOODIE M reason=GIFT"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-10",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 39210.0,
+   "budget_lc": 44740.0,
+   "vs_budget_pct": -12.4,
+   "units": 37,
+   "receipts": 22,
+   "visitors": 301,
+   "conversion": 0.0731,
+   "top_sellers": [
+    "LOGO BEANIE black x3",
+    "LOGO HOODIE grey melange x3",
+    "BADY black x3",
+    "MAYA navy x3",
+    "INSOLUX black x2"
+   ],
+   "customer_mix": {
+    "ES": 0.51,
+    "MX": 0.14,
+    "OTHER": 0.14,
+    "US": 0.14
+   },
+   "unmet_requests": [
+    "MAIRE black size 0 x1",
+    "BADY black size 3 x1",
+    "FLAMMETTE black size 3 x1",
+    "AMBRINE chocolate brown size 1 x1",
+    "MONTGENEVRE black size 1 x1",
+    "LOGO HOODIE navy size S x1",
+    "LOGO HOODIE navy size L x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MAIRE black 1",
+    "BADY black 0",
+    "ILVARO black 0",
+    "MAYA black 3",
+    "MAYA black 4",
+    "MAYA black 5",
+    "MONTCLA black 5",
+    "MONTGENEVRE black 3",
+    "MONTGENEVRE black 4"
+   ],
+   "returns": [
+    "LOGO BEANIE TU reason=GIFT",
+    "LOGO BEANIE TU reason=QUALITY"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-11",
+   "weekday": "Sunday",
+   "open": 1.0,
+   "net_sales_lc": 28760.0,
+   "budget_lc": 31440.0,
+   "vs_budget_pct": -8.5,
+   "units": 35,
+   "receipts": 23,
+   "visitors": 171,
+   "conversion": 0.1345,
+   "top_sellers": [
+    "MONTCLA navy x3",
+    "TIB black x3",
+    "MAYA black x3",
+    "LOGO HOODIE grey melange x2",
+    "CREWNECK SWEATSHIRT white x2"
+   ],
+   "customer_mix": {
+    "ES": 0.54,
+    "OTHER": 0.17,
+    "MX": 0.09,
+    "CO": 0.06
+   },
+   "unmet_requests": [
+    "AMBRINE chocolate brown size 2 x1",
+    "ARNEB black size 4 x1",
+    "LOGO CARDIGAN black size XS x1",
+    "LOGO HOODIE grey melange size M x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MAIRE black 1",
+    "MONTCLA black 5",
+    "ARNEB black 4",
+    "LOGO HOODIE navy S",
+    "LOGO HOODIE grey melange S",
+    "LOGO HOODIE grey melange M"
+   ],
+   "returns": [
+    "BADY 0 reason=CHANGE_MIND",
+    "MONTCLA 3 reason=CHANGE_MIND",
+    "KARAKORUM 4 reason=SIZE",
+    "LOGO BEANIE TU reason=SIZE",
+    "ARNEB 5 reason=EXCHANGE_SIZE"
+   ],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600427",
+     "lines": 128,
+     "units": 201,
+     "planned": "2026-10-08",
+     "delay_days": 3,
+     "wrong_items": false
+    }
+   ],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-12",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 14410.0,
+   "budget_lc": 23140.0,
+   "vs_budget_pct": -37.7,
+   "units": 13,
+   "receipts": 9,
+   "visitors": 125,
+   "conversion": 0.072,
+   "top_sellers": [
+    "MONTGENEVRE black x2",
+    "LOGO CAP black x1",
+    "MAKAIO BACKPACK navy x1",
+    "TECH GLOVES black x1",
+    "LOGO T-SHIRT navy x1"
+   ],
+   "customer_mix": {
+    "ES": 0.54,
+    "OTHER": 0.23,
+    "CN": 0.08,
+    "CO": 0.08
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MAIRE black 1",
+    "MONTCLA black 5",
+    "ARNEB black 4",
+    "LOGO HOODIE navy S",
+    "LOGO HOODIE grey melange S",
+    "LOGO HOODIE grey melange M"
+   ],
+   "returns": [
+    "LOGO CAP TU reason=SIZE",
+    "LEGERE BELT BAG TU reason=CHANGE_MIND"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-13",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 16510.0,
+   "budget_lc": 21620.0,
+   "vs_budget_pct": -23.6,
+   "units": 15,
+   "receipts": 9,
+   "visitors": 137,
+   "conversion": 0.0657,
+   "top_sellers": [
+    "LOGO T-SHIRT black x2",
+    "PEYRE black x1",
+    "LEGERE BELT BAG black x1",
+    "LOGO HOODIE grey melange x1",
+    "CREWNECK SWEATSHIRT black x1"
+   ],
+   "customer_mix": {
+    "ES": 0.6,
+    "US": 0.13,
+    "OTHER": 0.13,
+    "AR": 0.07
+   },
+   "unmet_requests": [
+    "ILVARO off-white size 2 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MAIRE black 1",
+    "MONTCLA black 5",
+    "ARNEB black 4",
+    "LOGO HOODIE navy S",
+    "LOGO HOODIE grey melange S",
+    "LOGO HOODIE grey melange M",
+    "LOGO T-SHIRT black M"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-14",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 21220.0,
+   "budget_lc": 24530.0,
+   "vs_budget_pct": -13.5,
+   "units": 18,
+   "receipts": 15,
+   "visitors": 131,
+   "conversion": 0.1145,
+   "top_sellers": [
+    "CASHMERE SCARF black x3",
+    "MONTGENEVRE black x2",
+    "BADY black x2",
+    "TRICOT PADDED CARDIGAN navy x1",
+    "POLO white x1"
+   ],
+   "customer_mix": {
+    "ES": 0.56,
+    "OTHER": 0.17,
+    "US": 0.17,
+    "MX": 0.11
+   },
+   "unmet_requests": [
+    "MONTGENEVRE black size 2 x1",
+    "TRAILGRIP W off-white size 40 x1",
+    "INSOLUX black size 40 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MAIRE black 1",
+    "MAIRE black 2",
+    "MONTCLA black 5",
+    "ARNEB black 4",
+    "LOGO HOODIE navy S",
+    "LOGO HOODIE grey melange S",
+    "LOGO HOODIE grey melange M",
+    "LOGO T-SHIRT black M"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-15",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 30125.0,
+   "budget_lc": 29200.0,
+   "vs_budget_pct": 3.2,
+   "units": 33,
+   "receipts": 21,
+   "visitors": 186,
+   "conversion": 0.1129,
+   "top_sellers": [
+    "LOGO BEANIE white x3",
+    "TECH GLOVES black x3",
+    "LOGO BEANIE black x2",
+    "CASHMERE SCARF black x1",
+    "LOGO CAP black x1"
+   ],
+   "customer_mix": {
+    "ES": 0.64,
+    "OTHER": 0.27,
+    "MX": 0.06,
+    "US": 0.03
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MAIRE black 1",
+    "MAIRE black 2"
+   ],
+   "returns": [],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600472",
+     "lines": 124,
+     "units": 183,
+     "planned": "2026-10-15",
+     "delay_days": 0,
+     "wrong_items": false
+    }
+   ],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-16",
+   "weekday": "Friday",
+   "open": 1.0,
+   "net_sales_lc": 35920.0,
+   "budget_lc": 36120.0,
+   "vs_budget_pct": -0.6,
+   "units": 36,
+   "receipts": 23,
+   "visitors": 171,
+   "conversion": 0.1345,
+   "top_sellers": [
+    "TRAILGRIP W black x3",
+    "LOGO CARDIGAN black x3",
+    "MONTCLA navy x3",
+    "TRICOT PADDED CARDIGAN navy x2",
+    "KARAKORUM black x2"
+   ],
+   "customer_mix": {
+    "ES": 0.58,
+    "MX": 0.17,
+    "OTHER": 0.11,
+    "US": 0.08
+   },
+   "unmet_requests": [
+    "MAIRE black size 2 x1",
+    "AMBRINE chocolate brown size 1 x1",
+    "PEYRE black size 6 x1",
+    "TRAILGRIP W black size 37 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MAIRE black 1",
+    "MAIRE black 2",
+    "TRAILGRIP W black 37",
+    "TRAILGRIP W black 39"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-17",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 45070.0,
+   "budget_lc": 44940.0,
+   "vs_budget_pct": 0.3,
+   "units": 42,
+   "receipts": 25,
+   "visitors": 270,
+   "conversion": 0.0926,
+   "top_sellers": [
+    "LOGO BEANIE black x4",
+    "FLAMMETTE black x3",
+    "TIB black x3",
+    "MAIRE beige x3",
+    "LOGO BEANIE navy x2"
+   ],
+   "customer_mix": {
+    "ES": 0.52,
+    "OTHER": 0.29,
+    "US": 0.05,
+    "MX": 0.05
+   },
+   "unmet_requests": [
+    "MAIRE black size 1 x1",
+    "MAIRE black size 2 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MAIRE black 1",
+    "MAIRE black 2",
+    "ILVARO black 0",
+    "WOOL TURTLENECK black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37",
+    "TRAILGRIP W black 39"
+   ],
+   "returns": [
+    "MONTCLA 5 reason=SIZE"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-18",
+   "weekday": "Sunday",
+   "open": 1.0,
+   "net_sales_lc": 21440.0,
+   "budget_lc": 31960.0,
+   "vs_budget_pct": -32.9,
+   "units": 21,
+   "receipts": 12,
+   "visitors": 171,
+   "conversion": 0.0702,
+   "top_sellers": [
+    "LOGO CARDIGAN black x3",
+    "MAYA black x2",
+    "CREWNECK SWEATSHIRT black x2",
+    "POLARIS OVERSIZED black x1",
+    "PEYRE black x1"
+   ],
+   "customer_mix": {
+    "ES": 0.38,
+    "MX": 0.29,
+    "US": 0.14,
+    "OTHER": 0.14
+   },
+   "unmet_requests": [
+    "MAIRE beige size 00 x1",
+    "ILVARO black size 0 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MAIRE black 1",
+    "MAIRE black 2",
+    "ILVARO black 0",
+    "WOOL TURTLENECK black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37",
+    "TRAILGRIP W black 39"
+   ],
+   "returns": [
+    "MAYA 3 reason=COLOUR",
+    "CABLE KNIT SWEATER M reason=SIZE"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-19",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 19450.0,
+   "budget_lc": 24810.0,
+   "vs_budget_pct": -21.6,
+   "units": 20,
+   "receipts": 11,
+   "visitors": 136,
+   "conversion": 0.0809,
+   "top_sellers": [
+    "LOGO BEANIE black x2",
+    "HERMINE off-white x2",
+    "LEGERE BELT BAG black x2",
+    "POLARIS CAPE white x1",
+    "CASHMERE SCARF grey melange x1"
+   ],
+   "customer_mix": {
+    "ES": 0.7,
+    "MX": 0.1,
+    "CO": 0.1,
+    "CN": 0.05
+   },
+   "unmet_requests": [
+    "MAIRE black size 1 x1",
+    "MONTGENEVRE navy size 2 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MAIRE black 1",
+    "MAIRE black 2",
+    "ILVARO black 0",
+    "WOOL TURTLENECK black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37",
+    "TRAILGRIP W black 39"
+   ],
+   "returns": [
+    "ROSIERE 3 reason=SIZE",
+    "TRICOT PADDED CARDIGAN S reason=QUALITY"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-20",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 7430.0,
+   "budget_lc": 24230.0,
+   "vs_budget_pct": -69.3,
+   "units": 11,
+   "receipts": 6,
+   "visitors": 124,
+   "conversion": 0.0484,
+   "top_sellers": [
+    "LOGO BEANIE white x1",
+    "LOGO CAP white x1",
+    "LOGO CAP black x1",
+    "TECH GLOVES black x1",
+    "MAKAIO BACKPACK navy x1"
+   ],
+   "customer_mix": {
+    "ES": 0.64,
+    "MX": 0.18,
+    "OTHER": 0.18
+   },
+   "unmet_requests": [
+    "AMBRINE chocolate brown size 0 x1",
+    "POLARIS CAPE white size L x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MAIRE black 1",
+    "MAIRE black 2",
+    "ILVARO black 0",
+    "WOOL TURTLENECK black S",
+    "LOGO T-SHIRT black L",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37",
+    "TRAILGRIP W black 39"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-21",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 25730.0,
+   "budget_lc": 25860.0,
+   "vs_budget_pct": -0.5,
+   "units": 24,
+   "receipts": 15,
+   "visitors": 172,
+   "conversion": 0.0872,
+   "top_sellers": [
+    "LOGO CARDIGAN black x3",
+    "MAYA olive x2",
+    "BADY powder pink x2",
+    "MONTCLA black x2",
+    "ROSIERE black x2"
+   ],
+   "customer_mix": {
+    "ES": 0.5,
+    "OTHER": 0.12,
+    "US": 0.12,
+    "MX": 0.08
+   },
+   "unmet_requests": [
+    "HERMINE off-white size 2 x1",
+    "FLAMMETTE black size 3 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MAIRE black 1",
+    "MAIRE black 2",
+    "ILVARO black 0",
+    "WOOL TURTLENECK black S",
+    "LOGO T-SHIRT black S",
+    "LOGO T-SHIRT black L",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37",
+    "TRAILGRIP W black 39"
+   ],
+   "returns": [
+    "TIB 2 reason=QUALITY"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E07b: Genius POLARIS underperforms in Europe/US",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,127 @@
+{
+  "protocolVersion": "0.3.0",
+  "name": "logistics-agent",
+  "description": "Transport agent (TMS + carrier visibility platform). Tracks DC->store shipments, checks lanes (lead time, cost, cut-off, customs) and validates / books inter-store transfers (IBT). Timestamps in UTC. Store codes: SAP plant or TMS ship-to.",
+  "url": "https://agents.moncler-int.example/logistics/a2a",
+  "preferredTransport": "HTTP+JSON",
+  "additionalInterfaces": [
+    {
+      "url": "https://agents.moncler-int.example/logistics/a2a",
+      "transport": "JSONRPC"
+    },
+    {
+      "url": "https://agents.moncler-int.example/logistics/v1",
+      "transport": "HTTP+JSON"
+    }
+  ],
+  "provider": {
+    "organization": "Moncler - Global Logistics",
+    "url": "https://intranet.moncler-int.example"
+  },
+  "version": "1.7.0",
+  "documentationUrl": "https://agents.moncler-int.example/logistics/docs",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": true,
+    "stateTransitionHistory": true
+  },
+  "securitySchemes": {
+    "apiKey": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-Api-Key"
+    }
+  },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ],
+  "defaultInputModes": [
+    "application/json",
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "application/json"
+  ],
+  "skills": [
+    {
+      "id": "track_shipment",
+      "name": "Track shipment",
+      "description": "Carrier events for an AWB, SAP delivery (VBELN) or internal shipment id (SHP...).",
+      "tags": [
+        "tracking",
+        "carrier"
+      ],
+      "examples": [
+        "Where is SHP02600440?"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "get_lane",
+      "name": "Lane lead time & cost",
+      "description": "Contract transit days, observed p50/p90, cut-off, cost and IBT policy between two nodes.",
+      "tags": [
+        "lane",
+        "lead-time",
+        "cost"
+      ],
+      "examples": [
+        "Lane MIL02 -> MIL01",
+        "IT10 to SEL01 transit time"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "request_transfer",
+      "name": "Inter-store transfer request",
+      "description": "Validate and book an IBT: policy (cross-border, closed stores), source stock, pickup cut-off, required-by date. Returns ACCEPTED / ACCEPTED_NEXT_PICKUP / REJECTED.",
+      "tags": [
+        "ibt",
+        "transfer"
+      ],
+      "examples": [
+        "Move 2 MAIRE black size 1 from ROM01 to MIL01"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "customs_status",
+      "name": "Customs holds",
+      "description": "Open customs holds and inspections.",
+      "tags": [
+        "customs"
+      ],
+      "examples": [
+        "Any shipment held in customs?"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    }
+  ],
+  "x-operational-notes": "IBT bookings only Mon-Fri; same-day courier cut-off 15:30 local, road express 12:00 local; DC cut-offs 14:00 CET / 15:00 ET / 16:00 HKT"
+}

@@ -1,0 +1,67 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/warehouse/v1/inbound/purchase-orders/4500218734?asOf=2026-10-05"
+  },
+  "response": {
+    "purchaseOrder": "4500218734",
+    "vendor": "Atelier Nistru SRL (Chisinau, MD) - outerwear CMT",
+    "createdOn": "2026-08-24",
+    "headerEta": "2026-10-16",
+    "asOf": "2026-10-05",
+    "lines": [
+      {
+        "item": "00010",
+        "plant": "IT10",
+        "material": "J20931A00012999",
+        "qty": 420,
+        "status": "OPEN",
+        "goodsReceipt": null
+      },
+      {
+        "item": "00020",
+        "plant": "US20",
+        "material": "J20931A00012999",
+        "qty": 220,
+        "status": "OPEN",
+        "goodsReceipt": null
+      },
+      {
+        "item": "00030",
+        "plant": "HK30",
+        "material": "J20931A00012999",
+        "qty": 1040,
+        "status": "OPEN",
+        "goodsReceipt": null
+      },
+      {
+        "item": "00040",
+        "plant": "IT10",
+        "material": "J20931A00012999",
+        "qty": 300,
+        "status": "OPEN",
+        "goodsReceipt": null
+      }
+    ],
+    "changes": [
+      {
+        "date": "2026-09-10",
+        "old": "20260925",
+        "new": "20261002",
+        "note": "Vendor: laqué nylon from mill delayed (dyeing lot rejected)"
+      },
+      {
+        "date": "2026-09-24",
+        "old": "20261002",
+        "new": "20261009",
+        "note": "Vendor: fabric arrived, cutting started; new ex-works Oct 5"
+      },
+      {
+        "date": "2026-10-01",
+        "old": "20261009",
+        "new": "20261016",
+        "note": "Vendor: final ETA, air freight booked for IT/HK; US +3 days"
+      }
+    ]
+  }
+}

@@ -1,0 +1,327 @@
+geo,month,value,scale,release
+EA,2024-09,-14.5,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2024-10,-12.7,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2024-11,-12.8,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2024-12,-12.5,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2025-01,-10.7,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2025-02,-11.3,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2025-03,-12.6,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2025-04,-14.8,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2025-05,-13.8,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2025-06,-12.6,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2025-07,-12.3,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2025-08,-13.8,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2025-09,-13.7,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2025-10,-15.2,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2025-11,-13.8,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2025-12,-14.0,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2026-01,-14.6,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2026-02,-13.9,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2026-03,-13.1,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2026-04,-14.2,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2026-05,-14.8,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2026-06,-14.9,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2026-07,-14.1,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2026-08,-13.2,"balance of opinion (DG ECFIN-style, SA)",final
+EA,2026-09,-15.4,"balance of opinion (DG ECFIN-style, SA)",first release
+IT,2024-09,-18.4,balance,final
+IT,2024-10,-18.1,balance,final
+IT,2024-11,-17.6,balance,final
+IT,2024-12,-17.3,balance,final
+IT,2025-01,-16.1,balance,final
+IT,2025-02,-15.5,balance,final
+IT,2025-03,-14.7,balance,final
+IT,2025-04,-15.7,balance,final
+IT,2025-05,-13.3,balance,final
+IT,2025-06,-10.2,balance,final
+IT,2025-07,-11.4,balance,final
+IT,2025-08,-10.8,balance,final
+IT,2025-09,-12.4,balance,final
+IT,2025-10,-11.2,balance,final
+IT,2025-11,-11.6,balance,final
+IT,2025-12,-12.9,balance,final
+IT,2026-01,-12.7,balance,final
+IT,2026-02,-13.0,balance,final
+IT,2026-03,-12.2,balance,final
+IT,2026-04,-13.7,balance,final
+IT,2026-05,-13.9,balance,final
+IT,2026-06,-13.6,balance,final
+IT,2026-07,-14.5,balance,final
+IT,2026-08,-14.8,balance,final
+IT,2026-09,-15.2,balance,first release
+FR,2024-09,-17.6,balance,final
+FR,2024-10,-15.6,balance,final
+FR,2024-11,-17.3,balance,final
+FR,2024-12,-19.2,balance,final
+FR,2025-01,-16.1,balance,final
+FR,2025-02,-16.7,balance,final
+FR,2025-03,-18.1,balance,final
+FR,2025-04,-21.1,balance,final
+FR,2025-05,-19.7,balance,final
+FR,2025-06,-17.9,balance,final
+FR,2025-07,-18.9,balance,final
+FR,2025-08,-16.9,balance,final
+FR,2025-09,-17.0,balance,final
+FR,2025-10,-18.5,balance,final
+FR,2025-11,-18.6,balance,final
+FR,2025-12,-21.5,balance,final
+FR,2026-01,-21.4,balance,final
+FR,2026-02,-20.5,balance,final
+FR,2026-03,-19.3,balance,final
+FR,2026-04,-19.1,balance,final
+FR,2026-05,-21.5,balance,final
+FR,2026-06,-19.7,balance,final
+FR,2026-07,-19.9,balance,final
+FR,2026-08,-22.0,balance,final
+FR,2026-09,-22.8,balance,first release
+DE,2024-09,-19.2,balance,final
+DE,2024-10,-22.9,balance,final
+DE,2024-11,-23.0,balance,final
+DE,2024-12,-26.3,balance,final
+DE,2025-01,-23.7,balance,final
+DE,2025-02,-22.2,balance,final
+DE,2025-03,-24.5,balance,final
+DE,2025-04,-25.5,balance,final
+DE,2025-05,-23.0,balance,final
+DE,2025-06,-21.2,balance,final
+DE,2025-07,-22.2,balance,final
+DE,2025-08,-23.3,balance,final
+DE,2025-09,-25.9,balance,final
+DE,2025-10,-23.2,balance,final
+DE,2025-11,-19.6,balance,final
+DE,2025-12,-19.5,balance,final
+DE,2026-01,-19.0,balance,final
+DE,2026-02,-20.3,balance,final
+DE,2026-03,-18.8,balance,final
+DE,2026-04,-20.6,balance,final
+DE,2026-05,-23.3,balance,final
+DE,2026-06,-23.1,balance,final
+DE,2026-07,-22.6,balance,final
+DE,2026-08,-22.8,balance,final
+DE,2026-09,-22.6,balance,first release
+ES,2024-09,-12.7,balance,final
+ES,2024-10,-12.6,balance,final
+ES,2024-11,-10.9,balance,final
+ES,2024-12,-13.4,balance,final
+ES,2025-01,-13.1,balance,final
+ES,2025-02,-12.8,balance,final
+ES,2025-03,-12.3,balance,final
+ES,2025-04,-14.8,balance,final
+ES,2025-05,-15.0,balance,final
+ES,2025-06,-12.0,balance,final
+ES,2025-07,-11.4,balance,final
+ES,2025-08,-10.3,balance,final
+ES,2025-09,-9.7,balance,final
+ES,2025-10,-8.1,balance,final
+ES,2025-11,-7.2,balance,final
+ES,2025-12,-9.0,balance,final
+ES,2026-01,-10.4,balance,final
+ES,2026-02,-11.5,balance,final
+ES,2026-03,-10.4,balance,final
+ES,2026-04,-11.3,balance,final
+ES,2026-05,-13.0,balance,final
+ES,2026-06,-10.8,balance,final
+ES,2026-07,-12.4,balance,final
+ES,2026-08,-12.2,balance,final
+ES,2026-09,-12.6,balance,first release
+NL,2024-09,-27.2,balance,final
+NL,2024-10,-27.1,balance,final
+NL,2024-11,-27.6,balance,final
+NL,2024-12,-32.3,balance,final
+NL,2025-01,-32.4,balance,final
+NL,2025-02,-29.5,balance,final
+NL,2025-03,-27.9,balance,final
+NL,2025-04,-30.9,balance,final
+NL,2025-05,-31.9,balance,final
+NL,2025-06,-29.6,balance,final
+NL,2025-07,-30.4,balance,final
+NL,2025-08,-31.3,balance,final
+NL,2025-09,-29.2,balance,final
+NL,2025-10,-29.2,balance,final
+NL,2025-11,-28.4,balance,final
+NL,2025-12,-28.4,balance,final
+NL,2026-01,-28.0,balance,final
+NL,2026-02,-26.7,balance,final
+NL,2026-03,-26.5,balance,final
+NL,2026-04,-27.7,balance,final
+NL,2026-05,-27.9,balance,final
+NL,2026-06,-27.0,balance,final
+NL,2026-07,-26.4,balance,final
+NL,2026-08,-25.9,balance,final
+NL,2026-09,-28.3,balance,first release
+DK,2024-09,-8.8,balance,final
+DK,2024-10,-6.5,balance,final
+DK,2024-11,-5.8,balance,final
+DK,2024-12,-7.8,balance,final
+DK,2025-01,-7.8,balance,final
+DK,2025-02,-7.7,balance,final
+DK,2025-03,-5.8,balance,final
+DK,2025-04,-10.7,balance,final
+DK,2025-05,-11.6,balance,final
+DK,2025-06,-9.4,balance,final
+DK,2025-07,-11.0,balance,final
+DK,2025-08,-12.2,balance,final
+DK,2025-09,-12.9,balance,final
+DK,2025-10,-10.2,balance,final
+DK,2025-11,-8.9,balance,final
+DK,2025-12,-11.8,balance,final
+DK,2026-01,-14.0,balance,final
+DK,2026-02,-14.6,balance,final
+DK,2026-03,-13.7,balance,final
+DK,2026-04,-12.4,balance,final
+DK,2026-05,-13.0,balance,final
+DK,2026-06,-13.6,balance,final
+DK,2026-07,-13.3,balance,final
+DK,2026-08,-12.9,balance,final
+DK,2026-09,-11.3,balance,first release
+US,2024-09,100.6,index 1985=100,final
+US,2024-10,100.8,index 1985=100,final
+US,2024-11,99.8,index 1985=100,final
+US,2024-12,97.9,index 1985=100,final
+US,2025-01,98.4,index 1985=100,final
+US,2025-02,96.2,index 1985=100,final
+US,2025-03,95.4,index 1985=100,final
+US,2025-04,86.1,index 1985=100,final
+US,2025-05,91.7,index 1985=100,final
+US,2025-06,97.3,index 1985=100,final
+US,2025-07,101.9,index 1985=100,final
+US,2025-08,104.2,index 1985=100,final
+US,2025-09,98.8,index 1985=100,final
+US,2025-10,97.8,index 1985=100,final
+US,2025-11,96.2,index 1985=100,final
+US,2025-12,101.1,index 1985=100,final
+US,2026-01,100.0,index 1985=100,final
+US,2026-02,94.8,index 1985=100,final
+US,2026-03,98.1,index 1985=100,final
+US,2026-04,99.5,index 1985=100,final
+US,2026-05,98.8,index 1985=100,final
+US,2026-06,101.7,index 1985=100,final
+US,2026-07,103.2,index 1985=100,final
+US,2026-08,97.1,index 1985=100,final
+US,2026-09,94.7,index 1985=100,first release
+JP,2024-09,33.9,index (Cabinet Office-style),final
+JP,2024-10,34.3,index (Cabinet Office-style),final
+JP,2024-11,34.9,index (Cabinet Office-style),final
+JP,2024-12,34.3,index (Cabinet Office-style),final
+JP,2025-01,34.6,index (Cabinet Office-style),final
+JP,2025-02,34.7,index (Cabinet Office-style),final
+JP,2025-03,35.3,index (Cabinet Office-style),final
+JP,2025-04,32.9,index (Cabinet Office-style),final
+JP,2025-05,34.3,index (Cabinet Office-style),final
+JP,2025-06,35.2,index (Cabinet Office-style),final
+JP,2025-07,35.2,index (Cabinet Office-style),final
+JP,2025-08,35.6,index (Cabinet Office-style),final
+JP,2025-09,36.2,index (Cabinet Office-style),final
+JP,2025-10,36.1,index (Cabinet Office-style),final
+JP,2025-11,35.4,index (Cabinet Office-style),final
+JP,2025-12,34.1,index (Cabinet Office-style),final
+JP,2026-01,34.1,index (Cabinet Office-style),final
+JP,2026-02,34.2,index (Cabinet Office-style),final
+JP,2026-03,34.6,index (Cabinet Office-style),final
+JP,2026-04,33.4,index (Cabinet Office-style),final
+JP,2026-05,33.3,index (Cabinet Office-style),final
+JP,2026-06,33.2,index (Cabinet Office-style),final
+JP,2026-07,34.1,index (Cabinet Office-style),final
+JP,2026-08,35.4,index (Cabinet Office-style),final
+JP,2026-09,35.1,index (Cabinet Office-style),first release
+KR,2024-09,101.5,"CCSI, long-run avg=100",final
+KR,2024-10,109.1,"CCSI, long-run avg=100",final
+KR,2024-11,110.4,"CCSI, long-run avg=100",final
+KR,2024-12,90.2,"CCSI, long-run avg=100",final
+KR,2025-01,105.6,"CCSI, long-run avg=100",final
+KR,2025-02,100.2,"CCSI, long-run avg=100",final
+KR,2025-03,99.7,"CCSI, long-run avg=100",final
+KR,2025-04,91.4,"CCSI, long-run avg=100",final
+KR,2025-05,95.1,"CCSI, long-run avg=100",final
+KR,2025-06,98.6,"CCSI, long-run avg=100",final
+KR,2025-07,101.1,"CCSI, long-run avg=100",final
+KR,2025-08,101.5,"CCSI, long-run avg=100",final
+KR,2025-09,101.0,"CCSI, long-run avg=100",final
+KR,2025-10,101.3,"CCSI, long-run avg=100",final
+KR,2025-11,99.7,"CCSI, long-run avg=100",final
+KR,2025-12,99.7,"CCSI, long-run avg=100",final
+KR,2026-01,99.3,"CCSI, long-run avg=100",final
+KR,2026-02,98.1,"CCSI, long-run avg=100",final
+KR,2026-03,98.8,"CCSI, long-run avg=100",final
+KR,2026-04,102.0,"CCSI, long-run avg=100",final
+KR,2026-05,100.0,"CCSI, long-run avg=100",final
+KR,2026-06,99.3,"CCSI, long-run avg=100",final
+KR,2026-07,100.4,"CCSI, long-run avg=100",final
+KR,2026-08,100.3,"CCSI, long-run avg=100",final
+KR,2026-09,100.1,"CCSI, long-run avg=100",first release
+CN,2024-09,88.5,"index (NBS-style), 100=neutral",final
+CN,2024-10,90.3,"index (NBS-style), 100=neutral",final
+CN,2024-11,90.7,"index (NBS-style), 100=neutral",final
+CN,2024-12,87.1,"index (NBS-style), 100=neutral",final
+CN,2025-01,90.0,"index (NBS-style), 100=neutral",final
+CN,2025-02,86.2,"index (NBS-style), 100=neutral",final
+CN,2025-03,86.9,"index (NBS-style), 100=neutral",final
+CN,2025-04,85.3,"index (NBS-style), 100=neutral",final
+CN,2025-05,86.5,"index (NBS-style), 100=neutral",final
+CN,2025-06,86.6,"index (NBS-style), 100=neutral",final
+CN,2025-07,86.1,"index (NBS-style), 100=neutral",final
+CN,2025-08,86.6,"index (NBS-style), 100=neutral",final
+CN,2025-09,87.2,"index (NBS-style), 100=neutral",final
+CN,2025-10,87.3,"index (NBS-style), 100=neutral",final
+CN,2025-11,86.7,"index (NBS-style), 100=neutral",final
+CN,2025-12,87.3,"index (NBS-style), 100=neutral",final
+CN,2026-01,87.6,"index (NBS-style), 100=neutral",final
+CN,2026-02,88.0,"index (NBS-style), 100=neutral",final
+CN,2026-03,86.4,"index (NBS-style), 100=neutral",final
+CN,2026-04,86.6,"index (NBS-style), 100=neutral",final
+CN,2026-05,87.6,"index (NBS-style), 100=neutral",final
+CN,2026-06,88.9,"index (NBS-style), 100=neutral",final
+CN,2026-07,88.8,"index (NBS-style), 100=neutral",final
+CN,2026-08,87.4,"index (NBS-style), 100=neutral",final
+CN,2026-09,88.7,"index (NBS-style), 100=neutral",first release
+GB,2024-09,-17.1,balance (GfK-style),final
+GB,2024-10,-18.8,balance (GfK-style),final
+GB,2024-11,-23.7,balance (GfK-style),final
+GB,2024-12,-22.4,balance (GfK-style),final
+GB,2025-01,-18.2,balance (GfK-style),final
+GB,2025-02,-20.8,balance (GfK-style),final
+GB,2025-03,-22.2,balance (GfK-style),final
+GB,2025-04,-24.2,balance (GfK-style),final
+GB,2025-05,-23.6,balance (GfK-style),final
+GB,2025-06,-21.3,balance (GfK-style),final
+GB,2025-07,-20.6,balance (GfK-style),final
+GB,2025-08,-20.1,balance (GfK-style),final
+GB,2025-09,-14.6,balance (GfK-style),final
+GB,2025-10,-15.8,balance (GfK-style),final
+GB,2025-11,-14.2,balance (GfK-style),final
+GB,2025-12,-14.8,balance (GfK-style),final
+GB,2026-01,-14.4,balance (GfK-style),final
+GB,2026-02,-15.3,balance (GfK-style),final
+GB,2026-03,-19.8,balance (GfK-style),final
+GB,2026-04,-17.3,balance (GfK-style),final
+GB,2026-05,-21.8,balance (GfK-style),final
+GB,2026-06,-22.9,balance (GfK-style),final
+GB,2026-07,-22.1,balance (GfK-style),final
+GB,2026-08,-22.1,balance (GfK-style),final
+GB,2026-09,-20.2,balance (GfK-style),first release
+AU,2024-09,81.6,index (Westpac-MI-style),final
+AU,2024-10,83.8,index (Westpac-MI-style),final
+AU,2024-11,86.0,index (Westpac-MI-style),final
+AU,2024-12,81.6,index (Westpac-MI-style),final
+AU,2025-01,91.3,index (Westpac-MI-style),final
+AU,2025-02,91.8,index (Westpac-MI-style),final
+AU,2025-03,87.2,index (Westpac-MI-style),final
+AU,2025-04,82.1,index (Westpac-MI-style),final
+AU,2025-05,87.0,index (Westpac-MI-style),final
+AU,2025-06,94.3,index (Westpac-MI-style),final
+AU,2025-07,93.2,index (Westpac-MI-style),final
+AU,2025-08,90.2,index (Westpac-MI-style),final
+AU,2025-09,90.2,index (Westpac-MI-style),final
+AU,2025-10,90.4,index (Westpac-MI-style),final
+AU,2025-11,85.9,index (Westpac-MI-style),final
+AU,2025-12,87.6,index (Westpac-MI-style),final
+AU,2026-01,88.3,index (Westpac-MI-style),final
+AU,2026-02,89.0,index (Westpac-MI-style),final
+AU,2026-03,84.4,index (Westpac-MI-style),final
+AU,2026-04,81.2,index (Westpac-MI-style),final
+AU,2026-05,83.3,index (Westpac-MI-style),final
+AU,2026-06,90.7,index (Westpac-MI-style),final
+AU,2026-07,89.6,index (Westpac-MI-style),final
+AU,2026-08,93.7,index (Westpac-MI-style),final
+AU,2026-09,94.4,index (Westpac-MI-style),first release
+EA,2026-10,-13.6,"balance of opinion (DG ECFIN-style, SA)",flash

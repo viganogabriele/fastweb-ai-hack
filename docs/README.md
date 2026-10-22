@@ -11,3 +11,5 @@
 | `sources/transcripts/Poke House 2.md` | ASR of our Q&A with the Moncler rep (header says "Poke House 3"). Uncorrected |
 
 Source files are kept verbatim; don't edit them. Put interpretation in `findings.md`.
+
+Test dataset (synthetic world, sources + hidden answers): see `../generated/README.md` before using it.

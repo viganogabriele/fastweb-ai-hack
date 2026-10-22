@@ -1,0 +1,40 @@
+store_id,store_name,sap_plant_werks,tms_shipto_kunnr,crm_store_code,zendesk_store_tag,supplying_dc,aliases,last_update
+MIL01,Milano Montenapoleone,1001,0000071001,IT01,store_milano_montenapoleone,DC-IT-CSG,Monte Napo; Montenapoleone; MI-MN; Milano Flagship,2026-06-30
+MIL02,Milano Rinascente Duomo,1002,0000071002,IT03,store_milano_rinascente_duomo,DC-IT-CSG,Rinascente; MI-RIN; Rina Duomo,2026-06-30
+ROM01,Roma Via Condotti,1003,0000071003,IT02,store_roma_via_condotti,DC-IT-CSG,Condotti; RM-CON; Roma,2026-06-30
+VEN01,Venezia San Marco,1004,0000071004,IT04,store_venezia_san_marco,DC-IT-CSG,San Marco; VE-SM,2026-06-30
+COU01,Courmayeur,1005,0000071005,IT06,store_courmayeur,DC-IT-CSG,Courma; Courmayeur,2026-06-30
+CRT01,Cortina d'Ampezzo,1006,0000071006,,store_cortina_d_ampezzo,DC-IT-CSG,Cortina,2026-06-30
+PAR01,Paris Saint-Honoré,1101,0000071101,FR01,store_paris_saint_honore,DC-IT-CSG,Saint-Honoré; St Honoré; PA-SH; Paris Flagship,2026-06-30
+PAR02,Paris Galeries Lafayette Haussmann,1102,0000071102,FR03,store_paris_galeries_lafayette_haussmann,DC-IT-CSG,Galeries Lafayette; GL Haussmann; PA-GL,2026-06-30
+CAN01,Cannes La Croisette,1103,0000071103,FR02,store_cannes_la_croisette,DC-IT-CSG,Cannes; Croisette,2026-06-30
+GVA01,Genève Rue du Rhône,1201,0000071201,CH01,store_geneve_rue_du_rhone,DC-IT-CSG,Genève; Geneva; Rue du Rhône,2026-06-30
+LON01,London New Bond Street,1301,0000071301,GB01,store_london_new_bond_street,DC-IT-CSG,New Bond St; Bond Street; LDN-NBS,2026-06-30
+LON02,London Harrods,1302,0000071302,GB02,store_london_harrods,DC-IT-CSG,Harrods; LDN-HAR,2026-06-30
+MUN01,München Maximilianstraße,1401,0000071401,DE01,store_munchen_maximilianstrae,DC-IT-CSG,München; Munich; Maximilianstrasse,2026-06-30
+BER01,Berlin KaDeWe,1402,0000071402,DE02,store_berlin_kadewe,DC-IT-CSG,KaDeWe; Berlin,2026-06-30
+ZRH01,Zürich Bahnhofstrasse,1202,0000071202,CH02,store_zurich_bahnhofstrasse,DC-IT-CSG,Zürich; Zurich; Bahnhofstrasse,2026-06-30
+STM01,St. Moritz Via Serlas,1203,0000071203,CH03,store_st_moritz_via_serlas,DC-IT-CSG,St. Moritz; St Moritz,2026-06-30
+MAD01,Madrid Calle Serrano,1501,0000071599,ES01,store_madrid_calle_serrano,DC-IT-CSG,Serrano; Madrid,2024-02-12
+AMS01,Amsterdam P.C. Hooftstraat,1601,0000071601,NL01,store_amsterdam_p_c_hooftstraat,DC-IT-CSG,PC Hooft; Amsterdam,2026-06-30
+CPH01,København Østergade,1701,0000071701,DK01,store_kbenhavn_stergade,DC-IT-CSG,Copenhagen; Østergade,2026-06-30
+DXB01,Dubai Mall Fashion Avenue,1801,0000071801,AE01,store_dubai_mall_fashion_avenue,DC-IT-CSG,Dubai Mall; DXB,2026-06-30
+NYC01,New York Madison Avenue,2001,0000072001,US01,store_new_york_madison_avenue,DC-US-NJ,Madison; Madison Ave,2026-06-30
+NYC02,New York SoHo,2002,0000072002,US03,store_new_york_soho,DC-US-NJ,SoHo; Soho,2026-06-30
+MIA01,Miami Design District,2003,0000072003,US04,store_miami_design_district,DC-US-NJ,Design District; Miami,2026-06-30
+BHS01,Beverly Hills Rodeo Drive,2004,0000072004,US02,store_beverly_hills_rodeo_drive,DC-US-NJ,Rodeo; Beverly Hills,2026-06-30
+ASP01,Aspen,2005,0000072005,US05,store_aspen,DC-US-NJ,Aspen,2026-06-30
+TOR01,Toronto Yorkville,2101,0000072101,CA01,store_toronto_yorkville,DC-US-NJ,Yorkville; Toronto,2026-06-30
+TYO01,Tokyo Ginza,3001,0000073001,JP01,store_tokyo_ginza,DC-HK-TKO,Ginza; 銀座,2026-06-30
+TYO02,Tokyo Omotesando,3002,0000073002,JP03,store_tokyo_omotesando,DC-HK-TKO,Omotesando; 表参道,2026-06-30
+OSA01,Osaka Shinsaibashi,3003,0000073003,JP02,store_osaka_shinsaibashi,DC-HK-TKO,Shinsaibashi; 心斎橋,2026-06-30
+SEL01,Seoul Cheongdam Flagship,3101,0000073101,KR02,store_seoul_cheongdam_flagship,DC-HK-TKO,Cheongdam; 청담; Seoul Flagship,2026-06-30
+SEL02,Seoul Hyundai Apgujeong,3102,0000073102,KR01,store_seoul_hyundai_apgujeong,DC-HK-TKO,Hyundai Apgujeong; 압구정 현대,2026-06-30
+BUS01,Busan Shinsegae Centum City,3103,0000073103,KR03,store_busan_centum,DC-HK-TKO,Centum; 센텀,2026-06-30
+SHA01,Shanghai Plaza 66,3201,0000073201,CN01,store_shanghai_plaza_66,DC-HK-TKO,Plaza 66; 恒隆,2026-06-30
+BJS01,Beijing SKP,3202,0000073202,CN02,store_beijing_skp,DC-HK-TKO,SKP; 北京SKP,2026-06-30
+CDU01,Chengdu Taikoo Li,3203,0000073203,CN03,store_chengdu_taikoo_li,DC-HK-TKO,Taikoo Li; 太古里,2026-06-30
+HKG01,Hong Kong Canton Road,3301,0000073301,HK01,store_hong_kong_canton_road,DC-HK-TKO,Canton Road; 廣東道,2026-06-30
+TPE01,Taipei 101,3401,0000073401,TW01,store_taipei_101,DC-HK-TKO,Taipei 101; 台北101,2026-06-30
+SIN01,Singapore Marina Bay Sands,3501,0000073501,SG01,store_singapore_marina_bay_sands,DC-HK-TKO,MBS; Marina Bay Sands,2026-06-30
+SYD01,Sydney Castlereagh Street,3601,0000073601,,store_sydney_castlereagh_street,DC-HK-TKO,Castlereagh; Sydney,2026-06-30

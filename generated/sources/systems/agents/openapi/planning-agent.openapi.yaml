@@ -1,0 +1,215 @@
+openapi: 3.0.3
+info:
+  title: planning-agent REST API
+  version: 3.0.0
+servers:
+- url: https://agents.moncler-int.example/planning/v1
+security:
+- bearer: []
+paths:
+  /replenishment-parameters/{store}:
+    get:
+      summary: Replenishment parameters
+      tags:
+      - parameters
+      parameters:
+      - name: store
+        in: path
+        required: true
+        description: MIL01 or 1001
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Params'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limited
+  /replenishment-proposal:
+    post:
+      summary: Replenishment proposal store x SKU
+      tags:
+      - replenishment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProposalRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Proposal'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Business rule violation
+  /allocation-plan:
+    get:
+      summary: Allocation plan for a new product
+      tags:
+      - allocation
+      parameters:
+      - name: sku
+        in: query
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Allocation'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limited
+  /otb:
+    get:
+      summary: Open-to-buy
+      tags:
+      - otb
+      parameters:
+      - name: region
+        in: query
+        required: true
+        description: ''
+        schema:
+          type: string
+          enum:
+          - EMEA
+          - AMERICAS
+          - APAC
+      - name: category
+        in: query
+        required: false
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Otb'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limited
+components:
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        traceId:
+          type: string
+    Params:
+      type: object
+      properties:
+        WERKS: &id001
+          type: string
+        STORE_ID: *id001
+        LIEF_WERK: *id001
+        BESTELLTAGE: *id001
+        WBZ_TAGE: *id001
+        REICHWEITE_TAGE: *id001
+        SAFETY_FACTOR: *id001
+        SAISON_PROFIL: *id001
+        STATUS: *id001
+    ProposalRequest:
+      type: object
+      required:
+      - store
+      - sku
+      properties:
+        store: *id001
+        sku: *id001
+        asOf: &id002
+          type: string
+          format: date
+        demandMultiplier:
+          type: number
+          default: 1.0
+        sizes:
+          type: array
+          items: *id001
+    Proposal:
+      type: object
+      properties:
+        store: *id001
+        werks: *id001
+        sku: *id001
+        asOf: *id002
+        forecastRun: *id001
+        coverDays: &id003
+          type: integer
+        demandMultiplier:
+          type: number
+        supplyingDc: *id001
+        atpSnapshot: *id001
+        expectedArrival: *id002
+        lines:
+          type: array
+          items:
+            type: object
+            properties:
+              size: *id001
+              onHand: *id003
+              inTransit: *id003
+              target: *id003
+              proposed: *id003
+              confirmedByDc: *id003
+              shortfall: *id003
+    Allocation:
+      type: object
+      properties:
+        sku: *id001
+        rows:
+          type: array
+          items:
+            type: object
+    Otb:
+      type: object
+      properties:
+        region: *id001
+        rows:
+          type: array
+          items:
+            type: object

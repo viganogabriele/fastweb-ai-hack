@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Luxury Wire - Top Stories</title>
+    <link>https://luxurywire.example/</link>
+    <atom:link href="https://luxurywire.example/rss/top.xml" rel="self" type="application/rss+xml"/>
+    <description>Breaking news on the global luxury industry</description>
+    <language>en-gb</language>
+    <lastBuildDate>Thu, 22 Oct 2026 05:00:41 GMT</lastBuildDate>
+    <ttl>15</ttl>
+    <item>
+      <title>EMBARGOED: Valcourt Group Q3 revenue down 4% organically, Asia weak</title>
+      <link>https://luxurywire.example/2026/10/22/embargoed-valcourt-group-q3-revenue-down-4-organically-asia</link>
+      <guid isPermaLink="false">lw:251651118</guid>
+      <pubDate>Thu, 22 Oct 2026 05:00:00 GMT</pubDate>
+      <dc:creator>Luxury Wire staff</dc:creator>
+      <category>earnings</category>
+      <category>Valcourt</category>
+      <description><![CDATA[EMBARGOED UNTIL 23 OCT 2026 06:00 CET. Valcourt Group reported third-quarter revenue of 2.31 billion euros, down 4 percent on an organic basis, as weakness in mainland China and Hong Kong offset growth in Europe and the Middle East.]]></description>
+    </item>
+    <item>
+      <title>Venice floods as tide hits 120 cm, MOSE barriers not raised</title>
+      <link>https://luxurywire.example/2026/10/20/venice-floods-as-tide-hits-120-cm-mose-barriers-not-raised</link>
+      <guid isPermaLink="false">lw:182169072</guid>
+      <pubDate>Tue, 20 Oct 2026 12:05:00 GMT</pubDate>
+      <dc:creator>Luxury Wire staff</dc:creator>
+      <category>Venice</category>
+      <category>flooding</category>
+      <category>acqua alta</category>
+      <description><![CDATA[High water flooded St Mark's Square in Venice on Tuesday morning after the tide reached around 120 centimetres, catching shopkeepers and tourists off guard.]]></description>
+    </item>
+    <item>
+      <title>Frieze London opens with cautious mood among collectors</title>
+      <link>https://luxurywire.example/2026/10/15/frieze-london-opens-with-cautious-mood-among-collectors</link>
+      <guid isPermaLink="false">lw:249528589</guid>
+      <pubDate>Thu, 15 Oct 2026 16:20:00 GMT</pubDate>
+      <dc:creator>Luxury Wire staff</dc:creator>
+      <category>art</category>
+      <category>London</category>
+      <category>Frieze</category>
+      <description><![CDATA[Frieze London and Frieze Masters opened to VIPs in Regent's Park on Wednesday, with dealers describing a measured market in which buyers took longer to commit. Several mid-market galleries reported sales in the 50,000 to 250,000 pound range on the first day.]]></description>
+    </item>
+    <item>
+      <title>Idol effect: pink Ilvaro puffer sells out across Asia within days</title>
+      <link>https://luxurywire.example/2026/10/06/idol-effect-pink-ilvaro-puffer-sells-out-across-asia-within</link>
+      <guid isPermaLink="false">lw:243884214</guid>
+      <pubDate>Tue, 06 Oct 2026 07:45:00 GMT</pubDate>
+      <dc:creator>Luxury Wire staff</dc:creator>
+      <category>Moncler</category>
+      <category>Ilvaro</category>
+      <category>K-pop</category>
+      <category>Asia</category>
+      <category>sell-out</category>
+      <description><![CDATA[A powder pink cropped down jacket worn by K-pop singer Yoon Ha-eun at Paris Fashion Week has sold out in stores and online across much of Asia, according to store staff and resale platforms.]]></description>
+    </item>
+    <item>
+      <title>Paris Fashion Week day three: street-style crowds swell outside the Tuileries</title>
+      <link>https://luxurywire.example/2026/10/01/paris-fashion-week-day-three-street-style-crowds-swell-outsi</link>
+      <guid isPermaLink="false">lw:113501384</guid>
+      <pubDate>Thu, 01 Oct 2026 21:10:00 GMT</pubDate>
+      <dc:creator>Luxury Wire staff</dc:creator>
+      <category>Paris Fashion Week</category>
+      <category>street style</category>
+      <category>K-pop</category>
+      <description><![CDATA[Crowds of fans outside the Tuileries gardens forced police to briefly close part of rue de Rivoli on Thursday as K-pop and Thai drama stars arrived for the afternoon shows.]]></description>
+    </item>
+    <item>
+      <title>Milan Fashion Week wraps with strong buyer turnout from Korea and the Gulf</title>
+      <link>https://luxurywire.example/2026/09/28/milan-fashion-week-wraps-with-strong-buyer-turnout-from-kore</link>
+      <guid isPermaLink="false">lw:111512944</guid>
+      <pubDate>Mon, 28 Sep 2026 18:30:00 GMT</pubDate>
+      <dc:creator>Luxury Wire staff</dc:creator>
+      <category>Milan Fashion Week</category>
+      <category>buyers</category>
+      <description><![CDATA[Milan Fashion Week closed on Monday after six days of shows, with organisers reporting buyer registrations up 9 percent on last September, led by South Korea, Japan and the Gulf states. Attendance from mainland China rose but remains below pre-pandemic levels.]]></description>
+    </item>
+    <item>
+      <title>Moncler Genius unveils &#x27;Polaris&#x27; capsule with oversized cape and balaclava</title>
+      <link>https://luxurywire.example/2026/09/24/moncler-genius-unveils-polaris-capsule-with-oversized-cape-a</link>
+      <guid isPermaLink="false">lw:48050214</guid>
+      <pubDate>Thu, 24 Sep 2026 09:00:00 GMT</pubDate>
+      <dc:creator>Luxury Wire staff</dc:creator>
+      <category>Moncler</category>
+      <category>Genius</category>
+      <category>launch</category>
+      <description><![CDATA[Moncler's Genius platform on Thursday released Polaris, a capsule built around extreme volume: a down cape priced at 2,900 euros, an oversized puffer at 2,400 euros and a knitted balaclava at 450 euros, in black, white and an icy light blue.]]></description>
+    </item>
+  </channel>
+</rss>

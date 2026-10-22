@@ -1,0 +1,16 @@
+WERKS,NAME1,LGORT,LGOBE,OPERATOR
+IT10,DC Castel San Giovanni (PC),0001,Magazzino principale / Main,in-house (SAP EWM)
+IT10,DC Castel San Giovanni (PC),W100,Riserva e-commerce,in-house (SAP EWM)
+IT10,DC Castel San Giovanni (PC),QM01,Blocco qualita,in-house (SAP EWM)
+IT10,DC Castel San Giovanni (PC),RT01,Resi da grading,in-house (SAP EWM)
+IT10,DC Castel San Giovanni (PC),OUT1,Stock lot / outlet,in-house (SAP EWM)
+US20,DC Secaucus NJ,0001,Magazzino principale / Main,in-house (SAP EWM)
+US20,DC Secaucus NJ,W100,Riserva e-commerce,in-house (SAP EWM)
+US20,DC Secaucus NJ,QM01,Blocco qualita,in-house (SAP EWM)
+US20,DC Secaucus NJ,RT01,Resi da grading,in-house (SAP EWM)
+US20,DC Secaucus NJ,OUT1,Stock lot / outlet,in-house (SAP EWM)
+HK30,DC Tseung Kwan O (3PL),0001,Magazzino principale / Main,3PL - Pacific Crest Logistics
+HK30,DC Tseung Kwan O (3PL),W100,Riserva e-commerce,3PL - Pacific Crest Logistics
+HK30,DC Tseung Kwan O (3PL),QM01,Blocco qualita,3PL - Pacific Crest Logistics
+HK30,DC Tseung Kwan O (3PL),RT01,Resi da grading,3PL - Pacific Crest Logistics
+HK30,DC Tseung Kwan O (3PL),OUT1,Stock lot / outlet,3PL - Pacific Crest Logistics

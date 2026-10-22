@@ -1,0 +1,20 @@
+{
+ "dos_q3_rep": 65955597,
+ "dos_q3_ly_rep": 62373458,
+ "dos_q3_const": 67050860,
+ "organic": 5.9,
+ "reported": 5.7,
+ "oct_qtd_organic": 23.6,
+ "regions_const": {
+  "AMERICAS": 7394153,
+  "APAC": 31961310,
+  "EMEA": 27695397
+ },
+ "regions_growth": {
+  "AMERICAS": 2.2,
+  "APAC": 11.0,
+  "EMEA": 1.6
+ },
+ "digital": 21400000.0,
+ "wholesale": 38900000.0
+}

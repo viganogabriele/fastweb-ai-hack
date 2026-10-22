@@ -1,0 +1,104 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/warehouse/v1/atp?plant=HK30&material=J20931A00618510"
+  },
+  "response": {
+    "snapshot": "2026-10-22T06:00:00",
+    "asOf": "2026-10-22",
+    "stale": false,
+    "positions": [
+      {
+        "plant": "HK30",
+        "material": "J20931A00618510",
+        "size": "0",
+        "unrestricted": 19,
+        "openDeliveries": 0,
+        "ecomReserve": 0,
+        "blocked": 0,
+        "atp": 19,
+        "nextReceipt": {
+          "date": "2026-11-20",
+          "qty": 176,
+          "po": "4500222417"
+        }
+      },
+      {
+        "plant": "HK30",
+        "material": "J20931A00618510",
+        "size": "00",
+        "unrestricted": 6,
+        "openDeliveries": 0,
+        "ecomReserve": 0,
+        "blocked": 0,
+        "atp": 6,
+        "nextReceipt": {
+          "date": "2026-11-20",
+          "qty": 56,
+          "po": "4500222417"
+        }
+      },
+      {
+        "plant": "HK30",
+        "material": "J20931A00618510",
+        "size": "1",
+        "unrestricted": 27,
+        "openDeliveries": 0,
+        "ecomReserve": 0,
+        "blocked": 0,
+        "atp": 27,
+        "nextReceipt": {
+          "date": "2026-11-20",
+          "qty": 240,
+          "po": "4500222417"
+        }
+      },
+      {
+        "plant": "HK30",
+        "material": "J20931A00618510",
+        "size": "2",
+        "unrestricted": 20,
+        "openDeliveries": 0,
+        "ecomReserve": 0,
+        "blocked": 0,
+        "atp": 20,
+        "nextReceipt": {
+          "date": "2026-11-20",
+          "qty": 184,
+          "po": "4500222417"
+        }
+      },
+      {
+        "plant": "HK30",
+        "material": "J20931A00618510",
+        "size": "3",
+        "unrestricted": 11,
+        "openDeliveries": 0,
+        "ecomReserve": 0,
+        "blocked": 0,
+        "atp": 11,
+        "nextReceipt": {
+          "date": "2026-11-20",
+          "qty": 96,
+          "po": "4500222417"
+        }
+      },
+      {
+        "plant": "HK30",
+        "material": "J20931A00618510",
+        "size": "4",
+        "unrestricted": 5,
+        "openDeliveries": 0,
+        "ecomReserve": 0,
+        "blocked": 0,
+        "atp": 5,
+        "nextReceipt": {
+          "date": "2026-11-20",
+          "qty": 48,
+          "po": "4500222417"
+        }
+      }
+    ],
+    "totalAtp": 88
+  }
+}

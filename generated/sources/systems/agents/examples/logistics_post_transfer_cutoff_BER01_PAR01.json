@@ -1,0 +1,29 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/logistics/v1/transfer-requests",
+    "body": {
+      "source": "1402",
+      "dest": "1101",
+      "sku": "J20931A00012-999",
+      "size": "1",
+      "qty": 1,
+      "requestedAtLocal": "2026-10-02T13:40:00",
+      "requiredBy": "2026-10-03"
+    }
+  },
+  "response": {
+    "status": "REJECTED",
+    "lane": "LN-1402-1101",
+    "mode": "ROAD_EXPRESS",
+    "carrier": "DHL Express",
+    "pickupDate": "2026-10-05",
+    "eta": "2026-10-07",
+    "transportCostEur": 48.78,
+    "cutoffLocal": "12:00",
+    "customsRequired": "N",
+    "note": "request at 13:40 after pickup cut-off 12:00; first pickup 2026-10-05",
+    "reason": "CUTOFF_MISSED",
+    "detail": "earliest delivery 2026-10-07 is after required date 2026-10-03"
+  }
+}

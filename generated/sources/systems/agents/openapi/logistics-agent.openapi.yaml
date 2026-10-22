@@ -1,0 +1,249 @@
+openapi: 3.0.3
+info:
+  title: logistics-agent REST API
+  version: 1.7.0
+servers:
+- url: https://agents.moncler-int.example/logistics/v1
+security:
+- apiKey: []
+paths:
+  /shipments/{ref}/tracking:
+    get:
+      summary: Tracking events (UTC)
+      tags:
+      - tracking
+      parameters:
+      - name: ref
+        in: path
+        required: true
+        description: AWB, SAP delivery or SHP id
+        schema:
+          type: string
+      - name: asOfUtc
+        in: query
+        required: false
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tracking'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limited
+  /lanes:
+    get:
+      summary: Lane lead time, cost, cut-off, IBT policy
+      tags:
+      - lanes
+      parameters:
+      - name: origin
+        in: query
+        required: true
+        description: IT10|US20|HK30|store code
+        schema:
+          type: string
+      - name: dest
+        in: query
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lane'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limited
+  /transfer-requests:
+    post:
+      summary: Validate/book an inter-store transfer
+      tags:
+      - ibt
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferResponse'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Business rule violation
+  /customs/holds:
+    get:
+      summary: Open customs holds
+      tags:
+      - customs
+      parameters:
+      - name: country
+        in: query
+        required: false
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomsHolds'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limited
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        traceId:
+          type: string
+    Tracking:
+      type: object
+      properties:
+        awb: &id001
+          type: string
+        carrier: *id001
+        shipmentRef: *id001
+        delivery: *id001
+        plannedDelivery: &id002
+          type: string
+          format: date
+        carrierEdd: *id002
+        status: *id001
+        events:
+          type: array
+          items:
+            type: object
+            properties:
+              event_time_utc: *id001
+              normalized_status: *id001
+              carrier_event_code: *id001
+              carrier_event_desc: *id001
+              location_city: *id001
+    Lane:
+      type: object
+      properties:
+        lane_id: *id001
+        origin: *id001
+        dest: *id001
+        mode: *id001
+        default_carrier: *id001
+        transit_days_contract: &id004
+          type: integer
+        observed_p50_days: &id003
+          type: number
+        observed_p90_days: *id003
+        pickup_cutoff_local: *id001
+        customs_required: *id001
+        documents: *id001
+        ibt_allowed: *id001
+        cost_fixed_eur: *id003
+        cost_per_unit_eur: *id003
+    TransferRequest:
+      type: object
+      required:
+      - source
+      - dest
+      - sku
+      - size
+      - qty
+      - requestedAtLocal
+      properties:
+        source: *id001
+        dest: *id001
+        sku: *id001
+        size: *id001
+        qty: *id004
+        requestedAtLocal:
+          type: string
+          format: date-time
+        requiredBy: *id002
+        reason: *id001
+    TransferResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - ACCEPTED
+          - ACCEPTED_NEXT_PICKUP
+          - REJECTED
+        reason:
+          type: string
+          enum:
+          - IBT_NOT_ALLOWED
+          - SOURCE_CLOSED
+          - NO_STOCK_AT_SOURCE
+          - CUTOFF_MISSED
+          - CANNOT_MEET_DATE
+          - NO_LANE
+        detail: *id001
+        lane: *id001
+        mode: *id001
+        carrier: *id001
+        pickupDate: *id002
+        eta: *id002
+        transportCostEur: *id003
+        cutoffLocal: *id001
+        customsRequired: *id001
+        note: *id001
+    CustomsHolds:
+      type: object
+      properties:
+        holds:
+          type: array
+          items:
+            type: object
+            properties:
+              declaration_no: *id001
+              awb: *id001
+              dest_country: *id001
+              status: *id001
+              hold_reason: *id001
+              lodged_date: *id002
+              released_date: *id002

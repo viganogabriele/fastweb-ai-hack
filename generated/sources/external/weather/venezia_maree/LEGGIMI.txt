@@ -1,0 +1,4 @@
+Livelli di marea osservati. Quote in cm riferite allo Zero Mareografico di Punta della Salute (ZMPS, 1897).
+Orari espressi in ora solare (UTC+1) per tutto l'anno, anche durante l'ora legale.
+Punta della Salute = interno laguna (risente delle chiusure MOSE). Piattaforma CNR = mare aperto, 15 km al largo.
+-999 = dato mancante. Soglie: 80 cm prime aree allagate; 110 cm marea sostenuta (12% della città); 140 cm eccezionale.

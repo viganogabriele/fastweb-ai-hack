@@ -1,0 +1,155 @@
+{
+  "protocolVersion": "0.3.0",
+  "name": "warehouse-agent",
+  "description": "WMS agent for the three distribution centres (IT10 Castel San Giovanni, US20 Secaucus, HK30 Tseung Kwan O via 3PL feed). Answers stock / available-to-promise, inbound purchase orders and quality holds; can create stock reservations. Speaks SAP identifiers: plant (WERKS), material = style+colour without dash (MATNR), AFS size (J_3ASIZE).",
+  "url": "https://agents.moncler-int.example/warehouse/a2a",
+  "preferredTransport": "JSONRPC",
+  "additionalInterfaces": [
+    {
+      "url": "https://agents.moncler-int.example/warehouse/a2a",
+      "transport": "JSONRPC"
+    },
+    {
+      "url": "https://agents.moncler-int.example/warehouse/v1",
+      "transport": "HTTP+JSON"
+    }
+  ],
+  "provider": {
+    "organization": "Moncler - Supply Chain IT - WMS team",
+    "url": "https://intranet.moncler-int.example"
+  },
+  "version": "2.3.1",
+  "documentationUrl": "https://agents.moncler-int.example/warehouse/docs",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false,
+    "stateTransitionHistory": true
+  },
+  "securitySchemes": {
+    "oauth2": {
+      "type": "oauth2",
+      "flows": {
+        "clientCredentials": {
+          "tokenUrl": "https://login.moncler-int.example/oauth2/token",
+          "scopes": {
+            "wms.read": "read stock/ATP",
+            "wms.reserve": "create reservations"
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "oauth2": [
+        "wms.read"
+      ]
+    }
+  ],
+  "defaultInputModes": [
+    "application/json",
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "application/json"
+  ],
+  "skills": [
+    {
+      "id": "get_stock",
+      "name": "Stock by storage location",
+      "description": "Unrestricted/web reserve/quality/returns stock per plant, material and size at end of a given day.",
+      "tags": [
+        "stock",
+        "wms",
+        "sap"
+      ],
+      "examples": [
+        "Stock of J20931A00012999 in IT10 on 2026-10-15?"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "get_atp",
+      "name": "Available-to-promise",
+      "description": "ATP now and weekly projection with confirmed inbound receipts. Based on the 06:00 snapshot (Mondays + today).",
+      "tags": [
+        "atp",
+        "availability"
+      ],
+      "examples": [
+        "ATP for ILVARO 510 at HK30",
+        "When is the next receipt of MAIRE black?"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "get_inbound_po",
+      "name": "Inbound purchase order",
+      "description": "Purchase order lines, delivery date and change history (vendor confirmations).",
+      "tags": [
+        "purchase-order",
+        "eta"
+      ],
+      "examples": [
+        "Show PO 4500218734"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "get_quality_stock",
+      "name": "Quality holds",
+      "description": "Blocked batches and defective returns in quality stock.",
+      "tags": [
+        "quality",
+        "blocked"
+      ],
+      "examples": [
+        "How many TIB units are blocked?"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "create_reservation",
+      "name": "Create reservation",
+      "description": "Reserve DC stock for PR samples, events, VIC holds, e-com. Rejected if ATP insufficient.",
+      "tags": [
+        "reservation"
+      ],
+      "examples": [
+        "Reserve 1 pc ILVARO 510 size 0 at HK30 for PR gifting"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    }
+  ],
+  "x-operational-notes": "60 req/min; HK30 data comes from the 3PL file feed (once a day, ~06:10 HKT) and may be one day old"
+}

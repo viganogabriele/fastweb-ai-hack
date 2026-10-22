@@ -1,0 +1,36 @@
+RATP - INFO TRAFIC
+Prévisions de trafic pour le mardi 13 octobre 2026
+Publié le lundi 12 octobre 2026 à 17h00
+
+En raison d'un mouvement social interprofessionnel, le trafic sera très perturbé sur l'ensemble des réseaux RATP le mardi 13 octobre 2026.
+Nous vous invitons à limiter vos déplacements et à privilégier le télétravail lorsque cela est possible.
+
+MÉTRO
+Ligne 1 : trafic quasi nul. 1 train sur 4 de 7h30 à 9h30 et de 17h00 à 19h00 uniquement. Fermeture des stations Concorde, Champs-Élysées - Clemenceau et Franklin D. Roosevelt toute la journée.
+Ligne 2 : 1 train sur 2 aux heures de pointe.
+Ligne 3 : 1 train sur 3 aux heures de pointe.
+Ligne 4 : 1 train sur 2.
+Ligne 5 : 1 train sur 3 aux heures de pointe.
+Ligne 6 : 1 train sur 3 aux heures de pointe.
+Ligne 7 : 1 train sur 2 aux heures de pointe uniquement, entre La Courneuve et Place d'Italie.
+Ligne 8 : service interrompu toute la journée.
+Ligne 9 : quelques trains aux heures de pointe entre Pont de Sèvres et Havre - Caumartin. Pas de desserte entre Havre - Caumartin et Mairie de Montreuil. Stations Saint-Augustin et Miromesnil fermées.
+Ligne 10 : 1 train sur 3.
+Ligne 11 : 1 train sur 2.
+Ligne 12 : 1 train sur 2 aux heures de pointe.
+Ligne 13 : 1 train sur 3 aux heures de pointe.
+Ligne 14 : trafic normal. Forte affluence attendue, régulation des accès en station possible.
+Lignes 3bis et 7bis : service interrompu.
+
+RER
+RER A : 1 train sur 2 aux heures de pointe, 1 train sur 3 en heures creuses. Interconnexion maintenue à Nanterre-Préfecture.
+RER B : 1 train sur 3. Interconnexion suspendue à Gare du Nord, changement de train obligatoire.
+
+BUS ET TRAMWAY
+Bus : 2 bus sur 3 en moyenne. Noctilien : 1 bus sur 2 dans la nuit de mardi à mercredi.
+Tramway : T1, T2, T3a, T3b : 2 trams sur 3. Autres lignes : trafic normal.
+
+Pour les lignes SNCF (RER C, D, E et Transilien), consultez les prévisions de SNCF Voyageurs.
+Retour à un trafic normal prévu le mercredi 14 octobre en début de service, sauf exceptions locales.
+
+Ces prévisions sont susceptibles d'évoluer. Retrouvez l'information en temps réel sur l'appli et sur ratp.example.

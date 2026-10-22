@@ -1,0 +1,599 @@
+=== AMS01 EUR
+ W36 d=7 s=78k vs=-18% NL60%,OTHER16%,GB8% ev= DEF=0 ARNsz=0 
+ W37 d=7 s=94k vs=-16% NL56%,OTHER13%,US13% ev=E42 DEF=0 ARNsz=1 
+   unmet: LOGO T-SHIRT white 2
+ W38 d=7 s=104k vs=-15% NL52%,OTHER21%,DE9% ev=E42 DEF=0 ARNsz=0 
+   unmet: WOOL TURTLENECK chocolate brown 2
+ W39 d=7 s=111k vs=-20% NL62%,OTHER20%,DE6% ev=E07b,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 6
+ W40 d=7 s=135k vs=-13% NL58%,OTHER20%,DE7% ev=E07b,E08,E42 DEF=3 ARNsz=1 
+   unmet: MAIRE black 3, WOOL TURTLENECK chocolate brown 3, TRAILGRIP GTX grey melange 2
+ W41 d=7 s=121k vs=-28% NL55%,OTHER23%,DE9% ev=E07b,E08,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 2, TIB navy 2, MONTGENEVRE navy 2
+ W42 d=7 s=181k vs=-2% NL54%,OTHER24%,US8% ev=E05,E07b,E08,E42 DEF=0 ARNsz=0 dly=10-17:2d
+   unmet: MAIRE black 9, PEYRE black 3, TRAILGRIP GTX black 2, ARNEB navy 2
+ W43 d=3 s=55k vs=-16% NL52%,OTHER28%,DE7% ev=E05,E07b,E08,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 2, FLAMMETTE black 2
+=== ASP01 USD
+ W36 d=7 s=25k vs=-40% US63%,CN10%,OTHER5% ev= DEF=0 ARNsz=0 
+ W37 d=7 s=12k vs=-64% US81%,OTHER5% ev=E42 DEF=0 ARNsz=0 
+ W38 d=7 s=24k vs=-32% US85%,OTHER12%,KR4% ev=E42 DEF=0 ARNsz=0 
+ W39 d=7 s=35k vs=-9% US78%,OTHER12%,CN7% ev=E42 DEF=0 ARNsz=0 dly=09-22:2d
+ W40 d=7 s=20k vs=-45% US61%,OTHER8%,BR7% ev=E08,E42 DEF=2 ARNsz=0 
+ W41 d=7 s=34k vs=-24% US84%,OTHER7%,CN5% ev=E08,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE navy 3, MAIRE black 2
+ W42 d=7 s=54k vs=+14% US95%,KR3%,OTHER2% ev=E08,E42 DEF=0 ARNsz=0 
+   unmet: CHAMBRE black 2
+ W43 d=3 s=19k vs=+1% US87%,OTHER7%,GB7% ev=E08,E42 DEF=0 ARNsz=0 
+=== BER01 EUR
+ W36 d=6 s=50k vs=-26% DE60%,OTHER7%,AT7% ev= DEF=0 ARNsz=0 
+ W37 d=6 s=68k vs=-15% DE54%,OTHER13%,CN6% ev=E42 DEF=0 ARNsz=0 
+ W38 d=6 s=90k vs=+4% DE59%,SA5%,TR5% ev=E42 DEF=0 ARNsz=0 
+   unmet: INSOLUX black 2
+ W39 d=6 s=72k vs=-25% DE49%,OTHER11%,CN8% ev=E42 DEF=0 ARNsz=0 
+   unmet: CABLE KNIT SWEATER off-white 2
+ W40 d=5 s=74k vs=-6% DE43%,OTHER10%,AT6% ev=E08,E42 DEF=1 ARNsz=0 
+   unmet: MAIRE black 4
+ W41 d=6 s=129k vs=+17% DE50%,US7%,OTHER5% ev=E08,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 3
+ W42 d=6 s=176k vs=+50% DE55%,OTHER5%,CH4% ev=E05,E08,E42 DEF=0 ARNsz=0 
+   unmet: LOGO BEANIE white 4, ROSIERE black 3, MAIRE black 3, KARAKORUM black 3
+ W43 d=3 s=37k vs=-27% DE67%,AT8%,AE7% ev=E05,E08,E42 DEF=2 ARNsz=0 
+   unmet: MAIRE black 4, INSOLUX off-white 3, MAYA black 2
+=== BHS01 USD
+ W36 d=7 s=85k vs=-23% US84%,OTHER6%,MX5% ev= DEF=0 ARNsz=1 
+ W37 d=7 s=91k vs=-30% US80%,OTHER5%,CN4% ev=E39,E42 DEF=0 ARNsz=0 
+   unmet: MAYA navy 2
+ W38 d=7 s=129k vs=-10% US79%,OTHER7%,MX4% ev=E15,E42 DEF=0 ARNsz=0 
+   unmet: MONTCLA navy 3, ARNEB black 2, CREWNECK SWEATSHIRT grey melange 2
+ W39 d=7 s=135k vs=-18% US76%,OTHER10%,BR4% ev=E07b,E15,E42 DEF=0 ARNsz=0 dly=09-23:3d
+   unmet: MAIRE black 4
+ W40 d=7 s=192k vs=+9% US77%,OTHER10%,BR4% ev=E07b,E08,E15,E42 DEF=2 ARNsz=0 
+ W41 d=7 s=188k vs=-3% US71%,OTHER8%,BR7% ev=E07b,E08,E15,E42 DEF=0 ARNsz=0 
+   unmet: CHAMBRE black 3, FLAMMETTE navy 2, MAIRE black 2, WOOL TURTLENECK black 2
+ W42 d=7 s=174k vs=-17% US71%,OTHER7%,KR5% ev=E07b,E08,E15,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 5, TRAILGRIP W black 3, WOOL TURTLENECK black 2, INSOLUX black 2
+ W43 d=3 s=84k vs=+13% US76%,CN8%,GB4% ev=E07b,E08,E15,E42 DEF=0 ARNsz=0 
+=== BJS01 CNY
+ W36 d=7 s=2044k vs=-9% CN98%,OTHER2% ev= DEF=0 ARNsz=0 
+   unmet: POLO white 2
+ W37 d=7 s=2266k vs=-13% CN98%,OTHER2% ev=E42 DEF=0 ARNsz=1 
+ W38 d=7 s=2545k vs=-15% CN98%,OTHER2% ev=E42 DEF=0 ARNsz=0 
+   unmet: INSOLUX black 2, TRAILGRIP GTX black 2
+ W39 d=7 s=3743k vs=+2% CN100%,OTHER0% ev=E07,E42 DEF=0 ARNsz=2 
+   unmet: CHAMBRE off-white 2
+ W40 d=7 s=4331k vs=+5% CN99%,OTHER1% ev=E01b,E06,E06b,E07,E08,E42 DEF=8 ARNsz=0 
+   unmet: MAIRE black 7, ILVARO powder pink 4, LOGO CARDIGAN navy 2
+ W41 d=7 s=4796k vs=+10% CN99%,OTHER1% ev=E01b,E06,E06b,E07,E08,E42 DEF=3 ARNsz=3 
+   unmet: MAIRE black 13, ILVARO powder pink 9, HERMINE off-white 3, CABLE KNIT SWEATER black 2
+ W42 d=7 s=4916k vs=+4% CN99%,OTHER1% ev=E06,E06b,E07,E08,E42 DEF=4 ARNsz=2 
+   unmet: MAIRE black 9, ILVARO powder pink 8, BADY off-white 3, ILVARO black 3
+ W43 d=3 s=986k vs=-39% CN98%,OTHER2% ev=E06,E06b,E07,E08,E22,E42 DEF=2 ARNsz=0 
+   unmet: MAIRE black 4, ILVARO black 2
+=== BUS01 KRW
+ W36 d=7 s=234944k vs=+4% KR82%,CN8%,US4% ev= DEF=0 ARNsz=0 
+ W37 d=7 s=198269k vs=-27% KR73%,CN11%,OTHER10% ev=E42 DEF=0 ARNsz=1 
+   unmet: TRAILGRIP W black 3
+ W38 d=7 s=280757k vs=-5% KR80%,CN9%,JP3% ev=E42 DEF=0 ARNsz=1 
+   unmet: ARNEB navy 2
+ W39 d=6 s=212309k vs=-13% KR65%,CN11%,JP3% ev=E42 DEF=0 ARNsz=0 
+   unmet: HERMINE navy 3
+ W40 d=7 s=305546k vs=-14% KR82%,CN8%,TW3% ev=E06,E06b,E08,E42,E43 DEF=5 ARNsz=1 dly=10-01:3d
+   unmet: ILVARO powder pink 7, ARNEB navy 2
+ W41 d=7 s=322762k vs=-16% KR80%,CN9%,OTHER4% ev=E06,E06b,E08,E42,E43 DEF=0 ARNsz=0 
+   unmet: ILVARO powder pink 15, TRAILGRIP W black 2
+ W42 d=7 s=403133k vs=+1% KR78%,CN10%,JP4% ev=E06,E06b,E08,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 18, ILVARO powder pink 6, KARAKORUM navy 2
+ W43 d=3 s=119318k vs=-15% KR85%,CN9%,JP3% ev=E06,E06b,E08,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 6
+=== CAN01 EUR
+ W36 d=6 s=30k vs=-41% FR33%,US17%,KR8% ev= DEF=0 ARNsz=0 dly=09-05:2d
+   unmet: POLO black 3
+ W37 d=6 s=44k vs=-31% FR25%,OTHER7%,CN7% ev=E42 DEF=0 ARNsz=0 
+   unmet: BADY black 2
+ W38 d=6 s=47k vs=-31% FR19%,OTHER15%,US14% ev=E42 DEF=0 ARNsz=0 
+   unmet: LOGO CARDIGAN navy 2
+ W39 d=6 s=78k vs=+0% CN21%,FR20%,OTHER12% ev=E42 DEF=0 ARNsz=0 
+   unmet: FLAMMETTE navy 2, TRAILGRIP GTX black 2
+ W40 d=6 s=57k vs=-35% FR27%,OTHER15%,US8% ev=E08,E42 DEF=1 ARNsz=0 
+   unmet: FLAMMETTE navy 2, MAIRE off-white 2, KARAKORUM navy 2
+ W41 d=6 s=60k vs=-35% FR33%,CN14%,GB9% ev=E08,E42 DEF=0 ARNsz=0 
+   unmet: LOGO HOODIE navy 2, LOGO HOODIE grey melange 2
+ W42 d=6 s=61k vs=-40% FR37%,CN10%,US10% ev=E08,E42 DEF=0 ARNsz=0 
+ W43 d=3 s=33k vs=-23% FR39%,US24%,OTHER13% ev=E08,E42 DEF=1 ARNsz=0 
+   unmet: MAIRE off-white 3
+=== CDU01 CNY
+ W36 d=7 s=1253k vs=-30% CN99%,OTHER1% ev= DEF=0 ARNsz=0 
+ W37 d=7 s=1601k vs=-22% CN97%,OTHER3% ev=E42 DEF=0 ARNsz=1 
+   unmet: HERMINE off-white 2, AMBRINE chocolate brown 2
+ W38 d=7 s=1872k vs=-16% CN98%,OTHER2% ev=E42 DEF=0 ARNsz=0 
+   unmet: MONTCLA black 2, TIB black 2
+ W39 d=7 s=2825k vs=+5% CN99%,OTHER1% ev=E07,E42 DEF=0 ARNsz=2 
+   unmet: ROSIERE black 2
+ W40 d=7 s=3798k vs=+25% CN99%,OTHER1% ev=E01b,E06,E06b,E07,E08,E42 DEF=6 ARNsz=1 
+   unmet: ILVARO powder pink 10, MAIRE black 3, PEYRE red 2, MAIRE off-white 2
+ W41 d=7 s=3308k vs=-1% CN98%,OTHER2% ev=E01b,E06,E06b,E07,E08,E42 DEF=1 ARNsz=0 
+   unmet: MAIRE black 4, ILVARO powder pink 4, LOGO HOODIE grey melange 2, TRAILGRIP GTX grey melange 2
+ W42 d=7 s=3522k vs=-1% CN97%,OTHER3% ev=E06,E06b,E07,E08,E42 DEF=1 ARNsz=0 
+   unmet: MAIRE black 6, TRICOT PADDED CARDIGAN black 3, BADY black 3, CHAMBRE black 2
+ W43 d=3 s=973k vs=-20% CN99%,OTHER1% ev=E06,E06b,E07,E08,E22,E42 DEF=2 ARNsz=0 
+=== COU01 EUR
+ W36 d=7 s=47k vs=-33% IT45%,JP10%,CN8% ev= DEF=0 ARNsz=0 
+   unmet: TRAILGRIP W black 2, AMBRINE chocolate brown 2
+ W37 d=6 s=27k vs=-54% IT32%,US19%,DE7% ev=E42 DEF=0 ARNsz=0 
+   unmet: LOGO CAP white 3, ARNEB black 2, ILVARO black 2, POLO white 2
+ W38 d=0 s=0k vs=+0%  ev=E42 DEF=0 ARNsz=0 
+ W39 d=0 s=0k vs=+0%  ev=E42 DEF=0 ARNsz=0 
+ W40 d=0 s=0k vs=+0%  ev=E08,E42 DEF=0 ARNsz=0 
+ W41 d=0 s=0k vs=+0%  ev=E08,E42 DEF=0 ARNsz=0 
+ W42 d=0 s=0k vs=+0%  ev=E08,E42 DEF=0 ARNsz=0 
+ W43 d=0 s=0k vs=+0%  ev=E08,E42 DEF=0 ARNsz=0 
+=== CPH01 DKK
+ W36 d=6 s=382k vs=-19% DK49%,US9%,DE8% ev= DEF=0 ARNsz=0 
+   unmet: BADY off-white 2
+ W37 d=6 s=456k vs=-17% DK52%,OTHER13%,SE7% ev=E42 DEF=0 ARNsz=0 
+   unmet: TIB black 2, INSOLUX black 2
+ W38 d=6 s=383k vs=-36% DK52%,SE14%,OTHER7% ev=E42 DEF=0 ARNsz=0 
+   unmet: MAIRE off-white 4, MONTGENEVRE black 3, VALBOURG black 2, MAYA olive 2
+ W39 d=6 s=570k vs=-12% DK55%,SE9%,US5% ev=E42 DEF=0 ARNsz=1 
+   unmet: LOGO HOODIE black 2, HERMINE off-white 2
+ W40 d=6 s=559k vs=-24% DK35%,NO16%,SE10% ev=E08,E37,E42 DEF=1 ARNsz=0 
+   unmet: LOGO CAP navy 2
+ W41 d=6 s=647k vs=-16% DK45%,NO12%,OTHER9% ev=E08,E42 DEF=0 ARNsz=0 
+   unmet: TIB black 2, TRICOT PADDED CARDIGAN navy 2
+ W42 d=6 s=949k vs=+11% DK57%,SE12%,OTHER6% ev=E05,E08,E42 DEF=0 ARNsz=0 
+   unmet: INSOLUX black 2
+ W43 d=3 s=349k vs=-7% DK58%,OTHER11%,SE8% ev=E05,E08,E42 DEF=0 ARNsz=0 
+   unmet: LOGO BEANIE black 2, WOOL TURTLENECK navy 2
+=== CRT01 EUR
+ W36 d=7 s=48k vs=-20% IT39%,US15%,CN11% ev= DEF=0 ARNsz=0 
+   unmet: CHAMONIX black 2
+ W37 d=7 s=61k vs=+3% IT42%,OTHER12%,US8% ev=E42 DEF=0 ARNsz=0 
+ W38 d=7 s=40k vs=-24% IT36%,CN16%,US13% ev=E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 2, PEYRE black 2
+ W39 d=7 s=42k vs=-27% IT41%,DE10%,GB9% ev=E42 DEF=0 ARNsz=0 
+ W40 d=6 s=42k vs=-22% IT40%,CN8%,JP8% ev=E08,E42,E44 DEF=2 ARNsz=0 
+   unmet: AMBRINE black 2
+ W41 d=3 s=24k vs=-33% IT17%,CN11%,AE4% ev=E08,E42,E44 DEF=0 ARNsz=0 
+ W42 d=3 s=31k vs=-25% IT10%,CN9%,CH4% ev=E08,E42,E44 DEF=0 ARNsz=0 
+ W43 d=0 s=0k vs=+0%  ev=E08,E42,E44 DEF=0 ARNsz=0 
+=== DXB01 AED
+ W36 d=7 s=423k vs=-29% AE25%,OTHER20%,CN11% ev= DEF=0 ARNsz=0 dly=09-01:2d
+   unmet: CABLE KNIT SWEATER off-white 3, MONTGENEVRE black 2, TRAILGRIP GTX black 2
+ W37 d=7 s=460k vs=-29% AE24%,OTHER24%,SA16% ev=E42 DEF=0 ARNsz=0 dly=09-09:3d
+   unmet: POLO navy 4, POLO black 2, INSOLUX off-white 2, ILVARO black 2
+ W38 d=7 s=621k vs=-8% OTHER25%,SA18%,IN14% ev=E42 DEF=0 ARNsz=0 
+   unmet: BADY black 3, TRICOT PADDED CARDIGAN navy 2, ARNEB black 2, LOGO T-SHIRT white 2
+ W39 d=7 s=632k vs=-8% OTHER23%,AE21%,IN11% ev=E42 DEF=0 ARNsz=1 
+   unmet: CREWNECK SWEATSHIRT black 3, CASHMERE SCARF grey melange 3, KARAKORUM navy 2
+ W40 d=7 s=508k vs=-30% SA19%,AE18%,OTHER15% ev=E08,E42 DEF=7 ARNsz=0 
+   unmet: TRAILGRIP W off-white 2
+ W41 d=7 s=738k vs=-1% AE21%,SA17%,OTHER17% ev=E08,E42 DEF=0 ARNsz=0 
+   unmet: CASHMERE SCARF beige 3, CHAMONIX black 2, LOGO HOODIE grey melange 2
+ W42 d=7 s=674k vs=-16% AE21%,OTHER20%,CN12% ev=E08,E42 DEF=1 ARNsz=2 
+   unmet: MAIRE black 5, ARNEB black 2
+ W43 d=3 s=250k vs=-9% OTHER22%,AE18%,IN17% ev=E08,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 3, TRAILGRIP GTX grey melange 2
+=== GVA01 CHF
+ W36 d=6 s=54k vs=-26% CH52%,OTHER11%,CN8% ev= DEF=0 ARNsz=0 
+   unmet: MONTCLA black 3
+ W37 d=6 s=58k vs=-32% CH41%,CN10%,US10% ev=E42 DEF=0 ARNsz=1 
+   unmet: FLAMMETTE black 3, LOGO CARDIGAN navy 2, MONTCLA black 2, TIB black 2
+ W38 d=6 s=67k vs=-28% CH41%,OTHER14%,CN8% ev=E42 DEF=0 ARNsz=0 
+   unmet: MAIRE off-white 2, MONTGENEVRE black 2, PEYRE black 2
+ W39 d=6 s=94k vs=-12% CH35%,OTHER15%,DE5% ev=E42 DEF=0 ARNsz=0 
+   unmet: ILVARO black 2
+ W40 d=6 s=86k vs=-26% CH36%,OTHER14%,DE7% ev=E08,E42 DEF=2 ARNsz=1 
+   unmet: MAIRE black 2, KARAKORUM grey melange 2, ROSIERE black 2
+ W41 d=6 s=117k vs=-7% CH41%,OTHER8%,CN6% ev=E08,E42 DEF=1 ARNsz=0 
+   unmet: MAIRE black 5
+ W42 d=6 s=169k vs=+26% CH42%,OTHER9%,CN8% ev=E05,E08,E42 DEF=0 ARNsz=1 
+   unmet: MAIRE black 5, HERMINE off-white 2, MONTGENEVRE black 2, VALBOURG off-white 2
+ W43 d=3 s=36k vs=-35% CH50%,OTHER18%,DE18% ev=E05,E08,E42 DEF=1 ARNsz=1 
+   unmet: MAIRE black 5
+=== HKG01 HKD
+ W36 d=7 s=1268k vs=-17% HK47%,CN44%,OTHER9% ev= DEF=0 ARNsz=0 
+   unmet: LOGO HOODIE navy 2
+ W37 d=7 s=1640k vs=+2% CN46%,HK44%,OTHER10% ev=E42 DEF=0 ARNsz=0 
+ W38 d=6 s=943k vs=-35% CN46%,HK30%,OTHER9% ev=E09,E42 DEF=0 ARNsz=1 
+   unmet: KARAKORUM navy 2
+ W39 d=7 s=1732k vs=-4% HK51%,CN38%,OTHER11% ev=E07,E42 DEF=0 ARNsz=1 dly=09-23:2d
+   unmet: ROSIERE black 2
+ W40 d=7 s=2396k vs=+23% CN59%,HK34%,OTHER7% ev=E01,E06,E06b,E07,E08,E42 DEF=4 ARNsz=1 
+   unmet: ILVARO powder pink 6, POLARIS OVERSIZED black 2, ROSIERE black 2, BADY black 2
+ W41 d=7 s=2213k vs=+8% CN58%,HK37%,OTHER5% ev=E01,E06,E06b,E07,E08,E42 DEF=1 ARNsz=0 
+   unmet: ILVARO powder pink 8, MAIRE black 4, WOOL TURTLENECK navy 3, ILVARO black 2
+ W42 d=7 s=1881k vs=-13% HK47%,CN44%,OTHER9% ev=E06,E06b,E07,E08,E42 DEF=1 ARNsz=1 
+   unmet: ILVARO black 9, ILVARO powder pink 6, MAIRE black 3, LOGO CARDIGAN black 2
+ W43 d=3 s=665k vs=-7% HK52%,CN40%,OTHER8% ev=E06,E06b,E07,E08,E42 DEF=1 ARNsz=0 
+   unmet: ILVARO black 3
+=== LON01 GBP
+ W36 d=7 s=210k vs=-11% GB50%,OTHER11%,US8% ev= DEF=0 ARNsz=1 
+   unmet: MAIRE beige 3, ALBENGA black 2
+ W37 d=7 s=283k vs=+3% GB41%,US15%,OTHER13% ev=E41,E42 DEF=0 ARNsz=0 
+   unmet: LOGO T-SHIRT black 3, MAIRE off-white 2
+ W38 d=7 s=276k vs=-8% GB46%,OTHER13%,US9% ev=E15,E41,E42 DEF=0 ARNsz=0 
+   unmet: CREWNECK SWEATSHIRT grey melange 2
+ W39 d=7 s=354k vs=+2% GB49%,US11%,OTHER10% ev=E07b,E15,E41,E42 DEF=0 ARNsz=0 
+   unmet: BADY off-white 3, CABLE KNIT SWEATER off-white 3, WOOL TURTLENECK chocolate brown 2
+ W40 d=7 s=330k vs=-15% GB45%,US11%,OTHER10% ev=E06b,E07b,E08,E15,E41,E42 DEF=13 ARNsz=1 
+   unmet: MAYA olive 2, ILVARO powder pink 2
+ W41 d=7 s=522k vs=+27% GB51%,OTHER9%,US7% ev=E06b,E07b,E08,E15,E18,E41,E42 DEF=5 ARNsz=1 
+   unmet: MAIRE black 28, ARNEB black 3, CREWNECK SWEATSHIRT grey melange 2
+ W42 d=7 s=512k vs=+13% GB44%,US10%,OTHER8% ev=E05b,E06b,E07b,E08,E15,E41,E42 DEF=4 ARNsz=0 
+   unmet: MAIRE black 10, LOGO HOODIE navy 2, INSOLUX black 2
+ W43 d=3 s=131k vs=-19% GB49%,US14%,OTHER7% ev=E05b,E06b,E07b,E08,E15,E41,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 3
+=== LON02 GBP
+ W36 d=7 s=122k vs=-16% GB50%,OTHER9%,CN9% ev= DEF=0 ARNsz=0 
+ W37 d=7 s=147k vs=-7% GB46%,US13%,OTHER10% ev=E42 DEF=0 ARNsz=0 
+ W38 d=7 s=166k vs=-1% GB47%,US12%,OTHER11% ev=E02,E15,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 9, TRAILGRIP GTX black 3, MONTCLA navy 2
+ W39 d=7 s=202k vs=+6% GB41%,OTHER11%,US11% ev=E02,E15,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 31, MAIRE navy 3
+ W40 d=7 s=188k vs=-9% GB32%,CN27%,US13% ev=E01,E02,E08,E15,E42 DEF=6 ARNsz=0 
+   unmet: MAIRE black 35, AMBRINE chocolate brown 2
+ W41 d=7 s=231k vs=+6% GB35%,CN22%,OTHER10% ev=E01,E02,E08,E15,E42 DEF=2 ARNsz=0 
+   unmet: MAIRE black 36, ROSIERE olive 2, WOOL TURTLENECK black 2
+ W42 d=7 s=252k vs=+8% GB45%,US12%,CN8% ev=E02,E05b,E08,E15,E42 DEF=5 ARNsz=0 
+   unmet: MAIRE black 32, AMBRINE chocolate brown 2, LOGO CARDIGAN navy 2, ROSIERE black 2
+ W43 d=3 s=48k vs=-42% GB45%,OTHER11%,CN8% ev=E05b,E08,E15,E42 DEF=0 ARNsz=0 
+   unmet: LOGO CARDIGAN black 4, MAIRE black 3
+=== MAD01 EUR
+ W36 d=7 s=75k vs=-35% ES45%,OTHER20%,CN10% ev= DEF=0 ARNsz=0 
+ W37 d=7 s=134k vs=-0% ES57%,OTHER17%,US7% ev=E41,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 2, LOGO CARDIGAN black 2
+ W38 d=7 s=134k vs=-10% ES50%,OTHER26%,US9% ev=E41,E42 DEF=0 ARNsz=1 
+   unmet: WOOL TURTLENECK navy 2
+ W39 d=7 s=141k vs=-15% ES49%,OTHER24%,MX9% ev=E07b,E14b,E41,E42 DEF=0 ARNsz=1 dly=09-26:2dW
+   unmet: AMBRINE chocolate brown 2, MAYA black 2
+ W40 d=7 s=173k vs=-6% ES49%,OTHER22%,MX9% ev=E07b,E08,E14b,E40,E41,E42 DEF=5 ARNsz=0 dly=10-01:0dW
+   unmet: MAYA black 5, ROSIERE black 2, FLAMMETTE black 2, AMBRINE chocolate brown 2
+ W41 d=7 s=176k vs=-14% ES56%,OTHER13%,MX8% ev=E07b,E08,E14b,E40,E41,E42 DEF=0 ARNsz=1 dly=10-11:3d
+   unmet: MAYA black 6, LOGO HOODIE navy 3, CREWNECK SWEATSHIRT black 3, LOGO T-SHIRT white 2
+ W42 d=7 s=185k vs=-13% ES55%,OTHER19%,MX10% ev=E07b,E08,E41,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 3
+ W43 d=3 s=53k vs=-30% ES61%,MX12%,OTHER10% ev=E07b,E08,E41,E42 DEF=0 ARNsz=0 
+=== MIA01 USD
+ W36 d=7 s=55k vs=-30% US89%,OTHER4%,BR4% ev=E28 DEF=0 ARNsz=0 
+ W37 d=7 s=70k vs=-16% US78%,BR9%,OTHER4% ev=E42 DEF=0 ARNsz=0 
+ W38 d=7 s=69k vs=-18% US72%,OTHER9%,CN7% ev=E15,E42 DEF=0 ARNsz=0 
+   unmet: AMBRINE black 2
+ W39 d=7 s=99k vs=+7% US69%,OTHER9%,BR8% ev=E15,E42 DEF=0 ARNsz=0 
+ W40 d=7 s=71k vs=-28% US82%,BR5%,KR4% ev=E08,E15,E42 DEF=2 ARNsz=0 
+   unmet: FLAMMETTE black 3, INSOLUX black 2
+ W41 d=7 s=84k vs=-17% US85%,MX5%,KR4% ev=E08,E15,E42 DEF=0 ARNsz=0 
+   unmet: LOGO CARDIGAN navy 4, KARAKORUM black 2
+ W42 d=7 s=67k vs=-40% US74%,OTHER12%,CN7% ev=E08,E15,E42 DEF=0 ARNsz=1 
+   unmet: LOGO CARDIGAN navy 2, LOGO HOODIE grey melange 2
+ W43 d=3 s=27k vs=-29% US76%,CN7%,BR6% ev=E08,E15,E42 DEF=0 ARNsz=0 
+   unmet: TRAILGRIP W off-white 2
+=== MIL01 EUR
+ W36 d=7 s=330k vs=-0% IT37%,CN11%,US5% ev= DEF=0 ARNsz=0 dly=08-31:2d 09-06:1d
+ W37 d=7 s=340k vs=-14% IT38%,CN13%,OTHER8% ev=E41,E42 DEF=0 ARNsz=1 
+ W38 d=7 s=422k vs=-2% IT40%,US11%,CN10% ev=E02,E41,E42 DEF=0 ARNsz=1 
+   unmet: MAIRE black 7
+ W39 d=7 s=524k vs=+7% IT38%,CN13%,US7% ev=E02,E07b,E21,E41,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 27, ILVARO powder pink 3
+ W40 d=7 s=653k vs=+21% CN32%,IT29%,US4% ev=E01,E02,E07b,E08,E21,E41,E42 DEF=16 ARNsz=1 
+   unmet: MAIRE black 22, POLO white 3
+ W41 d=7 s=675k vs=+17% IT33%,CN26%,US6% ev=E01,E02,E03,E07b,E08,E41,E42 DEF=1 ARNsz=5 
+   unmet: MAIRE black 45, ILVARO powder pink 6, WOOL TURTLENECK chocolate brown 2, LOGO CARDIGAN navy 2
+ W42 d=7 s=589k vs=-6% IT38%,CN12%,US9% ev=E02,E03,E05b,E07b,E08,E10b,E41,E42 DEF=7 ARNsz=1 
+   unmet: MAIRE black 30, LOGO CARDIGAN black 4, LOGO CARDIGAN navy 2, ILVARO black 2
+ W43 d=3 s=241k vs=+7% IT40%,US10%,CN9% ev=E03,E05b,E07b,E08,E41,E42 DEF=1 ARNsz=1 
+   unmet: MAIRE black 3, AMBRINE chocolate brown 3
+=== MIL02 EUR
+ W36 d=7 s=120k vs=-5% IT44%,CN13%,US8% ev= DEF=0 ARNsz=0 
+   unmet: ILVARO black 2
+ W37 d=7 s=132k vs=-6% IT32%,US8%,CN8% ev=E41,E42 DEF=0 ARNsz=0 
+ W38 d=7 s=135k vs=-15% IT40%,US12%,CN5% ev=E41,E42 DEF=0 ARNsz=0 
+   unmet: WOOL TURTLENECK chocolate brown 2
+ W39 d=7 s=195k vs=+12% IT44%,CN14%,US6% ev=E21,E41,E42 DEF=0 ARNsz=0 dly=09-26:3d
+   unmet: MAIRE black 4, KARAKORUM grey melange 2, LOGO HOODIE grey melange 2
+ W40 d=7 s=246k vs=+32% CN33%,IT29%,DE4% ev=E01,E08,E21,E41,E42 DEF=5 ARNsz=0 
+   unmet: MAIRE black 8, MAIRE navy 3, ILVARO off-white 2, MONTGENEVRE navy 2
+ W41 d=7 s=221k vs=+7% IT29%,CN26%,KR4% ev=E01,E08,E41,E42 DEF=2 ARNsz=0 dly=10-10:3d
+   unmet: TRAILGRIP GTX black 7, KARAKORUM black 2, TRICOT PADDED CARDIGAN navy 2, MAIRE black 2
+ W42 d=7 s=193k vs=-13% IT40%,CN10%,US10% ev=E05b,E08,E10b,E41,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 7, LOGO CARDIGAN navy 3, POLO navy 3
+ W43 d=3 s=87k vs=+9% IT39%,OTHER13%,AE7% ev=E05b,E08,E41,E42 DEF=1 ARNsz=0 
+   unmet: MAIRE black 2
+=== MUN01 EUR
+ W36 d=6 s=107k vs=-13% DE50%,US7%,CN4% ev= DEF=0 ARNsz=1 dly=09-05:2d
+   unmet: TRAILGRIP GTX black 2
+ W37 d=6 s=109k vs=-22% DE57%,OTHER8%,CH3% ev=E42 DEF=0 ARNsz=0 dly=09-12:2d
+   unmet: LOGO T-SHIRT black 3, POLO navy 2, CHAMONIX black 2
+ W38 d=6 s=171k vs=+6% DE54%,OTHER10%,CN4% ev=E42 DEF=0 ARNsz=0 
+ W39 d=6 s=148k vs=-20% DE49%,CN8%,OTHER6% ev=E07b,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 2
+ W40 d=5 s=141k vs=-4% DE44%,OTHER5%,TR3% ev=E07b,E08,E42 DEF=1 ARNsz=1 
+   unmet: MAIRE black 6, PEYRE black 3, HERMINE navy 3, LOGO CAP white 2
+ W41 d=6 s=165k vs=-26% DE53%,OTHER8%,CN5% ev=E07b,E08,E42 DEF=0 ARNsz=1 
+   unmet: MAIRE black 3
+ W42 d=6 s=304k vs=+26% DE53%,OTHER10%,CN4% ev=E05,E07b,E08,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 14, LOGO BEANIE navy 3, HERMINE navy 3, MONTGENEVRE grey melange 3
+ W43 d=3 s=77k vs=-24% DE62%,US8%,OTHER7% ev=E05,E07b,E08,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 2, ILVARO black 2
+=== NYC01 USD
+ W36 d=7 s=301k vs=+4% US78%,OTHER8%,BR4% ev= DEF=0 ARNsz=0 
+ W37 d=7 s=302k vs=-11% US77%,OTHER8%,BR3% ev=E42 DEF=0 ARNsz=1 
+   unmet: CABLE KNIT SWEATER black 2
+ W38 d=7 s=315k vs=-15% US79%,OTHER9%,GB3% ev=E15,E42 DEF=0 ARNsz=1 dly=09-18:2d
+ W39 d=7 s=263k vs=-36% US83%,OTHER5%,CN4% ev=E07b,E15,E20,E42 DEF=0 ARNsz=1 
+ W40 d=7 s=380k vs=-16% US75%,OTHER10%,MX4% ev=E07b,E08,E15,E42 DEF=10 ARNsz=2 
+   unmet: MAIRE black 2
+ W41 d=7 s=491k vs=-1% US81%,OTHER6%,CN3% ev=E07b,E08,E15,E42 DEF=4 ARNsz=0 
+   unmet: KARAKORUM navy 4, CHAMBRE black 2
+ W42 d=7 s=531k vs=+1% US78%,OTHER8%,MX3% ev=E07b,E08,E15,E42 DEF=1 ARNsz=1 dly=10-12:1d
+   unmet: MAIRE black 3, HERMINE navy 2
+ W43 d=3 s=222k vs=+16% US81%,OTHER7%,BR3% ev=E07b,E08,E15,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 2
+=== NYC02 USD
+ W36 d=7 s=167k vs=-2% US82%,OTHER6%,KR3% ev= DEF=0 ARNsz=0 dly=09-01:2d
+   unmet: MONTGENEVRE navy 2, BADY black 2, LOGO CARDIGAN black 2, LOGO HOODIE navy 2
+ W37 d=7 s=170k vs=-13% US82%,OTHER7%,CN5% ev=E42 DEF=0 ARNsz=0 
+   unmet: TRAILGRIP GTX black 2
+ W38 d=7 s=187k vs=-13% US74%,OTHER14%,CN4% ev=E15,E42 DEF=0 ARNsz=0 
+   unmet: KARAKORUM grey melange 2, MAYA navy 2
+ W39 d=7 s=226k vs=-7% US76%,OTHER9%,BR3% ev=E07b,E15,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 3, TIB black 3, ROSIERE black 2
+ W40 d=7 s=286k vs=+9% US76%,OTHER6%,KR4% ev=E06b,E07b,E08,E15,E42 DEF=8 ARNsz=0 
+   unmet: TIB black 2, ROSIERE black 2, LOGO T-SHIRT black 2, BADY off-white 2
+ W41 d=7 s=246k vs=-12% US74%,OTHER10%,BR4% ev=E06b,E07b,E08,E11,E15,E42 DEF=1 ARNsz=0 
+   unmet: MAIRE black 5, BADY powder pink 2, ILVARO off-white 2, ILVARO black 2
+ W42 d=7 s=235k vs=-21% US79%,CN4%,MX4% ev=E06b,E07b,E08,E15,E42 DEF=4 ARNsz=0 
+   unmet: MAIRE black 7, LOGO T-SHIRT white 2
+ W43 d=3 s=112k vs=+1% US83%,OTHER9%,CN4% ev=E06b,E07b,E08,E15,E42 DEF=1 ARNsz=0 
+=== OSA01 JPY
+ W36 d=7 s=37279k vs=+4% JP51%,CN15%,TW8% ev= DEF=0 ARNsz=0 
+   unmet: CHAMBRE black 2, BADY black 2, TIB off-white 2, TRAILGRIP W black 2
+ W37 d=7 s=32911k vs=-19% JP55%,CN15%,HK7% ev=E42 DEF=0 ARNsz=0 
+   unmet: CHAMBRE black 6, MAYA navy 3, HERMINE off-white 2, MONTCLA navy 2
+ W38 d=7 s=44841k vs=+1% JP55%,CN16%,KR5% ev=E42 DEF=0 ARNsz=0 
+   unmet: TRAILGRIP GTX black 4, TIB navy 3, TRAILGRIP W black 2
+ W39 d=7 s=38950k vs=-20% JP51%,CN17%,OTHER6% ev=E42 DEF=0 ARNsz=0 
+   unmet: BADY powder pink 2, TIB off-white 2
+ W40 d=7 s=49790k vs=-5% JP42%,CN32%,TW7% ev=E01,E06,E06b,E08,E13w,E42 DEF=8 ARNsz=0 
+   unmet: MAIRE black 11, ILVARO powder pink 7, LOGO T-SHIRT white 2, LOGO T-SHIRT navy 2
+ W41 d=7 s=40440k vs=-29% JP43%,CN34%,TH5% ev=E01,E06,E06b,E08,E13w,E42 DEF=4 ARNsz=0 
+   unmet: LOGO HOODIE grey melange 5, ILVARO powder pink 2, LOGO HOODIE navy 2
+ W42 d=7 s=79058k vs=+30% JP67%,CN10%,TW5% ev=E06,E06b,E08,E13,E42 DEF=2 ARNsz=0 
+   unmet: MAIRE black 13, LOGO CARDIGAN navy 5, ILVARO powder pink 4, BADY off-white 3
+ W43 d=3 s=24190k vs=+14% JP60%,CN15%,KR8% ev=E06,E06b,E08,E13,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 7, ILVARO black 3, VALBOURG black 2
+=== PAR01 EUR
+ W36 d=6 s=251k vs=-6% FR25%,OTHER14%,US10% ev= DEF=0 ARNsz=0 dly=09-02:3d
+   unmet: TRICOT PADDED CARDIGAN navy 3, VALBOURG off-white 2, LOGO HOODIE grey melange 2
+ W37 d=6 s=257k vs=-16% FR27%,OTHER13%,CN10% ev=E41,E42 DEF=0 ARNsz=0 
+ W38 d=6 s=298k vs=-13% FR27%,OTHER14%,CN13% ev=E02,E41,E42 DEF=0 ARNsz=0 dly=09-18:1d
+   unmet: LOGO T-SHIRT white 3, WOOL TURTLENECK black 2, MAIRE navy 2
+ W39 d=6 s=334k vs=-11% FR23%,OTHER12%,US10% ev=E02,E07b,E41,E42 DEF=0 ARNsz=2 
+   unmet: MAIRE black 20
+ W40 d=6 s=622k vs=+41% CN31%,FR20%,OTHER9% ev=E01,E02,E06b,E07b,E08,E21b,E41,E42 DEF=14 ARNsz=0 
+   unmet: MAIRE black 48, ILVARO powder pink 4, AMBRINE chocolate brown 4, LOGO T-SHIRT black 3
+ W41 d=6 s=553k vs=+18% CN28%,FR23%,OTHER6% ev=E01,E02,E06b,E07b,E08,E21b,E41,E42 DEF=8 ARNsz=0 
+   unmet: MAIRE black 54, AMBRINE chocolate brown 8, ILVARO powder pink 5, KARAKORUM black 3
+ W42 d=6 s=359k vs=-28% FR26%,OTHER13%,CN11% ev=E02,E05b,E06b,E07b,E08,E10,E41,E42 DEF=6 ARNsz=0 
+   unmet: MAIRE black 22, AMBRINE chocolate brown 5, PEYRE black 2
+ W43 d=3 s=196k vs=-7% FR34%,CN18%,US12% ev=E05b,E06b,E07b,E08,E41,E42 DEF=0 ARNsz=1 
+   unmet: MAIRE black 8
+=== PAR02 EUR
+ W36 d=7 s=200k vs=-13% FR27%,OTHER19%,CN18% ev= DEF=0 ARNsz=0 
+ W37 d=7 s=255k vs=-8% FR32%,US13%,CN12% ev=E41,E42 DEF=0 ARNsz=0 
+   unmet: VALBOURG black 2
+ W38 d=7 s=280k vs=-7% FR27%,OTHER15%,US11% ev=E02,E41,E42 DEF=0 ARNsz=1 
+   unmet: MAIRE black 8
+ W39 d=7 s=303k vs=-7% FR24%,US14%,OTHER13% ev=E02,E41,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 34
+ W40 d=7 s=457k vs=+28% CN31%,FR22%,US10% ev=E01,E02,E08,E21b,E41,E42 DEF=15 ARNsz=1 
+   unmet: MAIRE black 97, LOGO T-SHIRT white 4, MAIRE off-white 2
+ W41 d=7 s=415k vs=+5% CN29%,FR27%,OTHER10% ev=E01,E02,E08,E21b,E41,E42 DEF=2 ARNsz=0 
+   unmet: MAIRE black 48, TIB navy 2, MAIRE navy 2
+ W42 d=7 s=420k vs=-0% FR28%,OTHER13%,CN12% ev=E02,E05b,E08,E10,E41,E42 DEF=2 ARNsz=3 
+   unmet: MAIRE black 38, LOGO CARDIGAN black 4
+ W43 d=3 s=138k vs=-9% FR24%,OTHER16%,CN14% ev=E05b,E08,E41,E42 DEF=2 ARNsz=0 
+   unmet: MAIRE black 2
+=== ROM01 EUR
+ W36 d=7 s=157k vs=-13% IT34%,CN9%,SA6% ev= DEF=0 ARNsz=0 
+   unmet: MONTGENEVRE grey melange 2
+ W37 d=7 s=192k vs=-9% IT34%,CN11%,OTHER6% ev=E42 DEF=0 ARNsz=0 dly=09-11:2d
+ W38 d=7 s=128k vs=-45% IT38%,US8%,CN8% ev=E04,E42 DEF=0 ARNsz=0 
+ W39 d=7 s=152k vs=-44% IT37%,CN16%,US9% ev=E04,E42 DEF=0 ARNsz=2 dly=09-26:3d
+   unmet: LOGO T-SHIRT navy 2
+ W40 d=7 s=176k vs=-42% IT45%,US10%,OTHER8% ev=E04,E08,E42 DEF=6 ARNsz=0 
+ W41 d=7 s=207k vs=-36% IT42%,US13%,OTHER5% ev=E04,E08,E42 DEF=1 ARNsz=0 
+   unmet: MAIRE black 4
+ W42 d=7 s=165k vs=-52% IT38%,CN9%,KR7% ev=E04,E08,E10b,E42 DEF=1 ARNsz=0 
+   unmet: MAIRE black 9
+ W43 d=3 s=61k vs=-51% IT35%,US14%,FR6% ev=E04,E08,E42 DEF=0 ARNsz=0 
+=== SEL01 KRW
+ W36 d=7 s=496676k vs=-10% KR77%,CN10%,JP4% ev= DEF=0 ARNsz=0 
+ W37 d=7 s=631760k vs=-0% KR79%,CN10%,OTHER3% ev=E42 DEF=0 ARNsz=0 
+   unmet: ILVARO powder pink 2, VALBOURG black 2
+ W38 d=7 s=613494k vs=-13% KR81%,CN8%,OTHER4% ev=E42 DEF=0 ARNsz=0 
+   unmet: POLO white 2
+ W39 d=7 s=764935k vs=+10% KR82%,CN7%,OTHER4% ev=E42 DEF=0 ARNsz=2 
+   unmet: ILVARO powder pink 3, ROSIERE black 2
+ W40 d=7 s=1303769k vs=+48% KR64%,CN29%,OTHER3% ev=E01,E06,E06b,E08,E42 DEF=9 ARNsz=2 
+   unmet: ILVARO powder pink 17, LOGO T-SHIRT white 3, MAIRE black 2, INSOLUX black 2
+ W41 d=7 s=1093792k vs=+19% KR67%,CN22%,JP3% ev=E01,E06,E06b,E08,E14,E42 DEF=3 ARNsz=4 
+   unmet: MAIRE black 27, ILVARO powder pink 26, LOGO HOODIE grey melange 2
+ W42 d=7 s=813147k vs=-18% KR82%,CN8%,OTHER3% ev=E06,E06b,E08,E14,E27,E42 DEF=4 ARNsz=0 dly=10-13:1d 10-18:3d
+   unmet: MAIRE black 12, ILVARO powder pink 3, ILVARO black 3, AMBRINE chocolate brown 2
+ W43 d=3 s=306110k vs=-13% KR80%,CN12%,OTHER4% ev=E06,E06b,E08,E27,E42 DEF=3 ARNsz=0 
+   unmet: ILVARO black 5
+=== SEL02 KRW
+ W36 d=7 s=453874k vs=+3% KR81%,JP5%,CN4% ev= DEF=0 ARNsz=0 
+ W37 d=7 s=491185k vs=-11% KR80%,CN10%,OTHER2% ev=E42 DEF=0 ARNsz=1 
+   unmet: ILVARO off-white 2
+ W38 d=7 s=631479k vs=+6% KR83%,CN9%,OTHER2% ev=E42 DEF=0 ARNsz=0 
+   unmet: AMBRINE black 2
+ W39 d=6 s=429955k vs=-16% KR68%,CN10%,TW2% ev=E42 DEF=0 ARNsz=0 
+   unmet: ILVARO powder pink 3
+ W40 d=7 s=728210k vs=-2% KR78%,CN11%,OTHER4% ev=E06,E06b,E08,E42 DEF=5 ARNsz=0 dly=09-29:1d
+   unmet: ILVARO powder pink 13
+ W41 d=7 s=738118k vs=-9% KR83%,CN7%,OTHER3% ev=E06,E06b,E08,E42 DEF=4 ARNsz=1 
+   unmet: ILVARO powder pink 23, MAIRE black 6
+ W42 d=7 s=856616k vs=-0% KR81%,CN9%,OTHER3% ev=E06,E06b,E08,E42 DEF=0 ARNsz=1 
+   unmet: MAIRE black 51, ILVARO powder pink 16, ILVARO black 3, LOGO CARDIGAN black 2
+ W43 d=3 s=238637k vs=-21% KR75%,CN9%,TW4% ev=E06,E06b,E08,E42 DEF=1 ARNsz=1 
+   unmet: MAIRE black 15, ILVARO black 2
+=== SHA01 CNY
+ W36 d=7 s=2987k vs=-3% CN97%,OTHER3% ev= DEF=0 ARNsz=0 
+   unmet: LOGO T-SHIRT navy 2
+ W37 d=7 s=3402k vs=-5% CN99%,OTHER1% ev=E42 DEF=0 ARNsz=1 
+   unmet: LOGO HOODIE navy 2
+ W38 d=7 s=3843k vs=-5% CN97%,OTHER3% ev=E42 DEF=0 ARNsz=0 
+ W39 d=7 s=5447k vs=+13% CN98%,OTHER2% ev=E07,E42 DEF=0 ARNsz=1 
+ W40 d=7 s=5910k vs=+6% CN99%,OTHER1% ev=E01b,E06,E06b,E07,E08,E42 DEF=15 ARNsz=1 
+   unmet: ILVARO powder pink 8, MAIRE black 8, WOOL TURTLENECK black 2
+ W41 d=7 s=5916k vs=+2% CN98%,OTHER2% ev=E01b,E06,E06b,E07,E08,E42 DEF=6 ARNsz=1 
+   unmet: MAIRE black 12, ILVARO powder pink 8, POLARIS CAPE white 4, POLARIS CAPE black 3
+ W42 d=7 s=6273k vs=+1% CN99%,OTHER1% ev=E06,E06b,E07,E08,E42 DEF=3 ARNsz=1 
+   unmet: MAIRE black 9, ILVARO powder pink 7, AMBRINE black 3, KARAKORUM black 2
+ W43 d=3 s=1394k vs=-34% CN97%,OTHER3% ev=E06,E06b,E07,E08,E22,E42 DEF=3 ARNsz=0 
+   unmet: MAIRE black 2
+=== SIN01 SGD
+ W36 d=7 s=173k vs=-7% SG56%,CN13%,OTHER11% ev= DEF=0 ARNsz=0 
+   unmet: LOGO HOODIE navy 3, MONTCLA black 2, MAIRE beige 2, TRAILGRIP GTX black 2
+ W37 d=7 s=174k vs=-12% SG42%,CN14%,ID13% ev=E42 DEF=0 ARNsz=0 
+   unmet: LOGO HOODIE navy 3, WOOL TURTLENECK black 2, HERMINE navy 2, BADY black 2
+ W38 d=7 s=219k vs=+7% SG39%,OTHER13%,CN11% ev=E42 DEF=0 ARNsz=0 
+   unmet: LOGO HOODIE grey melange 2
+ W39 d=7 s=165k vs=-25% SG46%,CN16%,MY11% ev=E42 DEF=0 ARNsz=0 
+   unmet: LOGO HOODIE black 6
+ W40 d=7 s=173k vs=-26% SG50%,ID15%,CN13% ev=E06,E06b,E08,E42 DEF=4 ARNsz=0 
+   unmet: ECRINS black 3, HERMINE navy 3, ILVARO powder pink 3, POLO black 2
+ W41 d=7 s=197k vs=-20% SG43%,CN17%,ID12% ev=E06,E06b,E08,E34,E42 DEF=0 ARNsz=0 
+   unmet: ILVARO powder pink 9, MAIRE black 4, POLO navy 3, POLO white 2
+ W42 d=7 s=209k vs=-22% SG54%,CN12%,ID9% ev=E06,E06b,E08,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 8, TRAILGRIP GTX black 2
+ W43 d=3 s=118k vs=+30% SG52%,ID14%,CN14% ev=E06,E06b,E08,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 2
+=== STM01 CHF
+ W36 d=7 s=29k vs=-31% CH53%,OTHER13%,AE5% ev= DEF=0 ARNsz=0 
+   unmet: MAIRE off-white 2, TIB black 2, TRICOT PADDED CARDIGAN black 2
+ W37 d=7 s=39k vs=-9% CH52%,DE12%,CN10% ev=E42 DEF=0 ARNsz=0 
+ W38 d=7 s=24k vs=-40% CH63%,OTHER16%,US8% ev=E42 DEF=0 ARNsz=0 
+   unmet: CREWNECK SWEATSHIRT black 2
+ W39 d=7 s=20k vs=-55% CH59%,OTHER10%,CN8% ev=E42 DEF=0 ARNsz=0 
+ W40 d=7 s=36k vs=-23% CH49%,OTHER18%,CN10% ev=E08,E42 DEF=2 ARNsz=0 
+ W41 d=7 s=42k vs=-18% CH45%,OTHER16%,AE11% ev=E08,E42 DEF=0 ARNsz=0 
+   unmet: PEYRE black 3
+ W42 d=7 s=57k vs=-1% CH68%,DE6%,OTHER5% ev=E05,E08,E42 DEF=0 ARNsz=0 
+   unmet: PEYRE black 4, CHAMONIX black 3, MONTCLA black 2, FLAMMETTE black 2
+ W43 d=0 s=0k vs=+0%  ev=E05,E08,E42,E45 DEF=0 ARNsz=0 
+=== SYD01 AUD
+ W36 d=7 s=127k vs=+3% AU68%,CN13%,OTHER9% ev=E16 DEF=0 ARNsz=0 
+   unmet: TIB off-white 2
+ W37 d=7 s=93k vs=-21% AU78%,CN12%,OTHER8% ev=E16,E42 DEF=0 ARNsz=0 
+   unmet: WOOL TURTLENECK black 2
+ W38 d=7 s=83k vs=-22% AU72%,OTHER10%,CN10% ev=E16,E42 DEF=0 ARNsz=0 
+ W39 d=7 s=95k vs=-8% AU71%,CN16%,US5% ev=E16,E42 DEF=0 ARNsz=0 
+   unmet: LOGO CARDIGAN black 3
+ W40 d=7 s=85k vs=-10% AU83%,OTHER7%,CN7% ev=E08,E16,E42 DEF=3 ARNsz=0 
+ W41 d=7 s=75k vs=-15% AU81%,NZ10%,CN8% ev=E08,E16,E42 DEF=1 ARNsz=0 
+   unmet: LOGO HOODIE grey melange 2
+ W42 d=7 s=67k vs=-18% AU57%,CN21%,OTHER12% ev=E08,E16,E42 DEF=0 ARNsz=0 dly=10-17:3d
+   unmet: POLARIS CAPE black 2
+ W43 d=3 s=15k vs=-44% AU59%,OTHER34%,CN7% ev=E08,E16,E42 DEF=0 ARNsz=0 
+=== TOR01 CAD
+ W36 d=7 s=143k vs=-26% CA89%,US4%,OTHER4% ev= DEF=0 ARNsz=0 dly=09-01:1d
+   unmet: TIB off-white 2
+ W37 d=7 s=255k vs=+18% CA82%,CN7%,US6% ev=E24,E42 DEF=0 ARNsz=0 
+   unmet: BADY powder pink 2, PEYRE red 2, ILVARO black 2, MAYA olive 2
+ W38 d=7 s=185k vs=-22% CA75%,OTHER10%,US8% ev=E24,E42 DEF=0 ARNsz=0 
+   unmet: WOOL TURTLENECK navy 3, PEYRE black 3
+ W39 d=7 s=280k vs=+5% CA77%,OTHER9%,CN8% ev=E07b,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 2
+ W40 d=7 s=194k vs=-36% CA81%,CN8%,US7% ev=E07b,E08,E42 DEF=5 ARNsz=0 
+   unmet: MAIRE black 4, MONTCLA black 2, TIB black 2, KARAKORUM black 2
+ W41 d=7 s=227k vs=-29% CA71%,OTHER14%,CN8% ev=E07b,E08,E42 DEF=3 ARNsz=1 
+   unmet: ARNEB black 2, TRICOT PADDED CARDIGAN navy 2, CABLE KNIT SWEATER off-white 2, LOGO HOODIE grey melange 2
+ W42 d=7 s=247k vs=-28% CA83%,OTHER10%,CN6% ev=E07b,E08,E42 DEF=4 ARNsz=0 
+   unmet: MAIRE black 11, TRICOT PADDED CARDIGAN grey melange 2, MAYA olive 2, LOGO CARDIGAN black 2
+ W43 d=3 s=85k vs=-33% CA77%,OTHER14%,US6% ev=E07b,E08,E42 DEF=0 ARNsz=0 dly=10-20:1d
+   unmet: TRICOT PADDED CARDIGAN black 3, MAIRE black 2
+=== TPE01 TWD
+ W36 d=7 s=3274k vs=-22% TW76%,OTHER12%,CN4% ev= DEF=0 ARNsz=0 
+   unmet: CABLE KNIT SWEATER black 2
+ W37 d=7 s=3974k vs=-14% TW80%,OTHER8%,JP5% ev=E42 DEF=0 ARNsz=0 
+   unmet: CHAMBRE black 2, BADY black 2
+ W38 d=7 s=4202k vs=-9% TW74%,JP9%,OTHER8% ev=E42 DEF=0 ARNsz=0 
+   unmet: ARNEB black 3, TRICOT PADDED CARDIGAN black 2
+ W39 d=7 s=4563k vs=-13% TW79%,OTHER13%,HK5% ev=E42 DEF=0 ARNsz=0 
+   unmet: MAIRE off-white 2, LOGO T-SHIRT black 2
+ W40 d=7 s=4261k vs=-23% TW74%,OTHER11%,HK7% ev=E06,E06b,E08,E42 DEF=9 ARNsz=0 
+   unmet: MAYA black 2, POLO white 2
+ W41 d=7 s=5096k vs=-15% TW86%,CN7%,HK3% ev=E06,E06b,E08,E42 DEF=1 ARNsz=0 
+   unmet: MAIRE black 3
+ W42 d=7 s=4804k vs=-23% TW84%,JP8%,OTHER5% ev=E06,E06b,E08,E42 DEF=1 ARNsz=0 
+   unmet: LOGO T-SHIRT white 2, ILVARO powder pink 2
+ W43 d=3 s=1865k vs=-14% TW79%,JP10%,OTHER7% ev=E06,E06b,E08,E42 DEF=1 ARNsz=0 
+=== TYO01 JPY
+ W36 d=7 s=57847k vs=-18% JP63%,TW8%,CN8% ev= DEF=0 ARNsz=0 
+ W37 d=7 s=85798k vs=+5% JP54%,CN16%,KR4% ev=E42 DEF=0 ARNsz=0 
+   unmet: ILVARO powder pink 3, KARAKORUM navy 2, ECRINS black 2
+ W38 d=7 s=78442k vs=-12% JP53%,CN14%,TW7% ev=E42 DEF=0 ARNsz=1 
+   unmet: ROSIERE olive 3
+ W39 d=7 s=105370k vs=+2% JP56%,CN16%,TW5% ev=E42 DEF=0 ARNsz=3 
+   unmet: KARAKORUM grey melange 2, ILVARO powder pink 2
+ W40 d=7 s=95917k vs=-17% JP44%,CN34%,OTHER4% ev=E01,E06,E06b,E08,E13w,E42 DEF=14 ARNsz=0 
+   unmet: ILVARO powder pink 5, MAIRE black 3
+ W41 d=7 s=103556k vs=-19% JP46%,CN33%,TW5% ev=E01,E06,E06b,E08,E13w,E42 DEF=3 ARNsz=2 
+   unmet: MAIRE black 6, ILVARO powder pink 6, LOGO T-SHIRT black 2, CHAMBRE off-white 2
+ W42 d=7 s=168242k vs=+22% JP63%,CN13%,TW5% ev=E06,E06b,E08,E13,E42 DEF=3 ARNsz=0 
+   unmet: MAIRE black 23, ILVARO powder pink 2
+ W43 d=3 s=67338k vs=+35% JP70%,CN15%,HK4% ev=E06,E06b,E08,E13,E42 DEF=2 ARNsz=1 
+   unmet: MAIRE black 9
+=== TYO02 JPY
+ W36 d=7 s=33487k vs=-9% JP52%,CN13%,TW9% ev= DEF=0 ARNsz=0 
+   unmet: POLO white 2, CABLE KNIT SWEATER off-white 2
+ W37 d=7 s=36647k vs=-14% JP49%,CN16%,HK7% ev=E42 DEF=0 ARNsz=0 
+   unmet: PEYRE black 2, MAYA navy 2
+ W38 d=7 s=48552k vs=+7% JP55%,CN14%,KR6% ev=E42 DEF=0 ARNsz=1 
+   unmet: CABLE KNIT SWEATER off-white 3, ILVARO powder pink 2
+ W39 d=7 s=51504k vs=-1% JP57%,CN14%,HK4% ev=E42 DEF=0 ARNsz=0 
+   unmet: TIB black 4, LOGO T-SHIRT black 2, POLO navy 2, ILVARO powder pink 2
+ W40 d=7 s=36698k vs=-36% JP46%,CN15%,OTHER8% ev=E06,E06b,E08,E13w,E42 DEF=1 ARNsz=0 
+   unmet: ILVARO powder pink 4, CHAMBRE black 2, TRICOT PADDED CARDIGAN black 2, TIB black 2
+ W41 d=7 s=43733k vs=-30% JP56%,CN16%,KR5% ev=E06,E06b,E08,E13w,E42 DEF=1 ARNsz=0 
+   unmet: CHAMBRE black 2, TRICOT PADDED CARDIGAN grey melange 2
+ W42 d=7 s=75543k vs=+15% JP67%,CN15%,TW3% ev=E06,E06b,E08,E13,E42 DEF=0 ARNsz=1 
+   unmet: MAIRE black 9, ILVARO powder pink 8, ARNEB navy 2, MONTGENEVRE grey melange 2
+ W43 d=3 s=24448k vs=+1% JP69%,CN11%,TW9% ev=E06,E06b,E08,E13,E42 DEF=0 ARNsz=0 
+   unmet: MAIRE black 4
+=== VEN01 EUR
+ W36 d=7 s=85k vs=-37% IT36%,KR12%,CN12% ev= DEF=0 ARNsz=0 dly=09-03:1d
+ W37 d=7 s=164k vs=+4% IT41%,US10%,CN9% ev=E42 DEF=0 ARNsz=0 dly=09-11:2d
+   unmet: TRICOT PADDED CARDIGAN grey melange 2
+ W38 d=7 s=183k vs=+9% IT36%,CN12%,US6% ev=E42 DEF=0 ARNsz=0 
+   unmet: POLO black 2
+ W39 d=7 s=166k vs=-14% IT35%,CN17%,US7% ev=E42 DEF=0 ARNsz=0 
+   unmet: FLAMMETTE black 3, ILVARO powder pink 2, INSOLUX off-white 2, TIB off-white 2
+ W40 d=7 s=260k vs=+19% CN34%,IT31%,US11% ev=E01,E08,E42 DEF=7 ARNsz=0 
+   unmet: MAIRE black 3, HERMINE off-white 2, CABLE KNIT SWEATER black 2, HERMINE navy 2
+ W41 d=7 s=213k vs=-5% CN35%,IT25%,US6% ev=E01,E08,E42 DEF=3 ARNsz=1 
+   unmet: CHAMBRE black 3, MAIRE black 2, KARAKORUM black 2
+ W42 d=7 s=184k vs=-24% IT37%,CN15%,US10% ev=E08,E10b,E42 DEF=2 ARNsz=1 
+   unmet: INSOLUX off-white 2
+ W43 d=3 s=30k vs=-65% IT44%,OTHER12%,DE7% ev=E08,E31,E42 DEF=1 ARNsz=1 
+   unmet: LOGO HOODIE black 2
+=== ZRH01 CHF
+ W36 d=6 s=69k vs=-27% CH41%,US11%,OTHER10% ev= DEF=0 ARNsz=0 
+   unmet: MONTGENEVRE navy 2, TRAILGRIP W off-white 2
+ W37 d=6 s=98k vs=-13% CH41%,OTHER12%,CN5% ev=E42 DEF=0 ARNsz=0 
+   unmet: LOGO BEANIE navy 2
+ W38 d=6 s=116k vs=-6% CH46%,OTHER11%,AE5% ev=E42 DEF=0 ARNsz=1 
+   unmet: POLO black 3
+ W39 d=6 s=119k vs=-15% CH42%,OTHER9%,US7% ev=E42 DEF=0 ARNsz=0 
+   unmet: MAYA navy 5, LOGO CARDIGAN black 2, MAIRE black 2, LOGO HOODIE black 2
+ W40 d=6 s=167k vs=+9% CH36%,CN21%,US9% ev=E01,E08,E42 DEF=7 ARNsz=0 dly=09-28:3d
+   unmet: WOOL TURTLENECK black 4, ILVARO black 3, MAIRE off-white 2, BADY black 2
+ W41 d=6 s=157k vs=-4% CH36%,CN22%,OTHER9% ev=E01,E08,E42 DEF=0 ARNsz=1 
+   unmet: MAIRE black 4, LOGO CAP navy 3, ROSIERE black 2, MAIRE beige 2
+ W42 d=6 s=249k vs=+41% CH41%,OTHER11%,CN5% ev=E05,E08,E42 DEF=1 ARNsz=0 
+   unmet: MAIRE black 7, MONTGENEVRE navy 3, CHAMONIX black 2, HERMINE navy 2
+ W43 d=3 s=53k vs=-30% CH49%,US9%,CN9% ev=E05,E08,E42 DEF=0 ARNsz=0 
+   unmet: INSOLUX black 3, MONTGENEVRE navy 2, MAYA black 2

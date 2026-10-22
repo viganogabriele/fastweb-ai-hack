@@ -1,0 +1,337 @@
+openapi: 3.0.3
+info:
+  title: warehouse-agent REST API (WMS gateway)
+  version: 2.3.1
+servers:
+- url: https://agents.moncler-int.example/warehouse/v1
+security:
+- oauth2:
+  - wms.read
+paths:
+  /stock:
+    get:
+      summary: Stock per storage location (end of day)
+      tags:
+      - stock
+      parameters:
+      - name: plant
+        in: query
+        required: true
+        description: IT10|US20|HK30
+        schema:
+          type: string
+      - name: material
+        in: query
+        required: true
+        description: MATNR, style+colour e.g. J20931A00012999
+        schema:
+          type: string
+      - name: date
+        in: query
+        required: false
+        description: stock date, default yesterday
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StockResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limited
+  /atp:
+    get:
+      summary: Available to promise
+      tags:
+      - atp
+      parameters:
+      - name: plant
+        in: query
+        required: false
+        description: IT10|US20|HK30|ALL
+        schema:
+          type: string
+      - name: material
+        in: query
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: size
+        in: query
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: asOf
+        in: query
+        required: false
+        description: date - returns last snapshot <= asOf
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AtpResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limited
+  /inbound/purchase-orders/{ebeln}:
+    get:
+      summary: Purchase order with delivery date history
+      tags:
+      - inbound
+      parameters:
+      - name: ebeln
+        in: path
+        required: true
+        description: PO number
+        schema:
+          type: string
+      - name: asOf
+        in: query
+        required: false
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrder'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limited
+  /quality-stock:
+    get:
+      summary: Quality / blocked stock
+      tags:
+      - quality
+      parameters:
+      - name: materialPrefix
+        in: query
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QualityStock'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limited
+  /reservations:
+    post:
+      summary: Create reservation
+      tags:
+      - reservations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReservationRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReservationResponse'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Business rule violation
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.moncler-int.example/oauth2/token
+          scopes:
+            wms.read: read stock/ATP
+            wms.reserve: create reservations
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        traceId:
+          type: string
+    StockResponse:
+      type: object
+      properties:
+        plant: &id001
+          type: string
+        material: *id001
+        date: &id003
+          type: string
+          format: date
+        positions:
+          type: array
+          items:
+            type: object
+            properties:
+              storageLocation: *id001
+              size: *id001
+              batch: *id001
+              unrestricted: &id002
+                type: integer
+              blocked: *id002
+              returns: *id002
+    AtpResponse:
+      type: object
+      properties:
+        snapshot: *id001
+        asOf: *id003
+        stale:
+          type: boolean
+        totalAtp: *id002
+        positions:
+          type: array
+          items:
+            type: object
+            properties:
+              plant: *id001
+              material: *id001
+              size: *id001
+              unrestricted: *id002
+              openDeliveries: *id002
+              ecomReserve: *id002
+              blocked: *id002
+              atp: *id002
+              nextReceipt:
+                type: object
+                properties:
+                  date: *id003
+                  qty: *id002
+                  po: *id001
+    PurchaseOrder:
+      type: object
+      properties:
+        purchaseOrder: *id001
+        vendor: *id001
+        createdOn: *id003
+        headerEta: *id003
+        lines:
+          type: array
+          items:
+            type: object
+            properties:
+              item: *id001
+              plant: *id001
+              material: *id001
+              qty: *id002
+              status: *id001
+              goodsReceipt: *id003
+        changes:
+          type: array
+          items:
+            type: object
+            properties:
+              date: *id003
+              old: *id001
+              new: *id001
+              note: *id001
+    QualityStock:
+      type: object
+      properties:
+        asOf: *id001
+        notification:
+          type: object
+          properties:
+            id: *id001
+            createdOn: *id003
+            usageDecisionOn: *id003
+            defect: *id001
+        positions:
+          type: array
+          items:
+            type: object
+            properties:
+              plant: *id001
+              material: *id001
+              size: *id001
+              batch: *id001
+              blockedDcStock: *id002
+              returnsInQuality: *id002
+    ReservationRequest:
+      type: object
+      required:
+      - plant
+      - material
+      - size
+      - qty
+      - purpose
+      properties:
+        plant: *id001
+        material: *id001
+        size: *id001
+        qty: *id002
+        purpose:
+          type: string
+          enum:
+          - PR_SAMPLE
+          - EVENT
+          - VIC_HOLD
+          - ECOM_RESERVE
+          - STORE_BACKORDER
+        neededBy: *id003
+        requester: *id001
+    ReservationResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - CONFIRMED
+          - REJECTED_NO_STOCK
+        reservation: *id001
+        qty: *id002
+        atp: *id002
+        nextReceipt:
+          type: object
+          properties:
+            date: *id003
+            qty: *id002
+            po: *id001

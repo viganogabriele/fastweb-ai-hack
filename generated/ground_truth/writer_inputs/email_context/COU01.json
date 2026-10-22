@@ -1,0 +1,1573 @@
+{
+ "store": {
+  "store_id": "COU01",
+  "store_name": "Courmayeur",
+  "store_type": "Resort",
+  "city": "Courmayeur",
+  "country_code": "IT",
+  "country": "Italy",
+  "region": "EMEA",
+  "subregion": "Italy",
+  "language": "it",
+  "timezone": "Europe/Rome",
+  "currency": "EUR",
+  "lat": 45.7969,
+  "lon": 6.969,
+  "sqm": 160,
+  "opening_date": "2010-12-03",
+  "hemi": "N",
+  "closed_dow": [],
+  "store_manager": "Paolo Bertholin",
+  "assistant_manager": "Elisa Vuillermoz"
+ },
+ "days": [
+  {
+   "date": "2026-08-31",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 10660.0,
+   "budget_lc": 6970.0,
+   "vs_budget_pct": 52.9,
+   "units": 10,
+   "receipts": 8,
+   "visitors": 47,
+   "conversion": 0.1702,
+   "top_sellers": [
+    "MAYA black x2",
+    "CHAMONIX black x1",
+    "LOGO CAP white x1",
+    "LOGO HOODIE black x1",
+    "LOGO CAP black x1"
+   ],
+   "customer_mix": {
+    "US": 0.2,
+    "CH": 0.2,
+    "IT": 0.2,
+    "TR": 0.1
+   },
+   "unmet_requests": [
+    "FLAMMETTE black size 4 x1",
+    "TRAILGRIP W black size 38 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 1",
+    "MAIRE navy 0",
+    "MAIRE navy 1",
+    "FLAMMETTE black 0",
+    "ALBENGA black 0",
+    "MAYA black 5",
+    "MONTCLA black 3",
+    "TIB off-white 4",
+    "TIB off-white 5",
+    "TRAILGRIP GTX black 44"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-01",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 4041.0,
+   "budget_lc": 6260.0,
+   "vs_budget_pct": -35.4,
+   "units": 4,
+   "receipts": 3,
+   "visitors": 38,
+   "conversion": 0.0789,
+   "top_sellers": [
+    "TECH GLOVES black x1",
+    "INSOLUX black x1",
+    "MAIRE navy x1",
+    "BADY black x1"
+   ],
+   "customer_mix": {
+    "IT": 0.75,
+    "IN": 0.25
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 1",
+    "MAIRE navy 0",
+    "MAIRE navy 1",
+    "MAIRE navy 2",
+    "FLAMMETTE black 0",
+    "MAYA black 5",
+    "MONTCLA black 3",
+    "TIB off-white 4",
+    "TIB off-white 5",
+    "TRAILGRIP GTX black 44"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-02",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 3610.0,
+   "budget_lc": 7200.0,
+   "vs_budget_pct": -49.9,
+   "units": 5,
+   "receipts": 5,
+   "visitors": 41,
+   "conversion": 0.122,
+   "top_sellers": [
+    "LOGO CAP white x1",
+    "TRAILGRIP GTX grey melange x1",
+    "LOGO T-SHIRT navy x1",
+    "CABLE KNIT SWEATER off-white x1",
+    "MAYA olive x1"
+   ],
+   "customer_mix": {
+    "IT": 0.4,
+    "CN": 0.2,
+    "KR": 0.2,
+    "DE": 0.2
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE navy 2",
+    "INSOLUX black 38"
+   ],
+   "returns": [],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600189",
+     "lines": 30,
+     "units": 30,
+     "planned": "2026-09-02",
+     "delay_days": 0,
+     "wrong_items": false
+    }
+   ],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-03",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 10240.0,
+   "budget_lc": 10660.0,
+   "vs_budget_pct": -3.9,
+   "units": 9,
+   "receipts": 8,
+   "visitors": 53,
+   "conversion": 0.1509,
+   "top_sellers": [
+    "TIB off-white x2",
+    "BADY off-white x2",
+    "LOGO HOODIE black x1",
+    "MAYA black x1",
+    "WOOL TURTLENECK navy x1"
+   ],
+   "customer_mix": {
+    "IT": 0.33,
+    "CN": 0.22,
+    "BR": 0.22,
+    "TR": 0.11
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "ILVARO black 2",
+    "MAYA black 5",
+    "TIB off-white 4",
+    "TIB off-white 5",
+    "INSOLUX black 38"
+   ],
+   "returns": [
+    "LOGO CAP TU reason=SIZE"
+   ],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-04",
+   "weekday": "Friday",
+   "open": 1.0,
+   "net_sales_lc": 5160.0,
+   "budget_lc": 11900.0,
+   "vs_budget_pct": -56.6,
+   "units": 8,
+   "receipts": 8,
+   "visitors": 54,
+   "conversion": 0.1481,
+   "top_sellers": [
+    "LOGO CAP white x1",
+    "TECH GLOVES black x1",
+    "TRAILGRIP GTX grey melange x1",
+    "TRAILGRIP GTX black x1",
+    "CREWNECK SWEATSHIRT white x1"
+   ],
+   "customer_mix": {
+    "IT": 0.75,
+    "CN": 0.12,
+    "AE": 0.12
+   },
+   "unmet_requests": [
+    "TIB off-white size 4 x1",
+    "ARNEB navy size 6 x1",
+    "TRAILGRIP W black size 36 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "ILVARO black 2",
+    "MAYA black 5",
+    "TIB off-white 4",
+    "TIB off-white 5",
+    "INSOLUX black 38"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-05",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 9460.0,
+   "budget_lc": 15880.0,
+   "vs_budget_pct": -40.4,
+   "units": 10,
+   "receipts": 9,
+   "visitors": 85,
+   "conversion": 0.1059,
+   "top_sellers": [
+    "LOGO T-SHIRT black x2",
+    "LOGO HOODIE black x2",
+    "VALBOURG off-white x1",
+    "CREWNECK SWEATSHIRT white x1",
+    "TRICOT PADDED CARDIGAN black x1"
+   ],
+   "customer_mix": {
+    "IT": 0.4,
+    "US": 0.3,
+    "OTHER": 0.1,
+    "FR": 0.1
+   },
+   "unmet_requests": [
+    "AMBRINE chocolate brown size 3 x1",
+    "CABLE KNIT SWEATER off-white size L x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "ILVARO black 2",
+    "MAYA black 5",
+    "TIB off-white 4",
+    "TIB off-white 5",
+    "INSOLUX black 38"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-06",
+   "weekday": "Sunday",
+   "open": 1.0,
+   "net_sales_lc": 4190.0,
+   "budget_lc": 11550.0,
+   "vs_budget_pct": -63.7,
+   "units": 3,
+   "receipts": 2,
+   "visitors": 44,
+   "conversion": 0.0455,
+   "top_sellers": [
+    "WOOL TURTLENECK navy x1",
+    "ARNEB black x1",
+    "BADY off-white x1"
+   ],
+   "customer_mix": {
+    "JP": 0.67,
+    "IT": 0.33
+   },
+   "unmet_requests": [
+    "ILVARO black size 2 x1",
+    "AMBRINE chocolate brown size 2 x1",
+    "LOGO T-SHIRT black size XXL x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "ILVARO black 2",
+    "MAYA black 5",
+    "TIB off-white 4",
+    "TIB off-white 5",
+    "ARNEB black 3",
+    "INSOLUX black 38"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-07",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 6250.0,
+   "budget_lc": 7990.0,
+   "vs_budget_pct": -21.8,
+   "units": 9,
+   "receipts": 6,
+   "visitors": 48,
+   "conversion": 0.125,
+   "top_sellers": [
+    "LOGO BEANIE white x1",
+    "MAKAIO BACKPACK black x1",
+    "POLO navy x1",
+    "LOGO T-SHIRT black x1",
+    "LOGO HOODIE black x1"
+   ],
+   "customer_mix": {
+    "IT": 0.44,
+    "US": 0.22,
+    "OTHER": 0.11,
+    "KR": 0.11
+   },
+   "unmet_requests": [
+    "LOGO CAP white size TU x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "ILVARO black 2",
+    "MAYA black 5",
+    "TIB off-white 4",
+    "TIB off-white 5",
+    "ARNEB black 3",
+    "INSOLUX black 38"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-08",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 4020.0,
+   "budget_lc": 7980.0,
+   "vs_budget_pct": -49.6,
+   "units": 4,
+   "receipts": 4,
+   "visitors": 37,
+   "conversion": 0.1081,
+   "top_sellers": [
+    "CREWNECK SWEATSHIRT white x1",
+    "LOGO CARDIGAN black x1",
+    "TRICOT PADDED CARDIGAN black x1",
+    "ILVARO black x1"
+   ],
+   "customer_mix": {
+    "IT": 0.5,
+    "US": 0.25,
+    "TR": 0.25
+   },
+   "unmet_requests": [
+    "ARNEB black size 6 x1",
+    "VALBOURG off-white size 1 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "ILVARO black 1",
+    "ILVARO black 2",
+    "MAYA black 5",
+    "TIB off-white 4",
+    "TIB off-white 5",
+    "ARNEB black 3",
+    "TRICOT PADDED CARDIGAN black S",
+    "INSOLUX black 38"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-09",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 1279.0,
+   "budget_lc": 8250.0,
+   "vs_budget_pct": -84.5,
+   "units": 3,
+   "receipts": 2,
+   "visitors": 39,
+   "conversion": 0.0513,
+   "top_sellers": [
+    "LOGO CAP white x1",
+    "TRAILGRIP W black x1",
+    "MAYA black x1"
+   ],
+   "customer_mix": {
+    "US": 0.67,
+    "SA": 0.33
+   },
+   "unmet_requests": [
+    "ILVARO off-white size 4 x1",
+    "WOOL TURTLENECK black size XS x1",
+    "POLO navy size M x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP W black 39"
+   ],
+   "returns": [
+    "TRICOT PADDED CARDIGAN M reason=CHANGE_MIND"
+   ],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600235",
+     "lines": 8,
+     "units": 8,
+     "planned": "2026-09-09",
+     "delay_days": 0,
+     "wrong_items": false
+    }
+   ],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-10",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 10290.0,
+   "budget_lc": 8800.0,
+   "vs_budget_pct": 16.9,
+   "units": 11,
+   "receipts": 8,
+   "visitors": 56,
+   "conversion": 0.1429,
+   "top_sellers": [
+    "CASHMERE SCARF black x1",
+    "LOGO CAP black x1",
+    "POLO white x1",
+    "LOGO HOODIE black x1",
+    "LOGO CARDIGAN black x1"
+   ],
+   "customer_mix": {
+    "IT": 0.45,
+    "CN": 0.18,
+    "SA": 0.09,
+    "CH": 0.09
+   },
+   "unmet_requests": [
+    "LOGO HOODIE navy size XXL x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP W black 39"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-11",
+   "weekday": "Friday",
+   "open": 1.0,
+   "net_sales_lc": 1860.0,
+   "budget_lc": 10130.0,
+   "vs_budget_pct": -81.6,
+   "units": 2,
+   "receipts": 2,
+   "visitors": 49,
+   "conversion": 0.0408,
+   "top_sellers": [
+    "LOGO CAP black x1",
+    "ILVARO black x1"
+   ],
+   "customer_mix": {
+    "IT": 0.5,
+    "DE": 0.5
+   },
+   "unmet_requests": [
+    "BADY black size 0 x1",
+    "ILVARO black size 00 x1",
+    "LOGO CAP white size TU x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP W black 39"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-12",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 2900.0,
+   "budget_lc": 14520.0,
+   "vs_budget_pct": -80.0,
+   "units": 6,
+   "receipts": 4,
+   "visitors": 63,
+   "conversion": 0.0635,
+   "top_sellers": [
+    "CASHMERE SCARF beige x1",
+    "LOGO CAP navy x1",
+    "TRAILGRIP GTX black x1",
+    "POLO black x1",
+    "LOGO T-SHIRT white x1"
+   ],
+   "customer_mix": {
+    "KR": 0.33,
+    "IT": 0.33,
+    "OTHER": 0.17,
+    "US": 0.17
+   },
+   "unmet_requests": [
+    "POLO white size M x2",
+    "FLAMMETTE navy size 00 x1",
+    "ILVARO black size 00 x1",
+    "ARNEB black size 7 x1",
+    "LOGO CAP white size TU x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-13",
+   "weekday": "Sunday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-14",
+   "weekday": "Monday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "weekday": "Tuesday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-16",
+   "weekday": "Wednesday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-17",
+   "weekday": "Thursday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-18",
+   "weekday": "Friday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-19",
+   "weekday": "Saturday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-20",
+   "weekday": "Sunday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-21",
+   "weekday": "Monday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-22",
+   "weekday": "Tuesday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-23",
+   "weekday": "Wednesday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-24",
+   "weekday": "Thursday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-25",
+   "weekday": "Friday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-26",
+   "weekday": "Saturday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-27",
+   "weekday": "Sunday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-28",
+   "weekday": "Monday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-29",
+   "weekday": "Tuesday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-30",
+   "weekday": "Wednesday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-01",
+   "weekday": "Thursday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-02",
+   "weekday": "Friday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-03",
+   "weekday": "Saturday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-04",
+   "weekday": "Sunday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-05",
+   "weekday": "Monday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-06",
+   "weekday": "Tuesday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-07",
+   "weekday": "Wednesday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-08",
+   "weekday": "Thursday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-09",
+   "weekday": "Friday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-10",
+   "weekday": "Saturday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-11",
+   "weekday": "Sunday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-12",
+   "weekday": "Monday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-13",
+   "weekday": "Tuesday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-14",
+   "weekday": "Wednesday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-15",
+   "weekday": "Thursday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-16",
+   "weekday": "Friday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-17",
+   "weekday": "Saturday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-18",
+   "weekday": "Sunday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-19",
+   "weekday": "Monday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-20",
+   "weekday": "Tuesday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-21",
+   "weekday": "Wednesday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE off-white 0",
+    "MAIRE navy 2",
+    "BADY black 0",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "TIB off-white 5",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  }
+ ]
+}

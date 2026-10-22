@@ -1,0 +1,276 @@
+month,country_of_residence,visitor_arrivals
+2024 Sep,China,215522
+2024 Oct,China,316881
+2024 Nov,China,201623
+2024 Dec,China,203197
+2025 Jan,China,240279
+2025 Feb,China,222870
+2025 Mar,China,189414
+2025 Apr,China,225038
+2025 May,China,233696
+2025 Jun,China,200963
+2025 Jul,China,295864
+2025 Aug,China,322464
+2025 Sep,China,256430
+2025 Oct,China,338963
+2025 Nov,China,235896
+2025 Dec,China,238470
+2026 Jan,China,197746
+2026 Feb,China,331060
+2026 Mar,China,215455
+2026 Apr,China,253023
+2026 May,China,275560
+2026 Jun,China,235903
+2026 Jul,China,329660
+2026 Aug,China,371427
+2026 Sep,China,291847
+2024 Sep,Indonesia,171331
+2024 Oct,Indonesia,197482
+2024 Nov,Indonesia,185120
+2024 Dec,Indonesia,233273
+2025 Jan,Indonesia,233262
+2025 Feb,Indonesia,175523
+2025 Mar,Indonesia,184780
+2025 Apr,Indonesia,195306
+2025 May,Indonesia,182748
+2025 Jun,Indonesia,230236
+2025 Jul,Indonesia,203478
+2025 Aug,Indonesia,179933
+2025 Sep,Indonesia,192881
+2025 Oct,Indonesia,190567
+2025 Nov,Indonesia,198081
+2025 Dec,Indonesia,263815
+2026 Jan,Indonesia,172531
+2026 Feb,Indonesia,220905
+2026 Mar,Indonesia,203216
+2026 Apr,Indonesia,204820
+2026 May,Indonesia,198767
+2026 Jun,Indonesia,227146
+2026 Jul,Indonesia,198603
+2026 Aug,Indonesia,198458
+2026 Sep,Indonesia,179809
+2024 Sep,India,84837
+2024 Oct,India,101359
+2024 Nov,India,104296
+2024 Dec,India,88682
+2025 Jan,India,72063
+2025 Feb,India,75568
+2025 Mar,India,78581
+2025 Apr,India,103429
+2025 May,India,140148
+2025 Jun,India,135502
+2025 Jul,India,102059
+2025 Aug,India,97485
+2025 Sep,India,92152
+2025 Oct,India,109674
+2025 Nov,India,94555
+2025 Dec,India,92103
+2026 Jan,India,81932
+2026 Feb,India,87376
+2026 Mar,India,87076
+2026 Apr,India,105220
+2026 May,India,152040
+2026 Jun,India,157974
+2026 Jul,India,116329
+2026 Aug,India,112178
+2026 Sep,India,104835
+2024 Sep,Australia,107414
+2024 Oct,Australia,97460
+2024 Nov,Australia,89985
+2024 Dec,Australia,94059
+2025 Jan,Australia,94305
+2025 Feb,Australia,63882
+2025 Mar,Australia,85369
+2025 Apr,Australia,102901
+2025 May,Australia,97699
+2025 Jun,Australia,114661
+2025 Jul,Australia,120362
+2025 Aug,Australia,101292
+2025 Sep,Australia,114226
+2025 Oct,Australia,102783
+2025 Nov,Australia,89985
+2025 Dec,Australia,96309
+2026 Jan,Australia,89858
+2026 Feb,Australia,67810
+2026 Mar,Australia,86123
+2026 Apr,Australia,104402
+2026 May,Australia,95870
+2026 Jun,Australia,122691
+2026 Jul,Australia,126176
+2026 Aug,Australia,102496
+2026 Sep,Australia,127409
+2024 Sep,Malaysia,87143
+2024 Oct,Malaysia,93577
+2024 Nov,Malaysia,98564
+2024 Dec,Malaysia,112199
+2025 Jan,Malaysia,115643
+2025 Feb,Malaysia,86542
+2025 Mar,Malaysia,89405
+2025 Apr,Malaysia,103056
+2025 May,Malaysia,90778
+2025 Jun,Malaysia,107358
+2025 Jul,Malaysia,97535
+2025 Aug,Malaysia,91933
+2025 Sep,Malaysia,86266
+2025 Oct,Malaysia,97135
+2025 Nov,Malaysia,96618
+2025 Dec,Malaysia,128407
+2026 Jan,Malaysia,90683
+2026 Feb,Malaysia,114417
+2026 Mar,Malaysia,96442
+2026 Apr,Malaysia,95607
+2026 May,Malaysia,97294
+2026 Jun,Malaysia,106521
+2026 Jul,Malaysia,102087
+2026 Aug,Malaysia,95197
+2026 Sep,Malaysia,85129
+2024 Sep,Philippines,56285
+2024 Oct,Philippines,58001
+2024 Nov,Philippines,56178
+2024 Dec,Philippines,82167
+2025 Jan,Philippines,72517
+2025 Feb,Philippines,52821
+2025 Mar,Philippines,59909
+2025 Apr,Philippines,62588
+2025 May,Philippines,59432
+2025 Jun,Philippines,63963
+2025 Jul,Philippines,59200
+2025 Aug,Philippines,55819
+2025 Sep,Philippines,59181
+2025 Oct,Philippines,60182
+2025 Nov,Philippines,65067
+2025 Dec,Philippines,77886
+2026 Jan,Philippines,58018
+2026 Feb,Philippines,67035
+2026 Mar,Philippines,59626
+2026 Apr,Philippines,63339
+2026 May,Philippines,62055
+2026 Jun,Philippines,72251
+2026 Jul,Philippines,62487
+2026 Aug,Philippines,62369
+2026 Sep,Philippines,58072
+2024 Sep,USA,62762
+2024 Oct,USA,55559
+2024 Nov,USA,43782
+2024 Dec,USA,45631
+2025 Jan,USA,36451
+2025 Feb,USA,38689
+2025 Mar,USA,50435
+2025 Apr,USA,60420
+2025 May,USA,70588
+2025 Jun,USA,78489
+2025 Jul,USA,81247
+2025 Aug,USA,69908
+2025 Sep,USA,62900
+2025 Oct,USA,53932
+2025 Nov,USA,45653
+2025 Dec,USA,46426
+2026 Jan,USA,39419
+2026 Feb,USA,38128
+2026 Mar,USA,52668
+2026 Apr,USA,60315
+2026 May,USA,71755
+2026 Jun,USA,78813
+2026 Jul,USA,83925
+2026 Aug,USA,74057
+2026 Sep,USA,67980
+2024 Sep,South Korea,51419
+2024 Oct,South Korea,46946
+2024 Nov,South Korea,42129
+2024 Dec,South Korea,52192
+2025 Jan,South Korea,64948
+2025 Feb,South Korea,43574
+2025 Mar,South Korea,36663
+2025 Apr,South Korea,41108
+2025 May,South Korea,46854
+2025 Jun,South Korea,44459
+2025 Jul,South Korea,56183
+2025 Aug,South Korea,57622
+2025 Sep,South Korea,46873
+2025 Oct,South Korea,58767
+2025 Nov,South Korea,46926
+2025 Dec,South Korea,56188
+2026 Jan,South Korea,50828
+2026 Feb,South Korea,61916
+2026 Mar,South Korea,40955
+2026 Apr,South Korea,44189
+2026 May,South Korea,50186
+2026 Jun,South Korea,46965
+2026 Jul,South Korea,57695
+2026 Aug,South Korea,61629
+2026 Sep,South Korea,59144
+2024 Sep,Japan,55110
+2024 Oct,Japan,46921
+2024 Nov,Japan,46590
+2024 Dec,Japan,55643
+2025 Jan,Japan,42984
+2025 Feb,Japan,41346
+2025 Mar,Japan,53624
+2025 Apr,Japan,41156
+2025 May,Japan,51953
+2025 Jun,Japan,41035
+2025 Jul,Japan,46112
+2025 Aug,Japan,60991
+2025 Sep,Japan,51771
+2025 Oct,Japan,49204
+2025 Nov,Japan,43909
+2025 Dec,Japan,56157
+2026 Jan,Japan,43028
+2026 Feb,Japan,39051
+2026 Mar,Japan,52434
+2026 Apr,Japan,39839
+2026 May,Japan,48556
+2026 Jun,Japan,40448
+2026 Jul,Japan,42107
+2026 Aug,Japan,57966
+2026 Sep,Japan,51672
+2024 Sep,UK,55131
+2024 Oct,UK,51241
+2024 Nov,UK,41821
+2024 Dec,UK,45626
+2025 Jan,UK,36495
+2025 Feb,UK,39577
+2025 Mar,UK,46561
+2025 Apr,UK,55545
+2025 May,UK,61348
+2025 Jun,UK,61810
+2025 Jul,UK,72347
+2025 Aug,UK,68816
+2025 Sep,UK,61593
+2025 Oct,UK,54499
+2025 Nov,UK,43224
+2025 Dec,UK,44654
+2026 Jan,UK,38830
+2026 Feb,UK,39724
+2026 Mar,UK,49199
+2026 Apr,UK,56672
+2026 May,UK,59243
+2026 Jun,UK,62431
+2026 Jul,UK,69691
+2026 Aug,UK,75008
+2026 Sep,UK,61551
+2024 Sep,Others,403249
+2024 Oct,Others,370292
+2024 Nov,Others,311808
+2024 Dec,Others,320277
+2025 Jan,Others,259341
+2025 Feb,Others,273283
+2025 Mar,Others,350521
+2025 Apr,Others,397470
+2025 May,Others,416791
+2025 Jun,Others,429577
+2025 Jul,Others,498817
+2025 Aug,Others,473141
+2025 Sep,Others,412632
+2025 Oct,Others,365439
+2025 Nov,Others,313937
+2025 Dec,Others,328066
+2026 Jan,Others,243890
+2026 Feb,Others,285847
+2026 Mar,Others,342551
+2026 Apr,Others,410794
+2026 May,Others,436785
+2026 Jun,Others,436022
+2026 Jul,Others,502208
+2026 Aug,Others,452114
+2026 Sep,Others,419684

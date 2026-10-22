@@ -1,0 +1,3908 @@
+{
+ "provider": "WeatherHub",
+ "model_run": "2026-10-22T00:00:00Z",
+ "issued": "2026-10-22T03:41:12Z",
+ "units": {
+  "temp": "C",
+  "precip": "mm",
+  "snow": "cm",
+  "wind": "km/h"
+ },
+ "note": "dates are local calendar dates",
+ "locations": [
+  {
+   "location_id": "milano",
+   "name": "Milano",
+   "country": "IT",
+   "tz": "Europe/Rome",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 17.1,
+     "tmin_c": 10.8,
+     "pop_pct": 19,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 16.5,
+     "tmin_c": 10.9,
+     "pop_pct": 55,
+     "precip_mm": 8.7,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "rain",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 16.6,
+     "tmin_c": 9.6,
+     "pop_pct": 26,
+     "precip_mm": 4.1,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "rain",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 16.9,
+     "tmin_c": 9.4,
+     "pop_pct": 59,
+     "precip_mm": 0.5,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 16.5,
+     "tmin_c": 8.5,
+     "pop_pct": 72,
+     "precip_mm": 10.5,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "rain",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 16.7,
+     "tmin_c": 7.4,
+     "pop_pct": 43,
+     "precip_mm": 0.8,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 13.5,
+     "tmin_c": 6.9,
+     "pop_pct": 31,
+     "precip_mm": 2.6,
+     "snow_cm": 0.0,
+     "wind_kph": 4.0,
+     "condition": "rain",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 12.0,
+     "tmin_c": 6.8,
+     "pop_pct": 53,
+     "precip_mm": 2.3,
+     "snow_cm": 0.0,
+     "wind_kph": 5.0,
+     "condition": "rain",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 14.0,
+     "tmin_c": 6.3,
+     "pop_pct": 67,
+     "precip_mm": 7.3,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "rain",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 13.2,
+     "tmin_c": 6.5,
+     "pop_pct": 27,
+     "precip_mm": 0.1,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "showers",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "roma",
+   "name": "Roma",
+   "country": "IT",
+   "tz": "Europe/Rome",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 18.5,
+     "tmin_c": 11.4,
+     "pop_pct": 52,
+     "precip_mm": 0.8,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 22.0,
+     "tmin_c": 12.0,
+     "pop_pct": 52,
+     "precip_mm": 2.8,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "rain",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 22.2,
+     "tmin_c": 11.8,
+     "pop_pct": 53,
+     "precip_mm": 1.4,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 20.8,
+     "tmin_c": 10.4,
+     "pop_pct": 42,
+     "precip_mm": 6.6,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "rain",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 19.6,
+     "tmin_c": 10.8,
+     "pop_pct": 42,
+     "precip_mm": 2.4,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "rain",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 18.0,
+     "tmin_c": 9.5,
+     "pop_pct": 34,
+     "precip_mm": 3.1,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "rain",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 18.7,
+     "tmin_c": 8.8,
+     "pop_pct": 61,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "cloudy",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 17.6,
+     "tmin_c": 8.8,
+     "pop_pct": 25,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "cloudy",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 19.5,
+     "tmin_c": 8.7,
+     "pop_pct": 31,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "cloudy",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 18.2,
+     "tmin_c": 9.4,
+     "pop_pct": 42,
+     "precip_mm": 0.3,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "showers",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "venezia",
+   "name": "Venezia",
+   "country": "IT",
+   "tz": "Europe/Rome",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 16.1,
+     "tmin_c": 11.4,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 16.7,
+     "tmin_c": 11.5,
+     "pop_pct": 25,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "cloudy",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 18.1,
+     "tmin_c": 10.3,
+     "pop_pct": 65,
+     "precip_mm": 0.6,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 17.5,
+     "tmin_c": 9.8,
+     "pop_pct": 35,
+     "precip_mm": 0.2,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 14.5,
+     "tmin_c": 9.5,
+     "pop_pct": 13,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 13.2,
+     "tmin_c": 9.2,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 12.3,
+     "tmin_c": 6.9,
+     "pop_pct": 45,
+     "precip_mm": 2.9,
+     "snow_cm": 0.0,
+     "wind_kph": 16.0,
+     "condition": "rain",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 14.0,
+     "tmin_c": 7.4,
+     "pop_pct": 45,
+     "precip_mm": 0.1,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 15.2,
+     "tmin_c": 8.3,
+     "pop_pct": 40,
+     "precip_mm": 1.5,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 9.7,
+     "tmin_c": 8.1,
+     "pop_pct": 49,
+     "precip_mm": 4.6,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "rain",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "courmayeur",
+   "name": "Courmayeur",
+   "country": "IT",
+   "tz": "Europe/Rome",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 9.9,
+     "tmin_c": 1.9,
+     "pop_pct": 31,
+     "precip_mm": 0.2,
+     "snow_cm": 0.0,
+     "wind_kph": 4.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 10.8,
+     "tmin_c": 0.8,
+     "pop_pct": 35,
+     "precip_mm": 1.7,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 10.7,
+     "tmin_c": 0.4,
+     "pop_pct": 47,
+     "precip_mm": 5.4,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "rain",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 12.7,
+     "tmin_c": 0.7,
+     "pop_pct": 6,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 7.2,
+     "tmin_c": 0.0,
+     "pop_pct": 23,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "cloudy",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 8.5,
+     "tmin_c": -2.5,
+     "pop_pct": 70,
+     "precip_mm": 1.7,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 4.9,
+     "tmin_c": -4.4,
+     "pop_pct": 70,
+     "precip_mm": 2.4,
+     "snow_cm": 2.4,
+     "wind_kph": 6.0,
+     "condition": "snow",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 1.8,
+     "tmin_c": -3.6,
+     "pop_pct": 23,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "cloudy",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 4.5,
+     "tmin_c": -5.0,
+     "pop_pct": 56,
+     "precip_mm": 4.3,
+     "snow_cm": 4.3,
+     "wind_kph": 7.0,
+     "condition": "snow",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 2.5,
+     "tmin_c": -4.2,
+     "pop_pct": 38,
+     "precip_mm": 0.9,
+     "snow_cm": 0.9,
+     "wind_kph": 12.0,
+     "condition": "snow",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "cortina",
+   "name": "Cortina d'Ampezzo",
+   "country": "IT",
+   "tz": "Europe/Rome",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 10.0,
+     "tmin_c": 1.4,
+     "pop_pct": 44,
+     "precip_mm": 0.4,
+     "snow_cm": 0.0,
+     "wind_kph": 5.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 12.9,
+     "tmin_c": 3.3,
+     "pop_pct": 18,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 11.6,
+     "tmin_c": 2.1,
+     "pop_pct": 38,
+     "precip_mm": 1.4,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 10.9,
+     "tmin_c": -0.2,
+     "pop_pct": 31,
+     "precip_mm": 0.1,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 10.9,
+     "tmin_c": 0.4,
+     "pop_pct": 55,
+     "precip_mm": 1.3,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 5.9,
+     "tmin_c": -1.8,
+     "pop_pct": 70,
+     "precip_mm": 0.8,
+     "snow_cm": 0.3,
+     "wind_kph": 4.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 5.8,
+     "tmin_c": -3.2,
+     "pop_pct": 70,
+     "precip_mm": 0.5,
+     "snow_cm": 0.2,
+     "wind_kph": 5.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 3.5,
+     "tmin_c": -5.0,
+     "pop_pct": 35,
+     "precip_mm": 0.8,
+     "snow_cm": 0.8,
+     "wind_kph": 6.0,
+     "condition": "snow",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 4.0,
+     "tmin_c": -4.7,
+     "pop_pct": 26,
+     "precip_mm": 0.3,
+     "snow_cm": 0.3,
+     "wind_kph": 6.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 7.5,
+     "tmin_c": -4.0,
+     "pop_pct": 7,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "sunny",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "paris",
+   "name": "Paris",
+   "country": "FR",
+   "tz": "Europe/Paris",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 16.9,
+     "tmin_c": 9.9,
+     "pop_pct": 38,
+     "precip_mm": 2.5,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "rain",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 16.6,
+     "tmin_c": 9.7,
+     "pop_pct": 15,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 13.9,
+     "tmin_c": 9.6,
+     "pop_pct": 1,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 13.9,
+     "tmin_c": 9.0,
+     "pop_pct": 32,
+     "precip_mm": 0.6,
+     "snow_cm": 0.0,
+     "wind_kph": 16.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 13.3,
+     "tmin_c": 8.4,
+     "pop_pct": 6,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 15.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 12.4,
+     "tmin_c": 7.0,
+     "pop_pct": 21,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "cloudy",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 10.3,
+     "tmin_c": 6.0,
+     "pop_pct": 10,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 14.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 11.4,
+     "tmin_c": 6.0,
+     "pop_pct": 38,
+     "precip_mm": 1.8,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 11.0,
+     "tmin_c": 5.6,
+     "pop_pct": 19,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 12.5,
+     "tmin_c": 7.9,
+     "pop_pct": 25,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "cloudy",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "cannes",
+   "name": "Cannes",
+   "country": "FR",
+   "tz": "Europe/Paris",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 20.4,
+     "tmin_c": 14.0,
+     "pop_pct": 68,
+     "precip_mm": 0.2,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 19.6,
+     "tmin_c": 13.8,
+     "pop_pct": 43,
+     "precip_mm": 0.5,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 21.6,
+     "tmin_c": 13.0,
+     "pop_pct": 42,
+     "precip_mm": 2.2,
+     "snow_cm": 0.0,
+     "wind_kph": 15.0,
+     "condition": "rain",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 18.3,
+     "tmin_c": 11.3,
+     "pop_pct": 28,
+     "precip_mm": 1.4,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 19.8,
+     "tmin_c": 10.2,
+     "pop_pct": 33,
+     "precip_mm": 9.6,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "rain",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 18.1,
+     "tmin_c": 10.3,
+     "pop_pct": 29,
+     "precip_mm": 1.7,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 17.2,
+     "tmin_c": 9.2,
+     "pop_pct": 29,
+     "precip_mm": 7.2,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "rain",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 17.2,
+     "tmin_c": 8.9,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 14.8,
+     "tmin_c": 9.8,
+     "pop_pct": 31,
+     "precip_mm": 0.7,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 19.3,
+     "tmin_c": 10.7,
+     "pop_pct": 13,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "sunny",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "geneve",
+   "name": "Genève",
+   "country": "CH",
+   "tz": "Europe/Zurich",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 13.2,
+     "tmin_c": 7.2,
+     "pop_pct": 52,
+     "precip_mm": 2.3,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "rain",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 14.5,
+     "tmin_c": 7.7,
+     "pop_pct": 33,
+     "precip_mm": 0.3,
+     "snow_cm": 0.0,
+     "wind_kph": 16.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 15.4,
+     "tmin_c": 6.5,
+     "pop_pct": 44,
+     "precip_mm": 0.1,
+     "snow_cm": 0.0,
+     "wind_kph": 14.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 14.4,
+     "tmin_c": 5.9,
+     "pop_pct": 51,
+     "precip_mm": 0.9,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 10.6,
+     "tmin_c": 5.1,
+     "pop_pct": 31,
+     "precip_mm": 2.7,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "rain",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 8.9,
+     "tmin_c": 2.5,
+     "pop_pct": 70,
+     "precip_mm": 0.4,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 6.6,
+     "tmin_c": 0.8,
+     "pop_pct": 70,
+     "precip_mm": 5.8,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "rain",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 7.9,
+     "tmin_c": 0.5,
+     "pop_pct": 46,
+     "precip_mm": 2.8,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "rain",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 8.5,
+     "tmin_c": 1.8,
+     "pop_pct": 37,
+     "precip_mm": 1.1,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 9.7,
+     "tmin_c": 1.1,
+     "pop_pct": 39,
+     "precip_mm": 1.5,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "showers",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "london",
+   "name": "London",
+   "country": "GB",
+   "tz": "Europe/London",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 16.6,
+     "tmin_c": 9.4,
+     "pop_pct": 27,
+     "precip_mm": 0.5,
+     "snow_cm": 0.0,
+     "wind_kph": 19.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 15.4,
+     "tmin_c": 8.3,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 15.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 14.0,
+     "tmin_c": 7.4,
+     "pop_pct": 7,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 14.5,
+     "tmin_c": 8.1,
+     "pop_pct": 28,
+     "precip_mm": 1.0,
+     "snow_cm": 0.0,
+     "wind_kph": 19.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 11.7,
+     "tmin_c": 6.7,
+     "pop_pct": 38,
+     "precip_mm": 2.9,
+     "snow_cm": 0.0,
+     "wind_kph": 18.0,
+     "condition": "rain",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 9.9,
+     "tmin_c": 7.4,
+     "pop_pct": 39,
+     "precip_mm": 3.5,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "rain",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 12.7,
+     "tmin_c": 3.4,
+     "pop_pct": 62,
+     "precip_mm": 0.2,
+     "snow_cm": 0.0,
+     "wind_kph": 19.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 7.7,
+     "tmin_c": 6.2,
+     "pop_pct": 58,
+     "precip_mm": 0.1,
+     "snow_cm": 0.0,
+     "wind_kph": 21.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 10.9,
+     "tmin_c": 5.0,
+     "pop_pct": 38,
+     "precip_mm": 0.8,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 12.1,
+     "tmin_c": 5.9,
+     "pop_pct": 15,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 19.0,
+     "condition": "sunny",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "muenchen",
+   "name": "München",
+   "country": "DE",
+   "tz": "Europe/Berlin",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 12.3,
+     "tmin_c": 4.6,
+     "pop_pct": 35,
+     "precip_mm": 0.1,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 13.3,
+     "tmin_c": 5.0,
+     "pop_pct": 44,
+     "precip_mm": 0.5,
+     "snow_cm": 0.0,
+     "wind_kph": 18.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 14.0,
+     "tmin_c": 4.6,
+     "pop_pct": 27,
+     "precip_mm": 0.3,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 12.3,
+     "tmin_c": 4.1,
+     "pop_pct": 18,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 12.7,
+     "tmin_c": 3.4,
+     "pop_pct": 32,
+     "precip_mm": 0.2,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 7.9,
+     "tmin_c": 0.8,
+     "pop_pct": 70,
+     "precip_mm": 1.5,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 7.8,
+     "tmin_c": -0.1,
+     "pop_pct": 70,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "cloudy",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 6.8,
+     "tmin_c": -2.5,
+     "pop_pct": 16,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 3.4,
+     "tmin_c": -1.2,
+     "pop_pct": 15,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 5.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 8.2,
+     "tmin_c": -2.5,
+     "pop_pct": 20,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "sunny",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "berlin",
+   "name": "Berlin",
+   "country": "DE",
+   "tz": "Europe/Berlin",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 12.4,
+     "tmin_c": 6.2,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 17.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 11.7,
+     "tmin_c": 7.1,
+     "pop_pct": 33,
+     "precip_mm": 1.7,
+     "snow_cm": 0.0,
+     "wind_kph": 16.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 11.9,
+     "tmin_c": 5.8,
+     "pop_pct": 3,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 12.8,
+     "tmin_c": 5.4,
+     "pop_pct": 42,
+     "precip_mm": 1.2,
+     "snow_cm": 0.0,
+     "wind_kph": 18.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 9.7,
+     "tmin_c": 4.3,
+     "pop_pct": 21,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 20.0,
+     "condition": "cloudy",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 8.1,
+     "tmin_c": 2.6,
+     "pop_pct": 70,
+     "precip_mm": 0.9,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 6.9,
+     "tmin_c": 0.7,
+     "pop_pct": 70,
+     "precip_mm": 0.4,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 5.7,
+     "tmin_c": -0.7,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 2.1,
+     "tmin_c": -1.0,
+     "pop_pct": 31,
+     "precip_mm": 0.6,
+     "snow_cm": 0.6,
+     "wind_kph": 10.0,
+     "condition": "snow",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 3.4,
+     "tmin_c": 0.4,
+     "pop_pct": 21,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 19.0,
+     "condition": "cloudy",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "zuerich",
+   "name": "Zürich",
+   "country": "CH",
+   "tz": "Europe/Zurich",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 12.8,
+     "tmin_c": 6.4,
+     "pop_pct": 4,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 14.3,
+     "tmin_c": 6.8,
+     "pop_pct": 14,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 15.6,
+     "tmin_c": 6.8,
+     "pop_pct": 23,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "cloudy",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 14.5,
+     "tmin_c": 6.1,
+     "pop_pct": 36,
+     "precip_mm": 1.5,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 11.2,
+     "tmin_c": 4.2,
+     "pop_pct": 9,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 10.1,
+     "tmin_c": 3.1,
+     "pop_pct": 70,
+     "precip_mm": 3.8,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "rain",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 7.4,
+     "tmin_c": 0.9,
+     "pop_pct": 70,
+     "precip_mm": 1.9,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 5.4,
+     "tmin_c": -0.6,
+     "pop_pct": 22,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 18.0,
+     "condition": "cloudy",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 7.8,
+     "tmin_c": -0.1,
+     "pop_pct": 11,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 14.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 6.4,
+     "tmin_c": 1.0,
+     "pop_pct": 48,
+     "precip_mm": 2.8,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "rain",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "stmoritz",
+   "name": "St. Moritz",
+   "country": "CH",
+   "tz": "Europe/Zurich",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 7.6,
+     "tmin_c": -3.6,
+     "pop_pct": 22,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "cloudy",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 7.0,
+     "tmin_c": -2.1,
+     "pop_pct": 31,
+     "precip_mm": 0.4,
+     "snow_cm": 0.2,
+     "wind_kph": 11.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 8.3,
+     "tmin_c": -2.6,
+     "pop_pct": 13,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 5.8,
+     "tmin_c": -3.5,
+     "pop_pct": 42,
+     "precip_mm": 0.3,
+     "snow_cm": 0.1,
+     "wind_kph": 9.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 7.8,
+     "tmin_c": -4.4,
+     "pop_pct": 29,
+     "precip_mm": 0.2,
+     "snow_cm": 0.1,
+     "wind_kph": 6.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 4.4,
+     "tmin_c": -5.5,
+     "pop_pct": 70,
+     "precip_mm": 1.3,
+     "snow_cm": 10.1,
+     "wind_kph": 6.0,
+     "condition": "snow",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 0.1,
+     "tmin_c": -9.2,
+     "pop_pct": 70,
+     "precip_mm": 3.6,
+     "snow_cm": 12.9,
+     "wind_kph": 6.0,
+     "condition": "snow",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 1.1,
+     "tmin_c": -9.7,
+     "pop_pct": 20,
+     "precip_mm": 0.0,
+     "snow_cm": 13.2,
+     "wind_kph": 7.0,
+     "condition": "snow",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 0.2,
+     "tmin_c": -10.1,
+     "pop_pct": 51,
+     "precip_mm": 12.0,
+     "snow_cm": 12.0,
+     "wind_kph": 8.0,
+     "condition": "snow",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 5.0,
+     "tmin_c": -8.5,
+     "pop_pct": 14,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 5.0,
+     "condition": "sunny",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "madrid",
+   "name": "Madrid",
+   "country": "ES",
+   "tz": "Europe/Madrid",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 18.0,
+     "tmin_c": 11.3,
+     "pop_pct": 24,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "cloudy",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 19.9,
+     "tmin_c": 11.1,
+     "pop_pct": 65,
+     "precip_mm": 4.5,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "rain",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 19.3,
+     "tmin_c": 9.9,
+     "pop_pct": 39,
+     "precip_mm": 1.9,
+     "snow_cm": 0.0,
+     "wind_kph": 14.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 17.9,
+     "tmin_c": 10.8,
+     "pop_pct": 17,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 17.1,
+     "tmin_c": 8.7,
+     "pop_pct": 53,
+     "precip_mm": 0.8,
+     "snow_cm": 0.0,
+     "wind_kph": 15.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 17.4,
+     "tmin_c": 9.7,
+     "pop_pct": 41,
+     "precip_mm": 0.1,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 15.7,
+     "tmin_c": 8.3,
+     "pop_pct": 17,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 18.0,
+     "tmin_c": 7.2,
+     "pop_pct": 24,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "cloudy",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 14.8,
+     "tmin_c": 8.9,
+     "pop_pct": 16,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 14.6,
+     "tmin_c": 7.5,
+     "pop_pct": 46,
+     "precip_mm": 0.3,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "showers",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "amsterdam",
+   "name": "Amsterdam",
+   "country": "NL",
+   "tz": "Europe/Amsterdam",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 14.2,
+     "tmin_c": 8.6,
+     "pop_pct": 60,
+     "precip_mm": 0.1,
+     "snow_cm": 0.0,
+     "wind_kph": 18.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 14.9,
+     "tmin_c": 8.0,
+     "pop_pct": 13,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 16.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 13.6,
+     "tmin_c": 7.2,
+     "pop_pct": 53,
+     "precip_mm": 4.3,
+     "snow_cm": 0.0,
+     "wind_kph": 22.0,
+     "condition": "rain",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 14.6,
+     "tmin_c": 7.4,
+     "pop_pct": 60,
+     "precip_mm": 4.6,
+     "snow_cm": 0.0,
+     "wind_kph": 24.0,
+     "condition": "rain",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 11.5,
+     "tmin_c": 6.7,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 14.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 11.9,
+     "tmin_c": 6.4,
+     "pop_pct": 35,
+     "precip_mm": 0.2,
+     "snow_cm": 0.0,
+     "wind_kph": 16.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 10.9,
+     "tmin_c": 3.8,
+     "pop_pct": 14,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 16.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 9.5,
+     "tmin_c": 3.4,
+     "pop_pct": 45,
+     "precip_mm": 1.2,
+     "snow_cm": 0.0,
+     "wind_kph": 23.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 10.5,
+     "tmin_c": 3.4,
+     "pop_pct": 43,
+     "precip_mm": 0.7,
+     "snow_cm": 0.0,
+     "wind_kph": 14.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 12.0,
+     "tmin_c": 4.6,
+     "pop_pct": 24,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 14.0,
+     "condition": "cloudy",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "kobenhavn",
+   "name": "København",
+   "country": "DK",
+   "tz": "Europe/Copenhagen",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 12.4,
+     "tmin_c": 6.1,
+     "pop_pct": 10,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 16.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 10.4,
+     "tmin_c": 5.5,
+     "pop_pct": 1,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 18.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 12.0,
+     "tmin_c": 6.7,
+     "pop_pct": 41,
+     "precip_mm": 1.8,
+     "snow_cm": 0.0,
+     "wind_kph": 16.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 10.2,
+     "tmin_c": 4.8,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 25.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 7.4,
+     "tmin_c": 4.1,
+     "pop_pct": 7,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 19.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 7.1,
+     "tmin_c": 3.1,
+     "pop_pct": 55,
+     "precip_mm": 1.3,
+     "snow_cm": 0.0,
+     "wind_kph": 37.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 5.0,
+     "tmin_c": 2.5,
+     "pop_pct": 8,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 19.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 3.1,
+     "tmin_c": 0.6,
+     "pop_pct": 29,
+     "precip_mm": 0.4,
+     "snow_cm": 0.2,
+     "wind_kph": 15.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 4.0,
+     "tmin_c": 1.2,
+     "pop_pct": 10,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 20.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 4.1,
+     "tmin_c": 1.0,
+     "pop_pct": 29,
+     "precip_mm": 3.5,
+     "snow_cm": 0.0,
+     "wind_kph": 25.0,
+     "condition": "rain",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "dubai",
+   "name": "Dubai",
+   "country": "AE",
+   "tz": "Asia/Dubai",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 35.0,
+     "tmin_c": 22.4,
+     "pop_pct": 35,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "cloudy",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 34.9,
+     "tmin_c": 23.2,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 35.6,
+     "tmin_c": 21.9,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 17.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 35.1,
+     "tmin_c": 22.7,
+     "pop_pct": 8,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 14.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 36.4,
+     "tmin_c": 22.9,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 33.8,
+     "tmin_c": 21.6,
+     "pop_pct": 26,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "cloudy",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 29.3,
+     "tmin_c": 21.2,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 31.8,
+     "tmin_c": 22.0,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 34.7,
+     "tmin_c": 21.9,
+     "pop_pct": 16,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 31.0,
+     "tmin_c": 20.2,
+     "pop_pct": 12,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "sunny",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "newyork",
+   "name": "New York",
+   "country": "US",
+   "tz": "America/New_York",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 19.4,
+     "tmin_c": 12.2,
+     "pop_pct": 36,
+     "precip_mm": 6.6,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "rain",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 18.0,
+     "tmin_c": 9.2,
+     "pop_pct": 15,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 16.8,
+     "tmin_c": 8.8,
+     "pop_pct": 57,
+     "precip_mm": 2.0,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 15.0,
+     "tmin_c": 6.6,
+     "pop_pct": 43,
+     "precip_mm": 0.9,
+     "snow_cm": 0.0,
+     "wind_kph": 16.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 13.0,
+     "tmin_c": 7.1,
+     "pop_pct": 37,
+     "precip_mm": 1.9,
+     "snow_cm": 0.0,
+     "wind_kph": 18.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 12.0,
+     "tmin_c": 6.5,
+     "pop_pct": 30,
+     "precip_mm": 2.8,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "rain",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 13.8,
+     "tmin_c": 6.7,
+     "pop_pct": 27,
+     "precip_mm": 0.5,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 12.7,
+     "tmin_c": 8.6,
+     "pop_pct": 36,
+     "precip_mm": 0.7,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 12.1,
+     "tmin_c": 6.2,
+     "pop_pct": 62,
+     "precip_mm": 2.6,
+     "snow_cm": 0.0,
+     "wind_kph": 14.0,
+     "condition": "rain",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 15.3,
+     "tmin_c": 2.4,
+     "pop_pct": 22,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 21.0,
+     "condition": "cloudy",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "miami",
+   "name": "Miami",
+   "country": "US",
+   "tz": "America/New_York",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 28.8,
+     "tmin_c": 23.2,
+     "pop_pct": 61,
+     "precip_mm": 0.9,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 29.5,
+     "tmin_c": 21.8,
+     "pop_pct": 53,
+     "precip_mm": 7.7,
+     "snow_cm": 0.0,
+     "wind_kph": 19.0,
+     "condition": "rain",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 29.5,
+     "tmin_c": 21.5,
+     "pop_pct": 54,
+     "precip_mm": 2.5,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "rain",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 30.7,
+     "tmin_c": 21.7,
+     "pop_pct": 74,
+     "precip_mm": 3.2,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "rain",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 28.4,
+     "tmin_c": 21.5,
+     "pop_pct": 30,
+     "precip_mm": 0.3,
+     "snow_cm": 0.0,
+     "wind_kph": 17.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 28.1,
+     "tmin_c": 22.9,
+     "pop_pct": 39,
+     "precip_mm": 5.3,
+     "snow_cm": 0.0,
+     "wind_kph": 18.0,
+     "condition": "rain",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 30.2,
+     "tmin_c": 22.2,
+     "pop_pct": 72,
+     "precip_mm": 6.7,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "rain",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 29.0,
+     "tmin_c": 22.0,
+     "pop_pct": 72,
+     "precip_mm": 0.7,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 27.8,
+     "tmin_c": 22.5,
+     "pop_pct": 50,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "cloudy",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 28.7,
+     "tmin_c": 21.5,
+     "pop_pct": 73,
+     "precip_mm": 1.5,
+     "snow_cm": 0.0,
+     "wind_kph": 14.0,
+     "condition": "showers",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "beverlyhills",
+   "name": "Beverly Hills",
+   "country": "US",
+   "tz": "America/Los_Angeles",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 28.7,
+     "tmin_c": 15.2,
+     "pop_pct": 41,
+     "precip_mm": 0.4,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 27.4,
+     "tmin_c": 15.2,
+     "pop_pct": 23,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 18.0,
+     "condition": "cloudy",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 26.1,
+     "tmin_c": 14.9,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 25.7,
+     "tmin_c": 14.6,
+     "pop_pct": 16,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 23.6,
+     "tmin_c": 13.7,
+     "pop_pct": 22,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "cloudy",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 25.4,
+     "tmin_c": 13.1,
+     "pop_pct": 42,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "cloudy",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 24.2,
+     "tmin_c": 13.3,
+     "pop_pct": 7,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 22.3,
+     "tmin_c": 13.3,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 23.7,
+     "tmin_c": 13.6,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 5.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 24.3,
+     "tmin_c": 13.7,
+     "pop_pct": 18,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "sunny",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "aspen",
+   "name": "Aspen",
+   "country": "US",
+   "tz": "America/Denver",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 13.2,
+     "tmin_c": -2.5,
+     "pop_pct": 31,
+     "precip_mm": 0.5,
+     "snow_cm": 0.0,
+     "wind_kph": 14.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 12.6,
+     "tmin_c": -5.3,
+     "pop_pct": 6,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 14.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 9.2,
+     "tmin_c": -7.3,
+     "pop_pct": 28,
+     "precip_mm": 0.2,
+     "snow_cm": 0.2,
+     "wind_kph": 8.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 7.3,
+     "tmin_c": -8.7,
+     "pop_pct": 19,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 9.6,
+     "tmin_c": -7.8,
+     "pop_pct": 3,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 9.4,
+     "tmin_c": -4.6,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 10.8,
+     "tmin_c": -5.4,
+     "pop_pct": 6,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 9.1,
+     "tmin_c": -6.0,
+     "pop_pct": 23,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "cloudy",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 13.8,
+     "tmin_c": -7.7,
+     "pop_pct": 2,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 5.6,
+     "tmin_c": -8.7,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "sunny",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "toronto",
+   "name": "Toronto",
+   "country": "CA",
+   "tz": "America/Toronto",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 16.4,
+     "tmin_c": 6.6,
+     "pop_pct": 20,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 24.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 12.8,
+     "tmin_c": 5.6,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 15.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 12.4,
+     "tmin_c": 3.6,
+     "pop_pct": 11,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 13.1,
+     "tmin_c": 3.2,
+     "pop_pct": 29,
+     "precip_mm": 0.6,
+     "snow_cm": 0.0,
+     "wind_kph": 16.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 8.9,
+     "tmin_c": 2.9,
+     "pop_pct": 24,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 16.0,
+     "condition": "cloudy",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 10.1,
+     "tmin_c": 2.4,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 22.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 12.3,
+     "tmin_c": 3.5,
+     "pop_pct": 39,
+     "precip_mm": 6.0,
+     "snow_cm": 0.0,
+     "wind_kph": 17.0,
+     "condition": "rain",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 8.4,
+     "tmin_c": 4.4,
+     "pop_pct": 3,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 21.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 9.1,
+     "tmin_c": 2.0,
+     "pop_pct": 49,
+     "precip_mm": 2.2,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "rain",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 9.9,
+     "tmin_c": 0.4,
+     "pop_pct": 18,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 18.0,
+     "condition": "sunny",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "tokyo",
+   "name": "Tokyo",
+   "country": "JP",
+   "tz": "Asia/Tokyo",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 19.4,
+     "tmin_c": 13.9,
+     "pop_pct": 58,
+     "precip_mm": 25.2,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "rain",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 19.8,
+     "tmin_c": 12.7,
+     "pop_pct": 64,
+     "precip_mm": 4.5,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "rain",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 19.6,
+     "tmin_c": 11.7,
+     "pop_pct": 81,
+     "precip_mm": 3.2,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "rain",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 17.4,
+     "tmin_c": 10.4,
+     "pop_pct": 80,
+     "precip_mm": 1.9,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 17.3,
+     "tmin_c": 9.3,
+     "pop_pct": 46,
+     "precip_mm": 0.3,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 15.4,
+     "tmin_c": 9.2,
+     "pop_pct": 81,
+     "precip_mm": 17.7,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "rain",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 15.9,
+     "tmin_c": 10.2,
+     "pop_pct": 52,
+     "precip_mm": 1.9,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 18.3,
+     "tmin_c": 11.0,
+     "pop_pct": 66,
+     "precip_mm": 4.0,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "rain",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 18.4,
+     "tmin_c": 9.9,
+     "pop_pct": 37,
+     "precip_mm": 2.3,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "rain",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 13.7,
+     "tmin_c": 11.5,
+     "pop_pct": 75,
+     "precip_mm": 0.6,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "showers",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "osaka",
+   "name": "Osaka",
+   "country": "JP",
+   "tz": "Asia/Tokyo",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 21.2,
+     "tmin_c": 14.0,
+     "pop_pct": 19,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 20.1,
+     "tmin_c": 13.3,
+     "pop_pct": 25,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "cloudy",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 17.5,
+     "tmin_c": 11.4,
+     "pop_pct": 24,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 14.0,
+     "condition": "cloudy",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 19.3,
+     "tmin_c": 10.7,
+     "pop_pct": 36,
+     "precip_mm": 0.7,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 16.6,
+     "tmin_c": 10.8,
+     "pop_pct": 40,
+     "precip_mm": 0.2,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 17.6,
+     "tmin_c": 9.5,
+     "pop_pct": 27,
+     "precip_mm": 1.1,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 17.5,
+     "tmin_c": 9.9,
+     "pop_pct": 50,
+     "precip_mm": 0.2,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 21.5,
+     "tmin_c": 11.4,
+     "pop_pct": 24,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "cloudy",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 21.1,
+     "tmin_c": 10.8,
+     "pop_pct": 54,
+     "precip_mm": 0.3,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 15.3,
+     "tmin_c": 9.1,
+     "pop_pct": 20,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "sunny",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "seoul",
+   "name": "Seoul",
+   "country": "KR",
+   "tz": "Asia/Seoul",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 19.1,
+     "tmin_c": 7.8,
+     "pop_pct": 2,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 5.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 14.6,
+     "tmin_c": 5.2,
+     "pop_pct": 20,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 12.7,
+     "tmin_c": 4.2,
+     "pop_pct": 20,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 5.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 12.1,
+     "tmin_c": 4.9,
+     "pop_pct": 27,
+     "precip_mm": 1.2,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 16.0,
+     "tmin_c": 6.0,
+     "pop_pct": 25,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "cloudy",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 17.7,
+     "tmin_c": 6.8,
+     "pop_pct": 2,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 14.4,
+     "tmin_c": 6.7,
+     "pop_pct": 18,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 13.8,
+     "tmin_c": 5.2,
+     "pop_pct": 11,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 16.3,
+     "tmin_c": 5.5,
+     "pop_pct": 17,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 16.2,
+     "tmin_c": 6.3,
+     "pop_pct": 22,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 4.0,
+     "condition": "cloudy",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "busan",
+   "name": "Busan",
+   "country": "KR",
+   "tz": "Asia/Seoul",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 21.3,
+     "tmin_c": 12.1,
+     "pop_pct": 2,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 16.4,
+     "tmin_c": 10.1,
+     "pop_pct": 32,
+     "precip_mm": 0.4,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 15.3,
+     "tmin_c": 7.7,
+     "pop_pct": 42,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "cloudy",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 14.0,
+     "tmin_c": 8.5,
+     "pop_pct": 28,
+     "precip_mm": 0.8,
+     "snow_cm": 0.0,
+     "wind_kph": 14.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 18.4,
+     "tmin_c": 10.8,
+     "pop_pct": 48,
+     "precip_mm": 0.6,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 20.4,
+     "tmin_c": 11.0,
+     "pop_pct": 5,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 15.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 18.7,
+     "tmin_c": 10.2,
+     "pop_pct": 16,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 15.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 20.1,
+     "tmin_c": 9.3,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 15.8,
+     "tmin_c": 9.7,
+     "pop_pct": 58,
+     "precip_mm": 3.4,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "rain",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 17.7,
+     "tmin_c": 9.9,
+     "pop_pct": 31,
+     "precip_mm": 1.1,
+     "snow_cm": 0.0,
+     "wind_kph": 18.0,
+     "condition": "showers",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "shanghai",
+   "name": "Shanghai",
+   "country": "CN",
+   "tz": "Asia/Shanghai",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 24.0,
+     "tmin_c": 15.3,
+     "pop_pct": 53,
+     "precip_mm": 0.2,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 23.4,
+     "tmin_c": 14.6,
+     "pop_pct": 27,
+     "precip_mm": 2.4,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "rain",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 21.2,
+     "tmin_c": 13.2,
+     "pop_pct": 68,
+     "precip_mm": 0.8,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 19.6,
+     "tmin_c": 13.8,
+     "pop_pct": 10,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 18.5,
+     "tmin_c": 11.7,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 18.7,
+     "tmin_c": 11.3,
+     "pop_pct": 31,
+     "precip_mm": 2.4,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "rain",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 14.6,
+     "tmin_c": 11.9,
+     "pop_pct": 1,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 14.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 18.2,
+     "tmin_c": 12.1,
+     "pop_pct": 31,
+     "precip_mm": 1.2,
+     "snow_cm": 0.0,
+     "wind_kph": 14.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 15.2,
+     "tmin_c": 12.3,
+     "pop_pct": 21,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "cloudy",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 19.9,
+     "tmin_c": 13.9,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "sunny",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "beijing",
+   "name": "Beijing",
+   "country": "CN",
+   "tz": "Asia/Shanghai",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 16.7,
+     "tmin_c": 6.8,
+     "pop_pct": 18,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 16.7,
+     "tmin_c": 5.9,
+     "pop_pct": 12,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 16.5,
+     "tmin_c": 5.7,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 13.4,
+     "tmin_c": 4.4,
+     "pop_pct": 14,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 10.1,
+     "tmin_c": 1.8,
+     "pop_pct": 20,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 15.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 11.4,
+     "tmin_c": 1.2,
+     "pop_pct": 26,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "cloudy",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 11.8,
+     "tmin_c": 2.6,
+     "pop_pct": 79,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "cloudy",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 15.1,
+     "tmin_c": 2.8,
+     "pop_pct": 26,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "cloudy",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 14.5,
+     "tmin_c": 2.5,
+     "pop_pct": 34,
+     "precip_mm": 0.3,
+     "snow_cm": 0.0,
+     "wind_kph": 19.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 10.0,
+     "tmin_c": 3.7,
+     "pop_pct": 19,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "sunny",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "chengdu",
+   "name": "Chengdu",
+   "country": "CN",
+   "tz": "Asia/Shanghai",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 21.1,
+     "tmin_c": 13.5,
+     "pop_pct": 31,
+     "precip_mm": 1.1,
+     "snow_cm": 0.0,
+     "wind_kph": 4.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 19.3,
+     "tmin_c": 14.0,
+     "pop_pct": 4,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 19.0,
+     "tmin_c": 13.4,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 16.9,
+     "tmin_c": 13.4,
+     "pop_pct": 43,
+     "precip_mm": 0.6,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 18.7,
+     "tmin_c": 13.3,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 4.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 19.1,
+     "tmin_c": 13.2,
+     "pop_pct": 3,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 5.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 17.1,
+     "tmin_c": 12.6,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 5.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 19.2,
+     "tmin_c": 13.0,
+     "pop_pct": 34,
+     "precip_mm": 0.2,
+     "snow_cm": 0.0,
+     "wind_kph": 3.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 20.9,
+     "tmin_c": 12.7,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 4.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 16.9,
+     "tmin_c": 12.2,
+     "pop_pct": 0,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "sunny",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "hongkong",
+   "name": "Hong Kong",
+   "country": "HK",
+   "tz": "Asia/Hong_Kong",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 28.8,
+     "tmin_c": 23.7,
+     "pop_pct": 32,
+     "precip_mm": 3.1,
+     "snow_cm": 0.0,
+     "wind_kph": 19.0,
+     "condition": "rain",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 27.8,
+     "tmin_c": 21.9,
+     "pop_pct": 10,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 27.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 27.8,
+     "tmin_c": 22.7,
+     "pop_pct": 18,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 28.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 26.3,
+     "tmin_c": 22.3,
+     "pop_pct": 57,
+     "precip_mm": 0.1,
+     "snow_cm": 0.0,
+     "wind_kph": 15.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 26.4,
+     "tmin_c": 23.1,
+     "pop_pct": 4,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 25.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 28.2,
+     "tmin_c": 22.4,
+     "pop_pct": 17,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 25.0,
+     "condition": "sunny",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 27.4,
+     "tmin_c": 21.5,
+     "pop_pct": 26,
+     "precip_mm": 0.2,
+     "snow_cm": 0.0,
+     "wind_kph": 23.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 28.5,
+     "tmin_c": 23.5,
+     "pop_pct": 4,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 31.0,
+     "condition": "sunny",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 28.6,
+     "tmin_c": 23.1,
+     "pop_pct": 28,
+     "precip_mm": 0.7,
+     "snow_cm": 0.0,
+     "wind_kph": 29.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 24.8,
+     "tmin_c": 21.5,
+     "pop_pct": 19,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 25.0,
+     "condition": "sunny",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "taipei",
+   "name": "Taipei",
+   "country": "TW",
+   "tz": "Asia/Taipei",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 27.7,
+     "tmin_c": 21.8,
+     "pop_pct": 11,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "sunny",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 25.9,
+     "tmin_c": 20.8,
+     "pop_pct": 49,
+     "precip_mm": 0.2,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 27.4,
+     "tmin_c": 21.2,
+     "pop_pct": 36,
+     "precip_mm": 3.8,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "rain",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 26.8,
+     "tmin_c": 20.5,
+     "pop_pct": 40,
+     "precip_mm": 7.3,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "rain",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 26.3,
+     "tmin_c": 20.2,
+     "pop_pct": 42,
+     "precip_mm": 0.5,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 26.1,
+     "tmin_c": 20.0,
+     "pop_pct": 56,
+     "precip_mm": 7.6,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "rain",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 26.7,
+     "tmin_c": 19.7,
+     "pop_pct": 44,
+     "precip_mm": 0.9,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 29.6,
+     "tmin_c": 20.5,
+     "pop_pct": 69,
+     "precip_mm": 0.7,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 27.8,
+     "tmin_c": 21.4,
+     "pop_pct": 37,
+     "precip_mm": 1.5,
+     "snow_cm": 0.0,
+     "wind_kph": 7.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 27.5,
+     "tmin_c": 19.6,
+     "pop_pct": 64,
+     "precip_mm": 2.8,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "rain",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "singapore",
+   "name": "Singapore",
+   "country": "SG",
+   "tz": "Asia/Singapore",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 30.4,
+     "tmin_c": 25.2,
+     "pop_pct": 77,
+     "precip_mm": 7.6,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "rain",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 30.0,
+     "tmin_c": 24.8,
+     "pop_pct": 56,
+     "precip_mm": 4.0,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "rain",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 30.2,
+     "tmin_c": 26.0,
+     "pop_pct": 72,
+     "precip_mm": 37.4,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "rain",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 31.1,
+     "tmin_c": 25.2,
+     "pop_pct": 81,
+     "precip_mm": 8.3,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "rain",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 31.3,
+     "tmin_c": 25.1,
+     "pop_pct": 65,
+     "precip_mm": 1.6,
+     "snow_cm": 0.0,
+     "wind_kph": 9.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 31.8,
+     "tmin_c": 24.7,
+     "pop_pct": 95,
+     "precip_mm": 1.5,
+     "snow_cm": 0.0,
+     "wind_kph": 4.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 31.6,
+     "tmin_c": 24.7,
+     "pop_pct": 60,
+     "precip_mm": 5.5,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "rain",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 32.6,
+     "tmin_c": 25.4,
+     "pop_pct": 67,
+     "precip_mm": 5.3,
+     "snow_cm": 0.0,
+     "wind_kph": 6.0,
+     "condition": "rain",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 30.1,
+     "tmin_c": 24.0,
+     "pop_pct": 54,
+     "precip_mm": 7.5,
+     "snow_cm": 0.0,
+     "wind_kph": 8.0,
+     "condition": "rain",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 32.1,
+     "tmin_c": 24.6,
+     "pop_pct": 95,
+     "precip_mm": 3.7,
+     "snow_cm": 0.0,
+     "wind_kph": 10.0,
+     "condition": "rain",
+     "confidence": "low"
+    }
+   ]
+  },
+  {
+   "location_id": "sydney",
+   "name": "Sydney",
+   "country": "AU",
+   "tz": "Australia/Sydney",
+   "days": [
+    {
+     "date": "2026-10-22",
+     "tmax_c": 22.7,
+     "tmin_c": 14.8,
+     "pop_pct": 48,
+     "precip_mm": 5.2,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "rain",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-23",
+     "tmax_c": 24.1,
+     "tmin_c": 16.4,
+     "pop_pct": 33,
+     "precip_mm": 0.1,
+     "snow_cm": 0.0,
+     "wind_kph": 11.0,
+     "condition": "showers",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-24",
+     "tmax_c": 26.2,
+     "tmin_c": 18.4,
+     "pop_pct": 25,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 17.0,
+     "condition": "cloudy",
+     "confidence": "high"
+    },
+    {
+     "date": "2026-10-25",
+     "tmax_c": 22.3,
+     "tmin_c": 16.0,
+     "pop_pct": 42,
+     "precip_mm": 1.5,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-26",
+     "tmax_c": 23.6,
+     "tmin_c": 15.3,
+     "pop_pct": 31,
+     "precip_mm": 0.4,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "showers",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-27",
+     "tmax_c": 21.0,
+     "tmin_c": 14.0,
+     "pop_pct": 23,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 13.0,
+     "condition": "cloudy",
+     "confidence": "medium"
+    },
+    {
+     "date": "2026-10-28",
+     "tmax_c": 23.0,
+     "tmin_c": 16.2,
+     "pop_pct": 22,
+     "precip_mm": 0.0,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "cloudy",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-29",
+     "tmax_c": 26.6,
+     "tmin_c": 17.2,
+     "pop_pct": 40,
+     "precip_mm": 0.3,
+     "snow_cm": 0.0,
+     "wind_kph": 14.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-30",
+     "tmax_c": 23.9,
+     "tmin_c": 15.2,
+     "pop_pct": 28,
+     "precip_mm": 0.8,
+     "snow_cm": 0.0,
+     "wind_kph": 12.0,
+     "condition": "showers",
+     "confidence": "low"
+    },
+    {
+     "date": "2026-10-31",
+     "tmax_c": 20.9,
+     "tmin_c": 14.6,
+     "pop_pct": 31,
+     "precip_mm": 1.5,
+     "snow_cm": 0.0,
+     "wind_kph": 18.0,
+     "condition": "showers",
+     "confidence": "low"
+    }
+   ]
+  }
+ ]
+}

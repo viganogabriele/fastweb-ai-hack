@@ -1,0 +1,81 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/planning/v1/replenishment-proposal",
+    "body": {
+      "store": "SEL01",
+      "sku": "J20931A00618-510",
+      "asOf": "2026-10-22",
+      "demandMultiplier": 6
+    }
+  },
+  "response": {
+    "store": "SEL01",
+    "werks": "3101",
+    "sku": "J20931A00618-510",
+    "asOf": "2026-10-22",
+    "forecastRun": "2026-10-19",
+    "coverDays": 28,
+    "demandMultiplier": 6.0,
+    "supplyingDc": "HK30",
+    "atpSnapshot": "2026-10-22T06:00:00",
+    "expectedArrival": "2026-10-28",
+    "lines": [
+      {
+        "size": "00",
+        "onHand": 2,
+        "inTransit": 0,
+        "target": 35,
+        "proposed": 33,
+        "confirmedByDc": 6,
+        "shortfall": 27
+      },
+      {
+        "size": "0",
+        "onHand": 6,
+        "inTransit": 0,
+        "target": 35,
+        "proposed": 29,
+        "confirmedByDc": 19,
+        "shortfall": 10
+      },
+      {
+        "size": "1",
+        "onHand": 4,
+        "inTransit": 0,
+        "target": 35,
+        "proposed": 31,
+        "confirmedByDc": 27,
+        "shortfall": 4
+      },
+      {
+        "size": "2",
+        "onHand": 4,
+        "inTransit": 0,
+        "target": 35,
+        "proposed": 31,
+        "confirmedByDc": 20,
+        "shortfall": 11
+      },
+      {
+        "size": "3",
+        "onHand": 2,
+        "inTransit": 0,
+        "target": 35,
+        "proposed": 33,
+        "confirmedByDc": 11,
+        "shortfall": 22
+      },
+      {
+        "size": "4",
+        "onHand": 1,
+        "inTransit": 0,
+        "target": 35,
+        "proposed": 34,
+        "confirmedByDc": 5,
+        "shortfall": 29
+      }
+    ],
+    "note": "forecast is statistical (event-blind); pass demand_multiplier to reflect known events"
+  }
+}

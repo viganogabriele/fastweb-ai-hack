@@ -1,0 +1,483 @@
+{
+ "style_region": {
+  "AMBRINE|23R|AMERICAS": {
+   "W40": 30.0,
+   "W41": 46.7,
+   "W42": 55.9
+  },
+  "AMBRINE|23R|APAC": {
+   "W40": 51.7,
+   "W41": 57.8,
+   "W42": 64.9
+  },
+  "AMBRINE|23R|EMEA": {
+   "W40": 66.0,
+   "W41": 66.4,
+   "W42": 70.8
+  },
+  "AMBRINE|999|AMERICAS": {
+   "W40": 52.9,
+   "W41": 52.9,
+   "W42": 56.8
+  },
+  "AMBRINE|999|APAC": {
+   "W40": 51.2,
+   "W41": 56.5,
+   "W42": 61.0
+  },
+  "AMBRINE|999|EMEA": {
+   "W40": 47.9,
+   "W41": 54.8,
+   "W42": 60.9
+  },
+  "ARNEB|742|AMERICAS": {
+   "W40": 37.8,
+   "W41": 40.0,
+   "W42": 44.4
+  },
+  "ARNEB|742|APAC": {
+   "W40": 51.6,
+   "W41": 60.7,
+   "W42": 60.6
+  },
+  "ARNEB|742|EMEA": {
+   "W40": 60.4,
+   "W41": 61.3,
+   "W42": 64.6
+  },
+  "ARNEB|999|AMERICAS": {
+   "W40": 52.7,
+   "W41": 62.9,
+   "W42": 60.0
+  },
+  "ARNEB|999|APAC": {
+   "W40": 52.5,
+   "W41": 54.0,
+   "W42": 61.2
+  },
+  "ARNEB|999|EMEA": {
+   "W40": 55.6,
+   "W41": 60.5,
+   "W42": 64.4
+  },
+  "ILVARO|20D|AMERICAS": {
+   "W40": 40.0,
+   "W41": 42.3,
+   "W42": 48.3
+  },
+  "ILVARO|20D|APAC": {
+   "W40": 51.9,
+   "W41": 58.0,
+   "W42": 66.2
+  },
+  "ILVARO|20D|EMEA": {
+   "W40": 49.5,
+   "W41": 55.3,
+   "W42": 59.5
+  },
+  "ILVARO|510|AMERICAS": {
+   "W40": 52.9,
+   "W41": 64.7,
+   "W42": 28.9
+  },
+  "ILVARO|510|APAC": {
+   "W40": 88.5,
+   "W41": 94.9,
+   "W42": 65.6
+  },
+  "ILVARO|510|EMEA": {
+   "W40": 59.5,
+   "W41": 43.3,
+   "W42": 43.3
+  },
+  "ILVARO|999|AMERICAS": {
+   "W40": 37.4,
+   "W41": 46.5,
+   "W42": 55.6
+  },
+  "ILVARO|999|APAC": {
+   "W40": 60.3,
+   "W41": 70.1,
+   "W42": 82.4
+  },
+  "ILVARO|999|EMEA": {
+   "W40": 49.2,
+   "W41": 55.6,
+   "W42": 73.1
+  },
+  "POLARIS BALACLAVA|001|AMERICAS": {
+   "W40": 18.2,
+   "W41": 30.8,
+   "W42": 28.6
+  },
+  "POLARIS BALACLAVA|001|APAC": {
+   "W40": 52.9,
+   "W41": 63.2,
+   "W42": 61.6
+  },
+  "POLARIS BALACLAVA|001|EMEA": {
+   "W40": 36.4,
+   "W41": 38.8,
+   "W42": 48.0
+  },
+  "POLARIS BALACLAVA|999|AMERICAS": {
+   "W40": 5.7,
+   "W41": 21.1,
+   "W42": 31.8
+  },
+  "POLARIS BALACLAVA|999|APAC": {
+   "W40": 37.4,
+   "W41": 55.6,
+   "W42": 59.6
+  },
+  "POLARIS BALACLAVA|999|EMEA": {
+   "W40": 33.6,
+   "W41": 37.8,
+   "W42": 47.2
+  },
+  "POLARIS CAPE|001|AMERICAS": {
+   "W40": 7.7,
+   "W41": 23.1,
+   "W42": 28.6
+  },
+  "POLARIS CAPE|001|APAC": {
+   "W40": 46.3,
+   "W41": 48.7,
+   "W42": 53.7
+  },
+  "POLARIS CAPE|001|EMEA": {
+   "W40": 17.8,
+   "W41": 29.4,
+   "W42": 29.8
+  },
+  "POLARIS CAPE|999|AMERICAS": {
+   "W40": 13.8,
+   "W41": 17.6,
+   "W42": 25.7
+  },
+  "POLARIS CAPE|999|APAC": {
+   "W40": 39.6,
+   "W41": 51.2,
+   "W42": 54.9
+  },
+  "POLARIS CAPE|999|EMEA": {
+   "W40": 19.2,
+   "W41": 29.7,
+   "W42": 40.1
+  },
+  "POLARIS OVERSIZED|73A|AMERICAS": {
+   "W40": 0.0,
+   "W41": 7.7,
+   "W42": 14.3
+  },
+  "POLARIS OVERSIZED|73A|APAC": {
+   "W40": 24.4,
+   "W41": 25.0,
+   "W42": 30.5
+  },
+  "POLARIS OVERSIZED|73A|EMEA": {
+   "W40": 15.4,
+   "W41": 14.3,
+   "W42": 25.0
+  },
+  "POLARIS OVERSIZED|999|AMERICAS": {
+   "W40": 18.4,
+   "W41": 18.2,
+   "W42": 25.0
+  },
+  "POLARIS OVERSIZED|999|APAC": {
+   "W40": 46.1,
+   "W41": 55.2,
+   "W42": 60.1
+  },
+  "POLARIS OVERSIZED|999|EMEA": {
+   "W40": 25.4,
+   "W41": 32.7,
+   "W42": 39.6
+  },
+  "ROSIERE|82D|AMERICAS": {
+   "W40": 38.2,
+   "W41": 50.0,
+   "W42": 49.0
+  },
+  "ROSIERE|82D|APAC": {
+   "W40": 51.4,
+   "W41": 52.3,
+   "W42": 51.9
+  },
+  "ROSIERE|82D|EMEA": {
+   "W40": 32.0,
+   "W41": 43.7,
+   "W42": 48.0
+  },
+  "ROSIERE|999|AMERICAS": {
+   "W40": 45.5,
+   "W41": 52.6,
+   "W42": 60.6
+  },
+  "ROSIERE|999|APAC": {
+   "W40": 55.0,
+   "W41": 59.2,
+   "W42": 62.2
+  },
+  "ROSIERE|999|EMEA": {
+   "W40": 51.6,
+   "W41": 57.8,
+   "W42": 61.5
+  },
+  "WOOL TURTLENECK|23R|AMERICAS": {
+   "W40": 56.8,
+   "W41": 57.5,
+   "W42": 62.2
+  },
+  "WOOL TURTLENECK|23R|APAC": {
+   "W40": 58.4,
+   "W41": 64.6,
+   "W42": 64.9
+  },
+  "WOOL TURTLENECK|23R|EMEA": {
+   "W40": 56.9,
+   "W41": 59.8,
+   "W42": 59.2
+  },
+  "WOOL TURTLENECK|742|AMERICAS": {
+   "W40": 44.1,
+   "W41": 55.3,
+   "W42": 56.1
+  },
+  "WOOL TURTLENECK|742|APAC": {
+   "W40": 50.0,
+   "W41": 65.0,
+   "W42": 66.5
+  },
+  "WOOL TURTLENECK|742|EMEA": {
+   "W40": 54.3,
+   "W41": 53.3,
+   "W42": 67.6
+  },
+  "WOOL TURTLENECK|999|AMERICAS": {
+   "W40": 48.0,
+   "W41": 57.5,
+   "W42": 61.0
+  },
+  "WOOL TURTLENECK|999|APAC": {
+   "W40": 59.1,
+   "W41": 65.8,
+   "W42": 66.9
+  },
+  "WOOL TURTLENECK|999|EMEA": {
+   "W40": 62.1,
+   "W41": 64.4,
+   "W42": 68.8
+  }
+ },
+ "region_summary": {
+  "ILVARO": {
+   "EMEA": {
+    "shown": 63.2,
+    "weighted": 64.6
+   },
+   "AMERICAS": {
+    "shown": 44.0,
+    "weighted": 49.3
+   },
+   "APAC": {
+    "shown": 75.0,
+    "weighted": 75.1
+   },
+   "TOTAL": {
+    "shown": 64.2,
+    "weighted": 68.3
+   }
+  },
+  "AMBRINE": {
+   "EMEA": {
+    "shown": 58.9,
+    "weighted": 63.3
+   },
+   "AMERICAS": {
+    "shown": 51.7,
+    "weighted": 56.6
+   },
+   "APAC": {
+    "shown": 55.3,
+    "weighted": 61.7
+   },
+   "TOTAL": {
+    "shown": 56.5,
+    "weighted": 61.6
+   }
+  },
+  "ARNEB": {
+   "EMEA": {
+    "shown": 59.5,
+    "weighted": 64.5
+   },
+   "AMERICAS": {
+    "shown": 53.7,
+    "weighted": 55.9
+   },
+   "APAC": {
+    "shown": 58.1,
+    "weighted": 61.0
+   },
+   "TOTAL": {
+    "shown": 58.0,
+    "weighted": 61.9
+   }
+  },
+  "ROSIERE": {
+   "EMEA": {
+    "shown": 56.8,
+    "weighted": 59.6
+   },
+   "AMERICAS": {
+    "shown": 55.1,
+    "weighted": 57.9
+   },
+   "APAC": {
+    "shown": 55.5,
+    "weighted": 59.8
+   },
+   "TOTAL": {
+    "shown": 56.1,
+    "weighted": 59.4
+   }
+  },
+  "WOOL TURTLENECK": {
+   "EMEA": {
+    "shown": 62.1,
+    "weighted": 66.6
+   },
+   "AMERICAS": {
+    "shown": 53.1,
+    "weighted": 60.3
+   },
+   "APAC": {
+    "shown": 64.7,
+    "weighted": 66.6
+   },
+   "TOTAL": {
+    "shown": 61.8,
+    "weighted": 66.0
+   }
+  },
+  "POLARIS CAPE": {
+   "EMEA": {
+    "shown": 37.3,
+    "weighted": 37.7
+   },
+   "AMERICAS": {
+    "shown": 22.9,
+    "weighted": 26.5
+   },
+   "APAC": {
+    "shown": 43.9,
+    "weighted": 54.5
+   },
+   "TOTAL": {
+    "shown": 37.3,
+    "weighted": 46.8
+   }
+  },
+  "POLARIS OVERSIZED": {
+   "EMEA": {
+    "shown": 41.8,
+    "weighted": 37.6
+   },
+   "AMERICAS": {
+    "shown": 20.1,
+    "weighted": 22.6
+   },
+   "APAC": {
+    "shown": 43.6,
+    "weighted": 55.0
+   },
+   "TOTAL": {
+    "shown": 38.4,
+    "weighted": 45.8
+   }
+  },
+  "POLARIS BALACLAVA": {
+   "EMEA": {
+    "shown": 51.0,
+    "weighted": 47.5
+   },
+   "AMERICAS": {
+    "shown": 27.7,
+    "weighted": 31.0
+   },
+   "APAC": {
+    "shown": 61.1,
+    "weighted": 60.2
+   },
+   "TOTAL": {
+    "shown": 50.1,
+    "weighted": 53.1
+   }
+  }
+ },
+ "ilvaro_510_asia": {
+  "SEL01": {
+   "st_w40": 89,
+   "st_w42": 31,
+   "oh": 20
+  },
+  "SEL02": {
+   "st_w40": 109,
+   "st_w42": 109,
+   "oh": 0
+  },
+  "BUS01": {
+   "st_w40": 100,
+   "st_w42": 100,
+   "oh": 0
+  },
+  "SHA01": {
+   "st_w40": 71,
+   "st_w42": 33,
+   "oh": 12
+  },
+  "BJS01": {
+   "st_w40": 80,
+   "st_w42": 140,
+   "oh": 0
+  },
+  "CDU01": {
+   "st_w40": 100,
+   "st_w42": 100,
+   "oh": 0
+  },
+  "TYO01": {
+   "st_w40": 100,
+   "st_w42": 50,
+   "oh": 12
+  },
+  "TYO02": {
+   "st_w40": 80,
+   "st_w42": 100,
+   "oh": 0
+  },
+  "OSA01": {
+   "st_w40": 100,
+   "st_w42": 100,
+   "oh": 1
+  },
+  "HKG01": {
+   "st_w40": 80,
+   "st_w42": 100,
+   "oh": 0
+  },
+  "TPE01": {
+   "st_w40": 60,
+   "st_w42": 80,
+   "oh": 1
+  },
+  "SIN01": {
+   "st_w40": 60,
+   "st_w42": 80,
+   "oh": 1
+  }
+ },
+ "ilvaro_510_asia_w40": 88.5
+}

@@ -1,0 +1,32 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/logistics/v1/lanes?origin=1002&dest=1001"
+  },
+  "response": {
+    "lane_id": "LN-1002-1001",
+    "origin": "1002",
+    "origin_type": "STORE",
+    "origin_name": "Milano Rinascente Duomo",
+    "dest": "1001",
+    "dest_name": "Milano Montenapoleone",
+    "dest_country": "IT",
+    "distance_km": 0,
+    "mode": "COURIER_SAME_DAY",
+    "default_carrier": "Milkman",
+    "transit_days_contract": 0,
+    "transit_days_p90_contract": 1,
+    "observed_p50_days": null,
+    "observed_p90_days": null,
+    "observed_n": 0,
+    "pickup_cutoff_local": "15:30",
+    "pickup_days": "MON-FRI",
+    "customs_required": "N",
+    "documents": null,
+    "ibt_allowed": "Y",
+    "cost_fixed_eur": 15.01,
+    "cost_per_unit_eur": 0.6,
+    "co2_kg_per_parcel": 0.0,
+    "last_reviewed": "2026-07-15"
+  }
+}

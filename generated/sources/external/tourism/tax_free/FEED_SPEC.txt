@@ -1,0 +1,8 @@
+Refundia data feed - weekly tax-free shopping (issued refund cheques, all categories)
+delimiter: |   week: ISO week Mon-Sun (yr_wk = ISO year + week)
+spend_idx / trx_idx: index, base = average week of calendar 2025 = 100, computed separately for each dest_ctry x nat_grp pair
+avg_tkt_eur: average refund-cheque purchase value in EUR (gross of VAT)
+yoy_spend: % vs same ISO week previous year
+share_dest_spend: % of total tax-free spend in dest_ctry in that week (covered nationalities only)
+status: FINAL / PRELIM (may be revised, see rev) / PARTIAL_WTD (week-to-date, incomplete)
+nat_grp GCC = SA+AE+KW+QA+BH+OM. UK is not covered (no VAT refund scheme). Residents are not eligible in their own country.

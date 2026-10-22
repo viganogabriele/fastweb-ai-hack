@@ -1,0 +1,164 @@
+store,file,id,sent,business_date,kind,frm,subject
+BUS01,20260831_2051_BUS01.eml,0831,2026-08-31 20:51,2026-08-31,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (8/31 월)
+BUS01,20260901_2038_BUS01.eml,0901,2026-09-01 20:38,2026-09-01,closing,한승우 <seungwoo.han@moncler-retail.example>,BUS01 마감 0901
+BUS01,20260902_2046_BUS01.eml,0902,2026-09-02 20:46,2026-09-02,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (9/2 수)
+BUS01,20260903_2042_BUS01.eml,0903,2026-09-03 20:42,2026-09-03,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (9/3 목)
+BUS01,20260904_2103_BUS01.eml,0904,2026-09-04 21:03,2026-09-04,closing,한승우 <seungwoo.han@moncler-retail.example>,BUS01 마감 0904
+BUS01,20260905_2115_BUS01.eml,0905,2026-09-05 21:15,2026-09-05,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (9/5 토)
+BUS01,20260906_2120_BUS01.eml,0906,2026-09-06 21:20,2026-09-06,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (9/6 일)
+BUS01,20260907_2044_BUS01.eml,0907,2026-09-07 20:44,2026-09-07,closing,한승우 <seungwoo.han@moncler-retail.example>,BUS01 마감 0907
+BUS01,20260909_2057_BUS01.eml,0909,2026-09-09 20:57,2026-09-09,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (9/9 수)
+BUS01,20260910_2101_BUS01.eml,0910,2026-09-10 21:01,2026-09-10,closing,한승우 <seungwoo.han@moncler-retail.example>,BUS01 마감 0910
+BUS01,20260911_2106_BUS01.eml,0911,2026-09-11 21:06,2026-09-11,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (9/11 금)
+BUS01,20260912_2111_BUS01.eml,0912,2026-09-12 21:11,2026-09-12,closing,한승우 <seungwoo.han@moncler-retail.example>,BUS01 마감 0912 토
+BUS01,20260913_2118_BUS01.eml,0913,2026-09-13 21:18,2026-09-13,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (9/13 일)
+BUS01,20260914_2049_BUS01.eml,0914,2026-09-14 20:49,2026-09-14,closing,한승우 <seungwoo.han@moncler-retail.example>,BUS01 마감 0914
+BUS01,20260915_2040_BUS01.eml,0915,2026-09-15 20:40,2026-09-15,closing,BUS01 센텀시티 <bus01.store@moncler-retail.example>,센텀 마감 9/15
+BUS01,20260916_2052_BUS01.eml,0916,2026-09-16 20:52,2026-09-16,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (9/16 수)
+BUS01,20260917_2047_BUS01.eml,0917,2026-09-17 20:47,2026-09-17,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (9/17 목)
+BUS01,20260918_2104_BUS01.eml,0918,2026-09-18 21:04,2026-09-18,closing,한승우 <seungwoo.han@moncler-retail.example>,BUS01 마감 0918
+BUS01,20260919_2127_BUS01.eml,0919,2026-09-19 21:27,2026-09-19,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (9/19 토)
+BUS01,20260920_2113_BUS01.eml,0920,2026-09-20 21:13,2026-09-20,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (9/20 일)
+BUS01,20260921_2045_BUS01.eml,0921,2026-09-21 20:45,2026-09-21,closing,한승우 <seungwoo.han@moncler-retail.example>,BUS01 마감 0921
+BUS01,20260922_2059_BUS01.eml,0922,2026-09-22 20:59,2026-09-22,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (9/22 화)
+BUS01,20260923_2050_BUS01.eml,0923,2026-09-23 20:50,2026-09-23,closing,한승우 <seungwoo.han@moncler-retail.example>,BUS01 마감 0923
+BUS01,20260924_2036_BUS01.eml,0924,2026-09-24 20:36,2026-09-24,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (9/24 목) / 내일 휴점
+BUS01,20260924_2036_BUS01_ooo.eml,0924_ooo,2026-09-24 20:36,,ooo,윤성호 <sungho.yoon@moncler-retail.example>,자동 회신: 센텀 마감보고 (9/24 목) / 내일 휴점
+BUS01,20260926_2109_BUS01.eml,0926,2026-09-26 21:09,2026-09-26,closing,한승우 <seungwoo.han@moncler-retail.example>,BUS01 마감 0926
+BUS01,20260927_2124_BUS01.eml,0927,2026-09-27 21:24,2026-09-27,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (9/27 일)
+BUS01,20260928_2053_BUS01.eml,0928,2026-09-28 20:53,2026-09-28,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (9/28 월)
+BUS01,20260930_2102_BUS01.eml,0930,2026-09-30 21:02,2026-09-30,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (9/30 수)
+BUS01,20261001_2130_BUS01.eml,1001,2026-10-01 21:30,2026-10-01,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (10/1 목) 영화제 개막
+BUS01,20261002_2112_BUS01.eml,1002,2026-10-02 21:12,2026-10-02,closing,한승우 <seungwoo.han@moncler-retail.example>,BUS01 마감 1002
+BUS01,20261003_2135_BUS01.eml,1003,2026-10-03 21:35,2026-10-03,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (10/3 토)
+BUS01,20261004_2122_BUS01.eml,1004,2026-10-04 21:22,2026-10-04,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (10/4 일)
+BUS01,20261005_2055_BUS01.eml,1005,2026-10-05 20:55,2026-10-05,closing,한승우 <seungwoo.han@moncler-retail.example>,BUS01 마감 1005
+BUS01,20261006_1440_BUS01_fwd.eml,1006_fwd,2026-10-06 14:40,,fwd,정은비 <eunbi.jung@moncler-retail.example>,FW: [협찬문의] BIFF 관련 의상 협찬 요청드립니다
+BUS01,20261006_1705_BUS01.eml,1006_am,2026-10-06 17:05,,reply,윤성호 <sungho.yoon@moncler-retail.example>,RE: FW: [협찬문의] BIFF 관련 의상 협찬 요청드립니다
+BUS01,20261006_2048_BUS01.eml,1006,2026-10-06 20:48,2026-10-06,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (10/6 화)
+BUS01,20261007_2058_BUS01.eml,1007,2026-10-07 20:58,2026-10-07,closing,한승우 <seungwoo.han@moncler-retail.example>,BUS01 마감 1007
+BUS01,20261008_2051_BUS01.eml,1008,2026-10-08 20:51,2026-10-08,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (10/8 목)
+BUS01,20261009_2106_BUS01.eml,1009,2026-10-09 21:06,2026-10-09,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (10/9 금) 한글날
+BUS01,20261011_2140_BUS01.eml,1011,2026-10-11 21:40,"2026-10-10,2026-10-11",closing,한승우 <seungwoo.han@moncler-retail.example>,BUS01 주말 마감 (10/10~11)
+BUS01,20261012_2050_BUS01.eml,1012,2026-10-12 20:50,2026-10-12,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (10/12 월)
+BUS01,20261013_2108_BUS01.eml,1013,2026-10-13 21:08,2026-10-13,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (10/13 화)
+BUS01,20261014_2057_BUS01.eml,1014,2026-10-14 20:57,2026-10-14,closing,한승우 <seungwoo.han@moncler-retail.example>,BUS01 마감 1014
+BUS01,20261015_2046_BUS01.eml,1015,2026-10-15 20:46,2026-10-15,closing,BUS01 센텀시티 <bus01.store@moncler-retail.example>,센텀 마감 10/15
+BUS01,20261016_2114_BUS01.eml,1016,2026-10-16 21:14,2026-10-16,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (10/16 금)
+BUS01,20261017_2131_BUS01.eml,1017,2026-10-17 21:31,2026-10-17,closing,BUS01 센텀시티 <bus01.store@moncler-retail.example>,센텀 10/17 마감일보
+BUS01,20261018_2119_BUS01.eml,1018,2026-10-18 21:19,2026-10-18,closing,한승우 <seungwoo.han@moncler-retail.example>,BUS01 마감 1018
+BUS01,20261019_2102_BUS01.eml,1019,2026-10-19 21:02,2026-10-19,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (10/19 월) 일바로 핑크 입고!
+BUS01,20261020_2054_BUS01.eml,1020,2026-10-20 20:54,2026-10-20,closing,정은비 <eunbi.jung@moncler-retail.example>,센텀 마감보고 (10/20 화)
+BUS01,20261021_2100_BUS01.eml,1021,2026-10-21 21:00,2026-10-21,closing,한승우 <seungwoo.han@moncler-retail.example>,BUS01 마감 1021
+SEL01,20260831_2108_SEL01.eml,0831,2026-08-31 21:08,2026-08-31,closing,박민수 <minsu.park@moncler-retail.example>,청담 마감 8/31
+SEL01,20260901_2052_SEL01.eml,0901,2026-09-01 20:52,2026-09-01,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 9/1(화)
+SEL01,20260902_2115_SEL01.eml,0902,2026-09-02 21:15,2026-09-02,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 9/2(수)
+SEL01,20260903_2047_SEL01.eml,0903,2026-09-03 20:47,2026-09-03,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 9/3(목)
+SEL01,20260904_2131_SEL01.eml,0904,2026-09-04 21:31,2026-09-04,closing,박민수 <minsu.park@moncler-retail.example>,청담 마감 9/4(금)
+SEL01,20260905_2140_SEL01.eml,0905,2026-09-05 21:40,2026-09-05,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 9/5(토)
+SEL01,20260906_2122_SEL01.eml,0906,2026-09-06 21:22,2026-09-06,closing,오하늘 <haneul.oh@moncler-retail.example>,마감보고 9.6 청담
+SEL01,20260907_2105_SEL01.eml,0907,2026-09-07 21:05,2026-09-07,closing,박민수 <minsu.park@moncler-retail.example>,청담 마감 9/7(월)
+SEL01,20260908_2044_SEL01.eml,0908,2026-09-08 20:44,2026-09-08,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 9/8(화)
+SEL01,20260909_2112_SEL01.eml,0909,2026-09-09 21:12,2026-09-09,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 9/9(수)
+SEL01,20260910_2102_SEL01.eml,0910,2026-09-10 21:02,2026-09-10,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 9/10(목)
+SEL01,20260911_2058_SEL01.eml,0911,2026-09-11 20:58,2026-09-11,closing,박민수 <minsu.park@moncler-retail.example>,청담 마감 9/11
+SEL01,20260912_2136_SEL01.eml,0912,2026-09-12 21:36,2026-09-12,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 9/12(토)
+SEL01,20260913_2148_SEL01.eml,0913,2026-09-13 21:48,2026-09-13,closing,오하늘 <haneul.oh@moncler-retail.example>,마감보고 9.13 청담
+SEL01,20260914_2101_SEL01.eml,0914,2026-09-14 21:01,2026-09-14,closing,박민수 <minsu.park@moncler-retail.example>,청담 마감 9/14(월)
+SEL01,20260916_2119_SEL01.eml,0916,2026-09-16 21:19,2026-09-16,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 9/16(수)
+SEL01,20260917_2055_SEL01.eml,0917,2026-09-17 20:55,2026-09-17,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 9/17(목)
+SEL01,20260918_2126_SEL01.eml,0918,2026-09-18 21:26,2026-09-18,closing,박민수 <minsu.park@moncler-retail.example>,청담 마감 9/18(금)
+SEL01,20260919_2145_SEL01.eml,0919,2026-09-19 21:45,2026-09-19,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 9/19(토)
+SEL01,20260920_2130_SEL01.eml,0920,2026-09-20 21:30,2026-09-20,closing,오하늘 <haneul.oh@moncler-retail.example>,마감보고 9.20 청담
+SEL01,20260921_2049_SEL01.eml,0921,2026-09-21 20:49,2026-09-21,closing,박민수 <minsu.park@moncler-retail.example>,청담 마감 9/21(월)
+SEL01,20260922_2114_SEL01.eml,0922,2026-09-22 21:14,2026-09-22,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 9/22(화)
+SEL01,20260923_2107_SEL01.eml,0923,2026-09-23 21:07,2026-09-23,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 9/23(수)
+SEL01,20260924_2041_SEL01.eml,0924,2026-09-24 20:41,2026-09-24,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 9/24(목)
+SEL01,20260925_2058_SEL01.eml,0925,2026-09-25 20:58,2026-09-25,closing,박민수 <minsu.park@moncler-retail.example>,청담 마감 9/25 (추석)
+SEL01,20260926_2133_SEL01.eml,0926,2026-09-26 21:33,2026-09-26,closing,오하늘 <haneul.oh@moncler-retail.example>,마감보고 9.26 청담
+SEL01,20260927_2152_SEL01.eml,0927,2026-09-27 21:52,2026-09-27,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 9/27(일)
+SEL01,20260928_2110_SEL01.eml,0928,2026-09-28 21:10,2026-09-28,closing,박민수 <minsu.park@moncler-retail.example>,청담 마감 9/28(월)
+SEL01,20260929_2124_SEL01.eml,0929,2026-09-29 21:24,2026-09-29,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 9/29(화) - TIB 지퍼 불량 건
+SEL01,20260930_0912_SEL01.eml,0929_am,2026-09-30 09:12,,reply,윤성호 <sungho.yoon@moncler-retail.example>,RE: [청담] 마감보고 9/29(화) - TIB 지퍼 불량 건
+SEL01,20260930_2141_SEL01.eml,0930,2026-09-30 21:41,2026-09-30,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 9/30(수)
+SEL01,20261001_2118_SEL01.eml,1001,2026-10-01 21:18,2026-10-01,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 10/1(목)
+SEL01,20261002_2237_SEL01.eml,1002,2026-10-02 22:37,2026-10-02,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 10/2(금) - 일바로 핑크 문의 급증
+SEL01,20261003_2216_SEL01.eml,1003,2026-10-03 22:16,2026-10-03,closing,오하늘 <haneul.oh@moncler-retail.example>,마감보고 10.3 청담 (개천절)
+SEL01,20261003_2219_SEL01_dup.eml,1003_dup,2026-10-03 22:19,2026-10-03,dup,오하늘 <haneul.oh@moncler-retail.example>,마감보고 10.3 청담 (개천절)
+SEL01,20261004_2158_SEL01.eml,1004,2026-10-04 21:58,2026-10-04,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 10/4(일) - 인디핑크 웨이팅
+SEL01,20261004_2241_SEL01.eml,1004_am,2026-10-04 22:41,,reply,윤성호 <sungho.yoon@moncler-retail.example>,RE: [청담] 마감보고 10/4(일) - 인디핑크 웨이팅
+SEL01,20261005_1136_SEL01.eml,1004_re,2026-10-05 11:36,,reply,김지현 <jihyun.kim@moncler-retail.example>,RE: RE: [청담] 마감보고 10/4(일) - 인디핑크 웨이팅
+SEL01,20261005_2103_SEL01.eml,1005,2026-10-05 21:03,2026-10-05,closing,박민수 <minsu.park@moncler-retail.example>,청담 마감 10/5(월)
+SEL01,20261006_2129_SEL01.eml,1006,2026-10-06 21:29,2026-10-06,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 10/6(화)
+SEL01,20261007_1522_SEL01_fwd.eml,1007_fwd,2026-10-07 15:22,,fwd,김지현 <jihyun.kim@moncler-retail.example>,FW: [고객문의] 일바로 핑크 대기 관련
+SEL01,20261007_2112_SEL01.eml,1007,2026-10-07 21:12,2026-10-07,closing,박민수 <minsu.park@moncler-retail.example>,청담 마감 10/7(수)
+SEL01,20261008_2205_SEL01.eml,1008,2026-10-08 22:05,2026-10-08,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 10/8(목) - 일바로 핑크 미입고
+SEL01,20261009_1014_SEL01_fwd.eml,1009_fwd,2026-10-09 10:14,,fwd,박민수 <minsu.park@moncler-retail.example>,FW: Customs hold - Incheon - SEL01 replenishment
+SEL01,20261009_2147_SEL01.eml,1009,2026-10-09 21:47,2026-10-09,closing,오하늘 <haneul.oh@moncler-retail.example>,마감보고 10.9 청담 (한글날)
+SEL01,20261010_2151_SEL01.eml,1010,2026-10-10 21:51,2026-10-10,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 10/09(토)
+SEL01,20261011_2139_SEL01.eml,1011,2026-10-11 21:39,2026-10-11,closing,오하늘 <haneul.oh@moncler-retail.example>,마감보고 10.11 청담
+SEL01,20261013_0921_SEL01.eml,1012,2026-10-13 09:21,2026-10-12,closing,박민수 <minsu.park@moncler-retail.example>,청담 마감 10/12(월) - 늦은 보고
+SEL01,20261013_2105_SEL01.eml,1013,2026-10-13 21:05,2026-10-13,closing,오하늘 <haneul.oh@moncler-retail.example>,마감보고 10.13 청담
+SEL01,20261014_1048_SEL01_corr.eml,1013_corr,2026-10-14 10:48,2026-10-13,correction,김지현 <jihyun.kim@moncler-retail.example>,[정정] 10/13 청담 마감보고 - 핑크 입고 관련
+SEL01,20261014_2114_SEL01.eml,1014,2026-10-14 21:14,2026-10-14,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 10/14(수)
+SEL01,20261015_2126_SEL01.eml,1015,2026-10-15 21:26,2026-10-15,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 10/15(목) - 맞은편 C사 팝업 오픈
+SEL01,20261016_2108_SEL01.eml,1016,2026-10-16 21:08,2026-10-16,closing,박민수 <minsu.park@moncler-retail.example>,청담 마감 10/16(금)
+SEL01,20261017_2157_SEL01.eml,1017,2026-10-17 21:57,2026-10-17,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 10/17(토)
+SEL01,20261018_0940_SEL01.eml,1017_am,2026-10-18 09:40,,reply,윤성호 <sungho.yoon@moncler-retail.example>,RE: [청담] 마감보고 10/17(토)
+SEL01,20261018_1305_SEL01.eml,1017_re,2026-10-18 13:05,,reply,김지현 <jihyun.kim@moncler-retail.example>,RE: RE: [청담] 마감보고 10/17(토)
+SEL01,20261018_2220_SEL01.eml,1018,2026-10-18 22:20,2026-10-18,closing,오하늘 <haneul.oh@moncler-retail.example>,마감보고 10.18 청담 🩷
+SEL01,20261019_2116_SEL01.eml,1019,2026-10-19 21:16,2026-10-19,closing,박민수 <minsu.park@moncler-retail.example>,청담 마감 10/19(월)
+SEL01,20261020_2102_SEL01.eml,1020,2026-10-20 21:02,2026-10-20,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 10/20(화)
+SEL01,20261021_2123_SEL01.eml,1021,2026-10-21 21:23,2026-10-21,closing,김지현 <jihyun.kim@moncler-retail.example>,[청담] 마감보고 10/21(수)
+SEL02,20260831_2052_SEL02.eml,0831,2026-08-31 20:52,2026-08-31,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_0831
+SEL02,20260901_2047_SEL02.eml,0901,2026-09-01 20:47,2026-09-01,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_0901
+SEL02,20260902_2058_SEL02.eml,0902,2026-09-02 20:58,2026-09-02,closing,최동욱 <dongwook.choi@moncler-retail.example>,압구정 마감 9/2
+SEL02,20260903_2044_SEL02.eml,0903,2026-09-03 20:44,2026-09-03,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_0903
+SEL02,20260904_2105_SEL02.eml,0904,2026-09-04 21:05,2026-09-04,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_0904
+SEL02,20260905_2121_SEL02.eml,0905,2026-09-05 21:21,2026-09-05,closing,최동욱 <dongwook.choi@moncler-retail.example>,압구정 마감 9/5(토)
+SEL02,20260906_2112_SEL02.eml,0906,2026-09-06 21:12,2026-09-06,closing,최동욱 <dongwook.choi@moncler-retail.example>,압구정 마감 9/6(일)
+SEL02,20260907_2055_SEL02.eml,0907,2026-09-07 20:55,2026-09-07,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_0907
+SEL02,20260908_2050_SEL02.eml,0908,2026-09-08 20:50,2026-09-08,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_0908
+SEL02,20260910_2101_SEL02.eml,0910,2026-09-10 21:01,2026-09-10,closing,최동욱 <dongwook.choi@moncler-retail.example>,압구정 마감 9/10
+SEL02,20260911_2059_SEL02.eml,0911,2026-09-11 20:59,2026-09-11,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_0911
+SEL02,20260913_2208_SEL02.eml,0913,2026-09-13 22:08,"2026-09-12,2026-09-13",closing,최동욱 <dongwook.choi@moncler-retail.example>,압구정 주말 마감 (9/12 토 + 9/13 일)
+SEL02,20260914_2115_SEL02.eml,0914,2026-09-14 21:15,2026-09-14,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_0914
+SEL02,20260915_2049_SEL02.eml,0915,2026-09-15 20:49,2026-09-15,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_0915
+SEL02,20260916_2102_SEL02.eml,0916,2026-09-16 21:02,2026-09-16,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_0916
+SEL02,20260917_2051_SEL02.eml,0917,2026-09-17 20:51,2026-09-17,closing,강예린 <yerin.kang@moncler-retail.example>,압구정 마감보고 9/17
+SEL02,20260918_2122_SEL02.eml,0918,2026-09-18 21:22,2026-09-18,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_0918
+SEL02,20260919_2130_SEL02.eml,0919,2026-09-19 21:30,2026-09-19,closing,최동욱 <dongwook.choi@moncler-retail.example>,압구정 마감 9/19(토)
+SEL02,20260920_2118_SEL02.eml,0920,2026-09-20 21:18,2026-09-20,closing,최동욱 <dongwook.choi@moncler-retail.example>,압구정 마감 9/20(일)
+SEL02,20260921_2046_SEL02.eml,0921,2026-09-21 20:46,2026-09-21,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_0921
+SEL02,20260922_2057_SEL02.eml,0922,2026-09-22 20:57,2026-09-22,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_0922
+SEL02,20260923_2043_SEL02.eml,0923,2026-09-23 20:43,2026-09-23,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_0923
+SEL02,20260924_2039_SEL02.eml,0924,2026-09-24 20:39,2026-09-24,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_0924 (내일 휴점)
+SEL02,20260926_2124_SEL02.eml,0926,2026-09-26 21:24,2026-09-26,closing,최동욱 <dongwook.choi@moncler-retail.example>,압구정 마감 9/26(토)
+SEL02,20260927_2141_SEL02.eml,0927,2026-09-27 21:41,2026-09-27,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_0927
+SEL02,20260928_2055_SEL02.eml,0928,2026-09-28 20:55,2026-09-28,closing,최동욱 <dongwook.choi@moncler-retail.example>,압구정 마감 9/28(월)
+SEL02,20260929_2103_SEL02.eml,0929,2026-09-29 21:03,2026-09-29,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_0929
+SEL02,20260930_2137_SEL02.eml,0930,2026-09-30 21:37,2026-09-30,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_0930 + 9월 월마감
+SEL02,20261001_2106_SEL02.eml,1001,2026-10-01 21:06,2026-10-01,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_1001
+SEL02,20261002_2148_SEL02.eml,1002,2026-10-02 21:48,2026-10-02,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_1002
+SEL02,20261003_2157_SEL02.eml,1003,2026-10-03 21:57,2026-10-03,closing,최동욱 <dongwook.choi@moncler-retail.example>,압구정 마감 10/3(토) 개천절
+SEL02,20261004_2144_SEL02.eml,1004,2026-10-04 21:44,2026-10-04,closing,최동욱 <dongwook.choi@moncler-retail.example>,압구정 마감 10/4(일)
+SEL02,20261005_1022_SEL02_corr.eml,1004_corr,2026-10-05 10:22,2026-10-04,correction,최동욱 <dongwook.choi@moncler-retail.example>,[정정] 압구정 마감 10/4(일)
+SEL02,20261005_2058_SEL02.eml,1005,2026-10-05 20:58,2026-10-05,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_1005
+SEL02,20261006_1612_SEL02_misc.eml,1006_misdir,2026-10-06 16:12,,misc,이수진 <sujin.lee@moncler-retail.example>,[몽클레르] 매장 앞 대기 고객 관리 관련 협조 요청
+SEL02,20261006_2115_SEL02.eml,1006,2026-10-06 21:15,2026-10-06,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_1006
+SEL02,20261007_2049_SEL02.eml,1007,2026-10-07 20:49,2026-10-07,closing,강예린 <yerin.kang@moncler-retail.example>,압구정 마감 10/7
+SEL02,20261008_2110_SEL02.eml,1008,2026-10-08 21:10,2026-10-08,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_1008
+SEL02,20261009_2131_SEL02.eml,1009,2026-10-09 21:31,2026-10-09,closing,최동욱 <dongwook.choi@moncler-retail.example>,압구정 마감 10/9(금) 한글날
+SEL02,20261010_2136_SEL02.eml,1010,2026-10-10 21:36,2026-10-10,closing,최동욱 <dongwook.choi@moncler-retail.example>,압구정 마감 10/10(토)
+SEL02,20261011_2128_SEL02.eml,1011,2026-10-11 21:28,2026-10-11,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_1011
+SEL02,20261012_2100_SEL02.eml,1012,2026-10-12 21:00,2026-10-12,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_1012
+SEL02,20261013_2107_SEL02.eml,1013,2026-10-13 21:07,2026-10-13,closing,최동욱 <dongwook.choi@moncler-retail.example>,압구정 마감 10/13(화)
+SEL02,20261014_2053_SEL02.eml,1014,2026-10-14 20:53,2026-10-14,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_1014
+SEL02,20261015_2104_SEL02.eml,1015,2026-10-15 21:04,2026-10-15,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_1015
+SEL02,20261016_2133_SEL02.eml,1016,2026-10-16 21:33,2026-10-16,closing,최동욱 <dongwook.choi@moncler-retail.example>,압구정 마감 10/16(금)
+SEL02,20261017_2152_SEL02.eml,1017,2026-10-17 21:52,2026-10-17,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_1017 - 마이레 블랙 문의 폭주
+SEL02,20261018_1005_SEL02.eml,1017_am,2026-10-18 10:05,,reply,윤성호 <sungho.yoon@moncler-retail.example>,RE: [현대압구정] 일일 마감보고_1017 - 마이레 블랙 문의 폭주
+SEL02,20261018_2147_SEL02.eml,1018,2026-10-18 21:47,2026-10-18,closing,최동욱 <dongwook.choi@moncler-retail.example>,압구정 마감 10/18(일)
+SEL02,20261019_2120_SEL02.eml,1019,2026-10-19 21:20,2026-10-19,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_1019 - 일바로 핑크 입고
+SEL02,20261020_2111_SEL02.eml,1020,2026-10-20 21:11,2026-10-20,closing,이수진 <sujin.lee@moncler-retail.example>,[현대압구정] 일일 마감보고_1020
+SEL02,20261021_2059_SEL02.eml,1021,2026-10-21 20:59,2026-10-21,closing,최동욱 <dongwook.choi@moncler-retail.example>,압구정 마감 10/21(수)

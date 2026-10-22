@@ -1,0 +1,36 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/marketing/v1/campaign-calendar?market=Korea&from=2026-10-15&to=2026-11-15"
+  },
+  "response": {
+    "activities": [
+      {
+        "ID": "MK-0201",
+        "Market": "Global",
+        "Activity": "Moncler Genius POLARIS capsule launch",
+        "Type": "PRODUCT_LAUNCH",
+        "Channel": "All",
+        "Start": "2026-09-24",
+        "End": "2026-10-25",
+        "Owner": "Genius team",
+        "Budget EUR k": 1100.0,
+        "Status": "LIVE",
+        "Notes": "drop Thursday 24/09 10:00 local"
+      },
+      {
+        "ID": "MK-0406",
+        "Market": "Korea/Japan/China",
+        "Activity": "ILVARO 'Pink edit' social push",
+        "Type": "SOCIAL",
+        "Channel": "IG/Kakao/XHS",
+        "Start": "2026-10-06",
+        "End": "2026-10-25",
+        "Owner": "C. Valli",
+        "Budget EUR k": 35.0,
+        "Status": "LIVE",
+        "Notes": "added 06/10 after K-pop moment - NO STOCK until 20/11!"
+      }
+    ]
+  }
+}

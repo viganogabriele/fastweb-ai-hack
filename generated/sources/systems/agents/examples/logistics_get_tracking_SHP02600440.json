@@ -1,0 +1,101 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/logistics/v1/shipments/SHP02600440/tracking"
+  },
+  "response": {
+    "awb": "NX3467086408",
+    "carrier": "Nippon Express",
+    "shipmentRef": "SHP02600440",
+    "delivery": "0080412440",
+    "plannedDelivery": "2026-10-12",
+    "carrierEdd": "2026-10-08",
+    "status": "DELIVERED",
+    "events": [
+      {
+        "event_time_utc": "2026-10-07T04:17:00Z",
+        "normalized_status": "INFO_RECEIVED",
+        "carrier_event_code": "INF",
+        "carrier_event_desc": "Shipment information received",
+        "location_city": "Tseung Kwan O"
+      },
+      {
+        "event_time_utc": "2026-10-07T09:17:00Z",
+        "normalized_status": "PICKED_UP",
+        "carrier_event_code": "RCV",
+        "carrier_event_desc": "Cargo received / 貨物受付",
+        "location_city": "Tseung Kwan O"
+      },
+      {
+        "event_time_utc": "2026-10-07T12:40:00Z",
+        "normalized_status": "IN_TRANSIT",
+        "carrier_event_code": "ARR",
+        "carrier_event_desc": "Arrived Hong Kong",
+        "location_city": "Hong Kong"
+      },
+      {
+        "event_time_utc": "2026-10-07T15:05:00Z",
+        "normalized_status": "IN_TRANSIT",
+        "carrier_event_code": "DEP",
+        "carrier_event_desc": "Departed Hong Kong",
+        "location_city": "Hong Kong"
+      },
+      {
+        "event_time_utc": "2026-10-07T18:20:00Z",
+        "normalized_status": "IN_TRANSIT",
+        "carrier_event_code": "ARR",
+        "carrier_event_desc": "Arrived Incheon",
+        "location_city": "Incheon"
+      },
+      {
+        "event_time_utc": "2026-10-08T00:35:00Z",
+        "normalized_status": "CUSTOMS",
+        "carrier_event_code": "CUS",
+        "carrier_event_desc": "Import customs declaration filed",
+        "location_city": "Incheon"
+      },
+      {
+        "event_time_utc": "2026-10-08T05:12:00Z",
+        "normalized_status": "CUSTOMS_HOLD",
+        "carrier_event_code": "HLD",
+        "carrier_event_desc": "Customs hold - KC certificate missing",
+        "location_city": "Incheon"
+      },
+      {
+        "event_time_utc": "2026-10-09T01:02:00Z",
+        "normalized_status": "EXCEPTION",
+        "carrier_event_code": "EXC",
+        "carrier_event_desc": "Exception - Awaiting documents from shipper (KC 적합성 확인서)",
+        "location_city": "Incheon"
+      },
+      {
+        "event_time_utc": "2026-10-12T08:24:00Z",
+        "normalized_status": "CUSTOMS",
+        "carrier_event_code": "CLR",
+        "carrier_event_desc": "Import customs cleared",
+        "location_city": "Incheon"
+      },
+      {
+        "event_time_utc": "2026-10-12T22:05:00Z",
+        "normalized_status": "IN_TRANSIT",
+        "carrier_event_code": "ARR",
+        "carrier_event_desc": "Arrived delivery depot Seoul Gangnam",
+        "location_city": "Seoul Gangnam"
+      },
+      {
+        "event_time_utc": "2026-10-13T00:07:00Z",
+        "normalized_status": "OUT_FOR_DELIVERY",
+        "carrier_event_code": "OFD",
+        "carrier_event_desc": "Out for delivery",
+        "location_city": "Seoul"
+      },
+      {
+        "event_time_utc": "2026-10-13T01:57:00Z",
+        "normalized_status": "DELIVERED",
+        "carrier_event_code": "POD",
+        "carrier_event_desc": "Delivered (POD: STORE)",
+        "location_city": "Seoul"
+      }
+    ]
+  }
+}

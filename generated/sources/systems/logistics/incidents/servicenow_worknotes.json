@@ -1,0 +1,128 @@
+{
+ "INC0041877": [
+  {
+   "sys_created_on": "2026-09-26 12:14:09",
+   "sys_created_by": "Javier Molina",
+   "value": "Abrimos incidencia. 17 MAYA azul marino recibidos, pedido era negro. No vendemos el azul, nos sobra.",
+   "element": "work_notes"
+  },
+  {
+   "sys_created_on": "2026-09-26 15:40:31",
+   "sys_created_by": "DC CSG - Outbound (M. Re)",
+   "value": "Presa in carico. Verifichiamo picking list consegna 0080412337.",
+   "element": "work_notes"
+  },
+  {
+   "sys_created_on": "2026-09-29 10:05:12",
+   "sys_created_by": "DC CSG - Outbound (M. Re)",
+   "value": "WMS: prelievo confermato su materiale J10911A00034999, giacenza contabile coerente. Possibile errore di etichettatura lato negozio? Chiediamo foto etichette EAN.",
+   "element": "work_notes"
+  },
+  {
+   "sys_created_on": "2026-09-29 11:20:00",
+   "sys_created_by": "Javier Molina",
+   "value": "Fotos enviadas. EAN en las etiquetas = 742 (navy). El problema es vuestro.",
+   "element": "work_notes"
+  },
+  {
+   "sys_created_on": "2026-10-01 18:52:10",
+   "sys_created_by": "Lucía Fernández Ortega",
+   "value": "Ha vuelto a pasar con 0080412382. Ver INC0042011.",
+   "element": "work_notes"
+  },
+  {
+   "sys_created_on": "2026-10-02 09:20:44",
+   "sys_created_by": "DC CSG - Inventory (S. Gatti)",
+   "value": "Trovato: etichette ubicazioni 03-14-B e 03-14-C invertite dopo re-slotting del 21/09. Aperta QN 300004590. Inventario rotativo previsto 06/10.",
+   "element": "work_notes"
+  },
+  {
+   "sys_created_on": "2026-10-02 10:02:00",
+   "sys_created_by": "Roberto Galli",
+   "value": "Please prioritise black MAYA for Madrid in next delivery. Meanwhile IBT from MIL01 sizes 3-4 approved (IBT-26 ...).",
+   "element": "work_notes"
+  },
+  {
+   "sys_created_on": "2026-10-06 17:45:00",
+   "sys_created_by": "DC CSG - Inventory (S. Gatti)",
+   "value": "Inventario 06/10: +37 MAYA 999 / -37 MAYA 742 registrati (701/702).",
+   "element": "work_notes"
+  },
+  {
+   "sys_created_on": "2026-10-07 10:02:44",
+   "sys_created_by": "DC CSG - Outbound (M. Re)",
+   "value": "MAYA nero incluso nella consegna dell'08/10. Chiudo. Reso del blu da concordare con Retail Ops.",
+   "element": "work_notes"
+  }
+ ],
+ "INC0042230": [
+  {
+   "sys_created_on": "2026-10-08 10:31:40",
+   "sys_created_by": "박민수",
+   "value": "인천세관 보류 통보 받음. 관세사 연락: KC 적합성 확인서 필요. 오늘 입고 예정이었음.",
+   "element": "work_notes"
+  },
+  {
+   "sys_created_on": "2026-10-08 11:15:02",
+   "sys_created_by": "APAC Logistics (K. Leung)",
+   "value": "Broker confirms: import declaration for HS 6201/6202 down-filled garments requires KC conformity doc since the new labelling notice. Not in our document pack. Checking with trade compliance Milan.",
+   "element": "work_notes"
+  },
+  {
+   "sys_created_on": "2026-10-08 14:47:19",
+   "sys_created_by": "Trade Compliance (F. Albertini)",
+   "value": "Il certificato KC non è mai stato richiesto prima per le spedizioni dal TKO; chiediamo al laboratorio. Tempi stimati 2-3 giorni lavorativi.",
+   "element": "work_notes"
+  },
+  {
+   "sys_created_on": "2026-10-09 09:10:00",
+   "sys_created_by": "김지현",
+   "value": "VIC 고객 일바로 핑크 대기중인데 이 박스에 핑크 있나요?",
+   "element": "work_notes"
+  },
+  {
+   "sys_created_on": "2026-10-09 10:40:55",
+   "sys_created_by": "APAC Logistics (K. Leung)",
+   "value": "Checked packing list: no pink in this load, only ILVARO off-white 20D + other lines. Pink top-up ships Saturday 10/10 from TKO.",
+   "element": "work_notes"
+  },
+  {
+   "sys_created_on": "2026-10-12 09:30:00",
+   "sys_created_by": "Trade Compliance (F. Albertini)",
+   "value": "Certificato ricevuto dal laboratorio, inviato al broker.",
+   "element": "work_notes"
+  },
+  {
+   "sys_created_on": "2026-10-12 17:30:12",
+   "sys_created_by": "APAC Logistics (K. Leung)",
+   "value": "Released 17:24 KST. Delivery tomorrow morning.",
+   "element": "work_notes"
+  },
+  {
+   "sys_created_on": "2026-10-13 11:20:31",
+   "sys_created_by": "박민수",
+   "value": "입고 완료. 감사합니다.",
+   "element": "work_notes"
+  }
+ ],
+ "INC0042398": [
+  {
+   "sys_created_on": "2026-10-14 09:02:13",
+   "sys_created_by": "Vivian Lau",
+   "value": "Next SEL01 load (0080412455, ILVARO pink 20 pcs) selected for physical inspection. Any way to expedite?",
+   "element": "work_notes"
+  },
+  {
+   "sys_created_on": "2026-10-14 12:00:00",
+   "sys_created_by": "APAC Logistics (K. Leung)",
+   "value": "Broker says inspection queue 2-4 days after the KC case. We cannot expedite.",
+   "element": "work_notes"
+  },
+  {
+   "sys_created_on": "2026-10-17 17:00:00",
+   "sys_created_by": "APAC Logistics (K. Leung)",
+   "value": "Released. Delivery Sunday 18/10 morning.",
+   "element": "work_notes"
+  }
+ ]
+}

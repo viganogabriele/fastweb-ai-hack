@@ -1,0 +1,2009 @@
+{
+ "store": {
+  "store_id": "BUS01",
+  "store_name": "Busan Shinsegae Centum City",
+  "store_type": "Shop-in-shop",
+  "city": "Busan",
+  "country_code": "KR",
+  "country": "South Korea",
+  "region": "APAC",
+  "subregion": "Korea",
+  "language": "ko",
+  "timezone": "Asia/Seoul",
+  "currency": "KRW",
+  "lat": 35.169,
+  "lon": 129.129,
+  "sqm": 150,
+  "opening_date": "2016-03-11",
+  "hemi": "N",
+  "closed_dow": [],
+  "store_manager": "정은비",
+  "assistant_manager": "한승우"
+ },
+ "days": [
+  {
+   "date": "2026-08-31",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 18560000.0,
+   "budget_lc": 18961380.0,
+   "vs_budget_pct": -2.1,
+   "units": 12,
+   "receipts": 7,
+   "visitors": 56,
+   "conversion": 0.125,
+   "top_sellers": [
+    "MAYA black x2",
+    "LOGO CARDIGAN navy x2",
+    "TRAILGRIP GTX black x1",
+    "CASHMERE SCARF black x1",
+    "LOGO HOODIE navy x1"
+   ],
+   "customer_mix": {
+    "KR": 0.92,
+    "CN": 0.08
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE beige 2"
+   ],
+   "returns": [],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600170",
+     "lines": 95,
+     "units": 160,
+     "planned": "2026-08-31",
+     "delay_days": 0,
+     "wrong_items": false
+    }
+   ],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-01",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 4480000.0,
+   "budget_lc": 19617930.0,
+   "vs_budget_pct": -77.2,
+   "units": 5,
+   "receipts": 4,
+   "visitors": 54,
+   "conversion": 0.0741,
+   "top_sellers": [
+    "CASHMERE SCARF black x1",
+    "LOGO BEANIE navy x1",
+    "LOGO BEANIE black x1",
+    "TRAILGRIP W black x1",
+    "CHAMBRE black x1"
+   ],
+   "customer_mix": {
+    "KR": 0.8,
+    "US": 0.2
+   },
+   "unmet_requests": [
+    "MAIRE beige size 2 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE beige 2"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-02",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 28870000.0,
+   "budget_lc": 20333980.0,
+   "vs_budget_pct": 42.0,
+   "units": 19,
+   "receipts": 12,
+   "visitors": 63,
+   "conversion": 0.1905,
+   "top_sellers": [
+    "LOGO CARDIGAN black x2",
+    "TIB off-white x2",
+    "CABLE KNIT SWEATER black x2",
+    "BADY black x2",
+    "POLO navy x1"
+   ],
+   "customer_mix": {
+    "KR": 0.63,
+    "OTHER": 0.21,
+    "CN": 0.11,
+    "JP": 0.05
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE beige 2"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-03",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 21140000.0,
+   "budget_lc": 29761300.0,
+   "vs_budget_pct": -29.0,
+   "units": 13,
+   "receipts": 9,
+   "visitors": 82,
+   "conversion": 0.1098,
+   "top_sellers": [
+    "POLO black x2",
+    "WOOL TURTLENECK black x2",
+    "LOGO BEANIE powder pink x1",
+    "TRAILGRIP GTX black x1",
+    "LOGO T-SHIRT navy x1"
+   ],
+   "customer_mix": {
+    "KR": 0.77,
+    "CN": 0.15,
+    "US": 0.08
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE beige 2"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-04",
+   "weekday": "Friday",
+   "open": 1.0,
+   "net_sales_lc": 37155000.0,
+   "budget_lc": 37398320.0,
+   "vs_budget_pct": -0.7,
+   "units": 25,
+   "receipts": 13,
+   "visitors": 109,
+   "conversion": 0.1193,
+   "top_sellers": [
+    "CREWNECK SWEATSHIRT black x2",
+    "LOGO CARDIGAN navy x2",
+    "HERMINE black x2",
+    "LOGO BEANIE black x1",
+    "CASHMERE SCARF black x1"
+   ],
+   "customer_mix": {
+    "KR": 0.88,
+    "CN": 0.08,
+    "OTHER": 0.04
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE beige 2"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-05",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 51319000.0,
+   "budget_lc": 50483450.0,
+   "vs_budget_pct": 1.7,
+   "units": 30,
+   "receipts": 18,
+   "visitors": 155,
+   "conversion": 0.1161,
+   "top_sellers": [
+    "MAYA black x3",
+    "MAIRE black x3",
+    "WOOL TURTLENECK black x2",
+    "POLO navy x2",
+    "POLO white x2"
+   ],
+   "customer_mix": {
+    "KR": 0.9,
+    "CN": 0.07,
+    "OTHER": 0.03
+   },
+   "unmet_requests": [
+    "ILVARO powder pink size 2 x1",
+    "TIB off-white size 2 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE beige 2"
+   ],
+   "returns": [
+    "LOGO HOODIE M reason=SIZE"
+   ],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-06",
+   "weekday": "Sunday",
+   "open": 1.0,
+   "net_sales_lc": 73420000.0,
+   "budget_lc": 48768260.0,
+   "vs_budget_pct": 50.5,
+   "units": 41,
+   "receipts": 29,
+   "visitors": 153,
+   "conversion": 0.1895,
+   "top_sellers": [
+    "WOOL TURTLENECK black x4",
+    "LOGO BEANIE navy x3",
+    "MAYA navy x3",
+    "ILVARO black x3",
+    "TRAILGRIP W black x2"
+   ],
+   "customer_mix": {
+    "KR": 0.83,
+    "CN": 0.1,
+    "TW": 0.05,
+    "US": 0.02
+   },
+   "unmet_requests": [
+    "ARNEB black size 6 x1",
+    "CREWNECK SWEATSHIRT white size S x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE beige 2"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-07",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 20000000.0,
+   "budget_lc": 26856590.0,
+   "vs_budget_pct": -25.5,
+   "units": 12,
+   "receipts": 9,
+   "visitors": 70,
+   "conversion": 0.1286,
+   "top_sellers": [
+    "HERMINE black x2",
+    "LEGERE BELT BAG black x1",
+    "LOGO BEANIE black x1",
+    "POLO navy x1",
+    "LOGO HOODIE navy x1"
+   ],
+   "customer_mix": {
+    "KR": 0.58,
+    "CN": 0.25,
+    "OTHER": 0.08,
+    "JP": 0.08
+   },
+   "unmet_requests": [
+    "TRAILGRIP W black size 38 x1"
+   ],
+   "zero_stock_key_sizes": [],
+   "returns": [],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600216",
+     "lines": 44,
+     "units": 67,
+     "planned": "2026-09-07",
+     "delay_days": 0,
+     "wrong_items": false
+    }
+   ],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-08",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 15510000.0,
+   "budget_lc": 28258630.0,
+   "vs_budget_pct": -45.1,
+   "units": 9,
+   "receipts": 8,
+   "visitors": 78,
+   "conversion": 0.1026,
+   "top_sellers": [
+    "LOGO CAP white x1",
+    "TECH GLOVES black x1",
+    "TRAILGRIP GTX black x1",
+    "POLO navy x1",
+    "WOOL TURTLENECK black x1"
+   ],
+   "customer_mix": {
+    "KR": 0.89,
+    "OTHER": 0.11
+   },
+   "unmet_requests": [
+    "HERMINE navy size 3 x1"
+   ],
+   "zero_stock_key_sizes": [],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-09",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 17220000.0,
+   "budget_lc": 31016080.0,
+   "vs_budget_pct": -44.5,
+   "units": 10,
+   "receipts": 6,
+   "visitors": 67,
+   "conversion": 0.0896,
+   "top_sellers": [
+    "MAYA black x2",
+    "LOGO BEANIE navy x1",
+    "TRAILGRIP GTX black x1",
+    "CREWNECK SWEATSHIRT white x1",
+    "LOGO HOODIE navy x1"
+   ],
+   "customer_mix": {
+    "KR": 0.5,
+    "CN": 0.2,
+    "OTHER": 0.2,
+    "US": 0.1
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": []
+  },
+  {
+   "date": "2026-09-10",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 36090000.0,
+   "budget_lc": 32084370.0,
+   "vs_budget_pct": 12.5,
+   "units": 18,
+   "receipts": 13,
+   "visitors": 82,
+   "conversion": 0.1585,
+   "top_sellers": [
+    "ARNEB black x3",
+    "HERMINE off-white x3",
+    "MAIRE black x2",
+    "LOGO HOODIE navy x2",
+    "LOGO T-SHIRT navy x1"
+   ],
+   "customer_mix": {
+    "KR": 0.72,
+    "CN": 0.11,
+    "OTHER": 0.11,
+    "US": 0.06
+   },
+   "unmet_requests": [
+    "WOOL TURTLENECK black size XXL x1",
+    "TRAILGRIP W black size 38 x1"
+   ],
+   "zero_stock_key_sizes": [],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-11",
+   "weekday": "Friday",
+   "open": 1.0,
+   "net_sales_lc": 36280000.0,
+   "budget_lc": 39502080.0,
+   "vs_budget_pct": -8.2,
+   "units": 18,
+   "receipts": 14,
+   "visitors": 113,
+   "conversion": 0.1239,
+   "top_sellers": [
+    "LEGERE BELT BAG black x2",
+    "LOGO T-SHIRT navy x2",
+    "LOGO CARDIGAN black x2",
+    "ARNEB black x2",
+    "MAIRE beige x2"
+   ],
+   "customer_mix": {
+    "KR": 0.72,
+    "CN": 0.11,
+    "OTHER": 0.06,
+    "US": 0.06
+   },
+   "unmet_requests": [
+    "HERMINE off-white size 2 x1",
+    "TRAILGRIP W black size 40 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "ILVARO black 2",
+    "ILVARO off-white 1"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-12",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 39329000.0,
+   "budget_lc": 58136860.0,
+   "vs_budget_pct": -32.4,
+   "units": 21,
+   "receipts": 10,
+   "visitors": 116,
+   "conversion": 0.0862,
+   "top_sellers": [
+    "LOGO HOODIE navy x3",
+    "HERMINE black x2",
+    "MAIRE beige x2",
+    "CHAMONIX black x1",
+    "LOGO BEANIE navy x1"
+   ],
+   "customer_mix": {
+    "KR": 0.9,
+    "OTHER": 0.05,
+    "JP": 0.05
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "ILVARO black 2",
+    "ILVARO off-white 1"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-13",
+   "weekday": "Sunday",
+   "open": 1.0,
+   "net_sales_lc": 33840000.0,
+   "budget_lc": 54326000.0,
+   "vs_budget_pct": -37.7,
+   "units": 19,
+   "receipts": 12,
+   "visitors": 138,
+   "conversion": 0.087,
+   "top_sellers": [
+    "BADY black x3",
+    "MAYA navy x2",
+    "MAIRE beige x2",
+    "CHAMBRE black x2",
+    "POLO white x1"
+   ],
+   "customer_mix": {
+    "KR": 0.79,
+    "CN": 0.11,
+    "OTHER": 0.11
+   },
+   "unmet_requests": [
+    "POLO black size XL x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE beige 0",
+    "ILVARO black 2",
+    "ILVARO off-white 1"
+   ],
+   "returns": [
+    "ARNEB 4 reason=SIZE"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-14",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 26970000.0,
+   "budget_lc": 30595210.0,
+   "vs_budget_pct": -11.8,
+   "units": 20,
+   "receipts": 10,
+   "visitors": 84,
+   "conversion": 0.119,
+   "top_sellers": [
+    "LOGO CARDIGAN navy x3",
+    "ROSIERE black x3",
+    "BADY black x2",
+    "POLO navy x2",
+    "CASHMERE SCARF black x2"
+   ],
+   "customer_mix": {
+    "KR": 0.75,
+    "CN": 0.1,
+    "OTHER": 0.1,
+    "JP": 0.05
+   },
+   "unmet_requests": [
+    "CHAMONIX black size XXL x1"
+   ],
+   "zero_stock_key_sizes": [],
+   "returns": [
+    "ARNEB 3 reason=EXCHANGE_SIZE"
+   ],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600262",
+     "lines": 137,
+     "units": 266,
+     "planned": "2026-09-14",
+     "delay_days": 0,
+     "wrong_items": false
+    }
+   ],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 23980000.0,
+   "budget_lc": 31168930.0,
+   "vs_budget_pct": -23.1,
+   "units": 16,
+   "receipts": 11,
+   "visitors": 71,
+   "conversion": 0.1549,
+   "top_sellers": [
+    "FLAMMETTE black x2",
+    "TRICOT PADDED CARDIGAN black x2",
+    "TRAILGRIP GTX black x1",
+    "POLO white x1",
+    "LOGO BEANIE navy x1"
+   ],
+   "customer_mix": {
+    "KR": 0.56,
+    "CN": 0.25,
+    "TW": 0.06,
+    "OTHER": 0.06
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-16",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 26893000.0,
+   "budget_lc": 32905810.0,
+   "vs_budget_pct": -18.3,
+   "units": 14,
+   "receipts": 9,
+   "visitors": 75,
+   "conversion": 0.12,
+   "top_sellers": [
+    "BADY black x2",
+    "ARNEB navy x2",
+    "CREWNECK SWEATSHIRT white x2",
+    "LEGERE BELT BAG black x1",
+    "LOGO BEANIE black x1"
+   ],
+   "customer_mix": {
+    "KR": 0.93,
+    "CN": 0.07
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-17",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 22190000.0,
+   "budget_lc": 36151270.0,
+   "vs_budget_pct": -38.6,
+   "units": 14,
+   "receipts": 10,
+   "visitors": 96,
+   "conversion": 0.1042,
+   "top_sellers": [
+    "LOGO CAP white x1",
+    "LEGERE BELT BAG black x1",
+    "LOGO T-SHIRT navy x1",
+    "CREWNECK SWEATSHIRT white x1",
+    "CREWNECK SWEATSHIRT black x1"
+   ],
+   "customer_mix": {
+    "KR": 0.93,
+    "US": 0.07
+   },
+   "unmet_requests": [
+    "POLO white size XS x1"
+   ],
+   "zero_stock_key_sizes": [],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-18",
+   "weekday": "Friday",
+   "open": 1.0,
+   "net_sales_lc": 33760000.0,
+   "budget_lc": 43515940.0,
+   "vs_budget_pct": -22.4,
+   "units": 21,
+   "receipts": 10,
+   "visitors": 108,
+   "conversion": 0.0926,
+   "top_sellers": [
+    "TRAILGRIP GTX black x2",
+    "WOOL TURTLENECK black x2",
+    "CASHMERE SCARF black x1",
+    "TRAILGRIP GTX grey melange x1",
+    "LOGO BEANIE black x1"
+   ],
+   "customer_mix": {
+    "KR": 0.81,
+    "TW": 0.1,
+    "JP": 0.1
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-19",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 80234000.0,
+   "budget_lc": 62666620.0,
+   "vs_budget_pct": 28.0,
+   "units": 42,
+   "receipts": 23,
+   "visitors": 196,
+   "conversion": 0.1173,
+   "top_sellers": [
+    "MAIRE black x7",
+    "LOGO CAP navy x4",
+    "KARAKORUM navy x3",
+    "TRAILGRIP GTX black x3",
+    "BADY black x3"
+   ],
+   "customer_mix": {
+    "KR": 0.76,
+    "CN": 0.17,
+    "JP": 0.05,
+    "TW": 0.02
+   },
+   "unmet_requests": [
+    "ARNEB navy size 1 x2"
+   ],
+   "zero_stock_key_sizes": [],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-20",
+   "weekday": "Sunday",
+   "open": 1.0,
+   "net_sales_lc": 66730000.0,
+   "budget_lc": 58113380.0,
+   "vs_budget_pct": 14.8,
+   "units": 35,
+   "receipts": 29,
+   "visitors": 127,
+   "conversion": 0.2283,
+   "top_sellers": [
+    "MAIRE black x6",
+    "MAYA navy x4",
+    "ILVARO black x4",
+    "WOOL TURTLENECK black x3",
+    "MAIRE beige x2"
+   ],
+   "customer_mix": {
+    "KR": 0.86,
+    "CN": 0.06,
+    "OTHER": 0.03,
+    "JP": 0.03
+   },
+   "unmet_requests": [
+    "HERMINE navy size 00 x1"
+   ],
+   "zero_stock_key_sizes": [],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-21",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 25070000.0,
+   "budget_lc": 32383700.0,
+   "vs_budget_pct": -22.6,
+   "units": 14,
+   "receipts": 11,
+   "visitors": 72,
+   "conversion": 0.1528,
+   "top_sellers": [
+    "MAIRE black x2",
+    "BADY black x2",
+    "LEGERE BELT BAG black x1",
+    "MAKAIO BACKPACK black x1",
+    "LOGO HOODIE navy x1"
+   ],
+   "customer_mix": {
+    "KR": 0.79,
+    "CN": 0.14,
+    "JP": 0.07
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [],
+   "returns": [],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600307",
+     "lines": 110,
+     "units": 179,
+     "planned": "2026-09-21",
+     "delay_days": 0,
+     "wrong_items": false
+    }
+   ],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-22",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 44780000.0,
+   "budget_lc": 31285220.0,
+   "vs_budget_pct": 43.1,
+   "units": 24,
+   "receipts": 15,
+   "visitors": 99,
+   "conversion": 0.1515,
+   "top_sellers": [
+    "LOGO CARDIGAN black x3",
+    "ECRINS black x3",
+    "HERMINE black x2",
+    "ILVARO black x2",
+    "BADY black x2"
+   ],
+   "customer_mix": {
+    "KR": 0.79,
+    "CN": 0.08,
+    "TW": 0.08,
+    "JP": 0.04
+   },
+   "unmet_requests": [
+    "CHAMONIX black size XXL x1"
+   ],
+   "zero_stock_key_sizes": [],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-23",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 33350000.0,
+   "budget_lc": 35569190.0,
+   "vs_budget_pct": -6.2,
+   "units": 21,
+   "receipts": 14,
+   "visitors": 79,
+   "conversion": 0.1772,
+   "top_sellers": [
+    "LOGO CARDIGAN black x5",
+    "TRAILGRIP W off-white x3",
+    "MAIRE black x3",
+    "BADY black x2",
+    "LOGO T-SHIRT white x1"
+   ],
+   "customer_mix": {
+    "KR": 0.81,
+    "US": 0.1,
+    "OTHER": 0.05,
+    "CN": 0.05
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-24",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 12430000.0,
+   "budget_lc": 29257520.0,
+   "vs_budget_pct": -57.5,
+   "units": 10,
+   "receipts": 6,
+   "visitors": 72,
+   "conversion": 0.0833,
+   "top_sellers": [
+    "LOGO T-SHIRT white x2",
+    "TRICOT PADDED CARDIGAN black x2",
+    "MAKAIO BACKPACK black x1",
+    "LOGO BEANIE white x1",
+    "POLO white x1"
+   ],
+   "customer_mix": {
+    "KR": 0.6,
+    "CN": 0.3,
+    "TW": 0.1
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-25",
+   "weekday": "Friday",
+   "open": 0.0,
+   "top_sellers": [],
+   "customer_mix": {},
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-26",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 58659000.0,
+   "budget_lc": 52102960.0,
+   "vs_budget_pct": 12.6,
+   "units": 29,
+   "receipts": 16,
+   "visitors": 131,
+   "conversion": 0.1221,
+   "top_sellers": [
+    "CREWNECK SWEATSHIRT black x3",
+    "ARNEB navy x3",
+    "TRAILGRIP GTX grey melange x2",
+    "TIB off-white x2",
+    "BADY black x2"
+   ],
+   "customer_mix": {
+    "KR": 0.86,
+    "CN": 0.14
+   },
+   "unmet_requests": [
+    "KARAKORUM navy size 7 x1",
+    "LOGO CARDIGAN black size XL x1",
+    "TRAILGRIP W black size 38 x1"
+   ],
+   "zero_stock_key_sizes": [],
+   "returns": [
+    "LOGO BEANIE TU reason=SIZE"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-27",
+   "weekday": "Sunday",
+   "open": 1.0,
+   "net_sales_lc": 38020000.0,
+   "budget_lc": 62513300.0,
+   "vs_budget_pct": -39.2,
+   "units": 22,
+   "receipts": 11,
+   "visitors": 173,
+   "conversion": 0.0636,
+   "top_sellers": [
+    "TRAILGRIP W off-white x2",
+    "TRAILGRIP GTX black x2",
+    "ILVARO black x2",
+    "HERMINE black x2",
+    "LOGO BEANIE black x1"
+   ],
+   "customer_mix": {
+    "KR": 0.73,
+    "CN": 0.09,
+    "JP": 0.09,
+    "OTHER": 0.05
+   },
+   "unmet_requests": [
+    "HERMINE navy size 00 x2",
+    "MAIRE black size 4 x1",
+    "HERMINE navy size 1 x1",
+    "ILVARO powder pink size 3 x1",
+    "LOGO T-SHIRT white size XL x1"
+   ],
+   "zero_stock_key_sizes": [],
+   "returns": [
+    "LOGO HOODIE XS reason=SIZE"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-28",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 26080000.0,
+   "budget_lc": 36214060.0,
+   "vs_budget_pct": -28.0,
+   "units": 18,
+   "receipts": 13,
+   "visitors": 98,
+   "conversion": 0.1327,
+   "top_sellers": [
+    "LOGO BEANIE navy x2",
+    "CREWNECK SWEATSHIRT black x2",
+    "LOGO CARDIGAN black x2",
+    "BADY black x2",
+    "POLO black x1"
+   ],
+   "customer_mix": {
+    "KR": 0.89,
+    "CN": 0.11
+   },
+   "unmet_requests": [
+    "ILVARO powder pink size 1 x1",
+    "TIB off-white size 4 x1"
+   ],
+   "zero_stock_key_sizes": [],
+   "returns": [
+    "TIB 4 reason=DEF"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-29",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 25569000.0,
+   "budget_lc": 37981740.0,
+   "vs_budget_pct": -32.7,
+   "units": 17,
+   "receipts": 11,
+   "visitors": 91,
+   "conversion": 0.1209,
+   "top_sellers": [
+    "CHAMBRE black x3",
+    "LOGO CAP navy x1",
+    "LOGO BEANIE black x1",
+    "LOGO T-SHIRT white x1",
+    "CREWNECK SWEATSHIRT white x1"
+   ],
+   "customer_mix": {
+    "KR": 0.88,
+    "US": 0.06,
+    "CN": 0.06
+   },
+   "unmet_requests": [
+    "ARNEB navy size 1 x1",
+    "ARNEB navy size 3 x1"
+   ],
+   "zero_stock_key_sizes": [],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-30",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 44072000.0,
+   "budget_lc": 39749660.0,
+   "vs_budget_pct": 10.9,
+   "units": 21,
+   "receipts": 14,
+   "visitors": 106,
+   "conversion": 0.1321,
+   "top_sellers": [
+    "MAYA black x2",
+    "POLO navy x2",
+    "FLAMMETTE black x2",
+    "POLARIS OVERSIZED black x1",
+    "LOGO BEANIE white x1"
+   ],
+   "customer_mix": {
+    "KR": 0.76,
+    "TW": 0.1,
+    "CN": 0.1,
+    "US": 0.05
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "POLO navy S"
+   ],
+   "returns": [
+    "TIB 3 reason=DEF"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-01",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 59338000.0,
+   "budget_lc": 43452430.0,
+   "vs_budget_pct": 36.6,
+   "units": 32,
+   "receipts": 17,
+   "visitors": 139,
+   "conversion": 0.1223,
+   "top_sellers": [
+    "BADY black x4",
+    "TRAILGRIP W black x3",
+    "MAYA black x2",
+    "LEGERE BELT BAG black x2",
+    "TRAILGRIP GTX black x2"
+   ],
+   "customer_mix": {
+    "KR": 0.72,
+    "TW": 0.09,
+    "CN": 0.09,
+    "JP": 0.06
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "POLO navy S"
+   ],
+   "returns": [
+    "ARNEB 3 reason=EXCHANGE_SIZE"
+   ],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600352",
+     "lines": 97,
+     "units": 161,
+     "planned": "2026-09-28",
+     "delay_days": 3,
+     "wrong_items": false
+    }
+   ],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns",
+    "E43: Busan International Film Festival"
+   ]
+  },
+  {
+   "date": "2026-10-02",
+   "weekday": "Friday",
+   "open": 1.0,
+   "net_sales_lc": 33680000.0,
+   "budget_lc": 51751660.0,
+   "vs_budget_pct": -34.9,
+   "units": 23,
+   "receipts": 15,
+   "visitors": 169,
+   "conversion": 0.0888,
+   "top_sellers": [
+    "LOGO CARDIGAN black x3",
+    "LOGO CARDIGAN navy x3",
+    "TRAILGRIP W off-white x3",
+    "TRAILGRIP W black x3",
+    "LOGO BEANIE black x2"
+   ],
+   "customer_mix": {
+    "KR": 0.91,
+    "CN": 0.04,
+    "TW": 0.04
+   },
+   "unmet_requests": [
+    "ILVARO powder pink size 0 x1",
+    "LOGO CARDIGAN black size XL x1"
+   ],
+   "zero_stock_key_sizes": [
+    "POLO navy S"
+   ],
+   "returns": [
+    "MAYA 4 reason=CHANGE_MIND",
+    "TIB 3 reason=DEF"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns",
+    "E43: Busan International Film Festival"
+   ]
+  },
+  {
+   "date": "2026-10-03",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 67350000.0,
+   "budget_lc": 74751880.0,
+   "vs_budget_pct": -9.9,
+   "units": 38,
+   "receipts": 21,
+   "visitors": 211,
+   "conversion": 0.0995,
+   "top_sellers": [
+    "BADY black x6",
+    "CABLE KNIT SWEATER black x3",
+    "ILVARO black x3",
+    "TRAILGRIP GTX black x2",
+    "MAIRE black x2"
+   ],
+   "customer_mix": {
+    "KR": 0.76,
+    "OTHER": 0.08,
+    "CN": 0.08,
+    "JP": 0.03
+   },
+   "unmet_requests": [
+    "ILVARO powder pink size 0 x1",
+    "MAYA navy size 7 x1",
+    "POLO navy size S x1",
+    "TRAILGRIP W off-white size 36 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "POLO navy S"
+   ],
+   "returns": [
+    "TIB 1 reason=DEF",
+    "TIB 2 reason=DEF"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
+    "E06b: ILVARO spill-over other colours",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns",
+    "E43: Busan International Film Festival"
+   ]
+  },
+  {
+   "date": "2026-10-04",
+   "weekday": "Sunday",
+   "open": 1.0,
+   "net_sales_lc": 49457000.0,
+   "budget_lc": 70849030.0,
+   "vs_budget_pct": -30.2,
+   "units": 30,
+   "receipts": 16,
+   "visitors": 218,
+   "conversion": 0.0734,
+   "top_sellers": [
+    "CABLE KNIT SWEATER black x3",
+    "TRAILGRIP GTX grey melange x2",
+    "POLO navy x2",
+    "INSOLUX black x2",
+    "MAIRE black x2"
+   ],
+   "customer_mix": {
+    "KR": 0.8,
+    "CN": 0.1,
+    "JP": 0.1
+   },
+   "unmet_requests": [
+    "ILVARO powder pink size 0 x2",
+    "ILVARO powder pink size 1 x1",
+    "ILVARO powder pink size 3 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "POLO navy S"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
+    "E06b: ILVARO spill-over other colours",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns",
+    "E43: Busan International Film Festival"
+   ]
+  },
+  {
+   "date": "2026-10-05",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 33790000.0,
+   "budget_lc": 40277260.0,
+   "vs_budget_pct": -16.1,
+   "units": 22,
+   "receipts": 11,
+   "visitors": 123,
+   "conversion": 0.0894,
+   "top_sellers": [
+    "LOGO BEANIE black x2",
+    "CREWNECK SWEATSHIRT grey melange x2",
+    "MAYA navy x2",
+    "TRAILGRIP W black x2",
+    "POLARIS OVERSIZED black x1"
+   ],
+   "customer_mix": {
+    "KR": 0.82,
+    "OTHER": 0.05,
+    "CN": 0.05,
+    "JP": 0.05
+   },
+   "unmet_requests": [
+    "ILVARO powder pink size 0 x3",
+    "PEYRE red size 1 x1"
+   ],
+   "zero_stock_key_sizes": [],
+   "returns": [
+    "BADY 1 reason=SIZE",
+    "ILVARO 2 reason=CHANGE_MIND"
+   ],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600397",
+     "lines": 118,
+     "units": 188,
+     "planned": "2026-10-05",
+     "delay_days": 0,
+     "wrong_items": false
+    }
+   ],
+   "active_events": [
+    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
+    "E06b: ILVARO spill-over other colours",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns",
+    "E43: Busan International Film Festival"
+   ]
+  },
+  {
+   "date": "2026-10-06",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 31902000.0,
+   "budget_lc": 37796310.0,
+   "vs_budget_pct": -15.6,
+   "units": 19,
+   "receipts": 12,
+   "visitors": 139,
+   "conversion": 0.0863,
+   "top_sellers": [
+    "CASHMERE SCARF black x2",
+    "LOGO BEANIE black x2",
+    "ILVARO black x2",
+    "BADY black x2",
+    "LOGO T-SHIRT white x1"
+   ],
+   "customer_mix": {
+    "KR": 0.84,
+    "OTHER": 0.11,
+    "JP": 0.05
+   },
+   "unmet_requests": [
+    "ILVARO powder pink size 2 x1"
+   ],
+   "zero_stock_key_sizes": [],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
+    "E06b: ILVARO spill-over other colours",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns",
+    "E43: Busan International Film Festival"
+   ]
+  },
+  {
+   "date": "2026-10-07",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 41180000.0,
+   "budget_lc": 43733930.0,
+   "vs_budget_pct": -5.8,
+   "units": 23,
+   "receipts": 13,
+   "visitors": 130,
+   "conversion": 0.1,
+   "top_sellers": [
+    "CASHMERE SCARF black x2",
+    "LOGO BEANIE navy x2",
+    "LEGERE BELT BAG black x2",
+    "MAYA black x2",
+    "MAIRE beige x2"
+   ],
+   "customer_mix": {
+    "KR": 0.65,
+    "CN": 0.13,
+    "OTHER": 0.09,
+    "TW": 0.04
+   },
+   "unmet_requests": [
+    "ILVARO powder pink size 0 x2",
+    "ILVARO powder pink size 00 x1",
+    "ARNEB navy size 7 x1"
+   ],
+   "zero_stock_key_sizes": [],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
+    "E06b: ILVARO spill-over other colours",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns",
+    "E43: Busan International Film Festival"
+   ]
+  },
+  {
+   "date": "2026-10-08",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 46620000.0,
+   "budget_lc": 46991510.0,
+   "vs_budget_pct": -0.8,
+   "units": 26,
+   "receipts": 17,
+   "visitors": 139,
+   "conversion": 0.1223,
+   "top_sellers": [
+    "MAIRE beige x2",
+    "MAYA black x2",
+    "LOGO CARDIGAN black x2",
+    "LOGO HOODIE navy x2",
+    "CHAMBRE black x2"
+   ],
+   "customer_mix": {
+    "KR": 0.88,
+    "US": 0.08,
+    "CN": 0.04
+   },
+   "unmet_requests": [
+    "ILVARO powder pink size 00 x1",
+    "ILVARO powder pink size 1 x1"
+   ],
+   "zero_stock_key_sizes": [],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
+    "E06b: ILVARO spill-over other colours",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns",
+    "E43: Busan International Film Festival"
+   ]
+  },
+  {
+   "date": "2026-10-09",
+   "weekday": "Friday",
+   "open": 1.0,
+   "net_sales_lc": 47540000.0,
+   "budget_lc": 53947070.0,
+   "vs_budget_pct": -11.9,
+   "units": 33,
+   "receipts": 20,
+   "visitors": 189,
+   "conversion": 0.1058,
+   "top_sellers": [
+    "CABLE KNIT SWEATER black x3",
+    "POLO white x2",
+    "LOGO BEANIE black x2",
+    "MAYA navy x2",
+    "CREWNECK SWEATSHIRT black x2"
+   ],
+   "customer_mix": {
+    "KR": 0.79,
+    "CN": 0.12,
+    "OTHER": 0.03,
+    "TW": 0.03
+   },
+   "unmet_requests": [
+    "FLAMMETTE black size 2 x1",
+    "ILVARO powder pink size 1 x1",
+    "ILVARO powder pink size 3 x1"
+   ],
+   "zero_stock_key_sizes": [],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
+    "E06b: ILVARO spill-over other colours",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns",
+    "E43: Busan International Film Festival"
+   ]
+  },
+  {
+   "date": "2026-10-10",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 61500000.0,
+   "budget_lc": 81861200.0,
+   "vs_budget_pct": -24.9,
+   "units": 34,
+   "receipts": 18,
+   "visitors": 206,
+   "conversion": 0.0874,
+   "top_sellers": [
+    "MAIRE black x4",
+    "MAIRE beige x4",
+    "LOGO BEANIE white x3",
+    "TRICOT PADDED CARDIGAN black x3",
+    "ILVARO black x3"
+   ],
+   "customer_mix": {
+    "KR": 0.82,
+    "CN": 0.12,
+    "OTHER": 0.03,
+    "JP": 0.03
+   },
+   "unmet_requests": [
+    "MAIRE black size 2 x1",
+    "ILVARO powder pink size 0 x1",
+    "ILVARO powder pink size 2 x1",
+    "ILVARO powder pink size 3 x1",
+    "TRAILGRIP W black size 36 x1",
+    "TRAILGRIP W black size 37 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 2"
+   ],
+   "returns": [
+    "LOGO HOODIE L reason=CHANGE_MIND"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
+    "E06b: ILVARO spill-over other colours",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns",
+    "E43: Busan International Film Festival"
+   ]
+  },
+  {
+   "date": "2026-10-11",
+   "weekday": "Sunday",
+   "open": 1.0,
+   "net_sales_lc": 60230000.0,
+   "budget_lc": 78839650.0,
+   "vs_budget_pct": -23.6,
+   "units": 33,
+   "receipts": 20,
+   "visitors": 178,
+   "conversion": 0.1124,
+   "top_sellers": [
+    "FLAMMETTE black x3",
+    "KARAKORUM navy x3",
+    "LOGO BEANIE white x2",
+    "MONTCLA navy x2",
+    "LOGO CARDIGAN black x2"
+   ],
+   "customer_mix": {
+    "KR": 0.79,
+    "CN": 0.15,
+    "TW": 0.03,
+    "JP": 0.03
+   },
+   "unmet_requests": [
+    "ILVARO black size 3 x1",
+    "ILVARO powder pink size 00 x1",
+    "MONTCLA navy size 7 x1",
+    "CABLE KNIT SWEATER black size XS x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 2"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
+    "E06b: ILVARO spill-over other colours",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-12",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 55590000.0,
+   "budget_lc": 41928300.0,
+   "vs_budget_pct": 32.6,
+   "units": 25,
+   "receipts": 16,
+   "visitors": 114,
+   "conversion": 0.1404,
+   "top_sellers": [
+    "MAYA navy x3",
+    "TRICOT PADDED CARDIGAN black x3",
+    "ILVARO off-white x2",
+    "FLAMMETTE black x2",
+    "WOOL TURTLENECK black x2"
+   ],
+   "customer_mix": {
+    "KR": 0.72,
+    "CN": 0.16,
+    "TW": 0.08,
+    "US": 0.04
+   },
+   "unmet_requests": [
+    "ILVARO powder pink size 1 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 2"
+   ],
+   "returns": [],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600442",
+     "lines": 110,
+     "units": 207,
+     "planned": "2026-10-12",
+     "delay_days": 0,
+     "wrong_items": false
+    }
+   ],
+   "active_events": [
+    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
+    "E06b: ILVARO spill-over other colours",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-13",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 75480000.0,
+   "budget_lc": 44424860.0,
+   "vs_budget_pct": 69.9,
+   "units": 36,
+   "receipts": 27,
+   "visitors": 112,
+   "conversion": 0.2411,
+   "top_sellers": [
+    "HERMINE off-white x4",
+    "MAIRE black x4",
+    "HERMINE black x3",
+    "MAYA black x2",
+    "TRAILGRIP GTX black x2"
+   ],
+   "customer_mix": {
+    "KR": 0.86,
+    "JP": 0.06,
+    "CN": 0.06,
+    "US": 0.03
+   },
+   "unmet_requests": [
+    "ILVARO powder pink size 0 x1",
+    "KARAKORUM navy size 6 x1",
+    "TRICOT PADDED CARDIGAN black size XXL x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAIRE black 2"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
+    "E06b: ILVARO spill-over other colours",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-14",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 36330000.0,
+   "budget_lc": 46706310.0,
+   "vs_budget_pct": -22.2,
+   "units": 21,
+   "receipts": 16,
+   "visitors": 95,
+   "conversion": 0.1684,
+   "top_sellers": [
+    "TRAILGRIP GTX black x3",
+    "HERMINE off-white x2",
+    "BADY black x2",
+    "MAYA black x2",
+    "LEGERE BELT BAG black x1"
+   ],
+   "customer_mix": {
+    "KR": 0.9,
+    "CN": 0.1
+   },
+   "unmet_requests": [
+    "MAIRE black size 1 x3",
+    "MAIRE black size 4 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAIRE black 2"
+   ],
+   "returns": [
+    "ECRINS 4 reason=SIZE",
+    "TIB 3 reason=QUALITY"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
+    "E06b: ILVARO spill-over other colours",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-15",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 45553000.0,
+   "budget_lc": 51973300.0,
+   "vs_budget_pct": -12.4,
+   "units": 24,
+   "receipts": 15,
+   "visitors": 127,
+   "conversion": 0.1181,
+   "top_sellers": [
+    "TECH GLOVES black x3",
+    "CREWNECK SWEATSHIRT grey melange x2",
+    "HERMINE black x2",
+    "ROSIERE black x2",
+    "MAIRE black x2"
+   ],
+   "customer_mix": {
+    "KR": 0.75,
+    "JP": 0.08,
+    "CN": 0.08,
+    "OTHER": 0.08
+   },
+   "unmet_requests": [
+    "MAIRE black size 00 x1",
+    "MAIRE beige size 4 x1",
+    "ILVARO powder pink size 0 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MAIRE black 1",
+    "MAIRE black 2"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
+    "E06b: ILVARO spill-over other colours",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-16",
+   "weekday": "Friday",
+   "open": 1.0,
+   "net_sales_lc": 62630000.0,
+   "budget_lc": 58944060.0,
+   "vs_budget_pct": 6.3,
+   "units": 34,
+   "receipts": 22,
+   "visitors": 149,
+   "conversion": 0.1477,
+   "top_sellers": [
+    "LOGO BEANIE navy x5",
+    "PEYRE black x3",
+    "ARNEB black x3",
+    "LOGO BEANIE black x3",
+    "MAYA navy x2"
+   ],
+   "customer_mix": {
+    "KR": 0.76,
+    "CN": 0.12,
+    "JP": 0.06,
+    "OTHER": 0.06
+   },
+   "unmet_requests": [
+    "MAIRE black size 00 x2",
+    "MAIRE black size 1 x2",
+    "MAIRE black size 0 x1",
+    "MAIRE black size 2 x1",
+    "ILVARO powder pink size 0 x1",
+    "ILVARO powder pink size 2 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MAIRE black 1",
+    "MAIRE black 2"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
+    "E06b: ILVARO spill-over other colours",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-17",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 75650000.0,
+   "budget_lc": 81849500.0,
+   "vs_budget_pct": -7.6,
+   "units": 46,
+   "receipts": 28,
+   "visitors": 230,
+   "conversion": 0.1217,
+   "top_sellers": [
+    "LOGO BEANIE navy x7",
+    "BADY black x4",
+    "LOGO CARDIGAN black x3",
+    "WOOL TURTLENECK black x3",
+    "ILVARO off-white x2"
+   ],
+   "customer_mix": {
+    "KR": 0.8,
+    "CN": 0.11,
+    "OTHER": 0.02,
+    "JP": 0.02
+   },
+   "unmet_requests": [
+    "MAIRE black size 0 x3",
+    "MAIRE black size 1 x1",
+    "MAIRE black size 4 x1",
+    "HERMINE off-white size 3 x1",
+    "ILVARO powder pink size 4 x1",
+    "CHAMBRE black size 00 x1",
+    "LOGO CARDIGAN navy size XXL x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MAIRE black 1",
+    "MAIRE black 2"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
+    "E06b: ILVARO spill-over other colours",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-18",
+   "weekday": "Sunday",
+   "open": 1.0,
+   "net_sales_lc": 51900000.0,
+   "budget_lc": 75241200.0,
+   "vs_budget_pct": -31.0,
+   "units": 33,
+   "receipts": 18,
+   "visitors": 203,
+   "conversion": 0.0887,
+   "top_sellers": [
+    "BADY black x3",
+    "LOGO T-SHIRT navy x3",
+    "TRAILGRIP W black x2",
+    "WOOL TURTLENECK black x2",
+    "LOGO BEANIE black x2"
+   ],
+   "customer_mix": {
+    "KR": 0.64,
+    "OTHER": 0.09,
+    "JP": 0.09,
+    "CN": 0.09
+   },
+   "unmet_requests": [
+    "MAIRE black size 0 x1",
+    "MAIRE black size 4 x1",
+    "KARAKORUM navy size 7 x1",
+    "LOGO CARDIGAN black size XXL x1",
+    "TRAILGRIP W off-white size 39 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MAIRE black 1",
+    "MAIRE black 2"
+   ],
+   "returns": [
+    "LOGO BEANIE TU reason=GIFT"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
+    "E06b: ILVARO spill-over other colours",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-19",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 41163000.0,
+   "budget_lc": 46252210.0,
+   "vs_budget_pct": -11.0,
+   "units": 21,
+   "receipts": 15,
+   "visitors": 121,
+   "conversion": 0.124,
+   "top_sellers": [
+    "FLAMMETTE black x3",
+    "LOGO BEANIE white x2",
+    "CHAMONIX black x2",
+    "MAYA navy x2",
+    "LOGO CARDIGAN navy x2"
+   ],
+   "customer_mix": {
+    "KR": 0.86,
+    "CN": 0.1,
+    "JP": 0.05
+   },
+   "unmet_requests": [
+    "MAIRE black size 0 x1",
+    "MAIRE black size 1 x1",
+    "MAIRE black size 2 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MAIRE black 1",
+    "MAIRE black 2"
+   ],
+   "returns": [
+    "ILVARO 2 reason=CHANGE_MIND"
+   ],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600487",
+     "lines": 136,
+     "units": 265,
+     "planned": "2026-10-19",
+     "delay_days": 0,
+     "wrong_items": false
+    }
+   ],
+   "active_events": [
+    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
+    "E06b: ILVARO spill-over other colours",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-20",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 36440000.0,
+   "budget_lc": 44993080.0,
+   "vs_budget_pct": -19.0,
+   "units": 21,
+   "receipts": 14,
+   "visitors": 97,
+   "conversion": 0.1443,
+   "top_sellers": [
+    "ECRINS black x4",
+    "MAIRE beige x3",
+    "LOGO BEANIE white x2",
+    "LEGERE BELT BAG black x2",
+    "BADY black x2"
+   ],
+   "customer_mix": {
+    "KR": 0.86,
+    "TW": 0.05,
+    "JP": 0.05,
+    "CN": 0.05
+   },
+   "unmet_requests": [
+    "MAIRE black size 1 x1",
+    "MAIRE black size 4 x1",
+    "ARNEB navy size 5 x1",
+    "PEYRE black size 7 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MAIRE black 1",
+    "MAIRE black 2"
+   ],
+   "returns": [
+    "BADY 0 reason=SIZE",
+    "TRICOT PADDED CARDIGAN S reason=QUALITY"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
+    "E06b: ILVARO spill-over other colours",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-21",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 41715000.0,
+   "budget_lc": 48380080.0,
+   "vs_budget_pct": -13.8,
+   "units": 23,
+   "receipts": 13,
+   "visitors": 126,
+   "conversion": 0.1032,
+   "top_sellers": [
+    "BADY black x4",
+    "KARAKORUM navy x2",
+    "LOGO BEANIE black x2",
+    "LOGO CARDIGAN navy x2",
+    "LOGO BEANIE white x1"
+   ],
+   "customer_mix": {
+    "KR": 0.83,
+    "CN": 0.13,
+    "OTHER": 0.04
+   },
+   "unmet_requests": [
+    "MAIRE black size 0 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 0",
+    "MAIRE black 1",
+    "MAIRE black 2"
+   ],
+   "returns": [
+    "TRICOT PADDED CARDIGAN L reason=COLOUR"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
+    "E06b: ILVARO spill-over other colours",
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  }
+ ]
+}

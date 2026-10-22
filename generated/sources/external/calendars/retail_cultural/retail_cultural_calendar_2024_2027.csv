@@ -1,0 +1,90 @@
+start_date,end_date,event_name,local_name,geo_scope,category,retail_relevance,source
+2024-09-16,2024-09-18,Chuseok 2024,추석 연휴,KR,travel_peak,"Korean outbound travel spike (Japan, Europe) around the holiday",RetailCal
+2024-09-20,2024-09-22,Singapore Grand Prix 2024,F1 Singapore Grand Prix,Singapore (Marina Bay),event,,RetailCal
+2024-09-21,2024-10-06,Oktoberfest 2024,Oktoberfest / Wiesn,München,event,~6-7 million visitors; hotel prices peak; tracht not down jackets,RetailCal
+2024-10-01,2024-10-07,China National Day Golden Week 2024,国庆黄金周,CN outbound + domestic,travel_peak,"Chinese outbound tourism peak: Europe, Japan, Korea, HK, SEA",RetailCal
+2024-10-14,2024-11-11,Singles' Day (Double 11) 2024 incl. presales,双十一,"CN e-commerce (Tmall, JD, Douyin)",ecommerce,Presales start ~Oct 20 (2026: Oct 20 20:00 CST); offline luxury traffic softens; price-match requests,RetailCal
+2024-10-31,2024-10-31,Diwali 2024,दीपावली,"IN, SG, AE, GB, US diaspora",cultural,Gifting/jewellery; Indian travellers to Dubai/London,RetailCal
+2024-11-11,2024-11-11,Pepero Day 2024,빼빼로데이,KR,cultural,,RetailCal
+2024-11-28,2024-11-28,Thanksgiving 2024,Thanksgiving,US,holiday,,RetailCal
+2024-11-29,2024-12-02,Black Friday - Cyber Monday 2024,Black Friday,"US, GB, EU, AU",promo,Luxury brands mostly do not discount; multibrand/department stores do,RetailCal
+2024-12-01,2024-12-24,Christmas gifting season 2024,Christmas,global (N hemisphere),season,Peak weeks for outerwear and gifting,RetailCal
+2024-12-12,2024-12-12,Double 12 2024,双十二,CN,ecommerce,,RetailCal
+2024-12-15,2025-01-29,Dubai Shopping Festival 2024/2025,مهرجان دبي للتسوق,Dubai,event,"Mall promotions, raffle; tourist peak",RetailCal
+2024-12-26,2024-12-26,Boxing Day 2024,Boxing Day,"GB, CA, AU, HK",promo,Sales start (UK dept stores),RetailCal
+2025-01-04,2025-02-28,Saldi invernali Lombardia/Lazio 2025,Saldi invernali,IT,sales_season,,RetailCal
+2025-01-08,2025-02-04,Soldes d'hiver 2025,Soldes d'hiver,FR,sales_season,,RetailCal
+2025-01-28,2025-02-04,Chinese New Year / Spring Festival 2025,春节,"CN, HK, TW, SG, KR(Seollal), overseas Chinese",travel_peak,"Gifting before, outbound travel during",RetailCal
+2025-03-01,2025-03-29,Ramadan 2025,رمضان,"AE, GCC, SG, global Muslim",religious,"Daytime traffic down, evening malls busy; Eid shopping peak at the end",RetailCal
+2025-03-14,2025-03-14,White Day 2025,ホワイトデー/화이트데이,"JP, KR",cultural,,RetailCal
+2025-03-30,2025-04-02,Eid al-Fitr 2025,عيد الفطر,"AE, GCC",religious,"GCC outbound travel (London, Paris, Milan, Geneva)",RetailCal
+2025-04-26,2025-05-06,Golden Week Japan 2025,ゴールデンウィーク,JP,travel_peak,Japanese domestic/outbound travel,RetailCal
+2025-05-20,2025-05-20,520 2025,520 网络情人节,CN,cultural,Gifting day,RetailCal
+2025-06-06,2025-06-09,Eid al-Adha 2025,عيد الأضحى,"AE, GCC",religious,GCC summer travel starts,RetailCal
+2025-06-18,2025-06-18,618 Shopping Festival 2025,618,CN,ecommerce,,RetailCal
+2025-06-25,2025-07-22,Soldes d'été 2025,Soldes d'été,FR,sales_season,,RetailCal
+2025-07-05,2025-08-31,Saldi estivi 2025,Saldi estivi,IT,sales_season,,RetailCal
+2025-09-20,2025-10-05,Oktoberfest 2025,Oktoberfest / Wiesn,München,event,~6-7 million visitors; hotel prices peak; tracht not down jackets,RetailCal
+2025-10-01,2025-10-08,China National Day Golden Week 2025,国庆黄金周,CN outbound + domestic,travel_peak,"Chinese outbound tourism peak: Europe, Japan, Korea, HK, SEA",RetailCal
+2025-10-03,2025-10-05,Singapore Grand Prix 2025,F1 Singapore Grand Prix,Singapore (Marina Bay),event,,RetailCal
+2025-10-05,2025-10-08,Chuseok 2025,추석 연휴,KR,travel_peak,"Korean outbound travel spike (Japan, Europe) around the holiday",RetailCal
+2025-10-20,2025-10-20,Diwali 2025,दीपावली,"IN, SG, AE, GB, US diaspora",cultural,Gifting/jewellery; Indian travellers to Dubai/London,RetailCal
+2025-10-20,2025-11-11,Singles' Day (Double 11) 2025 incl. presales,双十一,"CN e-commerce (Tmall, JD, Douyin)",ecommerce,Presales start ~Oct 20 (2026: Oct 20 20:00 CST); offline luxury traffic softens; price-match requests,RetailCal
+2025-11-11,2025-11-11,Pepero Day 2025,빼빼로데이,KR,cultural,,RetailCal
+2025-11-27,2025-11-27,Thanksgiving 2025,Thanksgiving,US,holiday,,RetailCal
+2025-11-28,2025-12-01,Black Friday - Cyber Monday 2025,Black Friday,"US, GB, EU, AU",promo,Luxury brands mostly do not discount; multibrand/department stores do,RetailCal
+2025-12-01,2025-12-24,Christmas gifting season 2025,Christmas,global (N hemisphere),season,Peak weeks for outerwear and gifting,RetailCal
+2025-12-12,2025-12-12,Double 12 2025,双十二,CN,ecommerce,,RetailCal
+2025-12-15,2026-01-29,Dubai Shopping Festival 2025/2026,مهرجان دبي للتسوق,Dubai,event,"Mall promotions, raffle; tourist peak",RetailCal
+2025-12-26,2025-12-26,Boxing Day 2025,Boxing Day,"GB, CA, AU, HK",promo,Sales start (UK dept stores),RetailCal
+2026-01-03,2026-02-28,Saldi invernali Lombardia/Lazio 2026,Saldi invernali,IT,sales_season,,RetailCal
+2026-01-07,2026-02-03,Soldes d'hiver 2026,Soldes d'hiver,FR,sales_season,,RetailCal
+2026-02-15,2026-02-23,Chinese New Year / Spring Festival 2026,春节,"CN, HK, TW, SG, KR(Seollal), overseas Chinese",travel_peak,"Gifting before, outbound travel during",RetailCal
+2026-02-18,2026-03-19,Ramadan 2026,رمضان,"AE, GCC, SG, global Muslim",religious,"Daytime traffic down, evening malls busy; Eid shopping peak at the end",RetailCal
+2026-03-14,2026-03-14,White Day 2026,ホワイトデー/화이트데이,"JP, KR",cultural,,RetailCal
+2026-03-20,2026-03-23,Eid al-Fitr 2026,عيد الفطر,"AE, GCC",religious,"GCC outbound travel (London, Paris, Milan, Geneva)",RetailCal
+2026-04-29,2026-05-06,Golden Week Japan 2026,ゴールデンウィーク,JP,travel_peak,Japanese domestic/outbound travel,RetailCal
+2026-05-20,2026-05-20,520 2026,520 网络情人节,CN,cultural,Gifting day,RetailCal
+2026-05-27,2026-05-30,Eid al-Adha 2026,عيد الأضحى,"AE, GCC",religious,GCC summer travel starts,RetailCal
+2026-06-18,2026-06-18,618 Shopping Festival 2026,618,CN,ecommerce,,RetailCal
+2026-06-24,2026-07-21,Soldes d'été 2026,Soldes d'été,FR,sales_season,,RetailCal
+2026-07-04,2026-08-31,Saldi estivi 2026,Saldi estivi,IT,sales_season,,RetailCal
+2026-09-19,2026-10-04,Oktoberfest 2026,Oktoberfest / Wiesn,München,event,~6-7 million visitors; hotel prices peak; tracht not down jackets,RetailCal
+2026-09-19,2026-09-23,Silver Week Japan 2026,シルバーウィーク,JP,travel_peak,"5-day holiday (Sep 19-23), rare alignment",RetailCal
+2026-09-24,2026-09-26,Chuseok 2026,추석 연휴,KR,travel_peak,"Korean outbound travel spike (Japan, Europe) around the holiday",RetailCal
+2026-10-01,2026-10-07,China National Day Golden Week 2026,国庆黄金周,CN outbound + domestic,travel_peak,"Chinese outbound tourism peak: Europe, Japan, Korea, HK, SEA",RetailCal
+2026-10-09,2026-10-11,Singapore Grand Prix 2026,F1 Singapore Grand Prix,Singapore (Marina Bay),event,Marina Bay road closures; hotel ADR spike,RetailCal
+2026-10-09,2026-10-09,Hangul Day long weekend,한글날,KR,holiday,Fri Oct 9 -> 3-day weekend; also Oct 3-5 (substitute) long weekend,RetailCal
+2026-10-12,2026-10-12,Thanksgiving Canada / Columbus Day US 2026,Thanksgiving / Columbus Day,"CA, US",holiday,,RetailCal
+2026-10-17,2026-11-01,Vacances de la Toussaint 2026,Toussaint,FR,school,,RetailCal
+2026-10-20,2026-11-11,Singles' Day (Double 11) 2026 incl. presales,双十一,"CN e-commerce (Tmall, JD, Douyin)",ecommerce,Presales start ~Oct 20 (2026: Oct 20 20:00 CST); offline luxury traffic softens; price-match requests,RetailCal
+2026-10-26,2026-10-30,UK October half term,Half term,GB,school,,RetailCal
+2026-11-01,2026-11-01,Japan: brand price revisions effective (several luxury houses),価格改定,JP,pricing,Pre-buying ahead of price increases is common in Japan,RetailCal
+2026-11-08,2026-11-08,Diwali 2026,दीपावली,"IN, SG, AE, GB, US diaspora",cultural,Gifting/jewellery; Indian travellers to Dubai/London,RetailCal
+2026-11-11,2026-11-11,Pepero Day 2026,빼빼로데이,KR,cultural,,RetailCal
+2026-11-26,2026-11-26,Thanksgiving 2026,Thanksgiving,US,holiday,,RetailCal
+2026-11-27,2026-11-30,Black Friday - Cyber Monday 2026,Black Friday,"US, GB, EU, AU",promo,Luxury brands mostly do not discount; multibrand/department stores do,RetailCal
+2026-12-01,2026-12-24,Christmas gifting season 2026,Christmas,global (N hemisphere),season,Peak weeks for outerwear and gifting,RetailCal
+2026-12-12,2026-12-12,Double 12 2026,双十二,CN,ecommerce,,RetailCal
+2026-12-15,2027-01-29,Dubai Shopping Festival 2026/2027,مهرجان دبي للتسوق,Dubai,event,"Mall promotions, raffle; tourist peak",RetailCal
+2026-12-26,2026-12-26,Boxing Day 2026,Boxing Day,"GB, CA, AU, HK",promo,Sales start (UK dept stores),RetailCal
+2027-01-13,2027-02-09,Soldes d'hiver 2027,Soldes d'hiver,FR,sales_season,,RetailCal
+2027-02-06,2027-02-12,Chinese New Year / Spring Festival 2027,春节,"CN, HK, TW, SG, KR(Seollal), overseas Chinese",travel_peak,"Gifting before, outbound travel during",RetailCal
+2027-02-08,2027-03-09,Ramadan 2027,رمضان,"AE, GCC, SG, global Muslim",religious,"Daytime traffic down, evening malls busy; Eid shopping peak at the end",RetailCal
+2027-03-09,2027-03-12,Eid al-Fitr 2027,عيد الفطر,"AE, GCC",religious,"GCC outbound travel (London, Paris, Milan, Geneva)",RetailCal
+2027-03-14,2027-03-14,White Day 2027,ホワイトデー/화이트데이,"JP, KR",cultural,,RetailCal
+2027-04-29,2027-05-05,Golden Week Japan 2027,ゴールデンウィーク,JP,travel_peak,Japanese domestic/outbound travel,RetailCal
+2027-05-16,2027-05-19,Eid al-Adha 2027,عيد الأضحى,"AE, GCC",religious,GCC summer travel starts,RetailCal
+2027-05-20,2027-05-20,520 2027,520 网络情人节,CN,cultural,Gifting day,RetailCal
+2027-06-18,2027-06-18,618 Shopping Festival 2027,618,CN,ecommerce,,RetailCal
+2027-06-23,2027-07-20,Soldes d'été 2027,Soldes d'été,FR,sales_season,,RetailCal
+2027-09-14,2027-09-16,Chuseok 2027,추석 연휴,KR,travel_peak,"Korean outbound travel spike (Japan, Europe) around the holiday",RetailCal
+2027-09-18,2027-10-03,Oktoberfest 2027,Oktoberfest / Wiesn,München,event,~6-7 million visitors; hotel prices peak; tracht not down jackets,RetailCal
+2027-10-01,2027-10-07,China National Day Golden Week 2027,国庆黄金周,CN outbound + domestic,travel_peak,tentative,RetailCal
+2027-10-20,2027-11-11,Singles' Day (Double 11) 2027 incl. presales,双十一,"CN e-commerce (Tmall, JD, Douyin)",ecommerce,Presales start ~Oct 20 (2026: Oct 20 20:00 CST); offline luxury traffic softens; price-match requests,RetailCal
+2027-10-29,2027-10-29,Diwali 2027,दीपावली,"IN, SG, AE, GB, US diaspora",cultural,Gifting/jewellery; Indian travellers to Dubai/London,RetailCal
+2027-11-11,2027-11-11,Pepero Day 2027,빼빼로데이,KR,cultural,,RetailCal
+2027-11-25,2027-11-25,Thanksgiving 2027,Thanksgiving,US,holiday,,RetailCal
+2027-11-26,2027-11-29,Black Friday - Cyber Monday 2027,Black Friday,"US, GB, EU, AU",promo,Luxury brands mostly do not discount; multibrand/department stores do,RetailCal
+2027-12-12,2027-12-12,Double 12 2027,双十二,CN,ecommerce,,RetailCal
+2027-12-26,2027-12-26,Boxing Day 2027,Boxing Day,"GB, CA, AU, HK",promo,Sales start (UK dept stores),RetailCal

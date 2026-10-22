@@ -1,0 +1,34 @@
+city,stores,primary_provider_folder
+Milano,MIL01 MIL02,eu_meteoarchive
+Roma,ROM01,eu_meteoarchive
+Venezia,VEN01,eu_meteoarchive
+Courmayeur,COU01,eu_meteoarchive
+Cortina d'Ampezzo,CRT01,eu_meteoarchive
+Paris,PAR01 PAR02,eu_meteoarchive
+Cannes,CAN01,eu_meteoarchive
+Genève,GVA01,eu_meteoarchive
+London,LON01 LON02,eu_meteoarchive
+München,MUN01,eu_meteoarchive
+Berlin,BER01,eu_meteoarchive
+Zürich,ZRH01,eu_meteoarchive
+St. Moritz,STM01,eu_meteoarchive
+Madrid,MAD01,eu_meteoarchive
+Amsterdam,AMS01,eu_meteoarchive
+København,CPH01,eu_meteoarchive
+Dubai,DXB01,global_weatherhub_api
+New York,NYC01 NYC02,us_ncei_ghcnd
+Miami,MIA01,us_ncei_ghcnd
+Beverly Hills,BHS01,us_ncei_ghcnd
+Aspen,ASP01,us_ncei_ghcnd
+Toronto,TOR01,ca_eccc_climate
+Tokyo,TYO01 TYO02,jp_jma
+Osaka,OSA01,jp_jma
+Seoul,SEL01 SEL02,kr_kma_asos
+Busan,BUS01,kr_kma_asos
+Shanghai,SHA01,cn_tianqi_portal
+Beijing,BJS01,cn_tianqi_portal
+Chengdu,CDU01,cn_tianqi_portal
+Hong Kong,HKG01,hk_hko
+Taipei,TPE01,tw_cwa_466920
+Singapore,SIN01,sg_mss
+Sydney,SYD01,au_bom_066214

@@ -1,0 +1,39 @@
+{
+ "month": {
+  "period": "2026-08-30..2026-10-03",
+  "net_tax_total": 893426820,
+  "ly_tax_total": 767279700,
+  "ratio": 116.4,
+  "bud_ratio": 90.8,
+  "stores": {
+   "TYO01": 457918780,
+   "TYO02": 221958440,
+   "OSA01": 213549600
+  },
+  "net_ex_tax_total": 812206200,
+  "tax_free_share": 38.5,
+  "nat_share": {
+   "CN": 18.4,
+   "HK": 4.6,
+   "JP": 52.5,
+   "KR": 6.0,
+   "OTHER": 4.9,
+   "TH": 3.0,
+   "TW": 6.9,
+   "US": 3.8
+  }
+ },
+ "week_oct11_17": {
+  "ratio_total": 166.7,
+  "ratio_by_store": {
+   "TYO01": 189.2,
+   "TYO02": 133.7,
+   "OSA01": 161.4
+  }
+ },
+ "ilvaro_waiting_list": {
+  "TYO01": 8,
+  "TYO02": 6,
+  "OSA01": 7
+ }
+}

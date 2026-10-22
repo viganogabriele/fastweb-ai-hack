@@ -1,0 +1,22 @@
+{
+ "week": {
+  "dept_growth": 49.2,
+  "sel01_growth": -4.7,
+  "total_vat_mil": 2280.2
+ },
+ "dept_sep": {
+  "period": "2026-08-26..2026-09-25",
+  "vat_krw": 3310492900,
+  "ex_vat_krw": 3009539000,
+  "growth": 9.4,
+  "stores": {
+   "SEL02": 2278208900,
+   "BUS01": 1032284000
+  }
+ },
+ "ilvaro_waiting": {
+  "SEL02": 29,
+  "BUS01": 15,
+  "SEL01": 24
+ }
+}

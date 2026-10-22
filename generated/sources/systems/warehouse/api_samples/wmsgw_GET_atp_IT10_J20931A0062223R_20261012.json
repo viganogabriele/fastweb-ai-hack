@@ -1,0 +1,106 @@
+{
+  "_request": {
+    "method": "GET",
+    "url": "https://wms-gw.moncler-int.example/v1/atp?plant=IT10&material=J20931A0062223R",
+    "ts": "2026-10-12T06:30:00Z"
+  },
+  "plant": "IT10",
+  "material": "J20931A0062223R",
+  "sku": "J20931A00622-23R",
+  "styleName": "AMBRINE",
+  "asOf": "2026-10-12T06:00:00+02:00",
+  "uom": "PC",
+  "sizes": [
+    {
+      "size": "00",
+      "ean": "800062245200",
+      "onHandUnrestricted": 7,
+      "openDeliveries": 0,
+      "ecomReserve": 1,
+      "blocked": 0,
+      "returnsUngraded": 0,
+      "atp": 7,
+      "nextReceipts": []
+    },
+    {
+      "size": "0",
+      "ean": "800062245201",
+      "onHandUnrestricted": 0,
+      "openDeliveries": 0,
+      "ecomReserve": 0,
+      "blocked": 0,
+      "returnsUngraded": 0,
+      "atp": 0,
+      "nextReceipts": [
+        {
+          "purchaseOrder": "4500222090",
+          "item": "00010",
+          "eta": "2026-11-10",
+          "qtyAllSizes": 150,
+          "confirmation": "VENDOR_CONFIRMED"
+        }
+      ]
+    },
+    {
+      "size": "1",
+      "ean": "800062245202",
+      "onHandUnrestricted": 0,
+      "openDeliveries": 0,
+      "ecomReserve": 0,
+      "blocked": 0,
+      "returnsUngraded": 0,
+      "atp": 0,
+      "nextReceipts": [
+        {
+          "purchaseOrder": "4500222090",
+          "item": "00010",
+          "eta": "2026-11-10",
+          "qtyAllSizes": 150,
+          "confirmation": "VENDOR_CONFIRMED"
+        }
+      ]
+    },
+    {
+      "size": "2",
+      "ean": "800062245203",
+      "onHandUnrestricted": 0,
+      "openDeliveries": 0,
+      "ecomReserve": 0,
+      "blocked": 0,
+      "returnsUngraded": 0,
+      "atp": 0,
+      "nextReceipts": [
+        {
+          "purchaseOrder": "4500222090",
+          "item": "00010",
+          "eta": "2026-11-10",
+          "qtyAllSizes": 150,
+          "confirmation": "VENDOR_CONFIRMED"
+        }
+      ]
+    },
+    {
+      "size": "3",
+      "ean": "800062245204",
+      "onHandUnrestricted": 8,
+      "openDeliveries": 0,
+      "ecomReserve": 2,
+      "blocked": 0,
+      "returnsUngraded": 0,
+      "atp": 8,
+      "nextReceipts": []
+    },
+    {
+      "size": "4",
+      "ean": "800062245205",
+      "onHandUnrestricted": 8,
+      "openDeliveries": 0,
+      "ecomReserve": 1,
+      "blocked": 0,
+      "returnsUngraded": 0,
+      "atp": 8,
+      "nextReceipts": []
+    }
+  ],
+  "source": "wms-gateway/v1 (SAP + PCL feed)"
+}

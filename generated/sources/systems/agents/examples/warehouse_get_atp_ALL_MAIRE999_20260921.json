@@ -1,0 +1,284 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/warehouse/v1/atp?plant=ALL&material=J20931A00012999&asOf=2026-09-21"
+  },
+  "response": {
+    "snapshot": "2026-09-21T06:00:00",
+    "asOf": "2026-09-21",
+    "stale": false,
+    "positions": [
+      {
+        "plant": "HK30",
+        "material": "J20931A00012999",
+        "size": "0",
+        "unrestricted": 0,
+        "openDeliveries": 0,
+        "ecomReserve": 0,
+        "blocked": 0,
+        "atp": 0,
+        "nextReceipt": {
+          "date": "2026-10-02",
+          "qty": 287,
+          "po": "4500218734"
+        }
+      },
+      {
+        "plant": "HK30",
+        "material": "J20931A00012999",
+        "size": "00",
+        "unrestricted": 0,
+        "openDeliveries": 0,
+        "ecomReserve": 0,
+        "blocked": 0,
+        "atp": 0,
+        "nextReceipt": {
+          "date": "2026-10-02",
+          "qty": 111,
+          "po": "4500218734"
+        }
+      },
+      {
+        "plant": "HK30",
+        "material": "J20931A00012999",
+        "size": "1",
+        "unrestricted": 0,
+        "openDeliveries": 0,
+        "ecomReserve": 0,
+        "blocked": 0,
+        "atp": 0,
+        "nextReceipt": {
+          "date": "2026-10-02",
+          "qty": 317,
+          "po": "4500218734"
+        }
+      },
+      {
+        "plant": "HK30",
+        "material": "J20931A00012999",
+        "size": "2",
+        "unrestricted": 0,
+        "openDeliveries": 0,
+        "ecomReserve": 2,
+        "blocked": 0,
+        "atp": 0,
+        "nextReceipt": {
+          "date": "2026-10-02",
+          "qty": 204,
+          "po": "4500218734"
+        }
+      },
+      {
+        "plant": "HK30",
+        "material": "J20931A00012999",
+        "size": "3",
+        "unrestricted": 0,
+        "openDeliveries": 0,
+        "ecomReserve": 0,
+        "blocked": 0,
+        "atp": 0,
+        "nextReceipt": {
+          "date": "2026-10-02",
+          "qty": 89,
+          "po": "4500218734"
+        }
+      },
+      {
+        "plant": "HK30",
+        "material": "J20931A00012999",
+        "size": "4",
+        "unrestricted": 0,
+        "openDeliveries": 0,
+        "ecomReserve": 0,
+        "blocked": 0,
+        "atp": 0,
+        "nextReceipt": {
+          "date": "2026-10-02",
+          "qty": 32,
+          "po": "4500218734"
+        }
+      },
+      {
+        "plant": "IT10",
+        "material": "J20931A00012999",
+        "size": "0",
+        "unrestricted": 0,
+        "openDeliveries": 0,
+        "ecomReserve": 1,
+        "blocked": 0,
+        "atp": 0,
+        "nextReceipt": {
+          "date": "2026-10-02",
+          "qty": 92,
+          "po": "4500218734"
+        }
+      },
+      {
+        "plant": "IT10",
+        "material": "J20931A00012999",
+        "size": "00",
+        "unrestricted": 0,
+        "openDeliveries": 0,
+        "ecomReserve": 2,
+        "blocked": 0,
+        "atp": 0,
+        "nextReceipt": {
+          "date": "2026-10-02",
+          "qty": 29,
+          "po": "4500218734"
+        }
+      },
+      {
+        "plant": "IT10",
+        "material": "J20931A00012999",
+        "size": "1",
+        "unrestricted": 0,
+        "openDeliveries": 0,
+        "ecomReserve": 6,
+        "blocked": 0,
+        "atp": 0,
+        "nextReceipt": {
+          "date": "2026-10-02",
+          "qty": 126,
+          "po": "4500218734"
+        }
+      },
+      {
+        "plant": "IT10",
+        "material": "J20931A00012999",
+        "size": "2",
+        "unrestricted": 0,
+        "openDeliveries": 0,
+        "ecomReserve": 0,
+        "blocked": 0,
+        "atp": 0,
+        "nextReceipt": {
+          "date": "2026-10-02",
+          "qty": 93,
+          "po": "4500218734"
+        }
+      },
+      {
+        "plant": "IT10",
+        "material": "J20931A00012999",
+        "size": "3",
+        "unrestricted": 0,
+        "openDeliveries": 0,
+        "ecomReserve": 4,
+        "blocked": 0,
+        "atp": 0,
+        "nextReceipt": {
+          "date": "2026-10-02",
+          "qty": 55,
+          "po": "4500218734"
+        }
+      },
+      {
+        "plant": "IT10",
+        "material": "J20931A00012999",
+        "size": "4",
+        "unrestricted": 0,
+        "openDeliveries": 0,
+        "ecomReserve": 0,
+        "blocked": 0,
+        "atp": 0,
+        "nextReceipt": {
+          "date": "2026-10-02",
+          "qty": 25,
+          "po": "4500218734"
+        }
+      },
+      {
+        "plant": "US20",
+        "material": "J20931A00012999",
+        "size": "0",
+        "unrestricted": 0,
+        "openDeliveries": 0,
+        "ecomReserve": 2,
+        "blocked": 0,
+        "atp": 0,
+        "nextReceipt": {
+          "date": "2026-10-02",
+          "qty": 40,
+          "po": "4500218734"
+        }
+      },
+      {
+        "plant": "US20",
+        "material": "J20931A00012999",
+        "size": "00",
+        "unrestricted": 0,
+        "openDeliveries": 0,
+        "ecomReserve": 2,
+        "blocked": 0,
+        "atp": 0,
+        "nextReceipt": {
+          "date": "2026-10-02",
+          "qty": 9,
+          "po": "4500218734"
+        }
+      },
+      {
+        "plant": "US20",
+        "material": "J20931A00012999",
+        "size": "1",
+        "unrestricted": 0,
+        "openDeliveries": 0,
+        "ecomReserve": 1,
+        "blocked": 0,
+        "atp": 0,
+        "nextReceipt": {
+          "date": "2026-10-02",
+          "qty": 63,
+          "po": "4500218734"
+        }
+      },
+      {
+        "plant": "US20",
+        "material": "J20931A00012999",
+        "size": "2",
+        "unrestricted": 0,
+        "openDeliveries": 0,
+        "ecomReserve": 3,
+        "blocked": 0,
+        "atp": 0,
+        "nextReceipt": {
+          "date": "2026-10-02",
+          "qty": 52,
+          "po": "4500218734"
+        }
+      },
+      {
+        "plant": "US20",
+        "material": "J20931A00012999",
+        "size": "3",
+        "unrestricted": 0,
+        "openDeliveries": 0,
+        "ecomReserve": 2,
+        "blocked": 0,
+        "atp": 0,
+        "nextReceipt": {
+          "date": "2026-10-02",
+          "qty": 35,
+          "po": "4500218734"
+        }
+      },
+      {
+        "plant": "US20",
+        "material": "J20931A00012999",
+        "size": "4",
+        "unrestricted": 0,
+        "openDeliveries": 0,
+        "ecomReserve": 2,
+        "blocked": 0,
+        "atp": 0,
+        "nextReceipt": {
+          "date": "2026-10-02",
+          "qty": 21,
+          "po": "4500218734"
+        }
+      }
+    ],
+    "totalAtp": 0
+  }
+}

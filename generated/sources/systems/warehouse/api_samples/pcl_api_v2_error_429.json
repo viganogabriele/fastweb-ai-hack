@@ -1,0 +1,12 @@
+{
+  "_request": {
+    "method": "GET",
+    "ts": "2026-10-19T09:00:41+08:00",
+    "url": "/api/v2/inventory?client=MONC01"
+  },
+  "status": "ERROR",
+  "code": 429,
+  "message": "Too many requests - limit 60/min per client key",
+  "retryAfterSec": 37,
+  "traceId": "pcl-7f3a-22c1"
+}

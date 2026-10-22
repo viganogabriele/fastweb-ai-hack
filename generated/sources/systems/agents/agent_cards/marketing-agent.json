@@ -1,0 +1,142 @@
+{
+  "protocolVersion": "0.3.0",
+  "name": "marketing-agent",
+  "description": "Marketing & CRM agent (Salesforce + campaign calendar + social listening). Returns campaign calendar, client waitlists and drafts clienteling messages in the client language for sales associates (never sends them). Uses CRM store codes (e.g. IT01, KR02).",
+  "url": "https://agents.moncler-int.example/marketing/a2a",
+  "preferredTransport": "JSONRPC",
+  "additionalInterfaces": [
+    {
+      "url": "https://agents.moncler-int.example/marketing/a2a",
+      "transport": "JSONRPC"
+    },
+    {
+      "url": "https://agents.moncler-int.example/marketing/v1",
+      "transport": "HTTP+JSON"
+    }
+  ],
+  "provider": {
+    "organization": "Moncler - Marketing Technology / CRM",
+    "url": "https://intranet.moncler-int.example"
+  },
+  "version": "0.9.4-beta",
+  "documentationUrl": "https://agents.moncler-int.example/marketing/docs",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false,
+    "stateTransitionHistory": true
+  },
+  "securitySchemes": {
+    "oauth2": {
+      "type": "oauth2",
+      "flows": {
+        "clientCredentials": {
+          "tokenUrl": "https://login.moncler-int.example/oauth2/token",
+          "scopes": {
+            "crm.read": "read CRM",
+            "crm.draft": "create drafts"
+          }
+        }
+      }
+    },
+    "mtls": {
+      "type": "mutualTLS"
+    }
+  },
+  "security": [
+    {
+      "oauth2": [
+        "crm.read"
+      ]
+    },
+    {
+      "mtls": []
+    }
+  ],
+  "defaultInputModes": [
+    "application/json",
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "application/json"
+  ],
+  "skills": [
+    {
+      "id": "get_campaign_calendar",
+      "name": "Campaign calendar",
+      "description": "Activities by market and date range (campaigns, launches, client events, CRM).",
+      "tags": [
+        "calendar",
+        "campaign"
+      ],
+      "examples": [
+        "What is running in Korea next two weeks?"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "get_waitlist",
+      "name": "Store waitlists",
+      "description": "Waitlist / reservation entries by CRM store code and item.",
+      "tags": [
+        "waitlist",
+        "clienteling"
+      ],
+      "examples": [
+        "Open waitlist entries for ILVARO pink at KR02"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "draft_clienteling_message",
+      "name": "Draft clienteling message",
+      "description": "Draft a message to a client in it/fr/en/ko/ja/zh. Requires availability and ETA from other agents; returns compliance flags.",
+      "tags": [
+        "clienteling",
+        "message",
+        "draft"
+      ],
+      "examples": [
+        "Draft a KakaoTalk message for a client waiting for ILVARO pink size 0"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "get_social_alerts",
+      "name": "Social listening alerts",
+      "description": "Volume spikes / sentiment alerts.",
+      "tags": [
+        "social",
+        "alerts"
+      ],
+      "examples": [
+        "Any spike on Moncler in Korea?"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    }
+  ],
+  "x-operational-notes": "beta - drafts must be approved by the store manager; PII returned only with crm.pii scope (not granted to partner agents)"
+}

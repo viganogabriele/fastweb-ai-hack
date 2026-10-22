@@ -1,0 +1,23 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/marketing/v1/clienteling-message-draft",
+    "body": {
+      "clientName": "김OO",
+      "storeName": "몽클레르 청담 플래그십",
+      "language": "ko",
+      "item": "일바로 인디핑크",
+      "size": "0",
+      "available": false,
+      "eta": "11월 20일"
+    }
+  },
+  "response": {
+    "language": "ko",
+    "draft": "김OO 고객님, 몽클레르 청담 플래그십입니다. 문의하신 일바로 인디핑크 0 사이즈 11월 20일 경 입고 예정입니다. 토요일까지 보관해 드릴 수 있습니다.",
+    "complianceFlags": [
+      "NO_STOCK_PROMISE: do not confirm reservation until goods are received in store"
+    ],
+    "requiresApproval": true
+  }
+}

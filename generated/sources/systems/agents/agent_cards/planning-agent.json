@@ -1,0 +1,125 @@
+{
+  "protocolVersion": "0.3.0",
+  "name": "planning-agent",
+  "description": "Merchandise planning agent: replenishment parameters, statistical forecast (event-blind), allocation plans for new products, OTB and replenishment proposals per store x SKU. Uses internal store ids (MIL01) and SAP plants interchangeably.",
+  "url": "https://agents.moncler-int.example/planning/a2a",
+  "preferredTransport": "JSONRPC",
+  "additionalInterfaces": [
+    {
+      "url": "https://agents.moncler-int.example/planning/a2a",
+      "transport": "JSONRPC"
+    },
+    {
+      "url": "https://agents.moncler-int.example/planning/v1",
+      "transport": "HTTP+JSON"
+    }
+  ],
+  "provider": {
+    "organization": "Moncler - Merchandise Planning HQ",
+    "url": "https://intranet.moncler-int.example"
+  },
+  "version": "3.0.0",
+  "documentationUrl": "https://agents.moncler-int.example/planning/docs",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false,
+    "stateTransitionHistory": true
+  },
+  "securitySchemes": {
+    "bearer": {
+      "type": "http",
+      "scheme": "bearer",
+      "bearerFormat": "JWT"
+    }
+  },
+  "security": [
+    {
+      "bearer": []
+    }
+  ],
+  "defaultInputModes": [
+    "application/json",
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "application/json"
+  ],
+  "skills": [
+    {
+      "id": "get_replenishment_parameters",
+      "name": "Replenishment parameters",
+      "description": "Order days, lead time, cover days, safety factor, season profile per store.",
+      "tags": [
+        "parameters",
+        "replenishment"
+      ],
+      "examples": [
+        "Parameters of SYD01"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "propose_replenishment",
+      "name": "Replenishment proposal",
+      "description": "Order-up-to proposal for a store x SKU, checked against DC ATP. Accepts a demand multiplier to override the event-blind forecast.",
+      "tags": [
+        "replenishment",
+        "proposal"
+      ],
+      "examples": [
+        "Propose replenishment of ILVARO 510 for SEL01 with demand x6"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "get_allocation_plan",
+      "name": "Allocation plan (new products)",
+      "description": "Launch allocations per store/size with analog and factor.",
+      "tags": [
+        "allocation"
+      ],
+      "examples": [
+        "How was ILVARO allocated?"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    },
+    {
+      "id": "get_otb",
+      "name": "Open-to-buy",
+      "description": "OTB by region x category x month (EUR k).",
+      "tags": [
+        "otb",
+        "budget"
+      ],
+      "examples": [
+        "OTB outerwear EMEA November"
+      ],
+      "inputModes": [
+        "application/json",
+        "text/plain"
+      ],
+      "outputModes": [
+        "application/json"
+      ]
+    }
+  ],
+  "x-operational-notes": "forecast refreshed Mondays 05:00 CET; proposals are advisory, orders are released by the replenishment run"
+}

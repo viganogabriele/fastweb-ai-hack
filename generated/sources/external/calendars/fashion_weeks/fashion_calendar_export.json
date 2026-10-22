@@ -1,0 +1,386 @@
+{
+ "exported_at": "2026-10-20T08:12:44Z",
+ "count": 38,
+ "items": [
+  {
+   "id": "fw-001",
+   "name": "New York Fashion Week",
+   "season": "Womenswear SS25",
+   "city": "New York",
+   "start": "2024-09-06",
+   "end": "2024-09-11",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-002",
+   "name": "London Fashion Week",
+   "season": "Womenswear SS25",
+   "city": "London",
+   "start": "2024-09-13",
+   "end": "2024-09-17",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-003",
+   "name": "Milano Moda Donna",
+   "season": "Womenswear SS25",
+   "city": "Milano",
+   "start": "17/09/2024",
+   "end": "23/09/2024",
+   "official_schedule_published": true,
+   "notes": "dates as published by the organising chamber"
+  },
+  {
+   "id": "fw-004",
+   "name": "Paris Fashion Week",
+   "season": "Womenswear SS25",
+   "city": "Paris",
+   "start": "2024-09-23",
+   "end": "2024-10-01",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-005",
+   "name": "Shanghai Fashion Week",
+   "season": "SS25",
+   "city": "Shanghai",
+   "start": "2024-10-09",
+   "end": "2024-10-16",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-006",
+   "name": "Seoul Fashion Week",
+   "season": "SS25",
+   "city": "Seoul",
+   "start": "2024-09-03",
+   "end": "2024-09-07",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-007",
+   "name": "Milano Moda Uomo",
+   "season": "Menswear FW25",
+   "city": "Milano",
+   "start": "17/01/2025",
+   "end": "21/01/2025",
+   "official_schedule_published": true,
+   "notes": "dates as published by the organising chamber"
+  },
+  {
+   "id": "fw-008",
+   "name": "Paris Fashion Week Men",
+   "season": "Menswear FW25",
+   "city": "Paris",
+   "start": "2025-01-21",
+   "end": "2025-01-26",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-009",
+   "name": "New York Fashion Week",
+   "season": "Womenswear FW25",
+   "city": "New York",
+   "start": "2025-02-06",
+   "end": "2025-02-11",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-010",
+   "name": "London Fashion Week",
+   "season": "Womenswear FW25",
+   "city": "London",
+   "start": "2025-02-20",
+   "end": "2025-02-24",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-011",
+   "name": "Milano Moda Donna",
+   "season": "Womenswear FW25",
+   "city": "Milano",
+   "start": "25/02/2025",
+   "end": "03/03/2025",
+   "official_schedule_published": true,
+   "notes": "dates as published by the organising chamber"
+  },
+  {
+   "id": "fw-012",
+   "name": "Paris Fashion Week",
+   "season": "Womenswear FW25",
+   "city": "Paris",
+   "start": "2025-03-03",
+   "end": "2025-03-11",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-013",
+   "name": "Milano Moda Uomo",
+   "season": "Menswear SS26",
+   "city": "Milano",
+   "start": "20/06/2025",
+   "end": "24/06/2025",
+   "official_schedule_published": true,
+   "notes": "dates as published by the organising chamber"
+  },
+  {
+   "id": "fw-014",
+   "name": "Paris Fashion Week Men",
+   "season": "Menswear SS26",
+   "city": "Paris",
+   "start": "2025-06-24",
+   "end": "2025-06-29",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-015",
+   "name": "New York Fashion Week",
+   "season": "Womenswear SS26",
+   "city": "New York",
+   "start": "2025-09-11",
+   "end": "2025-09-16",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-016",
+   "name": "London Fashion Week",
+   "season": "Womenswear SS26",
+   "city": "London",
+   "start": "2025-09-18",
+   "end": "2025-09-22",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-017",
+   "name": "Milano Moda Donna",
+   "season": "Womenswear SS26",
+   "city": "Milano",
+   "start": "23/09/2025",
+   "end": "29/09/2025",
+   "official_schedule_published": true,
+   "notes": "dates as published by the organising chamber"
+  },
+  {
+   "id": "fw-018",
+   "name": "Paris Fashion Week",
+   "season": "Womenswear SS26",
+   "city": "Paris",
+   "start": "2025-09-29",
+   "end": "2025-10-07",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-019",
+   "name": "Shanghai Fashion Week",
+   "season": "SS26",
+   "city": "Shanghai",
+   "start": "2025-10-09",
+   "end": "2025-10-17",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-020",
+   "name": "Seoul Fashion Week",
+   "season": "SS26",
+   "city": "Seoul",
+   "start": "2025-09-02",
+   "end": "2025-09-06",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-021",
+   "name": "Milano Moda Uomo",
+   "season": "Menswear FW26",
+   "city": "Milano",
+   "start": "16/01/2026",
+   "end": "20/01/2026",
+   "official_schedule_published": true,
+   "notes": "dates as published by the organising chamber"
+  },
+  {
+   "id": "fw-022",
+   "name": "Paris Fashion Week Men",
+   "season": "Menswear FW26",
+   "city": "Paris",
+   "start": "2026-01-20",
+   "end": "2026-01-25",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-023",
+   "name": "New York Fashion Week",
+   "season": "Womenswear FW26",
+   "city": "New York",
+   "start": "2026-02-12",
+   "end": "2026-02-17",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-024",
+   "name": "London Fashion Week",
+   "season": "Womenswear FW26",
+   "city": "London",
+   "start": "2026-02-19",
+   "end": "2026-02-23",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-025",
+   "name": "Milano Moda Donna",
+   "season": "Womenswear FW26",
+   "city": "Milano",
+   "start": "24/02/2026",
+   "end": "02/03/2026",
+   "official_schedule_published": true,
+   "notes": "dates as published by the organising chamber"
+  },
+  {
+   "id": "fw-026",
+   "name": "Paris Fashion Week",
+   "season": "Womenswear FW26",
+   "city": "Paris",
+   "start": "2026-03-02",
+   "end": "2026-03-10",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-027",
+   "name": "Milano Moda Uomo",
+   "season": "Menswear SS27",
+   "city": "Milano",
+   "start": "19/06/2026",
+   "end": "23/06/2026",
+   "official_schedule_published": true,
+   "notes": "dates as published by the organising chamber"
+  },
+  {
+   "id": "fw-028",
+   "name": "Paris Fashion Week Men",
+   "season": "Menswear SS27",
+   "city": "Paris",
+   "start": "2026-06-23",
+   "end": "2026-06-28",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-029",
+   "name": "Tokyo Fashion Week",
+   "season": "SS27",
+   "city": "Tokyo",
+   "start": "2026-08-31",
+   "end": "2026-09-05",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-030",
+   "name": "Seoul Fashion Week",
+   "season": "SS27",
+   "city": "Seoul",
+   "start": "2026-09-01",
+   "end": "2026-09-05",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-031",
+   "name": "New York Fashion Week",
+   "season": "Womenswear SS27",
+   "city": "New York",
+   "start": "2026-09-10",
+   "end": "2026-09-15",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-032",
+   "name": "London Fashion Week",
+   "season": "Womenswear SS27",
+   "city": "London",
+   "start": "2026-09-17",
+   "end": "2026-09-21",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-033",
+   "name": "Milano Moda Donna",
+   "season": "Womenswear SS27",
+   "city": "Milano",
+   "start": "22/09/2026",
+   "end": "28/09/2026",
+   "official_schedule_published": true,
+   "notes": "dates as published by the organising chamber"
+  },
+  {
+   "id": "fw-034",
+   "name": "Paris Fashion Week",
+   "season": "Womenswear SS27",
+   "city": "Paris",
+   "start": "2026-09-29",
+   "end": "2026-10-07",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-035",
+   "name": "Shanghai Fashion Week",
+   "season": "SS27",
+   "city": "Shanghai",
+   "start": "2026-10-09",
+   "end": "2026-10-16",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-036",
+   "name": "Copenhagen Fashion Week",
+   "season": "SS27",
+   "city": "København",
+   "start": "2026-08-04",
+   "end": "2026-08-07",
+   "official_schedule_published": true,
+   "notes": ""
+  },
+  {
+   "id": "fw-037",
+   "name": "Milano Moda Uomo",
+   "season": "Menswear FW27",
+   "city": "Milano",
+   "start": "15/01/2027",
+   "end": "19/01/2027",
+   "official_schedule_published": false,
+   "notes": "dates as published by the organising chamber"
+  },
+  {
+   "id": "fw-038",
+   "name": "Paris Fashion Week Men",
+   "season": "Menswear FW27",
+   "city": "Paris",
+   "start": "2027-01-19",
+   "end": "2027-01-24",
+   "official_schedule_published": false,
+   "notes": ""
+  }
+ ]
+}

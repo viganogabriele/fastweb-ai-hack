@@ -1,0 +1,195 @@
+store,file,id,sent,business_date,kind,frm,subject
+PAR01,20260831_2012_PAR01.eml,0831,2026-08-31 20:12,2026-08-31,closing,Thomas Nguyen <thomas.nguyen@moncler-retail.example>,closing lundi 31/08
+PAR01,20260901_2034_PAR01.eml,0901,2026-09-01 20:34,2026-09-01,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 01/09
+PAR01,20260902_2051_PAR01.eml,0902,2026-09-02 20:51,2026-09-02,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 02/09
+PAR01,20260903_2105_PAR01.eml,0903,2026-09-03 21:05,2026-09-03,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 03/09
+PAR01,20260904_2040_PAR01.eml,0904,2026-09-04 20:40,2026-09-04,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 04/09
+PAR01,20260905_2120_PAR01.eml,0905,2026-09-05 21:20,2026-09-05,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing samedi 05/09
+PAR01,20260907_2005_PAR01.eml,0907,2026-09-07 20:05,2026-09-07,closing,Thomas Nguyen <thomas.nguyen@moncler-retail.example>,closing 07.09
+PAR01,20260908_2047_PAR01.eml,0908,2026-09-08 20:47,2026-09-08,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 08/09
+PAR01,20260909_2131_PAR01.eml,0909,2026-09-09 21:31,2026-09-09,closing,Thomas Nguyen <thomas.nguyen@moncler-retail.example>,closing mercredi
+PAR01,20260910_2038_PAR01.eml,0910,2026-09-10 20:38,2026-09-10,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 10/09
+PAR01,20260911_2055_PAR01.eml,0911,2026-09-11 20:55,2026-09-11,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 11/09
+PAR01,20260912_2112_PAR01.eml,0912,2026-09-12 21:12,2026-09-12,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing samedi 12/09
+PAR01,20260914_2009_PAR01.eml,0914,2026-09-14 20:09,2026-09-14,closing,Thomas Nguyen <thomas.nguyen@moncler-retail.example>,closing lundi 14/09
+PAR01,20260915_2044_PAR01.eml,0915,2026-09-15 20:44,2026-09-15,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 15/09
+PAR01,20260917_2058_PAR01.eml,0917,2026-09-17 20:58,2026-09-17;2026-09-16,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 17/09
+PAR01,20260918_2102_PAR01.eml,0918,2026-09-18 21:02,2026-09-18,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 18/09
+PAR01,20260919_2125_PAR01.eml,0919,2026-09-19 21:25,2026-09-19,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing samedi 19/09
+PAR01,20260921_2016_PAR01.eml,0921,2026-09-21 20:16,2026-09-21,closing,Thomas Nguyen <thomas.nguyen@moncler-retail.example>,closing 21/09
+PAR01,20260922_2050_PAR01.eml,0922,2026-09-22 20:50,2026-09-22,closing,Inès Haddad <ines.haddad@moncler-retail.example>,Clôture Saint-Honoré mardi 22 septembre
+PAR01,20260923_2041_PAR01.eml,0923,2026-09-23 20:41,2026-09-23,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 23/09
+PAR01,20260924_2103_PAR01.eml,0924,2026-09-24 21:03,2026-09-24,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 24/09
+PAR01,20260925_2037_PAR01.eml,0925,2026-09-25 20:37,2026-09-25,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 25/09
+PAR01,20260925_2214_PAR01_re1.eml,0925r,2026-09-25 22:14,,reply,Isabelle Moreau <isabelle.moreau@moncler-retail.example>,RE: PAR01 - Closing 25/09
+PAR01,20260926_0948_PAR01_re2.eml,0926r,2026-09-26 09:48,2026-09-19..2026-09-25,reply,Camille Lefèvre <camille.lefevre@moncler-retail.example>,RE: PAR01 - Closing 25/09
+PAR01,20260926_2118_PAR01.eml,0926,2026-09-26 21:18,2026-09-26,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing samedi 26/09
+PAR01,20260928_2022_PAR01.eml,0928,2026-09-28 20:22,2026-09-28,closing,Thomas Nguyen <thomas.nguyen@moncler-retail.example>,closing lundi 28/09
+PAR01,20260929_2109_PAR01.eml,0929,2026-09-29 21:09,2026-09-29,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 29/09 – début FW
+PAR01,20260930_2122_PAR01.eml,0930,2026-09-30 21:22,2026-09-30,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 30/09 – FW + Golden Week
+PAR01,20261001_2115_PAR01.eml,1001,2026-10-01 21:15,2026-10-01,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 01/10
+PAR01,20261002_2140_PAR01.eml,1002,2026-10-02 21:40,2026-10-02,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 02/10
+PAR01,20261002_2206_PAR01_corr.eml,1002c,2026-10-02 22:06,2026-10-02,correction,Camille Lefèvre <camille.lefevre@moncler-retail.example>,RE: PAR01 - Closing 02/10 - correction CA
+PAR01,20261003_2148_PAR01.eml,1003,2026-10-03 21:48,2026-10-03,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing samedi 03/10
+PAR01,20261003_2150_PAR01_dup.eml,1003d,2026-10-03 21:50,,duplicate,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing samedi 03/10
+PAR01,20261005_2031_PAR01.eml,1005,2026-10-05 20:31,2026-10-05,closing,Thomas Nguyen <thomas.nguyen@moncler-retail.example>,closing lundi 05/10
+PAR01,20261006_2111_PAR01.eml,1006,2026-10-06 21:11,2026-10-06,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 06/10
+PAR01,20261008_0842_PAR01.eml,1007,2026-10-08 08:42,2026-10-07,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 07/10 (envoi tardif)
+PAR01,20261008_2119_PAR01.eml,1008,2026-10-08 21:19,2026-10-08,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 08/10
+PAR01,20261009_1105_PAR01_fwd.eml,1009f,2026-10-09 11:05,,forward,Camille Lefèvre <camille.lefevre@moncler-retail.example>,TR: Doudoune Tib - fermeture cassée
+PAR01,20261009_2044_PAR01.eml,1009,2026-10-09 20:44,2026-10-09,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 09/10
+PAR01,20261010_2116_PAR01.eml,1010,2026-10-10 21:16,2026-10-10,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing samedi 10/10
+PAR01,20261012_2028_PAR01.eml,1012,2026-10-12 20:28,2026-10-12,closing,Thomas Nguyen <thomas.nguyen@moncler-retail.example>,closing lundi 12/10
+PAR01,20261013_2002_PAR01.eml,1013,2026-10-13 20:02,2026-10-13,closing,Thomas Nguyen <thomas.nguyen@moncler-retail.example>,closing mardi 13/10 - greve
+PAR01,20261014_2019_PAR01.eml,1014,2026-10-14 20:19,2026-10-14,closing,Thomas Nguyen <thomas.nguyen@moncler-retail.example>,closing 13/10
+PAR01,20261015_2047_PAR01.eml,1015,2026-10-15 20:47,2026-10-15,closing,Thomas Nguyen <thomas.nguyen@moncler-retail.example>,closing jeudi 15/10
+PAR01,20261016_2036_PAR01.eml,1016,2026-10-16 20:36,2026-10-16,closing,Thomas Nguyen <thomas.nguyen@moncler-retail.example>,closing ven 16/10
+PAR01,20261017_2104_PAR01.eml,1017,2026-10-17 21:04,2026-10-17,closing,Thomas Nguyen <thomas.nguyen@moncler-retail.example>,closing samedi 17/10
+PAR01,20261019_2122_PAR01.eml,1019,2026-10-19 21:22,2026-10-19,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 19/10 + points en suspens
+PAR01,20261019_2231_PAR01_re1.eml,1019r,2026-10-19 22:31,,reply,Isabelle Moreau <isabelle.moreau@moncler-retail.example>,RE: PAR01 - Closing 19/10 + points en suspens
+PAR01,20261020_2039_PAR01.eml,1020,2026-10-20 20:39,2026-10-20,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 20/10
+PAR01,20261021_2053_PAR01.eml,1021,2026-10-21 20:53,2026-10-21,closing,Camille Lefèvre <camille.lefevre@moncler-retail.example>,PAR01 - Closing 21/10
+PAR02,20260831_2118_PAR02.eml,0831,2026-08-31 21:18,2026-08-31,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 31/08
+PAR02,20260901_2102_PAR02.eml,0901,2026-09-01 21:02,2026-09-01,closing,Karim Benali <karim.benali@moncler-retail.example>,cloture 01/09
+PAR02,20260902_2126_PAR02.eml,0902,2026-09-02 21:26,2026-09-02,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 02/09
+PAR02,20260903_2140_PAR02.eml,0903,2026-09-03 21:40,2026-09-03,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 03/09
+PAR02,20260904_2135_PAR02.eml,0904,2026-09-04 21:35,2026-09-04,closing,Moncler GL Haussmann <par02.store@moncler-retail.example>,Fiche de clôture 04/09
+PAR02,20260905_2152_PAR02.eml,0905,2026-09-05 21:52,2026-09-05,closing,Karim Benali <karim.benali@moncler-retail.example>,cloture samedi
+PAR02,20260906_2044_PAR02.eml,0906,2026-09-06 20:44,2026-09-06,closing,Karim Benali <karim.benali@moncler-retail.example>,cloture dimanche 06/09
+PAR02,20260907_2120_PAR02.eml,0907,2026-09-07 21:20,2026-09-07,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 07/09
+PAR02,20260907_2120_PAR02_auto.eml,0907ooo,2026-09-07 21:20,,auto_reply,Isabelle Moreau <isabelle.moreau@moncler-retail.example>,Réponse automatique : Clôture GL 07/09
+PAR02,20260908_2112_PAR02.eml,0908,2026-09-08 21:12,2026-09-08,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 08/09
+PAR02,20260909_2144_PAR02.eml,0909,2026-09-09 21:44,2026-09-09,closing,Karim Benali <karim.benali@moncler-retail.example>,cloture 09/09
+PAR02,20260910_2130_PAR02.eml,0910,2026-09-10 21:30,2026-09-10,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 10/09
+PAR02,20260911_2116_PAR02.eml,0911,2026-09-11 21:16,2026-09-11,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 11/09
+PAR02,20260912_2158_PAR02.eml,0912,2026-09-12 21:58,2026-09-12,closing,Karim Benali <karim.benali@moncler-retail.example>,cloture samedi 12
+PAR02,20260913_2041_PAR02.eml,0913,2026-09-13 20:41,2026-09-13,closing,Moncler GL Haussmann <par02.store@moncler-retail.example>,Fiche de clôture dim 13/09
+PAR02,20260914_2109_PAR02.eml,0914,2026-09-14 21:09,2026-09-14,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 14/09
+PAR02,20260915_2122_PAR02.eml,0915,2026-09-15 21:22,2026-09-15,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 15/09
+PAR02,20260916_2149_PAR02.eml,0916,2026-09-16 21:49,2026-09-16,closing,Karim Benali <karim.benali@moncler-retail.example>,cloture 16/09
+PAR02,20260917_2114_PAR02.eml,0917,2026-09-17 21:14,2026-09-17,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 17/09
+PAR02,20260919_2205_PAR02.eml,0919,2026-09-19 22:05,2026-09-19,closing,Karim Benali <karim.benali@moncler-retail.example>,cloture samedi 19/09
+PAR02,20260920_2037_PAR02.eml,0920,2026-09-20 20:37,2026-09-20,closing,Moncler GL Haussmann <par02.store@moncler-retail.example>,Fiche de clôture 20/09
+PAR02,20260921_2111_PAR02.eml,0921,2026-09-21 21:11,2026-09-21,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 21/09
+PAR02,20260922_2127_PAR02.eml,0922,2026-09-22 21:27,2026-09-22,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 22/09 - Maire noire
+PAR02,20260923_2141_PAR02.eml,0923,2026-09-23 21:41,2026-09-23,closing,Karim Benali <karim.benali@moncler-retail.example>,cloture 23/09
+PAR02,20260924_2119_PAR02.eml,0924,2026-09-24 21:19,2026-09-24,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 24/09
+PAR02,20260925_1012_PAR02_re1.eml,0925m,2026-09-25 10:12,,reply,Marco Bellini <marco.bellini@moncler-retail.example>,RE: Clôture GL 22/09 - Maire noire
+PAR02,20260925_2107_PAR02.eml,0925,2026-09-25 21:07,2026-09-25,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 25/09
+PAR02,20260926_2208_PAR02.eml,0926,2026-09-26 22:08,2026-09-26,closing,Karim Benali <karim.benali@moncler-retail.example>,CLOTURE SAMEDI 26/09
+PAR02,20260927_2052_PAR02.eml,0927,2026-09-27 20:52,2026-09-27,closing,Karim Benali <karim.benali@moncler-retail.example>,cloture dim 27/09
+PAR02,20260928_2105_PAR02.eml,0928,2026-09-28 21:05,2026-09-28,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 28/09
+PAR02,20260929_2133_PAR02.eml,0929,2026-09-29 21:33,2026-09-29,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 29/09
+PAR02,20260930_2211_PAR02.eml,0930,2026-09-30 22:11,2026-09-30,closing,Karim Benali <karim.benali@moncler-retail.example>,cloture 30/09 golden week
+PAR02,20261001_2138_PAR02.eml,1001,2026-10-01 21:38,2026-10-01,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 01/10
+PAR02,20261002_2202_PAR02.eml,1002,2026-10-02 22:02,2026-10-02,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 02/10 – journée de folie
+PAR02,20261003_2234_PAR02.eml,1003,2026-10-03 22:34,2026-10-03,closing,Karim Benali <karim.benali@moncler-retail.example>,cloture samedi 03/10
+PAR02,20261004_2058_PAR02.eml,1004,2026-10-04 20:58,2026-10-04,closing,Moncler GL Haussmann <par02.store@moncler-retail.example>,Clôture dimanche 04/10
+PAR02,20261005_2113_PAR02.eml,1005,2026-10-05 21:13,2026-10-05,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 05/10
+PAR02,20261006_2129_PAR02.eml,1006,2026-10-06 21:29,2026-10-06,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 06/10
+PAR02,20261007_2155_PAR02.eml,1007,2026-10-07 21:55,2026-10-07,closing,Karim Benali <karim.benali@moncler-retail.example>,cloture 07/10
+PAR02,20261008_2124_PAR02.eml,1008,2026-10-08 21:24,2026-10-08,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 08/10
+PAR02,20261009_2108_PAR02.eml,1009,2026-10-09 21:08,2026-10-09,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 09/10
+PAR02,20261011_2103_PAR02.eml,1011,2026-10-11 21:03,2026-10-10;2026-10-11,closing,Karim Benali <karim.benali@moncler-retail.example>,cloture samedi + dimanche
+PAR02,20261012_1746_PAR02_fwd.eml,1012f,2026-10-12 17:46,2026-10-13,forward,Sophie Marchand <sophie.marchand@moncler-retail.example>,TR: [GL Haussmann] Information mouvement social mardi 13 octobre
+PAR02,20261012_2115_PAR02.eml,1012,2026-10-12 21:15,2026-10-12,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 12/10
+PAR02,20261013_2049_PAR02.eml,1013,2026-10-13 20:49,2026-10-13,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 13/10 – grève
+PAR02,20261014_2147_PAR02.eml,1014,2026-10-14 21:47,2026-10-14,closing,Karim Benali <karim.benali@moncler-retail.example>,cloture 14/10
+PAR02,20261015_2136_PAR02.eml,1015,2026-10-15 21:36,2026-10-15,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 15/10 – très grosse journée
+PAR02,20261017_2212_PAR02.eml,1017,2026-10-17 22:12,2026-10-17;2026-10-16,closing,Karim Benali <karim.benali@moncler-retail.example>,cloture samedi 17/10
+PAR02,20261018_2046_PAR02.eml,1018,2026-10-18 20:46,2026-10-18,closing,Moncler GL Haussmann <par02.store@moncler-retail.example>,Fiche de clôture 18/10
+PAR02,20261019_2120_PAR02.eml,1019,2026-10-19 21:20,2026-10-19,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 19/10
+PAR02,20261020_2104_PAR02.eml,1020,2026-10-20 21:04,2026-10-20,closing,Sophie Marchand <sophie.marchand@moncler-retail.example>,Clôture GL 20/10
+PAR02,20261021_2151_PAR02.eml,1021,2026-10-21 21:51,2026-10-21,closing,Karim Benali <karim.benali@moncler-retail.example>,cloture 21/10
+CAN01,20260831_1952_CAN01.eml,0831,2026-08-31 19:52,2026-08-31,closing,Julien Pastor <julien.pastor@moncler-retail.example>,Cloture 31/08
+CAN01,20260901_1947_CAN01.eml,0901,2026-09-01 19:47,2026-09-01,closing,Julien Pastor <julien.pastor@moncler-retail.example>,Cloture 01/09
+CAN01,20260902_2018_CAN01.eml,0902,2026-09-02 20:18,2026-09-02,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture boutique Cannes - 02/09
+CAN01,20260903_1931_CAN01.eml,0903,2026-09-03 19:31,2026-09-03,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes 03/09
+CAN01,20260904_1958_CAN01.eml,0904,2026-09-04 19:58,2026-09-04,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes 04/09
+CAN01,20260905_1944_CAN01.eml,0905,2026-09-05 19:44,2026-09-05,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes samedi 05/09
+CAN01,20260907_1936_CAN01.eml,0907,2026-09-07 19:36,2026-09-07,closing,Julien Pastor <julien.pastor@moncler-retail.example>,Cloture 07/09
+CAN01,20260908_1950_CAN01.eml,0908,2026-09-08 19:50,2026-09-08,closing,Julien Pastor <julien.pastor@moncler-retail.example>,Cloture 08/09
+CAN01,20260909_2006_CAN01.eml,0909,2026-09-09 20:06,2026-09-09,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes 09/09
+CAN01,20260910_2011_CAN01.eml,0910,2026-09-10 20:11,2026-09-10,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes 10/09
+CAN01,20260911_1955_CAN01.eml,0911,2026-09-11 19:55,2026-09-11,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes 11/09
+CAN01,20260912_1940_CAN01.eml,0912,2026-09-12 19:40,2026-09-12,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes samedi 12/09
+CAN01,20260912_2002_CAN01_fwd.eml,0912f,2026-09-12 20:02,,forward,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,TR: Hermine noire
+CAN01,20260914_0912_CAN01_re1.eml,0914i,2026-09-14 09:12,2026-09-12,reply,Isabelle Moreau <isabelle.moreau@moncler-retail.example>,RE: Clôture Cannes samedi 12/09
+CAN01,20260914_1247_CAN01_re2.eml,0914r,2026-09-14 12:47,2026-09-12,reply,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,RE: Clôture Cannes samedi 12/09
+CAN01,20260914_1941_CAN01.eml,0914,2026-09-14 19:41,2026-09-14,closing,Julien Pastor <julien.pastor@moncler-retail.example>,Cloture 14/09
+CAN01,20260915_1939_CAN01.eml,0915,2026-09-15 19:39,2026-09-15,closing,Julien Pastor <julien.pastor@moncler-retail.example>,Cloture 15/09
+CAN01,20260917_2003_CAN01.eml,0917,2026-09-17 20:03,2026-09-17,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes 17/09
+CAN01,20260918_1954_CAN01.eml,0918,2026-09-18 19:54,2026-09-18,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes 18/09
+CAN01,20260919_1948_CAN01.eml,0919,2026-09-19 19:48,2026-09-19,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes samedi 19/09
+CAN01,20260921_1938_CAN01.eml,0921,2026-09-21 19:38,2026-09-21,closing,Julien Pastor <julien.pastor@moncler-retail.example>,Cloture 21/09
+CAN01,20260922_1930_CAN01.eml,0922,2026-09-22 19:30,2026-09-22,closing,Julien Pastor <julien.pastor@moncler-retail.example>,Cloture 22/09
+CAN01,20260923_1959_CAN01.eml,0923,2026-09-23 19:59,2026-09-23,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes 23/09
+CAN01,20260924_2015_CAN01.eml,0924,2026-09-24 20:15,2026-09-24,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes 24/09
+CAN01,20260925_1952_CAN01.eml,0925,2026-09-25 19:52,2026-09-25,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes 25/09
+CAN01,20260926_2022_CAN01.eml,0926,2026-09-26 20:22,2026-09-26,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes samedi 26/09
+CAN01,20260928_1943_CAN01.eml,0928,2026-09-28 19:43,2026-09-28,closing,Julien Pastor <julien.pastor@moncler-retail.example>,Cloture 28/09
+CAN01,20260929_1935_CAN01.eml,0929,2026-09-29 19:35,2026-09-29,closing,Julien Pastor <julien.pastor@moncler-retail.example>,Cloture 28/09
+CAN01,20260930_2009_CAN01.eml,0930,2026-09-30 20:09,2026-09-30,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes 30/09
+CAN01,20261001_2001_CAN01.eml,1001,2026-10-01 20:01,2026-10-01,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes 01/10
+CAN01,20261002_1946_CAN01.eml,1002,2026-10-02 19:46,2026-10-02,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes 02/10
+CAN01,20261003_1958_CAN01.eml,1003,2026-10-03 19:58,2026-10-03,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes samedi 03/10
+CAN01,20261005_1933_CAN01.eml,1005,2026-10-05 19:33,2026-10-05,closing,Julien Pastor <julien.pastor@moncler-retail.example>,Cloture 05/10
+CAN01,20261006_1951_CAN01.eml,1006,2026-10-06 19:51,2026-10-06,closing,Julien Pastor <julien.pastor@moncler-retail.example>,cloture 06/10
+CAN01,20261008_1939_CAN01.eml,1008,2026-10-08 19:39,2026-10-08,closing,Julien Pastor <julien.pastor@moncler-retail.example>,Cloture 08/10
+CAN01,20261009_1942_CAN01.eml,1009,2026-10-09 19:42,2026-10-09,closing,Julien Pastor <julien.pastor@moncler-retail.example>,Cloture 09/10
+CAN01,20261010_1957_CAN01.eml,1010,2026-10-10 19:57,2026-10-10,closing,Julien Pastor <julien.pastor@moncler-retail.example>,Cloture 10/10
+CAN01,20261013_1949_CAN01.eml,1013,2026-10-13 19:49,2026-10-12;2026-10-13,closing,Julien Pastor <julien.pastor@moncler-retail.example>,Cloture lundi + mardi
+CAN01,20261014_2007_CAN01.eml,1014,2026-10-14 20:07,2026-10-14,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes 14/10
+CAN01,20261015_2018_CAN01.eml,1015,2026-10-15 20:18,2026-10-15,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes 15/10
+CAN01,20261016_1955_CAN01.eml,1016,2026-10-16 19:55,2026-10-16,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes 16/10
+CAN01,20261017_1947_CAN01.eml,1017,2026-10-17 19:47,2026-10-17,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes samedi 17/10
+CAN01,20261019_1941_CAN01.eml,1019,2026-10-19 19:41,2026-10-19,closing,Julien Pastor <julien.pastor@moncler-retail.example>,Cloture 19/10
+CAN01,20261020_1936_CAN01.eml,1020,2026-10-20 19:36,2026-10-20,closing,Julien Pastor <julien.pastor@moncler-retail.example>,Cloture 20/10
+CAN01,20261021_2024_CAN01.eml,1021,2026-10-21 20:24,2026-10-21,closing,Laetitia Rossi <laetitia.rossi@moncler-retail.example>,Clôture Cannes 21/10
+GVA01,20260831_1946_GVA01.eml,0831,2026-08-31 19:46,2026-08-31,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du 31.08.2026
+GVA01,20260901_1938_GVA01.eml,0901,2026-09-01 19:38,2026-09-01,closing,Bruno Monnier <bruno.monnier@moncler-retail.example>,Clôture GVA 01.09
+GVA01,20260902_1951_GVA01.eml,0902,2026-09-02 19:51,2026-09-02,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du 02.09.2026
+GVA01,20260903_2144_GVA01.eml,0903,2026-09-03 21:44,2026-09-03,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du 03.09.2026
+GVA01,20260904_1942_GVA01.eml,0904,2026-09-04 19:42,2026-09-04,closing,Bruno Monnier <bruno.monnier@moncler-retail.example>,Clôture GVA 04.09
+GVA01,20260905_1839_GVA01.eml,0905,2026-09-05 18:39,2026-09-05,closing,Bruno Monnier <bruno.monnier@moncler-retail.example>,Clôture samedi GVA
+GVA01,20260907_1933_GVA01.eml,0907,2026-09-07 19:33,2026-09-07,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du 07.09.2026
+GVA01,20260908_1940_GVA01.eml,0908,2026-09-08 19:40,2026-09-08,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du 08.09.2026
+GVA01,20260909_1937_GVA01.eml,0909,2026-09-09 19:37,2026-09-09,closing,Bruno Monnier <bruno.monnier@moncler-retail.example>,Clôture GVA 09.09
+GVA01,20260910_1955_GVA01.eml,0910,2026-09-10 19:55,2026-09-10,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du 10.09.2026 (Jeûne genevois)
+GVA01,20260911_1948_GVA01.eml,0911,2026-09-11 19:48,2026-09-11,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du 11.09.2026
+GVA01,20260912_1844_GVA01.eml,0912,2026-09-12 18:44,2026-09-12,closing,Bruno Monnier <bruno.monnier@moncler-retail.example>,Clôture samedi 12.09
+GVA01,20260914_1931_GVA01.eml,0914,2026-09-14 19:31,2026-09-14,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du 14.09.2026
+GVA01,20260915_1944_GVA01.eml,0915,2026-09-15 19:44,2026-09-15,closing,Bruno Monnier <bruno.monnier@moncler-retail.example>,Clôture GVA 15.09
+GVA01,20260916_1939_GVA01.eml,0916,2026-09-16 19:39,2026-09-16,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du 16.09.2026
+GVA01,20260918_1952_GVA01.eml,0918,2026-09-18 19:52,2026-09-18,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du 18.09.2026
+GVA01,20260919_1836_GVA01.eml,0919,2026-09-19 18:36,2026-09-19,closing,Bruno Monnier <bruno.monnier@moncler-retail.example>,Clôture samedi 19.09
+GVA01,20260921_1935_GVA01.eml,0921,2026-09-21 19:35,2026-09-21,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du 21.09.2026
+GVA01,20260922_1941_GVA01.eml,0922,2026-09-22 19:41,2026-09-22,closing,Bruno Monnier <bruno.monnier@moncler-retail.example>,Clôture GVA 22.09
+GVA01,20260923_1947_GVA01.eml,0923,2026-09-23 19:47,2026-09-23,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du 23.09.2026
+GVA01,20260924_2138_GVA01.eml,0924,2026-09-24 21:38,2026-09-24,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du 24.09.2026
+GVA01,20260925_1943_GVA01.eml,0925,2026-09-25 19:43,2026-09-25,closing,Bruno Monnier <bruno.monnier@moncler-retail.example>,Clôture GVA 25.09
+GVA01,20260926_0857_GVA01_corr.eml,0926c,2026-09-26 08:57,2026-09-25,correction,Bruno Monnier <bruno.monnier@moncler-retail.example>,Re: Clôture GVA 25.09 - correction
+GVA01,20260926_1848_GVA01.eml,0926,2026-09-26 18:48,2026-09-26,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du samedi 26.09.2026
+GVA01,20260928_1936_GVA01.eml,0928,2026-09-28 19:36,2026-09-28,closing,Bruno Monnier <bruno.monnier@moncler-retail.example>,Clôture GVA 28.09
+GVA01,20260929_1942_GVA01.eml,0929,2026-09-29 19:42,2026-09-29,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du 29.09.2026
+GVA01,20260930_1949_GVA01.eml,0930,2026-09-30 19:49,2026-09-30,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du 30.09.2026
+GVA01,20261001_2129_GVA01.eml,1001,2026-10-01 21:29,2026-10-01,closing,Bruno Monnier <bruno.monnier@moncler-retail.example>,Clôture GVA 01.10
+GVA01,20261002_1954_GVA01.eml,1002,2026-10-02 19:54,2026-10-02,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du 02.10.2026
+GVA01,20261003_1841_GVA01.eml,1003,2026-10-03 18:41,2026-10-03,closing,Bruno Monnier <bruno.monnier@moncler-retail.example>,Clôture samedi 03.10
+GVA01,20261005_1932_GVA01.eml,1005,2026-10-05 19:32,2026-10-05,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du 05.10.2026
+GVA01,20261006_1945_GVA01.eml,1006,2026-10-06 19:45,2026-10-06,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du 06.10.2026 – Tib
+GVA01,20261007_0831_GVA01_re1.eml,1007i,2026-10-07 08:31,,reply,Isabelle Moreau <isabelle.moreau@moncler-retail.example>,RE: GVA01 – Clôture du 06.10.2026 – Tib
+GVA01,20261007_1939_GVA01.eml,1007,2026-10-07 19:39,2026-10-07,closing,Bruno Monnier <bruno.monnier@moncler-retail.example>,Clôture GVA 07.10
+GVA01,20261008_2141_GVA01.eml,1008,2026-10-08 21:41,2026-10-08,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du 08.10.2026
+GVA01,20261009_1937_GVA01.eml,1009,2026-10-09 19:37,2026-10-09,closing,Bruno Monnier <bruno.monnier@moncler-retail.example>,Clôture GVA 09.10
+GVA01,20261010_1846_GVA01.eml,1010,2026-10-10 18:46,2026-10-10,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du samedi 10.10.2026
+GVA01,20261012_1944_GVA01.eml,1012,2026-10-12 19:44,2026-10-12,closing,Bruno Monnier <bruno.monnier@moncler-retail.example>,Clôture GVA 12.10
+GVA01,20261013_1958_GVA01.eml,1013,2026-10-13 19:58,2026-10-13,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du 13.10.2026
+GVA01,20261014_1947_GVA01.eml,1014,2026-10-14 19:47,2026-10-14,closing,Bruno Monnier <bruno.monnier@moncler-retail.example>,Clôture GVA 14.10
+GVA01,20261015_2146_GVA01.eml,1015,2026-10-15 21:46,2026-10-15,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du 15.10.2026
+GVA01,20261016_1958_GVA01.eml,1016,2026-10-16 19:58,2026-10-16,closing_wrong_list,Bruno Monnier <bruno.monnier@moncler-retail.example>,Clôture GVA 16.10
+GVA01,20261017_0822_GVA01_fwd.eml,1017f,2026-10-17 08:22,2026-10-16,forward,Bruno Monnier <bruno.monnier@moncler-retail.example>,TR: Clôture GVA 16.10
+GVA01,20261017_1852_GVA01.eml,1017,2026-10-17 18:52,2026-10-17,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du samedi 17.10.2026
+GVA01,20261019_1939_GVA01.eml,1019,2026-10-19 19:39,2026-10-19,closing,Bruno Monnier <bruno.monnier@moncler-retail.example>,Clôture GVA 19.10
+GVA01,20261020_1934_GVA01.eml,1020,2026-10-20 19:34,2026-10-20,closing,Nathalie Favre <nathalie.favre@moncler-retail.example>,GVA01 – Clôture du 20.10.2026
+GVA01,20261021_1941_GVA01.eml,1021,2026-10-21 19:41,2026-10-21,closing,Elodie Rochat <elodie.rochat@moncler-retail.example>,Clôture Genève 21.10

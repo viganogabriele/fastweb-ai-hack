@@ -1,0 +1,15 @@
+Id,Name,Type,Status,StartDate,EndDate,Store__c,NumberOfContacts,NumberOfResponses,BudgetedCost,ActualCost,Description,CurrencyIsoCode
+7015g00000Q8LnBAAV,UK | LON01 Private Client Evening FW26,Client Event,Completed,2026-10-08,2026-10-08,GB01,45,39,48000,51230,"Attended 36 (+9 guests). Purchasers 23, 27 transactions, GBP 41,881 (POS matched)",GBP
+7015g0t3CMNonnRrEy,IT | MIL01 MFW VIC appointments,Client Event,Completed,2026-09-22,2026-09-28,IT01,80,52,60000,58400,,EUR
+7015gcfwyGfNd4xPAF,FR | PAR01 PFW private viewing,Client Event,Completed,2026-10-03,2026-10-03,FR01,60,41,75000,79900,,EUR
+7015gBSGYzASNSgohZ,CN | Polaris VIP preview Plaza 66,Client Event,Completed,2026-09-26,2026-09-26,CN01,120,96,95000,101000,,CNY
+7015gyOZAVvbxKWgkj,KR | BIFF Busan Centum corner,Client Event,Completed,2026-10-01,2026-10-10,KR03,0,0,38000,36100,"walk-in, no invites",KRW
+7015giixcgPlKHe4m2,SG | F1 weekend cocktail MBS,Client Event,Completed,2026-10-10,2026-10-10,SG01,50,33,30000,31800,,SGD
+7015gd1XNoJMaGBzFs,CA | TIFF gifting lounge,PR Event,Completed,2026-09-10,2026-09-20,CA01,0,0,55000,61200,,CAD
+7015gAKZysvXl8GaE5,JP | Price change letter 11/1,Direct Mail,In Progress,2026-10-09,2026-10-31,JP01,4120,388,12000,9800,LINE + DM; responses = store visits booked,JPY
+7015gfs7ApetysZrSX,CN | Golden Week outbound - WeChat tax-free,WeChat,Completed,2026-09-28,2026-10-08,,9800,640,25000,22100,targeting clients travelling to IT/FR/UK,EUR
+7015gaoLJHxbpTDtpT,GLOBAL | Newsletter FW26 Icons,Email,Completed,2026-09-17,2026-09-17,,412000,23900,8000,8000,"hero: Maire black, Maya, Hermine",EUR
+7015gDnGeINHj42PyS,GLOBAL | Newsletter Genius Polaris,Email,Completed,2026-09-24,2026-09-24,,418500,31100,8000,8000,,EUR
+7015gvuebr96v3hqbf,EU | Newsletter Cold weather edit,Email,Completed,2026-10-14,2026-10-14,,188000,12700,6000,6000,,EUR
+7015geFp5y7JANbtmi,APAC | ILVARO pink edit (social),Social,In Progress,2026-10-06,2026-10-25,,0,0,35000,14100,launched after stock-out; links to sold-out PDP,EUR
+7015gCEk1rybz2UXGp,KR | ILVARO waitlist SMS,SMS,Planned,2026-11-20,2026-11-22,KR02,0,0,2000,0,to send when PO 4500222417 lands,KRW

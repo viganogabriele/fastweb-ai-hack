@@ -1,0 +1,82 @@
+{
+  "_request": {
+    "method": "GET",
+    "url": "https://wms-gw.moncler-int.example/v1/atp?plant=IT10&material=J20931A00618999",
+    "ts": "2026-10-22T06:30:00Z"
+  },
+  "plant": "IT10",
+  "material": "J20931A00618999",
+  "sku": "J20931A00618-999",
+  "styleName": "ILVARO",
+  "asOf": "2026-10-22T06:00:00+02:00",
+  "uom": "PC",
+  "sizes": [
+    {
+      "size": "00",
+      "ean": "800061885100",
+      "onHandUnrestricted": 19,
+      "openDeliveries": 0,
+      "ecomReserve": 3,
+      "blocked": 0,
+      "returnsUngraded": 1,
+      "atp": 19,
+      "nextReceipts": []
+    },
+    {
+      "size": "0",
+      "ean": "800061885101",
+      "onHandUnrestricted": 61,
+      "openDeliveries": 0,
+      "ecomReserve": 6,
+      "blocked": 0,
+      "returnsUngraded": 0,
+      "atp": 61,
+      "nextReceipts": []
+    },
+    {
+      "size": "1",
+      "ean": "800061885102",
+      "onHandUnrestricted": 83,
+      "openDeliveries": 0,
+      "ecomReserve": 7,
+      "blocked": 0,
+      "returnsUngraded": 1,
+      "atp": 83,
+      "nextReceipts": []
+    },
+    {
+      "size": "2",
+      "ean": "800061885103",
+      "onHandUnrestricted": 63,
+      "openDeliveries": 0,
+      "ecomReserve": 6,
+      "blocked": 0,
+      "returnsUngraded": 1,
+      "atp": 63,
+      "nextReceipts": []
+    },
+    {
+      "size": "3",
+      "ean": "800061885104",
+      "onHandUnrestricted": 33,
+      "openDeliveries": 0,
+      "ecomReserve": 4,
+      "blocked": 0,
+      "returnsUngraded": 1,
+      "atp": 33,
+      "nextReceipts": []
+    },
+    {
+      "size": "4",
+      "ean": "800061885105",
+      "onHandUnrestricted": 16,
+      "openDeliveries": 0,
+      "ecomReserve": 3,
+      "blocked": 0,
+      "returnsUngraded": 0,
+      "atp": 16,
+      "nextReceipts": []
+    }
+  ],
+  "source": "wms-gateway/v1 (SAP + PCL feed)"
+}

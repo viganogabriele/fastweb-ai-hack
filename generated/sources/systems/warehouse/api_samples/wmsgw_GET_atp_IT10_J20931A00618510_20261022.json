@@ -1,0 +1,130 @@
+{
+  "_request": {
+    "method": "GET",
+    "url": "https://wms-gw.moncler-int.example/v1/atp?plant=IT10&material=J20931A00618510",
+    "ts": "2026-10-22T06:30:00Z"
+  },
+  "plant": "IT10",
+  "material": "J20931A00618510",
+  "sku": "J20931A00618-510",
+  "styleName": "ILVARO",
+  "asOf": "2026-10-22T06:00:00+02:00",
+  "uom": "PC",
+  "sizes": [
+    {
+      "size": "00",
+      "ean": "800061815300",
+      "onHandUnrestricted": 5,
+      "openDeliveries": 0,
+      "ecomReserve": 3,
+      "blocked": 0,
+      "returnsUngraded": 0,
+      "atp": 5,
+      "nextReceipts": [
+        {
+          "purchaseOrder": "4500222417",
+          "item": "00020",
+          "eta": "2026-11-20",
+          "qtyAllSizes": 300,
+          "confirmation": "VENDOR_CONFIRMED"
+        }
+      ]
+    },
+    {
+      "size": "0",
+      "ean": "800061815301",
+      "onHandUnrestricted": 16,
+      "openDeliveries": 0,
+      "ecomReserve": 7,
+      "blocked": 0,
+      "returnsUngraded": 0,
+      "atp": 16,
+      "nextReceipts": [
+        {
+          "purchaseOrder": "4500222417",
+          "item": "00020",
+          "eta": "2026-11-20",
+          "qtyAllSizes": 300,
+          "confirmation": "VENDOR_CONFIRMED"
+        }
+      ]
+    },
+    {
+      "size": "1",
+      "ean": "800061815302",
+      "onHandUnrestricted": 21,
+      "openDeliveries": 0,
+      "ecomReserve": 2,
+      "blocked": 0,
+      "returnsUngraded": 0,
+      "atp": 21,
+      "nextReceipts": [
+        {
+          "purchaseOrder": "4500222417",
+          "item": "00020",
+          "eta": "2026-11-20",
+          "qtyAllSizes": 300,
+          "confirmation": "VENDOR_CONFIRMED"
+        }
+      ]
+    },
+    {
+      "size": "2",
+      "ean": "800061815303",
+      "onHandUnrestricted": 16,
+      "openDeliveries": 0,
+      "ecomReserve": 1,
+      "blocked": 0,
+      "returnsUngraded": 0,
+      "atp": 16,
+      "nextReceipts": [
+        {
+          "purchaseOrder": "4500222417",
+          "item": "00020",
+          "eta": "2026-11-20",
+          "qtyAllSizes": 300,
+          "confirmation": "VENDOR_CONFIRMED"
+        }
+      ]
+    },
+    {
+      "size": "3",
+      "ean": "800061815304",
+      "onHandUnrestricted": 8,
+      "openDeliveries": 0,
+      "ecomReserve": 0,
+      "blocked": 0,
+      "returnsUngraded": 0,
+      "atp": 8,
+      "nextReceipts": [
+        {
+          "purchaseOrder": "4500222417",
+          "item": "00020",
+          "eta": "2026-11-20",
+          "qtyAllSizes": 300,
+          "confirmation": "VENDOR_CONFIRMED"
+        }
+      ]
+    },
+    {
+      "size": "4",
+      "ean": "800061815305",
+      "onHandUnrestricted": 4,
+      "openDeliveries": 0,
+      "ecomReserve": 3,
+      "blocked": 0,
+      "returnsUngraded": 0,
+      "atp": 4,
+      "nextReceipts": [
+        {
+          "purchaseOrder": "4500222417",
+          "item": "00020",
+          "eta": "2026-11-20",
+          "qtyAllSizes": 300,
+          "confirmation": "VENDOR_CONFIRMED"
+        }
+      ]
+    }
+  ],
+  "source": "wms-gateway/v1 (SAP + PCL feed)"
+}

@@ -1,0 +1,990 @@
+Comune;Anno;Mese;Paese di residenza;Arrivi;Presenze;Stato del dato
+Milano;2024;9;Stati Uniti d'America;56930;148018;definitivo
+Milano;2024;10;Stati Uniti d'America;43835;113971;definitivo
+Milano;2024;11;Stati Uniti d'America;33780;87828;definitivo
+Milano;2024;12;Stati Uniti d'America;31737;82516;definitivo
+Milano;2025;1;Stati Uniti d'America;23067;59974;definitivo
+Milano;2025;2;Stati Uniti d'America;26638;69259;definitivo
+Milano;2025;3;Stati Uniti d'America;38283;99536;definitivo
+Milano;2025;4;Stati Uniti d'America;43427;112910;definitivo
+Milano;2025;5;Stati Uniti d'America;57100;148460;definitivo
+Milano;2025;6;Stati Uniti d'America;63000;163800;definitivo
+Milano;2025;7;Stati Uniti d'America;56982;148153;definitivo
+Milano;2025;8;Stati Uniti d'America;43021;111855;definitivo
+Milano;2025;9;Stati Uniti d'America;55028;143073;definitivo
+Milano;2025;10;Stati Uniti d'America;47090;122434;definitivo
+Milano;2025;11;Stati Uniti d'America;35794;93064;definitivo
+Milano;2025;12;Stati Uniti d'America;31603;82168;definitivo
+Milano;2026;1;Stati Uniti d'America;24799;64477;provvisorio
+Milano;2026;2;Stati Uniti d'America;31703;82428;provvisorio
+Milano;2026;3;Stati Uniti d'America;37505;97513;provvisorio
+Milano;2026;4;Stati Uniti d'America;47717;124064;provvisorio
+Milano;2026;5;Stati Uniti d'America;60971;158525;provvisorio
+Milano;2026;6;Stati Uniti d'America;62748;163145;provvisorio
+Milano;2026;7;Stati Uniti d'America;53670;139542;provvisorio
+Milano;2024;9;Cina;30670;55206;definitivo
+Milano;2024;10;Cina;43148;77666;definitivo
+Milano;2024;11;Cina;24777;44599;definitivo
+Milano;2024;12;Cina;21911;39440;definitivo
+Milano;2025;1;Cina;23385;42093;definitivo
+Milano;2025;2;Cina;24046;43283;definitivo
+Milano;2025;3;Cina;21641;38954;definitivo
+Milano;2025;4;Cina;27409;49336;definitivo
+Milano;2025;5;Cina;29695;53451;definitivo
+Milano;2025;6;Cina;27563;49613;definitivo
+Milano;2025;7;Cina;33593;60467;definitivo
+Milano;2025;8;Cina;30858;55544;definitivo
+Milano;2025;9;Cina;32228;58010;definitivo
+Milano;2025;10;Cina;47509;85516;definitivo
+Milano;2025;11;Cina;30856;55541;definitivo
+Milano;2025;12;Cina;25138;45248;definitivo
+Milano;2026;1;Cina;19884;35791;provvisorio
+Milano;2026;2;Cina;43825;78885;provvisorio
+Milano;2026;3;Cina;26541;47774;provvisorio
+Milano;2026;4;Cina;32610;58698;provvisorio
+Milano;2026;5;Cina;36328;65390;provvisorio
+Milano;2026;6;Cina;29996;53993;provvisorio
+Milano;2026;7;Cina;43853;78935;provvisorio
+Milano;2024;9;Germania;34982;83957;definitivo
+Milano;2024;10;Germania;30304;72730;definitivo
+Milano;2024;11;Germania;21994;52786;definitivo
+Milano;2024;12;Germania;20432;49037;definitivo
+Milano;2025;1;Germania;15259;36622;definitivo
+Milano;2025;2;Germania;19945;47868;definitivo
+Milano;2025;3;Germania;23663;56791;definitivo
+Milano;2025;4;Germania;28416;68198;definitivo
+Milano;2025;5;Germania;30962;74309;definitivo
+Milano;2025;6;Germania;34014;81634;definitivo
+Milano;2025;7;Germania;30546;73310;definitivo
+Milano;2025;8;Germania;27329;65590;definitivo
+Milano;2025;9;Germania;35263;84631;definitivo
+Milano;2025;10;Germania;29517;70841;definitivo
+Milano;2025;11;Germania;22223;53335;definitivo
+Milano;2025;12;Germania;21318;51163;definitivo
+Milano;2026;1;Germania;15689;37654;provvisorio
+Milano;2026;2;Germania;23323;55975;provvisorio
+Milano;2026;3;Germania;24944;59866;provvisorio
+Milano;2026;4;Germania;30870;74088;provvisorio
+Milano;2026;5;Germania;33885;81324;provvisorio
+Milano;2026;6;Germania;33995;81588;provvisorio
+Milano;2026;7;Germania;34308;82339;provvisorio
+Milano;2024;9;Francia;30536;73286;definitivo
+Milano;2024;10;Francia;26437;63449;definitivo
+Milano;2024;11;Francia;20653;49567;definitivo
+Milano;2024;12;Francia;18817;45161;definitivo
+Milano;2025;1;Francia;13143;31543;definitivo
+Milano;2025;2;Francia;16009;38422;definitivo
+Milano;2025;3;Francia;22625;54300;definitivo
+Milano;2025;4;Francia;27630;66312;definitivo
+Milano;2025;5;Francia;29618;71083;definitivo
+Milano;2025;6;Francia;28220;67728;definitivo
+Milano;2025;7;Francia;28774;69058;definitivo
+Milano;2025;8;Francia;24794;59506;definitivo
+Milano;2025;9;Francia;35258;84619;definitivo
+Milano;2025;10;Francia;27012;64829;definitivo
+Milano;2025;11;Francia;19510;46824;definitivo
+Milano;2025;12;Francia;18639;44734;definitivo
+Milano;2026;1;Francia;14326;34382;provvisorio
+Milano;2026;2;Francia;21219;50926;provvisorio
+Milano;2026;3;Francia;22195;53268;provvisorio
+Milano;2026;4;Francia;27767;66641;provvisorio
+Milano;2026;5;Francia;28974;69538;provvisorio
+Milano;2026;6;Francia;29870;71688;provvisorio
+Milano;2026;7;Francia;31297;75113;provvisorio
+Milano;2024;9;Regno Unito;29988;71971;definitivo
+Milano;2024;10;Regno Unito;23955;57492;definitivo
+Milano;2024;11;Regno Unito;18992;45581;definitivo
+Milano;2024;12;Regno Unito;19112;45869;definitivo
+Milano;2025;1;Regno Unito;13232;31757;definitivo
+Milano;2025;2;Regno Unito;15829;37990;definitivo
+Milano;2025;3;Regno Unito;23182;55637;definitivo
+Milano;2025;4;Regno Unito;25852;62045;definitivo
+Milano;2025;5;Regno Unito;28558;68539;definitivo
+Milano;2025;6;Regno Unito;28847;69233;definitivo
+Milano;2025;7;Regno Unito;29990;71976;definitivo
+Milano;2025;8;Regno Unito;23634;56722;definitivo
+Milano;2025;9;Regno Unito;30423;73015;definitivo
+Milano;2025;10;Regno Unito;26432;63437;definitivo
+Milano;2025;11;Regno Unito;19930;47832;definitivo
+Milano;2025;12;Regno Unito;18133;43519;definitivo
+Milano;2026;1;Regno Unito;14274;34258;provvisorio
+Milano;2026;2;Regno Unito;21517;51641;provvisorio
+Milano;2026;3;Regno Unito;20526;49262;provvisorio
+Milano;2026;4;Regno Unito;25888;62131;provvisorio
+Milano;2026;5;Regno Unito;28298;67915;provvisorio
+Milano;2026;6;Regno Unito;28793;69103;provvisorio
+Milano;2026;7;Regno Unito;29683;71239;provvisorio
+Milano;2024;9;Spagna;21095;50628;definitivo
+Milano;2024;10;Spagna;18857;45257;definitivo
+Milano;2024;11;Spagna;12467;29921;definitivo
+Milano;2024;12;Spagna;11804;28330;definitivo
+Milano;2025;1;Spagna;9569;22966;definitivo
+Milano;2025;2;Spagna;11320;27168;definitivo
+Milano;2025;3;Spagna;14741;35378;definitivo
+Milano;2025;4;Spagna;18842;45221;definitivo
+Milano;2025;5;Spagna;20226;48542;definitivo
+Milano;2025;6;Spagna;21316;51158;definitivo
+Milano;2025;7;Spagna;19451;46682;definitivo
+Milano;2025;8;Spagna;16353;39247;definitivo
+Milano;2025;9;Spagna;21558;51739;definitivo
+Milano;2025;10;Spagna;18551;44522;definitivo
+Milano;2025;11;Spagna;14071;33770;definitivo
+Milano;2025;12;Spagna;12824;30778;definitivo
+Milano;2026;1;Spagna;8994;21586;provvisorio
+Milano;2026;2;Spagna;13051;31322;provvisorio
+Milano;2026;3;Spagna;15103;36247;provvisorio
+Milano;2026;4;Spagna;19042;45701;provvisorio
+Milano;2026;5;Spagna;20807;49937;provvisorio
+Milano;2026;6;Spagna;19765;47436;provvisorio
+Milano;2026;7;Spagna;19460;46704;provvisorio
+Milano;2024;9;Svizzera e Liechtenstein;19895;47748;definitivo
+Milano;2024;10;Svizzera e Liechtenstein;17975;43140;definitivo
+Milano;2024;11;Svizzera e Liechtenstein;12240;29376;definitivo
+Milano;2024;12;Svizzera e Liechtenstein;12225;29340;definitivo
+Milano;2025;1;Svizzera e Liechtenstein;8627;20705;definitivo
+Milano;2025;2;Svizzera e Liechtenstein;11198;26875;definitivo
+Milano;2025;3;Svizzera e Liechtenstein;13540;32496;definitivo
+Milano;2025;4;Svizzera e Liechtenstein;18022;43253;definitivo
+Milano;2025;5;Svizzera e Liechtenstein;19657;47177;definitivo
+Milano;2025;6;Svizzera e Liechtenstein;19720;47328;definitivo
+Milano;2025;7;Svizzera e Liechtenstein;18973;45535;definitivo
+Milano;2025;8;Svizzera e Liechtenstein;15518;37243;definitivo
+Milano;2025;9;Svizzera e Liechtenstein;20017;48041;definitivo
+Milano;2025;10;Svizzera e Liechtenstein;17441;41858;definitivo
+Milano;2025;11;Svizzera e Liechtenstein;12530;30072;definitivo
+Milano;2025;12;Svizzera e Liechtenstein;12350;29640;definitivo
+Milano;2026;1;Svizzera e Liechtenstein;8596;20630;provvisorio
+Milano;2026;2;Svizzera e Liechtenstein;14629;35110;provvisorio
+Milano;2026;3;Svizzera e Liechtenstein;13928;33427;provvisorio
+Milano;2026;4;Svizzera e Liechtenstein;17033;40879;provvisorio
+Milano;2026;5;Svizzera e Liechtenstein;20205;48492;provvisorio
+Milano;2026;6;Svizzera e Liechtenstein;20092;48221;provvisorio
+Milano;2026;7;Svizzera e Liechtenstein;19405;46572;provvisorio
+Milano;2024;9;Corea del Sud;12346;24692;definitivo
+Milano;2024;10;Corea del Sud;10345;20690;definitivo
+Milano;2024;11;Corea del Sud;7972;15944;definitivo
+Milano;2024;12;Corea del Sud;9372;18744;definitivo
+Milano;2025;1;Corea del Sud;10088;20176;definitivo
+Milano;2025;2;Corea del Sud;8056;16112;definitivo
+Milano;2025;3;Corea del Sud;7219;14438;definitivo
+Milano;2025;4;Corea del Sud;9089;18178;definitivo
+Milano;2025;5;Corea del Sud;10060;20120;definitivo
+Milano;2025;6;Corea del Sud;9190;18380;definitivo
+Milano;2025;7;Corea del Sud;9610;19220;definitivo
+Milano;2025;8;Corea del Sud;9562;19124;definitivo
+Milano;2025;9;Corea del Sud;11052;22104;definitivo
+Milano;2025;10;Corea del Sud;13822;27644;definitivo
+Milano;2025;11;Corea del Sud;9193;18386;definitivo
+Milano;2025;12;Corea del Sud;10224;20448;definitivo
+Milano;2026;1;Corea del Sud;9003;18006;provvisorio
+Milano;2026;2;Corea del Sud;14578;29156;provvisorio
+Milano;2026;3;Corea del Sud;8346;16692;provvisorio
+Milano;2026;4;Corea del Sud;8770;17540;provvisorio
+Milano;2026;5;Corea del Sud;11081;22162;provvisorio
+Milano;2026;6;Corea del Sud;10073;20146;provvisorio
+Milano;2026;7;Corea del Sud;10453;20906;provvisorio
+Milano;2024;9;Giappone;12401;26042;definitivo
+Milano;2024;10;Giappone;10657;22380;definitivo
+Milano;2024;11;Giappone;9470;19887;definitivo
+Milano;2024;12;Giappone;9747;20469;definitivo
+Milano;2025;1;Giappone;6872;14431;definitivo
+Milano;2025;2;Giappone;7570;15897;definitivo
+Milano;2025;3;Giappone;10117;21246;definitivo
+Milano;2025;4;Giappone;8649;18163;definitivo
+Milano;2025;5;Giappone;10233;21489;definitivo
+Milano;2025;6;Giappone;9059;19024;definitivo
+Milano;2025;7;Giappone;8610;18081;definitivo
+Milano;2025;8;Giappone;10858;22802;definitivo
+Milano;2025;9;Giappone;12355;25946;definitivo
+Milano;2025;10;Giappone;10134;21281;definitivo
+Milano;2025;11;Giappone;9424;19790;definitivo
+Milano;2025;12;Giappone;9509;19969;definitivo
+Milano;2026;1;Giappone;6740;14154;provvisorio
+Milano;2026;2;Giappone;9118;19148;provvisorio
+Milano;2026;3;Giappone;10441;21926;provvisorio
+Milano;2026;4;Giappone;8308;17447;provvisorio
+Milano;2026;5;Giappone;10678;22424;provvisorio
+Milano;2026;6;Giappone;8404;17648;provvisorio
+Milano;2026;7;Giappone;8658;18182;provvisorio
+Milano;2024;9;Paesi del Golfo;8210;19704;definitivo
+Milano;2024;10;Paesi del Golfo;7199;17278;definitivo
+Milano;2024;11;Paesi del Golfo;6469;15526;definitivo
+Milano;2024;12;Paesi del Golfo;5909;14182;definitivo
+Milano;2025;1;Paesi del Golfo;4125;9900;definitivo
+Milano;2025;2;Paesi del Golfo;4728;11347;definitivo
+Milano;2025;3;Paesi del Golfo;6503;15607;definitivo
+Milano;2025;4;Paesi del Golfo;8480;20352;definitivo
+Milano;2025;5;Paesi del Golfo;8779;21070;definitivo
+Milano;2025;6;Paesi del Golfo;12512;30029;definitivo
+Milano;2025;7;Paesi del Golfo;14463;34711;definitivo
+Milano;2025;8;Paesi del Golfo;11363;27271;definitivo
+Milano;2025;9;Paesi del Golfo;8985;21564;definitivo
+Milano;2025;10;Paesi del Golfo;7999;19198;definitivo
+Milano;2025;11;Paesi del Golfo;6832;16397;definitivo
+Milano;2025;12;Paesi del Golfo;6283;15079;definitivo
+Milano;2026;1;Paesi del Golfo;4239;10174;provvisorio
+Milano;2026;2;Paesi del Golfo;5790;13896;provvisorio
+Milano;2026;3;Paesi del Golfo;6876;16502;provvisorio
+Milano;2026;4;Paesi del Golfo;8542;20501;provvisorio
+Milano;2026;5;Paesi del Golfo;9161;21986;provvisorio
+Milano;2026;6;Paesi del Golfo;12709;30502;provvisorio
+Milano;2026;7;Paesi del Golfo;14973;35935;provvisorio
+Milano;2024;9;India;7772;18653;definitivo
+Milano;2024;10;India;8682;20837;definitivo
+Milano;2024;11;India;7486;17966;definitivo
+Milano;2024;12;India;5384;12922;definitivo
+Milano;2025;1;India;4748;11395;definitivo
+Milano;2025;2;India;5182;12437;definitivo
+Milano;2025;3;India;5713;13711;definitivo
+Milano;2025;4;India;8116;19478;definitivo
+Milano;2025;5;India;11937;28649;definitivo
+Milano;2025;6;India;11439;27454;definitivo
+Milano;2025;7;India;7218;17323;definitivo
+Milano;2025;8;India;6086;14606;definitivo
+Milano;2025;9;India;8327;19985;definitivo
+Milano;2025;10;India;8703;20887;definitivo
+Milano;2025;11;India;7448;17875;definitivo
+Milano;2025;12;India;6526;15662;definitivo
+Milano;2026;1;India;5258;12619;provvisorio
+Milano;2026;2;India;7037;16889;provvisorio
+Milano;2026;3;India;6588;15811;provvisorio
+Milano;2026;4;India;8810;21144;provvisorio
+Milano;2026;5;India;12336;29606;provvisorio
+Milano;2026;6;India;11870;28488;provvisorio
+Milano;2026;7;India;8193;19663;provvisorio
+Milano;2024;9;Brasile;7404;17770;definitivo
+Milano;2024;10;Brasile;7208;17299;definitivo
+Milano;2024;11;Brasile;6966;16718;definitivo
+Milano;2024;12;Brasile;7617;18281;definitivo
+Milano;2025;1;Brasile;6175;14820;definitivo
+Milano;2025;2;Brasile;6977;16745;definitivo
+Milano;2025;3;Brasile;6958;16699;definitivo
+Milano;2025;4;Brasile;6807;16337;definitivo
+Milano;2025;5;Brasile;7096;17030;definitivo
+Milano;2025;6;Brasile;7048;16915;definitivo
+Milano;2025;7;Brasile;9171;22010;definitivo
+Milano;2025;8;Brasile;6206;14894;definitivo
+Milano;2025;9;Brasile;7212;17309;definitivo
+Milano;2025;10;Brasile;7494;17986;definitivo
+Milano;2025;11;Brasile;7480;17952;definitivo
+Milano;2025;12;Brasile;7850;18840;definitivo
+Milano;2026;1;Brasile;7003;16807;provvisorio
+Milano;2026;2;Brasile;8957;21497;provvisorio
+Milano;2026;3;Brasile;6739;16174;provvisorio
+Milano;2026;4;Brasile;7493;17983;provvisorio
+Milano;2026;5;Brasile;7116;17078;provvisorio
+Milano;2026;6;Brasile;7874;18898;provvisorio
+Milano;2026;7;Brasile;9629;23110;provvisorio
+Milano;2024;9;Altri paesi esteri;175926;422222;definitivo
+Milano;2024;10;Altri paesi esteri;147197;353273;definitivo
+Milano;2024;11;Altri paesi esteri;103581;248594;definitivo
+Milano;2024;12;Altri paesi esteri;101128;242707;definitivo
+Milano;2025;1;Altri paesi esteri;76612;183869;definitivo
+Milano;2025;2;Altri paesi esteri;86142;206741;definitivo
+Milano;2025;3;Altri paesi esteri;120715;289716;definitivo
+Milano;2025;4;Altri paesi esteri;146354;351250;definitivo
+Milano;2025;5;Altri paesi esteri;166200;398880;definitivo
+Milano;2025;6;Altri paesi esteri;161852;388445;definitivo
+Milano;2025;7;Altri paesi esteri;159108;381859;definitivo
+Milano;2025;8;Altri paesi esteri;142330;341592;definitivo
+Milano;2025;9;Altri paesi esteri;162807;390737;definitivo
+Milano;2025;10;Altri paesi esteri;150149;360358;definitivo
+Milano;2025;11;Altri paesi esteri;111631;267914;definitivo
+Milano;2025;12;Altri paesi esteri;100716;241718;definitivo
+Milano;2026;1;Altri paesi esteri;72710;174504;provvisorio
+Milano;2026;2;Altri paesi esteri;110446;265070;provvisorio
+Milano;2026;3;Altri paesi esteri;115429;277030;provvisorio
+Milano;2026;4;Altri paesi esteri;142371;341690;provvisorio
+Milano;2026;5;Altri paesi esteri;164646;395150;provvisorio
+Milano;2026;6;Altri paesi esteri;163684;392842;provvisorio
+Milano;2026;7;Altri paesi esteri;161238;386971;provvisorio
+Roma;2024;9;Stati Uniti d'America;143811;373909;definitivo
+Roma;2024;10;Stati Uniti d'America;119964;311906;definitivo
+Roma;2024;11;Stati Uniti d'America;83849;218007;definitivo
+Roma;2024;12;Stati Uniti d'America;77888;202509;definitivo
+Roma;2025;1;Stati Uniti d'America;54554;141840;definitivo
+Roma;2025;2;Stati Uniti d'America;55971;145525;definitivo
+Roma;2025;3;Stati Uniti d'America;104371;271365;definitivo
+Roma;2025;4;Stati Uniti d'America;141060;366756;definitivo
+Roma;2025;5;Stati Uniti d'America;186521;484955;definitivo
+Roma;2025;6;Stati Uniti d'America;202173;525650;definitivo
+Roma;2025;7;Stati Uniti d'America;179117;465704;definitivo
+Roma;2025;8;Stati Uniti d'America;143996;374390;definitivo
+Roma;2025;9;Stati Uniti d'America;160534;417388;definitivo
+Roma;2025;10;Stati Uniti d'America;143550;373230;definitivo
+Roma;2025;11;Stati Uniti d'America;84940;220844;definitivo
+Roma;2025;12;Stati Uniti d'America;82231;213801;definitivo
+Roma;2026;1;Stati Uniti d'America;48519;126149;provvisorio
+Roma;2026;2;Stati Uniti d'America;48528;126173;provvisorio
+Roma;2026;3;Stati Uniti d'America;89970;233922;provvisorio
+Roma;2026;4;Stati Uniti d'America;134135;348751;provvisorio
+Roma;2026;5;Stati Uniti d'America;164689;428191;provvisorio
+Roma;2026;6;Stati Uniti d'America;190136;494354;provvisorio
+Roma;2026;7;Stati Uniti d'America;162026;421268;provvisorio
+Roma;2024;9;Germania;44101;105842;definitivo
+Roma;2024;10;Germania;38931;93434;definitivo
+Roma;2024;11;Germania;25414;60994;definitivo
+Roma;2024;12;Germania;25400;60960;definitivo
+Roma;2025;1;Germania;17201;41282;definitivo
+Roma;2025;2;Germania;19162;45989;definitivo
+Roma;2025;3;Germania;34571;82970;definitivo
+Roma;2025;4;Germania;47332;113597;definitivo
+Roma;2025;5;Germania;50188;120451;definitivo
+Roma;2025;6;Germania;48928;117427;definitivo
+Roma;2025;7;Germania;51701;124082;definitivo
+Roma;2025;8;Germania;47872;114893;definitivo
+Roma;2025;9;Germania;49053;117727;definitivo
+Roma;2025;10;Germania;43068;103363;definitivo
+Roma;2025;11;Germania;25042;60101;definitivo
+Roma;2025;12;Germania;26658;63979;definitivo
+Roma;2026;1;Germania;16231;38954;provvisorio
+Roma;2026;2;Germania;17567;42161;provvisorio
+Roma;2026;3;Germania;31413;75391;provvisorio
+Roma;2026;4;Germania;41747;100193;provvisorio
+Roma;2026;5;Germania;48406;116174;provvisorio
+Roma;2026;6;Germania;46378;111307;provvisorio
+Roma;2026;7;Germania;49256;118214;provvisorio
+Roma;2024;9;Regno Unito;47718;114523;definitivo
+Roma;2024;10;Regno Unito;45979;110350;definitivo
+Roma;2024;11;Regno Unito;26184;62842;definitivo
+Roma;2024;12;Regno Unito;28513;68431;definitivo
+Roma;2025;1;Regno Unito;19770;47448;definitivo
+Roma;2025;2;Regno Unito;22114;53074;definitivo
+Roma;2025;3;Regno Unito;36289;87094;definitivo
+Roma;2025;4;Regno Unito;52726;126542;definitivo
+Roma;2025;5;Regno Unito;55678;133627;definitivo
+Roma;2025;6;Regno Unito;61329;147190;definitivo
+Roma;2025;7;Regno Unito;57855;138852;definitivo
+Roma;2025;8;Regno Unito;52996;127190;definitivo
+Roma;2025;9;Regno Unito;53397;128153;definitivo
+Roma;2025;10;Regno Unito;47328;113587;definitivo
+Roma;2025;11;Regno Unito;29579;70990;definitivo
+Roma;2025;12;Regno Unito;30222;72533;definitivo
+Roma;2026;1;Regno Unito;18717;44921;provvisorio
+Roma;2026;2;Regno Unito;20922;50213;provvisorio
+Roma;2026;3;Regno Unito;34528;82867;provvisorio
+Roma;2026;4;Regno Unito;49029;117670;provvisorio
+Roma;2026;5;Regno Unito;54117;129881;provvisorio
+Roma;2026;6;Regno Unito;54263;130231;provvisorio
+Roma;2026;7;Regno Unito;54848;131635;provvisorio
+Roma;2024;9;Francia;43979;105550;definitivo
+Roma;2024;10;Francia;40013;96031;definitivo
+Roma;2024;11;Francia;22887;54929;definitivo
+Roma;2024;12;Francia;25897;62153;definitivo
+Roma;2025;1;Francia;18167;43601;definitivo
+Roma;2025;2;Francia;20487;49169;definitivo
+Roma;2025;3;Francia;33275;79860;definitivo
+Roma;2025;4;Francia;45154;108370;definitivo
+Roma;2025;5;Francia;50183;120439;definitivo
+Roma;2025;6;Francia;51333;123199;definitivo
+Roma;2025;7;Francia;54395;130548;definitivo
+Roma;2025;8;Francia;48099;115438;definitivo
+Roma;2025;9;Francia;48407;116177;definitivo
+Roma;2025;10;Francia;48749;116998;definitivo
+Roma;2025;11;Francia;26154;62770;definitivo
+Roma;2025;12;Francia;27737;66569;definitivo
+Roma;2026;1;Francia;16675;40020;provvisorio
+Roma;2026;2;Francia;18794;45106;provvisorio
+Roma;2026;3;Francia;31138;74731;provvisorio
+Roma;2026;4;Francia;44523;106855;provvisorio
+Roma;2026;5;Francia;48334;116002;provvisorio
+Roma;2026;6;Francia;48069;115366;provvisorio
+Roma;2026;7;Francia;50929;122230;provvisorio
+Roma;2024;9;Spagna;42568;102163;definitivo
+Roma;2024;10;Spagna;42286;101486;definitivo
+Roma;2024;11;Spagna;23361;56066;definitivo
+Roma;2024;12;Spagna;27011;64826;definitivo
+Roma;2025;1;Spagna;16940;40656;definitivo
+Roma;2025;2;Spagna;18929;45430;definitivo
+Roma;2025;3;Spagna;32755;78612;definitivo
+Roma;2025;4;Spagna;47367;113681;definitivo
+Roma;2025;5;Spagna;50459;121102;definitivo
+Roma;2025;6;Spagna;52147;125153;definitivo
+Roma;2025;7;Spagna;48378;116107;definitivo
+Roma;2025;8;Spagna;46957;112697;definitivo
+Roma;2025;9;Spagna;46369;111286;definitivo
+Roma;2025;10;Spagna;45011;108026;definitivo
+Roma;2025;11;Spagna;25216;60518;definitivo
+Roma;2025;12;Spagna;28290;67896;definitivo
+Roma;2026;1;Spagna;16697;40073;provvisorio
+Roma;2026;2;Spagna;18581;44594;provvisorio
+Roma;2026;3;Spagna;28709;68902;provvisorio
+Roma;2026;4;Spagna;44554;106930;provvisorio
+Roma;2026;5;Spagna;46249;110998;provvisorio
+Roma;2026;6;Spagna;44586;107006;provvisorio
+Roma;2026;7;Spagna;48100;115440;provvisorio
+Roma;2024;9;Cina;16394;29509;definitivo
+Roma;2024;10;Cina;25765;46377;definitivo
+Roma;2024;11;Cina;12295;22131;definitivo
+Roma;2024;12;Cina;11257;20263;definitivo
+Roma;2025;1;Cina;12003;21605;definitivo
+Roma;2025;2;Cina;12062;21712;definitivo
+Roma;2025;3;Cina;13970;25146;definitivo
+Roma;2025;4;Cina;19255;34659;definitivo
+Roma;2025;5;Cina;21485;38673;definitivo
+Roma;2025;6;Cina;18099;32578;definitivo
+Roma;2025;7;Cina;21882;39388;definitivo
+Roma;2025;8;Cina;24215;43587;definitivo
+Roma;2025;9;Cina;22473;40451;definitivo
+Roma;2025;10;Cina;30144;54259;definitivo
+Roma;2025;11;Cina;14979;26962;definitivo
+Roma;2025;12;Cina;14861;26750;definitivo
+Roma;2026;1;Cina;10015;18027;provvisorio
+Roma;2026;2;Cina;15493;27887;provvisorio
+Roma;2026;3;Cina;14248;25646;provvisorio
+Roma;2026;4;Cina;18971;34148;provvisorio
+Roma;2026;5;Cina;21528;38750;provvisorio
+Roma;2026;6;Cina;18460;33228;provvisorio
+Roma;2026;7;Cina;22639;40750;provvisorio
+Roma;2024;9;Corea del Sud;17286;34572;definitivo
+Roma;2024;10;Corea del Sud;15942;31884;definitivo
+Roma;2024;11;Corea del Sud;10875;21750;definitivo
+Roma;2024;12;Corea del Sud;13237;26474;definitivo
+Roma;2025;1;Corea del Sud;13477;26954;definitivo
+Roma;2025;2;Corea del Sud;10133;20266;definitivo
+Roma;2025;3;Corea del Sud;11512;23024;definitivo
+Roma;2025;4;Corea del Sud;16458;32916;definitivo
+Roma;2025;5;Corea del Sud;17756;35512;definitivo
+Roma;2025;6;Corea del Sud;16113;32226;definitivo
+Roma;2025;7;Corea del Sud;18479;36958;definitivo
+Roma;2025;8;Corea del Sud;18913;37826;definitivo
+Roma;2025;9;Corea del Sud;17790;35580;definitivo
+Roma;2025;10;Corea del Sud;22002;44004;definitivo
+Roma;2025;11;Corea del Sud;12522;25044;definitivo
+Roma;2025;12;Corea del Sud;15482;30964;definitivo
+Roma;2026;1;Corea del Sud;9818;19636;provvisorio
+Roma;2026;2;Corea del Sud;12028;24056;provvisorio
+Roma;2026;3;Corea del Sud;11716;23432;provvisorio
+Roma;2026;4;Corea del Sud;14701;29402;provvisorio
+Roma;2026;5;Corea del Sud;17109;34218;provvisorio
+Roma;2026;6;Corea del Sud;16185;32370;provvisorio
+Roma;2026;7;Corea del Sud;17428;34856;provvisorio
+Roma;2024;9;Giappone;15419;32380;definitivo
+Roma;2024;10;Giappone;15269;32065;definitivo
+Roma;2024;11;Giappone;9875;20738;definitivo
+Roma;2024;12;Giappone;12457;26160;definitivo
+Roma;2025;1;Giappone;8477;17802;definitivo
+Roma;2025;2;Giappone;8585;18028;definitivo
+Roma;2025;3;Giappone;15273;32073;definitivo
+Roma;2025;4;Giappone;13579;28516;definitivo
+Roma;2025;5;Giappone;16531;34715;definitivo
+Roma;2025;6;Giappone;12716;26704;definitivo
+Roma;2025;7;Giappone;13439;28222;definitivo
+Roma;2025;8;Giappone;17734;37241;definitivo
+Roma;2025;9;Giappone;16891;35471;definitivo
+Roma;2025;10;Giappone;14819;31120;definitivo
+Roma;2025;11;Giappone;10884;22856;definitivo
+Roma;2025;12;Giappone;12730;26733;definitivo
+Roma;2026;1;Giappone;7539;15832;provvisorio
+Roma;2026;2;Giappone;7425;15592;provvisorio
+Roma;2026;3;Giappone;12725;26722;provvisorio
+Roma;2026;4;Giappone;12354;25943;provvisorio
+Roma;2026;5;Giappone;15901;33392;provvisorio
+Roma;2026;6;Giappone;11988;25175;provvisorio
+Roma;2026;7;Giappone;12406;26053;provvisorio
+Roma;2024;9;Paesi del Golfo;5419;13006;definitivo
+Roma;2024;10;Paesi del Golfo;4980;11952;definitivo
+Roma;2024;11;Paesi del Golfo;3477;8345;definitivo
+Roma;2024;12;Paesi del Golfo;3971;9530;definitivo
+Roma;2025;1;Paesi del Golfo;2394;5746;definitivo
+Roma;2025;2;Paesi del Golfo;2630;6312;definitivo
+Roma;2025;3;Paesi del Golfo;4581;10994;definitivo
+Roma;2025;4;Paesi del Golfo;6462;15509;definitivo
+Roma;2025;5;Paesi del Golfo;6657;15977;definitivo
+Roma;2025;6;Paesi del Golfo;9854;23650;definitivo
+Roma;2025;7;Paesi del Golfo;12004;28810;definitivo
+Roma;2025;8;Paesi del Golfo;10657;25577;definitivo
+Roma;2025;9;Paesi del Golfo;6770;16248;definitivo
+Roma;2025;10;Paesi del Golfo;5775;13860;definitivo
+Roma;2025;11;Paesi del Golfo;4122;9893;definitivo
+Roma;2025;12;Paesi del Golfo;4192;10061;definitivo
+Roma;2026;1;Paesi del Golfo;2285;5484;provvisorio
+Roma;2026;2;Paesi del Golfo;2527;6065;provvisorio
+Roma;2026;3;Paesi del Golfo;4518;10843;provvisorio
+Roma;2026;4;Paesi del Golfo;6050;14520;provvisorio
+Roma;2026;5;Paesi del Golfo;6739;16174;provvisorio
+Roma;2026;6;Paesi del Golfo;9260;22224;provvisorio
+Roma;2026;7;Paesi del Golfo;11179;26830;provvisorio
+Roma;2024;9;India;6702;16085;definitivo
+Roma;2024;10;India;7425;17820;definitivo
+Roma;2024;11;India;5390;12936;definitivo
+Roma;2024;12;India;4661;11186;definitivo
+Roma;2025;1;India;3566;8558;definitivo
+Roma;2025;2;India;3525;8460;definitivo
+Roma;2025;3;India;5281;12674;definitivo
+Roma;2025;4;India;7787;18689;definitivo
+Roma;2025;5;India;12174;29218;definitivo
+Roma;2025;6;India;11397;27353;definitivo
+Roma;2025;7;India;7661;18386;definitivo
+Roma;2025;8;India;7612;18269;definitivo
+Roma;2025;9;India;7568;18163;definitivo
+Roma;2025;10;India;9155;21972;definitivo
+Roma;2025;11;India;6051;14522;definitivo
+Roma;2025;12;India;5673;13615;definitivo
+Roma;2026;1;India;3791;9098;provvisorio
+Roma;2026;2;India;3326;7982;provvisorio
+Roma;2026;3;India;5172;12413;provvisorio
+Roma;2026;4;India;7927;19025;provvisorio
+Roma;2026;5;India;11706;28094;provvisorio
+Roma;2026;6;India;11324;27178;provvisorio
+Roma;2026;7;India;7647;18353;provvisorio
+Roma;2024;9;Brasile;12780;30672;definitivo
+Roma;2024;10;Brasile;13734;32962;definitivo
+Roma;2024;11;Brasile;9957;23897;definitivo
+Roma;2024;12;Brasile;13033;31279;definitivo
+Roma;2025;1;Brasile;10574;25378;definitivo
+Roma;2025;2;Brasile;9682;23237;definitivo
+Roma;2025;3;Brasile;12363;29671;definitivo
+Roma;2025;4;Brasile;14740;35376;definitivo
+Roma;2025;5;Brasile;15068;36163;definitivo
+Roma;2025;6;Brasile;16698;40075;definitivo
+Roma;2025;7;Brasile;19152;45965;definitivo
+Roma;2025;8;Brasile;15316;36758;definitivo
+Roma;2025;9;Brasile;14883;35719;definitivo
+Roma;2025;10;Brasile;15414;36994;definitivo
+Roma;2025;11;Brasile;11822;28373;definitivo
+Roma;2025;12;Brasile;16061;38546;definitivo
+Roma;2026;1;Brasile;10948;26275;provvisorio
+Roma;2026;2;Brasile;9762;23429;provvisorio
+Roma;2026;3;Brasile;11736;28166;provvisorio
+Roma;2026;4;Brasile;13247;31793;provvisorio
+Roma;2026;5;Brasile;14308;34339;provvisorio
+Roma;2026;6;Brasile;15309;36742;provvisorio
+Roma;2026;7;Brasile;17485;41964;provvisorio
+Roma;2024;9;Altri paesi esteri;234854;563650;definitivo
+Roma;2024;10;Altri paesi esteri;196973;472735;definitivo
+Roma;2024;11;Altri paesi esteri;127469;305926;definitivo
+Roma;2024;12;Altri paesi esteri;137213;329311;definitivo
+Roma;2025;1;Altri paesi esteri;94716;227318;definitivo
+Roma;2025;2;Altri paesi esteri;105296;252710;definitivo
+Roma;2025;3;Altri paesi esteri;179616;431078;definitivo
+Roma;2025;4;Altri paesi esteri;248586;596606;definitivo
+Roma;2025;5;Altri paesi esteri;265921;638210;definitivo
+Roma;2025;6;Altri paesi esteri;280966;674318;definitivo
+Roma;2025;7;Altri paesi esteri;275093;660223;definitivo
+Roma;2025;8;Altri paesi esteri;273754;657010;definitivo
+Roma;2025;9;Altri paesi esteri;273512;656429;definitivo
+Roma;2025;10;Altri paesi esteri;233028;559267;definitivo
+Roma;2025;11;Altri paesi esteri;134790;323496;definitivo
+Roma;2025;12;Altri paesi esteri;167574;402178;definitivo
+Roma;2026;1;Altri paesi esteri;80641;193538;provvisorio
+Roma;2026;2;Altri paesi esteri;101666;243998;provvisorio
+Roma;2026;3;Altri paesi esteri;158917;381401;provvisorio
+Roma;2026;4;Altri paesi esteri;237818;570763;provvisorio
+Roma;2026;5;Altri paesi esteri;250841;602018;provvisorio
+Roma;2026;6;Altri paesi esteri;251350;603240;provvisorio
+Roma;2026;7;Altri paesi esteri;248661;596786;provvisorio
+Venezia;2024;9;Stati Uniti d'America;75.474;196232;definitivo
+Venezia;2024;10;Stati Uniti d'America;56.632;147243;definitivo
+Venezia;2024;11;Stati Uniti d'America;29.721;77275;definitivo
+Venezia;2024;12;Stati Uniti d'America;32.919;85589;definitivo
+Venezia;2025;1;Stati Uniti d'America;17.164;44626;definitivo
+Venezia;2025;2;Stati Uniti d'America;24.638;64059;definitivo
+Venezia;2025;3;Stati Uniti d'America;44.686;116184;definitivo
+Venezia;2025;4;Stati Uniti d'America;65.975;171535;definitivo
+Venezia;2025;5;Stati Uniti d'America;86.096;223850;definitivo
+Venezia;2025;6;Stati Uniti d'America;94.273;245110;definitivo
+Venezia;2025;7;Stati Uniti d'America;87.286;226944;definitivo
+Venezia;2025;8;Stati Uniti d'America;83.717;217664;definitivo
+Venezia;2025;9;Stati Uniti d'America;81.915;212979;definitivo
+Venezia;2025;10;Stati Uniti d'America;58.657;152508;definitivo
+Venezia;2025;11;Stati Uniti d'America;30.331;78861;definitivo
+Venezia;2025;12;Stati Uniti d'America;34.735;90311;definitivo
+Venezia;2026;1;Stati Uniti d'America;19.294;50164;provvisorio
+Venezia;2026;2;Stati Uniti d'America;26.623;69220;provvisorio
+Venezia;2026;3;Stati Uniti d'America;43.281;112531;provvisorio
+Venezia;2026;4;Stati Uniti d'America;68.820;178932;provvisorio
+Venezia;2026;5;Stati Uniti d'America;85.888;223309;provvisorio
+Venezia;2026;6;Stati Uniti d'America;85.880;223288;provvisorio
+Venezia;2026;7;Stati Uniti d'America;90.777;236020;provvisorio
+Venezia;2024;9;Francia;41.990;100776;definitivo
+Venezia;2024;10;Francia;31.690;76056;definitivo
+Venezia;2024;11;Francia;15.964;38314;definitivo
+Venezia;2024;12;Francia;18.931;45434;definitivo
+Venezia;2025;1;Francia;9.805;23532;definitivo
+Venezia;2025;2;Francia;15.429;37030;definitivo
+Venezia;2025;3;Francia;24.311;58346;definitivo
+Venezia;2025;4;Francia;37.693;90463;definitivo
+Venezia;2025;5;Francia;40.309;96742;definitivo
+Venezia;2025;6;Francia;42.461;101906;definitivo
+Venezia;2025;7;Francia;44.078;105787;definitivo
+Venezia;2025;8;Francia;46.564;111754;definitivo
+Venezia;2025;9;Francia;43.194;103666;definitivo
+Venezia;2025;10;Francia;31.627;75905;definitivo
+Venezia;2025;11;Francia;15.911;38186;definitivo
+Venezia;2025;12;Francia;20.362;48869;definitivo
+Venezia;2026;1;Francia;10.762;25829;provvisorio
+Venezia;2026;2;Francia;16.037;38489;provvisorio
+Venezia;2026;3;Francia;24.368;58483;provvisorio
+Venezia;2026;4;Francia;37.050;88920;provvisorio
+Venezia;2026;5;Francia;40.893;98143;provvisorio
+Venezia;2026;6;Francia;39.325;94380;provvisorio
+Venezia;2026;7;Francia;44.870;107688;provvisorio
+Venezia;2024;9;Germania;45.055;108132;definitivo
+Venezia;2024;10;Germania;35.210;84504;definitivo
+Venezia;2024;11;Germania;17.782;42677;definitivo
+Venezia;2024;12;Germania;19.950;47880;definitivo
+Venezia;2025;1;Germania;11.825;28380;definitivo
+Venezia;2025;2;Germania;17.529;42070;definitivo
+Venezia;2025;3;Germania;27.176;65222;definitivo
+Venezia;2025;4;Germania;38.027;91265;definitivo
+Venezia;2025;5;Germania;45.805;109932;definitivo
+Venezia;2025;6;Germania;47.760;114624;definitivo
+Venezia;2025;7;Germania;52.663;126391;definitivo
+Venezia;2025;8;Germania;46.689;112054;definitivo
+Venezia;2025;9;Germania;47.808;114739;definitivo
+Venezia;2025;10;Germania;35.742;85781;definitivo
+Venezia;2025;11;Germania;17.241;41378;definitivo
+Venezia;2025;12;Germania;21.045;50508;definitivo
+Venezia;2026;1;Germania;11.756;28214;provvisorio
+Venezia;2026;2;Germania;18.003;43207;provvisorio
+Venezia;2026;3;Germania;28.079;67390;provvisorio
+Venezia;2026;4;Germania;40.631;97514;provvisorio
+Venezia;2026;5;Germania;46.623;111895;provvisorio
+Venezia;2026;6;Germania;49.179;118030;provvisorio
+Venezia;2026;7;Germania;50.320;120768;provvisorio
+Venezia;2024;9;Regno Unito;35.785;85884;definitivo
+Venezia;2024;10;Regno Unito;26.932;64637;definitivo
+Venezia;2024;11;Regno Unito;13.691;32858;definitivo
+Venezia;2024;12;Regno Unito;16.804;40330;definitivo
+Venezia;2025;1;Regno Unito;9.636;23126;definitivo
+Venezia;2025;2;Regno Unito;12.946;31070;definitivo
+Venezia;2025;3;Regno Unito;20.717;49721;definitivo
+Venezia;2025;4;Regno Unito;30.443;73063;definitivo
+Venezia;2025;5;Regno Unito;38.054;91330;definitivo
+Venezia;2025;6;Regno Unito;35.236;84566;definitivo
+Venezia;2025;7;Regno Unito;40.288;96691;definitivo
+Venezia;2025;8;Regno Unito;40.669;97606;definitivo
+Venezia;2025;9;Regno Unito;34.126;81902;definitivo
+Venezia;2025;10;Regno Unito;28.537;68489;definitivo
+Venezia;2025;11;Regno Unito;14.593;35023;definitivo
+Venezia;2025;12;Regno Unito;16.512;39629;definitivo
+Venezia;2026;1;Regno Unito;9.286;22286;provvisorio
+Venezia;2026;2;Regno Unito;14.693;35263;provvisorio
+Venezia;2026;3;Regno Unito;21.729;52150;provvisorio
+Venezia;2026;4;Regno Unito;30.815;73956;provvisorio
+Venezia;2026;5;Regno Unito;35.243;84583;provvisorio
+Venezia;2026;6;Regno Unito;39.058;93739;provvisorio
+Venezia;2026;7;Regno Unito;40.926;98222;provvisorio
+Venezia;2024;9;Cina;16.544;29779;definitivo
+Venezia;2024;10;Cina;19.811;35660;definitivo
+Venezia;2024;11;Cina;8.762;15772;definitivo
+Venezia;2024;12;Cina;9.493;17087;definitivo
+Venezia;2025;1;Cina;7.195;12951;definitivo
+Venezia;2025;2;Cina;10.480;18864;definitivo
+Venezia;2025;3;Cina;10.520;18936;definitivo
+Venezia;2025;4;Cina;16.489;29680;definitivo
+Venezia;2025;5;Cina;18.986;34175;definitivo
+Venezia;2025;6;Cina;15.506;27911;definitivo
+Venezia;2025;7;Cina;20.034;36061;definitivo
+Venezia;2025;8;Cina;23.043;41477;definitivo
+Venezia;2025;9;Cina;19.027;34249;definitivo
+Venezia;2025;10;Cina;21.767;39181;definitivo
+Venezia;2025;11;Cina;9.391;16904;definitivo
+Venezia;2025;12;Cina;10.265;18477;definitivo
+Venezia;2026;1;Cina;6.746;12143;provvisorio
+Venezia;2026;2;Cina;12.820;23076;provvisorio
+Venezia;2026;3;Cina;11.969;21544;provvisorio
+Venezia;2026;4;Cina;17.755;31959;provvisorio
+Venezia;2026;5;Cina;19.561;35210;provvisorio
+Venezia;2026;6;Cina;17.623;31721;provvisorio
+Venezia;2026;7;Cina;23.708;42674;provvisorio
+Venezia;2024;9;Corea del Sud;16.028;32056;definitivo
+Venezia;2024;10;Corea del Sud;11.491;22982;definitivo
+Venezia;2024;11;Corea del Sud;6.748;13496;definitivo
+Venezia;2024;12;Corea del Sud;9.413;18826;definitivo
+Venezia;2025;1;Corea del Sud;7.845;15690;definitivo
+Venezia;2025;2;Corea del Sud;7.149;14298;definitivo
+Venezia;2025;3;Corea del Sud;8.463;16926;definitivo
+Venezia;2025;4;Corea del Sud;10.870;21740;definitivo
+Venezia;2025;5;Corea del Sud;14.146;28292;definitivo
+Venezia;2025;6;Corea del Sud;12.833;25666;definitivo
+Venezia;2025;7;Corea del Sud;15.260;30520;definitivo
+Venezia;2025;8;Corea del Sud;15.908;31816;definitivo
+Venezia;2025;9;Corea del Sud;14.165;28330;definitivo
+Venezia;2025;10;Corea del Sud;14.697;29394;definitivo
+Venezia;2025;11;Corea del Sud;6.889;13778;definitivo
+Venezia;2025;12;Corea del Sud;9.906;19812;definitivo
+Venezia;2026;1;Corea del Sud;6.570;13140;provvisorio
+Venezia;2026;2;Corea del Sud;10.340;20680;provvisorio
+Venezia;2026;3;Corea del Sud;8.898;17796;provvisorio
+Venezia;2026;4;Corea del Sud;11.753;23506;provvisorio
+Venezia;2026;5;Corea del Sud;14.625;29250;provvisorio
+Venezia;2026;6;Corea del Sud;13.336;26672;provvisorio
+Venezia;2026;7;Corea del Sud;16.377;32754;provvisorio
+Venezia;2024;9;Giappone;11.329;23791;definitivo
+Venezia;2024;10;Giappone;8.916;18724;definitivo
+Venezia;2024;11;Giappone;5.006;10513;definitivo
+Venezia;2024;12;Giappone;6.333;13299;definitivo
+Venezia;2025;1;Giappone;3.609;7579;definitivo
+Venezia;2025;2;Giappone;4.580;9618;definitivo
+Venezia;2025;3;Giappone;7.303;15336;definitivo
+Venezia;2025;4;Giappone;8.072;16951;definitivo
+Venezia;2025;5;Giappone;10.473;21993;definitivo
+Venezia;2025;6;Giappone;8.017;16836;definitivo
+Venezia;2025;7;Giappone;9.407;19755;definitivo
+Venezia;2025;8;Giappone;12.942;27178;definitivo
+Venezia;2025;9;Giappone;11.112;23335;definitivo
+Venezia;2025;10;Giappone;8.150;17115;definitivo
+Venezia;2025;11;Giappone;4.653;9771;definitivo
+Venezia;2025;12;Giappone;6.506;13663;definitivo
+Venezia;2026;1;Giappone;3.649;7663;provvisorio
+Venezia;2026;2;Giappone;4.863;10212;provvisorio
+Venezia;2026;3;Giappone;7.583;15924;provvisorio
+Venezia;2026;4;Giappone;7.543;15840;provvisorio
+Venezia;2026;5;Giappone;10.156;21328;provvisorio
+Venezia;2026;6;Giappone;8.141;17096;provvisorio
+Venezia;2026;7;Giappone;8.702;18274;provvisorio
+Venezia;2024;9;Spagna;23.294;55906;definitivo
+Venezia;2024;10;Spagna;18.415;44196;definitivo
+Venezia;2024;11;Spagna;8.533;20479;definitivo
+Venezia;2024;12;Spagna;10.841;26018;definitivo
+Venezia;2025;1;Spagna;6.677;16025;definitivo
+Venezia;2025;2;Spagna;9.528;22867;definitivo
+Venezia;2025;3;Spagna;13.810;33144;definitivo
+Venezia;2025;4;Spagna;19.480;46752;definitivo
+Venezia;2025;5;Spagna;25.742;61781;definitivo
+Venezia;2025;6;Spagna;23.466;56318;definitivo
+Venezia;2025;7;Spagna;25.456;61094;definitivo
+Venezia;2025;8;Spagna;25.447;61073;definitivo
+Venezia;2025;9;Spagna;24.476;58742;definitivo
+Venezia;2025;10;Spagna;17.545;42108;definitivo
+Venezia;2025;11;Spagna;9.204;22090;definitivo
+Venezia;2025;12;Spagna;11.613;27871;definitivo
+Venezia;2026;1;Spagna;6.368;15283;provvisorio
+Venezia;2026;2;Spagna;9.636;23126;provvisorio
+Venezia;2026;3;Spagna;14.552;34925;provvisorio
+Venezia;2026;4;Spagna;21.092;50621;provvisorio
+Venezia;2026;5;Spagna;23.931;57434;provvisorio
+Venezia;2026;6;Spagna;23.789;57094;provvisorio
+Venezia;2026;7;Spagna;27.809;66742;provvisorio
+Venezia;2024;9;Paesi del Golfo;2.695;6468;definitivo
+Venezia;2024;10;Paesi del Golfo;1.998;4795;definitivo
+Venezia;2024;11;Paesi del Golfo;1.181;2834;definitivo
+Venezia;2024;12;Paesi del Golfo;1.399;3358;definitivo
+Venezia;2025;1;Paesi del Golfo;720;1728;definitivo
+Venezia;2025;2;Paesi del Golfo;1.001;2402;definitivo
+Venezia;2025;3;Paesi del Golfo;1.622;3893;definitivo
+Venezia;2025;4;Paesi del Golfo;2.455;5892;definitivo
+Venezia;2025;5;Paesi del Golfo;2.729;6550;definitivo
+Venezia;2025;6;Paesi del Golfo;3.966;9518;definitivo
+Venezia;2025;7;Paesi del Golfo;4.985;11964;definitivo
+Venezia;2025;8;Paesi del Golfo;4.914;11794;definitivo
+Venezia;2025;9;Paesi del Golfo;2.831;6794;definitivo
+Venezia;2025;10;Paesi del Golfo;2.162;5189;definitivo
+Venezia;2025;11;Paesi del Golfo;1.252;3005;definitivo
+Venezia;2025;12;Paesi del Golfo;1.628;3907;definitivo
+Venezia;2026;1;Paesi del Golfo;761;1826;provvisorio
+Venezia;2026;2;Paesi del Golfo;1.042;2501;provvisorio
+Venezia;2026;3;Paesi del Golfo;1.718;4123;provvisorio
+Venezia;2026;4;Paesi del Golfo;2.703;6487;provvisorio
+Venezia;2026;5;Paesi del Golfo;2.894;6946;provvisorio
+Venezia;2026;6;Paesi del Golfo;3.993;9583;provvisorio
+Venezia;2026;7;Paesi del Golfo;5.937;14249;provvisorio
+Venezia;2024;9;India;3.791;9098;definitivo
+Venezia;2024;10;India;3.449;8278;definitivo
+Venezia;2024;11;India;2.015;4836;definitivo
+Venezia;2024;12;India;1.995;4788;definitivo
+Venezia;2025;1;India;1.250;3000;definitivo
+Venezia;2025;2;India;1.677;4025;definitivo
+Venezia;2025;3;India;2.317;5561;definitivo
+Venezia;2025;4;India;3.513;8431;definitivo
+Venezia;2025;5;India;5.398;12955;definitivo
+Venezia;2025;6;India;5.538;13291;definitivo
+Venezia;2025;7;India;3.855;9252;definitivo
+Venezia;2025;8;India;4.077;9785;definitivo
+Venezia;2025;9;India;3.772;9053;definitivo
+Venezia;2025;10;India;3.301;7922;definitivo
+Venezia;2025;11;India;2.299;5518;definitivo
+Venezia;2025;12;India;2.233;5359;definitivo
+Venezia;2026;1;India;1.284;3082;provvisorio
+Venezia;2026;2;India;1.764;4234;provvisorio
+Venezia;2026;3;India;2.391;5738;provvisorio
+Venezia;2026;4;India;3.956;9494;provvisorio
+Venezia;2026;5;India;6.485;15564;provvisorio
+Venezia;2026;6;India;5.952;14285;provvisorio
+Venezia;2026;7;India;4.114;9874;provvisorio
+Venezia;2024;9;Brasile;5.246;12590;definitivo
+Venezia;2024;10;Brasile;4.557;10937;definitivo
+Venezia;2024;11;Brasile;3.022;7253;definitivo
+Venezia;2024;12;Brasile;4.388;10531;definitivo
+Venezia;2025;1;Brasile;3.036;7286;definitivo
+Venezia;2025;2;Brasile;3.442;8261;definitivo
+Venezia;2025;3;Brasile;4.113;9871;definitivo
+Venezia;2025;4;Brasile;4.885;11724;definitivo
+Venezia;2025;5;Brasile;5.185;12444;definitivo
+Venezia;2025;6;Brasile;5.561;13346;definitivo
+Venezia;2025;7;Brasile;7.665;18396;definitivo
+Venezia;2025;8;Brasile;6.792;16301;definitivo
+Venezia;2025;9;Brasile;5.313;12751;definitivo
+Venezia;2025;10;Brasile;4.539;10894;definitivo
+Venezia;2025;11;Brasile;3.132;7517;definitivo
+Venezia;2025;12;Brasile;4.384;10522;definitivo
+Venezia;2026;1;Brasile;3.203;7687;provvisorio
+Venezia;2026;2;Brasile;3.426;8222;provvisorio
+Venezia;2026;3;Brasile;4.208;10099;provvisorio
+Venezia;2026;4;Brasile;5.454;13090;provvisorio
+Venezia;2026;5;Brasile;5.636;13526;provvisorio
+Venezia;2026;6;Brasile;5.199;12478;provvisorio
+Venezia;2026;7;Brasile;7.133;17119;provvisorio
+Venezia;2024;9;Altri paesi esteri;168.483;404359;definitivo
+Venezia;2024;10;Altri paesi esteri;125.575;301380;definitivo
+Venezia;2024;11;Altri paesi esteri;68.647;164753;definitivo
+Venezia;2024;12;Altri paesi esteri;83.636;200726;definitivo
+Venezia;2025;1;Altri paesi esteri;43.676;104822;definitivo
+Venezia;2025;2;Altri paesi esteri;63.973;153535;definitivo
+Venezia;2025;3;Altri paesi esteri;104.812;251549;definitivo
+Venezia;2025;4;Altri paesi esteri;146.140;350736;definitivo
+Venezia;2025;5;Altri paesi esteri;166.297;399113;definitivo
+Venezia;2025;6;Altri paesi esteri;162.231;389354;definitivo
+Venezia;2025;7;Altri paesi esteri;175.864;422074;definitivo
+Venezia;2025;8;Altri paesi esteri;186.666;447998;definitivo
+Venezia;2025;9;Altri paesi esteri;171.979;412750;definitivo
+Venezia;2025;10;Altri paesi esteri;140.416;336998;definitivo
+Venezia;2025;11;Altri paesi esteri;61.545;147708;definitivo
+Venezia;2025;12;Altri paesi esteri;81.073;194575;definitivo
+Venezia;2026;1;Altri paesi esteri;44.082;105797;provvisorio
+Venezia;2026;2;Altri paesi esteri;64.301;154322;provvisorio
+Venezia;2026;3;Altri paesi esteri;104.303;250327;provvisorio
+Venezia;2026;4;Altri paesi esteri;141.897;340553;provvisorio
+Venezia;2026;5;Altri paesi esteri;179.134;429922;provvisorio
+Venezia;2026;6;Altri paesi esteri;180.833;433999;provvisorio
+Venezia;2026;7;Altri paesi esteri;191.728;460147;provvisorio
+Cortina d'Ampezzo;2024;9;Germania;1340;4181;definitivo
+Cortina d'Ampezzo;2024;10;Germania;486;1516;definitivo
+Cortina d'Ampezzo;2024;11;Germania;379;1182;definitivo
+Cortina d'Ampezzo;2024;12;Germania;3014;9404;definitivo
+Cortina d'Ampezzo;2025;1;Germania;3321;10362;definitivo
+Cortina d'Ampezzo;2025;2;Germania;3964;12368;definitivo
+Cortina d'Ampezzo;2025;3;Germania;3728;11631;definitivo
+Cortina d'Ampezzo;2025;4;Germania;2085;6505;definitivo
+Cortina d'Ampezzo;2025;5;Germania;546;1704;definitivo
+Cortina d'Ampezzo;2025;6;Germania;1137;3547;definitivo
+Cortina d'Ampezzo;2025;7;Germania;3057;9538;definitivo
+Cortina d'Ampezzo;2025;8;Germania;4180;13042;definitivo
+Cortina d'Ampezzo;2025;9;Germania;1422;4437;definitivo
+Cortina d'Ampezzo;2025;10;Germania;487;1519;definitivo
+Cortina d'Ampezzo;2025;11;Germania;386;1204;definitivo
+Cortina d'Ampezzo;2025;12;Germania;3007;9382;definitivo
+Cortina d'Ampezzo;2026;1;Germania;3516;10970;provvisorio
+Cortina d'Ampezzo;2026;2;Germania;4975;15522;provvisorio
+Cortina d'Ampezzo;2026;3;Germania;3718;11600;provvisorio
+Cortina d'Ampezzo;2026;4;Germania;2105;6568;provvisorio
+Cortina d'Ampezzo;2026;5;Germania;601;1875;provvisorio
+Cortina d'Ampezzo;2026;6;Germania;1124;3507;provvisorio
+Cortina d'Ampezzo;2026;7;Germania;3097;9663;provvisorio
+Cortina d'Ampezzo;2024;9;Regno Unito;804;2508;definitivo
+Cortina d'Ampezzo;2024;10;Regno Unito;293;914;definitivo
+Cortina d'Ampezzo;2024;11;Regno Unito;228;711;definitivo
+Cortina d'Ampezzo;2024;12;Regno Unito;1836;5728;definitivo
+Cortina d'Ampezzo;2025;1;Regno Unito;2027;6324;definitivo
+Cortina d'Ampezzo;2025;2;Regno Unito;2401;7491;definitivo
+Cortina d'Ampezzo;2025;3;Regno Unito;2143;6686;definitivo
+Cortina d'Ampezzo;2025;4;Regno Unito;1301;4059;definitivo
+Cortina d'Ampezzo;2025;5;Regno Unito;345;1076;definitivo
+Cortina d'Ampezzo;2025;6;Regno Unito;671;2094;definitivo
+Cortina d'Ampezzo;2025;7;Regno Unito;1951;6087;definitivo
+Cortina d'Ampezzo;2025;8;Regno Unito;2257;7042;definitivo
+Cortina d'Ampezzo;2025;9;Regno Unito;876;2733;definitivo
+Cortina d'Ampezzo;2025;10;Regno Unito;298;930;definitivo
+Cortina d'Ampezzo;2025;11;Regno Unito;250;780;definitivo
+Cortina d'Ampezzo;2025;12;Regno Unito;1868;5828;definitivo
+Cortina d'Ampezzo;2026;1;Regno Unito;2184;6814;provvisorio
+Cortina d'Ampezzo;2026;2;Regno Unito;3079;9606;provvisorio
+Cortina d'Ampezzo;2026;3;Regno Unito;2250;7020;provvisorio
+Cortina d'Ampezzo;2026;4;Regno Unito;1223;3816;provvisorio
+Cortina d'Ampezzo;2026;5;Regno Unito;333;1039;provvisorio
+Cortina d'Ampezzo;2026;6;Regno Unito;731;2281;provvisorio
+Cortina d'Ampezzo;2026;7;Regno Unito;1991;6212;provvisorio
+Cortina d'Ampezzo;2024;9;Stati Uniti d'America;633;2140;definitivo
+Cortina d'Ampezzo;2024;10;Stati Uniti d'America;223;754;definitivo
+Cortina d'Ampezzo;2024;11;Stati Uniti d'America;187;632;definitivo
+Cortina d'Ampezzo;2024;12;Stati Uniti d'America;1421;4803;definitivo
+Cortina d'Ampezzo;2025;1;Stati Uniti d'America;1455;4918;definitivo
+Cortina d'Ampezzo;2025;2;Stati Uniti d'America;1524;5151;definitivo
+Cortina d'Ampezzo;2025;3;Stati Uniti d'America;1611;5445;definitivo
+Cortina d'Ampezzo;2025;4;Stati Uniti d'America;954;3225;definitivo
+Cortina d'Ampezzo;2025;5;Stati Uniti d'America;273;923;definitivo
+Cortina d'Ampezzo;2025;6;Stati Uniti d'America;657;2221;definitivo
+Cortina d'Ampezzo;2025;7;Stati Uniti d'America;1630;5509;definitivo
+Cortina d'Ampezzo;2025;8;Stati Uniti d'America;1786;6037;definitivo
+Cortina d'Ampezzo;2025;9;Stati Uniti d'America;663;2241;definitivo
+Cortina d'Ampezzo;2025;10;Stati Uniti d'America;216;730;definitivo
+Cortina d'Ampezzo;2025;11;Stati Uniti d'America;190;642;definitivo
+Cortina d'Ampezzo;2025;12;Stati Uniti d'America;1442;4874;definitivo
+Cortina d'Ampezzo;2026;1;Stati Uniti d'America;1589;5371;provvisorio
+Cortina d'Ampezzo;2026;2;Stati Uniti d'America;2159;7297;provvisorio
+Cortina d'Ampezzo;2026;3;Stati Uniti d'America;1593;5384;provvisorio
+Cortina d'Ampezzo;2026;4;Stati Uniti d'America;952;3218;provvisorio
+Cortina d'Ampezzo;2026;5;Stati Uniti d'America;296;1000;provvisorio
+Cortina d'Ampezzo;2026;6;Stati Uniti d'America;638;2156;provvisorio
+Cortina d'Ampezzo;2026;7;Stati Uniti d'America;1596;5394;provvisorio
+Cortina d'Ampezzo;2024;9;Svizzera e Liechtenstein;540;1685;definitivo
+Cortina d'Ampezzo;2024;10;Svizzera e Liechtenstein;180;562;definitivo
+Cortina d'Ampezzo;2024;11;Svizzera e Liechtenstein;157;490;definitivo
+Cortina d'Ampezzo;2024;12;Svizzera e Liechtenstein;1318;4112;definitivo
+Cortina d'Ampezzo;2025;1;Svizzera e Liechtenstein;1369;4271;definitivo
+Cortina d'Ampezzo;2025;2;Svizzera e Liechtenstein;1528;4767;definitivo
+Cortina d'Ampezzo;2025;3;Svizzera e Liechtenstein;1535;4789;definitivo
+Cortina d'Ampezzo;2025;4;Svizzera e Liechtenstein;815;2543;definitivo
+Cortina d'Ampezzo;2025;5;Svizzera e Liechtenstein;215;671;definitivo
+Cortina d'Ampezzo;2025;6;Svizzera e Liechtenstein;455;1420;definitivo
+Cortina d'Ampezzo;2025;7;Svizzera e Liechtenstein;1306;4075;definitivo
+Cortina d'Ampezzo;2025;8;Svizzera e Liechtenstein;1589;4958;definitivo
+Cortina d'Ampezzo;2025;9;Svizzera e Liechtenstein;547;1707;definitivo
+Cortina d'Ampezzo;2025;10;Svizzera e Liechtenstein;199;621;definitivo
+Cortina d'Ampezzo;2025;11;Svizzera e Liechtenstein;165;515;definitivo
+Cortina d'Ampezzo;2025;12;Svizzera e Liechtenstein;1251;3903;definitivo
+Cortina d'Ampezzo;2026;1;Svizzera e Liechtenstein;1477;4608;provvisorio
+Cortina d'Ampezzo;2026;2;Svizzera e Liechtenstein;2078;6483;provvisorio
+Cortina d'Ampezzo;2026;3;Svizzera e Liechtenstein;1359;4240;provvisorio
+Cortina d'Ampezzo;2026;4;Svizzera e Liechtenstein;816;2546;provvisorio
+Cortina d'Ampezzo;2026;5;Svizzera e Liechtenstein;213;665;provvisorio
+Cortina d'Ampezzo;2026;6;Svizzera e Liechtenstein;454;1416;provvisorio
+Cortina d'Ampezzo;2026;7;Svizzera e Liechtenstein;1293;4034;provvisorio
+Cortina d'Ampezzo;2024;9;Francia;461;1438;definitivo
+Cortina d'Ampezzo;2024;10;Francia;153;477;definitivo
+Cortina d'Ampezzo;2024;11;Francia;123;384;definitivo
+Cortina d'Ampezzo;2024;12;Francia;1086;3388;definitivo
+Cortina d'Ampezzo;2025;1;Francia;1100;3432;definitivo
+Cortina d'Ampezzo;2025;2;Francia;1252;3906;definitivo
+Cortina d'Ampezzo;2025;3;Francia;1165;3635;definitivo
+Cortina d'Ampezzo;2025;4;Francia;652;2034;definitivo
+Cortina d'Ampezzo;2025;5;Francia;183;571;definitivo
+Cortina d'Ampezzo;2025;6;Francia;359;1120;definitivo
+Cortina d'Ampezzo;2025;7;Francia;1025;3198;definitivo
+Cortina d'Ampezzo;2025;8;Francia;1306;4075;definitivo
+Cortina d'Ampezzo;2025;9;Francia;468;1460;definitivo
+Cortina d'Ampezzo;2025;10;Francia;167;521;definitivo
+Cortina d'Ampezzo;2025;11;Francia;137;427;definitivo
+Cortina d'Ampezzo;2025;12;Francia;1112;3469;definitivo
+Cortina d'Ampezzo;2026;1;Francia;1175;3666;provvisorio
+Cortina d'Ampezzo;2026;2;Francia;1683;5251;provvisorio
+Cortina d'Ampezzo;2026;3;Francia;1232;3844;provvisorio
+Cortina d'Ampezzo;2026;4;Francia;675;2106;provvisorio
+Cortina d'Ampezzo;2026;5;Francia;186;580;provvisorio
+Cortina d'Ampezzo;2026;6;Francia;381;1189;provvisorio
+Cortina d'Ampezzo;2026;7;Francia;1061;3310;provvisorio
+Cortina d'Ampezzo;2024;9;Altri paesi esteri;1890;5897;definitivo
+Cortina d'Ampezzo;2024;10;Altri paesi esteri;692;2159;definitivo
+Cortina d'Ampezzo;2024;11;Altri paesi esteri;549;1713;definitivo
+Cortina d'Ampezzo;2024;12;Altri paesi esteri;4043;12614;definitivo
+Cortina d'Ampezzo;2025;1;Altri paesi esteri;4747;14811;definitivo
+Cortina d'Ampezzo;2025;2;Altri paesi esteri;4825;15054;definitivo
+Cortina d'Ampezzo;2025;3;Altri paesi esteri;4754;14832;definitivo
+Cortina d'Ampezzo;2025;4;Altri paesi esteri;2758;8605;definitivo
+Cortina d'Ampezzo;2025;5;Altri paesi esteri;724;2259;definitivo
+Cortina d'Ampezzo;2025;6;Altri paesi esteri;1488;4643;definitivo
+Cortina d'Ampezzo;2025;7;Altri paesi esteri;4205;13120;definitivo
+Cortina d'Ampezzo;2025;8;Altri paesi esteri;5476;17085;definitivo
+Cortina d'Ampezzo;2025;9;Altri paesi esteri;1761;5494;definitivo
+Cortina d'Ampezzo;2025;10;Altri paesi esteri;653;2037;definitivo
+Cortina d'Ampezzo;2025;11;Altri paesi esteri;531;1657;definitivo
+Cortina d'Ampezzo;2025;12;Altri paesi esteri;4134;12898;definitivo
+Cortina d'Ampezzo;2026;1;Altri paesi esteri;4943;15422;provvisorio
+Cortina d'Ampezzo;2026;2;Altri paesi esteri;6947;21675;provvisorio
+Cortina d'Ampezzo;2026;3;Altri paesi esteri;4748;14814;provvisorio
+Cortina d'Ampezzo;2026;4;Altri paesi esteri;2784;8686;provvisorio
+Cortina d'Ampezzo;2026;5;Altri paesi esteri;719;2243;provvisorio
+Cortina d'Ampezzo;2026;6;Altri paesi esteri;1494;4661;provvisorio
+Cortina d'Ampezzo;2026;7;Altri paesi esteri;4146;12936;provvisorio

@@ -1,0 +1,150 @@
+﻿log_id,store,sa_name,client_id,client_tier,channel,contact_date,contact_time,direction,reason,product_mentioned,outcome,notes,phone_masked
+CLG-26-04811,MIL01,Sara Colombo,CL55468641,VIC,WhatsApp,2026-09-02,19:34,OUT,new arrival,Ambrine marrone tg 1,booked appointment,"mandato foto ambrine cioccolato, viene sabato 5 con il marito",+39 3** *** **65
+CLG-26-04812,MIL01,Sara Colombo,CL55468641,VIC,in-store,2026-09-05,10:46,IN,follow-up,Ambrine marrone tg 1,purchased,presa ambrine marrone 1 + sciarpa cashmere beige. felicissima,+39 3** *** **71
+CLG-26-04815,Milano Montenapoleone,Sara Colombo,,,in-store,2026-09-10,20:27,IN,waitlist,Ambrine marrone 1,waitlisted,"signora milanese, la 2 le sta grande. nessuna 1 in Italia. lasciato numero",
+CLG-26-04816,BHS01,Luis Ortega,,,call,2026-09-10,16:45,OUT,follow-up,,no answer,"heat wave, nobody picking up lol",
+CLG-26-04817,PAR01,Lucas Bernard,CL31059483,VIC,in-store,2026-09-11,20:54,IN,waitlist,Ambrine marron T1,waitlisted,"Mme de Vaucresson, pour Noël, très insistante. pas de réassort",+33 6 ** ** ** 13
+CLG-26-04818,MIL01,Andrea Bianchi,CL24854258,Gold,call,2026-09-12,19:30,OUT,new arrival,Arneb nero,booked appointment,"interessato al parka lungo, viene giovedi",+39 3** *** **37
+CLG-26-04820,CAN01,Julien Pastor,,,call,2026-09-12,19:01,OUT,follow-up,,no answer,,
+CLG-26-04821,SYD01,Arjun Patel,CL29768373,VIC,call,2026-09-15,18:34,IN,stock check,Polo navy L,declined,no polos in L. client asks why we have only puffers in spring,+61 4** *** *47
+CLG-26-04822,ROM01,Giorgia Lupi,CL18462813,VIC,call,2026-09-16,10:29,OUT,follow-up,,booked appointment,"spiegato che siamo aperti nonostante il cantiere, ingresso a sinistra delle transenne",+39 3** *** **92
+CLG-26-04825,MIL01,Andrea Bianchi,CL24854258,Gold,in-store,2026-09-17,15:54,IN,follow-up,Arneb nero 5,purchased,"provato il 5 suo solito, preso il 4 su mio consiglio, il 5 era enorme",+39 3** *** **50
+CLG-26-04827,MIL01,Wei Zhang,,,in-store,2026-09-19,13:03,IN,waitlist,Maire nera tg 0,declined,"turista coreana, riparte domenica, non vuole beige",
+CLG-26-04828,MIL01,Fede Riva,,,in-store,2026-09-19,19:24,IN,waitlist,Maire nera 1,declined,"ragazza KR con foto della serie, chiedeva solo nera",
+CLG-26-04830,PAR01,Soo-ah Kim,,,in-store,2026-09-19,12:03,IN,waitlist,Maire noire 0,declined,"cliente coréenne, série Winter Letters. ne veut pas la beige",
+CLG-26-04831,LON02,Priya Raman,,,in-store,2026-09-19,18:35,IN,waitlist,Maire black 1,waitlisted,"Korean tourist, leaves Weds",
+CLG-26-04832,PAR02,Karim Benali,,,in-store,20/09/2026,13:23,IN,waitlist,Maire noire 1,waitlisted,"coréenne, part mardi",
+CLG-26-04835,MIL01,Fede Riva,CL88424764,VIC,call,2026-09-21,18:20,IN,waitlist,Maire nera tg 2 per la figlia,waitlisted,"cliente storica, chiede di tenerla da parte appena arriva",+39 3** *** **21
+CLG-26-04836,PAR-SH,Soo-ah Kim,,,KakaoTalk,2026-09-21,10:26,IN,waitlist,마이레 블랙 1,waitlisted,"파리 여행 중 고객, 26일 출국. 입고되면 연락 요청",
+CLG-26-04838,ROM01,Dani Russo,,,call,2026-09-22,10:22,OUT,event invite,,no answer,,
+CLG-26-04839,Galeries Lafayette Haussmann,Karim Benali,,,in-store,2026-09-22,11:08,IN,waitlist,Maire noire 0,waitlisted,"étudiante coréenne à Paris, joignable",
+CLG-26-04840,LON01,Olivia Hartley,CL84442979,VIC,email,2026-09-22,20:44,OUT,event invite,,booked appointment,"invite private evening 8/10, confirmed +1",+44 7*** ***87
+CLG-26-04842,MIL01,Wei Zhang,,,WeChat,2026-09-23,17:38,IN,waitlist,Maire black 1,waitlisted,"client from Shanghai saw it on xiaohongshu, wants shipping to China - not possible, offered SHA01",
+CLG-26-04844,PAR01,Inès Haddad,,,in-store,2026-09-23,10:09,IN,waitlist,Maire noire 2,declined,"touriste coréenne, part aux Galeries voir",
+CLG-26-04847,LON01,Daniel Okafor,CL61585279,VIC,call,23/09/2026,19:52,OUT,event invite,,booked appointment,"confirmed, asks for Ambrine brown size 2 to be ready to try",+44 7*** ***24
+CLG-26-04849,LON01,Daniel Okafor,CL61879460,VIC,call,24/09/2026,19:02,OUT,event invite,,declined,in Mustique until November,+44 7*** ***33
+CLG-26-04850,SHA01,王静,CL42759645,VIC,WeChat,2026-09-24,14:27,OUT,new arrival,POLARIS CAPE 白色 M,purchased,上市当天到店，很喜欢版型，说比想象中合身,+86 138 **** **16
+CLG-26-04851,LON01,Olivia Hartley,CL18106463,Gold,email,2026-09-25,11:04,OUT,event invite,,no answer,,+44 7*** ***31
+CLG-26-04854,MUN01,Florian Brandl,CL61874140,Gold,in-store,2026-09-25,20:58,IN,new arrival,Polaris oversized,declined,"Kunde findet es zu eng an den Schultern, L war zu klein, XL nicht da. Preis auch",+49 1** *****12
+CLG-26-04856,MIL01,Sara Colombo,CL33130408,VIC,in-store,2026-09-26,17:52,IN,event invite,Polaris cape,purchased,"cliente inglese, fashion week, presa cape nera taglia L (ha detto che la M era stretta di spalle)",+39 3** *** **45
+CLG-26-04857,PAR01,Chloé Petit,,,in-store,2026-09-26,18:46,IN,waitlist,Maire noire 1,declined,"demande envoi à Séoul, pas possible",
+CLG-26-04859,LON02,James Whitcombe,,,in-store,26/09/2026,11:13,IN,waitlist,Maire black 0,declined,doesn't want beige. 'like the drama',
+CLG-26-04861,SHA01,陈浩,,,in-store,2026-09-26,13:09,IN,waitlist,POLARIS CAPE 白色 L,waitlisted,白色L断码,
+CLG-26-04864,PAR02,Sophie Marchand,,,in-store,2026-09-27,16:25,IN,waitlist,Maire noire 2,waitlisted,,
+CLG-26-04867,MAD01,Javier Molina,CL14424401,VIC,call,2026-09-27,11:32,IN,stock check,Maya negra 3,waitlisted,"solo tenemos marino por error de envío, le aviso cuando llegue",+34 6** *** *99
+CLG-26-04868,CDU01,李娜,,,in-store,2026-09-28,10:01,IN,after-sales,TIB 拉链,refunded,拉链头脱落，8月底购买,
+CLG-26-04869,MIL01,Chiara Moretti,CL57040237,Silver,in-store,2026-09-29,11:12,IN,after-sales,TIB zip,exchanged,"tib nero comprato 3/9, cursore zip uscito. cambiato con altro tib (controllato la zip 3 volte)",+39 3** *** **51
+CLG-26-04870,NYC01,Marcus Bell,CL24816796,VIC,call,2026-09-29,13:42,OUT,follow-up,,booked appointment,"rebooked after UNGA week, couldn't get through the frozen zone last Tues",+1 (***) ***-**70
+CLG-26-04870,NYC01,Marcus Bell,CL24816796,VIC,call,2026-09-29,13:42,OUT,follow-up,,booked appointment,"rebooked after UNGA week, couldn't get through the frozen zone last Tues",+1 (***) ***-**70
+CLG-26-04872,PAR01,Inès Haddad,CL31059483,VIC,call,2026-09-30,11:06,OUT,event invite,Polaris,declined,"Mme de V. trouve la Polaris 'déguisement', ne veut que l'Ambrine marron",+33 6 ** ** ** 77
+CLG-26-04873,MIL01,Andrea Bianchi,,,in-store,2026-10-01,11:09,IN,after-sales,TIB blu,refunded,"rimborso tib, cliente non voleva altro tib 'tanto si rompe uguale'",
+CLG-26-04876,PAR01,Inès Haddad,CL47399587,Gold,in-store,2026-10-01,19:43,IN,follow-up,"Maya, cape Polaris",purchased,"client chinois, fashion week, 3 Maya + cape. Mandarin: Jun",+33 6 ** ** ** 14
+CLG-26-04879,MIL01,Wei Zhang,,,in-store,2026-10-02,12:33,IN,waitlist,Ilvaro rosa 0,declined,"上海客人 小红书 LUMIERE 同款, 要0码, 我们只有橱窗那件2码",
+CLG-26-04880,ROM01,Martina Sabatini,CL38997801,Gold,call,02/10/2026,18:07,OUT,follow-up,,booked appointment,pensava fossimo chiusi per lavori!! viene martedi,+39 3** *** **72
+CLG-26-04882,PAR01,Soo-ah Kim,,,in-store,2026-10-02,13:21,IN,waitlist,Ilvaro rose 0,declined,LUMIERE / 윤하은. plus de rose,
+CLG-26-04883,PAR01,Soo-ah Kim,,,in-store,2026-10-02,18:00,IN,waitlist,Ilvaro rose 1,declined,,
+CLG-26-04884,Harrods,James Whitcombe,,,in-store,2026-10-02,13:43,IN,waitlist,Maire black 2,declined,"Chinese family, golden week",
+CLG-26-04887,TYO01,木村 さくら,,,in-store,2026-10-02,19:46,IN,waitlist,ILVARO ピンク 0,waitlisted,LUMIEREのユンハウン着用のもの。サイズ0希望,
+CLG-26-04887,TYO01,木村 さくら,,,in-store,2026-10-02,19:46,IN,waitlist,ILVARO ピンク 0,waitlisted,LUMIEREのユンハウン着用のもの。サイズ0希望,
+CLG-26-04889,SEL01,박민수,,,in-store,2026-10-02,14:48,IN,waitlist,일바로 핑크 0,waitlisted,"윤하은 패딩. 20대 고객, 인스타 보고 옴",
+CLG-26-04890,SEL01,김지현,CL28913290,VIC,KakaoTalk,2026-10-02,19:53,IN,waitlist,일바로 인디핑크 1,waitlisted,"VIC 따님용, 입고시 바로 연락 요청",+82 10-****-**47
+CLG-26-04892,SHA01,小徐,,,in-store,2026-10-02,14:25,IN,waitlist,ILVARO 粉色 0,waitlisted,小红书同款,
+CLG-26-04893,BJS01,张敏,,,in-store,2026-10-02,19:51,IN,waitlist,ILVARO 粉色 1,waitlisted,,
+CLG-26-04894,CDU01,杨帆,,,in-store,2026-10-02,14:14,IN,waitlist,ILVARO 粉色 0,waitlisted,成都本地客，等货,
+CLG-26-04895,MIL01,Sara Colombo,,VIC,in-store,2026-10-03,18:45,IN,private appointment,"Hermine, Maya, Polaris cape",purchased,"sig.ra Al Mansouri + figlie, salottino, 14.6k. chiede di avvisarla per Maire nera 1 (figlia piccola)",
+CLG-26-04897,ROM01,Martina Sabatini,CL81070774,Gold,call,2026-10-03,19:45,OUT,follow-up,,no answer,lasciato msg in segreteria,+39 3** *** **13
+CLG-26-04898,PAR01,Lucas Bernard,CL18049997,VIC,WeChat,2026-10-03,14:06,IN,waitlist,Maire noire 00 + Ilvaro rose 00,waitlisted,"client de Pékin, achète pour sa fille. ok expédition à l'hôtel si arrivage avant le 8",+33 6 ** ** ** 69
+CLG-26-04899,PAR02,Karim Benali,,,in-store,2026-10-03,18:06,IN,waitlist,Maire noire 1,waitlisted,"groupe de 4 coréennes, toutes la même taille, liste",
+CLG-26-04900,MAD01,Paula Arranz,,,in-store,2026-10-03,20:38,IN,stock check,Maya negra 4,declined,no quiere marino,
+CLG-26-04903,TYO01,木村 さくら,CL36931473,VIC,LINE,2026-10-03,12:24,IN,waitlist,ILVARO ピンク 1,waitlisted,娘様用。入荷次第ご連絡,+81 90-****-**19
+CLG-26-04904,청담,박민수,,,call,2026-10-03,15:07,IN,waitlist,일바로 핑크,waitlisted,전화 문의 하루 30통 넘음,
+CLG-26-04906,SEL02,이수진,,,in-store,2026-10-03,20:55,IN,waitlist,일바로 핑크 00,waitlisted,,
+CLG-26-04907,SHA01,王静,CL73619844,VIC,WeChat,2026-10-03,19:16,IN,waitlist,ILVARO 粉色 1,waitlisted,VIC 要求到货第一时间通知,+86 138 **** **42
+CLG-26-04908,HKG01,Karen Chan,CL11064687,VIC,WeChat,2026-10-03,20:04,IN,waitlist,Ilvaro 粉紅 1,waitlisted,深圳客，要求到貨即通知,+852 **** **72
+CLG-26-04909,SIN01,Muhammad Hafiz,,,in-store,2026-10-03,13:17,IN,waitlist,Ilvaro pink 1,waitlisted,"LUMIERE fan, came with photo. we only have size 3",
+CLG-26-04910,PAR02,Sophie Marchand,CL57536823,Gold,in-store,2026-10-04,18:14,IN,waitlist,Ambrine marron 2,declined,"a pris l'Ambrine noire finalement, pas convaincue",+33 6 ** ** ** 48
+CLG-26-04913,銀座,田中 健一,,,call,2026-10-04,12:52,IN,waitlist,ILVAROピンク,waitlisted,電話でのお問い合わせ、本日だけで12件目,
+CLG-26-04915,PAR02,Karim Benali,,,in-store,2026-10-05,19:49,IN,after-sales,TIB,refunded,"fermeture cassée, cliente en colère, veut un avoir",
+CLG-26-04918,LON02,Priya Raman,CL26729770,Gold,in-store,2026-10-05,17:19,IN,after-sales,TIB,exchanged,"zip, exchanged, client very understanding",+44 7*** ***67
+CLG-26-04919,BUS01,한승우,,,in-store,2026-10-05,17:47,IN,waitlist,일바로 핑크,waitlisted,영화제 보러 온 서울 고객,
+CLG-26-04921,SYD01,Chloe Mitchell,,,in-store,2026-10-05,12:05,IN,stock check,Marin light jacket,declined,"wanted light jacket for spring, we only have SS leftovers in XS",
+CLG-26-04922,MIL01,Fede Riva,,,in-store,2026-10-06,13:36,IN,waitlist,Maire nera 0,waitlisted,"giapponese residente a Milano, lascia mail",
+CLG-26-04923,ROM01,Martina Sabatini,CL38997801,Gold,in-store,2026-10-06,14:49,IN,follow-up,Maya nera 3,purchased,"venuta dopo la telefonata, ha detto che non trovava l'ingresso",+39 3** *** **23
+CLG-26-04924,Roma Condotti,Valerio Proietti,,,call,2026-10-06,11:11,OUT,follow-up,,declined,"cliente dice che col cantiere non viene, aspetta novembre",
+CLG-26-04925,NYC02,Ana Gutierrez,,,in-store,2026-10-06,17:56,IN,after-sales,TIB navy,exchanged,"zipper pull came off. registers were down, did it on paper, keyed next day",
+CLG-26-04927,SEL01,박민수,,,in-store,2026-10-06,14:13,IN,waitlist,일바로 핑크 1,declined,"리셀러 의심, 3장 요청. 1인 1장 안내",
+CLG-26-04928,PAR01,Thomas Nguyen,,,in-store,2026-10-07,19:49,IN,after-sales,TIB marine,exchanged,"curseur sorti, échange taille identique",
+CLG-26-04929,OSA01,松井 亜美,,,in-store,2026-10-07,14:31,IN,after-sales,ARNEB 4,exchanged,大きいので3に交換,
+CLG-26-04930,MIL01,Andrea Bianchi,CL34499784,Gold,in-store,2026-10-08,18:58,IN,waitlist,Logo cardigan blu M,waitlisted,"francese che vive qui, torna domani alle 11. M finito stasera",+39 3** *** **77
+CLG-26-04931,LON01,Olivia Hartley,CL84442979,VIC,in-store,2026-10-08,19:41,IN,event invite,"Polaris cape, Hermine",purchased,"private evening. cape + hermine navy, champagne helped",+44 7*** ***28
+CLG-26-04932,LON01,Daniel Okafor,CL61585279,VIC,in-store,2026-10-08,18:23,IN,event invite,Ambrine brown 2,declined,"brown 2 not available (we told her it would be...). bought black Maire 1, the last one",+44 7*** ***73
+CLG-26-04935,LON01,Daniel Okafor,CL11017064,Gold,in-store,2026-10-08,19:42,IN,event invite,Arneb,purchased,Arneb 5 -> took 4 after trying,+44 7*** ***92
+CLG-26-04936,TPE01,吳承恩,,,in-store,2026-10-08,16:45,IN,after-sales,TIB,exchanged,拉鍊壞掉，換貨,
+CLG-26-04937,MIL01,Andrea Bianchi,CL34499784,Gold,call,2026-10-09,15:10,OUT,follow-up,Logo cardigan blu M,no answer,"nessuna risposta, lasciato msg",+39 3** *** **11
+CLG-26-04938,MI-MN,Chiara Moretti,,,in-store,2026-10-09,13:37,IN,waitlist,cardigan logo M nero,waitlisted,"regalo per il compagno, ripassa",
+CLG-26-04939,MI-MN,Chiara Moretti,,,in-store,2026-10-09,19:32,IN,waitlist,cardigan logo M,declined,"voleva subito, va in Rinascente",
+CLG-26-04940,LON01,Olivia Hartley,CL13182945,VIC,email,2026-10-09,12:47,OUT,follow-up,,thanked,thank you note after the evening,+44 7*** ***20
+CLG-26-04941,TYO01,佐藤 美咲,CL57891896,VIC,LINE,2026-10-09,17:31,OUT,price change notice,"MAYA, MAIRE",booked appointment,価格改定のご案内。10/12にご来店、MAYAとMAIREご検討,+81 90-****-**88
+CLG-26-04942,TYO01,木村 さくら,CL49450096,VIC,call,2026-10-09,18:06,OUT,price change notice,,no answer,留守電にメッセージ,+81 90-****-**84
+CLG-26-04944,MIL02,Ilaria Mancuso,,,in-store,2026-10-10,10:44,IN,waitlist,cardigan logo blu M,declined,"solo nero in M, cliente voleva blu",
+CLG-26-04944,MIL02,Ilaria Mancuso,,,in-store,2026-10-10,10:44,IN,waitlist,cardigan logo blu M,declined,"solo nero in M, cliente voleva blu",
+CLG-26-04945,PAR01,Inès Haddad,,,in-store,2026-10-10,14:31,IN,waitlist,Maire noire 2,purchased,a finalement pris la beige!! (une des rares),
+CLG-26-04948,NYC02,Ana Gutierrez,,,in-store,2026-10-10,13:03,IN,stock check,Ilvaro black 1,declined,"K-pop fan, wanted pink first then black, out of both in 1",
+CLG-26-04950,TYO01,木村 さくら,CL26859443,VIC,LINE,2026-10-10,13:09,OUT,price change notice,HERMINE,reserved,改定前にHERMINEネイビー2をお取り置き（7日間）,+81 90-****-**91
+CLG-26-04951,BJS01,刘洋,CL20742410,VIC,WeChat,2026-10-10,10:57,IN,waitlist,MAIRE 黑色 1,waitlisted,,+86 139 **** **82
+CLG-26-04952,SIN01,Grace Tan,CL36980629,VIC,WhatsApp,2026-10-10,11:10,IN,event invite,,booked appointment,"GP weekend, wants private viewing Sat morning before the crowds",+65 9*** **89
+CLG-26-04953,MAD01,Javier Molina,CL14424401,VIC,WhatsApp,2026-10-11,20:24,OUT,waitlist,Maya negra 3,booked appointment,"llegó la negra, viene el martes",+34 6** *** *52
+CLG-26-04955,TYO02,Park Jiyeon,,,LINE,2026-10-11,16:20,OUT,price change notice,,booked appointment,"고객님 한국분, 일본어 안내 후 한국어로 다시 설명",
+CLG-26-04957,SIN01,Muhammad Hafiz,,,in-store,2026-10-11,17:18,IN,stock check,"logo tee, cap",purchased,"F1 fans, tees and caps only",
+CLG-26-04958,MIL01,Sara Colombo,,,in-store,2026-10-12,20:34,IN,new arrival,Ilvaro rosa,declined,"provato, carino ma troppo 'bambola'. preso Bady nero",
+CLG-26-04959,TYO01,佐藤 美咲,CL57891896,VIC,in-store,2026-10-12,17:31,IN,price change notice,"MAYA ブラック 3, MAIRE ブラック 1",purchased,ご夫婦で。改定前に、と。MAIREはサイズ1が最後の1着,+81 90-****-**45
+CLG-26-04960,OSA01,中村 大輔,CL49989265,VIC,call,2026-10-12,19:03,OUT,price change notice,MAIRE,purchased,値上げ前にって来てくれはった。MAIREオフホワイト,+81 80-****-**96
+CLG-26-04960,OSA01,中村 大輔,CL49989265,VIC,call,2026-10-12,19:03,OUT,price change notice,MAIRE,purchased,値上げ前にって来てくれはった。MAIREオフホワイト,+81 80-****-**96
+CLG-26-04961,SEL01,김지현,CL51958019,VIC,KakaoTalk,2026-10-12,14:51,IN,waitlist,마이레 블랙 2,waitlisted,파리에서도 못 샀다고 함,+82 10-****-**83
+CLG-26-04962,PAR01,Thomas Nguyen,CL66077483,Gold,call,2026-10-13,19:13,OUT,follow-up,,rescheduled,"RDV annulé, grève, reporté à jeudi",+33 6 ** ** ** 40
+CLG-26-04964,London Bond St,Olivia Hartley,,,in-store,2026-10-13,11:05,IN,waitlist,Maire black 1,waitlisted,"local client, not a tourist. 4th one this week",
+CLG-26-04967,MAD01,Bea,,,in-store,2026-10-13,12:57,IN,waitlist,Ambrine marrón 1,waitlisted,,
+CLG-26-04968,TYO01,田中 健一,CL59880733,VIC,call,2026-10-13,17:16,IN,price change notice,MAIRE ブラック 2,declined,ブラック2欠品。ベージュはご不要とのこと,+81 90-****-**17
+CLG-26-04969,MIL01,Sara Colombo,,,call,2026-10-14,16:47,OUT,waitlist,cardigan logo M (lista),no answer,"lista cardigan M 6 nomi chiamati, 2 vanno in Rinascente, 3 non rispondono, 1 aspetta",
+CLG-26-04970,PAR02,Sophie Marchand,,,in-store,2026-10-14,18:42,IN,waitlist,Maire noire 0,waitlisted,cliente japonaise résidente,
+CLG-26-04971,AMS01,Ruben Bakker,,,in-store,2026-10-14,10:52,IN,new arrival,"Karakorum, beanie",purchased,"first cold day, client bought jacket + beanie + gloves",
+CLG-26-04974,MUN01,Katharina Huber,CL48919840,VIC,in-store,14/10/2026,15:12,IN,new arrival,Maya schwarz 4,purchased,"erster Schnee, kam um 10 Uhr direkt",+49 1** *****53
+CLG-26-04975,MUN01,Florian Brandl,,,in-store,2026-10-14,19:18,IN,stock check,Maya schwarz 3,declined,"ausverkauft in 3, Kunde geht",
+CLG-26-04976,TYO02,伊藤 翔,,,in-store,2026-10-14,11:42,IN,price change notice,MAYA ネイビー 4,purchased,11/1から上がると聞いて,
+CLG-26-04977,HKG01,Ming Wong,,,in-store,2026-10-14,19:50,IN,stock check,Ilvaro black 0,declined,冇黑色細碼，客人好失望,
+CLG-26-04978,MIL01,Wei Zhang,,,in-store,2026-10-15,10:17,IN,waitlist,Maire nera 1 e 2,declined,"mamma e figlia coreane, ripartono domani",
+CLG-26-04979,LON01,Priya Raman,,,in-store,2026-10-15,14:07,IN,waitlist,Maire black 1,waitlisted,"Korean student living in London, reachable. good one for when it lands",
+CLG-26-04980,MUN01,Katharina Huber,,,call,2026-10-15,17:23,IN,waitlist,Maire schwarz 1,waitlisted,Tochter möchte Maire schwarz,
+CLG-26-04981,ZRH01,Lea Baumgartner,,,in-store,2026-10-15,17:56,IN,new arrival,Hermine navy 2,purchased,"Schnee bis 1000m, Kundin fährt am WE nach Davos",
+CLG-26-04982,TOR01,Ryan Chen,,,in-store,2026-10-15,20:10,IN,waitlist,Maire black 0,waitlisted,"Korean student at UofT, saw it on the drama",
+CLG-26-04983,GVA01,Bruno Monnier,,,in-store,2026-10-16,17:38,IN,new arrival,Maya noir 4,purchased,"neige sur le Salève, client veut 'le plus chaud'",
+CLG-26-04984,CPH01,Anders Holm,,,call,2026-10-16,11:59,IN,stock check,Logo beanie black,declined,"sold out, asked LON01 transfer",
+CLG-26-04985,BER01,Mehmet Aydın,,,in-store,2026-10-16,10:05,IN,stock check,Logo Beanie weiß,declined,ausverkauft,
+CLG-26-04986,TYO01,木村 さくら,CL36931473,VIC,LINE,2026-10-16,13:31,OUT,waitlist,ILVARO ピンク 1,declined,入荷のご連絡→もうソウルで購入済みとのこと,+81 90-****-**58
+CLG-26-04986,TYO01,木村 さくら,CL36931473,VIC,LINE,2026-10-16,13:31,OUT,waitlist,ILVARO ピンク 1,declined,入荷のご連絡→もうソウルで購入済みとのこと,+81 90-****-**58
+CLG-26-04987,TYO01,木村 さくら,,,call,2026-10-16,11:58,OUT,waitlist,ILVARO ピンク 0,purchased,ウェイティング3番目の方、ご来店,
+CLG-26-04989,CDU01,李娜,CL79884764,VIC,WeChat,2026-10-16,18:34,OUT,waitlist,ILVARO 粉色 1,declined,客人取消等货，代购已买,+86 136 **** **84
+CLG-26-04990,Rinascente Duomo,Ilaria Mancuso,,,in-store,2026-10-17,17:06,IN,waitlist,logo cardigan M nero,waitlisted,finito oggi anche il nero M,
+CLG-26-04991,PAR01,Chloé Petit,,,in-store,2026-10-17,12:57,IN,new arrival,Ilvaro rose 1,purchased,"cliente japonaise en voyage, très contente de trouver le rose",
+CLG-26-04992,GVA01,Nathalie Favre,,,call,17/10/2026,11:01,OUT,event invite,,booked appointment,soirée clientes 29/10,
+CLG-26-04993,BHS01,Luis Ortega,,,in-store,2026-10-17,19:43,IN,new arrival,Polaris cape,declined,"""$3,375 for a cape I can't wear in LA""",
+CLG-26-04994,SEL01,박민수,CL28913290,VIC,KakaoTalk,2026-10-18,14:01,OUT,waitlist,일바로 인디핑크 1,no answer,"입고 연락, 바로 방문",+82 10-****-**53
+CLG-26-04995,SEL01,박민수,,,call,2026-10-18,10:33,OUT,waitlist,일바로 핑크 0,declined,이미 크림에서 구매함,
+CLG-26-04996,SHA01,王静,CL73619844,VIC,WeChat,2026-10-18,18:59,OUT,waitlist,ILVARO 粉色 1,declined,已经代购买到了,+86 138 **** **66
+CLG-26-04997,SYD01,Arjun Patel,,,in-store,2026-10-18,13:35,IN,new arrival,Polaris cape,waitlisted,"Chinese client, wants the cape in black, flying to Shanghai next week",
+CLG-26-04998,MIL01,Sara Colombo,CL55468641,VIC,call,2026-10-19,18:56,IN,waitlist,Maire nera 1,reserved,Bertolini: tenere da parte la 1 appena arriva. PRIORITA,+39 3** *** **95
+CLG-26-04999,SEL02,최동욱,CL74347065,VIC,KakaoTalk,2026-10-19,16:36,OUT,waitlist,일바로 핑크 0,declined,관심 없어졌다고 함,+82 10-****-**24
+CLG-26-05000,현대 압구정,최동욱,,,call,2026-10-19,16:22,OUT,waitlist,마이레 블랙 1,waitlisted,26일 입고 예정 안내,
+CLG-26-05001,HKG01,Karen Chan,CL11064687,VIC,WeChat,2026-10-19,10:25,OUT,waitlist,Ilvaro 粉紅 1,declined,已經喺韓國買咗,+852 **** **47
+CLG-26-05004,VEN01,Luca Boscolo,,,call,2026-10-20,16:39,OUT,follow-up,,rescheduled,"appuntamento spostato, acqua alta stamattina, apriamo alle 12",
+CLG-26-05005,PAR01,Lucas Bernard,CL31059483,VIC,call,2026-10-20,15:03,IN,waitlist,Ambrine marron T1,waitlisted,"rappel Mme de V. toujours rien, pas avant mi-novembre",+33 6 ** ** ** 11
+CLG-26-05006,LON01,Daniel Okafor,CL61585279,VIC,call,2026-10-20,14:08,OUT,waitlist,Maire black 0,reserved,"black Maire arriving Fri, reserved size 0 for her daughter",+44 7*** ***67
+CLG-26-05007,OSA01,松井 亜美,,,LINE,2026-10-20,20:16,OUT,waitlist,ILVARO ピンク 1,declined,もう興味がなくなったとのこと,
+CLG-26-05009,BUS01,정은비,CL84294095,VIC,KakaoTalk,2026-10-20,13:41,OUT,waitlist,일바로 핑크 1,purchased,"입고 연락 드림, 내일 방문 → 오늘 바로 오심",+82 10-****-**56
+CLG-26-05010,SHA01,小徐,,,in-store,2026-10-20,10:38,IN,price match,MAYA,declined,客人拿天猫预售截图问能否同价，按话术解释，客人说去线上买,
+CLG-26-05013,MIL01,Sara Colombo,CL55468641,VIC,WhatsApp,2026-10-21,19:27,OUT,waitlist,Maire nera 1,reserved,"arrivata! messa da parte, passa domani mattina",+39 3** *** **56
+CLG-26-05016,MIL01,Fede Riva,CL88424764,VIC,call,2026-10-21,12:41,OUT,waitlist,Maire nera 2,booked appointment,"per la figlia, viene giovedi",+39 3** *** **26
+CLG-26-05019,1001,Wei Zhang,,,WeChat,2026-10-21,19:17,OUT,waitlist,Maire black 1,declined,上海客人已经在国内买到了,
+CLG-26-05022,ROM01,Martina Sabatini,CL81070774,Gold,call,2026-10-21,20:09,OUT,new arrival,Maire nera,booked appointment,"interessata alla maire nera, passa sabato",+39 3** *** **21
+CLG-26-05023,SHA01,陈浩,CL14955557,VIC,WeChat,2026-10-21,16:59,IN,price match,HERMINE,escalated,VIC要求双十一价格，已上报赵磊,+86 138 **** **95
+CLG-26-05024,BJS01,张敏,,,in-store,2026-10-21,13:56,IN,price match,ILVARO 黑色,declined,比价，天猫有满减,

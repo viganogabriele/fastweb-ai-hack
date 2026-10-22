@@ -1,0 +1,82 @@
+{
+  "_request": {
+    "method": "GET",
+    "url": "https://wms-gw.moncler-int.example/v1/inbound/purchase-orders/4500218734",
+    "ts": "2026-10-22T07:05:00Z"
+  },
+  "purchaseOrder": "4500218734",
+  "vendor": {
+    "id": "V100231",
+    "name": "Atelier Nistru SRL (Chisinau, MD) - outerwear CMT"
+  },
+  "createdOn": "2026-08-24",
+  "lines": [
+    {
+      "item": "00010",
+      "plant": "IT10",
+      "material": "J20931A00012999",
+      "sizes": "ALL",
+      "qty": 420,
+      "currentDeliveryDate": "2026-10-16",
+      "goodsReceiptDate": "2026-10-16",
+      "status": "RECEIVED"
+    },
+    {
+      "item": "00020",
+      "plant": "US20",
+      "material": "J20931A00012999",
+      "sizes": "ALL",
+      "qty": 220,
+      "currentDeliveryDate": "2026-10-19",
+      "goodsReceiptDate": "2026-10-19",
+      "status": "RECEIVED"
+    },
+    {
+      "item": "00030",
+      "plant": "HK30",
+      "material": "J20931A00012999",
+      "sizes": "ALL",
+      "qty": 1040,
+      "currentDeliveryDate": "2026-10-16",
+      "goodsReceiptDate": "2026-10-16",
+      "status": "RECEIVED"
+    },
+    {
+      "item": "00040",
+      "plant": "IT10",
+      "material": "J20931A00012999",
+      "sizes": "ALL",
+      "qty": 300,
+      "currentDeliveryDate": "2026-10-19",
+      "goodsReceiptDate": "2026-10-19",
+      "status": "RECEIVED"
+    }
+  ],
+  "deliveryDateHistory": [
+    {
+      "changedOn": "2026-08-24",
+      "newDate": "2026-09-25",
+      "comment": "PO created, confirmed by vendor"
+    },
+    {
+      "changedOn": "2026-09-10",
+      "newDate": "2026-10-02",
+      "comment": "Vendor: laqué nylon from mill delayed (dyeing lot rejected)"
+    },
+    {
+      "changedOn": "2026-09-24",
+      "newDate": "2026-10-09",
+      "comment": "Vendor: fabric arrived, cutting started; new ex-works Oct 5"
+    },
+    {
+      "changedOn": "2026-10-01",
+      "newDate": "2026-10-16",
+      "comment": "Vendor: final ETA, air freight booked for IT/HK; US +3 days"
+    },
+    {
+      "changedOn": "2026-10-14",
+      "newDate": "2026-10-19",
+      "comment": "Line 00040 (balance 300 pcs IT10) pulled in from 2026-10-30"
+    }
+  ]
+}

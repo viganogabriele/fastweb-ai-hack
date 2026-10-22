@@ -1,0 +1,587 @@
+{
+  "_request": {
+    "method": "GET",
+    "url": "https://wms-gw.moncler-int.example/v1/quality-stock?materialPrefix=J10911A00305",
+    "ts": "2026-10-22T07:06:00Z"
+  },
+  "asOf": "2026-10-22T06:00:00+02:00",
+  "notification": {
+    "id": "300004587",
+    "createdOn": "2026-09-30",
+    "usageDecisionOn": "2026-10-02",
+    "defect": "Zipper slider (YKK-compatible #5 slider, supplier lot SL-0726) detaches / does not lock"
+  },
+  "positions": [
+    {
+      "plant": "HK30",
+      "material": "J10911A0030520D",
+      "size": "1",
+      "batch": "2607-A114",
+      "blockedDcStock": 8,
+      "returnsInQuality": 4,
+      "notification": "300004587"
+    },
+    {
+      "plant": "HK30",
+      "material": "J10911A0030520D",
+      "size": "2",
+      "batch": "2607-A114",
+      "blockedDcStock": 18,
+      "returnsInQuality": 7,
+      "notification": "300004587"
+    },
+    {
+      "plant": "HK30",
+      "material": "J10911A0030520D",
+      "size": "3",
+      "batch": "2607-A114",
+      "blockedDcStock": 26,
+      "returnsInQuality": 3,
+      "notification": "300004587"
+    },
+    {
+      "plant": "HK30",
+      "material": "J10911A0030520D",
+      "size": "4",
+      "batch": "2607-A114",
+      "blockedDcStock": 23,
+      "returnsInQuality": 6,
+      "notification": "300004587"
+    },
+    {
+      "plant": "HK30",
+      "material": "J10911A0030520D",
+      "size": "5",
+      "batch": "2607-A114",
+      "blockedDcStock": 15,
+      "returnsInQuality": 3,
+      "notification": "300004587"
+    },
+    {
+      "plant": "HK30",
+      "material": "J10911A0030520D",
+      "size": "6",
+      "batch": "2607-A114",
+      "blockedDcStock": 5,
+      "returnsInQuality": 2,
+      "notification": "300004587"
+    },
+    {
+      "plant": "HK30",
+      "material": "J10911A0030520D",
+      "size": "7",
+      "batch": "2607-A114",
+      "blockedDcStock": 5,
+      "returnsInQuality": 0,
+      "notification": "300004587"
+    },
+    {
+      "plant": "HK30",
+      "material": "J10911A00305742",
+      "size": "1",
+      "batch": "2607-A114",
+      "blockedDcStock": 10,
+      "returnsInQuality": 2,
+      "notification": "300004587"
+    },
+    {
+      "plant": "HK30",
+      "material": "J10911A00305742",
+      "size": "2",
+      "batch": "2607-A114",
+      "blockedDcStock": 23,
+      "returnsInQuality": 10,
+      "notification": "300004587"
+    },
+    {
+      "plant": "HK30",
+      "material": "J10911A00305742",
+      "size": "3",
+      "batch": "2607-A114",
+      "blockedDcStock": 28,
+      "returnsInQuality": 7,
+      "notification": "300004587"
+    },
+    {
+      "plant": "HK30",
+      "material": "J10911A00305742",
+      "size": "4",
+      "batch": "2607-A114",
+      "blockedDcStock": 27,
+      "returnsInQuality": 11,
+      "notification": "300004587"
+    },
+    {
+      "plant": "HK30",
+      "material": "J10911A00305742",
+      "size": "5",
+      "batch": "2607-A114",
+      "blockedDcStock": 14,
+      "returnsInQuality": 3,
+      "notification": "300004587"
+    },
+    {
+      "plant": "HK30",
+      "material": "J10911A00305742",
+      "size": "6",
+      "batch": "2607-A114",
+      "blockedDcStock": 6,
+      "returnsInQuality": 2,
+      "notification": "300004587"
+    },
+    {
+      "plant": "HK30",
+      "material": "J10911A00305742",
+      "size": "7",
+      "batch": "2607-A114",
+      "blockedDcStock": 5,
+      "returnsInQuality": 0,
+      "notification": "300004587"
+    },
+    {
+      "plant": "HK30",
+      "material": "J10911A00305999",
+      "size": "1",
+      "batch": "2607-A114",
+      "blockedDcStock": 16,
+      "returnsInQuality": 6,
+      "notification": "300004587"
+    },
+    {
+      "plant": "HK30",
+      "material": "J10911A00305999",
+      "size": "2",
+      "batch": "2607-A114",
+      "blockedDcStock": 39,
+      "returnsInQuality": 18,
+      "notification": "300004587"
+    },
+    {
+      "plant": "HK30",
+      "material": "J10911A00305999",
+      "size": "3",
+      "batch": "2607-A114",
+      "blockedDcStock": 58,
+      "returnsInQuality": 16,
+      "notification": "300004587"
+    },
+    {
+      "plant": "HK30",
+      "material": "J10911A00305999",
+      "size": "4",
+      "batch": "2607-A114",
+      "blockedDcStock": 55,
+      "returnsInQuality": 18,
+      "notification": "300004587"
+    },
+    {
+      "plant": "HK30",
+      "material": "J10911A00305999",
+      "size": "5",
+      "batch": "2607-A114",
+      "blockedDcStock": 21,
+      "returnsInQuality": 6,
+      "notification": "300004587"
+    },
+    {
+      "plant": "HK30",
+      "material": "J10911A00305999",
+      "size": "6",
+      "batch": "2607-A114",
+      "blockedDcStock": 12,
+      "returnsInQuality": 6,
+      "notification": "300004587"
+    },
+    {
+      "plant": "HK30",
+      "material": "J10911A00305999",
+      "size": "7",
+      "batch": "2607-A114",
+      "blockedDcStock": 5,
+      "returnsInQuality": 0,
+      "notification": "300004587"
+    },
+    {
+      "plant": "IT10",
+      "material": "J10911A0030520D",
+      "size": "1",
+      "batch": "2607-A114",
+      "blockedDcStock": 5,
+      "returnsInQuality": 0,
+      "notification": "300004587"
+    },
+    {
+      "plant": "IT10",
+      "material": "J10911A0030520D",
+      "size": "2",
+      "batch": "2607-A114",
+      "blockedDcStock": 18,
+      "returnsInQuality": 5,
+      "notification": "300004587"
+    },
+    {
+      "plant": "IT10",
+      "material": "J10911A0030520D",
+      "size": "3",
+      "batch": "2607-A114",
+      "blockedDcStock": 33,
+      "returnsInQuality": 8,
+      "notification": "300004587"
+    },
+    {
+      "plant": "IT10",
+      "material": "J10911A0030520D",
+      "size": "4",
+      "batch": "2607-A114",
+      "blockedDcStock": 36,
+      "returnsInQuality": 13,
+      "notification": "300004587"
+    },
+    {
+      "plant": "IT10",
+      "material": "J10911A0030520D",
+      "size": "5",
+      "batch": "2607-A114",
+      "blockedDcStock": 17,
+      "returnsInQuality": 2,
+      "notification": "300004587"
+    },
+    {
+      "plant": "IT10",
+      "material": "J10911A0030520D",
+      "size": "6",
+      "batch": "2607-A114",
+      "blockedDcStock": 11,
+      "returnsInQuality": 3,
+      "notification": "300004587"
+    },
+    {
+      "plant": "IT10",
+      "material": "J10911A0030520D",
+      "size": "7",
+      "batch": "2607-A114",
+      "blockedDcStock": 6,
+      "returnsInQuality": 0,
+      "notification": "300004587"
+    },
+    {
+      "plant": "IT10",
+      "material": "J10911A00305742",
+      "size": "1",
+      "batch": "2607-A114",
+      "blockedDcStock": 9,
+      "returnsInQuality": 5,
+      "notification": "300004587"
+    },
+    {
+      "plant": "IT10",
+      "material": "J10911A00305742",
+      "size": "2",
+      "batch": "2607-A114",
+      "blockedDcStock": 25,
+      "returnsInQuality": 7,
+      "notification": "300004587"
+    },
+    {
+      "plant": "IT10",
+      "material": "J10911A00305742",
+      "size": "3",
+      "batch": "2607-A114",
+      "blockedDcStock": 40,
+      "returnsInQuality": 14,
+      "notification": "300004587"
+    },
+    {
+      "plant": "IT10",
+      "material": "J10911A00305742",
+      "size": "4",
+      "batch": "2607-A114",
+      "blockedDcStock": 42,
+      "returnsInQuality": 16,
+      "notification": "300004587"
+    },
+    {
+      "plant": "IT10",
+      "material": "J10911A00305742",
+      "size": "5",
+      "batch": "2607-A114",
+      "blockedDcStock": 27,
+      "returnsInQuality": 8,
+      "notification": "300004587"
+    },
+    {
+      "plant": "IT10",
+      "material": "J10911A00305742",
+      "size": "6",
+      "batch": "2607-A114",
+      "blockedDcStock": 15,
+      "returnsInQuality": 2,
+      "notification": "300004587"
+    },
+    {
+      "plant": "IT10",
+      "material": "J10911A00305742",
+      "size": "7",
+      "batch": "2607-A114",
+      "blockedDcStock": 5,
+      "returnsInQuality": 0,
+      "notification": "300004587"
+    },
+    {
+      "plant": "IT10",
+      "material": "J10911A00305999",
+      "size": "1",
+      "batch": "2607-A114",
+      "blockedDcStock": 9,
+      "returnsInQuality": 1,
+      "notification": "300004587"
+    },
+    {
+      "plant": "IT10",
+      "material": "J10911A00305999",
+      "size": "2",
+      "batch": "2607-A114",
+      "blockedDcStock": 28,
+      "returnsInQuality": 6,
+      "notification": "300004587"
+    },
+    {
+      "plant": "IT10",
+      "material": "J10911A00305999",
+      "size": "3",
+      "batch": "2607-A114",
+      "blockedDcStock": 63,
+      "returnsInQuality": 25,
+      "notification": "300004587"
+    },
+    {
+      "plant": "IT10",
+      "material": "J10911A00305999",
+      "size": "4",
+      "batch": "2607-A114",
+      "blockedDcStock": 61,
+      "returnsInQuality": 26,
+      "notification": "300004587"
+    },
+    {
+      "plant": "IT10",
+      "material": "J10911A00305999",
+      "size": "5",
+      "batch": "2607-A114",
+      "blockedDcStock": 42,
+      "returnsInQuality": 12,
+      "notification": "300004587"
+    },
+    {
+      "plant": "IT10",
+      "material": "J10911A00305999",
+      "size": "6",
+      "batch": "2607-A114",
+      "blockedDcStock": 24,
+      "returnsInQuality": 10,
+      "notification": "300004587"
+    },
+    {
+      "plant": "IT10",
+      "material": "J10911A00305999",
+      "size": "7",
+      "batch": "2607-A114",
+      "blockedDcStock": 11,
+      "returnsInQuality": 5,
+      "notification": "300004587"
+    },
+    {
+      "plant": "US20",
+      "material": "J10911A0030520D",
+      "size": "1",
+      "batch": "2607-A114",
+      "blockedDcStock": 4,
+      "returnsInQuality": 1,
+      "notification": "300004587"
+    },
+    {
+      "plant": "US20",
+      "material": "J10911A0030520D",
+      "size": "2",
+      "batch": "2607-A114",
+      "blockedDcStock": 6,
+      "returnsInQuality": 4,
+      "notification": "300004587"
+    },
+    {
+      "plant": "US20",
+      "material": "J10911A0030520D",
+      "size": "3",
+      "batch": "2607-A114",
+      "blockedDcStock": 11,
+      "returnsInQuality": 3,
+      "notification": "300004587"
+    },
+    {
+      "plant": "US20",
+      "material": "J10911A0030520D",
+      "size": "4",
+      "batch": "2607-A114",
+      "blockedDcStock": 12,
+      "returnsInQuality": 4,
+      "notification": "300004587"
+    },
+    {
+      "plant": "US20",
+      "material": "J10911A0030520D",
+      "size": "5",
+      "batch": "2607-A114",
+      "blockedDcStock": 10,
+      "returnsInQuality": 4,
+      "notification": "300004587"
+    },
+    {
+      "plant": "US20",
+      "material": "J10911A0030520D",
+      "size": "6",
+      "batch": "2607-A114",
+      "blockedDcStock": 7,
+      "returnsInQuality": 2,
+      "notification": "300004587"
+    },
+    {
+      "plant": "US20",
+      "material": "J10911A0030520D",
+      "size": "7",
+      "batch": "2607-A114",
+      "blockedDcStock": 4,
+      "returnsInQuality": 0,
+      "notification": "300004587"
+    },
+    {
+      "plant": "US20",
+      "material": "J10911A00305742",
+      "size": "1",
+      "batch": "2607-A114",
+      "blockedDcStock": 4,
+      "returnsInQuality": 0,
+      "notification": "300004587"
+    },
+    {
+      "plant": "US20",
+      "material": "J10911A00305742",
+      "size": "2",
+      "batch": "2607-A114",
+      "blockedDcStock": 6,
+      "returnsInQuality": 1,
+      "notification": "300004587"
+    },
+    {
+      "plant": "US20",
+      "material": "J10911A00305742",
+      "size": "3",
+      "batch": "2607-A114",
+      "blockedDcStock": 8,
+      "returnsInQuality": 4,
+      "notification": "300004587"
+    },
+    {
+      "plant": "US20",
+      "material": "J10911A00305742",
+      "size": "4",
+      "batch": "2607-A114",
+      "blockedDcStock": 10,
+      "returnsInQuality": 3,
+      "notification": "300004587"
+    },
+    {
+      "plant": "US20",
+      "material": "J10911A00305742",
+      "size": "5",
+      "batch": "2607-A114",
+      "blockedDcStock": 9,
+      "returnsInQuality": 2,
+      "notification": "300004587"
+    },
+    {
+      "plant": "US20",
+      "material": "J10911A00305742",
+      "size": "6",
+      "batch": "2607-A114",
+      "blockedDcStock": 7,
+      "returnsInQuality": 1,
+      "notification": "300004587"
+    },
+    {
+      "plant": "US20",
+      "material": "J10911A00305742",
+      "size": "7",
+      "batch": "2607-A114",
+      "blockedDcStock": 4,
+      "returnsInQuality": 1,
+      "notification": "300004587"
+    },
+    {
+      "plant": "US20",
+      "material": "J10911A00305999",
+      "size": "1",
+      "batch": "2607-A114",
+      "blockedDcStock": 4,
+      "returnsInQuality": 0,
+      "notification": "300004587"
+    },
+    {
+      "plant": "US20",
+      "material": "J10911A00305999",
+      "size": "2",
+      "batch": "2607-A114",
+      "blockedDcStock": 8,
+      "returnsInQuality": 2,
+      "notification": "300004587"
+    },
+    {
+      "plant": "US20",
+      "material": "J10911A00305999",
+      "size": "3",
+      "batch": "2607-A114",
+      "blockedDcStock": 16,
+      "returnsInQuality": 3,
+      "notification": "300004587"
+    },
+    {
+      "plant": "US20",
+      "material": "J10911A00305999",
+      "size": "4",
+      "batch": "2607-A114",
+      "blockedDcStock": 18,
+      "returnsInQuality": 8,
+      "notification": "300004587"
+    },
+    {
+      "plant": "US20",
+      "material": "J10911A00305999",
+      "size": "5",
+      "batch": "2607-A114",
+      "blockedDcStock": 15,
+      "returnsInQuality": 4,
+      "notification": "300004587"
+    },
+    {
+      "plant": "US20",
+      "material": "J10911A00305999",
+      "size": "6",
+      "batch": "2607-A114",
+      "blockedDcStock": 10,
+      "returnsInQuality": 2,
+      "notification": "300004587"
+    },
+    {
+      "plant": "US20",
+      "material": "J10911A00305999",
+      "size": "7",
+      "batch": "2607-A114",
+      "blockedDcStock": 7,
+      "returnsInQuality": 1,
+      "notification": "300004587"
+    }
+  ],
+  "totals": {
+    "blockedDcStock": 1126,
+    "returnsInQuality": 348
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "_request": {
+    "method": "GET",
+    "url": "https://wms-gw.moncler-int.example/v1/inbound/purchase-orders/4500221905",
+    "ts": "2026-10-22T07:05:00Z"
+  },
+  "purchaseOrder": "4500221905",
+  "vendor": {
+    "id": "V100077",
+    "name": "Maglificio Val Seriana S.p.A. (BG, IT) - knitwear"
+  },
+  "createdOn": "2026-10-02",
+  "lines": [
+    {
+      "item": "00010",
+      "plant": "IT10",
+      "material": "I10919B00011999",
+      "sizes": [
+        "M"
+      ],
+      "qty": 120,
+      "currentDeliveryDate": "2026-10-30",
+      "goodsReceiptDate": null,
+      "status": "OPEN"
+    },
+    {
+      "item": "00020",
+      "plant": "IT10",
+      "material": "I10919B00011742",
+      "sizes": [
+        "M"
+      ],
+      "qty": 60,
+      "currentDeliveryDate": "2026-10-30",
+      "goodsReceiptDate": null,
+      "status": "OPEN"
+    },
+    {
+      "item": "00030",
+      "plant": "US20",
+      "material": "I10919B00011999",
+      "sizes": [
+        "M"
+      ],
+      "qty": 30,
+      "currentDeliveryDate": "2026-11-03",
+      "goodsReceiptDate": null,
+      "status": "OPEN"
+    },
+    {
+      "item": "00040",
+      "plant": "HK30",
+      "material": "I10919B00011999",
+      "sizes": [
+        "M"
+      ],
+      "qty": 90,
+      "currentDeliveryDate": "2026-11-04",
+      "goodsReceiptDate": null,
+      "status": "OPEN"
+    },
+    {
+      "item": "00050",
+      "plant": "HK30",
+      "material": "I10919B00011742",
+      "sizes": [
+        "M"
+      ],
+      "qty": 50,
+      "currentDeliveryDate": "2026-11-04",
+      "goodsReceiptDate": null,
+      "status": "OPEN"
+    }
+  ],
+  "deliveryDateHistory": [
+    {
+      "changedOn": "2026-10-02",
+      "newDate": "2026-10-30",
+      "comment": "Knit re-order size M only, wk44"
+    },
+    {
+      "changedOn": "2026-10-20",
+      "newDate": "2026-10-30",
+      "comment": "Vendor: 60% Oct 30, balance Nov 6 (yarn)"
+    }
+  ]
+}

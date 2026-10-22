@@ -1,0 +1,47 @@
+style_code,style_name,line,category,subcategory,gender,season,launch_date,end_date,price_eur,colors,size_run,season_group,description_it
+J20931A00012,MAIRE,Collection,Outerwear,Short down jacket,W,CO,,,1450,999|034|20D|742,W_OUT,HEAVY,Giubbotto corto in piumino laqué con cappuccio
+J20931A00087,HERMINE,Collection,Outerwear,Long down jacket,W,CO,,,2050,999|742|20D,W_OUT,HEAVY,Piumino lungo sciancrato con cappuccio staccabile
+J20931A00144,BADY,Collection,Outerwear,Short down jacket,W,CO,,,1350,999|20D|510,W_OUT,HEAVY,Piumino corto trapuntato a collo alto
+J20931A00203,FLAMMETTE,Collection,Outerwear,Long down jacket,W,CO,,,1890,999|742,W_OUT,HEAVY,Piumino lungo a trapuntature larghe
+J20931A00618,ILVARO,Collection,Outerwear,Cropped down jacket,W,FW26,2026-09-03,,1590,999|510|20D,W_OUT,HEAVY,"Piumino cropped boxy, nylon opaco, collo a imbuto"
+J20931A00622,AMBRINE,Collection,Outerwear,Long down coat,W,FW26,2026-09-03,,2290,999|23R,W_OUT,HEAVY,Cappotto lungo in piumino con cintura
+J20931A00655,VALLENTE,Collection,Outerwear,Short down jacket,W,FW25,2025-08-28,2026-03-15,1490,999|034|82D,W_OUT,HEAVY,Piumino corto con dettaglio in maglia
+J20931A00410,BOUREY,Collection,Outerwear,Short down jacket,W,FW24,2024-08-29,2025-03-16,1390,999|742|41F,W_OUT,HEAVY,Piumino corto lucido
+J20931A00711,LAIS,Collection,Outerwear,Rain jacket,W,SS25,2025-01-16,2025-08-31,990,999|73A|034,W_OUT,LIGHT,Giacca antipioggia leggera con cappuccio
+J20931A00733,ALBENGA,Collection,Outerwear,Rain jacket,W,SS26,2026-01-15,2026-08-31,1050,999|034|73A,W_OUT,LIGHT,Trench antipioggia in tessuto tecnico
+J20931A00560,CHAMBRE,Collection,Outerwear,Down vest,W,CO,,,890,999|20D,W_OUT,MID,Gilet in piumino con collo alto
+J10911A00034,MAYA,Collection,Outerwear,Short down jacket,M,CO,,,1550,999|742|82D,M_OUT,HEAVY,"Piumino laqué con cappuccio, l'iconico"
+J10911A00088,MONTCLA,Collection,Outerwear,Short down jacket,M,CO,,,1650,999|742,M_OUT,HEAVY,Piumino con cappuccio in nylon opaco
+J10911A00142,KARAKORUM,Collection,Outerwear,Short down jacket,M,CO,,,1450,999|742|90X,M_OUT,HEAVY,Piumino in ripstop con cappuccio
+J10911A00190,ECRINS,Collection,Outerwear,Short down jacket,M,CO,,,1490,999,M_OUT,HEAVY,Piumino con collo alto e tasche a toppa
+J10911A00213,MONTGENEVRE,Collection,Outerwear,Wool down jacket,M,CO,,,1750,999|742|90X,M_OUT,HEAVY,Piumino in lana con cappuccio
+J10911A00305,TIB,Collection,Outerwear,Down vest,M,CO,,,990,999|742|20D,M_OUT,MID,Gilet in piumino laqué
+J10911A00577,ARNEB,Collection,Outerwear,Long parka,M,FW26,2026-09-03,,2190,999|742,M_OUT,HEAVY,Parka lungo in piumino con cappuccio in pelliccia sintetica
+J10911A00581,ROSIERE,Collection,Outerwear,Short down jacket,M,FW26,2026-09-03,,1690,999|82D,M_OUT,HEAVY,Piumino corto con inserti in velluto a coste
+J10911A00499,LANS,Collection,Outerwear,Short down jacket,M,FW25,2025-08-28,2026-03-15,1590,999|742,M_OUT,HEAVY,Piumino con cappuccio a scomparsa
+J10911A00402,VEZERE,Collection,Outerwear,Short down jacket,M,FW24,2024-08-29,2025-03-16,1490,999|82D,M_OUT,HEAVY,Piumino imbottito con patch logo
+J10911A00720,ETIACHE,Collection,Outerwear,Windbreaker,M,SS25,2025-01-16,2025-08-31,950,999|742|73A,M_OUT,LIGHT,Giacca a vento con cappuccio
+J10911A00745,MARIN,Collection,Outerwear,Windbreaker,M,SS26,2026-01-15,2026-08-31,990,999|742|001,M_OUT,LIGHT,Giacca leggera idrorepellente
+H20971A00010,PEYRE,Grenoble,Outerwear,Ski jacket,M,CO,,,2250,999|41F,M_OUT,HEAVY,Giacca da sci in GORE-TEX
+H20981A00020,VALBOURG,Grenoble,Outerwear,Ski jacket,W,CO,,,2150,999|20D,W_OUT,HEAVY,Giacca da sci sciancrata
+H20971A00055,CHAMONIX,Grenoble,Bottoms,Ski trousers,U,CO,,,990,999,ALPHA,HEAVY,Pantaloni da sci imbottiti
+G20921A00901,POLARIS CAPE,Genius,Outerwear,Down cape,U,FW26,2026-09-24,,2900,999|001,ALPHA,HEAVY,Moncler Genius Polaris: mantella in piumino oversize
+G20921A00902,POLARIS OVERSIZED,Genius,Outerwear,Oversized down jacket,U,FW26,2026-09-24,,2400,999|73A,ALPHA,HEAVY,Moncler Genius Polaris: piumino oversize
+G20921A00903,POLARIS BALACLAVA,Genius,Accessories,Knit balaclava,U,FW26,2026-09-24,,450,999|001,TU,HEAVY,Moncler Genius Polaris: passamontagna in maglia
+I10919B00011,LOGO CARDIGAN,Collection,Knitwear,Cardigan,M,CO,,,790,999|742,ALPHA,MID,Cardigan in lana con patch logo
+I10919B00042,TRICOT PADDED CARDIGAN,Collection,Knitwear,Padded cardigan,M,CO,,,1150,999|742|90X,ALPHA,MID,Cardigan in maglia con fronte in piumino
+I20939C00008,CABLE KNIT SWEATER,Collection,Knitwear,Sweater,W,CO,,,750,20D|999|034,ALPHA,MID,Maglione a trecce in lana e cashmere
+I10919C00067,WOOL TURTLENECK,Collection,Knitwear,Turtleneck,M,FW26,2026-09-03,,650,999|742|23R,ALPHA,MID,Dolcevita in lana vergine
+I10918G00031,LOGO HOODIE,Collection,Jersey,Hoodie,U,CO,,,590,999|742|90X,ALPHA,MID,Felpa con cappuccio e logo
+I10918G00045,CREWNECK SWEATSHIRT,Collection,Jersey,Sweatshirt,U,CO,,,490,999|90X|001,ALPHA,MID,Felpa girocollo
+I10918C00012,LOGO T-SHIRT,Collection,Jersey,T-shirt,U,CO,,,350,999|001|742,ALPHA,LIGHT,T-shirt con patch logo
+I10918A00034,POLO,Collection,Jersey,Polo,M,CO,,,450,999|742|001,ALPHA,LIGHT,Polo in piquet con logo tricolore
+I10914M00061,TRAILGRIP GTX,Collection,Footwear,Sneakers,M,CO,,,690,999|90X,M_SHOE,MID,Sneakers da trail in GORE-TEX
+I20924M00062,TRAILGRIP W,Collection,Footwear,Sneakers,W,CO,,,690,999|20D,W_SHOE,MID,Sneakers da trail
+I20924H00080,INSOLUX,Collection,Footwear,Après-ski boots,W,CO,,,890,999|20D,W_SHOE,HEAVY,Doposci imbottiti
+I10913B00001,LOGO BEANIE,Collection,Accessories,Beanie,U,CO,,,290,999|742|001|510,TU,HEAVY,Berretto in lana con patch logo
+I10913A00004,CASHMERE SCARF,Collection,Accessories,Scarf,U,CO,,,450,999|90X|034,TU,HEAVY,Sciarpa in cashmere
+I10913E00007,TECH GLOVES,Collection,Accessories,Gloves,U,CO,,,390,999,TU,HEAVY,Guanti imbottiti touch
+I10913D00012,LOGO CAP,Collection,Accessories,Baseball cap,U,CO,,,270,999|742|001,TU,LIGHT,Cappellino con logo
+I10915C00021,LEGERE BELT BAG,Collection,Accessories,Belt bag,U,CO,,,450,999,TU,MID,Marsupio in nylon
+I10915D00030,MAKAIO BACKPACK,Collection,Accessories,Backpack,U,CO,,,690,999|742,TU,MID,Zaino in nylon tecnico

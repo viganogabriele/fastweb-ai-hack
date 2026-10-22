@@ -1,0 +1,22 @@
+Stato;Settore;Data inizio;Data fine;Sindacati;Categoria interessata;Modalità;Rilevanza;Regione;Provincia;Data proclamazione;Data ricezione;Note
+Effettuato;Ferroviario;07/09/2026;08/09/2026;CUB Trasporti;Personale mobile;Dalle 21:00 del 7 alle 21:00 dell'8;Regionale;Lombardia;;18/08/2026;19/08/2026;Trenord
+Effettuato;Trasporto pubblico locale;11/09/2026;11/09/2026;"Al Cobas; Orsa TPL";Personale ATM;4 ore: 18:00-22:00;Locale;Lombardia;Milano;21/08/2026;21/08/2026;
+Effettuato;Aereo;18/09/2026;18/09/2026;"Cub Trasporti; USB Lavoro Privato";Personale ENAV e handling;Dalle 10:00 alle 18:00;Nazionale;;;25/08/2026;26/08/2026;Voli garantiti 7-10 e 18-21
+Revocato;Ferroviario;24/09/2026;25/09/2026;"USB Lavoro Privato; Orsa Ferrovie";Personale Gruppo FS e Italo;Dalle 21:00 del 24 alle 21:00 del 25;Nazionale;;;02/09/2026;03/09/2026;Revocato il 22/09/2026
+Effettuato;Trasporto pubblico locale;29/09/2026;29/09/2026;"Filt Cgil; Uiltrasporti";Personale ACTV;Intera giornata con fasce 6:00-8:59 e 16:30-19:29;Locale;Veneto;Venezia;08/09/2026;09/09/2026;Navigazione e automobilistico
+Effettuato;Trasporto pubblico locale;06/10/2026;06/10/2026;"Faisa Confail; Cobas Lavoro Privato";Personale ATAC;4 ore: 20:00-24:00;Locale;Lazio;Roma;15/09/2026;16/09/2026;
+Effettuato;Generale;16/10/2026;16/10/2026;"USB; CUB; SI Cobas; ADL Cobas; Cobas Scuola";Tutti i settori pubblici e privati;"Intera giornata; trasporti secondo le modalità di settore";Nazionale;;;18/09/2026;19/09/2026;Sciopero generale
+Effettuato;Ferroviario;15/10/2026;16/10/2026;"USB; CUB Trasporti; SI Cobas";Personale Gruppo FS, Italo, Trenord;Dalle 21:00 del 15 alle 21:00 del 16;Nazionale;;;18/09/2026;19/09/2026;Adesione allo sciopero generale
+Effettuato;Trasporto pubblico locale;16/10/2026;16/10/2026;"USB; CUB Trasporti";Personale ATM Milano;Dalle 8:45 alle 15:00 e dalle 18:00 a fine servizio;Locale;Lombardia;Milano;18/09/2026;19/09/2026;Adesione allo sciopero generale
+Effettuato;Trasporto pubblico locale;16/10/2026;16/10/2026;"USB; CUB Trasporti; Cobas";Personale ATAC e Roma TPL;Dalle 8:30 alle 17:00 e dalle 20:00 a fine servizio;Locale;Lazio;Roma;18/09/2026;19/09/2026;Adesione allo sciopero generale
+Effettuato;Trasporto pubblico locale;16/10/2026;16/10/2026;USB;Personale ACTV;Intera giornata con fasce 6:00-8:59 e 16:30-19:29;Locale;Veneto;Venezia;18/09/2026;19/09/2026;Adesione allo sciopero generale
+Effettuato;Aereo;16/10/2026;16/10/2026;"USB; CUB Trasporti";Personale aeroportuale;Intera giornata, voli garantiti 7-10 e 18-21;Nazionale;;;18/09/2026;19/09/2026;Adesione allo sciopero generale
+Effettuato;Marittimo;16/10/2026;16/10/2026;USB;Personale imprese portuali;Intera giornata;Locale;Liguria;Genova;20/09/2026;21/09/2026;
+Proclamato;Taxi;23/10/2026;23/10/2026;"Unica Taxi; Uritaxi; Ugl Taxi";Tassisti;Dalle 8:00 alle 22:00;Locale;Lazio;Roma;08/10/2026;08/10/2026;
+Differito;Aereo;30/10/2026;30/10/2026;"Cub Trasporti; Usb";Personale ENAV e handling;Dalle 10:00 alle 18:00;Nazionale;;;29/09/2026;30/09/2026;Differito al 13/11/2026 a seguito di indicazione immediata della Commissione di Garanzia
+Proclamato;Ferroviario;06/11/2026;07/11/2026;"Orsa Ferrovie; Fast Confsal";Personale mobile;Dalle 21:00 del 6 alle 21:00 del 7;Nazionale;;;15/10/2026;16/10/2026;
+Proclamato;Aereo;13/11/2026;13/11/2026;"Cub Trasporti; Usb";Personale ENAV e handling;Dalle 10:00 alle 18:00;Nazionale;;;14/10/2026;14/10/2026;Nuova data dopo differimento
+Proclamato;Generale;20/11/2026;20/11/2026;"USB; CUB; SGB";Tutti i settori pubblici e privati;Intera giornata;Nazionale;;;20/10/2026;21/10/2026;In attesa di valutazione della Commissione
+Revocato;Trasporto pubblico locale;09/10/2026;09/10/2026;Orsa TPL;Personale GTT;4 ore: 17:30-21:30;Locale;Piemonte;Torino;18/09/2026;18/09/2026;Revocato il 07/10/2026
+Effettuato;Trasporto pubblico locale;02/10/2026;02/10/2026;Usb;Personale ANM;24 ore con fasce di garanzia;Locale;Campania;Napoli;11/09/2026;12/09/2026;
+Effettuato;Autostrade;26/09/2026;27/09/2026;"Filt Cgil; Fit Cisl; Uiltrasporti";Personale caselli;Dalle 22:00 del 26 alle 22:00 del 27;Nazionale;;;28/08/2026;29/08/2026;

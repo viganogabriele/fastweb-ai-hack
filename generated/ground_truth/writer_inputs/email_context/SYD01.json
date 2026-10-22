@@ -1,0 +1,2405 @@
+{
+ "store": {
+  "store_id": "SYD01",
+  "store_name": "Sydney Castlereagh Street",
+  "store_type": "Boutique",
+  "city": "Sydney",
+  "country_code": "AU",
+  "country": "Australia",
+  "region": "APAC",
+  "subregion": "Oceania",
+  "language": "en",
+  "timezone": "Australia/Sydney",
+  "currency": "AUD",
+  "lat": -33.869,
+  "lon": 151.208,
+  "sqm": 260,
+  "opening_date": "2018-04-12",
+  "hemi": "S",
+  "closed_dow": [],
+  "store_manager": "Chloe Mitchell",
+  "assistant_manager": "Arjun Patel"
+ },
+ "days": [
+  {
+   "date": "2026-08-31",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 5550.0,
+   "budget_lc": 13220.0,
+   "vs_budget_pct": -58.0,
+   "units": 5,
+   "receipts": 3,
+   "visitors": 49,
+   "conversion": 0.0612,
+   "top_sellers": [
+    "CASHMERE SCARF grey melange x1",
+    "LOGO BEANIE white x1",
+    "LOGO CAP black x1",
+    "LOGO CARDIGAN black x1",
+    "TRICOT PADDED CARDIGAN navy x1"
+   ],
+   "customer_mix": {
+    "AU": 0.6,
+    "OTHER": 0.2,
+    "CN": 0.2
+   },
+   "unmet_requests": [
+    "HERMINE navy size 0 x1",
+    "BADY black size 00 x1",
+    "TIB black size 1 x1",
+    "TIB off-white size 1 x1",
+    "TRICOT PADDED CARDIGAN navy size XL x1",
+    "CABLE KNIT SWEATER black size XXL x1"
+   ],
+   "zero_stock_key_sizes": [
+    "FLAMMETTE black 0",
+    "FLAMMETTE black 2",
+    "MAYA black 5",
+    "MAYA navy 2",
+    "MONTCLA navy 4",
+    "KARAKORUM navy 3",
+    "KARAKORUM navy 5",
+    "MONTGENEVRE black 2",
+    "CABLE KNIT SWEATER black S",
+    "TRAILGRIP GTX black 43"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality"
+   ]
+  },
+  {
+   "date": "2026-09-01",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 7700.0,
+   "budget_lc": 12450.0,
+   "vs_budget_pct": -38.2,
+   "units": 4,
+   "receipts": 3,
+   "visitors": 42,
+   "conversion": 0.0714,
+   "top_sellers": [
+    "LOGO HOODIE black x1",
+    "TRAILGRIP W black x1",
+    "MAIRE off-white x1",
+    "BADY black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.75,
+    "NZ": 0.25
+   },
+   "unmet_requests": [
+    "TIB off-white size 5 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "FLAMMETTE black 0",
+    "FLAMMETTE black 2",
+    "MAYA black 5",
+    "MAYA navy 2",
+    "MONTCLA navy 4",
+    "KARAKORUM navy 3",
+    "KARAKORUM navy 5",
+    "MONTGENEVRE black 2",
+    "CABLE KNIT SWEATER black S",
+    "TRAILGRIP GTX black 43"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality"
+   ]
+  },
+  {
+   "date": "2026-09-02",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 5850.0,
+   "budget_lc": 13100.0,
+   "vs_budget_pct": -55.3,
+   "units": 5,
+   "receipts": 3,
+   "visitors": 46,
+   "conversion": 0.0652,
+   "top_sellers": [
+    "TECH GLOVES black x1",
+    "LOGO T-SHIRT navy x1",
+    "LOGO HOODIE grey melange x1",
+    "LOGO CARDIGAN navy x1",
+    "TIB black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.8,
+    "OTHER": 0.2
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "FLAMMETTE black 2",
+    "MAYA navy 2",
+    "MONTGENEVRE black 2",
+    "TRAILGRIP GTX black 43"
+   ],
+   "returns": [],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600177",
+     "lines": 51,
+     "units": 57,
+     "planned": "2026-09-02",
+     "delay_days": 0,
+     "wrong_items": false
+    }
+   ],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality"
+   ]
+  },
+  {
+   "date": "2026-09-03",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 19350.0,
+   "budget_lc": 17930.0,
+   "vs_budget_pct": 7.9,
+   "units": 10,
+   "receipts": 6,
+   "visitors": 59,
+   "conversion": 0.1017,
+   "top_sellers": [
+    "CHAMONIX black x2",
+    "LOGO HOODIE black x2",
+    "LOGO T-SHIRT black x1",
+    "CREWNECK SWEATSHIRT white x1",
+    "KARAKORUM navy x1"
+   ],
+   "customer_mix": {
+    "AU": 0.5,
+    "CN": 0.3,
+    "OTHER": 0.1,
+    "US": 0.1
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "FLAMMETTE black 2",
+    "MAYA navy 2",
+    "KARAKORUM navy 4",
+    "MONTGENEVRE black 2",
+    "LOGO HOODIE black S",
+    "TRAILGRIP GTX black 43"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality"
+   ]
+  },
+  {
+   "date": "2026-09-04",
+   "weekday": "Friday",
+   "open": 1.0,
+   "net_sales_lc": 21850.0,
+   "budget_lc": 21440.0,
+   "vs_budget_pct": 1.9,
+   "units": 14,
+   "receipts": 12,
+   "visitors": 72,
+   "conversion": 0.1667,
+   "top_sellers": [
+    "LOGO T-SHIRT black x2",
+    "CREWNECK SWEATSHIRT white x2",
+    "LOGO BEANIE white x1",
+    "LOGO HOODIE black x1",
+    "CREWNECK SWEATSHIRT black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.71,
+    "US": 0.14,
+    "CN": 0.07,
+    "OTHER": 0.07
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "FLAMMETTE black 2",
+    "MAYA navy 2",
+    "KARAKORUM navy 4",
+    "MONTGENEVRE black 2",
+    "LOGO HOODIE black S",
+    "CREWNECK SWEATSHIRT white M",
+    "TRAILGRIP GTX black 43"
+   ],
+   "returns": [
+    "MAIRE 1 reason=COLOUR",
+    "LOGO T-SHIRT S reason=SIZE"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality"
+   ]
+  },
+  {
+   "date": "2026-09-05",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 42400.0,
+   "budget_lc": 27290.0,
+   "vs_budget_pct": 55.4,
+   "units": 25,
+   "receipts": 16,
+   "visitors": 118,
+   "conversion": 0.1356,
+   "top_sellers": [
+    "LOGO CAP black x2",
+    "TRAILGRIP GTX black x2",
+    "TIB navy x2",
+    "POLO black x2",
+    "BADY black x2"
+   ],
+   "customer_mix": {
+    "AU": 0.68,
+    "CN": 0.24,
+    "NZ": 0.04,
+    "US": 0.04
+   },
+   "unmet_requests": [
+    "LOGO HOODIE black size S x1",
+    "LOGO HOODIE grey melange size XXL x1",
+    "TRAILGRIP GTX black size 43 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "FLAMMETTE black 2",
+    "MAYA navy 2",
+    "MONTCLA navy 5",
+    "MONTGENEVRE black 2",
+    "MONTGENEVRE black 5",
+    "LOGO HOODIE black S",
+    "CREWNECK SWEATSHIRT white M",
+    "POLO black L",
+    "TRAILGRIP GTX black 42",
+    "TRAILGRIP GTX black 43"
+   ],
+   "returns": [
+    "KARAKORUM 4 reason=SIZE"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality"
+   ]
+  },
+  {
+   "date": "2026-09-06",
+   "weekday": "Sunday",
+   "open": 1.0,
+   "net_sales_lc": 24750.0,
+   "budget_lc": 18240.0,
+   "vs_budget_pct": 35.7,
+   "units": 13,
+   "receipts": 11,
+   "visitors": 58,
+   "conversion": 0.1897,
+   "top_sellers": [
+    "LOGO HOODIE black x2",
+    "WOOL TURTLENECK black x2",
+    "TRAILGRIP GTX black x1",
+    "LOGO T-SHIRT black x1",
+    "CREWNECK SWEATSHIRT black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.69,
+    "US": 0.08,
+    "CN": 0.08,
+    "OTHER": 0.08
+   },
+   "unmet_requests": [
+    "MONTCLA navy size 5 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "FLAMMETTE black 2",
+    "MAYA navy 2",
+    "MONTCLA navy 5",
+    "MONTGENEVRE black 2",
+    "MONTGENEVRE black 5",
+    "LOGO HOODIE black S",
+    "CREWNECK SWEATSHIRT white M",
+    "POLO black L",
+    "TRAILGRIP GTX black 42",
+    "TRAILGRIP GTX black 43"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality"
+   ]
+  },
+  {
+   "date": "2026-09-07",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 15400.0,
+   "budget_lc": 14340.0,
+   "vs_budget_pct": 7.4,
+   "units": 11,
+   "receipts": 7,
+   "visitors": 52,
+   "conversion": 0.1346,
+   "top_sellers": [
+    "CASHMERE SCARF black x2",
+    "CASHMERE SCARF grey melange x1",
+    "LOGO BEANIE white x1",
+    "LOGO BEANIE powder pink x1",
+    "CREWNECK SWEATSHIRT white x1"
+   ],
+   "customer_mix": {
+    "AU": 0.82,
+    "CN": 0.18
+   },
+   "unmet_requests": [
+    "TIB off-white size 7 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "BADY black 2",
+    "FLAMMETTE black 2",
+    "MAYA navy 2",
+    "MONTCLA navy 5",
+    "KARAKORUM navy 4",
+    "MONTGENEVRE black 2",
+    "MONTGENEVRE black 5",
+    "LOGO CARDIGAN navy L",
+    "LOGO HOODIE black S",
+    "CREWNECK SWEATSHIRT white M"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality"
+   ]
+  },
+  {
+   "date": "2026-09-08",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 6500.0,
+   "budget_lc": 13650.0,
+   "vs_budget_pct": -52.4,
+   "units": 5,
+   "receipts": 3,
+   "visitors": 36,
+   "conversion": 0.0833,
+   "top_sellers": [
+    "LOGO T-SHIRT navy x2",
+    "CREWNECK SWEATSHIRT black x1",
+    "CABLE KNIT SWEATER black x1",
+    "MAYA navy x1"
+   ],
+   "customer_mix": {
+    "AU": 0.8,
+    "CN": 0.2
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "BADY black 2",
+    "FLAMMETTE black 2",
+    "MAYA navy 2",
+    "MAYA navy 5",
+    "MONTCLA navy 5",
+    "KARAKORUM navy 4",
+    "MONTGENEVRE black 2",
+    "MONTGENEVRE black 5",
+    "LOGO CARDIGAN navy L",
+    "LOGO HOODIE black S"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality"
+   ]
+  },
+  {
+   "date": "2026-09-09",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 17850.0,
+   "budget_lc": 13690.0,
+   "vs_budget_pct": 30.4,
+   "units": 10,
+   "receipts": 9,
+   "visitors": 54,
+   "conversion": 0.1667,
+   "top_sellers": [
+    "ILVARO black x2",
+    "CASHMERE SCARF grey melange x1",
+    "LOGO BEANIE navy x1",
+    "LOGO T-SHIRT navy x1",
+    "LOGO T-SHIRT white x1"
+   ],
+   "customer_mix": {
+    "AU": 0.8,
+    "US": 0.1,
+    "OTHER": 0.1
+   },
+   "unmet_requests": [
+    "MAYA olive size 2 x1",
+    "WOOL TURTLENECK black size S x1"
+   ],
+   "zero_stock_key_sizes": [
+    "BADY black 2",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "MAYA navy 5",
+    "MONTCLA navy 5",
+    "KARAKORUM navy 4",
+    "MONTGENEVRE black 5",
+    "LOGO CARDIGAN navy L",
+    "LOGO T-SHIRT navy S",
+    "POLO black L"
+   ],
+   "returns": [],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600223",
+     "lines": 38,
+     "units": 44,
+     "planned": "2026-09-09",
+     "delay_days": 0,
+     "wrong_items": false
+    }
+   ],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality"
+   ]
+  },
+  {
+   "date": "2026-09-10",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 7500.0,
+   "budget_lc": 14860.0,
+   "vs_budget_pct": -49.5,
+   "units": 4,
+   "receipts": 4,
+   "visitors": 45,
+   "conversion": 0.0889,
+   "top_sellers": [
+    "LOGO BEANIE white x1",
+    "LOGO CAP navy x1",
+    "MAYA navy x1",
+    "FLAMMETTE black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.75,
+    "OTHER": 0.25
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "BADY black 2",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "MAYA navy 3",
+    "MAYA navy 5",
+    "MONTCLA navy 5",
+    "KARAKORUM navy 4",
+    "MONTGENEVRE black 5",
+    "LOGO CARDIGAN navy L",
+    "LOGO T-SHIRT navy S"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-11",
+   "weekday": "Friday",
+   "open": 1.0,
+   "net_sales_lc": 14350.0,
+   "budget_lc": 18720.0,
+   "vs_budget_pct": -23.3,
+   "units": 10,
+   "receipts": 5,
+   "visitors": 64,
+   "conversion": 0.0781,
+   "top_sellers": [
+    "LOGO T-SHIRT black x3",
+    "CREWNECK SWEATSHIRT black x2",
+    "LOGO HOODIE black x1",
+    "LOGO CARDIGAN navy x1",
+    "TRICOT PADDED CARDIGAN black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.6,
+    "CN": 0.3,
+    "OTHER": 0.1
+   },
+   "unmet_requests": [
+    "LOGO HOODIE black size XS x1",
+    "TRAILGRIP GTX black size 44 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "BADY black 2",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "MAYA navy 3",
+    "MAYA navy 5",
+    "MONTCLA black 2",
+    "MONTCLA navy 5",
+    "KARAKORUM navy 2",
+    "KARAKORUM navy 4",
+    "MONTGENEVRE black 5"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-12",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 25450.0,
+   "budget_lc": 24940.0,
+   "vs_budget_pct": 2.0,
+   "units": 14,
+   "receipts": 9,
+   "visitors": 77,
+   "conversion": 0.1169,
+   "top_sellers": [
+    "LOGO HOODIE black x2",
+    "LOGO BEANIE navy x1",
+    "LOGO CAP black x1",
+    "MAKAIO BACKPACK navy x1",
+    "LOGO T-SHIRT black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.71,
+    "OTHER": 0.14,
+    "CN": 0.14
+   },
+   "unmet_requests": [
+    "WOOL TURTLENECK black size XL x1",
+    "WOOL TURTLENECK navy size XXL x1"
+   ],
+   "zero_stock_key_sizes": [
+    "BADY black 2",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "MAYA navy 3",
+    "MAYA navy 5",
+    "MONTCLA black 2",
+    "MONTCLA navy 5",
+    "KARAKORUM navy 2",
+    "KARAKORUM navy 4"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-13",
+   "weekday": "Sunday",
+   "open": 1.0,
+   "net_sales_lc": 6150.0,
+   "budget_lc": 17990.0,
+   "vs_budget_pct": -65.8,
+   "units": 4,
+   "receipts": 2,
+   "visitors": 51,
+   "conversion": 0.0392,
+   "top_sellers": [
+    "TRAILGRIP GTX black x1",
+    "LEGERE BELT BAG black x1",
+    "CREWNECK SWEATSHIRT black x1",
+    "MONTCLA navy x1"
+   ],
+   "customer_mix": {
+    "AU": 1.0
+   },
+   "unmet_requests": [
+    "AMBRINE black size 0 x1",
+    "MONTGENEVRE grey melange size 5 x1",
+    "ROSIERE black size 4 x1",
+    "CABLE KNIT SWEATER off-white size XS x1"
+   ],
+   "zero_stock_key_sizes": [
+    "BADY black 2",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "MAYA navy 3",
+    "MAYA navy 5",
+    "MONTCLA black 2",
+    "MONTCLA navy 2",
+    "MONTCLA navy 5",
+    "KARAKORUM navy 2"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-14",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 9100.0,
+   "budget_lc": 12080.0,
+   "vs_budget_pct": -24.7,
+   "units": 5,
+   "receipts": 4,
+   "visitors": null,
+   "conversion": null,
+   "top_sellers": [
+    "LOGO BEANIE black x1",
+    "LOGO CAP black x1",
+    "TRICOT PADDED CARDIGAN black x1",
+    "MAYA olive x1",
+    "ILVARO black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.8,
+    "US": 0.2
+   },
+   "unmet_requests": [
+    "AMBRINE black size 2 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "BADY black 2",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "MAYA navy 3",
+    "MAYA navy 5",
+    "MONTCLA black 2",
+    "MONTCLA navy 2",
+    "MONTCLA navy 5",
+    "KARAKORUM navy 2"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 7600.0,
+   "budget_lc": 12010.0,
+   "vs_budget_pct": -36.7,
+   "units": 5,
+   "receipts": 4,
+   "visitors": 38,
+   "conversion": 0.1053,
+   "top_sellers": [
+    "LOGO HOODIE black x2",
+    "LOGO CAP navy x1",
+    "TRICOT PADDED CARDIGAN black x1",
+    "MAIRE navy x1"
+   ],
+   "customer_mix": {
+    "AU": 0.6,
+    "OTHER": 0.2,
+    "CN": 0.2
+   },
+   "unmet_requests": [
+    "KARAKORUM grey melange size 4 x1",
+    "LOGO HOODIE grey melange size S x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE navy 0",
+    "BADY black 2",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "MAYA navy 3",
+    "MAYA navy 5",
+    "MONTCLA black 2",
+    "MONTCLA navy 2",
+    "MONTCLA navy 5"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-16",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 15000.0,
+   "budget_lc": 12780.0,
+   "vs_budget_pct": 17.4,
+   "units": 9,
+   "receipts": 7,
+   "visitors": 45,
+   "conversion": 0.1556,
+   "top_sellers": [
+    "CREWNECK SWEATSHIRT white x3",
+    "CHAMONIX black x1",
+    "PEYRE black x1",
+    "CASHMERE SCARF grey melange x1",
+    "LOGO T-SHIRT black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.67,
+    "CN": 0.22,
+    "US": 0.11
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE navy 0",
+    "BADY black 1",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "MAYA navy 3",
+    "MONTCLA black 2",
+    "MONTCLA navy 2",
+    "KARAKORUM navy 2",
+    "LOGO CARDIGAN navy S"
+   ],
+   "returns": [],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600269",
+     "lines": 56,
+     "units": 69,
+     "planned": "2026-09-16",
+     "delay_days": 0,
+     "wrong_items": false
+    }
+   ],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-17",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 9050.0,
+   "budget_lc": 14730.0,
+   "vs_budget_pct": -38.6,
+   "units": 7,
+   "receipts": 2,
+   "visitors": 41,
+   "conversion": 0.0488,
+   "top_sellers": [
+    "LOGO CARDIGAN black x2",
+    "LOGO CAP navy x1",
+    "LOGO HOODIE black x1",
+    "WOOL TURTLENECK navy x1",
+    "CABLE KNIT SWEATER black x1"
+   ],
+   "customer_mix": {
+    "AU": 1.0
+   },
+   "unmet_requests": [
+    "POLO navy size XS x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE navy 0",
+    "BADY black 1",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "MAYA navy 3",
+    "MONTCLA black 2",
+    "MONTCLA navy 2",
+    "KARAKORUM navy 2",
+    "LOGO CARDIGAN navy S"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-18",
+   "weekday": "Friday",
+   "open": 1.0,
+   "net_sales_lc": 15200.0,
+   "budget_lc": 17110.0,
+   "vs_budget_pct": -11.2,
+   "units": 9,
+   "receipts": 9,
+   "visitors": 62,
+   "conversion": 0.1452,
+   "top_sellers": [
+    "CABLE KNIT SWEATER black x2",
+    "LEGERE BELT BAG black x1",
+    "LOGO T-SHIRT black x1",
+    "MAKAIO BACKPACK black x1",
+    "LOGO HOODIE black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.67,
+    "OTHER": 0.11,
+    "US": 0.11,
+    "NZ": 0.11
+   },
+   "unmet_requests": [
+    "LOGO CAP navy size TU x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE navy 0",
+    "BADY black 1",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "MAYA navy 3",
+    "MONTCLA black 2",
+    "MONTCLA navy 2",
+    "KARAKORUM navy 2",
+    "LOGO CARDIGAN navy S"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-19",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 15800.0,
+   "budget_lc": 22990.0,
+   "vs_budget_pct": -31.3,
+   "units": 10,
+   "receipts": 4,
+   "visitors": 76,
+   "conversion": 0.0526,
+   "top_sellers": [
+    "LOGO CARDIGAN navy x2",
+    "LOGO BEANIE navy x1",
+    "LOGO CAP white x1",
+    "POLO black x1",
+    "LOGO T-SHIRT black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.5,
+    "CN": 0.3,
+    "OTHER": 0.2
+   },
+   "unmet_requests": [
+    "TRICOT PADDED CARDIGAN black size M x1",
+    "TRAILGRIP GTX black size 41 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE navy 0",
+    "BADY black 1",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "MAYA navy 3",
+    "MONTCLA black 2",
+    "MONTCLA navy 2",
+    "KARAKORUM navy 2",
+    "LOGO CARDIGAN navy S"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-20",
+   "weekday": "Sunday",
+   "open": 1.0,
+   "net_sales_lc": 10900.0,
+   "budget_lc": 14560.0,
+   "vs_budget_pct": -25.1,
+   "units": 9,
+   "receipts": 6,
+   "visitors": 52,
+   "conversion": 0.1154,
+   "top_sellers": [
+    "CABLE KNIT SWEATER off-white x2",
+    "LOGO BEANIE navy x1",
+    "LEGERE BELT BAG black x1",
+    "LOGO CAP black x1",
+    "LOGO T-SHIRT white x1"
+   ],
+   "customer_mix": {
+    "AU": 0.78,
+    "OTHER": 0.22
+   },
+   "unmet_requests": [
+    "LOGO CARDIGAN black size XL x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE navy 0",
+    "BADY black 1",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "MAYA navy 3",
+    "MONTCLA black 2",
+    "MONTCLA navy 2",
+    "KARAKORUM navy 2",
+    "LOGO CARDIGAN navy S"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-21",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 12135.0,
+   "budget_lc": 11670.0,
+   "vs_budget_pct": 4.0,
+   "units": 8,
+   "receipts": 6,
+   "visitors": 41,
+   "conversion": 0.1463,
+   "top_sellers": [
+    "TRAILGRIP GTX grey melange x1",
+    "TRAILGRIP GTX black x1",
+    "POLO black x1",
+    "LOGO T-SHIRT white x1",
+    "LOGO HOODIE black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.62,
+    "CN": 0.25,
+    "OTHER": 0.12
+   },
+   "unmet_requests": [
+    "LOGO BEANIE navy size TU x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE navy 0",
+    "BADY black 1",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "MAYA navy 3",
+    "MONTCLA black 2",
+    "MONTCLA navy 2",
+    "KARAKORUM navy 2",
+    "LOGO CARDIGAN navy S"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-22",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 14800.0,
+   "budget_lc": 11120.0,
+   "vs_budget_pct": 33.1,
+   "units": 11,
+   "receipts": 8,
+   "visitors": 49,
+   "conversion": 0.1633,
+   "top_sellers": [
+    "MAKAIO BACKPACK black x2",
+    "LEGERE BELT BAG black x1",
+    "POLO black x1",
+    "CREWNECK SWEATSHIRT black x1",
+    "LOGO CARDIGAN black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.73,
+    "CN": 0.09,
+    "US": 0.09,
+    "OTHER": 0.09
+   },
+   "unmet_requests": [
+    "MAYA olive size 1 x1",
+    "LOGO HOODIE black size XS x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE navy 0",
+    "BADY black 1",
+    "FLAMMETTE black 1",
+    "ILVARO black 0",
+    "ILVARO black 1",
+    "MAYA navy 3",
+    "MONTCLA black 2",
+    "MONTCLA navy 2",
+    "KARAKORUM navy 2",
+    "LOGO CARDIGAN black L"
+   ],
+   "returns": [
+    "CABLE KNIT SWEATER L reason=COLOUR"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-23",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 6500.0,
+   "budget_lc": 11980.0,
+   "vs_budget_pct": -45.7,
+   "units": 6,
+   "receipts": 4,
+   "visitors": 54,
+   "conversion": 0.0741,
+   "top_sellers": [
+    "LOGO T-SHIRT white x1",
+    "LOGO T-SHIRT navy x1",
+    "LOGO T-SHIRT black x1",
+    "CREWNECK SWEATSHIRT black x1",
+    "LOGO CARDIGAN black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.83,
+    "CN": 0.17
+   },
+   "unmet_requests": [
+    "TIB navy size 5 x1",
+    "LOGO CARDIGAN black size XS x1"
+   ],
+   "zero_stock_key_sizes": [
+    "BADY black 1",
+    "LOGO CARDIGAN black L",
+    "CABLE KNIT SWEATER black M",
+    "POLO black S",
+    "TRAILGRIP W black 39"
+   ],
+   "returns": [],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600314",
+     "lines": 40,
+     "units": 51,
+     "planned": "2026-09-23",
+     "delay_days": 0,
+     "wrong_items": false
+    }
+   ],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-24",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 11850.0,
+   "budget_lc": 13700.0,
+   "vs_budget_pct": -13.5,
+   "units": 8,
+   "receipts": 7,
+   "visitors": 49,
+   "conversion": 0.1429,
+   "top_sellers": [
+    "LOGO CAP black x1",
+    "LEGERE BELT BAG black x1",
+    "LOGO T-SHIRT white x1",
+    "LOGO T-SHIRT black x1",
+    "LOGO CARDIGAN black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.88,
+    "CN": 0.12
+   },
+   "unmet_requests": [
+    "BADY black size 4 x1",
+    "TRAILGRIP W black size 39 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "BADY black 1",
+    "BADY black 2",
+    "LOGO CARDIGAN black L",
+    "CABLE KNIT SWEATER black M",
+    "POLO black S",
+    "TRAILGRIP W black 39"
+   ],
+   "returns": [
+    "MAKAIO BACKPACK TU reason=GIFT"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-25",
+   "weekday": "Friday",
+   "open": 1.0,
+   "net_sales_lc": 8700.0,
+   "budget_lc": 16850.0,
+   "vs_budget_pct": -48.4,
+   "units": 5,
+   "receipts": 5,
+   "visitors": 60,
+   "conversion": 0.0833,
+   "top_sellers": [
+    "MAKAIO BACKPACK black x1",
+    "POLO black x1",
+    "LOGO CARDIGAN navy x1",
+    "TRICOT PADDED CARDIGAN black x1",
+    "MAYA navy x1"
+   ],
+   "customer_mix": {
+    "AU": 0.6,
+    "CN": 0.2,
+    "NZ": 0.2
+   },
+   "unmet_requests": [
+    "CABLE KNIT SWEATER off-white size XL x1"
+   ],
+   "zero_stock_key_sizes": [
+    "BADY black 1",
+    "BADY black 2",
+    "LOGO CARDIGAN black L",
+    "LOGO CARDIGAN navy S",
+    "CABLE KNIT SWEATER black M",
+    "POLO black S",
+    "TRAILGRIP W black 39"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-26",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 24750.0,
+   "budget_lc": 22960.0,
+   "vs_budget_pct": 7.8,
+   "units": 17,
+   "receipts": 8,
+   "visitors": 84,
+   "conversion": 0.0952,
+   "top_sellers": [
+    "LOGO T-SHIRT black x4",
+    "LOGO HOODIE black x2",
+    "ILVARO black x2",
+    "LOGO BEANIE white x1",
+    "LOGO T-SHIRT navy x1"
+   ],
+   "customer_mix": {
+    "AU": 0.59,
+    "CN": 0.29,
+    "OTHER": 0.06,
+    "NZ": 0.06
+   },
+   "unmet_requests": [
+    "ECRINS black size 3 x1",
+    "TRICOT PADDED CARDIGAN black size XL x1"
+   ],
+   "zero_stock_key_sizes": [
+    "BADY black 1",
+    "BADY black 2",
+    "ILVARO black 0",
+    "MAYA navy 3",
+    "LOGO CARDIGAN black L",
+    "LOGO CARDIGAN navy S",
+    "CABLE KNIT SWEATER black M",
+    "POLO black S",
+    "TRAILGRIP W black 39"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-27",
+   "weekday": "Sunday",
+   "open": 1.0,
+   "net_sales_lc": 15870.0,
+   "budget_lc": 14280.0,
+   "vs_budget_pct": 11.1,
+   "units": 7,
+   "receipts": 5,
+   "visitors": 58,
+   "conversion": 0.0862,
+   "top_sellers": [
+    "POLARIS OVERSIZED black x1",
+    "LOGO HOODIE grey melange x1",
+    "LOGO HOODIE black x1",
+    "TRICOT PADDED CARDIGAN black x1",
+    "MONTCLA navy x1"
+   ],
+   "customer_mix": {
+    "AU": 0.71,
+    "US": 0.29
+   },
+   "unmet_requests": [
+    "LOGO CARDIGAN black size XS x1",
+    "LOGO CARDIGAN black size XXL x1"
+   ],
+   "zero_stock_key_sizes": [
+    "BADY black 1",
+    "BADY black 2",
+    "ILVARO black 0",
+    "ILVARO black 2",
+    "MAYA navy 3",
+    "MONTCLA navy 2",
+    "LOGO CARDIGAN black L",
+    "LOGO CARDIGAN navy S",
+    "TRICOT PADDED CARDIGAN black L",
+    "CABLE KNIT SWEATER black M"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-28",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 13000.0,
+   "budget_lc": 10850.0,
+   "vs_budget_pct": 19.8,
+   "units": 8,
+   "receipts": 5,
+   "visitors": 40,
+   "conversion": 0.125,
+   "top_sellers": [
+    "MAKAIO BACKPACK navy x1",
+    "POLO black x1",
+    "LOGO T-SHIRT white x1",
+    "CREWNECK SWEATSHIRT black x1",
+    "WOOL TURTLENECK black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.62,
+    "CN": 0.25,
+    "NZ": 0.12
+   },
+   "unmet_requests": [
+    "LOGO T-SHIRT black size XL x1"
+   ],
+   "zero_stock_key_sizes": [
+    "BADY black 1",
+    "BADY black 2",
+    "ILVARO black 0",
+    "ILVARO black 2",
+    "MAYA navy 3",
+    "MONTCLA navy 2",
+    "LOGO CARDIGAN black L",
+    "LOGO CARDIGAN navy S",
+    "TRICOT PADDED CARDIGAN black L",
+    "CABLE KNIT SWEATER black M"
+   ],
+   "returns": [
+    "TIB 4 reason=DEF"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-29",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 5500.0,
+   "budget_lc": 10610.0,
+   "vs_budget_pct": -48.2,
+   "units": 2,
+   "receipts": 1,
+   "visitors": 41,
+   "conversion": 0.0244,
+   "top_sellers": [
+    "HERMINE navy x1",
+    "CHAMBRE black x1"
+   ],
+   "customer_mix": {
+    "AU": 1.0
+   },
+   "unmet_requests": [
+    "LOGO CARDIGAN black size XL x1",
+    "LEGERE BELT BAG black size TU x1"
+   ],
+   "zero_stock_key_sizes": [
+    "BADY black 1",
+    "BADY black 2",
+    "ILVARO black 0",
+    "ILVARO black 2",
+    "MAYA navy 3",
+    "MONTCLA navy 2",
+    "LOGO CARDIGAN black L",
+    "LOGO CARDIGAN navy S",
+    "TRICOT PADDED CARDIGAN black L",
+    "CABLE KNIT SWEATER black M"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-09-30",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 12950.0,
+   "budget_lc": 11230.0,
+   "vs_budget_pct": 15.3,
+   "units": 9,
+   "receipts": 6,
+   "visitors": 49,
+   "conversion": 0.1224,
+   "top_sellers": [
+    "LOGO T-SHIRT black x2",
+    "POLARIS CAPE black x1",
+    "CHAMONIX black x1",
+    "POLARIS BALACLAVA black x1",
+    "TRAILGRIP GTX black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.78,
+    "CN": 0.11,
+    "OTHER": 0.11
+   },
+   "unmet_requests": [
+    "TRAILGRIP GTX black size 41 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "BADY black 2",
+    "ILVARO black 0",
+    "ILVARO black 2",
+    "MAYA navy 3",
+    "MONTCLA navy 2",
+    "LOGO CARDIGAN navy S",
+    "TRICOT PADDED CARDIGAN black L",
+    "LOGO T-SHIRT white M",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [
+    "TIB 4 reason=DEF"
+   ],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600359",
+     "lines": 48,
+     "units": 61,
+     "planned": "2026-09-30",
+     "delay_days": 0,
+     "wrong_items": false
+    }
+   ],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-01",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 14850.0,
+   "budget_lc": 12760.0,
+   "vs_budget_pct": 16.4,
+   "units": 9,
+   "receipts": 7,
+   "visitors": 41,
+   "conversion": 0.1707,
+   "top_sellers": [
+    "LOGO T-SHIRT black x2",
+    "LOGO CAP white x1",
+    "TRAILGRIP GTX black x1",
+    "LOGO HOODIE black x1",
+    "MAYA olive x1"
+   ],
+   "customer_mix": {
+    "AU": 0.78,
+    "US": 0.11,
+    "OTHER": 0.11
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "BADY black 2",
+    "ILVARO black 0",
+    "ILVARO black 2",
+    "MAYA navy 3",
+    "MONTCLA navy 2",
+    "LOGO CARDIGAN navy S",
+    "TRICOT PADDED CARDIGAN black L",
+    "LOGO T-SHIRT white M",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP W black 37"
+   ],
+   "returns": [
+    "TIB 4 reason=DEF"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-02",
+   "weekday": "Friday",
+   "open": 1.0,
+   "net_sales_lc": 11750.0,
+   "budget_lc": 15430.0,
+   "vs_budget_pct": -23.8,
+   "units": 7,
+   "receipts": 6,
+   "visitors": 56,
+   "conversion": 0.1071,
+   "top_sellers": [
+    "LOGO CAP black x1",
+    "POLO navy x1",
+    "LOGO HOODIE black x1",
+    "LOGO CARDIGAN black x1",
+    "TRICOT PADDED CARDIGAN black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.71,
+    "OTHER": 0.29
+   },
+   "unmet_requests": [
+    "ROSIERE black size 2 x1",
+    "TRICOT PADDED CARDIGAN black size L x1"
+   ],
+   "zero_stock_key_sizes": [
+    "BADY black 2",
+    "ILVARO black 0",
+    "ILVARO black 2",
+    "MAYA black 5",
+    "MAYA navy 3",
+    "MONTCLA navy 2",
+    "LOGO CARDIGAN navy S",
+    "TRICOT PADDED CARDIGAN black L",
+    "LOGO T-SHIRT white M",
+    "TRAILGRIP GTX black 41"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-03",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 17700.0,
+   "budget_lc": 20570.0,
+   "vs_budget_pct": -14.0,
+   "units": 9,
+   "receipts": 7,
+   "visitors": 66,
+   "conversion": 0.1061,
+   "top_sellers": [
+    "CASHMERE SCARF beige x1",
+    "LEGERE BELT BAG black x1",
+    "LOGO CARDIGAN black x1",
+    "WOOL TURTLENECK navy x1",
+    "TRAILGRIP W black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.89,
+    "CN": 0.11
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "BADY black 2",
+    "ILVARO black 0",
+    "ILVARO black 2",
+    "MAYA black 5",
+    "MAYA navy 3",
+    "MONTCLA navy 2",
+    "LOGO CARDIGAN navy S",
+    "TRICOT PADDED CARDIGAN black L",
+    "LOGO T-SHIRT white M",
+    "TRAILGRIP GTX black 41"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-04",
+   "weekday": "Sunday",
+   "open": 1.0,
+   "net_sales_lc": 9485.0,
+   "budget_lc": 13770.0,
+   "vs_budget_pct": -31.1,
+   "units": 8,
+   "receipts": 7,
+   "visitors": 47,
+   "conversion": 0.1489,
+   "top_sellers": [
+    "LOGO CAP white x1",
+    "LOGO CAP navy x1",
+    "TRAILGRIP GTX black x1",
+    "LOGO HOODIE grey melange x1",
+    "LOGO HOODIE black x1"
+   ],
+   "customer_mix": {
+    "AU": 1.0
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "BADY black 2",
+    "ILVARO black 0",
+    "ILVARO black 2",
+    "MAYA black 5",
+    "MAYA navy 3",
+    "MONTCLA navy 2",
+    "LOGO CARDIGAN navy S",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRICOT PADDED CARDIGAN black L",
+    "LOGO T-SHIRT white M"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-05",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 16250.0,
+   "budget_lc": 10040.0,
+   "vs_budget_pct": 61.9,
+   "units": 10,
+   "receipts": 9,
+   "visitors": 42,
+   "conversion": 0.2143,
+   "top_sellers": [
+    "LOGO T-SHIRT navy x2",
+    "POLO black x2",
+    "TRAILGRIP GTX grey melange x1",
+    "LOGO CAP white x1",
+    "MAYA black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.8,
+    "NZ": 0.1,
+    "CN": 0.1
+   },
+   "unmet_requests": [
+    "TRAILGRIP W black size 39 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "BADY black 2",
+    "ILVARO black 0",
+    "ILVARO black 2",
+    "MAYA black 2",
+    "MAYA black 5",
+    "MAYA navy 3",
+    "MONTCLA navy 2",
+    "LOGO CARDIGAN navy S",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRICOT PADDED CARDIGAN black L"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-06",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 12400.0,
+   "budget_lc": 9830.0,
+   "vs_budget_pct": 26.1,
+   "units": 7,
+   "receipts": 5,
+   "visitors": 39,
+   "conversion": 0.1282,
+   "top_sellers": [
+    "CREWNECK SWEATSHIRT black x2",
+    "LOGO T-SHIRT black x1",
+    "LOGO HOODIE black x1",
+    "MAIRE black x1",
+    "BADY black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.86,
+    "NZ": 0.14
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "BADY black 0",
+    "BADY black 2",
+    "FLAMMETTE black 2",
+    "ILVARO black 0",
+    "ILVARO black 2",
+    "MAYA black 2",
+    "MAYA black 5",
+    "MAYA navy 3",
+    "MONTCLA navy 2"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-07",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 11350.0,
+   "budget_lc": 10640.0,
+   "vs_budget_pct": 6.7,
+   "units": 6,
+   "receipts": 4,
+   "visitors": 29,
+   "conversion": 0.1379,
+   "top_sellers": [
+    "POLO black x1",
+    "LOGO HOODIE black x1",
+    "LOGO CARDIGAN black x1",
+    "TRICOT PADDED CARDIGAN grey melange x1",
+    "MAIRE off-white x1"
+   ],
+   "customer_mix": {
+    "AU": 0.83,
+    "CN": 0.17
+   },
+   "unmet_requests": [
+    "ECRINS black size 5 x1",
+    "LOGO CARDIGAN black size XL x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "BADY black 0",
+    "FLAMMETTE black 2",
+    "ILVARO black 2",
+    "MAYA black 2",
+    "MAYA black 5",
+    "LOGO CARDIGAN black L",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP GTX black 42"
+   ],
+   "returns": [],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600404",
+     "lines": 42,
+     "units": 52,
+     "planned": "2026-10-07",
+     "delay_days": 0,
+     "wrong_items": false
+    }
+   ],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-08",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 6950.0,
+   "budget_lc": 11850.0,
+   "vs_budget_pct": -41.4,
+   "units": 5,
+   "receipts": 3,
+   "visitors": 50,
+   "conversion": 0.06,
+   "top_sellers": [
+    "LOGO CAP black x1",
+    "POLO black x1",
+    "LOGO T-SHIRT black x1",
+    "MONTCLA navy x1",
+    "TIB off-white x1"
+   ],
+   "customer_mix": {
+    "AU": 0.8,
+    "CN": 0.2
+   },
+   "unmet_requests": [
+    "TRICOT PADDED CARDIGAN black size S x1",
+    "LOGO HOODIE black size XL x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "BADY black 0",
+    "FLAMMETTE black 2",
+    "ILVARO black 2",
+    "MAYA black 2",
+    "MAYA black 5",
+    "LOGO CARDIGAN black L",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP GTX black 42"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-09",
+   "weekday": "Friday",
+   "open": 1.0,
+   "net_sales_lc": 5600.0,
+   "budget_lc": 14460.0,
+   "vs_budget_pct": -61.3,
+   "units": 5,
+   "receipts": 3,
+   "visitors": 61,
+   "conversion": 0.0492,
+   "top_sellers": [
+    "LEGERE BELT BAG black x1",
+    "MAKAIO BACKPACK black x1",
+    "LOGO T-SHIRT white x1",
+    "LOGO T-SHIRT black x1",
+    "TRICOT PADDED CARDIGAN navy x1"
+   ],
+   "customer_mix": {
+    "AU": 0.8,
+    "NZ": 0.2
+   },
+   "unmet_requests": [
+    "MAYA olive size 3 x1",
+    "LOGO HOODIE grey melange size XXL x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "BADY black 0",
+    "FLAMMETTE black 2",
+    "ILVARO black 2",
+    "MAYA black 2",
+    "MAYA black 5",
+    "LOGO CARDIGAN black L",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41",
+    "TRAILGRIP GTX black 42"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-10",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 12800.0,
+   "budget_lc": 19110.0,
+   "vs_budget_pct": -33.0,
+   "units": 12,
+   "receipts": 8,
+   "visitors": 76,
+   "conversion": 0.1053,
+   "top_sellers": [
+    "CREWNECK SWEATSHIRT black x4",
+    "LOGO T-SHIRT navy x2",
+    "LOGO T-SHIRT white x1",
+    "POLARIS BALACLAVA black x1",
+    "TRICOT PADDED CARDIGAN grey melange x1"
+   ],
+   "customer_mix": {
+    "AU": 0.75,
+    "CN": 0.08,
+    "US": 0.08,
+    "NZ": 0.08
+   },
+   "unmet_requests": [
+    "LOGO HOODIE grey melange size XS x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAIRE black 2",
+    "BADY black 0",
+    "FLAMMETTE black 2",
+    "ILVARO black 2",
+    "MAYA black 2",
+    "MAYA black 5",
+    "LOGO CARDIGAN black L",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRAILGRIP GTX black 41"
+   ],
+   "returns": [
+    "TIB 5 reason=DEF"
+   ],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-11",
+   "weekday": "Sunday",
+   "open": 1.0,
+   "net_sales_lc": 9850.0,
+   "budget_lc": 12310.0,
+   "vs_budget_pct": -20.0,
+   "units": 6,
+   "receipts": 5,
+   "visitors": 45,
+   "conversion": 0.1111,
+   "top_sellers": [
+    "TRICOT PADDED CARDIGAN black x2",
+    "LEGERE BELT BAG black x1",
+    "MAKAIO BACKPACK black x1",
+    "LOGO T-SHIRT white x1",
+    "MAIRE off-white x1"
+   ],
+   "customer_mix": {
+    "AU": 0.83,
+    "NZ": 0.17
+   },
+   "unmet_requests": [
+    "TRAILGRIP GTX grey melange size 43 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAIRE black 2",
+    "BADY black 0",
+    "FLAMMETTE black 2",
+    "ILVARO black 2",
+    "MAYA black 2",
+    "MAYA black 5",
+    "LOGO CARDIGAN black L",
+    "TRICOT PADDED CARDIGAN black S",
+    "TRICOT PADDED CARDIGAN black L"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-12",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 5800.0,
+   "budget_lc": 9650.0,
+   "vs_budget_pct": -39.9,
+   "units": 4,
+   "receipts": 4,
+   "visitors": 34,
+   "conversion": 0.1176,
+   "top_sellers": [
+    "MAKAIO BACKPACK navy x1",
+    "POLO black x1",
+    "CREWNECK SWEATSHIRT black x1",
+    "MAIRE navy x1"
+   ],
+   "customer_mix": {
+    "AU": 0.5,
+    "CN": 0.25,
+    "OTHER": 0.25
+   },
+   "unmet_requests": [
+    "MAIRE black size 2 x1",
+    "BADY black size 0 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAIRE black 2",
+    "MAIRE navy 0",
+    "BADY black 0",
+    "FLAMMETTE black 2",
+    "ILVARO black 2",
+    "MAYA black 2",
+    "MAYA black 5",
+    "LOGO CARDIGAN black L",
+    "TRICOT PADDED CARDIGAN black S"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-13",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 13550.0,
+   "budget_lc": 9180.0,
+   "vs_budget_pct": 47.6,
+   "units": 7,
+   "receipts": 6,
+   "visitors": 39,
+   "conversion": 0.1538,
+   "top_sellers": [
+    "PEYRE black x1",
+    "TECH GLOVES black x1",
+    "MAKAIO BACKPACK navy x1",
+    "POLO navy x1",
+    "INSOLUX black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.43,
+    "CN": 0.29,
+    "OTHER": 0.14,
+    "US": 0.14
+   },
+   "unmet_requests": [
+    "LOGO CARDIGAN black size L x1",
+    "LOGO HOODIE black size XL x1",
+    "TRAILGRIP GTX black size 42 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAIRE black 2",
+    "MAIRE navy 0",
+    "BADY black 0",
+    "FLAMMETTE black 2",
+    "ILVARO black 2",
+    "MAYA black 2",
+    "MAYA black 5",
+    "LOGO CARDIGAN black L",
+    "TRICOT PADDED CARDIGAN black S"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-14",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 9600.0,
+   "budget_lc": 9390.0,
+   "vs_budget_pct": 2.2,
+   "units": 10,
+   "receipts": 8,
+   "visitors": 38,
+   "conversion": 0.2105,
+   "top_sellers": [
+    "POLO black x2",
+    "LOGO HOODIE black x2",
+    "LOGO CAP black x1",
+    "LOGO BEANIE navy x1",
+    "POLO navy x1"
+   ],
+   "customer_mix": {
+    "AU": 0.7,
+    "OTHER": 0.1,
+    "CN": 0.1,
+    "NZ": 0.1
+   },
+   "unmet_requests": [
+    "POLARIS CAPE black size L x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAIRE black 2",
+    "MAIRE navy 0",
+    "BADY black 0",
+    "FLAMMETTE black 2",
+    "ILVARO black 2",
+    "MAYA black 2",
+    "MAYA black 5",
+    "LOGO CARDIGAN black L",
+    "TRICOT PADDED CARDIGAN black S"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-15",
+   "weekday": "Thursday",
+   "open": 1.0,
+   "net_sales_lc": 6350.0,
+   "budget_lc": 11110.0,
+   "vs_budget_pct": -42.8,
+   "units": 5,
+   "receipts": 3,
+   "visitors": 47,
+   "conversion": 0.0638,
+   "top_sellers": [
+    "LOGO T-SHIRT white x1",
+    "LOGO T-SHIRT black x1",
+    "CREWNECK SWEATSHIRT black x1",
+    "CABLE KNIT SWEATER black x1",
+    "MAIRE navy x1"
+   ],
+   "customer_mix": {
+    "AU": 0.6,
+    "CN": 0.4
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAIRE black 2",
+    "MAIRE navy 0",
+    "BADY black 0",
+    "FLAMMETTE black 2",
+    "ILVARO black 2",
+    "MAYA black 2",
+    "MAYA black 5",
+    "LOGO CARDIGAN black L",
+    "TRICOT PADDED CARDIGAN black S"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-16",
+   "weekday": "Friday",
+   "open": 1.0,
+   "net_sales_lc": 6150.0,
+   "budget_lc": 12450.0,
+   "vs_budget_pct": -50.6,
+   "units": 6,
+   "receipts": 3,
+   "visitors": 52,
+   "conversion": 0.0577,
+   "top_sellers": [
+    "LOGO CAP black x2",
+    "LOGO CAP white x1",
+    "LOGO T-SHIRT black x1",
+    "CREWNECK SWEATSHIRT black x1",
+    "MONTCLA black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.67,
+    "CN": 0.33
+   },
+   "unmet_requests": [
+    "POLARIS CAPE black size L x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAIRE black 2",
+    "MAIRE navy 0",
+    "BADY black 0",
+    "FLAMMETTE black 2",
+    "ILVARO black 2",
+    "MAYA black 2",
+    "MAYA black 5",
+    "MONTCLA black 5",
+    "LOGO CARDIGAN black L"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-17",
+   "weekday": "Saturday",
+   "open": 1.0,
+   "net_sales_lc": 18450.0,
+   "budget_lc": 18560.0,
+   "vs_budget_pct": -0.6,
+   "units": 10,
+   "receipts": 5,
+   "visitors": 71,
+   "conversion": 0.0704,
+   "top_sellers": [
+    "POLARIS CAPE black x1",
+    "LOGO CAP white x1",
+    "TRAILGRIP GTX black x1",
+    "LEGERE BELT BAG black x1",
+    "LOGO T-SHIRT black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.5,
+    "US": 0.2,
+    "OTHER": 0.2,
+    "CN": 0.1
+   },
+   "unmet_requests": [
+    "MAIRE off-white size 1 x1",
+    "PEYRE black size 3 x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAIRE black 2",
+    "MAIRE navy 0",
+    "ILVARO black 2",
+    "MONTCLA black 5",
+    "MONTGENEVRE black 5",
+    "TRICOT PADDED CARDIGAN black L",
+    "LOGO T-SHIRT white L",
+    "INSOLUX black 38"
+   ],
+   "returns": [],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600449",
+     "lines": 48,
+     "units": 56,
+     "planned": "2026-10-14",
+     "delay_days": 3,
+     "wrong_items": false
+    }
+   ],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-18",
+   "weekday": "Sunday",
+   "open": 1.0,
+   "net_sales_lc": 7100.0,
+   "budget_lc": 11850.0,
+   "vs_budget_pct": -40.1,
+   "units": 7,
+   "receipts": 4,
+   "visitors": 42,
+   "conversion": 0.0952,
+   "top_sellers": [
+    "LOGO CAP black x2",
+    "TRICOT PADDED CARDIGAN black x2",
+    "LOGO CAP navy x1",
+    "LOGO T-SHIRT navy x1",
+    "LOGO T-SHIRT black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.57,
+    "US": 0.29,
+    "OTHER": 0.14
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAIRE black 2",
+    "MAIRE navy 0",
+    "ILVARO black 2",
+    "MONTCLA black 5",
+    "MONTGENEVRE black 5",
+    "TRICOT PADDED CARDIGAN black M",
+    "TRICOT PADDED CARDIGAN black L",
+    "LOGO T-SHIRT white L",
+    "INSOLUX black 38"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-19",
+   "weekday": "Monday",
+   "open": 1.0,
+   "net_sales_lc": 3350.0,
+   "budget_lc": 9060.0,
+   "vs_budget_pct": -63.0,
+   "units": 3,
+   "receipts": 2,
+   "visitors": 39,
+   "conversion": 0.0513,
+   "top_sellers": [
+    "POLO navy x1",
+    "POLO black x1",
+    "CHAMBRE black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.67,
+    "OTHER": 0.33
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAIRE black 2",
+    "MAIRE navy 0",
+    "ILVARO black 2",
+    "MONTCLA black 5",
+    "MONTGENEVRE black 5",
+    "TRICOT PADDED CARDIGAN black M",
+    "TRICOT PADDED CARDIGAN black L",
+    "LOGO T-SHIRT white L",
+    "INSOLUX black 38"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-20",
+   "weekday": "Tuesday",
+   "open": 1.0,
+   "net_sales_lc": 1900.0,
+   "budget_lc": 8370.0,
+   "vs_budget_pct": -77.3,
+   "units": 2,
+   "receipts": 2,
+   "visitors": 38,
+   "conversion": 0.0526,
+   "top_sellers": [
+    "LOGO CAP white x1",
+    "CABLE KNIT SWEATER black x1"
+   ],
+   "customer_mix": {
+    "AU": 0.5,
+    "OTHER": 0.5
+   },
+   "unmet_requests": [
+    "CREWNECK SWEATSHIRT black size XL x1"
+   ],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAIRE black 2",
+    "MAIRE navy 0",
+    "ILVARO black 2",
+    "MONTCLA black 5",
+    "MONTGENEVRE black 5",
+    "TRICOT PADDED CARDIGAN black M",
+    "TRICOT PADDED CARDIGAN black L",
+    "LOGO T-SHIRT white L",
+    "INSOLUX black 38"
+   ],
+   "returns": [],
+   "deliveries_received": [],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  },
+  {
+   "date": "2026-10-21",
+   "weekday": "Wednesday",
+   "open": 1.0,
+   "net_sales_lc": 9750.0,
+   "budget_lc": 9590.0,
+   "vs_budget_pct": 1.7,
+   "units": 5,
+   "receipts": 4,
+   "visitors": 39,
+   "conversion": 0.1026,
+   "top_sellers": [
+    "LOGO T-SHIRT navy x2",
+    "TRAILGRIP GTX black x1",
+    "MONTGENEVRE black x1",
+    "HERMINE off-white x1"
+   ],
+   "customer_mix": {
+    "AU": 0.6,
+    "CN": 0.2,
+    "OTHER": 0.2
+   },
+   "unmet_requests": [],
+   "zero_stock_key_sizes": [
+    "MAIRE black 1",
+    "MAIRE black 2",
+    "ILVARO black 2",
+    "MONTCLA black 5",
+    "MONTGENEVRE black 5",
+    "TRICOT PADDED CARDIGAN black M"
+   ],
+   "returns": [],
+   "deliveries_received": [
+    {
+     "shipment": "SHP02600494",
+     "lines": 34,
+     "units": 43,
+     "planned": "2026-10-21",
+     "delay_days": 0,
+     "wrong_items": false
+    }
+   ],
+   "active_events": [
+    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E16: Sydney: southern hemisphere spring, forecast uses northern seasonality",
+    "E42: ARNEB fits large - exchanges and returns"
+   ]
+  }
+ ]
+}

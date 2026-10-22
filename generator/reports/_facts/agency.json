@@ -1,0 +1,18 @@
+{
+ "window": "2026-09-15..2026-10-13",
+ "exposed_yoy": 10.0,
+ "control_yoy": -11.7,
+ "uplift": 21.7,
+ "footfall_uplift": 16.1,
+ "per_store_yoy": {
+  "NYC01": 30.8,
+  "NYC02": -8.5,
+  "BHS01": -1.4,
+  "LON01": 22.8,
+  "LON02": -5.2,
+  "MIA01": -9.5,
+  "ASP01": -28.5,
+  "TOR01": -8.8
+ },
+ "all6_yoy_full_flight": 12.3
+}

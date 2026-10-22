@@ -1,0 +1,201 @@
+{
+ "W36": {
+  "total_eur": 5558026,
+  "ly_eur": 5858814,
+  "d_rep": -5.1,
+  "d_lfl": -5.3,
+  "d_bud": -12.3,
+  "regions": {
+   "EMEA": {
+    "eur": 2271958,
+    "d_rep": -14.4,
+    "d_lfl": -14.4
+   },
+   "AMERICAS": {
+    "eur": 626142,
+    "d_rep": -1.0,
+    "d_lfl": -0.9
+   },
+   "APAC": {
+    "eur": 2659926,
+    "d_rep": 3.4,
+    "d_lfl": 2.9
+   }
+  },
+  "non_lfl": []
+ },
+ "W37": {
+  "total_eur": 6516951,
+  "ly_eur": 6086535,
+  "d_rep": 7.1,
+  "d_lfl": 6.8,
+  "d_bud": -10.4,
+  "regions": {
+   "EMEA": {
+    "eur": 2749814,
+    "d_rep": 5.3,
+    "d_lfl": 5.2
+   },
+   "AMERICAS": {
+    "eur": 706173,
+    "d_rep": 2.8,
+    "d_lfl": 2.8
+   },
+   "APAC": {
+    "eur": 3060964,
+    "d_rep": 9.8,
+    "d_lfl": 9.3
+   }
+  },
+  "non_lfl": []
+ },
+ "W38": {
+  "total_eur": 7044533,
+  "ly_eur": 6483431,
+  "d_rep": 8.7,
+  "d_lfl": 8.4,
+  "d_bud": -9.9,
+  "regions": {
+   "EMEA": {
+    "eur": 2959071,
+    "d_rep": 2.9,
+    "d_lfl": 2.8
+   },
+   "AMERICAS": {
+    "eur": 728230,
+    "d_rep": -7.6,
+    "d_lfl": -7.6
+   },
+   "APAC": {
+    "eur": 3357232,
+    "d_rep": 19.1,
+    "d_lfl": 18.5
+   }
+  },
+  "non_lfl": [
+   "COU01"
+  ]
+ },
+ "W39": {
+  "total_eur": 8146857,
+  "ly_eur": 7157079,
+  "d_rep": 13.8,
+  "d_lfl": 13.6,
+  "d_bud": -6.1,
+  "regions": {
+   "EMEA": {
+    "eur": 3380067,
+    "d_rep": 9.8,
+    "d_lfl": 9.7
+   },
+   "AMERICAS": {
+    "eur": 815497,
+    "d_rep": -0.6,
+    "d_lfl": -0.5
+   },
+   "APAC": {
+    "eur": 3951293,
+    "d_rep": 21.2,
+    "d_lfl": 20.7
+   }
+  },
+  "non_lfl": [
+   "COU01"
+  ]
+ },
+ "W41": {
+  "total_eur": 10119330,
+  "ly_eur": 8470016,
+  "d_rep": 19.5,
+  "d_lfl": 18.9,
+  "d_bud": -3.9,
+  "regions": {
+   "EMEA": {
+    "eur": 4422722,
+    "d_rep": 15.0,
+    "d_lfl": 14.3
+   },
+   "AMERICAS": {
+    "eur": 1028934,
+    "d_rep": 7.0,
+    "d_lfl": 7.8
+   },
+   "APAC": {
+    "eur": 4667674,
+    "d_rep": 27.4,
+    "d_lfl": 26.7
+   }
+  },
+  "non_lfl": [
+   "COU01",
+   "CRT01"
+  ]
+ },
+ "W42": {
+  "total_eur": 11013510,
+  "ly_eur": 8736362,
+  "d_rep": 26.1,
+  "d_lfl": 25.5,
+  "d_bud": -2.2,
+  "regions": {
+   "EMEA": {
+    "eur": 4520930,
+    "d_rep": 19.0,
+    "d_lfl": 18.0
+   },
+   "AMERICAS": {
+    "eur": 1056060,
+    "d_rep": -2.6,
+    "d_lfl": -2.0
+   },
+   "APAC": {
+    "eur": 5436520,
+    "d_rep": 41.2,
+    "d_lfl": 40.5
+   }
+  },
+  "non_lfl": [
+   "COU01",
+   "CRT01"
+  ]
+ },
+ "W40_fx_krw": {
+  "correct": 1636.9,
+  "wrong": 1366.9
+ },
+ "W40_v1": {
+  "total_eur": 10210991,
+  "regions": {
+   "EMEA": 4255214,
+   "AMERICAS": 926284,
+   "APAC": 5029493
+  },
+  "korea_eur": 1710092
+ },
+ "W40_v2": {
+  "total_eur": 9811191,
+  "ly_eur": 8508699,
+  "d_rep": 15.3,
+  "d_lfl": 14.9,
+  "d_bud": 0.4,
+  "non_lfl": [
+   "COU01"
+  ],
+  "regions": {
+   "EMEA": {
+    "eur": 4137486,
+    "d_rep": 10.4
+   },
+   "AMERICAS": {
+    "eur": 926284,
+    "d_rep": 7.3
+   },
+   "APAC": {
+    "eur": 4747420,
+    "d_rep": 21.8
+   }
+  },
+  "korea_eur": 1428019,
+  "dxb_eur": 117728
+ }
+}

@@ -1,0 +1,26 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/planning/v1/replenishment-parameters/SYD01"
+  },
+  "response": {
+    "WERKS": "3601",
+    "NAME1": "Sydney Castlereagh Street",
+    "STORE_ID": "SYD01",
+    "VKORG": "3000",
+    "LIEF_WERK": "HK30",
+    "BESTELLTAGE": "DI",
+    "WBZ_TAGE": "7",
+    "REICHWEITE_TAGE": "28",
+    "SAFETY_FACTOR": "1,15",
+    "SERVICE_LEVEL": "0,92",
+    "MIN_PRES_RULE": "1 pz taglie con quota curva >= 12%",
+    "SAISON_PROFIL": "NH_STD",
+    "FCST_MODEL": "STAT_HW_WEEKLY",
+    "STATUS": "ACTIVE",
+    "CUTOFF_ORDINE": "10:00 HKT",
+    "AENDERUNG_AM": "2026-07-28",
+    "AENDERUNG_VON": "PLN_GBELLI",
+    "NOTE": ""
+  }
+}

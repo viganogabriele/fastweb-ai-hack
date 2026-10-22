@@ -1,0 +1,69 @@
+{
+  "_request": {
+    "method": "GET",
+    "url": "https://wms-gw.moncler-int.example/v1/inbound/purchase-orders/4500222090",
+    "ts": "2026-10-22T07:05:00Z"
+  },
+  "purchaseOrder": "4500222090",
+  "vendor": {
+    "id": "V100502",
+    "name": "Romarta Confectii SA (Timisoara, RO) - outerwear"
+  },
+  "createdOn": "2026-09-29",
+  "lines": [
+    {
+      "item": "00010",
+      "plant": "IT10",
+      "material": "J20931A0062223R",
+      "sizes": [
+        "0",
+        "1",
+        "2"
+      ],
+      "qty": 150,
+      "currentDeliveryDate": "2026-11-10",
+      "goodsReceiptDate": null,
+      "status": "OPEN"
+    },
+    {
+      "item": "00020",
+      "plant": "HK30",
+      "material": "J20931A0062223R",
+      "sizes": [
+        "0",
+        "1",
+        "2"
+      ],
+      "qty": 60,
+      "currentDeliveryDate": "2026-11-12",
+      "goodsReceiptDate": null,
+      "status": "OPEN"
+    },
+    {
+      "item": "00030",
+      "plant": "US20",
+      "material": "J20931A0062223R",
+      "sizes": [
+        "0",
+        "1",
+        "2"
+      ],
+      "qty": 20,
+      "currentDeliveryDate": "2026-11-13",
+      "goodsReceiptDate": null,
+      "status": "OPEN"
+    }
+  ],
+  "deliveryDateHistory": [
+    {
+      "changedOn": "2026-09-29",
+      "newDate": "2026-11-10",
+      "comment": "Re-order brown small sizes (0/1/2)"
+    },
+    {
+      "changedOn": "2026-10-15",
+      "newDate": "2026-11-10",
+      "comment": "Confirmed; vendor asks to accept 2% over-delivery"
+    }
+  ]
+}

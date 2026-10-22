@@ -1,0 +1,254 @@
+openapi: 3.0.3
+info:
+  title: marketing-agent REST API
+  version: 0.9.4-beta
+servers:
+- url: https://agents.moncler-int.example/marketing/v1
+security:
+- oauth2:
+  - crm.read
+paths:
+  /campaign-calendar:
+    get:
+      summary: Campaign calendar
+      tags:
+      - calendar
+      parameters:
+      - name: market
+        in: query
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: from
+        in: query
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: to
+        in: query
+        required: false
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Calendar'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limited
+  /waitlists:
+    get:
+      summary: Waitlist entries
+      tags:
+      - clienteling
+      parameters:
+      - name: store
+        in: query
+        required: false
+        description: CRM store code e.g. KR02
+        schema:
+          type: string
+      - name: item
+        in: query
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        description: ''
+        schema:
+          type: string
+          enum:
+          - OPEN
+          - NOTIFIED
+          - FULFILLED
+          - CANCELLED
+          - EXPIRED
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Waitlist'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limited
+  /clienteling-message-draft:
+    post:
+      summary: Draft a clienteling message (not sent)
+      tags:
+      - clienteling
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DraftRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DraftResponse'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Business rule violation
+  /social-alerts:
+    get:
+      summary: Social listening alerts
+      tags:
+      - social
+      parameters:
+      - name: from
+        in: query
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: topic
+        in: query
+        required: false
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alerts'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limited
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.moncler-int.example/oauth2/token
+          scopes:
+            crm.read: read CRM
+            crm.draft: create drafts
+    mtls:
+      type: mutualTLS
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        traceId:
+          type: string
+    Calendar:
+      type: object
+      properties:
+        activities:
+          type: array
+          items:
+            type: object
+            properties:
+              ID: &id001
+                type: string
+              Market: *id001
+              Activity: *id001
+              Type: *id001
+              Start: &id002
+                type: string
+                format: date
+              End: *id002
+              Owner: *id001
+              Status: *id001
+              Notes: *id001
+    Waitlist:
+      type: object
+      properties:
+        count: &id004
+          type: integer
+        entries:
+          type: array
+          items:
+            type: object
+            properties:
+              waitlist_id: *id001
+              store_code: *id001
+              created_at: *id001
+              client_id: *id001
+              item: *id001
+              size: *id001
+              status: *id001
+    DraftRequest:
+      type: object
+      required:
+      - clientName
+      - storeName
+      - language
+      - item
+      - size
+      - available
+      properties:
+        clientName: *id001
+        storeName: *id001
+        language: *id001
+        item: *id001
+        size: *id001
+        available: &id003
+          type: boolean
+        eta: *id001
+        channel: *id001
+    DraftResponse:
+      type: object
+      properties:
+        language: *id001
+        draft: *id001
+        complianceFlags:
+          type: array
+          items: *id001
+        requiresApproval: *id003
+    Alerts:
+      type: object
+      properties:
+        alerts:
+          type: array
+          items:
+            type: object
+            properties:
+              alert_id: *id001
+              triggered_at_utc: *id001
+              topic_query: *id001
+              mentions_24h: *id004
+              change_pct:
+                type: number

@@ -1,0 +1,21 @@
+{
+ "tib_rate_shown": 42.3,
+ "tib_def_win": 295,
+ "tib_sold_win": 697,
+ "tib_sold_since_aug15": 2546,
+ "tib_rate_since": 11.6,
+ "tib_delivered": 2706,
+ "tib_def_by_region": {
+  "AMERICAS": 37,
+  "APAC": 119,
+  "EMEA": 139
+ },
+ "arneb_rate_shown": 9.5,
+ "arneb_rate_units": 10.4,
+ "arneb_exchange_share": 56.6,
+ "return_rate_by_region": {
+  "AMERICAS": 6.9,
+  "APAC": 1.8,
+  "EMEA": 3.5
+ }
+}
