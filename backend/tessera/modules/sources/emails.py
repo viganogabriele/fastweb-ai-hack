@@ -45,6 +45,7 @@ MANIFEST = ModuleManifest(
 class Store:
     language: str
     timezone: str
+    currency: str = ""
 
 
 @dataclass
@@ -60,7 +61,11 @@ def load_stores(sources_dir: Path) -> dict[str, Store]:
     path = sources_dir / "erp" / "master_data" / "stores.csv"
     with path.open(encoding="utf-8", newline="") as stream:
         return {
-            row["store_id"]: Store(language=row["language"], timezone=row["timezone"])
+            row["store_id"]: Store(
+                language=row["language"],
+                timezone=row["timezone"],
+                currency=row.get("currency") or "",
+            )
             for row in csv.DictReader(stream)
         }
 
