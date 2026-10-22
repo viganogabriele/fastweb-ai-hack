@@ -39,7 +39,7 @@ Usable capacity is 5 × 16 = 80 person-hours (RFC §6.1 assumed 4 × 16 = 64). T
 | D | Queue, detail, sources views 4 h; modules list and brief view 1 h; eval harness and frozen comparison 3 h; bundle, pitch, rehearsal, video 3.5 h = **11.5 h** |
 | E | Stock simulation and options with checks 4 h; systems adapter 1 h; agent runtime and investigator 2.5 h; approval and ledger 1 h; stock/concurrency regressions 1 h = **9.5 h** |
 
-That makes **52.5 h planned and 27.5 h reserve**. C and E get less planned work because they own most of the critical path and C reviews every contract change. Spend the reserve in this order: (1) unblock the critical path, (2) RFC §7.3 tests, (3) the S pool in RFC §6.6 order.
+That makes **51.5 h planned and 28.5 h reserve**. C and E get less planned work because they own most of the critical path and C reviews every contract change. Spend the reserve in this order: (1) unblock the critical path, (2) RFC §7.3 tests, (3) the S pool in RFC §6.6 order.
 
 ## 2. Rules that keep us out of each other's way
 
@@ -133,7 +133,7 @@ Goal: the full Core path on dev stores (RFC §6.2 G2): dedup/correction, a real 
 | ING-05 | A | PLT-04 | – | `src.docs`: one CSV/XLSX report from `sources/reports/` with locators and availability |
 | ING-06 | A | ING-05 | – | `ing.metrics`: one approved, versioned mapping → `MetricFact` with definition, period, currency/VAT, comparability |
 | ING-08 | A | PLT-04 | – | `src.external`: one external feed relevant to the slice → `ContextEvent`, with no future weather backdated |
-| ING-03 | A | PLT-05, DATA-03 | DATA-03 | `src.voice`: declared fixture transcript (manual, `mode: fixture`), no audio intervals. Real ASR deferred to ASR-01 |
+| ING-03 | A | PLT-04, DATA-03 | DATA-03 | `src.voice`: declared fixture transcript (manual, `mode: fixture`), no audio intervals. Real ASR deferred to ASR-01 |
 | INT-04 | B | INT-03 | – | Conflicts with structured facts and dates; no closing a case because of silence or old stock; `decision_due_at` when estimable |
 | INT-06 | B | ING-08 | ContextEvent fixture | `int.context`: geo/time association, corroborating vs context-only |
 | FC-01 | B | ING-01 | FC-01 pure | `fc.baseline` module: valid vintage at `as_of`, 7-day horizon |
@@ -249,7 +249,7 @@ flowchart LR
   subgraph P2[Phase 2]
     PLT04 --> ING05[ING-05 report]:::A --> ING06[ING-06 metrics]:::A
     PLT04 --> ING08[ING-08 external]:::A --> INT06[INT-06 context]:::B
-    PLT05 --> ING03[ING-03 voice]:::A
+    PLT04 --> ING03[ING-03 voice]:::A
     DATA03 --> ING03
     INT03 --> INT04[INT-04 conflicts]:::B
     ING01 --> FC01[FC-01 baseline]:::B
