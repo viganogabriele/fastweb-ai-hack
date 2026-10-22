@@ -15,11 +15,12 @@ One line per task. Edit only the lines of your own task.
 
 ## In progress
 
+- ING-01 pure (B, Bianca) ERP loaders with provenance and replay availability · branch `ING-01-erp-loaders`
+
 ## Ready (all hard dependencies merged)
 
 - PLT-07 (A) Fastweb smoke test: chat, tool call, embeddings, ASR. Needs `FASTWEB_API_KEY` in `.env`
 - DATA-03 (A) 2–3 voice recordings + sidecar JSON
-- ING-01 pure (B) ERP loaders with `available_at`
 - ACT-04 pure (E) Systems client (stock/ATP, lanes/ETA) against `make mocks`
 - AG-01 pure (E) Agent loop with budget, trace, fallback; fake model
 - WEB-01 (D) App shell on hand-written JSON
