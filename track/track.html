@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moncler — Forecast che ascolta i negozi</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --panel: #171a23;
+    --text: #e4e6eb;
+    --muted: #9aa0ab;
+    --accent: #6ea8fe;
+    --accent2: #4fd1c5;
+    --border: #2a2f3a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 820px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  h1 { color: var(--accent); margin-bottom: .25rem; }
+  h2 { color: var(--accent2); border-bottom: 1px solid var(--border); padding-bottom: .3rem; margin-top: 2.5rem; }
+  a { color: var(--accent); }
+  .subtitle { color: var(--muted); margin-top: 0; }
+  .box {
+    background: var(--panel);
+    border-left: 4px solid var(--accent2);
+    border-radius: 6px;
+    padding: .8rem 1rem;
+    margin: 1rem 0;
+  }
+  .summary { border-left-color: var(--accent); }
+  .summary li, li { margin: .35rem 0; }
+  blockquote {
+    margin: 1rem 0;
+    padding: .6rem 1rem;
+    border-left: 3px solid var(--border);
+    color: var(--muted);
+    font-style: italic;
+  }
+  nav.toc { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: .8rem 1.2rem; }
+  nav.toc ol { margin: .3rem 0; padding-left: 1.3rem; }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Forecast che ascolta i negozi</h1>
+<p class="subtitle">Traccia Moncler · FastwebAI Hackathon</p>
+
+<nav class="toc">
+  <strong>Indice</strong>
+  <ol start="0">
+    <li><a href="#riassunto">Riassunto</a></li>
+    <li><a href="#contesto">Il contesto</a></li>
+    <li><a href="#sfida">La sfida</a></li>
+    <li><a href="#spunti">Spunti di partenza</a></li>
+    <li><a href="#valore">Il valore</a></li>
+    <li><a href="#aspettative">Cosa ci aspettiamo</a></li>
+  </ol>
+</nav>
+
+<h2 id="riassunto">Riassunto</h2>
+<div class="box summary">
+<ul>
+  <li><strong>Problema:</strong> il forecast (prodotto / store / region) guarda solo i numeri, e i numeri arrivano dopo i fatti. I negozi vedono i fatti prima.</li>
+  <li><strong>Fonti da unire:</strong> forecast e vendite, mail serali dei negozi (testo libero, multilingue), report eterogenei (PDF, Excel, slide), dati esterni (eventi, meteo, turismo, calendari, tendenze).</li>
+  <li><strong>Output:</strong> indicazioni concrete su <strong>cosa riassortire</strong>, <strong>dove spostare la merce</strong>, <strong>cosa raccontare ai clienti</strong>.</li>
+  <li><strong>Deliverable:</strong> concept + <strong>prototipo funzionante</strong>.</li>
+  <li><strong>Nice to have:</strong> gestione dei prodotti nuovi (senza storico) e integrazione con gli agenti di altri sistemi (magazzino, logistica, marketing, pianificazione).</li>
+</ul>
+</div>
+
+<h2 id="contesto">1. Il contesto</h2>
+<p>Immaginate un brand con una rete di negozi in più Paesi. Ogni giorno vende migliaia di prodotti, e qualcuno deve decidere cosa riassortire, dove spostare la merce e cosa raccontare ai clienti. Per decidere c'è un forecast delle vendite a più livelli (singolo prodotto, store, region), ma guarda solo i numeri, e i numeri arrivano dopo i fatti. I fatti li vedono prima i negozi.</p>
+<p>Ogni sera ogni punto vendita scrive una mail di chiusura con commenti liberi, nella propria lingua:</p>
+<blockquote>
+  "tanti turisti coreani, chiedevano la versione nera"<br>
+  "taglia M finita da giovedì"<br>
+  "cantiere davanti all'ingresso, passaggio dimezzato"
+</blockquote>
+<p>Sono segnali preziosi, ma sono centinaia al giorno, scritti di fretta, e quasi nessuno li incrocia con le vendite. A questo si aggiungono i report di mercato, campagne, canali e Paesi, in formati diversi (PDF, Excel, slide), con metriche definite in modi diversi e a volte in contraddizione, e i dati che l'azienda non ha ma il mondo sì: eventi, meteo, flussi turistici, calendari, tendenze.</p>
+
+<h2 id="sfida">2. La sfida</h2>
+<p>E se numeri, commenti, report e dati esterni lavorassero insieme, parlando con tutto il resto? Magazzino, logistica, marketing e pianificazione hanno i propri strumenti e, sempre più spesso, i propri agenti: nessuna decisione resta dentro un solo sistema.</p>
+<div class="box">Costruire un sistema che unisca forecast, segnali dei negozi, report e dati esterni, e trasformi tutto questo in indicazioni utili a chi decide.</div>
+
+<h2 id="spunti">3. Spunti di partenza</h2>
+<ul>
+  <li>Lettura dei <strong>commenti liberi dei negozi</strong>, multilingue, per estrarre segnali (richieste, rotture di stock, eventi locali) e incrociarli con le vendite.</li>
+  <li><strong>Unificazione dei report eterogenei</strong> (PDF, Excel, slide), segnalando metriche diverse o contraddittorie.</li>
+  <li><strong>Arricchimento con dati esterni</strong> (eventi, meteo, flussi turistici, calendari, tendenze) uniti a quelli interni.</li>
+  <li>Attenzione ai <strong>prodotti senza storico</strong>: per novità e collezioni stagionali, per qualche settimana i commenti dei negozi sono l'unico indizio.</li>
+  <li><strong>Dialogo con gli agenti degli altri sistemi</strong> (magazzino, logistica, marketing, pianificazione) per portare l'indicazione fino alla decisione.</li>
+</ul>
+
+<h2 id="valore">4. Il valore</h2>
+<p>Vedere prima ciò che i numeri mostreranno dopo: decidere meglio cosa riassortire, dove spostare la merce e cosa raccontare ai clienti.</p>
+
+<h2 id="aspettative">5. Cosa ci aspettiamo</h2>
+<p>Un concept con <strong>prototipo funzionante</strong> che mostri come numeri, commenti, report e dati esterni, lavorando insieme, producano un'indicazione concreta.</p>
+<p>Come <strong>nice to have</strong>: gestione dei prodotti nuovi e integrazione con altri agenti.</p>
+
+<p style="margin-top:3rem"><a href="eval.html">→ Metodo di voto della giuria</a></p>
+
+</main>
+</body>
+</html>
