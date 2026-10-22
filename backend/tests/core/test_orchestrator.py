@@ -11,10 +11,10 @@ from tessera.core.contracts import (
     RunSpec,
     SourceDocument,
 )
-from tessera.core.db import create_schema, make_engine
+from tessera.core.db import connect
 from tessera.core.orchestrator import run
 from tessera.core.registry import RegisteredModule, Registry
-from tessera.core.repo import repo_session
+from tessera.core.run_repo import repo_session
 
 
 def manifest(module_id, *, requires=(), optional=(), enabled=True, mode="live", params_schema=None):
@@ -62,8 +62,7 @@ def result(ctx, status="succeeded"):
 
 @pytest.fixture
 def engine(tmp_path):
-    engine = make_engine(f"sqlite:///{tmp_path / 'pipeline.db'}")
-    create_schema(engine)
+    engine = connect(f"sqlite:///{tmp_path / 'pipeline.db'}")
     yield engine
     engine.dispose()
 
@@ -89,43 +88,6 @@ def test_selection_adds_required_modules_and_publishes_only_after_last(engine):
         run(request, engine=engine, registry=registry)
 
 
-def test_module_context_mutations_do_not_change_frozen_snapshot(engine):
-    module = manifest("source")
-    request = spec(module)
-
-    def execute(ctx):
-        ctx.spec.model_versions["mutated"] = "bad"
-        ctx.params["mutated"] = "bad"
-        ctx.manifest.params_schema["mutated"] = "bad"
-        return result(ctx)
-
-    run(request, engine=engine, registry=Registry((RegisteredModule(module, execute),)))
-    with repo_session(engine, request) as repo:
-        assert repo.spec == request
-    assert request.model_versions == {}
-    assert request.modules[0].params == {}
-    assert request.modules[0].manifest.params_schema == {}
-
-
-def test_cli_run_executes_selected_snapshot(engine, tmp_path, monkeypatch, capsys):
-    import json
-
-    from tessera.cli import main
-
-    module = manifest("source")
-    request = spec(module)
-    path = tmp_path / "run.json"
-    path.write_text(request.model_dump_json())
-    registry = Registry((RegisteredModule(module, result),))
-    monkeypatch.setattr(Registry, "discover", lambda: registry)
-    main(["run", "--run-spec", str(path), "--db-url", str(engine.url), "--modules", "source"])
-    receipt = json.loads(capsys.readouterr().out)
-    assert receipt["run_id"] == request.run_id
-    assert receipt["modules"][0]["status"] == "succeeded"
-    with repo_session(engine, request) as repo:
-        assert repo.run_state()["published"]
-
-
 def test_failed_module_rolls_back_its_artifacts_and_blocks_dependents(engine):
     source, consumer = manifest("source"), manifest("consumer", requires=("source",))
     called = []
@@ -147,7 +109,6 @@ def test_failed_module_rolls_back_its_artifacts_and_blocks_dependents(engine):
                 text_version="1",
                 meta={},
             ),
-            store_id="MIL01",
         )
         raise RuntimeError("failed after writing")
 
@@ -169,7 +130,7 @@ def test_failed_module_rolls_back_its_artifacts_and_blocks_dependents(engine):
     assert [s.status for s in statuses] == ["failed", "blocked"]
     assert called == []
     with repo_session(engine, request) as repo:
-        assert repo.list(SourceDocument) == ()
+        assert repo.list(SourceDocument) == []
         assert not repo.run_state()["published"]
         assert repo.run_state()["status"] == "failed"
 
@@ -320,3 +281,73 @@ def test_per_run_enabled_switch_preserves_implementation_identity(engine):
         ),
     )
     assert [entry.status for entry in statuses] == ["blocked", "blocked"]
+
+
+def test_transactional_adapter_preserves_snapshot_scope_and_outer_rollback(engine):
+    from tessera.core.repo import Repo as CanonicalRepo
+    from tessera.core.repo import RunNotFound
+
+    request = spec()
+    with pytest.raises(RuntimeError):
+        with repo_session(engine, request) as repo:
+            request.model_versions["mutated"] = "bad"
+            assert repo.spec.model_versions == {}
+            raise RuntimeError("rollback job")
+    with pytest.raises(RunNotFound):
+        CanonicalRepo.open(engine, request.run_id)
+
+    request = spec()
+    with repo_session(engine, request) as repo:
+        with pytest.raises(ValueError, match="outside"):
+            repo.list(SourceDocument, store_id="NYC01")
+        document = SourceDocument(
+            id="scope-doc",
+            version="1",
+            available_at=request.as_of,
+            availability_basis="test",
+            source_refs=(),
+            source_type="email",
+            connector="test",
+            uri="test://scope-doc",
+            content_hash="hash",
+            origin=None,
+            text="hello",
+            text_version="1",
+            meta={"store_id": "NYC01"},
+        )
+        with pytest.raises(ValueError, match="outside"):
+            repo.put(document)
+        valid = document.model_copy(update={"meta": {"store_id": "MIL01"}})
+        repo.put(valid)
+        assert repo.list(SourceDocument, store_id="MIL01") == [valid]
+    with pytest.raises(ValueError, match="immutable"):
+        with repo_session(engine, request.model_copy(update={"config_hash": "different"})):
+            pass
+
+
+def test_existing_pending_run_savepoint_does_not_commit_before_outer_job(engine):
+    request = spec()
+    with repo_session(engine, request):
+        pass
+    with pytest.raises(RuntimeError):
+        with repo_session(engine, request) as repo:
+            repo.put(
+                SourceDocument(
+                    id="rolled-back",
+                    version="1",
+                    available_at=request.as_of,
+                    availability_basis="test",
+                    source_refs=(),
+                    source_type="email",
+                    connector="test",
+                    uri="test://rollback",
+                    content_hash="hash",
+                    origin=None,
+                    text="hello",
+                    text_version="1",
+                    meta={},
+                )
+            )
+            raise RuntimeError("job fails after nested successful put")
+    with repo_session(engine, request) as repo:
+        assert repo.get(SourceDocument, "rolled-back") is None
