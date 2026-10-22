@@ -9,6 +9,7 @@
 | `research-data-fusion.md` | Research on heterogeneous sources, entity matching, source dependence, multimodal retrieval and scalable evidence handling |
 | `research-methods.md` | Scientific methods for short-horizon decisions: robust residuals, nowcasting, abstention, uncertainty, censored demand and temporal evaluation; mathematical design audit |
 | `research-fastweb-assets.md` | Assets verified against the supplied PDFs and linked API guide; exact model IDs, hosting, limitations and recommended roles; no credentials |
+| **`RFC-001-piattaforma.md`** | **Current plan**: modular platform, architecture, data contracts, Fastweb AI integration, 58 PR-sized tasks with dependencies, gates, cut order, open questions. Supersedes `project-design.md` §3–§8 |
 | `findings.md` | What we know: the official brief, what the Moncler rep added in Q&A, scoring, domain notes, pitfalls, open questions |
 | `project-design.md` | What we build: locked problem statement, candidate shapes, modular pipeline (Build/Thin/Mock/Cut per module), contracts, math, scenarios, cut plan, demo script |
 | `drafts/fastweb.md` | Team v0 proposal ("MONCLER PULSE"). Partly superseded: see `findings.md` §7 |
