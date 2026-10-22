@@ -10,6 +10,7 @@ from typing import Any
 
 from sqlalchemy import Engine
 
+from tessera.core.config import Settings, get_settings
 from tessera.core.contracts import ModuleManifest, ModuleResult, ModuleRun, RunSpec
 from tessera.core.registry import Registry
 from tessera.core.repo import Repo, repo_session
@@ -89,6 +90,7 @@ def run(
     clients: Mapping[str, Any] | None = None,
     modules: Sequence[str] | None = None,
     logger: logging.Logger | None = None,
+    settings: Settings | None = None,
 ) -> tuple[ModuleRun, ...]:
     """Execute the frozen module graph; failed/blocked snapshots stay unpublished.
 
@@ -129,6 +131,13 @@ def run(
         state = repo.run_state()
         if state["status"] != "pending":
             raise ValueError("run has already been executed; create a new run_id")
+        if clients is None:
+            from tessera.core.llm import LLMClient
+
+            llm_settings = settings or get_settings()
+            if spec.mode != "live":
+                llm_settings = llm_settings.model_copy(update={"llm_mode": "replay"})
+            clients = {"llm": LLMClient(llm_settings).for_run(spec)}
         repo.set_run_status("running")
         for module_id in plan:
             manifest = snapshots[module_id].manifest

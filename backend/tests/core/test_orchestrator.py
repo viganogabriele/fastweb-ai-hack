@@ -126,6 +126,29 @@ def test_cli_run_executes_selected_snapshot(engine, tmp_path, monkeypatch, capsy
         assert repo.run_state()["published"]
 
 
+def test_default_llm_client_is_bound_to_run_and_fixture_cannot_call_live(engine, tmp_path):
+    from tessera.core.config import Settings
+
+    module = manifest("fixture-source", mode="fixture")
+    request = spec(module, mode="fixture")
+
+    def execute(ctx):
+        assert ctx.clients["llm"].settings.llm_mode == "replay"
+        context = ctx.clients["llm"]._context({})
+        assert context["run"]["as_of"] == request.model_dump(mode="json")["as_of"]
+        assert context["run"]["stores"] == ["MIL01"]
+        return result(ctx)
+
+    settings = Settings(_env_file=None, data_dir=tmp_path, llm_mode="live")
+    statuses = run(
+        request,
+        engine=engine,
+        registry=Registry((RegisteredModule(module, execute),)),
+        settings=settings,
+    )
+    assert statuses[0].status == "succeeded"
+
+
 def test_failed_module_rolls_back_its_artifacts_and_blocks_dependents(engine):
     source, consumer = manifest("source"), manifest("consumer", requires=("source",))
     called = []
