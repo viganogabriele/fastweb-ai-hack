@@ -53,7 +53,11 @@ class Registry:
             entry = self._entries[snapshot.manifest.id]
         except KeyError:
             raise ValueError(f"module not installed: {snapshot.manifest.id}") from None
-        if entry.manifest != snapshot.manifest:
+        # Enabled is a per-run switch; implementation identity and dependency
+        # declarations must still match the installed code exactly.
+        if entry.manifest.model_dump(exclude={"enabled"}) != snapshot.manifest.model_dump(
+            exclude={"enabled"}
+        ):
             raise ValueError(f"module manifest changed: {snapshot.manifest.id}")
         Draft202012Validator(snapshot.manifest.params_schema).validate(snapshot.params)
         return entry

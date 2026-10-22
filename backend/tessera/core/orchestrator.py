@@ -194,7 +194,7 @@ def run(
                             raise ValueError("module result identity/version differs from snapshot")
                         if result.status not in _SUCCESS:
                             raise _UnsuccessfulResult(result)
-                        if missing_optional and result.status == "succeeded":
+                        if missing_optional:
                             result = result.model_copy(
                                 update={
                                     "status": "degraded",

@@ -181,7 +181,7 @@ def test_rejects_cycles_changed_snapshots_and_live_fixture_injection(engine):
         )
     with pytest.raises(ValueError, match="manifest changed"):
         run(
-            spec(manifest("a", enabled=False)),
+            spec(manifest("a").model_copy(update={"version": "different"})),
             modules=("a",),
             engine=engine,
             registry=Registry((RegisteredModule(manifest("a"), result),)),
@@ -269,3 +269,17 @@ def test_only_optional_failure_degrades_but_explicit_selection_prevents_publish(
     run(explicit, engine=engine, registry=registry, modules=("consumer", "optional"))
     with repo_session(engine, explicit) as repo:
         assert not repo.run_state()["published"]
+
+
+def test_per_run_enabled_switch_preserves_implementation_identity(engine):
+    installed = manifest("source")
+    disabled = installed.model_copy(update={"enabled": False})
+    consumer = manifest("consumer", requires=("source",))
+    statuses = run(
+        spec(disabled, consumer),
+        engine=engine,
+        registry=Registry(
+            (RegisteredModule(installed, result), RegisteredModule(consumer, result))
+        ),
+    )
+    assert [entry.status for entry in statuses] == ["blocked", "blocked"]
