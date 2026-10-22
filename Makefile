@@ -5,9 +5,10 @@ PY := $(BACKEND)/.venv/bin/python
 
 .PHONY: setup dev backend web mocks check fmt test types
 
-setup:  ## install backend and web dependencies from the lockfiles
+setup:  ## install backend, web and type-generator dependencies from the lockfiles
 	cd $(BACKEND) && uv sync --frozen
 	cd $(WEB) && npm ci
+	cd scripts/openapi && npm ci
 
 dev:  ## backend :8000 + web :5173 + dataset mock systems :8088 (Ctrl-C stops all)
 	@trap 'kill 0' INT TERM; \
@@ -36,6 +37,7 @@ test:
 	cd $(BACKEND) && uv run pytest -q
 
 types:  ## regenerate TypeScript contracts from FastAPI OpenAPI (no running server needed)
-	@schema=$$(mktemp --suffix=.json); trap 'rm -f "$$schema"' EXIT; \
+	@schema_dir=$$(mktemp -d) || exit 1; schema="$$schema_dir/openapi.json"; \
+	trap 'rm -f "$$schema"; rmdir "$$schema_dir"' EXIT; \
 	$(PY) scripts/export_openapi.py > "$$schema" && \
-	web/node_modules/.bin/openapi-typescript "$$schema" -o web/src/api/schema.d.ts
+	scripts/openapi/node_modules/.bin/openapi-typescript "$$schema" -o web/src/api/schema.d.ts

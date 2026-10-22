@@ -2,7 +2,9 @@
 
 import argparse
 import json
+from datetime import datetime
 from pathlib import Path
+from uuid import uuid4
 
 from sqlalchemy.engine import make_url
 from sqlalchemy.orm import Session
@@ -28,6 +30,11 @@ def main(argv: list[str] | None = None) -> None:
     reset.add_argument("--run", required=True)
     run = commands.add_parser("run", help="Execute an immutable module snapshot")
     run.add_argument("--run-spec", type=Path, required=True)
+    run.add_argument(
+        "--as-of",
+        type=datetime.fromisoformat,
+        help="Override the replay instant and assign a fresh run ID",
+    )
     run.add_argument("--modules", nargs="+", help="Selected module IDs, including prerequisites")
     for command in (load, reset, run):
         command.add_argument("--db-url", help="SQLite URL; default comes from DATA_DIR")
@@ -61,6 +68,10 @@ def main(argv: list[str] | None = None) -> None:
             from tessera.core.orchestrator import run as execute
 
             spec = RunSpec.model_validate_json(args.run_spec.read_text(encoding="utf-8"))
+            if args.as_of is not None:
+                spec = RunSpec.model_validate(
+                    {**spec.model_dump(), "as_of": args.as_of, "run_id": str(uuid4())}
+                )
             if (spec.mode == "fixture") != fixture_mode:
                 parser.error("fixture run requires the explicit fixture namespace")
             if not any(
@@ -68,15 +79,18 @@ def main(argv: list[str] | None = None) -> None:
             ):
                 parser.error("run requires at least one enabled module")
             statuses = execute(spec, engine=engine, modules=args.modules)
+            with repo_session(engine, spec, fixture_mode=fixture_mode) as repo:
+                status = repo.run_state()["status"]
             print(
                 json.dumps(
                     {
                         "run_id": spec.run_id,
+                        "status": status,
                         "modules": [module.model_dump(mode="json") for module in statuses],
                     }
                 )
             )
-            if any(module.status in {"failed", "blocked"} for module in statuses):
+            if status not in {"succeeded", "degraded"}:
                 raise SystemExit(1)
         else:
             namespace = "fixture" if fixture_mode else "product"

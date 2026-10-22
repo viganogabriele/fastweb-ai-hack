@@ -89,6 +89,34 @@ def test_selection_adds_required_modules_and_publishes_only_after_last(engine):
         run(request, engine=engine, registry=registry)
 
 
+def test_cli_replay_override_creates_new_immutable_run(engine, tmp_path, monkeypatch, capsys):
+    import json
+
+    from tessera.cli import main
+
+    module = manifest("source")
+    request = spec(module)
+    path = tmp_path / "run.json"
+    path.write_text(request.model_dump_json())
+    registry = Registry((RegisteredModule(module, result),))
+    monkeypatch.setattr(Registry, "discover", lambda: registry)
+    main(
+        [
+            "run",
+            "--run-spec",
+            str(path),
+            "--db-url",
+            str(engine.url),
+            "--as-of",
+            "2026-10-21T18:00:00+02:00",
+        ]
+    )
+    receipt = json.loads(capsys.readouterr().out)
+    assert receipt["run_id"] != request.run_id
+    assert receipt["status"] == "succeeded"
+    assert request.as_of == datetime(2026, 10, 22, tzinfo=UTC)
+
+
 def test_module_context_mutations_do_not_change_frozen_snapshot(engine):
     module = manifest("source")
     request = spec(module)
