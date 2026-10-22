@@ -14,14 +14,15 @@ One line per task. Edit only the lines of your own task.
 - EVL-01 (D, done by Bianca) `eval/`: frozen-export harness (manifest hashes before any answer key), Linux Landlock launcher denying product reads of answer keys/generator/eval
 - ING-02 pure (A, done by Bianca) `modules/ingestion/email_parser.py`: `.eml` → canonical text, segments with code-point offsets, quotes and attachments flagged
 - DATA-01a (A, done by Bianca) `data/fixtures/{documents,observations}/`: D1 positive, ambiguous mention, forward/duplicate, correction; built from dev emails, validated in `make check`
+- ING-01 pure (B, Bianca) `modules/sources/erp.py`: typed ERP rows with provenance, `available_at` (next-day 06:00 local), latest forecast vintage per store
+- PLT-07 (A) `scripts/smoke_fastweb.py` + `docs/smoke-fastweb.md`: key per model, tool calls on 5 chat models, Gemma chosen, embeddings OK, no ASR (OQ-2 closed)
 
 ## In progress
 
 ## Ready (all hard dependencies merged)
 
-- PLT-07 (A) Fastweb smoke test: chat, tool call, embeddings, ASR. Needs `FASTWEB_API_KEY` in `.env`
-- DATA-03 (A) 2–3 voice recordings + sidecar JSON
-- ING-01 pure (B) ERP loaders with `available_at`
+- PLT-05 (C) `core/llm.py` + `core/cache.py`: `chat/extract/embed`, recipe in `docs/smoke-fastweb.md`
+- DATA-03 (A) 2–3 voice recordings + sidecar JSON + manual transcript
 - ACT-04 pure (E) Systems client (stock/ATP, lanes/ETA) against `make mocks`
 - AG-01 pure (E) Agent loop with budget, trace, fallback; fake model
 - WEB-01 (D) App shell on hand-written JSON
@@ -32,6 +33,6 @@ One line per task. Edit only the lines of your own task.
 ## Blocked (waiting on)
 
 - DATA-01c (E) ← DATA-01b
-- PLT-05 (C) ← PLT-07
 - PLT-04, PLT-06 (C), ING-01 module (B), ACT-04 module (E) ← PLT-03
 - Rest of Phase 1–2 ← PLT-04 / PLT-05 (see `docs/PLAN.md` §4)
+- ASR-01 (A) real transcription, deferred to the reserve pool ← G2 (see `docs/PLAN.md` §4 "Deferred: ASR")
