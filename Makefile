@@ -3,7 +3,7 @@ BACKEND := backend
 WEB := web
 PY := $(BACKEND)/.venv/bin/python
 
-.PHONY: setup dev backend web mocks check fmt test
+.PHONY: setup dev backend web mocks check fmt test types
 
 setup:  ## install backend and web dependencies from the lockfiles
 	cd $(BACKEND) && uv sync --frozen
@@ -34,3 +34,8 @@ fmt:
 
 test:
 	cd $(BACKEND) && uv run pytest -q
+
+types:  ## regenerate TypeScript contracts from FastAPI OpenAPI (no running server needed)
+	@schema=$$(mktemp --suffix=.json); trap 'rm -f "$$schema"' EXIT; \
+	$(PY) scripts/export_openapi.py > "$$schema" && \
+	web/node_modules/.bin/openapi-typescript "$$schema" -o web/src/api/schema.d.ts

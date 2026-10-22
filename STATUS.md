@@ -23,6 +23,7 @@ One line per task. Edit only the lines of your own task.
 - PLT-03 (C, Bianca) SQLite repository, temporal isolation and fixture CLI · branch `PLT-03-artifact-repository`
 - PLT-04 (C, Bianca, `PLT-04-pipeline-orchestrator`) Module discovery, declared dependency execution and atomic run publication
 - PLT-05 (C, Bianca, `PLT-05-llm-runtime`) `core/llm.py` + `core/cache.py`: bounded chat/extract/embed and record/replay cache
+- PLT-06 (C, Bianca) Run API and generated TypeScript contracts · branch `PLT-06-api-types`
 
 ## Ready (all hard dependencies merged)
 
@@ -35,6 +36,6 @@ One line per task. Edit only the lines of your own task.
 ## Blocked (waiting on)
 
 - DATA-01c (E) ← DATA-01b
-- PLT-06 (C), ING-01 module (B), ACT-04 module (E) ← PLT-03
+- ING-01 module (B), ACT-04 module (E) ← PLT-03
 - Rest of Phase 1–2 ← PLT-04 / PLT-05 (see `docs/PLAN.md` §4)
 - ASR-01 (A) real transcription, deferred to the reserve pool ← G2 (see `docs/PLAN.md` §4 "Deferred: ASR")
