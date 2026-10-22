@@ -1,0 +1,10 @@
+.sd-playground { display: grid; gap: var(--sd-space-page-gap); padding: var(--sd-space-page-gap); }
+.sd-playground h1 { font-size: var(--sd-font-size-page); }
+.sd-playground h2 { font-size: var(--sd-font-size-section); }
+.sd-playground__section { display: grid; gap: var(--sd-space-4); padding: var(--sd-space-card-padding); background: var(--sd-color-surface-card); border: 1px solid var(--sd-color-border-subtle); border-radius: var(--sd-radius-card); min-width: 0; }
+.sd-playground__row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sd-space-3); }
+.sd-playground__fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sd-space-4); }
+.sd-playground__checks { display: grid; align-content: start; gap: var(--sd-space-1); }
+.sd-playground__check { display: flex; align-items: center; gap: var(--sd-space-2); min-height: var(--sd-local-hit-min); color: var(--sd-color-text-secondary); cursor: pointer; }
+.sd-playground__check input { margin-inline-end: var(--sd-space-1); }
+@media (max-width: 720px) { .sd-playground__fields { grid-template-columns: minmax(0, 1fr); } }

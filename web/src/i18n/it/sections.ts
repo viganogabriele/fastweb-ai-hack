@@ -1,0 +1,50 @@
+export const sections = {
+  stateTitle: 'In attesa dei servizi dati',
+  stateDescription: 'Questa vista sarà disponibile quando l’API e i moduli necessari saranno pronti.',
+  apiLabel: 'Dati previsti dall’API',
+  tasksLabel: 'Dipendenze del piano',
+  items: [
+    {
+      id: 'cases',
+      title: 'Casi',
+      summary: 'Coda ordinata per priorità e scadenza, con filtri per ufficio, prodotto e negozio. Il dettaglio raccoglierà prove, contesto, scenari e opzioni.',
+      endpoints: ['GET /api/runs/{run_id}/cases', 'GET /api/runs/{run_id}/cases/{id}'],
+      tasks: ['WEB-02', 'WEB-05', 'PLT-06', 'DATA-01b'],
+    },
+    {
+      id: 'sources',
+      title: 'Fonti',
+      summary: 'Elenco dei documenti e dettaglio con testo canonico sanitizzato, evidenze evidenziate, osservazioni e stato del collegamento.',
+      endpoints: ['GET /api/runs/{run_id}/documents', 'GET /api/runs/{run_id}/documents/{id}'],
+      tasks: ['WEB-04', 'PLT-06', 'DATA-01a'],
+    },
+    {
+      id: 'reports',
+      title: 'Report',
+      summary: 'Brief per vista, con citazioni che rimandano alle fonti dello stesso run.',
+      endpoints: ['GET /api/runs/{run_id}/reports?view='],
+      tasks: ['WEB-07', 'OUT-01', 'PLT-06'],
+    },
+    {
+      id: 'modules',
+      title: 'Pipeline',
+      summary: 'Catalogo dei moduli con stato, conteggi, modalità e configurazione per il prossimo run; il selettore temporale dipende dai run disponibili.',
+      endpoints: ['GET /api/modules', 'GET /api/runs'],
+      tasks: ['WEB-03', 'PLT-04', 'PLT-06'],
+    },
+    {
+      id: 'products',
+      title: 'Prodotti',
+      summary: 'Vendite affiancate ai motivi riportati dai negozi, prodotto per prodotto.',
+      endpoints: ['GET /api/runs/{run_id}/cases', 'GET /api/runs/{run_id}/forecast?store=&sku='],
+      tasks: ['WEB-08', 'ING-01', 'INS-01', 'EVL-03'],
+    },
+    {
+      id: 'clarifications',
+      title: 'Chiarimenti',
+      summary: 'Domande ai negozi, con la risposta acquisita come nuova fonte nel run successivo.',
+      endpoints: ['POST /api/clarifications/{id}/answer'],
+      tasks: ['WEB-09', 'OUT-02'],
+    },
+  ],
+} as const
