@@ -1,0 +1,20 @@
+.sd-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sd-space-1);
+  max-width: 100%;
+  padding: 3px 10px;
+  border: 1px solid var(--sd-color-border-subtle);
+  border-radius: var(--sd-local-radius-pill);
+  background: var(--sd-color-surface-card);
+  color: var(--sd-color-text-secondary);
+  font-size: var(--sd-font-size-caption);
+  font-weight: var(--sd-font-weight-medium);
+  line-height: 1.15;
+}
+.sd-status-badge svg { width: 1em; height: 1em; flex-shrink: 0; }
+.sd-status-badge--success { color: var(--sd-color-state-success); }
+.sd-status-badge--warning { color: var(--sd-color-state-warning); }
+.sd-status-badge--danger { color: var(--sd-color-state-danger); }
+.sd-status-badge--info { color: var(--sd-color-state-info); }
+.sd-status-badge__count { border-inline-start: 1px solid currentColor; padding-inline-start: var(--sd-space-1); }
