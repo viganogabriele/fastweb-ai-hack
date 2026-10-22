@@ -434,3 +434,93 @@ def test_parent_child_batch_put_is_atomic_and_resolves_earlier_parent(engine):
         with pytest.raises(ValueError, match="unavailable"):
             repo.put(other, invalid)
         assert repo.get(SourceDocument, other.id) is None
+
+
+def test_uninstalled_disabled_required_dependency_blocks_instead_of_crashing(engine):
+    missing = manifest("missing", enabled=False, mode="unavailable")
+    consumer = manifest("consumer", requires=("missing",))
+    request = spec(missing, consumer)
+    statuses = run(request, engine=engine, registry=Registry((RegisteredModule(consumer, result),)))
+    assert [s.status for s in statuses] == ["blocked", "blocked"]
+    with repo_session(engine, request) as repo:
+        assert repo.run_state()["status"] == "blocked"
+
+
+def test_progress_is_committed_while_a_module_runs(engine, tmp_path):
+    from tessera.core.repo import Repo as CanonicalRepo
+    from tessera.core.repo import list_module_runs
+
+    seen = {}
+
+    def execute(ctx):
+        other = connect(f"sqlite:///{tmp_path / 'pipeline.db'}")
+        try:
+            observer = CanonicalRepo.open(other, ctx.spec.run_id)
+            seen["status"] = observer.status()
+            seen["modules"] = {
+                m.module_id: m.status for m in list_module_runs(other, ctx.spec.run_id)
+            }
+        finally:
+            other.dispose()
+        return result(ctx)
+
+    source, later = manifest("source"), manifest("later", requires=("source",))
+    run(
+        spec(source, later),
+        engine=engine,
+        registry=Registry((RegisteredModule(source, execute), RegisteredModule(later, result))),
+    )
+    assert seen == {"status": "running", "modules": {"source": "running", "later": "pending"}}
+
+
+def test_module_cannot_publish_or_change_lifecycle(engine):
+    def sneaky(ctx):
+        ctx.repo.publish()
+        return result(ctx)
+
+    request = spec(manifest("source"))
+    statuses = run(
+        request, engine=engine, registry=Registry((RegisteredModule(manifest("source"), sneaky),))
+    )
+    assert statuses[0].status == "failed"
+    assert statuses[0].result.errors == ("module raised PermissionError",)
+    with repo_session(engine, request) as repo:
+        assert repo.run_state()["status"] == "failed"
+
+
+def test_failed_run_discards_outputs_of_earlier_successful_modules(engine):
+    def writer(ctx):
+        ctx.repo.put(
+            SourceDocument(
+                id="kept-until-failure",
+                version="1",
+                available_at=ctx.spec.as_of,
+                availability_basis="test",
+                source_refs=(),
+                source_type="email",
+                connector="source",
+                uri="test://doc",
+                content_hash="doc",
+                origin=None,
+                text="hello",
+                text_version="1",
+                meta={},
+            )
+        )
+        return result(ctx)
+
+    source, consumer = manifest("source"), manifest("consumer", requires=("source",))
+    request = spec(source, consumer)
+    statuses = run(
+        request,
+        engine=engine,
+        registry=Registry(
+            (
+                RegisteredModule(source, writer),
+                RegisteredModule(consumer, lambda c: result(c, "failed")),
+            )
+        ),
+    )
+    assert [s.status for s in statuses] == ["succeeded", "failed"]
+    with repo_session(engine, request) as repo:
+        assert repo.list(SourceDocument) == []
