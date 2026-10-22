@@ -9,11 +9,10 @@ One line per task. Edit only the lines of your own task.
 
 ## In progress
 
-<!-- - ID (lane, person) one-line goal · branch `ID-slug` -->
+- PLT-02 (C, Codex) MVP contracts, JSON Schema export and invariant tests implemented; review pending · branch `PLT-02-contracts`
 
 ## Ready (all hard dependencies merged)
 
-- PLT-02 (C) Contracts in `core/contracts/`. **Gates G0**: everyone reviews within 30 min
 - PLT-07 (A) Fastweb smoke test: chat, tool call, embeddings, ASR. Needs `FASTWEB_API_KEY` in `.env`
 - DATA-02 (A) `config/eval_split.yaml`, `domain.yaml`, `aliases.yaml`
 - ING-02 pure (A) `.eml` → canonical text + segments with offsets
