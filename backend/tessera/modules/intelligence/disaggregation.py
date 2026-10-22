@@ -8,13 +8,17 @@
   A forecast of 0 stays 0 (it is not missing).
 - The target is `sales_baseline`: a proxy for demand, not latent demand.
 
+Dates may be `date`, `datetime` or `pandas.Timestamp` (midnight); they are normalised to `date` so
+that keys parsed by pandas still match. Forecast values may be any real number (numpy included).
+
 Pure code: no DB, no dataset access. Reading vintages and the store calendar is the caller's job.
 """
 
 import math
+import numbers
 from collections.abc import Collection, Iterable, Mapping
 from dataclasses import dataclass
-from datetime import date, timedelta
+from datetime import date, datetime, time, timedelta
 from typing import Literal
 
 FORECAST_TARGET = "sales_baseline"
@@ -47,12 +51,14 @@ class DailyBaseline:
 
 def week_start(day: date) -> date:
     """Monday of the ISO week containing `day` (the forecast files' `week_start`)."""
+    day = _as_date(day, "day")
     return day - timedelta(days=day.weekday())
 
 
 def latest_vintage(run_dates: Iterable[date], as_of: date) -> date | None:
     """Most recent forecast run available at `as_of` (`run_date <= as_of`), or None."""
-    return max((d for d in run_dates if d <= as_of), default=None)
+    as_of = _as_date(as_of, "as_of")
+    return max((d for d in map(_as_run_date, run_dates) if d <= as_of), default=None)
 
 
 def disaggregate(
@@ -68,21 +74,25 @@ def disaggregate(
     """
     if days < 0:
         raise ValueError(f"days must be >= 0, got {days}")
-    for ws, units in weekly.items():
+    start = _as_date(start, "start")
+    forecast: dict[date, float | None] = {}
+    for key, units in weekly.items():
+        ws = _as_date(key, "week key")
         if ws.weekday() != 0:
             raise ValueError(f"week key {ws} is not a Monday")
-        if units is not None and (math.isinf(units) or units < 0):
-            raise ValueError(f"forecast for week {ws} must be finite and >= 0, got {units!r}")
+        if ws in forecast:
+            raise ValueError(f"week {ws} appears twice")
+        forecast[ws] = _as_units(ws, units)
 
-    closed = set(closed_days)
+    closed = {_as_date(c, "closed day") for c in closed_days}
     points: list[DailyBaselinePoint] = []
     reasons: list[str] = []
     for i in range(days):
         day = start + timedelta(days=i)
         ws = week_start(day)
         is_open = day not in closed
-        units = weekly.get(ws)
-        if units is None or math.isnan(units):
+        units = forecast.get(ws)
+        if units is None:
             _add(reasons, f"missing_forecast:{ws}")
             points.append(DailyBaselinePoint(day, ws, is_open, None))
             continue
@@ -95,6 +105,34 @@ def disaggregate(
 
     status: Status = "not_estimable" if reasons else "computed"
     return DailyBaseline(status, tuple(points), tuple(reasons))
+
+
+def _as_date(value: object, name: str) -> date:
+    if isinstance(value, datetime):  # pandas.Timestamp is a datetime subclass
+        if value.time() != time(0):
+            raise ValueError(f"{name} must be a calendar date, got {value!r}")
+        return value.date()
+    if isinstance(value, date):
+        return value
+    raise ValueError(f"{name} must be a date, got {value!r}")
+
+
+def _as_run_date(value: object) -> date:
+    return _as_date(value, "run_date")
+
+
+def _as_units(ws: date, units: object) -> float | None:
+    """None or NaN = missing; otherwise a finite real >= 0, returned as float."""
+    if units is None:
+        return None
+    if isinstance(units, bool) or not isinstance(units, numbers.Real):
+        raise ValueError(f"forecast for week {ws} must be a number, got {units!r}")
+    value = float(units)
+    if math.isnan(value):
+        return None
+    if math.isinf(value) or value < 0:
+        raise ValueError(f"forecast for week {ws} must be finite and >= 0, got {units!r}")
+    return value
 
 
 def _add(reasons: list[str], reason: str) -> None:

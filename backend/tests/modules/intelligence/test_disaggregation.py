@@ -1,5 +1,7 @@
 from datetime import date, timedelta
 
+import numpy as np
+import pandas as pd
 import pytest
 
 from tessera.modules.intelligence.disaggregation import (
@@ -108,3 +110,33 @@ def test_latest_vintage_has_no_look_ahead() -> None:
     assert latest_vintage(runs, date(2026, 10, 18)) == date(2026, 10, 12)
     assert latest_vintage(runs, date(2026, 10, 19)) == date(2026, 10, 19)
     assert latest_vintage(runs, date(2026, 10, 1)) is None
+
+
+def test_pandas_timestamps_and_numpy_values_match_plain_dates() -> None:
+    weekly = {pd.Timestamp(MON): np.float64(7.0), pd.Timestamp(NEXT): np.int64(14)}
+    bl = disaggregate(weekly, pd.Timestamp(d(4)), closed_days={pd.Timestamp(d(6))})
+    assert bl == disaggregate({MON: 7.0, NEXT: 14.0}, d(4), closed_days={d(6)})
+    assert bl.status == "computed"
+    assert bl.points[2].open is False and bl.points[2].baseline == 0.0
+    assert all(type(p.day) is date and type(p.week_start) is date for p in bl.points)
+
+
+def test_week_start_and_vintage_accept_timestamps() -> None:
+    assert week_start(pd.Timestamp("2026-10-22")) == MON
+    runs = pd.to_datetime(pd.Series(["2026-10-12", "2026-10-19"]))
+    assert latest_vintage(runs, pd.Timestamp("2026-10-22")) == date(2026, 10, 19)
+
+
+@pytest.mark.parametrize(
+    "weekly",
+    [
+        {pd.Timestamp("2026-10-19 12:00"): 1.0},  # not a calendar date
+        {MON: 1.0, pd.Timestamp(MON): 2.0},  # same week twice
+        {MON: "3.0"},  # not a number
+        {MON: True},
+        {"2026-10-19": 1.0},  # string key
+    ],
+)
+def test_ambiguous_inputs_raise(weekly) -> None:
+    with pytest.raises(ValueError):
+        disaggregate(weekly, MON)
