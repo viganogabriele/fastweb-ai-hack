@@ -10,7 +10,7 @@ from types import SimpleNamespace
 import pytest
 from sqlalchemy import select
 
-from tessera.core.contracts import ModuleManifest, RunSpec
+from tessera.core.contracts import ModuleManifest, ModuleSnapshot, RunSpec
 from tessera.core.db import connect, erp_rows
 from tessera.core.repo import Repo
 from tessera.modules.sources import erp
@@ -43,7 +43,11 @@ def sources(tmp_path):
     write(
         master / "stores.csv",
         ("store_id", "timezone", "currency"),
-        [("MIL01", "Europe/Rome", "EUR"), ("TYO01", "Asia/Tokyo", "JPY")],
+        [
+            ("MIL01", "Europe/Rome", "EUR"),
+            ("TYO01", "Asia/Tokyo", "JPY"),
+            ("NYC01", "America/New_York", "USD"),
+        ],
     )
     write(master / "styles.csv", ("style_code", "style_name"), [("J1", "MAIRE")])
     write(master / "sku_colour.csv", ("sku", "style_code", "color_code"), [("J1-999", "J1", "999")])
@@ -61,6 +65,7 @@ def sources(tmp_path):
     sales = erp_dir / "sales" / "daily_store_sku"
     write(sales / "sales_daily_2026_09.csv", SALE, [sale("2026-09-30")])
     october = [sale(f"2026-10-{day:02d}") for day in range(1, 22)] + [sale("2026-10-07", "TYO01")]
+    october += [sale("2026-10-06", "NYC01"), sale("2026-10-07", "NYC01")]
     write(sales / "sales_daily_2026_10.csv", SALE, october)
     stock = erp_dir / "inventory" / "store_stock_daily"
     for day in range(1, 22):
@@ -90,7 +95,7 @@ def engine(tmp_path):
     return connect(f"sqlite:///{tmp_path / 'erp.db'}")
 
 
-def spec(as_of, stores=("MIL01",)):
+def spec(as_of, stores=("MIL01",), **params):
     return RunSpec(
         run_id=f"run-{as_of:%m%d}",
         scenario_id="historical",
@@ -100,15 +105,19 @@ def spec(as_of, stores=("MIL01",)):
         config_hash="sha256:test",
         code_version="test",
         mode="live",
-        modules=(),
+        modules=(ModuleSnapshot(manifest=erp.MANIFEST, params=params),),
         prompt_versions={},
         model_versions={},
         authorized_fixture_refs=(),
     )
 
 
-def load(engine, sources, as_of, **params):
-    return erp.load_window(engine, spec(as_of), params, sources_dir=sources)
+def load(engine, sources, as_of, stores=("MIL01",), **params):
+    return erp.load_window(engine, spec(as_of, stores, **params), params, sources_dir=sources)
+
+
+def read(engine, sources, as_of, table, stores=("MIL01",), **params):
+    return erp.read(Repo(engine, spec(as_of, stores, **params)), table, sources_dir=sources)
 
 
 def stored(engine):
@@ -193,7 +202,7 @@ def test_unknown_store_fails(engine, sources):
 
 
 def test_run_on_dev_store(engine):
-    run_spec = spec(T1)
+    run_spec = spec(T1, history_days=3)
     repo = Repo(engine, run_spec)
     ctx = SimpleNamespace(spec=run_spec, repo=repo, params={"history_days": 3})
 
@@ -208,3 +217,57 @@ def test_run_on_dev_store(engine):
     sales = repo.erp("sales", store_id="MIL01")
     assert max(r.data["business_date"] for r in sales).isoformat() == "2026-10-07"
     assert all(r.available_at <= T1 for t in TABLES for r in repo.erp(t))
+
+
+def test_run_rejects_params_other_than_the_snapshot(engine):
+    run_spec = spec(T1, history_days=3)
+    ctx = SimpleNamespace(spec=run_spec, repo=Repo(engine, run_spec), params={"history_days": 5})
+
+    with pytest.raises(ValueError, match="module snapshot"):
+        erp.run(ctx)
+    assert stored(engine) == []
+
+
+def test_backwards_replay_does_not_change_a_runs_rows(engine, sources):
+    load(engine, sources, T2, history_days=2)
+    before = {t: [r.id for r in read(engine, sources, T2, t, history_days=2)] for t in TABLES}
+    sales = read(engine, sources, T2, "sales", history_days=2)
+    assert [r.data["business_date"].isoformat() for r in sales] == ["2026-10-12", "2026-10-13"]
+
+    load(engine, sources, T1, history_days=2)  # an earlier replay loads Oct 6-7
+    load(engine, sources, T2, stores=("TYO01",))  # another run loads another store
+
+    after = {t: [r.id for r in read(engine, sources, T2, t, history_days=2)] for t in TABLES}
+    assert after == before
+
+
+def test_window_uses_each_stores_local_day(engine, sources):
+    as_of = datetime(2026, 10, 8, 1, tzinfo=UTC)  # Oct 7 21:00 New York, Oct 8 03:00 Milan
+    stores = ("MIL01", "NYC01")
+    load(engine, sources, as_of, stores, history_days=1)
+
+    sales = read(engine, sources, as_of, "sales", stores, history_days=1)
+    # NYC01's window is Oct 6 (known 06:00 New York on Oct 7). MIL01's is Oct 7, not
+    # known until 06:00 Milan on Oct 8; its Oct 6 is outside the window.
+    assert [(r.data["store_id"], r.data["business_date"].isoformat()) for r in sales] == [
+        ("NYC01", "2026-10-06")
+    ]
+    assert [r.store_id for r in stored(engine) if r.tbl == "sales"] == ["NYC01"]
+
+
+def test_conflicting_master_snapshot_fails(engine, sources):
+    load(engine, sources, T2, master_available_at="2026-10-10T00:00:00+00:00")
+    rows = stored(engine)
+
+    with pytest.raises(ValueError, match="2026-10-10"):
+        load(engine, sources, T1)  # declares the default 2026-08-01
+    assert stored(engine) == rows
+
+
+def test_master_rows_follow_the_runs_snapshot(engine, sources):
+    later = (T1 + timedelta(days=2)).isoformat()
+    load(engine, sources, T1, master_available_at=later)  # no master row known at T1
+    load(engine, sources, T2)  # declares 2026-08-01, before T1
+
+    assert all(read(engine, sources, T1, t, master_available_at=later) == [] for t in TABLES[:6])
+    assert all(read(engine, sources, T2, t) for t in TABLES[:6])
