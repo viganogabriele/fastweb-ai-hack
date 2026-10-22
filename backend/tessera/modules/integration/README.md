@@ -17,13 +17,17 @@ and segment before relating facts.
   own unquoted evidence, with exactly one compatible fact in its explicit parent
   document. Known periods, product scope and units must match. Recognition currently
   covers a conservative set of Italian/English phrases; unresolvable correction
-  targets produce an abstention and a degraded result. Other wording/languages
-  remain separate observations for human verification.
+  targets, negation, hypothetical statements and questions produce an abstention
+  and a degraded result. Only affirmative supported statements can suppress facts.
+  Other wording/languages remain separate observations for human verification.
 
 Every relation retains endpoint versions, evidence references and all inspected
 input artifacts. Availability is the maximum of those inputs, including the new
 correction's availability, rather than its historical event date. The relation is
 therefore invisible to earlier snapshots. Repeated execution is idempotent.
+Segments resolve through the observation's versioned input references, and entity
+links apply only to the exact observation version they reference. Missing or
+ambiguous version pins abstain; a newer version never silently replaces a pin.
 
 The pure `state_at` helper demonstrates the consumer rules: union only certain
 copies; choose the earliest member as the representative and keep its original

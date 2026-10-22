@@ -7,6 +7,7 @@ import pytest
 
 from tessera.core.config import REPO_ROOT
 from tessera.core.contracts import (
+    ArtifactRef,
     EntityLink,
     Evidence,
     EvidenceRelation,
@@ -125,6 +126,35 @@ def infer(*triples, as_of=T3):
     return dedup.build_relations(observations, docs, segs, (), spec(as_of))
 
 
+def entity_link(obs, target, *, name=None):
+    common = {
+        key: getattr(obs, key)
+        for key in (
+            "available_at",
+            "availability_basis",
+            "source_refs",
+            "run_id",
+            "scenario_id",
+            "computed_at",
+            "producer",
+            "producer_version",
+        )
+    }
+    return EntityLink(
+        id=name or f"link-{obs.id}-{obs.version}",
+        version="v1",
+        **common,
+        input_refs=(dedup.ref(obs),),
+        observation_id=obs.id,
+        status="linked",
+        level="sku",
+        target_id=target,
+        candidates=(),
+        decided_by="test",
+        rationale="test",
+    )
+
+
 def test_exact_resend_counts_once_and_keeps_the_original_age():
     original, copy = fact("a"), fact("b", at=T2)
     relations, abstentions = infer(original, copy)
@@ -234,6 +264,118 @@ def test_quoted_correction_does_not_create_a_new_correction():
     b = fact("b", at=T2, text="Correggo: 9 e non 7.", value=9, parent=a[0].id, quoted=True)
     relations, _ = infer(a, b)
     assert all(r.relation not in ("supersedes", "retracts") for r in relations)
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Do not withdraw the Maire nera report: 7 requests remain confirmed.",
+        "I do not withdraw the Maire nera report: 7 requests remain confirmed.",
+        "Non ritiro la segnalazione Maire nera: 7 richieste confermate.",
+        "If confirmed, I withdraw the Maire nera report: 7 requests.",
+        "I withdraw the Maire nera report if the 7 requests are a mistake.",
+        "I might withdraw the Maire nera report: 7 requests.",
+        "Se confermato, ritiro la segnalazione Maire nera: 7 richieste.",
+        "Ritiro la segnalazione Maire nera se le 7 richieste sono errate.",
+        "I withdraw the Maire nera report of 7 requests?",
+        "Do not replace the Maire nera report: 7 requests remain confirmed.",
+        "Non correggo la segnalazione Maire nera: 7 richieste confermate.",
+        "If confirmed, correction: 9 requests instead of 7.",
+        "Forse 9 richieste e non 7.",
+        "Suppose there were 9 requests instead of 7.",
+        "We discussed 9 requests instead of 7.",
+        "I withdraw the Maire nera report once the 7 requests are confirmed as a mistake.",
+        "Ritiro la segnalazione Maire nera domani: 7 richieste.",
+    ],
+)
+def test_negated_hypothetical_or_questioned_corrections_retain_both_facts(text):
+    a = fact("a")
+    b = fact("b", at=T2, text=text, parent=a[0].id)
+    relations, abstentions = infer(a, b)
+    assert [r.relation for r in relations] == ["possibly_same_episode"]
+    assert abstentions == ("obs-b: uncertain correction intent; facts retained",)
+    assert len(dedup.state_at([a[2], b[2]], relations, T3).active_refs) == 2
+
+
+@pytest.mark.parametrize("reverse", [False, True])
+def test_segment_version_is_pinned_even_if_newer_version_changes_quoted_status(tmp_path, reverse):
+    a = fact("a")
+    b = fact(
+        "b",
+        at=T2,
+        text="I withdraw the Maire nera report of 7 requests.",
+        parent=a[0].id,
+        quoted=True,
+    )
+    newer_segment = b[1].model_copy(update={"version": "v2", "is_quoted": False})
+    segments = [b[1], newer_segment]
+    if reverse:
+        segments.reverse()
+    engine = connect(f"sqlite:///{tmp_path / 'versions.db'}")
+    with repo_session(engine, spec(), fixture_mode=True, write=True) as repo:
+        repo.put(a[0], b[0], a[1], *segments, a[2], b[2])
+        result = dedup.run(SimpleNamespace(spec=repo.spec, repo=repo))
+        relations = repo.list(EvidenceRelation)
+    assert result.status == "succeeded", result
+    assert result.counts["active_origins"] == 2
+    assert [r.relation for r in relations] == ["possibly_same_episode"]
+    assert dedup.ref(b[1]) in relations[0].input_refs
+    assert dedup.ref(newer_segment) not in relations[0].input_refs
+
+
+@pytest.mark.parametrize("pins", [(), ("v2",), ("v1", "v2")])
+def test_missing_or_ambiguous_segment_version_abstains_instead_of_falling_back(pins):
+    a, b = fact("a"), fact("b", at=T2)
+    obs = b[2].model_copy(
+        update={
+            "input_refs": (
+                dedup.ref(b[0]),
+                *(ArtifactRef(kind="Segment", id=b[1].id, version=v) for v in pins),
+            )
+        }
+    )
+    relations, abstentions = dedup.build_relations(
+        [a[2], obs], [a[0], b[0]], [a[1], b[1]], (), spec()
+    )
+    assert not relations
+    assert abstentions == ("obs-b: unavailable or invalid canonical evidence",)
+
+
+@pytest.mark.parametrize("reverse", [False, True])
+@pytest.mark.parametrize("include_v2", [False, True])
+def test_links_bind_to_exact_observation_version_independently_of_input_order(reverse, include_v2):
+    a, b = fact("a"), fact("b", at=T2)
+    a_v2 = a[2].model_copy(update={"version": "v2", "available_at": T1 + timedelta(minutes=1)})
+    links = [entity_link(a[2], "sku-A"), entity_link(a_v2, "sku-B"), entity_link(b[2], "sku-B")]
+    observations = [a[2], b[2], *([a_v2] if include_v2 else [])]
+    if reverse:
+        links.reverse()
+        observations.reverse()
+    relations, abstentions = dedup.build_relations(
+        observations, [a[0], b[0]], [a[1], b[1]], links, spec()
+    )
+    assert not abstentions
+    assert all(r.to_ref != dedup.ref(a[2]) and r.from_ref != dedup.ref(a[2]) for r in relations)
+    if include_v2:
+        assert [r.relation for r in relations] == ["duplicates"]
+        assert relations[0].to_ref == dedup.ref(a_v2)
+        assert dedup.ref(entity_link(a_v2, "sku-B")) in relations[0].input_refs
+        assert dedup.ref(entity_link(a[2], "sku-A")) not in relations[0].input_refs
+    else:
+        assert not relations
+
+
+@pytest.mark.parametrize("reverse", [False, True])
+def test_conflicting_links_for_one_observation_version_abstain(reverse):
+    a, b = fact("a"), fact("b", at=T2)
+    links = [entity_link(a[2], "sku-A"), entity_link(a[2], "sku-B", name="conflicting")]
+    if reverse:
+        links.reverse()
+    relations, abstentions = dedup.build_relations(
+        [a[2], b[2]], [a[0], b[0]], [a[1], b[1]], links, spec()
+    )
+    assert not relations
+    assert abstentions == ("obs-a@v1: ambiguous or unpinned entity links",)
 
 
 def test_t1_t2_t1_is_immutable_and_future_correction_is_invisible():

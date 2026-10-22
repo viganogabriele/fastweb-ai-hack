@@ -58,13 +58,64 @@ RETRACT = re.compile(
     r"\b(?:ritiro|ritiriamo|annullo|annulliamo|smentisco|retract|withdraw)\b",
     re.IGNORECASE,
 )
+AFFIRMATIVE_RETRACT = re.compile(
+    r"^\s*(?:(?:io\s+)?(?:ritiro|ritiriamo|annullo|annulliamo|smentisco)"
+    r"|(?:i|we)\s+(?:hereby\s+)?(?:retract|withdraw))\b",
+    re.IGNORECASE,
+)
+AFFIRMATIVE_REPLACE = re.compile(
+    r"^\s*(?:(?:io\s+)?(?:rettifico|correggo)|correzione\s*:|correction\s*:"
+    r"|corrected\s*:|(?:i|we)\s+(?:hereby\s+)?(?:correct|replace))",
+    re.IGNORECASE,
+)
+UNCERTAIN_INTENT = re.compile(
+    r"[?]|\b(?:if|unless|whether|perhaps|maybe|might|may|would|could|should|can|will"
+    r"|not|never|no|nothing|none|don['’]t|doesn['’]t|didn['’]t|non|nessun\w*"
+    r"|suppos\w*|assum\w*|hypothe\w*|imagin\w*|when|once|after|tomorrow|later"
+    r"|se|forse|potre\w*|dovre\w*|eventual\w*|ipot\w*|qualora|quando|appena|dopo|domani)\b"
+    r"|\bin (?:case|caso)\b",
+    re.IGNORECASE,
+)
+REPLACEMENT_CONTRAST = re.compile(
+    r"\b(?:e non|anzich[eé]|invece di|rather than|instead of)\s+(?=\d)",
+    re.IGNORECASE,
+)
+ASSERTED_VALUE = re.compile(
+    r"^\s*(?:il (?:fatturato(?: netto)?|totale)(?: di oggi)?"
+    r"|(?:the )?(?:net sales|revenue|total)(?: today)?)\s+(?:e['’]|è|is|are)\s+\d",
+    re.IGNORECASE,
+)
+RefKey = tuple[str, str, str]
+LinkMap = dict[RefKey, EntityLink]
+
+
+def _correction_intent(text: str) -> tuple[str | None, bool]:
+    """Accept affirmative statements only; uncertain language must never erase a fact.
+
+    This intentionally abstains on wording outside the small supported grammar.
+    The factual contrast '85 e non 58' is allowed; other negation/modal language,
+    questions and conditionals require a human even after an affirmative prefix.
+    """
+    retract, replace = RETRACT.search(text), REPLACE.search(text)
+    if not (retract or replace):
+        return None, False
+    contrast = REPLACEMENT_CONTRAST.search(text)
+    unsafe = UNCERTAIN_INTENT.search(REPLACEMENT_CONTRAST.sub("", text))
+    if not unsafe:
+        if retract and AFFIRMATIVE_RETRACT.search(text):
+            return "retracts", False
+        if not retract and (
+            AFFIRMATIVE_REPLACE.search(text) or (contrast and ASSERTED_VALUE.search(text))
+        ):
+            return "supersedes", False
+    return None, True
 
 
 def ref(record: SourceRecord) -> ArtifactRef:
     return ArtifactRef(kind=type(record).__name__, id=record.id, version=record.version)
 
 
-def _key(reference: ArtifactRef) -> tuple[str, str, str]:
+def _key(reference: ArtifactRef) -> RefKey:
     return reference.kind, reference.id, reference.version
 
 
@@ -76,16 +127,16 @@ def _norm(text: str | None) -> str:
     return " ".join((text or "").casefold().split())
 
 
-def _product(obs: Observation, links: dict[str, EntityLink]) -> tuple:
+def _product(obs: Observation, links: LinkMap) -> tuple:
     # Keep the literal mention as well: style-level links must not erase size/colour.
-    link = links.get(obs.id)
+    link = links.get(_key(ref(obs)))
     return (
         _norm(obs.product_mention),
         (link.level, link.target_id) if link and link.status == "linked" else None,
     )
 
 
-def _same_scope(a: Observation, b: Observation, links: dict[str, EntityLink]) -> bool:
+def _same_scope(a: Observation, b: Observation, links: LinkMap) -> bool:
     return (
         a.store_id is not None
         and a.store_id == b.store_id
@@ -116,10 +167,10 @@ def _same_fact(a: Observation, b: Observation) -> bool:
     )
 
 
-def _possible_scope(a: Observation, b: Observation, links: dict[str, EntityLink]) -> bool:
+def _possible_scope(a: Observation, b: Observation, links: LinkMap) -> bool:
     if a.store_id is None or a.store_id != b.store_id or a.kind != b.kind:
         return False
-    left, right = links.get(a.id), links.get(b.id)
+    left, right = links.get(_key(ref(a))), links.get(_key(ref(b)))
     if left and right and left.status == right.status == "linked":
         return (left.level, left.target_id) == (right.level, right.target_id)
     return (
@@ -184,15 +235,47 @@ def build_relations(
     missing/invalid parent is an abstention, never permission to guess a relation.
     """
     docs = {(d.id, d.version): d for d in documents if _visible(d, spec.as_of)}
-    segs = {s.id: s for s in segments if _visible(s, spec.as_of)}
-    link_map = {lk.observation_id: lk for lk in links if _visible(lk, spec.as_of)}
+    segs = {_key(ref(s)): s for s in segments if _visible(s, spec.as_of)}
+    link_candidates = defaultdict(list)
+    invalid_link_ids = set()
+    for link in links:
+        if not _visible(link, spec.as_of) or (link.run_id, link.scenario_id) != (
+            spec.run_id,
+            spec.scenario_id,
+        ):
+            continue
+        pins = {r for r in link.input_refs if r.kind == "Observation"}
+        if len(pins) != 1 or next(iter(pins)).id != link.observation_id:
+            invalid_link_ids.add(link.observation_id)
+            continue
+        link_candidates[_key(next(iter(pins)))].append(link)
+    link_map = {key: values[0] for key, values in link_candidates.items() if len(values) == 1}
     facts, errors, fact_docs, fact_segs = [], [], {}, {}
     for obs in sorted(observations, key=lambda o: (o.available_at or spec.as_of, o.id, o.version)):
         if not _visible(obs, spec.as_of) or obs.store_id not in spec.stores:
             continue
+        if obs.id in invalid_link_ids or len(link_candidates[_key(ref(obs))]) > 1:
+            errors.append(f"{obs.id}@{obs.version}: ambiguous or unpinned entity links")
+            continue
         try:
             evidence_docs = [docs[(e.document_id, e.document_version)] for e in obs.evidence]
-            evidence_segs = [segs[e.segment_id] for e in obs.evidence]
+            evidence_segs = []
+            for evidence in obs.evidence:
+                pins = {
+                    r for r in obs.input_refs if r.kind == "Segment" and r.id == evidence.segment_id
+                }
+                if len(pins) != 1:
+                    raise ValueError("evidence needs one exact segment version")
+                evidence_segs.append(segs[_key(next(iter(pins)))])
+                if (
+                    ArtifactRef(
+                        kind="SourceDocument",
+                        id=evidence.document_id,
+                        version=evidence.document_version,
+                    )
+                    not in obs.input_refs
+                ):
+                    raise ValueError("evidence document version must be pinned")
             for evidence, doc, seg in zip(obs.evidence, evidence_docs, evidence_segs, strict=True):
                 evidence.validate_against(doc, seg)
                 if doc.meta.get("store_id") not in (None, obs.store_id):
@@ -217,9 +300,9 @@ def build_relations(
             if not s.is_quoted
         ]
         text = "\n".join(own_quotes)
-        intent = (
-            "retracts" if RETRACT.search(text) else "supersedes" if REPLACE.search(text) else None
-        )
+        intent, uncertain = _correction_intent(text)
+        if uncertain:
+            errors.append(f"{new.id}: uncertain correction intent; facts retained")
         if intent is None:
             continue
         candidates = [
@@ -239,7 +322,7 @@ def build_relations(
             continue
         old = candidates[0]
         inputs = [doc, fact_docs[_key(ref(old))], *fact_segs[new_key], *fact_segs[_key(ref(old))]]
-        inputs += [lk for o in (new, old) if (lk := link_map.get(o.id)) is not None]
+        inputs += [lk for o in (new, old) if (lk := link_map.get(_key(ref(o)))) is not None]
         relations.append(
             _relation(
                 new,
@@ -263,7 +346,7 @@ def build_relations(
                 continue
             a, b = fact_docs[old_key], fact_docs[new_key]
             inputs = [a, b, *fact_segs[old_key], *fact_segs[new_key]]
-            inputs += [lk for o in (old, new) if (lk := link_map.get(o.id)) is not None]
+            inputs += [lk for o in (old, new) if (lk := link_map.get(_key(ref(o)))) is not None]
             quote_equal = tuple(e.quote for e in old.evidence) == tuple(
                 e.quote for e in new.evidence
             )
