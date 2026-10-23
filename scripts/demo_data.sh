@@ -1,11 +1,11 @@
 #!/usr/bin/env sh
-# Rebuild the committed DEMO-02 candidate (data/fixtures/runs/core-dev-20261022) into a
+# Rebuild the committed DEMO-02 candidate (data/fixtures/runs/core-dev-20261023) into a
 # fresh database, offline: no keys, no mock server, networking denied (~30 s).
 # Run from the repo root. `data/demo/current` then points at the replay attempt;
 # `make demo` serves it. Delete data/demo/ to rebuild after code changes.
 set -eu
 
-assets="$PWD/data/fixtures/runs/core-dev-20261022"
+assets="$PWD/data/fixtures/runs/core-dev-20261023"
 demo="$PWD/data/demo"
 py="$PWD/backend/.venv/bin/python"
 
@@ -21,7 +21,7 @@ export TMPDIR="$demo/tmp"
 
 "$py" scripts/prepare_core_demo.py \
   --output "$demo/candidate" \
-  --code-version f1d7923c788bdc519fcab5460dfe4ad1b9de8af0 \
+  --code-version 38fe618a91a9d4f573e96fc2ec3cde2ee6ec8ebe \
   --case-id case-mil01-i10919b00011-20261008 \
   --case-id case-mil01-unknown-20261009 >/dev/null
 cmp "$demo/candidate/run-spec.json" "$assets/run-spec.json"

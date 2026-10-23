@@ -25,7 +25,7 @@ demo: demo-data  ## backend :8000 + web :5173 on the recorded dev run, offline (
 	$(MAKE) --no-print-directory web & \
 	wait
 
-demo-data:  ## rebuild the committed core-dev-20261022 run into data/demo/ once (~30 s)
+demo-data:  ## rebuild the committed core-dev-20261023 run into data/demo/ once (~30 s)
 	scripts/demo_data.sh
 
 backend:

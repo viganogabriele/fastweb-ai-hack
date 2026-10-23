@@ -11,10 +11,10 @@ Use the committed recorded candidate; no keys, no network (`scripts/core_demo.md
 
 ```sh
 make setup
-demo_assets="$PWD/data/fixtures/runs/core-dev-20261022"
+demo_assets="$PWD/data/fixtures/runs/core-dev-20261023"
 demo_candidate="$PWD/data/core_demo/ui-candidate"        # must not exist yet
 backend/.venv/bin/python scripts/prepare_core_demo.py --output "$demo_candidate" \
-  --code-version f1d7923c788bdc519fcab5460dfe4ad1b9de8af0 \
+  --code-version 38fe618a91a9d4f573e96fc2ec3cde2ee6ec8ebe \
   --case-id case-mil01-i10919b00011-20261008 --case-id case-mil01-unknown-20261009
 backend/.venv/bin/python scripts/replay_demo.py --run-spec "$demo_assets/run-spec.json" \
   --sources "$demo_candidate/sources" --config "$demo_candidate/config" \
