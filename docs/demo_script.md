@@ -18,7 +18,7 @@ Recorded run: [scripts/core_demo.md](../scripts/core_demo.md). Public bundle:
 
 | Item | Value |
 |---|---|
-| Frozen candidate (G3, tag `freeze-g3` pending #211) | `1f7f35590782520d362c532c1e8159c4262703d7` |
+| Frozen candidate (G3, bound in [freeze-g3-handoff.md](freeze-g3-handoff.md); tag `freeze-g3` pending) | `1f7f35590782520d362c532c1e8159c4262703d7` |
 | Demo build | current `main` (UI redesign #253/#262, AG-03d fix #261) on the same recorded run; see Rehearsals for the exact SHA |
 | Recording of the dev run | code `38fe618a91a9d4f573e96fc2ec3cde2ee6ec8ebe`, assets `data/fixtures/runs/core-dev-20261023/` |
 | Run | `core-dev-candidate`, scenario `historical`, `as_of` 2026-10-22 20:00 UTC (22:00 Rome), `mode: recorded`, status `degraded`, namespace `product` |
@@ -182,7 +182,7 @@ Measured with `tools/demo-rehearsal` on a fresh attempt, 1280×800, light theme,
 | Date (UTC) | Build | Pace | Measured | Notes |
 |---|---|---|---|---|
 | 2026-10-23 07:58 | main `1f7f355` (pre-#253 UI), dev run `core-dev-20261023` | 1 | **4:01.1** (241.08 s, 6,027 frames) | Phase 1 proof. All 9 beats, 0 console errors, 0 deny hits, decision saved as `draft`. Trace beat 41 s vs 30 s target: hold trimmed by 6 s afterwards. Video `data/demo/video/phase1-main-1f7f355/rehearsal.mp4` (sha256 `270673c0…c91d`), not final. |
-| 2026-10-23 12:20 | main `bb37a2d` (UI redesign #253/#262, #261) + this branch, `core-dev-20261023`, synthetic `decisions.json` | 1 | **3:42.1** walkthrough (raw webm 237.04 s incl. a 15 s static tail before the browser closed) | Selectors rewritten for the redesign; D1 `notify_owner` approved as a draft. 1 console error (`/kpi` 404: this run has no KPI export). Deny hits on D1: catalogue name "VLOGO CARDIGAN" and the quote "Rinascente ne ha pochi anche loro". Holds lengthened afterwards (+12 s) and the mp4 is now cut at the last beat. |
+| 2026-10-23 10:20 | main `bb37a2d` (UI redesign #253/#262, #261) + this branch, `core-dev-20261023`, synthetic `decisions.json` | 1 | **3:42.1** walkthrough (raw webm 237.04 s incl. a 15 s static tail before the browser closed) | Selectors rewritten for the redesign; D1 `notify_owner` approved as a draft. 1 console error (`/kpi` 404: this run has no KPI export). Deny hits on D1: catalogue name "VLOGO CARDIGAN" and the quote "Rinascente ne ha pochi anche loro". Holds lengthened afterwards (+12 s) and the mp4 is now cut at the last beat. |
 | `[PENDING]` final | frozen bundle/run after #128, current UI | 1 | | Final video under `data/demo/video/`. |
 
 ## Do not show
