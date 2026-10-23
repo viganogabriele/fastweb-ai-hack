@@ -6,12 +6,12 @@ from types import SimpleNamespace
 
 import pytest
 
-from tessera.core.contracts import ForecastAdjustment
-from tessera.core.contracts.common import SourceRef
-from tessera.core.registry import Registry
-from tessera.core.repo import ErpRecord
-from tessera.modules.intelligence import residuals
-from tessera.modules.intelligence.residuals import DayAssessment, estimate
+from tesseract.core.contracts import ForecastAdjustment
+from tesseract.core.contracts.common import SourceRef
+from tesseract.core.registry import Registry
+from tesseract.core.repo import ErpRecord
+from tesseract.modules.intelligence import residuals
+from tesseract.modules.intelligence.residuals import DayAssessment, estimate
 
 AS_OF = datetime(2026, 10, 20, 18, tzinfo=UTC)
 SOURCE = SourceRef(uri="erp/test.csv", locator="record=2", content_hash="a" * 64)
@@ -256,9 +256,9 @@ def test_naive_clock_rejected(inputs):
 
 def test_module_persists_separate_auditable_abstention(monkeypatch, inputs):
     # A real Repo round trip; module consumes only baseline producer artifacts.
-    from tessera.core.contracts import ArtifactRef, ForecastPoint, RunSpec, ScenarioValues
-    from tessera.core.db import connect
-    from tessera.core.repo import Repo, create_run
+    from tesseract.core.contracts import ArtifactRef, ForecastPoint, RunSpec, ScenarioValues
+    from tesseract.core.db import connect
+    from tesseract.core.repo import Repo, create_run
 
     engine = connect("sqlite://")
     spec = RunSpec(

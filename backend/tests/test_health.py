@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 
-from tessera.api.main import app
+from tesseract.api.main import app
 
 
 def test_health() -> None:

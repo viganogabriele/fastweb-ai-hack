@@ -10,16 +10,16 @@ import sys
 
 import pytest
 
-from tessera.core.config import REPO_ROOT
-from tessera.core.contracts import (
+from tesseract.core.config import REPO_ROOT
+from tesseract.core.contracts import (
     ModuleManifest,
     ModuleResult,
     ModuleSnapshot,
     RunSpec,
     SourceDocument,
 )
-from tessera.core.registry import RegisteredModule, Registry
-from tessera.modules.sources import emails, voice
+from tesseract.core.registry import RegisteredModule, Registry
+from tesseract.modules.sources import emails, voice
 
 module_spec = importlib.util.spec_from_file_location(
     "replay_demo", REPO_ROOT / "scripts/replay_demo.py"
@@ -104,8 +104,8 @@ def test_repeatable_fixture_rebuild_starts_empty_and_retains_shared_inputs(input
     assert first["modules"][0]["counts"]["documents"] == 1
     attempts = list(inputs["workspace"].glob("attempt-*"))
     assert len(attempts) == 2
-    assert all((p / "data/tessera_fixture.db").is_file() for p in attempts)
-    assert not (inputs["cache"] / "tessera_fixture.db").exists()
+    assert all((p / "data/tesseract_fixture.db").is_file() for p in attempts)
+    assert not (inputs["cache"] / "tesseract_fixture.db").exists()
     assert "PRIVATE SOURCE TEXT" not in json.dumps(first)
 
 

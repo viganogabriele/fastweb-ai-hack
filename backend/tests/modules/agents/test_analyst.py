@@ -12,8 +12,8 @@ from zoneinfo import ZoneInfo
 import pytest
 from openai.types.chat import ChatCompletion
 
-from tessera.core.config import REPO_ROOT
-from tessera.core.contracts import (
+from tesseract.core.config import REPO_ROOT
+from tesseract.core.contracts import (
     AgentTrace,
     ArtifactRef,
     Case,
@@ -27,15 +27,15 @@ from tessera.core.contracts import (
     RunSpec,
     ScenarioValues,
 )
-from tessera.core.db import connect
-from tessera.core.fixtures import read_fixtures
-from tessera.core.registry import Registry
-from tessera.core.repo import Repo, create_run
-from tessera.modules.actions.options import case_forecast
-from tessera.modules.agents import analyst
-from tessera.modules.agents.runtime import ModelReply, ToolCall, ToolError
-from tessera.modules.intelligence import baseline, overlay
-from tessera.modules.sources import erp
+from tesseract.core.db import connect
+from tesseract.core.fixtures import read_fixtures
+from tesseract.core.registry import Registry
+from tesseract.core.repo import Repo, create_run
+from tesseract.modules.actions.options import case_forecast
+from tesseract.modules.agents import analyst
+from tesseract.modules.agents.runtime import ModelReply, ToolCall, ToolError
+from tesseract.modules.intelligence import baseline, overlay
+from tesseract.modules.sources import erp
 
 ROME = ZoneInfo("Europe/Rome")
 STORE = overlay.Store("MIL01", ROME, frozenset())

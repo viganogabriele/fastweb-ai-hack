@@ -9,7 +9,7 @@ import { CASES, DOCUMENTS, MODULES, RUNS, documentDetail, forRun } from './data.
  */
 export function mockApi(): Plugin {
   return {
-    name: 'tessera-mock-api',
+    name: 'tesseract-mock-api',
     apply: 'serve',
     configureServer(server) {
       server.middlewares.use('/api', (req, res) => {
@@ -63,7 +63,7 @@ async function handle(req: IncomingMessage, res: ServerResponse) {
 function send(res: ServerResponse, status: number, body: unknown) {
   res.statusCode = status
   res.setHeader('Content-Type', 'application/json')
-  res.setHeader('X-Tessera-Mock', '1')
+  res.setHeader('X-Tesseract-Mock', '1')
   res.end(JSON.stringify(body))
 }
 

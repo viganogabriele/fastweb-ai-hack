@@ -154,7 +154,7 @@ substitute for the integrated lead-time export. Its supported invocation is:
 
 ```sh
 # Execution example: paths/run id must be supplied by #211.
-$P -m eval product -- -m tessera.modules.ingestion.reading_export run \
+$P -m eval product -- -m tesseract.modules.ingestion.reading_export run \
   --run-spec "$READING_SPEC_FROM_BACKEND" --run-id "$READING_RUN_ID" \
   --out "$READING_EXPORT_FROM_BACKEND"
 ```

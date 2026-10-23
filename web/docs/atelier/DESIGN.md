@@ -6,7 +6,7 @@ fashion-house touch is restraint: warm neutrals instead of cold greys, one wine-
 serif wordmark, generous but consistent spacing.
 
 **Light mode is the default and the presentation mode.** Dark mode is complete and opt-in through
-the moon/sun button in the top bar; the choice persists in `localStorage` (`tessera-theme`). The OS
+the moon/sun button in the top bar; the choice persists in `localStorage` (`tesseract-theme`). The OS
 preference is ignored on purpose so a dark-mode laptop never switches the demo by itself.
 
 ## Tokens
@@ -14,7 +14,7 @@ preference is ignored on purpose so a dark-mode laptop never switches the demo b
 - `src/design/tokens.json` keeps the semantic names (`color.surface.card`, `color.text.primary`,
   `color.action.primary`, …), so every `--sd-*` variable and `sd-*` class still exists and pages
   written earlier pick up the theme without edits.
-- Each semantic colour declares its dark value in `$extensions["com.tessera.atelier"].modes.dark`.
+- Each semantic colour declares its dark value in `$extensions["com.tesseract.atelier"].modes.dark`.
   `node scripts/build-tokens.mjs` emits `:root` (light) and `:root[data-theme='dark']`.
 - `node scripts/check-contrast.mjs` checks every pair in **both** modes; all pass WCAG AA.
 - New tokens: `--sd-color-accent-signature` (wine red), `--sd-font-family-brand` (wordmark only).
@@ -49,7 +49,7 @@ from `generated/sources/erp/master_data/`, style names as renamed by DATA-04). `
 The mock enforces publication, store scope, run identity on derived cases and each record's
 `available_at` cutoff. The older synthetic run therefore has no records from the following day.
 Unsupported paths return 404, unsupported methods 405, run creation 409 and malformed paths 400;
-all responses carry `X-Tessera-Mock: 1`. No request falls through to a provider or the backend.
+all responses carry `X-Tesseract-Mock: 1`. No request falls through to a provider or the backend.
 `tests/mockApi.test.mjs` checks these boundaries.
 
 The overview shortcut selects the earliest deadline among critical/high cases, falling back to

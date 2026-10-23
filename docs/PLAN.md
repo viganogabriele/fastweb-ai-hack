@@ -1,4 +1,4 @@
-# PLAN: Tessera execution plan
+# PLAN: Tesseract execution plan
 
 | | |
 |---|---|
@@ -17,9 +17,9 @@ Each lane is one person, possibly with AI coding agents. A lane **owns** its pat
 
 | Lane | Person | Focus | Owns |
 |---|---|---|---|
-| **A: Reading** | _tbd_ | Fastweb smoke test, connectors, extraction, quantities, reports, external data, voice | `backend/tessera/modules/sources/` (except `erp.py`, `systems_client.py`), `modules/ingestion/`, `backend/prompts/extract_*`, `config/domain.yaml`, `config/aliases.yaml`, `config/eval_split.yaml`, `config/report_metrics.yaml`, `data/fixtures/{documents,observations,metrics,context,voice}/` |
+| **A: Reading** | _tbd_ | Fastweb smoke test, connectors, extraction, quantities, reports, external data, voice | `backend/tesseract/modules/sources/` (except `erp.py`, `systems_client.py`), `modules/ingestion/`, `backend/prompts/extract_*`, `config/domain.yaml`, `config/aliases.yaml`, `config/eval_split.yaml`, `config/report_metrics.yaml`, `data/fixtures/{documents,observations,metrics,context,voice}/` |
 | **B: Evidence and forecast** | _tbd_ | ERP loader, linking, dedup, cases, context, baseline and scenarios, report per owner | `modules/sources/erp.py`, `modules/integration/`, `modules/intelligence/`, `modules/outputs/`, `backend/prompts/{link,report}_*`, `data/fixtures/{links,cases,forecast,reports}/` |
-| **C: Platform** | _tbd_ | Contracts, repo, runs, orchestrator, LLM client, API, isolation and replay; reviews every contract change | `backend/tessera/core/`, `api/`, `cli.py`, `scripts/`, `Makefile`, `backend/pyproject.toml`, `.github/`, `config/pipeline.yaml`, `AGENTS.md`, `data/fixtures/runs/` |
+| **C: Platform** | _tbd_ | Contracts, repo, runs, orchestrator, LLM client, API, isolation and replay; reviews every contract change | `backend/tesseract/core/`, `api/`, `cli.py`, `scripts/`, `Makefile`, `backend/pyproject.toml`, `.github/`, `config/pipeline.yaml`, `AGENTS.md`, `data/fixtures/runs/` |
 | **D: UI, eval, demo** | _tbd_ | Dashboard, evaluation harness, demo script and bundle | `web/`, `eval/`, `config/demo.yaml`, demo material in `docs/` |
 | **E: Actions and agent** | _tbd_ | Stock simulation, systems adapter, options engine, investigator agent, approval and ledger | `modules/actions/`, `modules/agents/`, `modules/sources/systems_client.py`, `backend/prompts/investigator*`, `data/fixtures/{stock,options,traces}/` |
 
@@ -54,7 +54,7 @@ That makes **54.5 h planned and 25.5 h reserve**. C and E get less planned work 
 
 ## 3. Seams: artifacts between lanes
 
-Every handoff is a DTO kind with a fixture. The producer writes the fixture in Phase 0 (DATA-01a/b/c), and consumers build against it until the real producer lands. `tessera fixtures load` (PLT-03) loads fixtures into a separate `FIXTURE_MODE` namespace (RFC §4.6).
+Every handoff is a DTO kind with a fixture. The producer writes the fixture in Phase 0 (DATA-01a/b/c), and consumers build against it until the real producer lands. `tesseract fixtures load` (PLT-03) loads fixtures into a separate `FIXTURE_MODE` namespace (RFC §4.6).
 
 | Artifact (contract) | Producer | Consumers | Fixture |
 |---|---|---|---|
@@ -107,9 +107,9 @@ Goal: **one real dev email → observation with verified evidence → link or ab
 
 | ID | Lane | Needs merged | Builds against | Delivers / done when |
 |---|---|---|---|---|
-| PLT-03 | C | PLT-02 | – | `core/db.py`, `core/repo.py`: SQLite, artifact store (§2 rule 4), `RunSpec`, `as_of` filter inside the repo, `tessera fixtures load`, `tessera reset --run`; RFC §7.3 test 1 (T1 → T2 → T1) for the repo |
+| PLT-03 | C | PLT-02 | – | `core/db.py`, `core/repo.py`: SQLite, artifact store (§2 rule 4), `RunSpec`, `as_of` filter inside the repo, `tesseract fixtures load`, `tesseract reset --run`; RFC §7.3 test 1 (T1 → T2 → T1) for the repo |
 | PLT-05 | C | PLT-02, PLT-07 | PLT-07 findings | `core/llm.py` + `core/cache.py`: `chat/extract/embed` (`transcribe` comes with ASR-01), single-tool structured output with one retry, `LLM_MODE=live/record/replay`, replay miss = explicit error, budget and backoff (RFC §4.7.2) |
-| PLT-04 | C | PLT-03 | – | `core/registry.py` (auto-discovery), `core/orchestrator.py`: declared dependencies, one worker, statuses `succeeded/degraded/blocked/failed`, atomic publication; `tessera run --as-of ...` |
+| PLT-04 | C | PLT-03 | – | `core/registry.py` (auto-discovery), `core/orchestrator.py`: declared dependencies, one worker, statuses `succeeded/degraded/blocked/failed`, atomic publication; `tesseract run --as-of ...` |
 | PLT-06 | C | PLT-03 | Fixtures | API thin: `/api/runs`, `/api/runs/{id}/documents`, `/api/runs/{id}/cases` (RFC §4.6); `make types` generates `web/src/api/schema.d.ts` |
 | ING-02 | A | PLT-04 | ING-02 pure | `src.email` module writes `SourceDocument`/`Segment` for the selected dev mailboxes |
 | ING-09 | A | PLT-02 | – | Physical quantities (exact/range/vague/unknown) with units, from span text; vague quantifiers from `config/domain.yaml` |
@@ -122,7 +122,7 @@ Goal: **one real dev email → observation with verified evidence → link or ab
 | WEB-02 | D | – | DATA-01b, then PLT-06 | Case queue (priority, deadline, uncertainty) and case detail skeleton |
 | WEB-04 | D | – | DATA-01a, then PLT-06 | Sources view: canonical text with highlighted evidence, correct with emoji/CJK (code point → UTF-16) |
 
-**G1 (+6 h):** `tessera run` on one dev store-day produces a real case from a real email; the UI shows it from the API. Write down what is still a fixture.
+**G1 (+6 h):** `tesseract run` on one dev store-day produces a real case from a real email; the UI shows it from the API. Write down what is still a fixture.
 
 ### Phase 2: Vertical slice (G1 → G2, +12 h)
 

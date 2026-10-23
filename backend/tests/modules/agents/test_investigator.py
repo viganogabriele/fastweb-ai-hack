@@ -8,8 +8,8 @@ from types import SimpleNamespace
 import pytest
 from pydantic import ValidationError
 
-from tessera.core.cache import ReplayMiss
-from tessera.core.contracts import (
+from tesseract.core.cache import ReplayMiss
+from tesseract.core.contracts import (
     ActionOption,
     AgentTrace,
     Case,
@@ -21,14 +21,14 @@ from tessera.core.contracts import (
     SourceDocument,
     StockFact,
 )
-from tessera.core.db import connect
-from tessera.core.fixtures import read_fixtures
-from tessera.core.repo import ErpRecord, Repo, create_run, put_erp
-from tessera.core.run_repo import repo_session
-from tessera.modules.actions.options import OptionsPolicy
-from tessera.modules.agents import investigator as agent
-from tessera.modules.agents.runtime import Budget, Finish, ModelReply, ToolCall, ToolError
-from tessera.modules.sources.systems_client import Unknown
+from tesseract.core.db import connect
+from tesseract.core.fixtures import read_fixtures
+from tesseract.core.repo import ErpRecord, Repo, create_run, put_erp
+from tesseract.core.run_repo import repo_session
+from tesseract.modules.actions.options import OptionsPolicy
+from tesseract.modules.agents import investigator as agent
+from tesseract.modules.agents.runtime import Budget, Finish, ModelReply, ToolCall, ToolError
+from tesseract.modules.sources.systems_client import Unknown
 
 ROOT = Path(__file__).resolve().parents[4]
 D1 = "case-mil01-i10919b00011-20261008"
@@ -193,7 +193,7 @@ def test_stock_case_uses_different_checks_and_preserves_unknowns(database):
 
 
 def test_submitted_reservations_replace_live_ledger_reads(database, monkeypatch):
-    from tessera.modules.actions import options
+    from tesseract.modules.actions import options
 
     def forbidden(*_):
         pytest.fail("A frozen job must not reread the live ledger")
@@ -399,7 +399,7 @@ def test_donor_conflicts_use_only_latest_case_version(database, monkeypatch, sta
 
 
 def test_module_is_discoverable_and_requires_explicit_case_selection():
-    from tessera.core.registry import Registry
+    from tesseract.core.registry import Registry
 
     assert agent.MANIFEST in Registry.discover().manifests()
     result = agent.run(SimpleNamespace(params={}, clients={}))
@@ -410,7 +410,7 @@ def test_module_is_discoverable_and_requires_explicit_case_selection():
 def test_module_uses_llm_adapter_and_keeps_replay_misses_explicit(database, monkeypatch, missing):
     from openai.types.chat import ChatCompletion
 
-    from tessera.core.config import Settings
+    from tesseract.core.config import Settings
 
     engine, spec = database
     with repo_session(engine, spec, fixture_mode=True) as repo:

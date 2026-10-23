@@ -5,8 +5,8 @@ from decimal import Decimal
 import pytest
 from pydantic import BaseModel
 
-from tessera.core.contracts import AgentTrace, ArtifactRef
-from tessera.modules.agents.runtime import (
+from tesseract.core.contracts import AgentTrace, ArtifactRef
+from tesseract.modules.agents.runtime import (
     AgentLoop,
     Budget,
     FallbackContext,

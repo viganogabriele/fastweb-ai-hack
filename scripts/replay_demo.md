@@ -59,8 +59,8 @@ missing. Compare input/output hashes across attempts for a fixed snapshot. The
 actual copied tree hashes are recorded separately from the RunSpec's declared
 source/config identities; arbitrary historical hash schemes are not rewritten.
 
-Fixture snapshots remain in `data/tessera_fixture.db` inside their attempt and
-are labelled `fixture_demo_only: true`; product snapshots use `data/tessera.db`.
+Fixture snapshots remain in `data/tesseract_fixture.db` inside their attempt and
+are labelled `fixture_demo_only: true`; product snapshots use `data/tesseract.db`.
 A fixture demonstration can use source fixtures (for example a minimal stores.csv
 and one timestamped .eml with only `src.email` enabled). The regression tests rebuild
 that snapshot twice and compare output hashes, exercise the command directly,

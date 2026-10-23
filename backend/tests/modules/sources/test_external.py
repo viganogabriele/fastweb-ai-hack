@@ -6,13 +6,13 @@ from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from tessera.core.contracts import ContextEvent, ModuleSnapshot, RunSpec
-from tessera.core.db import connect
-from tessera.core.orchestrator import run as orchestrate
-from tessera.core.registry import RegisteredModule, Registry
-from tessera.core.run_repo import repo_session
-from tessera.modules.sources import external
-from tessera.modules.sources.external import MANIFEST, city_slug, load_city
+from tesseract.core.contracts import ContextEvent, ModuleSnapshot, RunSpec
+from tesseract.core.db import connect
+from tesseract.core.orchestrator import run as orchestrate
+from tesseract.core.registry import RegisteredModule, Registry
+from tesseract.core.run_repo import repo_session
+from tesseract.modules.sources import external
+from tesseract.modules.sources.external import MANIFEST, city_slug, load_city
 
 ROOT = Path(__file__).resolve().parents[4]
 SOURCES = ROOT / "generated" / "sources"

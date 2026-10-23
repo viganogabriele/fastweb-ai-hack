@@ -11,11 +11,11 @@ from fastapi.testclient import TestClient
 from openai.types.chat import ChatCompletion
 from sqlalchemy import insert, select, update
 
-from tessera.api.main import create_app
-from tessera.api.routers import investigations as api
-from tessera.core.cache import ReplayMiss
-from tessera.core.config import Settings
-from tessera.core.contracts import (
+from tesseract.api.main import create_app
+from tesseract.api.routers import investigations as api
+from tesseract.core.cache import ReplayMiss
+from tesseract.core.config import Settings
+from tesseract.core.contracts import (
     ActionOption,
     AgentTrace,
     ArtifactRef,
@@ -23,11 +23,11 @@ from tessera.core.contracts import (
     Clarification,
     Reservation,
 )
-from tessera.core.db import artifacts, connect, runs
-from tessera.core.llm import LLMClient
-from tessera.core.repo import ErpRecord, Repo, put_erp, reset_run
-from tessera.core.run_repo import repo_session
-from tessera.modules.actions import approval
+from tesseract.core.db import artifacts, connect, runs
+from tesseract.core.llm import LLMClient
+from tesseract.core.repo import ErpRecord, Repo, put_erp, reset_run
+from tesseract.core.run_repo import repo_session
+from tesseract.modules.actions import approval
 from tests.api.test_traces import case, common, raw, seed, spec, trace
 
 PATH = "/api/runs/one/cases/case-1/investigate"

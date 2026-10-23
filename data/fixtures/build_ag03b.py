@@ -19,9 +19,9 @@ Inputs are fixture-backed and frozen in `traces/recorded/inputs.json` (a snapsho
 records at recording time), so later fixture edits do not invalidate the recordings. Stock is read
 from those `StockFact`s; lanes come back `unknown` (no lane store in the fixtures): the model sees
 that and the options engine keeps the movement checks unknown. The run's `as_of` is the latest
-fixture `available_at`, as `tessera fixtures load` sets it.
+fixture `available_at`, as `tesseract fixtures load` sets it.
 
-Outputs, under `data/fixtures/traces/recorded/` (two levels deep, so `tessera fixtures load` does
+Outputs, under `data/fixtures/traces/recorded/` (two levels deep, so `tesseract fixtures load` does
 not load them as fixture records):
 
 - `llm_cache/`: the provider responses, content-addressed exactly as `data/llm_cache/` is;
@@ -37,18 +37,18 @@ import tempfile
 from datetime import UTC, datetime
 from pathlib import Path
 
-from tessera.core.cache import ResponseCache
-from tessera.core.config import Settings
-from tessera.core.contracts import RunSpec, StockFact
-from tessera.core.db import connect
-from tessera.core.fixtures import FIXTURE_RUN_ID, FIXTURE_SCENARIO_ID, read_fixtures
-from tessera.core.llm import LLMClient
-from tessera.core.repo import KINDS, ErpRecord, Repo, create_run, put_erp
-from tessera.core.run_repo import repo_session
-from tessera.modules.actions.options import load_policy
-from tessera.modules.agents import investigator as agent
-from tessera.modules.agents.chat_model import model_for_run
-from tessera.modules.sources.systems_client import Unknown
+from tesseract.core.cache import ResponseCache
+from tesseract.core.config import Settings
+from tesseract.core.contracts import RunSpec, StockFact
+from tesseract.core.db import connect
+from tesseract.core.fixtures import FIXTURE_RUN_ID, FIXTURE_SCENARIO_ID, read_fixtures
+from tesseract.core.llm import LLMClient
+from tesseract.core.repo import KINDS, ErpRecord, Repo, create_run, put_erp
+from tesseract.core.run_repo import repo_session
+from tesseract.modules.actions.options import load_policy
+from tesseract.modules.agents import investigator as agent
+from tesseract.modules.agents.chat_model import model_for_run
+from tesseract.modules.sources.systems_client import Unknown
 
 ROOT = Path(__file__).resolve().parents[2]
 FIXTURES = ROOT / "data" / "fixtures"

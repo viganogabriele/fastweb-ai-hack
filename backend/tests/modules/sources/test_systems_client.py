@@ -6,8 +6,8 @@ from zoneinfo import ZoneInfo
 import httpx
 import pytest
 
-from tessera.core.config import REPO_ROOT
-from tessera.modules.sources.systems_client import (
+from tesseract.core.config import REPO_ROOT
+from tesseract.modules.sources.systems_client import (
     Crosswalk,
     Lane,
     SystemsClient,

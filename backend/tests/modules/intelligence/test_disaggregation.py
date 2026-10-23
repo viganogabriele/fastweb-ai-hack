@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from tessera.modules.intelligence.disaggregation import (
+from tesseract.modules.intelligence.disaggregation import (
     disaggregate,
     latest_vintage,
     week_start,

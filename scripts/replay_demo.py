@@ -16,18 +16,18 @@ from uuid import uuid4
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 
-from tessera.core.cache import CacheCorrupt, ReplayMiss, ResponseCache
-from tessera.core.config import Settings, get_settings
-from tessera.core.contracts import RunSpec
-from tessera.core.db import connect
-from tessera.core.llm import LLMClient
-from tessera.core.orchestrator import run
-from tessera.core.registry import Registry
-from tessera.core.repo import KINDS
-from tessera.core.run_repo import repo_session
+from tesseract.core.cache import CacheCorrupt, ReplayMiss, ResponseCache
+from tesseract.core.config import Settings, get_settings
+from tesseract.core.contracts import RunSpec
+from tesseract.core.db import connect
+from tesseract.core.llm import LLMClient
+from tesseract.core.orchestrator import run
+from tesseract.core.registry import Registry
+from tesseract.core.repo import KINDS
+from tesseract.core.run_repo import repo_session
 
-MARKER = ".tessera-replay-workspace.json"
-OWNER = {"format": 1, "owner": "tessera-offline-replay"}
+MARKER = ".tesseract-replay-workspace.json"
+OWNER = {"format": 1, "owner": "tesseract-offline-replay"}
 FORBIDDEN = {".env", ".secrets", "ground_truth", "generator", "email_context"}
 
 

@@ -5,7 +5,7 @@ export type Theme = 'light' | 'dark'
 // Light is the default and the presentation mode: the OS preference is deliberately ignored so a
 // dark-mode laptop never switches the demo by itself. index.html applies the stored choice
 // before first paint.
-const STORAGE_KEY = 'tessera-theme'
+const STORAGE_KEY = 'tesseract-theme'
 const listeners = new Set<() => void>()
 
 const current = (): Theme => (document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light')

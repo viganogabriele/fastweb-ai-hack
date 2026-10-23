@@ -13,11 +13,11 @@ import httpx
 import pytest
 from sqlalchemy import event, func, select
 
-from tessera.core.contracts import ActionOption
-from tessera.core.db import connect
-from tessera.core.repo import Repo
-from tessera.modules.actions import ledger
-from tessera.modules.actions.approval import Conflict, LocalDraft, decide
+from tesseract.core.contracts import ActionOption
+from tesseract.core.db import connect
+from tesseract.core.repo import Repo
+from tesseract.modules.actions import ledger
+from tesseract.modules.actions.approval import Conflict, LocalDraft, decide
 from tests.modules.actions.test_approval import proposal, publish
 from tests.modules.actions.test_options import AS_OF, POLICY, SIZES, forecast, inputs, position
 

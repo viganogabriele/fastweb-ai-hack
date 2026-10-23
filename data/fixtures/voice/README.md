@@ -1,6 +1,6 @@
 # Voice notes (lane A)
 
-Store voice notes read by `src.voice` (`backend/tessera/modules/sources/voice.py`). RFC §5.2:
+Store voice notes read by `src.voice` (`backend/tesseract/modules/sources/voice.py`). RFC §5.2:
 2-3 recordings of 20-60 s (it/en) made by the team, no real personal data, plus a **manual
 transcript** written by the person who recorded them. DATA-03 (#29) produces the recordings;
 `src.voice` is intentionally stricter than a hand-written fixture so a bad file fails loudly.
@@ -14,7 +14,7 @@ data/fixtures/voice/<note_id>/
   transcript.txt   the manual transcript, UTF-8 (name configurable in the sidecar)
 ```
 
-Nested folders, not flat files: `tessera fixtures load` treats every `data/fixtures/*/*.json` as
+Nested folders, not flat files: `tesseract fixtures load` treats every `data/fixtures/*/*.json` as
 a list of stored contract records, and a sidecar is neither.
 
 ## `note.json`

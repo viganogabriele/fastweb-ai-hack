@@ -8,10 +8,10 @@ from jsonschema import Draft202012Validator
 from jsonschema import ValidationError as SchemaValidationError
 from pydantic import ValidationError
 
-from tessera.core import contracts
-from tessera.core.contracts import ModuleManifest, ModuleSnapshot, RunSpec, SourceDocument
-from tessera.core.contracts.common import Contract
-from tessera.core.contracts.schema import export_schema
+from tesseract.core import contracts
+from tesseract.core.contracts import ModuleManifest, ModuleSnapshot, RunSpec, SourceDocument
+from tesseract.core.contracts.common import Contract
+from tesseract.core.contracts.schema import export_schema
 
 
 def test_schema_covers_all_public_dtos_and_has_resolvable_refs():
@@ -39,7 +39,7 @@ def test_schema_covers_all_public_dtos_and_has_resolvable_refs():
 def test_export_cli_is_deterministic_and_writes_a_portable_schema(tmp_path, document):
     target = tmp_path / "nested" / "contracts.json"
     subprocess.run(
-        [sys.executable, "-m", "tessera.core.contracts", "--output", str(target)],
+        [sys.executable, "-m", "tesseract.core.contracts", "--output", str(target)],
         check=True,
     )
     schema = json.loads(target.read_text())

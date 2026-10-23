@@ -1,4 +1,4 @@
-"""PLT-03: `tessera fixtures load` and `tessera reset --run` on the fixture namespace."""
+"""PLT-03: `tesseract fixtures load` and `tesseract reset --run` on the fixture namespace."""
 
 import json
 import shutil
@@ -6,12 +6,12 @@ from pathlib import Path
 
 import pytest
 
-from tessera import cli
-from tessera.core.config import Settings, get_settings
-from tessera.core.contracts import Observation, Segment, SourceDocument
-from tessera.core.db import connect
-from tessera.core.fixtures import FIXTURE_RUN_ID, load_fixtures, read_fixtures
-from tessera.core.repo import Repo, RunNotFound, list_runs, run_status
+from tesseract import cli
+from tesseract.core.config import Settings, get_settings
+from tesseract.core.contracts import Observation, Segment, SourceDocument
+from tesseract.core.db import connect
+from tesseract.core.fixtures import FIXTURE_RUN_ID, load_fixtures, read_fixtures
+from tesseract.core.repo import Repo, RunNotFound, list_runs, run_status
 
 ROOT = Path(__file__).resolve().parents[3]
 FIXTURES = ROOT / "data" / "fixtures"
@@ -53,7 +53,7 @@ def test_cli_loads_into_fixture_namespace_and_resets(tmp_path, monkeypatch, caps
     try:
         cli.main(["fixtures", "load"])
         assert "run 'fixture'" in capsys.readouterr().out
-        assert not (tmp_path / "tessera.db").exists()
+        assert not (tmp_path / "tesseract.db").exists()
         fixture_db = Settings(data_dir=tmp_path, fixture_mode=True)
         engine = connect(fixture_db.db_url)
         assert run_status(engine, FIXTURE_RUN_ID) == "published"

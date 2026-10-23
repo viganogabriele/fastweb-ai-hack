@@ -9,11 +9,11 @@ from typing import Any
 import pytest
 from sqlalchemy import text
 
-from tessera.core.contracts import ModuleResult, ModuleRun, Observation, RunSpec, SourceDocument
-from tessera.core.contracts.common import SourceRef
-from tessera.core.db import SCHEMA_VERSION, SchemaMismatch, connect
-from tessera.core.fixtures import read_fixtures
-from tessera.core.repo import (
+from tesseract.core.contracts import ModuleResult, ModuleRun, Observation, RunSpec, SourceDocument
+from tesseract.core.contracts.common import SourceRef
+from tesseract.core.db import SCHEMA_VERSION, SchemaMismatch, connect
+from tesseract.core.fixtures import read_fixtures
+from tesseract.core.repo import (
     ImmutableArtifact,
     LookAhead,
     Repo,

@@ -4,14 +4,14 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import select, update
 
-from tessera.api.main import create_app
-from tessera.api.routers import clarifications
-from tessera.core.config import Settings
-from tessera.core.contracts import Clarification, SourceDocument
-from tessera.core.db import runs
-from tessera.core.registry import RegisteredModule, Registry
-from tessera.core.run_repo import repo_session
-from tessera.modules.agents.answer_registry import register_recorded_answer, submit_answer
+from tesseract.api.main import create_app
+from tesseract.api.routers import clarifications
+from tesseract.core.config import Settings
+from tesseract.core.contracts import Clarification, SourceDocument
+from tesseract.core.db import runs
+from tesseract.core.registry import RegisteredModule, Registry
+from tesseract.core.run_repo import repo_session
+from tesseract.modules.agents.answer_registry import register_recorded_answer, submit_answer
 from tests.modules.agents import test_answer_registry
 
 # Register the shared pytest fixture without an unused fixture-function import.
@@ -287,10 +287,10 @@ def test_startup_recovers_accepted_pending_answer_jobs(answer_setup, mode):
 
 @pytest.mark.parametrize("reply", ["self_contained", "context_only", "replay_miss"])
 def test_http_answer_with_production_pipeline_boundaries(answer_setup, monkeypatch, reply):
-    from tessera.core.cache import ReplayMiss
-    from tessera.core.contracts import Case, EntityLink, EvidenceRelation, Observation
-    from tessera.modules.agents.answer_registry import execute_follow_up
-    from tessera.modules.agents.contextual_answers import ContextualMention
+    from tesseract.core.cache import ReplayMiss
+    from tesseract.core.contracts import Case, EntityLink, EvidenceRelation, Observation
+    from tesseract.modules.agents.answer_registry import execute_follow_up
+    from tesseract.modules.agents.contextual_answers import ContextualMention
 
     engine, body, registry, originals, RecordedReading = test_answer_registry.production_pipeline(
         answer_setup, monkeypatch
@@ -424,7 +424,7 @@ def test_restart_recovers_from_existing_database_without_an_injected_engine(
 
 
 def test_startup_does_not_steal_an_already_running_job(answer_setup):
-    from tessera.modules.agents.answer_registry import jobs
+    from tesseract.modules.agents.answer_registry import jobs
 
     engine, body, registry, seed, seen, _ = answer_setup
     seed()
@@ -450,7 +450,7 @@ def test_startup_preserves_lazy_database_creation(tmp_path):
 
 
 def test_follow_up_api_excludes_historical_support_but_resolves_pinned_citations(answer_setup):
-    from tessera.core.contracts import (
+    from tesseract.core.contracts import (
         ActionOption,
         AgentTrace,
         Citation,

@@ -7,12 +7,12 @@ from datetime import timedelta
 import pytest
 from sqlalchemy import event, func, select
 
-from tessera.core import repo
-from tessera.core.contracts import RunSpec
-from tessera.core.db import connect
-from tessera.modules.actions import ledger
-from tessera.modules.actions.approval import Conflict, DecisionRequest, decide
-from tessera.modules.actions.options import evaluate_case
+from tesseract.core import repo
+from tesseract.core.contracts import RunSpec
+from tesseract.core.db import connect
+from tesseract.modules.actions import ledger
+from tesseract.modules.actions.approval import Conflict, DecisionRequest, decide
+from tesseract.modules.actions.options import evaluate_case
 from tests.modules.actions.test_options import AS_OF, inputs
 
 

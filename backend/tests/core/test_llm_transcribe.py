@@ -5,9 +5,9 @@ import pytest
 from openai import OpenAI
 from pydantic import SecretStr
 
-from tessera.core.cache import ReplayMiss
-from tessera.core.config import MissingApiKey, Settings
-from tessera.core.llm import BudgetExceeded, LLMCallFailed, LLMClient
+from tesseract.core.cache import ReplayMiss
+from tesseract.core.config import MissingApiKey, Settings
+from tesseract.core.llm import BudgetExceeded, LLMCallFailed, LLMClient
 
 from .test_llm import run_spec
 

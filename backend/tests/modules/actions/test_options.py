@@ -18,7 +18,7 @@ from zoneinfo import ZoneInfo
 import httpx
 import pytest
 
-from tessera.core.contracts import (
+from tesseract.core.contracts import (
     ActionOption,
     AdjustmentComponent,
     ArtifactRef,
@@ -33,10 +33,10 @@ from tessera.core.contracts import (
     SourceRef,
     StockFact,
 )
-from tessera.core.db import connect
-from tessera.core.repo import Repo, create_run
-from tessera.modules.actions import options
-from tessera.modules.actions.options import (
+from tesseract.core.db import connect
+from tesseract.core.repo import Repo, create_run
+from tesseract.modules.actions import options
+from tesseract.modules.actions.options import (
     OptionInputs,
     OptionsPolicy,
     Position,
@@ -45,9 +45,9 @@ from tessera.modules.actions.options import (
     evaluate_options,
     input_version_hash,
 )
-from tessera.modules.intelligence import baseline
-from tessera.modules.sources import erp
-from tessera.modules.sources.systems_client import (
+from tesseract.modules.intelligence import baseline
+from tesseract.modules.sources import erp
+from tesseract.modules.sources.systems_client import (
     Crosswalk,
     Lane,
     LaneEta,
