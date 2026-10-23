@@ -197,3 +197,38 @@ def test_write_failure_rolls_back_decision_and_reservation(setup):
         event.remove(engine, "before_cursor_execute", fail_write)
     assert ledger.reservations(engine, value.scenario_id) == ()
     assert approve(engine, value).decision.decision == "approved"
+
+
+def test_concurrent_identical_retries_return_one_persisted_decision(setup):
+    engine, value = setup
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        results = list(pool.map(lambda _: approve(engine, value), range(2)))
+    assert results[0] == results[1]
+    assert ledger.reservations(engine, value.scenario_id) == results[0].reservations
+
+
+def test_current_but_blocked_movement_cannot_be_approved(tmp_path):
+    engine = connect(f"sqlite:///{tmp_path / 'blocked.db'}")
+    value = inputs()
+    value = replace(
+        value,
+        case=value.case.model_copy(update={"run_id": value.run_id}),
+        policy=replace(value.policy, max_transfer_cost_eur=0),
+    )
+    publish(engine, [value])
+    with pytest.raises(Conflict, match="mandatory movement"):
+        approve(engine, value)
+    assert ledger.reservations(engine, value.scenario_id) == ()
+
+
+def test_durable_ledger_survives_engine_reconnect(setup):
+    engine, value = setup
+    draft = approve(engine, value)
+    url = engine.url
+    engine.dispose()
+    reopened = connect(url)
+    try:
+        assert ledger.reservations(reopened, value.scenario_id) == draft.reservations
+        assert decide(reopened, proposal(value), now=AS_OF) == draft
+    finally:
+        reopened.dispose()
