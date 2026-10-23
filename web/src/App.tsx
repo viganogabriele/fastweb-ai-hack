@@ -38,21 +38,21 @@ const NAV: NavGroup[] = [
     label: messages.shell.groups.core,
     items: [
       { id: 'cases', label: messages.shell.nav.cases, icon: ClipboardList },
-      { id: 'sources', label: messages.shell.nav.sources, icon: FileSearch },
-      { id: 'reports', label: messages.shell.nav.reports, icon: FileText },
-      { id: 'modules', label: messages.shell.nav.modules, icon: Workflow }
+      { id: 'products', label: messages.shell.nav.products, icon: Package },
+      { id: 'modules', label: messages.shell.nav.modules, icon: Workflow },
+      { id: 'reports', label: messages.shell.nav.reports, icon: FileText }
     ]
   },
   {
     id: 'should',
     label: messages.shell.groups.should,
     items: [
-      { id: 'products', label: messages.shell.nav.products, icon: Package },
       {
         id: 'clarifications',
         label: messages.shell.nav.clarifications,
         icon: MessageCircleQuestion
-      }
+      },
+      { id: 'sources', label: messages.shell.nav.sources, icon: FileSearch }
     ]
   }
 ]
@@ -254,7 +254,7 @@ export default function App() {
           ) : currentId === 'products' ? (
             <ProductsPage runs={runs} onCaseSelect={openCase} />
           ) : currentId === 'reports' ? (
-            <ReportsPage runs={runs} />
+            <ReportsPage runs={runs} onCaseSelect={openCase} />
           ) : ['overview', 'cases', 'sources'].includes(currentId) ? (
             <RunWorkspace
               key={`${currentId}-${runs.selectedId}`}
