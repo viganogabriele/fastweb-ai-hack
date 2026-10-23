@@ -40,6 +40,9 @@ class RunSpec(Contract):
     prompt_versions: dict[str, str]
     model_versions: dict[str, str]
     authorized_fixture_refs: tuple[Text, ...]
+    # Optional insertion boundary for jobs bound to the ERP rows present at submission.
+    # Existing runs retain their historical availability-only read behavior.
+    erp_max_seq: Count | None = None
 
     @model_validator(mode="after")
     def scope(self) -> Self:

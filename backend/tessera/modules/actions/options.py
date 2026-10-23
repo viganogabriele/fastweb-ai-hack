@@ -1293,6 +1293,8 @@ def gather(
     horizon_days: int,
     size_curves: Mapping[str, SizeCurve] | None = None,
     product: tuple[str | None, str | None] | None = None,
+    *,
+    reservations: Sequence[Reservation] | None = None,
 ) -> OptionInputs:
     """Everything ``evaluate_options`` needs for one case and one colour (``product``, default
     the case's own SKU-colour and size), read at the run's ``as_of``."""
@@ -1357,7 +1359,11 @@ def gather(
         r.id: r
         for r in (
             *run_repo.list(Reservation),
-            *session_reservations(run_repo.engine, spec.scenario_id),
+            *(
+                session_reservations(run_repo.engine, spec.scenario_id)
+                if reservations is None
+                else reservations
+            ),
         )
         if sku is None or r.sku == sku
     }
