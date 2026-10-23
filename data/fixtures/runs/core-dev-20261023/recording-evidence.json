@@ -1,0 +1,1388 @@
+{
+  "complete": true,
+  "execution_sha": "38fe618a91a9d4f573e96fc2ec3cde2ee6ec8ebe",
+  "format": 1,
+  "llm_traces": [
+    {
+      "attempt": 1,
+      "key": "a1130ada94a496989875893ad9c43123b80475b0f4f929643b04145e47134415",
+      "latency_seconds": 5.75584167893976,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 2682
+    },
+    {
+      "attempt": 1,
+      "key": "f48f267f6e9ab055bb4c92e75e909e4d191b4c37916e1595e07d7295d5512467",
+      "latency_seconds": 4.541963030118495,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 2432
+    },
+    {
+      "attempt": 1,
+      "key": "15d758e1f5f23a97baee22888167b030989da7be581c7c532a4c51900efc3a93",
+      "latency_seconds": 0.8197027880232781,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1564
+    },
+    {
+      "attempt": 1,
+      "key": "9655e02c5c6313dcdbb74938bf5081d01f0c9e93948d1140c6c57d0726f85052",
+      "latency_seconds": 7.122942785965279,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 2991
+    },
+    {
+      "attempt": 1,
+      "key": "ab52533c8f1166256a097100946bcd8ee04cecd9c06a8e882ea21917ba33c503",
+      "latency_seconds": 5.417962736915797,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 2499
+    },
+    {
+      "attempt": 1,
+      "key": "9e5c6a2f877e1a9d45623d7f27a3af7d27f4ffe8ec5a193de27cd16b12a6da43",
+      "latency_seconds": 1.4526389290113002,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1687
+    },
+    {
+      "attempt": 1,
+      "key": "87e5ac5c9acc41d62f9e37b8002c172f384128128eb04268bd33039eb8d20ef3",
+      "latency_seconds": 1.797254664823413,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1816
+    },
+    {
+      "attempt": 1,
+      "key": "af46234c75c992be59d66937865c8ede22dca28d38244b2d9dafa8f61ef9f6e8",
+      "latency_seconds": 0.5400910249445587,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1512
+    },
+    {
+      "attempt": 1,
+      "key": "c664b0af207c9d2e23409aa75dc0578b806968337e57ba1733918e7fcbf3395e",
+      "latency_seconds": 1.1284477380104363,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1623
+    },
+    {
+      "attempt": 1,
+      "key": "15e3cce3e61158f8c0d0da68128c1301fe913604f5f400ad67eda3a3aa15f327",
+      "latency_seconds": 8.348547215107828,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 3393
+    },
+    {
+      "attempt": 1,
+      "key": "ab3eb0efdb509520c3fdd4375f857e61f852356054423f85d6a5ec1c8b8b83b3",
+      "latency_seconds": 0.10883864294737577,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1414
+    },
+    {
+      "attempt": 1,
+      "key": "c90093048b13ff3e138d5f96d4a34f86171665c5ba6b2024f09d24e3809e9c18",
+      "latency_seconds": 0.17623286391608417,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1450
+    },
+    {
+      "attempt": 1,
+      "key": "afa65b14721869b2d07094803217b7141607a1e04e0ef025aff64762ba4aef73",
+      "latency_seconds": 0.3397090770304203,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 466
+    },
+    {
+      "attempt": 1,
+      "key": "d18ec60e8b71773269766245600b2d031343564d431d72694facca487c61c310",
+      "latency_seconds": 0.3354012118652463,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 479
+    },
+    {
+      "attempt": 1,
+      "key": "6ce41ee994e95202c7ad3f1bddc75506b54d05ebc615a9a8747370724bac2d3d",
+      "latency_seconds": 0.8180779539979994,
+      "mode": "record",
+      "model": "glm-5.3-flash",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1432
+    },
+    {
+      "attempt": 1,
+      "key": "166ca6a138d57a46191f380219b554ec3ee80a991734e5ea16c45d7d64e69a50",
+      "latency_seconds": 24.067932966165245,
+      "mode": "record",
+      "model": "glm-5.3-flash",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 8926
+    },
+    {
+      "attempt": 1,
+      "key": "8d760d9c2dd4a8959f9902cc2513b275089324e2a24721824670ae1cf4977e35",
+      "latency_seconds": 15.069341581081972,
+      "mode": "record",
+      "model": "glm-5.3-flash",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 11697
+    },
+    {
+      "attempt": 1,
+      "key": "6ad63476d06b89aaada1998d176c54de5fbed92a71d0edb38ba1239104fe4e75",
+      "latency_seconds": 6.517783863004297,
+      "mode": "record",
+      "model": "glm-5.3-flash",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 12088
+    },
+    {
+      "attempt": 1,
+      "key": "2748b6ec6d12d02699f10373db2932d6eb95fd2e861c3c0de339d0cc942c97b9",
+      "latency_seconds": 0.6011581548955292,
+      "mode": "record",
+      "model": "glm-5.3-flash",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1423
+    },
+    {
+      "attempt": 1,
+      "key": "2ed08c673abfeee402dffc12f379b9cef3ea0bcd3449b09808116b57cef2de69",
+      "latency_seconds": 15.203330792952329,
+      "mode": "record",
+      "model": "glm-5.3-flash",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 4483
+    },
+    {
+      "attempt": 1,
+      "key": "cd265cbc90e5a363ff1f108051b5e445e8eea0df7a2ba821a5bdf95277c0ba85",
+      "latency_seconds": 5.892440450144932,
+      "mode": "record",
+      "model": "glm-5.3-flash",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 4707
+    }
+  ],
+  "modules": [
+    {
+      "finished_at": "2026-10-23T06:01:44.589679Z",
+      "mode": "live",
+      "module_id": "src.email",
+      "result": {
+        "abstentions": [],
+        "counts": {
+          "documents": 12,
+          "segments": 34,
+          "skipped": 0
+        },
+        "errors": [],
+        "module_id": "src.email",
+        "module_version": "1",
+        "status": "succeeded"
+      },
+      "run_id": "core-dev-candidate",
+      "started_at": "2026-10-23T06:01:44.535933Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T06:01:50.882627Z",
+      "mode": "live",
+      "module_id": "src.erp",
+      "result": {
+        "abstentions": [],
+        "counts": {
+          "assortment_new": 346,
+          "assortment_rows": 346,
+          "forecast_new": 22190,
+          "forecast_rows": 22190,
+          "prices_new": 456,
+          "prices_rows": 456,
+          "returns_new": 430,
+          "returns_rows": 430,
+          "sales_new": 6011,
+          "sales_rows": 6011,
+          "sku_colour_new": 114,
+          "sku_colour_rows": 114,
+          "sku_size_ean_new": 643,
+          "sku_size_ean_rows": 643,
+          "stock_new": 88673,
+          "stock_rows": 88673,
+          "stores_new": 4,
+          "stores_rows": 4,
+          "styles_new": 46,
+          "styles_rows": 46
+        },
+        "errors": [],
+        "module_id": "src.erp",
+        "module_version": "2",
+        "status": "succeeded"
+      },
+      "run_id": "core-dev-candidate",
+      "started_at": "2026-10-23T06:01:44.592105Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T06:01:51.048457Z",
+      "mode": "live",
+      "module_id": "src.docs",
+      "result": {
+        "abstentions": [],
+        "counts": {
+          "documents": 1,
+          "segments": 172,
+          "sheets": 7
+        },
+        "errors": [],
+        "module_id": "src.docs",
+        "module_version": "1",
+        "status": "succeeded"
+      },
+      "run_id": "core-dev-candidate",
+      "started_at": "2026-10-23T06:01:50.885957Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T06:01:51.080891Z",
+      "mode": "live",
+      "module_id": "ing.metrics",
+      "result": {
+        "abstentions": [
+          "doc-20260906-1837-nyc01: not an XLSX report",
+          "doc-20260918-2115-mil01: not an XLSX report",
+          "doc-20260918-2207-mil01-corr: not an XLSX report",
+          "doc-20261002-2112-mil01: not an XLSX report",
+          "doc-20261002-2113-mil01-dup: not an XLSX report",
+          "doc-20261004-1829-nyc01: not an XLSX report",
+          "doc-20261004-1858-nyc01-corr: not an XLSX report",
+          "doc-20261009-1035-mil01: not an XLSX report",
+          "doc-20261009-1811-mil02: not an XLSX report",
+          "doc-20261009-1847-mil01-re1: not an XLSX report",
+          "doc-20261014-2016-mun01: not an XLSX report",
+          "doc-20261014-2248-nyc01-ooo: not an XLSX report",
+          "doc-flash-w42-2026 Stores!5: ROM01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!6: VEN01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!7: COU01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!8: CRT01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!9: PAR01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!10: PAR02 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!11: CAN01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!12: GVA01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!13: ZRH01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!14: STM01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!15: LON01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!16: LON02 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!18: BER01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!19: MAD01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!20: AMS01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!21: CPH01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!22: DXB01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!24: NYC02 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!25: MIA01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!26: BHS01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!27: ASP01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!28: TOR01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!29: TYO01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!30: TYO02 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!31: OSA01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!32: SEL01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!33: SEL02 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!34: BUS01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!35: SHA01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!36: BJS01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!37: CDU01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!38: HKG01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!39: TPE01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!40: SIN01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!41: SYD01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!42: 'TOTAL' is not in the master data",
+          "doc-flash-w42-2026 Stores!44: 'Confidential - Internal use only. Source: SAP BW / POS (Xstore), store door counters. Retail Controlling.' is not in the master data",
+          "doc-flash-w42-2026 Summary!5: EMEA is outside this run's stores",
+          "doc-flash-w42-2026 Summary!6: AMERICAS is outside this run's stores",
+          "doc-flash-w42-2026 Summary!7: APAC is outside this run's stores",
+          "doc-flash-w42-2026 Summary!8: 'TOTAL RETAIL' is not in the master data",
+          "doc-flash-w42-2026 Summary!10: 'MTD = 01/10 to 18/10, EUR at the same rates as the week, LY = same days -364.' is not in the master data",
+          "doc-flash-w42-2026 Summary!11: 'Confidential - Internal use only. Source: SAP BW / POS (Xstore), store door counters. Retail Controlling.' is not in the master data"
+        ],
+        "counts": {
+          "documents": 1,
+          "documents_unmapped": 12,
+          "facts": 16,
+          "rows_outside_run": 38,
+          "rows_unknown_scope": 5
+        },
+        "errors": [],
+        "module_id": "ing.metrics",
+        "module_version": "1",
+        "status": "succeeded"
+      },
+      "run_id": "core-dev-candidate",
+      "started_at": "2026-10-23T06:01:51.050866Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T06:01:51.090818Z",
+      "mode": "live",
+      "module_id": "src.external",
+      "result": {
+        "abstentions": [
+          "NYC01: New York is covered by us_ncei_ghcnd, not by this feed"
+        ],
+        "counts": {
+          "cities": 2,
+          "events": 2
+        },
+        "errors": [],
+        "module_id": "src.external",
+        "module_version": "1",
+        "status": "succeeded"
+      },
+      "run_id": "core-dev-candidate",
+      "started_at": "2026-10-23T06:01:51.082619Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T06:02:28.451148Z",
+      "mode": "live",
+      "module_id": "ing.extract",
+      "result": {
+        "abstentions": [
+          "doc-20260906-1837-nyc01: candidate 6 unsupported unit cleared",
+          "doc-20260906-1837-nyc01: candidate 9 unsupported unit cleared",
+          "doc-20261002-2112-mil01: candidate 5 unsupported unit cleared",
+          "doc-20261002-2112-mil01: candidate 7 unsupported unit cleared",
+          "doc-20261002-2113-mil01-dup: candidate 5 unsupported unit cleared",
+          "doc-20261002-2113-mil01-dup: candidate 7 unsupported unit cleared",
+          "doc-20261004-1829-nyc01: candidate 2 unsupported unit cleared",
+          "doc-20261014-2016-mun01: stockout rejected (quote not found in the document)",
+          "doc-flash-w42-2026: not read (unknown store)"
+        ],
+        "counts": {
+          "candidates_rejected": 1,
+          "documents": 12,
+          "documents_skipped": 1,
+          "numbers_dropped": 20,
+          "observations": 82,
+          "optional_fields_dropped": 7,
+          "resend_readings_reused": 1
+        },
+        "errors": [],
+        "module_id": "ing.extract",
+        "module_version": "1",
+        "status": "succeeded"
+      },
+      "run_id": "core-dev-candidate",
+      "started_at": "2026-10-23T06:01:51.092944Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T06:02:29.328940Z",
+      "mode": "live",
+      "module_id": "int.link",
+      "result": {
+        "abstentions": [
+          "obs-20261009-1035-mil01-1: unlinked: no_candidate",
+          "obs-20261014-2016-mun01-18: unlinked: colour_only",
+          "obs-20261014-2016-mun01-20: unlinked: no_candidate"
+        ],
+        "counts": {
+          "ambiguous": 0,
+          "linked": 38,
+          "links_new": 82,
+          "llm_linked": 2,
+          "not_product": 41,
+          "observations": 82,
+          "unlinked": 3
+        },
+        "errors": [],
+        "module_id": "int.link",
+        "module_version": "2",
+        "status": "succeeded"
+      },
+      "run_id": "core-dev-candidate",
+      "started_at": "2026-10-23T06:02:28.454022Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T06:02:29.506009Z",
+      "mode": "live",
+      "module_id": "int.dedup",
+      "result": {
+        "abstentions": [],
+        "counts": {
+          "active_origins": 71,
+          "documents": 11,
+          "duplicates": 10,
+          "non_additive_origins": 33,
+          "observations": 82,
+          "origin_groups": 72,
+          "possibly_same_episode": 118,
+          "relations_new": 129,
+          "retracts": 0,
+          "supersedes": 1
+        },
+        "errors": [],
+        "module_id": "int.dedup",
+        "module_version": "1",
+        "status": "succeeded"
+      },
+      "run_id": "core-dev-candidate",
+      "started_at": "2026-10-23T06:02:29.331035Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T06:02:29.652501Z",
+      "mode": "live",
+      "module_id": "sys.client",
+      "result": {
+        "abstentions": [],
+        "counts": {
+          "requests": 8,
+          "stale_snapshots": 0,
+          "stock_facts": 48,
+          "stock_facts_new": 48,
+          "unknown": 0
+        },
+        "errors": [],
+        "module_id": "sys.client",
+        "module_version": "1",
+        "status": "succeeded"
+      },
+      "run_id": "core-dev-candidate",
+      "started_at": "2026-10-23T06:02:29.508614Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T06:02:31.563966Z",
+      "mode": "live",
+      "module_id": "int.cases",
+      "result": {
+        "abstentions": [],
+        "counts": {
+          "cases": 38,
+          "cases_new": 38,
+          "cases_verify": 5,
+          "documents": 43,
+          "inactive_facts": 1,
+          "negated_unattached": 0,
+          "no_case_kind": 33,
+          "observations": 82,
+          "origin_groups": 39,
+          "scope_unknown": 3,
+          "unknown_origins": 0
+        },
+        "errors": [],
+        "module_id": "int.cases",
+        "module_version": "2",
+        "status": "succeeded"
+      },
+      "run_id": "core-dev-candidate",
+      "started_at": "2026-10-23T06:02:29.655468Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T06:02:31.601621Z",
+      "mode": "live",
+      "module_id": "int.context",
+      "result": {
+        "abstentions": [],
+        "counts": {
+          "cases": 38,
+          "events": 2,
+          "updated_cases": 11
+        },
+        "errors": [],
+        "module_id": "int.context",
+        "module_version": "1",
+        "status": "succeeded"
+      },
+      "run_id": "core-dev-candidate",
+      "started_at": "2026-10-23T06:02:31.566523Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T06:02:32.451621Z",
+      "mode": "live",
+      "module_id": "fc.baseline",
+      "result": {
+        "abstentions": [],
+        "counts": {
+          "baselines": 346,
+          "new": 346,
+          "not_estimable": 66,
+          "unchanged": 280
+        },
+        "errors": [],
+        "module_id": "fc.baseline",
+        "module_version": "1",
+        "status": "succeeded"
+      },
+      "run_id": "core-dev-candidate",
+      "started_at": "2026-10-23T06:02:31.603937Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T06:02:32.704338Z",
+      "mode": "live",
+      "module_id": "fc.overlay",
+      "result": {
+        "abstentions": [
+          "case-mil01-unknown-20261009: no SKU-colour scope (unknown)",
+          "case-mun01-unknown-20261014: no SKU-colour scope (unknown)",
+          "case-mun01-unknown-20261014-demand-shift: no SKU-colour scope (unknown)"
+        ],
+        "counts": {
+          "computed": 0,
+          "new": 27,
+          "not_estimable": 0,
+          "overlays": 27,
+          "unchanged": 27
+        },
+        "errors": [],
+        "module_id": "fc.overlay",
+        "module_version": "1",
+        "status": "degraded"
+      },
+      "run_id": "core-dev-candidate",
+      "started_at": "2026-10-23T06:02:32.454199Z",
+      "status": "degraded"
+    },
+    {
+      "finished_at": "2026-10-23T06:02:35.403589Z",
+      "mode": "live",
+      "module_id": "act.options",
+      "result": {
+        "abstentions": [],
+        "counts": {
+          "cases": 38,
+          "new": 157,
+          "options": 157,
+          "transfers": 5,
+          "transfers_recommended": 0
+        },
+        "errors": [],
+        "module_id": "act.options",
+        "module_version": "1",
+        "status": "succeeded"
+      },
+      "run_id": "core-dev-candidate",
+      "started_at": "2026-10-23T06:02:32.707195Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T06:03:45.952069Z",
+      "mode": "live",
+      "module_id": "ag.investigator",
+      "result": {
+        "abstentions": [],
+        "counts": {
+          "cases": 2,
+          "fallbacks": 1,
+          "traces": 2
+        },
+        "errors": [],
+        "module_id": "ag.investigator",
+        "module_version": "1",
+        "status": "degraded"
+      },
+      "run_id": "core-dev-candidate",
+      "started_at": "2026-10-23T06:02:35.406614Z",
+      "status": "degraded"
+    },
+    {
+      "finished_at": "2026-10-23T06:03:48.870540Z",
+      "mode": "live",
+      "module_id": "out.reports",
+      "result": {
+        "abstentions": [
+          "optional modules unavailable: ins.product"
+        ],
+        "counts": {
+          "cases": 38,
+          "citations": 330,
+          "reports": 2,
+          "reports_new": 2
+        },
+        "errors": [],
+        "module_id": "out.reports",
+        "module_version": "2",
+        "status": "degraded"
+      },
+      "run_id": "core-dev-candidate",
+      "started_at": "2026-10-23T06:03:45.954728Z",
+      "status": "degraded"
+    }
+  ],
+  "run_id": "core-dev-candidate",
+  "snapshot": {
+    "as_of": "2026-10-22T20:00:00Z",
+    "authorized_fixture_refs": [],
+    "code_version": "38fe618a91a9d4f573e96fc2ec3cde2ee6ec8ebe",
+    "config_hash": "fb50f57d8b4b1ad55076726fab97f2ee586b2ea3098b96f7aed651d5e9a89bc8",
+    "erp_max_seq": null,
+    "mode": "recorded",
+    "model_versions": {
+      "ag.investigator": "glm-5.3-flash",
+      "chat": "google/gemma-4-26B-A4B-it"
+    },
+    "modules": [
+      {
+        "manifest": {
+          "boundary": null,
+          "description": "Store closing emails (.eml) of the run's stores as documents and segments",
+          "enabled": true,
+          "id": "src.email",
+          "layer": "sources",
+          "mode": "live",
+          "optional_inputs": [],
+          "params_schema": {
+            "additionalProperties": false,
+            "properties": {
+              "files": {
+                "items": {
+                  "pattern": "^[A-Z0-9]+/[^/]+\\.eml$",
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array",
+                "uniqueItems": true
+              }
+            },
+            "type": "object"
+          },
+          "produces": [
+            "SourceDocument",
+            "Segment"
+          ],
+          "requires": [],
+          "version": "1"
+        },
+        "params": {
+          "files": [
+            "MIL01/20260918_2115_MIL01.eml",
+            "MIL01/20260918_2207_MIL01_corr.eml",
+            "MIL01/20261002_2112_MIL01.eml",
+            "MIL01/20261002_2113_MIL01_dup.eml",
+            "MIL01/20261009_1035_MIL01.eml",
+            "MIL01/20261009_1847_MIL01_re1.eml",
+            "MIL02/20261009_1811_MIL02.eml",
+            "NYC01/20260906_1837_NYC01.eml",
+            "NYC01/20261004_1829_NYC01.eml",
+            "NYC01/20261004_1858_NYC01_corr.eml",
+            "NYC01/20261014_2248_NYC01_ooo.eml",
+            "MUN01/20261014_2016_MUN01.eml"
+          ]
+        }
+      },
+      {
+        "manifest": {
+          "boundary": null,
+          "description": "ERP catalog, assortment, prices, daily sales, POS returns with reason code, stock and forecast vintages for the run's stores and history window, each row with available_at",
+          "enabled": true,
+          "id": "src.erp",
+          "layer": "sources",
+          "mode": "live",
+          "optional_inputs": [],
+          "params_schema": {
+            "additionalProperties": false,
+            "properties": {
+              "history_days": {
+                "maximum": 800,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "master_available_at": {
+                "format": "date-time",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "produces": [
+            "erp_rows"
+          ],
+          "requires": [],
+          "version": "2"
+        },
+        "params": {
+          "history_days": 60
+        }
+      },
+      {
+        "manifest": {
+          "boundary": null,
+          "description": "One XLSX report as a document with one segment and cell locator per row",
+          "enabled": true,
+          "id": "src.docs",
+          "layer": "sources",
+          "mode": "live",
+          "optional_inputs": [],
+          "params_schema": {
+            "additionalProperties": false,
+            "properties": {
+              "language": {
+                "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$",
+                "type": "string"
+              },
+              "report": {
+                "minLength": 1,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "produces": [
+            "SourceDocument",
+            "Segment"
+          ],
+          "requires": [],
+          "version": "1"
+        },
+        "params": {}
+      },
+      {
+        "manifest": {
+          "boundary": null,
+          "description": "One approved, versioned report mapping -> MetricFact with definition, period, currency/VAT and comparability",
+          "enabled": true,
+          "id": "ing.metrics",
+          "layer": "ingestion",
+          "mode": "live",
+          "optional_inputs": [],
+          "params_schema": {
+            "additionalProperties": false,
+            "properties": {
+              "mapping": {
+                "minLength": 1,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "produces": [
+            "MetricFact"
+          ],
+          "requires": [
+            "src.docs"
+          ],
+          "version": "1"
+        },
+        "params": {}
+      },
+      {
+        "manifest": {
+          "boundary": null,
+          "description": "MeteoArchive daily weather as cold/warm context events for the run's store cities",
+          "enabled": true,
+          "id": "src.external",
+          "layer": "sources",
+          "mode": "live",
+          "optional_inputs": [],
+          "params_schema": {
+            "additionalProperties": false,
+            "properties": {
+              "anomaly_c": {
+                "exclusiveMinimum": 0,
+                "type": "number"
+              },
+              "min_days": {
+                "minimum": 1,
+                "type": "integer"
+              },
+              "window_days": {
+                "minimum": 1,
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "produces": [
+            "ContextEvent"
+          ],
+          "requires": [],
+          "version": "1"
+        },
+        "params": {
+          "window_days": 21
+        }
+      },
+      {
+        "manifest": {
+          "boundary": null,
+          "description": "LLM candidates from document segments, quotes and numbers verified by code",
+          "enabled": true,
+          "id": "ing.extract",
+          "layer": "ingestion",
+          "mode": "live",
+          "optional_inputs": [],
+          "params_schema": {
+            "additionalProperties": false,
+            "type": "object"
+          },
+          "produces": [
+            "Observation"
+          ],
+          "requires": [
+            "src.email"
+          ],
+          "version": "1"
+        },
+        "params": {}
+      },
+      {
+        "manifest": {
+          "boundary": null,
+          "description": "Product mentions of the run's observations linked to catalog style, SKU or SKU-size, ambiguous or unlinked with their candidates; one constrained LLM choice on ties",
+          "enabled": true,
+          "id": "int.link",
+          "layer": "integration",
+          "mode": "live",
+          "optional_inputs": [
+            "ing.extract"
+          ],
+          "params_schema": {
+            "additionalProperties": false,
+            "properties": {
+              "candidate_min": {
+                "maximum": 100,
+                "minimum": 0,
+                "type": "number"
+              },
+              "embedding_dimensions": {
+                "enum": [
+                  512,
+                  2048
+                ]
+              },
+              "link_min": {
+                "maximum": 100,
+                "minimum": 0,
+                "type": "number"
+              },
+              "llm": {
+                "type": "boolean"
+              },
+              "min_margin": {
+                "maximum": 100,
+                "minimum": 0,
+                "type": "number"
+              },
+              "top_k": {
+                "maximum": 20,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "use_embeddings": {
+                "type": "boolean"
+              }
+            },
+            "type": "object"
+          },
+          "produces": [
+            "EntityLink"
+          ],
+          "requires": [
+            "src.erp"
+          ],
+          "version": "2"
+        },
+        "params": {}
+      },
+      {
+        "manifest": {
+          "boundary": null,
+          "description": "Certain copies, possible overlaps and fact-level temporal corrections",
+          "enabled": true,
+          "id": "int.dedup",
+          "layer": "integration",
+          "mode": "live",
+          "optional_inputs": [],
+          "params_schema": {
+            "additionalProperties": false,
+            "type": "object"
+          },
+          "produces": [
+            "EvidenceRelation"
+          ],
+          "requires": [
+            "int.link"
+          ],
+          "version": "1"
+        },
+        "params": {}
+      },
+      {
+        "manifest": {
+          "boundary": "simulated",
+          "description": "DC stock and ATP from the simulated warehouse systems for the run's assortment and supplying DCs, stored as StockFact when available at as_of",
+          "enabled": true,
+          "id": "sys.client",
+          "layer": "sources",
+          "mode": "live",
+          "optional_inputs": [],
+          "params_schema": {
+            "additionalProperties": false,
+            "properties": {
+              "lookback_days": {
+                "maximum": 14,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "plants": {
+                "items": {
+                  "enum": [
+                    "HK30",
+                    "IT10",
+                    "US20"
+                  ]
+                },
+                "type": "array",
+                "uniqueItems": true
+              },
+              "skus": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "uniqueItems": true
+              }
+            },
+            "type": "object"
+          },
+          "produces": [
+            "StockFact"
+          ],
+          "requires": [
+            "src.erp"
+          ],
+          "version": "1"
+        },
+        "params": {
+          "lookback_days": 0,
+          "skus": [
+            "I10919B00011-999",
+            "I10919B00011-742"
+          ]
+        }
+      },
+      {
+        "manifest": {
+          "boundary": null,
+          "description": "Cases per store, case type, product scope and window, unlinked ones included as verify; structured stock conflicts, source-backed calendar deadlines, origin counts",
+          "enabled": true,
+          "id": "int.cases",
+          "layer": "integration",
+          "mode": "live",
+          "optional_inputs": [
+            "src.erp",
+            "sys.client"
+          ],
+          "params_schema": {
+            "$defs": {
+              "ArrivalSlot": {
+                "additionalProperties": false,
+                "properties": {
+                  "cutoff_at": {
+                    "format": "date-time",
+                    "title": "Cutoff At",
+                    "type": "string"
+                  },
+                  "sellable_at": {
+                    "format": "date-time",
+                    "title": "Sellable At",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "cutoff_at",
+                  "sellable_at"
+                ],
+                "title": "ArrivalSlot",
+                "type": "object"
+              },
+              "DecisionCalendar": {
+                "additionalProperties": false,
+                "description": "Source-backed slots, pinned to one case (never inferred from episode end).\n\nThis optional run parameter is a normalized calendar input, not permission\nto move stock. The source must establish required_by and both calendars.",
+                "properties": {
+                  "available_at": {
+                    "format": "date-time",
+                    "title": "Available At",
+                    "type": "string"
+                  },
+                  "case_id": {
+                    "minLength": 1,
+                    "title": "Case Id",
+                    "type": "string"
+                  },
+                  "required_by": {
+                    "format": "date-time",
+                    "title": "Required By",
+                    "type": "string"
+                  },
+                  "slots": {
+                    "items": {
+                      "$ref": "#/$defs/ArrivalSlot"
+                    },
+                    "title": "Slots",
+                    "type": "array"
+                  },
+                  "source_refs": {
+                    "items": {
+                      "$ref": "#/$defs/SourceRef"
+                    },
+                    "title": "Source Refs",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "case_id",
+                  "available_at",
+                  "required_by",
+                  "source_refs",
+                  "slots"
+                ],
+                "title": "DecisionCalendar",
+                "type": "object"
+              },
+              "SourceRef": {
+                "additionalProperties": false,
+                "properties": {
+                  "content_hash": {
+                    "minLength": 1,
+                    "title": "Content Hash",
+                    "type": "string"
+                  },
+                  "locator": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Locator"
+                  },
+                  "uri": {
+                    "minLength": 1,
+                    "title": "Uri",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "uri",
+                  "content_hash"
+                ],
+                "title": "SourceRef",
+                "type": "object"
+              }
+            },
+            "additionalProperties": false,
+            "properties": {
+              "decision_calendars": {
+                "default": [],
+                "items": {
+                  "$ref": "#/$defs/DecisionCalendar"
+                },
+                "title": "Decision Calendars",
+                "type": "array"
+              },
+              "max_validity_days": {
+                "maximum": 60,
+                "minimum": 1,
+                "type": "integer"
+              }
+            },
+            "title": "ReconciliationParams",
+            "type": "object"
+          },
+          "produces": [
+            "Case"
+          ],
+          "requires": [
+            "int.dedup"
+          ],
+          "version": "2"
+        },
+        "params": {}
+      },
+      {
+        "manifest": {
+          "boundary": null,
+          "description": "Associate ContextEvent (geo/time) to cases: add corroborating/context_only refs to Case.context_refs without automatic uplift",
+          "enabled": true,
+          "id": "int.context",
+          "layer": "integration",
+          "mode": "live",
+          "optional_inputs": [
+            "int.cases",
+            "src.external"
+          ],
+          "params_schema": {
+            "additionalProperties": false,
+            "properties": {
+              "slack_hours": {
+                "maximum": 72,
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "produces": [
+            "Case"
+          ],
+          "requires": [],
+          "version": "1"
+        },
+        "params": {}
+      },
+      {
+        "manifest": {
+          "boundary": null,
+          "description": "Daily sales baseline D+1..D+7 per store \u00d7 SKU-colour from the forecast vintage valid at as_of, split over open days; not_estimable when the vintage does not cover it",
+          "enabled": true,
+          "id": "fc.baseline",
+          "layer": "intelligence",
+          "mode": "live",
+          "optional_inputs": [],
+          "params_schema": {
+            "additionalProperties": false,
+            "properties": {
+              "horizon_days": {
+                "maximum": 14,
+                "minimum": 1,
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "produces": [
+            "ForecastAdjustment"
+          ],
+          "requires": [
+            "src.erp"
+          ],
+          "version": "1"
+        },
+        "params": {}
+      },
+      {
+        "manifest": {
+          "boundary": null,
+          "description": "Low/base/high scenarios per demand case \u00d7 SKU-colour from one admissible episode, with decay and cap; baseline unchanged with the abstention reason otherwise",
+          "enabled": true,
+          "id": "fc.overlay",
+          "layer": "intelligence",
+          "mode": "live",
+          "optional_inputs": [],
+          "params_schema": {
+            "additionalProperties": false,
+            "properties": {
+              "incremental": {
+                "type": "boolean"
+              }
+            },
+            "type": "object"
+          },
+          "produces": [
+            "ForecastAdjustment"
+          ],
+          "requires": [
+            "fc.baseline",
+            "int.cases"
+          ],
+          "version": "1"
+        },
+        "params": {}
+      },
+      {
+        "manifest": {
+          "boundary": null,
+          "description": "Hold / verify_stock / ask_store / notify_owner and one domestic store transfer per open case, with every RFC \u00a74.10 check; no size curve blocks the move",
+          "enabled": true,
+          "id": "act.options",
+          "layer": "actions",
+          "mode": "live",
+          "optional_inputs": [
+            "int.cases",
+            "fc.overlay",
+            "sys.client"
+          ],
+          "params_schema": {
+            "additionalProperties": false,
+            "properties": {},
+            "type": "object"
+          },
+          "produces": [
+            "ActionOption"
+          ],
+          "requires": [
+            "src.erp",
+            "fc.baseline"
+          ],
+          "version": "1"
+        },
+        "params": {}
+      },
+      {
+        "manifest": {
+          "boundary": null,
+          "description": "Investigate selected cases with scoped tools; propose or verify, never approve",
+          "enabled": true,
+          "id": "ag.investigator",
+          "layer": "agents",
+          "mode": "live",
+          "optional_inputs": [
+            "sys.client"
+          ],
+          "params_schema": {
+            "additionalProperties": false,
+            "properties": {
+              "case_ids": {
+                "items": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "maxItems": 20,
+                "minItems": 1,
+                "type": "array",
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "case_ids"
+            ],
+            "type": "object"
+          },
+          "produces": [
+            "AgentTrace",
+            "Clarification",
+            "ActionOption"
+          ],
+          "requires": [
+            "int.cases",
+            "act.options"
+          ],
+          "version": "1"
+        },
+        "params": {
+          "case_ids": [
+            "case-mil01-i10919b00011-20261008",
+            "case-mil01-unknown-20261009"
+          ]
+        }
+      },
+      {
+        "manifest": {
+          "boundary": null,
+          "description": "Brief per owner (and per priority) from the run's cases, evidence, baselines and options; every number rendered from a structured citation by a template",
+          "enabled": true,
+          "id": "out.reports",
+          "layer": "outputs",
+          "mode": "live",
+          "optional_inputs": [
+            "fc.baseline",
+            "fc.overlay",
+            "act.options",
+            "ins.product"
+          ],
+          "params_schema": {
+            "additionalProperties": false,
+            "properties": {
+              "views": {
+                "items": {
+                  "enum": [
+                    "by_office",
+                    "by_priority"
+                  ]
+                },
+                "minItems": 1,
+                "type": "array",
+                "uniqueItems": true
+              }
+            },
+            "type": "object"
+          },
+          "produces": [
+            "Report"
+          ],
+          "requires": [
+            "int.cases"
+          ],
+          "version": "2"
+        },
+        "params": {}
+      }
+    ],
+    "prompt_versions": {
+      "ag.investigator": "investigator.v2",
+      "ing.extract": "extract_observations.v1",
+      "int.link": "link_choice.v1"
+    },
+    "run_id": "core-dev-candidate",
+    "scenario_id": "historical",
+    "schema_version": "1.0",
+    "source_manifest_hash": "a3d3d221987593f9512ddc82265a1f518da4218efd88e66c7a00f433b9984d70",
+    "stores": [
+      "MIL01",
+      "MIL02",
+      "MUN01",
+      "NYC01"
+    ]
+  },
+  "status": "degraded",
+  "systems_cache_corrupt": [],
+  "systems_cache_misses": []
+}

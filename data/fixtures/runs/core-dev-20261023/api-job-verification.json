@@ -1,0 +1,100 @@
+{
+  "case": {
+    "id": "case-mil01-j20931a00012-999-20261002",
+    "version": "v1"
+  },
+  "format": 2,
+  "job_id": "investigate-b3df8405d121b9c200b10b6733db4d65711aa86814239692c00e40ccd5a3b9fe",
+  "job_manifest": "investigate-job/manifest.json",
+  "limitations": [
+    "The negative used a copied job directory whose manifest omits the withheld key, so the API job itself ran and failed.",
+    "A job that stops on the wall-clock budget is refused at recording: a faster replay would request a turn that was never recorded. This job stops on the tool-call budget."
+  ],
+  "negative_withheld_job_envelope": {
+    "checks": {
+      "case_version_matches": true,
+      "job_artifacts_match": false,
+      "job_id_matches": true,
+      "parent_inventory_matches_recording": true,
+      "parent_unchanged": true,
+      "trace_matches": false
+    },
+    "format": 1,
+    "inputs": {
+      "llm_cache": {
+        "files": 5,
+        "sha256": "c81d039c04985b7ca679a1a85a5f2a515fa47e4aa132e4afaa339bd382d9fe13"
+      },
+      "systems_cache": {
+        "files": 1,
+        "sha256": "3a48490eac51ba459879ed612d634aec0b6f4d7bbd2d13b7044216ecc983fa1c"
+      }
+    },
+    "job_id": "investigate-b3df8405d121b9c200b10b6733db4d65711aa86814239692c00e40ccd5a3b9fe",
+    "job_published": false,
+    "job_status": "failed",
+    "network_attempts": 0,
+    "status": "failed",
+    "withheld_key": "271b280526ca9e69cc3e78188eeafdbb51285c900fa5261751bad0fa8493b344"
+  },
+  "parent_artifact_inventory_sha256": "e52fb3a1a025134198124a7f6829c71cabdd8a5eaa4700a4ae3f20a6f8f23405",
+  "parent_snapshot_sha256": "c522703633170af4933e06ed0f02edc29f2beb5f85cb32873ac46bb426b86edb",
+  "positive_offline_replays": [
+    {
+      "attempt": "attempt-627ca8daacbf4027a7050901236ddb0f",
+      "checks": {
+        "case_version_matches": true,
+        "job_artifacts_match": true,
+        "job_id_matches": true,
+        "parent_inventory_matches_recording": true,
+        "parent_unchanged": true,
+        "trace_matches": true
+      },
+      "format": 1,
+      "inputs": {
+        "llm_cache": {
+          "files": 6,
+          "sha256": "88448ed3d98e0e0c7a0762d8b597ba3091f03e84f4ed0f3c23b06e2ea9291332"
+        },
+        "systems_cache": {
+          "files": 1,
+          "sha256": "3a48490eac51ba459879ed612d634aec0b6f4d7bbd2d13b7044216ecc983fa1c"
+        }
+      },
+      "job_id": "investigate-b3df8405d121b9c200b10b6733db4d65711aa86814239692c00e40ccd5a3b9fe",
+      "job_published": true,
+      "job_status": "degraded",
+      "network_attempts": 0,
+      "status": "passed"
+    },
+    {
+      "attempt": "attempt-8d5d4f61d64e4c138532421894a441f1",
+      "checks": {
+        "case_version_matches": true,
+        "job_artifacts_match": true,
+        "job_id_matches": true,
+        "parent_inventory_matches_recording": true,
+        "parent_unchanged": true,
+        "trace_matches": true
+      },
+      "format": 1,
+      "inputs": {
+        "llm_cache": {
+          "files": 6,
+          "sha256": "88448ed3d98e0e0c7a0762d8b597ba3091f03e84f4ed0f3c23b06e2ea9291332"
+        },
+        "systems_cache": {
+          "files": 1,
+          "sha256": "3a48490eac51ba459879ed612d634aec0b6f4d7bbd2d13b7044216ecc983fa1c"
+        }
+      },
+      "job_id": "investigate-b3df8405d121b9c200b10b6733db4d65711aa86814239692c00e40ccd5a3b9fe",
+      "job_published": true,
+      "job_status": "degraded",
+      "network_attempts": 0,
+      "status": "passed"
+    }
+  ],
+  "recording_execution_sha": "6803eeada64e03678dd84a23b099f44e4634733f",
+  "status": "passed"
+}

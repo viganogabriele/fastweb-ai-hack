@@ -93,5 +93,5 @@ The record proves file identity at recording time, not row-level availability, t
 time a producer chose its inputs, or that a component behaved correctly. Component
 status comes from the supplied caches and RunSpec mode. An explicit `--component`
 declaration overrides it and is marked `declared: true`. The DEMO-02 dev candidate
-under `data/fixtures/runs/core-dev-20261022/` is a smoke target only. It has no
+under `data/fixtures/runs/core-dev-20261023/` is a smoke target only. It has no
 predictions/cases/options exports, and recording it is not a freeze.

@@ -534,3 +534,150 @@ def test_data01_fixtures_match_relations_and_module_is_idempotent(tmp_path):
         assert result.counts["duplicates"] == result.counts["supersedes"] == 1
         assert dedup.run(ctx).counts["relations_new"] == 0
         assert len(repo.list(EvidenceRelation)) == 2
+
+
+# The recorded 18/09 MIL01 pair: the model quotes only "il fatturato di oggi e' 85,0k"
+# and left the original figure's period unstated.
+ORIGINAL = "MIL01 - CHIUSURA 18/09\n\nFatturato: 58,0k (bdg 70,2) +21%"
+CORRECTION = (
+    "Scusate, ho invertito le cifre: il fatturato di oggi e' 85,0k e non 58. Il +21% e' giusto."
+)
+DAY = (datetime(2026, 10, 1, 22, tzinfo=UTC), datetime(2026, 10, 2, 21, 59, 59, tzinfo=UTC))
+
+
+def sales(
+    name, text, quote, value, *, at=T1, parent=None, period=(None, None), raw=None, doc_id=None
+):
+    doc, seg, obs = fact(name, at=at, text=text, parent=parent, doc_id=doc_id)
+    start = text.index(quote)
+    evidence = obs.evidence[0].model_copy(
+        update={"quote": quote, "char_start": start, "char_end": start + len(quote)}
+    )
+    obs = obs.model_copy(
+        update={
+            "kind": "sales_figure",
+            "product_mention": None,
+            "direction": "none",
+            "period_start": period[0],
+            "period_end": period[1],
+            "quantity": Quantity(
+                kind="exact", value=value, unit="money", currency="EUR", raw=raw or quote
+            ),
+            "evidence": (evidence,),
+        }
+    )
+    return doc, seg, obs
+
+
+def correction_pair(
+    correction=CORRECTION,
+    *,
+    quote="il fatturato di oggi e' 85,0k",
+    old_value=58000,
+    at=T2,
+    period=DAY,
+    old_period=None,
+):
+    old = sales("old", ORIGINAL, "Fatturato: 58,0k", old_value, period=old_period or (None, None))
+    new = sales(
+        "new",
+        correction,
+        quote,
+        85000,
+        at=at,
+        parent=old[0].id,
+        period=period,
+        raw="85,0k",
+    )
+    return old, new
+
+
+def test_shortest_quote_still_reads_the_contrast_after_it_and_names_the_target():
+    old, new = correction_pair()
+    relations, abstentions = infer(old, new)
+    assert not abstentions
+    assert [(r.relation, r.from_ref.id, r.to_ref.id) for r in relations] == [
+        ("supersedes", "obs-new", "obs-old")
+    ]
+    state = dedup.state_at([old[2], new[2]], relations, T3)
+    assert [r.id for r in state.active_refs] == ["obs-new"]  # 85k counts, 58k never added
+
+
+def test_named_wrong_value_picks_the_one_parent_figure_it_replaces():
+    old, new = correction_pair()
+    # The budget is a second same-scope money figure in the very same parent segment.
+    other = sales("budget", ORIGINAL, "bdg 70,2", 70200, raw="70,2", doc_id=old[0].id)
+    evidence = other[2].evidence[0].model_copy(update={"segment_id": old[1].id})
+    budget = (
+        old[0],
+        old[1],
+        other[2].model_copy(update={"input_refs": old[2].input_refs, "evidence": (evidence,)}),
+    )
+    budget[2].evidence[0].validate_against(old[0], old[1])
+    relations, abstentions = infer(old, budget, new)
+    assert not abstentions
+    assert [(r.relation, r.to_ref.id) for r in relations if r.relation == "supersedes"] == [
+        ("supersedes", "obs-old")
+    ]
+
+
+@pytest.mark.parametrize(
+    "variant",
+    [
+        {"correction": CORRECTION.replace("e non 58", "e non 59")},  # names another value
+        {  # no value named
+            "correction": "Correzione: il fatturato di oggi e' 85,0k.",
+            "quote": "Correzione: il fatturato di oggi e' 85,0k",
+        },
+        {"at": T2 + timedelta(days=1)},  # a later day's mail
+        {"period": (None, None)},  # the correction's own day is unknown
+        {"old_value": 58},  # "e non 58" after "85,0k" means 58k, never 58
+    ],
+)
+def test_unknown_parent_period_needs_the_named_value_on_the_same_day(variant):
+    old, new = correction_pair(**variant)
+    relations, abstentions = infer(old, new, as_of=T3 + timedelta(days=1))
+    assert all(r.relation not in ("supersedes", "retracts") for r in relations)
+    assert any("needs one explicit parent fact; found 0" in a for a in abstentions)
+
+
+def test_correction_words_in_another_sentence_are_not_read():
+    text = "Il fatturato di oggi e' 85,0k. Correggo: il cable knit 5 e non 4."
+    old, _ = correction_pair()
+    new = sales("new", text, "Il fatturato di oggi e' 85,0k", 85000, at=T2, parent=old[0].id)
+    relations, abstentions = infer(old, new)
+    assert not abstentions
+    assert all(r.relation != "supersedes" for r in relations)
+
+
+def test_equal_known_periods_still_require_the_named_value():
+    old, new = correction_pair(CORRECTION.replace("e non 58", "e non 59"), old_period=DAY)
+    relations, abstentions = infer(old, new)
+    assert all(r.relation != "supersedes" for r in relations)
+    assert any("found 0" in a for a in abstentions)
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Ritiriamo il dato del fatturato, Aurea nera: 9 richieste.",
+        "Correzione: fatturato 85k, Aurea nera: 9 richieste.",
+        "Aurea nera: 9 richieste, ritiriamo il dato del fatturato.",
+    ],
+)
+def test_correction_words_of_another_clause_never_touch_the_quoted_fact(text):
+    a = fact("a")
+    b = fact("b", at=T2, text=text, value=9, parent=a[0].id)
+    start = text.index("Aurea nera: 9 richieste")
+    evidence = (
+        b[2]
+        .evidence[0]
+        .model_copy(
+            update={"quote": "Aurea nera: 9 richieste", "char_start": start, "char_end": start + 23}
+        )
+    )
+    b = (b[0], b[1], b[2].model_copy(update={"evidence": (evidence,)}))
+    relations, abstentions = infer(a, b)
+    assert not abstentions
+    assert [r.relation for r in relations] == ["possibly_same_episode"]
+    assert len(dedup.state_at([a[2], b[2]], relations, T3).active_refs) == 2

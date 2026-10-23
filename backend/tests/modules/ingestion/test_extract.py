@@ -27,6 +27,7 @@ from tesseract.core.registry import RegisteredModule, Registry
 from tesseract.core.run_repo import repo_session
 from tesseract.modules.ingestion import extract
 from tesseract.modules.ingestion.extract import Candidate, Candidates
+from tesseract.modules.integration import dedup
 
 
 def test_unknown_optional_enum_does_not_discard_document_facts(tmp_path):
@@ -611,3 +612,85 @@ def test_readings_do_not_invent_thousands_or_decimals(raw, wrong):
 )
 def test_quantity_words_must_stand_alone_in_the_segment(raw, text, found):
     assert extract._stated_in(raw, text) is found
+
+
+def resend(
+    doc, sent, *, subject="chiusura", origin="giulia@example.test", text=None, source="email"
+):
+    document, *segments = synthetic(text or "Aurea nera: 7 richieste.", doc=doc, sent=sent)
+    meta = {**document.meta, "subject": subject}
+    update = {"origin": origin, "meta": meta, "source_type": source}
+    return [document.model_copy(update=update), *segments]
+
+
+def test_exact_resend_reuses_the_first_reading_and_dedup_proves_the_copy(tmp_path):
+    records = resend("doc-b", "2026-10-02T19:01:00Z") + resend("doc-a", "2026-10-02T19:00:00Z")
+    candidate = Candidate(
+        quote="Aurea nera: 7 richieste",
+        kind="unmet_demand",
+        product_mention="Aurea nera",
+        quantity_kind="exact",
+        value=7,
+        unit="requests",
+        quantity_raw="7",
+        period_start="2026-10-02",
+        period_end="2026-10-02",
+    )
+    status, observations, _, llm = execute(tmp_path, records, {"doc-a": [candidate]})
+    assert llm.calls == ["doc-a"]  # the earliest copy is read once; no second sample
+    assert status.result.counts["resend_readings_reused"] == 1
+    first, copy = sorted(observations, key=lambda o: o.available_at)
+    assert (first.document_id, copy.document_id) == ("doc-a", "doc-b")
+    assert copy.evidence[0].quote == first.evidence[0].quote
+    documents = [r for r in records if isinstance(r, SourceDocument)]
+    segments = [r for r in records if isinstance(r, Segment)]
+    relations, abstentions = dedup.build_relations(
+        observations, documents, segments, (), status_spec(first)
+    )
+    assert not abstentions
+    assert [(r.relation, r.from_ref.id, r.to_ref.id) for r in relations] == [
+        ("duplicates", copy.id, first.id)
+    ]
+
+
+def status_spec(observation):
+    return RunSpec(
+        run_id=observation.run_id,
+        scenario_id=observation.scenario_id,
+        as_of="2026-10-22T20:00:00Z",
+        stores=("MIL01",),
+        source_manifest_hash="sources",
+        config_hash="config",
+        code_version="test",
+        mode="live",
+        modules=(),
+        prompt_versions={},
+        model_versions={},
+        authorized_fixture_refs=(),
+    )
+
+
+@pytest.mark.parametrize(
+    "change",
+    [
+        {"subject": "R: chiusura"},
+        {"origin": "other@example.test"},
+        {"origin": None},
+        {"text": "Aurea nera: 8 richieste."},
+        {"sent": "2026-10-03T19:00:00Z"},  # same words, another store-local day
+    ],
+)
+def test_only_an_exact_same_day_resend_reuses_a_reading(tmp_path, change):
+    sent = change.pop("sent", "2026-10-02T19:01:00Z")
+    records = resend("doc-a", "2026-10-02T19:00:00Z") + resend("doc-b", sent, **change)
+    status, _, _, llm = execute(tmp_path, records, {"doc-a": [], "doc-b": []})
+    assert sorted(llm.calls) == ["doc-a", "doc-b"]
+    assert "resend_readings_reused" not in status.result.counts
+
+
+def test_non_email_origin_is_not_a_sender_identity():
+    # Every voice note has origin "voice": identical same-day notes are independent reports.
+    document, *segments = resend("doc-a", "2026-10-02T19:00:00Z", origin="voice")
+    voice = document.model_copy(update={"source_type": "voice"})
+    assert extract.resend_key(voice, segments, "Europe/Rome") == ("document", "doc-a")
+    assert extract.resend_key(document, segments, "Europe/Rome")[0] == "MIL01"

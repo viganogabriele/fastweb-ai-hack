@@ -181,6 +181,8 @@ def execute(job: RunSpec, case_id: str, engine, settings: Settings, inputs: JobI
                         prompt=inputs.prompt,
                         reservations=inputs.reservations,
                         budget=budget,
+                        # The job ID is content-derived: a replay rebuilds this exact trace.
+                        trace_id=f"trace:{job.run_id}:{case_id}",
                     )
                     # AgentLoop may catch tool failures to produce a safe fallback. Missing
                     # recordings still mean this job is not a reproducible investigation.

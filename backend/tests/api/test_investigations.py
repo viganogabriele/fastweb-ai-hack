@@ -150,6 +150,8 @@ def test_record_then_rebuild_job_from_cache_without_provider(service, monkeypatc
     assert rebuilt.status_code == 202 and rebuilt.json()["spec"]["run_id"] == job
     replayed = client.get(traces_url).json()
     new_replay = next(t for t in replayed if t["producer"] == api.investigator.MANIFEST.id)
+    assert new_replay["id"] == new["id"] == f"trace:{job}:case-1"
+    assert new_replay["version"] == new["version"]
     assert new_replay["outcome"] == new["outcome"]
     assert [(s["tool"], s["arguments"]) for s in new_replay["steps"]] == [
         (s["tool"], s["arguments"]) for s in new["steps"]

@@ -20,6 +20,10 @@ and invalid required fields reject only their item. Both are reported as abstent
 units never become piece counts; the quantity verifier drops their unsupported numeric values.
 The tool schema and prompt remain strict so recorded raw responses can be replayed unchanged.
 
+An exact email resend (same store, sender, local send date, subject and segments; only the
+send time differs) reuses the reading of the earliest such document instead of a second model
+call, so its copied facts are identical and ``int.dedup`` can prove the copy.
+
 A document whose envelope fails twice (``ExtractionFailed``) is an abstention, never a guess.
 Provider errors and replay misses are module errors (status ``degraded``); an exhausted budget
 stops the remaining documents.
@@ -29,7 +33,7 @@ import hashlib
 import re
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
-from datetime import date, datetime, time, timedelta
+from datetime import UTC, date, datetime, time, timedelta
 from functools import cache
 from pathlib import Path
 from typing import Literal, get_args
@@ -433,6 +437,21 @@ def messages(document: SourceDocument, segments: list[Segment], timezone: str) -
     ]
 
 
+def resend_key(document: SourceDocument, segments: list[Segment], timezone: str) -> tuple:
+    """Everything the model reads except the send time; no sender means no resend."""
+    # Only a mail sender identifies a resend; e.g. every voice note has origin "voice".
+    if document.source_type != "email" or document.origin is None or document.available_at is None:
+        return ("document", document.id)
+    return (
+        document.meta.get("store_id"),
+        document.origin,
+        document.language,
+        document.available_at.astimezone(ZoneInfo(timezone)).date(),
+        document.meta.get("subject", ""),
+        tuple((s.idx, s.is_quoted, s.text) for s in segments),
+    )
+
+
 def observe(
     ctx_spec,
     document: SourceDocument,
@@ -522,9 +541,16 @@ def run(ctx) -> ModuleResult:
     # document order on this thread, so observations, counts and errors match a serial run.
     pool = ThreadPoolExecutor(max_workers=settings.llm_concurrency)
     try:
-        futures = [
-            pool.submit(read, job) if job[1] and job[2] is not None else None for job in jobs
-        ]
+        readable = [job for job in jobs if job[1] and job[2] is not None]
+        keys = {job[0].id: resend_key(job[0], job[1], job[2].timezone) for job in readable}
+        first = {}
+        latest = datetime.max.replace(tzinfo=UTC)
+        for job in sorted(readable, key=lambda j: (j[0].available_at or latest, j[0].id)):
+            first.setdefault(keys[job[0].id], job)
+        readers = {key: pool.submit(read, job) for key, job in first.items()}
+        futures = [readers[keys[job[0].id]] if job[0].id in keys else None for job in jobs]
+        if len(readable) > len(first):
+            counts["resend_readings_reused"] = len(readable) - len(first)
         for (document, segments, store), future in zip(jobs, futures, strict=True):
             if future is None:
                 reason = "no segments for its text version" if not segments else "unknown store"

@@ -1,0 +1,55 @@
+{
+  "artifact_inventory_scope": "published projection before optional decision",
+  "artifact_inventory_sha256": "e52fb3a1a025134198124a7f6829c71cabdd8a5eaa4700a4ae3f20a6f8f23405",
+  "cases": 38,
+  "clarification_drafts": 1,
+  "config_hash": "fb50f57d8b4b1ad55076726fab97f2ee586b2ea3098b96f7aed651d5e9a89bc8",
+  "decision": {
+    "dispatch_status": "draft",
+    "idempotent": true,
+    "stale_status": 409,
+    "synthetic_reviewer": true
+  },
+  "documents": 13,
+  "evidence_relation_counts": {
+    "duplicates": 10,
+    "possibly_same_episode": 118,
+    "supersedes": 1
+  },
+  "execution_has_dirty_code": false,
+  "execution_sha": "38fe618a91a9d4f573e96fc2ec3cde2ee6ec8ebe",
+  "format": 2,
+  "namespace": "product",
+  "negative_documents": 1,
+  "network_attempts": 0,
+  "observations": 82,
+  "reports": 2,
+  "run_id": "core-dev-candidate",
+  "scenario_id": "historical",
+  "snapshot_code_version": "38fe618a91a9d4f573e96fc2ec3cde2ee6ec8ebe",
+  "snapshot_sha256": "c522703633170af4933e06ed0f02edc29f2beb5f85cb32873ac46bb426b86edb",
+  "source_manifest_hash": "a3d3d221987593f9512ddc82265a1f518da4218efd88e66c7a00f433b9984d70",
+  "status": "passed",
+  "trace_fallbacks": {
+    "case-mil01-i10919b00011-20261008": true,
+    "case-mil01-unknown-20261009": false
+  },
+  "trace_tools": {
+    "case-mil01-i10919b00011-20261008": [
+      "get_case_evidence",
+      "get_available_stock",
+      "get_available_stock",
+      "get_lane_and_eta",
+      "get_lane_and_eta",
+      "evaluate_options",
+      "fallback"
+    ],
+    "case-mil01-unknown-20261009": [
+      "get_case_evidence",
+      "request_clarification",
+      "finish"
+    ]
+  },
+  "traces": 2,
+  "verified_quotes": 82
+}
