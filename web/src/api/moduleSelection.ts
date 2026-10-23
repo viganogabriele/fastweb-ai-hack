@@ -20,7 +20,12 @@ export async function nextRunRequest(
   run: RunView,
   selection: Record<string, boolean>
 ): Promise<CreateRun> {
-  const { run_id: _runId, config_hash: _previousHash, ...spec } = run.spec
+  const {
+    run_id: _runId,
+    config_hash: _previousHash,
+    erp_max_seq: _erpBoundary,
+    ...spec
+  } = run.spec
   const modules = spec.modules.map((snapshot) => ({
     ...snapshot,
     manifest: {

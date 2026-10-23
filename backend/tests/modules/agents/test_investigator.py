@@ -192,6 +192,34 @@ def test_stock_case_uses_different_checks_and_preserves_unknowns(database):
         assert not any(o.recommended and o.kind == "transfer" for o in options)
 
 
+def test_submitted_reservations_replace_live_ledger_reads(database, monkeypatch):
+    from tessera.modules.actions import options
+
+    def forbidden(*_):
+        pytest.fail("A frozen job must not reread the live ledger")
+
+    monkeypatch.setattr(options, "session_reservations", forbidden)
+    engine, spec = database
+    with repo_session(engine, spec, fixture_mode=True) as repo:
+        result = agent.investigate(
+            repo,
+            D1,
+            model=Script(
+                ("get_case_evidence", dict(case_id=D1)),
+                ("evaluate_options", dict(case_id=D1)),
+                ("finish", finish()),
+            ),
+            reader=Reader(repo),
+            policy=OptionsPolicy(),
+            reservations=(),
+        )
+        assert not result.trace.fallback_used
+        assert all(step.error is None for step in result.trace.steps)
+        assert any(
+            step.output_refs for step in result.trace.steps if step.tool == "evaluate_options"
+        )
+
+
 def test_foreign_case_sku_location_size_and_donor_are_rejected_before_io(database):
     engine, spec = database
     with repo_session(engine, spec, fixture_mode=True) as repo:

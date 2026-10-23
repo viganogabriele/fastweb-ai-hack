@@ -21,6 +21,7 @@ from tessera.core.contracts import (
     ModuleManifest,
     ModuleResult,
     Observation,
+    Reservation,
     StockFact,
 )
 from tessera.core.contracts.common import DerivedRecord, Instant
@@ -148,8 +149,18 @@ def visible_case(repo: Repo, case_id: str) -> Case:
 
 
 class Investigator:
-    def __init__(self, repo: Repo, case_id: str, reader: Reader, policy: OptionsPolicy, horizon=7):
+    def __init__(
+        self,
+        repo: Repo,
+        case_id: str,
+        reader: Reader,
+        policy: OptionsPolicy,
+        horizon=7,
+        *,
+        reservations: tuple[Reservation, ...] | None = None,
+    ):
         self.repo, self.reader, self.policy, self.horizon = repo, reader, policy, horizon
+        self.reservations = reservations
         self.case = visible_case(repo, case_id)
         self.options: dict[str, ActionOption] = {}
         self.proposals: dict[tuple[str, str], ActionOption] = {}
@@ -282,7 +293,13 @@ class Investigator:
         colours = []
         for product in case_products(self.repo, self.case):
             inputs = gather(
-                self.repo, self.reader, self.case, self.policy, self.horizon, product=product
+                self.repo,
+                self.reader,
+                self.case,
+                self.policy,
+                self.horizon,
+                product=product,
+                reservations=self.reservations,
             )
             if args.candidate_donors is not None:
                 inputs = replace(
@@ -490,9 +507,12 @@ def investigate(
     policy: OptionsPolicy,
     horizon_days: int = 7,
     budget: Budget | None = None,
+    prompt: str | None = None,
+    reservations: tuple[Reservation, ...] | None = None,
 ) -> AgentRun:
-    session = Investigator(repo, case_id, reader, policy, horizon_days)
-    prompt = PROMPT_PATH.read_text(encoding="utf-8")
+    session = Investigator(repo, case_id, reader, policy, horizon_days, reservations=reservations)
+    if prompt is None:
+        prompt = PROMPT_PATH.read_text(encoding="utf-8")
     result = AgentLoop(
         model,
         session.tools(),

@@ -20,6 +20,11 @@ _WORKER = Lock()
 _SUCCESS = {"succeeded", "degraded"}
 
 
+def worker_slot() -> Lock:
+    """Share the prototype's single worker with snapshot-bound API jobs."""
+    return _WORKER
+
+
 @dataclass(frozen=True)
 class RunContext:
     spec: RunSpec
@@ -149,7 +154,7 @@ def run(
         with session() as repo:
             repo.save_module_run(status)
 
-    with _WORKER:
+    with worker_slot():
         with session() as repo:
             if repo.run_state()["status"] != "pending":
                 raise ValueError("run has already been executed; create a new run_id")

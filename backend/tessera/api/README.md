@@ -82,10 +82,58 @@ other artifact reads. Fixtures require explicit `?fixture=true` and enabled
 fixture access. Agent steps, errors, mode, token counts and fallback status are
 returned unchanged from the stored contract.
 
-These GETs perform no model calls and write no artifacts. They can read existing
-contract fixtures without importing or waiting for AG-03. The POST investigate
-service remains separate work in parent issue #113; this read-side implementation
-does not establish that real-model investigation has been recorded or verified.
+These GETs perform no model calls and write no artifacts.
+
+## Investigator jobs (PLT-12)
+
+`POST /api/runs/{run_id}/cases/{case_id}/investigate` takes no body. It returns
+202 with a `RunView` for a **separate run** and a `Location` header pointing at
+`/api/runs/{job_run_id}`. Poll that location for module status. After successful
+or degraded publication, read the resulting case, traces, options and simulated
+clarification drafts under `/api/runs/{job_run_id}/cases/{case_id}/...`. The
+original run and case remain unchanged; investigation never approves or sends.
+
+The job copies the complete visible snapshot, including exact artifact versions,
+insertion order, indexes and prior module results. It keeps the parent's clock,
+stores and scenario. Only the investigator runs; ingestion and the rest of the
+pipeline are not executed again. The selected case and the investigator's current
+manifest, prompt text, model, crosswalk and domain policy are captured at submission.
+An optional `RunSpec.erp_max_seq` also freezes the ERP insertion boundary, in
+addition to the existing time and store filters; rows loaded while a job waits
+cannot enter it. Nested investigations inherit this boundary. Scenario ledger
+reservations are captured for evaluation and included in the job identity;
+human approval still revalidates against the current ledger. A job uses
+the same single worker as pipeline runs. All new artifacts become readable
+together when the job publishes. A failure discards the copied snapshot and any
+partial outputs; metadata and the failed module result remain readable.
+
+Identical submissions reuse a deterministic job ID, including while pending or
+after failure. Its identity includes the parent snapshot, selected case, module
+configuration, domain policy, prompt content, crosswalk and ledger reservations.
+Execution mode does not change
+that identity. Reset a failed/interrupted job before retrying the same inputs;
+resetting and rebuilding also allows verification against its LLM recordings.
+In-process background jobs are not durable across an API restart. A queued task
+from before a reset cannot execute or fail a recreated job with the same ID.
+
+Recorded and fixture parents force LLM replay even when the server is configured
+for live calls. A live parent follows `LLM_MODE`; `record` records the new job's
+conversation and `replay` never constructs a provider client. A cache miss fails
+explicitly with `Missing LLM recording (replay miss)` in the module result. A new
+job's conversation needs its own recording: the two AG-03 dev recordings do not
+guarantee coverage for arbitrary snapshots. Stock and lanes use the existing
+time-filtered systems adapter (including the local mock HTTP service); unavailable
+systems remain unknown and may produce a degraded result.
+
+The investigator retains its tool/turn budget and caps the LLM client's overall
+deadline at 90 seconds (or the stricter configured limit). Existing runs without
+the optional ERP boundary and their LLM recordings remain compatible.
+
+Missing runs/cases and foreign namespaces return 404; unpublished parents,
+closed cases and cases with durable decisions in that run return 409. SQLite
+write contention returns 503 with
+`Retry-After: 5`. Fixture submission and all subsequent job reads require both
+`FIXTURE_MODE=1` and `?fixture=true`; the Location header preserves this selector.
 
 ## Clarification reads (PLT-13)
 

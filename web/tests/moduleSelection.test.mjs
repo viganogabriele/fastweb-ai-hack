@@ -44,6 +44,17 @@ test('disabled or absent dependencies and empty executable graphs cannot be subm
   assert.match(selectionIssues(missing, {})[0], /almeno un modulo/)
 })
 
+test('new pipeline requests omit the investigation ERP boundary and retain a stable hash', async () => {
+  const baseline = await nextRunRequest(run, {})
+  for (const erp_max_seq of [null, 0, 42]) {
+    const selected = { ...run, spec: { ...run.spec, erp_max_seq } }
+    const body = await nextRunRequest(selected, {})
+    assert.equal('erp_max_seq' in body, false)
+    assert.deepEqual(body, baseline)
+    assert.equal(selected.spec.erp_max_seq, erp_max_seq)
+  }
+})
+
 test('submission persists the complete selection and surfaces server rejection', async (t) => {
   const body = await nextRunRequest(run, { 'ing.extract': false })
   const created = { ...run, spec: { ...body, run_id: 'new-run' }, status: 'pending', published: false }
