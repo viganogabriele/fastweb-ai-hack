@@ -29,6 +29,13 @@ export type Reader = <T>(path: string, signal: AbortSignal) => Promise<T>
 const sameRef = (a: ArtifactRef, b: ArtifactRef) =>
   a.kind === b.kind && a.id === b.id && a.version === b.version
 
+const sameCitation = (a: Citation, b: Citation) =>
+  sameRef(a.ref, b.ref) && (a.field ?? null) === (b.field ?? null) &&
+  (a.unit ?? null) === (b.unit ?? null) &&
+  (a.period_start ?? null) === (b.period_start ?? null) &&
+  (a.period_end ?? null) === (b.period_end ?? null) &&
+  JSON.stringify(Object.entries(a.scope ?? {}).sort()) === JSON.stringify(Object.entries(b.scope ?? {}).sort())
+
 export function runPath(run: RunView, resource: string) {
   return `/runs/${encodeURIComponent(run.spec.run_id)}/${resource}${resource.includes('?') ? '&' : '?'}fixture=${run.namespace === 'fixture'}`
 }
@@ -71,7 +78,7 @@ export async function resolveReportCitation(
   if (!detail || !belongsToRun(detail.report, run) ||
       detail.report.input_version_hash !== report.input_version_hash ||
       detail.report.markdown !== report.markdown || !resolved ||
-      !sameRef(resolved.citation.ref, citation.ref) ||
+      !sameCitation(resolved.citation, citation) ||
       resolved.artifact.id !== citation.ref.id || resolved.artifact.version !== citation.ref.version ||
       resolved.artifact.run_id !== run.spec.run_id || resolved.artifact.scenario_id !== run.spec.scenario_id)
     throw new Error('La citazione o la sua versione non è disponibile nello stesso run.')

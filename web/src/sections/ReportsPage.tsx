@@ -112,7 +112,22 @@ function CitationPanel({ run, report, cases, index, onClose }: { run: RunView; r
         <dt>Unità</dt><dd>{data.citation.unit ?? 'Non specificata'}</dd>
         <dt>Ambito</dt><dd>{data.citation.scope ? Object.entries(data.citation.scope).map(([key, value]) => `${key}: ${value}`).join(' · ') : 'Non specificato'}</dd>
         <dt>Periodo</dt><dd>{data.citation.period_start ? date(data.citation.period_start) : 'Inizio non specificato'} – {data.citation.period_end ? date(data.citation.period_end) : 'Fine non specificata'}</dd></dl>
-      <details open><summary>Record citato e provenienza</summary><pre>{JSON.stringify(data.artifact, null, 2)}</pre></details>
+      <ArtifactEvidence artifact={data.artifact} />
+      <details><summary>Record completo e provenienza</summary><pre>{JSON.stringify(data.artifact, null, 2)}</pre></details>
     </>}
   </section>
+}
+
+function ArtifactEvidence({ artifact }: { artifact: Record<string, unknown> }) {
+  const evidence = Array.isArray(artifact.evidence) ? artifact.evidence : []
+  const sources = Array.isArray(artifact.source_refs) ? artifact.source_refs : []
+  return <>
+    {typeof artifact.priority_reason === 'string' && <p>{artifact.priority_reason}</p>}
+    {evidence.length > 0 && <section aria-label="Evidenze citate"><h4>Evidenze</h4>{evidence.map((item, i) =>
+      item && typeof item.quote === 'string' ? <blockquote key={i}><p>{item.quote}</p><cite>{item.document_id} · {item.document_version}</cite></blockquote> : null
+    )}</section>}
+    {sources.length > 0 && <section aria-label="Fonti del riferimento"><h4>Fonti</h4><ul>{sources.map((source, i) =>
+      source && typeof source.uri === 'string' ? <li key={i}>{source.uri}{typeof source.locator === 'string' ? ` · ${source.locator}` : ''}</li> : null
+    )}</ul></section>}
+  </>
 }
