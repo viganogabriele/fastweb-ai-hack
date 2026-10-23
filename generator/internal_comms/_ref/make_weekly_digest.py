@@ -15,7 +15,7 @@ for f in sorted(glob.glob('generated/ground_truth/writer_inputs/email_context/*.
             if m: W['unmet'][m.group(1)]+=int(m.group(3))
         for r in day.get('returns',[]):
             if 'DEF' in r: W['defret']+=1
-            if r.startswith('ARNEB') and 'SIZE' in r: W['sizeret']+=1
+            if r.startswith('ARTEM') and 'SIZE' in r: W['sizeret']+=1
         for k,v in (day.get('customer_mix') or {}).items(): W['mix'][k]+=v
         W['nd']+=1
         for dl in day.get('deliveries_received',[]):

@@ -43,7 +43,7 @@ Stefan
                       ["BER01 KaDeWe", "68 T€", "-15 %", "gelb", "-"],
                       ["ZRH01 Zürich", "CHF 98 T", "-13 %", "gelb", "Neuheiten gut angenommen"],
                       ["STM01 St. Moritz", "CHF 39 T", "-9 %", "gelb", "Wochenendgäste"]],
-               paras=["Neuheiten: AMBRINE und ILVARO werden viel anprobiert, Verkäufe noch zurückhaltend. ARNEB: erster Umtausch wegen Größe in Zürich.",
+               paras=["Neuheiten: AMALIA und IRIDIA werden viel anprobiert, Verkäufe noch zurückhaltend. ARTEM: erster Umtausch wegen Größe in Zürich.",
                       "Personal: BER01 eine Kollegin in Elternzeit ab Oktober, Ersatz wird gesucht.",
                       "Nächste Woche: Besuch MUN01 und Wiesn-Start Samstag (viel Publikum in der Stadt)."])),
 
@@ -91,8 +91,8 @@ STM01 CHF 20 T, -55% (red)
 
 Comments:
 - Weather still too warm for the season, 20 degrees in Munich, the clients are not in the mood for down jackets.
-- POLARIS launched Thursday in MUN01 and STM01. The reaction is not good: the clients try it and find it too small and too expensive. Until now 1 balaclava sold in Munich, nothing in St. Moritz.
-- MUN01: black MAIRE is missing since one week, some requests (not many).
+- ASTRA launched Thursday in MUN01 and STM01. The reaction is not good: the clients try it and find it too small and too expensive. Until now 1 balaclava sold in Munich, nothing in St. Moritz.
+- MUN01: black AUREA is missing since one week, some requests (not many).
 - Oktoberfest: many people in the city but not our clients.
 
 Best regards
@@ -108,7 +108,7 @@ sorry, diese Woche wieder auf Deutsch, auf Englisch brauche ich doppelt so lange
 MUN01 141 T€ -4 %, BER01 74 T€ -6 %, ZRH01 CHF 167 T +9 %, STM01 CHF 36 T -23 %.
 
 Zürich profitiert von den chinesischen Feiertagen (Gruppen aus Luzern / Jungfraujoch auf der Bahnhofstrasse). Leider waren wir nicht auf der Liste für die Mandarin-Unterstützung, Reto hat mit einer Studentin aus dem eigenen Netzwerk improvisiert.
-TIB Reißverschluss: in Zürich 7 Retouren, in München 1, Berlin 1. Keine Info von der Qualität, wir sammeln die Teile.
+VEL Reißverschluss: in Zürich 7 Retouren, in München 1, Berlin 1. Keine Info von der Qualität, wir sammeln die Teile.
 BER01: Tag der Deutschen Einheit am Samstag, Haus voll, aber wenig Umsatz bei uns.
 
 VG Stefan
@@ -117,9 +117,9 @@ VG Stefan
                table=[["Filiale", "Umsatz netto", "vs Budget", "Ampel"],
                       ["MUN01", "141 T€", "-4 %", "gelb"], ["BER01", "74 T€", "-6 %", "gelb"],
                       ["ZRH01", "CHF 167 T", "+9 %", "grün"], ["STM01", "CHF 36 T", "-23 %", "rot"]],
-               paras=["Ware: MAIRE schwarz in MUN01 fast leer, Nachlieferung laut Replenishment erst nach dem 16.10.",
-                      "POLARIS: weiterhin kaum Abverkauf in MUN01 (2 Teile seit Launch). Ich würde die Ware gerne an Filialen mit Nachfrage abgeben.",
-                      "TIB: Retouren wegen Reißverschluss (Schieber löst sich). Teile liegen im Lager, Rücksendung offen."])),
+               paras=["Ware: AUREA schwarz in MUN01 fast leer, Nachlieferung laut Replenishment erst nach dem 16.10.",
+                      "ASTRA: weiterhin kaum Abverkauf in MUN01 (2 Teile seit Launch). Ich würde die Ware gerne an Filialen mit Nachfrage abgeben.",
+                      "VEL: Retouren wegen Reißverschluss (Schieber löst sich). Teile liegen im Lager, Rücksendung offen."])),
 
 dict(key="w41", folder=F, file="2026-10-12_0745_KW41_DACH_Wagner", frm=S, to=TO, cc=CC, tz=TZ, sent="2026-10-12 07:45",
      subj="KW 41 DACH + Wetter",
@@ -130,10 +130,10 @@ BER01 129 T€ +17 % grün
 ZRH01 CHF 157 T -4 % gelb
 STM01 CHF 42 T -18 % rot
 
-Wichtig für diese Woche: der Wetterdienst meldet ab heute einen massiven Kälteeinbruch, in München Höchstwerte 2–5 Grad und Schnee möglich ab Mittwoch, in der Schweiz Schnee bis 1000 m. Das ist genau der Moment, auf den wir warten. Bitte Replenishment Heavy Down (MAYA, MONTGENEVRE, MAIRE, HERMINE), Mützen und Handschuhe für MUN01, BER01 und ZRH01 priorisieren. Die Filialen haben jeweils nur 1–2 Teile pro Größe bei den Ikonen.
+Wichtig für diese Woche: der Wetterdienst meldet ab heute einen massiven Kälteeinbruch, in München Höchstwerte 2–5 Grad und Schnee möglich ab Mittwoch, in der Schweiz Schnee bis 1000 m. Das ist genau der Moment, auf den wir warten. Bitte Replenishment Heavy Down (NOVA, MONTELUCE, AUREA, LIVIANA), Mützen und Handschuhe für MUN01, BER01 und ZRH01 priorisieren. Die Filialen haben jeweils nur 1–2 Teile pro Größe bei den Ikonen.
 
-TIB: Qualitätsalarm erhalten, wird umgesetzt.
-ARNEB: das Team empfiehlt inzwischen eine Nummer kleiner, das funktioniert.
+VEL: Qualitätsalarm erhalten, wird umgesetzt.
+ARTEM: das Team empfiehlt inzwischen eine Nummer kleiner, das funktioniert.
 
 VG Stefan
 """),
@@ -149,13 +149,13 @@ BER01 176 T€ / +50 % grün
 ZRH01 CHF 294 T / +41 % grün
 STM01 CHF 57 T / -1 % gelb
 
-Am Mittwoch der erste Schnee in München, Kunden standen um 10 Uhr vor der Tür. Ausverkauft u.a. Logo Beanie (schwarz, navy, weiß), Tech Gloves, MAYA schwarz Gr. 3/4, MONTGENEVRE grau in mehreren Größen. MAIRE schwarz fehlt weiterhin überall, 14 Anfragen in MUN01 notiert.
+Am Mittwoch der erste Schnee in München, Kunden standen um 10 Uhr vor der Tür. Ausverkauft u.a. Vlogo Beanie (schwarz, navy, weiß), Winter Gloves, NOVA schwarz Gr. 3/4, MONTELUCE grau in mehreren Größen. AUREA schwarz fehlt weiterhin überall, 14 Anfragen in MUN01 notiert.
 
-Berlin +50 %: neben dem Wetter hat sicher auch das neue Schaufenster geholfen, das Jana am Dienstag umgebaut hat (Schneelandschaft mit MAYA und Beanies), die Kunden sind gezielt deswegen reingekommen. Würde das gerne auf andere Häuser übertragen.
+Berlin +50 %: neben dem Wetter hat sicher auch das neue Schaufenster geholfen, das Jana am Dienstag umgebaut hat (Schneelandschaft mit NOVA und Beanies), die Kunden sind gezielt deswegen reingekommen. Würde das gerne auf andere Häuser übertragen.
 
 St. Moritz ist seit heute für die Zwischensaison geschlossen. Die Restware Heavy Down und Accessoires geht nach Absprache mit Luca Ferrari diese Woche an MUN01 und ZRH01.
 
-POLARIS: unverändert schwach in MUN01 (zu klein, zu teuer).
+ASTRA: unverändert schwach in MUN01 (zu klein, zu teuer).
 
 VG Stefan
 """),

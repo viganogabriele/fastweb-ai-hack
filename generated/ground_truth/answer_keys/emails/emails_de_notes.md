@@ -39,36 +39,36 @@ To: `retail-ops-dach@`, Cc: `stefan.wagner@` unless stated otherwise.
 
 - **Cold snap 12.–19.10.**: all four stores describe a weather shift with long/warm items, beanies, gloves and missing
   sizes. MUN01: 12.10. rain and 5 °C with conversion at only 5.8 %, 14.10. **first snow** at +72 % with beanie navy
-  sold out and Hermine navy/black, Montgenevre grey 5, Maya navy 4 missing, then 15.–17.10. strong, and on 20.10. Föhn
+  sold out and Liviana navy/black, Monteluce grey 5, Nova navy 4 missing, then 15.–17.10. strong, and on 20.10. Föhn
   ends it. BER01: +86 % on 12.10., 17.10. +78 % with beanie white sold out and 4 unmet requests after that.
   ZRH01: 12.10. −83 % (sleet, people came in to warm up, 4 receipts) and then +99 % / +137 % on 13./14.10.
   (snow down to 1000 m). Read the 12.10. drop as a weather-day artefact, not as weak demand. STM01: snow from 12.10.,
   "last burst" 15.–18.10.
-- **TIB zipper slider defect** (all reported as "Reißverschluss/Schieber"):
-  MUN01 02.10. (Gr. 4, photos attached). MUN01 09.10. forwarded customer complaint: Tib navy Gr. 5 bought 18.09.,
+- **VEL zipper slider defect** (all reported as "Reißverschluss/Schieber"):
+  MUN01 02.10. (Gr. 4, photos attached). MUN01 09.10. forwarded customer complaint: Vel navy Gr. 5 bought 18.09.,
   which matches POS `MUN01-260918-0012`. **This return is not yet in POS**, so the defect is under-counted in POS.
-  MUN01 17.10.: Tib Gr. 3 return booked with reason **QUALITY** (not DEF) and without an original receipt. Vroni says
+  MUN01 17.10.: Vel Gr. 3 return booked with reason **QUALITY** (not DEF) and without an original receipt. Vroni says
   it is the zipper, so count it as a defect.
-  BER01: 28.09. (Gr. 4), 20.10. (Gr. 3), 21.10. (Gr. 5). Jana asks whether to take Tib off the floor.
+  BER01: 28.09. (Gr. 4), 20.10. (Gr. 3), 21.10. (Gr. 5). Jana asks whether to take Vel off the floor.
   ZRH01: 29.09. (×2), 30.09., 01.10. (×2), 03.10. (×2), 12.10. Reto's 01.10. list gives purchase dates that match
   the POS original receipts; the colour of the 16.09. one is a guess.
   STM01: 28.09. (×2). These units were shipped back to the DC on 20.10. in a separate carton marked "Quality".
-- **ARNEB fits large**: MUN01 04.09., 05.09., 28.09. (exchange 2→1, staff now advise one size down), 09.10.
+- **ARTEM fits large**: MUN01 04.09., 05.09., 28.09. (exchange 2→1, staff now advise one size down), 09.10.
   Flo says it is the "4th size return since launch", but email_context has 3, so treat his count as approximate.
   ZRH01 14.09. (4→3) and 05.10. (size 1 still too big, no smaller size exists).
-- **Genius POLARIS weak (MUN01)**: launched 24.09. with many try-ons and 1 balaclava sold. Feedback: the oversized
+- **Couture ASTRA weak (MUN01)**: launched 24.09. with many try-ons and 1 balaclava sold. Feedback: the oversized
   runs small, so customers size up, and the 2,900 € cape is too expensive. On 15.10. Katharina offers the Cape and
   light-blue Oversized for transfer, and on 19.10. says the balaclava is "the only item that really moves".
   At ZRH01 the capsule is neutral and the balaclava sells in the cold (5× on 16.10.). BER01 does not carry it and
   sends customers to Munich (not a lost sale in the data).
-- **MAIRE black**: no stock in 0/1/2 at MUN01 from about 26.–30.09., at BER01 from 22./24.09. and at ZRH01 0/1 from
-  28.09. Unmet requests come almost daily, and the deliveries on 01.10. and 15.10. carried no black Maire. The DC
+- **AUREA black**: no stock in 0/1/2 at MUN01 from about 26.–30.09., at BER01 from 22./24.09. and at ZRH01 0/1 from
+  28.09. Unmet requests come almost daily, and the deliveries on 01.10. and 15.10. carried no black Aurea. The DC
   was back on 16.10., but the stores only get it with the shipments of 22.10. (MUN01, 35 pcs; BER01, 15 pcs) and
   23.10. (ZRH01, 20 pcs). The emails of 20./21.10. quote these counts correctly from the delivery notice.
 - **Golden Week (ZRH01, 30.09.–08.10.)**: Chinese share 33–53 %, coach groups from Lucerne, tax-free forms,
   Ying translating. Record day Sat 03.10. (CHF 61,273), reported only on Monday 05.10. at 08:23.
-  Long unmet lists: Bady black 0, Rosiere black 3 (4 requests between 03.10. and 08.10.), Maire black/beige/off-white,
-  Hermine, Montgenevre navy.
+  Long unmet lists: Aria black 0, Riviera black 3 (4 requests between 03.10. and 08.10.), Aurea black/beige/off-white,
+  Liviana, Monteluce navy.
 - **Oktoberfest (MUN01, 19.09.–04.10.)**: Wiesn Saturday 19.09. +34 %, Italian weekend 26.09. (−13 %, very busy).
   Wiesn weekdays are below budget: tourists browse and don't buy down jackets at 20 °C. On 05.10. the city is empty
   after the Wiesn (−50 %).
@@ -87,12 +87,12 @@ To: `retail-ops-dach@`, Cc: `stefan.wagner@` unless stated otherwise.
    (KPI 61,245).
 6. **08.10. 17:12**: the internal shift plan went to the ops list by mistake, followed by "Sorry, falscher Verteiler".
    It has no business signal.
-7. **14.10.**: Stefan asks how much Hermine and beanies they need, and on 15.10. Katharina answers with **estimates**
-   (Maire black 0–2 "at least 10"). These are opinions, not measured demand.
-8. 26.09.: Vroni says "Maire black 00 we never had". This is an unverified staff claim.
-9. 05.10.: Flo says the last 2 black Maire sold were "Gr. 3 and 4". The sizes are unverified (POS has the truth).
+7. **14.10.**: Stefan asks how much Liviana and beanies they need, and on 15.10. Katharina answers with **estimates**
+   (Aurea black 0–2 "at least 10"). These are opinions, not measured demand.
+8. 26.09.: Vroni says "Aurea black 00 we never had". This is an unverified staff claim.
+9. 05.10.: Flo says the last 2 black Aurea sold were "Gr. 3 and 4". The sizes are unverified (POS has the truth).
 10. The deliveries of 05.09. and 12.09. were 2 days late, which matches logistics. The 21.10. "waiting list of 11
-    customers" for black Maire is an anecdotal number.
+    customers" for black Aurea is an anecdotal number.
 
 ### BER01
 1. **Metric definition trap**: Mehmet's tables have "Frequenz Shop" (= door counter, matches KPI visitors) and
@@ -106,7 +106,7 @@ To: `retail-ops-dach@`, Cc: `stefan.wagner@` unless stated otherwise.
    are unreliable.
 6. **12.10.**: double send (`_dup`).
 7. **01.10.**: the body only says "siehe Anhang", and the figures are in the xlsx.
-8. **06.10.**: Stefan asks Jana, gets an out-of-office reply, and Mehmet answers: "2–3 black Maire requests per week,
+8. **06.10.**: Stefan asks Jana, gets an out-of-office reply, and Mehmet answers: "2–3 black Aurea requests per week,
    mostly size 0 and 4". This matches email_context. His statement "0 and 2 at zero since 22.09." is slightly off
    (size 2 is zero from 24.09.).
 9. **18./19.10.**: Stefan asks whether BER01 can give beanies to MUN01. Jana says no: white is at 0 and navy has
@@ -115,7 +115,7 @@ To: `retail-ops-dach@`, Cc: `stefan.wagner@` unless stated otherwise.
     Saturday.
 11. **14.10.**: brown turtleneck M requested. BER01 does stock brown and received 2 on 15.10., so it is a size
     stock-out, not an assortment gap.
-12. **16.10.**: Maya black 8 sold the day after the 15.10. delivery (5 black Maya in that delivery). Rosiere olive 7
+12. **16.10.**: Nova black 8 sold the day after the 15.10. delivery (5 black Nova in that delivery). Riviera olive 7
     was requested 3 times (10., 13., 15.10.).
 
 ### ZRH01
@@ -130,10 +130,10 @@ To: `retail-ops-dach@`, Cc: `stefan.wagner@` unless stated otherwise.
 7. **15.10.**: Reto asks merch for replenishment and suggests a transfer from St. Moritz. STM01 stock went back to
    the DC on 20.10., so the stock is available from the DC, not store-to-store.
 8. **12.10. −83 %**: a sleet day with no unmet requests recorded. It must not be read as a demand collapse.
-9. **ILVARO powder pink**: requested 26.09. (00) and 14.10. (size 1, the customer showed a photo of the Korean
+9. **IRIDIA powder pink**: requested 26.09. (00) and 14.10. (size 1, the customer showed a photo of the Korean
    singer). 3 pieces arrived on 16.10. and were tried on but not sold by 17.10. There are weak spill-over signals in
    Europe.
-10. 10.09.: Reto writes "Arneb 7 not in our assortment". This is an unverified staff claim, and the request itself
+10. 10.09.: Reto writes "Artem 7 not in our assortment". This is an unverified staff claim, and the request itself
     is a real unmet request.
 
 ### STM01
@@ -143,16 +143,16 @@ To: `retail-ops-dach@`, Cc: `stefan.wagner@` unless stated otherwise.
    Single weekend days are reported separately the rest of the time.
 3. **Missing 15.09.** (in the 16.09. mail: CHF 1,895) and **30.09.** (in the 01.10. mail: CHF 5,910 + requests).
 4. **Negative or zero days**: 01.09. −60 (return larger than sales), 02.09. zero sales (no KPI row), 13.09. CHF 169,
-   24.09. −2,540 (returns of 2 Insolux GIFT + Montgenevre SIZE). The sign is correct.
-5. **PEYRE (ski jacket)**: sizes 2/3/4 are repeatedly unmet (05.10., 08.10., 16.10. ×2, 17.10. ×2).
+   24.09. −2,540 (returns of 2 Alpina GIFT + Monteluce SIZE). The sign is correct.
+5. **PIERO (ski jacket)**: sizes 2/3/4 are repeatedly unmet (05.10., 08.10., 16.10. ×2, 17.10. ×2).
    The 09.10. delivery brought sizes 2+3, and the 16.10. delivery brought one size 4, which sold within an hour.
 6. **14./15.10.**: Stefan suggests staying open until 25.10. because of the snow, and Gian-Andrea declines
    (holidays booked, hotels closed, lifts open end of November).
 7. **19.10.**: inventory mail with a CSV (cp1252, `;` separator): 21 cartons of about 310 pieces, plus 2 defective
-   Tib in a separate "Quality" carton. 20.10.: GEODIS pickup done, store locked.
-8. **21.10.**: Stefan asks STM01 to ship Peyre/Chamonix L directly to Zürich and gets 2 auto-replies (Sabrina on
+   Vel in a separate "Quality" carton. 20.10.: GEODIS pickup done, store locked.
+8. **21.10.**: Stefan asks STM01 to ship Piero/Cortina L directly to Zürich and gets 2 auto-replies (Sabrina on
    holiday, store mailbox "closed until 3 December"). Correct reading: the goods are already on the way to the DC
    and the Zürich request must be served from the DC.
 9. **17.10.**: double send from iPhone.
-10. Repeated unmet requests: Maire off-white 00 3× (31.08., 07.09., 24.09.; the 24.09. mail says "third"),
-    Ambrine brown 3× (12.09., 17.09., 02.10.).
+10. Repeated unmet requests: Aurea off-white 00 3× (31.08., 07.09., 24.09.; the 24.09. mail says "third"),
+    Amalia brown 3× (12.09., 17.09., 02.10.).

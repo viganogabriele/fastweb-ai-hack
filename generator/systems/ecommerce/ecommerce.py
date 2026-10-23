@@ -97,13 +97,13 @@ def apply(countries, mask, a, b, m, shape="flat", hl=5.0):
 
 
 ASIA_CELEB = ["KR", "CN", "JP", "HK", "TW", "SG"]
-ilv510 = (name_of == "ILVARO") & (color_of == "510")
-ilv_oth = (name_of == "ILVARO") & np.isin(color_of, ["999", "20D"])
+ilv510 = (name_of == "IRIDIA") & (color_of == "510")
+ilv_oth = (name_of == "IRIDIA") & np.isin(color_of, ["999", "20D"])
 apply(ASIA_CELEB, ilv510, "2026-10-02", "2026-10-21", 38.0, "spike", hl=3.5)
 apply(["KR"], ilv510, "2026-10-02", "2026-10-21", 1.8)
 apply([c for c in CC if c not in ASIA_CELEB], ilv510, "2026-10-02", "2026-10-21", 5.0, "spike", hl=4)
 apply(ASIA_CELEB, ilv_oth, "2026-10-03", "2026-10-21", 3.0, "spike", hl=6)
-maire_blk = (name_of == "MAIRE") & (color_of == "999")
+maire_blk = (name_of == "AUREA") & (color_of == "999")
 apply(["KR"], maire_blk, "2026-09-17", "2026-10-21", 3.2)
 apply(["FR", "IT", "GB"], maire_blk, "2026-09-19", "2026-10-21", 1.4)
 heavy = sgroup == "HEAVY"
@@ -112,12 +112,12 @@ apply(["FR", "GB", "IT"], heavy, "2026-10-13", "2026-10-19", 1.2)
 apply(["JP"], heavy, "2026-09-28", "2026-10-11", 0.65)
 apply(["JP"], season == "CO", "2026-10-10", "2026-10-21", 1.5, "ramp")
 apply(["CN"], np.ones(NK, bool), "2026-10-20", "2026-10-21", 1.35)     # D11 presales online
-genius = line == "Genius"
-apply(["CN", "HK"], genius, "2026-09-24", "2026-10-21", 1.7, "spike", hl=12)
-apply(["IT", "FR", "GB", "DE", "ES", "NL", "US", "CA", "CH"], genius, "2026-09-24", "2026-10-21", 0.45)
-tib = name_of == "TIB"
-apply(CC, tib, "2026-09-28", "2026-10-21", 0.8)
-amb_brown = (name_of == "AMBRINE") & (color_of == "23R")
+couture = line == "Couture"
+apply(["CN", "HK"], couture, "2026-09-24", "2026-10-21", 1.7, "spike", hl=12)
+apply(["IT", "FR", "GB", "DE", "ES", "NL", "US", "CA", "CH"], couture, "2026-09-24", "2026-10-21", 0.45)
+valentino_v17 = name_of == "VEL"
+apply(CC, valentino_v17, "2026-09-28", "2026-10-21", 0.8)
+amb_brown = (name_of == "AMALIA") & (color_of == "23R")
 apply(["IT", "FR", "GB", "ES"], amb_brown, "2026-09-10", "2026-10-21", 2.2)
 apply(["US", "GB"], np.ones(NK, bool), "2026-09-15", "2026-10-21", 1.07)   # brand campaign (real effect)
 apply(["CN"], np.ones(NK, bool), "2026-10-01", "2026-10-07", 0.85)          # Golden week: people travel
@@ -241,7 +241,7 @@ for i, x in enumerate(DAYS):
                                 transfers.append((x, n, s, z, q, "TOPUP_RESERVE_ECOM"))
                     continue
                 if x in EXTRA_TOPUP_DAYS and x.weekday() != 0 and not (
-                        (C.STYLE_NAME[s.split('-')[0]] in ("MAIRE", "ILVARO")) and x >= dt.date(2026, 10, 17)):
+                        (C.STYLE_NAME[s.split('-')[0]] in ("AUREA", "IRIDIA")) and x >= dt.date(2026, 10, 17)):
                     continue
                 cur = size_curve(s, node_cc[n][0])
                 for j, z in enumerate(size_runs[s]):
@@ -316,15 +316,15 @@ for r in sales.itertuples():
     name = C.STYLE_NAME[r.sku.split("-")[0]]
     p = 0.09 if COUNTRIES[r.country][0] != "APAC" else 0.04
     reason = "OTHER"
-    if name == "TIB" and r.date >= dt.date(2026, 8, 15) and R.random() < 0.17:
+    if name == "VEL" and r.date >= dt.date(2026, 8, 15) and R.random() < 0.17:
         lag = int(R.integers(6, 26))
         rd = max(r.date + dt.timedelta(days=lag), dt.date(2026, 9, 27) + dt.timedelta(days=int(R.integers(0, 7))))
         ret_rows.append((rd, r.country, r.sku, r.size, 1, "DEFECTIVE"))
         continue
-    if name == "ARNEB" and R.random() < 0.14:
+    if name == "ARTEM" and R.random() < 0.14:
         ret_rows.append((r.date + dt.timedelta(days=int(R.integers(4, 14))), r.country, r.sku, r.size, 1, "SIZE_TOO_LARGE"))
         continue
-    if name.startswith("POLARIS") and COUNTRIES[r.country][0] != "APAC" and R.random() < 0.18:
+    if name.startswith("ASTRA") and COUNTRIES[r.country][0] != "APAC" and R.random() < 0.18:
         ret_rows.append((r.date + dt.timedelta(days=int(R.integers(4, 14))), r.country, r.sku, r.size, 1, "SIZE_TOO_SMALL"))
         continue
     if R.random() < p:
@@ -415,7 +415,7 @@ for r in lost.itertuples():
         elif R.random() < 0.03:
             status = "UNSUBSCRIBED"
         bis.append(dict(request_id=f"BIS-{rid}", created_at=(r.ts + dt.timedelta(minutes=int(R.integers(0, 9)))).strftime("%Y-%m-%dT%H:%M:%SZ"),
-                        site=f"moncler-{r.country.lower()}", locale=LOCALE[r.country], country=r.country,
+                        site=f"valentino-{r.country.lower()}", locale=LOCALE[r.country], country=r.country,
                         product_id=r.sku, variant_sku=f"{r.sku}-{r.size}", size=r.size, email_sha1_10=email_hash,
                         marketing_optin=bool(R.random() < 0.41), status=status,
                         notified_at=sent.strftime("%Y-%m-%dT%H:%M:%SZ") if sent is not None else "",
@@ -436,16 +436,16 @@ al[["changed_at_utc", "inventory_location", "variant_sku", "availability_event",
 
 # ------------------------------------------------------------------ export 4: site search log
 style_queries = {
-    "MAYA": ["maya", "maya jacket", "moncler maya", "maya piumino", "マヤ", "마야", "maya 999"],
-    "MAIRE": ["maire", "maire jacket", "maire short down jacket"],
-    "ILVARO": ["ilvaro", "ilvaro jacket", "ilvaro cropped"],
-    "AMBRINE": ["ambrine", "ambrine coat", "ambrine long"],
-    "HERMINE": ["hermine", "hermine long"], "BADY": ["bady"], "ARNEB": ["arneb", "arneb parka"],
-    "TIB": ["tib", "tib gilet", "tib vest"], "LOGO CARDIGAN": ["cardigan", "logo cardigan", "cardigan uomo"],
-    "MONTCLA": ["montcla"], "KARAKORUM": ["karakorum"], "TRAILGRIP GTX": ["trailgrip", "trailgrip gtx"],
-    "POLARIS CAPE": ["polaris", "genius polaris", "polaris cape"], "POLARIS OVERSIZED": ["polaris oversized"],
-    "LOGO HOODIE": ["hoodie", "felpa"], "LOGO BEANIE": ["beanie", "berretto"], "LOGO T-SHIRT": ["t-shirt", "t shirt"],
-    "POLO": ["polo"], "CHAMBRE": ["gilet donna", "chambre"], "FLAMMETTE": ["flammette"], "MONTGENEVRE": ["montgenevre"],
+    "NOVA": ["nova", "nova jacket", "valentino nova", "nova piumino", "Nova", "Nova", "nova 999"],
+    "AUREA": ["aurea", "aurea jacket", "aurea short down jacket"],
+    "IRIDIA": ["iridia", "iridia jacket", "iridia cropped"],
+    "AMALIA": ["amalia", "amalia coat", "amalia long"],
+    "LIVIANA": ["liviana", "liviana long"], "ARIA": ["aria"], "ARTEM": ["artem", "artem parka"],
+    "VEL": ["vel", "vel gilet", "vel vest"], "VLOGO CARDIGAN": ["cardigan", "vlogo cardigan", "cardigan uomo"],
+    "MISTRAL": ["mistral"], "COSIMO": ["cosimo"], "VTRACK GTX": ["vtrack", "vtrack gtx"],
+    "ASTRA CAPE": ["astra", "couture astra", "astra cape"], "ASTRA OVERSIZED": ["astra oversized"],
+    "VLOGO HOODIE": ["hoodie", "felpa"], "VLOGO BEANIE": ["beanie", "berretto"], "VLOGO T-SHIRT": ["t-shirt", "t shirt"],
+    "JERSEY POLO": ["jersey polo"], "CAMILLA": ["gilet donna", "camilla"], "FIAMMETTA": ["fiammetta"], "MONTELUCE": ["monteluce"],
 }
 generic = {"*": ["down jacket", "women jacket", "men jacket", "vest", "sale", "gift card", "kids", "store locator",
                  "black jacket", "long down jacket", "short down jacket", "sneakers", "scarf", "gloves"],
@@ -456,26 +456,26 @@ generic = {"*": ["down jacket", "women jacket", "men jacket", "vest", "sale", "g
            "CN": ["羽绒服", "女款羽绒服", "短款羽绒服", "双十一"], "HK": ["羽絨", "down jacket"], "TW": ["羽絨外套"]}
 event_q = [
     # (countries, query, start, end, base/day, decay hl, results)
-    (["KR"], "ilvaro pink", "2026-10-01", "2026-10-21", 260, 4, 3), (["KR"], "일바로 핑크", "2026-10-02", "2026-10-21", 140, 4, 0),
-    (["KR"], "윤하은 몽클레르", "2026-10-02", "2026-10-21", 180, 3, 0), (["KR"], "윤하은 패딩", "2026-10-02", "2026-10-21", 90, 3, 0),
-    (["KR"], "몽클레르 핑크 패딩", "2026-10-02", "2026-10-21", 70, 5, 4),
-    (["CN"], "尹夏恩同款", "2026-10-02", "2026-10-21", 150, 3, 0), (["CN"], "ilvaro 粉色", "2026-10-02", "2026-10-21", 110, 4, 3),
+    (["KR"], "iridia pink", "2026-10-01", "2026-10-21", 260, 4, 3), (["KR"], "Iridia 핑크", "2026-10-02", "2026-10-21", 140, 4, 0),
+    (["KR"], "윤하은 발렌티노", "2026-10-02", "2026-10-21", 180, 3, 0), (["KR"], "윤하은 패딩", "2026-10-02", "2026-10-21", 90, 3, 0),
+    (["KR"], "발렌티노 핑크 패딩", "2026-10-02", "2026-10-21", 70, 5, 4),
+    (["CN"], "尹夏恩同款", "2026-10-02", "2026-10-21", 150, 3, 0), (["CN"], "iridia 粉色", "2026-10-02", "2026-10-21", 110, 4, 3),
     (["CN"], "粉色羽绒服", "2026-10-02", "2026-10-21", 60, 5, 6), (["JP"], "イルヴァロ ピンク", "2026-10-02", "2026-10-21", 70, 4, 0),
-    (["JP"], "ilvaro pink", "2026-10-02", "2026-10-21", 55, 4, 3), (["HK", "TW", "SG"], "ilvaro pink", "2026-10-02", "2026-10-21", 35, 4, 3),
+    (["JP"], "iridia pink", "2026-10-02", "2026-10-21", 55, 4, 3), (["HK", "TW", "SG"], "iridia pink", "2026-10-02", "2026-10-21", 35, 4, 3),
     (["HK", "TW"], "尹夏恩", "2026-10-02", "2026-10-21", 25, 3, 0), (["SG", "US", "GB", "FR"], "yoon ha eun", "2026-10-02", "2026-10-21", 9, 4, 0),
-    (["US", "GB", "FR", "IT", "DE"], "ilvaro pink", "2026-10-02", "2026-10-21", 14, 5, 3),
-    (["KR"], "ilvaro pnk", "2026-10-02", "2026-10-14", 6, 6, 0), (["IT"], "ilvaro rosa", "2026-10-02", "2026-10-21", 9, 6, 0),
-    (["FR"], "ilvaro rose", "2026-10-02", "2026-10-21", 8, 6, 0),
-    (["KR"], "maire black", "2026-09-17", "2026-10-21", 55, 30, 1), (["KR"], "마이레 블랙", "2026-09-17", "2026-10-21", 30, 30, 0),
-    (["KR"], "몽클레르 마이레", "2026-09-17", "2026-10-21", 40, 30, 4), (["FR"], "maire noir", "2026-09-19", "2026-10-21", 12, 40, 1),
-    (["IT"], "maire nero", "2026-09-19", "2026-10-21", 10, 40, 1), (["GB", "US"], "maire black", "2026-09-19", "2026-10-21", 9, 40, 1),
-    (["IT", "FR", "GB"], "maire blak", "2026-09-20", "2026-10-15", 1.2, 99, 0),
-    (["IT"], "ambrine marrone", "2026-09-12", "2026-10-21", 9, 99, 1), (["FR"], "ambrine marron", "2026-09-12", "2026-10-21", 8, 99, 1),
-    (["GB", "ES"], "ambrine brown", "2026-09-12", "2026-10-21", 6, 99, 1), (["IT", "FR", "GB"], "brown down coat", "2026-09-15", "2026-10-21", 5, 99, 4),
-    (["IT", "FR", "DE", "GB"], "tib zip", "2026-09-29", "2026-10-21", 3, 20, 0), (["IT", "FR", "ES"], "tib zipper", "2026-09-29", "2026-10-21", 2, 20, 0),
+    (["US", "GB", "FR", "IT", "DE"], "iridia pink", "2026-10-02", "2026-10-21", 14, 5, 3),
+    (["KR"], "iridia pnk", "2026-10-02", "2026-10-14", 6, 6, 0), (["IT"], "iridia rosa", "2026-10-02", "2026-10-21", 9, 6, 0),
+    (["FR"], "iridia rose", "2026-10-02", "2026-10-21", 8, 6, 0),
+    (["KR"], "aurea black", "2026-09-17", "2026-10-21", 55, 30, 1), (["KR"], "Aurea 블랙", "2026-09-17", "2026-10-21", 30, 30, 0),
+    (["KR"], "발렌티노 Aurea", "2026-09-17", "2026-10-21", 40, 30, 4), (["FR"], "aurea noir", "2026-09-19", "2026-10-21", 12, 40, 1),
+    (["IT"], "aurea nero", "2026-09-19", "2026-10-21", 10, 40, 1), (["GB", "US"], "aurea black", "2026-09-19", "2026-10-21", 9, 40, 1),
+    (["IT", "FR", "GB"], "aurea blak", "2026-09-20", "2026-10-15", 1.2, 99, 0),
+    (["IT"], "amalia marrone", "2026-09-12", "2026-10-21", 9, 99, 1), (["FR"], "amalia marron", "2026-09-12", "2026-10-21", 8, 99, 1),
+    (["GB", "ES"], "amalia brown", "2026-09-12", "2026-10-21", 6, 99, 1), (["IT", "FR", "GB"], "brown down coat", "2026-09-15", "2026-10-21", 5, 99, 4),
+    (["IT", "FR", "DE", "GB"], "vel zip", "2026-09-29", "2026-10-21", 3, 20, 0), (["IT", "FR", "ES"], "vel zipper", "2026-09-29", "2026-10-21", 2, 20, 0),
     (["IT"], "cerniera gilet", "2026-09-30", "2026-10-21", 2, 20, 0), (["JP"], "価格改定", "2026-10-09", "2026-10-21", 25, 8, 0),
     (["CN"], "双11 价格", "2026-10-18", "2026-10-21", 40, 99, 0), (["DE", "AT", "CH"], "daunenjacke damen lang", "2026-10-12", "2026-10-19", 25, 99, 18),
-    (["CN", "HK"], "polaris", "2026-09-22", "2026-10-21", 45, 10, 6), (["AU"], "polo", "2026-09-01", "2026-10-21", 12, 99, 9),
+    (["CN", "HK"], "astra", "2026-09-22", "2026-10-21", 45, 10, 6), (["AU"], "jersey polo", "2026-09-01", "2026-10-21", 12, 99, 9),
     (["AU"], "t-shirt", "2026-09-01", "2026-10-21", 15, 99, 11), (["AU"], "light jacket", "2026-09-10", "2026-10-21", 8, 99, 3),
 ]
 srows = []
@@ -484,7 +484,7 @@ lost_style = lost.assign(style=lost.sku.str.split("-").str[0]).groupby(["date", 
 sale_style = sales.assign(style=sales.sku.str.split("-").str[0]).groupby(["date", "country", "style"]).qty.sum()
 for x in DAYS:
     for c in CC:
-        site = f"moncler-{c.lower()}"
+        site = f"valentino-{c.lower()}"
         sc = 1.0 + (0.25 if x.weekday() >= 5 else 0)
         size_c = {"US": 3, "GB": 1.6, "DE": 1.5, "KR": 1.6, "CN": 1.8, "JP": 1.5, "FR": 1.2, "IT": 1.1}.get(c, 0.6)
         for q in generic["*"] + generic.get(c, []):

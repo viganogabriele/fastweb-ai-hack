@@ -18,7 +18,7 @@ OUTD = outdir("retail_controlling", "weekly_flash")
 facts = Facts("flash")
 
 WEEK_NOTES = {
-    36: ["FW26 new-in (ILVARO, AMBRINE, ARNEB, ROSIERE, Wool turtleneck) on floor from Thu 03/09.",
+    36: ["FW26 new-in (IRIDIA, AMALIA, ARTEM, RIVIERA, Cashmere Turtleneck) on floor from Thu 03/09.",
          "MIA01: air-conditioning failure 3-5/09, store open but traffic down.",
          "SS26 residual stock returned to DC on 01/09 (no impact on sales, impact on stock KPIs)."],
     37: ["BHS01: heatwave Southern California, outerwear not moving (8-12/09).",
@@ -29,23 +29,23 @@ WEEK_NOTES = {
          "FW26 campaign US/UK live from 15/09 (OOH + digital)."],
     39: ["Milano Fashion Week 22-28/09: MIL01/MIL02 above budget.",
          "NYC01: UNGA week, Madison Ave frozen zones 21-26/09.",
-         "MAIRE black broken in sizes at PAR01, PAR02, MIL01, LON02; DC out of stock (supplier delay), ETA mid-October.",
-         "Genius POLARIS capsule launched Thu 24/09 (China very good, Europe/US soft)."],
+         "AUREA black broken in sizes at PAR01, PAR02, MIL01, LON02; DC out of stock (supplier delay), ETA mid-October.",
+         "Couture ASTRA capsule launched Thu 24/09 (China very good, Europe/US soft)."],
     40: ["Golden Week from 30/09: Chinese tourists in Milan/Paris/London; domestic travel in CN stores.",
          "Paris Fashion Week 29/09-07/10.",
          "CPH01: reduced opening hours 28/09-04/10 (staff shortage).",
-         "TIB vest: first customer returns for zipper defect (reason code DEF) from 28/09 - see Quality."],
+         "VEL vest: first customer returns for zipper defect (reason code DEF) from 28/09 - see Quality."],
     41: ["NYC02: POS outage Tue 06/10 14:10-17:40; part of 06/10 receipts posted with business date 07/10. Not restated.",
          "MAD01: door counter down 01/10-07/10 (traffic = 0, conversion not meaningful).",
          "LON01: private client evening Thu 08/10.",
-         "ILVARO powder pink sold out in Asia within days (celebrity effect), DC top-up landed 08/10.",
+         "IRIDIA powder pink sold out in Asia within days (celebrity effect), DC top-up landed 08/10.",
          "SIN01: F1 GP weekend 09-11/10."],
     42: ["Cold snap Central/Northern Europe from 12/10: MUN01, ZRH01, BER01, GVA01, CPH01 strong on outerwear.",
          "Strikes: Paris transport Tue 13/10, Italy general strike Fri 16/10.",
          "Japan: clients buying ahead of 01/11 price increase (announced 09/10).",
-         "SEL01: ILVARO replenishment released by Incheon customs 13/10 (planned 08/10).",
+         "SEL01: IRIDIA replenishment released by Incheon customs 13/10 (planned 08/10).",
          "Competitor pop-up opened in front of SEL01 on 15/10.",
-         "MAIRE black: DC re-supply received 16/10, store allocations shipping this week."],
+         "AUREA black: DC re-supply received 16/10, store allocations shipping this week."],
 }
 
 
@@ -129,7 +129,7 @@ def write_flash(w, fname, version, issued, krw_override=None, dup_store=None, ch
     t, (d0, d1, l0, l1, thu, fx, fx_ly) = week_table(w, krw_override, dup_store, issued)
     wb = xlsxwriter.Workbook(OUTD / fname)
     wb.set_properties({"title": f"Weekly Sales Flash W{w} 2026", "author": "Retail Controlling - M. Galli",
-                       "company": "Moncler S.p.A.", "comments": f"version {version}"})
+                       "company": "Valentino S.p.A.", "comments": f"version {version}"})
     F = lambda **kw: wb.add_format({"font_name": "Arial", "font_size": 9, **kw})
     title = F(bold=True, font_size=14, font_color="#1F2A44")
     sub = F(italic=True, font_color="#555555")
@@ -152,7 +152,7 @@ def write_flash(w, fname, version, issued, krw_override=None, dup_store=None, ch
     ws.hide_gridlines(2)
     ws.set_column(0, 0, 3)
     ws.set_column(1, 1, 110)
-    ws.write(1, 1, "MONCLER  |  Retail Controlling", F(bold=True, font_size=10, font_color="#888888"))
+    ws.write(1, 1, "VALENTINO  |  Retail Controlling", F(bold=True, font_size=10, font_color="#888888"))
     ws.write(3, 1, f"WEEKLY SALES FLASH - WEEK {w} / 2026", F(bold=True, font_size=20, font_color="#1F2A44"))
     ws.write(4, 1, f"Fiscal week {w}: {d0:%a %d/%m/%Y} - {d1:%a %d/%m/%Y}   |   LY comparable: wk {w} 2025 ({l0:%d/%m} - {l1:%d/%m/%Y})", sub)
     ws.write(5, 1, f"Version {version} - issued {issued:%d/%m/%Y} - distribution: ExCom, Regional MDs, Country Managers, Merchandising", sub)

@@ -31,18 +31,18 @@ Project root: /home/lorenzo/dev/hackathons/fastweb-2026  (python: .venv/bin/pyth
    an email to the wrong list, one sent next morning, one with the wrong date in the subject...). Not all in every store - vary.
 
 4. Headers conventions:
-   - domain moncler-retail.example; people firstname.lastname@moncler-retail.example (no accents in addresses);
-     store mailbox <store lowercase>.store@moncler-retail.example (sometimes used as From, e.g. on a shared iPad).
-   - Italy DL: retail-ops-italy@moncler-retail.example ; Spain DL: retail-ops-spain@moncler-retail.example
-   - Area manager Italy+Spain: Roberto Galli <roberto.galli@moncler-retail.example> (usually Cc).
+   - domain valentino-retail.example; people firstname.lastname@valentino-retail.example (no accents in addresses);
+     store mailbox <store lowercase>.store@valentino-retail.example (sometimes used as From, e.g. on a shared iPad).
+   - Italy DL: retail-ops-italy@valentino-retail.example ; Spain DL: retail-ops-spain@valentino-retail.example
+   - Area manager Italy+Spain: Roberto Galli <roberto.galli@valentino-retail.example> (usually Cc).
      Roberto is out of office Aug 31 -> Sep 4 (back Mon Sep 7): his auto-reply text (Italian/English) if you use it:
      "Sono fuori ufficio con accesso limitato alla posta fino a venerdì 4 settembre. Per urgenze contattare
-     retail-ops-italy@moncler-retail.example. / I am out of office ..." (keep it short; may vary).
+     retail-ops-italy@valentino-retail.example. / I am out of office ..." (keep it short; may vary).
      Roberto's style when replying: short, direct, from his phone, Italian, signs "R." or "Roberto", sometimes asks
      for numbers/photos/sizes, sometimes promises to escalate to merch-planning / DC. He never mentions internal codes.
-   - Other lists: merch-planning@moncler-retail.example, vm-team@moncler-retail.example,
-     dc-replenishment@moncler-retail.example (Castel San Giovanni DC, "il magazzino", "CSG"), it-helpdesk@moncler-retail.example,
-     facility-italy@moncler-retail.example.
+   - Other lists: merch-planning@valentino-retail.example, vm-team@valentino-retail.example,
+     dc-replenishment@valentino-retail.example (Castel San Giovanni DC, "il magazzino", "CSG"), it-helpdesk@valentino-retail.example,
+     facility-italy@valentino-retail.example.
    - sent = local time "YYYY-MM-DD HH:MM", typically 15-90 min after closing; occasionally next morning.
    - Subjects: store-specific habit that drifts over time; typos sometimes; "Re:" for replies.
 
@@ -55,10 +55,10 @@ Project root: /home/lorenzo/dev/hackathons/fastweb-2026  (python: .venv/bin/pyth
      store-specific structured habit (e.g. a mini form) used SOME days and dropped/modified on others.
    - Each writer has a stable voice; styles drift a bit over weeks (e.g. the form gets lazier, frustration grows).
    - Use the facts as experience, NOT as paraphrase of the lists: report only some things, approximations
-     ("una decina", "tanti coreani"), lag ("da giovedi"), nicknames ("la Maire nera", "il cardigan logo",
-     "l'Ambrine marrone/cioccolato", "il Tib", "il corto rosa"), occasionally a wrong size/colour/name, sometimes
+     ("una decina", "tanti coreani"), lag ("da giovedi"), nicknames ("la Aurea nera", "il cardigan logo",
+     "l'Amalia marrone/cioccolato", "il Vel", "il corto rosa"), occasionally a wrong size/colour/name, sometimes
      numbers that slightly disagree with KPI (rounded, gross vs net, k€). The key scenario unmet requests for your
-     store must appear often but humanly. Mention returns (e.g. Tib zip defect from end of Sept, Arneb fits big ->
+     store must appear often but humanly. Mention returns (e.g. Vel zip defect from end of Sept, Artem fits big ->
      exchanges) only when the staff would notice them.
    - KPI: net_sales_lc is net; staff often write "fatturato 62k" or "62.6" or "62.620" or vs budget "+12%"; a few times
      they don't give numbers at all. Visitors from the door counter; conversion sometimes quoted.
@@ -67,7 +67,7 @@ Project root: /home/lorenzo/dev/hackathons/fastweb-2026  (python: .venv/bin/pyth
      emails - short, the same disclaimer may repeat as a deliberate habit).
    - FORBIDDEN: event codes (E01...), the words synthetic/ground truth, AI-ish prose ("I hope this email finds you
      well", "Overall", "In summary", tidy symmetrical bullet lists every day, em-dashes everywhere).
-   - Don't invent hard facts that contradict the scenario (e.g. don't say the black Maire arrived before it did),
+   - Don't invent hard facts that contradict the scenario (e.g. don't say the black Aurea arrived before it did),
      except deliberate, documented traps.
 
 6. Final answer to the caller: <= 200 words: number of emails (and files), personas, main planted signals/traps,

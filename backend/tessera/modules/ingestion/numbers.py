@@ -3,7 +3,8 @@
 The extractor (ING-04) hands over the span that states how many: "7 richieste", "tre clienti",
 "8 to 10 clients", "un paio di signore". Code, not the LLM, turns it into a `Quantity`:
 
-- `exact`: one count next to a unit noun ("Maire nera: 6 richieste", "un cliente", "201pcs").
+- `exact`: one count next to a unit noun
+  ("Aurea nera: 6 richieste", "un cliente", "201pcs").
 - `range`: two ascending counts ("25-30 pezzi", "3 or 4 people", "tra 5 e 8 clienti").
 - `vague`: a vague quantifier from `config/domain.yaml` ("qualche cliente", "a few clients"), or
   a hedged count ("around 28 clients", "una sessantina di pezzi", "at least 3", "5 units or
@@ -766,7 +767,7 @@ def _after_problem(tokens: list[_Token], last: int, lex: _Lexicon) -> str | None
 
 def _hedge_follows(tokens: list[_Token], k: int, lex: _Lexicon) -> bool:
     """A hedge behind the punctuation at token k: "5 units (approx)", "5 pezzi, più o meno",
-    "5 units, at least", "5 units (about)"; not "3 clients, about the Maire"."""
+    "5 units, at least", "5 units (about)"; not "3 clients, about the Aurea"."""
     while k < len(tokens) and tokens[k].text in "(,-" and tokens[k].kind == "punct":
         k += 1
     keys = [t.key for t in tokens[k : k + 4]]

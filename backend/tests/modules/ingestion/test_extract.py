@@ -182,21 +182,21 @@ def test_d1_quote_matches_hand_labelled_evidence(tmp_path):
 
 
 def test_whitespace_variant_quote_maps_to_canonical_slice(tmp_path):
-    text = "Oggi tanti clienti\nhanno chiesto la Maire nera.\nNessun problema."
-    candidate = Candidate(quote="hanno   chiesto la\nMaire  nera", kind="unmet_demand")
+    text = "Oggi tanti clienti\nhanno chiesto la Aurea nera.\nNessun problema."
+    candidate = Candidate(quote="hanno   chiesto la\nAurea  nera", kind="unmet_demand")
     _, observations, _, _ = execute(tmp_path, synthetic(text), {"doc-synthetic": [candidate]})
     evidence = observations[0].evidence[0]
-    assert evidence.quote == "hanno chiesto la Maire nera"
+    assert evidence.quote == "hanno chiesto la Aurea nera"
     assert text[evidence.char_start : evidence.char_end] == evidence.quote
 
 
 def test_unverifiable_quotes_are_abstentions(tmp_path):
-    text = "Maire nera finita.\n\nMaire nera richiesta da due clienti."
+    text = "Aurea nera finita.\n\nAurea nera richiesta da due clienti."
     replies = {
         "doc-synthetic": [
-            Candidate(quote="Maire blu finita", kind="stockout"),
-            Candidate(quote="Maire nera", kind="unmet_demand"),
-            Candidate(quote="Maire nera finita.", kind="stockout"),
+            Candidate(quote="Aurea blu finita", kind="stockout"),
+            Candidate(quote="Aurea nera", kind="unmet_demand"),
+            Candidate(quote="Aurea nera finita.", kind="stockout"),
         ]
     }
     status, observations, published, _ = execute(tmp_path, synthetic(text), replies)
@@ -210,12 +210,12 @@ def test_unverifiable_quotes_are_abstentions(tmp_path):
 
 
 def test_numbers_are_kept_only_when_the_email_states_them(tmp_path):
-    text = "Un paio di clienti chiedevano il Tib.\nVenduto 58,0k.\nTib finito."
+    text = "Un paio di clienti chiedevano il Vel.\nVenduto 58,0k.\nVel finito."
     replies = {
         "doc-synthetic": [
             # A vague quantifier never becomes a number, whatever the model says.
             Candidate(
-                quote="Un paio di clienti chiedevano il Tib",
+                quote="Un paio di clienti chiedevano il Vel",
                 kind="unmet_demand",
                 quantity_kind="exact",
                 value=2,
@@ -233,7 +233,7 @@ def test_numbers_are_kept_only_when_the_email_states_them(tmp_path):
             ),
             # A number whose words are not in the email.
             Candidate(
-                quote="Tib finito",
+                quote="Vel finito",
                 kind="stockout",
                 quantity_kind="exact",
                 value=12,
@@ -305,12 +305,12 @@ def test_vague_words_without_spaces_are_recognised(raw):
 
 
 def test_value_must_read_from_raw_words_inside_the_evidence_segment(tmp_path):
-    text = "Oggi 2 clienti per il Tib.\n\nTib finito, 3 pezzi venduti.\n\nVenduto 58,0k € netto."
+    text = "Oggi 2 clienti per il Vel.\n\nVel finito, 3 pezzi venduti.\n\nVenduto 58,0k € netto."
     replies = {
         "doc-synthetic": [
             # raw "2" is in the email but does not say 12.
             Candidate(
-                quote="Oggi 2 clienti per il Tib",
+                quote="Oggi 2 clienti per il Vel",
                 kind="unmet_demand",
                 quantity_kind="exact",
                 value=12,
@@ -319,7 +319,7 @@ def test_value_must_read_from_raw_words_inside_the_evidence_segment(tmp_path):
             ),
             # raw "3" is true, but in another segment than the quote.
             Candidate(
-                quote="Oggi 2 clienti per il Tib",
+                quote="Oggi 2 clienti per il Vel",
                 kind="unmet_demand",
                 quantity_kind="exact",
                 value=3,
@@ -347,7 +347,7 @@ def test_value_must_read_from_raw_words_inside_the_evidence_segment(tmp_path):
                 quantity_raw="58,0k",
             ),
             Candidate(
-                quote="Tib finito, 3 pezzi venduti",
+                quote="Vel finito, 3 pezzi venduti",
                 kind="stockout",
                 quantity_kind="range",
                 low=1,
@@ -446,7 +446,7 @@ def test_readings_do_not_invent_thousands_or_decimals(raw, wrong):
         ("5", "venduti 2,5", False),
         ("2", "venduti 2 pezzi", True),
         ("2", "venduti 2.", True),
-        ("3 pezzi", "tib finito, 3 pezzi venduti", True),
+        ("3 pezzi", "vel finito, 3 pezzi venduti", True),
     ],
 )
 def test_quantity_words_must_stand_alone_in_the_segment(raw, text, found):

@@ -35,11 +35,11 @@
    "visitors": 241,
    "conversion": 0.0622,
    "top_sellers": [
-    "MAYA black x4",
-    "LOGO CAP black x3",
-    "TRAILGRIP GTX black x2",
-    "CASHMERE SCARF black x2",
-    "POLO black x1"
+    "NOVA black x4",
+    "VLOGO CAP black x3",
+    "VTRACK GTX black x2",
+    "VALENTINO SCARF black x2",
+    "JERSEY POLO black x1"
    ],
    "customer_mix": {
     "FR": 0.21,
@@ -48,18 +48,18 @@
     "TW": 0.11
    },
    "unmet_requests": [
-    "KARAKORUM grey melange size 2 x1",
-    "TIB off-white size 7 x1",
-    "MARIN navy size 1 x1",
-    "VALBOURG off-white size 4 x1"
+    "COSIMO grey melange size 2 x1",
+    "VEL off-white size 7 x1",
+    "MARIO navy size 1 x1",
+    "VALDORA off-white size 4 x1"
    ],
    "zero_stock_key_sizes": [
-    "KARAKORUM black 3",
-    "TRAILGRIP W black 39"
+    "COSIMO black 3",
+    "VTRACK W black 39"
    ],
    "returns": [
-    "MONTGENEVRE 4 reason=GIFT",
-    "TRICOT PADDED CARDIGAN M reason=CHANGE_MIND"
+    "MONTELUCE 4 reason=GIFT",
+    "VLOGO PADDED CARDIGAN M reason=CHANGE_MIND"
    ],
    "deliveries_received": [],
    "active_events": []
@@ -76,11 +76,11 @@
    "visitors": 277,
    "conversion": 0.0794,
    "top_sellers": [
-    "TIB black x4",
-    "LOGO HOODIE black x4",
-    "TRAILGRIP W off-white x3",
-    "POLO black x2",
-    "LOGO T-SHIRT black x2"
+    "VEL black x4",
+    "VLOGO HOODIE black x4",
+    "VTRACK W off-white x3",
+    "JERSEY POLO black x2",
+    "VLOGO T-SHIRT black x2"
    ],
    "customer_mix": {
     "FR": 0.24,
@@ -90,15 +90,15 @@
    },
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "MAIRE beige 1",
-    "KARAKORUM black 3",
-    "LOGO HOODIE black S",
-    "LOGO HOODIE black M",
-    "TRAILGRIP W black 39"
+    "AUREA beige 1",
+    "COSIMO black 3",
+    "VLOGO HOODIE black S",
+    "VLOGO HOODIE black M",
+    "VTRACK W black 39"
    ],
    "returns": [
-    "LOGO T-SHIRT L reason=CHANGE_MIND",
-    "MAKAIO BACKPACK TU reason=CHANGE_MIND"
+    "VLOGO T-SHIRT L reason=CHANGE_MIND",
+    "URBAN BACKPACK TU reason=CHANGE_MIND"
    ],
    "deliveries_received": [],
    "active_events": []
@@ -115,11 +115,11 @@
    "visitors": 290,
    "conversion": 0.0793,
    "top_sellers": [
-    "LOGO BEANIE navy x4",
-    "TRICOT PADDED CARDIGAN navy x3",
-    "CABLE KNIT SWEATER black x2",
-    "TIB black x2",
-    "MONTGENEVRE black x2"
+    "VLOGO BEANIE navy x4",
+    "VLOGO PADDED CARDIGAN navy x3",
+    "INTARSIA SWEATER black x2",
+    "VEL black x2",
+    "MONTELUCE black x2"
    ],
    "customer_mix": {
     "FR": 0.31,
@@ -128,14 +128,14 @@
     "US": 0.12
    },
    "unmet_requests": [
-    "MAYA black size 6 x1",
-    "TRAILGRIP GTX grey melange size 45 x1"
+    "NOVA black size 6 x1",
+    "VTRACK GTX grey melange size 45 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE beige 1",
-    "LOGO HOODIE black S",
-    "LOGO HOODIE black M",
-    "TRAILGRIP W black 39"
+    "AUREA beige 1",
+    "VLOGO HOODIE black S",
+    "VLOGO HOODIE black M",
+    "VTRACK W black 39"
    ],
    "returns": [],
    "deliveries_received": [
@@ -162,11 +162,11 @@
    "visitors": 343,
    "conversion": 0.0671,
    "top_sellers": [
-    "CABLE KNIT SWEATER black x3",
-    "MONTGENEVRE navy x2",
-    "LOGO BEANIE white x2",
-    "CREWNECK SWEATSHIRT black x2",
-    "WOOL TURTLENECK black x2"
+    "INTARSIA SWEATER black x3",
+    "MONTELUCE navy x2",
+    "VLOGO BEANIE white x2",
+    "RELAXED SWEATSHIRT black x2",
+    "CASHMERE TURTLENECK black x2"
    ],
    "customer_mix": {
     "FR": 0.23,
@@ -175,8 +175,8 @@
     "CN": 0.12
    },
    "unmet_requests": [
-    "VALBOURG off-white size 4 x1",
-    "TRICOT PADDED CARDIGAN navy size XL x1"
+    "VALDORA off-white size 4 x1",
+    "VLOGO PADDED CARDIGAN navy size XL x1"
    ],
    "zero_stock_key_sizes": [],
    "returns": [],
@@ -204,11 +204,11 @@
    "visitors": 477,
    "conversion": 0.0671,
    "top_sellers": [
-    "LOGO T-SHIRT navy x5",
-    "TIB navy x5",
-    "TIB black x4",
-    "CABLE KNIT SWEATER black x3",
-    "LOGO BEANIE navy x2"
+    "VLOGO T-SHIRT navy x5",
+    "VEL navy x5",
+    "VEL black x4",
+    "INTARSIA SWEATER black x3",
+    "VLOGO BEANIE navy x2"
    ],
    "customer_mix": {
     "FR": 0.34,
@@ -217,15 +217,15 @@
     "US": 0.13
    },
    "unmet_requests": [
-    "HERMINE navy size 0 x1"
+    "LIVIANA navy size 0 x1"
    ],
    "zero_stock_key_sizes": [
-    "MONTGENEVRE black 5"
+    "MONTELUCE black 5"
    ],
    "returns": [
-    "LOGO T-SHIRT M reason=CHANGE_MIND",
-    "LOGO CAP TU reason=COLOUR",
-    "LOGO CAP TU reason=CHANGE_MIND"
+    "VLOGO T-SHIRT M reason=CHANGE_MIND",
+    "VLOGO CAP TU reason=COLOUR",
+    "VLOGO CAP TU reason=CHANGE_MIND"
    ],
    "deliveries_received": [],
    "active_events": []
@@ -242,11 +242,11 @@
    "visitors": 629,
    "conversion": 0.0636,
    "top_sellers": [
-    "CREWNECK SWEATSHIRT white x5",
-    "TRAILGRIP GTX black x4",
-    "LOGO CARDIGAN black x4",
-    "TRICOT PADDED CARDIGAN navy x4",
-    "TIB black x4"
+    "RELAXED SWEATSHIRT white x5",
+    "VTRACK GTX black x4",
+    "VLOGO CARDIGAN black x4",
+    "VLOGO PADDED CARDIGAN navy x4",
+    "VEL black x4"
    ],
    "customer_mix": {
     "FR": 0.43,
@@ -255,16 +255,16 @@
     "IT": 0.11
    },
    "unmet_requests": [
-    "TRICOT PADDED CARDIGAN navy size XXL x2",
-    "LOGO HOODIE grey melange size XXL x2",
-    "CHAMBRE black size 4 x1"
+    "VLOGO PADDED CARDIGAN navy size XXL x2",
+    "VLOGO HOODIE grey melange size XXL x2",
+    "CAMILLA black size 4 x1"
    ],
    "zero_stock_key_sizes": [
-    "MONTGENEVRE black 5"
+    "MONTELUCE black 5"
    ],
    "returns": [
-    "LOGO HOODIE L reason=SIZE",
-    "LOGO T-SHIRT XXL reason=CHANGE_MIND"
+    "VLOGO HOODIE L reason=SIZE",
+    "VLOGO T-SHIRT XXL reason=CHANGE_MIND"
    ],
    "deliveries_received": [],
    "active_events": []
@@ -302,11 +302,11 @@
    "visitors": 297,
    "conversion": 0.0909,
    "top_sellers": [
-    "WOOL TURTLENECK black x5",
-    "LOGO BEANIE navy x3",
-    "CABLE KNIT SWEATER black x3",
-    "LOGO CAP white x3",
-    "AMBRINE black x3"
+    "CASHMERE TURTLENECK black x5",
+    "VLOGO BEANIE navy x3",
+    "INTARSIA SWEATER black x3",
+    "VLOGO CAP white x3",
+    "AMALIA black x3"
    ],
    "customer_mix": {
     "FR": 0.46,
@@ -315,13 +315,13 @@
     "GB": 0.04
    },
    "unmet_requests": [
-    "FLAMMETTE black size 4 x1"
+    "FIAMMETTA black size 4 x1"
    ],
    "zero_stock_key_sizes": [],
    "returns": [
-    "MAIRE 1 reason=QUALITY",
-    "TIB 6 reason=SIZE",
-    "LOGO CAP TU reason=QUALITY"
+    "AUREA 1 reason=QUALITY",
+    "VEL 6 reason=SIZE",
+    "VLOGO CAP TU reason=QUALITY"
    ],
    "deliveries_received": [],
    "active_events": []
@@ -338,11 +338,11 @@
    "visitors": 259,
    "conversion": 0.0772,
    "top_sellers": [
-    "TRAILGRIP GTX black x3",
-    "MAIRE black x3",
-    "LOGO T-SHIRT navy x2",
-    "MAKAIO BACKPACK navy x2",
-    "KARAKORUM navy x2"
+    "VTRACK GTX black x3",
+    "AUREA black x3",
+    "VLOGO T-SHIRT navy x2",
+    "URBAN BACKPACK navy x2",
+    "COSIMO navy x2"
    ],
    "customer_mix": {
     "FR": 0.22,
@@ -351,11 +351,11 @@
     "GB": 0.08
    },
    "unmet_requests": [
-    "VALBOURG off-white size 4 x1"
+    "VALDORA off-white size 4 x1"
    ],
    "zero_stock_key_sizes": [],
    "returns": [
-    "MAIRE 2 reason=QUALITY"
+    "AUREA 2 reason=QUALITY"
    ],
    "deliveries_received": [],
    "active_events": []
@@ -372,11 +372,11 @@
    "visitors": 351,
    "conversion": 0.0399,
    "top_sellers": [
-    "TIB black x3",
-    "LOGO T-SHIRT navy x3",
-    "CABLE KNIT SWEATER black x2",
-    "VALBOURG black x2",
-    "LOGO CARDIGAN navy x2"
+    "VEL black x3",
+    "VLOGO T-SHIRT navy x3",
+    "INTARSIA SWEATER black x2",
+    "VALDORA black x2",
+    "VLOGO CARDIGAN navy x2"
    ],
    "customer_mix": {
     "FR": 0.44,
@@ -385,13 +385,13 @@
     "KR": 0.08
    },
    "unmet_requests": [
-    "CREWNECK SWEATSHIRT white size L x1"
+    "RELAXED SWEATSHIRT white size L x1"
    ],
    "zero_stock_key_sizes": [
-    "LOGO HOODIE black M"
+    "VLOGO HOODIE black M"
    ],
    "returns": [
-    "BADY 1 reason=SIZE"
+    "ARIA 1 reason=SIZE"
    ],
    "deliveries_received": [],
    "active_events": []
@@ -408,11 +408,11 @@
    "visitors": 419,
    "conversion": 0.074,
    "top_sellers": [
-    "BADY black x4",
-    "WOOL TURTLENECK black x4",
-    "MAKAIO BACKPACK navy x3",
-    "MONTGENEVRE black x2",
-    "BADY powder pink x2"
+    "ARIA black x4",
+    "CASHMERE TURTLENECK black x4",
+    "URBAN BACKPACK navy x3",
+    "MONTELUCE black x2",
+    "ARIA powder pink x2"
    ],
    "customer_mix": {
     "FR": 0.2,
@@ -422,12 +422,12 @@
    },
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "LOGO T-SHIRT navy S"
+    "VLOGO T-SHIRT navy S"
    ],
    "returns": [
-    "HERMINE 3 reason=QUALITY",
-    "KARAKORUM 4 reason=COLOUR",
-    "TRAILGRIP GTX 44 reason=SIZE"
+    "LIVIANA 3 reason=QUALITY",
+    "COSIMO 4 reason=COLOUR",
+    "VTRACK GTX 44 reason=SIZE"
    ],
    "deliveries_received": [
     {
@@ -440,8 +440,8 @@
     }
    ],
    "active_events": [
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -456,11 +456,11 @@
    "visitors": 376,
    "conversion": 0.0532,
    "top_sellers": [
-    "TRICOT PADDED CARDIGAN navy x3",
-    "LOGO CARDIGAN navy x3",
-    "LOGO HOODIE navy x2",
-    "LOGO T-SHIRT white x2",
-    "LOGO T-SHIRT navy x2"
+    "VLOGO PADDED CARDIGAN navy x3",
+    "VLOGO CARDIGAN navy x3",
+    "VLOGO HOODIE navy x2",
+    "VLOGO T-SHIRT white x2",
+    "VLOGO T-SHIRT navy x2"
    ],
    "customer_mix": {
     "FR": 0.24,
@@ -469,17 +469,17 @@
     "OTHER": 0.09
    },
    "unmet_requests": [
-    "LOGO T-SHIRT navy size S x1",
-    "TRAILGRIP GTX black size 39 x1"
+    "VLOGO T-SHIRT navy size S x1",
+    "VTRACK GTX black size 39 x1"
    ],
    "zero_stock_key_sizes": [
-    "LOGO T-SHIRT navy S"
+    "VLOGO T-SHIRT navy S"
    ],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -494,11 +494,11 @@
    "visitors": 660,
    "conversion": 0.0561,
    "top_sellers": [
-    "WOOL TURTLENECK black x7",
-    "LOGO CAP black x5",
-    "MAIRE black x4",
-    "FLAMMETTE black x4",
-    "LOGO HOODIE black x3"
+    "CASHMERE TURTLENECK black x7",
+    "VLOGO CAP black x5",
+    "AUREA black x4",
+    "FIAMMETTA black x4",
+    "VLOGO HOODIE black x3"
    ],
    "customer_mix": {
     "FR": 0.36,
@@ -507,21 +507,21 @@
     "OTHER": 0.09
    },
    "unmet_requests": [
-    "ROSIERE olive size 2 x1"
+    "RIVIERA olive size 2 x1"
    ],
    "zero_stock_key_sizes": [
-    "MONTGENEVRE black 5",
-    "LOGO T-SHIRT navy S"
+    "MONTELUCE black 5",
+    "VLOGO T-SHIRT navy S"
    ],
    "returns": [
-    "LOGO CARDIGAN L reason=CHANGE_MIND",
-    "LOGO HOODIE L reason=SIZE",
-    "TRAILGRIP W 39 reason=GIFT"
+    "VLOGO CARDIGAN L reason=CHANGE_MIND",
+    "VLOGO HOODIE L reason=SIZE",
+    "VTRACK W 39 reason=GIFT"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -544,8 +544,8 @@
     }
    ],
    "active_events": [
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -560,11 +560,11 @@
    "visitors": 333,
    "conversion": 0.0691,
    "top_sellers": [
-    "ILVARO off-white x3",
-    "MAYA black x3",
-    "TRAILGRIP GTX black x2",
-    "KARAKORUM black x2",
-    "TIB navy x2"
+    "IRIDIA off-white x3",
+    "NOVA black x3",
+    "VTRACK GTX black x2",
+    "COSIMO black x2",
+    "VEL navy x2"
    ],
    "customer_mix": {
     "FR": 0.27,
@@ -573,18 +573,18 @@
     "CN": 0.13
    },
    "unmet_requests": [
-    "FLAMMETTE black size 00 x1"
+    "FIAMMETTA black size 00 x1"
    ],
    "zero_stock_key_sizes": [],
    "returns": [
-    "TIB 5 reason=SIZE",
-    "CHAMONIX M reason=SIZE",
-    "LOGO T-SHIRT S reason=COLOUR"
+    "VEL 5 reason=SIZE",
+    "CORTINA M reason=SIZE",
+    "VLOGO T-SHIRT S reason=COLOUR"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -599,11 +599,11 @@
    "visitors": 365,
    "conversion": 0.0658,
    "top_sellers": [
-    "LOGO CARDIGAN black x6",
-    "BADY black x3",
-    "LOGO CAP black x3",
-    "WOOL TURTLENECK black x2",
-    "MAYA black x2"
+    "VLOGO CARDIGAN black x6",
+    "ARIA black x3",
+    "VLOGO CAP black x3",
+    "CASHMERE TURTLENECK black x2",
+    "NOVA black x2"
    ],
    "customer_mix": {
     "FR": 0.3,
@@ -612,19 +612,19 @@
     "CN": 0.12
    },
    "unmet_requests": [
-    "WOOL TURTLENECK black size M x2",
-    "LOGO T-SHIRT white size S x2"
+    "CASHMERE TURTLENECK black size M x2",
+    "VLOGO T-SHIRT white size S x2"
    ],
    "zero_stock_key_sizes": [
-    "WOOL TURTLENECK black M"
+    "CASHMERE TURTLENECK black M"
    ],
    "returns": [
-    "TRAILGRIP GTX 44 reason=SIZE"
+    "VTRACK GTX 44 reason=SIZE"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -639,11 +639,11 @@
    "visitors": 350,
    "conversion": 0.0629,
    "top_sellers": [
-    "CREWNECK SWEATSHIRT black x3",
-    "TRAILGRIP GTX black x3",
-    "MONTGENEVRE black x3",
-    "LOGO CAP white x2",
-    "MONTCLA navy x2"
+    "RELAXED SWEATSHIRT black x3",
+    "VTRACK GTX black x3",
+    "MONTELUCE black x3",
+    "VLOGO CAP white x2",
+    "MISTRAL navy x2"
    ],
    "customer_mix": {
     "FR": 0.36,
@@ -652,22 +652,22 @@
     "OTHER": 0.08
    },
    "unmet_requests": [
-    "MAIRE navy size 00 x1",
-    "AMBRINE chocolate brown size 2 x1",
-    "LOGO T-SHIRT white size S x1"
+    "AUREA navy size 00 x1",
+    "AMALIA chocolate brown size 2 x1",
+    "VLOGO T-SHIRT white size S x1"
    ],
    "zero_stock_key_sizes": [
-    "MONTGENEVRE black 5",
-    "WOOL TURTLENECK black M"
+    "MONTELUCE black 5",
+    "CASHMERE TURTLENECK black M"
    ],
    "returns": [
-    "LOGO T-SHIRT M reason=COLOUR",
-    "LEGERE BELT BAG TU reason=SIZE"
+    "VLOGO T-SHIRT M reason=COLOUR",
+    "VITA BELT BAG TU reason=SIZE"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -682,11 +682,11 @@
    "visitors": 351,
    "conversion": 0.0855,
    "top_sellers": [
-    "TIB black x4",
-    "LOGO T-SHIRT navy x3",
-    "LOGO CAP white x3",
-    "MAIRE navy x3",
-    "LOGO T-SHIRT white x3"
+    "VEL black x4",
+    "VLOGO T-SHIRT navy x3",
+    "VLOGO CAP white x3",
+    "AUREA navy x3",
+    "VLOGO T-SHIRT white x3"
    ],
    "customer_mix": {
     "FR": 0.36,
@@ -695,19 +695,19 @@
     "US": 0.09
    },
    "unmet_requests": [
-    "MAIRE navy size 00 x1"
+    "AUREA navy size 00 x1"
    ],
    "zero_stock_key_sizes": [
-    "MONTGENEVRE black 5",
-    "WOOL TURTLENECK black M"
+    "MONTELUCE black 5",
+    "CASHMERE TURTLENECK black M"
    ],
    "returns": [
-    "LOGO CARDIGAN S reason=COLOUR"
+    "VLOGO CARDIGAN S reason=COLOUR"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -722,11 +722,11 @@
    "visitors": 531,
    "conversion": 0.0433,
    "top_sellers": [
-    "LOGO CARDIGAN navy x4",
-    "LOGO CARDIGAN black x3",
-    "MONTGENEVRE navy x3",
-    "WOOL TURTLENECK black x2",
-    "CREWNECK SWEATSHIRT black x2"
+    "VLOGO CARDIGAN navy x4",
+    "VLOGO CARDIGAN black x3",
+    "MONTELUCE navy x3",
+    "CASHMERE TURTLENECK black x2",
+    "RELAXED SWEATSHIRT black x2"
    ],
    "customer_mix": {
     "FR": 0.36,
@@ -737,7 +737,7 @@
    "unmet_requests": [],
    "zero_stock_key_sizes": [],
    "returns": [
-    "TRAILGRIP GTX 40 reason=CHANGE_MIND"
+    "VTRACK GTX 40 reason=CHANGE_MIND"
    ],
    "deliveries_received": [
     {
@@ -750,8 +750,8 @@
     }
    ],
    "active_events": [
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -766,11 +766,11 @@
    "visitors": 619,
    "conversion": 0.063,
    "top_sellers": [
-    "LOGO BEANIE white x4",
-    "LOGO BEANIE navy x4",
-    "CREWNECK SWEATSHIRT white x4",
-    "ECRINS black x4",
-    "BADY black x4"
+    "VLOGO BEANIE white x4",
+    "VLOGO BEANIE navy x4",
+    "RELAXED SWEATSHIRT white x4",
+    "ETTORE black x4",
+    "ARIA black x4"
    ],
    "customer_mix": {
     "FR": 0.22,
@@ -779,22 +779,22 @@
     "OTHER": 0.14
    },
    "unmet_requests": [
-    "TIB black size 1 x1",
-    "LOGO CARDIGAN black size XXL x1",
-    "CREWNECK SWEATSHIRT white size XS x1"
+    "VEL black size 1 x1",
+    "VLOGO CARDIGAN black size XXL x1",
+    "RELAXED SWEATSHIRT white size XS x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 1",
-    "MAIRE navy 2"
+    "AUREA black 1",
+    "AUREA navy 2"
    ],
    "returns": [
-    "LOGO CAP TU reason=COLOUR"
+    "VLOGO CAP TU reason=COLOUR"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -805,7 +805,7 @@
    "customer_mix": {},
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "MAIRE black 1"
+    "AUREA black 1"
    ],
    "returns": [],
    "deliveries_received": [
@@ -819,9 +819,9 @@
     }
    ],
    "active_events": [
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -836,11 +836,11 @@
    "visitors": 449,
    "conversion": 0.0802,
    "top_sellers": [
-    "LOGO HOODIE black x5",
-    "BADY black x5",
-    "LOGO T-SHIRT navy x4",
-    "TECH GLOVES black x4",
-    "MAKAIO BACKPACK black x3"
+    "VLOGO HOODIE black x5",
+    "ARIA black x5",
+    "VLOGO T-SHIRT navy x4",
+    "WINTER GLOVES black x4",
+    "URBAN BACKPACK black x3"
    ],
    "customer_mix": {
     "FR": 0.3,
@@ -849,24 +849,24 @@
     "OTHER": 0.08
    },
    "unmet_requests": [
-    "MAIRE black size 1 x2"
+    "AUREA black size 1 x2"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 1",
-    "MAIRE black 2"
+    "AUREA black 1",
+    "AUREA black 2"
    ],
    "returns": [
-    "FLAMMETTE 1 reason=CHANGE_MIND",
-    "MAYA 3 reason=SIZE",
-    "LOGO BEANIE TU reason=CHANGE_MIND",
-    "LEGERE BELT BAG TU reason=COLOUR",
-    "ARNEB 3 reason=EXCHANGE_SIZE"
+    "FIAMMETTA 1 reason=CHANGE_MIND",
+    "NOVA 3 reason=SIZE",
+    "VLOGO BEANIE TU reason=CHANGE_MIND",
+    "VITA BELT BAG TU reason=COLOUR",
+    "ARTEM 3 reason=EXCHANGE_SIZE"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -881,11 +881,11 @@
    "visitors": 324,
    "conversion": 0.0679,
    "top_sellers": [
-    "HERMINE black x4",
-    "LOGO CARDIGAN black x3",
-    "POLO white x2",
-    "LOGO T-SHIRT navy x2",
-    "LOGO CAP black x2"
+    "LIVIANA black x4",
+    "VLOGO CARDIGAN black x3",
+    "JERSEY POLO white x2",
+    "VLOGO T-SHIRT navy x2",
+    "VLOGO CAP black x2"
    ],
    "customer_mix": {
     "FR": 0.31,
@@ -894,22 +894,22 @@
     "JP": 0.06
    },
    "unmet_requests": [
-    "MAIRE black size 1 x1",
-    "CHAMONIX black size XL x1"
+    "AUREA black size 1 x1",
+    "CORTINA black size XL x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2"
    ],
    "returns": [
-    "ARNEB 3 reason=SIZE"
+    "ARTEM 3 reason=SIZE"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -924,11 +924,11 @@
    "visitors": 417,
    "conversion": 0.0815,
    "top_sellers": [
-    "LOGO BEANIE white x5",
-    "LOGO CARDIGAN navy x5",
-    "LOGO T-SHIRT black x4",
-    "MAYA navy x3",
-    "CASHMERE SCARF black x2"
+    "VLOGO BEANIE white x5",
+    "VLOGO CARDIGAN navy x5",
+    "VLOGO T-SHIRT black x4",
+    "NOVA navy x3",
+    "VALENTINO SCARF black x2"
    ],
    "customer_mix": {
     "FR": 0.2,
@@ -937,27 +937,27 @@
     "KR": 0.11
    },
    "unmet_requests": [
-    "MAIRE black size 1 x2",
-    "MAIRE black size 0 x1",
-    "MAIRE black size 2 x1",
-    "MAIRE black size 4 x1",
-    "BADY black size 4 x1",
-    "AMBRINE chocolate brown size 0 x1"
+    "AUREA black size 1 x2",
+    "AUREA black size 0 x1",
+    "AUREA black size 2 x1",
+    "AUREA black size 4 x1",
+    "ARIA black size 4 x1",
+    "AMALIA chocolate brown size 0 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "LOGO CARDIGAN navy S"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "VLOGO CARDIGAN navy S"
    ],
    "returns": [
-    "TRAILGRIP GTX 41 reason=CHANGE_MIND"
+    "VTRACK GTX 41 reason=CHANGE_MIND"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -972,11 +972,11 @@
    "visitors": 404,
    "conversion": 0.0545,
    "top_sellers": [
-    "LOGO CARDIGAN black x5",
-    "MAIRE navy x4",
-    "CABLE KNIT SWEATER black x3",
-    "TRICOT PADDED CARDIGAN black x2",
-    "MAIRE off-white x2"
+    "VLOGO CARDIGAN black x5",
+    "AUREA navy x4",
+    "INTARSIA SWEATER black x3",
+    "VLOGO PADDED CARDIGAN black x2",
+    "AUREA off-white x2"
    ],
    "customer_mix": {
     "FR": 0.23,
@@ -985,15 +985,15 @@
     "OTHER": 0.13
    },
    "unmet_requests": [
-    "MAIRE black size 1 x2"
+    "AUREA black size 1 x2"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2"
    ],
    "returns": [
-    "MONTGENEVRE 4 reason=CHANGE_MIND"
+    "MONTELUCE 4 reason=CHANGE_MIND"
    ],
    "deliveries_received": [
     {
@@ -1006,10 +1006,10 @@
     }
    ],
    "active_events": [
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1024,11 +1024,11 @@
    "visitors": 508,
    "conversion": 0.061,
    "top_sellers": [
-    "TRICOT PADDED CARDIGAN black x7",
-    "LOGO BEANIE navy x6",
-    "LOGO CARDIGAN black x3",
-    "MONTCLA black x3",
-    "MONTGENEVRE black x2"
+    "VLOGO PADDED CARDIGAN black x7",
+    "VLOGO BEANIE navy x6",
+    "VLOGO CARDIGAN black x3",
+    "MISTRAL black x3",
+    "MONTELUCE black x2"
    ],
    "customer_mix": {
     "FR": 0.3,
@@ -1037,26 +1037,26 @@
     "GB": 0.1
    },
    "unmet_requests": [
-    "MAIRE black size 2 x2",
-    "MAIRE black size 1 x1",
-    "POLARIS CAPE white size XS x1",
-    "CABLE KNIT SWEATER beige size XL x1"
+    "AUREA black size 2 x2",
+    "AUREA black size 1 x1",
+    "ASTRA CAPE white size XS x1",
+    "INTARSIA SWEATER beige size XL x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2"
    ],
    "returns": [
-    "LOGO CARDIGAN M reason=CHANGE_MIND",
-    "WOOL TURTLENECK M reason=SIZE"
+    "VLOGO CARDIGAN M reason=CHANGE_MIND",
+    "CASHMERE TURTLENECK M reason=SIZE"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1071,11 +1071,11 @@
    "visitors": 636,
    "conversion": 0.0597,
    "top_sellers": [
-    "FLAMMETTE black x5",
-    "TRICOT PADDED CARDIGAN black x5",
-    "LOGO CARDIGAN navy x4",
-    "MONTCLA navy x3",
-    "MAKAIO BACKPACK navy x3"
+    "FIAMMETTA black x5",
+    "VLOGO PADDED CARDIGAN black x5",
+    "VLOGO CARDIGAN navy x4",
+    "MISTRAL navy x3",
+    "URBAN BACKPACK navy x3"
    ],
    "customer_mix": {
     "FR": 0.27,
@@ -1084,26 +1084,26 @@
     "US": 0.08
    },
    "unmet_requests": [
-    "MAIRE black size 2 x3",
-    "MAIRE black size 1 x2",
-    "MAIRE black size 0 x1",
-    "MAIRE black size 4 x1",
-    "POLO white size L x1"
+    "AUREA black size 2 x3",
+    "AUREA black size 1 x2",
+    "AUREA black size 0 x1",
+    "AUREA black size 4 x1",
+    "JERSEY POLO white size L x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2"
    ],
    "returns": [
-    "LOGO T-SHIRT XL reason=COLOUR"
+    "VLOGO T-SHIRT XL reason=COLOUR"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1114,9 +1114,9 @@
    "customer_mix": {},
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2"
    ],
    "returns": [],
    "deliveries_received": [
@@ -1130,10 +1130,10 @@
     }
    ],
    "active_events": [
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1148,11 +1148,11 @@
    "visitors": 469,
    "conversion": 0.0704,
    "top_sellers": [
-    "KARAKORUM black x4",
-    "LOGO HOODIE navy x3",
-    "CHAMBRE black x3",
-    "TRICOT PADDED CARDIGAN black x3",
-    "TIB navy x3"
+    "COSIMO black x4",
+    "VLOGO HOODIE navy x3",
+    "CAMILLA black x3",
+    "VLOGO PADDED CARDIGAN black x3",
+    "VEL navy x3"
    ],
    "customer_mix": {
     "FR": 0.33,
@@ -1161,27 +1161,27 @@
     "SA": 0.09
    },
    "unmet_requests": [
-    "MAIRE black size 0 x5",
-    "MAIRE black size 2 x3"
+    "AUREA black size 0 x5",
+    "AUREA black size 2 x3"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "TRICOT PADDED CARDIGAN black L"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "VLOGO PADDED CARDIGAN black L"
    ],
    "returns": [
-    "MONTCLA 3 reason=CHANGE_MIND",
-    "TIB 4 reason=DEF",
-    "TIB 4 reason=DEF"
+    "MISTRAL 3 reason=CHANGE_MIND",
+    "VEL 4 reason=DEF",
+    "VEL 4 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1196,11 +1196,11 @@
    "visitors": 531,
    "conversion": 0.0791,
    "top_sellers": [
-    "TRAILGRIP GTX black x4",
-    "MAYA navy x4",
-    "MAYA black x4",
-    "HERMINE off-white x4",
-    "KARAKORUM black x3"
+    "VTRACK GTX black x4",
+    "NOVA navy x4",
+    "NOVA black x4",
+    "LIVIANA off-white x4",
+    "COSIMO black x3"
    ],
    "customer_mix": {
     "FR": 0.3,
@@ -1209,34 +1209,34 @@
     "US": 0.13
    },
    "unmet_requests": [
-    "MAIRE black size 1 x3",
-    "MAIRE black size 2 x3",
-    "MAIRE black size 3 x1",
-    "MAIRE black size 4 x1",
-    "ILVARO powder pink size 2 x1",
-    "AMBRINE chocolate brown size 2 x1",
-    "TRICOT PADDED CARDIGAN navy size XXL x1",
-    "LOGO T-SHIRT navy size XXL x1"
+    "AUREA black size 1 x3",
+    "AUREA black size 2 x3",
+    "AUREA black size 3 x1",
+    "AUREA black size 4 x1",
+    "IRIDIA powder pink size 2 x1",
+    "AMALIA chocolate brown size 2 x1",
+    "VLOGO PADDED CARDIGAN navy size XXL x1",
+    "VLOGO T-SHIRT navy size XXL x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "TRICOT PADDED CARDIGAN black L"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "VLOGO PADDED CARDIGAN black L"
    ],
    "returns": [
-    "LOGO CARDIGAN XL reason=SIZE",
-    "LOGO CARDIGAN XL reason=CHANGE_MIND",
-    "TIB 5 reason=DEF"
+    "VLOGO CARDIGAN XL reason=SIZE",
+    "VLOGO CARDIGAN XL reason=CHANGE_MIND",
+    "VEL 5 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E21b: Paris Fashion Week",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1251,11 +1251,11 @@
    "visitors": 751,
    "conversion": 0.0573,
    "top_sellers": [
-    "CREWNECK SWEATSHIRT black x9",
-    "MAYA olive x6",
-    "LOGO CARDIGAN black x5",
-    "LOGO BEANIE white x5",
-    "LOGO T-SHIRT white x3"
+    "RELAXED SWEATSHIRT black x9",
+    "NOVA olive x6",
+    "VLOGO CARDIGAN black x5",
+    "VLOGO BEANIE white x5",
+    "VLOGO T-SHIRT white x3"
    ],
    "customer_mix": {
     "CN": 0.47,
@@ -1264,35 +1264,35 @@
     "OTHER": 0.07
    },
    "unmet_requests": [
-    "MAIRE black size 1 x2",
-    "MAIRE black size 00 x1",
-    "BADY powder pink size 4 x1",
-    "ILVARO powder pink size 0 x1",
-    "ILVARO off-white size 3 x1",
-    "TRICOT PADDED CARDIGAN black size L x1",
-    "LOGO HOODIE navy size XS x1",
-    "LOGO T-SHIRT black size XXL x1"
+    "AUREA black size 1 x2",
+    "AUREA black size 00 x1",
+    "ARIA powder pink size 4 x1",
+    "IRIDIA powder pink size 0 x1",
+    "IRIDIA off-white size 3 x1",
+    "VLOGO PADDED CARDIGAN black size L x1",
+    "VLOGO HOODIE navy size XS x1",
+    "VLOGO T-SHIRT black size XXL x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "TRICOT PADDED CARDIGAN black L"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "VLOGO PADDED CARDIGAN black L"
    ],
    "returns": [
-    "LOGO HOODIE XS reason=SIZE",
-    "TIB 2 reason=DEF",
-    "TIB 6 reason=DEF"
+    "VLOGO HOODIE XS reason=SIZE",
+    "VEL 2 reason=DEF",
+    "VEL 6 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
     "E01: Chinese National Day Golden Week 2026 - outbound tourism peak",
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E21b: Paris Fashion Week",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1307,11 +1307,11 @@
    "visitors": 728,
    "conversion": 0.0522,
    "top_sellers": [
-    "CASHMERE SCARF black x6",
-    "PEYRE black x5",
-    "LOGO HOODIE black x5",
-    "WOOL TURTLENECK chocolate brown x4",
-    "MAYA black x4"
+    "VALENTINO SCARF black x6",
+    "PIERO black x5",
+    "VLOGO HOODIE black x5",
+    "CASHMERE TURTLENECK chocolate brown x4",
+    "NOVA black x4"
    ],
    "customer_mix": {
     "CN": 0.45,
@@ -1320,22 +1320,22 @@
     "US": 0.08
    },
    "unmet_requests": [
-    "MAIRE black size 1 x3",
-    "MAIRE black size 2 x3",
-    "MAIRE black size 0 x2",
-    "CREWNECK SWEATSHIRT black size XS x1"
+    "AUREA black size 1 x3",
+    "AUREA black size 2 x3",
+    "AUREA black size 0 x2",
+    "RELAXED SWEATSHIRT black size XS x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2"
    ],
    "returns": [
-    "MONTGENEVRE 3 reason=COLOUR",
-    "LOGO HOODIE M reason=CHANGE_MIND",
-    "TIB 3 reason=DEF",
-    "TIB 7 reason=DEF",
-    "TIB 4 reason=DEF"
+    "MONTELUCE 3 reason=COLOUR",
+    "VLOGO HOODIE M reason=CHANGE_MIND",
+    "VEL 3 reason=DEF",
+    "VEL 7 reason=DEF",
+    "VEL 4 reason=DEF"
    ],
    "deliveries_received": [
     {
@@ -1349,12 +1349,12 @@
    ],
    "active_events": [
     "E01: Chinese National Day Golden Week 2026 - outbound tourism peak",
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E21b: Paris Fashion Week",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1369,11 +1369,11 @@
    "visitors": 1174,
    "conversion": 0.0588,
    "top_sellers": [
-    "MAYA black x12",
-    "LOGO T-SHIRT black x7",
-    "WOOL TURTLENECK black x6",
-    "LOGO BEANIE white x5",
-    "CASHMERE SCARF black x5"
+    "NOVA black x12",
+    "VLOGO T-SHIRT black x7",
+    "CASHMERE TURTLENECK black x6",
+    "VLOGO BEANIE white x5",
+    "VALENTINO SCARF black x5"
    ],
    "customer_mix": {
     "CN": 0.44,
@@ -1382,37 +1382,37 @@
     "US": 0.06
    },
    "unmet_requests": [
-    "MAIRE black size 00 x3",
-    "MAIRE black size 1 x2",
-    "MAIRE black size 0 x1",
-    "MAIRE black size 2 x1",
-    "ILVARO powder pink size 0 x1",
-    "ILVARO powder pink size 2 x1",
-    "AMBRINE chocolate brown size 1 x1",
-    "PEYRE black size 7 x1"
+    "AUREA black size 00 x3",
+    "AUREA black size 1 x2",
+    "AUREA black size 0 x1",
+    "AUREA black size 2 x1",
+    "IRIDIA powder pink size 0 x1",
+    "IRIDIA powder pink size 2 x1",
+    "AMALIA chocolate brown size 1 x1",
+    "PIERO black size 7 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2"
    ],
    "returns": [
-    "TRICOT PADDED CARDIGAN L reason=CHANGE_MIND",
-    "TIB 2 reason=DEF",
-    "TIB 4 reason=DEF",
-    "TIB 4 reason=DEF",
-    "TIB 6 reason=DEF",
-    "TIB 4 reason=DEF"
+    "VLOGO PADDED CARDIGAN L reason=CHANGE_MIND",
+    "VEL 2 reason=DEF",
+    "VEL 4 reason=DEF",
+    "VEL 4 reason=DEF",
+    "VEL 6 reason=DEF",
+    "VEL 4 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
     "E01: Chinese National Day Golden Week 2026 - outbound tourism peak",
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E21b: Paris Fashion Week",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1427,11 +1427,11 @@
    "visitors": 1667,
    "conversion": 0.0558,
    "top_sellers": [
-    "LOGO BEANIE navy x11",
-    "TIB black x8",
-    "MONTGENEVRE black x7",
-    "LOGO CARDIGAN black x7",
-    "MAYA black x6"
+    "VLOGO BEANIE navy x11",
+    "VEL black x8",
+    "MONTELUCE black x7",
+    "VLOGO CARDIGAN black x7",
+    "NOVA black x6"
    ],
    "customer_mix": {
     "CN": 0.41,
@@ -1440,37 +1440,37 @@
     "OTHER": 0.09
    },
    "unmet_requests": [
-    "MAIRE black size 0 x4",
-    "MAIRE black size 1 x3",
-    "MAIRE black size 2 x3",
-    "MAIRE black size 00 x2",
-    "MAIRE black size 3 x2",
-    "AMBRINE chocolate brown size 2 x2",
-    "KARAKORUM black size 6 x2",
-    "LOGO T-SHIRT black size L x2"
+    "AUREA black size 0 x4",
+    "AUREA black size 1 x3",
+    "AUREA black size 2 x3",
+    "AUREA black size 00 x2",
+    "AUREA black size 3 x2",
+    "AMALIA chocolate brown size 2 x2",
+    "COSIMO black size 6 x2",
+    "VLOGO T-SHIRT black size L x2"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "MAIRE off-white 2",
-    "LOGO T-SHIRT black L"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "AUREA off-white 2",
+    "VLOGO T-SHIRT black L"
    ],
    "returns": [
-    "MAYA 3 reason=CHANGE_MIND",
-    "PEYRE 4 reason=SIZE",
-    "TIB 5 reason=DEF"
+    "NOVA 3 reason=CHANGE_MIND",
+    "PIERO 4 reason=SIZE",
+    "VEL 5 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
     "E01: Chinese National Day Golden Week 2026 - outbound tourism peak",
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E06b: ILVARO spill-over other colours",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E06b: IRIDIA spill-over other colours",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E21b: Paris Fashion Week",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1481,11 +1481,11 @@
    "customer_mix": {},
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "MAIRE off-white 2",
-    "LOGO T-SHIRT black L"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "AUREA off-white 2",
+    "VLOGO T-SHIRT black L"
    ],
    "returns": [],
    "deliveries_received": [
@@ -1500,13 +1500,13 @@
    ],
    "active_events": [
     "E01: Chinese National Day Golden Week 2026 - outbound tourism peak",
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E06b: ILVARO spill-over other colours",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E06b: IRIDIA spill-over other colours",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E21b: Paris Fashion Week",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1521,11 +1521,11 @@
    "visitors": 688,
    "conversion": 0.0654,
    "top_sellers": [
-    "CREWNECK SWEATSHIRT black x6",
-    "TIB black x4",
-    "ROSIERE black x4",
-    "MAYA navy x4",
-    "LEGERE BELT BAG black x4"
+    "RELAXED SWEATSHIRT black x6",
+    "VEL black x4",
+    "RIVIERA black x4",
+    "NOVA navy x4",
+    "VITA BELT BAG black x4"
    ],
    "customer_mix": {
     "CN": 0.38,
@@ -1534,41 +1534,41 @@
     "TW": 0.04
    },
    "unmet_requests": [
-    "MAIRE black size 1 x11",
-    "MAIRE black size 00 x2",
-    "MAIRE black size 0 x2",
-    "POLO black size XL x2",
-    "MAIRE black size 2 x1",
-    "MAIRE black size 3 x1",
-    "MAIRE off-white size 2 x1",
-    "ILVARO powder pink size 0 x1"
+    "AUREA black size 1 x11",
+    "AUREA black size 00 x2",
+    "AUREA black size 0 x2",
+    "JERSEY POLO black size XL x2",
+    "AUREA black size 2 x1",
+    "AUREA black size 3 x1",
+    "AUREA off-white size 2 x1",
+    "IRIDIA powder pink size 0 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "MAIRE off-white 2",
-    "LOGO T-SHIRT black L"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "AUREA off-white 2",
+    "VLOGO T-SHIRT black L"
    ],
    "returns": [
-    "HERMINE 0 reason=SIZE",
-    "CHAMBRE 4 reason=QUALITY",
-    "KARAKORUM 2 reason=SIZE",
-    "VALBOURG 3 reason=CHANGE_MIND",
-    "CREWNECK SWEATSHIRT XS reason=SIZE",
-    "TECH GLOVES TU reason=CHANGE_MIND",
-    "MAKAIO BACKPACK TU reason=SIZE"
+    "LIVIANA 0 reason=SIZE",
+    "CAMILLA 4 reason=QUALITY",
+    "COSIMO 2 reason=SIZE",
+    "VALDORA 3 reason=CHANGE_MIND",
+    "RELAXED SWEATSHIRT XS reason=SIZE",
+    "WINTER GLOVES TU reason=CHANGE_MIND",
+    "URBAN BACKPACK TU reason=SIZE"
    ],
    "deliveries_received": [],
    "active_events": [
     "E01: Chinese National Day Golden Week 2026 - outbound tourism peak",
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E06b: ILVARO spill-over other colours",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E06b: IRIDIA spill-over other colours",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E21b: Paris Fashion Week",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1583,11 +1583,11 @@
    "visitors": 805,
    "conversion": 0.0497,
    "top_sellers": [
-    "TRICOT PADDED CARDIGAN black x6",
-    "MAYA black x4",
-    "TRAILGRIP GTX black x3",
-    "LEGERE BELT BAG black x3",
-    "LOGO BEANIE white x3"
+    "VLOGO PADDED CARDIGAN black x6",
+    "NOVA black x4",
+    "VTRACK GTX black x3",
+    "VITA BELT BAG black x3",
+    "VLOGO BEANIE white x3"
    ],
    "customer_mix": {
     "CN": 0.43,
@@ -1596,43 +1596,43 @@
     "OTHER": 0.05
    },
    "unmet_requests": [
-    "MAIRE black size 1 x3",
-    "AMBRINE chocolate brown size 2 x2",
-    "MAIRE black size 2 x1",
-    "MAIRE black size 3 x1",
-    "HERMINE off-white size 2 x1",
-    "ILVARO powder pink size 0 x1",
-    "AMBRINE chocolate brown size 0 x1",
-    "AMBRINE chocolate brown size 1 x1"
+    "AUREA black size 1 x3",
+    "AMALIA chocolate brown size 2 x2",
+    "AUREA black size 2 x1",
+    "AUREA black size 3 x1",
+    "LIVIANA off-white size 2 x1",
+    "IRIDIA powder pink size 0 x1",
+    "AMALIA chocolate brown size 0 x1",
+    "AMALIA chocolate brown size 1 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "MAIRE off-white 2",
-    "MAIRE navy 0",
-    "KARAKORUM black 4",
-    "LOGO T-SHIRT black L"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "AUREA off-white 2",
+    "AUREA navy 0",
+    "COSIMO black 4",
+    "VLOGO T-SHIRT black L"
    ],
    "returns": [
-    "ILVARO 1 reason=COLOUR",
-    "AMBRINE 1 reason=CHANGE_MIND",
-    "MONTCLA 3 reason=SIZE",
-    "MONTCLA 3 reason=SIZE",
-    "TRAILGRIP W 39 reason=GIFT",
-    "TIB 3 reason=DEF",
-    "TIB 3 reason=DEF"
+    "IRIDIA 1 reason=COLOUR",
+    "AMALIA 1 reason=CHANGE_MIND",
+    "MISTRAL 3 reason=SIZE",
+    "MISTRAL 3 reason=SIZE",
+    "VTRACK W 39 reason=GIFT",
+    "VEL 3 reason=DEF",
+    "VEL 3 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
     "E01: Chinese National Day Golden Week 2026 - outbound tourism peak",
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E06b: ILVARO spill-over other colours",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E06b: IRIDIA spill-over other colours",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E21b: Paris Fashion Week",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1647,11 +1647,11 @@
    "visitors": 626,
    "conversion": 0.0623,
    "top_sellers": [
-    "MAIRE beige x5",
-    "MONTCLA navy x4",
-    "BADY off-white x4",
-    "LOGO HOODIE navy x3",
-    "LOGO BEANIE black x3"
+    "AUREA beige x5",
+    "MISTRAL navy x4",
+    "ARIA off-white x4",
+    "VLOGO HOODIE navy x3",
+    "VLOGO BEANIE black x3"
    ],
    "customer_mix": {
     "CN": 0.35,
@@ -1660,42 +1660,42 @@
     "BR": 0.06
    },
    "unmet_requests": [
-    "MAIRE black size 3 x2",
-    "KARAKORUM black size 4 x2",
-    "CABLE KNIT SWEATER off-white size L x2",
-    "MAIRE black size 2 x1",
-    "HERMINE navy size 00 x1",
-    "ILVARO powder pink size 0 x1",
-    "KARAKORUM black size 6 x1",
-    "ARNEB black size 6 x1"
+    "AUREA black size 3 x2",
+    "COSIMO black size 4 x2",
+    "INTARSIA SWEATER off-white size L x2",
+    "AUREA black size 2 x1",
+    "LIVIANA navy size 00 x1",
+    "IRIDIA powder pink size 0 x1",
+    "COSIMO black size 6 x1",
+    "ARTEM black size 6 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "MAIRE off-white 2",
-    "MAIRE navy 0",
-    "KARAKORUM black 4",
-    "LOGO T-SHIRT black L"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "AUREA off-white 2",
+    "AUREA navy 0",
+    "COSIMO black 4",
+    "VLOGO T-SHIRT black L"
    ],
    "returns": [
-    "CREWNECK SWEATSHIRT S reason=SIZE",
-    "CREWNECK SWEATSHIRT M reason=SIZE",
-    "CREWNECK SWEATSHIRT XL reason=QUALITY",
-    "TIB 2 reason=DEF",
-    "TIB 3 reason=DEF",
-    "TIB 4 reason=DEF"
+    "RELAXED SWEATSHIRT S reason=SIZE",
+    "RELAXED SWEATSHIRT M reason=SIZE",
+    "RELAXED SWEATSHIRT XL reason=QUALITY",
+    "VEL 2 reason=DEF",
+    "VEL 3 reason=DEF",
+    "VEL 4 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
     "E01: Chinese National Day Golden Week 2026 - outbound tourism peak",
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E06b: ILVARO spill-over other colours",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E06b: IRIDIA spill-over other colours",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E21b: Paris Fashion Week",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1710,11 +1710,11 @@
    "visitors": 751,
    "conversion": 0.0706,
    "top_sellers": [
-    "LOGO BEANIE white x6",
-    "LOGO BEANIE black x5",
-    "MAYA black x5",
-    "CASHMERE SCARF black x4",
-    "AMBRINE black x4"
+    "VLOGO BEANIE white x6",
+    "VLOGO BEANIE black x5",
+    "NOVA black x5",
+    "VALENTINO SCARF black x4",
+    "AMALIA black x4"
    ],
    "customer_mix": {
     "CN": 0.45,
@@ -1723,23 +1723,23 @@
     "OTHER": 0.08
    },
    "unmet_requests": [
-    "MAIRE black size 1 x3",
-    "MAIRE black size 0 x2",
-    "MAIRE black size 2 x2",
-    "MAIRE black size 00 x1",
-    "ILVARO powder pink size 0 x1"
+    "AUREA black size 1 x3",
+    "AUREA black size 0 x2",
+    "AUREA black size 2 x2",
+    "AUREA black size 00 x1",
+    "IRIDIA powder pink size 0 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2"
    ],
    "returns": [
-    "MONTGENEVRE 3 reason=QUALITY",
-    "TIB 4 reason=SIZE",
-    "LOGO BEANIE TU reason=COLOUR",
-    "TIB 1 reason=DEF",
-    "TIB 4 reason=DEF"
+    "MONTELUCE 3 reason=QUALITY",
+    "VEL 4 reason=SIZE",
+    "VLOGO BEANIE TU reason=COLOUR",
+    "VEL 1 reason=DEF",
+    "VEL 4 reason=DEF"
    ],
    "deliveries_received": [
     {
@@ -1753,12 +1753,12 @@
    ],
    "active_events": [
     "E01: Chinese National Day Golden Week 2026 - outbound tourism peak",
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E06b: ILVARO spill-over other colours",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E06b: IRIDIA spill-over other colours",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1773,11 +1773,11 @@
    "visitors": 691,
    "conversion": 0.0564,
    "top_sellers": [
-    "BADY black x6",
-    "TRICOT PADDED CARDIGAN black x6",
-    "LOGO BEANIE black x4",
-    "KARAKORUM navy x4",
-    "LOGO CARDIGAN black x4"
+    "ARIA black x6",
+    "VLOGO PADDED CARDIGAN black x6",
+    "VLOGO BEANIE black x4",
+    "COSIMO navy x4",
+    "VLOGO CARDIGAN black x4"
    ],
    "customer_mix": {
     "FR": 0.21,
@@ -1786,33 +1786,33 @@
     "OTHER": 0.12
    },
    "unmet_requests": [
-    "MAIRE black size 0 x3",
-    "MAIRE black size 1 x3",
-    "MAIRE black size 00 x2",
-    "MAIRE black size 2 x2",
-    "MAIRE black size 3 x1",
-    "ILVARO powder pink size 0 x1",
-    "ILVARO off-white size 00 x1",
-    "LOGO T-SHIRT navy size XL x1"
+    "AUREA black size 0 x3",
+    "AUREA black size 1 x3",
+    "AUREA black size 00 x2",
+    "AUREA black size 2 x2",
+    "AUREA black size 3 x1",
+    "IRIDIA powder pink size 0 x1",
+    "IRIDIA off-white size 00 x1",
+    "VLOGO T-SHIRT navy size XL x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2"
    ],
    "returns": [
-    "BADY 0 reason=GIFT",
-    "BADY 3 reason=SIZE",
-    "CABLE KNIT SWEATER L reason=GIFT"
+    "ARIA 0 reason=GIFT",
+    "ARIA 3 reason=SIZE",
+    "INTARSIA SWEATER L reason=GIFT"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E06b: ILVARO spill-over other colours",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E06b: IRIDIA spill-over other colours",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1827,11 +1827,11 @@
    "visitors": 1039,
    "conversion": 0.0597,
    "top_sellers": [
-    "MAKAIO BACKPACK black x5",
-    "LOGO CARDIGAN navy x5",
-    "LOGO BEANIE navy x5",
-    "LOGO CARDIGAN black x5",
-    "MAYA black x5"
+    "URBAN BACKPACK black x5",
+    "VLOGO CARDIGAN navy x5",
+    "VLOGO BEANIE navy x5",
+    "VLOGO CARDIGAN black x5",
+    "NOVA black x5"
    ],
    "customer_mix": {
     "FR": 0.34,
@@ -1840,34 +1840,34 @@
     "US": 0.08
    },
    "unmet_requests": [
-    "AMBRINE chocolate brown size 1 x4",
-    "MAIRE black size 2 x3",
-    "MAIRE black size 3 x3",
-    "MAIRE black size 0 x2",
-    "MAIRE black size 1 x2",
-    "MONTCLA navy size 4 x2",
-    "ILVARO off-white size 2 x1",
-    "PEYRE black size 3 x1"
+    "AMALIA chocolate brown size 1 x4",
+    "AUREA black size 2 x3",
+    "AUREA black size 3 x3",
+    "AUREA black size 0 x2",
+    "AUREA black size 1 x2",
+    "MISTRAL navy size 4 x2",
+    "IRIDIA off-white size 2 x1",
+    "PIERO black size 3 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2"
    ],
    "returns": [
-    "BADY 0 reason=SIZE",
-    "MONTGENEVRE 4 reason=SIZE",
-    "LOGO CARDIGAN XL reason=CHANGE_MIND",
-    "TIB 3 reason=DEF"
+    "ARIA 0 reason=SIZE",
+    "MONTELUCE 4 reason=SIZE",
+    "VLOGO CARDIGAN XL reason=CHANGE_MIND",
+    "VEL 3 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E06b: ILVARO spill-over other colours",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E06b: IRIDIA spill-over other colours",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1878,9 +1878,9 @@
    "customer_mix": {},
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2"
    ],
    "returns": [],
    "deliveries_received": [
@@ -1894,12 +1894,12 @@
     }
    ],
    "active_events": [
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E06b: ILVARO spill-over other colours",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E06b: IRIDIA spill-over other colours",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1914,11 +1914,11 @@
    "visitors": 542,
    "conversion": 0.0424,
    "top_sellers": [
-    "TIB black x4",
-    "INSOLUX black x3",
-    "TRAILGRIP GTX black x3",
-    "KARAKORUM grey melange x2",
-    "MAIRE beige x2"
+    "VEL black x4",
+    "ALPINA black x3",
+    "VTRACK GTX black x3",
+    "COSIMO grey melange x2",
+    "AUREA beige x2"
    ],
    "customer_mix": {
     "FR": 0.26,
@@ -1927,43 +1927,43 @@
     "CN": 0.1
    },
    "unmet_requests": [
-    "MAIRE black size 0 x3",
-    "MAIRE black size 4 x3",
-    "MAIRE black size 1 x1",
-    "MAIRE black size 2 x1",
-    "MAIRE black size 3 x1",
-    "AMBRINE chocolate brown size 0 x1",
-    "PEYRE black size 1 x1",
-    "PEYRE black size 3 x1"
+    "AUREA black size 0 x3",
+    "AUREA black size 4 x3",
+    "AUREA black size 1 x1",
+    "AUREA black size 2 x1",
+    "AUREA black size 3 x1",
+    "AMALIA chocolate brown size 0 x1",
+    "PIERO black size 1 x1",
+    "PIERO black size 3 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2"
    ],
    "returns": [
-    "ILVARO 0 reason=CHANGE_MIND",
-    "MAYA 4 reason=SIZE",
-    "TIB 4 reason=SIZE",
-    "TRICOT PADDED CARDIGAN XS reason=QUALITY",
-    "LOGO HOODIE L reason=SIZE",
-    "LOGO HOODIE L reason=CHANGE_MIND",
-    "CREWNECK SWEATSHIRT L reason=SIZE",
-    "CREWNECK SWEATSHIRT XXL reason=COLOUR",
-    "TRAILGRIP GTX 40 reason=GIFT",
-    "TRAILGRIP W 37 reason=QUALITY",
-    "LOGO BEANIE TU reason=GIFT",
-    "CASHMERE SCARF TU reason=SIZE",
-    "LEGERE BELT BAG TU reason=SIZE"
+    "IRIDIA 0 reason=CHANGE_MIND",
+    "NOVA 4 reason=SIZE",
+    "VEL 4 reason=SIZE",
+    "VLOGO PADDED CARDIGAN XS reason=QUALITY",
+    "VLOGO HOODIE L reason=SIZE",
+    "VLOGO HOODIE L reason=CHANGE_MIND",
+    "RELAXED SWEATSHIRT L reason=SIZE",
+    "RELAXED SWEATSHIRT XXL reason=COLOUR",
+    "VTRACK GTX 40 reason=GIFT",
+    "VTRACK W 37 reason=QUALITY",
+    "VLOGO BEANIE TU reason=GIFT",
+    "VALENTINO SCARF TU reason=SIZE",
+    "VITA BELT BAG TU reason=SIZE"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
-    "E06b: ILVARO spill-over other colours",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
+    "E06b: IRIDIA spill-over other colours",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1978,11 +1978,11 @@
    "visitors": 266,
    "conversion": 0.0827,
    "top_sellers": [
-    "LOGO CARDIGAN black x2",
-    "MONTCLA black x2",
-    "KARAKORUM black x2",
-    "VALBOURG black x1",
-    "LOGO BEANIE powder pink x1"
+    "VLOGO CARDIGAN black x2",
+    "MISTRAL black x2",
+    "COSIMO black x2",
+    "VALDORA black x1",
+    "VLOGO BEANIE powder pink x1"
    ],
    "customer_mix": {
     "FR": 0.41,
@@ -1991,34 +1991,34 @@
     "US": 0.09
    },
    "unmet_requests": [
-    "MAIRE black size 1 x2",
-    "MAIRE black size 4 x2",
-    "MAIRE black size 0 x1",
-    "MAIRE black size 2 x1",
-    "CABLE KNIT SWEATER beige size L x1"
+    "AUREA black size 1 x2",
+    "AUREA black size 4 x2",
+    "AUREA black size 0 x1",
+    "AUREA black size 2 x1",
+    "INTARSIA SWEATER beige size L x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "KARAKORUM black 5"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "COSIMO black 5"
    ],
    "returns": [
-    "TRAILGRIP GTX 41 reason=SIZE",
-    "TIB 3 reason=DEF",
-    "TIB 3 reason=DEF",
-    "TIB 4 reason=DEF"
+    "VTRACK GTX 41 reason=SIZE",
+    "VEL 3 reason=DEF",
+    "VEL 3 reason=DEF",
+    "VEL 4 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
     "E05b: Cold snap - milder echo in Paris/London/Milan",
-    "E06b: ILVARO spill-over other colours",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E06b: IRIDIA spill-over other colours",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E10: Transport strike in Paris (RATP/SNCF)",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -2033,11 +2033,11 @@
    "visitors": 450,
    "conversion": 0.0733,
    "top_sellers": [
-    "LOGO BEANIE white x4",
-    "MAIRE navy x4",
-    "LOGO BEANIE black x3",
-    "LOGO HOODIE black x3",
-    "TRICOT PADDED CARDIGAN black x3"
+    "VLOGO BEANIE white x4",
+    "AUREA navy x4",
+    "VLOGO BEANIE black x3",
+    "VLOGO HOODIE black x3",
+    "VLOGO PADDED CARDIGAN black x3"
    ],
    "customer_mix": {
     "FR": 0.3,
@@ -2046,34 +2046,34 @@
     "US": 0.12
    },
    "unmet_requests": [
-    "MAIRE navy size 0 x1"
+    "AUREA navy size 0 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "MAIRE navy 0",
-    "KARAKORUM black 5"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "AUREA navy 0",
+    "COSIMO black 5"
    ],
    "returns": [
-    "MONTCLA 4 reason=CHANGE_MIND",
-    "LOGO CARDIGAN L reason=CHANGE_MIND",
-    "CABLE KNIT SWEATER L reason=SIZE",
-    "LOGO HOODIE S reason=GIFT",
-    "POLO XXL reason=GIFT",
-    "INSOLUX 39 reason=SIZE",
-    "LOGO BEANIE TU reason=QUALITY",
-    "TECH GLOVES TU reason=SIZE"
+    "MISTRAL 4 reason=CHANGE_MIND",
+    "VLOGO CARDIGAN L reason=CHANGE_MIND",
+    "INTARSIA SWEATER L reason=SIZE",
+    "VLOGO HOODIE S reason=GIFT",
+    "JERSEY POLO XXL reason=GIFT",
+    "ALPINA 39 reason=SIZE",
+    "VLOGO BEANIE TU reason=QUALITY",
+    "WINTER GLOVES TU reason=SIZE"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E02: Korean tourists asking for BLACK Maire (sold out)",
+    "E02: Korean tourists asking for BLACK Aurea (sold out)",
     "E05b: Cold snap - milder echo in Paris/London/Milan",
-    "E06b: ILVARO spill-over other colours",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E06b: IRIDIA spill-over other colours",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -2088,11 +2088,11 @@
    "visitors": 540,
    "conversion": 0.0556,
    "top_sellers": [
-    "LOGO HOODIE black x5",
-    "HERMINE navy x4",
-    "POLO black x3",
-    "MONTCLA black x3",
-    "MAIRE beige x3"
+    "VLOGO HOODIE black x5",
+    "LIVIANA navy x4",
+    "JERSEY POLO black x3",
+    "MISTRAL black x3",
+    "AUREA beige x3"
    ],
    "customer_mix": {
     "FR": 0.27,
@@ -2102,12 +2102,12 @@
    },
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2"
    ],
    "returns": [
-    "VALBOURG 2 reason=CHANGE_MIND"
+    "VALDORA 2 reason=CHANGE_MIND"
    ],
    "deliveries_received": [
     {
@@ -2121,11 +2121,11 @@
    ],
    "active_events": [
     "E05b: Cold snap - milder echo in Paris/London/Milan",
-    "E06b: ILVARO spill-over other colours",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E06b: IRIDIA spill-over other colours",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -2140,11 +2140,11 @@
    "visitors": 635,
    "conversion": 0.0677,
    "top_sellers": [
-    "TRAILGRIP W black x6",
-    "LEGERE BELT BAG black x5",
-    "BADY black x5",
-    "TRICOT PADDED CARDIGAN black x4",
-    "KARAKORUM black x3"
+    "VTRACK W black x6",
+    "VITA BELT BAG black x5",
+    "ARIA black x5",
+    "VLOGO PADDED CARDIGAN black x4",
+    "COSIMO black x3"
    ],
    "customer_mix": {
     "FR": 0.32,
@@ -2153,33 +2153,33 @@
     "US": 0.09
    },
    "unmet_requests": [
-    "MAIRE black size 2 x2",
-    "MAIRE black size 1 x1",
-    "AMBRINE chocolate brown size 0 x1",
-    "AMBRINE chocolate brown size 1 x1",
-    "AMBRINE chocolate brown size 2 x1",
-    "AMBRINE chocolate brown size 3 x1"
+    "AUREA black size 2 x2",
+    "AUREA black size 1 x1",
+    "AMALIA chocolate brown size 0 x1",
+    "AMALIA chocolate brown size 1 x1",
+    "AMALIA chocolate brown size 2 x1",
+    "AMALIA chocolate brown size 3 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2"
    ],
    "returns": [
-    "MAIRE 0 reason=SIZE",
-    "LOGO BEANIE TU reason=SIZE",
-    "LOGO BEANIE TU reason=GIFT",
-    "TIB 4 reason=DEF",
-    "TIB 4 reason=DEF"
+    "AUREA 0 reason=SIZE",
+    "VLOGO BEANIE TU reason=SIZE",
+    "VLOGO BEANIE TU reason=GIFT",
+    "VEL 4 reason=DEF",
+    "VEL 4 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
     "E05b: Cold snap - milder echo in Paris/London/Milan",
-    "E06b: ILVARO spill-over other colours",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E06b: IRIDIA spill-over other colours",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -2194,11 +2194,11 @@
    "visitors": 878,
    "conversion": 0.0729,
    "top_sellers": [
-    "LOGO BEANIE white x12",
-    "BADY off-white x7",
-    "LOGO CARDIGAN navy x5",
-    "KARAKORUM black x5",
-    "ECRINS black x4"
+    "VLOGO BEANIE white x12",
+    "ARIA off-white x7",
+    "VLOGO CARDIGAN navy x5",
+    "COSIMO black x5",
+    "ETTORE black x4"
    ],
    "customer_mix": {
     "FR": 0.29,
@@ -2207,28 +2207,28 @@
     "US": 0.12
    },
    "unmet_requests": [
-    "MAIRE black size 0 x3",
-    "MAIRE black size 2 x1",
-    "POLO white size L x1",
-    "TRAILGRIP W black size 40 x1"
+    "AUREA black size 0 x3",
+    "AUREA black size 2 x1",
+    "JERSEY POLO white size L x1",
+    "VTRACK W black size 40 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2"
    ],
    "returns": [
-    "TRAILGRIP W 37 reason=COLOUR",
-    "TIB 5 reason=DEF"
+    "VTRACK W 37 reason=COLOUR",
+    "VEL 5 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
     "E05b: Cold snap - milder echo in Paris/London/Milan",
-    "E06b: ILVARO spill-over other colours",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E06b: IRIDIA spill-over other colours",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -2239,9 +2239,9 @@
    "customer_mix": {},
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2"
    ],
    "returns": [],
    "deliveries_received": [
@@ -2256,11 +2256,11 @@
    ],
    "active_events": [
     "E05b: Cold snap - milder echo in Paris/London/Milan",
-    "E06b: ILVARO spill-over other colours",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E06b: IRIDIA spill-over other colours",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -2275,11 +2275,11 @@
    "visitors": 437,
    "conversion": 0.0847,
    "top_sellers": [
-    "MAYA black x7",
-    "KARAKORUM navy x6",
-    "MONTGENEVRE black x4",
-    "ROSIERE black x4",
-    "LOGO BEANIE powder pink x3"
+    "NOVA black x7",
+    "COSIMO navy x6",
+    "MONTELUCE black x4",
+    "RIVIERA black x4",
+    "VLOGO BEANIE powder pink x3"
    ],
    "customer_mix": {
     "FR": 0.32,
@@ -2288,34 +2288,34 @@
     "IT": 0.07
    },
    "unmet_requests": [
-    "MAIRE black size 0 x1",
-    "AMBRINE chocolate brown size 1 x1"
+    "AUREA black size 0 x1",
+    "AMALIA chocolate brown size 1 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "LOGO CARDIGAN navy M"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "VLOGO CARDIGAN navy M"
    ],
    "returns": [
-    "MAIRE 1 reason=QUALITY",
-    "MONTCLA 4 reason=SIZE",
-    "TRICOT PADDED CARDIGAN S reason=GIFT",
-    "LOGO HOODIE XL reason=SIZE",
-    "TRAILGRIP GTX 41 reason=GIFT",
-    "TRAILGRIP GTX 42 reason=SIZE",
-    "TRAILGRIP W 41 reason=GIFT",
-    "INSOLUX 38 reason=CHANGE_MIND",
-    "MAKAIO BACKPACK TU reason=QUALITY"
+    "AUREA 1 reason=QUALITY",
+    "MISTRAL 4 reason=SIZE",
+    "VLOGO PADDED CARDIGAN S reason=GIFT",
+    "VLOGO HOODIE XL reason=SIZE",
+    "VTRACK GTX 41 reason=GIFT",
+    "VTRACK GTX 42 reason=SIZE",
+    "VTRACK W 41 reason=GIFT",
+    "ALPINA 38 reason=CHANGE_MIND",
+    "URBAN BACKPACK TU reason=QUALITY"
    ],
    "deliveries_received": [],
    "active_events": [
     "E05b: Cold snap - milder echo in Paris/London/Milan",
-    "E06b: ILVARO spill-over other colours",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E06b: IRIDIA spill-over other colours",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -2330,11 +2330,11 @@
    "visitors": 381,
    "conversion": 0.063,
    "top_sellers": [
-    "MAYA black x4",
-    "LOGO CAP navy x3",
-    "WOOL TURTLENECK black x3",
-    "LEGERE BELT BAG black x3",
-    "POLO black x2"
+    "NOVA black x4",
+    "VLOGO CAP navy x3",
+    "CASHMERE TURTLENECK black x3",
+    "VITA BELT BAG black x3",
+    "JERSEY POLO black x2"
    ],
    "customer_mix": {
     "FR": 0.37,
@@ -2343,29 +2343,29 @@
     "IT": 0.07
    },
    "unmet_requests": [
-    "MAIRE black size 2 x1",
-    "MAIRE black size 3 x1",
-    "LOGO CARDIGAN navy size M x1"
+    "AUREA black size 2 x1",
+    "AUREA black size 3 x1",
+    "VLOGO CARDIGAN navy size M x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "LOGO CARDIGAN navy M",
-    "POLO black L"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "VLOGO CARDIGAN navy M",
+    "JERSEY POLO black L"
    ],
    "returns": [
-    "ROSIERE 7 reason=CHANGE_MIND",
-    "MAKAIO BACKPACK TU reason=GIFT",
-    "ARNEB 5 reason=SIZE"
+    "RIVIERA 7 reason=CHANGE_MIND",
+    "URBAN BACKPACK TU reason=GIFT",
+    "ARTEM 5 reason=SIZE"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E06b: ILVARO spill-over other colours",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E06b: IRIDIA spill-over other colours",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -2380,11 +2380,11 @@
    "visitors": 496,
    "conversion": 0.0706,
    "top_sellers": [
-    "TRAILGRIP GTX black x4",
-    "KARAKORUM navy x4",
-    "TIB navy x4",
-    "LOGO HOODIE black x4",
-    "LOGO BEANIE black x3"
+    "VTRACK GTX black x4",
+    "COSIMO navy x4",
+    "VEL navy x4",
+    "VLOGO HOODIE black x4",
+    "VLOGO BEANIE black x3"
    ],
    "customer_mix": {
     "FR": 0.33,
@@ -2393,34 +2393,34 @@
     "US": 0.07
    },
    "unmet_requests": [
-    "MAIRE black size 2 x2",
-    "MAIRE black size 00 x1",
-    "MAIRE black size 0 x1",
-    "MAIRE black size 1 x1",
-    "HERMINE navy size 3 x1",
-    "BADY off-white size 4 x1",
-    "KARAKORUM grey melange size 2 x1"
+    "AUREA black size 2 x2",
+    "AUREA black size 00 x1",
+    "AUREA black size 0 x1",
+    "AUREA black size 1 x1",
+    "LIVIANA navy size 3 x1",
+    "ARIA off-white size 4 x1",
+    "COSIMO grey melange size 2 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "LOGO CARDIGAN black M",
-    "LOGO CARDIGAN navy M",
-    "POLO black L"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "VLOGO CARDIGAN black M",
+    "VLOGO CARDIGAN navy M",
+    "JERSEY POLO black L"
    ],
    "returns": [
-    "BADY 1 reason=SIZE",
-    "TRICOT PADDED CARDIGAN L reason=CHANGE_MIND",
-    "CABLE KNIT SWEATER M reason=COLOUR"
+    "ARIA 1 reason=SIZE",
+    "VLOGO PADDED CARDIGAN L reason=CHANGE_MIND",
+    "INTARSIA SWEATER M reason=COLOUR"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E06b: ILVARO spill-over other colours",
-    "E07b: Genius POLARIS underperforms in Europe/US",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E41: AMBRINE chocolate brown very requested in Milan/Paris",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E06b: IRIDIA spill-over other colours",
+    "E07b: Couture ASTRA underperforms in Europe/US",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E41: AMALIA chocolate brown very requested in Milan/Paris",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   }
  ]

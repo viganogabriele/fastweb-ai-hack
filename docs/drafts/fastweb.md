@@ -1,17 +1,17 @@
-# FastwebAI Hackathon 2026 — Traccia Moncler e proposta progettuale
+# FastwebAI Hackathon 2026 — Traccia Valentino e proposta progettuale
 
 **Documento di lavoro del team**  
 **Evento indicato sulla scheda:** 20 ottobre 2026  
-**Focus scelto:** Moncler  
+**Focus scelto:** Valentino  
 **Stato:** trascrizione revisionata + interpretazione della challenge + proposta per un prototipo da hackathon
 
-> **Nota sulle fonti e sull'accuratezza.** Questo documento parte dalle due fotografie della scheda «FastwebAI Hackathon – Schede use case» e dal file caricato `Poke House(1)(1).md`, che contiene una trascrizione automatica di circa 12 minuti e 21 secondi. **Nonostante il nome del file, l'audio trascritto parla di Alpitour World e Moncler, non di Poke House.** La seconda foto inizia a metà frase: il titolo e l'inizio del contesto della challenge Moncler non sono visibili. Separiamo pertanto il **testo originale leggibile**, la **trascrizione ripulita del parlato** e le **nostre proposte**, che non sono richieste ufficiali degli organizzatori. Nei passaggi in cui l'audio automatico non consente una ricostruzione attendibile, lo dichiariamo invece di inventare parole.
+> **Nota sulle fonti e sull'accuratezza.** Questo documento parte dalle due fotografie della scheda «FastwebAI Hackathon – Schede use case» e dal file caricato `Poke House(1)(1).md`, che contiene una trascrizione automatica di circa 12 minuti e 21 secondi. **Nonostante il nome del file, l'audio trascritto parla di Alpitour World e Valentino, non di Poke House.** La seconda foto inizia a metà frase: il titolo e l'inizio del contesto della challenge Valentino non sono visibili. Separiamo pertanto il **testo originale leggibile**, la **trascrizione ripulita del parlato** e le **nostre proposte**, che non sono richieste ufficiali degli organizzatori. Nei passaggi in cui l'audio automatico non consente una ricostruzione attendibile, lo dichiariamo invece di inventare parole.
 
 ---
 
-## 1. La traccia ufficiale Moncler — testo visibile nelle foto
+## 1. La traccia ufficiale Valentino — testo visibile nelle foto
 
-> **Trascrizione del testo stampato**, senza aggiungere contenuti mancanti. L'attribuzione a Moncler deriva dalla presentazione orale contenuta nella registrazione; l'intestazione della scheda non è fotografata. Il brano comincia letteralmente a metà frase.
+> **Trascrizione del testo stampato**, senza aggiungere contenuti mancanti. L'attribuzione a Valentino deriva dalla presentazione orale contenuta nella registrazione; l'intestazione della scheda non è fotografata. Il brano comincia letteralmente a metà frase.
 
 **[Inizio del paragrafo «Il contesto» non visibile]**
 
@@ -47,9 +47,9 @@
 
 **04:17–05:23 — Dal segnale all'azione.** Le raccomandazioni possono riguardare la comunicazione (valorizzare un prodotto già disponibile) oppure il prodotto (sviluppare o testare un'offerta nuova). L'intervento indica come riferimento principale il mercato italiano e afferma che circa **l'85% del business è intermediato da agenzie di viaggio** e il **15% è diretto**. Sono valori riferiti dall'oratore nella registrazione, non verificati qui su dati aziendali pubblici.
 
-### 2.2 Moncler (05:23–10:45) — parte centrale per il nostro progetto
+### 2.2 Valentino (05:23–10:45) — parte centrale per il nostro progetto
 
-**05:23–06:27 — Introduzione e riservatezza.** Viene presentato un rappresentante di Moncler, indicato dalla trascrizione automatica come «Danilo Lofreno» (**cognome da verificare**). La persona dichiara di occuparsi di AI e Data Science. Il parlato include un riferimento a vincoli di comunicazione aziendale, ma quel tratto dell'ASR è troppo confuso per ricostruire con sicurezza la prescrizione esatta. **Prima di usare pubblicamente nome, logo o citazioni, chiedere conferma agli organizzatori.**
+**05:23–06:27 — Introduzione e riservatezza.** Viene presentato un rappresentante di Valentino, indicato dalla trascrizione automatica come «Danilo Lofreno» (**cognome da verificare**). La persona dichiara di occuparsi di AI e Data Science. Il parlato include un riferimento a vincoli di comunicazione aziendale, ma quel tratto dell'ASR è troppo confuso per ricostruire con sicurezza la prescrizione esatta. **Prima di usare pubblicamente nome, logo o citazioni, chiedere conferma agli organizzatori.**
 
 **06:27–07:00 — Il ruolo del team Data & AI.** Il team è stato creato da poco e lavora per centralizzare iniziative di intelligenza artificiale che altrimenti resterebbero distribuite fra reparti. L'obiettivo è unire gli strumenti più recenti di AI con ciò che l'azienda svolge già tramite data science e *machine learning*, incluse le previsioni di vendita (*forecast*).
 
@@ -69,9 +69,9 @@ Segue un breve scambio scherzoso e poi interviene la moderazione. Viene ribadito
 
 ---
 
-## 3. La challenge Moncler in parole semplici
+## 3. La challenge Valentino in parole semplici
 
-Moncler non chiede un altro chatbot che risponda a domande sui report. Chiede di dimostrare che un sistema possa **mettere insieme segnali deboli e dati disomogenei per suggerire una decisione concreta, prima che il problema sia evidente nelle vendite**.
+Valentino non chiede un altro chatbot che risponda a domande sui report. Chiede di dimostrare che un sistema possa **mettere insieme segnali deboli e dati disomogenei per suggerire una decisione concreta, prima che il problema sia evidente nelle vendite**.
 
 Esempio: il forecast segnala una domanda ordinaria per una giacca in un negozio; i dipendenti iniziano però a scrivere, in più lingue, che molti clienti chiedono proprio quel modello e quella taglia. Contemporaneamente sono previste temperature molto più basse del normale. Il sistema collega la nota al prodotto corretto, controlla la disponibilità locale e in altri negozi, rileva una possibile futura rottura di stock e propone un trasferimento **quantificato e giustificato**. Un operatore conferma o rifiuta la proposta.
 
@@ -95,7 +95,7 @@ Esempio: il forecast segnala una domanda ordinaria per una giacca in un negozio;
 
 ## 4. Idee progettuali per distinguersi
 
-### Idea A — **MONCLER PULSE: Signal-to-Decision** (consigliata)
+### Idea A — **VALENTINO PULSE: Signal-to-Decision** (consigliata)
 
 Un *control center* che unisce report dei negozi, stock, vendite, forecast e condizioni esterne per creare **decision cards**: ogni scheda mostra un rischio o un'opportunità, la spiegazione, le fonti e l'azione suggerita.
 
@@ -124,15 +124,15 @@ Concentrarsi sui nuovi SKU senza storico. Il sistema legge note multilingue dei 
 Un motore che legge report PDF, Excel e slide, riconosce le definizioni dei KPI, individua unità differenti e mette in evidenza contraddizioni prima che qualcuno prenda una decisione.
 
 **Punti forti:** problema enterprise concreto e dimostrabile.  
-**Limite:** da solo appare più vicino a un sistema di document processing che alla decision intelligence chiesta da Moncler.
+**Limite:** da solo appare più vicino a un sistema di document processing che alla decision intelligence chiesta da Valentino.
 
 ### Scelta proposta
 
-Realizzare **MONCLER PULSE**, usando **Cold Front Radar** come *storytelling* della demo e aggiungendo, solo se resta tempo, un esempio di **New Collection Radar**. Il risultato combina una narrazione comprensibile, un'AI realmente utile e una decisione verificabile.
+Realizzare **VALENTINO PULSE**, usando **Cold Front Radar** come *storytelling* della demo e aggiungendo, solo se resta tempo, un esempio di **New Collection Radar**. Il risultato combina una narrazione comprensibile, un'AI realmente utile e una decisione verificabile.
 
 ---
 
-## 5. Il prodotto consigliato: MONCLER PULSE
+## 5. Il prodotto consigliato: VALENTINO PULSE
 
 **One-liner:** *From store whispers to business decisions.*  
 **Promessa:** intercettare un problema o un'opportunità prima che emerga nei KPI aggregati, indicando cosa fare, su quali evidenze e con quali limiti.
@@ -168,7 +168,7 @@ Il motivo per cui può risultare più convincente di un semplice chatbot è che 
 
 ---
 
-## 6. Demo completa consigliata (dati sintetici, NON dati reali Moncler)
+## 6. Demo completa consigliata (dati sintetici, NON dati reali Valentino)
 
 **Situazione:** un negozio a Parigi segnala richieste crescenti per una giacca in taglia M. Un abbassamento delle temperature, insieme ai commenti dei dipendenti, porta il sistema a rivalutare il rischio di stockout. A Milano lo stesso SKU è relativamente abbondante.
 
@@ -284,7 +284,7 @@ Per l'MVP bastano componenti chiari, non uno sciame di agenti:
 - **Decision Engine:** combina segnali e dati numerici ed elabora proposte con regole controllabili.
 - **Logistics Handoff (simulato):** prepara un payload per un sistema esterno dopo approvazione umana.
 
-Se volete mostrare un'integrazione agent-to-agent, è sufficiente far vedere un *mock endpoint* che riceve la proposta e restituisce `draft_created`, con log e tracciabilità. **Non fingete l'esistenza di un'integrazione reale con sistemi Moncler.**
+Se volete mostrare un'integrazione agent-to-agent, è sufficiente far vedere un *mock endpoint* che riceve la proposta e restituisce `draft_created`, con log e tracciabilità. **Non fingete l'esistenza di un'integrazione reale con sistemi Valentino.**
 
 ---
 
@@ -340,7 +340,7 @@ Con 2–3 persone conviene accorpare UI e integrazione, e tagliare import PDF e 
 
 > Ogni giorno i negozi osservano cose che i modelli di forecast possono rilevare solo più tardi: una taglia richiesta all'improvviso, un prodotto che sta esaurendosi, un cambiamento dovuto al meteo. Questi segnali rimangono spesso nascosti in commenti multilingue e report separati.  
 >  
-> **MONCLER PULSE** li collega a forecast, vendite, inventario e dati esterni. Non produce solo una dashboard: genera **decisioni spiegabili**. In questa demo un commento da Parigi contribuisce a individuare un possibile stockout. Il sistema verifica se Milano può supportare Parigi, propone un trasferimento quantitativo e mostra esattamente da dove arrivano le prove.  
+> **VALENTINO PULSE** li collega a forecast, vendite, inventario e dati esterni. Non produce solo una dashboard: genera **decisioni spiegabili**. In questa demo un commento da Parigi contribuisce a individuare un possibile stockout. Il sistema verifica se Milano può supportare Parigi, propone un trasferimento quantitativo e mostra esattamente da dove arrivano le prove.  
 >  
 > E se cambiamo la domanda di Milano, la proposta cambia. Perché le decisioni non sono frasi inventate dall'AI: sono calcoli verificabili, arricchiti dalla comprensione del linguaggio naturale. Il passo finale rimane sempre umano: il responsabile decide se approvare la bozza.  
 >  
@@ -351,7 +351,7 @@ Con 2–3 persone conviene accorpare UI e integrazione, e tagliare import PDF e 
 - Un generico «chiedi ai tuoi documenti» senza **azione aziendale misurabile**.
 - Un chatbot che propone quantità senza verificare stock e domanda del negozio di origine.
 - Un'interfaccia piena di grafici ma senza una storia chiara.
-- Presentare dati di esempio come dati ufficiali Moncler o risultati di un modello di forecast realmente addestrato.
+- Presentare dati di esempio come dati ufficiali Valentino o risultati di un modello di forecast realmente addestrato.
 - Confondere correlazione e causalità: una giornata fredda **non prova**, da sola, che aumenteranno le vendite.
 - Ignorare tempi di consegna, scorte impegnate, resi e taglie: la raccomandazione deve dichiarare i vincoli non ancora modellati.
 - Fingere collegamenti a sistemi aziendali inesistenti o compiere operazioni reali senza autorizzazione.
@@ -368,7 +368,7 @@ Queste **non** sono metriche ufficiali della giuria: sono controlli pratici di q
 
 ---
 
-## 10. Domande intelligenti da fare ai referenti Moncler
+## 10. Domande intelligenti da fare ai referenti Valentino
 
 Le risposte possono cambiare radicalmente la priorità delle funzionalità. È utile porne poche, precise, prima di investire molto nel codice:
 
@@ -387,15 +387,15 @@ Le risposte possono cambiare radicalmente la priorità delle funzionalità. È u
 
 **Fonti primarie fornite dal team**
 
-- Foto «FastwebAI Hackathon – Schede use case», 20 ottobre 2026, seconda pagina visibile parzialmente (testo della challenge attribuita a Moncler).
-- File `Poke House(1)(1).md`: trascrizione automatica fornita dal team, durata dichiarata circa 12:21, comprendente Alpitour World (inizio) e Moncler (da circa 05:23).
+- Foto «FastwebAI Hackathon – Schede use case», 20 ottobre 2026, seconda pagina visibile parzialmente (testo della challenge attribuita a Valentino).
+- File `Poke House(1)(1).md`: trascrizione automatica fornita dal team, durata dichiarata circa 12:21, comprendente Alpitour World (inizio) e Valentino (da circa 05:23).
 
 **Riferimenti esterni utili, non necessari a capire la challenge**
 
-- [Moncler Group — Annual Report 2025](https://www.monclergroup.com/v3/assets/blt61bda6b71f29a239/blt045d4d3f55ee3c5a/69c41c93fc5d0628f24862ef/Moncler-Group-Annual-Report-2025.pdf), per comprendere il contesto della rete retail globale. È una fonte pubblica del 2025, **non** un dataset dell'hackathon.
+- [Valentino Group — Annual Report 2025](https://www.valentinogroup.com/v3/assets/blt61bda6b71f29a239/blt045d4d3f55ee3c5a/69c41c93fc5d0628f24862ef/Valentino-Group-Annual-Report-2025.pdf), per comprendere il contesto della rete retail globale. È una fonte pubblica del 2025, **non** un dataset dell'hackathon.
 - [Open-Meteo — documentazione](https://open-meteo.com/en/docs), per l'arricchimento con condizioni e previsioni meteo. Verificare licenza e limiti per l'utilizzo previsto.
 
-**Cose che NON sappiamo dalle fonti disponibili:** l'inizio esatto del contesto stampato Moncler, i criteri formali di giudizio, l'accesso ai dati interni, la disponibilità di API/logistica reali, le autorizzazioni di comunicazione, la durata dell'hackathon e la formulazione esatta di alcuni passaggi del parlato. Tutte le quantità e le note dei negozi nel caso di studio sono **sintetiche e illustrative**.
+**Cose che NON sappiamo dalle fonti disponibili:** l'inizio esatto del contesto stampato Valentino, i criteri formali di giudizio, l'accesso ai dati interni, la disponibilità di API/logistica reali, le autorizzazioni di comunicazione, la durata dell'hackathon e la formulazione esatta di alcuni passaggi del parlato. Tutte le quantità e le note dei negozi nel caso di studio sono **sintetiche e illustrative**.
 
 ---
 

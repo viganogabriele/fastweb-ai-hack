@@ -1,65 +1,65 @@
 alert_id,triggered_at_utc,alert_type,topic_query,mentions_24h,baseline_24h,change_pct,top_countries,top_languages,net_sentiment,top_terms,sample_post,sample_url
-TW-70022,2026-08-01T01:01:00Z,VOLUME_SPIKE,Moncler sale,789,536,47.0,"IT,FR,US,GB","en,fr",0.04,,,
-TW-70023,2026-08-03T09:13:00Z,VOLUME_SPIKE,Moncler sale,378,235,61.0,"IT,FR,US,GB","en,fr",-0.14,,,
-TW-70024,2026-08-04T18:34:00Z,VOLUME_SPIKE,Moncler kids,1049,520,102.0,"IT,FR,US,GB","en,it",0.2,,,
-TW-70025,2026-08-05T03:02:00Z,VOLUME_SPIKE,Moncler hoodie,431,282,53.0,"IT,FR,US,GB",en,0.39,,,
-TW-70026,2026-08-08T18:12:00Z,VOLUME_SPIKE,Moncler kids,1314,626,110.0,"IT,FR,US,GB","en,it",0.19,,,
-TW-70027,2026-08-09T14:08:00Z,VOLUME_SPIKE,Moncler hoodie,1144,617,85.0,"IT,FR,US,GB",en,0.25,,,
-TW-70028,2026-08-11T18:42:00Z,VOLUME_SPIKE,Moncler Maya,575,269,114.0,"IT,FR,US,GB","en,it",0.43,,,
-TW-70029,2026-08-12T16:03:00Z,VOLUME_SPIKE,Moncler kids,1288,626,106.0,"IT,FR,US,GB","en,it",0.27,,,
-TW-70030,2026-08-15T15:43:00Z,VOLUME_SPIKE,Moncler Grenoble,1215,650,87.0,"IT,FR,US,GB","fr,de",0.22,,,
-TW-70031,2026-08-17T18:14:00Z,VOLUME_SPIKE,Moncler gilet,363,254,43.0,"IT,FR,US,GB",it,-0.09,,,
-TW-70032,2026-08-20T04:23:00Z,VOLUME_SPIKE,Moncler Grenoble,1069,734,46.0,"IT,FR,US,GB","fr,de",0.25,,,
-TW-70033,2026-08-21T05:12:00Z,VOLUME_SPIKE,Moncler Maya,1207,713,69.0,"IT,FR,US,GB","en,it",0.27,,,
-TW-70034,2026-08-24T04:34:00Z,VOLUME_SPIKE,Moncler gilet,774,438,77.0,"IT,FR,US,GB",it,0.22,,,
-TW-70035,2026-08-25T10:59:00Z,VOLUME_SPIKE,Moncler kids,1069,574,86.0,"IT,FR,US,GB","en,it",0.15,,,
-TW-70036,2026-08-27T20:12:00Z,VOLUME_SPIKE,Moncler gilet,558,331,69.0,"IT,FR,US,GB",it,0.04,,,
-TW-70037,2026-08-28T03:52:00Z,VOLUME_SPIKE,Moncler gilet,1516,818,85.0,"IT,FR,US,GB",it,0.13,,,
-TW-70038,2026-08-29T00:15:00Z,VOLUME_SPIKE,Moncler hoodie,746,332,125.0,"IT,FR,US,GB",en,0.31,,,
-TW-70039,2026-09-02T18:24:00Z,VOLUME_SPIKE,Moncler hoodie,1025,467,119.0,"IT,FR,US,GB",en,0.09,,,
-TW-70040,2026-09-06T16:37:00Z,VOLUME_SPIKE,Moncler hoodie,1200,740,62.0,"IT,FR,US,GB",en,0.31,,,
-TW-70041,2026-09-10T05:28:00Z,VOLUME_SPIKE,Moncler Maya,1315,791,66.0,"IT,FR,US,GB","en,it",0.38,,,
-TW-70042,2026-09-11T16:53:00Z,VOLUME_SPIKE,Moncler gilet,312,211,48.0,"IT,FR,US,GB",it,0.27,,,
-TW-70043,2026-09-14T00:44:00Z,VOLUME_SPIKE,Moncler gilet,811,552,47.0,"IT,FR,US,GB",it,0.06,,,
-TW-70044,2026-09-15T13:18:00Z,VOLUME_SPIKE,Moncler Grenoble,1353,844,60.0,"IT,FR,US,GB","fr,de",0.51,,,
-TW-70045,2026-09-16T08:56:00Z,VOLUME_SPIKE,Moncler store queue,946,664,42.0,"IT,FR,US,GB",en,-0.08,,,
-TW-77100,2026-09-16T14:20:00Z,KEYWORD_SPIKE,Moncler Maire,1840,310,494.0,KR,ko,0.62,"마이레, 몽클레르, 박지우, 겨울편지, 패딩",윤겨울편지 7화에서 박지우 입은 패딩 몽클레르 마이레 맞죠?? 블랙 너무 예쁨,https://social.example/p/797323514
-TW-70046,2026-09-17T00:18:00Z,VOLUME_SPIKE,Moncler gilet,1535,671,129.0,"IT,FR,US,GB",it,0.25,,,
-TW-77107,2026-09-18T09:05:00Z,VOLUME_SPIKE,Moncler Maire black,3920,340,1053.0,"KR,FR","ko,fr",0.55,"마이레 블랙, 품절, 파리, 몽클레르",파리 몽클레르 갔는데 마이레 블랙 없음… 다 품절,https://social.example/p/1240985225
-TW-70047,2026-09-19T03:54:00Z,VOLUME_SPIKE,Moncler hoodie,1078,664,62.0,"IT,FR,US,GB",en,0.01,,,
-TW-70048,2026-09-20T11:42:00Z,VOLUME_SPIKE,Moncler kids,1644,771,113.0,"IT,FR,US,GB","en,it",0.15,,,
-TW-77114,2026-09-22T11:40:00Z,NEW_TOPIC,Moncler Paris sold out,610,80,662.0,"KR,FR","ko,fr,en",0.1,"sold out, rupture, 품절, Saint-Honoré","Maire noire en rupture partout à Paris, même aux Galeries. Les touristes coréennes font la queue",https://social.example/p/467176562
-TW-77121,2026-09-24T02:10:00Z,VOLUME_SPIKE,Moncler Genius Polaris,22800,2400,850.0,"CN,HK",zh,0.71,"Polaris, 天才系列, 周一, 斗篷",Polaris斗篷太好看了，上海恒隆已经排队,https://social.example/p/788523253
-TW-70049,2026-09-24T03:47:00Z,VOLUME_SPIKE,Moncler sale,1639,725,126.0,"IT,FR,US,GB","en,fr",0.04,,,
-TW-70050,2026-09-26T03:13:00Z,VOLUME_SPIKE,Moncler Maya,1329,598,122.0,"IT,FR,US,GB","en,it",0.13,,,
-TW-77128,2026-09-27T16:00:00Z,SENTIMENT_DROP,Moncler Genius Polaris,1450,1100,32.0,"FR,IT,GB,US","fr,it,en",-0.22,"too small, trop petit, caro, overpriced","Tried the Polaris oversized and it's... not oversized at all. And €2,400?",https://social.example/p/230696798
-TW-70051,2026-09-27T18:32:00Z,VOLUME_SPIKE,Moncler Maya,1568,777,102.0,"IT,FR,US,GB","en,it",0.27,,,
-TW-70052,2026-09-28T23:52:00Z,VOLUME_SPIKE,Moncler sale,1036,472,119.0,"IT,FR,US,GB","en,fr",-0.05,,,
-TW-77135,2026-09-29T19:30:00Z,NEW_TOPIC,Moncler TIB zipper,140,15,833.0,"IT,FR,ES,DE","it,fr,en",-0.68,"zip, cerniera, tirette, broken, rotta","Gilet TIB comprato ad agosto, il cursore della zip si è staccato. Per 990€. Complimenti @moncler",https://social.example/p/725055218
-TW-70053,2026-09-29T21:39:00Z,VOLUME_SPIKE,Moncler sale,1797,872,106.0,"IT,FR,US,GB","en,fr",0.06,,,
-TW-77226,2026-09-30T13:00:00Z,FALSE_POSITIVE,Moncler (homonym),520,60,767.0,FR,fr,0.0,"Monclar, village, randonnée","Randonnée autour de Monclar ce weekend, magnifique",https://social.example/p/3915326088
-TW-70054,2026-09-30T22:11:00Z,VOLUME_SPIKE,Moncler store queue,1119,519,116.0,"IT,FR,US,GB",en,-0.03,,,
-TW-70055,2026-10-01T15:27:00Z,VOLUME_SPIKE,Moncler gilet,880,585,50.0,"IT,FR,US,GB",it,0.1,,,
-TW-77142,2026-10-01T21:05:00Z,VOLUME_SPIKE,Moncler pink / Yoon Ha-eun,18600,120,15400.0,KR,"ko,en",0.88,"윤하은, 몽클레르, 핑크패딩, LUMIERE, PFW",윤하은 파리 출국 착장 몽클레르 핑크 패딩 ㄷㄷ 제품명 아시는 분?,https://social.example/p/536954372
-TW-77149,2026-10-01T23:40:00Z,VOLUME_SPIKE,Moncler ILVARO,61200,90,67900.0,"KR,CN,JP,TW,HK","ko,zh,ja",0.86,"ILVARO, 일바로, 尹夏恩同款, イルヴァロ",尹夏恩同款 Moncler ILVARO 粉色 已经全网断货了吧,https://social.example/p/1193796744
-TW-77156,2026-10-02T03:15:00Z,KEYWORD_MATCH,ILVARO sold out,24300,0,,"KR,CN,JP","ko,zh,ja",-0.15,"품절, 断货, 売り切れ, restock",몽클레르 공홈 일바로 핑크 7시 반에 다 품절됨 ㅠㅠ 재입고 언제??,https://social.example/p/3346693842
-TW-77163,2026-10-03T08:00:00Z,VOLUME_SPIKE,Moncler ILVARO,45100,900,4911.0,"KR,CN,JP,SG,US","ko,zh,ja,en",0.74,"ILVARO black, 블랙도, 黑色也",핑크 없어서 일바로 블랙 샀어요. 블랙도 이쁨,https://social.example/p/3307386127
-TW-77170,2026-10-04T12:00:00Z,NEW_TOPIC,Moncler resale ILVARO,2900,0,,"KR,CN","ko,zh",-0.31,"리셀, 크림, 闲鱼, 加价",크림에 일바로 핑크 0사이즈 리셀가 2배 ㄷㄷ,https://social.example/p/1701167190
-TW-77177,2026-10-05T10:30:00Z,KEYWORD_MATCH,Moncler TIB zipper,410,15,2633.0,"IT,FR,ES,GB,DE","it,fr,es,en,de",-0.74,"zip, slider, cremallera, Reißverschluss",Second Moncler TIB vest with a broken zip slider in my family. Store says 'known issue'.,https://social.example/p/2763366233
-TW-77184,2026-10-08T09:10:00Z,NEW_TOPIC,Moncler Seoul delivery,220,0,,KR,ko,-0.4,"청담, 입고, 지연, 세관",청담 몽클레르 일바로 오늘 입고라더니 세관에 걸렸대요,https://social.example/p/1184392287
-TW-77191,2026-10-09T06:00:00Z,VOLUME_SPIKE,モンクレール 値上げ,5300,400,1225.0,JP,ja,-0.35,"値上げ, 11月, 価格改定, 駆け込み",モンクレール11月から値上げらしい。マヤ買うなら今月中,https://social.example/p/1189090301
-TW-70056,2026-10-09T23:23:00Z,VOLUME_SPIKE,Moncler kids,1138,672,69.0,"IT,FR,US,GB","en,it",0.37,,,
-TW-70057,2026-10-10T04:44:00Z,VOLUME_SPIKE,Moncler store queue,882,618,43.0,"IT,FR,US,GB",en,0.06,,,
-TW-70058,2026-10-11T07:34:00Z,VOLUME_SPIKE,Moncler kids,1054,639,65.0,"IT,FR,US,GB","en,it",0.4,,,
-TW-77233,2026-10-11T10:00:00Z,BRAND_PROTECTION,fake Moncler ILVARO,1300,40,3150.0,"CN,KR","zh,ko",-0.5,"高仿, 同款, 짝퉁, cheap",尹夏恩同款粉色羽绒服 高仿 299元包邮,https://social.example/p/3699804323
-TW-70059,2026-10-12T01:24:00Z,VOLUME_SPIKE,Moncler hoodie,955,574,66.0,"IT,FR,US,GB",en,0.26,,,
-TW-77198,2026-10-14T07:00:00Z,KEYWORD_SPIKE,Moncler Arneb,380,90,322.0,"GB,US,DE,CA","en,de",-0.12,"runs big, size down, fällt groß aus",PSA: Moncler Arneb runs at least one size big. Size down.,https://social.example/p/752618789
-TW-77212,2026-10-14T18:00:00Z,VOLUME_SPIKE,Moncler snow Munich,980,300,227.0,"DE,CH,AT",de,0.4,"Schnee, Daunenjacke, Montgenevre",Erster Schnee in München und ich hab endlich eine Ausrede für die Montgenevre,https://social.example/p/2985743749
-TW-70060,2026-10-15T03:40:00Z,VOLUME_SPIKE,Moncler sale,443,235,89.0,"IT,FR,US,GB","en,fr",-0.26,,,
-TW-77205,2026-10-15T05:30:00Z,COMPETITOR,Canada Goose pop-up Cheongdam,7700,300,2467.0,KR,ko,0.45,"캐나다구스, 팝업, 청담, 사은품",청담 캐나다구스 팝업 줄 엄청 김. 몽클레르 바로 맞은편,https://social.example/p/1110767815
-TW-77240,2026-10-17T09:00:00Z,VOLUME_SPIKE,Moncler Maire restock,2100,300,600.0,"KR,FR,JP","ko,fr,ja",0.52,"재입고, restock, 再入荷, Maire noire",마이레 블랙 재입고 됐대요! 홍콩/서울 먼저,https://social.example/p/748881109
-TW-70061,2026-10-17T14:06:00Z,VOLUME_SPIKE,Moncler Maya,1718,768,124.0,"IT,FR,US,GB","en,it",0.31,,,
-TW-77247,2026-10-18T03:00:00Z,KEYWORD_MATCH,ILVARO pink restock,3300,0,,KR,ko,0.3,"일바로 핑크 입고, 청담, 대기",청담 일바로 핑크 오늘 몇 장 들어왔대요 대기자 먼저,https://social.example/p/2275077267
-TW-70062,2026-10-19T14:42:00Z,VOLUME_SPIKE,Moncler sale,1360,775,75.0,"IT,FR,US,GB","en,fr",0.08,,,
-TW-77219,2026-10-20T02:00:00Z,KEYWORD_MATCH,Moncler 双十一,6100,1900,221.0,CN,zh,-0.05,"双十一, 预售, 天猫, 价格, 门店",天猫双十一预售Moncler比门店便宜，门店能不能价保？,https://social.example/p/921390403
-TW-70063,2026-10-21T22:20:00Z,VOLUME_SPIKE,Moncler kids,684,420,63.0,"IT,FR,US,GB","en,it",0.08,,,
+TW-70022,2026-08-01T01:01:00Z,VOLUME_SPIKE,Valentino sale,789,536,47.0,"IT,FR,US,GB","en,fr",0.04,,,
+TW-70023,2026-08-03T09:13:00Z,VOLUME_SPIKE,Valentino sale,378,235,61.0,"IT,FR,US,GB","en,fr",-0.14,,,
+TW-70024,2026-08-04T18:34:00Z,VOLUME_SPIKE,Valentino kids,1049,520,102.0,"IT,FR,US,GB","en,it",0.2,,,
+TW-70025,2026-08-05T03:02:00Z,VOLUME_SPIKE,Valentino hoodie,431,282,53.0,"IT,FR,US,GB",en,0.39,,,
+TW-70026,2026-08-08T18:12:00Z,VOLUME_SPIKE,Valentino kids,1314,626,110.0,"IT,FR,US,GB","en,it",0.19,,,
+TW-70027,2026-08-09T14:08:00Z,VOLUME_SPIKE,Valentino hoodie,1144,617,85.0,"IT,FR,US,GB",en,0.25,,,
+TW-70028,2026-08-11T18:42:00Z,VOLUME_SPIKE,Valentino Nova,575,269,114.0,"IT,FR,US,GB","en,it",0.43,,,
+TW-70029,2026-08-12T16:03:00Z,VOLUME_SPIKE,Valentino kids,1288,626,106.0,"IT,FR,US,GB","en,it",0.27,,,
+TW-70030,2026-08-15T15:43:00Z,VOLUME_SPIKE,Astra,1215,650,87.0,"IT,FR,US,GB","fr,de",0.22,,,
+TW-70031,2026-08-17T18:14:00Z,VOLUME_SPIKE,Valentino gilet,363,254,43.0,"IT,FR,US,GB",it,-0.09,,,
+TW-70032,2026-08-20T04:23:00Z,VOLUME_SPIKE,Astra,1069,734,46.0,"IT,FR,US,GB","fr,de",0.25,,,
+TW-70033,2026-08-21T05:12:00Z,VOLUME_SPIKE,Valentino Nova,1207,713,69.0,"IT,FR,US,GB","en,it",0.27,,,
+TW-70034,2026-08-24T04:34:00Z,VOLUME_SPIKE,Valentino gilet,774,438,77.0,"IT,FR,US,GB",it,0.22,,,
+TW-70035,2026-08-25T10:59:00Z,VOLUME_SPIKE,Valentino kids,1069,574,86.0,"IT,FR,US,GB","en,it",0.15,,,
+TW-70036,2026-08-27T20:12:00Z,VOLUME_SPIKE,Valentino gilet,558,331,69.0,"IT,FR,US,GB",it,0.04,,,
+TW-70037,2026-08-28T03:52:00Z,VOLUME_SPIKE,Valentino gilet,1516,818,85.0,"IT,FR,US,GB",it,0.13,,,
+TW-70038,2026-08-29T00:15:00Z,VOLUME_SPIKE,Valentino hoodie,746,332,125.0,"IT,FR,US,GB",en,0.31,,,
+TW-70039,2026-09-02T18:24:00Z,VOLUME_SPIKE,Valentino hoodie,1025,467,119.0,"IT,FR,US,GB",en,0.09,,,
+TW-70040,2026-09-06T16:37:00Z,VOLUME_SPIKE,Valentino hoodie,1200,740,62.0,"IT,FR,US,GB",en,0.31,,,
+TW-70041,2026-09-10T05:28:00Z,VOLUME_SPIKE,Valentino Nova,1315,791,66.0,"IT,FR,US,GB","en,it",0.38,,,
+TW-70042,2026-09-11T16:53:00Z,VOLUME_SPIKE,Valentino gilet,312,211,48.0,"IT,FR,US,GB",it,0.27,,,
+TW-70043,2026-09-14T00:44:00Z,VOLUME_SPIKE,Valentino gilet,811,552,47.0,"IT,FR,US,GB",it,0.06,,,
+TW-70044,2026-09-15T13:18:00Z,VOLUME_SPIKE,Astra,1353,844,60.0,"IT,FR,US,GB","fr,de",0.51,,,
+TW-70045,2026-09-16T08:56:00Z,VOLUME_SPIKE,Valentino store queue,946,664,42.0,"IT,FR,US,GB",en,-0.08,,,
+TW-77100,2026-09-16T14:20:00Z,KEYWORD_SPIKE,Valentino Aurea,1840,310,494.0,KR,ko,0.62,"Aurea, 발렌티노, 박지우, 겨울편지, 패딩",윤겨울편지 7화에서 박지우 입은 패딩 발렌티노 Aurea 맞죠?? 블랙 너무 예쁨,https://social.example/p/797323514
+TW-70046,2026-09-17T00:18:00Z,VOLUME_SPIKE,Valentino gilet,1535,671,129.0,"IT,FR,US,GB",it,0.25,,,
+TW-77107,2026-09-18T09:05:00Z,VOLUME_SPIKE,Valentino Aurea black,3920,340,1053.0,"KR,FR","ko,fr",0.55,"Aurea 블랙, 품절, 파리, 발렌티노",파리 발렌티노 갔는데 Aurea 블랙 없음… 다 품절,https://social.example/p/1240985225
+TW-70047,2026-09-19T03:54:00Z,VOLUME_SPIKE,Valentino hoodie,1078,664,62.0,"IT,FR,US,GB",en,0.01,,,
+TW-70048,2026-09-20T11:42:00Z,VOLUME_SPIKE,Valentino kids,1644,771,113.0,"IT,FR,US,GB","en,it",0.15,,,
+TW-77114,2026-09-22T11:40:00Z,NEW_TOPIC,Valentino Paris sold out,610,80,662.0,"KR,FR","ko,fr,en",0.1,"sold out, rupture, 품절, Saint-Honoré","Aurea noire en rupture partout à Paris, même aux Galeries. Les touristes coréennes font la queue",https://social.example/p/467176562
+TW-77121,2026-09-24T02:10:00Z,VOLUME_SPIKE,Valentino Couture Astra,22800,2400,850.0,"CN,HK",zh,0.71,"Astra, 天才系列, 周一, 斗篷",Astra斗篷太好看了，上海恒隆已经排队,https://social.example/p/788523253
+TW-70049,2026-09-24T03:47:00Z,VOLUME_SPIKE,Valentino sale,1639,725,126.0,"IT,FR,US,GB","en,fr",0.04,,,
+TW-70050,2026-09-26T03:13:00Z,VOLUME_SPIKE,Valentino Nova,1329,598,122.0,"IT,FR,US,GB","en,it",0.13,,,
+TW-77128,2026-09-27T16:00:00Z,SENTIMENT_DROP,Valentino Couture Astra,1450,1100,32.0,"FR,IT,GB,US","fr,it,en",-0.22,"too small, trop petit, caro, overpriced","Tried the Astra Oversized and it's... not oversized at all. And €2,400?",https://social.example/p/230696798
+TW-70051,2026-09-27T18:32:00Z,VOLUME_SPIKE,Valentino Nova,1568,777,102.0,"IT,FR,US,GB","en,it",0.27,,,
+TW-70052,2026-09-28T23:52:00Z,VOLUME_SPIKE,Valentino sale,1036,472,119.0,"IT,FR,US,GB","en,fr",-0.05,,,
+TW-77135,2026-09-29T19:30:00Z,NEW_TOPIC,Valentino VEL zipper,140,15,833.0,"IT,FR,ES,DE","it,fr,en",-0.68,"zip, cerniera, tirette, broken, rotta","Gilet VEL comprato ad agosto, il cursore della zip si è staccato. Per 990€. Complimenti @valentino",https://social.example/p/725055218
+TW-70053,2026-09-29T21:39:00Z,VOLUME_SPIKE,Valentino sale,1797,872,106.0,"IT,FR,US,GB","en,fr",0.06,,,
+TW-77226,2026-09-30T13:00:00Z,FALSE_POSITIVE,Valentino (homonym),520,60,767.0,FR,fr,0.0,"Monclar, village, randonnée","Randonnée autour de Monclar ce weekend, magnifique",https://social.example/p/3915326088
+TW-70054,2026-09-30T22:11:00Z,VOLUME_SPIKE,Valentino store queue,1119,519,116.0,"IT,FR,US,GB",en,-0.03,,,
+TW-70055,2026-10-01T15:27:00Z,VOLUME_SPIKE,Valentino gilet,880,585,50.0,"IT,FR,US,GB",it,0.1,,,
+TW-77142,2026-10-01T21:05:00Z,VOLUME_SPIKE,Valentino pink / Yoon Ha-eun,18600,120,15400.0,KR,"ko,en",0.88,"윤하은, 발렌티노, 핑크패딩, LUMIERE, PFW",윤하은 파리 출국 착장 발렌티노 핑크 패딩 ㄷㄷ 제품명 아시는 분?,https://social.example/p/536954372
+TW-77149,2026-10-01T23:40:00Z,VOLUME_SPIKE,Valentino IRIDIA,61200,90,67900.0,"KR,CN,JP,TW,HK","ko,zh,ja",0.86,"IRIDIA, Iridia, 尹夏恩同款, イルヴァロ",尹夏恩同款 Valentino IRIDIA 粉色 已经全网断货了吧,https://social.example/p/1193796744
+TW-77156,2026-10-02T03:15:00Z,KEYWORD_MATCH,IRIDIA sold out,24300,0,,"KR,CN,JP","ko,zh,ja",-0.15,"품절, 断货, 売り切れ, restock",발렌티노 공홈 Iridia 핑크 7시 반에 다 품절됨 ㅠㅠ 재입고 언제??,https://social.example/p/3346693842
+TW-77163,2026-10-03T08:00:00Z,VOLUME_SPIKE,Valentino IRIDIA,45100,900,4911.0,"KR,CN,JP,SG,US","ko,zh,ja,en",0.74,"IRIDIA black, 블랙도, 黑色也",핑크 없어서 Iridia 블랙 샀어요. 블랙도 이쁨,https://social.example/p/3307386127
+TW-77170,2026-10-04T12:00:00Z,NEW_TOPIC,Valentino resale IRIDIA,2900,0,,"KR,CN","ko,zh",-0.31,"리셀, 크림, 闲鱼, 加价",크림에 Iridia 핑크 0사이즈 리셀가 2배 ㄷㄷ,https://social.example/p/1701167190
+TW-77177,2026-10-05T10:30:00Z,KEYWORD_MATCH,Valentino VEL zipper,410,15,2633.0,"IT,FR,ES,GB,DE","it,fr,es,en,de",-0.74,"zip, slider, cremallera, Reißverschluss",Second Valentino VEL vest with a broken zip slider in my family. Store says 'known issue'.,https://social.example/p/2763366233
+TW-77184,2026-10-08T09:10:00Z,NEW_TOPIC,Valentino Seoul delivery,220,0,,KR,ko,-0.4,"청담, 입고, 지연, 세관",청담 발렌티노 Iridia 오늘 입고라더니 세관에 걸렸대요,https://social.example/p/1184392287
+TW-77191,2026-10-09T06:00:00Z,VOLUME_SPIKE,ヴァレンティノ 値上げ,5300,400,1225.0,JP,ja,-0.35,"値上げ, 11月, 価格改定, 駆け込み",ヴァレンティノ11月から値上げらしい。Nova買うなら今月中,https://social.example/p/1189090301
+TW-70056,2026-10-09T23:23:00Z,VOLUME_SPIKE,Valentino kids,1138,672,69.0,"IT,FR,US,GB","en,it",0.37,,,
+TW-70057,2026-10-10T04:44:00Z,VOLUME_SPIKE,Valentino store queue,882,618,43.0,"IT,FR,US,GB",en,0.06,,,
+TW-70058,2026-10-11T07:34:00Z,VOLUME_SPIKE,Valentino kids,1054,639,65.0,"IT,FR,US,GB","en,it",0.4,,,
+TW-77233,2026-10-11T10:00:00Z,BRAND_PROTECTION,fake Valentino IRIDIA,1300,40,3150.0,"CN,KR","zh,ko",-0.5,"高仿, 同款, 짝퉁, cheap",尹夏恩同款粉色羽绒服 高仿 299元包邮,https://social.example/p/3699804323
+TW-70059,2026-10-12T01:24:00Z,VOLUME_SPIKE,Valentino hoodie,955,574,66.0,"IT,FR,US,GB",en,0.26,,,
+TW-77198,2026-10-14T07:00:00Z,KEYWORD_SPIKE,Valentino Artem,380,90,322.0,"GB,US,DE,CA","en,de",-0.12,"runs big, size down, fällt groß aus",PSA: Valentino Artem runs at least one size big. Size down.,https://social.example/p/752618789
+TW-77212,2026-10-14T18:00:00Z,VOLUME_SPIKE,Valentino snow Munich,980,300,227.0,"DE,CH,AT",de,0.4,"Schnee, Daunenjacke, Monteluce",Erster Schnee in München und ich hab endlich eine Ausrede für die Monteluce,https://social.example/p/2985743749
+TW-70060,2026-10-15T03:40:00Z,VOLUME_SPIKE,Valentino sale,443,235,89.0,"IT,FR,US,GB","en,fr",-0.26,,,
+TW-77205,2026-10-15T05:30:00Z,COMPETITOR,Canada Goose pop-up Cheongdam,7700,300,2467.0,KR,ko,0.45,"캐나다구스, 팝업, 청담, 사은품",청담 캐나다구스 팝업 줄 엄청 김. 발렌티노 바로 맞은편,https://social.example/p/1110767815
+TW-77240,2026-10-17T09:00:00Z,VOLUME_SPIKE,Valentino Aurea restock,2100,300,600.0,"KR,FR,JP","ko,fr,ja",0.52,"재입고, restock, 再入荷, Aurea noire",Aurea 블랙 재입고 됐대요! 홍콩/서울 먼저,https://social.example/p/748881109
+TW-70061,2026-10-17T14:06:00Z,VOLUME_SPIKE,Valentino Nova,1718,768,124.0,"IT,FR,US,GB","en,it",0.31,,,
+TW-77247,2026-10-18T03:00:00Z,KEYWORD_MATCH,IRIDIA pink restock,3300,0,,KR,ko,0.3,"Iridia 핑크 입고, 청담, 대기",청담 Iridia 핑크 오늘 몇 장 들어왔대요 대기자 먼저,https://social.example/p/2275077267
+TW-70062,2026-10-19T14:42:00Z,VOLUME_SPIKE,Valentino sale,1360,775,75.0,"IT,FR,US,GB","en,fr",0.08,,,
+TW-77219,2026-10-20T02:00:00Z,KEYWORD_MATCH,Valentino 双十一,6100,1900,221.0,CN,zh,-0.05,"双十一, 预售, 天猫, 价格, 门店",天猫双十一预售Valentino比门店便宜，门店能不能价保？,https://social.example/p/921390403
+TW-70063,2026-10-21T22:20:00Z,VOLUME_SPIKE,Valentino kids,684,420,63.0,"IT,FR,US,GB","en,it",0.08,,,

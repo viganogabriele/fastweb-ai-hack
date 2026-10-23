@@ -26,19 +26,19 @@
 ### Scenario signals
 1. **SEL01 customs hold** – load `SHP02600440` / delivery `0080412440` / AWB `NX3467086408` (Nippon Express): picked up TKO Oct 7, arrived
    ICN Oct 8 03:20 KST, **customs hold Oct 8 (KC certificate missing)**, released Oct 12 17:24 KST, delivered **Oct 13**. Carrier EDD Oct 8,
-   internal plan Oct 12 → the internal `delay_days=1` hides a 5-day slip vs the carrier promise. The load contained ILVARO **off-white only**;
+   internal plan Oct 12 → the internal `delay_days=1` hides a 5-day slip vs the carrier promise. The load contained IRIDIA **off-white only**;
    the pink top-up (20 pcs) left TKO on Oct 10 in `SHP02600455`, was **selected for inspection** (follow-up of the KC case) and delivered Oct 18
    (planned Oct 15). Incidents INC0042230 / INC0042398. Store staff believed pink was in the first box (work notes).
-2. **MAD01 mis-pick** – deliveries 0080412337 (Sep 24→26) and 0080412382 (Sep 30→Oct 1): 17 + 20 MAYA navy shipped instead of black.
+2. **MAD01 mis-pick** – deliveries 0080412337 (Sep 24→26) and 0080412382 (Sep 30→Oct 1): 17 + 20 NOVA navy shipped instead of black.
    INC0041877 (Spanish/Italian notes; DC first blames the store), duplicate INC0042011, root cause bin labels swapped (QN 300004590),
-   cycle count Oct 6, black MAYA in delivery 0080412427 (shipped Oct 8, **arrived Oct 11, 3 days late**). 37 navy still at MAD01 (open).
-   IBT MIL01→MAD01 MAYA black sizes 3/4 (2+2) received Oct 3.
-3. **MAIRE black IBTs** – ROM01→MIL01 (2+1, received Sep 24), LON01→LON02 same day (Sep 25); rejected: CAN01→PAR01 (source refused),
-   **COU01→MIL01 (store closed for the season although it holds 6 black Maire)**, GVA01→PAR02 (CH→EU cross-border not allowed),
+   cycle count Oct 6, black NOVA in delivery 0080412427 (shipped Oct 8, **arrived Oct 11, 3 days late**). 37 navy still at MAD01 (open).
+   IBT MIL01→MAD01 NOVA black sizes 3/4 (2+2) received Oct 3.
+3. **AUREA black IBTs** – ROM01→MIL01 (2+1, received Sep 24), LON01→LON02 same day (Sep 25); rejected: CAN01→PAR01 (source refused),
+   **COU01→MIL01 (store closed for the season although it holds 6 black Aurea)**, GVA01→PAR02 (CH→EU cross-border not allowed),
    BER01→PAR01 on Fri Oct 2 13:xx (**after 12:00 cut-off**, first pickup Monday → client leaves Sunday → cancelled).
-4. **LOGO CARDIGAN M** – IBT MIL02→MIL01 *approved* Oct 9 but never shipped (department store must release goods); ROM01→MIL01 and
+4. **VLOGO CARDIGAN M** – IBT MIL02→MIL01 *approved* Oct 9 but never shipped (department store must release goods); ROM01→MIL01 and
    VEN01→MIL01 still `REQUESTED`. Same-city courier lane MIL02→MIL01 costs ~€16, same day if booked before 15:30.
-5. **ILVARO pink IBTs in Asia** – SIN01→SEL01 rejected (cross-border, KC document), BUS01/SEL02→SEL01 rejected (no stock), BJS01→SHA01 rejected,
+5. **IRIDIA pink IBTs in Asia** – SIN01→SEL01 rejected (cross-border, KC document), BUS01/SEL02→SEL01 rejected (no stock), BJS01→SHA01 rejected,
    TYO02→TYO01 1 pc received Oct 5. Cross-region IBT never allowed (route via DC / STO).
 6. **SYD01** – IBT requests for polos/tees from SIN01 rejected (cross-border); INC0042302 complains about receiving puffers in spring.
 7. Other delays have plausible causes in the events: HKG01 typhoon (SHP02600311, INC0040912), Rinascente goods-in slot (SHP02600413),

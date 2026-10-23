@@ -4,10 +4,10 @@ from bjs01_p2 import E2
 
 STORE = "BJS01"
 PEOPLE = {
-    "ly": ("刘洋", "yang.liu@moncler-retail.example"),
-    "zm": ("张敏", "min.zhang@moncler-retail.example"),
-    "mx": ("马骁", "xiao.ma@moncler-retail.example"),
-    "box": ("", "bjs01.store@moncler-retail.example"),
+    "ly": ("刘洋", "yang.liu@valentino-retail.example"),
+    "zm": ("张敏", "min.zhang@valentino-retail.example"),
+    "mx": ("马骁", "xiao.ma@valentino-retail.example"),
+    "box": ("", "bjs01.store@valentino-retail.example"),
 }
 PEOPLE_MAILER = {
     "ly": "iPhone Mail (22A3354)",
@@ -16,5 +16,5 @@ PEOPLE_MAILER = {
 }
 DEFAULT_TO = ["ops_cn"]
 DEFAULT_CC = ["zhaolei"]
-ALLOWED_REPEATS = ["[抱拳]", "张敏", "Moncler 北京SKP店", "马骁", "领导好", "各位好：", "赵总、各位好：", "赵总好："]
+ALLOWED_REPEATS = ["[抱拳]", "张敏", "Valentino 北京SKP店", "马骁", "领导好", "各位好：", "赵总、各位好：", "赵总好："]
 EMAILS = E1 + E2

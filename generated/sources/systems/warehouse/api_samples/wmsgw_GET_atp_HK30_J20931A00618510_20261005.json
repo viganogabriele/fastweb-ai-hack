@@ -1,13 +1,13 @@
 {
   "_request": {
     "method": "GET",
-    "url": "https://wms-gw.moncler-int.example/v1/atp?plant=HK30&material=J20931A00618510",
+    "url": "https://wms-gw.valentino-int.example/v1/atp?plant=HK30&material=J20931A00618510",
     "ts": "2026-10-05T06:30:00Z"
   },
   "plant": "HK30",
   "material": "J20931A00618510",
   "sku": "J20931A00618-510",
-  "styleName": "ILVARO",
+  "styleName": "IRIDIA",
   "asOf": "2026-10-05T06:00:00+08:00",
   "uom": "PC",
   "sizes": [

@@ -1,6 +1,10 @@
 # generated/ — how to use this dataset (read before touching anything)
 
-Controlled synthetic world for the Moncler track (module **M0 "World simulator"** in `docs/project-design.md`).
+Controlled synthetic world for the Valentino track (module **M0 "World simulator"** in `docs/project-design.md`).
+Valentino is the demo branding. Model names are synthetic labels; style codes, SKU keys and
+numerical series were preserved during the 2026-10-23 rebrand. The separate public commercial
+catalog and image associations are documented in `../data/catalog/README.md`; they are visual
+references, not historical evidence for this simulation.
 39 stores, 18 countries, 114 style-colours / 643 SKU-sizes. Sales run from 2024-09-01 to 2026-10-21, and the store emails, POS lines and stock run from Aug to Oct 2026.
 **"Today" = Thursday 2026-10-22.** All people, influencers, vendors and competitors are fictional.
 
@@ -49,6 +53,7 @@ When a coding agent works on **product** code, add this to its prompt or `CLAUDE
 | `internal_comms/` | area-manager weekly recaps, chat exports (WhatsApp, Teams JSON, KakaoTalk, LINE, WeChat), store visit reports, HQ memos, voice-of-customer | each export in its native format | M3 extra evidence, M13b |
 | `reports/` | 25 reports (XLSX/PDF/PPTX/DOCX/CSV) from controlling, regions, JP/KR/CN, merch, agency, market research, tax-free operator, quality, board | **conflicting metric definitions** (FX, VAT, calendars, sell-through, LFL perimeter) + real mistakes | M7 reconciler |
 | `external/` | weather (per-provider formats, °F/°C), tides, 10-day forecast, holidays ICS, events, strikes, Rome ordinance, tourism with **publication lag**, flight seats, hotels, tax-free index, trends, ~4.7k social posts (3 vendors), ~80 news items, FX, macro | schema changes mid-period, relative indices, duplicates, mixed timestamps | M8 context, S2/S4 |
+| `external/catalog/valentino.json` | Official public product metadata, source URLs, image URLs, reference prices and retrieval timestamp | **Display-only**; distinct from synthetic ERP SKUs and historical signals | Future visual catalog; `data/catalog/` contains the offline exports |
 | `systems/` | other departments + their agents: `warehouse/` (SAP-like DC stock, POs, ATP, quality holds), `logistics/` (tracking, customs, incidents, transfers, **lane lead-time/cost matrix**), `marketing/` (campaigns, CRM clienteling notes, waitlists, PR), `planning/` (OTB, allocation, replenishment params, S&OP minutes), `ecommerce/`, `customer_care/`, `agents/` (agent cards, OpenAPI, examples, inter-agent log), `reference/` (ID crosswalk) | different IDs per system (MIL01 / 1001 / CRM code / ship-to), SKU with or without size, EAN | M10, M13a/c |
 
 **Mock agents server** (for M13): `.venv/bin/python generator/systems/mock_agents/server.py --port 8088`, run from the repo root.
@@ -57,8 +62,8 @@ Running the server is fine; importing its code into the product is not (it reads
 
 ### Conventions
 - **Store id** `MIL01`... is the master key (`erp/master_data/stores.csv`). Other systems use other codes; see `systems/reference/`.
-- **SKU** = `<style_code>-<colour_code>` (e.g. `J20931A00012-999` = MAIRE black). SKU-size = `+ -<size>`. Sizes: women outerwear `00 0 1 2 3 4`, men `1–7`, knit/jersey `XS–XXL`, shoes EU, accessories `TU`.
-- Staff never write codes: they write "la Maire nera", "粉色", "イルバロ", "the long black one". Colour names in 8 languages are in `generator/config.py`. Copy that list into your own code; don't import it.
+- **SKU** = `<style_code>-<colour_code>` (e.g. `J20931A00012-999` = AUREA black). SKU-size = `+ -<size>`. Sizes: women outerwear `00 0 1 2 3 4`, men `1–7`, knit/jersey `XS–XXL`, shoes EU, accessories `TU`.
+- Staff never write codes: they write "la Aurea nera", "粉色", "Iridia", "the long black one". Colour names in 8 languages are in `generator/config.py`. Copy that list into your own code; don't import it.
 - **Money:** `erp` amounts are **net of VAT/consumption tax and of returns**, in **local currency**. `net_sales_eur_bud` uses 2026 budget FX. Emails and reports often quote VAT-inclusive, gross, k€, 万 or 천원 figures.
 - **Dates:** `business_date` is the store's local date. Email `Date:` headers carry the local offset. Social and logistics timestamps are mostly UTC, with exceptions.
 
@@ -99,7 +104,7 @@ To replay "the evening of day D" (the demo narrative), only use:
 - **Dev (tune here):** MIL01, MIL02, PAR01, LON01, MUN01, MAD01, NYC01, TYO01, SEL01, SHA01, HKG01, SYD01, plus whatever else is not in hold-out.
 - **Hold-out (only for the final metrics table):** ROM01, PAR02, LON02, ZRH01, NYC02, TYO02, SEL02, BJS01, TPE01, DXB01.
 
-The hold-out still covers every storyline: construction (ROM01), black Maire (PAR02, LON02), cold (ZRH01), POS outage (NYC02), pink ILVARO (TYO02, SEL02, TPE01), POLARIS (BJS01), Gulf tourists (DXB01).
+The hold-out still covers every storyline: construction (ROM01), black Aurea (PAR02, LON02), cold (ZRH01), POS outage (NYC02), pink IRIDIA (TYO02, SEL02, TPE01), ASTRA (BJS01), Gulf tourists (DXB01).
 Also keep the team's hand-written hold-out notes (design doc §7.2) separate from all of this.
 
 ---
@@ -108,14 +113,14 @@ Also keep the team's hand-written hold-out notes (design doc §7.2) separate fro
 
 | Design scenario | Concrete case(s) to use |
 |---|---|
-| S1 size stock-out with unmet demand | MIL01 LOGO CARDIGAN **size M**, sold out Thu 2026-10-08; DC has none until end of Oct |
-| S2 tourist-driven colour demand | **black MAIRE** at PAR01, PAR02, MIL01, LON02 from ~Sep 19 (Korean tourists, Chuseok); DC empty until Oct 16 |
+| S1 size stock-out with unmet demand | MIL01 VLOGO CARDIGAN **size M**, sold out Thu 2026-10-08; DC has none until end of Oct |
+| S2 tourist-driven colour demand | **black AUREA** at PAR01, PAR02, MIL01, LON02 from ~Sep 19 (Korean tourists, Chuseok); DC empty until Oct 16 |
 | S3 construction, traffic halved | **ROM01** Via Condotti scaffolding Sep 14 → Nov 6 (−50% footfall). It must NOT become "demand down" |
 | S4 cold snap (A with notes / B context only) | A: MUN01, ZRH01, BER01, CPH01, AMS01 Oct 12–19. B: Paris, London and Milan get milder cold with fewer notes |
-| S5 new product, no history | **ILVARO powder pink (510)** in Asia after the idol photo on Oct 1; also AMBRINE brown, ARNEB, POLARIS |
+| S5 new product, no history | **IRIDIA powder pink (510)** in Asia after the idol photo on Oct 1; also AMALIA brown, ARTEM, ASTRA |
 | S6 decoys | many: wrong colour/model names, corrected figures, gross-vs-net, staff exaggerations (see the answer keys) |
-| S7 phantom inventory / data discrepancy | MIL02 says "only one cardigan M" while stock shows 3; COU01 stock after seasonal return; MAD01 received navy MAYA instead of black |
-| S8 ambiguous product | "粉紅 Bady" (HKG01 meaning ILVARO), "Maire pink", MIL01 writing "Maya" for Maire |
+| S7 phantom inventory / data discrepancy | MIL02 says "only one cardigan M" while stock shows 3; COU01 stock after seasonal return; MAD01 received navy NOVA instead of black |
+| S8 ambiguous product | "粉紅 Aria" (HKG01 meaning IRIDIA), "Aurea pink", MIL01 writing "Nova" for Aurea |
 | Forecast-bias case | **SYD01**: event-blind forecast ~2.5× too high on down jackets (southern spring) |
 | Agents / handoff | SEL01 customs hold (KC certificate), BER01→PAR01 transfer rejected after cut-off, lane matrix for transfers |
 

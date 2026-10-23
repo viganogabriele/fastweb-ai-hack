@@ -1,0 +1,1636 @@
+{
+  "brand": "Valentino",
+  "retrieved_at": "2026-10-23T01:11:52.490205+00:00",
+  "source": "Official Valentino public collection JSON-LD",
+  "official_product_count": 332,
+  "products": [
+    {
+      "style_code": "J20931A00012",
+      "name": "AUREA",
+      "category": "Outerwear",
+      "subcategory": "Short down jacket",
+      "gender": "W",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 1450.0,
+      "variants": [
+        {
+          "sku": "J20931A00012-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "J20931A00012-034",
+          "color": "beige",
+          "color_code": "034"
+        },
+        {
+          "sku": "J20931A00012-20D",
+          "color": "bianco latte",
+          "color_code": "20D"
+        },
+        {
+          "sku": "J20931A00012-742",
+          "color": "blu notte",
+          "color_code": "742"
+        }
+      ],
+      "reference": {
+        "id": "BNA06JAKA_5U0",
+        "name": "Nappa Leather Jacket",
+        "url": "https://www.valentino.com/en-it/product-nappa-leather-jacket-BNA06JAKA_5U0",
+        "image": "images/BNA06JAKA_5U0.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/7517b5de-82c6-455f-abf6-8b7cb5e18df3/ihqstx/std/500x0/Nappa-Leather-Jacket?quality=80&size=35&format=auto",
+        "price": 6900.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "J20931A00087",
+      "name": "LIVIANA",
+      "category": "Outerwear",
+      "subcategory": "Long down jacket",
+      "gender": "W",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 2050.0,
+      "variants": [
+        {
+          "sku": "J20931A00087-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "J20931A00087-742",
+          "color": "blu notte",
+          "color_code": "742"
+        },
+        {
+          "sku": "J20931A00087-20D",
+          "color": "bianco latte",
+          "color_code": "20D"
+        }
+      ],
+      "reference": {
+        "id": "BNB07KAHJ_H08",
+        "name": "Goat Cashmere Cape",
+        "url": "https://www.valentino.com/en-it/product-goat-cashmere-cape-BNB07KAHJ_H08",
+        "image": "images/BNB07KAHJ_H08.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/cccecf73-f322-46b4-bb3e-e69184ad0adf/ihqstx/std/500x0/Goat-Cashmere-Cape?quality=80&size=35&format=auto",
+        "price": 12000.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "J20931A00144",
+      "name": "ARIA",
+      "category": "Outerwear",
+      "subcategory": "Short down jacket",
+      "gender": "W",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 1350.0,
+      "variants": [
+        {
+          "sku": "J20931A00144-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "J20931A00144-20D",
+          "color": "bianco latte",
+          "color_code": "20D"
+        },
+        {
+          "sku": "J20931A00144-510",
+          "color": "rosa cipria",
+          "color_code": "510"
+        }
+      ],
+      "reference": {
+        "id": "BNB07CAH8_M12",
+        "name": "Printed Shearling Caban Coat",
+        "url": "https://www.valentino.com/en-it/product-printed-shearling-caban-coat-BNB07CAH8_M12",
+        "image": "images/BNB07CAH8_M12.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/2a5f3175-f477-4c9e-8de0-2f646598f21c/ihqstx/std/500x0/Printed-Shearling-Caban-Coat?quality=80&size=35&format=auto",
+        "price": 18000.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "J20931A00203",
+      "name": "FIAMMETTA",
+      "category": "Outerwear",
+      "subcategory": "Long down jacket",
+      "gender": "W",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 1890.0,
+      "variants": [
+        {
+          "sku": "J20931A00203-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "J20931A00203-742",
+          "color": "blu notte",
+          "color_code": "742"
+        }
+      ],
+      "reference": {
+        "id": "BNB07JAHJ_A03",
+        "name": "Goat Cashmere Coat",
+        "url": "https://www.valentino.com/en-it/product-goat-cashmere-coat-BNB07JAHJ_A03",
+        "image": "images/BNB07JAHJ_A03.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/3c88c3c8-1630-4a67-ba07-ff14b1f670f7/ihqstx/std/500x0/Goat-Cashmere-Coat?quality=80&size=35&format=auto",
+        "price": 15000.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "J20931A00618",
+      "name": "IRIDIA",
+      "category": "Outerwear",
+      "subcategory": "Cropped down jacket",
+      "gender": "W",
+      "season": "FW26",
+      "launch_date": "2026-09-03",
+      "end_date": null,
+      "price_eur": 1590.0,
+      "variants": [
+        {
+          "sku": "J20931A00618-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "J20931A00618-510",
+          "color": "rosa cipria",
+          "color_code": "510"
+        },
+        {
+          "sku": "J20931A00618-20D",
+          "color": "bianco latte",
+          "color_code": "20D"
+        }
+      ],
+      "reference": {
+        "id": "BNB07BAHE_S93",
+        "name": "Goatskin Coat",
+        "url": "https://www.valentino.com/en-it/product-goatskin-coat-BNB07BAHE_S93",
+        "image": "images/BNB07BAHE_S93.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/5cfd5cdf-b689-464f-b095-d2318f496074/ihqstx/std/500x0/Goatskin-Coat?quality=80&size=35&format=auto",
+        "price": 20000.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "J20931A00622",
+      "name": "AMALIA",
+      "category": "Outerwear",
+      "subcategory": "Long down coat",
+      "gender": "W",
+      "season": "FW26",
+      "launch_date": "2026-09-03",
+      "end_date": null,
+      "price_eur": 2290.0,
+      "variants": [
+        {
+          "sku": "J20931A00622-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "J20931A00622-23R",
+          "color": "marrone cioccolato",
+          "color_code": "23R"
+        }
+      ],
+      "reference": {
+        "id": "BCA8K7AG6_0NO",
+        "name": "Soft Drap Coat",
+        "url": "https://www.valentino.com/en-it/product-soft-drap-coat-BCA8K7AG6_0NO",
+        "image": "images/BCA8K7AG6_0NO.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/8c81d361-5a13-4c98-872a-c9b01d44cf32/ihqstx/std/500x0/Soft-Drap-Coat?quality=80&size=35&format=auto",
+        "price": 5500.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "J20931A00655",
+      "name": "VIOLANTE",
+      "category": "Outerwear",
+      "subcategory": "Short down jacket",
+      "gender": "W",
+      "season": "FW25",
+      "launch_date": "2025-08-28",
+      "end_date": "2026-03-15",
+      "price_eur": 1490.0,
+      "variants": [
+        {
+          "sku": "J20931A00655-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "J20931A00655-034",
+          "color": "beige",
+          "color_code": "034"
+        },
+        {
+          "sku": "J20931A00655-82D",
+          "color": "verde oliva",
+          "color_code": "82D"
+        }
+      ],
+      "reference": {
+        "id": "BNB16ZAB2_1YN",
+        "name": "Aged-Effect Leather Caban",
+        "url": "https://www.valentino.com/en-it/product-aged-effect-leather-caban-BNB16ZAB2_1YN",
+        "image": "images/BNB16ZAB2_1YN.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/8290050f-b5a6-4c69-839b-84afffe2328a/ihqstx/std/500x0/Aged-Effect-Leather-Caban?quality=80&size=35&format=auto",
+        "price": 6200.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "J20931A00410",
+      "name": "BRUNEA",
+      "category": "Outerwear",
+      "subcategory": "Short down jacket",
+      "gender": "W",
+      "season": "FW24",
+      "launch_date": "2024-08-29",
+      "end_date": "2025-03-16",
+      "price_eur": 1390.0,
+      "variants": [
+        {
+          "sku": "J20931A00410-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "J20931A00410-742",
+          "color": "blu notte",
+          "color_code": "742"
+        },
+        {
+          "sku": "J20931A00410-41F",
+          "color": "rosso",
+          "color_code": "41F"
+        }
+      ],
+      "reference": {
+        "id": "BCA5VA6JA_0NO",
+        "name": "Embroidered Compact Drap Coat",
+        "url": "https://www.valentino.com/en-it/product-embroidered-compact-drap-coat-BCA5VA6JA_0NO",
+        "image": "images/BCA5VA6JA_0NO.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/d2070673-f8dd-43d8-a614-a7e01a750abc/ihqstx/std/500x0/Embroidered-Compact-Drap-Coat?quality=80&size=35&format=auto",
+        "price": 6900.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "J20931A00711",
+      "name": "LUNA",
+      "category": "Outerwear",
+      "subcategory": "Rain jacket",
+      "gender": "W",
+      "season": "SS25",
+      "launch_date": "2025-01-16",
+      "end_date": "2025-08-31",
+      "price_eur": 990.0,
+      "variants": [
+        {
+          "sku": "J20931A00711-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "J20931A00711-73A",
+          "color": "azzurro",
+          "color_code": "73A"
+        },
+        {
+          "sku": "J20931A00711-034",
+          "color": "beige",
+          "color_code": "034"
+        }
+      ],
+      "reference": {
+        "id": "BCG4YA6JA_NUD",
+        "name": "Embroidered Compact Drap Cape",
+        "url": "https://www.valentino.com/en-it/product-embroidered-compact-drap-cape-BCG4YA6JA_NUD",
+        "image": "images/BCG4YA6JA_NUD.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/ab449433-92de-4f3a-8cf0-0828a87dc4f1/ihqstx/std/500x0/Embroidered-Compact-Drap-Cape?quality=80&size=35&format=auto",
+        "price": 7900.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "J20931A00733",
+      "name": "ADELA",
+      "category": "Outerwear",
+      "subcategory": "Rain jacket",
+      "gender": "W",
+      "season": "SS26",
+      "launch_date": "2026-01-15",
+      "end_date": "2026-08-31",
+      "price_eur": 1050.0,
+      "variants": [
+        {
+          "sku": "J20931A00733-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "J20931A00733-034",
+          "color": "beige",
+          "color_code": "034"
+        },
+        {
+          "sku": "J20931A00733-73A",
+          "color": "azzurro",
+          "color_code": "73A"
+        }
+      ],
+      "reference": {
+        "id": "BCA7K54G2_LC0",
+        "name": "Double Kashmir Coat",
+        "url": "https://www.valentino.com/en-it/product-double-kashmir-coat-BCA7K54G2_LC0",
+        "image": "images/BCA7K54G2_LC0.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/b815f4c9-cb19-4eb4-82d9-418765f4ab69/ihqstx/std/500x0/Double-Kashmir-Coat?quality=80&size=35&format=auto",
+        "price": 6500.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "J20931A00560",
+      "name": "CAMILLA",
+      "category": "Outerwear",
+      "subcategory": "Down vest",
+      "gender": "W",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 890.0,
+      "variants": [
+        {
+          "sku": "J20931A00560-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "J20931A00560-20D",
+          "color": "bianco latte",
+          "color_code": "20D"
+        }
+      ],
+      "reference": {
+        "id": "BCAH306JA_819",
+        "name": "Compact Drap Coat",
+        "url": "https://www.valentino.com/en-it/product-compact-drap-coat-BCAH306JA_819",
+        "image": "images/BCAH306JA_819.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/068a4519-c886-44de-adf2-488a1d5496b1/ihqstx/std/500x0/Compact-Drap-Coat?quality=80&size=35&format=auto",
+        "price": 6900.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "J10911A00034",
+      "name": "NOVA",
+      "category": "Outerwear",
+      "subcategory": "Short down jacket",
+      "gender": "M",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 1550.0,
+      "variants": [
+        {
+          "sku": "J10911A00034-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "J10911A00034-742",
+          "color": "blu notte",
+          "color_code": "742"
+        },
+        {
+          "sku": "J10911A00034-82D",
+          "color": "verde oliva",
+          "color_code": "82D"
+        }
+      ],
+      "reference": {
+        "id": "VCJH48BP2_1MD",
+        "name": "Valentino double wool caban with suede collar and metallic V detail",
+        "url": "https://www.valentino.com/en-it/product-valentino-double-wool-caban-with-suede-collar-and-metallic-v-detail-VCJH48BP2_1MD",
+        "image": "images/VCJH48BP2_1MD.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/58362d9f-1621-4f97-8434-356ec287d9a5/ihqstx/std/500x0/Valentino-double-wool-caban-with-suede-collar-and-metallic-V-detail?quality=80&size=35&format=auto",
+        "price": 2300.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "J10911A00088",
+      "name": "MISTRAL",
+      "category": "Outerwear",
+      "subcategory": "Short down jacket",
+      "gender": "M",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 1650.0,
+      "variants": [
+        {
+          "sku": "J10911A00088-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "J10911A00088-742",
+          "color": "blu notte",
+          "color_code": "742"
+        }
+      ],
+      "reference": {
+        "id": "VCJH49BP2_080",
+        "name": "Valentino double wool caban with metallic V Detail",
+        "url": "https://www.valentino.com/en-it/product-valentino-double-wool-coat-with-metallic-v-detail-VCJH49BP2_080",
+        "image": "images/VCJH49BP2_080.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/5177ee03-1eef-408e-89a1-a48c11f25d19/ihqstx/std/500x0/Valentino-double-wool-caban-with-metallic-V-Detail?quality=80&size=35&format=auto",
+        "price": 2500.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "J10911A00142",
+      "name": "COSIMO",
+      "category": "Outerwear",
+      "subcategory": "Short down jacket",
+      "gender": "M",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 1450.0,
+      "variants": [
+        {
+          "sku": "J10911A00142-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "J10911A00142-742",
+          "color": "blu notte",
+          "color_code": "742"
+        },
+        {
+          "sku": "J10911A00142-90X",
+          "color": "grigio melange",
+          "color_code": "90X"
+        }
+      ],
+      "reference": {
+        "id": "VCIR51BNP_0NO",
+        "name": "Valentino bomber jacket in viscose and cotton cannetté with metallic V Detail",
+        "url": "https://www.valentino.com/en-it/product-valentino-bomber-jacket-in-viscose-and-cotton-cannett%C3%A9-with-metallic-v-detail-VCIR51BNP_0NO",
+        "image": "images/VCIR51BNP_0NO.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/91baae1d-4e17-4717-b558-dfbff225a38d/ihqstx/std/500x0/Valentino-bomber-jacket-in-viscose-and-cotton-cannetté-with-metallic-V-Detail?quality=80&size=35&format=auto",
+        "price": 1900.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "J10911A00190",
+      "name": "ETTORE",
+      "category": "Outerwear",
+      "subcategory": "Short down jacket",
+      "gender": "M",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 1490.0,
+      "variants": [
+        {
+          "sku": "J10911A00190-999",
+          "color": "nero",
+          "color_code": "999"
+        }
+      ],
+      "reference": {
+        "id": "VCIQ17BHV_0NO",
+        "name": "Valentino washed silk jacket with metallic V detail",
+        "url": "https://www.valentino.com/en-it/product-valentino-washed-silk-jacket-with-metallic-v-detail-VCIQ17BHV_0NO",
+        "image": "images/VCIQ17BHV_0NO.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/6c0fea6b-191c-4f67-bbe4-a8ce52f87f6c/ihqstx/std/500x0/Valentino-washed-silk-jacket-with-metallic-V-detail?quality=80&size=35&format=auto",
+        "price": 2300.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "J10911A00213",
+      "name": "MONTELUCE",
+      "category": "Outerwear",
+      "subcategory": "Wool down jacket",
+      "gender": "M",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 1750.0,
+      "variants": [
+        {
+          "sku": "J10911A00213-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "J10911A00213-742",
+          "color": "blu notte",
+          "color_code": "742"
+        },
+        {
+          "sku": "J10911A00213-90X",
+          "color": "grigio melange",
+          "color_code": "90X"
+        }
+      ],
+      "reference": {
+        "id": "VCIO01AWA_Z2G",
+        "name": "Valentino Shirt Jacket In Nylon Gabardine With Vgold",
+        "url": "https://www.valentino.com/en-it/product-valentino-shirt-jacket-in-nylon-gabardine-with-vgold-VCIO01AWA_Z2G",
+        "image": "images/VCIO01AWA_Z2G.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/7523261a-5043-4739-b716-4b8e477e91af/ihqstx/std/500x0/Valentino-Shirt-Jacket-In-Nylon-Gabardine-With-Vgold?quality=80&size=35&format=auto",
+        "price": 1500.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "J10911A00305",
+      "name": "VEL",
+      "category": "Outerwear",
+      "subcategory": "Down vest",
+      "gender": "M",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 990.0,
+      "variants": [
+        {
+          "sku": "J10911A00305-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "J10911A00305-742",
+          "color": "blu notte",
+          "color_code": "742"
+        },
+        {
+          "sku": "J10911A00305-20D",
+          "color": "bianco latte",
+          "color_code": "20D"
+        }
+      ],
+      "reference": {
+        "id": "VCIO01BL1_0NO",
+        "name": "Valentino Cotton Tweed Shirt Jacket With Vgold",
+        "url": "https://www.valentino.com/en-it/product-valentino-cotton-tweed-shirt-jacket-with-vgold-VCIO01BL1_0NO",
+        "image": "images/VCIO01BL1_0NO.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/2f0d0221-e4c6-459a-9cde-a7d2b2ced303/ihqstx/std/500x0/Valentino-Cotton-Tweed-Shirt-Jacket-With-Vgold?quality=80&size=35&format=auto",
+        "price": 1600.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "J10911A00577",
+      "name": "ARTEM",
+      "category": "Outerwear",
+      "subcategory": "Long parka",
+      "gender": "M",
+      "season": "FW26",
+      "launch_date": "2026-09-03",
+      "end_date": null,
+      "price_eur": 2190.0,
+      "variants": [
+        {
+          "sku": "J10911A00577-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "J10911A00577-742",
+          "color": "blu notte",
+          "color_code": "742"
+        }
+      ],
+      "reference": {
+        "id": "VCJL40BJN_J73",
+        "name": "Valentino Wool And Cashmere Jacket",
+        "url": "https://www.valentino.com/en-it/product-valentino-wool-and-cashmere-jacket-VCJL40BJN_J73",
+        "image": "images/VCJL40BJN_J73.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/8e094773-d02c-4836-9084-0adb3ee50fc5/ihqstx/std/500x0/Valentino-Wool-And-Cashmere-Jacket?quality=80&size=35&format=auto",
+        "price": 2500.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "J10911A00581",
+      "name": "RIVIERA",
+      "category": "Outerwear",
+      "subcategory": "Short down jacket",
+      "gender": "M",
+      "season": "FW26",
+      "launch_date": "2026-09-03",
+      "end_date": null,
+      "price_eur": 1690.0,
+      "variants": [
+        {
+          "sku": "J10911A00581-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "J10911A00581-82D",
+          "color": "verde oliva",
+          "color_code": "82D"
+        }
+      ],
+      "reference": {
+        "id": "VCIR37BJU_H6M",
+        "name": "Valentino Shirt Jacket In Boutonné Wool With Vgold",
+        "url": "https://www.valentino.com/en-it/product-valentino-shirt-jacket-in-boutonn%C3%A9-wool-with-vgold-VCIR37BJU_H6M",
+        "image": "images/VCIR37BJU_H6M.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/bed4a701-6962-4d21-b7dc-ec71b730242e/ihqstx/std/500x0/Valentino-Shirt-Jacket-In-Boutonné-Wool-With-Vgold?quality=80&size=35&format=auto",
+        "price": 1800.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "J10911A00499",
+      "name": "LEON",
+      "category": "Outerwear",
+      "subcategory": "Short down jacket",
+      "gender": "M",
+      "season": "FW25",
+      "launch_date": "2025-08-28",
+      "end_date": "2026-03-15",
+      "price_eur": 1590.0,
+      "variants": [
+        {
+          "sku": "J10911A00499-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "J10911A00499-742",
+          "color": "blu notte",
+          "color_code": "742"
+        }
+      ],
+      "reference": {
+        "id": "VCJH44BKA_3DC",
+        "name": "Valentino Wool Jacket With Vgold",
+        "url": "https://www.valentino.com/en-it/product-valentino-wool-jacket-with-vgold-VCJH44BKA_3DC",
+        "image": "images/VCJH44BKA_3DC.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/fe7323f0-bcae-467a-9b03-8ecb44eb1e68/ihqstx/std/500x0/Valentino-Wool-Jacket-With-Vgold?quality=80&size=35&format=auto",
+        "price": 2300.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "J10911A00402",
+      "name": "VESPRO",
+      "category": "Outerwear",
+      "subcategory": "Short down jacket",
+      "gender": "M",
+      "season": "FW24",
+      "launch_date": "2024-08-29",
+      "end_date": "2025-03-16",
+      "price_eur": 1490.0,
+      "variants": [
+        {
+          "sku": "J10911A00402-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "J10911A00402-82D",
+          "color": "verde oliva",
+          "color_code": "82D"
+        }
+      ],
+      "reference": {
+        "id": "VMB01HBM8_BLB",
+        "name": "Valentino Viscose Sweatshirt With Striped VLogo",
+        "url": "https://www.valentino.com/en-it/product-valentino-viscose-sweatshirt-with-striped-vlogo-VMB01HBM8_BLB",
+        "image": "images/VMB01HBM8_BLB.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/e056decd-db9c-4d0a-9dbc-67d6bb74329f/ihqstx/std/500x0/Valentino-Viscose-Sweatshirt-With-Striped-VLogo?quality=80&size=35&format=auto",
+        "price": 1600.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "J10911A00720",
+      "name": "ELIANO",
+      "category": "Outerwear",
+      "subcategory": "Windbreaker",
+      "gender": "M",
+      "season": "SS25",
+      "launch_date": "2025-01-16",
+      "end_date": "2025-08-31",
+      "price_eur": 950.0,
+      "variants": [
+        {
+          "sku": "J10911A00720-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "J10911A00720-742",
+          "color": "blu notte",
+          "color_code": "742"
+        },
+        {
+          "sku": "J10911A00720-73A",
+          "color": "azzurro",
+          "color_code": "73A"
+        }
+      ],
+      "reference": {
+        "id": "VCI345713_4GT",
+        "name": "Valentino Hooded Windbreaker In Lightweight Nylon With Inlaid V",
+        "url": "https://www.valentino.com/en-it/product-valentino-hooded-windbreaker-in-lightweight-nylon-with-inlaid-v-VCI345713_4GT",
+        "image": "images/VCI345713_4GT.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/a333d801-3bb6-430a-b904-733655f06b9c/ihqstx/std/500x0/Valentino-Hooded-Windbreaker-In-Lightweight-Nylon-With-Inlaid-V?quality=80&size=35&format=auto",
+        "price": 1800.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "J10911A00745",
+      "name": "MARIO",
+      "category": "Outerwear",
+      "subcategory": "Windbreaker",
+      "gender": "M",
+      "season": "SS26",
+      "launch_date": "2026-01-15",
+      "end_date": "2026-08-31",
+      "price_eur": 990.0,
+      "variants": [
+        {
+          "sku": "J10911A00745-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "J10911A00745-742",
+          "color": "blu notte",
+          "color_code": "742"
+        },
+        {
+          "sku": "J10911A00745-001",
+          "color": "bianco",
+          "color_code": "001"
+        }
+      ],
+      "reference": {
+        "id": "VNA03GBL0_0NO",
+        "name": "Valentino Leather Jacket",
+        "url": "https://www.valentino.com/en-it/product-valentino-leather-jacket-VNA03GBL0_0NO",
+        "image": "images/VNA03GBL0_0NO.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/fcdf54b6-7c1c-4d15-b884-2786bdfb9bf4/ihqstx/std/500x0/Valentino-Leather-Jacket?quality=80&size=35&format=auto",
+        "price": 3900.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "H20971A00010",
+      "name": "PIERO",
+      "category": "Outerwear",
+      "subcategory": "Ski jacket",
+      "gender": "M",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 2250.0,
+      "variants": [
+        {
+          "sku": "H20971A00010-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "H20971A00010-41F",
+          "color": "rosso",
+          "color_code": "41F"
+        }
+      ],
+      "reference": {
+        "id": "VCIR45BET_420",
+        "name": "Valentino Nylon Bomber Jacket With Vgold",
+        "url": "https://www.valentino.com/en-it/product-valentino-nylon-bomber-jacket-with-vgold-VCIR45BET_420",
+        "image": "images/VCIR45BET_420.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/e35d6e1f-5d1e-4eb0-afb1-7971e2eddaa4/ihqstx/std/500x0/Valentino-Nylon-Bomber-Jacket-With-Vgold?quality=80&size=35&format=auto",
+        "price": 1800.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "H20981A00020",
+      "name": "VALDORA",
+      "category": "Outerwear",
+      "subcategory": "Ski jacket",
+      "gender": "W",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 2150.0,
+      "variants": [
+        {
+          "sku": "H20981A00020-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "H20981A00020-20D",
+          "color": "bianco latte",
+          "color_code": "20D"
+        }
+      ],
+      "reference": {
+        "id": "BNB06ZA9L_K29",
+        "name": "Suede Caban",
+        "url": "https://www.valentino.com/en-it/product-suede-caban-BNB06ZA9L_K29",
+        "image": "images/BNB06ZA9L_K29.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/eb531a30-3598-40cc-8b94-7c43e77aa487/ihqstx/std/500x0/Suede-Caban?quality=80&size=35&format=auto",
+        "price": 5800.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "H20971A00055",
+      "name": "CORTINA",
+      "category": "Bottoms",
+      "subcategory": "Ski trousers",
+      "gender": "U",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 990.0,
+      "variants": [
+        {
+          "sku": "H20971A00055-999",
+          "color": "nero",
+          "color_code": "999"
+        }
+      ],
+      "reference": {
+        "id": "VRBP65BPW_4A8",
+        "name": "Valentino pinstripe wool trousers with pleats",
+        "url": "https://www.valentino.com/en-it/product-valentino-pinstripe-wool-pants-with-pleats-VRBP65BPW_4A8",
+        "image": "images/VRBP65BPW_4A8.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/3cd99692-161b-42b7-ae20-2c0647e62d77/ihqstx/std/500x0/Valentino-pinstripe-wool-trousers-with-pleats?quality=80&size=35&format=auto",
+        "price": 1500.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "G20921A00901",
+      "name": "ASTRA CAPE",
+      "category": "Outerwear",
+      "subcategory": "Down cape",
+      "gender": "U",
+      "season": "FW26",
+      "launch_date": "2026-09-24",
+      "end_date": null,
+      "price_eur": 2900.0,
+      "variants": [
+        {
+          "sku": "G20921A00901-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "G20921A00901-001",
+          "color": "bianco",
+          "color_code": "001"
+        }
+      ],
+      "reference": {
+        "id": "VCIQ10ALS_LC0",
+        "name": "Valentino Cotton Gabardine Shirt Jacket With VLogo",
+        "url": "https://www.valentino.com/en-it/product-valentino-cotton-gabardine-shirt-jacket-with-vlogo-VCIQ10ALS_LC0",
+        "image": "images/VCIQ10ALS_LC0.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/fd96ea3e-2ba9-480e-9de5-8575064296c7/ihqstx/std/500x0/Valentino-Cotton-Gabardine-Shirt-Jacket-With-VLogo?quality=80&size=35&format=auto",
+        "price": 1900.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "G20921A00902",
+      "name": "ASTRA OVERSIZED",
+      "category": "Outerwear",
+      "subcategory": "Oversized down jacket",
+      "gender": "U",
+      "season": "FW26",
+      "launch_date": "2026-09-24",
+      "end_date": null,
+      "price_eur": 2400.0,
+      "variants": [
+        {
+          "sku": "G20921A00902-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "G20921A00902-73A",
+          "color": "azzurro",
+          "color_code": "73A"
+        }
+      ],
+      "reference": {
+        "id": "VCIR65BFB_Z6H",
+        "name": "Valentino Shirt Jacket In Canneté Cotton With VLogo Embroidery",
+        "url": "https://www.valentino.com/en-it/product-valentino-shirt-jacket-in-cannet%C3%A9-cotton-with-vlogo-embroidery-VCIR65BFB_Z6H",
+        "image": "images/VCIR65BFB_Z6H.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/2f333f3b-75ab-4656-a870-d638365b0715/ihqstx/std/500x0/Valentino-shirt-jacket-in-canneté-cotton-with-VLogo-embroidery?quality=80&size=35&format=auto",
+        "price": 1700.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "G20921A00903",
+      "name": "ASTRA BALACLAVA",
+      "category": "Accessories",
+      "subcategory": "Knit balaclava",
+      "gender": "U",
+      "season": "FW26",
+      "launch_date": "2026-09-24",
+      "end_date": null,
+      "price_eur": 450.0,
+      "variants": [
+        {
+          "sku": "G20921A00903-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "G20921A00903-001",
+          "color": "bianco",
+          "color_code": "001"
+        }
+      ],
+      "reference": {
+        "id": "YHD00QNUH_ZJC",
+        "name": "Valentino MyVilla Embroidered Cotton Baseball Cap",
+        "url": "https://www.valentino.com/en-it/product-valentino-myvilla-embroidered-cotton-baseball-cap--YHD00QNUH_ZJC",
+        "image": "images/YHD00QNUH_ZJC.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/1aef351e-e398-454a-b632-0e78bdb6dd53/ihqstx/std/500x0/Valentino-MyVilla-Embroidered-Cotton-Baseball-Cap-?quality=80&size=35&format=auto",
+        "price": 390.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "I10919B00011",
+      "name": "VLOGO CARDIGAN",
+      "category": "Knitwear",
+      "subcategory": "Cardigan",
+      "gender": "M",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 790.0,
+      "variants": [
+        {
+          "sku": "I10919B00011-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "I10919B00011-742",
+          "color": "blu notte",
+          "color_code": "742"
+        }
+      ],
+      "reference": {
+        "id": "VKC38DBMW_0AN",
+        "name": "Valentino Cotton And Mouliné Wool Jumper With Panther Jacquard",
+        "url": "https://www.valentino.com/en-it/product-valentino-cotton-and-moulin%C3%A9-wool-jumper-with-panther-jacquard-VKC38DBMW_0AN",
+        "image": "images/VKC38DBMW_0AN.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/c3e5f9e7-81b5-4f6c-af8b-6db676e7ae53/ihqstx/std/500x0/Valentino-Cotton-And-Mouliné-Wool-Jumper-With-Panther-Jacquard?quality=80&size=35&format=auto",
+        "price": 1300.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "I10919B00042",
+      "name": "VLOGO PADDED CARDIGAN",
+      "category": "Knitwear",
+      "subcategory": "Padded cardigan",
+      "gender": "M",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 1150.0,
+      "variants": [
+        {
+          "sku": "I10919B00042-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "I10919B00042-742",
+          "color": "blu notte",
+          "color_code": "742"
+        },
+        {
+          "sku": "I10919B00042-90X",
+          "color": "grigio melange",
+          "color_code": "90X"
+        }
+      ],
+      "reference": {
+        "id": "VKP04XBLC_QT3",
+        "name": "Valentino Wool Polo Shirt With VLogo",
+        "url": "https://www.valentino.com/en-it/product-valentino-wool-polo-shirt-with-vlogo-VKP04XBLC_QT3",
+        "image": "images/VKP04XBLC_QT3.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/6373e9e5-9a77-4795-99b7-26a6d5241f4d/ihqstx/std/500x0/Valentino-Wool-Polo-Shirt-With-VLogo?quality=80&size=35&format=auto",
+        "price": 1300.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "I20939C00008",
+      "name": "INTARSIA SWEATER",
+      "category": "Knitwear",
+      "subcategory": "Sweater",
+      "gender": "W",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 750.0,
+      "variants": [
+        {
+          "sku": "I20939C00008-20D",
+          "color": "bianco latte",
+          "color_code": "20D"
+        },
+        {
+          "sku": "I20939C00008-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "I20939C00008-034",
+          "color": "beige",
+          "color_code": "034"
+        }
+      ],
+      "reference": {
+        "id": "BKC77DAJD_1MK",
+        "name": "Wool jumper with lace",
+        "url": "https://www.valentino.com/en-it/product-wool-sweater-with-lace-BKC77DAJD_1MK",
+        "image": "images/BKC77DAJD_1MK.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/e52324e5-00ae-4067-b980-d17b1544d29f/ihqstx/std/500x0/Wool-jumper-with-lace?quality=80&size=35&format=auto",
+        "price": 3000.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "I10919C00067",
+      "name": "CASHMERE TURTLENECK",
+      "category": "Knitwear",
+      "subcategory": "Turtleneck",
+      "gender": "M",
+      "season": "FW26",
+      "launch_date": "2026-09-03",
+      "end_date": null,
+      "price_eur": 650.0,
+      "variants": [
+        {
+          "sku": "I10919C00067-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "I10919C00067-742",
+          "color": "blu notte",
+          "color_code": "742"
+        },
+        {
+          "sku": "I10919C00067-23R",
+          "color": "marrone cioccolato",
+          "color_code": "23R"
+        }
+      ],
+      "reference": {
+        "id": "VKP04VBH9_598",
+        "name": "Valentino Wool Polo With VLogo Embroidery",
+        "url": "https://www.valentino.com/en-it/product-valentino-wool-polo-with-vlogo-embroidery-VKP04VBH9_598",
+        "image": "images/VKP04VBH9_598.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/a6ac640d-7792-4a7f-8602-392ddfbc8a1d/ihqstx/std/500x0/Valentino-Wool-Polo-With-VLogo-Embroidery?quality=80&size=35&format=auto",
+        "price": 950.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "I10918G00031",
+      "name": "VLOGO HOODIE",
+      "category": "Jersey",
+      "subcategory": "Hoodie",
+      "gender": "U",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 590.0,
+      "variants": [
+        {
+          "sku": "I10918G00031-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "I10918G00031-742",
+          "color": "blu notte",
+          "color_code": "742"
+        },
+        {
+          "sku": "I10918G00031-90X",
+          "color": "grigio melange",
+          "color_code": "90X"
+        }
+      ],
+      "reference": {
+        "id": "VMG18RBRE_HE8",
+        "name": "Valentino stretch chenille top with knot at the neck",
+        "url": "https://www.valentino.com/en-it/product-valentino-stretch-chenille-top-with-knot-at-the-neck-VMG18RBRE_HE8",
+        "image": "images/VMG18RBRE_HE8.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/c6d10524-a9f7-4962-bdab-dda0e2e41f66/ihqstx/std/500x0/Valentino-stretch-chenille-top-with-knot-at-the-neck?quality=80&size=35&format=auto",
+        "price": 850.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "I10918G00045",
+      "name": "RELAXED SWEATSHIRT",
+      "category": "Jersey",
+      "subcategory": "Sweatshirt",
+      "gender": "U",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 490.0,
+      "variants": [
+        {
+          "sku": "I10918G00045-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "I10918G00045-90X",
+          "color": "grigio melange",
+          "color_code": "90X"
+        },
+        {
+          "sku": "I10918G00045-001",
+          "color": "bianco",
+          "color_code": "001"
+        }
+      ],
+      "reference": {
+        "id": "VMG10VBR6_1TL",
+        "name": "Valentino cotton t-shirt with crew neck, contrasting side bands and VLogo embroidery",
+        "url": "https://www.valentino.com/en-it/product-valentino-cotton-t-shirt-with-crew-neck,-contrasting-side-bands-and-vlogo-embroidery-VMG10VBR6_1TL",
+        "image": "images/VMG10VBR6_1TL.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/9b1abcf5-1e46-4aad-8454-fefd1b077b38/ihqstx/std/500x0/Valentino-cotton-t-shirt-with-crew-neck,-contrasting-side-bands-and-VLogo-embroidery?quality=80&size=35&format=auto",
+        "price": 450.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "I10918C00012",
+      "name": "VLOGO T-SHIRT",
+      "category": "Jersey",
+      "subcategory": "T-shirt",
+      "gender": "U",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 350.0,
+      "variants": [
+        {
+          "sku": "I10918C00012-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "I10918C00012-001",
+          "color": "bianco",
+          "color_code": "001"
+        },
+        {
+          "sku": "I10918C00012-742",
+          "color": "blu notte",
+          "color_code": "742"
+        }
+      ],
+      "reference": {
+        "id": "VMG10VBMM_0NO",
+        "name": "Valentino Cotton T-Shirt With VLogo Embroidery",
+        "url": "https://www.valentino.com/en-it/product-valentino-cotton-t-shirt-with-vlogo-embroidery-VMG10VBMM_0NO",
+        "image": "images/VMG10VBMM_0NO.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/2a332cab-3d5b-49b7-b581-4f520c7e17f9/ihqstx/std/500x0/Valentino-Cotton-T-Shirt-With-VLogo-Embroidery?quality=80&size=35&format=auto",
+        "price": 450.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "I10918A00034",
+      "name": "JERSEY POLO",
+      "category": "Jersey",
+      "subcategory": "Jersey Polo",
+      "gender": "M",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 450.0,
+      "variants": [
+        {
+          "sku": "I10918A00034-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "I10918A00034-742",
+          "color": "blu notte",
+          "color_code": "742"
+        },
+        {
+          "sku": "I10918A00034-001",
+          "color": "bianco",
+          "color_code": "001"
+        }
+      ],
+      "reference": {
+        "id": "VMH04NBM8_BLB",
+        "name": "Valentino Viscose T-Shirt With Striped VLogo Embroidery",
+        "url": "https://www.valentino.com/en-it/product-valentino-viscose-t-shirt-with-striped-vlogo-embroidery-VMH04NBM8_BLB",
+        "image": "images/VMH04NBM8_BLB.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/ee9b7a6e-36e0-4fe2-818d-1bbd9f3a86de/ihqstx/std/500x0/Valentino-Viscose-T-Shirt-With-Striped-VLogo-Embroidery?quality=80&size=35&format=auto",
+        "price": 790.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "I10914M00061",
+      "name": "VTRACK GTX",
+      "category": "Footwear",
+      "subcategory": "Sneakers",
+      "gender": "M",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 690.0,
+      "variants": [
+        {
+          "sku": "I10914M00061-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "I10914M00061-90X",
+          "color": "grigio melange",
+          "color_code": "90X"
+        }
+      ],
+      "reference": {
+        "id": "YS0O23ENB_1RE",
+        "name": "Stud Up Trainer In Split Leather And Nylon With Butterfly Embroidery",
+        "url": "https://www.valentino.com/en-it/product-stud-up-sneaker-in-split-leather-and-nylon-with-butterfly-embroidery-YS0O23ENB_1RE",
+        "image": "images/YS0O23ENB_1RE.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/a2ebe8f4-a865-4e90-af37-2644c71c624b/ihqstx/std/500x0/Stud-Up-Trainer-In-Split-Leather-And-Nylon-With-Butterfly-Embroidery?quality=80&size=35&format=auto",
+        "price": 690.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "I20924M00062",
+      "name": "VTRACK W",
+      "category": "Footwear",
+      "subcategory": "Sneakers",
+      "gender": "W",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 690.0,
+      "variants": [
+        {
+          "sku": "I20924M00062-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "I20924M00062-20D",
+          "color": "bianco latte",
+          "color_code": "20D"
+        }
+      ],
+      "reference": {
+        "id": "WS0QK8ENB_1TD",
+        "name": "Stud Up Trainer In Split Leather And Nylon With Butterfly Embroidery",
+        "url": "https://www.valentino.com/en-it/product-stud-up-sneaker-in-split-leather-and-nylon-with-butterfly-embroidery--WS0QK8ENB_1TD",
+        "image": "images/WS0QK8ENB_1TD.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/635886f3-027d-4ebd-a6f8-c570f97c9c23/ihqstx/std/500x0/Stud-Up-Trainer-In-Split-Leather-And-Nylon-With-Butterfly-Embroidery-?quality=80&size=35&format=auto",
+        "price": 690.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "I20924H00080",
+      "name": "ALPINA",
+      "category": "Footwear",
+      "subcategory": "Après-ski boots",
+      "gender": "W",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 890.0,
+      "variants": [
+        {
+          "sku": "I20924H00080-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "I20924H00080-20D",
+          "color": "bianco latte",
+          "color_code": "20D"
+        }
+      ],
+      "reference": {
+        "id": "WS0IL9LAL_F7W",
+        "name": "Upvillage Crosta Sneaker",
+        "url": "https://www.valentino.com/en-it/product-upvillage-crosta-sneaker-WS0IL9LAL_F7W",
+        "image": "images/WS0IL9LAL_F7W.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/402f30e2-cc04-440c-8773-0c7c791099ee/ihqstx/std/500x0/Upvillage-Crosta-Sneaker?quality=80&size=35&format=auto",
+        "price": 650.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "I10913B00001",
+      "name": "VLOGO BEANIE",
+      "category": "Accessories",
+      "subcategory": "Beanie",
+      "gender": "U",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 290.0,
+      "variants": [
+        {
+          "sku": "I10913B00001-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "I10913B00001-742",
+          "color": "blu notte",
+          "color_code": "742"
+        },
+        {
+          "sku": "I10913B00001-001",
+          "color": "bianco",
+          "color_code": "001"
+        },
+        {
+          "sku": "I10913B00001-510",
+          "color": "rosa cipria",
+          "color_code": "510"
+        }
+      ],
+      "reference": {
+        "id": "YHD00MVMF_3BQ",
+        "name": "Valentino Garavani VLogo Signature Baseball Cap In Check Fabric",
+        "url": "https://www.valentino.com/en-it/product-valentino-garavani-vlogo-signature-baseball-cap-in-check-fabric-YHD00MVMF_3BQ",
+        "image": "images/YHD00MVMF_3BQ.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/0ff612fb-68e1-4f60-9859-600e17b2e857/ihqstx/std/500x0/Valentino-Garavani-VLogo-Signature-Baseball-Cap-In-Check-Fabric?quality=80&size=35&format=auto",
+        "price": 450.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "I10913A00004",
+      "name": "VALENTINO SCARF",
+      "category": "Accessories",
+      "subcategory": "Scarf",
+      "gender": "U",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 450.0,
+      "variants": [
+        {
+          "sku": "I10913A00004-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "I10913A00004-90X",
+          "color": "grigio melange",
+          "color_code": "90X"
+        },
+        {
+          "sku": "I10913A00004-034",
+          "color": "beige",
+          "color_code": "034"
+        }
+      ],
+      "reference": {
+        "id": "WEI114HXQ_2NF",
+        "name": "Le Fou de l'Archive Silk Scarf from the Valentino Archive",
+        "url": "https://www.valentino.com/en-it/product-le-fou-de-l-archive-silk-scarf-from-the-valentino-archive-WEI114HXQ_2NF",
+        "image": "images/WEI114HXQ_2NF.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/860a464d-df1e-40a3-b0eb-bf3bd4d8d77e/ihqstx/std/500x0/Le-Fou-de-l'Archive-Silk-Scarf-from-the-Valentino-Archive?quality=80&size=35&format=auto",
+        "price": 450.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "I10913E00007",
+      "name": "WINTER GLOVES",
+      "category": "Accessories",
+      "subcategory": "Gloves",
+      "gender": "U",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 390.0,
+      "variants": [
+        {
+          "sku": "I10913E00007-999",
+          "color": "nero",
+          "color_code": "999"
+        }
+      ],
+      "reference": {
+        "id": "YHD00MGRF_3A5",
+        "name": "Valentino Garavani VLogo Signature Wool Baseball Cap",
+        "url": "https://www.valentino.com/en-it/product-valentino-garavani-vlogo-signature-wool-baseball-cap-YHD00MGRF_3A5",
+        "image": "images/YHD00MGRF_3A5.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/d8af387f-14bb-46da-9033-0865ecc23866/ihqstx/std/500x0/Valentino-Garavani-VLogo-Signature-Wool-Baseball-Cap?quality=80&size=35&format=auto",
+        "price": 490.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "I10913D00012",
+      "name": "VLOGO CAP",
+      "category": "Accessories",
+      "subcategory": "Baseball cap",
+      "gender": "U",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 270.0,
+      "variants": [
+        {
+          "sku": "I10913D00012-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "I10913D00012-742",
+          "color": "blu notte",
+          "color_code": "742"
+        },
+        {
+          "sku": "I10913D00012-001",
+          "color": "bianco",
+          "color_code": "001"
+        }
+      ],
+      "reference": {
+        "id": "YHDA51NUX_T55",
+        "name": "Baseball Cap Valentino Garavani VLogo Signature In Suede",
+        "url": "https://www.valentino.com/en-it/product-baseball-cap-valentino-garavani-vlogo-signature-in-suede--YHDA51NUX_T55",
+        "image": "images/YHDA51NUX_T55.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/2444b0f2-4677-4ef1-a168-d24e61db7fd9/ihqstx/std/500x0/Baseball-Cap-Valentino-Garavani-VLogo-Signature-In-Suede-?quality=80&size=35&format=auto",
+        "price": 650.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "I10915C00021",
+      "name": "VITA BELT BAG",
+      "category": "Accessories",
+      "subcategory": "Belt bag",
+      "gender": "U",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 450.0,
+      "variants": [
+        {
+          "sku": "I10915C00021-999",
+          "color": "nero",
+          "color_code": "999"
+        }
+      ],
+      "reference": {
+        "id": "YB0U12EQK_5HG",
+        "name": "Stud Up Backpack in Technical Fabric",
+        "url": "https://www.valentino.com/en-it/product-rockstud-stud-up-in-technical-fabric-YB0U12EQK_5HG",
+        "image": "images/YB0U12EQK_5HG.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/ec316f8e-118f-4357-a375-0dc56731232b/ihqstx/std/500x0/Stud-Up-Backpack-in-Technical-Fabric?quality=80&size=35&format=auto",
+        "price": 1980.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    },
+    {
+      "style_code": "I10915D00030",
+      "name": "URBAN BACKPACK",
+      "category": "Accessories",
+      "subcategory": "Backpack",
+      "gender": "U",
+      "season": "CO",
+      "launch_date": null,
+      "end_date": null,
+      "price_eur": 690.0,
+      "variants": [
+        {
+          "sku": "I10915D00030-999",
+          "color": "nero",
+          "color_code": "999"
+        },
+        {
+          "sku": "I10915D00030-742",
+          "color": "blu notte",
+          "color_code": "742"
+        }
+      ],
+      "reference": {
+        "id": "YB0U13IGP_5HG",
+        "name": "Stud Up Waist Bag in Technical Fabric",
+        "url": "https://www.valentino.com/en-it/product-stud-up-waist-bag-in-technical-fabric-YB0U13IGP_5HG",
+        "image": "images/YB0U13IGP_5HG.jpg",
+        "image_url": "https://valentino-cdn.thron.com/delivery/public/image/valentino/b3666946-45ca-4284-b03a-a47f309c2e42/ihqstx/std/500x0/Stud-Up-Waist-Bag-in-Technical-Fabric?quality=80&size=35&format=auto",
+        "price": 1400.0,
+        "currency": "EUR",
+        "association": "illustrative_category_match"
+      }
+    }
+  ]
+}

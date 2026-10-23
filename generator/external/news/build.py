@@ -366,7 +366,7 @@ def main():
                   "tags": ["値上げ", "円安"], "file": None, "paywalled": True, "fetch_status": "403"})
     # aggregator order: crawler order (not chronological)
     items.sort(key=lambda x: x["id"][3:5])
-    feed = {"feed": "luxury-retail-monitor", "provider": "NewsHarvester v2.3", "query": "luxury OR moncler OR outerwear OR tourism OR strike OR weather (custom watchlist #12)",
+    feed = {"feed": "luxury-retail-monitor", "provider": "NewsHarvester v2.3", "query": "luxury OR valentino OR outerwear OR tourism OR strike OR weather (custom watchlist #12)",
             "generated_at": "2026-10-22T05:12:44Z", "count": len(items), "items": items}
     (OUT / "feed_index.json").write_text(json.dumps(feed, ensure_ascii=False, indent=1), encoding="utf-8")
 

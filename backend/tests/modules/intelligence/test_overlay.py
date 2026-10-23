@@ -69,7 +69,7 @@ def obs(name, value=6.0, unit="units", kind="unmet_demand", days=(date(2026, 10,
         **derived(f"obs-{name}", at), document_id=f"doc-{name}", kind=kind, store_id="MIL01",
         period_start=local(first) if first else None,
         period_end=local(first + timedelta(n - 1), 23, 59, 59) if first else None,
-        product_mention="Maire nera",
+        product_mention="Aurea nera",
         quantity=Quantity(kind="exact", value=value, unit=unit) if quantity == "exact"
         else Quantity(kind=quantity, unit=unit),
         direction=direction, attribution="store_staff", negated=negated,
@@ -79,7 +79,7 @@ def obs(name, value=6.0, unit="units", kind="unmet_demand", days=(date(2026, 10,
     )  # fmt: skip
 
 
-def case(*facts, scope=("sku", SKU), last=None, valid_until="auto", name="maire",
+def case(*facts, scope=("sku", SKU), last=None, valid_until="auto", name="aurea",
          case_type="unmet_demand"):  # fmt: skip
     last = last or max(f.available_at for f in facts)
     at = max(f.available_at for f in facts)
@@ -167,7 +167,7 @@ def test_inadmissible_fact_keeps_the_baseline_with_its_reason(fact, code):
     record = one([case(fact)], [fact])
     assert_baseline(record)
     assert record.reason == f"no_admissible_episode: {fact.id}: {code}"
-    assert record.case_ids == ("case-maire",) and record.baseline_ref == base_fc().baseline_ref
+    assert record.case_ids == ("case-aurea",) and record.baseline_ref == base_fc().baseline_ref
 
 
 def test_admissible_episode_gives_ordered_decaying_scenarios():
@@ -340,7 +340,7 @@ def test_run_on_the_data01b_fixtures_matches_their_forecasts(tmp_path):
         assert got[key].status == fc.status == "unchanged"
         assert got[key].baseline_ref == fc.baseline_ref
         assert [p.latent for p in got[key].series] == pytest.approx([p.latent for p in fc.series])
-    maire = got[(("case-mil01-j20931a00012-999-20261002",), SKU)]
-    assert "unit_requests_not_units" in maire.reason and "copy_of:" in maire.reason
+    valentino_v01 = got[(("case-mil01-j20931a00012-999-20261002",), SKU)]
+    assert "unit_requests_not_units" in valentino_v01.reason and "copy_of:" in valentino_v01.reason
     assert result.counts["computed"] == 0 and result.counts["overlays"] == len(want)
     assert again.counts["new"] == 0

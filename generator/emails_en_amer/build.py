@@ -4,9 +4,9 @@ Usage: .venv/bin/python generator/emails_en_amer/build.py [STORE ...]
 
 Each bodies_<STORE>.py defines:
     STORE = "NYC01"
-    WRITERS = {"rs": "Rebecca Stein <rebecca.stein@moncler-retail.example>", ...}
-    DEFAULT_TO = ["retail-ops-usa@moncler-retail.example"]
-    DEFAULT_CC = ["Lauren Mitchell <lauren.mitchell@moncler-retail.example>"]
+    WRITERS = {"rs": "Rebecca Stein <rebecca.stein@valentino-retail.example>", ...}
+    DEFAULT_TO = ["retail-ops-usa@valentino-retail.example"]
+    DEFAULT_CC = ["Lauren Mitchell <lauren.mitchell@valentino-retail.example>"]
     EMAILS = [dict(...), ...]
 
 Email dict keys:
@@ -63,7 +63,7 @@ _JPEG = bytes.fromhex(
 def _msgid(store, key):
     h = hashlib.sha1(f"{store}|{key}".encode()).hexdigest().upper()
     n = int(h[:2], 16) % 9 + 1
-    return f"<{['BN', 'CY4', 'SJ0', 'MN2'][int(h[2], 16) % 4]}PR{n}1MB{h[3:7]}{h[7:19]}@moncler-retail.example>"
+    return f"<{['BN', 'CY4', 'SJ0', 'MN2'][int(h[2], 16) % 4]}PR{n}1MB{h[3:7]}{h[7:19]}@valentino-retail.example>"
 
 
 def _load(store):

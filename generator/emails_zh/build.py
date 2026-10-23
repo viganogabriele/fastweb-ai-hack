@@ -63,7 +63,7 @@ def _fmt_addr(s: str, charset="utf-8") -> str:
 def _msgid(store, key, frm_addr):
     h = hashlib.sha1(f"{store}|{key}".encode()).hexdigest().upper()
     a = parseaddr(frm_addr)[1]
-    dom = a.split("@")[-1] if "@" in a else "moncler-retail.example"
+    dom = a.split("@")[-1] if "@" in a else "valentino-retail.example"
     return f"<{h[:8]}-{h[8:12]}-{h[12:16]}-{h[16:28]}@{dom}>"
 
 

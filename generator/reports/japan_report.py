@@ -60,7 +60,7 @@ def fmts(wb):
 def write_month():
     cy, ly = month_table()
     wb = xlsxwriter.Workbook(OUTD / "国内直営店_月次売上報告_2026年9月度_確定.xlsx")
-    wb.set_properties({"title": "2026年9月度 月次売上報告", "author": "日本支社 営業企画部 小林", "company": "モンクレール ジャパン"})
+    wb.set_properties({"title": "2026年9月度 月次売上報告", "author": "日本支社 営業企画部 小林", "company": "ヴァレンティノ ジャパン"})
     f = fmts(wb)
     # ---- summary
     ws = wb.add_worksheet("月次サマリー")
@@ -185,10 +185,10 @@ def write_month():
         "【全体】9月度は前年比{:.1f}%、予算比{:.1f}%で着地。第5週（9/27〜10/3）は国慶節の中国人観光客が銀座・心斎橋で増加し、月末にかけて回復。".format(
             A.net_tax / B.net_tax * 100, A.net_tax / A.bud_tax * 100),
         "【気温】9月末〜10月初旬にかけて最高気温27〜29℃の日が続き、ダウンジャケットの動きが鈍い。ニット・カットソー・スニーカーは堅調。",
-        "【新作】ILVARO（クロップド）は入荷数が少なく、ブラックは銀座で早期に欠品サイズあり。パウダーピンクは問い合わせ多数。",
-        "【価格改定】11/1付の価格改定（平均+8%）について、10/9に顧客への告知予定。告知後の駆け込み需要を見込み、MAYA・MAIREの在庫確保をMDへ依頼済み。",
-        "【品質】TIBベストのファスナー（スライダー）不具合による返品が9月末より発生。本社品質管理部へ報告済み。",
-        "【POLARIS】Genius POLARISは中国のお客様中心に動きあり、日本人顧客の反応は限定的。",
+        "【新作】IRIDIA（クロップド）は入荷数が少なく、ブラックは銀座で早期に欠品サイズあり。パウダーピンクは問い合わせ多数。",
+        "【価格改定】11/1付の価格改定（平均+8%）について、10/9に顧客への告知予定。告知後の駆け込み需要を見込み、NOVA・AUREAの在庫確保をMDへ依頼済み。",
+        "【品質】VELベストのファスナー（スライダー）不具合による返品が9月末より発生。本社品質管理部へ報告済み。",
+        "【ASTRA】Couture ASTRAは中国のお客様中心に動きあり、日本人顧客の反応は限定的。",
         "※本資料の数値は税込。アジア太平洋本部向けレポート（ユーロ換算）とは定義が異なるためご注意ください。",
     ]
     for i, t_ in enumerate(text):
@@ -249,7 +249,7 @@ def write_weekly():
         ws.write(11 + i, 0, i + 1, f["txt"])
         ws.write(11 + i, 1, f"{sn} {col}", f["txt"])
         ws.write(11 + i, 2, u, f["yen"])
-    # ILVARO pink waiting list (approx from unmet demand)
+    # IRIDIA pink waiting list (approx from unmet demand)
     lost = pd.read_csv(__import__("common").GT / "demand" / "lost_sales_daily.csv")
     lost = lost[lost.store_id.isin(JP) & lost.sku.str.startswith("J20931A00618-510") &
                 (lost.date >= "2026-10-02") & (lost.date <= "2026-10-17")]
@@ -257,13 +257,13 @@ def write_weekly():
     facts["ilvaro_waiting_list"] = wl
     ws.write(23, 0, "所感", f["title"])
     text = [
-        "・10/9の価格改定告知以降、MAYA・MAIRE・HERMINEを中心に駆け込み購入が本格化。銀座は前年比{:.0f}%。".format(out["TYO01"]),
+        "・10/9の価格改定告知以降、NOVA・AUREA・LIVIANAを中心に駆け込み購入が本格化。銀座は前年比{:.0f}%。".format(out["TYO01"]),
         "・10/12以降気温が下がり、ようやくダウンが動き始めた。",
-        "・ILVARO パウダーピンクは全店完売継続。10/8入荷分も即日完売。お取り置き・入荷待ちリスト：銀座{}名、表参道{}名、心斎橋{}名（概数）。".format(
+        "・IRIDIA パウダーピンクは全店完売継続。10/8入荷分も即日完売。お取り置き・入荷待ちリスト：銀座{}名、表参道{}名、心斎橋{}名（概数）。".format(
             wl["TYO01"], wl["TYO02"], wl["OSA01"]),
-        "・ブラック・オフホワイトのILVAROも問い合わせ増、サイズ1・2が欠品。",
-        "・TIBのファスナー不良返品は継続（交換対応）。",
-        "・価格改定前の在庫が不足する見込み。MAYAブラック サイズ3・4の追加配分を要請中。",
+        "・ブラック・オフホワイトのIRIDIAも問い合わせ増、サイズ1・2が欠品。",
+        "・VELのファスナー不良返品は継続（交換対応）。",
+        "・価格改定前の在庫が不足する見込み。NOVAブラック サイズ3・4の追加配分を要請中。",
     ]
     for i, t_ in enumerate(text):
         ws.write(24 + i, 0, t_)

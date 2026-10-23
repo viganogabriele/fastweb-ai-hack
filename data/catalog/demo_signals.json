@@ -1,0 +1,1201 @@
+{
+  "mode": "fixture",
+  "scenario_id": "historical",
+  "source": "Existing source-derived dev fixtures, not real Valentino customer reports",
+  "cases": [
+    {
+      "id": "case-mil01-i10919b00011-20261008",
+      "version": "v1",
+      "available_at": "2026-10-09T08:35:52Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261009_1035_MIL01.eml",
+          "content_hash": "sha256:5b8afe5fc87f71f0eb397c3f91acc7a300f9b97bb13d127144b4ddab080b7ebd",
+          "locator": null
+        },
+        {
+          "uri": "dataset://erp/master_data/styles.csv",
+          "content_hash": "sha256:36632f9c5616d48fbe94958702172d72d492e9628967ffa063874ccba8569b89",
+          "locator": "style_code=I10919B00011"
+        },
+        {
+          "uri": "dataset://erp/master_data/styles.csv",
+          "content_hash": "sha256:36632f9c5616d48fbe94958702172d72d492e9628967ffa063874ccba8569b89",
+          "locator": "style_code=I10919B00042"
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "Observation",
+          "id": "obs-20261009-1035-mil01-stockout",
+          "version": "v1"
+        },
+        {
+          "kind": "Observation",
+          "id": "obs-20261009-1035-mil01-unmet-demand",
+          "version": "v1"
+        },
+        {
+          "kind": "EntityLink",
+          "id": "link-20261009-1035-mil01-stockout",
+          "version": "v1"
+        },
+        {
+          "kind": "EntityLink",
+          "id": "link-20261009-1035-mil01-unmet-demand",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01b",
+      "producer_version": "1",
+      "case_type": "unmet_demand",
+      "store_id": "MIL01",
+      "scope_level": "style",
+      "scope_id": "I10919B00011",
+      "window_start": "2026-10-07T22:00:00Z",
+      "window_end": "2026-10-09T08:35:52Z",
+      "status": "open",
+      "owner": "allocation",
+      "priority": "high",
+      "priority_reason": "Size M at 0 units in both colours since 2026-10-08 and customers keep asking; no count, so no numeric uplift.",
+      "decision_due_at": "2026-10-16T08:35:52Z",
+      "first_available_at": "2026-10-09T08:35:52Z",
+      "last_received_at": "2026-10-09T08:35:52Z",
+      "last_independent_evidence_at": "2026-10-09T08:35:52Z",
+      "valid_until": "2026-10-16T08:35:52Z",
+      "supporting": [
+        {
+          "kind": "Observation",
+          "id": "obs-20261009-1035-mil01-stockout",
+          "version": "v1"
+        },
+        {
+          "kind": "Observation",
+          "id": "obs-20261009-1035-mil01-unmet-demand",
+          "version": "v1"
+        }
+      ],
+      "contradicting": [],
+      "n_documents": 1,
+      "n_origin_groups": 1,
+      "n_unknown_origins": 0,
+      "blocking_uncertainties": [
+        "Unmet demand is vague ('in continuazione'): no count of requests or units.",
+        "Stock-out is the store's statement; ERP stock for size M not checked yet.",
+        "No verified size curve: the share of size M in the colour forecast is unknown."
+      ],
+      "context_refs": [
+        {
+          "kind": "EntityLink",
+          "id": "link-20261009-1035-mil01-stockout",
+          "version": "v1"
+        },
+        {
+          "kind": "EntityLink",
+          "id": "link-20261009-1035-mil01-unmet-demand",
+          "version": "v1"
+        }
+      ]
+    },
+    {
+      "id": "case-mil01-j10911a00305-742-4-20261001",
+      "version": "v1",
+      "available_at": "2026-10-01T09:24:02Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261001_1124_MIL01_fwd.eml",
+          "content_hash": "sha256:9be12107b51f0d8e9665e019d486c7f5ee44dd7b686eb176fcf79aa67457e7ee",
+          "locator": null
+        },
+        {
+          "uri": "dataset://erp/master_data/sku_size_ean.csv",
+          "content_hash": "sha256:0e3810a27f3a7190bbd7d6d0607dd4004191dd5e56d3ecc62489f3bc1280b20a",
+          "locator": "sku_size=J10911A00305-742-4"
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "Observation",
+          "id": "obs-20261001-1124-mil01-fwd-tib-zip",
+          "version": "v1"
+        },
+        {
+          "kind": "EntityLink",
+          "id": "link-20261001-1124-mil01-fwd-tib-zip",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01b",
+      "producer_version": "1",
+      "case_type": "product_feedback",
+      "store_id": "MIL01",
+      "scope_level": "sku_size",
+      "scope_id": "J10911A00305-742-4",
+      "window_start": "2026-10-01T09:24:02Z",
+      "window_end": "2026-10-01T09:24:02Z",
+      "status": "open",
+      "owner": "product_quality",
+      "priority": "medium",
+      "priority_reason": "Quality defect (zip) reported by a customer in a forwarded mail.",
+      "decision_due_at": null,
+      "first_available_at": "2026-10-01T09:24:02Z",
+      "last_received_at": "2026-10-01T09:24:02Z",
+      "last_independent_evidence_at": "2026-10-01T09:24:02Z",
+      "valid_until": null,
+      "supporting": [
+        {
+          "kind": "Observation",
+          "id": "obs-20261001-1124-mil01-fwd-tib-zip",
+          "version": "v1"
+        }
+      ],
+      "contradicting": [],
+      "n_documents": 1,
+      "n_origin_groups": 1,
+      "n_unknown_origins": 0,
+      "blocking_uncertainties": [
+        "One customer complaint; the store's 'same problem as recent returns' is not counted here.",
+        "Purchase and defect dates come from the customer, not from POS."
+      ],
+      "context_refs": [
+        {
+          "kind": "EntityLink",
+          "id": "link-20261001-1124-mil01-fwd-tib-zip",
+          "version": "v1"
+        }
+      ]
+    },
+    {
+      "id": "case-mil01-j20931a00012-999-20261002",
+      "version": "v1",
+      "available_at": "2026-10-02T19:13:52Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2112_MIL01.eml",
+          "content_hash": "sha256:4485adb77cbfbd090a9865ecac389e35705ab374bf55037d05e0c9ba9712b711",
+          "locator": null
+        },
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2113_MIL01_dup.eml",
+          "content_hash": "sha256:2ddc2401fb2ad795dc6e5dc76d9850bd2182e42b27d47d020b903070a23e3466",
+          "locator": null
+        },
+        {
+          "uri": "dataset://erp/master_data/sku_colour.csv",
+          "content_hash": "sha256:ea0ec35ed17a37ab91fac2deaede6ee9637c00761a7339cc12581e144d14c160",
+          "locator": "sku=J20931A00012-999"
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "Observation",
+          "id": "obs-20261002-2112-mil01-maire-requests",
+          "version": "v1"
+        },
+        {
+          "kind": "Observation",
+          "id": "obs-20261002-2113-mil01-dup-maire-requests",
+          "version": "v1"
+        },
+        {
+          "kind": "EntityLink",
+          "id": "link-20261002-2112-mil01-maire-requests",
+          "version": "v1"
+        },
+        {
+          "kind": "EntityLink",
+          "id": "link-20261002-2113-mil01-dup-maire-requests",
+          "version": "v1"
+        },
+        {
+          "kind": "EvidenceRelation",
+          "id": "rel-20261002-mil01-maire-duplicates",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01b",
+      "producer_version": "1",
+      "case_type": "unmet_demand",
+      "store_id": "MIL01",
+      "scope_level": "sku",
+      "scope_id": "J20931A00012-999",
+      "window_start": "2026-10-01T22:00:00Z",
+      "window_end": "2026-10-02T21:59:59Z",
+      "status": "open",
+      "owner": "allocation",
+      "priority": "medium",
+      "priority_reason": "Exact count of requests in one day for AUREA black; two copies of the same email count as one origin.",
+      "decision_due_at": null,
+      "first_available_at": "2026-10-02T19:12:11Z",
+      "last_received_at": "2026-10-02T19:13:52Z",
+      "last_independent_evidence_at": "2026-10-02T19:12:11Z",
+      "valid_until": "2026-10-09T19:12:11Z",
+      "supporting": [
+        {
+          "kind": "Observation",
+          "id": "obs-20261002-2112-mil01-maire-requests",
+          "version": "v1"
+        },
+        {
+          "kind": "Observation",
+          "id": "obs-20261002-2113-mil01-dup-maire-requests",
+          "version": "v1"
+        }
+      ],
+      "contradicting": [],
+      "n_documents": 2,
+      "n_origin_groups": 1,
+      "n_unknown_origins": 0,
+      "blocking_uncertainties": [
+        "Requests are not units: no conversion to demand without evidence."
+      ],
+      "context_refs": [
+        {
+          "kind": "EntityLink",
+          "id": "link-20261002-2112-mil01-maire-requests",
+          "version": "v1"
+        },
+        {
+          "kind": "EntityLink",
+          "id": "link-20261002-2113-mil01-dup-maire-requests",
+          "version": "v1"
+        },
+        {
+          "kind": "EvidenceRelation",
+          "id": "rel-20261002-mil01-maire-duplicates",
+          "version": "v1"
+        }
+      ]
+    },
+    {
+      "id": "case-nyc01-unknown-20260906",
+      "version": "v1",
+      "available_at": "2026-09-06T22:37:07Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/NYC01/20260906_1837_NYC01.eml",
+          "content_hash": "sha256:a1e8d26c42dcdcc3b6797dd3e680b1e58d361c59d569029ebe4c54766446be30",
+          "locator": null
+        },
+        {
+          "uri": "dataset://erp/master_data/styles.csv",
+          "content_hash": "sha256:36632f9c5616d48fbe94958702172d72d492e9628967ffa063874ccba8569b89",
+          "locator": "style_code=I10918G00045"
+        },
+        {
+          "uri": "dataset://erp/master_data/styles.csv",
+          "content_hash": "sha256:36632f9c5616d48fbe94958702172d72d492e9628967ffa063874ccba8569b89",
+          "locator": "style_code=I10918G00031"
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "Observation",
+          "id": "obs-20260906-1837-nyc01-sweatshirt-return",
+          "version": "v1"
+        },
+        {
+          "kind": "EntityLink",
+          "id": "link-20260906-1837-nyc01-sweatshirt-return",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01b",
+      "producer_version": "1",
+      "case_type": "product_feedback",
+      "store_id": "NYC01",
+      "scope_level": "unknown",
+      "scope_id": null,
+      "window_start": "2026-09-06T04:00:00Z",
+      "window_end": "2026-09-07T03:59:59Z",
+      "status": "verify",
+      "owner": "product_quality",
+      "priority": "low",
+      "priority_reason": "One return of 'a sweatshirt'; the product is not identified.",
+      "decision_due_at": null,
+      "first_available_at": "2026-09-06T22:37:07Z",
+      "last_received_at": "2026-09-06T22:37:07Z",
+      "last_independent_evidence_at": "2026-09-06T22:37:07Z",
+      "valid_until": null,
+      "supporting": [
+        {
+          "kind": "Observation",
+          "id": "obs-20260906-1837-nyc01-sweatshirt-return",
+          "version": "v1"
+        }
+      ],
+      "contradicting": [],
+      "n_documents": 1,
+      "n_origin_groups": 1,
+      "n_unknown_origins": 0,
+      "blocking_uncertainties": [
+        "Product ambiguous: RELAXED SWEATSHIRT or VLOGO HOODIE, colour and size unknown."
+      ],
+      "context_refs": [
+        {
+          "kind": "EntityLink",
+          "id": "link-20260906-1837-nyc01-sweatshirt-return",
+          "version": "v1"
+        }
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "id": "doc-20260906-1837-nyc01",
+      "version": "v1",
+      "available_at": "2026-09-06T22:37:07Z",
+      "availability_basis": "email_date_header",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/NYC01/20260906_1837_NYC01.eml",
+          "content_hash": "sha256:a1e8d26c42dcdcc3b6797dd3e680b1e58d361c59d569029ebe4c54766446be30",
+          "locator": null
+        }
+      ],
+      "source_type": "email",
+      "connector": "src.email",
+      "uri": "dataset://store_emails/NYC01/20260906_1837_NYC01.eml",
+      "content_hash": "sha256:a1e8d26c42dcdcc3b6797dd3e680b1e58d361c59d569029ebe4c54766446be30",
+      "origin": "marcus.bell@valentino-retail.example",
+      "author_ref": "Marcus Bell",
+      "language": "en",
+      "business_date": "2026-09-06",
+      "event_start": null,
+      "event_end": null,
+      "thread_key": "<MN2PR51MB903148355AF8FC19@valentino-retail.example>",
+      "parent_document_id": null,
+      "text": "sun\n- 43.3k / plan 50.8. didnt get there\n- 42 units 27 trans\n- mistral black x5 which is wild, it was 84 degrees out\n- delivery 177u, all on the floor except the shoes\n- 5 returns. vel 3 change of mind, valdora 2 (wanted the black instead), cortina pants colour, a sweatshirt, and a belt bag w a scratch on the buckle\nbunch of brazilians and a mexican family from monterrey in the afternoon\ntmrw normal hours 10-7 per lauren\n\nSent from my iPhone",
+      "text_version": "email-v1",
+      "meta": {
+        "store_id": "NYC01",
+        "message_id": "<MN2PR51MB903148355AF8FC19@valentino-retail.example>",
+        "in_reply_to": null,
+        "subject": "eod sun",
+        "thread_subject": "eod sun",
+        "is_reply": false,
+        "is_forward": false,
+        "body_source": "plain",
+        "fixture_case": "ambiguous_mention"
+      }
+    },
+    {
+      "id": "doc-20260918-2115-mil01",
+      "version": "v1",
+      "available_at": "2026-09-18T19:15:56Z",
+      "availability_basis": "email_date_header",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20260918_2115_MIL01.eml",
+          "content_hash": "sha256:9a17aa5d3f19e6626bf8e234a89ee3bd3422d1ffffd9cb4f0c90a7516ece8f00",
+          "locator": null
+        }
+      ],
+      "source_type": "email",
+      "connector": "src.email",
+      "uri": "dataset://store_emails/MIL01/20260918_2115_MIL01.eml",
+      "content_hash": "sha256:9a17aa5d3f19e6626bf8e234a89ee3bd3422d1ffffd9cb4f0c90a7516ece8f00",
+      "origin": "giulia.ferrandi@valentino-retail.example",
+      "author_ref": "Giulia Ferrandi",
+      "language": "it",
+      "business_date": "2026-09-18",
+      "event_start": null,
+      "event_end": null,
+      "thread_key": "<ca847db8e00a.5487b537@valentino-retail.example>",
+      "parent_document_id": null,
+      "text": "MIL01 - CHIUSURA 18/09\n\nFatturato: 58,0k (bdg 70,2) +21%\nIngressi 463 | scontrini 44 | conv 9,5%\n\nVenerdi ottimo! Nova nera 12 pezzi, record della stagione per ora. Bene anche il cable knit bianco (5) e la hoodie grigia.\nParecchi giapponesi.\nUn solo reso (hoodie S).\n\nGiulia",
+      "text_version": "email-v1",
+      "meta": {
+        "store_id": "MIL01",
+        "message_id": "<ca847db8e00a.5487b537@valentino-retail.example>",
+        "in_reply_to": null,
+        "subject": "Chiusura MIL01 - 18/09",
+        "thread_subject": "Chiusura MIL01 - 18/09",
+        "is_reply": false,
+        "is_forward": false,
+        "body_source": "plain",
+        "fixture_case": "correction"
+      }
+    },
+    {
+      "id": "doc-20260918-2207-mil01-corr",
+      "version": "v1",
+      "available_at": "2026-09-18T20:07:29Z",
+      "availability_basis": "email_date_header",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20260918_2207_MIL01_corr.eml",
+          "content_hash": "sha256:a7aee178d35376e64f4c90515fe2eb4f8e6b1b231db3275fa77d10129c77dceb",
+          "locator": null
+        }
+      ],
+      "source_type": "email",
+      "connector": "src.email",
+      "uri": "dataset://store_emails/MIL01/20260918_2207_MIL01_corr.eml",
+      "content_hash": "sha256:a7aee178d35376e64f4c90515fe2eb4f8e6b1b231db3275fa77d10129c77dceb",
+      "origin": "giulia.ferrandi@valentino-retail.example",
+      "author_ref": "Giulia Ferrandi",
+      "language": "it",
+      "business_date": "2026-09-18",
+      "event_start": null,
+      "event_end": null,
+      "thread_key": "<ca847db8e00a.5487b537@valentino-retail.example>",
+      "parent_document_id": "doc-20260918-2115-mil01",
+      "text": "Scusate, ho invertito le cifre: il fatturato di oggi e' 85,0k e non 58. Il +21% e' giusto.\nG.",
+      "text_version": "email-v1",
+      "meta": {
+        "store_id": "MIL01",
+        "message_id": "<a745f9062431.c5c163c5@valentino-retail.example>",
+        "in_reply_to": "<ca847db8e00a.5487b537@valentino-retail.example>",
+        "subject": "R: Chiusura MIL01 - 18/09 - CORREZIONE",
+        "thread_subject": "Chiusura MIL01 - 18/09 - CORREZIONE",
+        "is_reply": true,
+        "is_forward": false,
+        "body_source": "plain",
+        "fixture_case": "correction"
+      }
+    },
+    {
+      "id": "doc-20261001-1124-mil01-fwd",
+      "version": "v1",
+      "available_at": "2026-10-01T09:24:02Z",
+      "availability_basis": "email_date_header",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261001_1124_MIL01_fwd.eml",
+          "content_hash": "sha256:9be12107b51f0d8e9665e019d486c7f5ee44dd7b686eb176fcf79aa67457e7ee",
+          "locator": null
+        }
+      ],
+      "source_type": "email",
+      "connector": "src.email",
+      "uri": "dataset://store_emails/MIL01/20261001_1124_MIL01_fwd.eml",
+      "content_hash": "sha256:9be12107b51f0d8e9665e019d486c7f5ee44dd7b686eb176fcf79aa67457e7ee",
+      "origin": "giulia.ferrandi@valentino-retail.example",
+      "author_ref": "Giulia Ferrandi",
+      "language": "it",
+      "business_date": "2026-10-01",
+      "event_start": null,
+      "event_end": null,
+      "thread_key": "<a0d14cd01da4.d95e69d6@valentino-retail.example>",
+      "parent_document_id": null,
+      "text": "Vi giro la mail di un cliente (signore italiano, cliente abituale). Stesso problema dei resi di questi giorni.\nGiulia\n\n-----Messaggio originale-----\nDa: F. Colombo\nInviato: mercoledi 30 settembre 2026 23:10\nA: mil01.store@valentino-retail.example\nOggetto: gilet Vel zip rotta\n\nBuonasera,\nho acquistato da voi il 12 settembre un gilet Vel blu taglia 4. Dopo nemmeno tre settimane il cursore della zip si e' staccato da una parte e il gilet non si chiude piu'. Lo uso per andare in ufficio, non l'ho certo maltrattato.\nDomani passo in negozio, vorrei sapere se lo sostituite o se devo mandarlo in riparazione. Sinceramente da Valentino non me lo aspettavo.\nCordiali saluti\nF. Colombo",
+      "text_version": "email-v1",
+      "meta": {
+        "store_id": "MIL01",
+        "message_id": "<a0d14cd01da4.d95e69d6@valentino-retail.example>",
+        "in_reply_to": null,
+        "subject": "I: gilet Vel zip rotta",
+        "thread_subject": "gilet Vel zip rotta",
+        "is_reply": false,
+        "is_forward": true,
+        "body_source": "plain",
+        "fixture_case": "forward"
+      }
+    },
+    {
+      "id": "doc-20261002-2112-mil01",
+      "version": "v1",
+      "available_at": "2026-10-02T19:12:11Z",
+      "availability_basis": "email_date_header",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2112_MIL01.eml",
+          "content_hash": "sha256:4485adb77cbfbd090a9865ecac389e35705ab374bf55037d05e0c9ba9712b711",
+          "locator": null
+        }
+      ],
+      "source_type": "email",
+      "connector": "src.email",
+      "uri": "dataset://store_emails/MIL01/20261002_2112_MIL01.eml",
+      "content_hash": "sha256:4485adb77cbfbd090a9865ecac389e35705ab374bf55037d05e0c9ba9712b711",
+      "origin": "giulia.ferrandi@valentino-retail.example",
+      "author_ref": "Giulia Ferrandi",
+      "language": "it",
+      "business_date": "2026-10-02",
+      "event_start": null,
+      "event_end": null,
+      "thread_key": "<7b3e8b297f25.3d98742b@valentino-retail.example>",
+      "parent_document_id": null,
+      "text": "Ciao a tutti,\ngiornata record, vi incollo il riepilogo.\n\nMIL01 MONTENAPOLEONE - 02/10/2026\nFatturato netto\t136.135 EUR\nBudget\t83.080 EUR\nvs bdg\t+63,9%\nIngressi\t828\nScontrini\t63\nConv.\t7,6%\nUPT\t1,94\nTop\tNova nera, Vita Belt Bag nero, Aria nera, Iridia bianco\nNote\tGolden week, 40% CN. Tax free in tilt 16-17. Aurea nera 7 richieste.\n\nIl terminale del tax free si e' bloccato per quasi un'ora, coda fino all'ingresso, abbiamo fatto i moduli a mano e alcuni cinesi li abbiamo mandati a fare il rimborso in aeroporto. Fei sfinita.\nAurea nera: 7 richieste (2 2 2, 1 1, 0, 4). Anche un Iridia bianco 00.\n1 Vel zip.\n\nGiulia",
+      "text_version": "email-v1",
+      "meta": {
+        "store_id": "MIL01",
+        "message_id": "<7b3e8b297f25.3d98742b@valentino-retail.example>",
+        "in_reply_to": null,
+        "subject": "Chiusura MIL01 - 02/10",
+        "thread_subject": "Chiusura MIL01 - 02/10",
+        "is_reply": false,
+        "is_forward": false,
+        "body_source": "plain",
+        "fixture_case": "duplicate"
+      }
+    },
+    {
+      "id": "doc-20261002-2113-mil01-dup",
+      "version": "v1",
+      "available_at": "2026-10-02T19:13:52Z",
+      "availability_basis": "email_date_header",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2113_MIL01_dup.eml",
+          "content_hash": "sha256:2ddc2401fb2ad795dc6e5dc76d9850bd2182e42b27d47d020b903070a23e3466",
+          "locator": null
+        }
+      ],
+      "source_type": "email",
+      "connector": "src.email",
+      "uri": "dataset://store_emails/MIL01/20261002_2113_MIL01_dup.eml",
+      "content_hash": "sha256:2ddc2401fb2ad795dc6e5dc76d9850bd2182e42b27d47d020b903070a23e3466",
+      "origin": "giulia.ferrandi@valentino-retail.example",
+      "author_ref": "Giulia Ferrandi",
+      "language": "it",
+      "business_date": "2026-10-02",
+      "event_start": null,
+      "event_end": null,
+      "thread_key": "<bf5a44ad5ee5.bf9af74e@valentino-retail.example>",
+      "parent_document_id": null,
+      "text": "Ciao a tutti,\ngiornata record, vi incollo il riepilogo.\n\nMIL01 MONTENAPOLEONE - 02/10/2026\nFatturato netto\t136.135 EUR\nBudget\t83.080 EUR\nvs bdg\t+63,9%\nIngressi\t828\nScontrini\t63\nConv.\t7,6%\nUPT\t1,94\nTop\tNova nera, Vita Belt Bag nero, Aria nera, Iridia bianco\nNote\tGolden week, 40% CN. Tax free in tilt 16-17. Aurea nera 7 richieste.\n\nIl terminale del tax free si e' bloccato per quasi un'ora, coda fino all'ingresso, abbiamo fatto i moduli a mano e alcuni cinesi li abbiamo mandati a fare il rimborso in aeroporto. Fei sfinita.\nAurea nera: 7 richieste (2 2 2, 1 1, 0, 4). Anche un Iridia bianco 00.\n1 Vel zip.\n\nGiulia",
+      "text_version": "email-v1",
+      "meta": {
+        "store_id": "MIL01",
+        "message_id": "<bf5a44ad5ee5.bf9af74e@valentino-retail.example>",
+        "in_reply_to": null,
+        "subject": "Chiusura MIL01 - 02/10",
+        "thread_subject": "Chiusura MIL01 - 02/10",
+        "is_reply": false,
+        "is_forward": false,
+        "body_source": "plain",
+        "fixture_case": "duplicate"
+      }
+    },
+    {
+      "id": "doc-20261009-1035-mil01",
+      "version": "v1",
+      "available_at": "2026-10-09T08:35:52Z",
+      "availability_basis": "email_date_header",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261009_1035_MIL01.eml",
+          "content_hash": "sha256:5b8afe5fc87f71f0eb397c3f91acc7a300f9b97bb13d127144b4ddab080b7ebd",
+          "locator": null
+        }
+      ],
+      "source_type": "email",
+      "connector": "src.email",
+      "uri": "dataset://store_emails/MIL01/20261009_1035_MIL01.eml",
+      "content_hash": "sha256:5b8afe5fc87f71f0eb397c3f91acc7a300f9b97bb13d127144b4ddab080b7ebd",
+      "origin": "giulia.ferrandi@valentino-retail.example",
+      "author_ref": "Giulia Ferrandi",
+      "language": "it",
+      "business_date": "2026-10-09",
+      "event_start": null,
+      "event_end": null,
+      "thread_key": "<31e46e9d5105.c1b19e2a@valentino-retail.example>",
+      "parent_document_id": null,
+      "text": "Ciao ragazzi,\nda ieri siamo a zero cardigan logo in M, sia nero che blu (la golden week ci ha svuotato) e a Castel San Giovanni la M rientra solo a fine ottobre.\nAvete qualche M da girarci? Anche 1 o 2 pezzi per colore, ce lo chiedono in continuazione. Se vi serve qualcosa da noi ditemi, ricambiamo volentieri.\nGrazie mille\nGiulia\nMIL01 Montenapoleone",
+      "text_version": "email-v1",
+      "meta": {
+        "store_id": "MIL01",
+        "message_id": "<31e46e9d5105.c1b19e2a@valentino-retail.example>",
+        "in_reply_to": null,
+        "subject": "richiesta transfer cardigan logo M",
+        "thread_subject": "richiesta transfer cardigan logo M",
+        "is_reply": false,
+        "is_forward": false,
+        "body_source": "plain",
+        "fixture_case": "d1_positive"
+      }
+    }
+  ],
+  "observations": [
+    {
+      "id": "obs-20260906-1837-nyc01-sweatshirt-return",
+      "version": "v1",
+      "available_at": "2026-09-06T22:37:07Z",
+      "availability_basis": "document_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/NYC01/20260906_1837_NYC01.eml",
+          "content_hash": "sha256:a1e8d26c42dcdcc3b6797dd3e680b1e58d361c59d569029ebe4c54766446be30",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "SourceDocument",
+          "id": "doc-20260906-1837-nyc01",
+          "version": "v1"
+        },
+        {
+          "kind": "Segment",
+          "id": "doc-20260906-1837-nyc01-seg0",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01a",
+      "producer_version": "1",
+      "document_id": "doc-20260906-1837-nyc01",
+      "kind": "product_feedback",
+      "store_id": "NYC01",
+      "period_start": "2026-09-06T04:00:00Z",
+      "period_end": "2026-09-07T03:59:59Z",
+      "time_text": "sun",
+      "product_mention": "a sweatshirt",
+      "quantity": {
+        "kind": "exact",
+        "value": 1.0,
+        "low": null,
+        "high": null,
+        "unit": "units",
+        "currency": null,
+        "raw": "a sweatshirt",
+        "evidence_ref": null
+      },
+      "direction": "down",
+      "reason": null,
+      "reason_text": null,
+      "funnel_stage": null,
+      "attribution": "store_staff",
+      "negated": false,
+      "evidence": [
+        {
+          "document_id": "doc-20260906-1837-nyc01",
+          "document_version": "v1",
+          "segment_id": "doc-20260906-1837-nyc01-seg0",
+          "quote": "a sweatshirt",
+          "char_start": 263,
+          "char_end": 275,
+          "t_start_s": null,
+          "t_end_s": null
+        }
+      ],
+      "extractor_version": "manual-data01a-v1"
+    },
+    {
+      "id": "obs-20260918-2115-mil01-net-sales",
+      "version": "v1",
+      "available_at": "2026-09-18T19:15:56Z",
+      "availability_basis": "document_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20260918_2115_MIL01.eml",
+          "content_hash": "sha256:9a17aa5d3f19e6626bf8e234a89ee3bd3422d1ffffd9cb4f0c90a7516ece8f00",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "SourceDocument",
+          "id": "doc-20260918-2115-mil01",
+          "version": "v1"
+        },
+        {
+          "kind": "Segment",
+          "id": "doc-20260918-2115-mil01-seg1",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01a",
+      "producer_version": "1",
+      "document_id": "doc-20260918-2115-mil01",
+      "kind": "sales_figure",
+      "store_id": "MIL01",
+      "period_start": "2026-09-17T22:00:00Z",
+      "period_end": "2026-09-18T21:59:59Z",
+      "time_text": null,
+      "product_mention": null,
+      "quantity": {
+        "kind": "exact",
+        "value": 58000.0,
+        "low": null,
+        "high": null,
+        "unit": "money",
+        "currency": "EUR",
+        "raw": "58,0k",
+        "evidence_ref": null
+      },
+      "direction": "none",
+      "reason": null,
+      "reason_text": null,
+      "funnel_stage": null,
+      "attribution": "store_staff",
+      "negated": false,
+      "evidence": [
+        {
+          "document_id": "doc-20260918-2115-mil01",
+          "document_version": "v1",
+          "segment_id": "doc-20260918-2115-mil01-seg1",
+          "quote": "Fatturato: 58,0k",
+          "char_start": 24,
+          "char_end": 40,
+          "t_start_s": null,
+          "t_end_s": null
+        }
+      ],
+      "extractor_version": "manual-data01a-v1"
+    },
+    {
+      "id": "obs-20260918-2207-mil01-corr-net-sales",
+      "version": "v1",
+      "available_at": "2026-09-18T20:07:29Z",
+      "availability_basis": "document_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20260918_2207_MIL01_corr.eml",
+          "content_hash": "sha256:a7aee178d35376e64f4c90515fe2eb4f8e6b1b231db3275fa77d10129c77dceb",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "SourceDocument",
+          "id": "doc-20260918-2207-mil01-corr",
+          "version": "v1"
+        },
+        {
+          "kind": "Segment",
+          "id": "doc-20260918-2207-mil01-corr-seg0",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01a",
+      "producer_version": "1",
+      "document_id": "doc-20260918-2207-mil01-corr",
+      "kind": "sales_figure",
+      "store_id": "MIL01",
+      "period_start": "2026-09-17T22:00:00Z",
+      "period_end": "2026-09-18T21:59:59Z",
+      "time_text": "oggi",
+      "product_mention": null,
+      "quantity": {
+        "kind": "exact",
+        "value": 85000.0,
+        "low": null,
+        "high": null,
+        "unit": "money",
+        "currency": "EUR",
+        "raw": "85,0k",
+        "evidence_ref": null
+      },
+      "direction": "none",
+      "reason": null,
+      "reason_text": null,
+      "funnel_stage": null,
+      "attribution": "store_staff",
+      "negated": false,
+      "evidence": [
+        {
+          "document_id": "doc-20260918-2207-mil01-corr",
+          "document_version": "v1",
+          "segment_id": "doc-20260918-2207-mil01-corr-seg0",
+          "quote": "il fatturato di oggi e' 85,0k e non 58",
+          "char_start": 32,
+          "char_end": 70,
+          "t_start_s": null,
+          "t_end_s": null
+        }
+      ],
+      "extractor_version": "manual-data01a-v1"
+    },
+    {
+      "id": "obs-20261001-1124-mil01-fwd-tib-zip",
+      "version": "v1",
+      "available_at": "2026-10-01T09:24:02Z",
+      "availability_basis": "document_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261001_1124_MIL01_fwd.eml",
+          "content_hash": "sha256:9be12107b51f0d8e9665e019d486c7f5ee44dd7b686eb176fcf79aa67457e7ee",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "SourceDocument",
+          "id": "doc-20261001-1124-mil01-fwd",
+          "version": "v1"
+        },
+        {
+          "kind": "Segment",
+          "id": "doc-20261001-1124-mil01-fwd-seg2",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01a",
+      "producer_version": "1",
+      "document_id": "doc-20261001-1124-mil01-fwd",
+      "kind": "product_feedback",
+      "store_id": "MIL01",
+      "period_start": null,
+      "period_end": null,
+      "time_text": "Dopo nemmeno tre settimane",
+      "product_mention": "gilet Vel blu taglia 4",
+      "quantity": {
+        "kind": "exact",
+        "value": 1.0,
+        "low": null,
+        "high": null,
+        "unit": "units",
+        "currency": null,
+        "raw": "un gilet",
+        "evidence_ref": null
+      },
+      "direction": "down",
+      "reason": "quality_defect",
+      "reason_text": "il cursore della zip si e' staccato",
+      "funnel_stage": null,
+      "attribution": "customer",
+      "negated": false,
+      "evidence": [
+        {
+          "document_id": "doc-20261001-1124-mil01-fwd",
+          "document_version": "v1",
+          "segment_id": "doc-20261001-1124-mil01-fwd-seg2",
+          "quote": "il cursore della zip si e' staccato da una parte",
+          "char_start": 379,
+          "char_end": 427,
+          "t_start_s": null,
+          "t_end_s": null
+        }
+      ],
+      "extractor_version": "manual-data01a-v1"
+    },
+    {
+      "id": "obs-20261002-2112-mil01-maire-requests",
+      "version": "v1",
+      "available_at": "2026-10-02T19:12:11Z",
+      "availability_basis": "document_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2112_MIL01.eml",
+          "content_hash": "sha256:4485adb77cbfbd090a9865ecac389e35705ab374bf55037d05e0c9ba9712b711",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "SourceDocument",
+          "id": "doc-20261002-2112-mil01",
+          "version": "v1"
+        },
+        {
+          "kind": "Segment",
+          "id": "doc-20261002-2112-mil01-seg2",
+          "version": "v1"
+        },
+        {
+          "kind": "Segment",
+          "id": "doc-20261002-2112-mil01-seg1",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01a",
+      "producer_version": "1",
+      "document_id": "doc-20261002-2112-mil01",
+      "kind": "unmet_demand",
+      "store_id": "MIL01",
+      "period_start": "2026-10-01T22:00:00Z",
+      "period_end": "2026-10-02T21:59:59Z",
+      "time_text": null,
+      "product_mention": "Aurea nera",
+      "quantity": {
+        "kind": "exact",
+        "value": 7.0,
+        "low": null,
+        "high": null,
+        "unit": "requests",
+        "currency": null,
+        "raw": "7 richieste",
+        "evidence_ref": null
+      },
+      "direction": "up",
+      "reason": null,
+      "reason_text": null,
+      "funnel_stage": null,
+      "attribution": "store_staff",
+      "negated": false,
+      "evidence": [
+        {
+          "document_id": "doc-20261002-2112-mil01",
+          "document_version": "v1",
+          "segment_id": "doc-20261002-2112-mil01-seg2",
+          "quote": "Aurea nera: 7 richieste (2 2 2, 1 1, 0, 4)",
+          "char_start": 526,
+          "char_end": 568,
+          "t_start_s": null,
+          "t_end_s": null
+        },
+        {
+          "document_id": "doc-20261002-2112-mil01",
+          "document_version": "v1",
+          "segment_id": "doc-20261002-2112-mil01-seg1",
+          "quote": "Aurea nera 7 richieste.",
+          "char_start": 307,
+          "char_end": 330,
+          "t_start_s": null,
+          "t_end_s": null
+        }
+      ],
+      "extractor_version": "manual-data01a-v1"
+    },
+    {
+      "id": "obs-20261002-2113-mil01-dup-maire-requests",
+      "version": "v1",
+      "available_at": "2026-10-02T19:13:52Z",
+      "availability_basis": "document_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2113_MIL01_dup.eml",
+          "content_hash": "sha256:2ddc2401fb2ad795dc6e5dc76d9850bd2182e42b27d47d020b903070a23e3466",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "SourceDocument",
+          "id": "doc-20261002-2113-mil01-dup",
+          "version": "v1"
+        },
+        {
+          "kind": "Segment",
+          "id": "doc-20261002-2113-mil01-dup-seg2",
+          "version": "v1"
+        },
+        {
+          "kind": "Segment",
+          "id": "doc-20261002-2113-mil01-dup-seg1",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01a",
+      "producer_version": "1",
+      "document_id": "doc-20261002-2113-mil01-dup",
+      "kind": "unmet_demand",
+      "store_id": "MIL01",
+      "period_start": "2026-10-01T22:00:00Z",
+      "period_end": "2026-10-02T21:59:59Z",
+      "time_text": null,
+      "product_mention": "Aurea nera",
+      "quantity": {
+        "kind": "exact",
+        "value": 7.0,
+        "low": null,
+        "high": null,
+        "unit": "requests",
+        "currency": null,
+        "raw": "7 richieste",
+        "evidence_ref": null
+      },
+      "direction": "up",
+      "reason": null,
+      "reason_text": null,
+      "funnel_stage": null,
+      "attribution": "store_staff",
+      "negated": false,
+      "evidence": [
+        {
+          "document_id": "doc-20261002-2113-mil01-dup",
+          "document_version": "v1",
+          "segment_id": "doc-20261002-2113-mil01-dup-seg2",
+          "quote": "Aurea nera: 7 richieste (2 2 2, 1 1, 0, 4)",
+          "char_start": 526,
+          "char_end": 568,
+          "t_start_s": null,
+          "t_end_s": null
+        },
+        {
+          "document_id": "doc-20261002-2113-mil01-dup",
+          "document_version": "v1",
+          "segment_id": "doc-20261002-2113-mil01-dup-seg1",
+          "quote": "Aurea nera 7 richieste.",
+          "char_start": 307,
+          "char_end": 330,
+          "t_start_s": null,
+          "t_end_s": null
+        }
+      ],
+      "extractor_version": "manual-data01a-v1"
+    },
+    {
+      "id": "obs-20261009-1035-mil01-stockout",
+      "version": "v1",
+      "available_at": "2026-10-09T08:35:52Z",
+      "availability_basis": "document_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261009_1035_MIL01.eml",
+          "content_hash": "sha256:5b8afe5fc87f71f0eb397c3f91acc7a300f9b97bb13d127144b4ddab080b7ebd",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "SourceDocument",
+          "id": "doc-20261009-1035-mil01",
+          "version": "v1"
+        },
+        {
+          "kind": "Segment",
+          "id": "doc-20261009-1035-mil01-seg0",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01a",
+      "producer_version": "1",
+      "document_id": "doc-20261009-1035-mil01",
+      "kind": "stockout",
+      "store_id": "MIL01",
+      "period_start": "2026-10-07T22:00:00Z",
+      "period_end": null,
+      "time_text": "da ieri",
+      "product_mention": "cardigan logo in M, sia nero che blu",
+      "quantity": {
+        "kind": "exact",
+        "value": 0.0,
+        "low": null,
+        "high": null,
+        "unit": "units",
+        "currency": null,
+        "raw": "a zero",
+        "evidence_ref": null
+      },
+      "direction": "down",
+      "reason": null,
+      "reason_text": null,
+      "funnel_stage": null,
+      "attribution": "store_staff",
+      "negated": false,
+      "evidence": [
+        {
+          "document_id": "doc-20261009-1035-mil01",
+          "document_version": "v1",
+          "segment_id": "doc-20261009-1035-mil01-seg0",
+          "quote": "da ieri siamo a zero cardigan logo in M, sia nero che blu",
+          "char_start": 14,
+          "char_end": 71,
+          "t_start_s": null,
+          "t_end_s": null
+        }
+      ],
+      "extractor_version": "manual-data01a-v1"
+    },
+    {
+      "id": "obs-20261009-1035-mil01-unmet-demand",
+      "version": "v1",
+      "available_at": "2026-10-09T08:35:52Z",
+      "availability_basis": "document_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261009_1035_MIL01.eml",
+          "content_hash": "sha256:5b8afe5fc87f71f0eb397c3f91acc7a300f9b97bb13d127144b4ddab080b7ebd",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "SourceDocument",
+          "id": "doc-20261009-1035-mil01",
+          "version": "v1"
+        },
+        {
+          "kind": "Segment",
+          "id": "doc-20261009-1035-mil01-seg0",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01a",
+      "producer_version": "1",
+      "document_id": "doc-20261009-1035-mil01",
+      "kind": "unmet_demand",
+      "store_id": "MIL01",
+      "period_start": "2026-10-07T22:00:00Z",
+      "period_end": null,
+      "time_text": null,
+      "product_mention": "cardigan logo in M",
+      "quantity": {
+        "kind": "vague",
+        "value": null,
+        "low": null,
+        "high": null,
+        "unit": "requests",
+        "currency": null,
+        "raw": "in continuazione",
+        "evidence_ref": null
+      },
+      "direction": "up",
+      "reason": null,
+      "reason_text": null,
+      "funnel_stage": null,
+      "attribution": "store_staff",
+      "negated": false,
+      "evidence": [
+        {
+          "document_id": "doc-20261009-1035-mil01",
+          "document_version": "v1",
+          "segment_id": "doc-20261009-1035-mil01-seg0",
+          "quote": "ce lo chiedono in continuazione",
+          "char_start": 220,
+          "char_end": 251,
+          "t_start_s": null,
+          "t_end_s": null
+        }
+      ],
+      "extractor_version": "manual-data01a-v1"
+    }
+  ],
+  "product_links": [
+    {
+      "case_id": "case-mil01-i10919b00011-20261008",
+      "style_code": "I10919B00011"
+    },
+    {
+      "case_id": "case-mil01-j10911a00305-742-4-20261001",
+      "style_code": "J10911A00305"
+    },
+    {
+      "case_id": "case-mil01-j20931a00012-999-20261002",
+      "style_code": "J20931A00012"
+    }
+  ]
+}

@@ -87,8 +87,8 @@ def test_run_publishes_only_mails_available_at_as_of(tmp_path):
 
 def eml(message_id, date, body, *, in_reply_to=None, references=None, subject="chiusura"):
     headers = [
-        "From: Store <mil01.store@moncler-retail.example>",
-        "To: hq@moncler-retail.example",
+        "From: Store <mil01.store@valentino-retail.example>",
+        "To: hq@valentino-retail.example",
         f"Subject: {subject}",
         f"Message-ID: {message_id}",
         "Content-Type: text/plain; charset=utf-8",

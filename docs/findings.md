@@ -1,9 +1,11 @@
-# Findings — Moncler track (FastwebAI Hackathon 2026)
+# Findings — Valentino track (FastwebAI Hackathon 2026)
 
 _Last updated: 2026-10-22._
+_Brand labels were replaced for the Valentino demo on 2026-10-23. They are aliases, not
+historical attribution of the challenge or quoted statements to Valentino._
 _A synthesis of everything in `sources/`, plus what the organizers told the team in person. Facts are kept apart from our interpretation, and passages where the transcript is garbled are marked._
 
-> Confidentiality: the Moncler rep asked us **not to cite them** ("non citateci", `sources/transcripts/Poke House.md:49`). In anything public — project name, slides, repo, demo data — use a neutral name and a fictional luxury brand unless the organizers say otherwise.
+> Confidentiality: the Valentino rep asked us **not to cite them** ("non citateci", `sources/transcripts/Poke House.md:49`). In anything public — project name, slides, repo, demo data — use a neutral name and a fictional luxury brand unless the organizers say otherwise.
 
 ---
 
@@ -13,9 +15,9 @@ _A synthesis of everything in `sources/`, plus what the organizers told the team
 |---|---|---|
 | `sources/track/track.html` | Official track text ("Forecast che ascolta i negozi"), complete | High (transcribed from the printed card) |
 | `sources/track/eval.html` | Jury voting method | High; category names were partly cut off in the photos |
-| `sources/transcripts/Poke House.md` | ASR (automatic transcript) of the opening pitches: Alpitour 00:00–05:23, **Moncler 05:23–10:45**, then the moderator. The filename is misleading. | Medium-low |
-| `sources/transcripts/Poke House 2.md` | ASR (Whisper `small`, uncorrected) of **our Q&A with the Moncler rep**. Its header says "Poke House 3". | Low: the gist is reliable, the exact wording is not |
-| `drafts/fastweb.md` | The team's v0 proposal ("MONCLER PULSE"), written before we had the full track text, the Q&A or the scoring. Partly superseded; see §7. | — |
+| `sources/transcripts/Poke House.md` | ASR (automatic transcript) of the opening pitches: Alpitour 00:00–05:23, **Valentino 05:23–10:45**, then the moderator. The filename is misleading. | Medium-low |
+| `sources/transcripts/Poke House 2.md` | ASR (Whisper `small`, uncorrected) of **our Q&A with the Valentino rep**. Its header says "Poke House 3". | Low: the gist is reliable, the exact wording is not |
+| `drafts/fastweb.md` | The team's v0 proposal ("VALENTINO PULSE"), written before we had the full track text, the Q&A or the scoring. Partly superseded; see §7. | — |
 
 ---
 
@@ -37,7 +39,7 @@ _A synthesis of everything in `sources/`, plus what the organizers told the team
 
 ---
 
-## 3. What the Moncler rep added
+## 3. What the Valentino rep added
 
 Line references point to `sources/transcripts/Poke House 2.md` unless stated otherwise. This is our reading of a garbled transcript; ⚠ marks the passages that are hardest to read.
 
@@ -68,7 +70,7 @@ Line references point to `sources/transcripts/Poke House 2.md` unless stated oth
 
 | Category | Weight | What it really asks |
 |---|---:|---|
-| Aderenza alla challenge (fit with the challenge) | 10 | Did we address the Moncler problem? |
+| Aderenza alla challenge (fit with the challenge) | 10 | Did we address the Valentino problem? |
 | **Completezza e realizzabilità** (completeness and feasibility) | **40** | Does it work end to end, and is it believable? **Also the first tie-breaker.** |
 | Innovazione agenti AI (AI-agent innovation) | 20 | Is there a genuinely agentic part (tools, choosing the next step, talking to other agents)? |
 | Potenziale applicativo (application potential) | 10 | Could it be used for real? |
@@ -135,7 +137,7 @@ Line references point to `sources/transcripts/Poke House 2.md` unless stated oth
 - **Respect scarcity-managed products:** produce an insight, not a "make more" recommendation.
 
 ### Trust, evaluation, honesty
-- All demo data is **synthetic**; say so. Never present it as Moncler data or as a trained model's results.
+- All demo data is **synthetic**; say so. Never present it as Valentino data or as a trained model's results.
 - **Circularity risk:** if we generate notes from planted events, then detect them, it proves little unless the test set also contains noise, omissions and decoys. The extraction prompts must not be tuned on the hold-out set. Ideally the rep reviews sample notes.
 - **Show "does no harm" too:** on decoy and noise scenarios the adjusted forecast must stay close to the baseline.
 - **Offline replay:** cache every LLM and external call, so the live demo can't fail on the network.
@@ -153,7 +155,7 @@ Line references point to `sources/transcripts/Poke House 2.md` unless stated oth
 
 | Draft says | Now |
 |---|---|
-| Name "MONCLER PULSE", speaker named | Rename to something neutral; don't cite the company or the person |
+| Name "VALENTINO PULSE", speaker named | Rename to something neutral; don't cite the company or the person |
 | "We don't know the jury criteria" (§3) | Known; see §4 above |
 | Demo note contains the SKU code "JKT-014" | Unrealistic: notes use names, colours and sizes. Product linking must be part of the demo |
 | Only store→store transfers | Add DC replenishment, hold and no-action options; check cross-border feasibility |

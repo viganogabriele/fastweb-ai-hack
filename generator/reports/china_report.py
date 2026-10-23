@@ -4,7 +4,7 @@ Author: 中国区零售运营部 (Shanghai). Definitions:
 - 含税 (VAT 13% added to store net sales), RMB
 - 全渠道 = 3 stores + online (天猫旗舰店 from TP partner report, not in our systems + 微信小程序 from systems/ecommerce)
 - 门店 calendar month, net of returns
-- 售罄率 (POLARIS) = units sold / (units sold + EOP stock units), store level
+- 售罄率 (ASTRA) = units sold / (units sold + EOP stock units), store level
 - online 同比 compares Tmall+WeChat 2026 vs Tmall only 2025 (mini program launched Nov 2025) -> inflated
 """
 import datetime as dt
@@ -62,7 +62,7 @@ def main():
 
     s = d.slide(bg="FFFFFF")
     d.rect(s, 0, 0, 5.2, 7.5, TH["accent"])
-    d.text(s, 0.6, 2.4, 4.4, 1.2, "MONCLER\n中国区", size=30, bold=True, color="FFFFFF")
+    d.text(s, 0.6, 2.4, 4.4, 1.2, "VALENTINO\n中国区", size=30, bold=True, color="FFFFFF")
     d.text(s, 5.8, 2.6, 7, 0.8, "2026年9月 经营月报", size=34, bold=True, color=TH["accent"])
     d.text(s, 5.8, 3.5, 7, 0.5, "全渠道（门店 + 天猫旗舰店 + 微信小程序）", size=16, color=TH["muted"])
     d.text(s, 5.8, 5.6, 7, 0.9, ["中国区零售运营部", "2026年10月12日  v2"], size=12, color=TH["muted"])
@@ -72,9 +72,9 @@ def main():
     msgs = [
         f"9月全渠道销售 {tot_cy / 1e4:,.0f} 万元，同比 {(tot_cy / tot_ly - 1) * 100:+.1f}%；其中门店 {st_cy / 1e4:,.0f} 万元，同比 {(st_cy / st_ly - 1) * 100:+.1f}%，预算达成 {st_cy / cy.bud_tax.sum() * 100:.0f}%。",
         f"线上（天猫旗舰店+微信小程序）{online_cy / 1e4:,.0f} 万元，同比 {(online_cy / online_ly - 1) * 100:+.0f}%。",
-        "Genius POLARIS 系列 9月24日上市，首周表现超预期，北京SKP 斗篷款（CAPE）黑色 XXL 已断码。",
+        "Couture ASTRA 系列 9月24日上市，首周表现超预期，北京SKP 斗篷款（CAPE）黑色 XXL 已断码。",
         "国庆前两周本地客流稳定，成都太古里外地游客明显增加。",
-        "10月初 小红书 上 ILVARO 粉色 话题爆发（LUMIERE 成员 尹夏恩 巴黎时装周同款），门店到货即售罄，大量顾客登记预订。",
+        "10月初 小红书 上 IRIDIA 粉色 话题爆发（LUMIERE 成员 尹夏恩 巴黎时装周同款），门店到货即售罄，大量顾客登记预订。",
         "风险：双11 预售（10月20日开始）期间门店客流可能分流，顾客询问门店是否与天猫同价。",
     ]
     d.text(s, 0.8, 1.5, 11.8, 5.2, msgs, size=15, bullets=True, spacing=10)
@@ -113,17 +113,17 @@ def main():
     d.text(s, 7.2, 3.6, 5.6, 2.5, ["成都太古里客流增长主要来自外地游客（川渝周边及西北）。",
                                    "北京SKP 转化率较高，VIC 预约到店增加。"], size=12, bullets=True, spacing=6)
 
-    # POLARIS
+    # ASTRA
     dd = daily()
-    pol = dd[dd.store_id.isin(CN) & dd.style_name.str.startswith("POLARIS") & (dd.date >= D(2026, 9, 24)) & (dd.date <= M1)]
+    pol = dd[dd.store_id.isin(CN) & dd.style_name.str.startswith("ASTRA") & (dd.date >= D(2026, 9, 24)) & (dd.date <= M1)]
     sold = pol.groupby(["style_name", "store_id"]).units_sold.sum()
     stk = stock(M1)
-    stk = stk[stk.store_id.isin(CN) & stk.style_name.str.startswith("POLARIS")].groupby(["style_name", "store_id"]).on_hand.sum()
+    stk = stk[stk.store_id.isin(CN) & stk.style_name.str.startswith("ASTRA")].groupby(["style_name", "store_id"]).on_hand.sum()
     s = d.slide()
-    header(s, "Genius POLARIS 上市表现", "9月24日-30日，售罄率 = 销售件数 /（销售件数 + 期末库存件数）")
+    header(s, "Couture ASTRA 上市表现", "9月24日-30日，售罄率 = 销售件数 /（销售件数 + 期末库存件数）")
     rows = [["款式", "门店", "销售件数", "期末库存", "售罄率"]]
     st_out = {}
-    for sty in ["POLARIS CAPE", "POLARIS OVERSIZED", "POLARIS BALACLAVA"]:
+    for sty in ["ASTRA CAPE", "ASTRA OVERSIZED", "ASTRA BALACLAVA"]:
         for sid in CN:
             u = int(sold.get((sty, sid), 0))
             o = int(stk.get((sty, sid), 0))
@@ -133,7 +133,7 @@ def main():
     d.table(s, 0.6, 1.5, 7.6, rows, col_w=[2.2, 2.0, 1.1, 1.1, 1.2], size=11, zebra=TH["light"], row_h=0.38)
     d.text(s, 8.6, 1.6, 4.3, 5.0, ["北京SKP 斗篷款（CAPE）黑色 XXL 首周断码，上海 M 码库存充足。",
                                    "顾客反馈：廓形好看，价格可以接受，多为连带购买。",
-                                   "建议：申请从欧洲调拨 POLARIS 库存（欧洲销售较弱）。"], size=13, bullets=True, spacing=8)
+                                   "建议：申请从欧洲调拨 ASTRA 库存（欧洲销售较弱）。"], size=13, bullets=True, spacing=8)
 
     # Social
     s = d.slide()
@@ -141,14 +141,14 @@ def main():
     days = [D(2026, 10, 1) + dt.timedelta(days=i) for i in range(11)]
     base = np.array([120, 2850, 4620, 3980, 3010, 2380, 1890, 1700, 1490, 1260, 1105])
     d.chart(s, 0.6, 1.4, 7.4, 5.0, XL_CHART_TYPE.LINE_MARKERS, [f"10/{x.day}" for x in days],
-            [("ILVARO 粉色 相关笔记数（小红书）", [int(v) for v in base]),
-             ("POLARIS 相关笔记数", [int(v) for v in np.array([310, 290, 340, 300, 280, 260, 240, 230, 220, 210, 190])])],
+            [("IRIDIA 粉色 相关笔记数（小红书）", [int(v) for v in base]),
+             ("ASTRA 相关笔记数", [int(v) for v in np.array([310, 290, 340, 300, 280, 260, 240, 230, 220, 210, 190])])],
             colors=[TH["accent"], "7F7F7F"], title="每日新增笔记数")
     d.text(s, 8.3, 1.5, 4.6, 5.0, [
-        "10月1日 LUMIERE 成员 尹夏恩（Yoon Ha-eun）在巴黎时装周场外穿着 ILVARO 粉色，10月2日起小红书相关笔记激增，“同款”搜索量排名第一。",
-        "三家门店 ILVARO 粉色 10月2-3日核心尺码全部售罄，10月8日补货当天售完。",
-        "黑色、米白色 ILVARO 询问量同步上升。",
-        "POLARIS 讨论热度平稳，以穿搭分享为主。",
+        "10月1日 LUMIERE 成员 尹夏恩（Yoon Ha-eun）在巴黎时装周场外穿着 IRIDIA 粉色，10月2日起小红书相关笔记激增，“同款”搜索量排名第一。",
+        "三家门店 IRIDIA 粉色 10月2-3日核心尺码全部售罄，10月8日补货当天售完。",
+        "黑色、米白色 IRIDIA 询问量同步上升。",
+        "ASTRA 讨论热度平稳，以穿搭分享为主。",
         "数据说明：第三方监测平台口径，含转发，未去重。"], size=12, bullets=True, spacing=6)
 
     # Golden week
@@ -166,15 +166,15 @@ def main():
              f"{((gw_st + gw_on) / (gw_stl + TMALL['2025-10-01..07']) - 1) * 100:+.1f}%"]]
     d.table(s, 0.6, 1.6, 6.0, rows, col_w=[1.8, 1.4, 1.4, 1.4], size=13, zebra=TH["light"], row_h=0.5, bold_last=True)
     d.text(s, 7.0, 1.6, 5.8, 4.8, ["外地游客占比提升，成都表现最好。", "客流增幅高于销售增幅，较多浏览型客户。",
-                                   "ILVARO 粉色无货，登记预订顾客超过百名（三店合计）。"], size=14, bullets=True, spacing=8)
+                                   "IRIDIA 粉色无货，登记预订顾客超过百名（三店合计）。"], size=14, bullets=True, spacing=8)
 
     s = d.slide()
     header(s, "10月展望与需求")
     d.text(s, 0.8, 1.5, 11.8, 5.2, [
         "双11 预售 10月20日开始：预计门店客流下降 10-15%，需总部明确门店是否价格保护/同价政策。",
-        "ILVARO 粉色：申请紧急追单，优先分配中国区；目前登记顾客名单持续增加。",
-        "POLARIS：申请从欧洲/美国调拨库存。",
-        "TIB 马甲 拉链质量问题：北京SKP 已有退货，等待总部质检结论。",
+        "IRIDIA 粉色：申请紧急追单，优先分配中国区；目前登记顾客名单持续增加。",
+        "ASTRA：申请从欧洲/美国调拨库存。",
+        "VEL 马甲 拉链质量问题：北京SKP 已有退货，等待总部质检结论。",
         "天气：北方 10月下旬降温，羽绒服进入旺季。"], size=16, bullets=True, spacing=12)
 
     d.save(OUTD / "中国区9月经营月报_2026_v2.pptx")
@@ -182,7 +182,7 @@ def main():
                       tmall=TMALL, wechat_sep=round(wc), online_cy=round(online_cy), online_growth_shown=round((online_cy / online_ly - 1) * 100, 1),
                       online_growth_like_for_like_tmall=round((TMALL["2026-09"] / TMALL["2025-09"] - 1) * 100, 1),
                       total_cy=round(tot_cy), total_growth=round((tot_cy / tot_ly - 1) * 100, 1),
-                      polaris_sellthrough_units=st_out, gw_store_growth=round((gw_st / gw_stl - 1) * 100, 1)))
+                      valentino_atelier_sellthrough_units=st_out, gw_store_growth=round((gw_st / gw_stl - 1) * 100, 1)))
     facts.save()
 
 

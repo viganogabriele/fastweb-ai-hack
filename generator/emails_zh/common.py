@@ -3,7 +3,7 @@
 Bodies are hand-authored in bodies_<STORE>.py; this module only provides addresses.
 """
 
-DOMAIN = "moncler-retail.example"
+DOMAIN = "valentino-retail.example"
 
 # distribution lists / shared people
 DL = {

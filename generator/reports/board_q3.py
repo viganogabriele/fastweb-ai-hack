@@ -46,7 +46,7 @@ def main():
         d.text(s, 12.0, 7.0, 0.8, 0.3, str(d.n), size=8, color=TH["muted"], align=PP_ALIGN.RIGHT)
 
     s = d.slide(bg="1A1A1A")
-    d.text(s, 0.9, 2.5, 11, 1.0, "MONCLER", size=40, color="FFFFFF", font="Cambria", bold=True)
+    d.text(s, 0.9, 2.5, 11, 1.0, "VALENTINO", size=40, color="FFFFFF", font="Cambria", bold=True)
     d.text(s, 0.9, 3.5, 11, 0.8, "Q3 2026 Trading Update", size=28, color="D9C7A3", font="Cambria")
     d.text(s, 0.9, 5.6, 11, 0.9, ["Board of Directors - 28 October 2026", "DRAFT v5 - for discussion - figures subject to closing"],
            size=13, color="BBBBBB")
@@ -62,8 +62,8 @@ def main():
         d.text(s, x + 0.2, 2.9, 2.5, 0.6, b, size=12, color=TH["muted"])
     d.text(s, 0.7, 4.2, 12, 2.6, [
         "APAC the engine of growth (Greater China, Korea); EMEA solid with strong tourist flows in September; Americas flat.",
-        "FW26 new-in well received; Genius POLARIS a success in China. FW26 US/UK campaign delivered +22% attributed sales uplift.",
-        "Watch-outs: TIB vest quality issue (slider), stock-outs on hero items (MAIRE black, ILVARO pink), Rome store works."],
+        "FW26 new-in well received; Couture ASTRA a success in China. FW26 US/UK campaign delivered +22% attributed sales uplift.",
+        "Watch-outs: VEL vest quality issue (slider), stock-outs on hero items (AUREA black, IRIDIA pink), Rome store works."],
         size=15, bullets=True, spacing=10)
 
     s = d.slide()
@@ -97,12 +97,12 @@ def main():
         "Golden Week: Chinese clients in Milan, Paris and domestic China very strong.",
         "Cold snap in Central Europe from 12/10 accelerated outerwear in Germany, Switzerland, Nordics.",
         "Japan: pre-buying ahead of 1 November price increase.",
-        "ILVARO powder pink: celebrity-driven sell-out in Asia; re-order under evaluation.",
+        "IRIDIA powder pink: celebrity-driven sell-out in Asia; re-order under evaluation.",
     ], size=14, bullets=False, spacing=10)
     d.text(s, 7.0, 1.5, 5.8, 5.0, [
         [("Risks", {"bold": True, "size": 17})],
-        "TIB vest slider defect: potential stop-sale of July batch; provision under assessment (€1-2m).",
-        "Stock availability on hero items (MAIRE black DC re-supply only from 16/10).",
+        "VEL vest slider defect: potential stop-sale of July batch; provision under assessment (€1-2m).",
+        "Stock availability on hero items (AUREA black DC re-supply only from 16/10).",
         "Double 11 pre-sales may cannibalise China store traffic in late October.",
         "Market research (Castellane) flags cooling Korean demand - not visible in our numbers so far.",
     ], size=14, spacing=10)

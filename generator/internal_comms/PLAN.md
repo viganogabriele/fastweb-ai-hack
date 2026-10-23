@@ -4,7 +4,7 @@ Project root: /home/lorenzo/dev/hackathons/fastweb-2026 (python: `.venv/bin/pyth
 READ FIRST: `generator/WORLD_BRIEF.md`, `generator/EMAIL_SPEC.md`, `generator/events.py`, this file,
 `generator/internal_comms/common.py` (helpers), `generator/internal_comms/_ref/weekly_digest.txt`
 (per store, per ISO week W36..W43: days open, net sales local ccy in k, vs budget, top-3 customer nationalities,
-active scenario events, # TIB defect returns, # ARNEB size returns, late/wrong deliveries, top unmet requests with counts).
+active scenario events, # VEL defect returns, # ARTEM size returns, late/wrong deliveries, top unmet requests with counts).
 Full per-day detail: `generated/ground_truth/writer_inputs/email_context/<STORE>.json`. Stock: `generated/sources/erp/inventory/store_stock_daily/`.
 
 ISO weeks 2026: W36 Aug31–Sep6, W37 Sep7–13, W38 Sep14–20, W39 Sep21–27, W40 Sep28–Oct4, W41 Oct5–11,
@@ -31,9 +31,9 @@ W42 Oct12–18, W43 Oct19–25 (only 19–21 closed so far). Today is Thu 2026-1
 - Do not modify anything under `generated/sources/erp/`, `generator/world.py`, `generator/events.py`, or other agents' dirs
   (`generator/emails_*`, `generated/sources/store_emails/`).
 
-## People / addresses (domain moncler-retail.example; address = first.last@, no accents)
+## People / addresses (domain valentino-retail.example; address = first.last@, no accents)
 Store managers / assistant managers: see `generated/sources/erp/master_data/stores.csv`. Invent SAs freely
-(keep a stable cast per store inside your part). Store mailbox: `<store lowercase>.store@moncler-retail.example`.
+(keep a stable cast per store inside your part). Store mailbox: `<store lowercase>.store@valentino-retail.example`.
 
 Area managers (AM) and whom they report to:
 | AM | perimeter | lang of recap | To | Cc |
@@ -65,32 +65,32 @@ HQ / functions (Milan unless noted):
   quality-claims@, all-stores-emea@, all-stores-apac@, all-stores-americas@, all-stores@
 
 ## Key facts derived from internal data (use as what people saw; with lag/noise)
-- Black MAIRE: zero at MIL01 from ~Sep 19-20, PAR01 ~Sep 28 (dwindling from Sep 21), PAR02 ~Sep 21, LON02 ~Sep 25,
+- Black AUREA: zero at MIL01 from ~Sep 19-20, PAR01 ~Sep 28 (dwindling from Sep 21), PAR02 ~Sep 21, LON02 ~Sep 25,
   LON01 ran down to zero ~Oct 8. DC out until Oct 16 (420 units landing at CSG Oct 16). Unmet demand huge at
   PAR02 (97 requests W40), PAR01, MIL01, LON02 (~30-36/week). The first store re-allocation after Oct 16
   reached the ITALIAN stores on Oct 21 (MIL01 62 pcs, MIL02 36, **ROM01 40** despite halved footfall, VEN01 25, CRT01 8),
   while PAR01 (55) / PAR02 (74) / MAD01 / MUN01 are in transit for Oct 22 and LON01 (73) / LON02 (62) / GVA01 / ZRH01 for Oct 23;
   Asia/US later (SEL01 Oct 22, TYO01 Oct 23, SEL02 172 pcs Oct 26, NYC Oct 25...). So on Oct 21 PAR01/PAR02/LON02 are still at 0.
   Beige/navy do not substitute.
-  Black Maire requests also everywhere in Asia (SEL02 51 in W42, TYO01 23, OSA01 13...).
-- LOGO CARDIGAN size M: MIL01 at 0 (both black and navy) from Thu Oct 8; MIL02 navy M 0 from Oct 8, black M 0 from Oct 17;
+  Black Aurea requests also everywhere in Asia (SEL02 51 in W42, TYO01 23, OSA01 13...).
+- VLOGO CARDIGAN size M: MIL01 at 0 (both black and navy) from Thu Oct 8; MIL02 navy M 0 from Oct 8, black M 0 from Oct 17;
   **ROM01 still has 3 navy M** and VEN01 1 black + 1 navy M (transfer opportunity). DC no M until ~Oct 30 (knit re-order wk44).
-- ILVARO powder pink (510): idol photo Oct 1 → Asia sells out in 1-3 days (SEL02/BUS01/CDU01/HKG01/OSA01/TYO01 at 0
+- IRIDIA powder pink (510): idol photo Oct 1 → Asia sells out in 1-3 days (SEL02/BUS01/CDU01/HKG01/OSA01/TYO01 at 0
   from Oct 2-6; SEL01/SHA01 kept only 1 piece, the display/damaged one). DC top-up landed Oct 8 but the first
   redistribution reached **EUROPE/US first: MIL01 +12 (Oct 10), PAR01 +12 (Oct 11), LON01 +12 (Oct 12), NYC01 +11 (Oct 14)**
   where pink barely sells, while Asia received only on Oct 16-19 (TYO01 15 on Oct 16, SEL01 ~19 on Oct 18, SEL02 27/BUS01 17/
-  HKG01 10/SHA01 12 on Oct 18-19, OSA01 ~10 on Oct 20). CDU01 and BJS01 still 0 on Oct 21. Spill-over: ILVARO black/off-white
-  requests (HKG01 9 in W42, SEL01). DC black ILVARO out Oct 6-20.
-- TIB vest zipper slider defect: defect returns start Sep 28 at most stores (POS reason DEF), peak W40 (MIL01 16,
+  HKG01 10/SHA01 12 on Oct 18-19, OSA01 ~10 on Oct 20). CDU01 and BJS01 still 0 on Oct 21. Spill-over: IRIDIA black/off-white
+  requests (HKG01 9 in W42, SEL01). DC black IRIDIA out Oct 6-20.
+- VEL vest zipper slider defect: defect returns start Sep 28 at most stores (POS reason DEF), peak W40 (MIL01 16,
   PAR02 15, SHA01 15, TYO01 14, PAR01 14, LON01 13, NYC01 10, DXB01 7...). Units delivered from mid-August are affected.
-- POLARIS (Genius capsule, launched Sep 24): strong in SHA01/BJS01/CDU01/HKG01 (POLARIS CAPE requests at SHA01), weak in
+- ASTRA (Couture capsule, launched Sep 24): strong in SHA01/BJS01/CDU01/HKG01 (ASTRA CAPE requests at SHA01), weak in
   EU/US (fit runs small, price perceived too high).
-- ARNEB men's parka fits large → exchanges/returns reason SIZE (~10%), staff advise one size down.
-- AMBRINE chocolate brown requested in MIL/PAR/LON01/MAD; DC brown sizes 0,1,2 out from Sep 25 to Nov 10.
+- ARTEM men's parka fits large → exchanges/returns reason SIZE (~10%), staff advise one size down.
+- AMALIA chocolate brown requested in MIL/PAR/LON01/MAD; DC brown sizes 0,1,2 out from Sep 25 to Nov 10.
 - ROM01: scaffolding + municipal pavement works in front of the entrance Sep 14 → Nov 6; sales ~-40/-50% vs budget.
-- MAD01: picking error, navy MAYA received instead of black (Sep 26 and Oct 1 deliveries); black MAYA at 1 piece from
+- MAD01: picking error, navy NOVA received instead of black (Sep 26 and Oct 1 deliveries); black NOVA at 1 piece from
   ~Sep 20 until restock **Oct 11**. MAD01 door counter broken Oct 1-7 (zero visitors recorded).
-- SEL01: ILVARO replenishment held at Incheon customs (missing KC certificate), expected Oct 8, received **Oct 13**
+- SEL01: IRIDIA replenishment held at Incheon customs (missing KC certificate), expected Oct 8, received **Oct 13**
   (logistics system shows that shipment as planned Oct 12 → arrived Oct 13). Competitor (Canadian outerwear brand) pop-up
   opposite SEL01 from Oct 15 with queues and giveaways.
 - Cold snap Oct 12-19 (Munich first snow Wed Oct 14, snow to 1000 m in CH, max 2-6 °C) in MUN/BER/ZRH/STM/CPH/AMS/GVA;
@@ -111,20 +111,20 @@ HQ / functions (Milan unless noted):
 
 ## Cross-source planted distortions (assigned; each part documents its own)
 AM weekly recaps:
-- Roberto: "secondo me il tema Maire nera è sovrastimato" (opinion, wrong: MIL01 lost ~45 requests in W41); ROM01 drop
-  first blamed on "pochi americani / caldo" in W38, works said to end "fine ottobre" (true: Nov 6); W40 says MAD01 MAYA
+- Roberto: "secondo me il tema Aurea nera è sovrastimato" (opinion, wrong: MIL01 lost ~45 requests in W41); ROM01 drop
+  first blamed on "pochi americani / caldo" in W38, works said to end "fine ottobre" (true: Nov 6); W40 says MAD01 NOVA
   black issue "risolto" (true: restocked Oct 11); W41 says cardigan M out at MIL01 "da martedì" (true: Thursday Oct 8).
-- Isabelle: suggests pushing beige/navy Maire to Korean clients as substitute (data: does not convert); attributes PAR01
+- Isabelle: suggests pushing beige/navy Aurea to Korean clients as substitute (data: does not convert); attributes PAR01
   W40 +41% to Fashion Week (mostly Golden Week Chinese tourists).
-- Stefan: credits BER01 W42 +50% partly to new window display (cause: cold snap); "Polaris läuft nicht – zu klein".
+- Stefan: credits BER01 W42 +50% partly to new window display (cause: cold snap); "Astra läuft nicht – zu klein".
 - Fiona: quotes agency "+22% uplift" from the campaign as fact; says CPH01 ran reduced hours "for two weeks" (one week).
 - Lauren: skeptical of campaign uplift ("mid single digits at best" - correct); says NYC02 outage was "Monday" (it was Tue Oct 6).
-- Suzuki: W40 calls pink ILVARO "一時的なブーム" (wrong, demand persisted); blames slow down-jacket sales on fewer Chinese
+- Suzuki: W40 calls pink IRIDIA "一時的なブーム" (wrong, demand persisted); blames slow down-jacket sales on fewer Chinese
   tourists (actually CN share was higher; real cause warm weather).
 - Yoon: customs shipment "12일 입고" (true Oct 13); blames SEL01 W42 -18% only on competitor pop-up (also stock-outs).
-- Zhao: over-generalises "POLARIS 全线卖爆" and asks for more; Double 11 worry.
-HQ memos: TIB alert dated Oct 5 (after returns started Sep 28), states affected units "delivered from 1 September" (true:
-mid-August) and "return rate below 3%" (true ~15%). FW26 launch brief: POLARIS "true to size" (runs small), ARNEB "regular fit"
-(runs large), ILVARO powder pink "limited regional colour, secondary" (became the hit). Golden Week staffing memo omits
+- Zhao: over-generalises "ASTRA 全线卖爆" and asks for more; Double 11 worry.
+HQ memos: VEL alert dated Oct 5 (after returns started Sep 28), states affected units "delivered from 1 September" (true:
+mid-August) and "return rate below 3%" (true ~15%). FW26 launch brief: ASTRA "true to size" (runs small), ARTEM "regular fit"
+(runs large), IRIDIA powder pink "limited regional colour, secondary" (became the hit). Golden Week staffing memo omits
 LON02 and ZRH01 from the Mandarin-speaker support list. Cold-weather tips memo (Oct 13) says first snow in Munich
 "expected around Oct 20" (it fell Oct 14).

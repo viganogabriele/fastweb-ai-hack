@@ -118,7 +118,7 @@ def main():
         c.drawString(20 * mm, 60 * mm, "Syndicated study - published 30 September 2026")
         c.drawString(20 * mm, 54 * mm, "Consumer fieldwork: 20 July - 10 August 2026, n = 4,212 HNW / aspirational luxury consumers")
         c.drawString(20 * mm, 48 * mm, "Markets: CN, KR, JP, US, IT, FR, DE, UK")
-        c.drawString(20 * mm, 30 * mm, "Licensed to: Moncler S.p.A. - Strategy & Consumer Insights")
+        c.drawString(20 * mm, 30 * mm, "Licensed to: Valentino S.p.A. - Strategy & Consumer Insights")
         c.restoreState()
 
     path = OUTD / "Castellane_Luxury_Outerwear_Pulse_Q3-2026.pdf"
@@ -189,7 +189,7 @@ def main():
 
     E.append(Paragraph("5. Brand health (panel)", S["h1"]))
     rows = [["Brand (anonymised where requested)", "Awareness", "Consideration", "Δ consid. QoQ"],
-            ["Moncler", "78%", "41%", "+1 pp"], ["Canadian outerwear brand", "71%", "33%", "+3 pp"],
+            ["Valentino", "78%", "41%", "+1 pp"], ["Canadian outerwear brand", "71%", "33%", "+3 pp"],
             ["French heritage ski brand", "44%", "19%", "0 pp"], ["Italian luxury house A (outerwear line)", "82%", "27%", "-1 pp"],
             ["Scandinavian technical brand", "39%", "17%", "+2 pp"]]
     E.append(table(rows, [80 * mm, 25 * mm, 30 * mm, 30 * mm], TEAL, font="NSans", zebra=SAND))

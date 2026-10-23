@@ -34,15 +34,15 @@ Planted signals
 - Rosh Hashanah: Fri 9/11 quiet (0911), Sat 9/12 -30% / Sun 9/13 -44% (0913 recap, "plan didn't have the holiday").
 - Labor Day weekend: Sat 9/5 +22% (0905), Mon 9/7 -41% (0907).
 - FW26 campaign from 9/15: VM installs windows night of 9/14 (0914, cc vm-team), live 9/15 (0915). Clients mention ads 9/16, 10/10, 10/19. Real lift small: Rebecca 1020re "hard to see, maybe a few %".
-- POLARIS (Genius) launch Thu 9/24 (key 0924, sent 9/25 morning): 1 cape (white) sold, 8-10 try-ons, "boxy but tight in the shoulders", price too high; 0 on 9/25; 1005 oversized jacket never sold; 1021: balaclava returned for SIZE, Rebecca proposes moving units to another store / not reordering.
-- TIB zipper slider defect (DEF): first 9/28 (0928, size 3), 9/29 (6), 9/30 (6), 10/1 x3 (4,6,2, Priya), 10/2 x2 (4,2), 10/3 (4), 10/4 (2), 10/8 x2 (3,3, in xlsx), 10/10 (5), 10/11 (4), 10/17 (1). Running count in mails reaches #15 = matches POS. Batch "07/26" on label, units held, store asks for RTV/recall instruction (1002re, 1010). TIB still selling in non-defect sense (10/6 navy x4, 10/10 cream x4, 10/14 black x4).
-- ARNEB runs large: early comments 9/5; exchange 2->1 on 9/10, 5->4 on 9/20 and 10/18; returns for size 9/24 (4), 10/2 (4), 10/3 (5); staff now size everyone down (0911, 1010, 1018).
-- MAIRE black: strong sell-through 9/9 (x7, VIC with daughters, cc merch), black 3 sold out 10/2 (1002) -> unmet 10/3 (size 3), 10/4 (real size 4, see trap), 10/8 (3), 10/15 (1 and 4; black 1 now zero), 10/16 (3 + VIC Ellen Feldman, fwd 1016fw), 10/17 (0/1/3 all out), 10/20 (0 and 3). Waitlist 3 names (10/7) -> 5 names (10/21). 10/21 delivery: one black 1 came in, still nothing in 0/3. DC says nothing before mid-Oct (1005).
-- KARAKORUM: black 3 zero from 9/12 (0913), still zero 9/15, lost sale 9/16. Navy 3 x2 on 10/10, navy 3 + navy 6 on 10/11 (1011), plus Karakorum 5 return for COLOUR (wanted navy).
-- CHAMBRE black 4 x2 on 10/8 (only in xlsx attachment of key 1008). CHAMBRE cream 4 on 9/24.
-- Other unmet requests mentioned: Valbourg cream 1 + logo cardigan black XS (9/4), Valbourg black 1 (9/5), logo cardigan black XS again (9/7), Maire beige 4 (9/8), Maya navy 7 (9/12), cable knit black S x2 + Maya black 1 (9/13), Trailgrip W cream 35 (9/15), Bady cream + wool turtleneck brown L (9/17), Maya navy 1 (9/18), Ambrine black 2 + Valbourg black 4 (9/19), TIB cream 6 (9/25), Rosiere olive 6 (9/26), Maya olive 7 (9/30), Ilvaro pink 1 (10/6), Montcla black 1 (10/10), Hermine navy 3 (10/13), logo tee white XS (10/14), Hermine navy 1 (10/16), Ilvaro black 00 / cable knit black XS / crewneck black XS / Insolux cream 38 (10/17), Ecrins black 2 + polo black XXL (10/18).
-- ILVARO pink / K-pop: first ask 10/6 with a TikTok of the singer in Paris (store only had pink in 00 and 3); 10/13 two girls ask for "the pink one from tiktok", one buys black.
-- Deliveries: 9/18 arrived 2 days late (planned Wed 9/16), Arneb 3/4 missing for two days (0918). 10/12 one day late because of the holiday (1012). Others on time; 10/21 314u biggest of the season.
+- ASTRA (Couture) launch Thu 9/24 (key 0924, sent 9/25 morning): 1 cape (white) sold, 8-10 try-ons, "boxy but tight in the shoulders", price too high; 0 on 9/25; 1005 oversized jacket never sold; 1021: balaclava returned for SIZE, Rebecca proposes moving units to another store / not reordering.
+- VEL zipper slider defect (DEF): first 9/28 (0928, size 3), 9/29 (6), 9/30 (6), 10/1 x3 (4,6,2, Priya), 10/2 x2 (4,2), 10/3 (4), 10/4 (2), 10/8 x2 (3,3, in xlsx), 10/10 (5), 10/11 (4), 10/17 (1). Running count in mails reaches #15 = matches POS. Batch "07/26" on label, units held, store asks for RTV/recall instruction (1002re, 1010). VEL still selling in non-defect sense (10/6 navy x4, 10/10 cream x4, 10/14 black x4).
+- ARTEM runs large: early comments 9/5; exchange 2->1 on 9/10, 5->4 on 9/20 and 10/18; returns for size 9/24 (4), 10/2 (4), 10/3 (5); staff now size everyone down (0911, 1010, 1018).
+- AUREA black: strong sell-through 9/9 (x7, VIC with daughters, cc merch), black 3 sold out 10/2 (1002) -> unmet 10/3 (size 3), 10/4 (real size 4, see trap), 10/8 (3), 10/15 (1 and 4; black 1 now zero), 10/16 (3 + VIC Ellen Feldman, fwd 1016fw), 10/17 (0/1/3 all out), 10/20 (0 and 3). Waitlist 3 names (10/7) -> 5 names (10/21). 10/21 delivery: one black 1 came in, still nothing in 0/3. DC says nothing before mid-Oct (1005).
+- COSIMO: black 3 zero from 9/12 (0913), still zero 9/15, lost sale 9/16. Navy 3 x2 on 10/10, navy 3 + navy 6 on 10/11 (1011), plus Cosimo 5 return for COLOUR (wanted navy).
+- CAMILLA black 4 x2 on 10/8 (only in xlsx attachment of key 1008). CAMILLA cream 4 on 9/24.
+- Other unmet requests mentioned: Valdora cream 1 + vlogo cardigan black XS (9/4), Valdora black 1 (9/5), vlogo cardigan black XS again (9/7), Aurea beige 4 (9/8), Nova navy 7 (9/12), cable knit black S x2 + Nova black 1 (9/13), Vtrack W cream 35 (9/15), Aria cream + cashmere turtleneck brown L (9/17), Nova navy 1 (9/18), Amalia black 2 + Valdora black 4 (9/19), VEL cream 6 (9/25), Riviera olive 6 (9/26), Nova olive 7 (9/30), Iridia pink 1 (10/6), Mistral black 1 (10/10), Liviana navy 3 (10/13), logo tee white XS (10/14), Liviana navy 1 (10/16), Iridia black 00 / cable knit black XS / crewneck black XS / Alpina cream 38 (10/17), Ettore black 2 + jersey polo black XXL (10/18).
+- IRIDIA pink / K-pop: first ask 10/6 with a TikTok of the singer in Paris (store only had pink in 00 and 3); 10/13 two girls ask for "the pink one from tiktok", one buys black.
+- Deliveries: 9/18 arrived 2 days late (planned Wed 9/16), Artem 3/4 missing for two days (0918). 10/12 one day late because of the holiday (1012). Others on time; 10/21 314u biggest of the season.
 - Big days: Sat 10/10 $115.9K (weather + appointment block, M. family ~$18K), Sat 10/17 $116.7K record (110 units, crewnecks to college crowd + Brazilian family), Fri 10/16 $97.3K, Mon 10/19 $96.0K.
 - Cross-store: 10/6 SoHo POS down in the afternoon, two clients sent up to Madison (1006); transfer asks to SoHo/BH (0908, 0913, 1016).
 - Month closes: Sept ~$1.28M vs $1.53M plan (-16%), comp ~+27%, "-6% without UNGA" (0930). Oct MTD 10/21 ~$1.49M vs $1.52M.
@@ -54,15 +54,15 @@ Traps / noise (with correct reading)
 - 9/7 (key 0907): Marcus writes "23.1k vs 38.9k LY"; 38.9K is the PLAN. LY same day was ~$23.8K (flat comp, not -41%).
 - 9/8 (key 0908): Rebecca reports $52.4K; KPI net is $51,975 ($52.0K). Plan $37.2K and +40% are right.
 - 9/16 (key 0916): subject says "Madison EOD 9/15" (copied); content is Wed 9/16 ($42.5K). 9/15 has its own mail (0915).
-- 9/17 (key 0917): Priya says the Bady request was cream in "00"; the actual unmet request was BADY off-white size 0.
+- 9/17 (key 0917): Priya says the Aria request was cream in "00"; the actual unmet request was ARIA off-white size 0.
 - 10/4 (key 1004): Marcus types $54.1K; correction 18:58 (1004c, suffix _corr): $45.1K, -37% vs plan.
-- 10/4 (key 1004): Marcus calls it "maire black 3 again"; the actual request that day was MAIRE black size 4 (size 3 was the zero-stock size).
+- 10/4 (key 1004): Marcus calls it "aurea black 3 again"; the actual request that day was AUREA black size 4 (size 3 was the zero-stock size).
 - 10/7: duplicate send (1007d, suffix _dup, 2 min later, identical body). Count once.
-- 10/8 (key 1008): body only "See attached"; all facts (incl. CHAMBRE black 4 x2 and 2 TIB DEF) are in NYC01_closing_form_1008.xlsx.
+- 10/8 (key 1008): body only "See attached"; all facts (incl. CAMILLA black 4 x2 and 2 VEL DEF) are in NYC01_closing_form_1008.xlsx.
 - 10/11 (key 1011): sent to retail-ops-canada by mistake (autocomplete); it is a NYC01 email, not TOR01.
-- 10/14 (key 1014): Priya's "$56.8K on the register" is GROSS (before returns: Maire 0, Bady 1, crewneck). Net in KPI is $53.1K (-14% vs plan, not -7%).
-- 10/19 (key 1019): Marcus credits the +59% Monday mainly to the campaign. Wrong: driver was two VIC appointments (~$31K, Mrs. H: three Montcla + cardigans) plus the first properly cold Monday; Rebecca says so in 1020re ("campaign lift hard to see, maybe a few %"). Do not use 10/19 as campaign evidence.
-- 9/24 POLARIS: "one cape sold" is correct (POS: POLARIS CAPE white x1). The later "one balaclava sold" (1021) is the store's statement; only the 10/21 SIZE return is in the context data.
+- 10/14 (key 1014): Priya's "$56.8K on the register" is GROSS (before returns: Aurea 0, Aria 1, crewneck). Net in KPI is $53.1K (-14% vs plan, not -7%).
+- 10/19 (key 1019): Marcus credits the +59% Monday mainly to the campaign. Wrong: driver was two VIC appointments (~$31K, Mrs. H: three Mistral + cardigans) plus the first properly cold Monday; Rebecca says so in 1020re ("campaign lift hard to see, maybe a few %"). Do not use 10/19 as campaign evidence.
+- 9/24 ASTRA: "one cape sold" is correct (POS: ASTRA CAPE white x1). The later "one balaclava sold" (1021) is the store's statement; only the 10/21 SIZE return is in the context data.
 - Lauren OOO (lm1014) is an auto-reply, no store facts. The lm*/re threads and 1016fw carry no daily KPIs (covers = []).
 - Comps quoted are rough and only directional (+50s early Sept, ~+27% Sept close, ~+39% MTD 10/7, ~+50% MTD 10/21); MTD figures are rounded.
 
@@ -75,25 +75,25 @@ Writers
 
 Planted signals
 - POS outage Tue 10/6 14:10-17:40 (key 1006): manual slips keyed in on 10/7. System shows 10/6 $12.6K (-61%), 10/7 $50.1K (+60%). Correct split per store (keys 1007, 1007re2): 10/6 ~$31.5K / 20 trx, 10/7 ~$31.2K / 12 trx (12 slips, $18,930). Also ~4 walkouts (~$5-6K lost demand) not in any system. IT ticket INC0048213.
-- ILVARO spill-over: first hint 10/2 (key 1002 "pink Moncler from the K-pop show"), explicit 10/3 (Yoon Ha-eun / LUMIERE, TikTok), IG DM forwarded to clienteling 10/3 (1003fwd), black/cream Ilvaro sold as substitute (10/3 cream x3, 10/8 black x4), unmet Ilvaro cream 3 (10/4, 10/8, 10/21), cream 0 (10/7), black 0 (10/9, 10/10). Pink never allocated to SoHo. Ilvaro black x3 on 9/21 is pre-hype normal demand.
-- MAIRE black 2 out from ~9/23 with repeated asks (9/26 x2, 9/27, 10/4, 10/5 x3, 10/10, 10/11, 10/16, 10/17, 10/18) then 0 and 1 also out (10/10-10/12); 10/14 three asks in 0/1/2; waitlist grows 5 -> 9 -> 11-12 names. Customers substitute with beige only partially (10/5).
-- TIB zipper defect: 9/29 first (logged as quality), then DEF returns 9/30, 10/1 x3, 10/3 x4, 10/10, 10/13 x2, 10/16, 10/17, 10/20; Ana quarantines 4 suspicious units 10/2; store asks for RTV instruction repeatedly. Store count "~15 since end of Sept" is right (14 DEF + 1 coded QUALITY).
-- Other stock-outs with lost asks: Bady black 2 (8/31-9/5), Logo cardigan black S/XL (early Sep), Montgenevre navy 3/4/5 (mid Sep), Flammette black 0/3 (Sep), Tib black 5 (late Sep-10/3), Logo tee black M/L/XL (from 9/29), Montcla black 5 (from 10/13).
-- POLARIS launch 9/24: tried on, "small in the shoulders", "$$$" (key 0924).
+- IRIDIA spill-over: first hint 10/2 (key 1002 "pink Valentino from the K-pop show"), explicit 10/3 (Yoon Ha-eun / LUMIERE, TikTok), IG DM forwarded to clienteling 10/3 (1003fwd), black/cream Iridia sold as substitute (10/3 cream x3, 10/8 black x4), unmet Iridia cream 3 (10/4, 10/8, 10/21), cream 0 (10/7), black 0 (10/9, 10/10). Pink never allocated to SoHo. Iridia black x3 on 9/21 is pre-hype normal demand.
+- AUREA black 2 out from ~9/23 with repeated asks (9/26 x2, 9/27, 10/4, 10/5 x3, 10/10, 10/11, 10/16, 10/17, 10/18) then 0 and 1 also out (10/10-10/12); 10/14 three asks in 0/1/2; waitlist grows 5 -> 9 -> 11-12 names. Customers substitute with beige only partially (10/5).
+- VEL zipper defect: 9/29 first (logged as quality), then DEF returns 9/30, 10/1 x3, 10/3 x4, 10/10, 10/13 x2, 10/16, 10/17, 10/20; Ana quarantines 4 suspicious units 10/2; store asks for RTV instruction repeatedly. Store count "~15 since end of Sept" is right (14 DEF + 1 coded QUALITY).
+- Other stock-outs with lost asks: Aria black 2 (8/31-9/5), Vlogo Cardigan black S/XL (early Sep), Monteluce navy 3/4/5 (mid Sep), Fiammetta black 0/3 (Sep), Vel black 5 (late Sep-10/3), Logo tee black M/L/XL (from 9/29), Mistral black 5 (from 10/13).
+- ASTRA launch 9/24: tried on, "small in the shoulders", "$$$" (key 0924).
 - Campaign: new windows 9/14-15, IG mentions 9/18; staff unsure it converts.
 - Labor Day weekend (9/5-9/7) and Yom Kippur (9/21) soft days; Korean shoppers late Sep/Oct asking for black.
 
 Traps / noise
 - 9/8 (Tue): no email. Partially covered in 0909 ("tuesday was like 17-18k"; real $17.6K).
 - 9/12 (key 0912): Ana writes $41.2K = gross before returns; net in KPI is $38.6K.
-- 9/19 has no own email; covered by Sat+Sun combined recap sent 9/20 (key 0920), which also contains a self-corrected confusion about which day a Bady return happened.
-- 9/24 (key 0924): Tyler says "0 sold i think" for POLARIS; POS shows 1 POLARIS CAPE sold that day.
+- 9/19 has no own email; covered by Sat+Sun combined recap sent 9/20 (key 0920), which also contains a self-corrected confusion about which day a Aria return happened.
+- 9/24 (key 0924): Tyler says "0 sold i think" for ASTRA; POS shows 1 ASTRA CAPE sold that day.
 - 9/25: duplicate send (0925dup, 2 min later, identical).
 - 9/30 (key 0930): Tyler typo $38.3K (real $33.8K) and "Sept ~815k MTD" which wrongly includes Aug 31. Correction next morning by Ana (0930corr): $33.8K; Sept ~$784K vs ~$880K plan.
-- 10/6 (key 1006): client asking "Bady pink 4" thought it was the TikTok Ilvaro; correct reading: unmet request is BADY powder pink size 4, not ILVARO.
+- 10/6 (key 1006): client asking "Aria pink 4" thought it was the TikTok Iridia; correct reading: unmet request is ARIA powder pink size 4, not IRIDIA.
 - 10/13 (key 1013): subject says "Mon 10/12" but the content is Tue 10/13 (copy-paste); 10/12 has its own email.
 - 10/15: no email that evening; sent next morning 10/16 09:14 ("sorry late"), covers 10/15.
-- 10/11 (key 1011): Jordan says "we never had brown here I think" for Ambrine chocolate brown 2: speculation, not verified.
+- 10/11 (key 1011): Jordan says "we never had brown here I think" for Amalia chocolate brown 2: speculation, not verified.
 - 10/16 (-65%): store has no explanation; nothing in scenario explains it (noise day).
 
 ## MIA01 - Miami Design District (58 files)
@@ -105,14 +105,14 @@ Writers
 
 Planted signals
 - AC failure Thu 9/3 - Sat 9/5 (keys 0902 noise warning, 0903 with 2 thermostat photos IMG_2207/2209 + ticket FAC-31877, 0903re1 Lauren approves portable units, 0903re2, 0904, 0905): 86°F inside on 9/3, walkouts, portable units from 9/4 16:30, compressor replaced Sat 9/5 15:00, portables returned 9/7. Sales 9/3 -69%, 9/4 -56%; 9/5 back on plan thanks to portables.
-- Low outerwear / wrong assortment: heat (90s°F), outerwear only bought for trips (Europe, Switzerland, Aspen/Vail, Toronto); repeated unmet knit/jersey sizes (logo cardigan navy M/L/XL 10/9-10/17, turtleneck black L, padded cardigan L, cable knit various, logo tee navy S/M, hoodie grey XS/M, crewneck XL/XXL). Explicit escalation to merch on 10/13 (key 1013). Delivery 10/11 "only outerwear", 10/18 "some tees finally".
-- Latin American clients: Brazilians (9/7 Brazil Independence Day + Labor Day, +60%; 9/27 Brazilian group to Switzerland +92%), Mexicans (9/16 Monterrey family), Venezuelan regular (Ambrine black 1, 9/17), Argentines/Colombians (9/26).
+- Low outerwear / wrong assortment: heat (90s°F), outerwear only bought for trips (Europe, Switzerland, Aspen/Vail, Toronto); repeated unmet knit/jersey sizes (vlogo cardigan navy M/L/XL 10/9-10/17, turtleneck black L, padded cardigan L, cable knit various, logo tee navy S/M, hoodie grey XS/M, crewneck XL/XXL). Explicit escalation to merch on 10/13 (key 1013). Delivery 10/11 "only outerwear", 10/18 "some tees finally".
+- Latin American clients: Brazilians (9/7 Brazil Independence Day + Labor Day, +60%; 9/27 Brazilian group to Switzerland +92%), Mexicans (9/16 Monterrey family), Venezuelan regular (Amalia black 1, 9/17), Argentines/Colombians (9/26).
 - Hurricane-season chatter 9/25-9/30 (tropical wave near the Bahamas, NHC 50%, clients cancel appointments, storm turns north). Door counts on those days are normal (51-62); the sales drop 9/29-9/30 is low conversion, the storm is only partially to blame. No actual closure.
-- POLARIS weak: launch 9/24 tried on by 4, none sold ("small in the shoulders", price); first Polaris sale 9/27 (oversized), balaclavas 9/29 and 10/10; unmet Polaris cape XXL 10/5.
-- TIB zipper defect: 9/30 two DEF returns ("slider opens in the middle").
-- ARNEB: staff aware it runs big (10/1 advice), sale sized down 10/10, return 10/16 (Arneb 4 too big).
-- Unmet outerwear asks mentioned: Maire navy 1/2/3, Maire black 1 (9/29, 10/11, 10/19) and 0/1/2 out by 10/20, Ambrine black 1 (9/17, 9/19), Flammette black 0/1 (9/28, 10/1, 10/2), Insolux black 38/39, Karakorum black 6/7/1, Maya navy 2/3/1.
-- ILVARO: client returns Ilvaro 10/9 because she wants the pink one seen on TikTok (store never received pink).
+- ASTRA weak: launch 9/24 tried on by 4, none sold ("small in the shoulders", price); first Astra sale 9/27 (oversized), balaclavas 9/29 and 10/10; unmet Astra Cape XXL 10/5.
+- VEL zipper defect: 9/30 two DEF returns ("slider opens in the middle").
+- ARTEM: staff aware it runs big (10/1 advice), sale sized down 10/10, return 10/16 (Artem 4 too big).
+- Unmet outerwear asks mentioned: Aurea navy 1/2/3, Aurea black 1 (9/29, 10/11, 10/19) and 0/1/2 out by 10/20, Amalia black 1 (9/17, 9/19), Fiammetta black 0/1 (9/28, 10/1, 10/2), Alpina black 38/39, Cosimo black 6/7/1, Nova navy 2/3/1.
+- IRIDIA: client returns Iridia 10/9 because she wants the pink one seen on TikTok (store never received pink).
 - Campaign: Instagram only, no billboards in Miami (9/15); new FW26 windows 10/14-10/15.
 
 Traps / noise
@@ -126,7 +126,7 @@ Traps / noise
 - 10/10 (key 1010): Kevin writes $28.0K; correct is $20.8K (Dani's correction next morning, key 1010corr). Kevin also implies above plan; it was slightly below.
 - 10/13 (key 1013): Dani says October is "around 40% under plan"; real MTD at 10/12 is ~-26% ($134K vs $180K). Exaggeration.
 - 10/14: no own email; combined in 1015 (sent 10/15) with both days.
-- 10/16: "2 Ilvaro black to the same girl, sizes 1 and 2" is the store's reading; POS just shows 2 units.
+- 10/16: "2 Iridia black to the same girl, sizes 1 and 2" is the store's reading; POS just shows 2 units.
 
 ## BHS01 - Beverly Hills Rodeo Drive (53 files)
 
@@ -137,14 +137,14 @@ Writers
 
 Planted signals
 - Heat wave Tue 9/8 - Sat 9/12 (keys 0907 warning, 0908, 0909, 0910, 0911, 0912): 99-104°F in BH, 105-108°F Valley, appointments cancelled, no outerwear try-ons, Rodeo empty midday; 9/12 Saturday -65%. Heat breaks Sun 9/13 (84°F). 9/9 only on plan thanks to a single ski client.
-- Stylist pulls / celebrity: stylist K. (HBO series) pulls 9/4-9/8, 9/10-9/16 (bought a Maya black 9/16); R. Studio editorial hold 9/10; Emmys week pulls 9/18, returned 9/21 with makeup on a Bady collar (cleaning charged to stylist); Polaris sales mostly to stylists (9/29 oversized for a music video, 9/30 cape, 10/8 cape); studio wardrobe one-off buy 10/16 (~$12K: Maire off-white x4 + padded cardigan black x3) explained in thread 1016re1/re2.
-- Ski-trip outerwear: Peyre red (9/9 Aspen, 9/25), Valbourg off-white/black (9/15 Deer Valley, 9/16, 9/22, 9/29), Insolux (9/1 Jackson Hole, 10/5, 10/7, 10/13, 10/15 x3, 10/18, 10/21), Gstaad/St. Moritz trips (9/3, 9/28); asks for transfers from Aspen (Peyre red 7, 9/21); unmet Valbourg black 00 (9/11), off-white 1 (9/19), black 4 (10/9), Insolux 37/35/38.
-- ARNEB runs large: exchange 6->5 (9/6); size 3 keeps being asked (9/5, 9/18, 9/19) because staff advise sizing down -> request to allocate more 3s (key 0918).
-- MAIRE black: asks for 3/4 from 9/26, 0/3 9/27, 3 on 10/8, 1 on 10/11/10/13/10/18, 0/3 on 10/15, 2 on 10/16/10/20; out in all sizes 0-3 by 10/14, Sofia has 6 clients waiting.
-- Other repeated misses: Maya navy 5 (9/11, 9/17, 9/26 "4th time"), Chambre black 2/4/0 (10/5-10/14), Montcla navy 2/4/3, knit sizes (turtleneck black XS/M, polo navy M, cable knit various).
-- TIB zipper defect: 10/1 (first one), 10/3 (second).
-- POLARIS launch 9/24: zero sold launch day ("fits like a kids size", "for $3K I expect more"), then 5 units total, all stylist-driven.
-- ILVARO pink asked by a stylist 10/21 (never allocated to BH).
+- Stylist pulls / celebrity: stylist K. (HBO series) pulls 9/4-9/8, 9/10-9/16 (bought a Nova black 9/16); R. Studio editorial hold 9/10; Emmys week pulls 9/18, returned 9/21 with makeup on a Aria collar (cleaning charged to stylist); Astra sales mostly to stylists (9/29 oversized for a music video, 9/30 cape, 10/8 cape); studio wardrobe one-off buy 10/16 (~$12K: Aurea off-white x4 + padded cardigan black x3) explained in thread 1016re1/re2.
+- Ski-trip outerwear: Piero red (9/9 Aspen, 9/25), Valdora off-white/black (9/15 Deer Valley, 9/16, 9/22, 9/29), Alpina (9/1 Jackson Hole, 10/5, 10/7, 10/13, 10/15 x3, 10/18, 10/21), Gstaad/St. Moritz trips (9/3, 9/28); asks for transfers from Aspen (Piero red 7, 9/21); unmet Valdora black 00 (9/11), off-white 1 (9/19), black 4 (10/9), Alpina 37/35/38.
+- ARTEM runs large: exchange 6->5 (9/6); size 3 keeps being asked (9/5, 9/18, 9/19) because staff advise sizing down -> request to allocate more 3s (key 0918).
+- AUREA black: asks for 3/4 from 9/26, 0/3 9/27, 3 on 10/8, 1 on 10/11/10/13/10/18, 0/3 on 10/15, 2 on 10/16/10/20; out in all sizes 0-3 by 10/14, Sofia has 6 clients waiting.
+- Other repeated misses: Nova navy 5 (9/11, 9/17, 9/26 "4th time"), Camilla black 2/4/0 (10/5-10/14), Mistral navy 2/4/3, knit sizes (turtleneck black XS/M, jersey polo navy M, cable knit various).
+- VEL zipper defect: 10/1 (first one), 10/3 (second).
+- ASTRA launch 9/24: zero sold launch day ("fits like a kids size", "for $3K I expect more"), then 5 units total, all stylist-driven.
+- IRIDIA pink asked by a stylist 10/21 (never allocated to BH).
 - Campaign billboard on Sunset seen 9/14; clients ask about "the jacket in the ad" 9/15.
 - Delivery due 9/22 arrived 9/23 (3 days late vs original ASN).
 - Emmys Sun 9/20 + Yom Kippur eve: -84%.
@@ -170,14 +170,14 @@ Writers
 Planted signals
 - Shoulder season: town empties after Labor Day; restaurants announce closures, Gondola stops (9/8); leaf-peeper weekends 9/12-9/27 bring traffic but not sales (9/19), except Sun 9/20; reduced hours Mon-Wed 11-5 from 10/12 (thread 0928re1/re2, confirmed 1003, applied 1012: email sent 17:31). Seasonal hiring (J-1 from Argentina, offers 10/21).
 - Zero-sales days: Mon 9/7 (Labor Day, key 0907 "donut", 18 visitors) and Mon 9/28 (key 0928, 17 visitors). Both have no row in store_daily_kpi; the emails confirm the store WAS open (not a data gap). Lauren's reply 0928re1 refers to both.
-- Negative net days (returns > sales): 9/2 (-$525, polo gift return), 9/9 (-$1.6K, Ecrins 4 gift + Trailgrip 43), 9/10 (~-$900, Valbourg 1 colour return), 10/1 (-$1.3K, Arneb 3 quality return).
+- Negative net days (returns > sales): 9/2 (-$525, jersey polo gift return), 9/9 (-$1.6K, Ettore 4 gift + Vtrack 43), 9/10 (~-$900, Valdora 1 colour return), 10/1 (-$1.3K, Artem 3 quality return).
 - First snow: forecast talk 10/8, snow on top of Ajax 10/12-13 (down to ~10,000 ft), Independence Pass closed by snow/ice morning of 10/14, 28°F, snowmaking tests; clients asking for ski pieces right away.
-- Ski allocation gap: Peyre black down to 1 (9/17), sold out 9/25, asks 9/29 (women's fit) and 10/9 (size 3); Valbourg black 2 asked 10/10; Chamonix L out; Megan's stock count 9/18 (41 down jackets vs 6 ski pieces); last year allocation arrived Oct 28; formal request to merch 10/15 with xlsx wish list (key 1015merch). Opening day Thanksgiving Nov 26.
-- MAIRE: black 2 asked 10/9, black 1 10/11, black out in all sizes 0-3 by 10/18; navy 1/2 asked 10/9, navy 00 (9/22, 10/7), navy 4 (10/20).
-- ARNEB: return 9/30 (too big, no exchange), 10/1 (quality, seam); sale 10/16 sized down one (4 and 5 instead of 5 and 6) fit perfectly.
-- TIB zipper defect: 9/30 (first), 10/4 (second).
-- POLARIS not allocated to Aspen; manager says it doesn't fit the clientele (9/24).
-- Pink ILVARO asked 9/5 (before the K-pop moment; no pink allocated). Brown Ambrine asked 9/4 (Dallas client).
+- Ski allocation gap: Piero black down to 1 (9/17), sold out 9/25, asks 9/29 (women's fit) and 10/9 (size 3); Valdora black 2 asked 10/10; Cortina L out; Megan's stock count 9/18 (41 down jackets vs 6 ski pieces); last year allocation arrived Oct 28; formal request to merch 10/15 with xlsx wish list (key 1015merch). Opening day Thanksgiving Nov 26.
+- AUREA: black 2 asked 10/9, black 1 10/11, black out in all sizes 0-3 by 10/18; navy 1/2 asked 10/9, navy 00 (9/22, 10/7), navy 4 (10/20).
+- ARTEM: return 9/30 (too big, no exchange), 10/1 (quality, seam); sale 10/16 sized down one (4 and 5 instead of 5 and 6) fit perfectly.
+- VEL zipper defect: 9/30 (first), 10/4 (second).
+- ASTRA not allocated to Aspen; manager says it doesn't fit the clientele (9/24).
+- Pink IRIDIA asked 9/5 (before the K-pop moment; no pink allocated). Brown Amalia asked 9/4 (Dallas client).
 - Campaign: no effect felt in the valley (9/15).
 - Door counter offline 10/9 (key 1009): door_counter_daily has no row and KPI visitors is empty for ASP01 2026-10-09; Hannah estimates ~25 people.
 
@@ -188,24 +188,24 @@ Traps / noise
 - 10/6 (Tue): no email; 1007 says "a one-beanie day ($300)", correct.
 - 10/15: Lauren's out-of-office auto-reply (1015ooo, "traveling Oct 14-16 (Toronto)", same text as in NYC01) in reply to the merch request.
 - 10/18: duplicate send (1018dup).
-- 9/27 (key 0927): "Chinese couple bought the Valbourg for Niseko" - store anecdote.
+- 9/27 (key 0927): "Chinese couple bought the Valdora for Niseko" - store anecdote.
 - 10/12 (key 1012): "2 trx" but lists 4 items (2 tickets with 2 items each): consistent with KPI (2 receipts, 4 units).
 
 ## TOR01 - Toronto Yorkville (55 files, amounts in CAD)
 
 Writers
-- Émilie Gagnon (SM, from Montréal): English with Québécois French ("pas pire", "bon", "voilà", "ouf", "tabarnouche", "c'est fou", "en tout cas"), French-style space before ":", "!" and "?", non-native slips ("arrived with 1 day late", "1 client asked the Hermine"), subject "Yorkville - closing <d> sept/oct", bilingual signature. On 10/1 she wrote the whole email in French, then added an English version. Forwards use "TR:" and French forward headers.
+- Émilie Gagnon (SM, from Montréal): English with Québécois French ("pas pire", "bon", "voilà", "ouf", "tabarnouche", "c'est fou", "en tout cas"), French-style space before ":", "!" and "?", non-native slips ("arrived with 1 day late", "1 client asked the Liviana"), subject "Yorkville - closing <d> sept/oct", bilingual signature. On 10/1 she wrote the whole email in French, then added an English version. Forwards use "TR:" and French forward headers.
 - Ryan Chen (ASM): iPhone, numbers-first ("Net 44.5K vs 46.6 plan, 17 trx"), subject "TOR EOD MM/DD"; closes Sat/Sun/Mon when Émilie is off.
 - Aisha Mohamed (SA/keyholder): Sundays (9/6, 9/20, 9/27, 10/11, 10/18), cheerful, emoji, DD/MM dates in subject (Canadian habit).
 
 Planted signals
-- TIFF Sep 10-20: stylist pre-visits 9/8 + memo policy thread with Lauren (0908re1: max 5 pieces/72h, no Genius before 9/24); opening night 9/10 +61%; 9/11 +74% (actress from an A24 film buys Ilvaro black x3, paparazzi on Hazelton Ave); King St Festival Street closure 9/10-9/13; 9/12 photo of the queue (IMG_5512.jpg); memo pulls tracked (7 out, 1 converted); stylist thank-you forwarded 9/21 (0921fwd; actor wore Montgenevre at premiere). Mid-festival dip 9/15-9/17; post-TIFF 9/19-9/20 international shoppers.
+- TIFF Sep 10-20: stylist pre-visits 9/8 + memo policy thread with Lauren (0908re1: max 5 pieces/72h, no Couture before 9/24); opening night 9/10 +61%; 9/11 +74% (actress from an A24 film buys Iridia black x3, paparazzi on Hazelton Ave); King St Festival Street closure 9/10-9/13; 9/12 photo of the queue (IMG_5512.jpg); memo pulls tracked (7 out, 1 converted); stylist thank-you forwarded 9/21 (0921fwd; actor wore Monteluce at premiere). Mid-festival dip 9/15-9/17; post-TIFF 9/19-9/20 international shoppers.
 - Earlier cold: first cold morning 7°C on 9/23 ("in Toronto we always start before the US"), 2°C morning on 10/17 with 223 visitors. Afternoons still 12-15°C mid-October (10/15) so outerwear purchases are hesitant.
-- ARNEB strong in Toronto (compared to Canada Goose parkas, "less bulky"): sales 9/9 x2, 9/24 x2, 10/2 x3, 10/20 x2; always sized down; Arneb black 3 out from mid-Sept (ask 9/16), black 6 asked 10/4, 10/6, 10/9, 5 out by 10/9, black 2 asked 10/16 by a woman; 10/10 return 5 for size. Stock by size on 10/2 in 1002re2 matches stock_eod (1:1, 2:2, 3:0, 4:4, 5:1, 6:0, 7:1). Store asks merch for 3/5/6.
-- MAIRE black: strong early Sept (5 sold 9/1-9/2), size 0 out from 9/2, asks 9/13, 9/23, 9/24 (size 4), 10/2 (1, 4), 10/4 (0, 1), 10/6, 10/12 (0, 3), 10/13 (2), 10/16 (2 x2, 4), 10/17 (0 x2, 2, 3), 10/18, 10/19, 10/20; zero in 0-3 from 10/12; waitlist 9 (10/15) then 12 (10/17); no Maire black in the 10/12 and 10/20 deliveries.
-- TIB zipper defect: first 2 on 9/28 (sizes 7 and 2), then 9/29, 10/2, 10/3, 10/7, 10/8, 10/9, 10/13 x2, 10/14, 10/18; Émilie checks zippers before selling from 9/29.
-- POLARIS: 9/24 one oversized sold, feedback small in the shoulders/expensive, cape not understood; light blue XXL asked by tall client 9/25 (fits like L); 8 pieces sold by 10/15 (summary in 1015), 1 returned (colour, 9/30).
-- ILVARO: TIFF-driven sell-out of black 9/11-9/13 (transfer asked from NY), Chinese students with the K-pop photo buy Ilvaro black x3 on 10/2, Ilvaro off-white asked 9/26 and 10/8, return 10/13 (she wants pink).
+- ARTEM strong in Toronto (compared to Canada Goose parkas, "less bulky"): sales 9/9 x2, 9/24 x2, 10/2 x3, 10/20 x2; always sized down; Artem black 3 out from mid-Sept (ask 9/16), black 6 asked 10/4, 10/6, 10/9, 5 out by 10/9, black 2 asked 10/16 by a woman; 10/10 return 5 for size. Stock by size on 10/2 in 1002re2 matches stock_eod (1:1, 2:2, 3:0, 4:4, 5:1, 6:0, 7:1). Store asks merch for 3/5/6.
+- AUREA black: strong early Sept (5 sold 9/1-9/2), size 0 out from 9/2, asks 9/13, 9/23, 9/24 (size 4), 10/2 (1, 4), 10/4 (0, 1), 10/6, 10/12 (0, 3), 10/13 (2), 10/16 (2 x2, 4), 10/17 (0 x2, 2, 3), 10/18, 10/19, 10/20; zero in 0-3 from 10/12; waitlist 9 (10/15) then 12 (10/17); no Aurea black in the 10/12 and 10/20 deliveries.
+- VEL zipper defect: first 2 on 9/28 (sizes 7 and 2), then 9/29, 10/2, 10/3, 10/7, 10/8, 10/9, 10/13 x2, 10/14, 10/18; Émilie checks zippers before selling from 9/29.
+- ASTRA: 9/24 one oversized sold, feedback small in the shoulders/expensive, cape not understood; light blue XXL asked by tall client 9/25 (fits like L); 8 pieces sold by 10/15 (summary in 1015), 1 returned (colour, 9/30).
+- IRIDIA: TIFF-driven sell-out of black 9/11-9/13 (transfer asked from NY), Chinese students with the K-pop photo buy Iridia black x3 on 10/2, Iridia off-white asked 9/26 and 10/8, return 10/13 (she wants pink).
 - Canadian Thanksgiving weekend 10/9-10/12: -25%, -68%, -58%, -33% (cottages); Monday hours 12-5.
 - National Day for Truth and Reconciliation 9/30 noted.
 - Lauren's Toronto visit 10/15 (matches her out-of-office "traveling Oct 14-16 (Toronto)" seen in NYC01/ASP01); recap of the visit in 1015.

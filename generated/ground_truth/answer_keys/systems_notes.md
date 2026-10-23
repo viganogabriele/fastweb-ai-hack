@@ -29,7 +29,7 @@ ID crosswalks) live in `generator/systems/common.py`; every area imports it so t
   A naive "same order as internal" mapping swaps Seoul Cheongdam and Hyundai Apgujeong, Rome and Rinascente, etc.
 - DCs: DC-IT-CSG = plant IT10, DC-US-NJ = US20, DC-HK-TKO = HK30 (3PL site `TKO-3`, client `MONC01`).
 - SKU: internal `J20931A00012-999`; SAP `MATNR` = `J20931A00012999` + size in `J_3ASIZE`; 3PL item code
-  `MC` + last 8 chars of style + colour + 2-digit 1-based size index (MAIRE black size 0 = `MC31A0001299902`) + EAN;
+  `MC` + last 8 chars of style + colour + 2-digit 1-based size index (AUREA black size 0 = `MC31A0001299902`) + EAN;
   e-com variant `J20931A00012-999-1` (TU items mostly without suffix; WeChat channel rows carry the EAN).
 
 ### Planted crosswalk problems (`reference/store_code_crosswalk_MDM.csv`)
@@ -48,14 +48,14 @@ Receipts are PO goods receipts (regular + the key POs in `common.KEY_POS`). DC_C
 
 | SKU | DC truth |
 |---|---|
-| MAIRE black `J20931A00012999` | Sells down from Aug 1 (IT10 ~536, HK30 ~656, US20 ~133) to **0 on Sep 11–12** in all DCs, zero until **Oct 16**. PO 4500218734: IT10 **420 pcs GR Oct 16** (the "420" everyone quotes for EMEA), HK30 1,040 GR Oct 16, US20 220 GR Oct 19, IT10 balance 300 GR Oct 19 (pulled in from Oct 30 on Oct 14). Big EMEA shipment Oct 20 (611 pcs), HK Oct 17 + Oct 21. Today ATP: IT10 15, US20 39, HK30 38. |
-| ILVARO powder pink `J20931A00618510` | Launch buy only (received ~Aug 17–21, all allocated to stores/web), **0 from launch Sep 3 to Oct 8**. Top-up PO 4500219960 = 600 pcs GR Oct 8 split **HK30 330 / IT10 190 / US20 80** (decided Sep 21, before the K-pop spike). E-com share HK 70 / IT 40 / US 15. Today ATP **HK30 88, IT10 70, US20 37** (+ W100 16 IT / 5 US) while Asian stores hold only a few units each against long waitlists and the APAC web reserve is empty → replenishment is event-blind (orders only up to the normal target). Next receipt PO 4500222417 (1,200 pcs) ETA **Nov 20** (Oct 5 first answer Nov 27; US line Nov 24). |
-| ILVARO black `J20931A00618999` | Reserved stock exhausted → 0 from **Oct 6/7 to Oct 20**; PO 4500221188 (850) GR Oct 20 (expedited from Oct 23). HK30 shipped 384 on Oct 21 (ATP 29 left); **IT10 275 / US20 88 ATP today, EMEA/US stores not yet replenished** (next EMEA order day Thu Oct 22). |
-| LOGO CARDIGAN size M (both colours) | DC zero from **Sep 30/Oct 1**; PO 4500221905 IT10 ETA **Oct 30** (120 black + 60 navy; vendor: 60% Oct 30 / 40% Nov 6), US20 Nov 3, HK30 Nov 4. NB **6 black M units sit in IT10 `RT01` (ungraded online returns)**, 3 at US20, 2 at HK30 – releasable stock nobody looks at. |
-| AMBRINE chocolate brown sizes 0/1/2 | DC zero from **Sep 25**; PO 4500222090 ETA **Nov 10** (IT10 150, HK30 60 Nov 12, US20 20 Nov 13). Sizes 00/3/4 still have a few units. |
-| TIB (men's vest) | Batch `2607-A114` received Aug 11–12 (defective slider), shipped Aug 15 → Oct 2; QN **300004587** opened Sep 30, usage decision **Oct 2** → remaining batch blocked (`SPEME`, 0001) = **1,126 pcs** across DCs (IT10 527, HK30 419, US20 180; all colours); good batch `2609-B027` received Sep 18–21 used from Oct 3. Store + online defect returns land in `QM01` (HK: `QC-HOLD`), ~348 pcs by Oct 21. |
-| MAYA black/navy (MAD01 mis-pick) | Book stock: deliveries 0080412337 / 0080412382 issued MAYA **999** but navy (742) left the DC. Cycle count **Oct 6**: +37 MAYA 999 / −37 MAYA 742 (BWART 701/702). Before Oct 6 the IT10 book stock of black MAYA is 37 lower than physical and navy 37 higher. |
-| POLARIS black | STO 4700001288 IT10 → HK30: 71 pcs GI Oct 15, GR at TKO Oct 21 (ASN said Oct 20; flight offload). |
+| AUREA black `J20931A00012999` | Sells down from Aug 1 (IT10 ~536, HK30 ~656, US20 ~133) to **0 on Sep 11–12** in all DCs, zero until **Oct 16**. PO 4500218734: IT10 **420 pcs GR Oct 16** (the "420" everyone quotes for EMEA), HK30 1,040 GR Oct 16, US20 220 GR Oct 19, IT10 balance 300 GR Oct 19 (pulled in from Oct 30 on Oct 14). Big EMEA shipment Oct 20 (611 pcs), HK Oct 17 + Oct 21. Today ATP: IT10 15, US20 39, HK30 38. |
+| IRIDIA powder pink `J20931A00618510` | Launch buy only (received ~Aug 17–21, all allocated to stores/web), **0 from launch Sep 3 to Oct 8**. Top-up PO 4500219960 = 600 pcs GR Oct 8 split **HK30 330 / IT10 190 / US20 80** (decided Sep 21, before the K-pop spike). E-com share HK 70 / IT 40 / US 15. Today ATP **HK30 88, IT10 70, US20 37** (+ W100 16 IT / 5 US) while Asian stores hold only a few units each against long waitlists and the APAC web reserve is empty → replenishment is event-blind (orders only up to the normal target). Next receipt PO 4500222417 (1,200 pcs) ETA **Nov 20** (Oct 5 first answer Nov 27; US line Nov 24). |
+| IRIDIA black `J20931A00618999` | Reserved stock exhausted → 0 from **Oct 6/7 to Oct 20**; PO 4500221188 (850) GR Oct 20 (expedited from Oct 23). HK30 shipped 384 on Oct 21 (ATP 29 left); **IT10 275 / US20 88 ATP today, EMEA/US stores not yet replenished** (next EMEA order day Thu Oct 22). |
+| VLOGO CARDIGAN size M (both colours) | DC zero from **Sep 30/Oct 1**; PO 4500221905 IT10 ETA **Oct 30** (120 black + 60 navy; vendor: 60% Oct 30 / 40% Nov 6), US20 Nov 3, HK30 Nov 4. NB **6 black M units sit in IT10 `RT01` (ungraded online returns)**, 3 at US20, 2 at HK30 – releasable stock nobody looks at. |
+| AMALIA chocolate brown sizes 0/1/2 | DC zero from **Sep 25**; PO 4500222090 ETA **Nov 10** (IT10 150, HK30 60 Nov 12, US20 20 Nov 13). Sizes 00/3/4 still have a few units. |
+| VEL (men's vest) | Batch `2607-A114` received Aug 11–12 (defective slider), shipped Aug 15 → Oct 2; QN **300004587** opened Sep 30, usage decision **Oct 2** → remaining batch blocked (`SPEME`, 0001) = **1,126 pcs** across DCs (IT10 527, HK30 419, US20 180; all colours); good batch `2609-B027` received Sep 18–21 used from Oct 3. Store + online defect returns land in `QM01` (HK: `QC-HOLD`), ~348 pcs by Oct 21. |
+| NOVA black/navy (MAD01 mis-pick) | Book stock: deliveries 0080412337 / 0080412382 issued NOVA **999** but navy (742) left the DC. Cycle count **Oct 6**: +37 NOVA 999 / −37 NOVA 742 (BWART 701/702). Before Oct 6 the IT10 book stock of black NOVA is 37 lower than physical and navy 37 higher. |
+| ASTRA black | STO 4700001288 IT10 → HK30: 71 pcs GI Oct 15, GR at TKO Oct 21 (ASN said Oct 20; flight offload). |
 
 SS26 store stock returned on Sep 1 arrives Sep 4–12 in `RT01` and is moved to `OUT1` (stock lot) on Sep 15.
 
@@ -65,7 +65,7 @@ SS26 store stock returned on Sep 1 arrives Sep 4–12 in `RT01` and is moved to 
 - `sap_stock_US20/...`: same SAP extract but downloaded with US settings: `,` separated, decimal point, `MM/DD/YYYY`, unit `PC`,
   **cp1252 encoding** (e.g. `DOPOSCI APRÈS-SKI`).
 - Storage locations: `0001` main, `W100` e-commerce reserve (not available for stores), `QM01` quality block (SPEME), `RT01` returns
-  awaiting grading (RETME), `OUT1` stock lot. TIB rows carry batch (`CHARG`) 2604-A031 / 2607-A114 / 2609-B027; other SKUs no batch.
+  awaiting grading (RETME), `OUT1` stock lot. VEL rows carry batch (`CHARG`) 2604-A031 / 2607-A114 / 2609-B027; other SKUs no batch.
 - `pcl_tko_inventory/TKO_INV_SNAPSHOT_YYYYMMDD.csv` (3PL): own item codes + EAN, HKT, location types PICK/RESERVE/ECOM/QC-HOLD/RETURNS/B-GRADE,
   `Allocated Qty` = store orders not yet shipped. File name = stock date, `Snapshot Time` = next morning 06:05 HKT.
   **Missing file 20261001** (National Day). **20261018 is a stale copy of 20261017** (same timestamps/quantities).
@@ -74,31 +74,31 @@ SS26 store stock returned on Sep 1 arrives Sep 4–12 in `RT01` and is moved to 
 - `outbound/LIKP_outbound_deliveries_2026-08_10.csv`: delivery `VBELN` ↔ `XABLN` (internal SHP id) ↔ `BOLNR` (AWB). 9 deliveries have empty BOLNR
   (label printed in carrier portal). `ZLAU` = launch allocations (73 deliveries, not in internal shipments file).
 - `outbound/MSEG_goods_movements_IT10_US20.csv`: BWART 101 GR, 601 GI (store deliveries + daily e-com collective), 311 transfers
-  (0001↔W100, RT01→0001/OUT1 grading), 344 TIB block, 653 defect returns into QM01, 641 STO, 701/702 MAYA inventory differences.
+  (0001↔W100, RT01→0001/OUT1 grading), 344 VEL block, 653 defect returns into QM01, 641 STO, 701/702 NOVA inventory differences.
 - `inbound/EKPO_EKET_purchase_orders_FW26.csv` (`EINDT_ORIG` vs `EINDT`, ~8% of lines under-delivered and short-closed) and
   `inbound/CDPOS_po_delivery_date_changes.csv` (delivery-date change log; key POs have `WERKS='*'`).
 - `atp/ATP_projection_YYYYMMDD.csv`: Mondays Sep 7 → Oct 19 + today Oct 22, 06:00. ATP_NOW = LABST(0001) − open deliveries; W100,
-  blocked and RT01 are excluded. Weekly receipt buckets use **the ETA known at that date** (e.g. MAIRE black: Sep 7 snapshot → Sep 25,
+  blocked and RT01 are excluded. Weekly receipt buckets use **the ETA known at that date** (e.g. AUREA black: Sep 7 snapshot → Sep 25,
   Sep 14/21 → Oct 2, Sep 28 → Oct 9, Oct 5/12 → Oct 16). Generic POs show the original ETA until 7 days before receipt.
-- `quality/QMEL_quality_notifications.csv`: TIB QN 300004587 (block), ARNEB fit check QN 300004571 (closed "within tolerance" →
-  advise one size down), MAYA mis-pick QN 300004590, POLARIS fit QN 300004602 (open), a damaged carton.
+- `quality/QMEL_quality_notifications.csv`: VEL QN 300004587 (block), ARTEM fit check QN 300004571 (closed "within tolerance" →
+  advise one size down), NOVA mis-pick QN 300004590, ASTRA fit QN 300004602 (open), a damaged carton.
   `quality/quarantine_returns_detail.csv`: one RMA per returned unit (stores = POS DEF returns with POS receipt id; e-com returns);
   `IN_TRANSIT_TO_DC` = returned in store but not yet received.
 - `reservations/ZRESV_reservations_export.csv`: PR sample for the singer's agency **REJECTED_NO_STOCK at HK30 on Oct 5 and never re-submitted**
   (IT10 had pink from Oct 8 and issued 2 pcs to Vogue Italia on Oct 14); LON01 event stock (Sep 25, issued Oct 2); manual store
-  backorders for MAIRE black (PAR01/PAR02/MIL01/LON02, still OPEN) and ILVARO pink (Asian stores); MIL01 cardigan M backorder; VIC hold
-  AMBRINE brown 1 rejected Sep 25.
-- `api_samples/`: SAP OData `A_MatlStkInAcctMod` (MAIRE black IT10 on Oct 15 = 0, Oct 16 after GR, Oct 20 after the big GI), WMS gateway
-  ATP JSON, PO JSON with date history, TIB quality stock, 3PL API (camelCase, HKT) incl. a **STALE** response (Oct 18 → data Oct 17 with
+  backorders for AUREA black (PAR01/PAR02/MIL01/LON02, still OPEN) and IRIDIA pink (Asian stores); MIL01 cardigan M backorder; VIC hold
+  AMALIA brown 1 rejected Sep 25.
+- `api_samples/`: SAP OData `A_MatlStkInAcctMod` (AUREA black IT10 on Oct 15 = 0, Oct 16 after GR, Oct 20 after the big GI), WMS gateway
+  ATP JSON, PO JSON with date history, VEL quality stock, 3PL API (camelCase, HKT) incl. a **STALE** response (Oct 18 → data Oct 17 with
   warning) and errors (429, SAP 503 maintenance window Sunday night).
 
 ### Signals / correct readings
-1. "Where to find stock": ILVARO pink 195 pcs ATP across DCs today (88 HK30) while APAC stores hold single-digit units per size (BJS01, CDU01 at zero) and the APAC web is sold out – push to SEL/TYO/SHA/HKG
+1. "Where to find stock": IRIDIA pink 195 pcs ATP across DCs today (88 HK30) while APAC stores hold single-digit units per size (BJS01, CDU01 at zero) and the APAC web is sold out – push to SEL/TYO/SHA/HKG
    now (HK30) and consider IT10→HK30 or direct IT10→APAC for the 70 IT10 units (EMEA demand is low). Next real supply Nov 20.
-2. ILVARO black is back (IT10 275 ATP): EMEA/US stores with spill-over demand (PAR01, LON01, NYC02) can be replenished on Thursday's run.
-3. MAIRE black: DC stock is gone again after the Oct 20/21 waves (IT10 15). The 420 headline was only the IT tranche.
-4. LOGO CARDIGAN M: no DC stock until Oct 30, but RT01 return units exist (6 at IT10) and IBT from MIL02 is stuck (see logistics).
-5. TIB: ATP excludes blocked batch; anything that sums SPEME/QM01 into availability is wrong (see agents bug).
+2. IRIDIA black is back (IT10 275 ATP): EMEA/US stores with spill-over demand (PAR01, LON01, NYC02) can be replenished on Thursday's run.
+3. AUREA black: DC stock is gone again after the Oct 20/21 waves (IT10 15). The 420 headline was only the IT tranche.
+4. VLOGO CARDIGAN M: no DC stock until Oct 30, but RT01 return units exist (6 at IT10) and IBT from MIL02 is stuck (see logistics).
+5. VEL: ATP excludes blocked batch; anything that sums SPEME/QM01 into availability is wrong (see agents bug).
 
 ## Logistics (`logistics/`)
 
@@ -128,19 +128,19 @@ SS26 store stock returned on Sep 1 arrives Sep 4–12 in `RT01` and is moved to 
 ### Scenario signals
 1. **SEL01 customs hold** – load `SHP02600440` / delivery `0080412440` / AWB `NX3467086408` (Nippon Express): picked up TKO Oct 7, arrived
    ICN Oct 8 03:20 KST, **customs hold Oct 8 (KC certificate missing)**, released Oct 12 17:24 KST, delivered **Oct 13**. Carrier EDD Oct 8,
-   internal plan Oct 12 → the internal `delay_days=1` hides a 5-day slip vs the carrier promise. The load contained ILVARO **off-white only**;
+   internal plan Oct 12 → the internal `delay_days=1` hides a 5-day slip vs the carrier promise. The load contained IRIDIA **off-white only**;
    the pink top-up (20 pcs) left TKO on Oct 10 in `SHP02600455`, was **selected for inspection** (follow-up of the KC case) and delivered Oct 18
    (planned Oct 15). Incidents INC0042230 / INC0042398. Store staff believed pink was in the first box (work notes).
-2. **MAD01 mis-pick** – deliveries 0080412337 (Sep 24→26) and 0080412382 (Sep 30→Oct 1): 17 + 20 MAYA navy shipped instead of black.
+2. **MAD01 mis-pick** – deliveries 0080412337 (Sep 24→26) and 0080412382 (Sep 30→Oct 1): 17 + 20 NOVA navy shipped instead of black.
    INC0041877 (Spanish/Italian notes; DC first blames the store), duplicate INC0042011, root cause bin labels swapped (QN 300004590),
-   cycle count Oct 6, black MAYA in delivery 0080412427 (shipped Oct 8, **arrived Oct 11, 3 days late**). 37 navy still at MAD01 (open).
-   IBT MIL01→MAD01 MAYA black sizes 3/4 (2+2) received Oct 3.
-3. **MAIRE black IBTs** – ROM01→MIL01 (2+1, received Sep 24), LON01→LON02 same day (Sep 25); rejected: CAN01→PAR01 (source refused),
-   **COU01→MIL01 (store closed for the season although it holds 6 black Maire)**, GVA01→PAR02 (CH→EU cross-border not allowed),
+   cycle count Oct 6, black NOVA in delivery 0080412427 (shipped Oct 8, **arrived Oct 11, 3 days late**). 37 navy still at MAD01 (open).
+   IBT MIL01→MAD01 NOVA black sizes 3/4 (2+2) received Oct 3.
+3. **AUREA black IBTs** – ROM01→MIL01 (2+1, received Sep 24), LON01→LON02 same day (Sep 25); rejected: CAN01→PAR01 (source refused),
+   **COU01→MIL01 (store closed for the season although it holds 6 black Aurea)**, GVA01→PAR02 (CH→EU cross-border not allowed),
    BER01→PAR01 on Fri Oct 2 13:xx (**after 12:00 cut-off**, first pickup Monday → client leaves Sunday → cancelled).
-4. **LOGO CARDIGAN M** – IBT MIL02→MIL01 *approved* Oct 9 but never shipped (department store must release goods); ROM01→MIL01 and
+4. **VLOGO CARDIGAN M** – IBT MIL02→MIL01 *approved* Oct 9 but never shipped (department store must release goods); ROM01→MIL01 and
    VEN01→MIL01 still `REQUESTED`. Same-city courier lane MIL02→MIL01 costs ~€16, same day if booked before 15:30.
-5. **ILVARO pink IBTs in Asia** – SIN01→SEL01 rejected (cross-border, KC document), BUS01/SEL02→SEL01 rejected (no stock), BJS01→SHA01 rejected,
+5. **IRIDIA pink IBTs in Asia** – SIN01→SEL01 rejected (cross-border, KC document), BUS01/SEL02→SEL01 rejected (no stock), BJS01→SHA01 rejected,
    TYO02→TYO01 1 pc received Oct 5. Cross-region IBT never allowed (route via DC / STO).
 6. **SYD01** – IBT requests for polos/tees from SIN01 rejected (cross-border); INC0042302 complains about receiving puffers in spring.
 7. Other delays have plausible causes in the events: HKG01 typhoon (SHP02600311, INC0040912), Rinascente goods-in slot (SHP02600413),
@@ -158,8 +158,8 @@ SS26 store stock returned on Sep 1 arrives Sep 4–12 in `RT01` and is moved to 
 
 Model: online demand per storefront country = event-free store baseline of that country × online share, with online-specific event
 multipliers; fulfilled from three web reserves (`W100` at IT10 = EU/AE, US20 = US/CA, HK30 = APAC incl. AU). Web reserves are topped up
-on Mondays (14-day cover, event-blind) unless the DC is blocked; extra top-ups on key receipts (Oct 9 ILVARO pink share, Oct 17 MAIRE black,
-Oct 20 ILVARO black). Unserved demand becomes notify-me requests. ~14k units online in 82 days.
+on Mondays (14-day cover, event-blind) unless the DC is blocked; extra top-ups on key receipts (Oct 9 IRIDIA pink share, Oct 17 AUREA black,
+Oct 20 IRIDIA black). Unserved demand becomes notify-me requests. ~14k units online in 82 days.
 
 ### Files
 - `shopify_sales_by_variant_daily.csv` – day (storefront local day), `sales_channel` (`Online Store`; CN = `WeChat Mini Program`),
@@ -167,34 +167,34 @@ Oct 20 ILVARO black). Unserved demand becomes notify-me requests. ~14k units onl
   storefront** (EUR, GBP, CHF, DKK, AED, USD, CAD, JPY, KRW, CNY, HKD, TWD, SGD, AUD – do not sum without FX).
   Quirks: **2026-09-30 rows are duplicated** (BI job appended twice, 200 exact duplicates); `variant_sku` for one-size (TU) items mostly
   **without the `-TU` suffix**; WeChat rows carry the **EAN** as variant_sku; returns are booked on the return date (net quantity can be negative).
-  TIB defect returns (reason DEFECTIVE in the model) appear from ~Sep 28, ARNEB returns (size too large) and POLARIS EU returns (too small).
+  VEL defect returns (reason DEFECTIVE in the model) appear from ~Sep 28, ARTEM returns (size too large) and ASTRA EU returns (too small).
 - `back_in_stock_requests.csv` – one row per request (UTC). Status SENT/CONVERTED once the variant was restocked on that web node,
-  PENDING otherwise. ~6% duplicate subscriptions by the same person. 1,858 requests, **1,666 for ILVARO 510**
-  (KR 738, CN 446, JP 250, HK 80, TW 75, SG 34; EU/US only ~35). MAIRE black 148 (KR 77, GB 17, CN 10, JP 9, FR 8, IT 6...) Sep 13 → Oct 16.
+  PENDING otherwise. ~6% duplicate subscriptions by the same person. 1,858 requests, **1,666 for IRIDIA 510**
+  (KR 738, CN 446, JP 250, HK 80, TW 75, SG 34; EU/US only ~35). AUREA black 148 (KR 77, GB 17, CN 10, JP 9, FR 8, IT 6...) Sep 13 → Oct 16.
   The planning call notes of Oct 2 quote "~700 notify-me this morning" – the export has ~190 pink requests before 09:15 CET Oct 2 (~270 for the day):
   the e-com figure was inflated (page views / provisional).
 - `inventory_availability_log.csv` – OUT_OF_STOCK / BACK_IN_STOCK transitions per web node × variant (UTC).
-  **ILVARO 510 APAC: all sizes OOS between 2026-10-01 22:22 and 23:38 UTC = Oct 2 07:22–08:38 KST** (KR/CN/JP storefronts share the APAC node).
+  **IRIDIA 510 APAC: all sizes OOS between 2026-10-01 22:22 and 23:38 UTC = Oct 2 07:22–08:38 KST** (KR/CN/JP storefronts share the APAC node).
   EU sizes 00/0 OOS Oct 2, all EU/US sizes by Oct 5. Top-up back in stock Oct 8 21:30 UTC (APAC) / Oct 9 04:30 UTC (EU) and APAC sold out again
-  by ~Oct 9 12:00 UTC. MAIRE black sizes go OOS Sep 14–26 (APAC/EMEA), back Oct 17. AMBRINE brown 0/1/2 OOS from Sep 26–Oct 10.
+  by ~Oct 9 12:00 UTC. AUREA black sizes go OOS Sep 14–26 (APAC/EMEA), back Oct 17. AMALIA brown 0/1/2 OOS from Sep 26–Oct 10.
 - `site_search_queries_daily.csv` – per day × site × raw search term, searches, results, clicks, exits, zero-result flag. Event queries:
-  `ilvaro pink`, `일바로 핑크` (0 results – Korean name not indexed), `윤하은 몽클레르`, `尹夏恩同款`, `イルヴァロ ピンク` (0 results),
-  `yoon ha eun`, `ilvaro rosa`/`ilvaro rose` (0 results – site uses "rosa cipria"/"rose poudré"), typos `ilvaro pnk`, `maire blak`;
-  `maire black` / `마이레 블랙` / `maire noir` / `maire nero` from Sep 17–19; `ambrine marrone/marron/brown`; `tib zip`, `cerniera gilet`
-  from Sep 29; `価格改定` from Oct 9; `双11 价格` from Oct 18; `daunenjacke damen lang` during the cold snap; AU searches for `polo`,
+  `iridia pink`, `Iridia 핑크` (0 results – Korean name not indexed), `윤하은 발렌티노`, `尹夏恩同款`, `イルヴァロ ピンク` (0 results),
+  `yoon ha eun`, `iridia rosa`/`iridia rose` (0 results – site uses "rosa cipria"/"rose poudré"), typos `iridia pnk`, `aurea blak`;
+  `aurea black` / `Aurea 블랙` / `aurea noir` / `aurea nero` from Sep 17–19; `amalia marrone/marron/brown`; `vel zip`, `cerniera gilet`
+  from Sep 29; `価格改定` from Oct 9; `双11 价格` from Oct 18; `daunenjacke damen lang` during the cold snap; AU searches for `jersey polo`,
   `t-shirt`, `light jacket`. Raw terms are not normalised (~7% upper-case or padded/title-case variants).
 
 ### Correct readings
 - Online confirms the K-pop spike is Asia-wide and immediate (Oct 2 morning KST), while EU/US online pink demand is modest:
   stock should flow to APAC, not EU.
-- Zero-result searches in Korean/Japanese/Italian/French for ILVARO pink are a merchandising fix (synonyms) and a demand signal.
+- Zero-result searches in Korean/Japanese/Italian/French for IRIDIA pink are a merchandising fix (synonyms) and a demand signal.
 
 ## Marketing / CRM (`marketing/`)
 
 ### Files
 - `campaign_calendar_FW26.xlsx` – sheet `Calendar FW26` (Gantt: merged month headers, week columns W31–W53, coloured fills by type,
   cell comments with notes), sheet `List` (one row per activity, budget SUM formula), sheet `v3_OLD` (**superseded July plan with wrong dates**:
-  US/UK OOH Sep 22, POLARIS Oct 1, LON01 evening Oct 15, Japan price letter Oct 15 – do not use).
+  US/UK OOH Sep 22, ASTRA Oct 1, LON01 evening Oct 15, Japan price letter Oct 15 – do not use).
 - `media_plan_FW26_by_market.xlsx` – market × channel, flight, budget local + EUR, impressions/CPM, agency, spend-to-date %.
   AU runs the global winter creative in September (spring in Sydney). Harrods windows are barter (not in budget).
 - `HartwellRowe_FW26_Altitude_flash_results_US_UK_wk38-41.pdf` – agency flash report claiming **+22% "attributed sales uplift"**.
@@ -204,9 +204,9 @@ Oct 20 ILVARO black). Unserved demand becomes notify-me requests. ~14k units onl
   (Golden Week). Correct reading: real incremental effect is single-digit (~+6%); do not use +22% for forecasting.
 - `salesforce_campaigns_export.csv` – Campaign object export. LON01 evening `7015g00000Q8LnBAAV`: 45 contacts, 39 responses,
   description "Attended 36 (+9 guests). Purchasers 23, 27 transactions, GBP 41,881 (POS matched)". Quirk: `BudgetedCost/ActualCost` are EUR
-  even when `CurrencyIsoCode` says GBP/CNY/KRW/... (export issue). Also MIL01 MFW appointments, PAR01 PFW viewing, SHA01 Polaris preview,
-  JP price letter (DM+LINE, 4,120 contacts), Golden Week WeChat outbound, newsletters (Sep 17 icons newsletter **features MAIRE black as hero
-  while DC is at zero**), ILVARO "Pink edit" social (launched Oct 6 when nothing was in stock), KR waitlist SMS planned for Nov 20.
+  even when `CurrencyIsoCode` says GBP/CNY/KRW/... (export issue). Also MIL01 MFW appointments, PAR01 PFW viewing, SHA01 Astra preview,
+  JP price letter (DM+LINE, 4,120 contacts), Golden Week WeChat outbound, newsletters (Sep 17 icons newsletter **features AUREA black as hero
+  while DC is at zero**), IRIDIA "Pink edit" social (launched Oct 6 when nothing was in stock), KR waitlist SMS planned for Nov 20.
 - `salesforce_campaign_members_LON01_private_evening.csv` – 45 members: 23 "Attended - Purchased", 13 "Attended", 3 "Responded - No Show",
   6 "Declined"; 9 plus-ones. `External_Client_Id__c` = POS `customer_id`; `Event_Purchase_GBP__c` = that client's POS net amount on Oct 8.
   NB POS has **no transactions after ~19:00** on Oct 8: event purchases were rung through during the afternoon appointments, so time-based
@@ -214,25 +214,25 @@ Oct 20 ILVARO black). Unserved demand becomes notify-me requests. ~14k units onl
 - `salesforce_clienteling_notes_export.csv` – ~1,030 Task rows (UTC `CreatedDate`, CRM store codes, owner = POS sales-associate code,
   `Client_External_Id__c` = POS customer id when the client bought something that day, else empty). Free text in the store language
   (it/fr/en/de/es/ja/ko/zh-CN/zh-HK/zh-TW), lower-case/typos/abbreviations. Signal notes are sampled from the true unmet demand:
-  MAIRE black (Korean clients, Sep 17+; neutral wording before the drama), ILVARO pink (from Oct 2, mentions Yoon Ha-eun), AMBRINE brown,
-  LOGO CARDIGAN M (MIL01 from Oct 8 + others in Oct), ARNEB "one size down" (from POS size returns), TIB zip complaints (from POS DEF returns),
-  Japan pre-buying before Nov 1 (TYO/OSA from Oct 10), POLARIS (CN likes it; EU "small and expensive"), Double 11 price-matching (CN Oct 20–21),
-  SYD01 polos/tees in spring, cold snap DACH/CPH/AMS, MAD01 "only navy MAYA", Golden Week groups. ~420 routine notes. 6 duplicated notes
+  AUREA black (Korean clients, Sep 17+; neutral wording before the drama), IRIDIA pink (from Oct 2, mentions Yoon Ha-eun), AMALIA brown,
+  VLOGO CARDIGAN M (MIL01 from Oct 8 + others in Oct), ARTEM "one size down" (from POS size returns), VEL zip complaints (from POS DEF returns),
+  Japan pre-buying before Nov 1 (TYO/OSA from Oct 10), ASTRA (CN likes it; EU "small and expensive"), Double 11 price-matching (CN Oct 20–21),
+  SYD01 polos/tees in spring, cold snap DACH/CPH/AMS, MAD01 "only navy NOVA", Golden Week groups. ~420 routine notes. 6 duplicated notes
   (mobile retry: same text/time, new Id).
 - `store_waitlist_reservations.csv` – clienteling-app export (~400 entries, CRM store codes, UTC). Entries are a sample of real unmet
-  demand for MAIRE black, ILVARO pink/black, AMBRINE brown, LOGO CARDIGAN M, MAYA black (MAD01). Status NOTIFIED/FULFILLED only after the
-  store actually got stock back (from store stock files). Quirks: item as `sku-size`, as `sku` only, or as free text ("MAIRE black");
+  demand for AUREA black, IRIDIA pink/black, AMALIA brown, VLOGO CARDIGAN M, NOVA black (MAD01). Status NOTIFIED/FULFILLED only after the
+  store actually got stock back (from store stock files). Quirks: item as `sku-size`, as `sku` only, or as free text ("AUREA black");
   ~30% of entries that should be NOTIFIED are still **OPEN** (associates never updated); 12 duplicate entries; 3 clients on both PAR01 and
   PAR02 waitlists; **4 rows with invalid store code `KR1`** (= KR02 / SEL01); walk-in leads have no client id.
-- `PR_seeding_tracker_FW26.xlsx` – seeding log. **Park Ji-woo** (actress) seeded MAIRE black size 0 on Aug 25 for the drama "Winter Letters"
-  (episode aired Sep 16) → the origin of the Korean Maire-black wave, but nobody told planning. LUMIERE stylist received BADY, **Yoon Ha-eun
+- `PR_seeding_tracker_FW26.xlsx` – seeding log. **Park Ji-woo** (actress) seeded AUREA black size 0 on Aug 25 for the drama "Winter Letters"
+  (episode aired Sep 16) → the origin of the Korean Maire-black wave, but nobody told planning. LUMIERE stylist received ARIA, **Yoon Ha-eun
   was NOT seeded**; row added Oct 2 "NOT SEEDED – organic"; gifting request Oct 5 "ON HOLD – ATP 0 at HK30", still pending Oct 16 (IT10 had
   stock and gave 2 pcs to Vogue Italia on Oct 12–14). One row has post date before the sent date (logged late).
-- `social_listening_alerts_export.csv` – Talkwalker-like alerts (UTC). Key: Sep 16 Maire/drama (KR), Sep 18 Maire black sold out Paris,
-  Sep 24 Polaris CN spike, Sep 27 Polaris sentiment drop EU, Sep 29 TIB zip, **Oct 1 21:05 UTC Yoon Ha-eun pink jacket**, Oct 1 23:40 ILVARO
+- `social_listening_alerts_export.csv` – Talkwalker-like alerts (UTC). Key: Sep 16 Aurea/drama (KR), Sep 18 Aurea black sold out Paris,
+  Sep 24 Astra CN spike, Sep 27 Astra sentiment drop EU, Sep 29 VEL zip, **Oct 1 21:05 UTC Yoon Ha-eun pink jacket**, Oct 1 23:40 IRIDIA
   61k mentions, Oct 2 "sold out at 7:30", Oct 3 spill-over on black, Oct 4 resale x2, Oct 8 Seoul delivery stuck at customs, Oct 9 JP price increase,
-  Oct 11 counterfeit ILVARO, Oct 14 Arneb runs big, Oct 14 snow Munich, Oct 15 Canada Goose pop-up opposite SEL01, Oct 17 Maire restock,
-  Oct 18 ILVARO pink at Cheongdam, Oct 20 Double 11. Noise: daily volume alerts on generic topics, a **false positive** (Monclar village), brand-protection alert.
+  Oct 11 counterfeit IRIDIA, Oct 14 Artem runs big, Oct 14 snow Munich, Oct 15 Canada Goose pop-up opposite SEL01, Oct 17 Aurea restock,
+  Oct 18 IRIDIA pink at Cheongdam, Oct 20 Double 11. Noise: daily volume alerts on generic topics, a **false positive** (Monclar village), brand-protection alert.
 
 ## Planning (`planning/`)
 
@@ -243,15 +243,15 @@ Oct 20 ILVARO black). Unserved demand becomes notify-me requests. ~14k units onl
   (pasted values, +12% vs LY – outdated). Cached values were computed with LibreOffice so `data_only` readers see numbers.
   Plan = LY (2025) actual × regional growth × category adjustment; Actual Sales Aug/Sep from internal daily sales, **Oct = MTD to Oct 21**
   compared with a full-month plan (Summary note warns; the Oct var% ~ −35% is NOT a real miss). Aug–Sep actual is ~10–15% under plan, in line
-  with the internal KPI budget gap. Comments: EMEA outerwear on-order note about MAIRE black re-order; APAC "ILVARO pink: no upside foreseen".
-  Assumptions: POLARIS EU = Genius FW25 CN/HK profile (factor 1.0); ILVARO "BADY × 0,55 (allocation) / forecast BADY × 0,6"; SYD01 profile NH_STD.
-- `allocation_plan_FW26_new_products.xlsx` – allocation tool export. `Wave1_0309` (ILVARO, AMBRINE, ARNEB, ROSIERE, WOOL TURTLENECK) and
-  `Wave2_Genius_2409` (POLARIS). `alloc_qty` **equals what stores really received** (= store stock EOD on launch day + launch-day POS sales;
+  with the internal KPI budget gap. Comments: EMEA outerwear on-order note about AUREA black re-order; APAC "IRIDIA pink: no upside foreseen".
+  Assumptions: ASTRA EU = Couture FW25 CN/HK profile (factor 1.0); IRIDIA "ARIA × 0,55 (allocation) / forecast ARIA × 0,6"; SYD01 profile NH_STD.
+- `allocation_plan_FW26_new_products.xlsx` – allocation tool export. `Wave1_0309` (IRIDIA, AMALIA, ARTEM, RIVIERA, CASHMERE TURTLENECK) and
+  `Wave2_Couture_2409` (ASTRA). `alloc_qty` **equals what stores really received** (= store stock EOD on launch day + launch-day POS sales;
   identical to the `ZLAU` deliveries in the WMS). `calc_qty` is the tool's pre-rounding value (±18%), `override=MANUAL` where they differ by > 1.5.
-  Analogs: ILVARO→BADY × **0.55** (events.py note says forecast used 0.6 – the two numbers are both "true": allocation 0.55, forecast 0.6),
-  AMBRINE→HERMINE × 0.8 with 70/30 black/brown split, ARNEB→MONTCLA 0.85, ROSIERE→KARAKORUM 0.9, POLARIS→"GENIUS FW25 DROP (CN/HK profile)" × 1.0
+  Analogs: IRIDIA→ARIA × **0.55** (events.py note says forecast used 0.6 – the two numbers are both "true": allocation 0.55, forecast 0.6),
+  AMALIA→LIVIANA × 0.8 with 70/30 black/brown split, ARTEM→MISTRAL 0.85, RIVIERA→COSIMO 0.9, ASTRA→"COUTURE FW25 DROP (CN/HK profile)" × 1.0
   for every region (the flaw behind EU/US over-allocation). Quirks: Wave2 uses **store names/aliases instead of codes** ("Monte Napo", "Harrods",
-  "銀座"...) and has no `werks` column; one row duplicated (ILVARO 510, SEL02, size 1) → summing double counts 1–2 units; season_profile NH_STD everywhere.
+  "銀座"...) and has no `werks` column; one row duplicated (IRIDIA 510, SEL02, size 1) → summing double counts 1–2 units; season_profile NH_STD everywhere.
 - `replenishment_parameters_stores.csv` – SAP-ish (`;` separator, **decimal comma**), German/English field names: `BESTELLTAGE` (order days:
   EMEA/AMERICAS flagships MO/DO, others MO; APAC flagships DI/FR, others DI), `WBZ_TAGE` lead time (from world.py LEAD), `REICHWEITE_TAGE`
   cover 21 EMEA / 28 AMERICAS+APAC, safety 1.15, service level, `SAISON_PROFIL`. Planted: **SYD01 = NH_STD** (should be southern hemisphere,
@@ -259,23 +259,23 @@ Oct 20 ILVARO black). Unserved demand becomes notify-me requests. ~14k units onl
   **STM01 still ACTIVE** although closed from Oct 19 (note says "bloccare riordini!"); CRT01 order day Monday although open Fri–Sun in October;
   COU01 `BLOCKED_SEASON`; ROM01 note "no parameter change" despite −50% footfall.
 - `min_presentation_by_store_category.csv` – min units per core size and max facings; SYD01 has 34 outerwear facings vs 6 jersey.
-- `sop_minutes/` – S&OP minutes Sep 7 (DOCX, IT), Sep 21 (MD, EN), Oct 2 ILVARO call notes (MD, IT), Oct 5 (DOCX, EN), Oct 19 (DOCX, IT)
+- `sop_minutes/` – S&OP minutes Sep 7 (DOCX, IT), Sep 21 (MD, EN), Oct 2 IRIDIA call notes (MD, IT), Oct 5 (DOCX, EN), Oct 19 (DOCX, IT)
   + `..._DRAFT.md` and `planner_running_notes_GBellini.md`. Each document reflects what was known **at that date** (PO ETAs from
   `common.KEY_POS` revision history).
 
 ### Planted contradictions / traps
-- **Oct 19 DRAFT vs final**: draft says EMEA MAIRE allocation 60% to the four Korean-demand stores, IT balance 300 still due Oct 30,
-  ILVARO pink re-order Nov 27, SEL01 pink arrived Oct 13, ILVARO black Oct 23, "Polaris STO arrived" – all wrong/outdated. Final DOCX: 45%,
-  balance arrived Oct 19, re-order **Nov 20**, pink arrived **Oct 18**, ILVARO black Oct 20, STO arriving Oct 20 (actually received Oct 21).
+- **Oct 19 DRAFT vs final**: draft says EMEA AUREA allocation 60% to the four Korean-demand stores, IT balance 300 still due Oct 30,
+  IRIDIA pink re-order Nov 27, SEL01 pink arrived Oct 13, IRIDIA black Oct 23, "Astra STO arrived" – all wrong/outdated. Final DOCX: 45%,
+  balance arrived Oct 19, re-order **Nov 20**, pink arrived **Oct 18**, IRIDIA black Oct 20, STO arriving Oct 20 (actually received Oct 21).
 - Oct 2 call notes: "~700 notify-me requests this morning" (export: ~190); "SEL01, SEL02, BUS01 sold out" (true for the day);
   split HK330/IT190/US80 **kept unchanged** although Asia was exploding → the 70 IT10 pink units still sit in Italy on Oct 22.
 - Sep 7 Golden Week override +25% MIL/PAR "action" was **never loaded** (Sep 21: template rejected); the SYD01 forecast fix is parked in every
   meeting and still not done on Oct 19.
-- Oct 19: Bellini keeps priority on PAR01/PAR02/MIL01/LON02 for the 420 MAIRE black **although the Korean tourist wave ended mid-October**
+- Oct 19: Bellini keeps priority on PAR01/PAR02/MIL01/LON02 for the 420 AUREA black **although the Korean tourist wave ended mid-October**
   (Moreau's warning) – risk of over-allocating; the correct move is to rebalance toward stores with current demand.
 - Oct 19: "~110 pink at HK30 and ~80 at IT10 not shipped because the automatic replenishment only covers the event-free target" – this is the
   root cause the teams should detect and fix (event-aware proposal / demand multiplier).
-- Oct 5: ILVARO black re-order ETA Oct 23 (true then); changed to Oct 20 on Oct 9.
+- Oct 5: IRIDIA black re-order ETA Oct 23 (true then); changed to Oct 20 on Oct 9.
 
 ## Customer care (`customer_care/`)
 
@@ -284,18 +284,18 @@ Oct 20 ILVARO black). Unserved demand becomes notify-me requests. ~14k units onl
   custom fields `Category [list]`, `Product/Style [txt]`, `SKU [txt]` (with/without size suffix, often empty), `Store [list]` (Zendesk dropdown
   slugs), `Order number [txt]` (`MC-EU|US|AP-26-0xxxxxx`), `Country [list]`, `Satisfaction`. Descriptions are the customer's first message in
   their language (it/fr/en-US/en-GB/de/es/ja/ko/zh-cn/zh-tw), composed from authored sentences + openers/closers.
-- Signal volumes (approx.): ILVARO pink availability ~200 (from Oct 2, decaying; KR/JP/CN/TW/HK first), ILVARO black spill-over ~22,
-  TIB zipper defect ~89 (from Sep 25, rising), MAIRE black ~58 (Sep 16 → Oct 17), ARNEB too large ~38 (from Sep 10), delivery delays ~73
+- Signal volumes (approx.): IRIDIA pink availability ~200 (from Oct 2, decaying; KR/JP/CN/TW/HK first), IRIDIA black spill-over ~22,
+  VEL zipper defect ~89 (from Sep 25, rising), AUREA black ~58 (Sep 16 → Oct 17), ARTEM too large ~38 (from Sep 10), delivery delays ~73
   (incl. Korean clients waiting for items reserved at Cheongdam during the customs hold), Japan price increase ~28 (from Oct 9), Double 11
-  price matching ~16 (from Oct 18), POLARIS fit small EU ~15 / availability CN ~12, AMBRINE brown ~16, LOGO CARDIGAN M ~9; ~680 background tickets.
+  price matching ~16 (from Oct 18), ASTRA fit small EU ~15 / availability CN ~12, AMALIA brown ~16, VLOGO CARDIGAN M ~9; ~680 background tickets.
 - `zendesk_ticket_comments_sample.json` – 150 threads (customer message, agent macro, optional follow-up, internal notes).
-  Macros change over time: TIB "send photos, we'll assess repair" before Oct 3, then "quality issue on a limited batch – full refund or
-  replacement". **Inconsistent agent information** (planted): some ILVARO macros say restock "end of October" (ko/en) or "mid/late November"
+  Macros change over time: VEL "send photos, we'll assess repair" before Oct 3, then "quality issue on a limited batch – full refund or
+  replacement". **Inconsistent agent information** (planted): some IRIDIA macros say restock "end of October" (ko/en) or "mid/late November"
   (ja/zh) – truth: next receipt Nov 20, nothing before except store allocations from the Oct 8 top-up. The JP price macro says items reserved in
   store keep the old price if collected by Oct 31 (policy unclear in other sources).
 
 ### Data-quality quirks
-- 14 TIB defect tickets mis-categorised as `other` / `returns_refund` / empty; ~4% tickets with empty category.
+- 14 VEL defect tickets mis-categorised as `other` / `returns_refund` / empty; ~4% tickets with empty category.
 - Inconsistent tags for the same issue: `zip_defect`, `zipper`, `cerniera`, `tib_zip`, `defect zipper`.
 - 18 duplicated tickets (same customer re-wrote by email): status `closed`, tag `merged`, different Id.
 - KakaoTalk tickets of Oct 3–4 were imported late: `Created at = 2026-10-06 01:12:44` (tag `kakao_import`) – their real date is earlier.
@@ -318,26 +318,26 @@ Oct 20 ILVARO black). Unserved demand becomes notify-me requests. ~14k units onl
   generated by replaying the handlers at the historical date (so every answer is consistent with what systems knew then).
 
 ### Planted behaviours in the log
-1. Sep 8 / Sep 14 / Sep 25 / Oct 5: MAIRE black ATP and PO ETA drifting **Sep 25 → Oct 2 → Oct 9 → Oct 16**.
+1. Sep 8 / Sep 14 / Sep 25 / Oct 5: AUREA black ATP and PO ETA drifting **Sep 25 → Oct 2 → Oct 9 → Oct 16**.
 2. Sep 22: IBT ROM01→MIL01 accepted *next pickup* (request 12:51 after the 12:00 cut-off) – ETA Sep 24, €40.71.
 3. Sep 24: COU01→MIL01 rejected – store closed for the season (stock is there but unreachable).
 4. **Oct 2 13:40 CEST: BER01→PAR01 rejected `CUTOFF_MISSED`** – first pickup Monday Oct 5, ETA Oct 7 > required Oct 3.
-5. Oct 2 / Oct 5: marketing-agent PR reservation for ILVARO pink at HK30 rejected (ATP 0); nobody retries after the Oct 8 top-up.
+5. Oct 2 / Oct 5: marketing-agent PR reservation for IRIDIA pink at HK30 rejected (ATP 0); nobody retries after the Oct 8 top-up.
 6. Oct 2: planning gets an ATP answer based on **Monday's (Sep 28) snapshot** – ATP is only snapshotted on Mondays + today. The JSON carries
    `stale: true` but the agent's text reply does not mention it; consumers must check `snapshot`/`stale`.
 7. Oct 8: logistics pushes the SEL01 customs hold; Oct 12 tracking shows EXCEPTION; carrier EDD Oct 8 vs plan Oct 12.
 8. **Oct 9: marketing-agent drafts a Korean waitlist message with ETA "10월 말" (end of October)** supplied by the caller without checking
    the warehouse – wrong (next pink receipt Nov 20). The agent only flags `NO_STOCK_PROMISE`.
 9. Oct 14: logistics-agent errors on an inter-DC lane (IT10→HK30 not modelled).
-10. **Oct 15: warehouse-agent ATP for TIB black IT10 = 590 – BUG: it adds the blocked batch (`BLOCKED_QI`) to ATP.** The answer uses the Oct 12
+10. **Oct 15: warehouse-agent ATP for VEL black IT10 = 590 – BUG: it adds the blocked batch (`BLOCKED_QI`) to ATP.** The answer uses the Oct 12
     snapshot: correct ATP = 302, blocked 288 (Oct 22 file: ATP 158, blocked 323).
 11. Oct 16: token expired (401-like JSON-RPC error); Oct 19: 3PL rate limit 429.
-12. Oct 19: HK30 MAIRE ATP from the 3PL feed (the Oct 18 3PL file is a stale copy of Oct 17).
+12. Oct 19: HK30 AUREA ATP from the 3PL feed (the Oct 18 3PL file is a stale copy of Oct 17).
 13. Oct 20: SIN01→SEL01 IBT rejected (cross-border exception only); calendar shows the "Pink edit" social push running while stock is 0.
-14. Oct 21: standard (event-blind) replenishment proposal for SEL01 ILVARO 510; with `demandMultiplier` ≈ 6 the proposal asks ~30 per size and
+14. Oct 21: standard (event-blind) replenishment proposal for SEL01 IRIDIA 510; with `demandMultiplier` ≈ 6 the proposal asks ~30 per size and
     is capped by HK30 ATP – the shortfall is the real gap to Nov 20.
-15. Oct 22 (today): ATP ILVARO 510 = 195 (HK30 88 / IT10 70 / US20 37), ILVARO 999 = 392 (IT10 275), LOGO CARDIGAN black = 193 **but 0 in size M**
-    (the text summary hides the size), AMBRINE brown = 18 (0 in sizes 0–2).
+15. Oct 22 (today): ATP IRIDIA 510 = 195 (HK30 88 / IT10 70 / US20 37), IRIDIA 999 = 392 (IT10 275), VLOGO CARDIGAN black = 193 **but 0 in size M**
+    (the text summary hides the size), AMALIA brown = 18 (0 in sizes 0–2).
 
 ### Mock server (`generator/systems/mock_agents/server.py`, logic in `handlers.py`)
 `.venv/bin/python generator/systems/mock_agents/server.py --port 8088` → REST under `/{warehouse|logistics|marketing|planning}/v1/...`,

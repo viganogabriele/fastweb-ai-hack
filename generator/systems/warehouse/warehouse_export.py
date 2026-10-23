@@ -38,7 +38,7 @@ SUBCAT_IT = {"Short down jacket": "GIUBB.CORTO PIUMINO", "Long down jacket": "PI
              "Ski jacket": "GIACCA SCI", "Ski trousers": "PANTALONE SCI", "Down cape": "MANTELLA PIUMINO",
              "Oversized down jacket": "PIUMINO OVERSIZE", "Knit balaclava": "PASSAMONTAGNA", "Cardigan": "CARDIGAN",
              "Padded cardigan": "CARDIGAN IMBOTTITO", "Sweater": "MAGLIONE", "Turtleneck": "DOLCEVITA", "Hoodie": "FELPA CAPPUCCIO",
-             "Sweatshirt": "FELPA", "T-shirt": "T-SHIRT", "Polo": "POLO", "Sneakers": "SNEAKERS", "Après-ski boots": "DOPOSCI APRÈS-SKI",
+             "Sweatshirt": "FELPA", "T-shirt": "T-SHIRT", "Jersey Polo": "JERSEY POLO", "Sneakers": "SNEAKERS", "Après-ski boots": "DOPOSCI APRÈS-SKI",
              "Beanie": "BERRETTO", "Scarf": "SCIARPA", "Gloves": "GUANTI", "Baseball cap": "CAPPELLINO", "Belt bag": "MARSUPIO",
              "Backpack": "ZAINO"}
 
@@ -75,13 +75,13 @@ def stock_rows(w, i):
                 if arr[:i + 1].max() > 0:
                     rows.append((x, w, "0001", s, z, b, int(arr[i]), 0, 0, 0))
             if tb:
-                rows.append((x, w, "0001", s, z, C.TIB["bad_batch"], 0, 0, tb, 0))
+                rows.append((x, w, "0001", s, z, C.VALENTINO_V17["bad_batch"], 0, 0, tb, 0))
         else:
             rows.append((x, w, "0001", s, z, "", m, 0, 0, 0))
         if k in web_eod and web_eod[k][:i + 1].max() > 0:
             rows.append((x, w, "W100", s, z, "", int(web_eod[k][i]), 0, 0, 0))
         if k in qm_eod and qm_eod[k][i] > 0:
-            rows.append((x, w, "QM01", s, z, C.TIB["bad_batch"] if SN[s] == "TIB" else "", 0, 0, int(qm_eod[k][i]), 0))
+            rows.append((x, w, "QM01", s, z, C.VALENTINO_V17["bad_batch"] if SN[s] == "VEL" else "", 0, 0, int(qm_eod[k][i]), 0))
         if k in rt_eod and rt_eod[k][i] > 0:
             rows.append((x, w, "RT01", s, z, "", 0, 0, 0, int(rt_eod[k][i])))
         if k in out1_eod and out1_eod[k][i] > 0:
@@ -151,14 +151,14 @@ def tko_rows(i):
                 rows.append([snap.strftime("%Y-%m-%d %H:%M"), "TKO-3", "MONC01", item, ean[(s, z)], desc, lot, lt, qq, al, qq - al, 0, "PCS"])
         if k in tib_blocked and tib_blocked[k][i] > 0:
             q = int(tib_blocked[k][i])
-            rows.append([snap.strftime("%Y-%m-%d %H:%M"), "TKO-3", "MONC01", item, ean[(s, z)], desc, C.TIB["bad_batch"], "QC-HOLD", q, 0, 0, q, "PCS"])
+            rows.append([snap.strftime("%Y-%m-%d %H:%M"), "TKO-3", "MONC01", item, ean[(s, z)], desc, C.VALENTINO_V17["bad_batch"], "QC-HOLD", q, 0, 0, q, "PCS"])
         if k in web_eod and web_eod[k][:i + 1].max() > 0:
             q = int(web_eod[k][i])
             rows.append([snap.strftime("%Y-%m-%d %H:%M"), "TKO-3", "MONC01", item, ean[(s, z)], desc, "", "ECOM", q, 0, q, 0, "PCS"])
         if k in qm_eod and qm_eod[k][i] > 0:
             q = int(qm_eod[k][i])
             rows.append([snap.strftime("%Y-%m-%d %H:%M"), "TKO-3", "MONC01", item, ean[(s, z)], desc,
-                         C.TIB["bad_batch"] if SN[s] == "TIB" else "", "QC-HOLD", q, 0, 0, q, "PCS"])
+                         C.VALENTINO_V17["bad_batch"] if SN[s] == "VEL" else "", "QC-HOLD", q, 0, 0, q, "PCS"])
         if k in rt_eod and rt_eod[k][i] > 0:
             q = int(rt_eod[k][i])
             rows.append([snap.strftime("%Y-%m-%d %H:%M"), "TKO-3", "MONC01", item, ean[(s, z)], desc, "", "RETURNS", q, 0, 0, q, "PCS"])
@@ -180,7 +180,7 @@ for i, x in enumerate(DAYS):
         rows = prev   # stale: interface re-sent the Oct 17 snapshot (timestamps and quantities of Oct 17)
     df = pd.DataFrame(rows, columns=TKO_COLS)
     if x == dt.date(2026, 9, 21):
-        # POLARIS items not yet mapped in 3PL item master on first days -> item code UNMAPPED
+        # ASTRA items not yet mapped in 3PL item master on first days -> item code UNMAPPED
         pass
     df.to_csv(TKO / f"TKO_INV_SNAPSHOT_{x:%Y%m%d}.csv", index=False, encoding="utf-8-sig")
     prev = rows
@@ -269,16 +269,16 @@ for (d_, w, s, z), q in es.groupby(["date", "werks", "sku", "size"]).qty.sum().i
 for (x, w, s, z, q, bw) in S["adjustments"]:
     mv.append((x.isoformat(), w, bw, "0001", s, z, "", q, "", "", "", "", "", None, None, "INVENTARIO ROTATIVO 06/10 - DIFF"))
 for r in S["sto_rows"]:
-    mv.append(("2026-10-15", "IT10", "641", "0001", r["sku"], r["size"], "", -r["qty"], "4700001288", "00010", "0080499120", "", "", None, None, "STO IT10>HK30 GENIUS"))
-UD = C.TIB["usage_decision"]
+    mv.append(("2026-10-15", "IT10", "641", "0001", r["sku"], r["size"], "", -r["qty"], "4700001288", "00010", "0080499120", "", "", None, None, "STO IT10>HK30 COUTURE"))
+UD = C.VALENTINO_V17["usage_decision"]
 for k, arr in tib_blocked.items():
     q = int(arr[-1])
     if q and k[0] != "HK30":
-        mv.append((UD, k[0], "344", "0001", k[1], k[2], C.TIB["bad_batch"], q, "", "", "", "", "", None, None, f"BLOCCO QN {C.TIB['qn']}"))
+        mv.append((UD, k[0], "344", "0001", k[1], k[2], C.VALENTINO_V17["bad_batch"], q, "", "", "", "", "", None, None, f"BLOCCO QN {C.VALENTINO_V17['qn']}"))
 sd = S["store_def"]
 for r in sd.itertuples():
     if r.dc_receipt is not None and r.werks != "HK30" and isinstance(r.dc_receipt, dt.date):
-        mv.append((r.dc_receipt.isoformat(), r.werks, "653", "QM01", r.sku, r.size, C.TIB["bad_batch"], r.qty, "", "", "",
+        mv.append((r.dc_receipt.isoformat(), r.werks, "653", "QM01", r.sku, r.size, C.VALENTINO_V17["bad_batch"], r.qty, "", "", "",
                    C.TMS_SHIPTO[r.store_id], "", None, None, f"RESO DIFETTOSO {r.receipt_id}"))
 for (x, w, s, z, a_, b_) in S["grading"]:
     if w == "HK30":
@@ -325,7 +325,7 @@ for r in S["sto_rows"]:
     tx.append(("2026-10-21", "RCV", "ASN-STO1288", "4700001288", r["sku"], r["size"], r["qty"], "RESERVE", ""))
 for k, arr in tib_blocked.items():
     if k[0] == "HK30" and arr[-1]:
-        tx.append(("2026-10-03", "HOLD", f"QN{C.TIB['qn']}", "CLIENT INSTRUCTION", k[1], k[2], int(arr[-1]), "QC-HOLD", ""))
+        tx.append(("2026-10-03", "HOLD", f"QN{C.VALENTINO_V17['qn']}", "CLIENT INSTRUCTION", k[1], k[2], int(arr[-1]), "QC-HOLD", ""))
 for r in sd.itertuples():
     if r.werks == "HK30" and isinstance(r.dc_receipt, dt.date):
         tx.append((r.dc_receipt.isoformat(), "RTN", f"RMA-{r.receipt_id[-9:]}", r.receipt_id, r.sku, r.size, r.qty, "QC-HOLD", r.store_id))
@@ -356,7 +356,7 @@ for (eb, w, s), g in rec.groupby(["ebeln", "werks", "sku"]):
     gr = g.date.min().date()
     if eb not in po_head:
         cat = sk.category[s]
-        vend = str(R.choice(VENDOR_BY_CAT[cat])) if not SN[s].startswith("POLARIS") else "V100610"
+        vend = str(R.choice(VENDOR_BY_CAT[cat])) if not SN[s].startswith("ASTRA") else "V100610"
         kind = g.kind.iloc[0]
         created = gr - dt.timedelta(days=int(R.integers(50, 110)))
         po_head[eb] = dict(vendor=vend, created=created, bsart="ZLA" if kind == "LAUNCH_BUY" else "NB")
@@ -416,8 +416,8 @@ for (w, s, z), arr in main_eod.items():
         continue
     if sk.season[s] in ("SS26", "FW24", "FW25", "SS25"):
         continue
-    if SN[s] in ("MAIRE", "ILVARO", "LOGO CARDIGAN", "AMBRINE", "TIB") and s.split("-")[1] in ("999", "510", "23R", "742", "20D"):
-        if not (SN[s] == "TIB" or (SN[s] == "LOGO CARDIGAN" and z != "M")):
+    if SN[s] in ("AUREA", "IRIDIA", "VLOGO CARDIGAN", "AMALIA", "VEL") and s.split("-")[1] in ("999", "510", "23R", "742", "20D"):
+        if not (SN[s] == "VEL" or (SN[s] == "VLOGO CARDIGAN" and z != "M")):
             continue
     last = int(arr[-1])
     out28 = 0
@@ -462,7 +462,7 @@ for po in C.KEY_POS:
                             eta_hkt=ln.get("eta", "") + " 00:00", received_hkt="", status="PRE-ADVISED",
                             remarks="ETA from client PO, no carrier booking yet"))
 asn.append(dict(asn_no="ASN-STO1288", client_ref="4700001288", item_count=len(S["sto_rows"]), total_qty=int(sum(r["qty"] for r in S["sto_rows"])),
-                style="POLARIS", eta_hkt="2026-10-20 14:00", received_hkt="2026-10-21 11:40", status="RECEIVED",
+                style="ASTRA", eta_hkt="2026-10-20 14:00", received_hkt="2026-10-21 11:40", status="RECEIVED",
                 remarks="Inter-DC transfer from IT10; 1 day late (flight offload FRA)"))
 pd.DataFrame(asn).sort_values("eta_hkt").to_csv(OUT / "pcl_tko_inventory" / "TKO_ASN_INBOUND.csv", index=False, encoding="utf-8-sig")
 print("PO rows", len(pod), "changes", len(chg))
@@ -545,29 +545,29 @@ print("ATP done")
 # =============================================================================== 6. quality + reservations
 (OUT / "quality").mkdir(exist_ok=True)
 qn = [
-    dict(QMNUM=C.TIB["qn"], QMART="Q2", QMTXT="TIB gilet - cursore zip si stacca / non blocca", MATNR="J10911A00305*",
-         CHARG=C.TIB["bad_batch"], LIFNR="V100231", ERDAT=C.TIB["qn_created"], PRIOK="1-Very high", STATUS="OSNO ATCO",
-         USAGE_DECISION_DATE=C.TIB["usage_decision"], UD_CODE="R-BLK (rejected - block batch)",
+    dict(QMNUM=C.VALENTINO_V17["qn"], QMART="Q2", QMTXT="VEL gilet - cursore zip si stacca / non blocca", MATNR="J10911A00305*",
+         CHARG=C.VALENTINO_V17["bad_batch"], LIFNR="V100231", ERDAT=C.VALENTINO_V17["qn_created"], PRIOK="1-Very high", STATUS="OSNO ATCO",
+         USAGE_DECISION_DATE=C.VALENTINO_V17["usage_decision"], UD_CODE="R-BLK (rejected - block batch)",
          QTY_AFFECTED=int(sum(int(a[-1]) for a in tib_blocked.values())),
-         LONGTEXT=f"{C.TIB['defect']}. Rising store returns (reason DEF) since end of September, mostly units delivered from mid-August. "
-                  f"Batch {C.TIB['bad_batch']} blocked in all DCs on {C.TIB['usage_decision']}; good batch {C.TIB['good_batch']} released. "
+         LONGTEXT=f"{C.VALENTINO_V17['defect']}. Rising store returns (reason DEF) since end of September, mostly units delivered from mid-August. "
+                  f"Batch {C.VALENTINO_V17['bad_batch']} blocked in all DCs on {C.VALENTINO_V17['usage_decision']}; good batch {C.VALENTINO_V17['good_batch']} released. "
                   "Vendor 8D requested, RTV pending. Store returns to be sent to QM01 (IT10/US20) or QC-HOLD (TKO)."),
-    dict(QMNUM="300004571", QMART="Q3", QMTXT="ARNEB - verifica taglie vs scheda tecnica (veste grande)", MATNR="J10911A00577*",
+    dict(QMNUM="300004571", QMART="Q3", QMTXT="ARTEM - verifica taglie vs scheda tecnica (veste grande)", MATNR="J10911A00577*",
          CHARG="", LIFNR="V100502", ERDAT="2026-09-22", PRIOK="3-Medium", STATUS="NOCO",
          USAGE_DECISION_DATE="2026-10-01", UD_CODE="A (accepted - within tolerance)", QTY_AFFECTED=0,
-         LONGTEXT="Stores report ARNEB runs large. Measured 5 pcs/size: chest +1.5 cm vs tech pack, within +/-2 cm tolerance. "
+         LONGTEXT="Stores report ARTEM runs large. Measured 5 pcs/size: chest +1.5 cm vs tech pack, within +/-2 cm tolerance. "
                   "Closed, recommendation to retail: advise one size down. No stock action."),
-    dict(QMNUM="300004590", QMART="Q3", QMTXT="MAYA 999 vs 742 mispick MAD01 - verifica ubicazioni", MATNR="J10911A00034999",
+    dict(QMNUM="300004590", QMART="Q3", QMTXT="NOVA 999 vs 742 mispick MAD01 - verifica ubicazioni", MATNR="J10911A00034999",
          CHARG="", LIFNR="", ERDAT="2026-10-02", PRIOK="2-High", STATUS="NOCO", USAGE_DECISION_DATE="2026-10-06",
          UD_CODE="Internal - bin relabel", QTY_AFFECTED=int(sum(abs(a[4]) for a in S["adjustments"]) // 2),
-         LONGTEXT="Bins 03-14-B (MAYA 999) and 03-14-C (MAYA 742) labels swapped after re-slotting on Sep 21. Two deliveries to "
+         LONGTEXT="Bins 03-14-B (NOVA 999) and 03-14-C (NOVA 742) labels swapped after re-slotting on Sep 21. Two deliveries to "
                   "Madrid Serrano (store 1501) picked navy instead of black. Cycle count 06/10 posted differences 701/702. "
                   "Store keeps navy until next delivery; credit/return to be agreed with retail ops."),
-    dict(QMNUM="300004602", QMART="F2", QMTXT="POLARIS - customer feedback fit small (EU)", MATNR="G20921A0090*",
+    dict(QMNUM="300004602", QMART="F2", QMTXT="ASTRA - customer feedback fit small (EU)", MATNR="G20921A0090*",
          CHARG="", LIFNR="V100610", ERDAT="2026-10-07", PRIOK="3-Medium", STATUS="OSNO", USAGE_DECISION_DATE="",
          UD_CODE="", QTY_AFFECTED=0,
-         LONGTEXT="Retail EU/US: clients find Polaris oversized jacket smaller than expected. Fit check requested. Asia not complaining."),
-    dict(QMNUM="300004611", QMART="Q3", QMTXT="Cartone danneggiato in ricevimento - CHAMBRE 20D", MATNR="J20931A00560020D",
+         LONGTEXT="Retail EU/US: clients find Astra Oversized jacket smaller than expected. Fit check requested. Asia not complaining."),
+    dict(QMNUM="300004611", QMART="Q3", QMTXT="Cartone danneggiato in ricevimento - CAMILLA 20D", MATNR="J20931A00560020D",
          CHARG="", LIFNR="V100502", ERDAT="2026-10-09", PRIOK="4-Low", STATUS="NOCO", USAGE_DECISION_DATE="2026-10-12",
          UD_CODE="A (accepted)", QTY_AFFECTED=3, LONGTEXT="Outer carton crushed, garments ok after inspection."),
 ]
@@ -580,7 +580,7 @@ for r in sd.itertuples():
     qrows.append(dict(RMA=f"RMA{rma}", SOURCE="STORE", SOURCE_ID=C.SAP_WERKS[r.store_id], POS_RECEIPT=r.receipt_id, RETURN_DATE=r.return_date,
                       DC=r.werks, DC_RECEIPT_DATE=r.dc_receipt.isoformat() if isinstance(r.dc_receipt, dt.date) else "",
                       STATUS="IN_QM01" if isinstance(r.dc_receipt, dt.date) else "IN_TRANSIT_TO_DC",
-                      MATNR=C.matnr(r.sku), J_3ASIZE=r.size, CHARG=C.TIB["bad_batch"], QTY=int(r.qty), DEFECT_CODE="ZIP-SLD-01",
+                      MATNR=C.matnr(r.sku), J_3ASIZE=r.size, CHARG=C.VALENTINO_V17["bad_batch"], QTY=int(r.qty), DEFECT_CODE="ZIP-SLD-01",
                       DISPOSITION="RTV_PENDING_8D"))
 er = pd.read_csv(C.CACHE / "ecom_returns_units.csv", dtype={"size": str})
 for r in er[er.reason == "DEFECTIVE"].itertuples():
@@ -621,17 +621,17 @@ for sid in ["PAR01", "MIL01", "LON02", "PAR02"]:
         addres(RTYPE="STORE_BACKORDER", WERKS="IT10", MATNR="J20931A00012999", J_3ASIZE=z, QTY=int(R.integers(2, 7)),
                CREATED=created.isoformat(), NEEDED=(created + dt.timedelta(days=3)).isoformat(),
                REQUESTER=f"Store {C.SAP_WERKS[sid]}", STATUS="OPEN" if sid != "MIL01" or z != "1" else "OPEN",
-               STATUS_DATE=created.isoformat(), TEXT="manual request - clients asking black Maire")
+               STATUS_DATE=created.isoformat(), TEXT="manual request - clients asking black Aurea")
 for sid in ["SEL01", "SEL02", "TYO01", "SHA01", "HKG01"]:
     for z in ["0", "1"]:
         created = dt.date(2026, 10, 2) + dt.timedelta(days=int(R.integers(0, 4)))
         addres(RTYPE="STORE_BACKORDER", WERKS="HK30", MATNR="J20931A00618510", J_3ASIZE=z, QTY=int(R.integers(5, 16)),
                CREATED=created.isoformat(), NEEDED=(created + dt.timedelta(days=4)).isoformat(), REQUESTER=f"Store {C.SAP_WERKS[sid]}",
-               STATUS="PARTIALLY_CONFIRMED" if R.random() < 0.6 else "OPEN", STATUS_DATE="2026-10-09", TEXT="pink ILVARO waitlist")
+               STATUS="PARTIALLY_CONFIRMED" if R.random() < 0.6 else "OPEN", STATUS_DATE="2026-10-09", TEXT="pink IRIDIA waitlist")
 addres(RTYPE="STORE_BACKORDER", WERKS="IT10", MATNR="I10919B00011999", J_3ASIZE="M", QTY=4, CREATED="2026-10-09", NEEDED="2026-10-12",
        REQUESTER=f"Store {C.SAP_WERKS['MIL01']}", STATUS="OPEN", STATUS_DATE="2026-10-09", TEXT="cardigan logo M - clienti in attesa")
 addres(RTYPE="VIC_HOLD", WERKS="IT10", MATNR="J20931A0062223R", J_3ASIZE="1", QTY=1, CREATED="2026-09-24", NEEDED="2026-09-26",
-       REQUESTER=f"Store {C.SAP_WERKS['MIL01']}", STATUS="REJECTED_NO_STOCK", STATUS_DATE="2026-09-25", TEXT="VIC - Ambrine marrone tg 1")
+       REQUESTER=f"Store {C.SAP_WERKS['MIL01']}", STATUS="REJECTED_NO_STOCK", STATUS_DATE="2026-09-25", TEXT="VIC - Amalia marrone tg 1")
 addres(RTYPE="ECOM_RESERVE", WERKS="HK30", MATNR="J20931A00618510", J_3ASIZE="*", QTY=C.ILVARO_TOPUP_ECOM_RESERVE["HK30"],
        CREATED="2026-10-06", NEEDED="2026-10-09", REQUESTER="E-commerce APAC", STATUS="ISSUED", STATUS_DATE="2026-10-09", TEXT="top-up share web")
 addres(RTYPE="ECOM_RESERVE", WERKS="IT10", MATNR="J20931A00618510", J_3ASIZE="*", QTY=C.ILVARO_TOPUP_ECOM_RESERVE["IT10"],

@@ -35,8 +35,8 @@ BJT = ZoneInfo("Asia/Shanghai")
 # ---------------------------------------------------------------------------
 # prices from the internal price list (read-only)
 # ---------------------------------------------------------------------------
-STYLE_CODES = {"J20931A00618": "ILVARO", "J20931A00012": "MAIRE", "J10911A00034": "MAYA", "G20921A00901": "POLARIS CAPE",
-               "G20921A00903": "POLARIS BALACLAVA", "G20921A00902": "POLARIS OVERSIZED"}
+STYLE_CODES = {"J20931A00618": "IRIDIA", "J20931A00012": "AUREA", "J10911A00034": "NOVA", "G20921A00901": "ASTRA CAPE",
+               "G20921A00903": "ASTRA BALACLAVA", "G20921A00902": "ASTRA OVERSIZED"}
 
 
 def load_prices():
@@ -83,7 +83,7 @@ def make_slots(rng, lang, place, t):
 
     pr = lambda st, c: PRICES[(st, c)]  # noqa: E731
     pct = m("pct", lambda: resale_pct(rng, t, place))
-    rs = lambda c, rnd: round(pr("ILVARO", c) * (1 + pct() / 100) / rnd) * rnd  # noqa: E731
+    rs = lambda c, rnd: round(pr("IRIDIA", c) * (1 + pct() / 100) / rnd) * rnd  # noqa: E731
 
     def resale_krw():
         v = rs("KRW", 10000)
@@ -116,10 +116,10 @@ def make_slots(rng, lang, place, t):
         resale_sgd=m("rsg", lambda: "S$" + fmt_int(rs("SGD", 50))),
         p_maire_krw=m("pmk", lambda: rng.choice(["248만원", "2,480,000원"])),
         p_cape_cny=m("pcc", lambda: rng.choice(["¥27700", "27700", "2.77w"])),
-        p_bala_cny_raw=m("pbc", lambda: fmt_int(pr("POLARIS BALACLAVA", "CNY"))),
-        p_maya_jpy_raw=m("pmj", lambda: fmt_int(pr("MAYA", "JPY"))),
-        p_maya_jpy_new=m("pmjn", lambda: fmt_int(round(pr("MAYA", "JPY") * 1.08 / 1000) * 1000)),
-        p_ilvaro_jpy_new=m("pijn", lambda: fmt_int(round(pr("ILVARO", "JPY") * 1.08 / 1000) * 1000)),
+        p_bala_cny_raw=m("pbc", lambda: fmt_int(pr("ASTRA BALACLAVA", "CNY"))),
+        p_maya_jpy_raw=m("pmj", lambda: fmt_int(pr("NOVA", "JPY"))),
+        p_maya_jpy_new=m("pmjn", lambda: fmt_int(round(pr("NOVA", "JPY") * 1.08 / 1000) * 1000)),
+        p_ilvaro_jpy_new=m("pijn", lambda: fmt_int(round(pr("IRIDIA", "JPY") * 1.08 / 1000) * 1000)),
         size=m("size", lambda: rng.choices(["0", "1", "2", "00", "3"], [3, 4, 3, 1, 1])[0]),
         msize=m("msize", lambda: rng.choice(["2", "3", "4", "5"])),
         n=m("n", lambda: rng.randint(2, 9)),
@@ -139,9 +139,9 @@ FAMILY = {"instagram": "global", "tiktok": "global", "x": "global", "threads": "
           "xhs": "xhs", "naver_blog": "naver", "naver_cafe": "naver"}
 HOME = {"ko": "KR_HOME", "ja": "JP_HOME", "zh-CN": "CN_HOME", "zh-HK": "HKG01", "zh-TW": "TPE01", "en": "US_HOME", "it": "MIL01",
         "fr": "PAR01", "de": "MUN01", "es": "MAD01", "nl": "AMS01", "da": "CPH01"}
-GENERIC_TAGS = {"ko": ["몽클레어", "몽클레르", "moncler"], "ja": ["モンクレール", "moncler"], "en": ["moncler"], "it": ["moncler"],
-                "fr": ["moncler"], "de": ["moncler"], "es": ["moncler"], "nl": ["moncler"], "da": ["moncler"], "zh-HK": ["moncler"],
-                "zh-TW": ["moncler"], "zh-CN": ["盟可睐"]}
+GENERIC_TAGS = {"ko": ["몽클레어", "발렌티노", "valentino"], "ja": ["ヴァレンティノ", "valentino"], "en": ["valentino"], "it": ["valentino"],
+                "fr": ["valentino"], "de": ["valentino"], "es": ["valentino"], "nl": ["valentino"], "da": ["valentino"], "zh-HK": ["valentino"],
+                "zh-TW": ["valentino"], "zh-CN": ["华伦天奴"]}
 TAIL = {"ko": ["ㅠㅠ", "ㅋㅋ", "..", "!!", "🥲", "ㅎㅎ", "하..", "😭", "🤔"], "en": ["lol", "tbh", "!!", "😅", "ugh", "honestly", "fr", "😭"],
         "ja": ["笑", "…", "w", "😇", "！", "泣"], "zh-CN": ["😭", "哈哈哈", "～", "！！", "🥲", "绝了"], "zh-HK": ["😭", "🥲", "！", "哈哈"],
         "zh-TW": ["😭", "🥲", "！", "哈哈"], "it": ["😅", "!!", "boh", "🙃", "mah"], "fr": ["😅", "!!", "bref", "🙃"],
@@ -305,7 +305,7 @@ def generate():
                 signal=is_signal, lang=lang, platform=plat, ts=t, tz=tz, place=place, author=author, kind=kind,
                 text=text_full, title=title, tags=tags, media=media, media_count=mcount, metrics=metrics, geo=geo,
                 sent=sent, doc_type=doc_type, sub=r.choice(spec["subs"]) if (plat == "reddit" and spec.get("subs")) else
-                ("monclerheads" if plat == "reddit" else None), cafe=cafe, kw=spec.get("kw"), seed=False))
+                ("valentinoheads" if plat == "reddit" else None), cafe=cafe, kw=spec.get("kw"), seed=False))
     # hand-written seeds
     for j, s in enumerate(SEEDS):
         r = R("seed", j)
@@ -354,8 +354,8 @@ def route(posts):
 # ---------------------------------------------------------------------------
 # Vendor A: Pulsewire
 # ---------------------------------------------------------------------------
-KW_LIST = ["moncler", "몽클", "モンクレ", "盟可睐", "蒙口", "ilvaro", "일바로", "maire", "마이어", "tib", "티브", "polaris", "genius",
-           "arneb", "ambrine", "haeun", "하은", "lumiere", "루미에르", "ハウン", "夏恩", "maya", "마야"]
+KW_LIST = ["valentino", "몽클", "モンクレ", "华伦天奴", "华伦天奴", "iridia", "Iridia", "aurea", "마이어", "vel", "티브", "astra", "couture",
+           "artem", "amalia", "haeun", "하은", "lumiere", "루미에르", "ハウン", "夏恩", "nova", "Nova"]
 SCHEMA_SWITCH = E.ts("2026-09-15")
 
 
@@ -383,7 +383,7 @@ def pw_record(p, collected, metrics, r, variant=None):
     else:
         match_type = "hashtag" if p["tags"] else "logo_detection"
     if not kws and match_type != "geofence":
-        kws = ["moncler"]
+        kws = ["valentino"]
     # text quirks
     if plat in ("instagram", "threads") and r.random() < 0.04:
         text = html.escape(text, quote=False).replace("'", "&#39;")
@@ -441,7 +441,7 @@ def pw_record(p, collected, metrics, r, variant=None):
             rec["author"]["location"] = loc
         rec["lang"] = lang
     if plat == "reddit":
-        rec["subreddit"] = "r/" + (p["sub"] or "monclerheads")
+        rec["subreddit"] = "r/" + (p["sub"] or "valentinoheads")
         rec["title"] = p["title"]
     rec["text"] = text
     rec["hashtags"] = [h for h in hashtags_in(text)] if p["doc_type"] == "post" else []
@@ -483,7 +483,7 @@ def write_pulsewire(posts):
     for p in posts:
         r = R("pwid", p["key"])
         p["_docid"] = "pw-" + E.rand_str(r, 16, "0123456789abcdef")
-        p["_pid"], p["_url"] = E.make_url(r, p["platform"], p["author"]["handle"], p["media"], sub=p.get("sub") or "monclerheads",
+        p["_pid"], p["_url"] = E.make_url(r, p["platform"], p["author"]["handle"], p["media"], sub=p.get("sub") or "valentinoheads",
                                           title=p.get("title") or "")
         if p["doc_type"] == "comment":
             p["_parent"] = "https://www.instagram.com/p/D" + E.rand_str(r, 10) + "/"
@@ -590,7 +590,7 @@ PROV = {"SHA01": [("上海", 8), ("江苏", 1.5), ("浙江", 1.5)], "BJS01": [("
         "TYO01": [("日本", 6), ("上海", 1)], "HKG01": [("香港", 1)]}
 CN_COLS = ["序号", "平台", "帖子ID", "链接", "标题", "正文", "发布时间", "作者昵称", "作者ID", "粉丝数", "认证类型", "IP属地", "点赞数", "评论数",
            "转发数", "收藏数", "阅读数", "内容类型", "话题", "命中关键词", "情感倾向", "抓取时间"]
-CN_KW = ["盟可睐", "蒙口", "moncler", "ilvaro", "尹夏恩", "夏恩", "maire", "bady", "polaris", "genius", "双十一", "maya", "羽绒服"]
+CN_KW = ["华伦天奴", "华伦天奴", "valentino", "iridia", "尹夏恩", "夏恩", "aurea", "aria", "astra", "couture", "双十一", "nova", "羽绒服"]
 
 
 def cn_time_str(r, plat, pub_l, crawl_l):
@@ -658,7 +658,7 @@ def write_cn(posts):
         verified = {True: r.choice(["微博认证", "蓝V", "黄V", "金V"]) if p["platform"] == "weibo" else "专业号", False: ""}[bool(a.get("verified"))]
         topics = " ".join(f"#{h}#" for h in p["tags"]) if p["platform"] == "weibo" else " ".join(p["tags"])
         low = (p["text"] + (p["title"] or "")).lower()
-        kw = "|".join(k for k in CN_KW if k in low) or "盟可睐"
+        kw = "|".join(k for k in CN_KW if k in low) or "华伦天奴"
         text = p["text"]
         ctype = ("转发" if p.get("repost") else "原创") if p["platform"] == "weibo" else ("视频" if p["media"] == "video" else "图文")
 
@@ -741,7 +741,7 @@ CN_README = """云听舆情 · 社媒数据导出说明 (v2.3)
 # ---------------------------------------------------------------------------
 KR_COLS = ["no", "channel", "cafe_name", "board_name", "blog_name", "title", "body_snippet", "writer_nick", "insta_id", "follower_cnt",
            "post_date", "view_cnt", "comment_cnt", "like_cnt", "url", "search_kw", "crawl_dt"]
-KR_HL = ["몽클레어", "몽클레르", "몽클", "일바로", "마이어", "윤하은", "하은", "노스피크", "티브", "마야", "아르네브", "청담"]
+KR_HL = ["몽클레어", "발렌티노", "몽클", "Iridia", "마이어", "윤하은", "하은", "노스피크", "티브", "Nova", "아르네브", "청담"]
 
 
 def kr_highlight(s, kw):
@@ -774,7 +774,7 @@ def write_kr(posts):
         cutoff_k = T_CUTOFF.astimezone(KST) - dt.timedelta(minutes=r.randint(5, 30))
         if crawl > cutoff_k:
             crawl = cutoff_k if cutoff_k > pub_k else pub_k + dt.timedelta(minutes=10)
-        kws = p.get("kw") or ["몽클레어", "몽클레르"]
+        kws = p.get("kw") or ["몽클레어", "발렌티노"]
         kw = r.choice(kws)
         plat = p["platform"]
         if plat == "instagram":

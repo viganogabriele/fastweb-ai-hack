@@ -17,7 +17,7 @@ R = C.rng("agents")
 OUT = C.OUT / "agents"
 for sub in ("agent_cards", "openapi", "examples"):
     (OUT / sub).mkdir(parents=True, exist_ok=True)
-BASE = "https://agents.moncler-int.example"
+BASE = "https://agents.valentino-int.example"
 
 
 def uid():
@@ -31,19 +31,19 @@ CARDS = {
                     "Answers stock / available-to-promise, inbound purchase orders and quality holds; can create stock reservations. "
                     "Speaks SAP identifiers: plant (WERKS), material = style+colour without dash (MATNR), AFS size (J_3ASIZE).",
         version="2.3.1", owner="Supply Chain IT - WMS team", transport="JSONRPC",
-        auth={"oauth2": {"type": "oauth2", "flows": {"clientCredentials": {"tokenUrl": "https://login.moncler-int.example/oauth2/token",
+        auth={"oauth2": {"type": "oauth2", "flows": {"clientCredentials": {"tokenUrl": "https://login.valentino-int.example/oauth2/token",
                                                                           "scopes": {"wms.read": "read stock/ATP", "wms.reserve": "create reservations"}}}}},
         security=[{"oauth2": ["wms.read"]}],
         skills=[("get_stock", "Stock by storage location", "Unrestricted/web reserve/quality/returns stock per plant, material and size at end of a given day.",
                  ["stock", "wms", "sap"], ["Stock of J20931A00012999 in IT10 on 2026-10-15?"]),
                 ("get_atp", "Available-to-promise", "ATP now and weekly projection with confirmed inbound receipts. Based on the 06:00 snapshot (Mondays + today).",
-                 ["atp", "availability"], ["ATP for ILVARO 510 at HK30", "When is the next receipt of MAIRE black?"]),
+                 ["atp", "availability"], ["ATP for IRIDIA 510 at HK30", "When is the next receipt of AUREA black?"]),
                 ("get_inbound_po", "Inbound purchase order", "Purchase order lines, delivery date and change history (vendor confirmations).",
                  ["purchase-order", "eta"], ["Show PO 4500218734"]),
                 ("get_quality_stock", "Quality holds", "Blocked batches and defective returns in quality stock.", ["quality", "blocked"],
-                 ["How many TIB units are blocked?"]),
+                 ["How many VEL units are blocked?"]),
                 ("create_reservation", "Create reservation", "Reserve DC stock for PR samples, events, VIC holds, e-com. Rejected if ATP insufficient.",
-                 ["reservation"], ["Reserve 1 pc ILVARO 510 size 0 at HK30 for PR gifting"])],
+                 ["reservation"], ["Reserve 1 pc IRIDIA 510 size 0 at HK30 for PR gifting"])],
         limits="60 req/min; HK30 data comes from the 3PL file feed (once a day, ~06:10 HKT) and may be one day old"),
     "logistics-agent": dict(
         description="Transport agent (TMS + carrier visibility platform). Tracks DC->store shipments, checks lanes (lead time, cost, cut-off, customs) "
@@ -56,25 +56,25 @@ CARDS = {
                  ["lane", "lead-time", "cost"], ["Lane MIL02 -> MIL01", "IT10 to SEL01 transit time"]),
                 ("request_transfer", "Inter-store transfer request", "Validate and book an IBT: policy (cross-border, closed stores), source stock, "
                  "pickup cut-off, required-by date. Returns ACCEPTED / ACCEPTED_NEXT_PICKUP / REJECTED.", ["ibt", "transfer"],
-                 ["Move 2 MAIRE black size 1 from ROM01 to MIL01"]),
+                 ["Move 2 AUREA black size 1 from ROM01 to MIL01"]),
                 ("customs_status", "Customs holds", "Open customs holds and inspections.", ["customs"], ["Any shipment held in customs?"])],
         limits="IBT bookings only Mon-Fri; same-day courier cut-off 15:30 local, road express 12:00 local; DC cut-offs 14:00 CET / 15:00 ET / 16:00 HKT"),
     "marketing-agent": dict(
         description="Marketing & CRM agent (Salesforce + campaign calendar + social listening). Returns campaign calendar, client waitlists and "
                     "drafts clienteling messages in the client language for sales associates (never sends them). Uses CRM store codes (e.g. IT01, KR02).",
         version="0.9.4-beta", owner="Marketing Technology / CRM", transport="JSONRPC",
-        auth={"oauth2": {"type": "oauth2", "flows": {"clientCredentials": {"tokenUrl": "https://login.moncler-int.example/oauth2/token",
+        auth={"oauth2": {"type": "oauth2", "flows": {"clientCredentials": {"tokenUrl": "https://login.valentino-int.example/oauth2/token",
                                                                           "scopes": {"crm.read": "read CRM", "crm.draft": "create drafts"}}}},
               "mtls": {"type": "mutualTLS"}},
         security=[{"oauth2": ["crm.read"]}, {"mtls": []}],
         skills=[("get_campaign_calendar", "Campaign calendar", "Activities by market and date range (campaigns, launches, client events, CRM).",
                  ["calendar", "campaign"], ["What is running in Korea next two weeks?"]),
                 ("get_waitlist", "Store waitlists", "Waitlist / reservation entries by CRM store code and item.", ["waitlist", "clienteling"],
-                 ["Open waitlist entries for ILVARO pink at KR02"]),
+                 ["Open waitlist entries for IRIDIA pink at KR02"]),
                 ("draft_clienteling_message", "Draft clienteling message", "Draft a message to a client in it/fr/en/ko/ja/zh. Requires availability "
                  "and ETA from other agents; returns compliance flags.", ["clienteling", "message", "draft"],
-                 ["Draft a KakaoTalk message for a client waiting for ILVARO pink size 0"]),
-                ("get_social_alerts", "Social listening alerts", "Volume spikes / sentiment alerts.", ["social", "alerts"], ["Any spike on Moncler in Korea?"])],
+                 ["Draft a KakaoTalk message for a client waiting for IRIDIA pink size 0"]),
+                ("get_social_alerts", "Social listening alerts", "Volume spikes / sentiment alerts.", ["social", "alerts"], ["Any spike on Valentino in Korea?"])],
         limits="beta - drafts must be approved by the store manager; PII returned only with crm.pii scope (not granted to partner agents)"),
     "planning-agent": dict(
         description="Merchandise planning agent: replenishment parameters, statistical forecast (event-blind), allocation plans for new products, "
@@ -85,9 +85,9 @@ CARDS = {
                  ["parameters", "replenishment"], ["Parameters of SYD01"]),
                 ("propose_replenishment", "Replenishment proposal", "Order-up-to proposal for a store x SKU, checked against DC ATP. "
                  "Accepts a demand multiplier to override the event-blind forecast.", ["replenishment", "proposal"],
-                 ["Propose replenishment of ILVARO 510 for SEL01 with demand x6"]),
+                 ["Propose replenishment of IRIDIA 510 for SEL01 with demand x6"]),
                 ("get_allocation_plan", "Allocation plan (new products)", "Launch allocations per store/size with analog and factor.", ["allocation"],
-                 ["How was ILVARO allocated?"]),
+                 ["How was IRIDIA allocated?"]),
                 ("get_otb", "Open-to-buy", "OTB by region x category x month (EUR k).", ["otb", "budget"], ["OTB outerwear EMEA November"])],
         limits="forecast refreshed Mondays 05:00 CET; proposals are advisory, orders are released by the replenishment run"),
 }
@@ -96,7 +96,7 @@ for name, c in CARDS.items():
         "protocolVersion": "0.3.0", "name": name, "description": c["description"], "url": f"{BASE}/{name.split('-')[0]}/a2a",
         "preferredTransport": c["transport"], "additionalInterfaces": [{"url": f"{BASE}/{name.split('-')[0]}/a2a", "transport": "JSONRPC"},
                                                                        {"url": f"{BASE}/{name.split('-')[0]}/v1", "transport": "HTTP+JSON"}],
-        "provider": {"organization": f"Moncler - {c['owner']}", "url": "https://intranet.moncler-int.example"},
+        "provider": {"organization": f"Valentino - {c['owner']}", "url": "https://intranet.valentino-int.example"},
         "version": c["version"], "documentationUrl": f"{BASE}/{name.split('-')[0]}/docs",
         "capabilities": {"streaming": name != "logistics-agent", "pushNotifications": name == "logistics-agent", "stateTransitionHistory": True},
         "securitySchemes": c["auth"], "security": c["security"],
@@ -243,9 +243,9 @@ EX = {
     "marketing_get_calendar_Korea": ({"method": "GET", "path": "/marketing/v1/campaign-calendar?market=Korea&from=2026-10-15&to=2026-11-15"},
                                      H.mk_calendar("Korea", "2026-10-15", "2026-11-15")),
     "marketing_post_draft_ko_ILVARO": ({"method": "POST", "path": "/marketing/v1/clienteling-message-draft",
-                                        "body": {"clientName": "김OO", "storeName": "몽클레르 청담 플래그십", "language": "ko", "item": "일바로 인디핑크",
+                                        "body": {"clientName": "김OO", "storeName": "발렌티노 청담 플래그십", "language": "ko", "item": "Iridia 인디핑크",
                                                  "size": "0", "available": False, "eta": "11월 20일"}},
-                                       H.mk_message_draft("김OO", "몽클레르 청담 플래그십", "ko", "일바로 인디핑크", "0", False, "11월 20일")),
+                                       H.mk_message_draft("김OO", "발렌티노 청담 플래그십", "ko", "Iridia 인디핑크", "0", False, "11월 20일")),
     "planning_get_params_SYD01": ({"method": "GET", "path": "/planning/v1/replenishment-parameters/SYD01"}, H.pl_params("SYD01")),
     "planning_post_proposal_SEL01_ILVARO510": ({"method": "POST", "path": "/planning/v1/replenishment-proposal",
                                                 "body": {"store": "SEL01", "sku": "J20931A00618-510", "asOf": "2026-10-22", "demandMultiplier": 6}},
@@ -304,21 +304,21 @@ def atp_text(r):
 
 M9 = "J20931A00012999"
 I510 = "J20931A00618510"
-# 1) Sep 8: planning asks warehouse for MAIRE black coverage
+# 1) Sep 8: planning asks warehouse for AUREA black coverage
 r = H.wh_atp("ALL", M9, "2026-09-08")
-convo("2026-09-08T08:02:11", "planning-agent", "warehouse-agent", "ATP MAIRE nero tutte le DC", {"material": M9, "plant": "ALL"}, "get_atp", r,
+convo("2026-09-08T08:02:11", "planning-agent", "warehouse-agent", "ATP AUREA nero tutte le DC", {"material": M9, "plant": "ALL"}, "get_atp", r,
       reply_text=atp_text(r))
 # 2) Sep 14 Monday: after the stock-out
 r = H.wh_atp("IT10", M9, "2026-09-14")
-convo("2026-09-14T07:45:03", "planning-agent", "warehouse-agent", "ATP MAIRE 999 IT10", {"material": M9, "plant": "IT10"}, "get_atp", r, reply_text=atp_text(r))
+convo("2026-09-14T07:45:03", "planning-agent", "warehouse-agent", "ATP AUREA 999 IT10", {"material": M9, "plant": "IT10"}, "get_atp", r, reply_text=atp_text(r))
 # 3) Sep 22: IBT ROM01 -> MIL01
 r = H.lg_transfer_request("ROM01", "MIL01", "J20931A00012-999", "1", 2, "2026-09-22T12:51:00")
-convo("2026-09-22T12:51:30", "planning-agent", "logistics-agent", "IBT request: 2 pcs MAIRE black sz 1 from ROM01 to MIL01 (Korean clients waiting)",
+convo("2026-09-22T12:51:30", "planning-agent", "logistics-agent", "IBT request: 2 pcs AUREA black sz 1 from ROM01 to MIL01 (Korean clients waiting)",
       {"source": "ROM01", "dest": "MIL01", "sku": "J20931A00012-999", "size": "1", "qty": 2, "requestedAtLocal": "2026-09-22T12:51:00"},
       "request_transfer", r, reply_text=f"{r['status']}: pickup {r['pickupDate']}, ETA {r['eta']}, cost EUR {r['transportCostEur']}. {r.get('note', '')}".strip())
 # 4) Sep 24: COU01 -> MIL01 rejected (closed for season)
 r = H.lg_transfer_request("COU01", "MIL01", "J20931A00012-999", "1", 2, "2026-09-24T15:50:00")
-convo("2026-09-24T15:50:40", "planning-agent", "logistics-agent", "IBT COU01 -> MIL01 MAIRE black sz 1 x2",
+convo("2026-09-24T15:50:40", "planning-agent", "logistics-agent", "IBT COU01 -> MIL01 AUREA black sz 1 x2",
       {"source": "1005", "dest": "1001", "sku": "J20931A00012999", "size": "1", "qty": 2, "requestedAtLocal": "2026-09-24T15:50:00"},
       "request_transfer", r, reply_text=f"REJECTED - {r.get('detail', r.get('reason'))}")
 # 5) Sep 25: planning asks PO status (ETA revised)
@@ -327,79 +327,79 @@ convo("2026-09-25T09:10:00", "planning-agent", "warehouse-agent", "status PO 450
       reply_text=f"PO 4500218734 header ETA {r['headerEta']}; {len(r['changes'])} change(s) logged.")
 # 6) Oct 2 09:30: marketing asks pink for PR gifting at HK30 -> rejected
 r = H.wh_reservation("HK30", I510, "0", 1, "PR_SAMPLE", "2026-10-02")
-convo("2026-10-02T09:31:12", "marketing-agent", "warehouse-agent", "Reserve 1 pc ILVARO 510 size 0 at HK30 - PR gifting (agency of Yoon Ha-eun)",
+convo("2026-10-02T09:31:12", "marketing-agent", "warehouse-agent", "Reserve 1 pc IRIDIA 510 size 0 at HK30 - PR gifting (agency of Yoon Ha-eun)",
       {"plant": "HK30", "material": I510, "size": "0", "qty": 1, "purpose": "PR_SAMPLE"}, "create_reservation", r,
       reply_text="Reservation rejected: ATP 0 at HK30.")
 # 7) Oct 2: planning asks ATP pink all DCs (all zero until top-up)
 r = H.wh_atp("ALL", I510, "2026-10-02")
-convo("2026-10-02T09:40:00", "planning-agent", "warehouse-agent", "ILVARO 510 ATP all plants + inbound", {"material": I510, "plant": "ALL"}, "get_atp", r,
+convo("2026-10-02T09:40:00", "planning-agent", "warehouse-agent", "IRIDIA 510 ATP all plants + inbound", {"material": I510, "plant": "ALL"}, "get_atp", r,
       reply_text=atp_text(r) + " NB snapshot is Monday's (28/09).")
 # 8) Oct 2 13:40 local BER01: IBT for PAR01 rejected because of cut-off / required date
 r = H.lg_transfer_request("BER01", "PAR01", "J20931A00012-999", "1", 1, "2026-10-02T13:40:00", "2026-10-03")
 convo("2026-10-02T13:40:22", "planning-agent", "logistics-agent",
-      "Urgent IBT BER01 -> PAR01 MAIRE black sz 1, client flies back to Seoul Sunday, need it by Saturday 03/10",
+      "Urgent IBT BER01 -> PAR01 AUREA black sz 1, client flies back to Seoul Sunday, need it by Saturday 03/10",
       {"source": "BER01", "dest": "PAR01", "sku": "J20931A00012-999", "size": "1", "qty": 1, "requestedAtLocal": "2026-10-02T13:40:00", "requiredBy": "2026-10-03"},
       "request_transfer", r, reply_text=f"REJECTED ({r.get('reason')}): {r.get('detail')}. Pickup cut-off {r.get('cutoffLocal')} local, next pickup {r.get('pickupDate')}.")
-# 9) Oct 5: MAIRE PO again
+# 9) Oct 5: AUREA PO again
 r = H.wh_po("4500218734", "2026-10-05")
 convo("2026-10-05T08:05:00", "planning-agent", "warehouse-agent", "PO 4500218734 latest ETA", {"purchaseOrder": "4500218734", "asOf": "2026-10-05"},
       "get_inbound_po", r, reply_text=f"Header ETA now {r['headerEta']}.")
 # 10) Oct 5: marketing PR retry -> still rejected
 r = H.wh_reservation("HK30", I510, "0", 1, "PR_SAMPLE", "2026-10-05")
-convo("2026-10-05T03:15:00", "marketing-agent", "warehouse-agent", "retry reservation ILVARO 510 sz 0 HK30 for PR", {"plant": "HK30", "material": I510, "size": "0", "qty": 1,
+convo("2026-10-05T03:15:00", "marketing-agent", "warehouse-agent", "retry reservation IRIDIA 510 sz 0 HK30 for PR", {"plant": "HK30", "material": I510, "size": "0", "qty": 1,
       "purpose": "PR_SAMPLE"}, "create_reservation", r, tz="UTC", reply_text="Rejected - no ATP. Next receipt 2026-10-08.")
 # 11) Oct 8: logistics pushes customs hold notification to planning (push)
 r = H.lg_tracking("SHP02600440", "2026-10-08T06:00:00Z")
 convo("2026-10-08T06:20:00", "logistics-agent", "planning-agent", "PUSH: SEL01 delivery 0080412440 on customs hold at ICN (KC certificate missing). ETA unknown.",
       {"event": "CUSTOMS_HOLD", "shipmentRef": "SHP02600440", "store": "3101"}, "notify", {"ack": True}, tz="UTC", reply_text="ack")
 # 12) Oct 9: marketing drafts a KR waitlist message with a wrong ETA (no check with warehouse)
-r = H.mk_message_draft("이OO", "몽클레르 청담", "ko", "일바로 핑크", "0", False, "10월 말")
-convo("2026-10-09T02:10:00", "planning-agent", "marketing-agent", "Draft KakaoTalk message to SEL01 waitlist clients (ILVARO pink sz 0), ETA end of October",
-      {"clientName": "이OO", "storeName": "몽클레르 청담", "language": "ko", "item": "일바로 핑크", "size": "0", "available": False, "eta": "10월 말"},
+r = H.mk_message_draft("이OO", "발렌티노 청담", "ko", "Iridia 핑크", "0", False, "10월 말")
+convo("2026-10-09T02:10:00", "planning-agent", "marketing-agent", "Draft KakaoTalk message to SEL01 waitlist clients (IRIDIA pink sz 0), ETA end of October",
+      {"clientName": "이OO", "storeName": "발렌티노 청담", "language": "ko", "item": "Iridia 핑크", "size": "0", "available": False, "eta": "10월 말"},
       "draft_clienteling_message", r, tz="UTC", reply_text="Draft ready (requires store manager approval).")
 # 13) Oct 12: pink ATP after top-up
 r = H.wh_atp("ALL", I510, "2026-10-12")
-convo("2026-10-12T07:30:00", "planning-agent", "warehouse-agent", "ILVARO 510 ATP after top-up", {"material": I510, "plant": "ALL"}, "get_atp", r, reply_text=atp_text(r))
+convo("2026-10-12T07:30:00", "planning-agent", "warehouse-agent", "IRIDIA 510 ATP after top-up", {"material": I510, "plant": "ALL"}, "get_atp", r, reply_text=atp_text(r))
 # 14) Oct 12: SEL01 shipment status
 r = H.lg_tracking("SHP02600440", "2026-10-12T01:00:00Z")
 convo("2026-10-12T01:05:00", "planning-agent", "logistics-agent", "status SHP02600440?", {"ref": "SHP02600440"}, "track_shipment", r, tz="UTC",
       reply_text=f"Status {r['status']} (carrier EDD {r['carrierEdd']}, planned {r['plannedDelivery']}).")
 # 15) Oct 14: lane IT10 -> HK30 STO? (not a store lane) -> error
-convo("2026-10-14T10:00:00", "planning-agent", "logistics-agent", "lead time IT10 -> HK30 for an STO of Polaris", {"origin": "IT10", "dest": "HK30"}, "get_lane", None,
+convo("2026-10-14T10:00:00", "planning-agent", "logistics-agent", "lead time IT10 -> HK30 for an STO of Astra", {"origin": "IT10", "dest": "HK30"}, "get_lane", None,
       error={"code": -32602, "message": "Invalid params: dest must be a store (SAP plant 1xxx-3xxx or TMS ship-to). Inter-DC lanes are managed by Global Logistics (manual)."})
-# 16) Oct 15: TIB ATP - warehouse agent bug includes blocked stock
+# 16) Oct 15: VEL ATP - warehouse agent bug includes blocked stock
 r = H.wh_atp("IT10", "J10911A00305999", "2026-10-15", include_blocked_bug=True)
-convo("2026-10-15T08:00:00", "planning-agent", "warehouse-agent", "ATP TIB black IT10", {"material": "J10911A00305999", "plant": "IT10"}, "get_atp", r,
+convo("2026-10-15T08:00:00", "planning-agent", "warehouse-agent", "ATP VEL black IT10", {"material": "J10911A00305999", "plant": "IT10"}, "get_atp", r,
       reply_text=atp_text(r))
 # 17) Oct 19: stale HK30
 r = H.wh_atp("HK30", M9, "2026-10-19")
-convo("2026-10-19T07:05:00", "planning-agent", "warehouse-agent", "ATP MAIRE 999 HK30 (after receipt)", {"material": M9, "plant": "HK30"}, "get_atp", r,
+convo("2026-10-19T07:05:00", "planning-agent", "warehouse-agent", "ATP AUREA 999 HK30 (after receipt)", {"material": M9, "plant": "HK30"}, "get_atp", r,
       reply_text=atp_text(r) + " Source: 3PL feed.")
 # 18) Oct 19: MIL02 -> MIL01 cardigan M lane
 r = H.lg_lane("MIL02", "MIL01")
-convo("2026-10-19T10:12:00", "planning-agent", "logistics-agent", "lane MIL02 -> MIL01, IBT LOGO CARDIGAN M approved 09/10 but not shipped - why?",
+convo("2026-10-19T10:12:00", "planning-agent", "logistics-agent", "lane MIL02 -> MIL01, IBT VLOGO CARDIGAN M approved 09/10 but not shipped - why?",
       {"origin": "1002", "dest": "1001"}, "get_lane", r, reply_text="Same-day courier lane, cut-off 15:30. No pickup was ever booked for this IBT: source "
       "(department store) has not released the goods.")
 # 19) Oct 20: marketing calendar Korea
 r = H.mk_calendar("Korea", "2026-10-20", "2026-11-30")
 convo("2026-10-20T09:00:00", "planning-agent", "marketing-agent", "campaigns Korea next 6 weeks", {"market": "Korea", "from": "2026-10-20", "to": "2026-11-30"},
-      "get_campaign_calendar", r, reply_text=f"{len(r['activities'])} activities incl. ILVARO 'Pink edit' social push running until 25/10.")
+      "get_campaign_calendar", r, reply_text=f"{len(r['activities'])} activities incl. IRIDIA 'Pink edit' social push running until 25/10.")
 # 20) Oct 20: transfer SIN01 -> SEL01 rejected (cross-border)
 r = H.lg_transfer_request("SIN01", "SEL01", "J20931A00618-510", "0", 2, "2026-10-20T11:00:00")
-convo("2026-10-20T03:00:00", "planning-agent", "logistics-agent", "IBT SIN01 -> SEL01 ILVARO 510 size 0 x2",
+convo("2026-10-20T03:00:00", "planning-agent", "logistics-agent", "IBT SIN01 -> SEL01 IRIDIA 510 size 0 x2",
       {"source": "SIN01", "dest": "SEL01", "sku": "J20931A00618-510", "size": "0", "qty": 2, "requestedAtLocal": "2026-10-20T11:00:00"},
       "request_transfer", r, tz="UTC", reply_text=f"REJECTED - {r.get('detail')}")
 # 21) Oct 21: replenishment proposal default (event-blind) vs override
 r1 = H.pl_replenishment_proposal("SEL01", "J20931A00618-510", "2026-10-21", 1.0)
-convo("2026-10-21T07:00:00", "warehouse-agent", "planning-agent", "replenishment proposal SEL01 ILVARO 510 (standard)", {"store": "SEL01", "sku": "J20931A00618-510"},
+convo("2026-10-21T07:00:00", "warehouse-agent", "planning-agent", "replenishment proposal SEL01 IRIDIA 510 (standard)", {"store": "SEL01", "sku": "J20931A00618-510"},
       "propose_replenishment", r1, reply_text="Standard proposal computed on the statistical forecast.")
 # 22) Oct 22 (today): ATP checks
-for mat, txt in ((I510, "ILVARO 510"), ("J20931A00618999", "ILVARO 999"), ("I10919B00011999", "LOGO CARDIGAN 999"), ("J20931A0062223R", "AMBRINE 23R")):
+for mat, txt in ((I510, "IRIDIA 510"), ("J20931A00618999", "IRIDIA 999"), ("I10919B00011999", "VLOGO CARDIGAN 999"), ("J20931A0062223R", "AMALIA 23R")):
     r = H.wh_atp("ALL", mat, "2026-10-22")
     convo(f"2026-10-22T07:{int(R.integers(5, 55)):02d}:00", "planning-agent", "warehouse-agent", f"ATP {txt} all plants today", {"material": mat, "plant": "ALL"},
           "get_atp", r, reply_text=atp_text(r))
 # 23) auth failure / rate limit noise
-convo("2026-10-16T05:59:00", "marketing-agent", "warehouse-agent", "ATP MAIRE 999", {"material": M9}, "get_atp", None, tz="UTC",
+convo("2026-10-16T05:59:00", "marketing-agent", "warehouse-agent", "ATP AUREA 999", {"material": M9}, "get_atp", None, tz="UTC",
       error={"code": -32001, "message": "Unauthorized: token expired (exp 2026-10-16T05:58:41Z)"})
 convo("2026-10-19T09:00:41", "planning-agent", "warehouse-agent", "ATP batch 40 materials HK30", {"plant": "HK30", "materials": 40}, "get_atp", None, tz="UTC",
       error={"code": 429, "message": "Too many requests - 3PL portal limit 60/min, retry after 37s"})
