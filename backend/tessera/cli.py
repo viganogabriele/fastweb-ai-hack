@@ -77,6 +77,12 @@ def _run(args: argparse.Namespace) -> None:
         engine.dispose()
 
 
+def _mcp(args: argparse.Namespace) -> None:
+    from tessera.api.mcp import serve
+
+    serve(args.api_url, fixture=args.fixture_mode)
+
+
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(prog="tessera")
     parser.add_argument("--version", action="version", version=__version__)
@@ -100,6 +106,13 @@ def main(argv: list[str] | None = None) -> None:
     run.add_argument("--modules", nargs="+", help="selected module IDs plus prerequisites")
     run.add_argument("--fixture-mode", action="store_true")
     run.set_defaults(func=_run)
+
+    mcp = sub.add_parser("mcp", help="serve read-only tools and knowledge base over MCP stdio")
+    mcp.add_argument(
+        "--api-url", default="http://127.0.0.1:8000", help="trusted Tessera API origin"
+    )
+    mcp.add_argument("--fixture-mode", action="store_true", help="explicit fixture namespace")
+    mcp.set_defaults(func=_mcp)
 
     args = parser.parse_args(argv)
     if args.command is None:
