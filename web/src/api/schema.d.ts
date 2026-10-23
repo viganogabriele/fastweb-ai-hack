@@ -401,6 +401,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/runs/{run_id}/kpi": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Kpi */
+        get: operations["kpi_api_runs__run_id__kpi_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/runs/{run_id}/market": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Market */
+        get: operations["market_api_runs__run_id__market_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/runs/{run_id}/options/{option_id}/decision": {
         parameters: {
             query?: never;
@@ -897,6 +931,19 @@ export interface components {
             /** Sku */
             sku: string;
         };
+        /** CategorySales */
+        CategorySales: {
+            /** Before */
+            before: number;
+            /** Category */
+            category: string;
+            /** Ly */
+            ly: number;
+            /** Sales */
+            sales: number;
+            /** Units */
+            units: number;
+        };
         /** Check */
         Check: {
             /** Detail */
@@ -1257,6 +1304,15 @@ export interface components {
             /** Detail */
             detail?: components["schemas"]["ValidationError"][];
         };
+        /** Hashtag */
+        Hashtag: {
+            /** Before */
+            before: number;
+            /** Now */
+            now: number;
+            /** Tag */
+            tag: string;
+        };
         /** Health */
         Health: {
             /** Fastweb Models Configured */
@@ -1274,6 +1330,33 @@ export interface components {
             version: string;
         };
         JsonValue: unknown;
+        /** KpiDay */
+        KpiDay: {
+            /**
+             * Available At
+             * Format: date-time
+             */
+            available_at: string;
+            /** Budget Eur */
+            budget_eur: number;
+            /**
+             * Date
+             * Format: date
+             */
+            date: string;
+            /** Receipts */
+            receipts: number;
+            /** Returns Units */
+            returns_units: number;
+            /** Sales Eur */
+            sales_eur: number;
+            /** Store Id */
+            store_id: string;
+            /** Units */
+            units: number;
+            /** Visitors */
+            visitors: number | null;
+        };
         /** Leg */
         Leg: {
             /** Cost Eur */
@@ -1357,6 +1440,41 @@ export interface components {
              */
             simulated: true;
         };
+        /** MarketMonth */
+        MarketMonth: {
+            /** Month */
+            month: string;
+            /** Partial Until */
+            partial_until: number | null;
+            /** Regions */
+            regions: {
+                [key: string]: components["schemas"]["MonthlyValue"];
+            };
+        };
+        /** MarketSeries */
+        MarketSeries: {
+            /**
+             * Available At
+             * Format: date-time
+             */
+            available_at: string;
+            /** Categories */
+            categories: components["schemas"]["CategorySales"][];
+            /**
+             * Last Day
+             * Format: date
+             */
+            last_day: string;
+            /** Monthly */
+            monthly: components["schemas"]["MarketMonth"][];
+            /** Notes */
+            notes: string[];
+            /** Regions */
+            regions: components["schemas"]["RegionSales"][];
+            social: components["schemas"]["SocialSeries"];
+            /** Stores */
+            stores: string[];
+        };
         /** ModuleManifest */
         ModuleManifest: {
             /** Boundary */
@@ -1439,6 +1557,15 @@ export interface components {
             params: {
                 [key: string]: components["schemas"]["JsonValue"];
             };
+        };
+        /** MonthlyValue */
+        MonthlyValue: {
+            /** Budget */
+            budget: number;
+            /** Ly */
+            ly: number;
+            /** Sales */
+            sales: number;
         };
         /** Observation */
         Observation: {
@@ -1527,6 +1654,20 @@ export interface components {
             unit?: ("units" | "customers" | "requests" | "visitors" | "money" | "percent") | null;
             /** Value */
             value?: number | null;
+        };
+        /** RegionSales */
+        RegionSales: {
+            /** Before */
+            before: number;
+            /** Ly */
+            ly: number;
+            /**
+             * Region
+             * @enum {string}
+             */
+            region: "EMEA" | "AMERICAS" | "APAC";
+            /** Sales */
+            sales: number;
         };
         /**
          * RegisteredAnswer
@@ -1857,6 +1998,39 @@ export interface components {
             text_version: string;
             /** Version */
             version: string;
+        };
+        /** SocialSeries */
+        SocialSeries: {
+            /** Duplicates Removed */
+            duplicates_removed: number;
+            /** Hashtags */
+            hashtags: components["schemas"]["Hashtag"][];
+            /** Malformed Records */
+            malformed_records: number;
+            /** Posts */
+            posts: number;
+            /**
+             * Scope
+             * @default global_listening
+             * @constant
+             */
+            scope: "global_listening";
+            /** Weeks */
+            weeks: components["schemas"]["SocialWeek"][];
+        };
+        /** SocialWeek */
+        SocialWeek: {
+            /** Neg */
+            neg: number;
+            /** Neu */
+            neu: number;
+            /** Pos */
+            pos: number;
+            /**
+             * Week
+             * Format: date
+             */
+            week: string;
         };
         /** SourceDocument */
         SourceDocument: {
@@ -2691,6 +2865,72 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ForecastAdjustment"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    kpi_api_runs__run_id__kpi_get: {
+        parameters: {
+            query?: {
+                fixture?: boolean;
+            };
+            header?: never;
+            path: {
+                run_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KpiDay"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    market_api_runs__run_id__market_get: {
+        parameters: {
+            query?: {
+                fixture?: boolean;
+            };
+            header?: never;
+            path: {
+                run_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MarketSeries"];
                 };
             };
             /** @description Validation Error */

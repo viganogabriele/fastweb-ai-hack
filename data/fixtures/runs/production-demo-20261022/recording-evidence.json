@@ -1,0 +1,841 @@
+{
+  "execution_sha": "8f6bbc85970a79d8dc4e371eebf8deb96b3e6682",
+  "llm_traces": [
+    {
+      "attempt": 1,
+      "key": "cd361d666a1139d9c7c4ca7cecf8f52b99571e4e24092eed3d88378a4a551900",
+      "latency_seconds": 0.8506300379522145,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1564
+    },
+    {
+      "attempt": 1,
+      "key": "30ab55cede3764eb73cd320f4a7f7b43c8df0977ffa65887eded82eb96870b53",
+      "latency_seconds": 4.702043910976499,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 2379
+    },
+    {
+      "attempt": 1,
+      "key": "c9ab30839aab7516e9f191ad6a4ce4d0f79bbe915e9d7a544b5164c8c2116cbc",
+      "latency_seconds": 4.624853770947084,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 2414
+    },
+    {
+      "attempt": 1,
+      "key": "c44f6973c24025f24aeddb4e96f07b5d5cc2929f7884bfe7f9cca7a1df9b557b",
+      "latency_seconds": 1.4233401620294899,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1694
+    },
+    {
+      "attempt": 1,
+      "key": "6ba0bb6bfe4bc4234e1c6994d8692751fedafaac5ec65f4ea0569615d1542bbe",
+      "latency_seconds": 6.462710896972567,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 2956
+    },
+    {
+      "attempt": 1,
+      "key": "c4b3c78a43b1f02989d9fe30649734b8b6e3d0ac74d2f650bed7e2a3ed5d7ec5",
+      "latency_seconds": 0.5027401160914451,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1512
+    },
+    {
+      "attempt": 1,
+      "key": "25f2a0c567d32c56d24906c4aef4861fbba32451b0373949b12d5ca55cddf267",
+      "latency_seconds": 1.470040539978072,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1721
+    },
+    {
+      "attempt": 1,
+      "key": "6ba5020a15bf95fc83d5b91fbc3c427f3397d2934645f00260141ab8b9fb6703",
+      "latency_seconds": 6.9667494259774685,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 2794
+    },
+    {
+      "attempt": 1,
+      "key": "4b2d49e41186d4e909886b8d4914f7f4c2e56ec8403201ce5d2ee505555268d1",
+      "latency_seconds": 1.1660006621386856,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1623
+    },
+    {
+      "attempt": 1,
+      "key": "c175b2c564bad0bcf28ae69b0bc99c6825ffe2d942a4da60cc9cff191e650efa",
+      "latency_seconds": 0.12889260309748352,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1414
+    },
+    {
+      "attempt": 1,
+      "key": "c604520f0e845e5cd1a20c8d22f31fe4f583ca2133284fe21eb8f0050836eaff",
+      "latency_seconds": 1.5748240461107343,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1687
+    },
+    {
+      "attempt": 1,
+      "key": "7b0308f5a2383a7f41efd7eb607c990d9d53170bc6fdc8d37b0ce789d893416f",
+      "latency_seconds": 4.193389733089134,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 2173
+    },
+    {
+      "attempt": 1,
+      "key": "f7b1e0507333fd69d115f8e04f92ca1c36a611274e7c463b54ba7f8ec06341e6",
+      "latency_seconds": 1.0011425719130784,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1644
+    },
+    {
+      "attempt": 1,
+      "key": "e7a23ccbbd403d5c1c9fdd7ab2399e0bf69aa246e4c1264c6c21ec2ee89b68ef",
+      "latency_seconds": 5.27701609604992,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 2793
+    },
+    {
+      "attempt": 1,
+      "key": "3576fc1275f24cafdf70164b73510a09f766d1e2468e2dda90d9df4f0842f719",
+      "latency_seconds": 0.12128581502474844,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1489
+    },
+    {
+      "attempt": 1,
+      "key": "d043535a750e973233cafcef5b9b649e9baf7be4853089001d4e37ffba5c272f",
+      "latency_seconds": 0.16998116113245487,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1450
+    },
+    {
+      "attempt": 1,
+      "key": "768655f1c758cc93347efc4d926f48b8e4293068831574525edbde91fd9c5422",
+      "latency_seconds": 0.9576336359605193,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1689
+    },
+    {
+      "attempt": 1,
+      "key": "e7130d101fece92e74360877c55e92ffb9f524f53a935821732673020f45b9e2",
+      "latency_seconds": 1.098754066042602,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1671
+    },
+    {
+      "attempt": 1,
+      "key": "50483c05298a590e0f91100a8325b64aa28b274ae003b2c32499277f7ada0bf7",
+      "latency_seconds": 8.29161364492029,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 3208
+    },
+    {
+      "attempt": 1,
+      "key": "5fbf904a7468fd4d6172b28404bbbce1c9750875196ce78b2fd51f5b08d05b32",
+      "latency_seconds": 6.183907579863444,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 2737
+    },
+    {
+      "attempt": 1,
+      "key": "ae4ad14e4e9269117425c86e3b87eb337fc5e41e29c6d1a5cf0e86f2f2279569",
+      "latency_seconds": 3.672258698847145,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 2323
+    },
+    {
+      "attempt": 1,
+      "key": "93d7ebffe1364154becc649f255130c9836de4593de517ba14c5c165aba7304c",
+      "latency_seconds": 0.4426160790026188,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 470
+    },
+    {
+      "attempt": 1,
+      "key": "17822b0c81badadf391c29a2685ee37eeb348207cdfc6c595db59f425308fabe",
+      "latency_seconds": 0.34702378790825605,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 466
+    },
+    {
+      "attempt": 1,
+      "key": "296c08077eb02ba06e248e8c4b87e8ce2134d21b6b29456262c485c6abe0d311",
+      "latency_seconds": 0.3820866448804736,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 740
+    },
+    {
+      "attempt": 1,
+      "key": "a4b1b1c40f73cc5ad21dd4727ead59e2ab3233e478ecdd367c983b3102656fea",
+      "latency_seconds": 0.5276822219602764,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 631
+    },
+    {
+      "attempt": 1,
+      "key": "7fcfd6ad32ef2b408f16119cfa6a82dfbe4fe34ba8ef7fe1aee1f1db32b776db",
+      "latency_seconds": 0.34585286397486925,
+      "mode": "record",
+      "model": "google/gemma-4-26B-A4B-it",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 479
+    },
+    {
+      "attempt": 1,
+      "key": "215cdce08bb3da6692f7165381a8a6dcdd112498696b1aef5fd295a260597456",
+      "latency_seconds": 0.9296771688386798,
+      "mode": "record",
+      "model": "glm-5.3-flash",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1432
+    },
+    {
+      "attempt": 1,
+      "key": "040de22b8512bdac07644facab507fd9b386c7d853991a02474c0c4e68ee3fca",
+      "latency_seconds": 23.950875747017562,
+      "mode": "record",
+      "model": "glm-5.3-flash",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 9666
+    },
+    {
+      "attempt": 1,
+      "key": "8d93c8573a8c90fa8db8fff4486a4058d45a54ceeb64409f0b85a7b0fd07e38b",
+      "latency_seconds": 14.846131799044088,
+      "mode": "record",
+      "model": "glm-5.3-flash",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 16396
+    },
+    {
+      "attempt": 1,
+      "key": "0cd11c43191c7d711a728ebf583ef2fab3522be58e07725e6a1f6783a960d239",
+      "latency_seconds": 1.2805322681088,
+      "mode": "record",
+      "model": "glm-5.3-flash",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 1432
+    },
+    {
+      "attempt": 1,
+      "key": "48b95c8a1b0071c6fea0e6764a5b7b6ab5ba719e51cd0d6c3540369d9f430f6a",
+      "latency_seconds": 36.97488256311044,
+      "mode": "record",
+      "model": "glm-5.3-flash",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 5990
+    },
+    {
+      "attempt": 1,
+      "key": "c89088729864b2451f1ae435ac1e5b6c33370609411de30dc8598d9d689d8341",
+      "latency_seconds": 12.369210734032094,
+      "mode": "record",
+      "model": "glm-5.3-flash",
+      "operation": "chat",
+      "status": 200,
+      "tokens": 5866
+    }
+  ],
+  "modules": [
+    {
+      "finished_at": "2026-10-23T07:54:27.401238Z",
+      "mode": "live",
+      "module_id": "src.email",
+      "result": {
+        "abstentions": [],
+        "counts": {
+          "documents": 20,
+          "segments": 64,
+          "skipped": 0
+        },
+        "errors": [],
+        "module_id": "src.email",
+        "module_version": "1",
+        "status": "succeeded"
+      },
+      "run_id": "production-demo-20261022",
+      "started_at": "2026-10-23T07:54:27.249081Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T07:54:49.394220Z",
+      "mode": "live",
+      "module_id": "src.erp",
+      "result": {
+        "abstentions": [],
+        "counts": {
+          "assortment_new": 850,
+          "assortment_rows": 850,
+          "forecast_new": 54754,
+          "forecast_rows": 54754,
+          "prices_new": 1026,
+          "prices_rows": 1026,
+          "returns_new": 873,
+          "returns_rows": 873,
+          "sales_new": 14556,
+          "sales_rows": 14556,
+          "sku_colour_new": 114,
+          "sku_colour_rows": 114,
+          "sku_size_ean_new": 643,
+          "sku_size_ean_rows": 643,
+          "stock_new": 217176,
+          "stock_rows": 217176,
+          "stores_new": 9,
+          "stores_rows": 9,
+          "styles_new": 46,
+          "styles_rows": 46
+        },
+        "errors": [],
+        "module_id": "src.erp",
+        "module_version": "2",
+        "status": "succeeded"
+      },
+      "run_id": "production-demo-20261022",
+      "started_at": "2026-10-23T07:54:27.406041Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T07:54:49.634142Z",
+      "mode": "live",
+      "module_id": "src.docs",
+      "result": {
+        "abstentions": [],
+        "counts": {
+          "documents": 1,
+          "segments": 172,
+          "sheets": 7
+        },
+        "errors": [],
+        "module_id": "src.docs",
+        "module_version": "1",
+        "status": "succeeded"
+      },
+      "run_id": "production-demo-20261022",
+      "started_at": "2026-10-23T07:54:49.404271Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T07:54:49.690617Z",
+      "mode": "live",
+      "module_id": "ing.metrics",
+      "result": {
+        "abstentions": [
+          "doc-20260906-1837-nyc01: not an XLSX report",
+          "doc-20260918-2115-mil01: not an XLSX report",
+          "doc-20260918-2207-mil01-corr: not an XLSX report",
+          "doc-20261002-2112-mil01: not an XLSX report",
+          "doc-20261002-2113-mil01-dup: not an XLSX report",
+          "doc-20261004-1829-nyc01: not an XLSX report",
+          "doc-20261004-1858-nyc01-corr: not an XLSX report",
+          "doc-20261009-1035-mil01: not an XLSX report",
+          "doc-20261009-1811-mil02: not an XLSX report",
+          "doc-20261009-1847-mil01-re1: not an XLSX report",
+          "doc-20261014-1841-syd01: not an XLSX report",
+          "doc-20261014-2016-mun01: not an XLSX report",
+          "doc-20261014-2019-par01: not an XLSX report",
+          "doc-20261014-2114-sel01: not an XLSX report",
+          "doc-20261014-2124-tyo01: not an XLSX report",
+          "doc-20261014-2137-lon01: not an XLSX report",
+          "doc-20261014-2238-tyo01-re1: not an XLSX report",
+          "doc-20261014-2248-nyc01-ooo: not an XLSX report",
+          "doc-demo-20261021-lon01: not an XLSX report",
+          "doc-demo-20261021-mil01: not an XLSX report",
+          "doc-flash-w42-2026 Stores!5: ROM01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!6: VEN01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!7: COU01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!8: CRT01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!10: PAR02 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!11: CAN01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!12: GVA01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!13: ZRH01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!14: STM01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!16: LON02 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!18: BER01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!19: MAD01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!20: AMS01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!21: CPH01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!22: DXB01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!24: NYC02 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!25: MIA01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!26: BHS01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!27: ASP01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!28: TOR01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!30: TYO02 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!31: OSA01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!33: SEL02 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!34: BUS01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!35: SHA01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!36: BJS01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!37: CDU01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!38: HKG01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!39: TPE01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!40: SIN01 is outside this run's stores",
+          "doc-flash-w42-2026 Stores!42: 'TOTAL' is not in the master data",
+          "doc-flash-w42-2026 Stores!44: 'Confidential - Internal use only. Source: SAP BW / POS (Xstore), store door counters. Retail Controlling.' is not in the master data",
+          "doc-flash-w42-2026 Summary!5: EMEA is outside this run's stores",
+          "doc-flash-w42-2026 Summary!6: AMERICAS is outside this run's stores",
+          "doc-flash-w42-2026 Summary!7: APAC is outside this run's stores",
+          "doc-flash-w42-2026 Summary!8: 'TOTAL RETAIL' is not in the master data",
+          "doc-flash-w42-2026 Summary!10: 'MTD = 01/10 to 18/10, EUR at the same rates as the week, LY = same days -364.' is not in the master data",
+          "doc-flash-w42-2026 Summary!11: 'Confidential - Internal use only. Source: SAP BW / POS (Xstore), store door counters. Retail Controlling.' is not in the master data"
+        ],
+        "counts": {
+          "documents": 1,
+          "documents_unmapped": 20,
+          "facts": 36,
+          "rows_outside_run": 33,
+          "rows_unknown_scope": 5
+        },
+        "errors": [],
+        "module_id": "ing.metrics",
+        "module_version": "1",
+        "status": "succeeded"
+      },
+      "run_id": "production-demo-20261022",
+      "started_at": "2026-10-23T07:54:49.637520Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T07:54:49.715969Z",
+      "mode": "live",
+      "module_id": "src.external",
+      "result": {
+        "abstentions": [
+          "NYC01: New York is covered by us_ncei_ghcnd, not by this feed",
+          "TYO01: Tokyo is covered by jp_jma, not by this feed",
+          "SEL01: Seoul is covered by kr_kma_asos, not by this feed",
+          "SYD01: Sydney is covered by au_bom_066214, not by this feed",
+          "London: external/weather/eu_meteoarchive/london_2026-03-01_2026-10-21.json says GMT while the store's timezone is Europe/London; its days are bounded by the store's timezone"
+        ],
+        "counts": {
+          "cities": 4,
+          "events": 5
+        },
+        "errors": [],
+        "module_id": "src.external",
+        "module_version": "1",
+        "status": "degraded"
+      },
+      "run_id": "production-demo-20261022",
+      "started_at": "2026-10-23T07:54:49.693564Z",
+      "status": "degraded"
+    },
+    {
+      "finished_at": "2026-10-23T07:55:06.032502Z",
+      "mode": "live",
+      "module_id": "ing.extract",
+      "result": {
+        "abstentions": [
+          "doc-20260906-1837-nyc01: candidate 7 unsupported unit cleared",
+          "doc-20260918-2115-mil01: candidate 7 rejected (invalid quantity_kind)",
+          "doc-20260918-2115-mil01: candidate 6 unsupported unit cleared",
+          "doc-20260918-2115-mil01: demand_up rejected (quote not found in the document)",
+          "doc-20261002-2112-mil01: candidate 3 unsupported unit cleared",
+          "doc-20261002-2112-mil01: candidate 5 unsupported unit cleared",
+          "doc-20261002-2112-mil01: candidate 7 unsupported unit cleared",
+          "doc-20261002-2113-mil01-dup: candidate 3 unsupported unit cleared",
+          "doc-20261002-2113-mil01-dup: candidate 5 unsupported unit cleared",
+          "doc-20261002-2113-mil01-dup: candidate 7 unsupported unit cleared",
+          "doc-20261004-1829-nyc01: candidate 2 unsupported unit cleared",
+          "doc-20261014-2114-sel01: candidate 3 unsupported unit cleared",
+          "doc-20261014-2124-tyo01: unmet_demand rejected (quote not found in the document)",
+          "doc-flash-w42-2026: not read (unknown store)"
+        ],
+        "counts": {
+          "candidates_rejected": 3,
+          "documents": 20,
+          "documents_skipped": 1,
+          "numbers_dropped": 27,
+          "observations": 125,
+          "optional_fields_dropped": 10,
+          "resend_readings_reused": 1
+        },
+        "errors": [],
+        "module_id": "ing.extract",
+        "module_version": "1",
+        "status": "succeeded"
+      },
+      "run_id": "production-demo-20261022",
+      "started_at": "2026-10-23T07:54:49.722667Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T07:55:07.219735Z",
+      "mode": "live",
+      "module_id": "int.link",
+      "result": {
+        "abstentions": [
+          "obs-20261009-1035-mil01-1: unlinked: no_candidate",
+          "obs-20261014-2124-tyo01-10: unlinked: colour_only",
+          "obs-20261014-2238-tyo01-re1-1: unlinked: no_candidate",
+          "obs-20261014-2016-mun01-17: unlinked: colour_only",
+          "obs-20261014-2016-mun01-20: unlinked: no_candidate",
+          "obs-20261014-2137-lon01-7: ambiguous: colour_not_in_style"
+        ],
+        "counts": {
+          "ambiguous": 1,
+          "linked": 64,
+          "links_new": 125,
+          "llm_linked": 5,
+          "not_product": 55,
+          "observations": 125,
+          "unlinked": 5
+        },
+        "errors": [],
+        "module_id": "int.link",
+        "module_version": "2",
+        "status": "succeeded"
+      },
+      "run_id": "production-demo-20261022",
+      "started_at": "2026-10-23T07:55:06.039031Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T07:55:07.507686Z",
+      "mode": "live",
+      "module_id": "int.dedup",
+      "result": {
+        "abstentions": [],
+        "counts": {
+          "active_origins": 114,
+          "documents": 19,
+          "duplicates": 10,
+          "non_additive_origins": 50,
+          "observations": 125,
+          "origin_groups": 115,
+          "possibly_same_episode": 133,
+          "relations_new": 144,
+          "retracts": 0,
+          "supersedes": 1
+        },
+        "errors": [],
+        "module_id": "int.dedup",
+        "module_version": "1",
+        "status": "succeeded"
+      },
+      "run_id": "production-demo-20261022",
+      "started_at": "2026-10-23T07:55:07.225183Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T07:55:08.039352Z",
+      "mode": "live",
+      "module_id": "sys.client",
+      "result": {
+        "abstentions": [
+          "dc_stock HK30 I10919B00011-742: no_extraction",
+          "dc_stock HK30 I10919B00011-999: no_extraction",
+          "dc_stock HK30 J20931A00012-999: no_extraction"
+        ],
+        "counts": {
+          "requests": 18,
+          "stale_snapshots": 0,
+          "stock_facts": 90,
+          "stock_facts_new": 90,
+          "unknown": 3
+        },
+        "errors": [],
+        "module_id": "sys.client",
+        "module_version": "1",
+        "status": "succeeded"
+      },
+      "run_id": "production-demo-20261022",
+      "started_at": "2026-10-23T07:55:07.515994Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T07:55:17.119314Z",
+      "mode": "live",
+      "module_id": "int.cases",
+      "result": {
+        "abstentions": [],
+        "counts": {
+          "cases": 63,
+          "cases_new": 63,
+          "cases_verify": 8,
+          "documents": 70,
+          "inactive_facts": 1,
+          "negated_unattached": 0,
+          "no_case_kind": 47,
+          "observations": 125,
+          "origin_groups": 64,
+          "scope_unknown": 6,
+          "unknown_origins": 0
+        },
+        "errors": [],
+        "module_id": "int.cases",
+        "module_version": "2",
+        "status": "succeeded"
+      },
+      "run_id": "production-demo-20261022",
+      "started_at": "2026-10-23T07:55:08.106824Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T07:55:17.304432Z",
+      "mode": "live",
+      "module_id": "int.context",
+      "result": {
+        "abstentions": [],
+        "counts": {
+          "cases": 63,
+          "events": 5,
+          "updated_cases": 26
+        },
+        "errors": [],
+        "module_id": "int.context",
+        "module_version": "1",
+        "status": "succeeded"
+      },
+      "run_id": "production-demo-20261022",
+      "started_at": "2026-10-23T07:55:17.129231Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T07:55:22.121122Z",
+      "mode": "live",
+      "module_id": "fc.baseline",
+      "result": {
+        "abstentions": [],
+        "counts": {
+          "baselines": 850,
+          "new": 850,
+          "not_estimable": 159,
+          "unchanged": 691
+        },
+        "errors": [],
+        "module_id": "fc.baseline",
+        "module_version": "1",
+        "status": "succeeded"
+      },
+      "run_id": "production-demo-20261022",
+      "started_at": "2026-10-23T07:55:17.311729Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T07:55:22.977240Z",
+      "mode": "live",
+      "module_id": "fc.overlay",
+      "result": {
+        "abstentions": [
+          "case-mil01-unknown-20261009: no SKU-colour scope (unknown)",
+          "case-tyo01-unknown-20261014: no SKU-colour scope (unknown)",
+          "case-tyo01-unknown-20261014-unmet-demand: no SKU-colour scope (unknown)",
+          "case-mun01-unknown-20261014: no SKU-colour scope (unknown)",
+          "case-mun01-unknown-20261014-demand-shift: no SKU-colour scope (unknown)",
+          "case-lon01-unknown-20261014: no SKU-colour scope (unknown)"
+        ],
+        "counts": {
+          "computed": 1,
+          "new": 45,
+          "not_estimable": 0,
+          "overlays": 45,
+          "unchanged": 44
+        },
+        "errors": [],
+        "module_id": "fc.overlay",
+        "module_version": "1",
+        "status": "degraded"
+      },
+      "run_id": "production-demo-20261022",
+      "started_at": "2026-10-23T07:55:22.130207Z",
+      "status": "degraded"
+    },
+    {
+      "finished_at": "2026-10-23T07:55:30.727656Z",
+      "mode": "live",
+      "module_id": "act.options",
+      "result": {
+        "abstentions": [],
+        "counts": {
+          "cases": 63,
+          "new": 257,
+          "options": 257,
+          "transfers": 5,
+          "transfers_recommended": 0
+        },
+        "errors": [],
+        "module_id": "act.options",
+        "module_version": "1",
+        "status": "succeeded"
+      },
+      "run_id": "production-demo-20261022",
+      "started_at": "2026-10-23T07:55:22.980435Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T07:55:31.396769Z",
+      "mode": "live",
+      "module_id": "src.business",
+      "result": {
+        "abstentions": [],
+        "counts": {
+          "kpi_days": 1045,
+          "social_duplicates_removed": 166,
+          "social_malformed_excluded": 238,
+          "social_posts": 3288
+        },
+        "errors": [],
+        "module_id": "src.business",
+        "module_version": "1",
+        "status": "succeeded"
+      },
+      "run_id": "production-demo-20261022",
+      "started_at": "2026-10-23T07:55:30.736117Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T07:55:33.076439Z",
+      "mode": "live",
+      "module_id": "ins.product",
+      "result": {
+        "abstentions": [],
+        "counts": {
+          "products": 54,
+          "products_new": 54,
+          "return_lines": 711,
+          "with_reported_reasons": 31
+        },
+        "errors": [],
+        "module_id": "ins.product",
+        "module_version": "2",
+        "status": "succeeded"
+      },
+      "run_id": "production-demo-20261022",
+      "started_at": "2026-10-23T07:55:31.409986Z",
+      "status": "succeeded"
+    },
+    {
+      "finished_at": "2026-10-23T07:57:17.748727Z",
+      "mode": "live",
+      "module_id": "ag.investigator",
+      "result": {
+        "abstentions": [],
+        "counts": {
+          "cases": 2,
+          "fallbacks": 1,
+          "traces": 2
+        },
+        "errors": [],
+        "module_id": "ag.investigator",
+        "module_version": "1",
+        "status": "degraded"
+      },
+      "run_id": "production-demo-20261022",
+      "started_at": "2026-10-23T07:55:33.085143Z",
+      "status": "degraded"
+    },
+    {
+      "finished_at": "2026-10-23T07:57:38.808887Z",
+      "mode": "live",
+      "module_id": "out.reports",
+      "result": {
+        "abstentions": [],
+        "counts": {
+          "cases": 63,
+          "citations": 616,
+          "reports": 2,
+          "reports_new": 2
+        },
+        "errors": [],
+        "module_id": "out.reports",
+        "module_version": "2",
+        "status": "succeeded"
+      },
+      "run_id": "production-demo-20261022",
+      "started_at": "2026-10-23T07:57:17.759614Z",
+      "status": "succeeded"
+    }
+  ],
+  "published": true,
+  "run_id": "production-demo-20261022",
+  "status": "degraded",
+  "systems_cache_corrupt": [],
+  "systems_cache_misses": []
+}

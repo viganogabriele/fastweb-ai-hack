@@ -52,7 +52,7 @@ UNSPECIFIED = "unspecified"
 
 MANIFEST = ModuleManifest(
     id="ins.product",
-    version="1",
+    version="2",
     layer="intelligence",
     description=(
         "Per product: units sold and returned, POS return reasons and the reasons stores "
@@ -149,7 +149,7 @@ def _ref(o: Observation) -> ArtifactRef:
 
 
 def _erp_ref(row: repo.ErpRecord) -> ArtifactRef:
-    return ArtifactRef(kind=f"ERP:{row.table}", id=row.id, version=row.version)
+    return ArtifactRef(kind=f"erp.{row.table}", id=row.id, version=row.version)
 
 
 @dataclass(frozen=True)

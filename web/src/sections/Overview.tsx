@@ -290,7 +290,7 @@ export function Overview({
           ))}
         </div>
         <div className="sd-ov-viewbar__tools">
-          {view === 'ops' ? filters : <p className="sd-ov-viewbar__scope">Tutta la rete, confronto con l'anno scorso a parità di giorni</p>}
+          {view === 'ops' ? filters : <p className="sd-ov-viewbar__scope">Negozi del run, confronto con l'anno scorso a parità di giorni</p>}
         </div>
       </div>
       {view === 'market' ? (
@@ -532,7 +532,7 @@ export function Overview({
             <div className="sd-ov-sales__main">
               <dl className="sd-ov-sales__stats">
                 <div><dt>Scontrini</dt><dd>{now.receipts.toLocaleString('it-IT')}</dd></div>
-                <div><dt>Visitatori</dt><dd>{now.visitors.toLocaleString('it-IT')}</dd></div>
+                <div><dt>Visitatori</dt><dd>{now.visitors?.toLocaleString('it-IT') ?? '–'}</dd></div>
                 <div><dt>Conversione</dt><dd>{now.conversion === null ? '–' : `${(now.conversion * 100).toLocaleString('it-IT', { maximumFractionDigits: 1 })}%`}</dd></div>
                 <div><dt>Scontrino medio</dt><dd>{now.receipts ? formatEuro(now.sales / now.receipts) : '–'}</dd></div>
               </dl>

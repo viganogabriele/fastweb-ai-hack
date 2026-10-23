@@ -9,6 +9,7 @@ from sqlalchemy import Engine
 
 from tesseract import __version__
 from tesseract.api.models import Health
+from tesseract.api.routers.business import router as business_router
 from tesseract.api.routers.catalog import router as catalog_router
 from tesseract.api.routers.catalog import run_router as run_catalog_router
 from tesseract.api.routers.clarifications import execute_answer
@@ -70,6 +71,7 @@ def create_app(
     app.state.registry = registry
     app.state.settings = settings
     app.include_router(router)
+    app.include_router(business_router)
     app.include_router(options_router)
     app.include_router(clarifications_router)
     app.include_router(investigations_router)

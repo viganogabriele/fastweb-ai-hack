@@ -44,3 +44,12 @@ test('store performance and day counts stay inside the window', () => {
   )
   assert.deepEqual([...counts], [['2026-10-20', 2], ['2026-10-21', 0]])
 })
+
+
+test('missing visitor counters keep conversion unavailable across an aggregate', () => {
+  const input = [row('2026-10-20', 'MIL01', 100, 80, 2, null), row('2026-10-20', 'NYC01', 100, 80, 1, 10)]
+  const result = totals(dailySeries(input, null, 1, '2026-10-20'))
+  assert.equal(result.sales, 200)
+  assert.equal(result.visitors, null)
+  assert.equal(result.conversion, null)
+})
