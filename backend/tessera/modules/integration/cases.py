@@ -503,7 +503,7 @@ def build_cases(
                 n_origin_groups=len(origins) - unknown_origins,
                 n_unknown_origins=unknown_origins,
                 blocking_uncertainties=tuple(
-                    _uncertainties(draft, supporting, visible_rel, members)
+                    _uncertainties(draft, supporting, touching, members)
                 ),
                 context_refs=tuple(ref(r) for r in (*own_links, *touching)),
             )
