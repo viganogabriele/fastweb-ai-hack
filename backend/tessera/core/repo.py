@@ -247,9 +247,13 @@ class Repo:
             raise RunNotFound(run_id)
         return cls(engine, RunSpec.model_validate(spec))
 
+    def _spec(self) -> RunSpec:
+        """The run's own spec for internal reads of immutable fields, without copying."""
+        return self.spec
+
     @property
     def run_id(self) -> str:
-        return self.spec.run_id
+        return self._spec().run_id
 
     def status(self) -> str:
         return run_status(self.engine, self.run_id)
@@ -290,12 +294,12 @@ class Repo:
         if KINDS.get(kind) is not type(record):
             raise TypeError(f"{kind} is not a storable contract")
         if isinstance(record, DerivedRecord) and (
-            record.run_id != self.run_id or record.scenario_id != self.spec.scenario_id
+            record.run_id != self.run_id or record.scenario_id != self._spec().scenario_id
         ):
             raise ValueError(
                 f"{kind} {record.id} belongs to run {record.run_id!r}/{record.scenario_id!r}"
             )
-        if record.available_at is not None and record.available_at > self.spec.as_of:
+        if record.available_at is not None and record.available_at > self._spec().as_of:
             raise LookAhead(f"{kind} {record.id} available at {record.available_at.isoformat()}")
         payload = record.model_dump(mode="json")
         derived = isinstance(record, DerivedRecord)
@@ -331,7 +335,7 @@ class Repo:
         """
         c = artifacts.c
         query = select(c.payload).where(c.run_id == self.run_id, c.kind == kind.__name__)
-        visible = c.available_at <= self.spec.as_of
+        visible = c.available_at <= self._spec().as_of
         query = query.where(visible | c.available_at.is_(None) if include_unknown else visible)
         for column, value in (("store_id", store_id), ("sku", sku), ("case_id", case_id)):
             if value is not None:
@@ -348,7 +352,7 @@ class Repo:
             c.run_id == self.run_id,
             c.kind == kind.__name__,
             c.id == id,
-            c.available_at <= self.spec.as_of,
+            c.available_at <= self._spec().as_of,
         )
         if version is not None:
             query = query.where(c.version == version)
@@ -361,7 +365,7 @@ class Repo:
     ) -> builtins.list[ErpRecord]:
         """ERP rows of one table known at `as_of`. Unknown availability is never visible."""
         c = erp_rows.c
-        query = select(erp_rows).where(c.tbl == table, c.available_at <= self.spec.as_of)
+        query = select(erp_rows).where(c.tbl == table, c.available_at <= self._spec().as_of)
         if store_id is not None:
             query = query.where(c.store_id == store_id)
         if sku is not None:

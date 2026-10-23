@@ -5,6 +5,8 @@ through PLT-04's `RunRepo` so parent and store-scope checks apply. The LLM is a 
 """
 
 import json
+import threading
+import time
 from datetime import UTC, date, datetime
 from pathlib import Path
 from types import SimpleNamespace
@@ -285,3 +287,29 @@ def test_choice_schema_rejects_ids_not_offered() -> None:
     assert schema.model_validate({"target_id": None, "rationale": "r"}).target_id is None
     with pytest.raises(ValidationError):
         schema.model_validate({"target_id": "Z-9", "rationale": "r"})
+
+
+def test_decisions_run_in_parallel_and_keep_observation_order(monkeypatch) -> None:
+    both_in_flight = threading.Barrier(2, timeout=5)
+
+    def slow_decide(obs, snapshot, params, llm, errors):
+        both_in_flight.wait()  # BrokenBarrierError if decisions were serial
+        if obs.id == "a":
+            time.sleep(0.2)  # finishes last, still reported first
+        errors.append(f"{obs.id}: llm LLMCallFailed")
+        return link.Decision(
+            status="ambiguous",
+            level=None,
+            target_id=None,
+            candidates=(),
+            decided_by="rule:link_mention",
+            rationale=f"{obs.id} tie",
+        )
+
+    monkeypatch.setattr(link, "decide", slow_decide)
+    monkeypatch.setattr(link, "to_link", lambda obs, decision, spec, snapshot: obs.id)
+    repo = SimpleNamespace(spec=None, put=lambda *links: len(links))
+    observations = [SimpleNamespace(id=i, available_at=AS_OF) for i in ("a", "b")]
+    result = link.link_observations(repo, observations, None, LinkParams(), llm=None)
+    assert result.errors == ("a: llm LLMCallFailed", "b: llm LLMCallFailed")
+    assert result.abstentions == ("a: a tie", "b: b tie")

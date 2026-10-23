@@ -38,6 +38,8 @@ class Settings(BaseSettings):
     llm_max_calls: int = 100
     llm_max_tokens: int = 200_000
     llm_deadline_seconds: float = 180
+    # Parallel provider calls per run (client semaphore and module thread pools).
+    llm_concurrency: int = Field(default=4, ge=1, le=32)
 
     sources_dir: Path = REPO_ROOT / "generated" / "sources"
     data_dir: Path = REPO_ROOT / "data"

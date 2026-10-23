@@ -25,6 +25,7 @@ import hashlib
 import json
 import re
 from collections.abc import Iterable, Mapping, Sequence
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 from datetime import date, datetime
 from pathlib import Path
@@ -331,11 +332,25 @@ def link_observations(
     links: list[EntityLink] = []
     counts = dict.fromkeys(("linked", "ambiguous", "unlinked", "not_product"), 0)
     llm_links = 0
-    for obs in observations:
-        if obs.available_at is None:
+
+    def decide_one(obs: Observation) -> tuple[Decision, list[str]]:
+        own: list[str] = []
+        return decide(obs, snapshot, params, llm, own), own
+
+    # Tie-break LLM calls run in parallel (the client bounds them); decisions are consumed
+    # in observation order, so links, counts and messages match a serial run.
+    observations = list(observations)
+    with ThreadPoolExecutor(max_workers=get_settings().llm_concurrency) as pool:
+        futures = [
+            pool.submit(decide_one, obs) if obs.available_at is not None else None
+            for obs in observations
+        ]
+    for obs, future in zip(observations, futures, strict=True):
+        if future is None:
             abstentions.append(f"{obs.id}: unknown availability")
             continue
-        decision = decide(obs, snapshot, params, llm, errors)
+        decision, own = future.result()
+        errors.extend(own)
         counts[decision.status] += 1
         llm_links += decision.decided_by.startswith("llm:") and decision.status == "linked"
         if decision.status in ("ambiguous", "unlinked"):
