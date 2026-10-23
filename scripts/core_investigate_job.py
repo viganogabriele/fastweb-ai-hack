@@ -10,6 +10,11 @@ temporary directory outside the candidate and is removed on every exit.
 verify: on a fresh offline replay attempt rebuilt from the package (replay_demo.py), POSTs
 the same job against the unmodified recorded parent with networking denied, using only the
 packaged job recordings. Job ID, trace, job artifacts and parent inventory must match.
+
+rebind: after a reviewed code fix that changes only parent-derived artifacts, replays the
+job as verify does and re-pins the parent and job artifact inventories. Job ID, case version,
+trace and every envelope must still match; the earlier pins stay in the manifest. No provider
+is called and no recording is replaced.
 """
 
 import argparse
@@ -114,6 +119,16 @@ def trace_summary(trace):
     }
 
 
+def head():
+    return subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=REPO_ROOT, text=True).strip()
+
+
+def dirty_code():
+    roots = ("backend/tesseract", "backend/prompts", "config", "scripts")
+    command = ["git", "status", "--porcelain", "--untracked-files=all", "--", *roots]
+    return bool(subprocess.check_output(command, cwd=REPO_ROOT, text=True))
+
+
 def record(candidate, *, case_id, output):
     candidate, output = allowed(candidate), allowed(output)
     if output.exists():
@@ -121,9 +136,7 @@ def record(candidate, *, case_id, output):
     spec = RunSpec.model_validate_json((candidate / "run-spec.json").read_text())
     if spec.mode != "recorded" or spec.authorized_fixture_refs:
         raise ValueError("source-backed recorded candidate required")
-    execution_sha = subprocess.check_output(
-        ["git", "rev-parse", "HEAD"], cwd=REPO_ROOT, text=True
-    ).strip()
+    execution_sha = head()
     source = Settings(_env_file=None, data_dir=candidate / "runtime")
     with private_copy(
         source.db_path,
@@ -206,6 +219,40 @@ def _record(settings, spec, case_id, output, execution_sha):
 
 def verify(attempt, *, job, workspace):
     """Replay from a rebuilt attempt plus packaged job recordings only, networking denied."""
+    return _replay(attempt, job=job, workspace=workspace)[0]
+
+
+def rebind(attempt, *, job, workspace, reason):
+    """Re-pin the inventories only when every other recorded value replays unchanged."""
+    result, observed = _replay(attempt, job=job, workspace=workspace)
+    kept = ("parent_unchanged", "case_version_matches", "job_id_matches", "trace_matches")
+    if result["network_attempts"] or not all(result["checks"][check] for check in kept):
+        raise ValueError("the job itself changed; record it again instead of rebinding")
+    # The parent is re-verified separately (check_core_demo.py); bind only to that inventory.
+    job = allowed(job)
+    verified = json.loads((job.parent / "api-verification.json").read_text())
+    if verified["artifact_inventory_sha256"] != observed["parent"]:
+        raise ValueError("the parent differs from api-verification.json; verify it first")
+    if dirty_code():
+        raise ValueError("commit the code before rebinding")
+    path = job / "manifest.json"
+    manifest = json.loads(path.read_text())
+    previous = {
+        "parent": manifest["parent"]["artifact_inventory_sha256"],
+        "job": manifest["job"]["artifact_inventory_sha256"],
+    }
+    if previous == observed:
+        return {**result, "status": "passed"}
+    manifest["parent"]["artifact_inventory_sha256"] = observed["parent"]
+    manifest["job"]["artifact_inventory_sha256"] = observed["job"]
+    manifest.setdefault("rebound", []).append(
+        {"execution_sha": head(), "reason": reason, "previous_artifact_inventory_sha256": previous}
+    )
+    path.write_text(json.dumps(manifest, sort_keys=True, indent=2) + "\n")
+    return {**result, "status": "rebound", "artifact_inventory_sha256": observed}
+
+
+def _replay(attempt, *, job, workspace):
     attempt, job, workspace = allowed(attempt), allowed(job), allowed(workspace)
     manifest = json.loads((job / "manifest.json").read_text())
     rebuilt = json.loads((attempt / "manifest.json").read_text())
@@ -271,7 +318,7 @@ def _verify(settings, job, manifest):
         },
     }
     result["status"] = "passed" if all(result["checks"].values()) and not denied else "failed"
-    return result
+    return result, {"parent": before, "job": job_inventory}
 
 
 def main():
@@ -285,13 +332,20 @@ def main():
     ver.add_argument("--attempt", type=Path, required=True)
     ver.add_argument("--job", type=Path, required=True)
     ver.add_argument("--workspace", type=Path, required=True)
+    reb = commands.add_parser("rebind")
+    reb.add_argument("--attempt", type=Path, required=True)
+    reb.add_argument("--job", type=Path, required=True)
+    reb.add_argument("--workspace", type=Path, required=True)
+    reb.add_argument("--reason", required=True)
     args = parser.parse_args()
     if args.command == "record":
         result = record(args.candidate, case_id=args.case_id, output=args.output)
+    elif args.command == "rebind":
+        result = rebind(args.attempt, job=args.job, workspace=args.workspace, reason=args.reason)
     else:
         result = verify(args.attempt, job=args.job, workspace=args.workspace)
     print(json.dumps(result, sort_keys=True))
-    return 0 if result["status"] in {"recorded", "passed"} else 1
+    return 0 if result["status"] in {"recorded", "passed", "rebound"} else 1
 
 
 if __name__ == "__main__":

@@ -6,7 +6,7 @@
   "execution_sha": "6803eeada64e03678dd84a23b099f44e4634733f",
   "format": 1,
   "job": {
-    "artifact_inventory_sha256": "0621d43ced6978a945ac4d6e07e34343678ee415020af2c89c1bc9d02637ef15",
+    "artifact_inventory_sha256": "2f51cfb95d990a30f4e360caef183fe0b31effad8b27516f854513d352502689",
     "run_id": "investigate-b3df8405d121b9c200b10b6733db4d65711aa86814239692c00e40ccd5a3b9fe",
     "spec_sha256": "815e8e7a4b749ce5be9c5cb707e6aa40d3fc0529aa558ea64960fa0f575bcee0",
     "status": "degraded"
@@ -16,13 +16,23 @@
     "Recorded on a private copy whose parent was marked live; the copy is discarded."
   ],
   "parent": {
-    "artifact_inventory_sha256": "e52fb3a1a025134198124a7f6829c71cabdd8a5eaa4700a4ae3f20a6f8f23405",
+    "artifact_inventory_sha256": "2ceed68aca37042b7f856a74c361cd2e9e71a50667d5e83bacfdd6f7e091858c",
     "code_version": "38fe618a91a9d4f573e96fc2ec3cde2ee6ec8ebe",
     "recording_copy_mode": "live (private database copy only)",
     "run_id": "core-dev-candidate",
     "snapshot_sha256": "c522703633170af4933e06ed0f02edc29f2beb5f85cb32873ac46bb426b86edb",
     "unchanged_after_job": true
   },
+  "rebound": [
+    {
+      "execution_sha": "cd522581cfba94b14705ca9528061b3a53d70b7a",
+      "previous_artifact_inventory_sha256": {
+        "job": "0621d43ced6978a945ac4d6e07e34343678ee415020af2c89c1bc9d02637ef15",
+        "parent": "e52fb3a1a025134198124a7f6829c71cabdd8a5eaa4700a4ae3f20a6f8f23405"
+      },
+      "reason": "#258 (AG-03d): evaluate_options no longer republishes donor-narrowed D1 options; job envelopes and trace unchanged"
+    }
+  ],
   "recordings": {
     "llm_cache": [
       [

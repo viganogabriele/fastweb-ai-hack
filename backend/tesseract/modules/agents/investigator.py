@@ -286,6 +286,9 @@ class Investigator:
 
     def evaluate(self, args: OptionsArgs) -> ToolResult:
         self._case(args.case_id)
+        # Candidate donors are validated, never a filter: the options keep their deterministic
+        # IDs and approval re-evaluates every domestic donor, so a narrowed evaluation would
+        # publish a current version that approval can never accept (#258).
         if args.candidate_donors is not None:
             donors = set(args.candidate_donors)
             if not donors <= (set(self.repo.spec.stores) - {self.case.store_id}):
@@ -301,15 +304,6 @@ class Investigator:
                 product=product,
                 reservations=self.reservations,
             )
-            if args.candidate_donors is not None:
-                inputs = replace(
-                    inputs,
-                    routes=tuple(
-                        route
-                        for route in inputs.routes
-                        if route.donor.store_id in args.candidate_donors
-                    ),
-                )
             colours.append(inputs)
             for position in (inputs.dest, *(route.donor for route in inputs.routes)):
                 for fact in position.stock.values():
@@ -562,7 +556,7 @@ def investigate(
         for step in result.trace.steps
     )
     trace = result.trace.model_copy(update={"steps": steps})
-    # Retain earlier tool outputs after narrowing donor candidates.
+    # Retain earlier tool outputs when the evaluated inputs changed between calls.
     records = [*session.facts.values(), *session.proposals.values(), *session.drafts.values()]
     if records:
         repo.put(*records)
