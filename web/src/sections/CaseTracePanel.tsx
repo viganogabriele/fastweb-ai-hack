@@ -4,6 +4,7 @@ import type { ArtifactRef } from '../api/client'
 import { requestCaseTrace, requestCaseTraces } from '../api/caseTraces'
 import type { AgentTrace, TraceIdentity, TraceSelection, TraceState } from '../api/caseTraces'
 import { Button, StatusBadge } from '../ui'
+import './CaseTracePanel.css'
 
 export function CaseTracePanel(props: TraceSelection) {
   return <TraceList key={JSON.stringify([props.runId, props.fixtureMode, props.item])} {...props} />
@@ -12,8 +13,9 @@ function TraceList(props: TraceSelection) {
   const [state, setState] = useState<TraceState<AgentTrace[]>>({ status: 'loading' })
   const [revision, setRevision] = useState(0)
   const [selected, setSelected] = useState<TraceIdentity | null>(null)
-  useEffect(() => requestCaseTraces(props, readApi, setState), [props.item, props.runId, props.fixtureMode, revision])
-  return <section className="sd-case-analysis__trace" aria-label="Tracce pubblicate">
+  const { item, runId, fixtureMode } = props
+  useEffect(() => requestCaseTraces({ item, runId, fixtureMode }, readApi, setState), [item, runId, fixtureMode, revision])
+  return <section className="sd-case-analysis__trace sd-case-traces" aria-label="Tracce pubblicate">
     <h4>Tracce investigatore pubblicate</h4>
     <StatusBadge tone={props.fixtureMode ? 'warning' : 'neutral'} label={props.fixtureMode ? 'Namespace fixture · esempi sintetici' : 'Snapshot prodotto · API'} />
     <p>Run {props.runId} · caso {props.item.id} · versione {props.item.version}</p>
@@ -32,7 +34,9 @@ function TraceList(props: TraceSelection) {
 function TraceDetail({ selection, exact }: { selection: TraceSelection; exact: TraceIdentity }) {
   const [state, setState] = useState<TraceState<AgentTrace[]>>({ status: 'loading' })
   const [revision, setRevision] = useState(0)
-  useEffect(() => requestCaseTrace(selection, exact, readApi, setState), [selection.item, selection.runId, selection.fixtureMode, exact.id, exact.version, revision])
+  const { item, runId, fixtureMode } = selection
+  const { id, version } = exact
+  useEffect(() => requestCaseTrace({ item, runId, fixtureMode }, { id, version }, readApi, setState), [item, runId, fixtureMode, id, version, revision])
   return <article aria-label={`Traccia ${exact.id} versione ${exact.version}`}>
     <h5>{exact.id} · {exact.version}</h5>
     <TraceStatus state={state} retry={() => setRevision((value) => value + 1)} />

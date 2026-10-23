@@ -83,7 +83,7 @@ test('actual trace rendering escapes model/tool text, keeps errors, order, fallb
   const module = { exports: {} }
   vm.runInNewContext(output, { exports: module.exports, require: (name) => {
     if (name === '../ui') return { StatusBadge: ({ label }) => React.createElement('span', null, label) }
-    if (name.startsWith('../api/')) return {}
+    if (name.startsWith('../api/') || name.endsWith('.css')) return {}
     return require(name)
   } })
   const html = renderToStaticMarkup(React.createElement(module.exports.TraceRecord, { trace: { ...trace, steps: [...trace.steps, { ...trace.steps[0], tool: 'finish', error: null }] }, selection }))
