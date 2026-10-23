@@ -42,3 +42,15 @@ Downstream modules consume the contract artifacts through the repository, follow
 these rules; they must not import another module or treat absent overlap relations
 as proof that unknown episodes are independent. The helper's dataclasses are local
 views, not new persisted contracts.
+
+# Cases
+
+`int.cases` runs after `int.dedup` and writes only `Case` artifacts. Each observation kind
+maps to a case type with an owner in `config/domain.yaml` (`stockout`/`low_stock` →
+`unmet_demand`, `demand_up/down` → `demand_shift`, `other` → `unknown`); `sales_figure` and
+`local_event` open no case. Ambiguous, unlinked or missing links keep their own `verify`
+case with `scope=unknown`, citing the link and its candidates; they are never merged.
+Certain copies stay in one case and count as one origin; corrected or retracted facts are
+not supporting evidence; negated facts are `contradicting`. A later report joins the open
+case of the same store, type and scope only within `policy.decay.max_validity` of its last
+independent evidence. `decision_due_at` and conflicts with structured facts are INT-04.

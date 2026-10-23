@@ -294,9 +294,10 @@ def _uncertainties(
         if first.link_problem == "ambiguous":
             out.append(f"Product ambiguous: '{mention}' fits {ids}.")
         else:
-            out.append(f"Product '{mention}' not found in the catalog" + (
-                f"; closest candidates {ids}." if ids else "."
-            ))
+            out.append(
+                f"Product '{mention}' not found in the catalog"
+                + (f"; closest candidates {ids}." if ids else ".")
+            )
     if draft.case_type == "unknown":
         out.append("Signal type 'other': needs human review.")
     if draft.scope_level == "style" and draft.case_type in DECAYING:

@@ -243,7 +243,8 @@ def test_kinds_map_to_an_owned_case_type(kind, case_type):
 def test_metrics_and_store_level_facts():
     sales = fact("s", kind="sales_figure", value=12, unit="units", mention=None)
     traffic = fact("t", kind="traffic_change", value=None, unit="visitors", mention=None)
-    built = build([sales, traffic], [link(sales[2], "not_product"), link(traffic[2], "not_product")])
+    links = [link(sales[2], "not_product"), link(traffic[2], "not_product")]
+    built = build([sales, traffic], links)
     (case,) = built.cases
     assert built.counts["no_case_kind"] == 1
     assert (case.scope_level, case.scope_id, case.case_type) == ("store", "MIL01", "traffic_change")
