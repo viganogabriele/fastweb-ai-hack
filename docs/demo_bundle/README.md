@@ -26,10 +26,13 @@ tokens. Deletion via an empty target is allowed. Recognised residual emails, URL
 domains, local/UNC/home paths, filenames, mail headers (in the dataset's languages), HTML,
 Markdown links and credential patterns exclude the artifact. A configured sensitive token
 that survives in any form also excludes it: the check runs on NFKC-normalised, case-folded
-text without zero-width characters or soft hyphens, and again on letters and digits only
+text without Unicode format controls (including zero-width characters and soft hyphens),
+and again on letters and digits only
 (so `Private-⏎House` or full-width variants are caught). Replacement itself stays literal:
 add the variants you want substituted rather than excluded. Any store id outside the
-approved `stores` in public text, or in a report citation scope, excludes the artifact.
+approved `stores` in public text (case-insensitively and ignoring format controls),
+or in a report citation scope, excludes the artifact. Private-pattern detection also
+checks the normalised text, preventing invisible characters from hiding an email address.
 
 Choose a fresh private `reference_key` of at least 32 characters for real inputs
 (for example, locally generate one with `secrets.token_hex(32)`). Keep the key and

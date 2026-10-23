@@ -40,13 +40,14 @@ class Excluded(ValueError):
     pass
 
 
-_INVISIBLE = dict.fromkeys(map(ord, "\u00ad\u200b\u200c\u200d\u2060\ufeff"))
 _STORE_ID = re.compile(r"\b[A-Z]{3}\d{2}\b")
 
 
 def folded(text):
     """Compatibility-normalized, case-folded text without invisible characters."""
-    return unicodedata.normalize("NFKC", text).translate(_INVISIBLE).casefold()
+    return "".join(
+        c for c in unicodedata.normalize("NFKC", text) if unicodedata.category(c) != "Cf"
+    ).casefold()
 
 
 def squeezed(text):
@@ -87,6 +88,7 @@ class Builder:
             "|".join(re.escape(k) for k in sorted(self.replacements, key=lambda s: (-len(s), s)))
         )
         self.raw, self.public, self.documents, self.segments = {}, {}, {}, {}
+        self.malformed = set()
         self.excluded, self.mapping = [], []
         self.identifiers = {}
         for item in manifest["artifacts"]:
@@ -94,18 +96,22 @@ class Builder:
             identity = (kind, payload["id"], payload["version"])
             if not all(isinstance(part, str) and part for part in identity) or identity in self.raw:
                 raise ValueError("Artifact identities must be nonempty and unique")
-            declared = {
-                value
-                for value in (
-                    payload.get("store_id"),
-                    payload.get("meta", {}).get("store_id"),
-                    payload.get("scope", {}).get("store_id"),
-                )
-                if value is not None
-            }
-            declared.update(payload.get("store_ids", []))
-            if not declared <= set(stores):
-                raise ValueError("Artifact is outside the approved dev stores")
+            meta, scope = payload.get("meta", {}), payload.get("scope", {})
+            store_ids = payload.get("store_ids", [])
+            if (
+                not isinstance(meta, dict)
+                or not isinstance(scope, dict)
+                or not isinstance(store_ids, list)
+                or any(not isinstance(value, str) for value in store_ids)
+            ):
+                self.malformed.add(identity)
+            else:
+                declared = [payload.get("store_id"), meta.get("store_id"), scope.get("store_id")]
+                declared = [value for value in declared if value is not None] + store_ids
+                if any(not isinstance(value, str) for value in declared):
+                    self.malformed.add(identity)
+                elif not set(declared) <= self.stores:
+                    raise ValueError("Artifact is outside the approved dev stores")
             self.raw[identity] = payload
             self.mapping.append(
                 {
@@ -147,13 +153,13 @@ class Builder:
             boundaries[index] = length + index - cursor
         text = "".join(out)
         normal, compact = folded(text), squeezed(text)
-        if PRIVATE.search(text) or PRIVATE.search(unicodedata.normalize("NFKC", text)):
+        if PRIVATE.search(text) or PRIVATE.search(normal):
             raise Excluded("unresolved_sensitive_text")
         if any(
             key in normal or (len(short) >= 4 and short in compact) for key, short in self.residuals
         ):
             raise Excluded("unresolved_sensitive_text")
-        if set(_STORE_ID.findall(unicodedata.normalize("NFKC", text))) - self.stores:
+        if set(_STORE_ID.findall(normal.upper())) - self.stores:
             raise Excluded("store_outside_approved_split")
         return text, boundaries
 
@@ -183,8 +189,8 @@ class Builder:
             for identity, source in self.raw.items()
             if identity[0] == "SourceDocument"
             and identity[1] == payload["document_id"]
-            and source["text_version"] == payload["text_version"]
             and identity in self.documents
+            and source["text_version"] == payload["text_version"]
         ]
         if len(found) != 1:
             raise Excluded("ambiguous_or_excluded_document")
@@ -194,6 +200,8 @@ class Builder:
         kind = identity[0]
         result = {"id": self.ref(identity)["id"], "version": "public-v1"}
         if kind == "SourceDocument":
+            if not isinstance(p.get("text_version"), str) or not p["text_version"]:
+                raise Excluded("malformed_artifact")
             store = p.get("meta", {}).get("store_id")
             if not store:
                 raise Excluded("missing_dev_store")
@@ -323,6 +331,8 @@ class Builder:
             failed = {}
             for identity in pending:
                 try:
+                    if identity in self.malformed:
+                        raise Excluded("malformed_artifact")
                     if identity[0] not in KINDS:
                         raise Excluded("unsupported_artifact")
                     self.public[identity] = self.project(identity, self.raw[identity])

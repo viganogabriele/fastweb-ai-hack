@@ -322,6 +322,10 @@ class PublicDemoTests(unittest.TestCase):
             "key AKIAIOSFODNN7EXAMPLE",
             "foto_negozio.heic attached",
             "Compare with ROM01 today",
+            "Compare with rom01 today",
+            "Compare with ROM\u200b01 today",
+            "Contact person@exam\u200bple.test",
+            "Contact person@exam\u2066ple.test",
         ]
         for text in variants:
             manifest = sample()
@@ -381,6 +385,29 @@ class PublicDemoTests(unittest.TestCase):
         files, _ = Builder(manifest, ["MIL01"]).build()
         reasons = {e["reason"] for e in json.loads(files["manifest.json"])["excluded"]}
         self.assertIn("malformed_artifact", reasons)
+
+    def test_malformed_store_metadata_excludes_artifact_without_aborting_bundle(self):
+        for field, value in (("meta", None), ("meta", []), ("scope", []), ("store_ids", "MIL01")):
+            manifest = sample()
+            manifest["artifacts"][0]["payload"][field] = value
+            with self.subTest(field=field, value=value):
+                files, _ = Builder(manifest, ["MIL01"]).build()
+                self.assertEqual(json.loads(files["artifacts.json"]), [])
+                reasons = {e["reason"] for e in json.loads(files["manifest.json"])["excluded"]}
+                self.assertIn("malformed_artifact", reasons)
+
+    def test_malformed_document_version_does_not_poison_valid_segments(self):
+        manifest = sample()
+        document = copy.deepcopy(manifest["artifacts"][0])
+        # Another version of the same document lacks the canonical text version.
+        document["payload"]["version"] = "broken-version"
+        del document["payload"]["text_version"]
+        manifest["artifacts"].insert(0, document)
+        files, _ = Builder(manifest, ["MIL01"]).build()
+        artifacts = json.loads(files["artifacts.json"])
+        self.assertEqual(len(artifacts), 5)
+        (excluded,) = json.loads(files["manifest.json"])["excluded"]
+        self.assertEqual(excluded["reason"], "malformed_artifact")
 
 
 if __name__ == "__main__":
