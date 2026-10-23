@@ -13,6 +13,7 @@ import {
 import { messages } from './i18n'
 import { ModulesPage } from './sections/ModulesPage'
 import { ProductsPage } from './sections/ProductsPage'
+import { ReportsPage } from './sections/ReportsPage'
 import { RunWorkspace } from './sections/RunWorkspace'
 import type { Case } from './api/client'
 import { DEFAULT_CASE_QUEUE_FILTERS } from './sections/caseUtils'
@@ -243,6 +244,8 @@ export default function App() {
             <ModulesPage key={runs.selectedId} runs={runs} />
           ) : currentId === 'products' ? (
             <ProductsPage runs={runs} onCaseSelect={openCase} />
+          ) : currentId === 'reports' ? (
+            <ReportsPage runs={runs} />
           ) : ['overview', 'cases', 'sources'].includes(currentId) ? (
             <RunWorkspace
               key={`${currentId}-${runs.selectedId}`}
