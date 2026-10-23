@@ -14,6 +14,16 @@ publication, character offsets, absence of fallback timestamps, and availability
 `2026-10-22T20:00:00Z` (22:00 Europe/Rome). MIL01 and MIL02 agree with the store master.
 No sidecar correction or product module change was needed.
 
+Additional checks against the actual fixture directory denied audio loading entirely:
+an as-of of `2026-10-22T17:00:00Z` skipped all three as unavailable; a ROM01-only
+run at the evening cutoff skipped all three as outside the selected stores.
+
+Validation: plain `make check` had 1618 passing backend tests and one existing eval
+isolation failure (`_Py_HashRandomization_Init: failed to get random numbers to
+initialize Python`). No isolation test was changed. `PYTHONHASHSEED=0 make check`
+passed all 1619 backend tests, lint/format, web lint/typecheck, 38 web tests and schema
+regeneration. The verification utility also passed explicit Ruff lint/format checks.
+
 All three notes are **synthetic_extension**, with no related historical email. There
 are **no paraphrase notes** in DATA-03. These independent scenarios must stay out of
 historical WAPE, including forecasts influenced by them; use a separate demo run.
