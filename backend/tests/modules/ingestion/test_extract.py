@@ -426,6 +426,22 @@ def test_budget_exhaustion_stops_remaining_documents(tmp_path):
     assert "documents" not in status.result.counts
 
 
+def test_skipped_documents_keep_order_and_are_not_counted_after_budget_exhaustion(tmp_path):
+    records = synthetic("Uno.", doc="doc-a") + synthetic("Due.", doc="doc-b")[:1]
+    status, _, _, _ = execute(tmp_path, records, {"doc-a": BudgetExceeded("over")})
+    assert "documents_skipped" not in status.result.counts
+    assert status.result.abstentions == ()
+
+
+def test_skipped_document_abstention_follows_earlier_extraction_failure(tmp_path):
+    records = synthetic("Uno.", doc="doc-a") + synthetic("Due.", doc="doc-b")[:1]
+    status, _, _, _ = execute(tmp_path, records, {"doc-a": ExtractionFailed("invalid")})
+    assert status.result.abstentions == (
+        "doc-a: extraction failed validation twice",
+        "doc-b: not read (no segments for its text version)",
+    )
+
+
 def test_calls_run_in_parallel_and_results_keep_document_order(tmp_path):
     records = synthetic("Uno.", doc="doc-a") + synthetic("Due.", doc="doc-b")
     both_in_flight = threading.Barrier(2, timeout=5)

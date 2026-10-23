@@ -502,11 +502,6 @@ def run(ctx) -> ModuleResult:
             key=lambda s: s.idx,
         )
         store = stores.get(document.meta.get("store_id"))
-        if not segments or store is None:
-            reason = "no segments for its text version" if not segments else "unknown store"
-            abstentions.append(f"{document.id}: not read ({reason})")
-            counts["documents_skipped"] += 1
-            continue
         jobs.append((document, segments, store))
 
     def read(job) -> Candidates:
@@ -527,8 +522,15 @@ def run(ctx) -> ModuleResult:
     # document order on this thread, so observations, counts and errors match a serial run.
     pool = ThreadPoolExecutor(max_workers=settings.llm_concurrency)
     try:
-        futures = [pool.submit(read, job) for job in jobs]
+        futures = [
+            pool.submit(read, job) if job[1] and job[2] is not None else None for job in jobs
+        ]
         for (document, segments, store), future in zip(jobs, futures, strict=True):
+            if future is None:
+                reason = "no segments for its text version" if not segments else "unknown store"
+                abstentions.append(f"{document.id}: not read ({reason})")
+                counts["documents_skipped"] += 1
+                continue
             try:
                 proposed = future.result()
             except ExtractionFailed:
