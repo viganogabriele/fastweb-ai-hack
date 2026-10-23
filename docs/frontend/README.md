@@ -71,7 +71,7 @@ this setup: [demo-walkthrough-ui.md §1](demo-walkthrough-ui.md#1-run-the-real-u
 | Panoramica `#/panoramica` | Done | Counts derived from the run's cases (`web/src/sections/Overview.tsx:152-159`), deadlines from the cutoff. |
 | Casi queue `#/casi` | Done | Filters, sort, uncertainty badges (`web/src/sections/CaseQueue.tsx:111-160`). |
 | Case detail `#/casi/<id>/<version>` | Partial | All data is real, but evidence shows as raw `kind · id · version` codes with no quote or link to the source (`web/src/sections/CaseQueue.tsx:331-339`). The forecast is a raw table with up to 20 decimals (`web/src/sections/CaseForecastPanel.tsx:7`), not the chart the RFC asks for. The page is ~8,800 px tall. |
-| Options + decision | Done (server) | Published options, checks, local-draft POST, 409 review, retry (`web/src/sections/CaseOptionsPanel.tsx`). **Gap:** existing decisions are not shown after a reload; only this tab's journal (`web/src/sections/CaseOptionsPanel.tsx:100-114`). The replay contains an approved draft, yet every case still reads "Aperto". |
+| Options + decision | Done (server) | Published options, checks, local-draft POST, 409 review, retry (`web/src/sections/CaseOptionsPanel.tsx`). **Gap:** existing decisions are not shown after a reload; only this tab's journal (`web/src/sections/CaseOptionsPanel.tsx:100-114`). The replay contains an approved draft, yet every case still reads "Aperto". The server read now exists (`GET /api/runs/{run_id}/decisions`, PLT-14); the UI does not call it yet (M5). |
 | Investigator trace | Done (read-only) | Mode, fallback, steps, refs (`web/src/sections/CaseTracePanel.tsx`). No UI for `POST .../investigate` (`backend/tesseract/api/routers/investigations.py:243`). |
 | Clarification panel (in case) | Done (read-only) | Draft question, `simulated`, timestamps (`web/src/sections/CaseClarificationsPanel.tsx:49-65`). No answer UI → #135. |
 | Fonti `#/fonti` | Done | Canonical text with highlighted case evidence on hover (`web/src/sections/RunWorkspace.tsx:274-289`). No click-through from highlight to case, no audio player. |
@@ -101,11 +101,13 @@ IDs are for reference in PRs and issues. Order within a class is the order to do
   trace → options/decision. Collapse raw IDs, hashes and producer versions into "Dettagli
   tecnici". Hide the fixture-example block entirely in the product namespace
   (`web/src/sections/CaseDetailAnalysis.tsx:23-46`).
-- **M5 Persisted decision state.** After reload, show existing local drafts for a case. This
-  needs a read endpoint (none exists: `backend/tesseract/api/routers/options.py` has GET
-  options and two POST decision routes, no decision read). Open a lane C issue; until it
-  lands, the UI must not imply a case is undecided because of a missing read (interim note:
-  demo-walkthrough §3, M5).
+- **M5 Persisted decision state.** After reload, show existing local drafts for a case, read
+  from `GET /api/runs/{run_id}/decisions?case_id=<case>` (one draft:
+  `GET /api/runs/{run_id}/decisions/{decision_id}`; PLT-14, `backend/tesseract/api/README.md`
+  "Decision reads"). Each item is the saved `LocalDraft` unchanged (`decision.at`, `by`,
+  `decision`, `dispatch_status: draft`, option id/version, `simulated: true`), including drafts
+  restored by `replay_demo.py --decisions`. An empty list means no saved decision; a failed
+  read is an error, never "Aperto". Never derive "decided" locally.
 - **M6 Walkthrough fit.** Do the click-path fixes in [demo-walkthrough-ui.md](demo-walkthrough-ui.md) §3.
 
 ### Should
@@ -141,7 +143,7 @@ IDs are for reference in PRs and issues. Order within a class is the order to do
    labelled «esempio sintetico, nomi sostituiti».
 2. **Demo case set.** The script uses ROM01 (hold-out) and a live D5 reply
    (`docs/demo_script.md:72-100`). See the proposed replacements in demo-walkthrough §2.
-3. **Decision read endpoint** (M5): lane C owner and timing.
+3. **Decision read endpoint** (M5): resolved by PLT-14 (#241); only the UI work remains.
 4. **UI language.** Backend reasons/rationales are English while the UI is Italian (e.g. option
    rationale, uncertainty reasons). Keep source text verbatim; decide whether UI chrome stays
    Italian for the jury.
