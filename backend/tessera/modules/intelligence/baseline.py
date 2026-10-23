@@ -20,7 +20,6 @@ off by default and not applied here. ``fc.overlay`` builds scenarios on top of t
 ``baseline`` reads one back.
 """
 
-import re
 from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
 from datetime import date, timedelta
@@ -42,11 +41,10 @@ from tessera.core.contracts import (
     ScenarioValues,
 )
 from tessera.core.contracts.common import SourceRef
-from tessera.modules.intelligence.disaggregation import disaggregate, week_start
+from tessera.modules.intelligence.disaggregation import closed_weekdays, disaggregate, week_start
 from tessera.modules.sources import erp
 
 MAX_HORIZON_DAYS = 14
-WEEKDAYS = ("mon", "tue", "wed", "thu", "fri", "sat", "sun")
 UNCHANGED_REASON = "Baseline only: no overlay applied, scenarios equal the forecast baseline."
 
 MANIFEST = ModuleManifest(
@@ -96,21 +94,6 @@ class Vintage:
 def default_horizon_days(config_dir: Path) -> int:
     domain = yaml.safe_load((config_dir / "domain.yaml").read_text(encoding="utf-8"))
     return int(domain["policy"]["horizon"]["days"]["value"])
-
-
-def closed_weekdays(closed_dow: object) -> frozenset[int]:
-    """``closed_dow`` ("Sun", "Sat|Sun", empty) as ``date.weekday()`` numbers."""
-    if closed_dow is None:
-        return frozenset()
-    days = set()
-    for token in re.split(r"[\s,;|/]+", str(closed_dow).strip()):
-        if not token:
-            continue
-        name = token[:3].lower()
-        if name not in WEEKDAYS:
-            raise ValueError(f"unknown closed_dow {closed_dow!r}")
-        days.add(WEEKDAYS.index(name))
-    return frozenset(days)
 
 
 def latest_vintage(rows: Iterable[repo.ErpRecord]) -> Vintage | None:
