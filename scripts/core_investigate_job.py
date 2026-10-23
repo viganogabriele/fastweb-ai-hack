@@ -123,6 +123,12 @@ def head():
     return subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=REPO_ROOT, text=True).strip()
 
 
+def dirty_code():
+    roots = ("backend/tesseract", "backend/prompts", "config", "scripts")
+    command = ["git", "status", "--porcelain", "--untracked-files=all", "--", *roots]
+    return bool(subprocess.check_output(command, cwd=REPO_ROOT, text=True))
+
+
 def record(candidate, *, case_id, output):
     candidate, output = allowed(candidate), allowed(output)
     if output.exists():
@@ -222,12 +228,21 @@ def rebind(attempt, *, job, workspace, reason):
     kept = ("parent_unchanged", "case_version_matches", "job_id_matches", "trace_matches")
     if result["network_attempts"] or not all(result["checks"][check] for check in kept):
         raise ValueError("the job itself changed; record it again instead of rebinding")
-    path = allowed(job) / "manifest.json"
+    # The parent is re-verified separately (check_core_demo.py); bind only to that inventory.
+    job = allowed(job)
+    verified = json.loads((job.parent / "api-verification.json").read_text())
+    if verified["artifact_inventory_sha256"] != observed["parent"]:
+        raise ValueError("the parent differs from api-verification.json; verify it first")
+    if dirty_code():
+        raise ValueError("commit the code before rebinding")
+    path = job / "manifest.json"
     manifest = json.loads(path.read_text())
     previous = {
         "parent": manifest["parent"]["artifact_inventory_sha256"],
         "job": manifest["job"]["artifact_inventory_sha256"],
     }
+    if previous == observed:
+        return {**result, "status": "passed"}
     manifest["parent"]["artifact_inventory_sha256"] = observed["parent"]
     manifest["job"]["artifact_inventory_sha256"] = observed["job"]
     manifest.setdefault("rebound", []).append(

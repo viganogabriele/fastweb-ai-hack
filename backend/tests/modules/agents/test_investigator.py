@@ -702,7 +702,8 @@ def test_donor_subset_never_shadows_an_option_approval_can_accept(database, dono
         assert step.error is None
         assert set(step.output_refs) == {agent.ref(o) for o in published}
         current = {o.id: o for o in published}
-        assert {o.id: o for o in repo.list(ActionOption) if o.id in current} == current
+        stored = [o for o in repo.list(ActionOption) if o.id in current]
+        assert sorted(stored, key=lambda o: o.id) == sorted(published, key=lambda o: o.id)
     set_run_status(engine, spec.run_id, "published")
     recommended = next(o for o in published if o.recommended)
     draft = approval.decide(

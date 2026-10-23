@@ -32,10 +32,14 @@ validates candidate donors but always evaluates the same inputs as `act.options`
 approval. No model request changed. D1's `evaluate_options` is its sixth and last tool
 call before the budget fallback, so its output never reaches the model, and the job's
 candidates already covered every domestic donor. So no LLM or systems envelope was
-re-recorded. The RunSpec, snapshot and every recording are unchanged. The replay
-evidence below was regenerated on `bb02f88` (verification `execution_sha`). Extraction,
-linking, dedup, cases, forecast and `act.options` outputs are unchanged. Only the D1
-investigator trace and its four duplicate option versions changed.
+re-recorded. The RunSpec, snapshot and every recording are unchanged. The replay,
+API, job and clarification-answer evidence was regenerated offline on this fix; each
+file's `execution_sha` names the commit that ran it. Extraction, linking, dedup, cases,
+forecast and `act.options` outputs are unchanged. What changed: the D1 investigator
+trace, its four duplicate option versions (gone), and the two owner/priority reports,
+which no longer cite them (330 → 328 citations). The child runs of
+`clarification-answers/` and the investigate job were re-pinned with `rebind` (below
+and in its `VERIFICATION.md`).
 
 - Clock: `2026-10-22T20:00:00Z`; dev stores MIL01, MIL02, MUN01, NYC01.
 - 12 explicitly selected Italian, English and German emails, including resend,
@@ -301,8 +305,10 @@ fail unpublished, with exit 1 and the parent unchanged
 The #258 fix changed the parent's artifact inventory (D1 trace and options), so the job
 manifest's parent and job inventory pins no longer matched. The job's envelopes and
 trace replay identically. `rebind` replays the job like `verify`, refuses unless job ID,
-case version, trace and parent-unchanged checks pass, and re-pins only the two
-inventories. The earlier values stay under `rebound` in `manifest.json`:
+case version, trace and parent-unchanged checks pass and the parent inventory equals the
+re-verified `api-verification.json`, and re-pins only the two inventories from committed
+code. The earlier values stay under `rebound` in `manifest.json`; re-hash
+`asset-manifest.json` afterwards:
 
 ```sh
 backend/.venv/bin/python scripts/core_investigate_job.py rebind \
