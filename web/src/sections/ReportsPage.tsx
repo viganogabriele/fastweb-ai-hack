@@ -54,13 +54,17 @@ function PublishedReports({ run }: { run: RunView }) {
 
 function ReportCard({ report, cases, run }: { report: Report; cases: Case[]; run: RunView }) {
   const [citation, selectCitation] = useState<number | null>(null)
-  const citationButtons = useRef(new Map<number, HTMLButtonElement>())
+  const citationTrigger = useRef<HTMLButtonElement | null>(null)
+  const openCitation = (index: number, trigger: HTMLButtonElement) => {
+    citationTrigger.current = trigger
+    selectCitation(index)
+  }
   const returnFocus = () => {
-    if (citation !== null) citationButtons.current.get(citation)?.focus()
+    citationTrigger.current?.focus()
     selectCitation(null)
   }
   const inline = (text: string): ReactNode => briefTokens(text, report.citations.length).map((token, i) =>
-    token.kind === 'citation' ? <button key={i} type="button" className="sd-report__citation" aria-label={`Apri citazione ${token.index + 1}`} aria-pressed={citation === token.index} onClick={() => selectCitation(token.index)}>{token.value}</button>
+    token.kind === 'citation' ? <button key={i} type="button" className="sd-report__citation" aria-label={`Apri citazione ${token.index + 1}`} aria-pressed={citation === token.index} onClick={(event) => openCitation(token.index, event.currentTarget)}>{token.value}</button>
       : token.kind === 'strong' ? <strong key={i}>{token.value}</strong> : token.value
   )
   return <article className="sd-report">
@@ -79,7 +83,7 @@ function ReportCard({ report, cases, run }: { report: Report; cases: Case[]; run
       return <p key={i}>{inline(block)}</p>
     })}</div>
     <section className="sd-report__references" aria-label="Citazioni del brief"><h3>Citazioni</h3>
-      {report.citations.length ? <ol>{report.citations.map((item, index) => <li key={index}><button type="button" className="sd-report__citation" ref={(node) => { if (node) citationButtons.current.set(index, node); else citationButtons.current.delete(index) }} aria-pressed={citation === index} onClick={() => selectCitation(index)}>{item.ref.kind} · {item.ref.id} · {item.ref.version}{item.field ? ` · ${item.field}` : ''}</button></li>)}</ol> : <p>Il brief non contiene citazioni.</p>}
+      {report.citations.length ? <ol>{report.citations.map((item, index) => <li key={index}><button type="button" className="sd-report__citation" aria-pressed={citation === index} onClick={(event) => openCitation(index, event.currentTarget)}>{item.ref.kind} · {item.ref.id} · {item.ref.version}{item.field ? ` · ${item.field}` : ''}</button></li>)}</ol> : <p>Il brief non contiene citazioni.</p>}
     </section>
     {citation !== null && <CitationPanel key={citation} run={run} report={report} cases={cases} index={citation} onClose={returnFocus} />}
     <details className="sd-report__provenance"><summary>Provenienza del brief</summary><dl><dt>Run</dt><dd>{report.run_id}</dd><dt>Report e versione</dt><dd>{report.id} · {report.version}</dd><dt>Generato da</dt><dd>{report.generated_by}</dd><dt>Hash degli input</dt><dd>{report.input_version_hash}</dd></dl></details>
