@@ -16,6 +16,7 @@ Pure code: no DB, no dataset access. Reading vintages and the store calendar is 
 
 import math
 import numbers
+import re
 from collections.abc import Collection, Iterable, Mapping
 from dataclasses import dataclass
 from datetime import date, datetime, time, timedelta
@@ -138,3 +139,19 @@ def _as_units(ws: date, units: object) -> float | None:
 def _add(reasons: list[str], reason: str) -> None:
     if reason not in reasons:
         reasons.append(reason)
+
+
+def closed_weekdays(closed_dow: object) -> frozenset[int]:
+    """``closed_dow`` ("Sun", "Sat|Sun", empty) as ``date.weekday()`` numbers."""
+    weekdays = ("mon", "tue", "wed", "thu", "fri", "sat", "sun")
+    if closed_dow is None:
+        return frozenset()
+    days = set()
+    for token in re.split(r"[\s,;|/]+", str(closed_dow).strip()):
+        if not token:
+            continue
+        name = token[:3].lower()
+        if name not in weekdays:
+            raise ValueError(f"unknown closed_dow {closed_dow!r}")
+        days.add(weekdays.index(name))
+    return frozenset(days)
