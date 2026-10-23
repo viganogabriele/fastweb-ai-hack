@@ -86,6 +86,8 @@ HORIZON = [D + timedelta(days=k) for k in range(1, 8)]  # D+1..D+7, RFC §4.9
 POS_WEEKS = (36, 37, 38, 39, 40)  # complete weeks before D, all out by 2026-10-05 06:00 local
 CURVE_FIRST, CURVE_LAST = date(2026, 8, 31), date(2026, 10, 4)  # 2026-W36 .. 2026-W40
 BASIS_TOKEN = {"on_hand": "onhand", "sellable": "sellable", "atp": "atp"}
+OPENING, CLOSING = time(10, 0), time(19, 0)  # store opening and closing, local time
+WEEKDAYS = {"MON": 0, "TUE": 1, "WED": 2, "THU": 3, "FRI": 4, "SAT": 5, "SUN": 6}
 
 
 # --- reading the sources ---------------------------------------------------------------
@@ -135,9 +137,15 @@ def derived(inputs: list[SourceRecord], extra_sources=(), extra_refs=()) -> dict
 
 
 def option_fields(inputs: list[SourceRecord], extra_sources=()) -> dict:
-    """`derived()` plus the version hash of exactly the inputs the option was computed from."""
+    """`derived()` plus the version hash of everything the option was computed from.
+
+    The hash covers the stored inputs and the source rows/files behind them, so an approval
+    against it is stale as soon as either changes (RFC §4.10 approval).
+    """
     fields = derived(inputs, extra_sources=extra_sources)
-    fields["input_version_hash"] = input_version_hash(fields["input_refs"])
+    fields["input_version_hash"] = input_version_hash(
+        [*fields["input_refs"], *(as_ref(item) for item in fields["source_refs"])]
+    )
     return fields
 
 
@@ -149,6 +157,21 @@ def input_version_hash(refs) -> str:
 def local_instant(day: date, at: time) -> datetime:
     """`day` at local time `at` in the store's time zone, serialized in UTC."""
     return datetime.combine(day, at, TZ).astimezone(UTC)
+
+
+def pickup_weekdays(spec: str) -> set[int]:
+    """A lane `pickup_days` value (`MON-SAT`, `MON-FRI`) as ISO weekdays."""
+    first, _, last = spec.partition("-")
+    assert first in WEEKDAYS and last in WEEKDAYS, spec
+    return set(range(WEEKDAYS[first], WEEKDAYS[last] + 1))
+
+
+def next_pickup_day(day: date, spec: str) -> date:
+    """First day on or after `day` when the lane loads (RFC §4.10 `decision_due_at`)."""
+    allowed = pickup_weekdays(spec)
+    while day.weekday() not in allowed:
+        day += timedelta(days=1)
+    return day
 
 
 class Sources:
@@ -203,8 +226,15 @@ class Sources:
 
 
 def size_shares(src: Sources, store: str, sku: str) -> tuple[dict[str, float], dict[str, int]]:
-    """RFC §4.9 "raccordo con la taglia": colour units by size on days size M opened in stock."""
+    """RFC §4.9 "raccordo con la taglia": colour units by size on days size M opened.
+
+    Two traps of the POS export: `qty` is already signed (a `RETURN` line carries -1) and
+    some weeks repeat whole lines verbatim, so `qty` is added as it comes and exact
+    duplicates are counted once. A day enters the curve only if size M was on hand at
+    opening, because a size that is sold out cannot sell.
+    """
     units: dict[str, int] = {}
+    seen: set[tuple[tuple[str, str], ...]] = set()
     for week in POS_WEEKS:
         for row in read_csv(pos_csv(week)):
             day = date.fromisoformat(row["business_date"])
@@ -212,11 +242,13 @@ def size_shares(src: Sources, store: str, sku: str) -> tuple[dict[str, float], d
                 continue
             if row["store_id"] != store or row["sku"] != sku:
                 continue
-            # A sale censors the size only if the size was on hand when the shop opened.
+            key = tuple(sorted(row.items()))
+            if key in seen:  # the export repeats the line: one sale, not two
+                continue
+            seen.add(key)
             if src.units(store, sku, SIZE, day - timedelta(days=1)) <= 0:
                 continue
-            sign = -1 if row["line_type"] == "RETURN" else 1
-            units[row["size"]] = units.get(row["size"], 0) + sign * int(row["qty"])
+            units[row["size"]] = units.get(row["size"], 0) + int(row["qty"])
     total = sum(units.values())
     assert total > 0 and all(qty >= 0 for qty in units.values())
     return {size: qty / total for size, qty in units.items()}, units
@@ -389,13 +421,19 @@ def outcome(
 
 
 def as_ref(evidence) -> ArtifactRef:
-    """Evidence of a check: a stored artifact, or a source file that has no contract."""
+    """Evidence of a check: a stored artifact, or a source file that has no contract.
+
+    A source file has no record version, so the reference carries the dataset uri plus the row
+    locator as id and the file content hash as version (the convention `ForecastVintage` uses for
+    source rows). Keeping the locator in the id keeps two rows of the same file apart.
+    """
     if isinstance(evidence, ArtifactRef):
         return evidence
     if isinstance(evidence, SourceRecord):
         return ref(evidence)
     if isinstance(evidence, SourceRef):
-        return ArtifactRef(kind="SourceFile", id=evidence.uri, version=evidence.content_hash)
+        ident = evidence.uri if evidence.locator is None else f"{evidence.uri}#{evidence.locator}"
+        return ArtifactRef(kind="SourceFile", id=ident, version=evidence.content_hash)
     raise TypeError(evidence)
 
 
@@ -416,16 +454,20 @@ def main() -> None:
         for rec in json.loads((OUT / "cases" / f"{CASE_ID}.json").read_text(encoding="utf-8"))
         if rec["kind"] == "Case"
     )
-    forecasts = {
-        colour: ForecastAdjustment.model_validate(rec["payload"])
-        for colour in SKUS
+    # Only the black 999 forecast is an option input: the 742 facts are counts from the EOD
+    # export, so the 742 forecast is not loaded (an unused input would blur `available_at`).
+    (forecast_rec,) = [
+        rec
         for rec in json.loads(
-            (OUT / "forecast" / f"fc-mil01-i10919b00011-{colour}-20261010.json").read_text(
+            (OUT / "forecast" / "fc-mil01-i10919b00011-999-20261010.json").read_text(
                 encoding="utf-8"
             )
         )
         if rec["kind"] == "ForecastAdjustment"
-    }
+    ]
+    forecast = ForecastAdjustment.model_validate(forecast_rec["payload"])
+    # The vague unmet demand lives in the case's observation; the POS export cannot show it.
+    (unmet_obs,) = [item for item in case.supporting if item.id.endswith("unmet-demand")]
 
     # The story, checked against the sources: D1 says size M is gone at MIL01 in both colours,
     # MIL02 can spare size M only in black, and the DC cannot send any before the end of October.
@@ -460,6 +502,24 @@ def main() -> None:
         for r in later
     ), later
 
+    dest_before = src.units(STORE, SKUS["999"], SIZE, before)
+    donor_before = src.units(DONOR, SKUS["999"], SIZE, before)
+    bridged = [
+        row
+        for row in read_csv(pos_csv(41))
+        if (row["store_id"], row["sku"], row["size"], row["business_date"])
+        == (STORE, SKUS["999"], SIZE, eod.isoformat())
+    ]
+    (bridged_sale,) = [row for row in bridged if row["line_type"] == "SALE"]
+    donor_eod_sales = [
+        row
+        for row in read_csv(pos_csv(41))
+        if (row["store_id"], row["sku"], row["size"], row["business_date"])
+        == (DONOR, SKUS["999"], SIZE, eod.isoformat())
+        and row["line_type"] == "SALE"
+    ]
+    bridge_gap = dest_before - src.units(STORE, SKUS["999"], SIZE, eod) - len(bridged)
+
     facts = build_stock(src)
     by_key = {(f.location_id, f.sku, f.basis): f for f in facts}
     dest_on_hand = by_key[(STORE, SKUS["999"], "on_hand")]
@@ -479,20 +539,38 @@ def main() -> None:
     hold_dest_lost, hold_dest_left = simulate(0.0, {}, demand_dest)
     hold_donor_lost, hold_donor_left = simulate(3.0, {}, demand_donor)
 
-    q_transfer = 2  # the email asks for 1-2 pieces; donor protection allows exactly 2 of 3
-    sellable = HORIZON[0]  # the leg arrives at closing on D: sellable from the next opening
-    transfer_dest_lost, transfer_dest_left = simulate(
-        0.0, {sellable: float(q_transfer)}, demand_dest
-    )
-    transfer_donor_lost, transfer_donor_left = simulate(3.0 - q_transfer, {}, demand_donor)
-
-    q_dc = int(backorder["QTY"])  # unit count MIL01 already has a backorder line for
-    dc_dest_lost, dc_dest_left = simulate(0.0, {}, demand_dest)  # no arrival inside the horizon
-
     transfer_lane = src.lanes[(src.werks[DONOR], src.werks[STORE])]
     dc_lane = src.lanes[(DC, src.werks[STORE])]
     donor_min = src.min_pres[DONOR]
     store_min = src.min_pres[STORE]
+    donor_units_eod = src.units(DONOR, SKUS["999"], SIZE, eod)
+    donor_demand_total = sum(demand_donor.values())
+    # Availability and the minimum at dispatch cap the quantity at 2 (the email asks for 1-2);
+    # donor protection over the horizon is a separate check and it does not pass (see below).
+    q_transfer = int(donor_units_eod - float(donor_min["min_pres_per_core_size"]))
+    sellable = HORIZON[0]  # the leg arrives at closing on D: sellable from the next opening
+    transfer_dest_lost, transfer_dest_left = simulate(
+        0.0, {sellable: float(q_transfer)}, demand_dest
+    )
+    transfer_donor_lost, transfer_donor_left = simulate(
+        float(donor_units_eod - q_transfer), {}, demand_donor
+    )
+    donor_after_move = float(donor_units_eod - q_transfer)
+    # Stock the donor would need to serve its own horizon demand and still hold its minimum.
+    donor_deficit = (
+        donor_demand_total + float(donor_min["min_pres_per_core_size"]) - donor_units_eod
+    )
+    assert donor_deficit > 0
+    cumulative, donor_sold_out = 0.0, HORIZON[-1]
+    for day in HORIZON:
+        cumulative += demand_donor[day]
+        if cumulative > donor_after_move:
+            donor_sold_out = day
+            break
+
+    q_dc = int(backorder["QTY"])  # unit count MIL01 already has a backorder line for
+    dc_dest_lost, dc_dest_left = simulate(0.0, {}, demand_dest)  # no arrival inside the horizon
+
     transfer_cost = round(
         float(transfer_lane["cost_fixed_eur"])
         + float(transfer_lane["cost_per_unit_eur"]) * q_transfer,
@@ -503,10 +581,32 @@ def main() -> None:
     )
     assert float(donor_min["min_pres_per_core_size"]) == 1 and SIZE in donor_min["core_sizes"]
     assert float(store_min["min_pres_per_core_size"]) == 2 and SIZE in store_min["core_sizes"]
-    assert 3 - q_transfer >= float(donor_min["min_pres_per_core_size"])  # donor stays protected
+    assert donor_units_eod - q_transfer >= float(donor_min["min_pres_per_core_size"])
+    # The donor's own demand over the horizon exceeds what a dispatch of q would leave: RFC §4.10
+    # protection cannot hold for any positive integer, which the check below records as `fail`.
+    assert donor_demand_total > donor_units_eod - q_transfer
     assert transfer_lane["ibt_allowed"] == "Y" and transfer_lane["customs_required"] == "N"
     assert float(transfer_lane["transit_days_contract"]) == 0
     assert transfer_lane["observed_n"] == "0"  # same-day courier: no observed history yet
+
+    matnr = SKUS["999"].replace("-", "")
+    receipt = src.atp_row("999")
+    receipt_units = int(float(receipt["NEXT_RCPT_QTY"]))
+    receipt_day = date.fromisoformat(receipt["NEXT_RCPT_DATE"])
+    projection_day = date.fromisoformat(receipt["SNAPSHOT"][:10])
+    projection_lag = (D - projection_day).days
+    backorder_qty = int(backorder["QTY"])
+    backorder_needed = date.fromisoformat(backorder["NEEDED"])
+    atp_sources = (file_ref(ATP, f"WERKS={DC};MATNR={matnr};J_3ASIZE={SIZE}"),)
+    resv_sources = (
+        file_ref(RESERVATIONS, f"RSNUM={backorder['RSNUM']};WERKS={DC};J_3ASIZE={SIZE}"),
+    )
+    bridge_sources = (
+        file_ref(stock_csv(before), f"store_id={STORE};sku={SKUS['999']};size={SIZE}"),
+        file_ref(stock_csv(eod), f"store_id={STORE};sku={SKUS['999']};size={SIZE}"),
+        file_ref(pos_csv(41), f"store_id={STORE};sku={SKUS['999']};business_date<={eod}"),
+    )
+    ean = src.ean[f"{SKUS['999']}-{SIZE}"]
 
     demand_basis = (
         "colour sales_baseline of forecast vintage 2026-10-05 (run date + 1 day 06:00 local), "
@@ -520,8 +620,8 @@ def main() -> None:
         f"{p_donor:.4f} (RFC §4.9 raccordo con la taglia)"
     )
     no_arrival = (
-        "no sellable arrival inside D+1..D+7: the DC receipt is 2026-10-30, so the destination's "
-        "losses equal hold"
+        f"no sellable arrival inside D+1..D+7: the DC receipt is {receipt_day.isoformat()}, so "
+        "the destination's losses equal hold and no transport cost falls inside the horizon"
     )
     dc_counterpart = (
         "DC counterpart demand is not modelled from a source, so its losses stay unknown; the "
@@ -529,46 +629,56 @@ def main() -> None:
     )
 
     curve_sources = tuple(
-        file_ref(pos_csv(week), f"business_date<={CURVE_LAST}") for week in POS_WEEKS
+        file_ref(pos_csv(week), f"store_id={STORE};business_date<={CURVE_LAST}")
+        for week in POS_WEEKS
+    )
+    donor_curve_sources = tuple(
+        file_ref(pos_csv(week), f"store_id={DONOR};business_date<={CURVE_LAST}")
+        for week in POS_WEEKS
+    )
+    donor_demand_sources = (
+        file_ref(
+            FCST / "fcst_sku_store_run_2026-10-05.csv",
+            f"store_id={DONOR};sku={SKUS['999']};run_date=2026-10-05",
+        ),
     )
     donor_min_sources = (file_ref(MIN_PRES, f"WERKS={src.werks[DONOR]};category=Knitwear"),)
     store_min_sources = (file_ref(MIN_PRES, f"WERKS={src.werks[STORE]};category=Knitwear"),)
     lane_sources = (file_ref(LANES, f"lane_id={transfer_lane['lane_id']}"),)
     dc_lane_sources = (file_ref(LANES, f"lane_id={dc_lane['lane_id']}"),)
-    matnr = SKUS["999"].replace("-", "")
-    receipt = src.atp_row("999")
-    receipt_units = int(float(receipt["NEXT_RCPT_QTY"]))
-    receipt_day = date.fromisoformat(receipt["NEXT_RCPT_DATE"])
-    atp_sources = (file_ref(ATP, f"WERKS={DC};MATNR={matnr};J_3ASIZE={SIZE}"),)
-    resv_sources = (
-        file_ref(RESERVATIONS, f"RSNUM={backorder['RSNUM']};WERKS={DC};J_3ASIZE={SIZE}"),
-    )
-    bridge_sources = (
-        file_ref(stock_csv(before), f"store_id={STORE};sku={SKUS['999']};size={SIZE}"),
-        file_ref(stock_csv(eod), f"store_id={STORE};sku={SKUS['999']};size={SIZE}"),
-        file_ref(pos_csv(41), f"store_id={STORE};business_date<={D}"),
-    )
-    ean = src.ean[f"{SKUS['999']}-{SIZE}"]
 
     # --- options ---------------------------------------------------------------------
+    # Sensitivity of the curve: with a flat 1/6 share the destination's hold loss would differ,
+    # but no option is recommended on the strength of the numbers (see the unknown checks), so a
+    # different but admissible curve cannot flip the answer.
+    flat_dest_lost, _ = simulate(
+        0.0,
+        {},
+        {day: value / p_dest / len(dest_units) for day, value in demand_dest.items()},
+    )
     curve_check = check(
         "size_curve",
         "pass",
         True,
         f"size {SIZE} is {p_dest:.1%} of the colour units sold {CURVE_FIRST}..{CURVE_LAST} on "
-        f"days it opened in stock ({dest_units[SIZE]}/{sum(dest_units.values())}); the shares sum "
-        "to 1 on the horizon and the colour total reconciles, so per-size losses are admissible",
+        f"the days it opened in stock ({dest_units[SIZE]}/{sum(dest_units.values())}); the five "
+        f"complete POS weeks W{min(POS_WEEKS)}-W{max(POS_WEEKS)} were out before D, the shares "
+        "sum to 1 and the colour total reconciles. Sensitivity: a flat "
+        f"1/{len(dest_units)} curve would put the destination's hold loss at "
+        f"{fmt(flat_dest_lost)} instead of {fmt(hold_dest_lost)}, and it changes no status "
+        "(nothing is recommended on these numbers)",
         *curve_sources,
+        *donor_curve_sources,
     )
 
     hold = ActionOption(
         id="opt-d1-mil01-hold",
         **option_fields(
-            [case, forecasts["999"], dest_on_hand, dest_sellable],
+            [case, forecast, dest_on_hand, dest_sellable],
             extra_sources=merge_sources(curve_sources, resv_sources),
         ),
         case_id=case.id,
-        forecast_ref=ref(forecasts["999"]),
+        forecast_ref=ref(forecast),
         kind="hold",
         legs=(),
         checks=(
@@ -579,7 +689,7 @@ def main() -> None:
                 False,
                 "unmet demand is vague ('in continuazione'): no count, no unit uplift, scenarios "
                 "stay on the baseline (RFC §4.9 step 5)",
-                file_ref(pos_csv(41), f"store_id={STORE};business_date<={D}"),
+                unmet_obs,
             ),
         ),
         outcomes=tuple(
@@ -597,10 +707,13 @@ def main() -> None:
         ),
         baseline_outcomes=None,
         assumptions=(
-            "starting stock is the EOD 2026-10-08 snapshot: 0 units of size M at MIL01, 3 at "
-            "MIL02 (RFC §4.10, initial state)",
-            "the 4 units MIL01 has on backorder at IT10 are not stock: ATP is 0 until the "
-            "2026-10-30 receipt",
+            f"starting stock is the EOD {eod.isoformat()} snapshot: {dest_on_hand.qty:.0f} units "
+            f"of size {SIZE} at {STORE}, {donor_on_hand.qty:.0f} at {DONOR}, in both colours: "
+            f"742 is {src.units(STORE, SKUS['742'], SIZE, eod):.0f} at {STORE} and "
+            f"{src.units(DONOR, SKUS['742'], SIZE, eod):.0f} at {DONOR}, so black "
+            f"carries the whole store loss (RFC §4.10 initial state)",
+            f"the {backorder_qty} units MIL01 has on backorder at {DC} are not stock: ATP is 0 "
+            f"until the {receipt_day.isoformat()} receipt",
             "hold is the ranking baseline: every movement is compared against these losses",
         ),
         valid_until=case.valid_until,  # type: ignore[arg-type]
@@ -620,7 +733,7 @@ def main() -> None:
             extra_sources=merge_sources(curve_sources, resv_sources, atp_sources),
         ),
         case_id=case.id,
-        forecast_ref=ref(forecasts["999"]),
+        forecast_ref=ref(forecast),
         kind="verify_stock",
         legs=(),
         checks=(
@@ -628,20 +741,23 @@ def main() -> None:
                 "snapshot_bridge",
                 "unknown",
                 False,
-                f"MIL01 {SKUS['999']} had 8 units of size {SIZE} at EOD {before.isoformat()} and "
-                f"0 at EOD {eod.isoformat()}, while POS records 1 sale on {D.isoformat()}: 7 units "
-                "are unaccounted for (no inbound, no IBT line, no return), so the last snapshot is "
-                "not current stock",
+                f"MIL01 {SKUS['999']} had {dest_before:.0f} units of size {SIZE} at EOD "
+                f"{before.isoformat()} and {dest_on_hand.qty:.0f} at EOD {eod.isoformat()}, while "
+                f"POS records {len(bridged)} sale of size {SIZE} on "
+                f"{bridged_sale['ts_local']}: {bridge_gap:.0f} units are unaccounted for (no "
+                "inbound, no IBT line, no return), so the last snapshot is not current stock",
                 *bridge_sources,
             ),
             check(
                 "donor_discrepancy",
                 "unknown",
                 False,
-                f"MIL02 shows 3 units of size {SIZE} at EOD {eod.isoformat()} after selling 2 "
-                "units of size M that day; store-level sellable quantity, reservations and quality "
-                "holds are not exported, and the case flags a possible discrepancy with MIL02, so "
-                "the donor count must be confirmed before any movement",
+                f"MIL02 went from {donor_before:.0f} units of size {SIZE} at EOD "
+                f"{before.isoformat()} to {donor_on_hand.qty:.0f} at EOD {eod.isoformat()} with "
+                f"{len(donor_eod_sales)} size-{SIZE} sales on {eod.isoformat()}, so the "
+                "arithmetic reconciles; store-level sellable quantity, reservations and quality "
+                "holds are not exported, so those units are physical stock, not certified "
+                "sellable, and the donor count must be confirmed before any movement",
                 donor_on_hand,
                 file_ref(pos_csv(41), f"store_id={DONOR};business_date={eod}"),
             ),
@@ -649,9 +765,10 @@ def main() -> None:
                 "dc_projection_freshness",
                 "unknown",
                 False,
-                f"the last ATP projection for {DC} is dated 2026-10-05, four days before D: "
-                f"ATP_NOW is 0 and the next receipt of {receipt_units} units is "
-                f"{receipt_day.isoformat()}, while MIL01 has 4 units on backorder for 2026-10-12",
+                f"the last ATP projection for {DC} is dated {projection_day.isoformat()}, "
+                f"{projection_lag} days before D: ATP_NOW is 0 and the next receipt of "
+                f"{receipt_units} units is {receipt_day.isoformat()}, while MIL01 has "
+                f"{backorder_qty} units on backorder for {backorder_needed.isoformat()}",
                 *atp_sources,
                 *resv_sources,
             ),
@@ -659,8 +776,9 @@ def main() -> None:
                 "open_backorder",
                 "pass",
                 False,
-                "MIL01 already has an open backorder line at the DC for 4 units of size M, needed "
-                "2026-10-12: documented demand, not forecast uplift",
+                f"MIL01 already has an open backorder line at the DC for {backorder_qty} units "
+                f"of size {SIZE}, needed {backorder_needed.isoformat()}: documented demand, not "
+                "forecast uplift",
                 *resv_sources,
             ),
             curve_check,
@@ -668,29 +786,36 @@ def main() -> None:
         outcomes=None,  # not quantifiable: the option does not move stock (RFC §4.10)
         baseline_outcomes=None,
         assumptions=(
-            "the verification is a physical count at both stores, plus a check that the 4 "
-            "backordered units are still expected on 2026-10-12",
+            f"the verification is a physical count at both stores, plus a check that the "
+            f"{backorder_qty} backordered units are still expected on "
+            f"{backorder_needed.isoformat()}",
             "nothing is dispatched: the review UI shows this option as informational",
         ),
         valid_until=case.valid_until,  # type: ignore[arg-type]
         recommended=True,
         rationale=(
-            "the data do not support a movement yet: MIL01 lost 7 units of size M between the "
-            "last two snapshots, the donor's sellable quantity is not exported and the DC ATP "
-            "projection is four days old. Count at MIL01 and MIL02 first, then re-run the options: "
-            "a movement approved now would rest on a snapshot that is already wrong"
+            f"the data do not support a movement yet: {bridge_gap:.0f} units of size {SIZE} "
+            f"disappeared from MIL01 between the last two snapshots, the donor's sellable "
+            f"quantity is not exported and the DC ATP projection is {projection_lag} days old. "
+            f"Count at {STORE} and {DONOR} first, then re-run the options: a movement approved "
+            "now would rest on a snapshot that is already wrong"
         ),
     )
 
-    transfer_pickup = local_instant(D, time(15, 30))  # lane cutoff, MON-FRI
-    transfer_eta = local_instant(D, time(19, 0))  # same-day courier, at the store's closing
-    transfer_sellable = local_instant(sellable, time(10, 0))  # sold from the next opening
+    transfer_cutoff = time.fromisoformat(transfer_lane["pickup_cutoff_local"])
+    assert D.weekday() in pickup_weekdays(transfer_lane["pickup_days"])
+    assert case.available_at < local_instant(D, transfer_cutoff)  # the run is before the cutoff
+    transfer_pickup = local_instant(D, transfer_cutoff)
+    # The lane has 0 contract days: the courier lands at closing, so the goods sell from the
+    # next opening. Arrival hour and the 19:00 closing are stated assumptions, not lane fields.
+    transfer_eta = local_instant(D, CLOSING)
+    transfer_sellable = local_instant(sellable, OPENING)
     transfer = ActionOption(
         id="opt-d1-mil01-mil02-999-m-q2",
         **option_fields(
             [
                 case,
-                forecasts["999"],
+                forecast,
                 dest_on_hand,
                 dest_sellable,
                 donor_on_hand,
@@ -701,7 +826,7 @@ def main() -> None:
             ),
         ),
         case_id=case.id,
-        forecast_ref=ref(forecasts["999"]),
+        forecast_ref=ref(forecast),
         kind="transfer",
         legs=(
             Leg(
@@ -732,8 +857,10 @@ def main() -> None:
                 "availability_freshness",
                 "pass",
                 True,
-                f"donor 3 units of size {SIZE} on hand at EOD {eod.isoformat()} (D-1); destination "
-                "0 since 2026-10-07 (see the snapshot bridge in the verification option)",
+                f"donor {donor_on_hand.qty:.0f} units of size {SIZE} on hand at EOD "
+                f"{eod.isoformat()} (D-1); destination {dest_before:.0f} at EOD "
+                f"{before.isoformat()} and {dest_on_hand.qty:.0f} at EOD {eod.isoformat()} (see "
+                "the snapshot bridge in the verification option)",
                 donor_on_hand,
                 dest_on_hand,
             ),
@@ -741,9 +868,9 @@ def main() -> None:
                 "reservations",
                 "unknown",
                 True,
-                "the DC reservation export has no open line for MIL02 (only MIL01's 4-unit "
-                "backorder), but store-level reservations are not exported either: the donor's "
-                "sellable quantity is unknown, not assumed equal to on hand",
+                f"the DC reservation export has no open line for {DONOR} (only MIL01's "
+                f"{backorder_qty}-unit backorder), but store-level reservations are not exported "
+                "either: the donor's sellable quantity is unknown, not assumed equal to on hand",
                 *resv_sources,
                 donor_sellable,
             ),
@@ -761,8 +888,9 @@ def main() -> None:
                 True,
                 f"MIL02 {donor_min['category']} minimum is "
                 f"{donor_min['min_pres_per_core_size']} unit per core size "
-                f"({donor_min['core_sizes']}): sending 2 of 3 preserves it, and the destination "
-                f"reaches its own minimum of {store_min['min_pres_per_core_size']} for size {SIZE}",
+                f"({donor_min['core_sizes']}): at dispatch, sending {q_transfer} of "
+                f"{donor_units_eod:.0f} leaves exactly that minimum, and the destination reaches "
+                f"its own minimum of {store_min['min_pres_per_core_size']} for size {SIZE}",
                 *donor_min_sources,
                 *store_min_sources,
             ),
@@ -778,12 +906,20 @@ def main() -> None:
                 "donor_protected",
                 "pass",
                 True,
-                f"the donor keeps 1 unit while its own demand for size {SIZE} over D+1..D+7 is "
-                f"{fmt(sum(demand_donor.values()))} units ({p_donor:.1%} of its colour forecast): it "
-                f"loses {fmt(transfer_donor_lost)} units against {fmt(hold_donor_lost)} on hold, "
-                "and the damage is in the outcomes, not hidden",
+                f"at dispatch the donor keeps its policy minimum: {donor_units_eod:.0f} units "
+                f"minus the {q_transfer} moved leave {donor_after_move:.0f}, MIL02's minimum for "
+                f"size {SIZE}. Over D+1..D+7 its own demand for size {SIZE} is "
+                f"{fmt(donor_demand_total)} units ({p_donor:.1%} of its colour forecast), so it "
+                f"sells out on {donor_sold_out.isoformat()} and loses "
+                f"{fmt(transfer_donor_lost)} units against {fmt(hold_donor_lost)} on hold: that "
+                f"additional damage is in the outcomes. Even with no transfer the donor ends "
+                f"the horizon {fmt(donor_deficit)} units short of its demand at its minimum, so "
+                "no positive integer holds the minimum for the whole horizon (see the "
+                "assumptions)",
                 donor_on_hand,
-                *curve_sources,
+                *donor_min_sources,
+                *donor_curve_sources,
+                *donor_demand_sources,
             ),
             check(
                 "lane_ibt",
@@ -799,8 +935,9 @@ def main() -> None:
                 "pass",
                 True,
                 f"cutoff {transfer_lane['pickup_cutoff_local']} local on "
-                f"{transfer_lane['pickup_days']}: D is a Friday and the run computes at 10:35, so "
-                "the pickup is the same day",
+                f"{transfer_lane['pickup_days']}: {D.strftime('%A %Y-%m-%d')} is a pickup day and "
+                f"the run computes at {case.available_at.astimezone(TZ):%H:%M}, so the pickup is "
+                "the same day",
                 *lane_sources,
             ),
             check(
@@ -849,39 +986,58 @@ def main() -> None:
             for scenario in SCENARIOS
         ),
         assumptions=(
-            f"q is limited by policy, not by the model: 3 units on hand at MIL02 minus its "
-            f"minimum of 1 for size {SIZE} = 2, which is also the 1-2 pieces the source email "
-            "asks for",
+            f"q is limited by availability and the minimum at dispatch, not by the model: "
+            f"{donor_units_eod:.0f} units on hand at {DONOR} minus its minimum of "
+            f"{donor_min['min_pres_per_core_size']} for size {SIZE} = {q_transfer}, which is the "
+            "top of the 1..2 the source email asks for",
             "donor demand uses the donor's own colour forecast and its own size curve: the move is "
             "judged against the donor's loss, not only the destination's gain",
-            "the two unknown mandatory checks keep it non-recommendable until the count is "
-            f"confirmed, even though it cuts unserved units by "
+            "RFC §4.10 reads `donor_protected` at dispatch and asks to compare the "
+            "additional damage against hold: MIL02's own demand exceeds what a dispatch leaves, "
+            f"so its stock floor breaks on {donor_sold_out.isoformat()} whatever quantity is "
+            f"moved. The check records the floor the stock can keep and the "
+            f"{fmt(transfer_donor_lost)}-unit horizon loss the outcomes carry",
+            "two mandatory checks are unknown (store-level reservations and quality holds are "
+            f"not exported), so the move is never recommended, even though it cuts unserved "
+            f"units by "
             f"{fmt(hold_dest_lost + hold_donor_lost - transfer_dest_lost - transfer_donor_lost)} "
-            f"at {fmt(transfer_cost)} EUR",
+            f"for {fmt(transfer_cost)} EUR",
+            "a human may still decide the cut is worth confirming the counts first; the engine "
+            "cannot recommend it (RFC §4.10 insufficient data on a counterpart)",
         ),
         valid_until=case.valid_until,  # type: ignore[arg-type]
         recommended=False,
         rationale=(
-            f"mechanically feasible: 2 of the 3 units at {DONOR}, within its minimum of 1, by "
+            f"legs and lane work: {q_transfer} of the {donor_units_eod:.0f} units at {DONOR}, by "
             f"same-day courier before the {transfer_lane['pickup_cutoff_local']} cutoff, sellable "
             f"at {sellable.isoformat()}. It leaves {fmt(transfer_dest_lost)} units of size {SIZE} "
-            f"unserved at {STORE} instead of {fmt(hold_dest_lost)}, but pushes "
-            f"{fmt(transfer_donor_lost)} lost units onto {DONOR} for {fmt(transfer_cost)} EUR: not "
-            "recommendable while the donor's sellable quantity and quality state are unknown"
+            f"unserved at {STORE} instead of {fmt(hold_dest_lost)} and keeps the donor's policy "
+            f"minimum at dispatch, but the donor sells out on {donor_sold_out.isoformat()} and "
+            f"loses {fmt(transfer_donor_lost)} units against {fmt(hold_donor_lost)} on hold for "
+            f"{fmt(transfer_cost)} EUR, and its sellable quantity and quality state are unknown: "
+            "no recommendation while the counts are unconfirmed"
         ),
     )
 
-    dc_pickup = local_instant(date(2026, 10, 30), time(14, 0))  # first pickup after the receipt
-    dc_eta = local_instant(date(2026, 10, 31), time(12, 0))
-    dc_sellable = local_instant(date(2026, 10, 31), time(15, 0))
+    # The DC leg is dated from the sources: first loading day on or after the receipt, the lane's
+    # cutoff and contract days, then the first opening after arrival (RFC §4.10
+    # `decision_due_at`).
+    dc_cutoff = time.fromisoformat(dc_lane["pickup_cutoff_local"])
+    dc_transit = int(float(dc_lane["transit_days_contract"]))
+    dc_pickup_day = next_pickup_day(receipt_day, dc_lane["pickup_days"])
+    dc_pickup = local_instant(dc_pickup_day, dc_cutoff)
+    dc_arrival = dc_pickup_day + timedelta(days=dc_transit)
+    dc_eta = local_instant(dc_arrival, dc_cutoff)
+    dc_sellable = local_instant(dc_arrival + timedelta(days=1), OPENING)
+    assert dc_sellable.date() > case.valid_until.date()  # nothing arrives inside the horizon
     replenish = ActionOption(
         id="opt-d1-mil01-dc-999-m-q4",
         **option_fields(
-            [case, forecasts["999"], dest_on_hand, dest_sellable, atp, dc_on_hand],
+            [case, forecast, dest_on_hand, dest_sellable, atp, dc_on_hand],
             extra_sources=merge_sources(curve_sources, dc_lane_sources, atp_sources, resv_sources),
         ),
         case_id=case.id,
-        forecast_ref=ref(forecasts["999"]),
+        forecast_ref=ref(forecast),
         kind="replenish_dc",
         legs=(
             Leg(
@@ -920,8 +1076,8 @@ def main() -> None:
                 "reservations",
                 "pass",
                 True,
-                "the 4 units requested match MIL01's existing open backorder line for "
-                "2026-10-12: the leg promises no more than the line already asks",
+                f"the {q_dc} units requested match MIL01's existing open backorder line for "
+                f"{backorder_needed.isoformat()}: the leg promises no more than the line asks",
                 *resv_sources,
             ),
             check(
@@ -937,8 +1093,8 @@ def main() -> None:
                 "min_presentation_safety",
                 "pass",
                 True,
-                f"4 units cover MIL01's minimum of {store_min['min_pres_per_core_size']} per core "
-                f"size for size {SIZE}",
+                f"{q_dc} units cover MIL01's minimum of "
+                f"{store_min['min_pres_per_core_size']} per core size for size {SIZE}",
                 *store_min_sources,
             ),
             check(
@@ -969,7 +1125,8 @@ def main() -> None:
                 "pass",
                 True,
                 f"cutoff {dc_lane['pickup_cutoff_local']} local on {dc_lane['pickup_days']}: the "
-                "first pickup after the receipt is 2026-10-30",
+                f"first loading day after the {receipt_day.isoformat()} receipt is "
+                f"{dc_pickup_day.isoformat()}",
                 *dc_lane_sources,
             ),
             check(
@@ -997,7 +1154,7 @@ def main() -> None:
                 None,
                 rounded(dc_dest_left),
                 None,
-                dc_cost,
+                0.0,  # the leg is outside the horizon: its cost is not charged to these losses
                 no_arrival,
                 size_basis,
             )
@@ -1017,8 +1174,9 @@ def main() -> None:
             for scenario in SCENARIOS
         ),
         assumptions=(
-            "the leg is dated on the first pickup the lane calendar allows after the receipt "
-            "(2026-10-30), not on D: showing the real ETA is the point of the option",
+            f"the leg is dated on the first loading day the lane calendar allows after the "
+            f"receipt ({dc_pickup_day.isoformat()}), not on D, and it costs {fmt(dc_cost)} EUR: "
+            "showing the real ETA is the point of the option",
             "DC-side outcomes stay unknown (no per-location DC demand in the sources) and the "
             "option is not recommended, so no numerical claim is made on the counterpart",
         ),
@@ -1028,8 +1186,8 @@ def main() -> None:
             f"blocked: {DC} has 0 ATP for size {SIZE} and the {receipt_units}-unit receipt lands "
             f"on {receipt_day.isoformat()}, so the earliest sellable date is "
             f"{dc_sellable.date().isoformat()}, after "
-            "the case's due date. Inside D+1..D+7 it changes nothing versus hold: the 4-unit "
-            "backorder cannot be served from the DC"
+            "the case's due date. Inside D+1..D+7 it changes nothing versus hold: the "
+            f"{q_dc}-unit backorder cannot be served from the DC"
         ),
     )
 
@@ -1065,12 +1223,10 @@ def main() -> None:
                 tool="get_available_stock",
                 arguments={"sku": SKUS["999"], "size": SIZE, "locations": [STORE, DONOR, DC]},
                 input_refs=(),
+                # The whole visible stock view of the article, including the unknown
+                # `sellable` facts: they are what makes the verification necessary.
                 output_refs=tuple(
-                    ref(fact)
-                    for fact in facts
-                    if fact.sku == SKUS["999"]
-                    and (fact.location_id, fact.basis)
-                    in {(STORE, "on_hand"), (DONOR, "on_hand"), (DC, "atp")}
+                    ref(fact) for fact in facts if fact.sku == SKUS["999"]
                 ),
                 duration_ms=8,
             ),
@@ -1079,13 +1235,13 @@ def main() -> None:
                 arguments={
                     "origin": DONOR,
                     "dest": STORE,
-                    "requested_at": transfer_pickup.isoformat(),
+                    "requested_at": case.available_at.isoformat(),  # the run instant
                     "required_by": case.valid_until.isoformat(),  # type: ignore[union-attr]
                 },
                 input_refs=(),
-                # Lane rows are source rows, not stored artifacts: they surface in the leg and
-                # checks of the options evaluated next.
-                output_refs=(),
+                # A lane row is a source row, not a stored artifact: it travels as the
+                # `SourceFile` reference the checks also use.
+                output_refs=(as_ref(lane_sources[0]),),
                 duration_ms=5,
             ),
             AgentStep(
@@ -1101,11 +1257,16 @@ def main() -> None:
                     "option_id": verify.id,
                     "status": "verify",
                     "evidence_refs": [
-                        f"Case:{case.id}",
-                        f"StockFact:{dest_on_hand.id}",
-                        f"StockFact:{donor_on_hand.id}",
-                        f"StockFact:{atp.id}",
-                        f"ActionOption:{transfer.id}",
+                        f"{item.kind}:{item.id}@{item.version}"
+                        for item in (
+                            ref(case),
+                            ref(dest_on_hand),
+                            ref(dest_sellable),
+                            ref(donor_on_hand),
+                            ref(donor_sellable),
+                            ref(atp),
+                            ref(transfer),
+                        )
                     ],
                     "rationale": verify.rationale,
                 },
@@ -1115,9 +1276,10 @@ def main() -> None:
             ),
         ),
         outcome=(
-            "verify_stock: the transfer is feasible but not recommendable while the destination "
-            "snapshot is unexplained and the donor's sellable quantity is unknown; the DC cannot "
-            "serve the open 4-unit backorder before 2026-10-30"
+            "verify_stock: the transfer's legs work and it clears every mandatory check that the "
+            "sources can decide, but the donor's sellable quantity and quality state are unknown, "
+            "the destination snapshot is unexplained and the DC can only serve the open "
+            f"{q_dc}-unit backorder after {receipt_day.isoformat()}: count first, then re-run"
         ),
         fallback_used=True,
         mode="fixture",

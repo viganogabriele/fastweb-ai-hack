@@ -494,6 +494,10 @@ def test_report_check_rejects_wrong_citation_semantics(update: dict) -> None:
 
 def test_all_fixtures_load_as_one_run() -> None:
     # The loader reads every family under `data/fixtures/`; this file owns DATA-01a/b only, so
-    # its records are a subset of what one run loads (DATA-01c adds stock, options and traces).
+    # the encoder families must match exactly once DATA-01c's records are set aside.
     _, records = read_fixtures(FIXTURES)
-    assert set(everything()) <= {(type(r).__name__, r.id) for r in records}
+    loaded = {(type(r).__name__, r.id) for r in records}
+    ours = set(everything())
+    assert ours <= loaded
+    later = {"StockFact", "ActionOption", "AgentTrace"}
+    assert {key for key in loaded if key[0] not in later} == ours

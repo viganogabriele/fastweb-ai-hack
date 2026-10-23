@@ -31,6 +31,7 @@ SOURCES = ROOT / "generated" / "sources"
 MASTER = SOURCES / "erp" / "master_data"
 STOCK_DIR = SOURCES / "erp" / "inventory" / "store_stock_daily"
 POS_DIR = SOURCES / "erp" / "sales" / "pos_lines"
+FCST = SOURCES / "erp" / "forecast" / "sku_store_weekly"
 ATP = SOURCES / "systems" / "warehouse" / "atp" / "ATP_projection_20261005.csv"
 LANES = SOURCES / "systems" / "logistics" / "lane_matrix_lead_time_cost.csv"
 MIN_PRES = SOURCES / "systems" / "planning" / "min_presentation_by_store_category.csv"
@@ -42,6 +43,9 @@ SIZE = "M"
 SKU = "I10919B00011-999"
 SKU_BLUE = "I10919B00011-742"
 SIZES = (SKU, SKU_BLUE)
+D = date(2026, 10, 9)
+HORIZON = [D + timedelta(days=k) for k in range(1, 8)]
+CURVE_FIRST, CURVE_LAST = date(2026, 8, 31), date(2026, 10, 4)
 FOLDERS = {
     "stock": (StockFact,),
     "options": (ActionOption,),
@@ -54,9 +58,9 @@ OTHER_KINDS = {
     "ForecastAdjustment": ForecastAdjustment,
 }
 KINDS = {cls.__name__: cls for classes in FOLDERS.values() for cls in classes} | OTHER_KINDS
-# A check may cite a source file that has no contract (`SourceFile`, uri + content hash), the way
-# DATA-01b cites a `ForecastVintage` row. Everything else must be a stored record.
-EXTERNAL_KINDS = {"SourceFile", "ForecastVintage"}
+# A check may cite a source file that has no contract (`SourceFile`, uri + locator + content
+# hash), the way DATA-01b cites a `ForecastVintage` row. Everything else must be a stored record.
+EXTERNAL_KINDS = {"SourceFile"}
 MOVEMENTS = {"replenish_dc", "transfer", "combo"}
 MANDATORY_CHECKS = {
     "identity_crosswalk",
@@ -71,6 +75,8 @@ MANDATORY_CHECKS = {
     "size_curve",
     "shared_resources",
 }
+# The RFC names availability and freshness as one control; the movements name it by basis.
+AVAILABILITY_CHECKS = {"availability_freshness", "availability_atp"}
 TOOLS = {
     "get_case_evidence",
     "get_available_stock",
@@ -132,30 +138,75 @@ def forecast() -> ForecastAdjustment:
 
 
 @cache
-def size_share(store: str) -> float:
-    """The curve the fixtures use: size M units / colour units on days size M opened in stock."""
-    units: dict[str, int] = {}
-    stock: dict[tuple[date, str, str, str], float] = {}
+def size_units(store: str) -> tuple[dict[str, int], int]:
+    """The curve the fixtures use, recomputed from the POS rows.
 
-    def on_hand(day: date, size: str) -> float:
-        key = (day, store, SKU, size)
-        if key not in stock:
-            for row in read_csv(STOCK_DIR / f"stock_eod_{day.isoformat()}.csv"):
-                stock[(day, row["store_id"], row["sku"], row["size"])] = float(row["on_hand"])
-        return stock[key]
+    `qty` is already signed (a `RETURN` line is negative) and the export repeats whole lines
+    verbatim, so the rows are added as they come after removing exact duplicates. A day counts
+    only if size M was on hand at opening.
+    """
+    units: dict[str, int] = {}
+    seen: set[tuple[tuple[str, str], ...]] = set()
+    opened: dict[date, bool] = {}
+
+    def opened_with_m(day: date) -> bool:
+        if day not in opened:
+            opened[day] = any(
+                (row["store_id"], row["sku"], row["size"]) == (store, SKU, SIZE)
+                and float(row["on_hand"]) > 0
+                for row in read_csv(STOCK_DIR / f"stock_eod_{day.isoformat()}.csv")
+            )
+        return opened[day]
 
     for week in (36, 37, 38, 39, 40):
         for row in read_csv(POS_DIR / f"pos_lines_2026-W{week}.csv"):
             day = date.fromisoformat(row["business_date"])
-            if not (date(2026, 8, 31) <= day <= date(2026, 10, 4)):
+            if not (CURVE_FIRST <= day <= CURVE_LAST):
                 continue
             if (row["store_id"], row["sku"]) != (store, SKU):
                 continue
-            if on_hand(day - timedelta(days=1), SIZE) <= 0:
+            key = tuple(sorted(row.items()))
+            if key in seen:
                 continue
-            sign = -1 if row["line_type"] == "RETURN" else 1
-            units[row["size"]] = units.get(row["size"], 0) + sign * int(row["qty"])
-    return units[SIZE] / sum(units.values())
+            seen.add(key)
+            if opened_with_m(day - timedelta(days=1)) is False:
+                continue
+            units[row["size"]] = units.get(row["size"], 0) + int(row["qty"])
+    return units, sum(units.values())
+
+
+def size_share(store: str) -> float:
+    units, total = size_units(store)
+    return units[SIZE] / total
+
+
+@cache
+def erp_forecast(store: str) -> dict[date, float]:
+    """Weekly colour forecast of the vintage admissible at D, by ISO week start."""
+    return {
+        date.fromisoformat(r["week_start"]): float(r["fcst_units"])
+        for r in read_csv(FCST / "fcst_sku_store_run_2026-10-05.csv")
+        if (r["store_id"], r["sku"]) == (store, SKU)
+    }
+
+
+def horizon_demand(store: str) -> dict[date, float]:
+    series = erp_forecast(store)
+    share = size_share(store)
+    return {day: series[day - timedelta(days=day.weekday())] / 7 * share for day in HORIZON}
+
+
+def simulate(
+    start: float, arrivals: dict[date, float], demand: dict[date, float]
+) -> tuple[float, float]:
+    """Per-day recursion of RFC 4.10: served = min(demand, stock), no backlog, no reset."""
+    stock, lost = start, 0.0
+    for day in sorted(demand):
+        stock += arrivals.get(day, 0.0)
+        served = min(demand[day], stock)
+        lost += demand[day] - served
+        stock -= served
+    return lost, stock
 
 
 def numbers(outcome) -> tuple:
@@ -209,6 +260,12 @@ def test_stock_facts_are_sourced_and_match_the_exported_quantities() -> None:
             assert fact.qty is None and fact.availability_basis.startswith("no_store_level")
 
 
+def source_file_ref(ref) -> ArtifactRef:
+    """The id/version the builder gives a source row it cites (no contract, no record version)."""
+    ident = ref.uri if ref.locator is None else f"{ref.uri}#{ref.locator}"
+    return ArtifactRef(kind="SourceFile", id=ident, version=ref.content_hash)
+
+
 def test_options_reference_existing_inputs_and_are_available_with_the_case() -> None:
     for option in of(ActionOption):
         assert (option.run_id, option.scenario_id) == (FIXTURE_RUN_ID, FIXTURE_SCENARIO_ID)
@@ -222,9 +279,35 @@ def test_options_reference_existing_inputs_and_are_available_with_the_case() -> 
         assert option.forecast_ref == ArtifactRef(
             kind="ForecastAdjustment", id=forecast().id, version=forecast().version
         )
-        keys = sorted(f"{r.kind}:{r.id}@{r.version}" for r in option.input_refs)
+        # The hash covers the stored inputs and the source rows behind them.
+        keys = sorted(
+            f"{r.kind}:{r.id}@{r.version}"
+            for r in (
+                *option.input_refs,
+                *(source_file_ref(ref) for ref in option.source_refs),
+            )
+        )
         digest = hashlib.sha256("\n".join(keys).encode()).hexdigest()
         assert option.input_version_hash == f"sha256:{digest}", option.id
+
+
+def test_check_evidence_is_resolvable_or_a_hashed_source_row() -> None:
+    seen_locator = False
+    for option in of(ActionOption):
+        for item in option.checks:
+            assert item.source_refs or item.status == "not_applicable", item.name
+            for ref in item.source_refs:
+                if ref.kind == "SourceFile":
+                    assert ref.id.startswith("dataset://"), ref
+                    assert ref.version.startswith("sha256:"), ref
+                    uri, _, locator = ref.id.partition("#")
+                    path = SOURCES / uri.removeprefix("dataset://")
+                    digest = hashlib.sha256(path.read_bytes()).hexdigest()
+                    assert ref.version == f"sha256:{digest}", ref
+                    seen_locator = seen_locator or bool(locator)
+                else:
+                    resolve(ref)
+    assert seen_locator, "the row locator must survive in the reference id"
 
 
 def test_each_option_covers_the_rfc_checks_and_its_kind() -> None:
@@ -242,10 +325,11 @@ def test_each_option_covers_the_rfc_checks_and_its_kind() -> None:
         if option.kind in MOVEMENTS:
             assert option.legs, option.id
             assert MANDATORY_CHECKS <= set(names), sorted(MANDATORY_CHECKS - set(names))
+            assert set(names) & AVAILABILITY_CHECKS, option.id
             assert any(c.mandatory for c in option.checks)
             for leg in option.legs:
                 assert_movement_leg(leg, crosswalk, ean)
-        else:  # informational options move nothing (RFC §4.10)
+        else:  # informational options move nothing (RFC 4.10)
             assert not option.legs, option.id
     transfer = everything()[("ActionOption", "opt-d1-mil01-mil02-999-m-q2")]
     (leg,) = transfer.legs
@@ -254,7 +338,7 @@ def test_each_option_covers_the_rfc_checks_and_its_kind() -> None:
         for f in of(StockFact)
         if (f.location_id, f.sku, f.size, f.basis) == (DONOR, SKU, SIZE, "on_hand")
     ]
-    # Quantity is limited by policy, not chosen by a model: donor stock minus its minimum.
+    # Quantity is limited by availability and the minimum at dispatch, not chosen by a model.
     assert donor_stock is not None
     assert leg.qty == donor_stock - donor_min == 2
 
@@ -277,26 +361,38 @@ def assert_movement_leg(leg: Leg, crosswalk: dict, ean: dict) -> None:
     assert leg.cost_eur == pytest.approx(
         float(lane["cost_fixed_eur"]) + float(lane["cost_per_unit_eur"]) * leg.qty
     )
-    assert lane["customs_required"] == "N"  # cross-border stays out of the MVP (RFC §4.10)
+    assert lane["customs_required"] == "N"  # cross-border stays out of the MVP (RFC 4.10)
 
 
-def test_blocked_move_and_feasible_move_have_the_documented_check_outcomes() -> None:
+def test_the_isolated_move_is_feasible_but_not_recommendable() -> None:
     movements = [o for o in of(ActionOption) if o.kind in MOVEMENTS]
     assert {o.kind for o in movements} == {"transfer", "replenish_dc"}
-    (blocked,) = [o for o in movements if any(c.mandatory and c.status == "fail" for c in o.checks)]
-    (feasible,) = [
-        o for o in movements if not any(c.mandatory and c.status == "fail" for c in o.checks)
-    ]
-    assert blocked.kind == "replenish_dc" and blocked.legs[0].origin == DC
-    assert {c.name for c in blocked.checks if c.status == "fail"} == {
-        "availability_atp",
-        "eta_required_by",
-    }
-    # The feasible move is mechanically possible, but the donor's sellable state is not exported.
-    assert {c.name for c in feasible.checks if c.mandatory and c.status == "unknown"} == {
+    (transfer,) = [o for o in movements if o.kind == "transfer"]
+    (blocked_dc,) = [o for o in movements if o.kind == "replenish_dc"]
+    # The isolated move clears every mandatory check the sources can decide: eligibility, lane,
+    # cutoff, ETA, policy minimum at dispatch, size curve, shared resources.
+    assert not [c for c in transfer.checks if c.mandatory and c.status == "fail"]
+    assert {c.name for c in transfer.checks if c.mandatory and c.status == "unknown"} == {
         "reservations",
         "quality_hold",
     }
+    # Unknown is not a pass (RFC 4.10): the move is not recommended, and the donor's additional
+    # damage over the horizon is carried in the outcomes instead of being hidden.
+    assert transfer.recommended is False
+    (donor_check,) = [c for c in transfer.checks if c.name == "donor_protected"]
+    assert donor_check.status == "pass" and donor_check.mandatory
+    hold = everything()[("ActionOption", "opt-d1-mil01-hold")]
+    (hold_base,) = [o for o in hold.outcomes if o.scenario_id == "base"]
+    (moved_base,) = [o for o in transfer.outcomes if o.scenario_id == "base"]
+    assert hold_base.lost_units_donor == pytest.approx(0.0, abs=1e-9)
+    assert moved_base.lost_units_donor > 0
+    # The DC has no ATP and the receipt lands after the case's due date: blocked.
+    assert blocked_dc.legs[0].origin == DC
+    assert {c.name for c in blocked_dc.checks if c.mandatory and c.status == "fail"} == {
+        "availability_atp",
+        "eta_required_by",
+    }
+    # No movement may be recommended: RFC 4.10 eliminates options with a mandatory fail/unknown.
     assert not any(o.recommended for o in movements)
     (recommended,) = [o for o in of(ActionOption) if o.recommended]
     assert recommended.kind == "verify_stock" and recommended.outcomes is None
@@ -314,36 +410,53 @@ def test_outcomes_follow_the_formula_and_the_ranking_of_the_move() -> None:
         assert numbers(move_out[scenario]) == numbers(move_out["base"])
     (leg,) = transfer.legs
     base, moved = hold_out["base"], move_out["base"]
-    # Destination: no stock and no arrival on hold; the leg makes exactly `qty` units servable.
+    # Destination: the leg makes exactly `qty` units servable inside the horizon.
     assert moved.lost_units_dest == pytest.approx(base.lost_units_dest - leg.qty, abs=1e-3)
-    # Donor: keeps stock minus qty and its own size-M demand is documented, so its loss is too.
+    # Donor: keeps stock minus qty, and its own size-M demand is documented.
     assert moved.lost_units_donor > base.lost_units_donor
     assert moved.leftover_units_donor == pytest.approx(
         max(0.0, base.leftover_units_donor - leg.qty), abs=1e-3
     )
     assert moved.transport_cost_eur == leg.cost_eur > 0
-    # The move reduces total unserved units, but by less than the units it moves.
+    # The move reduces total unserved units, but by less than the units it moves: the gain is
+    # the donor's surplus, not the quantity on the van.
     gain = (base.lost_units_dest + base.lost_units_donor) - (
         moved.lost_units_dest + moved.lost_units_donor
     )
     assert 0 < gain < leg.qty
 
 
-def test_hold_losses_are_the_forecast_of_the_fixture_run_times_the_size_curve() -> None:
+def test_numbers_are_re_derived_from_forecast_and_curve() -> None:
     hold = everything()[("ActionOption", "opt-d1-mil01-hold")]
-    series = [day.baseline for day in forecast().series]
-    assert len(series) == 7
+    transfer = everything()[("ActionOption", "opt-d1-mil01-mil02-999-m-q2")]
     (base,) = [o for o in hold.outcomes if o.scenario_id == "base"]
-    assert base.lost_units_dest == pytest.approx(sum(series) * size_share(STORE), abs=1e-2)
-    assert base.lost_units_dest == pytest.approx(2.409, abs=1e-3)
-    assert size_share(DONOR) == pytest.approx(12 / 39)
+    # The curve is 13 of 58 colour units at the destination and 12 of 38 at the donor; both are
+    # recomputed above from the POS rows, so a change of rule (sign, duplicates) fails here.
+    assert size_units(STORE) == (size_units(STORE)[0], 58)
+    assert size_units(DONOR)[1] == 38
+    assert size_units(STORE)[0][SIZE] == 13 and size_units(DONOR)[0][SIZE] == 12
+    assert (size_share(STORE), size_share(DONOR)) == pytest.approx((13 / 58, 12 / 38), abs=1e-9)
+    # Hold starts from 0 at the destination and 3 at the donor, so its losses/leftovers follow
+    # directly from the horizon demand.
+    assert base.lost_units_dest == pytest.approx(sum(horizon_demand(STORE).values()), abs=2e-3)
+    assert base.leftover_units_donor == pytest.approx(
+        3 - sum(horizon_demand(DONOR).values()), abs=2e-3
+    )
+    (moved,) = [o for o in transfer.outcomes if o.scenario_id == "base"]
+    assert moved.lost_units_dest == pytest.approx(base.lost_units_dest - 2, abs=2e-3)
+    assert moved.lost_units_donor == pytest.approx(
+        sum(horizon_demand(DONOR).values()) - 1, abs=2e-3
+    )
+    # The documented numbers of the README.
+    assert base.lost_units_dest == pytest.approx(2.492, abs=1e-3)
+    assert moved.lost_units_dest == pytest.approx(0.492, abs=1e-3)
 
 
 def test_trace_follows_the_rfc_tool_allowlist_and_ends_on_the_recommendation() -> None:
     (trace,) = of(AgentTrace)
     assert (trace.run_id, trace.scenario_id) == (FIXTURE_RUN_ID, FIXTURE_SCENARIO_ID)
     assert trace.case_id == CASE_ID and trace.mode == "fixture"
-    assert trace.fallback_used is True  # RFC §4.8.1: the deterministic path records it
+    assert trace.fallback_used is True  # RFC 4.8.1: the deterministic path records it
     assert trace.tokens_in is None and trace.tokens_out is None
     assert [s.tool for s in trace.steps] == [
         "get_case_evidence",
@@ -355,18 +468,31 @@ def test_trace_follows_the_rfc_tool_allowlist_and_ends_on_the_recommendation() -
     assert {s.tool for s in trace.steps} <= TOOLS
     for step in trace.steps:
         assert step.duration_ms >= 0
-        for ref in (*step.input_refs, *step.output_refs):
-            if ref.kind not in EXTERNAL_KINDS:
-                resolve(ref)
+        for item in (*step.input_refs, *step.output_refs):
+            if item.kind not in EXTERNAL_KINDS:
+                resolve(item)
     (recommended,) = [o for o in of(ActionOption) if o.recommended]
     finish = trace.steps[-1]
     assert finish.arguments["option_id"] == recommended.id
     assert finish.arguments["status"] == "verify"
     assert "verify_stock" in trace.outcome
+    # The evidence of the finish step names stored records with the version they were read at.
+    for item in finish.arguments["evidence_refs"]:
+        kind, rest = item.split(":", 1)
+        ident, _, version = rest.rpartition("@")
+        record = resolve(ArtifactRef(kind=kind, id=ident, version=version))
+        assert record.id == ident
     inputs = [resolve(r) for r in trace.input_refs if r.kind not in EXTERNAL_KINDS]
     assert trace.available_at == max(r.available_at for r in inputs)
     stock_step = trace.steps[1]
-    assert {f.basis for f in map(resolve, stock_step.output_refs)} == {"on_hand", "atp"}
+    assert {f.basis for f in map(resolve, stock_step.output_refs)} == {
+        "on_hand",
+        "sellable",
+        "atp",
+    }
+    (lane_ref,) = trace.steps[2].output_refs
+    assert lane_ref.kind == "SourceFile" and "#lane_id=" in lane_ref.id
+    assert trace.steps[2].arguments["requested_at"] == trace.available_at.isoformat()
 
 
 def test_only_dev_stores_and_no_look_ahead() -> None:
@@ -378,8 +504,10 @@ def test_only_dev_stores_and_no_look_ahead() -> None:
     for option in of(ActionOption):
         for leg in option.legs:
             assert {leg.origin, leg.dest} <= allowed | {DC}
-    as_of = max(r.available_at for r in everything().values() if r.available_at is not None)
+    family = [r for folder in FOLDERS for r in load(folder)]
+    as_of = max(r.available_at for r in family)
     assert as_of == case().available_at  # the case is the last input of this family
+    assert all(r.available_at <= case().available_at for r in family)
     for folder in FOLDERS:
         for path in (FIXTURES / folder).glob("*.json"):
             text = path.read_text(encoding="utf-8").lower()

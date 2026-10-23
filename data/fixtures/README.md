@@ -67,25 +67,38 @@ backend/.venv/bin/python data/fixtures/build_data01c.py
 | Folder | Records | What it exercises |
 |---|---|---|
 | `stock/` | 12 `StockFact`s, all `basis` values | `I10919B00011` `999`/`742`, size `M`: `on_hand` from the EOD 2026-10-08 store export (MIL01 0, MIL02 3/0) and from the 2026-10-05 SAP projection for `IT10`; `atp` for the DC (0, receipt 2026-10-30); `sellable` with `qty=null` for the stores, because no store-level sellable/reservation export exists: unknown is not zero |
-| `options/` | 4 `ActionOption`s on the D1 case | `hold` (ranking baseline), `verify_stock` (**recommended**), `replenish_dc` 4 units from `IT10` (**blocked**: no ATP, sellable 2026-10-31) and the `transfer` MIL02→MIL01 of 2 units (mechanically feasible, not recommendable) |
+| `options/` | 4 `ActionOption`s on the D1 case | `hold` (ranking baseline), `verify_stock` (**recommended**), `replenish_dc` 4 units from `IT10` (**blocked**: ATP 0, sellable 2026-11-01) and the `transfer` MIL02→MIL01 of 2 units (**feasible**, not recommendable: two mandatory checks are `unknown`) |
 | `traces/` | one `AgentTrace`, `mode=fixture` | The deterministic fallback path of RFC §4.8.1 on the RFC §4.8.2 tools, ending `finish(status=verify)` on the recommended option; `fallback_used=true`, no tokens |
 
-The D1 numbers, all recomputed by the builder (the test re-derives the destination's loss from the
-forecast fixture and the size curve):
+The D1 numbers, all recomputed by the builder and re-derived by the test from the forecast fixture
+and the size curve:
 
 | Option | Unserved M at MIL01 | Unserved M at MIL02 | Leftover at MIL02 | Transport |
 |---|---|---|---|---|
-| `hold` | 2.41 units | 0.00 | 0.48 | – |
-| `transfer` q=2 | 0.41 units | 1.52 | 0.00 | 16.21 EUR |
+| `hold` | 2.49 units | 0.00 | 0.41 | – |
+| `transfer` q=2 | 0.49 units | 1.59 | 0.00 | 16.21 EUR |
 
-The transfer does reduce the total unserved units (2.41 → 1.93), but it pushes the loss onto the
-donor and costs 16.21 EUR; more importantly, two **mandatory** checks stay `unknown`
-(`reservations` and `quality_hold`: the sources export neither store-level holds nor sellable
-quantities). A movement with an unknown mandatory check is never recommended (RFC §4.10), so the
-recommendation is the physical count: MIL01 dropped from 8 to 0 units of size M between the two
-last snapshots with one recorded sale (`snapshot_bridge`), the donor's count must be confirmed and
-the DC projection is four days old. This is the intended D1 outcome, not a missing option: RFC
-§4.10 says not to force a transfer D1 only because the demo wants one.
+The transfer cuts the destination's unserved units by 2.00 and raises the donor's by 1.59: a net
+gain of 0.41 units for 16.21 EUR, i.e. the whole donor surplus (3 units on hand against 2.59 units
+of its own size-M demand). It is the **feasible isolated move** of the issue: every mandatory check
+the sources can decide passes (identity, availability and freshness, the donor's minimum at
+dispatch, lane/IBT, calendar, ETA before the case's due date, size curve, shared resources), so it
+has legs, a lane, an ETA, a cost and simulated outcomes to render. It is **not recommendable**:
+`reservations` and `quality_hold` are `unknown` because no store-level sellable, reservation or
+quality export exists, and RFC §4.10 forbids recommending a movement with an unknown mandatory
+control. The recommendation is the physical count: MIL01 dropped from 8 to 0 units of size M
+between the two last snapshots with one recorded sale (`snapshot_bridge`), the donor count must be
+confirmed and the DC projection is four days old.
+
+**Donor protection, and the one reading to know.** `donor_protected` passes at dispatch (3 units
+minus the 2 moved leave MIL02's minimum of 1) and the check states the horizon damage instead of
+hiding it: the donor's own size-M demand is 2.59 units, so it sells out on 2026-10-12 and the
+outcomes carry 1.59 lost units against 0.00 on hold. Read strictly as a floor over D+1..D+7, the
+control could never pass here: 3 units against 2.59 of demand plus a minimum of 1 leave the donor
+0.59 units short even with no transfer, so no integer quantity would qualify. The fixture therefore
+records the floor the stock can keep and the additional damage RFC §4.10 asks to compare; a team
+that prefers the strict reading flips this one status to `fail` and the movement becomes blocked
+with no other change.
 
 Conventions worth knowing when consuming these records:
 
@@ -93,16 +106,29 @@ Conventions worth knowing when consuming these records:
   week (`series[].baseline` of the `forecast/` fixtures, identical to the ERP CSV). The D1 case has
   no numeric uplift, so `low`/`base`/`high` coincide, and `outcomes` repeats the same numbers.
 - **Size curve.** Size M units over the colour units sold 2026-08-31..2026-10-04 on days size M
-  opened in stock: MIL01 `13/60 = 0.2167`, MIL02 `12/39 = 0.3077` (RFC §4.9 "raccordo con la
-  taglia"). The donor is judged with its own curve, so donor protection is size-aware.
+  opened in stock: MIL01 `13/58 = 0.2241`, MIL02 `12/38 = 0.3158` (RFC §4.9 "raccordo con la
+  taglia"). POS `qty` is already signed, so `RETURN` lines are added as they come, and the export
+  repeats some lines verbatim (`MIL02-260905-0006`): exact duplicates are counted once. The donor
+  is judged with its own curve, and the check reports the window, the five POS files and a
+  sensitivity: a flat 1/6 curve puts the destination's hold loss at 1.85 instead of 2.49 and
+  changes no status.
 - **Checks.** Names are stable (`identity_crosswalk`, `availability_freshness`/`availability_atp`,
   `reservations`, `quality_hold`, `min_presentation_safety`, `scarcity_assortment`,
   `donor_protected`, `lane_ibt`, `calendar_cutoff`, `eta_required_by`, `size_curve`,
   `shared_resources`); `mandatory=true` on every movement check, including the `unknown` ones.
+  The transfer is the feasible path (no `fail`), the DC option the blocked one (`availability_atp`,
+  `eta_required_by`), and `verify_stock` the only recommended option.
 - **Check evidence.** `Check.source_refs` are `ArtifactRef`s. Where the evidence is a source file
   with no contract (lane matrix, minimum presentation, ATP columns, POS weeks) the ref is
-  `kind="SourceFile"`, `id` = dataset uri, `version` = content hash, the same convention DATA-01b
-  uses for `ForecastVintage` rows.
+  `kind="SourceFile"`, `id` = dataset uri plus the row locator (`.../lane_matrix_lead_time_cost.csv#lane_id=LN-1002-1001`),
+  `version` = the file content hash: the same convention DATA-01b uses for `ForecastVintage` rows,
+  with the locator kept so two rows of one file stay distinct.
+- **Version hash.** `input_version_hash` covers the stored `input_refs` and the `source_refs`
+  behind them, so an approval made against it is stale as soon as either changes (RFC §4.10).
+- **Leg dates.** The transfer pickup is the lane's cutoff on D (MON-FRI, run at 10:35, same day),
+  sellable at the next opening; arrival at 19:00 local is a stated assumption, not a lane field.
+  The DC leg is dated from the sources: first `MON-SAT` loading day on or after the 2026-10-30
+  receipt, at the 14:00 cutoff, plus the lane's 1 contract day, then the next opening.
 - **Availability.** Store facts are known at the end of their local day, the DC projection at its
   `SNAPSHOT` instant; every record here is available at D 10:35 local or earlier. Later facts that
   confirm the story are *not* inputs: the IBT request of 2026-10-09 17:32 (created because the
@@ -110,4 +136,3 @@ Conventions worth knowing when consuming these records:
 - **Stores.** Destination and donor are dev stores (`MIL01`, `MIL02`) plus the supplying DC
   `IT10`. `ROM01`, also addressed by the source email, is a hold-out store and has no record here
   (RFC §5.1).
-
