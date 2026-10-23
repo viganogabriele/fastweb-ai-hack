@@ -160,14 +160,14 @@ export function Overview({
   const kpis = [
     { label: 'Casi aperti', value: active.length, note: `${cases.length - active.length} chiusi o decisi`, icon: ClipboardList, tone: 'neutral' },
     { label: 'Priorità alta', value: urgent.length, note: 'critica o alta', icon: Flame, tone: urgent.length ? 'danger' : 'neutral' },
-    { label: 'In scadenza', value: dueSoon.length, note: 'entro 48 h', icon: AlarmClock, tone: dueSoon.length ? 'warning' : 'neutral' },
+    { label: 'In scadenza', value: dueSoon.length, note: 'scadute o entro 48 h', icon: AlarmClock, tone: dueSoon.length ? 'warning' : 'neutral' },
     { label: 'Da verificare', value: verify.length, note: 'incertezze bloccanti', icon: ShieldQuestion, tone: verify.length ? 'info' : 'neutral' },
     { label: 'Fonti acquisite', value: documents.length, note: 'documenti nel run', icon: FileText, tone: 'neutral' },
     { label: 'Negozi', value: run.spec.stores.length, note: 'nel perimetro', icon: Store, tone: 'neutral' }
   ]
 
-  // The most urgent open case: earliest deadline among critical/high, else the earliest overall.
-  const nextUp = [...urgent, ...dueSoon].sort(
+  // Open the highest-priority active case, breaking ties by its decision deadline.
+  const nextUp = [...active].sort(
     (a, b) =>
       priorityOrder[a.priority] - priorityOrder[b.priority] ||
       (a.decision_due_at ?? '9999').localeCompare(b.decision_due_at ?? '9999')
@@ -183,7 +183,7 @@ export function Overview({
             {dueSoon.length ? (
               <>
                 {dueSoon.length} {dueSoon.length === 1 ? 'decisione scade' : 'decisioni scadono'} entro 48 ore
-                {dueSoon[0]?.decision_due_at ? <>, la prima tra <strong>{deadline(dueSoon[0].decision_due_at, asOf).text}</strong></> : null}.
+                {dueSoon[0]?.decision_due_at ? <> · prima scadenza: <strong>{deadline(dueSoon[0].decision_due_at, asOf).text}</strong></> : null}.
               </>
             ) : (
               'Nessuna decisione in scadenza nelle prossime 48 ore.'
@@ -211,7 +211,7 @@ export function Overview({
       <div className="sd-ov-row">
         <Card
           title="Da decidere"
-          meta="Casi aperti con scadenza entro 48 ore dal cutoff del run"
+          meta="Casi aperti scaduti o in scadenza entro 48 ore dal cutoff del run"
           action={<span className="sd-ov-count">{dueSoon.length}</span>}
           className="sd-ov-due"
         >

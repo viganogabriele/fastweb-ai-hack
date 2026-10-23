@@ -13,7 +13,10 @@ export function mockApi(): Plugin {
     apply: 'serve',
     configureServer(server) {
       server.middlewares.use('/api', (req, res) => {
-        void handle(req, res)
+        void handle(req, res).catch(() => {
+          if (!res.headersSent) send(res, 400, { detail: 'Richiesta mock non valida' })
+          else res.end()
+        })
       })
     }
   }
@@ -30,7 +33,7 @@ async function handle(req: IncomingMessage, res: ServerResponse) {
   if (req.method !== 'GET') return send(res, 405, { detail: 'Metodo non supportato dal mock' })
 
   const [root, runId, collection, itemId] = parts
-  if (root === 'health')
+  if (root === 'health' && parts.length === 1)
     return send(res, 200, { status: 'ok', version: 'mock', llm_mode: 'mock', sources_present: true, fastweb_models_configured: [] })
   if (root === 'modules' && parts.length === 1) return send(res, 200, MODULES)
   if (root !== 'runs') return notFound(res)
@@ -39,6 +42,7 @@ async function handle(req: IncomingMessage, res: ServerResponse) {
   const run = RUNS.find((item) => item.spec.run_id === runId)
   if (!run) return notFound(res)
   if (!collection) return send(res, 200, run)
+  if (parts.length > 4) return notFound(res)
 
   if (collection === 'cases') {
     const cases = forRun(runId, CASES, (item) => item.store_id) ?? []

@@ -59,7 +59,10 @@
 .sd-ov-due__list button { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr) auto 16px; align-items: center; gap: var(--sd-space-4); inline-size: 100%; padding: var(--sd-space-3) var(--sd-space-card-padding); border: 0; background: transparent; color: inherit; font: inherit; text-align: start; cursor: pointer; transition: background-color var(--sd-local-duration-hover) var(--sd-local-ease-out); }
 .sd-ov-due__list li:last-child button { border-end-start-radius: var(--sd-radius-card); border-end-end-radius: var(--sd-radius-card); }
 .sd-ov-due__list button:hover { background: var(--sd-local-hover-surface); }
-.sd-ov-due__list button:hover .sd-ov-chevron { color: var(--sd-color-accent-signature); transform: translateX(2px); }
+.sd-ov-due__list button:hover .sd-ov-chevron { color: var(--sd-color-accent-signature); }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .sd-ov-due__list button:hover .sd-ov-chevron { transform: translateX(2px); }
+}
 .sd-ov-due__body { display: grid; gap: 2px; min-width: 0; }
 .sd-ov-due__title { display: flex; align-items: baseline; gap: var(--sd-space-2); min-width: 0; font-size: var(--sd-font-size-body-sm); }
 .sd-ov-due__title strong { font-weight: var(--sd-font-weight-semibold); }

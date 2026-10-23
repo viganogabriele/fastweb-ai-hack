@@ -135,7 +135,7 @@ const DOC_SEEDS: DocSeed[] = [
     text: 'Closing notes LON01\nThree customers returned the VTRACK GTX this week, all citing the sole peeling after a few days. Flagging to product quality.\nFootfall was steady, slightly below last Thursday.'
   },
   {
-    id: 'doc-nyc01-20261022', store: 'NYC01', lang: 'en', type: 'voice_note', at: 2,
+    id: 'doc-nyc01-20261022', store: 'NYC01', lang: 'en', type: 'voice_note', at: -2,
     text: 'Hey team, quick one from Madison. A VIP asked for "that long navy parka from the campaign", we couldn’t tell which style. She is coming back Saturday. Also the scarf table is almost empty, lots of people asking for the beige cashmere.'
   },
   {
@@ -320,13 +320,16 @@ export function documentDetail(id: string): DocumentDetail | undefined {
   }
 }
 
-/** Each run only sees its own stores; unpublished runs expose nothing. */
-export function forRun<T>(runId: string, items: T[], storeOf: (item: T) => string | null | undefined): T[] | undefined {
+/** Respect the selected run, store scope and availability cutoff, even for synthetic data. */
+export function forRun<T extends { available_at: string | null; run_id?: string }>(runId: string, items: T[], storeOf: (item: T) => string | null | undefined): T[] | undefined {
   const run = RUNS.find((item) => item.spec.run_id === runId)
   if (!run) return undefined
   if (!run.published) return []
   return items.filter((item) => {
     const store = storeOf(item)
-    return !store || run.spec.stores.includes(store)
+    return (!store || run.spec.stores.includes(store))
+      && item.available_at !== null
+      && Date.parse(item.available_at) <= Date.parse(run.spec.as_of)
+      && (!item.run_id || item.run_id === runId)
   })
 }
