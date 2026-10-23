@@ -53,9 +53,9 @@ source/config identities; arbitrary historical hash schemes are not rewritten.
 Fixture snapshots remain in `data/tessera_fixture.db` inside their attempt and
 are labelled `fixture_demo_only: true`; product snapshots use `data/tessera.db`.
 A fixture demonstration can use source fixtures (for example a minimal stores.csv
-and one timestamped .eml with only `src.email` enabled). The regression tests run
-that command twice and compare output hashes, and also replay a synthetic cached
-chat response. Preloading derived fixture artifacts via authorized_fixture_refs
+and one timestamped .eml with only `src.email` enabled). The regression tests rebuild
+that snapshot twice and compare output hashes, exercise the command directly,
+and also replay a synthetic cached chat response. Preloading derived fixture artifacts via authorized_fixture_refs
 is deliberately refused: it would not demonstrate rebuilding projections.
 
 This command does not establish real-model investigator tool selection, G2/G3
