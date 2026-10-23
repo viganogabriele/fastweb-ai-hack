@@ -312,7 +312,7 @@ def run(ctx: Context) -> ModuleResult:
     new = []
     for report in reports:
         same_id = [r for r in stored if r.id == report.id]
-        if any(r.input_version_hash == report.input_version_hash for r in same_id):
+        if same_id and same_id[-1].input_version_hash == report.input_version_hash:
             continue
         # A regeneration over changed inputs is a new version, never an overwrite.
         new.append(report.model_copy(update={"version": f"v{len(same_id) + 1}"}))
