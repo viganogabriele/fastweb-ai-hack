@@ -404,11 +404,14 @@ def wall_time(est: dict, workers: int, concurrency: int, rates: Mapping[str, flo
 
 # Rates from the dev record evidence (docs/holdout-evaluation-protocol.md §5.1.1).
 DEFAULT_RATES = {
+    # Dev record (MIL01+MUN01, 27 mails): 27 extraction + 13 link calls, no retries.
     "extract_calls_per_email": 1.05,
-    "link_calls_per_email": 0.6,
+    "link_calls_per_email": 0.5,
     "investigator_calls_per_case": 6.0,
-    "seconds_per_call": 8.0,
-    "seconds_per_origin": 12.0,
+    # 40 calls in 22 s at concurrency 8, i.e. ~4.4 s each when serial.
+    "seconds_per_call": 4.5,
+    # 4.9 s mean, 8.6 s max over 14 origins; it grows with the cumulative mailbox.
+    "seconds_per_origin": 10.0,
 }
 
 
