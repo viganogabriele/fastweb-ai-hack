@@ -17,9 +17,8 @@ export const vision = {
     },
     store: {
       title: 'Negozio',
-      description: 'Report di chiusura e verifica dei conflitti con lo stock.',
-      planned: 'Confronto tra colleghi',
-      destination: 'Prodotti'
+      description: 'Esempio sintetico di confronto tra colleghi e verifica dei conflitti con lo stock.',
+      destination: 'Voce del negozio'
     },
     country: {
       title: 'Paese e regione',

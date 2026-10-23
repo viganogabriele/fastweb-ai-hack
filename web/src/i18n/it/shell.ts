@@ -14,6 +14,7 @@ export const shell = {
   },
   nav: {
     overview: 'Panoramica',
+    voice: 'Voce del negozio',
     cases: 'Casi',
     sources: 'Fonti',
     reports: 'Report',

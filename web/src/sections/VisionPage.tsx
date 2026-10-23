@@ -60,10 +60,9 @@ export function VisionPage() {
         <p id="vision-flow-description">{t.flowDescription}</p>
       </header>
       <div className="sd-vision__flow">
-        {/* This branch has free-form recording, but no guided interview or colleague comparison. */}
         <Level copy={t.levels.employee} icon={Mic} href="/store/record?store=MIL01&lang=it" />
         <ArrowDown className="sd-vision__flow-arrow" aria-hidden="true" />
-        <Level copy={t.levels.store} icon={Store} href="#/prodotti" />
+        <Level copy={t.levels.store} icon={Store} href="#/voce" />
         <ArrowDown className="sd-vision__flow-arrow" aria-hidden="true" />
         <Level copy={t.levels.country} icon={Globe} />
         <ArrowDown className="sd-vision__flow-arrow" aria-hidden="true" />

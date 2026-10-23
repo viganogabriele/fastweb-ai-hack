@@ -1,0 +1,230 @@
+{
+  "stores": [
+    {
+      "store_id": "MIL01",
+      "name": "Milano Montenapoleone"
+    },
+    {
+      "store_id": "MIL02",
+      "name": "Milano Rinascente Duomo"
+    }
+  ],
+  "notes": [
+    {
+      "note_id": "mil01-melange-touch-belted-coat-fit",
+      "store_id": "MIL01",
+      "sent_at": "2026-10-22T19:05:00+02:00",
+      "author": "roberto",
+      "duration_s": 30.7,
+      "language": "it",
+      "transcript": "Ciao, Roberto da Milano Montenapoleone, oggi 4 clienti si sono avvicinati al piumino in lana grigio melange, ma una volta percepito al tatto si sono allontanati. Inoltre 3 clienti hanno provato il cappotto lungo in piumino con cintura, quello marrone cioccolato, in taglia 2, ma lo sentivano troppo stretto in vita. Infine la connessione oggi è saltata per 5 minuti, quindi io segnalerei nel caso si riverificasse nel breve termine.\n"
+    },
+    {
+      "note_id": "mil01-cashmere-scarf-vest-size",
+      "store_id": "MIL01",
+      "sent_at": "2026-10-22T19:40:00+02:00",
+      "author": "martino",
+      "duration_s": 40.4,
+      "language": "it",
+      "transcript": "Ciao, Martino da Milano Montenapoleone, aggiornamento di chiusura. Oggi sei clienti hanno preso in mano la sciarpa in cashmere grigio melange, tre l'hanno apprezzata ma una signora mi ha chiesto se c'è anche in beige, e in negozio non ce l'abbiamo. Poi due clienti, che vestirebbero taglia 3, hanno guardato a lungo il gilet in piumino blu notte, ma in negozio avevamo solo la 2 e la 4, e se ne sono andati senza provare altro.\nUn'ultima cosa: il lettore dei pagamenti si è bloccato un paio di volte nel primo pomeriggio, una cliente ha dovuto riprovare tre volte prima che passasse. Non è successo altro, ma se capita ancora lo scrivo a chi di dovere.\n"
+    },
+    {
+      "note_id": "mil02-navy-long-down-lining",
+      "store_id": "MIL02",
+      "sent_at": "2026-10-22T19:20:00+02:00",
+      "author": "paolo",
+      "duration_s": 49.3,
+      "language": "it",
+      "transcript": "Ciao, Paolo da Milano Rinascente Duomo, nota veloce a fine giornata, cinque clienti oggi hanno ispezionato il piumino lungo blu notte, però appena hanno visto la fodera interna hanno posato il capo, due addirittura facendo una faccia storta. Una signora mi ha detto che la fodera \"sembra di plastica\" e che per quel prezzo si aspettava qualcosa di più nobile. Un cliente invece ha chiesto se esiste lo stesso modello senza cappuccio, perché gli piaceva la linea ma lo trovava troppo sportivo per l'ufficio.\nIn compenso il cardigan imbottito nero è piaciuto: due clienti l'hanno provato, uno l'ha preso. Per il resto oggi poco passaggio, complice la pioggia dal pomeriggio. Domani fascia pomeridiana con un collega in meno, ve lo segnalo.\n"
+    }
+  ],
+  "products": {
+    "J10911A00213-90X": {
+      "name": "MONTELUCE",
+      "image": "/api/catalog/images/VCIO01AWA_Z2G.jpg",
+      "reference_name": "Valentino Shirt Jacket In Nylon Gabardine With Vgold",
+      "source_url": "https://www.valentino.com/en-it/product-valentino-shirt-jacket-in-nylon-gabardine-with-vgold-VCIO01AWA_Z2G"
+    },
+    "J20931A00622-23R": {
+      "name": "AMALIA",
+      "image": "/api/catalog/images/BCA8K7AG6_0NO.jpg",
+      "reference_name": "Soft Drap Coat",
+      "source_url": "https://www.valentino.com/en-it/product-soft-drap-coat-BCA8K7AG6_0NO"
+    },
+    "I10913A00004-90X": {
+      "name": "VALENTINO SCARF",
+      "image": "/api/catalog/images/WEI114HXQ_2NF.jpg",
+      "reference_name": "Le Fou de l'Archive Silk Scarf from the Valentino Archive",
+      "source_url": "https://www.valentino.com/en-it/product-le-fou-de-l-archive-silk-scarf-from-the-valentino-archive-WEI114HXQ_2NF"
+    },
+    "I10913A00004-034": {
+      "name": "VALENTINO SCARF",
+      "image": "/api/catalog/images/WEI114HXQ_2NF.jpg",
+      "reference_name": "Le Fou de l'Archive Silk Scarf from the Valentino Archive",
+      "source_url": "https://www.valentino.com/en-it/product-le-fou-de-l-archive-silk-scarf-from-the-valentino-archive-WEI114HXQ_2NF"
+    },
+    "J10911A00305-742": {
+      "name": "VEL",
+      "image": "/api/catalog/images/VCIO01BL1_0NO.jpg",
+      "reference_name": "Valentino Cotton Tweed Shirt Jacket With Vgold",
+      "source_url": "https://www.valentino.com/en-it/product-valentino-cotton-tweed-shirt-jacket-with-vgold-VCIO01BL1_0NO"
+    },
+    "J20931A00087-742": {
+      "name": "LIVIANA",
+      "image": "/api/catalog/images/BNB07KAHJ_H08.jpg",
+      "reference_name": "Goat Cashmere Cape",
+      "source_url": "https://www.valentino.com/en-it/product-goat-cashmere-cape-BNB07KAHJ_H08"
+    },
+    "J20931A00203-742": {
+      "name": "FIAMMETTA",
+      "image": "/api/catalog/images/BNB07JAHJ_A03.jpg",
+      "reference_name": "Goat Cashmere Coat",
+      "source_url": "https://www.valentino.com/en-it/product-goat-cashmere-coat-BNB07JAHJ_A03"
+    },
+    "I10919B00042-999": {
+      "name": "VLOGO PADDED CARDIGAN",
+      "image": "/api/catalog/images/VKP04XBLC_QT3.jpg",
+      "reference_name": "Valentino Wool Polo Shirt With VLogo",
+      "source_url": "https://www.valentino.com/en-it/product-valentino-wool-polo-shirt-with-vlogo-VKP04XBLC_QT3"
+    }
+  },
+  "facts": {
+    "curated": true,
+    "by_note": {
+      "mil01-melange-touch-belted-coat-fit": [
+        {
+          "type": "provato_non_comprato",
+          "sku": "J10911A00213-90X",
+          "colour": "grigio melange",
+          "reason": "Rifiuto al tatto",
+          "quote": "4 clienti si sono avvicinati al piumino in lana grigio melange, ma una volta percepito al tatto si sono allontanati.",
+          "product": "MONTELUCE"
+        },
+        {
+          "type": "provato_non_comprato",
+          "sku": "J20931A00622-23R",
+          "size": "2",
+          "colour": "marrone cioccolato",
+          "reason": "Troppo stretto in vita",
+          "quote": "3 clienti hanno provato il cappotto lungo in piumino con cintura, quello marrone cioccolato, in taglia 2, ma lo sentivano troppo stretto in vita.",
+          "product": "AMALIA"
+        },
+        {
+          "type": "operativo",
+          "sku": null,
+          "quote": "la connessione oggi è saltata per 5 minuti",
+          "product": null
+        }
+      ],
+      "mil01-cashmere-scarf-vest-size": [
+        {
+          "type": "apprezzato",
+          "sku": "I10913A00004-90X",
+          "colour": "grigio melange",
+          "quote": "Oggi sei clienti hanno preso in mano la sciarpa in cashmere grigio melange, tre l'hanno apprezzata",
+          "product": "VALENTINO SCARF"
+        },
+        {
+          "type": "richiesto_non_disponibile",
+          "sku": "I10913A00004-034",
+          "colour": "beige",
+          "quote": "una signora mi ha chiesto se c'è anche in beige, e in negozio non ce l'abbiamo.",
+          "product": "VALENTINO SCARF"
+        },
+        {
+          "type": "richiesto_non_disponibile",
+          "sku": "J10911A00305-742",
+          "size": "3",
+          "colour": "blu notte",
+          "quote": "due clienti, che vestirebbero taglia 3, hanno guardato a lungo il gilet in piumino blu notte, ma in negozio avevamo solo la 2 e la 4, e se ne sono andati senza provare altro.",
+          "product": "VEL"
+        },
+        {
+          "type": "operativo",
+          "sku": null,
+          "quote": "il lettore dei pagamenti si è bloccato un paio di volte nel primo pomeriggio, una cliente ha dovuto riprovare tre volte prima che passasse.",
+          "product": null
+        }
+      ],
+      "mil02-navy-long-down-lining": [
+        {
+          "type": "provato_non_comprato",
+          "sku": [
+            "J20931A00087-742",
+            "J20931A00203-742"
+          ],
+          "colour": "blu notte",
+          "reason": "Fodera: «sembra di plastica»",
+          "quote": "cinque clienti oggi hanno ispezionato il piumino lungo blu notte, però appena hanno visto la fodera interna hanno posato il capo, due addirittura facendo una faccia storta. Una signora mi ha detto che la fodera \"sembra di plastica\" e che per quel prezzo si aspettava qualcosa di più nobile.",
+          "product": "LIVIANA / FIAMMETTA"
+        },
+        {
+          "type": "richiesto_non_disponibile",
+          "sku": [
+            "J20931A00087-742",
+            "J20931A00203-742"
+          ],
+          "colour": "blu notte",
+          "reason": "Richiesta senza cappuccio; disponibilità da verificare",
+          "caveat": "Identità ambigua. J20931A00087 ha il cappuccio staccabile: la richiesta non certifica domanda insoddisfatta.",
+          "quote": "Un cliente invece ha chiesto se esiste lo stesso modello senza cappuccio, perché gli piaceva la linea ma lo trovava troppo sportivo per l'ufficio.",
+          "product": "LIVIANA / FIAMMETTA"
+        },
+        {
+          "type": "apprezzato",
+          "sku": "I10919B00042-999",
+          "colour": "nero",
+          "quote": "il cardigan imbottito nero è piaciuto: due clienti l'hanno provato, uno l'ha preso.",
+          "product": "VLOGO PADDED CARDIGAN"
+        },
+        {
+          "type": "operativo",
+          "sku": null,
+          "quote": "oggi poco passaggio, complice la pioggia dal pomeriggio.",
+          "product": null
+        },
+        {
+          "type": "operativo",
+          "sku": null,
+          "quote": "Domani fascia pomeridiana con un collega in meno, ve lo segnalo.",
+          "product": null
+        }
+      ]
+    }
+  },
+  "conflicts": [
+    {
+      "sku": "J20931A00622-23R",
+      "size": "2",
+      "note_id": "mil01-melange-touch-belted-coat-fit",
+      "store_id": "MIL01",
+      "snapshot_date": "2026-10-21",
+      "on_hand": 0,
+      "in_transit": 0,
+      "quote": "3 clienti hanno provato il cappotto lungo in piumino con cintura, quello marrone cioccolato, in taglia 2, ma lo sentivano troppo stretto in vita.",
+      "provenance": {
+        "file": "generated/sources/erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv",
+        "row": "2026-10-21,MIL01,J20931A00622-23R,2,0,0"
+      }
+    },
+    {
+      "sku": "J10911A00305-742",
+      "size": "3",
+      "note_id": "mil01-cashmere-scarf-vest-size",
+      "store_id": "MIL01",
+      "snapshot_date": "2026-10-21",
+      "on_hand": 7,
+      "in_transit": 0,
+      "quote": "due clienti, che vestirebbero taglia 3, hanno guardato a lungo il gilet in piumino blu notte, ma in negozio avevamo solo la 2 e la 4, e se ne sono andati senza provare altro.",
+      "provenance": {
+        "file": "generated/sources/erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv",
+        "row": "2026-10-21,MIL01,J10911A00305-742,3,7,0"
+      }
+    }
+  ],
+  "overlap": [],
+  "closing_emails": {
+    "MIL01": [],
+    "MIL02": []
+  }
+}
