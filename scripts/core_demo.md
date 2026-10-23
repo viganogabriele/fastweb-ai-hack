@@ -22,6 +22,21 @@ relations. The positive POST-investigate job was recorded at
 Later commits that do not change executable code keep these identities; the final
 verification SHA is recorded in the PR/#211 handoff.
 
+**Post-freeze bug fix (#258, AG-03d).** The investigator's `evaluate_options` used to
+filter donors to the model's `candidate_donors` and republish the result under the
+deterministic option IDs. On D1 the model passed `["MUN01", "NYC01"]`, which left out
+MIL02, the only domestic donor. That created a second, current version `02f273c06fbcb197`
+of `hold`/`verify_stock`/`ask_store`/`notify_owner`, and approval (which re-evaluates every
+domestic donor) could never rebuild it: every approval returned 409. The tool now
+validates candidate donors but always evaluates the same inputs as `act.options` and
+approval. No model request changed. D1's `evaluate_options` is its sixth and last tool
+call before the budget fallback, so its output never reaches the model, and the job's
+candidates already covered every domestic donor. So no LLM or systems envelope was
+re-recorded. The RunSpec, snapshot and every recording are unchanged. The replay
+evidence below was regenerated on `bb02f88` (verification `execution_sha`). Extraction,
+linking, dedup, cases, forecast and `act.options` outputs are unchanged. Only the D1
+investigator trace and its four duplicate option versions changed.
+
 - Clock: `2026-10-22T20:00:00Z`; dev stores MIL01, MIL02, MUN01, NYC01.
 - 12 explicitly selected Italian, English and German emails, including resend,
   correction, reply and out-of-office inputs; one actual W42 workbook; Milan and
@@ -122,21 +137,27 @@ backend/.venv/bin/python scripts/replay_demo.py \
 `operator-decision-replay.json` records two cold attempts. Both exit 0 with zero
 network attempts and no missing prerequisites. They match on inputs, exact
 artifact IDs and versions, the decision (draft sha256 `69a9a767…85fd`), output
-`faccb706836a72ff87fd1aca9dba151985f8d6b1980f5109d0d6db810fc0c61f` and ledger
-`a4829accf1c98b7989d85b9636f8d8fa560c526693a4f0289366fff0c46ea785`. As above,
+`359131a5e985e86e428a2f3b1f28b503380b1717b6e219c16cafdb099bbf4cd9` and ledger
+`a4829accf1c98b7989d85b9636f8d8fa560c526693a4f0289366fff0c46ea785`. The #258 fix
+left the decision, its option version `4c5c3713b5a3498f` and the ledger unchanged;
+only the output hash moved (it was `faccb706…c61f`), because the duplicate D1 option
+versions are gone. As above,
 only the AgentTrace raw hashes differ, because of the excluded `duration_ms`.
 `make demo` still replays the synthetic `decisions.json`.
 
 Which options a human can decide here was checked by POSTing every current
-option against a throwaway copy of a fresh replay. That sweep's log is local and
-is not packaged; its results:
+option against throwaway copies of a fresh replay without decisions: one copy for
+all rejections, one for the informational approvals and one per transfer. That
+sweep's log is local and is not packaged. Results after the #258 fix:
 
 - Reject: all 157.
-- Approve: 152. The exceptions are the D1 `hold`, `verify_stock`, `ask_store` and
-  `notify_owner` at version `02f273c06fbcb197`, which return 409 "proposal inputs
-  or checks changed". The investigator's donor-scoped `evaluate_options` step
-  republished them under the deterministic IDs (#258). Separately,
-  `opt-case-mil01-j10911a00305-20261002-transfer` correctly fails `donor_protection`.
+- Approve: 156. The only exception is `opt-case-mil01-j10911a00305-20261002-transfer`,
+  which correctly fails `donor_protection` (409 "mandatory movement checks do not
+  pass").
+- The demo beat: approving D1 `notify_owner` (`4c5c3713b5a3498f`) returns a local
+  draft (`dispatch_status: draft`, zero reservations). Before the fix the four D1
+  informational options were current at `02f273c06fbcb197`, and approving any of them
+  returned 409 "proposal inputs or checks changed".
 
 For the two negative rehearsals, copy a cache outside the owned replay workspace,
 withhold one envelope in that copy and pass it to the same command. The actual
@@ -159,12 +180,13 @@ The completed recording and two fresh cold replays publish:
   and 118 possible overlaps (33 non-additive origins). 82 facts form 72 origin
   groups, 71 of them active. 16 report metric facts, two actual weather context
   events, 346 baselines and 27 case overlays.
-- 161 stored option versions, two investigator traces, one simulated clarification
+- 157 stored option versions (one per option ID), two investigator traces, one simulated clarification
   draft, two owner/priority reports, and an exact versioned local decision draft.
 - No fabricated numerical uplift: overlays stay unchanged with explicit reasons;
   missing baseline coverage remains `not_estimable`. No transfer is recommended.
 
-Both replays: output `9346b85e48e39119838e0aa88b1d6362379be5d5fa1a6cea50f2fc3463fba56f`,
+Both replays: output `20a7a75bd7db91ad94f5c89c0e4f6d4bc4cb64455a53a63d14155cdb5a50f338`
+(`9346b85e…a56f` before the #258 fix),
 ledger `7b4f494a100a7ce204cc16a1fd4345314a16d0473895d5c1f5cac021ec0b230e`,
 snapshot `c522703633170af4933e06ed0f02edc29f2beb5f85cb32873ac46bb426b86edb`,
 exit 0, no missing prerequisites and zero network attempts (`replay-comparison.json`).
@@ -173,7 +195,9 @@ The final status is honestly `degraded`: unknown SKU scopes require verification
 the optional product-insights module is absent and the D1 investigator reaches
 the six-tool budget. D1 calls evidence,
 stock twice, lanes twice and the deterministic options engine, then publishes a
-visible `verify` fallback. The unresolved MIL01 case instead calls evidence,
+visible `verify` fallback. Its `evaluate_options` step names MUN01 and NYC01 as
+candidates; the engine still evaluates every domestic donor and its outputs are the
+`act.options` versions (#258). The unresolved MIL01 case instead calls evidence,
 drafts a clarification and finishes without fallback. These are real-model
 choices on source-derived cases.
 
@@ -272,7 +296,23 @@ job artifact inventory, case version and parent inventory must all match, and
 the parent must be unchanged. Both cold attempts passed with zero network
 attempts. Withholding one job envelope in a copied job directory makes the job
 fail unpublished, with exit 1 and the parent unchanged
-(`api-job-verification.json`). Earlier API jobs minted a random trace ID on
+(`api-job-verification.json`).
+
+The #258 fix changed the parent's artifact inventory (D1 trace and options), so the job
+manifest's parent and job inventory pins no longer matched. The job's envelopes and
+trace replay identically. `rebind` replays the job like `verify`, refuses unless job ID,
+case version, trace and parent-unchanged checks pass, and re-pins only the two
+inventories. The earlier values stay under `rebound` in `manifest.json`:
+
+```sh
+backend/.venv/bin/python scripts/core_investigate_job.py rebind \
+  --attempt "$PWD/data/core_demo/offline-reproduction/attempt-<id>" \
+  --job "$demo_assets/investigate-job" \
+  --workspace "$PWD/data/core_demo/job-rebind" \
+  --reason "<issue>: <why only parent-derived artifacts changed>"
+```
+
+Earlier API jobs minted a random trace ID on
 every execution, so a replayed job could never reproduce the recorded trace.
 The API now uses `trace:<job id>:<case id>` (see `tests/api/test_investigations.py`).
 
@@ -308,8 +348,10 @@ ignored). The summary is on #115. Known gaps:
 
 - The case page does not yet render a saved decision after reload (M5), so
   persistence is verified through the API only.
-- The D1 options panel shows both versions of four options, and the current ones
-  cannot be approved (#258).
+- That check ran before the #258 fix. Then the D1 options panel showed 9 option
+  versions, two for each informational option, and the current ones could not be approved. After the fix
+  the API lists 5 (one per option ID) and they are approvable (verified through the
+  API above; the browser check was not repeated).
 
 The scoped Memi audit (`web/`, `diagnose . --json --no-write --fail-on none`)
 reported 50/100; it is unchanged because this task changes no design tokens or
@@ -352,4 +394,4 @@ sign-off, candidate selection, export freeze and eventual `freeze-g3` tag after
 review/merge. `decisions.json` is a scripted synthetic reviewer command.
 `decisions-operator.json` is the genuine operator decision, Lorenzo's local
 rejection of the D1 transfer. The NYC01 correction abstention, the D1 fallback
-and #258 must remain visible in that handoff.
+and the #258 post-freeze bug fix above must remain visible in that handoff.
