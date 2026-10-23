@@ -6,7 +6,9 @@ All checks run with networking denied, including the decision's stock revalidati
 """
 
 import argparse
+import hashlib
 import json
+import subprocess
 import sys
 from datetime import timedelta
 from pathlib import Path
@@ -14,7 +16,14 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 
 from fastapi.testclient import TestClient
-from replay_demo import allowed, environment, offline
+from replay_demo import (
+    FrozenDecision,
+    allowed,
+    digest,
+    environment,
+    offline,
+    semantic_payload,
+)
 
 from tessera.api.main import create_app
 from tessera.api.routers.options import decision_clock
@@ -35,10 +44,49 @@ from tessera.core.contracts import (
 from tessera.core.db import connect
 from tessera.core.repo import KINDS, latest
 from tessera.core.run_repo import repo_session
+from tessera.modules.actions.approval import DecisionRequest, LocalDraft
+
+
+def decision_export(spec, *, at, request, draft):
+    """Export the returned draft verbatim; never reconstruct its identity from a request."""
+    return FrozenDecision(
+        snapshot_sha256=digest(spec.model_dump(mode="json")),
+        namespace="fixture" if spec.mode == "fixture" else "product",
+        at=at,
+        request=DecisionRequest.model_validate(request),
+        draft=LocalDraft.model_validate(draft),
+    ).model_dump(mode="json")
+
+
+def input_inventory(root):
+    return digest(
+        [
+            (
+                p.relative_to(root).as_posix(),
+                hashlib.sha256(allowed(p).read_bytes()).hexdigest(),
+            )
+            for p in sorted(root.rglob("*"))
+            if not p.is_dir()
+        ]
+    )
 
 
 def check(candidate, *, decision_output=None):
     candidate = allowed(candidate)
+    # Refuse before sending a decision command, including an idempotent retry.
+    if decision_output is not None and allowed(decision_output).exists():
+        raise ValueError("decision export already exists; preserve the original exact draft")
+    execution_sha = subprocess.check_output(
+        ["git", "rev-parse", "HEAD"], cwd=Path(__file__).resolve().parents[1], text=True
+    ).strip()
+    code_roots = ("backend/tessera", "backend/prompts", "scripts")
+    dirty_code = bool(
+        subprocess.check_output(
+            ["git", "status", "--porcelain", "--untracked-files=all", "--", *code_roots],
+            cwd=Path(__file__).resolve().parents[1],
+            text=True,
+        )
+    )
     settings = Settings(
         _env_file=None,
         llm_mode="replay",
@@ -54,6 +102,8 @@ def check(candidate, *, decision_output=None):
 
         spec = RunSpec.model_validate_json((candidate / "run-spec.json").read_text())
         assert spec.mode == "recorded" and not spec.authorized_fixture_refs
+        assert input_inventory(candidate / "sources") == spec.source_manifest_hash
+        assert input_inventory(candidate / "config") == spec.config_hash
         app = create_app(engine=engine, fixture_engine=fixture, settings=settings)
         app.dependency_overrides[decision_clock] = lambda: spec.as_of + timedelta(minutes=1)
         with offline() as denied, environment(settings), TestClient(app) as api:
@@ -71,6 +121,7 @@ def check(candidate, *, decision_output=None):
             assert api.get("/api/runs/not-this-run/cases").status_code == 404
             assert api.get(prefix + "/cases/not-this-case/options").status_code == 404
             with repo_session(engine, spec.run_id) as repo:
+                assert repo.spec == spec, "published snapshot differs from candidate RunSpec"
                 documents = repo.list(SourceDocument)
                 observations = repo.list(Observation)
                 cases = latest(repo.list(Case))
@@ -83,7 +134,9 @@ def check(candidate, *, decision_output=None):
                     assert observation.available_at <= spec.as_of
                     for evidence in observation.evidence:
                         doc = repo.get(
-                            SourceDocument, evidence.document_id, evidence.document_version
+                            SourceDocument,
+                            evidence.document_id,
+                            evidence.document_version,
                         )
                         segment = repo.get(Segment, evidence.segment_id)
                         assert doc and segment
@@ -104,10 +157,19 @@ def check(candidate, *, decision_output=None):
                 for case in cases:
                     exact = get(f"/cases/{case.id}", version=case.version)
                     assert exact["version"] == case.version and exact["run_id"] == spec.run_id
+                    assert (
+                        api.get(
+                            prefix + f"/cases/{case.id}", params={"version": "absent"}
+                        ).status_code
+                        == 404
+                    )
                 for trace in traces:
                     assert trace.mode == "recorded"
                     assert trace.steps[0].tool == "get_case_evidence"
-                    exact = get(f"/cases/{trace.case_id}/traces/{trace.id}", version=trace.version)
+                    exact = get(
+                        f"/cases/{trace.case_id}/traces/{trace.id}",
+                        version=trace.version,
+                    )
                     assert exact == trace.model_dump(mode="json")
                 for clarification in clarifications:
                     assert clarification.status == "draft" and clarification.simulated
@@ -125,7 +187,28 @@ def check(candidate, *, decision_output=None):
                     details = get(f"/reports/{owner}")
                     assert details
                 result = {
-                    "format": 1,
+                    "format": 2,
+                    "execution_sha": execution_sha,
+                    "execution_has_dirty_code": dirty_code,
+                    "snapshot_code_version": spec.code_version,
+                    "snapshot_sha256": digest(spec.model_dump(mode="json")),
+                    "namespace": repo.namespace,
+                    "scenario_id": spec.scenario_id,
+                    "source_manifest_hash": spec.source_manifest_hash,
+                    "config_hash": spec.config_hash,
+                    "artifact_inventory_sha256": digest(
+                        [
+                            (
+                                kind,
+                                item.id,
+                                item.version,
+                                digest(semantic_payload(kind, item.model_dump(mode="json"))),
+                            )
+                            for kind, model in sorted(KINDS.items())
+                            for item in sorted(repo.list(model), key=lambda x: (x.id, x.version))
+                        ]
+                    ),
+                    "artifact_inventory_scope": "published projection before optional decision",
                     "run_id": spec.run_id,
                     "status": "passed",
                     "documents": len(documents),
@@ -159,7 +242,11 @@ def check(candidate, *, decision_output=None):
                 }
                 stale = api.post(
                     prefix + path,
-                    json={**body, "input_version_hash": "stale", "idempotency_key": "demo02-stale"},
+                    json={
+                        **body,
+                        "input_version_hash": "stale",
+                        "idempotency_key": "demo02-stale",
+                    },
                 )
                 assert stale.status_code == 409
                 saved = api.post(prefix + path, json=body)
@@ -172,24 +259,24 @@ def check(candidate, *, decision_output=None):
                 encoded = (
                     json.dumps(
                         [
-                            {
-                                "at": (spec.as_of + timedelta(minutes=1)).isoformat(),
-                                "request": {
+                            decision_export(
+                                spec,
+                                at=spec.as_of + timedelta(minutes=1),
+                                request={
                                     "run_id": spec.run_id,
                                     "scenario_id": spec.scenario_id,
                                     **body,
                                 },
-                            }
+                                draft=draft,
+                            )
                         ],
                         sort_keys=True,
                         indent=2,
                     )
                     + "\n"
                 )
-                if output.exists() and output.read_text() != encoded:
-                    raise ValueError("decision output differs from the frozen command")
-                if not output.exists():
-                    output.write_text(encoded)
+                with output.open("x") as stream:
+                    stream.write(encoded)
                 result["decision"] = {
                     "stale_status": stale.status_code,
                     "idempotent": True,

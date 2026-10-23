@@ -453,6 +453,28 @@ def test_frozen_drafts_are_exact_durable_and_part_of_replay_hashes(
     assert first["raw_output_sha256"] == second["raw_output_sha256"] != empty["raw_output_sha256"]
 
 
+def test_api_checker_exports_a_draft_that_the_replay_can_restore(
+    inputs, tmp_path, decision_snapshot, monkeypatch
+):
+    monkeypatch.syspath_prepend(str(REPO_ROOT / "scripts"))
+    from check_core_demo import decision_export
+
+    spec, registry, frozen = decision_snapshot
+    event = decision_export(
+        spec,
+        at=frozen.at,
+        request=frozen.request.model_dump(mode="json"),
+        draft=frozen.draft.model_dump(mode="json"),
+    )
+    assert replay.FrozenDecision.model_validate(event) == frozen
+    path = tmp_path / "export.json"
+    path.write_text(json.dumps([event]))
+    result = replay.rebuild(spec, **inputs, decisions=path, registry=registry)
+    assert result["status"] == "succeeded", result
+    assert result["decisions"][0]["id"] == frozen.draft.decision.id
+    assert result["ledger_sha256"] == replay.digest([frozen.draft.model_dump(mode="json")])
+
+
 def test_changed_frozen_draft_fails_without_saving_a_decision(inputs, tmp_path, decision_snapshot):
     spec, registry, frozen = decision_snapshot
     event = frozen.model_dump(mode="json")
