@@ -4,6 +4,7 @@ import argparse
 import json
 from pathlib import Path
 
+from .forecast import KEY, score_forecasts
 from .harness import ARTIFACTS, FrozenRun, freeze
 from .isolation import run_product
 
@@ -25,6 +26,11 @@ def main() -> None:
     verify.add_argument("--sha256", required=True)
     verify.add_argument("--key", action="append", required=True)
     verify.add_argument("--output", type=Path, required=True)
+    forecast = sub.add_parser("forecast", help="Score frozen forecast errors on a fixed universe")
+    forecast.add_argument("bundle", type=Path)
+    forecast.add_argument("--sha256", required=True)
+    forecast.add_argument("--key", default=KEY)
+    forecast.add_argument("--output", type=Path, required=True)
     product = sub.add_parser(
         "product", help="Start the product with kernel-enforced input isolation"
     )
@@ -55,7 +61,11 @@ def main() -> None:
         if not args.output.resolve().is_relative_to(root / "data"):
             parser.error("evaluation receipts must be written under data/")
         run = FrozenRun(args.bundle, args.sha256)
-        receipt = run.receipt(root / "generated/ground_truth", args.key)
+        receipt = (
+            score_forecasts(run, root / "generated/ground_truth", args.key)
+            if args.command == "forecast"
+            else run.receipt(root / "generated/ground_truth", args.key)
+        )
         # Never overwrite a previous evaluation record.
         with args.output.open("x", encoding="utf-8") as stream:
             json.dump(receipt, stream, ensure_ascii=False, indent=2)

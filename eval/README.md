@@ -2,8 +2,9 @@
 
 This package is the only code allowed to read `generated/ground_truth/` (RFC §7.1).
 The backend never imports it. It consumes a **frozen product export**, not a running
-pipeline or database. EVL-02/04 will add scoring; `verify` currently records input
-hashes and artifact counts, with an empty `metrics` object. These are not results.
+pipeline or database. `verify` records input hashes and artifact counts, with an
+empty `metrics` object. These are not results. EVL-03 adds the optional `forecast`
+scorer described below; it never runs a product module or selects a scenario from outcomes.
 
 Run commands below from the repository root with `backend/.venv/bin/python`.
 There are no additional dependencies and no answer-key access during tests.
@@ -93,6 +94,75 @@ in the receipt. For future scorers, `FrozenRun.read_answer_key()` returns bytes;
 callers parse their chosen CSV/JSON format. Traversal and symlink escapes from the
 oracle root or bundle are rejected. Scorers must stay in `eval/`, never provide
 product inputs, and report exclusions and limits required by RFC §7.2.
+
+## 4. Forecast errors (EVL-03)
+
+Before freezing, add the store's IANA timezone to **each** universe entry and fix
+the scenario in the protocol. For example:
+
+```json
+{
+  "universe": [
+    {"store_id": "MIL01", "sku": "SYNTHETIC-999", "timezone": "Europe/Rome"}
+  ],
+  "forecast": {"scenario": "base", "scenario_id": "historical"}
+}
+```
+
+These fields supplement the complete protocol in section 2. The universe must
+include no-alert and decoy products before oracle access. The scorer does not
+derive its sample from cases or labels. Duplicate universe entries/origins fail.
+
+Export `ForecastAdjustment` objects into `predictions.json`: `fc.baseline` for
+every selected origin × store × SKU-colour, plus the stored `fc.overlay` records.
+Native DTOs use `computed_at` as their temporal origin, matching the current
+producers' use of the run's `as_of`. When export computation time differs, wrap
+each DTO as `{"as_of": "<aware run origin>", "payload": {"producer": "fc.baseline", ...}}`.
+The explicit origin must be the run's historical clock, not the export time.
+Freeze these exports with the existing `freeze` command before opening the oracle.
+
+```sh
+backend/.venv/bin/python -m eval forecast data/frozen/run-001 \
+  --sha256 '<previously recorded manifest SHA-256>' \
+  --output data/run-001-forecast-errors.json
+```
+
+The scorer verifies all bundle hashes, validates frozen choices and predictions,
+then reads only `demand/true_demand_window.csv` through `FrozenRun.read_answer_key`.
+`--key` can specify another CSV with the same schema: `date,store_id,sku,demand_units`.
+The output records the manifest hash, full frozen protocol and oracle file hash.
+It uses exclusive creation; previous evaluation records cannot be overwritten.
+No actual holdout metrics have been produced as part of this implementation.
+
+- H=1, 3 and 7 are reported separately, starting the next **store-local** day after
+  each origin. Every target day must be present and nonblank. An incomplete target
+  horizon is `pending`; missing days never become zero or a shorter horizon.
+- Target is realised `demand_units` at daily SKU-colour grain, compared with the
+  overlay's **latent** demand. Expected demand columns and recorded sales are not
+  substituted. Scenarios are conditional hypotheses, not calibrated forecasts.
+- The frozen `low`, `base` or `high` scenario is used for every scored point.
+  More than one computed overlay for the same origin/store/SKU is rejected.
+  An overlay must agree with the baseline's vintage and daily baseline values.
+  Nonhistorical scenarios (including synthetic extensions) are rejected.
+- No overlay, or an overlay marked `unchanged`/`not_estimable`, uses the baseline.
+  Those products remain in the comparison. Missing daily baselines or incomplete
+  computed overlays are explicitly `unscorable`; both comparator metrics use the
+  same remaining sample, with exclusions and coverage visible in the report.
+- WAPE is `sum(abs(actual - forecast)) / sum(actual)` across all scored daily
+  points, expressed as a ratio. MAE uses the same pointwise errors divided by
+  `n_days`; opposite daily errors do not cancel. Zero actual volume gives
+  `wape: null`, with MAE, volumes and counts still reported. An empty sample also
+  has `mae: null`. Negative/nonfinite quantities and duplicate oracle days fail.
+- Each horizon reports eligible, mature, pending, unscorable and scored origin
+  counts; adjusted, abstained and no-alert counts; prediction coverage
+  (`scored / mature`) and adjustment coverage (`adjusted / scored`). Undefined
+  coverage is `null`. Forecast records outside the frozen universe/origins are
+  ignored and counted; future/unknown input availability inside the sample fails.
+
+Temporal origins and their horizons can overlap; their daily observations are not
+independent replications. Incomplete prediction coverage limits any comparison
+claim. Keep evaluation outputs away from subsequent product inputs and do not
+tune prompts/policy against holdout results.
 
 ## Checks
 
