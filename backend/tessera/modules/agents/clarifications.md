@@ -10,6 +10,8 @@ The answer must arrive strictly after both the question and the parent clock,
 and be available by the new clock. Previously published runs remain unchanged.
 A cancelled/answered clarification, closed case, mismatched run/scenario/store,
 missing source version or mismatched source quote is rejected as `InvalidAnswer`.
+The question's `input_refs` must identify exactly the supplied Case version;
+matching `case_id` alone cannot authorize a different version's lineage.
 
 ## Outputs
 

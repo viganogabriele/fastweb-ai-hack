@@ -326,6 +326,25 @@ def test_missing_unrelated_and_forged_sources_are_rejected(inputs):
             prepare_answer(**dict(inputs, **change), replay=False)
 
 
+@pytest.mark.parametrize("case_refs", [(), (ref("Case", "case", "other-version"),)])
+def test_question_requires_the_exact_selected_case_version(inputs, case_refs):
+    clarification = Clarification.model_validate(
+        {
+            **inputs["clarification"].model_dump(),
+            "input_refs": (*case_refs, ref("Observation", "observation")),
+        }
+    )
+    with pytest.raises(InvalidAnswer, match="case version"):
+        prepare_answer(**dict(inputs, clarification=clarification), replay=False)
+
+
+def test_a_different_case_version_cannot_reuse_a_registered_answer(inputs):
+    key = answer_fingerprint(inputs["parent"], inputs["clarification"], inputs["answer"])
+    case = inputs["case"].model_copy(update={"version": "2", "priority_reason": "Updated case"})
+    with pytest.raises(InvalidAnswer, match="case version"):
+        prepare_answer(**dict(inputs, case=case), registered_answers={key})
+
+
 @pytest.mark.parametrize("same_document_id", [False, True])
 def test_multiple_source_documents_never_get_an_arbitrary_parent(inputs, same_document_id):
     source = inputs["documents"][0].model_copy(

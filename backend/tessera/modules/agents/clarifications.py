@@ -139,6 +139,9 @@ def prepare_answer(
         raise InvalidAnswer("The selected case must belong to a store in the parent run")
     if clarification.case_id != case.id:
         raise InvalidAnswer("Clarification must belong to the selected case")
+    case_refs = {reference for reference in clarification.input_refs if reference.kind == "Case"}
+    if case_refs != {_ref(case)}:
+        raise InvalidAnswer("Supply exactly the case version referenced by the clarification")
     if case.status in {"closed", "decided"}:
         raise InvalidAnswer("A closed or decided case cannot accept a clarification answer")
     if clarification.status not in {"draft", "asked"}:
