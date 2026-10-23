@@ -34,9 +34,11 @@ drafts = Table(
 
 def reservations(engine: Engine, scenario_id: str) -> tuple[Reservation, ...]:
     """Read the session ledger, including decisions made after the snapshot's as_of."""
-    if not inspect(engine).has_table(drafts.name):
-        return ()
     with engine.connect() as conn:
+        # A module's engine adapter supplies its worker connection. Inspect that
+        # connection so schema visibility and reads share the caller's transaction.
+        if not inspect(conn).has_table(drafts.name):
+            return ()
         payloads = conn.execute(
             select(drafts.c.payload).where(drafts.c.scenario_id == scenario_id)
         ).scalars()

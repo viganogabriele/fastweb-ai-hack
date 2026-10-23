@@ -347,6 +347,11 @@ class SystemsClient:
         if isinstance(got, Unknown):
             return got
         body, ref = got
+        # Observed P50/P90 cover the whole period: hash only the fields knowable at as_of, so a
+        # past replay's provenance (and option versions) does not change with later deliveries.
+        known = {k: v for k, v in body.items() if not k.startswith("observed_")}
+        digest = hashlib.sha256(json.dumps(known, sort_keys=True).encode()).hexdigest()
+        ref = ref.model_copy(update={"content_hash": digest})
         try:
             reviewed = date.fromisoformat(body["last_reviewed"])
             if reviewed > as_of:

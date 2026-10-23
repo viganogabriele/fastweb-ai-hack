@@ -11,6 +11,10 @@ Daily facts use next-day 06:00 in the store timezone; later posting wins. Foreca
 uses explicit issued_at when present, otherwise run-date 06:00 local. These 06:00
 times are prototype conventions, recorded in availability_basis, not source facts.
 
+``returns`` keeps only the ``RETURN`` lines of the POS receipts (``sales/pos_lines/``,
+one file per ISO week) with their reason code; sale lines are skipped before parsing,
+so locators stay physical. Like daily sales, a return is known the next day at 06:00.
+
 Money stays ``Decimal``. Forecast units are fractional quantities fed to FC-01, so
 they are ``float`` (FC-01 accepts any real number, which ``Decimal`` is not).
 Source URIs are relative to ``generated/sources`` (``erp/...``), so row ids are the
@@ -53,6 +57,7 @@ Table = Literal[
     "assortment",
     "prices",
     "sales",
+    "returns",
     "stock",
     "forecast",
 ]
@@ -78,6 +83,7 @@ _KEYS = {
         "returns_lc",
         "net_sales_lc",
     ),
+    "returns": ("store_id", "sku", "business_date", "receipt_id", "line_type", "qty"),
     "stock": ("store_id", "sku", "size", "snapshot_date", "on_hand", "in_transit"),
     "forecast": ("store_id", "sku", "run_date", "target_week", "week_start", "fcst_units"),
 }
@@ -102,6 +108,9 @@ _DECIMALS = {
     "net_sales_lc",
 }
 _FLOATS = {"fcst_units"}
+_SIGNED = {"qty"}  # POS line quantity: negative on a return line
+# Lines a table keeps, decided on the raw record before parsing.
+_KEEP = {"returns": lambda raw: raw.get("line_type") == "RETURN"}
 _INSTANTS = {"posted_at", "issued_at", "available_at"}
 
 
@@ -138,6 +147,8 @@ def _parse(field: str, value: str) -> Value:
         if result < 0:
             raise ValueError(f"{field} must be nonnegative")
         return result
+    if field in _SIGNED:
+        return int(value)
     if field in _FLOATS:
         try:
             result = float(value)
@@ -163,7 +174,7 @@ def _availability(
     store_timezones: Mapping[str, str],
     master_available_at: datetime | None,
 ) -> tuple[datetime | None, str]:
-    if table not in {"sales", "stock", "forecast"}:
+    if table not in {"sales", "returns", "stock", "forecast"}:
         available = master_available_at
         basis = "declared_master_snapshot" if available else "availability_unknown:undated_master"
         # An explicit per-row publication time supersedes the snapshot assumption.
@@ -183,7 +194,7 @@ def _availability(
             available = _local_six(data["run_date"], timezone)
             basis = "assumed:run_date_06_local"
     else:
-        field = "business_date" if table == "sales" else "snapshot_date"
+        field = "snapshot_date" if table == "stock" else "business_date"
         available = _local_six(data[field] + timedelta(days=1), timezone)
         basis = f"assumed:{field}_next_day_06_local"
     for field in ("posting_date", "posted_at", "available_at"):
@@ -219,6 +230,8 @@ def parse_rows(
     result = []
     for record_number, raw in enumerate(rows, start=2):
         if store_ids is not None and "store_id" in raw and raw["store_id"] not in store_ids:
+            continue
+        if table in _KEEP and not _KEEP[table](raw):
             continue
         try:
             if any(not isinstance(k, str) or not isinstance(v, str) for k, v in raw.items()):
@@ -358,6 +371,7 @@ _MASTER: tuple[tuple[str, Table], ...] = (
 # weekly: one more week keeps the vintage valid at as_of even for a short window.
 _FACTS: tuple[tuple[str, str, Table, str, timedelta], ...] = (
     ("sales/daily_store_sku", "sales_daily_", "sales", "business_date", timedelta()),
+    ("sales/pos_lines", "pos_lines_", "returns", "business_date", timedelta()),
     ("inventory/store_stock_daily", "stock_eod_", "stock", "snapshot_date", timedelta()),
     ("forecast/sku_store_weekly", "fcst_sku_store_run_", "forecast", "run_date", timedelta(7)),
 )
@@ -367,11 +381,11 @@ _END_OF_TIME = datetime.max.replace(tzinfo=UTC)
 
 MANIFEST = ModuleManifest(
     id="src.erp",
-    version="1",
+    version="2",
     layer="sources",
     description=(
-        "ERP catalog, assortment, prices, daily sales, stock and forecast vintages for the "
-        "run's stores and history window, each row with available_at"
+        "ERP catalog, assortment, prices, daily sales, POS returns with reason code, stock and "
+        "forecast vintages for the run's stores and history window, each row with available_at"
     ),
     requires=(),
     optional_inputs=(),
@@ -481,13 +495,16 @@ def _check_master_snapshot(engine: Engine, snapshot: datetime) -> None:
 
 def _files(sources_dir: Path, folder: str, prefix: str) -> Iterator[tuple[str, date, date]]:
     """Files of a partitioned folder with the first and last day their name covers."""
-    pattern = re.compile(re.escape(prefix) + r"(\d{4})[_-](\d{2})(?:-(\d{2}))?\.csv")
+    pattern = re.compile(re.escape(prefix) + r"(\d{4})[_-](?:(\d{2})(?:-(\d{2}))?|W(\d{2}))\.csv")
     for path in sorted((sources_dir / "erp" / folder).glob(f"{prefix}*.csv")):
         match = pattern.fullmatch(path.name)
         if match is None:
             raise ValueError(f"Unexpected ERP file name: {folder}/{path.name}")
-        year, month, day = (int(part) if part else None for part in match.groups())
-        if day is None:
+        year, month, day, week = (int(part) if part else None for part in match.groups())
+        if week is not None:
+            first = date.fromisocalendar(year, week, 1)
+            last = first + timedelta(days=6)
+        elif day is None:
             first = date(year, month, 1)
             last = (first + timedelta(days=31)).replace(day=1) - timedelta(days=1)
         else:

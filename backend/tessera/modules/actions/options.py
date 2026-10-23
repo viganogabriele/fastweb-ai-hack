@@ -1271,8 +1271,13 @@ def case_products(run_repo: repo.Repo, case: Case) -> list[tuple[str | None, str
 
 
 def case_forecast(run_repo: repo.Repo, store_id: str, sku: str, case_id: str | None):
-    """The case's own adjustment if any, else the store × SKU baseline."""
-    found = run_repo.list(ForecastAdjustment, store_id=store_id, sku=sku)
+    """The case's own adjustment if any, else the store × SKU baseline. Agent alternatives
+    (``ag.analyst``) are proposals for a human, never the default forecast."""
+    found = [
+        f
+        for f in run_repo.list(ForecastAdjustment, store_id=store_id, sku=sku)
+        if f.proposal_source != "agent"
+    ]
     own = [f for f in found if case_id is not None and case_id in f.case_ids]
     base = [f for f in found if not f.case_ids]
     return (own or base or [None])[-1]
@@ -1402,7 +1407,9 @@ def build_options(
     options: list[ActionOption] = []
     abstentions: list[str] = []
     cases = [
-        c for c in run_repo.list(Case) if c.status not in CLOSED_CASES and c.store_id in spec.stores
+        c
+        for c in repo.latest(run_repo.list(Case))
+        if c.status not in CLOSED_CASES and c.store_id in spec.stores
     ]
     for case in cases:
         try:

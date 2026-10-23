@@ -450,7 +450,7 @@ def run(ctx: Context) -> ModuleResult:
         carried.setdefault(str(r.data["store_id"]), set()).add(str(r.data["sku"]))
     built = build_overlays(
         ctx.spec,
-        run_repo.list(Case),
+        repo.latest(run_repo.list(Case)),
         run_repo.list(Observation),
         run_repo.list(EvidenceRelation),
         baselines,
