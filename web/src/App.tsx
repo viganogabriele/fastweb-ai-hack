@@ -12,6 +12,7 @@ import {
 } from 'lucide-react'
 import { messages } from './i18n'
 import { ModulesPage } from './sections/ModulesPage'
+import { ReportsPage } from './sections/ReportsPage'
 import { RunWorkspace } from './sections/RunWorkspace'
 import type { Case } from './api/client'
 import { DEFAULT_CASE_QUEUE_FILTERS } from './sections/caseUtils'
@@ -236,6 +237,8 @@ export default function App() {
           />
           {currentId === 'modules' ? (
             <ModulesPage key={runs.selectedId} runs={runs} />
+          ) : currentId === 'reports' ? (
+            <ReportsPage runs={runs} />
           ) : ['overview', 'cases', 'sources'].includes(currentId) ? (
             <RunWorkspace
               key={`${currentId}-${runs.selectedId}`}
