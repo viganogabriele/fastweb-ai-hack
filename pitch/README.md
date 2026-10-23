@@ -10,6 +10,10 @@ rather than the stack. Read them in order.
 | `03-pitch-playbook.pdf` | The jury and its criteria, three messages, where the money leaks, 4-minute run sheet, numbers we can say, words to use and avoid, buyer and pilot | 10 min |
 | `04-tackling-bleeds.pdf` | Hard questions with short answers, plus our own loose ends to close before the demo | 12 min |
 
+Italian editions: `01-l-idea.pdf`, `02-il-processo.pdf`, `03-playbook-pitch.pdf`,
+`04-punti-deboli.pdf` (same content; sources in `src/` with `lang="it"`). Edit both languages
+when the content changes.
+
 Numbers come from the dev-store evaluations in PR #162 (EVL-02) and PR #163 (EVL-04). No
 hold-out result exists yet: update pack 3 and pack 4 once EVL-05 (#128) lands.
 

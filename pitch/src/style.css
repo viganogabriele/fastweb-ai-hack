@@ -260,3 +260,5 @@ td.k { color: var(--text); font-weight: 600; white-space: nowrap; }
 .checklist li { list-style: none; position: relative; padding-left: 1mm; }
 .checklist { padding-left: 6mm; }
 .checklist li::before { content: "□"; position: absolute; left: -5.5mm; color: var(--accent); }
+
+:lang(it) .qa .bridge::before { content: "Aggancio → "; }

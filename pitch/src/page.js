@@ -2,16 +2,19 @@
 // build.py reads the result from <body data-overflow="...">.
 document.fonts.ready.then(() => {
   const doc = document.body.dataset.doc || "";
+  const it = document.documentElement.lang === "it";
+  const pack = it ? "kit del pitch" : "pitch pack";
+  const disclaimer = it ? "Dati sintetici · Valentino è un brand dimostrativo" : "Synthetic data · Valentino is demo branding";
   const pages = [...document.querySelectorAll(".page")];
   pages.forEach((page, i) => {
     if (!page.classList.contains("cover")) {
       page.insertAdjacentHTML(
         "afterbegin",
-        `<div class="running"><span><b>Tessera</b> · pitch pack</span><span>${doc}</span></div>`,
+        `<div class="running"><span><b>Tessera</b> · ${pack}</span><span>${doc}</span></div>`,
       );
       page.insertAdjacentHTML(
         "beforeend",
-        `<div class="folio"><span>Synthetic data · Valentino is demo branding</span><span>${i + 1} / ${pages.length}</span></div>`,
+        `<div class="folio"><span>${disclaimer}</span><span>${i + 1} / ${pages.length}</span></div>`,
       );
     }
   });
