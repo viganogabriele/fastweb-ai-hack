@@ -1,7 +1,9 @@
 """HTTP boundary regressions: execute snapshots, publish atomically, isolate reads."""
 
 import json
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+from threading import Event
 
 import pytest
 from fastapi.testclient import TestClient
@@ -389,3 +391,137 @@ def test_submission_accepts_disabled_uninstalled_snapshot_and_503s_on_held_lock(
         assert client.post("/api/runs", json=payload).status_code == 202
     holder.dispose()
     engine.dispose()
+
+
+@pytest.mark.parametrize("suffix", ["", "/documents", "/documents/doc-1", "/cases"])
+def test_reset_during_lookup_preserves_snapshot_without_recreating_run(
+    service, monkeypatch, suffix
+):
+    from tessera.core.repo import Repo as StoredRepo
+    from tessera.core.repo import list_runs, reset_run
+
+    client, engine, _ = service
+    seed(engine)
+    original = StoredRepo.open
+    reset = False
+
+    def open_then_reset(bound_engine, run_id):
+        nonlocal reset
+        repo = original(bound_engine, run_id)
+        if not reset:
+            reset = True
+            reset_run(engine, run_id)
+        return repo
+
+    monkeypatch.setattr(StoredRepo, "open", open_then_reset)
+    response = client.get(f"/api/runs/run-1{suffix}")
+    assert response.status_code == 200, response.text
+    if not suffix:
+        assert response.json()["published"] is True
+    elif suffix == "/documents":
+        assert [item["id"] for item in response.json()] == ["doc-1"]
+    elif suffix == "/documents/doc-1":
+        assert response.json()["document"]["id"] == "doc-1"
+    assert list_runs(engine) == []
+    assert client.get(f"/api/runs/run-1{suffix}").status_code == 404
+
+
+def test_listing_does_not_recreate_runs_reset_after_enumeration(service, monkeypatch):
+    from tessera.api.routers import runs as routes
+    from tessera.core.repo import list_runs, reset_run
+
+    client, engine, _ = service
+    seed(engine)
+    original = routes.stored_runs
+
+    def list_then_reset(bound_engine):
+        result = original(bound_engine)
+        reset_run(engine, "run-1")
+        return result
+
+    monkeypatch.setattr(routes, "stored_runs", list_then_reset)
+    assert client.get("/api/runs").json() == []
+    assert list_runs(engine) == []
+
+
+@pytest.mark.parametrize("outcome", ["succeeded", "degraded", "blocked", "failed"])
+def test_active_run_hides_partial_outputs_and_preserves_previous_session(service, outcome):
+    from tessera.core.orchestrator import run
+
+    client, engine, _ = service
+    previous = seed(engine, "previous-session")
+    source = ModuleManifest(
+        id="src.test",
+        version="v1",
+        layer="sources",
+        description="Source committed before the next module completes",
+        requires=(),
+        optional_inputs=(),
+        produces=("SourceDocument",),
+        enabled=True,
+        mode="recorded",
+        params_schema={},
+    )
+    later = source.model_copy(update={"id": "ing.test", "requires": (source.id,)})
+    spec = RunSpec(
+        run_id="active-session",
+        **dict(
+            body(),
+            scenario_id="another-session",
+            modules=[{"manifest": manifest, "params": {}} for manifest in (source, later)],
+        ),
+    )
+    entered, release = Event(), Event()
+
+    def execute(ctx):
+        if ctx.manifest.id == source.id:
+            ctx.repo.put(document().model_copy(update={"text": "New session document"}))
+            status = "succeeded"
+        else:
+            entered.set()
+            assert release.wait(10), "Test did not release the active module"
+            status = outcome
+        return ModuleResult(
+            module_id=ctx.manifest.id,
+            module_version=ctx.manifest.version,
+            status=status,
+            counts={},
+            errors=(),
+            abstentions=(),
+        )
+
+    registry = Registry([RegisteredModule(manifest, execute) for manifest in (source, later)])
+    with ThreadPoolExecutor(max_workers=1) as worker:
+        future = worker.submit(run, spec, engine=engine, registry=registry, clients={})
+        try:
+            assert entered.wait(5), "Pipeline did not reach the second module"
+            metadata = client.get("/api/runs/active-session").json()
+            assert metadata["status"] == "running"
+            assert metadata["published"] is False
+            assert {m["module_id"]: m["status"] for m in metadata["module_runs"]} == {
+                source.id: "succeeded",
+                later.id: "running",
+            }
+            for suffix in ("documents", "documents/doc-1", "cases", "cases/case-1"):
+                assert client.get(f"/api/runs/active-session/{suffix}").status_code == 409
+            old = client.get("/api/runs/previous-session/documents/doc-1")
+            assert old.status_code == 200
+            assert old.json()["document"]["text"] == document().text
+            assert client.get("/api/runs/previous-session").json()["spec"] == previous.model_dump(
+                mode="json"
+            )
+        finally:
+            release.set()
+        future.result(timeout=10)
+
+    metadata = client.get("/api/runs/active-session").json()
+    assert metadata["status"] == outcome
+    published = outcome in {"succeeded", "degraded"}
+    assert metadata["published"] is published
+    response = client.get("/api/runs/active-session/documents/doc-1")
+    assert response.status_code == (200 if published else 409)
+    if published:
+        assert response.json()["document"]["text"] == "New session document"
+    assert client.get("/api/runs/previous-session/documents/doc-1").json()["document"]["text"] == (
+        document().text
+    )
