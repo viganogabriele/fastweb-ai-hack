@@ -78,7 +78,8 @@ def prepare(output, *, sources, config, code_version, case_ids=()):
     # Prevent a partially prepared candidate from being mistaken for an approved one.
     output.mkdir(mode=0o700, parents=True, exist_ok=False)
     try:
-        manifests = {m.id: m for m in Registry.discover().manifests()}
+        registry = Registry.discover()
+        manifests = {m.id: m for m in registry.manifests()}
         params = {
             "src.email": {"files": list(EMAILS)},
             "src.erp": {"history_days": 60},
@@ -112,6 +113,12 @@ def prepare(output, *, sources, config, code_version, case_ids=()):
             },
             authorized_fixture_refs=(),
         )
+        for snapshot in spec.modules:
+            registry.resolve(snapshot)
+        # These two files are read before copy_files() checks the selected inventory.
+        # Validate their lexical ancestors first, before a link could expose hidden inputs.
+        stores_path = allowed(sources / "erp/master_data/stores.csv")
+        split_path = allowed(config / "eval_split.yaml")
         scope = erp.window(spec, params["src.erp"], sources_dir=sources)
         paths = ["erp/" + relative for relative, _ in erp._MASTER]
         for folder, prefix, table, _, _ in erp._FACTS:
@@ -136,10 +143,10 @@ def prepare(output, *, sources, config, code_version, case_ids=()):
         # Dev sample is checked against the authoritative split before any model call.
         import yaml
 
-        split = yaml.safe_load((config / "eval_split.yaml").read_text())
+        split = yaml.safe_load(split_path.read_text())
         if not set(STORES) <= set(split["dev"]):
             raise ValueError("candidate contains a non-dev store")
-        with (sources / "erp/master_data/stores.csv").open() as stream:
+        with stores_path.open() as stream:
             known = {r["store_id"] for r in csv.DictReader(stream)}
         if not set(STORES) <= known:
             raise ValueError("unknown store")

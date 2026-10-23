@@ -37,7 +37,12 @@ SKU = "I10919B00011-999"
 
 
 @pytest.fixture
-def database(tmp_path):
+def selected_model():
+    return None
+
+
+@pytest.fixture
+def database(tmp_path, selected_model):
     engine = connect(f"sqlite:///{tmp_path / 'agent.db'}")
     _, records = read_fixtures(ROOT / "data/fixtures")
     spec = RunSpec(
@@ -51,7 +56,7 @@ def database(tmp_path):
         mode="fixture",
         modules=(),
         prompt_versions={},
-        model_versions={},
+        model_versions={agent.MANIFEST.id: selected_model} if selected_model else {},
         authorized_fixture_refs=(),
     )
     create_run(engine, spec)
@@ -407,7 +412,10 @@ def test_module_is_discoverable_and_requires_explicit_case_selection():
 
 
 @pytest.mark.parametrize("missing", [False, True])
-def test_module_uses_llm_adapter_and_keeps_replay_misses_explicit(database, monkeypatch, missing):
+@pytest.mark.parametrize("selected_model", [None, "frozen-alternative-model"])
+def test_module_uses_llm_adapter_and_keeps_replay_misses_explicit(
+    database, monkeypatch, missing, selected_model
+):
     from openai.types.chat import ChatCompletion
 
     from tessera.core.config import Settings
@@ -423,7 +431,7 @@ def test_module_uses_llm_adapter_and_keeps_replay_misses_explicit(database, monk
             requests = []
 
             def chat(self, messages, tools, model, **generation):
-                assert model == agent.MODEL
+                assert model == (selected_model or agent.MODEL)
                 self.requests.append(generation)
                 if missing:
                     raise ReplayMiss("not recorded")
@@ -472,6 +480,7 @@ def test_module_uses_llm_adapter_and_keeps_replay_misses_explicit(database, monk
         else:
             assert result.counts["traces"] == 1
             assert len(traces) == 1 and not traces[0].fallback_used
+            assert traces[0].id == f"trace:{spec.run_id}:{AMBIGUOUS}"
             assert client.requests[0]["cache_context"]["prompt_version"] == agent.PROMPT_VERSION
 
 

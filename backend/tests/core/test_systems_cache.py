@@ -1,5 +1,6 @@
 """Systems recordings preserve provenance bytes and cannot fall through to HTTP."""
 
+import base64
 import json
 
 import httpx
@@ -8,7 +9,8 @@ import pytest
 from tessera.core.cache import CacheCorrupt, ReplayMiss
 from tessera.core.config import Settings
 from tessera.core.contracts import RunSpec
-from tessera.core.systems_cache import SystemsCache, SystemsTransport
+from tessera.core.systems_cache import SystemsCache, SystemsTransport, systems_factory
+from tessera.modules.sources.systems_client import Crosswalk
 
 
 @pytest.fixture
@@ -66,6 +68,11 @@ def test_record_replay_preserves_bytes_and_does_not_construct_socket_transport(
         {"source_manifest_hash": "other"},
         {"config_hash": "other"},
         {"mode": "fixture"},
+        {"code_version": "another-build"},
+        {"scenario_id": "another-session"},
+        {"erp_max_seq": 42},
+        {"model_versions": {"ag.investigator": "different-model"}},
+        {"prompt_versions": {"ag.investigator": "different-prompt"}},
     ],
 )
 def test_other_scope_is_an_explicit_miss(tmp_path, spec, update):
@@ -100,3 +107,49 @@ def test_transient_errors_are_not_recorded(tmp_path, spec):
     result = get(cache, spec, "record", httpx.MockTransport(lambda _: httpx.Response(503)))
     assert result.status_code == 503
     assert not list(tmp_path.rglob("*.json"))
+
+
+@pytest.mark.parametrize("raw", [b"not JSON", b"[]", b"\xff"])
+def test_invalid_recorded_body_cannot_be_swallowed_as_an_unknown(tmp_path, spec, raw):
+    cache = SystemsCache(tmp_path)
+    get(cache, spec, "record", httpx.MockTransport(lambda _: httpx.Response(200, json={})))
+    path = next(tmp_path.rglob("*.json"))
+    key = path.stem
+    path.unlink()
+    cache.put(key, {"status": 200, "body": base64.b64encode(raw).decode()})
+    with pytest.raises(CacheCorrupt):
+        get(cache, spec)
+    with pytest.raises(CacheCorrupt):
+        cache.require_complete()
+
+
+def test_factory_freezes_nested_snapshot_settings_and_forces_recorded_runs_offline(tmp_path, spec):
+    cache = SystemsCache(tmp_path)
+    original = spec.model_copy(deep=True)
+    configured = settings("replay")
+    factory = systems_factory(configured, spec, cache)
+    get(cache, original, "record", httpx.MockTransport(lambda _: httpx.Response(200, json={})))
+    configured.llm_mode = "live"
+    configured.mocks_base_url = "https://elsewhere.test"
+    spec.model_versions["chat"] = "changed"
+    client = factory(Crosswalk({}, {}, {}, {}))
+    try:
+        assert client._http.get("/warehouse/v1/atp?asOf=2026-10-22").json() == {}
+    finally:
+        client.close()
+    factory = systems_factory(
+        settings("live"), original.model_copy(update={"mode": "recorded"}), cache
+    )
+    client = factory(Crosswalk({}, {}, {}, {}))
+    try:
+        with pytest.raises(ReplayMiss):
+            client._http.get("/warehouse/v1/atp?asOf=2026-10-21")
+    finally:
+        client.close()
+
+
+def test_get_bodies_are_rejected_before_network(tmp_path, spec):
+    transport = SystemsTransport(settings("replay"), spec, SystemsCache(tmp_path))
+    with httpx.Client(base_url="http://127.0.0.1:8088", transport=transport) as client:
+        with pytest.raises(ValueError, match="request body"):
+            client.request("GET", "/warehouse/v1/atp", content=b"different request")

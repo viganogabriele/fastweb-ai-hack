@@ -72,6 +72,19 @@ def digest(value):
     ).hexdigest()
 
 
+def semantic_payload(kind, payload):
+    # Retain measured timings in the DB/raw artifact hash. They describe this
+    # execution, rather than evidence, policy or the recorded model's choices.
+    if kind == "AgentTrace":
+        return {
+            **payload,
+            "steps": [
+                {k: v for k, v in step.items() if k != "duration_ms"} for step in payload["steps"]
+            ],
+        }
+    return payload
+
+
 def allowed(path):
     # Check every lexical ancestor before resolve() can hide a link or a
     # forbidden component (including one followed by '..').
@@ -237,6 +250,7 @@ def rebuild(
         "systems_cache_corrupt": [],
         "inputs": {},
         "output_sha256": None,
+        "output_hash_excludes": ["AgentTrace.steps[*].duration_ms"],
     }
     engine = None
     replay_cache = None
@@ -270,6 +284,13 @@ def rebuild(
             manifest["missing_prerequisites"].append(name)
             manifest["inputs"][name] = stage(root, dest)
             manifest["missing_prerequisites"].pop()
+        for name, expected in (
+            ("sources", spec.source_manifest_hash),
+            ("config", spec.config_hash),
+        ):
+            if manifest["inputs"][name]["sha256"] != expected:
+                manifest["missing_prerequisites"].append(name + "_hash_mismatch")
+                raise IsolationError("staged inputs differ from the declared snapshot")
         settings = Settings(
             _env_file=None,
             sources_dir=attempt / "inputs/sources",
@@ -328,8 +349,17 @@ def rebuild(
                 for record in repo.list(model)
             ]
         manifest["output_sha256"] = digest(
-            sorted(payloads, key=lambda p: (p[0], p[1]["id"], p[1]["version"]))
+            [
+                (kind, semantic_payload(kind, item))
+                for kind, item in sorted(
+                    payloads, key=lambda p: (p[0], p[1]["id"], p[1]["version"])
+                )
+            ]
         )
+        manifest["artifacts"] = [
+            {"kind": kind, "id": item["id"], "version": item["version"], "sha256": digest(item)}
+            for kind, item in sorted(payloads, key=lambda p: (p[0], p[1]["id"], p[1]["version"]))
+        ]
         manifest["modules"] = [
             {
                 "id": item.module_id,
