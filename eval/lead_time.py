@@ -31,7 +31,7 @@ from dataclasses import dataclass, replace
 from datetime import UTC, date, datetime, time, timedelta
 from pathlib import Path
 
-from .baselines import ERP, Alert, local_instant, sales_alerts, stock_alerts
+from .baselines import ERP, Alert, local_instant, sales_alerts, stock_alerts, store_zones
 from .harness import split_stores
 
 EVENTS_KEY = "scenario/events.json"
@@ -358,16 +358,31 @@ def breadth(unit: Unit) -> str:
 
 
 def placebo_units(units: list[Unit], start: date, end: date, root: Path) -> list[Unit]:
-    """Each unit's window moved by ±14/21 days, inside the period and clear of the real one."""
+    """Move by local calendar weeks, inside the period and clear of all real store windows.
+
+    Excluding every same-store event is conservative: a broad alert may span products from
+    otherwise disjoint events. Controls can overlap each other; they are not replicates.
+    """
     out = []
     for unit in units:
+        zone = store_zones(root)[unit.store_id]
         low = local_instant(root, unit.store_id, start, time.min)
-        high = local_instant(root, unit.store_id, end + timedelta(days=1), time(23, 59, 59))
+        high = local_instant(root, unit.store_id, end, time.max)
         for days in PLACEBO_SHIFTS:
             shift = timedelta(days=days)
-            moved = replace(unit, start=unit.start + shift, t_end=unit.t_end + shift)
+            moved = replace(
+                unit,
+                start=(unit.start.astimezone(zone) + shift).astimezone(UTC),
+                t_end=(unit.t_end.astimezone(zone) + shift).astimezone(UTC),
+            )
             inside = low <= moved.start and moved.t_end <= high
-            if inside and (moved.t_end < unit.start or moved.start > unit.t_end):
+            overlaps_real = any(
+                real.store_id == unit.store_id
+                and moved.start <= real.t_end
+                and real.start <= moved.t_end
+                for real in units
+            )
+            if inside and not overlaps_real:
                 out.append(moved)
     return out
 
@@ -375,20 +390,50 @@ def placebo_units(units: list[Unit], start: date, end: date, root: Path) -> list
 def chance_check(alerts: dict[str, list[Alert]], units: list[Unit], placebo: list[Unit]) -> dict:
     """Detection on real windows vs the same events at shifted windows, by event breadth.
 
-    A rate near the placebo rate means matches are coincidences of alert volume and scope,
-    not detections; lead times on those units are not evidence of anticipation.
+    Raw counts are retained for auditing, but compare the paired real rate with the mean
+    per-unit control rate. Otherwise ineligible units and unequal numbers of valid shifts
+    change the event mix. This is descriptive, not a significance test or a causal null.
     """
+    by_unit = defaultdict(list)
+    for unit in placebo:
+        by_unit[(unit.event_id, unit.store_id)].append(unit)
     result = {}
     for group in ("store_wide", "broad", "specific"):
         real = [u for u in units if breadth(u) == group]
         fake = [u for u in placebo if breadth(u) == group]
-        result[group] = {
-            method: {
+        result[group] = {}
+        for method, found in alerts.items():
+            paired, excluded = [], []
+            for unit in real:
+                key = {"event_id": unit.event_id, "store_id": unit.store_id}
+                controls = by_unit[(unit.event_id, unit.store_id)]
+                if not controls:
+                    excluded.append(key)
+                    continue
+                paired.append(
+                    key
+                    | {
+                        "real": any(matches(a, unit) for a in found),
+                        "placebo": [
+                            sum(any(matches(a, u) for a in found) for u in controls),
+                            len(controls),
+                        ],
+                    }
+                )
+            result[group][method] = {
                 "real": [sum(any(matches(a, u) for a in found) for u in real), len(real)],
                 "placebo": [sum(any(matches(a, u) for a in found) for u in fake), len(fake)],
+                "paired": {
+                    "real": [sum(row["real"] for row in paired), len(paired)],
+                    "placebo_rate": (
+                        statistics.mean(row["placebo"][0] / row["placebo"][1] for row in paired)
+                        if paired
+                        else None
+                    ),
+                    "units": paired,
+                },
+                "excluded_no_placebo": excluded,
             }
-            for method, found in alerts.items()
-        }
     return result
 
 
@@ -492,6 +537,12 @@ def lead_time_report(root: Path, run, split: str, start: date, end: date) -> dic
     scored = score(alerts, units, store_days)
     for row, unit in zip(scored["units"], units, strict=True):
         row["breadth"] = breadth(unit)
+    # The main score retains its existing next-evening ERP grace day. For the chance
+    # comparison all methods must share the pipeline's within-period observation limit.
+    chance_units = [
+        replace(u, t_end=min(u.t_end, local_instant(root, u.store_id, end, time.max)))
+        for u in units
+    ]
     covered = {u.event_id for u in units}
     alert_refs = {a.ref for a in alerts.get("pipeline", [])}
     payloads = [record.get("payload", record) for record in cases]
@@ -509,7 +560,9 @@ def lead_time_report(root: Path, run, split: str, start: date, end: date) -> dic
         "pipeline": "frozen_run" if run else "not_scored",
         "calibration": calibration,
         "summary": scored["summary"],
-        "chance_check": chance_check(alerts, units, placebo_units(units, start, end, root)),
+        "chance_check": chance_check(
+            alerts, chance_units, placebo_units(chance_units, start, end, root)
+        ),
         "non_alert_cases": dict(Counter(row["as"] for row in verify)),
         "pipeline_alerts_by_case_type": dict(Counter(alert_types)),
         "excluded_events": sorted(e["id"] for e in events if e["id"] not in covered),
@@ -520,6 +573,10 @@ def lead_time_report(root: Path, run, split: str, start: date, end: date) -> dic
             "Pipeline time is the case's first_available_at as exported; a case whose scope "
             "was resolved later is credited from its first evidence.",
             "Units overlap in time and stores; they are not independent replicates.",
+            "Chance check is descriptive: compare paired rates, not pooled raw counts. "
+            "Similar rates do not prove coincidence; a gap does not establish significance. "
+            "Calendar shifts may change seasonality, alert coverage and event context; "
+            "excluded units may differ systematically from eligible ones.",
         ],
     }
     if run is not None:
