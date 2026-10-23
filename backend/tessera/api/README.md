@@ -105,7 +105,46 @@ use the same repository transaction as the other run artifact endpoints.
 Questions, observation references, simulated flag, status and answer references
 are returned unchanged from the contract. An existing case without questions
 returns an empty list. These GETs never invoke an agent, send messages, submit
-answers or create runs. Durable answers and follow-up scheduling remain the
-separate OUT-02b task; this API reads its available artifacts without importing
-that service or depending on model recordings. The endpoints are navigation
-within a run, not an additional user authorization mechanism.
+answers or create runs. The endpoints are navigation within a run, not an
+additional user authorization mechanism.
+
+## Simulated clarification answers (OUT-02)
+
+POST `/api/runs/{run_id}/cases/{case_id}/clarifications/{clarification_id}/answer`
+accepts `AnswerRequest` and returns 202 with an immutable `AnswerJob`. The body
+must repeat the three URL IDs exactly and supply the parent scenario, exact case
+and clarification versions, answer text, timezone-aware receipt timestamp,
+optional language, distinct follow-up scenario, follow-up clock and idempotency
+key. The new clock must reach the receipt timestamp, strictly after the parent
+clock. Mode, store and fixture authorization are determined by the server and
+published parent; the client cannot override them.
+
+The adapter commits the durable answer job before queuing its worker. The
+response identifies the simulated source document and the actual new run; it
+does not assert that execution has completed. Read `/api/runs/{job.run.run_id}`
+for publication, module errors and pending/running/failed/degraded status. The
+original run, question and source versions remain unchanged. All fixture writes
+and subsequent navigation need `?fixture=true` and enabled fixture access.
+
+Malformed input or mismatched scope returns 422; stale versions, an unpublished
+or superseded parent and conflicting idempotency-key reuse return 409. An exact
+answer with no trusted offline recording returns 424 without a network fallback.
+Missing source lineage, unavailable frozen code or invalid frozen module
+parameters return 503. A locked database returns 503 with `Retry-After: 5`.
+Retry an uncertain submission with its original payload and key; an accepted
+retry returns the same job without repeating completed execution. Background
+failure does not turn a committed submission into a failed HTTP response.
+
+On startup the API queues accepted pending answer jobs from existing databases,
+including the fixture database only when fixture access is enabled. It does not
+create new databases during recovery or replay completed jobs. A running job
+left by a crashed worker, or a failed projection, requires stopping the old
+worker and explicitly resetting the projection before retrying the durable job.
+This recovery applies to clarification jobs; generic PLT-06 run jobs retain the
+in-process lifecycle described above.
+
+The HTTP integration tests exercise durable acceptance, execution of a controlled
+module graph, job recovery and scope/error boundaries without provider calls.
+They do not establish that the real extraction/linking/forecast/options pipeline
+interprets a short contextual reply or has all its offline recordings. Parent
+#134 still requires that end-to-end acceptance and the answer UI in #135.

@@ -4,6 +4,7 @@ import logging
 from typing import Literal
 
 from fastapi import APIRouter, BackgroundTasks, HTTPException, Request
+from jsonschema.exceptions import ValidationError as SchemaError
 from sqlalchemy.exc import OperationalError
 
 from tessera.api.routers.runs import Namespace, PublishedRepo, engine_for, registry_for
@@ -48,8 +49,8 @@ def answer(
     if (body.run_id, body.case_id, body.clarification_id) != (run_id, case_id, clarification_id):
         raise HTTPException(422, "Answer scope must match the run, case and clarification URL")
     engine = engine_for(request, ns)
-    registry = registry_for(request)
     try:
+        registry = registry_for(request)
         job = submit_answer(engine, body, fixture_mode=ns == "fixture", registry=registry)
     except AnswerConflict as error:
         raise HTTPException(409, str(error)) from None
@@ -59,7 +60,7 @@ def answer(
         raise HTTPException(422, str(error)) from None
     except AnswerUnavailable as error:
         raise HTTPException(503, str(error)) from None
-    except ValueError:
+    except (ValueError, SchemaError):
         raise HTTPException(503, "Frozen pipeline implementation is unavailable") from None
     except OperationalError as error:
         if "locked" not in str(error.orig):

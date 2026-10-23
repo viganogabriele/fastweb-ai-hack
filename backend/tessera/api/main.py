@@ -1,5 +1,7 @@
 """Thin, run-bound API. Database connections are created lazily, never on import."""
 
+from asyncio import TaskGroup, to_thread
+from contextlib import asynccontextmanager
 from threading import Lock
 
 from fastapi import FastAPI
@@ -7,12 +9,46 @@ from sqlalchemy import Engine
 
 from tessera import __version__
 from tessera.api.models import Health
+from tessera.api.routers.clarifications import execute_answer
 from tessera.api.routers.clarifications import router as clarifications_router
 from tessera.api.routers.options import router as options_router
 from tessera.api.routers.runs import router
 from tessera.core.config import Settings, get_settings
 from tessera.core.db import connect
 from tessera.core.registry import Registry
+from tessera.modules.agents.answer_registry import pending_follow_ups
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    settings = app.state.settings or get_settings()
+    # Accepted answer events survive a restart before an HTTP background task starts.
+    # Scan existing databases only, preserving lazy database creation for a new app.
+    async with TaskGroup() as workers:
+        for namespace in ("product", "fixture"):
+            if namespace == "fixture" and not settings.fixture_mode:
+                continue
+            engine = app.state.engines[namespace]
+            if engine is None:
+                isolated = settings.model_copy(update={"fixture_mode": namespace == "fixture"})
+                if not isolated.db_path.is_file():
+                    continue
+                engine = app_engine(app, namespace)
+            pending = await to_thread(
+                pending_follow_ups, engine, fixture_mode=namespace == "fixture"
+            )
+            for job in pending:
+                workers.create_task(
+                    to_thread(
+                        execute_answer,
+                        engine,
+                        job,
+                        namespace == "fixture",
+                        app.state.registry,
+                        settings,
+                    )
+                )
+        yield
 
 
 def create_app(
@@ -22,7 +58,7 @@ def create_app(
     registry: Registry | None = None,
     settings: Settings | None = None,
 ) -> FastAPI:
-    app = FastAPI(title="Tessera", version=__version__)
+    app = FastAPI(title="Tessera", version=__version__, lifespan=lifespan)
     app.state.engines = {"product": engine, "fixture": fixture_engine}
     app.state.engine_lock = Lock()
     app.state.registry = registry
