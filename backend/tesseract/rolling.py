@@ -58,6 +58,7 @@ import json
 import math
 import multiprocessing
 import os
+import shutil
 import sys
 import threading
 import time as clock
@@ -1280,7 +1281,10 @@ def finish(workspace: Path, plan: dict, cache: Path, mode: str, wall: float) -> 
     ):
         link = bundle / target
         link.unlink(missing_ok=True)
-        os.link(out / name, link)
+        try:
+            os.link(out / name, link)
+        except OSError:  # Landlock refuses cross-directory links (EXDEV): copy instead
+            shutil.copyfile(out / name, link)
     hashes["protocol.json"] = write_json(out / "protocol.json", lead, pretty=True)
     hashes["protocol-forecast.json"] = write_json(
         out / "protocol-forecast.json", forecast, pretty=True
