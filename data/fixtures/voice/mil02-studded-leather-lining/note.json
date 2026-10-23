@@ -1,0 +1,14 @@
+{
+  "note_id": "mil02-studded-leather-lining",
+  "store_id": "MIL02",
+  "sent_at": "2026-10-22T19:20:00+02:00",
+  "timezone": "Europe/Rome",
+  "language": "it",
+  "author_ref": "pseudonym:mil02-staff-paolo",
+  "fixture_kind": "synthetic_extension",
+  "audio": "note.wav",
+  "audio_sha256": "sha256:5eee4bbd0a592852abe1f3eec9c57e1a23074f06b16f10882644e2d8f5d6e8ea",
+  "duration_s": 45.0,
+  "manual_transcript": "transcript.txt",
+  "asr_prompt": "Giacca in pelle marrone con le borchie, fodera interna, piumino lungo nero."
+}

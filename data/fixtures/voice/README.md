@@ -66,3 +66,31 @@ Example:
 
 Rebuild nothing here by hand: the files are the source. Record a note, compute
 `sha256sum cardigan.wav`, write `note.json` and `transcript.txt`.
+
+## The recorded notes (DATA-03)
+
+Three Italian closing notes recorded by the team on phones (m4a, AAC 48 kHz), converted to WAV
+16 kHz mono PCM with no metadata (`ffmpeg -i in.m4a -ar 16000 -ac 1 -c:a pcm_s16le
+-map_metadata -1 note.wav`). All are `synthetic_extension`: independent notes, not paraphrases of
+a dataset email, sent on the demo evening (2026-10-22, before the evening run).
+
+| `note_id` | Store | Length | Signals in the note |
+|---|---|---|---|
+| `mil01-melange-touch-leather-fit` | MIL01 | 26 s | melange coat rejected on touch (4); leather jacket M tight at the waist (3); 5-minute connection outage |
+| `mil02-studded-leather-lining` | MIL02 | 45 s | brown studded leather jacket put down over the lining (5), a request for it without studs; long black down jacket tried by 2, 1 sold; low traffic, rain; one person short tomorrow |
+| `mil01-wool-scarf-vest-size` | MIL01 | 40 s | light grey wool scarf "itchy" (3 of 6), a request for cashmere; blue padded vest, size S missing (XS/M only), 2 walk-outs; payment terminal froze |
+
+Deliberate traps, so the reader is tested on what it must not invent:
+
+- **Spoken store names are not master-data names.** The speakers say "Milano Brera", "Milano
+  Moscova" and "Roma Prati", which are not in `stores.csv`. The store comes from `store_id` in
+  the sidecar (MIL01/MIL02, dev stores only); the spoken name must not be resolved to another
+  store, and Roma must not become ROM01 (hold-out).
+- **Some products are not in the catalogue.** There are no leather jackets, studs or wool scarves
+  (only `CASHMERE SCARF`). These must stay unlinked observations, not be forced onto a SKU.
+  The near matches are ambiguous, so a link needs a confidence, not a certainty: `90X` grigio
+  melange exists only on jackets (KARAKORUM, MONTGENEVRE), not on a coat; the long black down
+  jacket fits several styles (HERMINE, FLAMMETTE, AMBRINE); the only navy down vest is the men's
+  TIB, while the note is about two women.
+- **Not every sentence is demand.** Connection outages, the payment terminal, traffic, weather and
+  staffing are operational or context notes, not SKU signals.
