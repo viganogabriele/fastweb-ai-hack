@@ -230,7 +230,7 @@ export function MarketView({ runId }: { runId: string }) {
   return (
     <div className="sd-mk">
       <motion.p className="sd-mk-lead" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ ...transition.view, duration: 0.5 }}>
-        Fino al {dayName(data.last_day)} la rete vende {formatChange(yoy(monthNow, monthLy))} sull'anno scorso a parità di giorni.{' '}
+        Fino al {dayName(data.last_day)} i negozi del run vendono {formatChange(yoy(monthNow, monthLy))} sull'anno scorso a parità di giorni.{' '}
         {regionNames[leader.region]} guida la crescita e i {(categoryNames[main.category] ?? main.category).toLowerCase()} valgono{' '}
         {Math.round(main.share * 100)}% delle vendite.
         {topTag ? ` Sui social gli hashtag in maggiore crescita sono #${data.social.hashtags.slice(0, 3).map((row) => row.tag).join(', #')}.` : ''}
@@ -253,7 +253,7 @@ export function MarketView({ runId }: { runId: string }) {
       </ul>
 
       <div className="sd-mk-grid">
-        <Section id="mk-monthly" title="Vendite della rete, mese per mese" meta="Tutti i negozi, euro al cambio di budget. Il trattino è l'anno precedente negli stessi giorni del mese." className="sd-mk-wide">
+        <Section id="mk-monthly" title="Vendite della rete, mese per mese" meta="Negozi del run, euro al cambio di budget. Il trattino è l'anno precedente negli stessi giorni del mese." className="sd-mk-wide">
           <MonthlyChart monthly={data.monthly} />
           <ul className="sd-ov-legend" aria-hidden="true">
             {REGIONS.map((region) => (
@@ -284,7 +284,7 @@ export function MarketView({ runId }: { runId: string }) {
           </ul>
         </Section>
 
-        <Section id="mk-categories" title="Categorie, ultime 4 settimane" meta="Quota delle vendite e crescita sull'anno scorso.">
+        <Section id="mk-categories" title="Categorie, ultime 4 settimane" meta="Dettaglio vendite SKU e crescita sull'anno scorso. Gli scostamenti dai KPI regionali restano nei dati.">
           <ul className="sd-mk-categories">
             {categories.map((row, index) => (
               <li key={row.category}>
@@ -299,7 +299,7 @@ export function MarketView({ runId }: { runId: string }) {
           </ul>
         </Section>
 
-        <Section id="mk-social" title="Il brand sui social" meta={`${data.social.posts.toLocaleString('it-IT')} post monitorati, per settimana e sentiment. Temi in crescita nelle ultime due settimane.`} className="sd-mk-wide">
+        <Section id="mk-social" title="Il brand sui social" meta={`${data.social.posts.toLocaleString('it-IT')} post nell'ascolto globale del brand, per settimana e sentiment. Temi in crescita nelle ultime due settimane.`} className="sd-mk-wide">
           <div className="sd-mk-social-wrap">
             <div>
               <SentimentChart weeks={data.social.weeks} last={data.last_day} />

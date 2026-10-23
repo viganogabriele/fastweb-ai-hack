@@ -290,7 +290,7 @@ export function Overview({
           ))}
         </div>
         <div className="sd-ov-viewbar__tools">
-          {view === 'ops' ? filters : <p className="sd-ov-viewbar__scope">Tutta la rete, confronto con l'anno scorso a parità di giorni</p>}
+          {view === 'ops' ? filters : <p className="sd-ov-viewbar__scope">Negozi del run, confronto con l'anno scorso a parità di giorni</p>}
         </div>
       </div>
       {view === 'market' ? (
