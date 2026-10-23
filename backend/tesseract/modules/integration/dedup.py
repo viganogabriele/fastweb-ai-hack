@@ -6,8 +6,9 @@ store, author or text similarity alone never proves a copy. Possible overlaps st
 separate and their quantities must not be added by consumers.
 
 Automatic corrections deliberately cover only explicit Italian/English phrases in
-the sentence of the fact's own unquoted segment that contains its quote (the model's
-shortest quote often drops "e non 58") and an unambiguous fact in its parent document.
+the fact's own unquoted quote, extended only by a value contrast that follows it
+directly (the model's shortest quote often drops "e non 58"; wording from another
+clause never applies), and an unambiguous fact in its parent document.
 A parent fact without a stated period matches only a correction that names the
 replaced value, on the parent's own business day. Other languages/ambiguous targets
 abstain; subjects and fixture metadata are never used as correction labels. No LLM,
@@ -89,13 +90,12 @@ ASSERTED_VALUE = re.compile(
     r"|(?:the )?(?:net sales|revenue|total)(?: today)?)\s+(?:e['’]|è|is|are)\s+\d",
     re.IGNORECASE,
 )
-# Sentence ends; a point before a digit is a decimal separator ("45.1k").
-SENTENCE_END = re.compile(r"[\n!?;]|\.(?!\d)")
-REPLACED_VALUE = re.compile(
+_CONTRAST_VALUE = (
     r"\b(?:e non|anzich[eé]|invece di|rather than|instead of)\s+"
-    r"(\d[\d.,'’]*(?<=\d)\s*(?:k|mila|mln)?)(?!\w)",
-    re.IGNORECASE,
+    r"(\d[\d.,'’]*(?<=\d)\s*(?:k|mila|mln)?)(?!\w)"
 )
+REPLACED_VALUE = re.compile(_CONTRAST_VALUE, re.IGNORECASE)
+TRAILING_CONTRAST = re.compile(r"\s*" + _CONTRAST_VALUE, re.IGNORECASE)
 SCALE = re.compile(r"\d\s*(k|mila|mln)\s*$", re.IGNORECASE)
 RefKey = tuple[str, str, str]
 LinkMap = dict[RefKey, EntityLink]
@@ -123,14 +123,11 @@ def _correction_intent(text: str) -> tuple[str | None, bool]:
     return None, True
 
 
-def _sentence(evidence, segment: Segment) -> str:
-    """The quote widened to its sentence in the segment: last end before it, first after."""
-    start, end = evidence.char_start - segment.char_start, evidence.char_end - segment.char_start
-    text = segment.text
-    before = [m.end() for m in SENTENCE_END.finditer(text, 0, start)]
-    # A sentence end that is the quote's own last character ends the sentence there.
-    after = SENTENCE_END.search(text, max(end - 1, start))
-    return text[before[-1] if before else 0 : after.end() if after else len(text)]
+def _own_words(evidence, segment: Segment) -> str:
+    """The quote plus a value contrast directly after it ("85,0k" + " e non 58")."""
+    end = evidence.char_end - segment.char_start
+    trailing = TRAILING_CONTRAST.match(segment.text, end)
+    return evidence.quote + (segment.text[end : trailing.end()] if trailing else "")
 
 
 def _replaced_values(text: str, new: Observation) -> set[float]:
@@ -359,12 +356,12 @@ def build_relations(
     for new in facts:
         new_key = _key(ref(new))
         doc = fact_docs[new_key]
-        own_sentences = [
-            _sentence(e, s)
+        own_words = [
+            _own_words(e, s)
             for e, s in zip(new.evidence, fact_segs[new_key], strict=True)
             if not s.is_quoted
         ]
-        text = "\n".join(own_sentences)
+        text = "\n".join(own_words)
         intent, uncertain = _correction_intent(text)
         if uncertain:
             errors.append(f"{new.id}: uncertain correction intent; facts retained")

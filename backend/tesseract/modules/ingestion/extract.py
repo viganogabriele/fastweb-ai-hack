@@ -20,8 +20,8 @@ and invalid required fields reject only their item. Both are reported as abstent
 units never become piece counts; the quantity verifier drops their unsupported numeric values.
 The tool schema and prompt remain strict so recorded raw responses can be replayed unchanged.
 
-An exact resend (same store, sender, local send date, subject and segments; only the send
-time differs) reuses the reading of the earliest such document instead of a second model
+An exact email resend (same store, sender, local send date, subject and segments; only the
+send time differs) reuses the reading of the earliest such document instead of a second model
 call, so its copied facts are identical and ``int.dedup`` can prove the copy.
 
 A document whose envelope fails twice (``ExtractionFailed``) is an abstention, never a guess.
@@ -439,7 +439,8 @@ def messages(document: SourceDocument, segments: list[Segment], timezone: str) -
 
 def resend_key(document: SourceDocument, segments: list[Segment], timezone: str) -> tuple:
     """Everything the model reads except the send time; no sender means no resend."""
-    if document.origin is None or document.available_at is None:
+    # Only a mail sender identifies a resend; e.g. every voice note has origin "voice".
+    if document.source_type != "email" or document.origin is None or document.available_at is None:
         return ("document", document.id)
     return (
         document.meta.get("store_id"),

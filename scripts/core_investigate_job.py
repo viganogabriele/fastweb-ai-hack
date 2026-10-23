@@ -4,7 +4,8 @@ record: copies the recorded candidate's published database into a new private di
 marks only that copy's parent RunSpec live (the API never records on a recorded parent;
 job identity and cache keys exclude execution mode), POSTs the job in record mode and
 writes the job's own LLM and simulated-system envelopes plus a manifest pinning the parent
-snapshot, artifact inventory, case version, job ID and trace. The candidate is unchanged.
+snapshot, artifact inventory, case version, job ID and trace. The scratch copy lives in a
+temporary directory outside the candidate and is removed on every exit.
 
 verify: on a fresh offline replay attempt rebuilt from the package (replay_demo.py), POSTs
 the same job against the unmodified recorded parent with networking denied, using only the
@@ -15,10 +16,12 @@ import argparse
 import hashlib
 import json
 import shutil
+import sqlite3
 import subprocess
 import sys
+import tempfile
+from contextlib import contextmanager
 from pathlib import Path
-from uuid import uuid4
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 
@@ -42,13 +45,27 @@ def recordings(directory):
     )
 
 
-def private_copy(database, root, settings_args):
-    """A new directory with a copy of the database; the source database is never opened."""
-    root.mkdir(mode=0o700)
-    settings = Settings(_env_file=None, data_dir=root / "data", **settings_args)
-    settings.data_dir.mkdir()
-    shutil.copyfile(allowed(database), settings.db_path)
-    return settings
+@contextmanager
+def private_copy(database, settings_args):
+    """A scratch directory outside every input with a consistent copy of the database.
+
+    SQLite's backup API includes committed WAL pages; the source is opened read-only.
+    The scratch directory is removed on every exit, including failures.
+    """
+    root = Path(tempfile.mkdtemp(prefix="core-investigate-job-"))
+    try:
+        settings = Settings(_env_file=None, data_dir=root / "data", **settings_args)
+        settings.data_dir.mkdir()
+        source = sqlite3.connect(f"file:{allowed(database)}?mode=ro", uri=True)
+        target = sqlite3.connect(settings.db_path)
+        try:
+            source.backup(target)
+        finally:
+            target.close()
+            source.close()
+        yield settings
+    finally:
+        shutil.rmtree(root)
 
 
 def parent_state(engine, spec, case_id):
@@ -107,9 +124,8 @@ def record(candidate, *, case_id, output):
         ["git", "rev-parse", "HEAD"], cwd=REPO_ROOT, text=True
     ).strip()
     source = Settings(_env_file=None, data_dir=candidate / "runtime")
-    settings = private_copy(
+    with private_copy(
         source.db_path,
-        candidate / ("job-recording-" + uuid4().hex),
         {
             "llm_mode": "record",
             "sources_dir": candidate / "sources",
@@ -117,7 +133,11 @@ def record(candidate, *, case_id, output):
             "llm_concurrency": 1,
             "llm_deadline_seconds": 900,
         },
-    )
+    ) as settings:
+        return _record(settings, spec, case_id, output, execution_sha)
+
+
+def _record(settings, spec, case_id, output, execution_sha):
     engine = connect(settings.db_url)
     try:
         before, case, parent_traces = parent_state(engine, spec, case_id)
@@ -176,7 +196,6 @@ def record(candidate, *, case_id, output):
         ],
     }
     (output / "manifest.json").write_text(json.dumps(manifest, sort_keys=True, indent=2) + "\n")
-    shutil.rmtree(settings.data_dir.parent)
     return manifest
 
 
@@ -194,16 +213,19 @@ def verify(attempt, *, job, workspace):
             raise ValueError(f"packaged {name} differs from the job manifest")
     workspace.mkdir(mode=0o700, parents=True, exist_ok=True)
     attempt_settings = Settings(_env_file=None, data_dir=attempt / "data")
-    settings = private_copy(
+    with private_copy(
         attempt_settings.db_path,
-        workspace / ("job-replay-" + uuid4().hex),
         {
             "llm_mode": "replay",
             "sources_dir": attempt / "inputs/sources",
             "config_dir": attempt / "inputs/config",
             "fastweb_keys_file": workspace / "no-credentials.json",
         },
-    )
+    ) as settings:
+        return _verify(settings, job, manifest)
+
+
+def _verify(settings, job, manifest):
     staged = {
         name: stage(job / name, settings.data_dir / name)
         for name in ("llm_cache", "systems_cache")
@@ -244,7 +266,6 @@ def verify(attempt, *, job, workspace):
         },
     }
     result["status"] = "passed" if all(result["checks"].values()) and not denied else "failed"
-    shutil.rmtree(settings.data_dir.parent)
     return result
 
 

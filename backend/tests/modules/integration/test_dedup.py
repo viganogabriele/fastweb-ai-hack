@@ -569,12 +569,20 @@ def sales(
     return doc, seg, obs
 
 
-def correction_pair(correction=CORRECTION, *, old_value=58000, at=T2, period=DAY, old_period=None):
+def correction_pair(
+    correction=CORRECTION,
+    *,
+    quote="il fatturato di oggi e' 85,0k",
+    old_value=58000,
+    at=T2,
+    period=DAY,
+    old_period=None,
+):
     old = sales("old", ORIGINAL, "Fatturato: 58,0k", old_value, period=old_period or (None, None))
     new = sales(
         "new",
         correction,
-        "il fatturato di oggi e' 85,0k",
+        quote,
         85000,
         at=at,
         parent=old[0].id,
@@ -584,7 +592,7 @@ def correction_pair(correction=CORRECTION, *, old_value=58000, at=T2, period=DAY
     return old, new
 
 
-def test_shortest_quote_still_reads_the_correction_sentence_and_names_the_target():
+def test_shortest_quote_still_reads_the_contrast_after_it_and_names_the_target():
     old, new = correction_pair()
     relations, abstentions = infer(old, new)
     assert not abstentions
@@ -617,7 +625,10 @@ def test_named_wrong_value_picks_the_one_parent_figure_it_replaces():
     "variant",
     [
         {"correction": CORRECTION.replace("e non 58", "e non 59")},  # names another value
-        {"correction": "Correzione: il fatturato di oggi e' 85,0k."},  # no value named
+        {  # no value named
+            "correction": "Correzione: il fatturato di oggi e' 85,0k.",
+            "quote": "Correzione: il fatturato di oggi e' 85,0k",
+        },
         {"at": T2 + timedelta(days=1)},  # a later day's mail
         {"period": (None, None)},  # the correction's own day is unknown
         {"old_value": 58},  # "e non 58" after "85,0k" means 58k, never 58
@@ -644,3 +655,29 @@ def test_equal_known_periods_still_require_the_named_value():
     relations, abstentions = infer(old, new)
     assert all(r.relation != "supersedes" for r in relations)
     assert any("found 0" in a for a in abstentions)
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Ritiriamo il dato del fatturato, Aurea nera: 9 richieste.",
+        "Correzione: fatturato 85k, Aurea nera: 9 richieste.",
+        "Aurea nera: 9 richieste, ritiriamo il dato del fatturato.",
+    ],
+)
+def test_correction_words_of_another_clause_never_touch_the_quoted_fact(text):
+    a = fact("a")
+    b = fact("b", at=T2, text=text, value=9, parent=a[0].id)
+    start = text.index("Aurea nera: 9 richieste")
+    evidence = (
+        b[2]
+        .evidence[0]
+        .model_copy(
+            update={"quote": "Aurea nera: 9 richieste", "char_start": start, "char_end": start + 23}
+        )
+    )
+    b = (b[0], b[1], b[2].model_copy(update={"evidence": (evidence,)}))
+    relations, abstentions = infer(a, b)
+    assert not abstentions
+    assert [r.relation for r in relations] == ["possibly_same_episode"]
+    assert len(dedup.state_at([a[2], b[2]], relations, T3).active_refs) == 2
