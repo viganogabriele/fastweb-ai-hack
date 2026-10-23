@@ -65,5 +65,7 @@ policy:
     donor_max_additional_lost: { value: 0, unit: units, note: "extra donor lost units against hold, high scenario" }
     max_transfer_cost_eur: { value: 100, unit: eur_per_leg, note: "transport cost ceiling of one leg" }
     max_stock_age_days: { value: 1, unit: days, note: "days between the stock snapshot and the horizon start" }
-    # scarce_skus: not declared on purpose. Strategic scarcity is allocation's call (RFC §4.10);
-    # until they list the SKUs (an empty list included), every move has scarcity_policy=unknown.
+    # Demo declarations (team decision 2026-10-23): stated as assumptions on every option card.
+    scarce_skus: { value: [], unit: sku, note: "declared: no SKU under strategic scarcity allocation" }
+    size_curve: { value: uniform, unit: policy, note: "declared: colour demand split evenly over the SKU's master sizes" }
+    store_stock_netted: { value: true, unit: bool, note: "declared: store on_hand already net of reservations and quality holds" }

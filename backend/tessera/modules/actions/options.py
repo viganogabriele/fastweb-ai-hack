@@ -20,7 +20,10 @@ Every movement check is mandatory and comes back ``pass``, ``fail`` or ``unknown
 or a missing policy entry is ``unknown``, never an implicit permission. Without a verified size
 curve (``size_demand_unknown``) nothing is quantified per size and the move is blocked: the
 option still shows the stock per size and the checks, and the store is asked to confirm. Policy
-values come from ``policy.options`` in ``config/domain.yaml``.
+values come from ``policy.options`` in ``config/domain.yaml``; two of them are declarations that
+stand in for missing data and are named as such in the checks: ``size_curve: uniform`` (colour
+demand split evenly over the master sizes, used by ``gather`` when no verified curve is given)
+and ``store_stock_netted`` (store ``on_hand`` taken as net of reservations and quality holds).
 
 Simulation (ACT-01 ``simulate_stock``), per scenario low/base/high of servable demand × the
 location's size share, over the destination's horizon D+1..D+n:
@@ -122,6 +125,8 @@ class OptionsPolicy:
     max_transfer_cost_eur: float | None = None
     max_stock_age_days: int | None = None
     scarce_skus: frozenset[str] | None = None
+    size_curve: Literal["uniform"] | None = None  # declared curve when no verified one exists
+    store_stock_netted: bool | None = None  # declared: store on_hand is net of reservations/holds
 
 
 @dataclass(frozen=True)
@@ -232,6 +237,10 @@ def policy_from(entries: Mapping[str, Any]) -> OptionsPolicy:
         max_transfer_cost_eur=real("max_transfer_cost_eur"),
         max_stock_age_days=whole("max_stock_age_days"),
         scarce_skus=names("scarce_skus"),
+        size_curve="uniform" if value("size_curve") == "uniform" else None,
+        store_stock_netted=None
+        if value("store_stock_netted") is None
+        else bool(value("store_stock_netted")),
     )
 
 
@@ -503,8 +512,8 @@ def _quantities(
         _stock_check("donor_stock", donor.store_id, donor_fact),
         _freshness(inputs, donor, size),
         _inbound(inputs.dest, size),
-        _netting("reservations", donor_fact, "reservations_included", "reservations"),
-        _netting("quality_hold", donor_fact, "quality_holds_included", "quality holds"),
+        _netting("reservations", donor_fact, "reservations_included", "reservations", policy),
+        _netting("quality_hold", donor_fact, "quality_holds_included", "quality holds", policy),
         _shared_resources(ledger, reserved),
         _forecast_check("dest_forecast", inputs.dest, dest_demand),
         _forecast_check("donor_forecast", donor, donor_demand),
@@ -828,12 +837,21 @@ def _inbound(dest: Position, size: str) -> Check:
     return _check("dest_inbound", "pass", f"{dest.store_id}: nothing in transit at the snapshot")
 
 
-def _netting(name: str, fact: StockFact | Unknown | None, attr: str, what: str) -> Check:
+def _netting(
+    name: str, fact: StockFact | Unknown | None, attr: str, what: str, policy: OptionsPolicy
+) -> Check:
     if not isinstance(fact, StockFact):
         return _check(name, "unknown", "donor stock unknown")
     included = getattr(fact, attr)
     if included is False:
         return _check(name, "pass", f"{fact.basis} is net of {what}", _fact_refs(fact))
+    if included is None and fact.basis == "on_hand" and policy.store_stock_netted:
+        return _check(
+            name,
+            "pass",
+            f"{fact.location_id} on_hand taken as net of {what} (declared policy)",
+            _fact_refs(fact),
+        )
     state = "not stated by the source" if included is None else "included, amount unknown"
     return _check(
         name, "unknown", f"{fact.location_id} {fact.basis}: {what} {state}", _fact_refs(fact)
@@ -1226,12 +1244,21 @@ def gather(
     start = spec.as_of.astimezone(tz).date() + timedelta(days=1)
     horizon = (start, start + timedelta(days=horizon_days - 1))
     sku, size = case_product(case)
-    curves = size_curves or {}
+    curves = dict(size_curves or {})
 
     eans: dict[str, str | None] = {}
     if sku is not None:
         for row in erp.read(run_repo, "sku_size_ean", sku=sku):
             eans[str(row.data["size"])] = str(row.data.get("ean") or "") or None
+
+    def curve(store: str) -> SizeCurve | None:
+        if store in curves:
+            return curves[store]
+        if policy.size_curve == "uniform" and eans:
+            share = 1 / len(eans)
+            basis = f"declared policy: uniform over {len(eans)} master sizes"
+            return SizeCurve({s: share for s in eans}, basis)
+        return None
 
     def position(store: str) -> Position:
         data = stores[store]
@@ -1251,7 +1278,7 @@ def gather(
             in_assortment=any(
                 str(r.data["sku"]) == sku for r in erp.read(run_repo, "assortment", store_id=store)
             ),
-            size_curve=curves.get(store),
+            size_curve=curve(store),
         )
 
     if sku is None:

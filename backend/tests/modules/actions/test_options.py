@@ -228,12 +228,26 @@ def recommended(opts) -> list[str]:
 # Pure service
 
 
-def test_policy_is_read_from_domain_yaml_and_scarcity_stays_undeclared():
+def test_policy_is_read_from_domain_yaml():
     policy = options.load_policy(ROOT / "config")
     assert policy.max_units_per_transfer is not None and policy.donor_min_stock is not None
     assert policy.transfer_case_types == frozenset({"unmet_demand"})
-    assert policy.scarce_skus is None
+    assert policy.scarce_skus == frozenset()
+    assert policy.size_curve == "uniform" and policy.store_stock_netted is True
     assert options.policy_from({}) == OptionsPolicy()
+
+
+def test_store_on_hand_counts_as_netted_only_by_declared_policy():
+    donor = position("MIL02", DONOR_STOCK, forecast("MIL02", 1.0), netted=None)
+    donor = replace(
+        donor,
+        stock={s: f.model_copy(update={"basis": "on_hand"}) for s, f in donor.stock.items()},
+    )
+    declared = by_kind(evaluate_options(inputs(donor=donor)))["transfer"]
+    assert checks(declared)["reservations"] == checks(declared)["quality_hold"] == "pass"
+    silent = replace(POLICY, store_stock_netted=None)
+    t = by_kind(evaluate_options(inputs(donor=donor, policy=silent)))["transfer"]
+    assert checks(t)["reservations"] == checks(t)["quality_hold"] == "unknown"
 
 
 def test_admissible_transfer_is_recommended_with_whole_units_and_comparison():
@@ -607,11 +621,14 @@ def test_module_writes_options_for_open_cases_with_domestic_donors_only(tmp_path
     stored = {o.kind: o for o in repo.list(ActionOption, case_id=fixture_case().id)}
     t = stored["transfer"]
     assert t.legs[0].origin == "MIL02" and t.run_id == spec.run_id
-    # ERP store stock is physical on-hand with no netting; no size curve exists yet.
-    status = checks(t)
-    assert status["size_curve"] == status["reservations"] == "unknown"
-    assert status["dest_forecast"] == status["donor_forecast"] == "pass"
-    assert not t.recommended and stored["ask_store"].recommended
+    # Declared policies stand in for the missing size curve and store reservations.
+    assert all(v == "pass" for v in checks(t).values()), checks(t)
+    detail = {c.name: c.detail for c in t.checks}
+    assert "declared policy: uniform over 6 master sizes" in detail["size_curve"]
+    assert "declared policy" in detail["reservations"]
+    assert recommended(stored.values()) == ["transfer"]
+    (leg,) = t.legs
+    assert (leg.size, leg.qty, leg.lane_id) == ("1", 2, "LN-1002-1001")
     assert t.available_at <= T
 
 
