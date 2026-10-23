@@ -168,10 +168,29 @@ and, for noise, the email answer-key indexes; nothing else from the oracle.
   detected by T_end" counts; false alerts per store-day; `decision_due_at - t_pipeline`;
   duplicate/correction/forward/noise mails behind cases, folded copies and fragmented units.
 
-- **Chance check**: every unit's window shifted by ±14/21 days (inside the period, clear of
-  the real window) and scored again, per event breadth (`store_wide`, `broad` > 10 SKUs,
-  `specific`). A real detection rate near the placebo rate means the matches are coincidences
-  of alert volume and scope; do not read lead times on that group as anticipation.
+- **Chance check**: shift windows by ±14/21 **local calendar days**, preserving weekdays and
+  local boundaries, per event breadth (`store_wide`, `broad` > 10 SKUs, `specific` ≤ 10).
+  For this diagnostic, cap real windows at the last evaluation day's end, the common
+  observation limit of pipeline cases and baselines. The main lead-time score retains its
+  existing next-evening ERP grace day. Shift these capped windows without further clipping;
+  reject controls outside the period or touching **any** real event window at that store,
+  even a different product (broad alerts can span both). This includes unscored events
+  ending before the period whose next-day ERP observation windows reach into it; they
+  block controls without entering either comparison population. Controls may overlap
+  each other.
+  `chance_check[group][method].real` and `.placebo` retain raw `[detected, total]` counts for
+  auditing, but **do not compare those pooled rates**: units can have zero to four controls.
+  Compare `.paired.real[0] / .paired.real[1]` with `.paired.placebo_rate` instead. Both use
+  only units with at least one control, with equal weight per unit; the placebo rate is the
+  mean of each unit's control detection fraction. `.paired.units` exposes each event/store's
+  real detection and control counts; `.excluded_no_placebo` lists ineligible units. With no
+  eligible units the paired real count is `[0, 0]` and placebo rate is `null`, not zero.
+  This is a **descriptive sensitivity check**, not a significance test: similar rates show
+  no separation under these shifts, not proof that individual matches are coincidences.
+  A positive gap does not establish performance above chance or anticipation. Seasonal
+  changes, sparse frozen-case coverage, overlapping controls and selection of eligible
+  units limit the comparison. Broad groups with similar rates do not support anticipation
+  claims from lead times alone. Apply fixed settings to hold-out; do not tune on its results.
 
 False alerts are relative to planted events, so real unplanned stock-outs count against the
 stock baseline; broad events (a season group, a style everywhere) can be matched by chance.
