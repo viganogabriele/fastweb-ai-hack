@@ -165,7 +165,9 @@ def test_replay_miss_is_explicit_and_discards_the_job_snapshot(service, monkeypa
     job = response.json()["spec"]["run_id"]
     state = client.get(f"/api/runs/{job}").json()
     assert state["status"] == "failed" and not state["published"]
-    assert state["module_runs"][-1]["result"]["errors"] == ["Missing LLM recording (replay miss)"]
+    assert state["module_runs"][-1]["result"]["errors"] == [
+        "Missing LLM or systems recording (replay miss)"
+    ]
     assert client.get(f"/api/runs/{job}/cases/case-1/traces").status_code == 409
     with repo_session(engine, job) as repo:
         assert repo.list(Case) == []

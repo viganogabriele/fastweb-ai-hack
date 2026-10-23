@@ -25,6 +25,7 @@ from tessera.core.orchestrator import run
 from tessera.core.registry import Registry
 from tessera.core.repo import KINDS
 from tessera.core.run_repo import repo_session
+from tessera.core.systems_cache import SystemsCache, systems_factory
 
 MARKER = ".tessera-replay-workspace.json"
 OWNER = {"format": 1, "owner": "tessera-offline-replay"}
@@ -193,9 +194,28 @@ def attempt_directory(workspace, inputs):
     return attempt
 
 
-def rebuild(spec, *, sources, config, cache, workspace, voice=None, registry=None):
+def rebuild(
+    spec,
+    *,
+    sources,
+    config,
+    cache,
+    workspace,
+    voice=None,
+    systems_cache=None,
+    registry=None,
+):
     """Trusted installed modules only. Each invocation starts with a fresh SQLite DB."""
-    attempt = attempt_directory(workspace, (sources, config, cache, *((voice,) if voice else ())))
+    attempt = attempt_directory(
+        workspace,
+        (
+            sources,
+            config,
+            cache,
+            *((voice,) if voice else ()),
+            *((systems_cache,) if systems_cache else ()),
+        ),
+    )
     manifest = {
         "format": 1,
         "attempt_id": attempt.name,
@@ -213,11 +233,14 @@ def rebuild(spec, *, sources, config, cache, workspace, voice=None, registry=Non
         "network_attempts": 0,
         "cache_misses": [],
         "cache_corrupt": [],
+        "systems_cache_misses": [],
+        "systems_cache_corrupt": [],
         "inputs": {},
         "output_sha256": None,
     }
     engine = None
     replay_cache = None
+    recorded_systems = None
     denied = []
     try:
         if spec.mode == "unavailable" or not any(
@@ -241,6 +264,8 @@ def rebuild(spec, *, sources, config, cache, workspace, voice=None, registry=Non
         ]
         if voice is not None:
             trees.append(("voice", voice, attempt / "data/fixtures/voice"))
+        if systems_cache is not None:
+            trees.append(("systems_cache", systems_cache, attempt / "data/systems_cache"))
         for name, root, dest in trees:
             manifest["missing_prerequisites"].append(name)
             manifest["inputs"][name] = stage(root, dest)
@@ -268,18 +293,26 @@ def rebuild(spec, *, sources, config, cache, workspace, voice=None, registry=Non
             }
         )
         replay_cache = ReplayCache(settings.data_dir / "llm_cache")
+        recorded_systems = SystemsCache(settings.data_dir / "systems_cache")
         engine = connect(settings.db_url)
         old_logging = logging.root.manager.disable
         try:
             logging.disable(logging.CRITICAL)
-            with offline() as denied, environment(settings), open(os.devnull, "w") as sink:
+            with (
+                offline() as denied,
+                environment(settings),
+                open(os.devnull, "w") as sink,
+            ):
                 with redirect_stdout(sink), redirect_stderr(sink):
                     client = LLMClient(settings, cache=replay_cache).for_run(spec)
                     statuses = run(
                         spec,
                         engine=engine,
                         registry=registry or Registry.discover(),
-                        clients={"llm": client},
+                        clients={
+                            "llm": client,
+                            "systems": systems_factory(settings, spec, recorded_systems),
+                        },
                         settings=settings,
                     )
         finally:
@@ -317,6 +350,8 @@ def rebuild(spec, *, sources, config, cache, workspace, voice=None, registry=Non
             and not denied
             and not replay_cache.missing
             and not replay_cache.corrupt
+            and not recorded_systems.missing
+            and not recorded_systems.corrupt
             and not manifest["missing_prerequisites"]
         ):
             manifest["status"] = manifest["run_status"]
@@ -328,6 +363,12 @@ def rebuild(spec, *, sources, config, cache, workspace, voice=None, registry=Non
         if replay_cache is not None:
             manifest["cache_misses"] = sorted(replay_cache.missing)
             manifest["cache_corrupt"] = sorted(replay_cache.corrupt)
+        if recorded_systems is not None:
+            manifest["systems_cache_misses"] = sorted(recorded_systems.missing)
+            manifest["systems_cache_corrupt"] = sorted(recorded_systems.corrupt)
+            if recorded_systems.missing or recorded_systems.corrupt:
+                manifest["status"] = "failed"
+                manifest["missing_prerequisites"].append("valid_systems_recordings")
         if denied:
             manifest["missing_prerequisites"].append("offline_network_or_process_operation")
         if replay_cache is not None and (replay_cache.missing or replay_cache.corrupt):
@@ -345,7 +386,14 @@ def main(argv=None):
     for name in ("run-spec", "sources", "config", "cache", "workspace"):
         parser.add_argument("--" + name, type=Path, required=True)
     parser.add_argument(
-        "--voice", type=Path, help="authorized voice source tree (required for src.voice)"
+        "--voice",
+        type=Path,
+        help="authorized voice source tree (required for src.voice)",
+    )
+    parser.add_argument(
+        "--systems-cache",
+        type=Path,
+        help="recorded simulated stock/logistics GET responses",
     )
     args = parser.parse_args(argv)
     try:
@@ -360,6 +408,7 @@ def main(argv=None):
             cache=args.cache,
             workspace=args.workspace,
             voice=args.voice,
+            systems_cache=args.systems_cache,
         )
     except Exception as error:
         result = {"format": 1, "status": "failed", "error_type": type(error).__name__}

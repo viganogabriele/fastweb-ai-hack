@@ -160,6 +160,7 @@ def run(
                 raise ValueError("run has already been executed; create a new run_id")
             if clients is None:
                 from tessera.core.llm import LLMClient
+                from tessera.core.systems_cache import systems_factory
 
                 llm_settings = settings or get_settings()
                 if spec.mode != "live":
@@ -167,7 +168,8 @@ def run(
                 clients = {
                     "llm": LLMClient(
                         llm_settings, concurrency=llm_settings.llm_concurrency
-                    ).for_run(spec)
+                    ).for_run(spec),
+                    "systems": systems_factory(llm_settings, spec),
                 }
             repo.set_run_status("running")
             for module_id in plan:
@@ -259,6 +261,9 @@ def _execute(module_id, snapshot, entries, statuses, record, session, spec, clie
                         missing_optional_inputs=missing_optional,
                     )
                 )
+                recordings = getattr((clients or {}).get("systems"), "recordings", None)
+                if recordings is not None:
+                    recordings.require_complete()
                 if not isinstance(result, ModuleResult):
                     raise TypeError("module must return ModuleResult")
                 if (result.module_id, result.module_version) != (module_id, manifest.version):

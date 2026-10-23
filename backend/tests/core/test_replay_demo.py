@@ -8,6 +8,7 @@ import socket
 import subprocess
 import sys
 
+import httpx
 import pytest
 
 from tessera.core.config import REPO_ROOT
@@ -19,7 +20,9 @@ from tessera.core.contracts import (
     SourceDocument,
 )
 from tessera.core.registry import RegisteredModule, Registry
+from tessera.core.systems_cache import SystemsCache, SystemsTransport
 from tessera.modules.sources import emails, voice
+from tessera.modules.sources.systems_client import Crosswalk
 
 module_spec = importlib.util.spec_from_file_location(
     "replay_demo", REPO_ROOT / "scripts/replay_demo.py"
@@ -284,6 +287,41 @@ def test_subprocess_escape_is_denied(inputs):
     result = replay.rebuild(spec, **inputs, registry=registry)
     assert result["status"] == "failed" and result["network_attempts"] == 1
     assert "offline_network_or_process_operation" in result["missing_prerequisites"]
+
+
+@pytest.mark.parametrize("missing", [False, True])
+def test_systems_recordings_rebuild_offline_and_swallowed_misses_still_fail(
+    inputs, tmp_path, missing
+):
+    def callback(ctx):
+        client = ctx.clients["systems"](Crosswalk({}, {}, {}, {}))
+        try:
+            try:
+                response = client._http.get("/warehouse/v1/atp?asOf=2026-10-22")
+                assert response.json() == {"positions": []}
+            except replay.ReplayMiss:
+                pass  # Tool fallback cannot hide a missing systems prerequisite.
+        finally:
+            client.close()
+        return success(ctx)
+
+    spec, registry = custom(callback)
+    recorded = tmp_path / "systems"
+    recorded.mkdir()
+    if not missing:
+        transport = SystemsTransport(
+            replay.Settings(_env_file=None, llm_mode="record"),
+            spec,
+            SystemsCache(recorded),
+            upstream=httpx.MockTransport(lambda _: httpx.Response(200, json={"positions": []})),
+        )
+        with httpx.Client(base_url="http://127.0.0.1:8088", transport=transport) as client:
+            client.get("/warehouse/v1/atp?asOf=2026-10-22")
+    result = replay.rebuild(spec, **inputs, systems_cache=recorded, registry=registry)
+    assert result["status"] == ("failed" if missing else "succeeded")
+    assert result["network_attempts"] == 0
+    assert len(result["systems_cache_misses"]) == int(missing)
+    assert result["inputs"]["systems_cache"]["files"] == int(not missing)
 
 
 @pytest.mark.parametrize("location", ["sources", "config", "cache", "workspace"])
