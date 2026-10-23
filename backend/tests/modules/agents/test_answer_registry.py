@@ -478,3 +478,28 @@ def test_unsupported_pipeline_is_rejected_before_persisting(setup):
     with pytest.raises(AnswerUnavailable, match="requires extraction"):
         submit_answer(engine, request, registry=registry)
     assert count(engine, jobs) == count(engine, events) == 0
+
+
+def test_transitive_supporting_refs_outside_input_refs_are_seeded(setup):
+    engine, request, registry, seed, _, originals = setup
+    source, segment, observation, case, question = originals
+    extra = observation.model_copy(update={"id": "other-observation"})
+    case = case.model_copy(update={"supporting": (*case.supporting, ref(extra))})
+    seed(published=False)
+    from sqlalchemy import delete
+
+    from tessera.core.db import artifacts
+
+    with engine.begin() as conn:
+        conn.execute(delete(artifacts).where(artifacts.c.kind.in_(("Case", "Clarification"))))
+    with repo_session(engine, "parent", write=True) as repo:
+        repo.put(extra, case, question)
+        repo.publish()
+    job = submit_answer(engine, request, registry=registry)
+    execute_follow_up(engine, job.run.run_id, registry=registry, clients={})
+    with repo_session(engine, job.run.run_id) as repo:
+        historical = repo.get(Case, case.id)
+        assert len(historical.supporting) == 2
+        for reference in historical.supporting:
+            resolved = repo.get(Observation, reference.id, reference.version)
+            assert resolved is not None and resolved.run_id == job.run.run_id

@@ -141,6 +141,16 @@ def _closure(parent, roots):
     """
     ordered, visiting, seen = [], set(), set()
 
+    def references(value):
+        if isinstance(value, ArtifactRef):
+            yield value
+        elif isinstance(value, Contract):
+            for field in type(value).model_fields:
+                yield from references(getattr(value, field))
+        elif isinstance(value, (tuple, list)):
+            for item in value:
+                yield from references(item)
+
     def visit(ref):
         if ref.kind.startswith("erp.") or ref.kind == "ForecastVintage":
             return  # RunRepo validates these against the child's filtered ERP view.
@@ -153,7 +163,9 @@ def _closure(parent, roots):
             raise AnswerUnavailable("Unsupported parent reference")
         record = _load(parent, kind, ref.id, ref.version)
         visiting.add(ref)
-        for dependency in getattr(record, "input_refs", ()):
+        # Include supporting/contradicting/context and observation_refs, not
+        # just input_refs. Raw JSON source metadata remains original provenance.
+        for dependency in references(record):
             visit(dependency)
         if isinstance(record, Observation):
             for evidence in record.evidence:
@@ -195,6 +207,7 @@ def _prepare(conn, request, fixture_mode):
         .where(
             runs.c.scenario_id == request.scenario_id,
             runs.c.status == "published",
+            (runs.c.spec["mode"].as_string() == "fixture") == fixture_mode,
         )
         .order_by(runs.c.created_at.desc())
         .limit(1)
@@ -447,6 +460,9 @@ def execute_follow_up(
             raise AnswerUnavailable("Answer job not found in this namespace")
         payload = saved["payload"]
         job = AnswerJob.model_validate(payload["job"])
+        current_spec = conn.execute(select(runs.c.spec).where(runs.c.run_id == run_id)).scalar()
+        if current_spec is not None and RunSpec.model_validate(current_spec) != job.run:
+            raise AnswerConflict("Follow-up run ID now belongs to a different snapshot")
         projection = conn.execute(select(runs.c.status).where(runs.c.run_id == run_id)).scalar()
         if projection == "published":
             conn.execute(update(jobs).where(key).values(status="succeeded"))
