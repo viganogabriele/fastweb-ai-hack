@@ -185,6 +185,23 @@ def test_missing_week_is_not_estimable_never_filled_from_an_older_run(engine, so
     assert all(p.latent is None for p in fc.series)
 
 
+def test_vintage_with_only_later_weeks_bounds_availability(engine, sources):
+    # A SKU forecast only from a launch week after the horizon still cites the vintage, so
+    # the record cannot be available before it (RunRepo rejects a derived record that is).
+    path = sources / "erp/forecast/sku_store_weekly/fcst_sku_store_run_2026-10-12.csv"
+    with path.open("a", newline="", encoding="utf-8") as stream:
+        csv.writer(stream).writerow(fcst("2026-10-12", "2026-11-02", "MIL01", "J3-999", "4"))
+    repo = run_repo(engine, sources, T1, stores=("MIL01",))
+
+    baseline.write_baselines(repo, 7)
+
+    late = baseline.baseline(repo, "MIL01", "J3-999")
+    vintage = [r for r in repo.erp("forecast", store_id="MIL01", sku="J3-999")]
+    assert late.status == "not_estimable" and late.baseline_ref.version == "2026-10-12"
+    assert vintage and late.available_at == max(r.available_at for r in vintage)
+    assert late.available_at <= T1
+
+
 def test_conflicting_rows_and_absent_skus_are_not_estimable(engine, sources):
     repo = run_repo(engine, sources, T1)
 

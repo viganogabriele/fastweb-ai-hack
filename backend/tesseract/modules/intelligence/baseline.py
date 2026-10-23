@@ -157,8 +157,12 @@ def build_store(
         reasons = list(dict.fromkeys((*reasons, *daily.reasons)))
 
         vintage_ref = None
+        cited: tuple[repo.ErpRecord, ...] = ()
         if vintage is not None and weeks:
             row = next(iter(weeks.values()))[0]
+            # The cited vintage bounds availability even when none of its weeks is in the
+            # horizon (a SKU forecast only from a later launch week).
+            cited = (row,)
             stem = Path(row.source_refs[0].uri).stem
             vintage_ref = ArtifactRef(
                 kind="ForecastVintage",
@@ -179,7 +183,7 @@ def build_store(
             ForecastAdjustment(
                 id=f"baseline-{store_id.lower()}-{sku.lower()}-{start:%Y%m%d}",
                 version="v1",
-                available_at=max(row.available_at for row in inputs),
+                available_at=max(row.available_at for row in (*inputs, *cited)),
                 availability_basis="max(store master, forecast vintage rows)",
                 source_refs=source_refs,
                 run_id=spec.run_id,
