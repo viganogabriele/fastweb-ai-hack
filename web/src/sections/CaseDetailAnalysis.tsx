@@ -45,7 +45,7 @@ export function CaseDetailAnalysis({ item, runId, fixtureMode }: Props) {
     </> : <div className="sd-case-decision__empty"><strong>Contesto analitico sintetico non disponibile</strong>
       {item.blocking_uncertainties.length > 0
         ? <><p>Il caso riporta queste incertezze bloccanti:</p><ul>{item.blocking_uncertainties.map((reason) => <li key={reason}>{reason}</li>)}</ul></>
-        : <p>Nessun esempio sintetico è definito per questa combinazione run/caso/versione. Le opzioni del server sono mostrate separatamente qui sopra.</p>}
+        : <p>Nessun esempio sintetico è definito per questa combinazione run/caso/versione. Forecast e opzioni del server sono mostrati separatamente qui sopra.</p>}
     </div>}
   </section>
 }

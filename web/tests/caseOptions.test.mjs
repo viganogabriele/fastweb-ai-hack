@@ -237,24 +237,36 @@ test('uncertain commands remain reconcilable when refreshed options change or di
   }
 })
 
-test('reviewing one conflict preserves successful and uncertain commands on other options', async () => {
-  const conflictIntent = { ...intent, option_id: 'conflict' }
-  const successIntent = { ...intent, option_id: 'success' }
-  const { session, calls } = harness({ load: async () => [option, { ...option, id: 'conflict' }, { ...option, id: 'success' }],
+test('acknowledging one conflict preserves other uncertain commands and confirmed results', async () => {
+  const uncertain = { ...option, id: 'uncertain' }
+  const confirmed = { ...option, id: 'confirmed' }
+  const calls = []
+  let retry = false
+  const session = createOptionsSession(context, {
+    load: async () => [option, uncertain, confirmed],
     post: async (_, body) => {
-      if (body.option_id === 'conflict') throw new OptionsApiError(409)
-      if (body.option_id === 'o1') throw new TypeError('reply lost')
+      calls.push(body)
+      if (body.option_id === uncertain.id && !retry) throw new TypeError('lost response')
+      if (body.option_id === option.id) throw new OptionsApiError(409)
       return draft(body)
-    } })
-  await session.load(); await session.submit(intent); await session.submit(successIntent)
-  const original = session.snapshot().commands.get(intentKey(intent)).body
-  await session.submit(conflictIntent)
-  session.reviewed()
-  assert.equal(session.snapshot().commands.get(intentKey(intent)).body, original)
-  assert.equal(session.snapshot().commands.get(intentKey(successIntent)).status, 'success')
-  assert.equal(session.snapshot().commands.has(intentKey(conflictIntent)), false)
-  await session.submit(successIntent)
-  assert.equal(calls.length, 3, 'review must not enable duplicate successful commands')
+    },
+    key: () => `key-${calls.length}`
+  })
+  await session.load()
+  const uncertainIntent = { ...intent, option_id: uncertain.id }
+  const confirmedIntent = { ...intent, option_id: confirmed.id }
+  await session.submit(uncertainIntent)
+  await session.submit(confirmedIntent)
+  const original = session.snapshot().commands.get(intentKey(uncertainIntent)).body
   await session.submit(intent)
-  assert.equal(calls[3][1], original, 'review must not replace an uncertain command key')
+  session.reviewed()
+  assert.equal(session.snapshot().commands.has(intentKey(intent)), false, 'only the conflicted command is cleared for fresh review')
+  assert.equal(session.snapshot().commands.get(intentKey(confirmedIntent)).status, 'success')
+  assert.equal(session.snapshot().commands.get(intentKey(uncertainIntent)).body, original)
+  retry = true
+  await session.submit(uncertainIntent)
+  assert.equal(calls.at(-1), original, 'uncertain command must keep its frozen payload and key after unrelated review')
+  const count = calls.length
+  await session.submit(confirmedIntent)
+  assert.equal(calls.length, count, 'confirmed commands remain protected against resubmission')
 })
