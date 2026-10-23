@@ -4,6 +4,7 @@ import { Button, StatusBadge } from '../ui'
 import { findCaseDetailFixture } from '../mocks/caseDetails'
 import type { ActionOption, ForecastAdjustment } from '../mocks/caseDetails'
 import { canDecideOption, decisionForRecord, decisionKey, optionBlockers } from './caseDecision'
+import { CaseOptionsPanel } from './CaseOptionsPanel'
 
 type Props = { item: Case; runId: string; fixtureMode: boolean }
 type Decision = { key: string; action: 'approved' | 'rejected' } | null
@@ -20,6 +21,7 @@ export function CaseDetailAnalysis({ item, runId, fixtureMode }: Props) {
     <header><div><p className="sd-case-detail__eyebrow">Analisi e proposta</p><h3 id="sd-case-analysis-title">Previsione, traccia e opzioni</h3></div>
       <StatusBadge tone={detail ? 'warning' : 'neutral'} label={detail ? 'Esempio sintetico' : fixtureMode ? 'Fixture senza esempio' : 'Dettagli non esposti'} />
     </header>
+    <CaseOptionsPanel item={item} runId={runId} fixtureMode={fixtureMode} />
     {detail ? <>
       <p className="sd-case-decision__demo-label">Contesto demo fixture · run {runId} · caso {item.id} · versione {item.version}. Tutti i valori e gli esiti seguenti sono esempi sintetici.</p>
       <ForecastView forecast={detail.forecast} />
