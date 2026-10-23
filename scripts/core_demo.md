@@ -128,7 +128,8 @@ only the AgentTrace raw hashes differ, because of the excluded `duration_ms`.
 `make demo` still replays the synthetic `decisions.json`.
 
 Which options a human can decide here was checked by POSTing every current
-option against a throwaway copy of a fresh replay:
+option against a throwaway copy of a fresh replay. That sweep's log is local and
+is not packaged; its results:
 
 - Reject: all 157.
 - Approve: 152. The exceptions are the D1 `hold`, `verify_stock`, `ask_store` and
@@ -288,8 +289,9 @@ TESSERACT_API_TARGET=http://127.0.0.1:8106 npm run dev -- --port 5186
 ```
 
 The browser check was repeated on this recording on 2026-10-23 (DEMO-02c, #115).
-It used headless Chromium (Playwright) on `make demo-data`, whose output, ledger
-and snapshot hashes matched the ones above. All 42 checks passed with 0 page
+It used headless Chromium (Playwright) on `make demo-data`, which replays the
+synthetic `decisions.json`; its output, ledger and snapshot hashes matched the
+"Actual Core outcome" values. All 42 checks passed with 0 page
 errors, 0 console errors and 0 API responses ≥ 400. It checked:
 
 - the `recorded` and `degraded` run labels;
