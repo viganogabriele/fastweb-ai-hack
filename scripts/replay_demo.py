@@ -72,9 +72,16 @@ def digest(value):
 
 
 def allowed(path):
-    path = Path(path)
-    if path.is_symlink():
-        raise IsolationError("symlink input")
+    # Check every lexical ancestor before resolve() can hide a link or a
+    # forbidden component (including one followed by '..').
+    path = Path(path).absolute()
+    for ancestor in (path, *path.parents):
+        if ancestor.is_symlink():
+            raise IsolationError("symlink input")
+        if ancestor.name in FORBIDDEN or ancestor.name.endswith("_notes.md"):
+            raise IsolationError("forbidden input location")
+        if ancestor.name == "labels" and ancestor.parent.name == "eval":
+            raise IsolationError("forbidden input location")
     path = path.resolve()
     if any(p in FORBIDDEN or p.endswith("_notes.md") for p in path.parts):
         raise IsolationError("forbidden input location")
@@ -143,11 +150,17 @@ def environment(settings):
     values["asr_api_key"] = ""
     updates = {key.upper(): str(value) for key, value in values.items()}
     previous = {key: os.environ.get(key) for key in updates}
+    # Modules import the cached get_settings function directly. Its Settings()
+    # would still open the repository dotenv even when every field is overridden
+    # through the environment; prevent that read for this dedicated command.
+    previous_env_file = Settings.model_config.get("env_file")
     try:
+        Settings.model_config["env_file"] = None
         os.environ.update(updates)
         get_settings.cache_clear()
         yield
     finally:
+        Settings.model_config["env_file"] = previous_env_file
         for key, value in previous.items():
             if value is None:
                 os.environ.pop(key, None)
@@ -177,9 +190,9 @@ def attempt_directory(workspace, inputs):
     return attempt
 
 
-def rebuild(spec, *, sources, config, cache, workspace, registry=None):
+def rebuild(spec, *, sources, config, cache, workspace, voice=None, registry=None):
     """Trusted installed modules only. Each invocation starts with a fresh SQLite DB."""
-    attempt = attempt_directory(workspace, (sources, config, cache))
+    attempt = attempt_directory(workspace, (sources, config, cache, *((voice,) if voice else ())))
     manifest = {
         "format": 1,
         "attempt_id": attempt.name,
@@ -211,11 +224,21 @@ def rebuild(spec, *, sources, config, cache, workspace, registry=None):
         if spec.authorized_fixture_refs:
             # Generic preloading of derived fixtures would masquerade as a rebuild.
             raise IsolationError("fixture artifact preloading is unsupported; use source inputs")
-        for name, root, dest in (
+        needs_voice = any(
+            s.manifest.id == "src.voice" and s.manifest.enabled and s.manifest.mode != "unavailable"
+            for s in spec.modules
+        )
+        if needs_voice and voice is None:
+            manifest["missing_prerequisites"].append("voice_inputs")
+            raise FileNotFoundError("voice source directory required")
+        trees = [
             ("sources", sources, attempt / "inputs/sources"),
             ("config", config, attempt / "inputs/config"),
             ("cache", cache, attempt / "data/llm_cache"),
-        ):
+        ]
+        if voice is not None:
+            trees.append(("voice", voice, attempt / "data/fixtures/voice"))
+        for name, root, dest in trees:
             manifest["missing_prerequisites"].append(name)
             manifest["inputs"][name] = stage(root, dest)
             manifest["missing_prerequisites"].pop()
@@ -318,6 +341,9 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("run-spec", "sources", "config", "cache", "workspace"):
         parser.add_argument("--" + name, type=Path, required=True)
+    parser.add_argument(
+        "--voice", type=Path, help="authorized voice source tree (required for src.voice)"
+    )
     args = parser.parse_args(argv)
     try:
         spec_path = allowed(args.run_spec)
@@ -330,6 +356,7 @@ def main(argv=None):
             config=args.config,
             cache=args.cache,
             workspace=args.workspace,
+            voice=args.voice,
         )
     except Exception as error:
         result = {"format": 1, "status": "failed", "error_type": type(error).__name__}

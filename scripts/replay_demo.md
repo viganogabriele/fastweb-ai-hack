@@ -17,6 +17,12 @@ no model calls. Reuse the same public provider/model settings as the recording;
 LLM replay keys include those settings and the run's source/config/model/prompt
 identity. No API key is required or read by the replay client.
 
+For snapshots enabling `src.voice`, also pass `--voice /absolute/path/to/voice`.
+This explicit source tree contains the note folders, audio and transcript sidecars;
+it is staged into the attempt's `data/fixtures/voice` and hashed in the manifest.
+Omitting it fails with the `voice_inputs` prerequisite, rather than silently
+replaying zero notes. The same overlap, symlink and forbidden-path rules apply.
+
 Each invocation creates a new `attempt-<id>` below an empty or previously owned
 workspace. It copies the authorized source/config/cache trees and executes the
 existing orchestrator against a newly created database in that attempt. It never
@@ -25,6 +31,9 @@ run, or rewrites the source trees/cache. A nonempty unowned workspace, overlappi
 input/output roots, symlinks, nonregular files, secrets and hidden-answer paths
 are refused. Private attempt directories have mode 0700. Do not point the
 workspace at the application's data directory.
+
+Symlink checks include parent directories; `eval/labels` is a forbidden input.
+Module settings use the isolated environment without reading the repository dotenv.
 
 The input RunSpec remains unchanged, including run/scenario IDs, clock, module
 modes and namespace. The runtime client and module settings force `LLM_MODE=replay`.

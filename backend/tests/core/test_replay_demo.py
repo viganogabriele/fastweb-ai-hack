@@ -1,5 +1,6 @@
 """Offline replay boundaries, without real credentials or external network access."""
 
+import hashlib
 import importlib.util
 import json
 import logging
@@ -18,7 +19,7 @@ from tessera.core.contracts import (
     SourceDocument,
 )
 from tessera.core.registry import RegisteredModule, Registry
-from tessera.modules.sources import emails
+from tessera.modules.sources import emails, voice
 
 module_spec = importlib.util.spec_from_file_location(
     "replay_demo", REPO_ROOT / "scripts/replay_demo.py"
@@ -269,3 +270,89 @@ def test_subprocess_escape_is_denied(inputs):
     result = replay.rebuild(spec, **inputs, registry=registry)
     assert result["status"] == "failed" and result["network_attempts"] == 1
     assert "offline_network_or_process_operation" in result["missing_prerequisites"]
+
+
+@pytest.mark.parametrize("location", ["sources", "config", "cache", "workspace"])
+def test_symlinked_ancestor_is_rejected_before_staging(inputs, tmp_path, location):
+    alias = tmp_path / "linked-parent"
+    alias.symlink_to(tmp_path, target_is_directory=True)
+    inputs[location] = alias / inputs[location].name
+    with pytest.raises(replay.IsolationError):
+        replay.rebuild(snapshot(), **inputs)
+    assert not inputs["workspace"].exists()
+
+
+@pytest.mark.parametrize("relative", ["eval/labels", "ground_truth/../authorized"])
+def test_hidden_answer_paths_are_rejected_before_file_reads(inputs, tmp_path, relative):
+    root = tmp_path / relative
+    root.mkdir(parents=True)
+    inputs["sources"] = root
+    with pytest.raises(replay.IsolationError):
+        replay.rebuild(snapshot(), **inputs)
+    assert not inputs["workspace"].exists()
+
+
+def test_module_settings_never_read_dotenv_and_restore_configuration(inputs, monkeypatch):
+    from pydantic_settings.sources import DotEnvSettingsSource
+
+    def guard(source):
+        # Fail before opening any file, including the real repository dotenv.
+        assert source.env_file is None, "replay must not read dotenv"
+        return {}
+
+    monkeypatch.setattr(DotEnvSettingsSource, "_read_env_files", guard)
+    previous_env_file = replay.Settings.model_config["env_file"]
+    seen = []
+
+    def callback(ctx):
+        settings = replay.get_settings()
+        assert settings.sources_dir.is_relative_to(inputs["workspace"])
+        assert settings.llm_mode == "replay"
+        assert not settings.asr_api_key.get_secret_value()
+        seen.append(settings)
+        return success(ctx)
+
+    spec, registry = custom(callback)
+    result = replay.rebuild(spec, **inputs, registry=registry)
+    assert result["status"] == "succeeded"
+    assert len(seen) == 1
+    assert replay.Settings.model_config["env_file"] == previous_env_file
+
+
+def test_voice_snapshot_requires_and_rebuilds_explicit_voice_inputs(inputs, tmp_path):
+    spec = snapshot(voice.MANIFEST)
+    spec = spec.model_copy(
+        update={"modules": (ModuleSnapshot(manifest=voice.MANIFEST, params={"mode": "fixture"}),)}
+    )
+    missing = replay.rebuild(spec, **inputs)
+    assert missing["status"] == "failed"
+    assert "voice_inputs" in missing["missing_prerequisites"]
+    root = tmp_path / "voice"
+    note = root / "demo-note"
+    note.mkdir(parents=True)
+    audio = b"synthetic test audio"
+    (note / "audio.wav").write_bytes(audio)
+    (note / "transcript.txt").write_text("PRIVATE VOICE TRANSCRIPT")
+    (note / "note.json").write_text(
+        json.dumps(
+            {
+                "note_id": "demo-note",
+                "store_id": "MIL01",
+                "sent_at": "2026-10-22T18:00:00Z",
+                "timezone": "Europe/Rome",
+                "author_ref": "synthetic-manager",
+                "fixture_kind": "synthetic_extension",
+                "audio": "audio.wav",
+                "audio_sha256": "sha256:" + hashlib.sha256(audio).hexdigest(),
+            }
+        )
+    )
+    first = replay.rebuild(spec, **inputs, voice=root)
+    second = replay.rebuild(spec, **inputs, voice=root)
+    assert first["status"] == second["status"] == "succeeded"
+    assert first["modules"][0]["counts"]["documents"] == 1
+    assert first["inputs"]["voice"]["files"] == 3
+    assert first["output_sha256"] == second["output_sha256"]
+    assert "PRIVATE VOICE" not in json.dumps(first)
+    with pytest.raises(replay.IsolationError):
+        replay.rebuild(spec, **{**inputs, "workspace": root / "output"}, voice=root)
