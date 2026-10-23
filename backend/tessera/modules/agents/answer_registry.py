@@ -47,6 +47,7 @@ from tessera.modules.agents.clarifications import (
     UnrecordedAnswer,
     prepare_answer,
 )
+from tessera.modules.agents.contextual_answers import ContextualExtraction
 
 metadata = MetaData()
 events = Table(
@@ -246,7 +247,12 @@ def _prepare(conn, request, fixture_mode):
     for snapshot in prepared.run.modules:
         if snapshot.manifest.id in active and not set(snapshot.manifest.requires) <= active:
             raise AnswerUnavailable("Follow-up has a missing or disabled required module")
-    seeds = _closure(parent, prepared.seed_refs)
+    inherited = tuple(
+        ArtifactRef(kind="Observation", id=o.id, version=o.version)
+        for o in parent.list(Observation)
+        if o.producer == "ag.contextual_answer" and not o.version.startswith("parent:")
+    )
+    seeds = _closure(parent, (*prepared.seed_refs, *inherited))
     return prepared, seeds
 
 
@@ -462,6 +468,13 @@ class _PipelineView:
             return None
         return record
 
+    def contextual_history(self):
+        return [
+            o
+            for o in self._repo.list(Observation)
+            if o.version in self._historical and o.producer == "ag.contextual_answer"
+        ]
+
 
 class _RecordingGuard:
     """Notice cache misses even when a module catches them and degrades."""
@@ -542,9 +555,14 @@ def execute_follow_up(
             guard = _RecordingGuard(clients["llm"]) if "llm" in clients else None
             if guard is not None:
                 clients["llm"] = guard
-            result = entry.run(
-                replace(ctx, repo=_PipelineView(ctx.repo, historical), clients=clients)
-            )
+            view = _PipelineView(ctx.repo, historical)
+            contextual = None
+            if entry.manifest.id == "ing.extract":
+                contextual = ContextualExtraction(view, job, clients["llm"])
+                view = contextual
+            result = entry.run(replace(ctx, repo=view, clients=clients))
+            if contextual is not None and result.status in {"succeeded", "degraded"}:
+                contextual.finish()
             if guard is not None and guard.missing.is_set():
                 # General pipeline modules may publish partial results as degraded.
                 # An answer replay must fail closed instead of publishing unread input.
