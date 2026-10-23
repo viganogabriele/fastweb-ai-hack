@@ -453,6 +453,46 @@ def test_frozen_drafts_are_exact_durable_and_part_of_replay_hashes(
     assert first["raw_output_sha256"] == second["raw_output_sha256"] != empty["raw_output_sha256"]
 
 
+def test_restored_drafts_are_readable_through_the_api_with_exact_identity(
+    inputs, tmp_path, decision_snapshot
+):
+    from fastapi.testclient import TestClient
+
+    from tesseract.api.main import create_app
+    from tesseract.core.config import Settings
+
+    spec, registry, frozen = decision_snapshot
+    path = tmp_path / "decisions.json"
+    path.write_text(json.dumps([frozen.model_dump(mode="json")]))
+    result = replay.rebuild(spec, **inputs, decisions=path, registry=registry)
+    assert result["status"] == "succeeded", result
+    engine = replay.connect(
+        f"sqlite:///{inputs['workspace'] / result['attempt_id'] / 'data/tesseract_fixture.db'}"
+    )
+    product = replay.connect(f"sqlite:///{tmp_path / 'product.db'}")
+    app = create_app(
+        engine=product,
+        fixture_engine=engine,
+        settings=Settings(_env_file=None, fixture_mode=True),
+    )
+    expected = frozen.draft.model_dump(mode="json")
+    try:
+        with TestClient(app) as api:
+            prefix = f"/api/runs/{spec.run_id}/decisions"
+            listed = api.get(
+                prefix, params={"fixture": True, "case_id": frozen.draft.option.case_id}
+            )
+            assert listed.status_code == 200 and listed.json() == [expected]
+            item = api.get(f"{prefix}/{frozen.draft.decision.id}", params={"fixture": True})
+            assert item.status_code == 200 and item.json() == expected
+            assert item.json()["decision"]["version"] == result["decisions"][0]["version"]
+            assert item.json()["option"]["version"] == result["decisions"][0]["option_version"]
+            assert api.get(prefix).status_code == 404
+    finally:
+        engine.dispose()
+        product.dispose()
+
+
 def test_api_checker_exports_a_draft_that_the_replay_can_restore(
     inputs, tmp_path, decision_snapshot, monkeypatch
 ):

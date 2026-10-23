@@ -158,6 +158,24 @@ returns an empty list. These GETs never invoke an agent, send messages, submit
 answers or create runs. The endpoints are navigation within a run, not an
 additional user authorization mechanism.
 
+## Decision reads (PLT-14)
+
+GET `/api/runs/{run_id}/decisions` lists the local drafts saved for the run by
+the decision endpoints (PLT-10) or restored by `replay_demo.py --decisions`, in
+decision-clock order; `?case_id=...` keeps one case's drafts and requires that
+case to be visible. GET `/api/runs/{run_id}/decisions/{decision_id}` returns one.
+Each item is the persisted `LocalDraft` unchanged: the decision's id, version,
+`at` clock, `by`, `decision`, `dispatch_status: draft` and the option ref in
+`input_refs`, the decided option at its exact version, held reservations and
+`simulated: true`.
+
+The rows come from the scenario ledger, which survives run resets, filtered to
+this run's scenario and ID in the selected namespace. An idempotent retry appears
+once; a rejected (409) attempt saves nothing and is never listed. An option
+without a draft is undecided: reads never revalidate, refresh, synthesize or
+dispatch a decision. Missing runs, unknown decision IDs and foreign namespaces
+return 404 (fixture access as for other reads); unpublished runs return 409.
+
 ## Simulated clarification answers (OUT-02)
 
 POST `/api/runs/{run_id}/cases/{case_id}/clarifications/{clarification_id}/answer`

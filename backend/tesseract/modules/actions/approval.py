@@ -13,7 +13,7 @@ from typing import Literal
 from uuid import uuid4
 
 import yaml
-from sqlalchemy import Engine, insert, select
+from sqlalchemy import Engine, insert, inspect, select
 
 from tesseract.core import repo
 from tesseract.core.config import get_settings
@@ -78,6 +78,21 @@ def load_inputs(current: repo.Repo, case: Case) -> Sequence[OptionInputs]:
         return inputs
     finally:
         reader.client.close()
+
+
+def saved_drafts(engine: Engine, scenario_id: str, run_id: str) -> tuple[LocalDraft, ...]:
+    """The committed drafts of one run, exactly as saved; never rebuilt or revalidated."""
+    with engine.connect() as conn:
+        if not inspect(conn).has_table(ledger.drafts.name):
+            return ()
+        payloads = conn.execute(
+            select(ledger.drafts.c.payload).where(
+                ledger.drafts.c.scenario_id == scenario_id,
+                ledger.drafts.c.run_id == run_id,
+            )
+        ).scalars()
+        drafts = [LocalDraft.model_validate(payload) for payload in payloads]
+    return tuple(sorted(drafts, key=lambda d: (d.decision.at, d.decision.id)))
 
 
 def decide(
