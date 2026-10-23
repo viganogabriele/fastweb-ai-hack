@@ -101,3 +101,31 @@ ING-03b status, verified reference hashes, observed fallback publication and saf
 record/replay commands are in [VERIFICATION.md](VERIFICATION.md). All three real ASR
 responses are cached; two notes publish recorded intervals and one explicitly falls
 back to untimed manual text because the server returned an end past the audio duration.
+
+## Live notes from the phone (DEMO-04)
+
+`/store/record?store=<STORE_ID>` (opened from a per-store QR) records a note in the browser and
+shows a live transcript: every 4 s the recording so far goes to `POST /api/voice/transcribe` (team
+ASR, never cached; 20 calls/min per key). On stop the store checks the text and sends it:
+`POST /api/voice/notes` writes `data/voice_inbox/<note_id>/` (gitignored) with the same three
+files as above and `fixture_kind: "live"`; `transcript.txt` is the accepted live ASR text, not a
+hand-written one. `src.voice` reads this folder next to `data/fixtures/voice/`.
+
+"Elabora ora" (`POST /api/voice/process`) starts one small product run per store over the new
+notes: scenario `live-voice`, `as_of` now, only `src.voice → ing.extract → int.link →
+int.dedup → int.cases` (+ `src.erp`). `src.email` is given a file outside the run's stores so it
+reads no mail; the run is therefore `degraded` by design. LLM calls run in `record` mode, so the
+run replays later without keys. Notes whose run failed or was blocked are offered again. The
+dashboard lists runs by `as_of`, so the live run becomes the default selection; pick the demo
+run again from the run menu.
+
+Demo checklist:
+
+- Keys: Fastweb chat key (`.secrets/fastweb_keys.json`) and `ASR_API_KEY` in `.env` on the
+  laptop that runs the backend. Without the ASR key the page says so and the text can be typed.
+- The microphone needs HTTPS on the phone: `make dev`, then `cloudflared tunnel --url
+  http://127.0.0.1:5173` (`brew install cloudflared`) and put
+  `https://<name>.trycloudflare.com/store/record?store=MIL01` in the QR. Vite allows
+  `*.trycloudflare.com` and `*.ngrok-free.app` hosts.
+- Name the model when speaking ("il gilet VEL blu notte taglia 3"): descriptions alone often
+  stay unlinked and open a "to verify" case.

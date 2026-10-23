@@ -23,6 +23,10 @@ store's business date), never the recording time of a file on disk: a note sent 
 is not read, and its audio is not even opened. The sidecar declares the audio's SHA-256; a file
 whose bytes differ from the declared hash is an error, because its transcript was checked
 against different audio. Notes for stores outside the run are skipped, like other sources.
+
+Live notes (DEMO-04) recorded from ``/store/record`` live in ``data/voice_inbox/<slug>/`` with
+the same three files and ``fixture_kind: "live"``; their ``transcript.txt`` is the live ASR
+transcript the store accepted, not a hand-written one. Both folders are read in one pass.
 """
 
 import hashlib
@@ -40,6 +44,7 @@ from tessera.core.contracts import ModuleManifest, ModuleResult, Segment, Source
 from tessera.core.contracts.common import Contract, Instant, NonNegative, Text
 
 VOICE_DIR = "fixtures/voice"
+INBOX_DIR = "voice_inbox"
 NOTE_FILE = "note.json"
 DEFAULT_TRANSCRIPT = "transcript.txt"
 DOC_VERSION = "v1"
@@ -85,7 +90,7 @@ class Sidecar(Contract):
     timezone: Text
     language: str | None = None
     author_ref: Text
-    fixture_kind: Literal["paraphrase", "synthetic_extension"]
+    fixture_kind: Literal["paraphrase", "synthetic_extension", "live"]
     audio: Text
     audio_sha256: str
     duration_s: NonNegative | None = None
@@ -141,6 +146,10 @@ class Audio:
 
 def voice_path(data_dir: Path | None = None) -> Path:
     return (data_dir or get_settings().data_dir) / VOICE_DIR
+
+
+def inbox_path(data_dir: Path | None = None) -> Path:
+    return (data_dir or get_settings().data_dir) / INBOX_DIR
 
 
 def read_sidecar(directory: Path) -> Note:
@@ -345,7 +354,7 @@ def _language_hint(sidecar: Sidecar) -> str | None:
 
 
 def run(ctx, *, voice_dir: Path | None = None, client=None) -> ModuleResult:
-    root = voice_dir or voice_path()
+    roots = [voice_dir] if voice_dir else [voice_path(), inbox_path()]
     mode = str(ctx.params.get("mode") or "recorded")
     if mode not in ("recorded", "fixture"):
         raise ValueError(f"unknown voice mode: {mode}")
@@ -356,8 +365,9 @@ def run(ctx, *, voice_dir: Path | None = None, client=None) -> ModuleResult:
     )
     errors: list[str] = []
     abstentions: list[str] = []
-    if not root.is_dir():
-        abstentions.append(f"no voice notes under {root}")
+    roots = [root for root in roots if root.is_dir()]
+    if not roots:
+        abstentions.append("no voice notes folder")
         return ModuleResult(
             module_id=MANIFEST.id,
             module_version=MANIFEST.version,
@@ -367,7 +377,7 @@ def run(ctx, *, voice_dir: Path | None = None, client=None) -> ModuleResult:
             abstentions=tuple(abstentions),
         )
     notes: list[Note] = []
-    for directory in sorted(root.iterdir()):
+    for directory in sorted(d for root in roots for d in root.iterdir()):
         if not directory.is_dir() or directory.name.startswith("."):
             continue
         if wanted and directory.name not in wanted:
@@ -381,7 +391,7 @@ def run(ctx, *, voice_dir: Path | None = None, client=None) -> ModuleResult:
         if slug not in found:
             errors.append(f"voice/{slug}: no such note")
     if not notes and not errors:
-        abstentions.append(f"no voice notes under {root}")
+        abstentions.append(f"no voice notes under {', '.join(map(str, roots))}")
     for note in notes:
         sidecar = note.sidecar
         if sidecar.store_id not in ctx.spec.stores:

@@ -360,6 +360,58 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/voice/notes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Notes */
+        get: operations["notes_api_voice_notes_get"];
+        put?: never;
+        /** Create Note */
+        post: operations["create_note_api_voice_notes_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/voice/process": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Process */
+        post: operations["process_api_voice_process_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/voice/transcribe": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Transcribe */
+        post: operations["transcribe_api_voice_transcribe_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -574,6 +626,24 @@ export interface components {
             kind: string;
             /** Version */
             version: string;
+        };
+        /** Body_create_note_api_voice_notes_post */
+        Body_create_note_api_voice_notes_post: {
+            /** Audio */
+            audio: string;
+            /** Language */
+            language?: string | null;
+            /** Store Id */
+            store_id: string;
+            /** Transcript */
+            transcript: string;
+        };
+        /** Body_transcribe_api_voice_transcribe_post */
+        Body_transcribe_api_voice_transcribe_post: {
+            /** Audio */
+            audio: string;
+            /** Language */
+            language?: string | null;
         };
         /** Case */
         Case: {
@@ -1097,6 +1167,24 @@ export interface components {
             /** Target Id */
             target_id: string;
         };
+        /** LiveNoteView */
+        LiveNoteView: {
+            /** Duration S */
+            duration_s: number | null;
+            /** Note Id */
+            note_id: string;
+            /** Run Id */
+            run_id: string | null;
+            /**
+             * Sent At
+             * Format: date-time
+             */
+            sent_at: string;
+            /** Store Id */
+            store_id: string;
+            /** Transcript */
+            transcript: string;
+        };
         /** LocalDraft */
         LocalDraft: {
             decision: components["schemas"]["Decision"];
@@ -1254,6 +1342,11 @@ export interface components {
             time_text?: string | null;
             /** Version */
             version: string;
+        };
+        /** ProcessRequest */
+        ProcessRequest: {
+            /** Store Id */
+            store_id?: string | null;
         };
         /** Quantity */
         Quantity: {
@@ -1568,6 +1661,13 @@ export interface components {
             locator?: string | null;
             /** Uri */
             uri: string;
+        };
+        /** Transcription */
+        Transcription: {
+            /** Duration S */
+            duration_s?: number | null;
+            /** Text */
+            text: string;
         };
         /** ValidationError */
         ValidationError: {
@@ -2284,6 +2384,136 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ReportDetail"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    notes_api_voice_notes_get: {
+        parameters: {
+            query?: {
+                store?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LiveNoteView"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_note_api_voice_notes_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": components["schemas"]["Body_create_note_api_voice_notes_post"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LiveNoteView"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    process_api_voice_process_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ProcessRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RunView"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    transcribe_api_voice_transcribe_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": components["schemas"]["Body_transcribe_api_voice_transcribe_post"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Transcription"];
                 };
             };
             /** @description Validation Error */

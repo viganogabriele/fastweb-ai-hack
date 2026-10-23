@@ -14,6 +14,7 @@ from tessera.api.routers.clarifications import router as clarifications_router
 from tessera.api.routers.investigations import router as investigations_router
 from tessera.api.routers.options import router as options_router
 from tessera.api.routers.runs import router
+from tessera.api.routers.voice import router as voice_router
 from tessera.core.config import Settings, get_settings
 from tessera.core.db import connect
 from tessera.core.registry import Registry
@@ -68,6 +69,7 @@ def create_app(
     app.include_router(options_router)
     app.include_router(clarifications_router)
     app.include_router(investigations_router)
+    app.include_router(voice_router)
 
     @app.get("/api/health", response_model=Health)
     def health() -> dict:
