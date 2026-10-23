@@ -1,0 +1,78 @@
+{
+  "artifact_inventory_scope": "published projection before optional decision",
+  "artifact_inventory_sha256": "dbe7300a1561e71ab81c40b34d1a2128ff0b0c5aca73953f35684744aa36cd4b",
+  "cases": 63,
+  "clarification_drafts": 1,
+  "config_hash": "fb50f57d8b4b1ad55076726fab97f2ee586b2ea3098b96f7aed651d5e9a89bc8",
+  "dashboard": {
+    "cases_with_deduplicated_origins": 6,
+    "categories": 6,
+    "category_minus_kpi_eur": {
+      "before": -0.01,
+      "ly": -10260.01,
+      "sales": 0.0
+    },
+    "forecast_computed": 1,
+    "kpi_days": 1045,
+    "monthly_points": 12,
+    "products": 46,
+    "social_duplicates_removed": 166,
+    "social_malformed_excluded": 238,
+    "social_posts": 3288,
+    "stores": [
+      "MIL01",
+      "MIL02",
+      "MUN01",
+      "PAR01",
+      "LON01",
+      "NYC01",
+      "TYO01",
+      "SEL01",
+      "SYD01"
+    ]
+  },
+  "documents": 21,
+  "evidence_relation_counts": {
+    "duplicates": 10,
+    "possibly_same_episode": 133,
+    "supersedes": 1
+  },
+  "execution_has_dirty_code": false,
+  "execution_sha": "00f49360ed4dfb6c224ce5c139cf3459bb83fcd5",
+  "format": 2,
+  "namespace": "product",
+  "negative_documents": 1,
+  "network_attempts": 0,
+  "observations": 125,
+  "reports": 2,
+  "run_id": "production-demo-20261022",
+  "scenario_id": "synthetic-production-rehearsal",
+  "snapshot_code_version": "8f6bbc85970a79d8dc4e371eebf8deb96b3e6682",
+  "snapshot_sha256": "4fb16e3659c2cd95b04d09c3c3653d5f1d16e73ce8640ab2fcbd2d34d5e2394e",
+  "source_manifest_hash": "3e5d26613c99bcd943f68cf0854a669b131a432dc0454cfdab3f1e1d48d53b05",
+  "status": "passed",
+  "trace_fallbacks": {
+    "case-mil01-i10919b00011-20261008": true,
+    "case-mil01-unknown-20261009": false
+  },
+  "trace_tools": {
+    "case-mil01-i10919b00011-20261008": [
+      "get_case_evidence",
+      "get_available_stock",
+      "get_available_stock",
+      "get_lane_and_eta",
+      "get_lane_and_eta",
+      "get_lane_and_eta",
+      "get_lane_and_eta",
+      "get_lane_and_eta",
+      "fallback"
+    ],
+    "case-mil01-unknown-20261009": [
+      "get_case_evidence",
+      "request_clarification",
+      "finish"
+    ]
+  },
+  "traces": 2,
+  "verified_quotes": 125
+}

@@ -1,0 +1,811 @@
+{
+  "run_id": "production-demo-20261022",
+  "scenario_id": "synthetic-production-rehearsal",
+  "as_of": "2026-10-22T20:00:00Z",
+  "stores": [
+    "MIL01",
+    "MIL02",
+    "MUN01",
+    "PAR01",
+    "LON01",
+    "NYC01",
+    "TYO01",
+    "SEL01",
+    "SYD01"
+  ],
+  "source_manifest_hash": "3e5d26613c99bcd943f68cf0854a669b131a432dc0454cfdab3f1e1d48d53b05",
+  "config_hash": "fb50f57d8b4b1ad55076726fab97f2ee586b2ea3098b96f7aed651d5e9a89bc8",
+  "code_version": "8f6bbc85970a79d8dc4e371eebf8deb96b3e6682",
+  "schema_version": "1.0",
+  "mode": "recorded",
+  "modules": [
+    {
+      "manifest": {
+        "id": "src.email",
+        "version": "1",
+        "layer": "sources",
+        "description": "Store closing emails (.eml) of the run's stores as documents and segments",
+        "requires": [],
+        "optional_inputs": [],
+        "produces": [
+          "SourceDocument",
+          "Segment"
+        ],
+        "enabled": true,
+        "mode": "live",
+        "boundary": null,
+        "params_schema": {
+          "type": "object",
+          "properties": {
+            "files": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Z0-9]+/[^/]+\\.eml$"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "params": {
+        "files": [
+          "MIL01/20260918_2115_MIL01.eml",
+          "MIL01/20260918_2207_MIL01_corr.eml",
+          "MIL01/20261002_2112_MIL01.eml",
+          "MIL01/20261002_2113_MIL01_dup.eml",
+          "MIL01/20261009_1035_MIL01.eml",
+          "MIL01/20261009_1847_MIL01_re1.eml",
+          "MIL02/20261009_1811_MIL02.eml",
+          "NYC01/20260906_1837_NYC01.eml",
+          "NYC01/20261004_1829_NYC01.eml",
+          "NYC01/20261004_1858_NYC01_corr.eml",
+          "NYC01/20261014_2248_NYC01_ooo.eml",
+          "MUN01/20261014_2016_MUN01.eml",
+          "PAR01/20261014_2019_PAR01.eml",
+          "LON01/20261014_2137_LON01.eml",
+          "TYO01/20261014_2124_TYO01.eml",
+          "TYO01/20261014_2238_TYO01_re1.eml",
+          "SEL01/20261014_2114_SEL01.eml",
+          "SYD01/20261014_1841_SYD01.eml",
+          "MIL01/demo_20261021_MIL01.eml",
+          "LON01/demo_20261021_LON01.eml"
+        ]
+      }
+    },
+    {
+      "manifest": {
+        "id": "src.erp",
+        "version": "2",
+        "layer": "sources",
+        "description": "ERP catalog, assortment, prices, daily sales, POS returns with reason code, stock and forecast vintages for the run's stores and history window, each row with available_at",
+        "requires": [],
+        "optional_inputs": [],
+        "produces": [
+          "erp_rows"
+        ],
+        "enabled": true,
+        "mode": "live",
+        "boundary": null,
+        "params_schema": {
+          "type": "object",
+          "properties": {
+            "history_days": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 800
+            },
+            "master_available_at": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "params": {
+        "history_days": 60
+      }
+    },
+    {
+      "manifest": {
+        "id": "src.docs",
+        "version": "1",
+        "layer": "sources",
+        "description": "One XLSX report as a document with one segment and cell locator per row",
+        "requires": [],
+        "optional_inputs": [],
+        "produces": [
+          "SourceDocument",
+          "Segment"
+        ],
+        "enabled": true,
+        "mode": "live",
+        "boundary": null,
+        "params_schema": {
+          "type": "object",
+          "properties": {
+            "report": {
+              "type": "string",
+              "minLength": 1
+            },
+            "language": {
+              "type": "string",
+              "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "params": {}
+    },
+    {
+      "manifest": {
+        "id": "ing.metrics",
+        "version": "1",
+        "layer": "ingestion",
+        "description": "One approved, versioned report mapping -> MetricFact with definition, period, currency/VAT and comparability",
+        "requires": [
+          "src.docs"
+        ],
+        "optional_inputs": [],
+        "produces": [
+          "MetricFact"
+        ],
+        "enabled": true,
+        "mode": "live",
+        "boundary": null,
+        "params_schema": {
+          "type": "object",
+          "properties": {
+            "mapping": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "params": {}
+    },
+    {
+      "manifest": {
+        "id": "src.external",
+        "version": "1",
+        "layer": "sources",
+        "description": "MeteoArchive daily weather as cold/warm context events for the run's store cities",
+        "requires": [],
+        "optional_inputs": [],
+        "produces": [
+          "ContextEvent"
+        ],
+        "enabled": true,
+        "mode": "live",
+        "boundary": null,
+        "params_schema": {
+          "type": "object",
+          "properties": {
+            "window_days": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "anomaly_c": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "min_days": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "params": {
+        "window_days": 21
+      }
+    },
+    {
+      "manifest": {
+        "id": "ing.extract",
+        "version": "1",
+        "layer": "ingestion",
+        "description": "LLM candidates from document segments, quotes and numbers verified by code",
+        "requires": [
+          "src.email"
+        ],
+        "optional_inputs": [],
+        "produces": [
+          "Observation"
+        ],
+        "enabled": true,
+        "mode": "live",
+        "boundary": null,
+        "params_schema": {
+          "type": "object",
+          "additionalProperties": false
+        }
+      },
+      "params": {}
+    },
+    {
+      "manifest": {
+        "id": "int.link",
+        "version": "2",
+        "layer": "integration",
+        "description": "Product mentions of the run's observations linked to catalog style, SKU or SKU-size, ambiguous or unlinked with their candidates; one constrained LLM choice on ties",
+        "requires": [
+          "src.erp"
+        ],
+        "optional_inputs": [
+          "ing.extract"
+        ],
+        "produces": [
+          "EntityLink"
+        ],
+        "enabled": true,
+        "mode": "live",
+        "boundary": null,
+        "params_schema": {
+          "type": "object",
+          "properties": {
+            "llm": {
+              "type": "boolean"
+            },
+            "use_embeddings": {
+              "type": "boolean"
+            },
+            "embedding_dimensions": {
+              "enum": [
+                512,
+                2048
+              ]
+            },
+            "candidate_min": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "link_min": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "min_margin": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "top_k": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 20
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "params": {}
+    },
+    {
+      "manifest": {
+        "id": "int.dedup",
+        "version": "1",
+        "layer": "integration",
+        "description": "Certain copies, possible overlaps and fact-level temporal corrections",
+        "requires": [
+          "int.link"
+        ],
+        "optional_inputs": [],
+        "produces": [
+          "EvidenceRelation"
+        ],
+        "enabled": true,
+        "mode": "live",
+        "boundary": null,
+        "params_schema": {
+          "type": "object",
+          "additionalProperties": false
+        }
+      },
+      "params": {}
+    },
+    {
+      "manifest": {
+        "id": "sys.client",
+        "version": "1",
+        "layer": "sources",
+        "description": "DC stock and ATP from the simulated warehouse systems for the run's assortment and supplying DCs, stored as StockFact when available at as_of",
+        "requires": [
+          "src.erp"
+        ],
+        "optional_inputs": [],
+        "produces": [
+          "StockFact"
+        ],
+        "enabled": true,
+        "mode": "live",
+        "boundary": "simulated",
+        "params_schema": {
+          "type": "object",
+          "properties": {
+            "skus": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            },
+            "plants": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "HK30",
+                  "IT10",
+                  "US20"
+                ]
+              },
+              "uniqueItems": true
+            },
+            "lookback_days": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 14
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "params": {
+        "skus": [
+          "I10919B00011-999",
+          "I10919B00011-742",
+          "J20931A00012-999"
+        ],
+        "lookback_days": 0
+      }
+    },
+    {
+      "manifest": {
+        "id": "int.cases",
+        "version": "2",
+        "layer": "integration",
+        "description": "Cases per store, case type, product scope and window, unlinked ones included as verify; structured stock conflicts, source-backed calendar deadlines, origin counts",
+        "requires": [
+          "int.dedup"
+        ],
+        "optional_inputs": [
+          "src.erp",
+          "sys.client"
+        ],
+        "produces": [
+          "Case"
+        ],
+        "enabled": true,
+        "mode": "live",
+        "boundary": null,
+        "params_schema": {
+          "$defs": {
+            "ArrivalSlot": {
+              "additionalProperties": false,
+              "properties": {
+                "cutoff_at": {
+                  "format": "date-time",
+                  "title": "Cutoff At",
+                  "type": "string"
+                },
+                "sellable_at": {
+                  "format": "date-time",
+                  "title": "Sellable At",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cutoff_at",
+                "sellable_at"
+              ],
+              "title": "ArrivalSlot",
+              "type": "object"
+            },
+            "DecisionCalendar": {
+              "additionalProperties": false,
+              "description": "Source-backed slots, pinned to one case (never inferred from episode end).\n\nThis optional run parameter is a normalized calendar input, not permission\nto move stock. The source must establish required_by and both calendars.",
+              "properties": {
+                "case_id": {
+                  "minLength": 1,
+                  "title": "Case Id",
+                  "type": "string"
+                },
+                "available_at": {
+                  "format": "date-time",
+                  "title": "Available At",
+                  "type": "string"
+                },
+                "required_by": {
+                  "format": "date-time",
+                  "title": "Required By",
+                  "type": "string"
+                },
+                "source_refs": {
+                  "items": {
+                    "$ref": "#/$defs/SourceRef"
+                  },
+                  "title": "Source Refs",
+                  "type": "array"
+                },
+                "slots": {
+                  "items": {
+                    "$ref": "#/$defs/ArrivalSlot"
+                  },
+                  "title": "Slots",
+                  "type": "array"
+                }
+              },
+              "required": [
+                "case_id",
+                "available_at",
+                "required_by",
+                "source_refs",
+                "slots"
+              ],
+              "title": "DecisionCalendar",
+              "type": "object"
+            },
+            "SourceRef": {
+              "additionalProperties": false,
+              "properties": {
+                "uri": {
+                  "minLength": 1,
+                  "title": "Uri",
+                  "type": "string"
+                },
+                "content_hash": {
+                  "minLength": 1,
+                  "title": "Content Hash",
+                  "type": "string"
+                },
+                "locator": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Locator"
+                }
+              },
+              "required": [
+                "uri",
+                "content_hash"
+              ],
+              "title": "SourceRef",
+              "type": "object"
+            }
+          },
+          "additionalProperties": false,
+          "properties": {
+            "max_validity_days": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 60
+            },
+            "decision_calendars": {
+              "default": [],
+              "items": {
+                "$ref": "#/$defs/DecisionCalendar"
+              },
+              "title": "Decision Calendars",
+              "type": "array"
+            }
+          },
+          "title": "ReconciliationParams",
+          "type": "object"
+        }
+      },
+      "params": {
+        "decision_calendars": [
+          {
+            "case_id": "case-lon01-j20931a00012-999-2-20261021",
+            "available_at": "2026-10-22T10:00:00Z",
+            "required_by": "2026-10-24T16:00:00Z",
+            "slots": [
+              {
+                "cutoff_at": "2026-10-23T08:00:00Z",
+                "sellable_at": "2026-10-24T09:00:00Z"
+              }
+            ],
+            "source_refs": [
+              {
+                "uri": "dataset://internal_comms/demo/decision_calendars.json",
+                "content_hash": "sha256:6df33d842da00d45d7a3ef79109d6af6cc87abebe1e9e2c46b03b1513118410b"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "manifest": {
+        "id": "int.context",
+        "version": "1",
+        "layer": "integration",
+        "description": "Associate ContextEvent (geo/time) to cases: add corroborating/context_only refs to Case.context_refs without automatic uplift",
+        "requires": [],
+        "optional_inputs": [
+          "int.cases",
+          "src.external"
+        ],
+        "produces": [
+          "Case"
+        ],
+        "enabled": true,
+        "mode": "live",
+        "boundary": null,
+        "params_schema": {
+          "type": "object",
+          "properties": {
+            "slack_hours": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 72
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "params": {}
+    },
+    {
+      "manifest": {
+        "id": "fc.baseline",
+        "version": "1",
+        "layer": "intelligence",
+        "description": "Daily sales baseline D+1..D+7 per store × SKU-colour from the forecast vintage valid at as_of, split over open days; not_estimable when the vintage does not cover it",
+        "requires": [
+          "src.erp"
+        ],
+        "optional_inputs": [],
+        "produces": [
+          "ForecastAdjustment"
+        ],
+        "enabled": true,
+        "mode": "live",
+        "boundary": null,
+        "params_schema": {
+          "type": "object",
+          "properties": {
+            "horizon_days": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 14
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "params": {}
+    },
+    {
+      "manifest": {
+        "id": "fc.overlay",
+        "version": "1",
+        "layer": "intelligence",
+        "description": "Low/base/high scenarios per demand case × SKU-colour from one admissible episode, with decay and cap; baseline unchanged with the abstention reason otherwise",
+        "requires": [
+          "fc.baseline",
+          "int.cases"
+        ],
+        "optional_inputs": [],
+        "produces": [
+          "ForecastAdjustment"
+        ],
+        "enabled": true,
+        "mode": "live",
+        "boundary": null,
+        "params_schema": {
+          "type": "object",
+          "properties": {
+            "incremental": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "params": {}
+    },
+    {
+      "manifest": {
+        "id": "act.options",
+        "version": "1",
+        "layer": "actions",
+        "description": "Hold / verify_stock / ask_store / notify_owner and one domestic store transfer per open case, with every RFC §4.10 check; no size curve blocks the move",
+        "requires": [
+          "src.erp",
+          "fc.baseline"
+        ],
+        "optional_inputs": [
+          "int.cases",
+          "fc.overlay",
+          "sys.client"
+        ],
+        "produces": [
+          "ActionOption"
+        ],
+        "enabled": true,
+        "mode": "live",
+        "boundary": null,
+        "params_schema": {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": false
+        }
+      },
+      "params": {}
+    },
+    {
+      "manifest": {
+        "id": "src.business",
+        "version": "1",
+        "layer": "sources",
+        "description": "Frozen KPI, regional/category sales and deduplicated global social context",
+        "requires": [
+          "src.erp"
+        ],
+        "optional_inputs": [],
+        "produces": [
+          "BusinessSnapshot"
+        ],
+        "enabled": true,
+        "mode": "live",
+        "boundary": null,
+        "params_schema": {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": false
+        }
+      },
+      "params": {}
+    },
+    {
+      "manifest": {
+        "id": "ins.product",
+        "version": "2",
+        "layer": "intelligence",
+        "description": "Per product: units sold and returned, POS return reasons and the reasons stores report, over the same stores and business days",
+        "requires": [
+          "src.erp",
+          "int.dedup"
+        ],
+        "optional_inputs": [],
+        "produces": [
+          "ProductInsight"
+        ],
+        "enabled": true,
+        "mode": "live",
+        "boundary": null,
+        "params_schema": {
+          "type": "object",
+          "properties": {
+            "days": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 800
+            },
+            "min_return_lines": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "params": {}
+    },
+    {
+      "manifest": {
+        "id": "ag.investigator",
+        "version": "1",
+        "layer": "agents",
+        "description": "Investigate selected cases with scoped tools; propose or verify, never approve",
+        "requires": [
+          "int.cases",
+          "act.options"
+        ],
+        "optional_inputs": [
+          "sys.client"
+        ],
+        "produces": [
+          "AgentTrace",
+          "Clarification",
+          "ActionOption"
+        ],
+        "enabled": true,
+        "mode": "live",
+        "boundary": null,
+        "params_schema": {
+          "type": "object",
+          "properties": {
+            "case_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1,
+              "maxItems": 20,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "case_ids"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "params": {
+        "case_ids": [
+          "case-mil01-i10919b00011-20261008",
+          "case-mil01-unknown-20261009"
+        ]
+      }
+    },
+    {
+      "manifest": {
+        "id": "out.reports",
+        "version": "2",
+        "layer": "outputs",
+        "description": "Brief per owner (and per priority) from the run's cases, evidence, baselines and options; every number rendered from a structured citation by a template",
+        "requires": [
+          "int.cases"
+        ],
+        "optional_inputs": [
+          "fc.baseline",
+          "fc.overlay",
+          "act.options",
+          "ins.product"
+        ],
+        "produces": [
+          "Report"
+        ],
+        "enabled": true,
+        "mode": "live",
+        "boundary": null,
+        "params_schema": {
+          "type": "object",
+          "properties": {
+            "views": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "by_office",
+                  "by_priority"
+                ]
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "params": {}
+    }
+  ],
+  "prompt_versions": {
+    "ing.extract": "extract_observations.v1",
+    "int.link": "link_choice.v1",
+    "ag.investigator": "investigator.v2"
+  },
+  "model_versions": {
+    "chat": "google/gemma-4-26B-A4B-it",
+    "ag.investigator": "glm-5.3-flash"
+  },
+  "authorized_fixture_refs": [],
+  "erp_max_seq": null
+}

@@ -1,0 +1,26 @@
+{
+  "record_output_sha256": "91f86a7377805fd737e8178fbdec3e6672ca59c1ca79ef8dc173c684bc74a3c9",
+  "replays": [
+    {
+      "attempt_id": "attempt-d2b8b00e6ca34bf98b7aa7611fec6162",
+      "cache_misses": [],
+      "ledger_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "network_attempts": 0,
+      "output_sha256": "91f86a7377805fd737e8178fbdec3e6672ca59c1ca79ef8dc173c684bc74a3c9",
+      "snapshot_sha256": "4fb16e3659c2cd95b04d09c3c3653d5f1d16e73ce8640ab2fcbd2d34d5e2394e",
+      "status": "degraded",
+      "systems_cache_misses": []
+    },
+    {
+      "attempt_id": "attempt-b54a19a58015464292d5c34e083f26c1",
+      "cache_misses": [],
+      "ledger_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "network_attempts": 0,
+      "output_sha256": "91f86a7377805fd737e8178fbdec3e6672ca59c1ca79ef8dc173c684bc74a3c9",
+      "snapshot_sha256": "4fb16e3659c2cd95b04d09c3c3653d5f1d16e73ce8640ab2fcbd2d34d5e2394e",
+      "status": "degraded",
+      "systems_cache_misses": []
+    }
+  ],
+  "timing_exclusion": "AgentTrace.steps.duration_ms only; values remain in raw artifacts."
+}
