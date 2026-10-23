@@ -349,6 +349,32 @@ def test_subprocess_escape_is_denied(inputs):
     assert "offline_network_or_process_operation" in result["missing_prerequisites"]
 
 
+@pytest.mark.parametrize("change", ["run", "scenario", "clock"])
+def test_frozen_decision_must_match_the_rebuilt_snapshot(inputs, tmp_path, change):
+    spec = snapshot()
+    request = {
+        "run_id": spec.run_id,
+        "scenario_id": spec.scenario_id,
+        "option_id": "option",
+        "input_version_hash": "hash",
+        "decision": "rejected",
+        "by": "synthetic test reviewer",
+        "idempotency_key": "decision-1",
+    }
+    at = "2026-10-22T20:01:00Z"
+    if change == "run":
+        request["run_id"] = "other"
+    elif change == "scenario":
+        request["scenario_id"] = "other"
+    else:
+        at = "2026-10-21T20:01:00Z"
+    path = tmp_path / "decisions.json"
+    path.write_text(json.dumps([{"at": at, "request": request}]))
+    result = replay.rebuild(spec, **inputs, decisions=path)
+    assert result["status"] == "failed" and result["error_type"] == "IsolationError"
+    assert result["run_status"] == "not_started" and result["decisions"] == []
+
+
 @pytest.mark.parametrize("missing", [False, True])
 def test_systems_recordings_rebuild_offline_and_swallowed_misses_still_fail(
     inputs, tmp_path, missing

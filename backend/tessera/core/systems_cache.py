@@ -120,14 +120,14 @@ class SystemsTransport(httpx.BaseTransport):
             self.upstream.close()
 
 
-def systems_factory(settings: Settings, spec: RunSpec, cache=None):
+def systems_factory(settings: Settings, spec: RunSpec, cache=None, *, allow_recording=False):
     """Wire the existing ACT-04 parser to recorded HTTP bytes, without changing its math."""
     from tessera.modules.sources.systems_client import SystemsClient
 
     # Freeze before a queued job or module can mutate the caller's nested settings/spec.
     settings = settings.model_copy(deep=True)
     spec = spec.model_copy(deep=True)
-    if spec.mode != "live":
+    if spec.mode != "live" and not (allow_recording and settings.llm_mode == "record"):
         settings.llm_mode = "replay"
     cache = cache if cache is not None else SystemsCache(settings.data_dir / "systems_cache")
 

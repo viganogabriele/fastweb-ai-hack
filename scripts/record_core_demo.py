@@ -6,6 +6,7 @@ candidate; existing decisions are refused, and earlier execution evidence is kep
 """
 
 import argparse
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -13,7 +14,7 @@ from uuid import uuid4
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 
-from replay_demo import allowed, environment
+from replay_demo import allowed, digest, environment
 
 from tessera.core.config import Settings
 from tessera.core.contracts import RunSpec
@@ -27,13 +28,28 @@ from tessera.core.systems_cache import SystemsCache, systems_factory
 
 def record(candidate, *, execution_sha, reset=False):
     candidate = allowed(candidate)
-    if not (candidate / "input-manifest.json").is_file():
+    if not allowed(candidate / "input-manifest.json").is_file():
         raise ValueError("prepare the explicit dev candidate first")
-    spec = RunSpec.model_validate_json((candidate / "run-spec.json").read_text())
+    spec = RunSpec.model_validate_json(allowed(candidate / "run-spec.json").read_text())
     if spec.mode != "recorded" or spec.authorized_fixture_refs:
         raise ValueError("source-backed recorded snapshot required")
     if spec.code_version != execution_sha:
         raise ValueError("candidate code_version must match the executing candidate SHA")
+    for name, expected in (("sources", spec.source_manifest_hash), ("config", spec.config_hash)):
+        root = allowed(candidate / name)
+        inventory = []
+        for item in sorted(root.rglob("*")):
+            item = allowed(item)
+            if item.is_dir():
+                continue
+            if not item.is_file():
+                raise ValueError("non-regular candidate input")
+            inventory.append(
+                (item.relative_to(root).as_posix(), hashlib.sha256(item.read_bytes()).hexdigest())
+            )
+        if digest(inventory) != expected:
+            raise ValueError("candidate inputs changed; prepare and review a new snapshot")
+    allowed(candidate / "runtime")
     settings = Settings(
         _env_file=None,
         llm_mode="record",
@@ -67,7 +83,7 @@ def record(candidate, *, execution_sha, reset=False):
                 settings=settings,
                 clients={
                     "llm": client.for_run(spec),
-                    "systems": systems_factory(settings, spec, systems),
+                    "systems": systems_factory(settings, spec, systems, allow_recording=True),
                 },
             )
         with repo_session(engine, spec.run_id) as repo:

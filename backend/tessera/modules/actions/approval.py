@@ -63,7 +63,9 @@ def load_inputs(current: repo.Repo, case: Case) -> Sequence[OptionInputs]:
     """Production gathering with the same policy, source filters and evaluator as act.options."""
     settings = get_settings()
     recordings = SystemsCache(settings.data_dir / "systems_cache")
-    reader = SystemsReader.open(current, systems_factory(settings, current.spec, recordings))
+    reader = SystemsReader.open(
+        current, systems_factory(settings, current.spec, recordings, allow_recording=True)
+    )
     if isinstance(reader, Unknown):
         raise Conflict(f"systems unavailable: {reader.reason}")
     try:

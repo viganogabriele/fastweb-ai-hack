@@ -57,7 +57,9 @@ def reader_for(repo: RunRepo, settings: Settings, rows):
     if isinstance(crosswalk, Unknown):
         return investigator.UnavailableReader(crosswalk)
     cache = SystemsCache(settings.data_dir / "systems_cache")
-    reader = SystemsReader(repo, systems_factory(settings, repo.spec, cache)(crosswalk))
+    reader = SystemsReader(
+        repo, systems_factory(settings, repo.spec, cache, allow_recording=True)(crosswalk)
+    )
     reader.recordings = cache
     return reader
 
