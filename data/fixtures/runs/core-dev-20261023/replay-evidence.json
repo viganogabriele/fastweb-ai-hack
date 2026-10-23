@@ -961,13 +961,13 @@
     {
       "id": "trace:core-dev-candidate:case-mil01-i10919b00011-20261008",
       "kind": "AgentTrace",
-      "sha256": "58a11bf894c9902f6a884c6dbec7ef228134a54adc1367c85fd4303211266264",
+      "sha256": "2de4bef0befe84215b331dc579adc0fca2334c116f71da1492e7923c59d4cee6",
       "version": "1"
     },
     {
       "id": "trace:core-dev-candidate:case-mil01-unknown-20261009",
       "kind": "AgentTrace",
-      "sha256": "bd053fc350b1a00bb3107f09a5c9f6ed552524ed033db3051696c84fc58ab85e",
+      "sha256": "3e5465698037be4e9791adb2e2f2eee7a2841500a1ac3de5bf6ffad12d66372e",
       "version": "1"
     },
     {
@@ -8598,7 +8598,7 @@
     }
   ],
   "as_of": "2026-10-22T20:00:00+00:00",
-  "attempt_id": "attempt-dc1c13e2c83b4f75b7e596f002bcd77e",
+  "attempt_id": "attempt-9f795a7d3e89438cb9c73d295ad9dea6",
   "cache_corrupt": [],
   "cache_misses": [],
   "decisions": [
@@ -8876,7 +8876,7 @@
   ],
   "output_sha256": "20a7a75bd7db91ad94f5c89c0e4f6d4bc4cb64455a53a63d14155cdb5a50f338",
   "provider_identity_sha256": "eb8df1dfea242ec3a9b69ae32d7dd04ade6be2b85a1dba452a0778fdaeb5fa12",
-  "raw_output_sha256": "a0f6ec3817c9715520cf384758cdda087867e01a33baee81e63aedcec2b6b4b4",
+  "raw_output_sha256": "f89e41c4680b969dba730c2c44823555658dd28950eb21f0f00e1e5aa1594cd3",
   "run_id": "core-dev-candidate",
   "run_status": "degraded",
   "scenario_id": "historical",

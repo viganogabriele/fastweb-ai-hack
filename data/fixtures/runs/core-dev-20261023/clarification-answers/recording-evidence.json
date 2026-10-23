@@ -2,7 +2,7 @@
   "answers": {
     "abstain": {
       "answer_document_observations": 0,
-      "artifact_sha256": "e3b7b44558b2f89ac9917ad6898c186402c6074af7ab4dc3721e9926b002a36e",
+      "artifact_sha256": "714c2c75d44c99af09c589481152f3869a41777b976744c27b87839170edbc4d",
       "corrected": [
         {
           "available_at": "2026-10-22T20:20:00+00:00",
@@ -520,7 +520,7 @@
     },
     "self-contained": {
       "answer_document_observations": 0,
-      "artifact_sha256": "e4d549fe60c78a1a284e9356a4320ac051bb58133d8a2f240c13fc3c175ebeaa",
+      "artifact_sha256": "6f612cda5e00a2554ded1922a8a9ad8db5c740c47f8a77fcc40676bf1e7ed87f",
       "corrected": [
         {
           "available_at": "2026-10-22T20:20:00+00:00",
@@ -771,12 +771,24 @@
   "execution_sha": "9d50277d3db10444b70f5356599106e6696c29d4",
   "format": 1,
   "parent": {
-    "artifact_sha256": "4a111a0d0255ba4aac6ae95adcbf87200b2a58ed4f044a871bb7822ff9e28bfe",
-    "artifact_sha256_after": "4a111a0d0255ba4aac6ae95adcbf87200b2a58ed4f044a871bb7822ff9e28bfe",
-    "output_sha256": "4a111a0d0255ba4aac6ae95adcbf87200b2a58ed4f044a871bb7822ff9e28bfe",
+    "artifact_sha256": "35aabf506926bce8c14900df7d574667ab8d23699ee64f22ca4c0b15ca664b48",
+    "artifact_sha256_after": "35aabf506926bce8c14900df7d574667ab8d23699ee64f22ca4c0b15ca664b48",
+    "output_sha256": "35aabf506926bce8c14900df7d574667ab8d23699ee64f22ca4c0b15ca664b48",
     "run_id": "core-dev-candidate",
     "snapshot_sha256": "c522703633170af4933e06ed0f02edc29f2beb5f85cb32873ac46bb426b86edb"
   },
+  "rebound": [
+    {
+      "execution_sha": "002b0a1d28cdb3ad001290a362740db4a00fcf02",
+      "previous_artifact_sha256": {
+        "abstain": "e3b7b44558b2f89ac9917ad6898c186402c6074af7ab4dc3721e9926b002a36e",
+        "elliptical": "16be1eb19e58501792c6aeb2883b16d1ff29c5a7c9e867b21a76aed921a806a6",
+        "parent": "4a111a0d0255ba4aac6ae95adcbf87200b2a58ed4f044a871bb7822ff9e28bfe",
+        "self-contained": "e4d549fe60c78a1a284e9356a4320ac051bb58133d8a2f240c13fc3c175ebeaa"
+      },
+      "reason": "#258 (AG-03d): evaluate_options no longer republishes donor-narrowed D1 options; every envelope and recorded outcome replays unchanged"
+    }
+  ],
   "systems_cache_corrupt": [],
   "systems_cache_misses": []
 }
