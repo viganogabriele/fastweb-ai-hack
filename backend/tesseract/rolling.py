@@ -316,6 +316,10 @@ def build_plan(
             **({"ag.investigator": investigator.MODEL} if investigate else {}),
         },
         "config": {name: sha256_file(config_dir / name) for name in CONFIG_FILES},
+        "prompt_files": sorted(
+            path.relative_to(REPO_ROOT).as_posix()
+            for path in (extract.PROMPT_PATH, link.PROMPT_PATH)
+        ),
         "llm_scope": {
             "format": 1,
             "runner": "tesseract.rolling",
@@ -327,7 +331,8 @@ def build_plan(
             },
         },
     }
-    return plan
+    # The JSON form is the identity: a resumed run compares it to the frozen plan.json.
+    return json.loads(canonical(plan))
 
 
 def estimate(plan: dict, rates: Mapping[str, float] | None = None) -> dict:
@@ -1227,7 +1232,12 @@ def finish(workspace: Path, plan: dict, cache: Path, mode: str, wall: float) -> 
         hashes[f"{name}.json"] = write_json(out / f"{name}.json", exports[name])
         counts[name] = len(exports[name])
     sources = sorted(p for p in exports["opened"] if p.startswith("generated/sources/"))
-    configs = sorted(p for p in exports["opened"] if p.startswith(("config/", "backend/prompts/")))
+    # Read configs/prompts plus every declared one (a prompt is read only when it is used).
+    configs = sorted(
+        {p for p in exports["opened"] if p.startswith(("config/", "backend/prompts/"))}
+        | {f"config/{name}" for name in plan["config"]}
+        | set(plan["prompt_files"])
+    )
     for name, paths in (("sources.txt", sources), ("config.txt", configs)):
         data = "".join(p + "\n" for p in paths).encode()
         (out / name).write_bytes(data)
@@ -1267,6 +1277,7 @@ def finish(workspace: Path, plan: dict, cache: Path, mode: str, wall: float) -> 
         execution,
         {
             "mode": mode,
+            "execution": execution_identity(),
             "wall_seconds": round(wall, 1),
             "exports": hashes,
             "llm": llm_totals(workspace, plan),
@@ -1274,6 +1285,25 @@ def finish(workspace: Path, plan: dict, cache: Path, mode: str, wall: float) -> 
         pretty=True,
     )
     return {"exports": hashes, "counts": counts, "diagnostics": exports["diagnostics"]}
+
+
+def execution_identity() -> dict:
+    """HEAD and dirty code paths when git is readable (not under the isolated launcher)."""
+    import subprocess
+
+    try:
+        head = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=REPO_ROOT, text=True, stderr=subprocess.DEVNULL
+        ).strip()
+        dirty = subprocess.check_output(
+            ["git", "status", "--porcelain", "--", "backend/tesseract", "backend/prompts"],
+            cwd=REPO_ROOT,
+            text=True,
+            stderr=subprocess.DEVNULL,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return {"head": "unavailable", "dirty_code": None}
+    return {"head": head, "dirty_code": bool(dirty)}
 
 
 def llm_totals(workspace: Path, plan: dict) -> dict:
