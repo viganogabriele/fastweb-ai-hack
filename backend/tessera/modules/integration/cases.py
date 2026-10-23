@@ -407,15 +407,20 @@ def build_cases(
     case_groups = [g for g in groups if g.first.kind not in NO_CASE_KINDS]
     drafts, unattached = _cluster(case_groups, validity)
 
+    # Positions of the relations touching each fact, so a case scans only its own relations.
+    touching_at: dict[RefKey, list[int]] = defaultdict(list)
+    for position, r in enumerate(visible_rel):
+        touching_at[_key(r.from_ref)].append(position)
+        touching_at[_key(r.to_ref)].append(position)
+
     cases, abstentions, taken = [], [], set()
     totals = defaultdict(int)
     for draft in drafts:
         supporting = [o for g in draft.groups for o in g.members]
         contradicting = [o for g in draft.negated for o in g.members]
         members = {_key(ref(o)) for o in (*supporting, *contradicting)}
-        touching = [
-            r for r in visible_rel if _key(r.from_ref) in members or _key(r.to_ref) in members
-        ]
+        positions = sorted({i for m in members for i in touching_at.get(m, ())})
+        touching = [visible_rel[i] for i in positions]
         if (problem := draft.groups[0].link_problem) in ("missing", "conflicting"):
             abstentions.append(f"{draft.groups[0].first.id}: {problem} entity link")
         own_links = list(
