@@ -107,6 +107,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/runs/{run_id}/cases/{case_id}/clarifications": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Clarifications */
+        get: operations["clarifications_api_runs__run_id__cases__case_id__clarifications_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/runs/{run_id}/cases/{case_id}/clarifications/{clarification_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Clarification */
+        get: operations["clarification_api_runs__run_id__cases__case_id__clarifications__clarification_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/runs/{run_id}/cases/{case_id}/decisions": {
         parameters: {
             query?: never;
@@ -489,6 +523,60 @@ export interface components {
             } | null;
             /** Unit */
             unit?: ("units" | "customers" | "requests" | "visitors" | "money" | "percent") | null;
+        };
+        /** Clarification */
+        Clarification: {
+            /** Answer Document Id */
+            answer_document_id?: string | null;
+            /** Answered At */
+            answered_at?: string | null;
+            /**
+             * Asked At
+             * Format: date-time
+             */
+            asked_at: string;
+            /** Availability Basis */
+            availability_basis: string;
+            /** Available At */
+            available_at: string | null;
+            /** Case Id */
+            case_id: string;
+            /**
+             * Computed At
+             * Format: date-time
+             */
+            computed_at: string;
+            /** Id */
+            id: string;
+            /** Input Refs */
+            input_refs: components["schemas"]["ArtifactRef"][];
+            /** Observation Refs */
+            observation_refs: components["schemas"]["ArtifactRef"][];
+            /** Producer */
+            producer: string;
+            /** Producer Version */
+            producer_version: string;
+            /** Question */
+            question: string;
+            /** Run Id */
+            run_id: string;
+            /** Scenario Id */
+            scenario_id: string;
+            /**
+             * Simulated
+             * @default true
+             * @constant
+             */
+            simulated: true;
+            /** Source Refs */
+            source_refs: components["schemas"]["SourceRef"][];
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "draft" | "asked" | "answered" | "cancelled";
+            /** Version */
+            version: string;
         };
         /** CreateRun */
         CreateRun: {
@@ -1521,6 +1609,77 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["Case"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    clarifications_api_runs__run_id__cases__case_id__clarifications_get: {
+        parameters: {
+            query?: {
+                status?: ("draft" | "asked" | "answered" | "cancelled") | null;
+                fixture?: boolean;
+            };
+            header?: never;
+            path: {
+                case_id: string;
+                run_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Clarification"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    clarification_api_runs__run_id__cases__case_id__clarifications__clarification_id__get: {
+        parameters: {
+            query?: {
+                version?: string | null;
+                fixture?: boolean;
+            };
+            header?: never;
+            path: {
+                case_id: string;
+                clarification_id: string;
+                run_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Clarification"];
                 };
             };
             /** @description Validation Error */
