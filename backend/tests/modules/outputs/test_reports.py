@@ -164,6 +164,23 @@ def test_by_priority_groups_cases_highest_first(tmp_path):
     )
 
 
+def test_changed_inputs_write_the_next_version(tmp_path):
+    engine = connect(f"sqlite:///{tmp_path / 'v.db'}")
+    load_master(engine, AS_OF)
+    _, records = read_fixtures(FIXTURES)
+    create_run(engine, spec())
+    repo = Repo(engine, spec())
+    repo.put(*(r for r in records if type(r).__name__ in INPUTS))
+    ctx = SimpleNamespace(spec=repo.spec, repo=repo, params={"views": ["by_office"]})
+    reports.run(ctx)
+    repo.put(*(r for r in records if type(r).__name__ in ("StockFact", "ActionOption")))
+    assert reports.run(ctx).counts["reports_new"] == 1
+    first, second = repo.list(Report)
+    assert (first.id, first.version, second.version) == (second.id, "v1", "v2")
+    assert "recommended option" in second.markdown and "recommended option" not in first.markdown
+    assert repo.get(Report, first.id) == second
+
+
 def test_views_param_and_empty_run(tmp_path):
     result, _, built = run_module(tmp_path, kinds=(), params={"views": ["by_office"]})
     assert set(built) == {"by_office"} and result.counts["cases"] == 0

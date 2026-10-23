@@ -19,7 +19,8 @@ record that holds it (RFC §4.8.1). Optional LLM prose is not part of this modul
 
 The report is available at the latest cited record, ``as_of`` is the run's, ``input_refs`` are
 the cited records and ``input_version_hash`` is the SHA-256 of their sorted ``kind:id@version``.
-A run with no case writes a brief that says so.
+A run with no case writes a brief that says so. Rerunning over the same inputs writes nothing;
+over changed inputs (e.g. options added later) it writes the next version of the same report id.
 """
 
 import hashlib
@@ -307,8 +308,14 @@ def run(ctx: Context) -> ModuleResult:
     facts = read_facts(ctx.repo)
     views = tuple(ctx.params.get("views") or VIEWS)
     reports = [build_report(view, facts, ctx.spec) for view in views]
-    existing = {(r.id, r.version) for r in ctx.repo.list(Report)}
-    new = [r for r in reports if (r.id, r.version) not in existing]
+    stored = ctx.repo.list(Report)
+    new = []
+    for report in reports:
+        same_id = [r for r in stored if r.id == report.id]
+        if any(r.input_version_hash == report.input_version_hash for r in same_id):
+            continue
+        # A regeneration over changed inputs is a new version, never an overwrite.
+        new.append(report.model_copy(update={"version": f"v{len(same_id) + 1}"}))
     written = ctx.repo.put(*new) if new else 0
     return ModuleResult(
         module_id=MANIFEST.id,
