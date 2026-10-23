@@ -6,9 +6,12 @@ store, author or text similarity alone never proves a copy. Possible overlaps st
 separate and their quantities must not be added by consumers.
 
 Automatic corrections deliberately cover only explicit Italian/English phrases in
-the fact's own unquoted evidence and an unambiguous fact in its parent document.
-Other languages/ambiguous targets abstain; subjects and fixture metadata are never
-used as correction labels. No LLM, contract changes or source mutations are needed.
+the sentence of the fact's own unquoted segment that contains its quote (the model's
+shortest quote often drops "e non 58") and an unambiguous fact in its parent document.
+A parent fact without a stated period matches only a correction that names the
+replaced value, on the parent's own business day. Other languages/ambiguous targets
+abstain; subjects and fixture metadata are never used as correction labels. No LLM,
+contract changes or source mutations are needed.
 """
 
 import hashlib
@@ -33,6 +36,7 @@ from tesseract.core.contracts import (
 )
 from tesseract.core.contracts.common import SourceRecord
 from tesseract.core.orchestrator import RunContext
+from tesseract.modules.ingestion.extract import readings
 
 MANIFEST = ModuleManifest(
     id="int.dedup",
@@ -81,10 +85,18 @@ REPLACEMENT_CONTRAST = re.compile(
     re.IGNORECASE,
 )
 ASSERTED_VALUE = re.compile(
-    r"^\s*(?:il (?:fatturato(?: netto)?|totale)(?: di oggi)?"
+    r"(?:^|:)\s*(?:il (?:fatturato(?: netto)?|totale)(?: di oggi)?"
     r"|(?:the )?(?:net sales|revenue|total)(?: today)?)\s+(?:e['’]|è|is|are)\s+\d",
     re.IGNORECASE,
 )
+# Sentence ends; a point before a digit is a decimal separator ("45.1k").
+SENTENCE_END = re.compile(r"[\n!?;]|\.(?!\d)")
+REPLACED_VALUE = re.compile(
+    r"\b(?:e non|anzich[eé]|invece di|rather than|instead of)\s+"
+    r"(\d[\d.,'’]*(?<=\d)\s*(?:k|mila|mln)?)(?!\w)",
+    re.IGNORECASE,
+)
+SCALE = re.compile(r"\d\s*(k|mila|mln)\s*$", re.IGNORECASE)
 RefKey = tuple[str, str, str]
 LinkMap = dict[RefKey, EntityLink]
 
@@ -109,6 +121,36 @@ def _correction_intent(text: str) -> tuple[str | None, bool]:
         ):
             return "supersedes", False
     return None, True
+
+
+def _sentence(evidence, segment: Segment) -> str:
+    """The quote widened to its sentence in the segment: last end before it, first after."""
+    start, end = evidence.char_start - segment.char_start, evidence.char_end - segment.char_start
+    text = segment.text
+    before = [m.end() for m in SENTENCE_END.finditer(text, 0, start)]
+    # A sentence end that is the quote's own last character ends the sentence there.
+    after = SENTENCE_END.search(text, max(end - 1, start))
+    return text[before[-1] if before else 0 : after.end() if after else len(text)]
+
+
+def _replaced_values(text: str, new: Observation) -> set[float]:
+    """Values the correction says were wrong ("85,0k e non 58" names 58k)."""
+    scale = SCALE.search(new.quantity.raw or "")
+    values = set()
+    for match in REPLACED_VALUE.finditer(text):
+        token = match.group(1)
+        # "85,0k e non 58": the replaced value shares the replacement's scale.
+        values |= readings(token + scale.group(1) if scale and not SCALE.search(token) else token)
+    return values
+
+
+def _states(old: Observation, values: set[float]) -> bool:
+    value = old.quantity.value
+    return (
+        old.quantity.kind == "exact"
+        and value is not None
+        and any(abs(value - v) <= 1e-9 * max(1.0, abs(v)) for v in values)
+    )
 
 
 def ref(record: SourceRecord) -> ArtifactRef:
@@ -294,26 +336,44 @@ def build_relations(
     for new in facts:
         new_key = _key(ref(new))
         doc = fact_docs[new_key]
-        own_quotes = [
-            e.quote
+        own_sentences = [
+            _sentence(e, s)
             for e, s in zip(new.evidence, fact_segs[new_key], strict=True)
             if not s.is_quoted
         ]
-        text = "\n".join(own_quotes)
+        text = "\n".join(own_sentences)
         intent, uncertain = _correction_intent(text)
         if uncertain:
             errors.append(f"{new.id}: uncertain correction intent; facts retained")
         if intent is None:
             continue
+        replaced = _replaced_values(text, new) if intent == "supersedes" else set()
+
+        def same_period(old: Observation) -> bool:
+            if new.period_start is None or new.period_end is None:
+                return False
+            if (new.period_start, new.period_end) == (old.period_start, old.period_end):
+                return True
+            # The parent left the day unstated: only the named wrong value, sent on the
+            # same business day the correction's own period covers, identifies it.
+            parent = fact_docs[_key(ref(old))]
+            return (
+                bool(replaced)
+                and old.period_start is None
+                and old.period_end is None
+                and parent.business_date is not None
+                and parent.business_date == doc.business_date
+                and new.period_start <= parent.available_at <= new.period_end
+            )
+
         candidates = [
             old
             for old in facts
             if old.document_id == doc.parent_document_id
             and old.available_at < new.available_at
             and _same_scope(new, old, link_map)
-            and new.period_start is not None
-            and new.period_end is not None
-            and (new.period_start, new.period_end) == (old.period_start, old.period_end)
+            and same_period(old)
+            and (not replaced or _states(old, replaced))
         ]
         if len(candidates) != 1:
             errors.append(
