@@ -491,6 +491,7 @@ def test_run_binding_isolates_as_of_and_reuses_same_snapshot_across_run_ids(tmp_
         {"prompt_versions": {"extract": "v2"}},
         {"model_versions": {"chat-model": "r2"}},
         {"authorized_fixture_refs": ("new-fixture",)},
+        {"erp_max_seq": 0},
     ],
 )
 def test_run_scope_versions_and_provenance_isolate_recordings(tmp_path, changes):

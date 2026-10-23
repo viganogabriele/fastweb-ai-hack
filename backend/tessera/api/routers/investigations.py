@@ -1,24 +1,35 @@
 """Explicit investigator jobs on isolated copies of complete run snapshots."""
 
+from dataclasses import dataclass
 from datetime import UTC, datetime
 
 import yaml
 from fastapi import APIRouter, BackgroundTasks, HTTPException, Request, Response
+from sqlalchemy import func, inspect, select
 from sqlalchemy.exc import OperationalError
 
 from tessera.api.models import RunView
 from tessera.api.routers.runs import Namespace, engine_for, published_repo, view
 from tessera.core.cache import ReplayMiss, cache_key
 from tessera.core.config import Settings, get_settings
-from tessera.core.contracts import Case, ModuleResult, ModuleRun, ModuleSnapshot, RunSpec
+from tessera.core.contracts import (
+    Case,
+    ModuleResult,
+    ModuleRun,
+    ModuleSnapshot,
+    Reservation,
+    RunSpec,
+)
+from tessera.core.db import erp_rows, runs
 from tessera.core.llm import LLMClient
 from tessera.core.orchestrator import worker_slot
 from tessera.core.repo import Repo, RunNotFound
 from tessera.core.run_repo import RunRepo, repo_session
-from tessera.modules.actions.options import policy_from
+from tessera.modules.actions import ledger
+from tessera.modules.actions.options import OptionsPolicy, policy_from
 from tessera.modules.agents import investigator
 from tessera.modules.agents.chat_model import model_for_run
-from tessera.modules.agents.runtime import ToolError
+from tessera.modules.agents.runtime import Budget, ToolError
 from tessera.modules.sources.systems_client import (
     SystemsClient,
     SystemsReader,
@@ -30,15 +41,34 @@ from tessera.modules.sources.systems_client import (
 router = APIRouter(prefix="/api")
 
 
-def reader_for(repo: RunRepo, settings: Settings):
-    rows, _ = crosswalk_rows(settings.sources_dir)
+@dataclass(frozen=True)
+class JobInputs:
+    prompt: str
+    crosswalk: tuple[dict[str, str], ...]
+    policy: OptionsPolicy
+    horizon: int
+    reservations: tuple[Reservation, ...]
+    generation: datetime
+
+
+def reader_for(repo: RunRepo, settings: Settings, rows):
     crosswalk = crosswalk_at(repo, rows)
     if isinstance(crosswalk, Unknown):
         return investigator.UnavailableReader(crosswalk)
     return SystemsReader(repo, SystemsClient(crosswalk, base_url=settings.mocks_base_url))
 
 
-def job_spec(parent: RunSpec, case: Case, settings: Settings, domain: dict) -> RunSpec:
+def job_spec(
+    parent: RunSpec,
+    case: Case,
+    settings: Settings,
+    domain: dict,
+    *,
+    prompt: str,
+    crosswalk,
+    reservations,
+    erp_max_seq: int,
+) -> RunSpec:
     mode = (
         "fixture"
         if parent.mode == "fixture"
@@ -55,7 +85,11 @@ def job_spec(parent: RunSpec, case: Case, settings: Settings, domain: dict) -> R
                 {
                     "parent": parent.config_hash,
                     "domain": domain,
-                    "prompt": investigator.PROMPT_PATH.read_text(encoding="utf-8"),
+                    "prompt": prompt,
+                    "crosswalk": crosswalk,
+                    "reservations": [r.model_dump(mode="json") for r in reservations],
+                    "provider": settings.fastweb_base_url.rstrip("/"),
+                    "systems": settings.mocks_base_url.rstrip("/"),
                 }
             ),
             "modules": tuple(
@@ -70,6 +104,7 @@ def job_spec(parent: RunSpec, case: Case, settings: Settings, domain: dict) -> R
                 **parent.model_versions,
                 investigator.MANIFEST.id: investigator.MODEL,
             },
+            "erp_max_seq": erp_max_seq,
         }
     )
     # Execution mode does not change admissible evidence. Stable job IDs also keep
@@ -77,13 +112,14 @@ def job_spec(parent: RunSpec, case: Case, settings: Settings, domain: dict) -> R
     identity = spec.model_dump(mode="json", exclude={"mode"})
     for module in identity["modules"]:
         module["manifest"].pop("mode", None)
-    identity["case_version"] = case.version
+    identity["case"] = case.model_dump(mode="json")
     return spec.model_copy(update={"run_id": "investigate-" + cache_key(identity)})
 
 
-def execute(job: RunSpec, case_id: str, engine, settings: Settings, policy, horizon: int) -> None:
+def execute(job: RunSpec, case_id: str, engine, settings: Settings, inputs: JobInputs) -> None:
     fixture = job.mode == "fixture"
-    module_id = investigator.MANIFEST.id
+    module_id = "ag.investigator"
+    snapshot = next(item for item in job.modules if item.manifest.id == module_id)
     started = datetime.now(UTC)
 
     def module(status, result=None):
@@ -100,28 +136,44 @@ def execute(job: RunSpec, case_id: str, engine, settings: Settings, policy, hori
     with worker_slot():
         try:
             with repo_session(engine, job.run_id, fixture_mode=fixture, write=True) as repo:
-                if repo.run_state()["status"] != "pending":
+                generation = repo.session.execute(
+                    select(runs.c.created_at).where(runs.c.run_id == job.run_id)
+                ).scalar_one()
+                if generation != inputs.generation or repo.run_state()["status"] != "pending":
                     return
                 repo.set_run_status("running")
                 repo.save_module_run(module("running"))
             with repo_session(engine, job.run_id, fixture_mode=fixture, write=True) as repo:
-                client = LLMClient(settings, concurrency=settings.llm_concurrency).for_run(job)
+                generation = repo.session.execute(
+                    select(runs.c.created_at).where(runs.c.run_id == job.run_id)
+                ).scalar_one()
+                if generation != inputs.generation:
+                    return
+                budget = Budget()
+                client = LLMClient(
+                    settings,
+                    concurrency=settings.llm_concurrency,
+                    deadline_seconds=min(settings.llm_deadline_seconds, budget.max_seconds),
+                ).for_run(job)
                 case = investigator.visible_case(repo, case_id)
                 model = model_for_run(
                     client,
-                    prompt_version=investigator.PROMPT_VERSION,
-                    model=investigator.MODEL,
+                    prompt_version=job.prompt_versions[module_id],
+                    model=job.model_versions[module_id],
                     cache_context={"case": case.model_dump(mode="json")},
                 )
-                reader = reader_for(repo, settings)
+                reader = reader_for(repo, settings, inputs.crosswalk)
                 try:
                     outcome = investigator.investigate(
                         repo,
                         case_id,
                         model=model,
                         reader=reader,
-                        policy=policy,
-                        horizon_days=horizon,
+                        policy=inputs.policy,
+                        horizon_days=inputs.horizon,
+                        prompt=inputs.prompt,
+                        reservations=inputs.reservations,
+                        budget=budget,
                     )
                 finally:
                     if isinstance(reader, SystemsReader):
@@ -136,7 +188,7 @@ def execute(job: RunSpec, case_id: str, engine, settings: Settings, policy, hori
                 )
                 result = ModuleResult(
                     module_id=module_id,
-                    module_version=investigator.MANIFEST.version,
+                    module_version=snapshot.manifest.version,
                     status=status,
                     counts={"cases": 1, "traces": 1, "fallbacks": int(outcome.trace.fallback_used)},
                     errors=(),
@@ -153,10 +205,18 @@ def execute(job: RunSpec, case_id: str, engine, settings: Settings, policy, hori
             )
             try:
                 with repo_session(engine, job.run_id, fixture_mode=fixture, write=True) as repo:
+                    generation = repo.session.execute(
+                        select(runs.c.created_at).where(runs.c.run_id == job.run_id)
+                    ).scalar_one()
+                    if generation != inputs.generation or repo.run_state()["status"] not in {
+                        "pending",
+                        "running",
+                    }:
+                        return
                     repo.discard_artifacts()
                     result = ModuleResult(
                         module_id=module_id,
-                        module_version=investigator.MANIFEST.version,
+                        module_version=snapshot.manifest.version,
                         status="failed",
                         counts={},
                         errors=(reason,),
@@ -188,6 +248,15 @@ def investigate(
                 case = investigator.visible_case(parent, case_id)
             except ToolError:
                 raise HTTPException(409, "Case is not actionable") from None
+            if inspect(parent.session).has_table(ledger.drafts.name):
+                decisions = parent.session.execute(
+                    select(ledger.drafts.c.payload).where(
+                        ledger.drafts.c.scenario_id == parent.spec.scenario_id,
+                        ledger.drafts.c.run_id == run_id,
+                    )
+                ).scalars()
+                if any(item["option"]["case_id"] == case_id for item in decisions):
+                    raise HTTPException(409, "Case already decided")
             if parent.spec.mode != "live":
                 settings = settings.model_copy(update={"llm_mode": "replay"})
             domain = yaml.safe_load(
@@ -195,7 +264,22 @@ def investigate(
             )
             policy = policy_from(domain["policy"].get("options") or {})
             horizon = int(domain["policy"]["horizon"]["days"]["value"])
-            spec = job_spec(parent.spec, case, settings, domain)
+            prompt = investigator.PROMPT_PATH.read_text(encoding="utf-8")
+            rows, _ = crosswalk_rows(settings.sources_dir)
+            reservations = ledger.reservations(parent.engine, parent.spec.scenario_id)
+            erp_max_seq = parent.session.execute(select(func.max(erp_rows.c.seq))).scalar() or 0
+            if parent.spec.erp_max_seq is not None:
+                erp_max_seq = min(erp_max_seq, parent.spec.erp_max_seq)
+            spec = job_spec(
+                parent.spec,
+                case,
+                settings,
+                domain,
+                prompt=prompt,
+                crosswalk=rows,
+                reservations=reservations,
+                erp_max_seq=erp_max_seq,
+            )
             try:
                 existing = Repo.open(parent.engine, spec.run_id)
             except RunNotFound:
@@ -209,7 +293,13 @@ def investigate(
                         status="pending",
                     )
                 )
-                tasks.add_task(execute, spec, case_id, engine, settings, policy, horizon)
+                generation = parent.session.execute(
+                    select(runs.c.created_at).where(runs.c.run_id == spec.run_id)
+                ).scalar_one()
+                inputs = JobInputs(prompt, tuple(rows), policy, horizon, reservations, generation)
+                tasks.add_task(
+                    execute, spec, case_id, engine, settings.model_copy(deep=True), inputs
+                )
             else:
                 job = RunRepo(parent.session, existing.spec, fixture_mode=ns == "fixture")
             result = view(job)

@@ -1,21 +1,33 @@
 """Investigator HTTP jobs: snapshot isolation, atomic publication and offline cache."""
 
 import json
+from concurrent.futures import ThreadPoolExecutor
+from datetime import timedelta
+from threading import Barrier, Event
 from types import SimpleNamespace
 
 import pytest
 from fastapi.testclient import TestClient
 from openai.types.chat import ChatCompletion
+from sqlalchemy import insert, select, update
 
 from tessera.api.main import create_app
 from tessera.api.routers import investigations as api
 from tessera.core.cache import ReplayMiss
 from tessera.core.config import Settings
-from tessera.core.contracts import ActionOption, AgentTrace, ArtifactRef, Case, Clarification
-from tessera.core.db import connect
+from tessera.core.contracts import (
+    ActionOption,
+    AgentTrace,
+    ArtifactRef,
+    Case,
+    Clarification,
+    Reservation,
+)
+from tessera.core.db import artifacts, connect, runs
 from tessera.core.llm import LLMClient
-from tessera.core.repo import reset_run
+from tessera.core.repo import ErpRecord, Repo, put_erp, reset_run
 from tessera.core.run_repo import repo_session
+from tessera.modules.actions import approval
 from tests.api.test_traces import case, common, raw, seed, spec, trace
 
 PATH = "/api/runs/one/cases/case-1/investigate"
@@ -269,3 +281,299 @@ def test_missing_unpublished_closed_cases_and_fixture_guards(service, monkeypatc
     assert client.get(response.headers["location"]).status_code == 200
     app.state.settings = app.state.settings.model_copy(update={"fixture_mode": False})
     assert client.post(path + "?fixture=true").status_code == 403
+
+
+def test_queued_job_uses_submitted_prompt_model_crosswalk_and_settings(
+    service, monkeypatch, tmp_path
+):
+    client, engine, app = service
+    seed(engine, mode="live")
+    original_model = api.investigator.MODEL
+    app.state.settings.fastweb_keys_file.write_text(json.dumps({original_model: "fake-key"}))
+    app.state.settings = app.state.settings.model_copy(update={"llm_mode": "record"})
+    prompt = tmp_path / "prompt.md"
+    prompt.write_text("The frozen investigator prompt")
+    monkeypatch.setattr(api.investigator, "PROMPT_PATH", prompt)
+    monkeypatch.setattr(api, "crosswalk_rows", lambda _: ([{"test": "original"}], {}))
+    queued, payloads, reader_rows = [], [], []
+    execute, reader_for = api.execute, api.reader_for
+    monkeypatch.setattr(api, "execute", lambda *args: queued.append(args))
+
+    class InspectProvider(Provider):
+        def create(self, **payload):
+            payloads.append(payload)
+            return super().create(**payload)
+
+    monkeypatch.setattr(
+        api,
+        "LLMClient",
+        lambda settings, **kw: LLMClient(settings, client_factory=InspectProvider, **kw),
+    )
+
+    def reader(repo, settings, rows):
+        reader_rows.append(rows)
+        return reader_for(repo, settings, rows)
+
+    monkeypatch.setattr(api, "reader_for", reader)
+    response = client.post(PATH)
+    job = response.json()["spec"]["run_id"]
+    prompt.write_text("A later prompt must not execute in this job")
+    monkeypatch.setattr(api.investigator, "MODEL", "changed-model")
+    monkeypatch.setattr(api.investigator, "PROMPT_VERSION", "changed-version")
+    monkeypatch.setattr(api, "crosswalk_rows", lambda _: pytest.fail("crosswalk reread"))
+    app.state.settings.llm_mode = "replay"
+    execute(*queued[0])
+    state = client.get(response.headers["location"]).json()
+    assert state["published"]
+    assert all(p["model"] == original_model for p in payloads)
+    assert payloads[0]["messages"][0]["content"] == "The frozen investigator prompt"
+    assert reader_rows == [({"test": "original"},)]
+    assert client.get(f"/api/runs/{job}/cases/case-1/traces").status_code == 200
+
+
+def test_erp_boundary_survives_new_loads_and_reopening(service, monkeypatch):
+    client, engine, _ = service
+    parent = seed(engine)
+
+    def row(id, store="MIL01", available=None):
+        return ErpRecord(
+            "sales",
+            id,
+            "v1",
+            available or parent.as_of,
+            "test",
+            (),
+            {"store_id": store, "sku": "SKU-999"},
+        )
+
+    put_erp(
+        engine,
+        [
+            row("original"),
+            row("foreign", "NYC01"),
+            row("future", available=parent.as_of + timedelta(days=1)),
+        ],
+    )
+    monkeypatch.setattr(api, "execute", lambda *_: None)
+    response = client.post(PATH)
+    job = response.json()["spec"]["run_id"]
+    put_erp(engine, [row("late-loaded-but-historically-available")])
+    # The canonical repo applies the insertion boundary as well as availability.
+    assert {r.id for r in Repo.open(engine, job).erp("sales")} == {"original", "foreign"}
+    with repo_session(engine, job) as repo:
+        assert [r.id for r in repo.erp("sales")] == ["original"]
+    with repo_session(engine, "one") as repo:
+        assert len(repo.erp("sales")) == 2
+    # Changed admissible ERP input creates another job, rather than reusing stale output.
+    assert client.post(PATH).json()["spec"]["run_id"] != job
+    with repo_session(engine, job) as repo:
+        repo.save_module_run(repo.module_runs()[-1].model_copy(update={"status": "succeeded"}))
+        repo.publish()
+    child = client.post(f"/api/runs/{job}/cases/case-1/investigate").json()["spec"]["run_id"]
+    with repo_session(engine, child) as repo:
+        assert [r.id for r in repo.erp("sales")] == ["original"]
+
+
+def test_stale_queued_task_cannot_execute_a_reset_recreated_job(service, monkeypatch):
+    client, engine, _ = service
+    seed(engine)
+    queued, calls = [], []
+    execute = api.execute
+    monkeypatch.setattr(api, "execute", lambda *args: queued.append(args))
+    monkeypatch.setattr(api.investigator, "investigate", lambda *a, **kw: calls.append(a))
+    job = client.post(PATH).json()["spec"]["run_id"]
+    reset_run(engine, job)
+    assert client.post(PATH).json()["spec"]["run_id"] == job
+    execute(*queued[0])
+    assert calls == []
+    assert client.get(f"/api/runs/{job}").json()["status"] == "pending"
+
+
+def test_simultaneous_submissions_create_and_queue_one_job(service, monkeypatch):
+    client, engine, _ = service
+    seed(engine)
+    queued = []
+    monkeypatch.setattr(api, "execute", lambda *args: queued.append(args))
+    barrier = Barrier(2)
+
+    def submit():
+        barrier.wait(timeout=5)
+        return client.post(PATH)
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        responses = list(pool.map(lambda _: submit(), range(2)))
+    assert [r.status_code for r in responses] == [202, 202]
+    assert responses[0].json() == responses[1].json()
+    assert len(queued) == 1
+
+
+def test_running_outputs_are_hidden_until_atomic_publication(service, monkeypatch):
+    client, engine, _ = service
+    seed(engine, with_traces=False)
+    queued = []
+    execute = api.execute
+    monkeypatch.setattr(api, "execute", lambda *args: queued.append(args))
+    entered, release = Event(), Event()
+
+    def investigate(repo, case_id, **_):
+        record = trace(repo.spec)
+        repo.put(record)
+        entered.set()
+        assert release.wait(timeout=10)
+        return SimpleNamespace(trace=record)
+
+    monkeypatch.setattr(api.investigator, "investigate", investigate)
+    response = client.post(PATH)
+    job = response.json()["spec"]["run_id"]
+    with ThreadPoolExecutor(max_workers=1) as pool:
+        pending = pool.submit(execute, *queued[0])
+        try:
+            assert entered.wait(timeout=5)
+            assert client.get(response.headers["location"]).json()["status"] == "running"
+            assert client.get(f"/api/runs/{job}/cases/case-1/traces").status_code == 409
+            assert client.get("/api/runs/one/cases/case-1").status_code == 200
+        finally:
+            release.set()
+        pending.result(timeout=5)
+    assert client.get(f"/api/runs/{job}/cases/case-1/traces").json()[0]["id"] == "trace-1"
+
+
+def test_failed_job_sanitizes_errors_and_reuses_failure_without_new_execution(service, monkeypatch):
+    client, engine, _ = service
+    seed(engine)
+    calls = []
+
+    def investigate(*_, **kwargs):
+        calls.append(kwargs)
+        raise RuntimeError("sensitive-provider-body")
+
+    monkeypatch.setattr(api.investigator, "investigate", investigate)
+    response = client.post(PATH)
+    state = client.get(response.headers["location"])
+    assert state.json()["status"] == "failed"
+    assert "sensitive-provider-body" not in state.text
+    assert state.json()["module_runs"][-1]["result"]["errors"] == [
+        "Investigation failed (RuntimeError)"
+    ]
+    assert client.post(PATH).json()["spec"]["run_id"] == response.json()["spec"]["run_id"]
+    assert len(calls) == 1
+
+
+def test_snapshot_preserves_all_versions_order_and_exact_references(service, monkeypatch):
+    client, engine, _ = service
+    parent = seed(engine)
+    queued = []
+    monkeypatch.setattr(api, "execute", lambda *args: queued.append(args))
+    job = client.post(PATH).json()["spec"]["run_id"]
+    with repo_session(engine, job) as copied, repo_session(engine, "one") as source:
+        assert [t.version for t in copied.list(AgentTrace, case_id="case-1")] == ["v1", "v2", "v10"]
+        for original in source.list(AgentTrace):
+            record = copied.get(AgentTrace, original.id, original.version)
+            assert record == original.model_copy(update={"run_id": job})
+            for ref in record.input_refs:
+                assert copied.get(Case, ref.id, ref.version) is not None
+        assert copied.spec.scenario_id == parent.scenario_id
+
+
+def test_existing_database_specs_without_optional_boundary_still_open(service):
+    _, engine, _ = service
+    parent = seed(engine)
+    old = parent.model_dump(mode="json", exclude={"erp_max_seq"})
+    with engine.begin() as conn:
+        conn.execute(update(runs).where(runs.c.run_id == parent.run_id).values(spec=old))
+    with repo_session(engine, "one") as repo:
+        assert repo.spec.erp_max_seq is None
+        assert repo.get(Case, "case-1") is not None
+
+
+def test_submission_rollback_does_not_leave_a_partial_job(service, monkeypatch):
+    client, engine, _ = service
+    seed(engine)
+    original = api.RunRepo.copy_snapshot
+
+    def fail(self, source):
+        original(self, source)
+        raise RuntimeError("copy failed")
+
+    monkeypatch.setattr(api.RunRepo, "copy_snapshot", fail)
+    with pytest.raises(RuntimeError, match="copy failed"):
+        client.post(PATH)
+    with engine.connect() as conn:
+        assert conn.execute(select(runs.c.run_id)).scalars().all() == ["one"]
+        assert set(conn.execute(select(artifacts.c.run_id)).scalars()) == {"one"}
+
+
+def test_decided_case_is_rejected_and_other_cases_remain_actionable(service, monkeypatch):
+    client, engine, _ = service
+    parent = spec()
+    option = ActionOption(
+        id="decided",
+        **common(parent),
+        case_id="case-1",
+        kind="hold",
+        legs=(),
+        checks=(),
+        assumptions=(),
+        valid_until=parent.as_of + timedelta(days=1),
+        recommended=False,
+        rationale="Hold",
+        input_version_hash="hash",
+    )
+    with repo_session(engine, parent) as repo:
+        repo.put(case(parent), case(parent, "case-2"), option)
+        repo.publish()
+    approval.decide(
+        engine,
+        approval.DecisionRequest(
+            run_id="one",
+            scenario_id="historical",
+            option_id=option.id,
+            input_version_hash="hash",
+            decision="rejected",
+            by="reviewer",
+            idempotency_key="decision",
+        ),
+        now=parent.as_of,
+    )
+    monkeypatch.setattr(api, "execute", lambda *_: None)
+    assert client.post(PATH).status_code == 409
+    assert client.post(PATH.replace("case-1", "case-2")).status_code == 202
+
+
+def test_ledger_snapshot_changes_job_identity_and_freezes_reservations(service, monkeypatch):
+    client, engine, _ = service
+    parent = seed(engine)
+    queued = []
+    monkeypatch.setattr(api, "execute", lambda *args: queued.append(args))
+    first = client.post(PATH).json()["spec"]["run_id"]
+    reservation = Reservation(
+        id="held",
+        **common(parent),
+        decision_id="decision",
+        location="MIL01",
+        sku="SKU-999",
+        size="M",
+        qty=1,
+        status="pending",
+        idempotency_key="held",
+        created_at=parent.as_of,
+    )
+    with engine.begin() as conn:
+        api.ledger.metadata.create_all(conn)
+        conn.execute(
+            insert(api.ledger.drafts).values(
+                scenario_id="historical",
+                idempotency_key="held",
+                run_id="another-run",
+                option_id="another-case",
+                request={},
+                payload={
+                    "option": {"case_id": "other"},
+                    "reservations": [reservation.model_dump(mode="json")],
+                },
+            )
+        )
+    second = client.post(PATH).json()["spec"]["run_id"]
+    assert first != second
+    assert queued[0][-1].reservations == ()
+    assert queued[1][-1].reservations == (reservation,)

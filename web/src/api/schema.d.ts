@@ -1335,6 +1335,8 @@ export interface components {
             code_version: string;
             /** Config Hash */
             config_hash: string;
+            /** Erp Max Seq */
+            erp_max_seq?: number | null;
             /**
              * Mode
              * @enum {string}

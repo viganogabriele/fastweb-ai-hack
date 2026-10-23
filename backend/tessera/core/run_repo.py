@@ -66,7 +66,7 @@ class RunRepo(Repo):
         ).scalar()
         if existing is None:
             create_run(bound, snapshot)
-        elif existing != snapshot.model_dump(mode="json"):
+        elif RunSpec.model_validate(existing) != snapshot:
             raise ValueError("RunSpec is immutable; use a new run_id for a changed snapshot")
         super().__init__(bound, snapshot)
         self._parents: dict[tuple[str, str, str], tuple[SourceRecord, set[str]]] = {}
