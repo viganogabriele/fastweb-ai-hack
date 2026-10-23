@@ -110,8 +110,9 @@ and, for noise, the email answer-key indexes; nothing else from the oracle.
 - **Unit**: planted event × evaluated store overlapping the period. Store-wide events match only
   store-scope alerts; product events match alerts whose SKUs (and sizes, when both name them)
   intersect the event's; alert and event directions must agree. Rules: `eval/lead_time.py`.
-- **Pipeline**: each exported `Case` at `first_available_at`; `scope=unknown` cases are
-  verify requests, not alerts.
+- **Pipeline**: each exported `Case` with a resolved store and scope, any status, at
+  `first_available_at`. `unknown` type or scope = verify request; `customer_profile` =
+  marketing context. Both are counted, not scored as alerts.
 - **Baselines** (`eval/baselines.py`, sources only): stock policy (on-hand of a SKU-size falls
   to ≤ threshold) and sales detector (3-day Poisson surprise vs the previous 28 days, per SKU
   upward and per store both ways). ERP data of day B is used from B + 1 20:00 local.

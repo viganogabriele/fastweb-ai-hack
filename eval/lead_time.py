@@ -54,6 +54,8 @@ KIND_GROUPS = {
     "closing_wrong_list": "noise",
 }
 CASE_DIRECTIONS = {"unmet_demand": "stockout"}
+# Fixed before scoring: marketing context is not a demand/stock alert; `unknown` asks to verify.
+CONTEXT_CASE_TYPES = frozenset({"customer_profile"})
 SECONDS_PER_DAY = 86400
 
 
@@ -142,7 +144,10 @@ def _instant(value: str | None) -> datetime | None:
 
 
 def case_alerts(cases: list[dict], root: Path) -> tuple[list[Alert], list[dict]]:
-    """Exported cases (raw or fixture-wrapped) → pipeline alerts plus verify requests."""
+    """Exported cases (raw or fixture-wrapped) → pipeline alerts plus non-alert cases.
+
+    Any status counts: a `verify` case with resolved scope is still in a human's queue.
+    """
     rows = catalog(root)
     alerts, verify = [], []
     for record in cases:
@@ -174,8 +179,10 @@ def case_alerts(cases: list[dict], root: Path) -> tuple[list[Alert], list[dict]]
             decision_due_at=_instant(case.get("decision_due_at")),
             sources=sources,
         )
-        if level == "unknown" or not alert.store_id:
-            verify.append({"case": case["id"], "status": case["status"]})
+        if case["case_type"] in CONTEXT_CASE_TYPES:
+            verify.append({"case": case["id"], "status": case["status"], "as": "context"})
+        elif level == "unknown" or not alert.store_id or case["case_type"] == "unknown":
+            verify.append({"case": case["id"], "status": case["status"], "as": "verify"})
         else:
             alerts.append(alert)
     return alerts, verify
@@ -376,6 +383,9 @@ def lead_time_report(root: Path, run, split: str, start: date, end: date) -> dic
         alerts[method] = grid[calibration[method]["chosen"]]
     scored = score(alerts, units, store_days)
     covered = {u.event_id for u in units}
+    alert_refs = {a.ref for a in alerts.get("pipeline", [])}
+    payloads = [record.get("payload", record) for record in cases]
+    alert_types = [c["case_type"] for c in payloads if c["id"] in alert_refs]
     report = {
         "task": "EVL-04",
         "split": split,
@@ -385,7 +395,8 @@ def lead_time_report(root: Path, run, split: str, start: date, end: date) -> dic
         "pipeline": "frozen_run" if run else "not_scored",
         "calibration": calibration,
         "summary": scored["summary"],
-        "verify_requests": verify,
+        "non_alert_cases": dict(Counter(row["as"] for row in verify)),
+        "pipeline_alerts_by_case_type": dict(Counter(alert_types)),
         "excluded_events": sorted(e["id"] for e in events if e["id"] not in covered),
         "units": scored["units"],
         "limits": [

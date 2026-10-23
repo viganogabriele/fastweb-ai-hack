@@ -175,8 +175,16 @@ class LeadTimeTests(unittest.TestCase):
             ],
         }
         unknown = case | {"id": "case-2", "scope_level": "unknown", "scope_id": None}
-        alerts, verify = case_alerts([{"kind": "Case", "payload": case}, unknown], self.root)
-        self.assertEqual(verify, [{"case": "case-2", "status": "open"}])
+        profile = case | {"id": "case-3", "case_type": "customer_profile", "scope_level": "store"}
+        records = [{"kind": "Case", "payload": case}, unknown, profile]
+        alerts, others = case_alerts(records, self.root)
+        self.assertEqual(
+            others,
+            [
+                {"case": "case-2", "status": "open", "as": "verify"},
+                {"case": "case-3", "status": "open", "as": "context"},
+            ],
+        )
         (alert,) = alerts
         self.assertEqual(
             (alert.skus, alert.sizes, alert.direction),
