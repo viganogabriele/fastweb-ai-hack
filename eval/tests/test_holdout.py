@@ -39,7 +39,7 @@ class WriteOnceTest(unittest.TestCase):
             with self.assertRaises(FileExistsError):
                 holdout._write_new(target, {"status": "again"})
         with self.assertRaises(SystemExit):
-            holdout._write_new(Path(tempfile.gettempdir()) / "outside.json", {})
+            holdout._write_new(holdout.ROOT / "eval" / "outside.json", {})
 
     def test_forecast_unavailable_record(self):
         with tempfile.TemporaryDirectory(dir=holdout.ROOT / "data") as tmp:
