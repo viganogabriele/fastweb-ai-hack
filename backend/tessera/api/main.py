@@ -14,6 +14,8 @@ from tessera.api.routers.clarifications import router as clarifications_router
 from tessera.api.routers.investigations import router as investigations_router
 from tessera.api.routers.options import router as options_router
 from tessera.api.routers.runs import router
+from tessera.api.routers.voice import router as voice_router
+from tessera.api.voice_boundary import VoiceBoundary
 from tessera.core.config import Settings, get_settings
 from tessera.core.db import connect
 from tessera.core.registry import Registry
@@ -60,6 +62,7 @@ def create_app(
     settings: Settings | None = None,
 ) -> FastAPI:
     app = FastAPI(title="Tessera", version=__version__, lifespan=lifespan)
+    app.add_middleware(VoiceBoundary)
     app.state.engines = {"product": engine, "fixture": fixture_engine}
     app.state.engine_lock = Lock()
     app.state.registry = registry
@@ -68,6 +71,7 @@ def create_app(
     app.include_router(options_router)
     app.include_router(clarifications_router)
     app.include_router(investigations_router)
+    app.include_router(voice_router)
 
     @app.get("/api/health", response_model=Health)
     def health() -> dict:
