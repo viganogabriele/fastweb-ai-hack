@@ -1,0 +1,208 @@
+{
+  "format": 1,
+  "attempt": "attempt-6d26aa2e1a4f40ecb71aab03edd2c1f8",
+  "parent": {
+    "run_id": "core-dev-candidate",
+    "snapshot_sha256": "5d4b91c05510818b543e1d3563c21a947547f9b3e2995ffbc690da416b594c11",
+    "output_sha256": "72344004ec7fafc09d53e6add68c8eb3457a90e41916e46c0de64693b86dab23",
+    "artifact_sha256": "72344004ec7fafc09d53e6add68c8eb3457a90e41916e46c0de64693b86dab23",
+    "artifact_sha256_after": "72344004ec7fafc09d53e6add68c8eb3457a90e41916e46c0de64693b86dab23"
+  },
+  "answers": {
+    "self-contained": {
+      "http_status": 202,
+      "retry_same_job": true,
+      "fingerprint": "ef493000bdcba7a93d5e95f3bd509cabd098b2df0bb4b875df466c3f082930fe",
+      "run_id": "clarification-run:59baeea50cafb6e0876e6849deb9ff7ca100b735f2264830139a8476348767fb",
+      "run_status": "degraded",
+      "published": true,
+      "artifact_sha256": "49174e52de360388bc1477523fed0e65111b69b0e849dfe7f0a921b8855ce976",
+      "matches_recording": true,
+      "status": "degraded",
+      "current_observations": 79,
+      "duplicate_current_observation_ids": [],
+      "answer_document_observations": 0,
+      "supersedes": 3,
+      "investigations": [
+        [
+          "case-mil01-i10919b00011-20261008",
+          true,
+          [
+            "get_case_evidence",
+            "get_available_stock",
+            "get_available_stock",
+            "get_lane_and_eta",
+            "get_lane_and_eta",
+            "evaluate_options",
+            "fallback"
+          ]
+        ]
+      ],
+      "corrected": [
+        {
+          "observation_id": "obs-20261009-1035-mil01-1",
+          "version": "contextual:ef493000bdcba7a93d5e95f3bd509cabd098b2df0bb4b875df466c3f082930fe:obs-20261009-1035-mil01-1",
+          "product_mention": "cardigan logo taglia M nero e blu",
+          "quantity_raw": "in continuazione",
+          "available_at": "2026-10-22T20:20:00+00:00",
+          "links": [
+            {
+              "status": "linked",
+              "level": "style",
+              "target_id": "I10919B00011"
+            }
+          ],
+          "cases": [
+            {
+              "id": "case-mil01-i10919b00011-20261022",
+              "status": "open",
+              "scope_level": "style",
+              "scope_id": "I10919B00011"
+            }
+          ]
+        }
+      ],
+      "module_errors": {
+        "ag.investigator": [
+          "case-mil01-unknown-20261009: Case is unavailable or not actionable in this run"
+        ]
+      }
+    },
+    "elliptical": {
+      "http_status": 202,
+      "retry_same_job": true,
+      "fingerprint": "5ca26c7e0c430b4d37f38c152348f89d80e815b45457c22f54c1574f4323997f",
+      "run_id": "clarification-run:b684a01f0731ddabf12222474e7e0d3c746d9f0489e9ec16332df0e45ed6ea2d",
+      "run_status": "degraded",
+      "published": true,
+      "artifact_sha256": "25bb719a6711183df2c31f5efafa3cc0d514a7e713079c2250840eabae2a5926",
+      "matches_recording": true,
+      "status": "degraded",
+      "current_observations": 82,
+      "duplicate_current_observation_ids": [],
+      "answer_document_observations": 0,
+      "supersedes": 3,
+      "investigations": [
+        [
+          "case-mil01-i10919b00011-20261008",
+          true,
+          [
+            "get_case_evidence",
+            "get_available_stock",
+            "get_available_stock",
+            "get_lane_and_eta",
+            "get_lane_and_eta",
+            "evaluate_options",
+            "fallback"
+          ]
+        ]
+      ],
+      "corrected": [
+        {
+          "observation_id": "obs-20261009-1035-mil01-1",
+          "version": "contextual:5ca26c7e0c430b4d37f38c152348f89d80e815b45457c22f54c1574f4323997f:obs-20261009-1035-mil01-1",
+          "product_mention": "Cardigan logo M",
+          "quantity_raw": "in continuazione",
+          "available_at": "2026-10-22T20:20:00+00:00",
+          "links": [
+            {
+              "status": "linked",
+              "level": "style",
+              "target_id": "I10919B00011"
+            }
+          ],
+          "cases": [
+            {
+              "id": "case-mil01-i10919b00011-20261022",
+              "status": "open",
+              "scope_level": "style",
+              "scope_id": "I10919B00011"
+            }
+          ]
+        }
+      ],
+      "module_errors": {
+        "ag.investigator": [
+          "case-mil01-unknown-20261009: Case is unavailable or not actionable in this run"
+        ]
+      }
+    },
+    "abstain": {
+      "http_status": 202,
+      "retry_same_job": true,
+      "fingerprint": "7f94fcc7a6062d26a33e755d1fa233cfae37096c1bc50a9df163cef5d789c5e9",
+      "run_id": "clarification-run:bdfe45cb9a201f2e3c8d418e2b51aa392b9d4ba3a52b696e3a022fde323eaf26",
+      "run_status": "degraded",
+      "published": true,
+      "artifact_sha256": "da21c85ff6c66fb654ad87a2d7315dd9e53e267ef816eff4c24baf166d1856c2",
+      "matches_recording": true,
+      "status": "degraded",
+      "current_observations": 75,
+      "duplicate_current_observation_ids": [],
+      "answer_document_observations": 0,
+      "supersedes": 3,
+      "investigations": [
+        [
+          "case-mil01-i10919b00011-20261008",
+          true,
+          [
+            "get_case_evidence",
+            "get_available_stock",
+            "get_available_stock",
+            "get_lane_and_eta",
+            "get_lane_and_eta",
+            "evaluate_options",
+            "fallback"
+          ]
+        ]
+      ],
+      "corrected": [
+        {
+          "observation_id": "obs-20261009-1035-mil01-1",
+          "version": "contextual:7f94fcc7a6062d26a33e755d1fa233cfae37096c1bc50a9df163cef5d789c5e9:obs-20261009-1035-mil01-1",
+          "product_mention": "M",
+          "quantity_raw": "in continuazione",
+          "available_at": "2026-10-22T20:20:00+00:00",
+          "links": [
+            {
+              "status": "unlinked",
+              "level": null,
+              "target_id": null
+            }
+          ],
+          "cases": [
+            {
+              "id": "case-mil01-unknown-20261022",
+              "status": "verify",
+              "scope_level": "unknown",
+              "scope_id": null
+            }
+          ]
+        }
+      ],
+      "module_errors": {
+        "ag.investigator": [
+          "case-mil01-unknown-20261009: Case is unavailable or not actionable in this run"
+        ]
+      }
+    }
+  },
+  "registered": [
+    "abstain",
+    "elliptical",
+    "self-contained"
+  ],
+  "presets": 3,
+  "negative": {
+    "free_text_status": 424,
+    "unrecorded_clock_status": 202,
+    "unrecorded_clock_run_status": "failed",
+    "unrecorded_clock_published": false,
+    "unrecorded_clock_misses": 2
+  },
+  "network_attempts": 0,
+  "cache_misses": [],
+  "cache_corrupt": [],
+  "systems_cache_misses": [],
+  "status": "passed"
+}
