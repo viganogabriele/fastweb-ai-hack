@@ -4,6 +4,7 @@ import { readApi } from '../api/client'
 import type { Case, RunView } from '../api/client'
 import type { useRuns } from '../api/useRuns'
 import { Button, EmptyState, ErrorState, LoadingState, Select, StatusBadge } from '../ui'
+import { closeCitationAndRestoreFocus } from './citationFocus'
 import { briefTokens, citedValue, loadReports, reportOwners, resolveReportCitation } from './reportData'
 import type { Report, ResolvedCitation } from './reportData'
 import './reports.css'
@@ -60,8 +61,7 @@ function ReportCard({ report, cases, run }: { report: Report; cases: Case[]; run
     selectCitation(index)
   }
   const returnFocus = () => {
-    citationTrigger.current?.focus()
-    selectCitation(null)
+    closeCitationAndRestoreFocus(citationTrigger.current, () => selectCitation(null))
   }
   const inline = (text: string): ReactNode => briefTokens(text, report.citations.length).map((token, i) =>
     token.kind === 'citation' ? <button key={i} type="button" className="sd-report__citation" aria-label={`Apri citazione ${token.index + 1}`} aria-pressed={citation === token.index} onClick={(event) => openCitation(token.index, event.currentTarget)}>{token.value}</button>
