@@ -18,13 +18,13 @@ export function CaseDetailAnalysis({ item, runId, fixtureMode }: Props) {
   const activeConfirmation = decisionForRecord(confirming, runId, item.id, item.version)
 
   return <section className="sd-case-decision" aria-labelledby="sd-case-analysis-title">
-    <header><div><p className="sd-case-detail__eyebrow">Analisi e proposta</p><h3 id="sd-case-analysis-title">Previsione, traccia e opzioni</h3></div>
+    <header><div><p className="sd-case-detail__eyebrow">Analisi e proposta</p><h3 id="sd-case-analysis-title">Previsione e opzioni</h3></div>
       <StatusBadge tone={detail ? 'warning' : 'neutral'} label={detail ? 'Esempio sintetico disponibile' : 'Nessun esempio sintetico'} />
     </header>
     <CaseForecastPanel item={item} runId={runId} fixtureMode={fixtureMode} />
     <CaseOptionsPanel item={item} runId={runId} fixtureMode={fixtureMode} />
     {detail ? <>
-      <p className="sd-case-decision__demo-label">Contesto demo fixture · run {runId} · caso {item.id} · versione {item.version}. Traccia e opzioni seguenti sono esempi sintetici.</p>
+      <p className="sd-case-decision__demo-label sd-case-analysis__tech">Contesto demo fixture · run {runId} · caso {item.id} · versione {item.version}. Traccia e opzioni seguenti sono esempi sintetici.</p>
       <section className="sd-case-analysis__trace" aria-labelledby="sd-case-trace-title">
         <h4 id="sd-case-trace-title">Traccia agente</h4><p>{detail.trace.outcome} · modalità {detail.trace.mode}{detail.trace.fallbackUsed ? ' · fallback usato' : ''}</p>
         <ol>{detail.trace.steps.map((step, index) => <li key={`${step.tool}-${index}`}>

@@ -6,7 +6,7 @@ import { Button } from '../ui'
 import { transition } from '../ui/motion'
 import { messages } from '../i18n'
 import { ShellContext } from './ShellContext'
-import { setTheme, useTheme } from './theme'
+import { switchTheme, useTheme } from './theme'
 import './shell.css'
 
 export interface AppShellProps {
@@ -160,7 +160,7 @@ function ThemeToggle() {
       aria-label={next === 'dark' ? messages.shell.themeDark : messages.shell.themeLight}
       title={next === 'dark' ? messages.shell.themeDark : messages.shell.themeLight}
       icon={theme === 'dark' ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
-      onClick={() => setTheme(next)}
+      onClick={(event) => switchTheme(next, event.currentTarget)}
     />
   )
 }

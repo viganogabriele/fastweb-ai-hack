@@ -168,7 +168,6 @@ export function RunWorkspace({
         <Overview
           run={run}
           cases={currentCases}
-          documents={data.documents}
           onCaseSelect={onCaseSelect}
         />
       )}

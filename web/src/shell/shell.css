@@ -356,3 +356,6 @@
 .sd-page-header__title { font-size: var(--sd-font-size-page); font-weight: var(--sd-font-weight-semibold); letter-spacing: -0.022em; line-height: 1.2; }
 .sd-page-header__subtitle { margin-block-start: var(--sd-space-1); font-size: 15px; }
 .sd-page-header__meta { display: inline-flex; margin-block-start: var(--sd-space-3); padding: 4px 10px; border: 1px solid var(--sd-color-border-subtle); border-radius: var(--sd-local-radius-pill); background: var(--sd-color-surface-card); color: var(--sd-color-text-secondary); font-size: var(--sd-font-size-caption); font-weight: var(--sd-font-weight-medium); }
+
+/* Bodoni is a display face: page titles and the wordmark only, never reading text. */
+.sd-page-header__title { font-family: var(--sd-font-family-brand); font-size: 36px; font-weight: var(--sd-font-weight-medium); letter-spacing: 0.005em; line-height: 1.1; }

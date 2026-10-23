@@ -50,3 +50,20 @@ a { color: var(--sd-color-accent-signature); text-underline-offset: 3px; }
     scroll-behavior: auto !important;
   }
 }
+
+/* Theme switch (shell/theme.ts): the light-bulb reveal clips one snapshot, so the default
+   cross-fade is off and only the circle's edge moves. Turning the light off clips the old (light)
+   snapshot, so it must sit above the new (dark) one. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+:root[data-theme-reveal='off']::view-transition-old(root) { z-index: 1; }
+
+/* A theme switch swaps every colour in one frame: no per-component colour transitions. */
+:root[data-theme-switching] *,
+:root[data-theme-switching] *::before,
+:root[data-theme-switching] *::after {
+  transition: none !important;
+}

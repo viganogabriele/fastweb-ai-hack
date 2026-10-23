@@ -42,3 +42,10 @@
 
 /* Atelier: module headings at card-title size. */
 .sd-module-heading h2 { font-size: var(--sd-font-size-section); font-weight: var(--sd-font-weight-semibold); }
+.sd-modules-phase { display: grid; gap: var(--sd-space-3); }
+.sd-modules-phase__head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sd-space-2) var(--sd-space-3); padding-block-start: var(--sd-space-3); }
+.sd-modules-phase__head h2 { margin: 0; font-size: var(--sd-font-size-body); }
+.sd-modules-phase__head span { color: var(--sd-color-text-secondary); font-size: var(--sd-font-size-body-sm); }
+.sd-module-title { display: flex; align-items: center; gap: var(--sd-space-3); min-width: 0; }
+.sd-module-title h2 { margin: 0; }
+.sd-module-title span:not(.sd-pipeline__tile) { color: var(--sd-color-text-muted); font-size: var(--sd-font-size-caption); }

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react'
-import { ArrowLeft, CircleAlert, Clock3, Search } from 'lucide-react'
+import { Clock3, Search } from 'lucide-react'
 import type { Case } from '../api/client'
 import { Button, EmptyState, Input, Select, StatusBadge } from '../ui'
 import {
@@ -9,7 +9,9 @@ import {
   uncertaintyReasons
 } from './caseUtils'
 import type { CaseQueueFilters, CaseSelection } from './caseUtils'
-import { CaseDetailAnalysis } from './CaseDetailAnalysis'
+import { CaseDetail } from './CaseDetail'
+import { ownerLabel } from './caseLabels'
+import { caseTypeLabel } from './productView'
 import './sections.css'
 
 const statuses: Record<Case['status'], string> = {
@@ -167,81 +169,9 @@ export function CaseQueue({
   const resetFilters = () => onFiltersChange(DEFAULT_CASE_QUEUE_FILTERS)
 
   if (selected) {
-    const overdue = isPastDeadline(selected.decision_due_at, asOf)
-    const openUncertainties = uncertaintyReasons(selected)
     return (
-      <article className="sd-case-detail" aria-labelledby="sd-case-detail-title">
-        <Button
-          variant="ghost"
-          size="sm"
-          icon={<ArrowLeft />}
-          onClick={returnToQueue}
-        >
-          Torna alla coda
-        </Button>
-        <header className="sd-case-detail__header">
-          <div>
-            <p className="sd-case-detail__eyebrow">
-              {selected.store_id ?? 'Negozio da verificare'} · {selected.case_type}
-            </p>
-            <h2 id="sd-case-detail-title" ref={detailHeading} tabIndex={-1}>
-              {selected.scope_id ?? 'Prodotto da identificare'}
-            </h2>
-            <p>{selected.priority_reason}</p>
-          </div>
-          <div className="sd-case-detail__badges">
-            <StatusBadge
-              tone={selected.priority === 'critical' ? 'danger' : selected.priority === 'high' ? 'warning' : 'neutral'}
-              label={priorities[selected.priority]}
-            />
-            <StatusBadge
-              tone={selected.status === 'verify' ? 'warning' : 'neutral'}
-              label={statuses[selected.status]}
-            />
-          </div>
-        </header>
-
-        <dl className="sd-case-detail__facts">
-          <div><dt>Responsabile</dt><dd>{selected.owner}</dd></div>
-          <div><dt>Scadenza decisione</dt><dd>{overdue && <strong>Scaduta · </strong>}{deadlineLabel(selected.decision_due_at)}</dd></div>
-          <div><dt>Finestra del caso</dt><dd>{date(selected.window_start)} – {date(selected.window_end)}</dd></div>
-          <div><dt>Documenti / origini note</dt><dd>{selected.n_documents} / {selected.n_origin_groups}</dd></div>
-          <div><dt>Origini sconosciute</dt><dd>{selected.n_unknown_origins}</dd></div>
-          <div><dt>Ultima evidenza indipendente</dt><dd>{date(selected.last_independent_evidence_at)}</dd></div>
-        </dl>
-
-        <div className="sd-case-detail__sections">
-          <section aria-labelledby="sd-case-verifications">
-            <h3 id="sd-case-verifications"><CircleAlert aria-hidden="true" /> Verifiche aperte</h3>
-            {openUncertainties.length ? (
-              <ul className="sd-case-detail__uncertainties">
-                {openUncertainties.map((item) => <li key={item}>{item}</li>)}
-              </ul>
-            ) : <p>Nessuna incertezza bloccante registrata.</p>}
-          </section>
-          <section aria-labelledby="sd-case-evidence">
-            <h3 id="sd-case-evidence">Evidenze collegate</h3>
-            <RefList title="A supporto" refs={selected.supporting} />
-            <RefList title="In conflitto" refs={selected.contradicting} />
-            <RefList title="Contesto e link" refs={selected.context_refs} />
-          </section>
-          <section aria-labelledby="sd-case-sources">
-            <h3 id="sd-case-sources">Fonti del caso</h3>
-            {selected.source_refs.length ? (
-              <ul className="sd-case-detail__sources">
-                {selected.source_refs.map((source, index) => (
-                  <li key={`${source.uri}-${source.locator ?? index}`}>
-                    <code>{source.uri}</code>
-                    {source.locator && <span>{source.locator}</span>}
-                  </li>
-                ))}
-              </ul>
-            ) : <p>Nessun riferimento di fonte disponibile.</p>}
-          </section>
-        </div>
-        <CaseDetailAnalysis item={selected} runId={runId} fixtureMode={fixtureMode} />
-        <p className="sd-case-detail__provenance">Caso {selected.id} · {selected.version} · disponibile dal {date(selected.available_at)}</p>
-      </article>
+      <CaseDetail item={selected} runId={runId} asOf={asOf} fixtureMode={fixtureMode}
+        onReturn={returnToQueue} headingRef={detailHeading} />
     )
   }
 
@@ -262,7 +192,7 @@ export function CaseQueue({
       <form className="sd-case-queue__filters" role="search" onSubmit={(event) => event.preventDefault()}>
         <Input size="sm" label="Cerca casi" type="search" icon={<Search />} placeholder="Negozio, prodotto, fonte o incertezza" value={filters.search} onChange={(event) => updateFilter('search', event.target.value)} />
         <Select size="sm" label="Negozio" value={filters.store} onValueChange={(value) => updateFilter('store', value)} options={[{ value: 'all', label: 'Tutti i negozi' }, ...stores.map((id) => ({ value: id, label: id }))]} />
-        <Select size="sm" label="Ufficio" value={filters.owner} onValueChange={(value) => updateFilter('owner', value)} options={[{ value: 'all', label: 'Tutti gli uffici' }, ...owners.map((owner) => ({ value: owner, label: owner }))]} />
+        <Select size="sm" label="Ufficio" value={filters.owner} onValueChange={(value) => updateFilter('owner', value)} options={[{ value: 'all', label: 'Tutti gli uffici' }, ...owners.map((owner) => ({ value: owner, label: ownerLabel(owner) }))]} />
         <Select size="sm" label="Prodotto" value={filters.product} onValueChange={(value) => updateFilter('product', value)} options={[{ value: 'all', label: 'Tutti i prodotti' }, { value: 'unknown', label: 'Prodotto da identificare' }, ...products.map((product) => ({ value: product, label: product }))]} />
         <Select size="sm" label="Priorità" value={filters.priority} onValueChange={(value) => updateFilter('priority', value)} options={[{ value: 'all', label: 'Tutte le priorità' }, ...Object.entries(priorities).map(([value, label]) => ({ value, label }))]} />
         <Select size="sm" label="Scadenza" value={filters.deadline} onValueChange={(value) => updateFilter('deadline', value)} options={[{ value: 'all', label: 'Tutte le scadenze' }, { value: 'dated', label: 'Con scadenza' }, { value: 'past', label: 'Scaduta al cutoff' }, { value: 'undated', label: 'Senza scadenza' }]} />
@@ -301,7 +231,7 @@ export function CaseQueue({
                 >
                   <span className="sd-case-queue__identity">
                     <strong>{item.store_id ?? 'Negozio da verificare'} · {item.scope_id ?? 'Prodotto da identificare'}</strong>
-                    <span>{item.case_type} · {item.owner}</span>
+                    <span>{caseTypeLabel(item.case_type)} · {ownerLabel(item.owner)}</span>
                   </span>
                   <span className="sd-case-queue__summary">
                     <StatusBadge tone={item.priority === 'critical' ? 'danger' : item.priority === 'high' ? 'warning' : 'neutral'} label={priorities[item.priority]} />
@@ -324,17 +254,6 @@ export function CaseQueue({
           action={<Button onClick={resetFilters}>Azzera filtri</Button>}
         />
       )}
-    </div>
-  )
-}
-
-function RefList({ title, refs }: { title: string; refs: Case['supporting'] }) {
-  return (
-    <div className="sd-case-detail__ref-group">
-      <h4>{title}</h4>
-      {refs.length ? (
-        <ul>{refs.map((ref) => <li key={`${ref.kind}-${ref.id}-${ref.version}`}><code>{ref.kind}</code> · {ref.id} · {ref.version}</li>)}</ul>
-      ) : <p>Nessuna registrata.</p>}
     </div>
   )
 }

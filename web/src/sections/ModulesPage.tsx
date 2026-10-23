@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import type { CSSProperties } from 'react'
 import { readApi } from '../api/client'
 import type { ModuleManifest } from '../api/client'
 import type { useRuns } from '../api/useRuns'
@@ -15,13 +16,13 @@ import {
   StatusBadge
 } from '../ui'
 import { PipelineGraph } from './PipelineGraph'
-import { moduleDetailId, moduleStatuses } from './moduleGraph'
+import { moduleDetailId, moduleStatuses, phases } from './moduleGraph'
+import { ModuleGlyph, moduleTitle, phaseIcons, phaseSlot } from './moduleCatalog'
 import './sections.css'
 import './modules.css'
 
 export function ModulesPage({ runs }: { runs: ReturnType<typeof useRuns> }) {
   const run = runs.selected
-  const [showGraph, setShowGraph] = useState(false)
   const [catalog, setCatalog] = useState<ModuleManifest[] | null>(null)
   const [catalogError, setCatalogError] = useState('')
   const [revision, setRevision] = useState(0)
@@ -112,13 +113,14 @@ export function ModulesPage({ runs }: { runs: ReturnType<typeof useRuns> }) {
 
   return (
     <div className="sd-run-workspace">
+      {modules.length > 0 && <PipelineGraph modules={modules} run={run} />}
       <section
         className="sd-run-card sd-modules-intro"
         aria-label="Configurazione del prossimo run"
       >
         <h2>
           {run
-            ? 'Moduli del run selezionato'
+            ? 'Configura il prossimo run'
             : 'Catalogo dei moduli installati'}
         </h2>
         <p>
@@ -142,13 +144,6 @@ export function ModulesPage({ runs }: { runs: ReturnType<typeof useRuns> }) {
           </p>
         )}
         <div className="sd-modules-actions">
-          <Button
-            pressed={showGraph}
-            disabled={!modules.length}
-            onClick={() => setShowGraph((current) => !current)}
-          >
-            {showGraph ? 'Nascondi grafo' : 'Mostra grafo'}
-          </Button>
           <Button
             onClick={() => {
               if (!run) {
@@ -205,10 +200,20 @@ export function ModulesPage({ runs }: { runs: ReturnType<typeof useRuns> }) {
           </p>
         )}
       </section>
-      {showGraph && <PipelineGraph modules={modules} run={run} />}
       {modules.length ? (
+        phases.map((phase) => {
+          const members = modules.filter((item) => phase.layers.includes(item.layer))
+          const PhaseIcon = phaseIcons[phase.key]
+          return members.length ? (
+        <section className="sd-modules-phase" key={phase.key} aria-labelledby={`modules-phase-${phase.key}`}
+          style={{ '--sd-pipeline-phase': `var(--sd-phase-${phaseSlot(phase.key)})` } as CSSProperties}>
+          <header className="sd-modules-phase__head">
+            <span className="sd-pipeline__tile"><PhaseIcon aria-hidden="true" /></span>
+            <h2 id={`modules-phase-${phase.key}`}>{phase.name}</h2>
+            <span>{phase.who} · {members.length === 1 ? '1 modulo' : `${members.length} moduli`}</span>
+          </header>
         <div className="sd-run-list">
-          {modules.map((item) => {
+          {members.map((item) => {
             const execution = run?.module_runs.find(
               (entry) => entry.module_id === item.id
             )
@@ -223,9 +228,13 @@ export function ModulesPage({ runs }: { runs: ReturnType<typeof useRuns> }) {
               <article className="sd-run-card sd-module" key={item.id}
                 id={moduleDetailId(item.id)} tabIndex={-1}>
                 <div className="sd-module-heading">
-                  <h2>
-                    {item.id} · {item.version}
-                  </h2>
+                  <div className="sd-module-title">
+                    <span className="sd-pipeline__tile"><ModuleGlyph id={item.id} manifest={item} /></span>
+                    <div>
+                      <h2>{moduleTitle(item.id)}</h2>
+                      <span>{item.id} · {item.version}</span>
+                    </div>
+                  </div>
                   <StatusBadge {...status} />
                 </div>
                 <p>{item.description}</p>
@@ -306,6 +315,9 @@ export function ModulesPage({ runs }: { runs: ReturnType<typeof useRuns> }) {
             )
           })}
         </div>
+        </section>
+          ) : null
+        })
       ) : (
         <EmptyState
           title="Nessun modulo disponibile"

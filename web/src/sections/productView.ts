@@ -25,6 +25,7 @@ const caseTypeLabels: Record<string, string> = {
   unmet_demand: 'Domanda non soddisfatta',
   demand_up: 'Aumento della domanda',
   demand_down: 'Calo della domanda',
+  demand_shift: 'Variazione della domanda',
   stockout: 'Prodotto esaurito',
   low_stock: 'Scorte basse',
   stock_discrepancy: 'Discrepanza di magazzino',
