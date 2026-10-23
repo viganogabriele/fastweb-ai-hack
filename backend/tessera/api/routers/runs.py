@@ -10,20 +10,27 @@ from jsonschema.exceptions import ValidationError as SchemaError
 from pydantic import ValidationError
 from sqlalchemy.exc import OperationalError
 
-from tessera.api.models import CreateRun, DocumentDetail, RunView
+from tessera.api.models import (
+    CreateRun,
+    DocumentDetail,
+    ReportDetail,
+    ResolvedReportCitation,
+    RunView,
+)
 from tessera.core.config import Settings, get_settings
 from tessera.core.contracts import (
     Case,
     EntityLink,
     ModuleManifest,
     Observation,
+    Report,
     RunSpec,
     Segment,
     SourceDocument,
 )
 from tessera.core.orchestrator import run
 from tessera.core.registry import Registry
-from tessera.core.repo import RunNotFound
+from tessera.core.repo import KINDS, RunNotFound
 from tessera.core.repo import list_runs as stored_runs
 from tessera.core.run_repo import RunRepo as Repo
 from tessera.core.run_repo import repo_session
@@ -201,3 +208,59 @@ def case(case_id: str, repo: PublishedRepo, version: str | None = None):
     if item is None:
         raise HTTPException(404, "Case not found")
     return item
+
+
+def report_detail(item: Report, repo: Repo) -> ReportDetail:
+    resolved = []
+    for citation in item.citations:
+        ref = citation.ref
+        kind = KINDS.get(ref.kind)
+        artifact = repo.get(kind, ref.id, ref.version) if kind else None
+        if artifact is None:
+            raise HTTPException(409, "Report citation is unavailable in this run")
+        resolved.append(
+            ResolvedReportCitation(
+                citation=citation,
+                artifact=artifact.model_dump(mode="json"),
+            )
+        )
+    return ReportDetail(report=item, citations=tuple(resolved))
+
+
+def latest_reports(repo: Repo, view: str | None = None) -> tuple[Report, ...]:
+    # Repository order is publication order, not a lexical sort of v1/v2/.../v10.
+    latest = {item.id: item for item in repo.list(Report)}
+    return tuple(
+        sorted(
+            (item for item in latest.values() if view is None or item.view == view),
+            key=lambda item: (item.view, item.id),
+        )
+    )
+
+
+@router.get("/runs/{run_id}/reports", response_model=tuple[Report, ...])
+def reports(repo: PublishedRepo, view: str | None = None):
+    items = latest_reports(repo, view)
+    for item in items:
+        report_detail(item, repo)
+    return items
+
+
+@router.get("/runs/{run_id}/reports/{owner}", response_model=tuple[ReportDetail, ...])
+def owner_reports(owner: str, repo: PublishedRepo, view: str | None = None):
+    # OUT-01 stores complete briefs grouped by office/priority, rather than one
+    # artifact per owner. Select the persisted briefs citing this owner's cases;
+    # preserve their text and numbering instead of regenerating on a GET.
+    result = []
+    for item in latest_reports(repo, view):
+        owners = {
+            case.owner
+            for citation in item.citations
+            if citation.ref.kind == "Case"
+            if (case := repo.get(Case, citation.ref.id, citation.ref.version)) is not None
+        }
+        if owner in owners:
+            result.append(report_detail(item, repo))
+    if not result:
+        raise HTTPException(404, "No report for this owner")
+    return tuple(result)

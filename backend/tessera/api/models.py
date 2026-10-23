@@ -2,11 +2,15 @@
 
 from typing import Literal
 
+from pydantic import JsonValue
+
 from tessera.core.contracts import (
+    Citation,
     EntityLink,
     ModuleRun,
     ModuleSnapshot,
     Observation,
+    Report,
     RunSpec,
     Segment,
     SourceDocument,
@@ -50,3 +54,13 @@ class Health(Contract):
     llm_mode: str
     fastweb_models_configured: list[str]
     sources_present: bool
+
+
+class ResolvedReportCitation(Contract):
+    citation: Citation
+    artifact: dict[str, JsonValue]
+
+
+class ReportDetail(Contract):
+    report: Report
+    citations: tuple[ResolvedReportCitation, ...]
