@@ -42,6 +42,7 @@ from sqlalchemy import select
 from tesseract.core.cache import ResponseCache
 from tesseract.core.config import REPO_ROOT, Settings
 from tesseract.core.contracts import (
+    AgentTrace,
     Case,
     EntityLink,
     EvidenceRelation,
@@ -112,6 +113,7 @@ def outcome(engine, run_id):
         links = [lk for lk in repo.list(EntityLink) if not lk.version.startswith("parent:")]
         cases = [c for c in repo.list(Case) if not c.version.startswith("parent:")]
         relations = [r for r in repo.list(EvidenceRelation) if r.relation == "supersedes"]
+        traces = [t for t in repo.list(AgentTrace) if not t.version.startswith("parent:")]
         statuses = repo.module_runs()
         result = {
             "status": state["status"],
@@ -124,6 +126,9 @@ def outcome(engine, run_id):
                 o.document_id.startswith("clarification-answer:") for o in current
             ),
             "supersedes": len(relations),
+            "investigations": sorted(
+                (t.case_id, t.fallback_used, [s.tool for s in t.steps]) for t in traces
+            ),
             "corrected": [],
             "module_errors": {
                 s.module_id: list(s.result.errors) for s in statuses if s.result and s.result.errors
@@ -217,8 +222,12 @@ def code_identity():
     return sha, bool(dirty)
 
 
-def record(output, *, workspace, keys_file=None):
-    """Trusted importer: real model/system recordings for each allowed answer."""
+def record(output, *, workspace, keys_file=None, seed_cache=None):
+    """Trusted importer: real model/system recordings for each allowed answer.
+
+    ``seed_cache`` reuses envelopes of an earlier recording of the same answers
+    (shown as cache hits); only requests without a recording reach the provider.
+    """
     output = allowed(output)
     if output.exists():
         raise ValueError("output exists; choose a new recording directory")
@@ -229,6 +238,9 @@ def record(output, *, workspace, keys_file=None):
     _, attempt, parent_manifest = stage_parent(workspace)
     output.mkdir(parents=True)
     shutil.copyfile(ANSWERS / "answers.json", output / "answers.json")
+    for name in ("llm_cache", "systems_cache") if seed_cache else ():
+        if (allowed(seed_cache) / name).is_dir():
+            shutil.copytree(seed_cache / name, output / name)
     settings = settings_for(
         attempt,
         llm_mode="record",
@@ -237,7 +249,6 @@ def record(output, *, workspace, keys_file=None):
         **({"fastweb_keys_file": keys_file} if keys_file else {}),
     )
     engine = connect(settings.db_url)
-    llm = LLMClient(settings, cache=ResponseCache(output / "llm_cache"))
     systems = SystemsCache(output / "systems_cache")
     evidence = {
         "format": 1,
@@ -255,7 +266,9 @@ def record(output, *, workspace, keys_file=None):
             # Private recording database only; replay re-registers after checking recordings.
             fingerprint = register_recorded_answer(engine, request)
             job = submit_answer(engine, request)
-            first = len(llm.traces)
+            # One client per follow-up: its overall deadline must not be shared, or a
+            # late investigator turn falls back without a recordable response.
+            llm = LLMClient(settings, cache=ResponseCache(output / "llm_cache"))
             with environment(settings):
                 try:
                     execute_follow_up(
@@ -272,7 +285,7 @@ def record(output, *, workspace, keys_file=None):
                 except Exception as error:  # Evidence must show the failure, not hide it.
                     evidence["answers"][key] = {"error": f"{type(error).__name__}: {error}"}
             result = outcome(engine, job.run.run_id)
-            traces = llm.traces[first:]
+            traces = llm.traces
             evidence["answers"][key] = {
                 **evidence["answers"].get(key, {}),
                 "fingerprint": fingerprint,
@@ -412,10 +425,14 @@ def replay(workspace, *, answers=ANSWERS, register_only=False):
                     f"/clarifications/{first.clarification_id}"
                 )
                 # The UI path: discover trusted bodies, add only an idempotency key.
-                presets = client.get(base + "/registered-answers").json()
-                by_key = {r.follow_up_scenario_id: k for k, r in registered.items()}
-                for preset in presets:
-                    key = by_key[preset["follow_up_scenario_id"]]
+                presets = {
+                    p["follow_up_scenario_id"]: p
+                    for p in client.get(base + "/registered-answers").json()
+                }
+                result["presets"] = len(presets)
+                # Recording order: follow-ups share one database, as in the recording.
+                for key, request in registered.items():
+                    preset = presets[request.follow_up_scenario_id]
                     body = {k: v for k, v in preset.items() if k != "fingerprint"}
                     body["idempotency_key"] = f"replay-{key}"
                     response = client.post(base + "/answer", json=body)
@@ -500,6 +517,7 @@ def main(argv=None):
     rec.add_argument("--output", type=Path, required=True)
     rec.add_argument("--workspace", type=Path, required=True)
     rec.add_argument("--keys-file", type=Path)
+    rec.add_argument("--seed-cache", type=Path, help="earlier recording of these answers")
     rep = commands.add_parser("replay", help="offline replay with networking denied")
     rep.add_argument("--workspace", type=Path, required=True)
     rep.add_argument("--answers", type=Path, default=ANSWERS)
@@ -507,7 +525,12 @@ def main(argv=None):
     args = parser.parse_args(argv)
     os.umask(0o077)
     if args.command == "record":
-        evidence = record(args.output, workspace=args.workspace, keys_file=args.keys_file)
+        evidence = record(
+            args.output,
+            workspace=args.workspace,
+            keys_file=args.keys_file,
+            seed_cache=args.seed_cache,
+        )
         summary = {
             "complete": evidence.get("complete"),
             "answers": {
