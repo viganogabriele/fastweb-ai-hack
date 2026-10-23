@@ -44,3 +44,35 @@ case quantities are outside the investigator.
 
 The specification above is complete for implementation. The user explicitly
 requested implementation; work proceeds after this planning checkpoint.
+
+## Using the implementation
+
+The registry discovers `ag.investigator` automatically. Supply
+`{"case_ids": ["<visible case ID>"]}` in its module snapshot; at most twenty cases
+can be explicitly selected. It requires `int.cases` and `act.options`, and uses
+`ctx.clients["llm"]` plus the existing `systems` client factory. A replay cache miss
+fails the module explicitly. Missing systems data produces a degraded investigation
+with unknown checks; it never becomes stock zero.
+
+`investigate(repo, case_id, model=..., reader=..., policy=..., horizon_days=7)` is
+the service seam for PLT-12. Pass a writable, transaction-bound repository from
+`repo_session`; the module worker owns its transaction. Published historical runs
+remain immutable: a later investigation needs its own writable job snapshot.
+It returns `AgentRun` (validated choice plus persisted trace), and stores acquired
+stock projections, evaluated option versions and local clarification drafts before
+storing references to them. The service does not update the original case.
+
+Clarification questions are model-generated drafts, with the store language supplied
+by the repository and required by the prompt; a human still reviews their wording.
+Final decision explanations are server templates, so arbitrary model numbers or
+causal claims do not become the displayed rationale.
+
+## Validation status
+
+The automated conversations use fake models and fixture-backed dev cases. They
+verify different stock/ambiguity tool paths, scoped IDs, persistence, draft
+idempotency, donor-conflict gates, valid vs blocked proposals, exhausted-budget
+fallback and the real LLM adapter's explicit replay-miss behavior. These tests do
+**not** claim a real provider chose those tools. The two real recorded dev traces
+remain blocked on a team-provisioned per-model key file; issue #81 and PR #146
+must remain open/draft until those recordings can be made and replayed.

@@ -294,3 +294,110 @@ def test_module_is_discoverable_and_requires_explicit_case_selection():
     assert agent.MANIFEST in Registry.discover().manifests()
     result = agent.run(SimpleNamespace(params={}, clients={}))
     assert result.status == "blocked"
+
+
+@pytest.mark.parametrize("missing", [False, True])
+def test_module_uses_llm_adapter_and_keeps_replay_misses_explicit(database, monkeypatch, missing):
+    from openai.types.chat import ChatCompletion
+
+    from tessera.core.config import Settings
+
+    engine, spec = database
+    with repo_session(engine, spec, fixture_mode=True) as repo:
+        reader = Reader(repo)
+        monkeypatch.setattr(agent.SystemsReader, "open", lambda *args: reader)
+        monkeypatch.setattr(agent, "get_settings", lambda: Settings(_env_file=None))
+        script = Script(("get_case_evidence", dict(case_id=AMBIGUOUS)), ("finish", finish()))
+
+        class Client:
+            requests = []
+
+            def chat(self, messages, tools, model, **generation):
+                self.requests.append(generation)
+                if missing:
+                    raise ReplayMiss("not recorded")
+                reply = script.complete(messages, tools, 10)
+                return ChatCompletion.model_validate(
+                    dict(
+                        id="fake-response",
+                        object="chat.completion",
+                        created=0,
+                        model="fake-model",
+                        choices=[
+                            dict(
+                                index=0,
+                                finish_reason="tool_calls",
+                                message=dict(
+                                    role="assistant",
+                                    content=None,
+                                    tool_calls=[
+                                        dict(
+                                            id=c.id,
+                                            type="function",
+                                            function=dict(name=c.name, arguments=c.arguments),
+                                        )
+                                        for c in reply.tool_calls
+                                    ],
+                                ),
+                            )
+                        ],
+                    )
+                )
+
+        client = Client()
+        result = agent.run(
+            SimpleNamespace(
+                repo=repo,
+                spec=spec,
+                params={"case_ids": [AMBIGUOUS]},
+                clients={"llm": client},
+            )
+        )
+        assert result.status == ("failed" if missing else "succeeded")
+        traces = [t for t in repo.list(AgentTrace) if t.producer == agent.MANIFEST.id]
+        if missing:
+            assert result.errors == (f"{AMBIGUOUS}: missing LLM recording",)
+            assert traces == []
+        else:
+            assert result.counts["traces"] == 1
+            assert len(traces) == 1 and not traces[0].fallback_used
+            assert client.requests[0]["cache_context"]["prompt_version"] == agent.PROMPT_VERSION
+
+
+def test_fresh_valid_option_can_be_proposed_but_donor_conflict_adds_a_block(database, monkeypatch):
+    engine, spec = database
+    with repo_session(engine, spec, fixture_mode=True) as repo:
+        tools = tools_for(repo)
+        option = repo.get(ActionOption, "opt-d1-mil01-mil02-999-m-q2")
+        passing = ActionOption.model_validate(
+            {
+                **option.model_dump(),
+                "recommended": True,
+                "valid_until": datetime(2026, 10, 30, tzinfo=UTC),
+                "checks": [dict(c.model_dump(), status="pass") for c in option.checks],
+            }
+        )
+        tools.evidence(agent.CaseArgs(case_id=D1))
+        tools.options[passing.id] = passing
+        choice = Finish(
+            status="action_proposed",
+            option_id=passing.id,
+            evidence_refs=(passing.id,),
+            rationale="Proposal only",
+        )
+        assert tools.validate(choice) is None
+        donor = repo.get(Case, D1).model_copy(
+            update={
+                "id": "donor-conflict",
+                "store_id": "MIL02",
+                "case_type": "stock_discrepancy",
+            }
+        )
+        repo.put(donor)
+        monkeypatch.setattr(agent, "evaluate_case", lambda inputs: (passing,))
+        tools.evaluate(agent.OptionsArgs(case_id=D1))
+        blocked = tools.options[passing.id]
+        assert not blocked.recommended
+        assert any(c.name == "donor_conflict" and c.status == "unknown" for c in blocked.checks)
+        assert agent.ref(donor) in blocked.input_refs
+        assert tools.validate(choice) is not None
