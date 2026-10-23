@@ -6,17 +6,25 @@ import { Button, Input, StatusBadge } from '../ui'
 import { createOptionsSession, intentKey } from './caseOptionsState'
 import type { Intent, OptionsSession, OptionsState } from './caseOptionsState'
 
+// Tab-lifetime journal: revisiting a case keeps uncertain commands and their keys.
+// Nothing is submitted on mount, and fixture/product commands never share a scope.
+const retainedSessions = new Map<string, OptionsState>()
+
 export function CaseOptionsPanel({ item, runId, fixtureMode }: { item: Case; runId: string; fixtureMode: boolean }) {
   const context = { runId, caseId: item.id, version: item.version, fixture: fixtureMode }
   return <ScopedOptions key={optionsContextKey(context)} context={context} closed={item.status === 'closed' || item.status === 'decided'} />
 }
 
 function ScopedOptions({ context, closed }: { context: OptionsContext; closed: boolean }) {
-  const [session] = useState(() => createOptionsSession(context))
+  const [scope] = useState(context)
+  const [session] = useState(() => createOptionsSession(scope, undefined, retainedSessions.get(optionsContextKey(scope))))
   useEffect(() => {
     session.start()
-    return () => session.dispose()
-  }, [session])
+    return () => {
+      session.dispose()
+      retainedSessions.set(optionsContextKey(scope), session.snapshotForResume())
+    }
+  }, [session, scope])
   return <PublishedOptions session={session} context={context} closed={closed} />
 }
 

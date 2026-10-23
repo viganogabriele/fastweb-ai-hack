@@ -20,8 +20,9 @@ export const intentKey = (intent: Intent) => JSON.stringify([
 // The synchronous lock also protects against two clicks before React can rerender.
 export function createOptionsSession(context: OptionsContext, dependencies = {
   load: loadCaseOptions, post: postCaseDecision, key: () => crypto.randomUUID()
-}) {
-  let state: OptionsState = { options: [], loading: true, reviewRequired: false, pending: false, revision: 0, commands: new Map() }
+}, previous?: OptionsState) {
+  let state: OptionsState = { options: [], loading: true, reviewRequired: previous?.reviewRequired ?? false, pending: false,
+    revision: previous?.revision ?? 0, commands: previous?.commands ?? new Map() }
   let active = true
   let generation = 0
   let read: AbortController | undefined
@@ -77,6 +78,12 @@ export function createOptionsSession(context: OptionsContext, dependencies = {
   }
   return {
     snapshot: () => state,
+    // Leaving a selection cannot cancel a server commit. Keep the exact command
+    // available for an explicit retry on return, without accepting late results.
+    snapshotForResume: (): OptionsState => ({ ...state, pending: false,
+      commands: new Map([...state.commands].map(([key, command]) => [key, command.status === 'pending'
+        ? { ...command, status: 'retryable', message: 'Selezione cambiata durante il salvataggio: esito sconosciuto. Riprova lo stesso comando per verificarlo.' }
+        : command])) }),
     subscribe(listener: () => void) { listeners.add(listener); return () => { listeners.delete(listener) } },
     load, submit,
     start() { active = true; void load() },

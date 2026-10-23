@@ -19,7 +19,7 @@ export function CaseDetailAnalysis({ item, runId, fixtureMode }: Props) {
 
   return <section className="sd-case-decision" aria-labelledby="sd-case-analysis-title">
     <header><div><p className="sd-case-detail__eyebrow">Analisi e proposta</p><h3 id="sd-case-analysis-title">Previsione, traccia e opzioni</h3></div>
-      <StatusBadge tone={detail ? 'warning' : 'neutral'} label={detail ? 'Esempio sintetico' : fixtureMode ? 'Fixture senza esempio' : 'Dettagli non esposti'} />
+      <StatusBadge tone={detail ? 'warning' : 'neutral'} label={detail ? 'Esempio sintetico disponibile' : 'Nessun esempio sintetico'} />
     </header>
     <CaseOptionsPanel item={item} runId={runId} fixtureMode={fixtureMode} />
     {detail ? <>
@@ -33,7 +33,7 @@ export function CaseDetailAnalysis({ item, runId, fixtureMode }: Props) {
         </li>)}</ol>
       </section>
       <section className="sd-case-analysis__options" aria-labelledby="sd-case-options-title">
-        <h4 id="sd-case-options-title">Opzioni e controlli</h4>
+        <h4 id="sd-case-options-title">Esempi sintetici: opzioni e controlli</h4>
         {detail.options.length ? detail.options.map((option) => <OptionCard key={option.id} option={option} item={item} fixtureMode={fixtureMode}
           decision={activeDecision?.key === decisionKey(runId, item.id, item.version, option.id) ? activeDecision.action : null}
           confirming={activeConfirmation?.key === decisionKey(runId, item.id, item.version, option.id) ? activeConfirmation.action : null}
@@ -42,12 +42,10 @@ export function CaseDetailAnalysis({ item, runId, fixtureMode }: Props) {
           onCancel={() => setConfirming(null)} />) : <p>Nessuna opzione è stata proposta per questa astensione.</p>}
       </section>
       <p className="sd-case-decision__notice" role="note">Le decisioni sono simulazioni locali per questo esempio. Non vengono inviate, salvate sul server o applicate a stock/run.</p>
-    </> : <div className="sd-case-decision__empty"><strong>Dettagli analitici non disponibili</strong>
+    </> : <div className="sd-case-decision__empty"><strong>Contesto analitico sintetico non disponibile</strong>
       {item.blocking_uncertainties.length > 0
         ? <><p>Il caso riporta queste incertezze bloccanti:</p><ul>{item.blocking_uncertainties.map((reason) => <li key={reason}>{reason}</li>)}</ul></>
-        : <p>{fixtureMode ? 'Nessun esempio sintetico è definito per questa combinazione run/caso/versione.' : 'Il run live non pubblica forecast, tracce, opzioni o controlli tramite l’API disponibile.'}</p>}
-      <p>Approve e Reject sono disabilitati perché non sono disponibili opzioni verificabili.</p>
-      <div className="sd-case-decision__actions"><Button disabled>Approva</Button><Button variant="secondary" disabled>Respingi</Button></div>
+        : <p>Nessun esempio sintetico è definito per questa combinazione run/caso/versione. Le opzioni del server sono mostrate separatamente qui sopra.</p>}
     </div>}
   </section>
 }

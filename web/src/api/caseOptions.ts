@@ -21,7 +21,8 @@ export class OptionsApiError extends Error {
       : status === 404 ? 'Caso o opzione non trovati nel namespace selezionato.'
         : status === 422 ? 'Decisione non valida: verifica identità locale e dati della proposta.'
           : status === 503 ? 'Registro occupato (503). Esito non confermato: riprova lo stesso comando.'
-            : `Servizio non disponibile (${status}). Esito non confermato: riprova lo stesso comando.`)
+            : status >= 500 ? `Servizio non disponibile (${status}). Esito non confermato: riprova lo stesso comando.`
+              : `Decisione rifiutata dal servizio (${status}). Verifica la richiesta prima di un nuovo comando.`)
     this.status = status
   }
 }
