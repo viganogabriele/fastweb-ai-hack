@@ -52,6 +52,6 @@ Unsupported paths return 404, unsupported methods 405, run creation 409 and malf
 all responses carry `X-Tessera-Mock: 1`. No request falls through to a provider or the backend.
 `tests/mockApi.test.mjs` checks these boundaries.
 
-The overview shortcut selects an active case by priority, then deadline, including when no case
-is due within 48 hours. Overdue cases remain in the decision queue. The arrow hover movement is
+The overview shortcut selects the earliest deadline among critical/high cases, falling back to
+all active cases, including when no case is due within 48 hours. Overdue cases remain in the decision queue. The arrow hover movement is
 limited to fine pointers with no reduced-motion preference; the colour feedback remains available.

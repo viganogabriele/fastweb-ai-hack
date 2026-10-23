@@ -32,7 +32,7 @@ const manifest = (
   description: string,
   requires: string[],
   produces: string[],
-  mode: ModuleManifest['mode'] = 'recorded'
+  mode: ModuleManifest['mode'] = 'fixture'
 ): ModuleManifest => ({
   id,
   layer,
@@ -135,7 +135,7 @@ const DOC_SEEDS: DocSeed[] = [
     text: 'Closing notes LON01\nThree customers returned the VTRACK GTX this week, all citing the sole peeling after a few days. Flagging to product quality.\nFootfall was steady, slightly below last Thursday.'
   },
   {
-    id: 'doc-nyc01-20261022', store: 'NYC01', lang: 'en', type: 'voice_note', at: -2,
+    id: 'doc-nyc01-20261022', store: 'NYC01', lang: 'en', type: 'voice_note', at: 2,
     text: 'Hey team, quick one from Madison. A VIP asked for "that long navy parka from the campaign", we couldn’t tell which style. She is coming back Saturday. Also the scarf table is almost empty, lots of people asking for the beige cashmere.'
   },
   {
@@ -271,6 +271,12 @@ const CASE_SEEDS: CaseSeed[] = [
   { id: 'case-lon01-j10911a00745-742-mario', store: 'LON01', scope: 'J10911A00745-742', level: 'sku', type: 'unmet_demand', owner: 'allocation', priority: 'medium', status: 'verify', reason: 'Una nota interna smentisce la richiesta registrata dal negozio.', due: 8, contra: ['obs-lon01-vtrack'], uncertain: ['Fonti in contrasto.'] }
 ]
 
+const caseAvailableAt = (seed: CaseSeed) => new Date(Math.max(
+  Date.parse(hours(-2)),
+  ...OBSERVATIONS.filter((item) => [...(seed.obs ?? []), ...(seed.contra ?? [])].includes(item.id))
+    .map((item) => Date.parse(item.available_at!))
+)).toISOString()
+
 const obsRef = (id: string): S['ArtifactRef'] => ({ kind: 'Observation', id, version: 'v1' })
 
 export const CASES: Case[] = CASE_SEEDS.map((seed) => ({
@@ -290,10 +296,10 @@ export const CASES: Case[] = CASE_SEEDS.map((seed) => ({
   window_start: '2026-10-20T00:00:00Z',
   window_end: '2026-10-29T00:00:00Z',
   first_available_at: hours(-30),
-  last_received_at: hours(-2),
-  last_independent_evidence_at: hours(-2),
+  last_received_at: caseAvailableAt(seed),
+  last_independent_evidence_at: caseAvailableAt(seed),
   valid_until: hours(72),
-  available_at: hours(-2),
+  available_at: caseAvailableAt(seed),
   availability_basis: 'derived',
   computed_at: COMPUTED,
   supporting: (seed.obs ?? []).map(obsRef),
@@ -309,27 +315,24 @@ export const CASES: Case[] = CASE_SEEDS.map((seed) => ({
   producer_version: '0.4.0'
 }))
 
-export function documentDetail(id: string): DocumentDetail | undefined {
+export function documentDetail(id: string, runId = MAIN_RUN): DocumentDetail | undefined {
   const document = documentById.get(id)
-  if (!document) return undefined
+  if (!document || !forRun(runId, [document], (item) => String(item.meta.store_id))?.length) return undefined
   return {
     document,
     segments: [],
     links: [],
-    observations: OBSERVATIONS.filter((item) => item.document_id === id)
+    observations: forRun(runId, OBSERVATIONS.filter((item) => item.document_id === id), (item) => item.store_id) ?? []
   }
 }
 
-/** Respect the selected run, store scope and availability cutoff, even for synthetic data. */
+/** Keep synthetic snapshots subject to the same cutoff and store isolation as the API. */
 export function forRun<T extends { available_at: string | null; run_id?: string }>(runId: string, items: T[], storeOf: (item: T) => string | null | undefined): T[] | undefined {
   const run = RUNS.find((item) => item.spec.run_id === runId)
   if (!run) return undefined
   if (!run.published) return []
   return items.filter((item) => {
     const store = storeOf(item)
-    return (!store || run.spec.stores.includes(store))
-      && item.available_at !== null
-      && Date.parse(item.available_at) <= Date.parse(run.spec.as_of)
-      && (!item.run_id || item.run_id === runId)
-  })
+    return (!store || run.spec.stores.includes(store)) && item.available_at !== null && Date.parse(item.available_at) <= Date.parse(run.spec.as_of)
+  }).map((item) => item.run_id === undefined ? item : { ...item, run_id: runId })
 }

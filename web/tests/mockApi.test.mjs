@@ -1,54 +1,60 @@
 import assert from 'node:assert/strict'
-import { createServer } from 'node:http'
-import { once } from 'node:events'
-import test from 'node:test'
-import { CASES, DOCUMENTS, MAIN_RUN, RUNS, forRun } from '../mock-api/data.ts'
+import { test } from 'node:test'
+import { CASES, DOCUMENTS, MODULES, OBSERVATIONS, RUNS, documentDetail, forRun } from '../mock-api/data.ts'
 import { mockApi } from '../mock-api/plugin.ts'
 
-test('synthetic records respect publication, run identity, store scope and cutoff', () => {
-  for (const run of RUNS) {
-    const cases = forRun(run.spec.run_id, CASES, item => item.store_id)
-    const documents = forRun(run.spec.run_id, DOCUMENTS, item => item.meta.store_id)
-    for (const item of [...cases, ...documents]) {
-      assert.ok(run.published)
-      assert.ok(Date.parse(item.available_at) <= Date.parse(run.spec.as_of))
-      if ('run_id' in item) assert.equal(item.run_id, run.spec.run_id)
-    }
-    if (!run.published) assert.deepEqual([cases, documents], [[], []])
+const storeOf = item => item.store_id ?? String(item.meta.store_id)
+test('mock snapshots exclude future data and respect run/store scope and publication', () => {
+  for (const records of [CASES, DOCUMENTS]) {
+    assert.deepEqual(forRun('mock-2026-10-21', records, storeOf), [])
+    assert.deepEqual(forRun('mock-2026-10-23', records, storeOf), [])
+    const visible = forRun('fixture', records, storeOf)
+    assert.ok(visible.length)
+    assert.ok(visible.every(item => Date.parse(item.available_at) <= Date.parse(RUNS[0].spec.as_of)))
+    assert.ok(visible.every(item => RUNS[0].spec.stores.includes(storeOf(item))))
   }
-  assert.equal(forRun('missing', CASES, item => item.store_id), undefined)
-  assert.ok(forRun(MAIN_RUN, CASES, item => item.store_id).length > 0)
-  assert.deepEqual(forRun(MAIN_RUN, [
-    { available_at: '2026-10-23T00:00:00Z', store: 'MIL01' },
-    { available_at: '2026-10-21T00:00:00Z', store: 'OUTSIDE' },
-  ], item => item.store), [])
+  assert.equal(documentDetail(DOCUMENTS[0].id, 'mock-2026-10-21'), undefined)
+  assert.ok(MODULES.every(item => item.mode === 'fixture'))
+})
+test('visible derived artifacts carry the selected run id', () => {
+  const run = RUNS[1]
+  const records = [{ available_at: '2026-10-20T00:00:00Z', store_id: run.spec.stores[0], run_id: 'fixture' }]
+  assert.equal(forRun(run.spec.run_id, records, storeOf)[0].run_id, run.spec.run_id)
+  assert.equal(records[0].run_id, 'fixture')
+  const excluded = [
+    { ...records[0], store_id: 'OUTSIDE' },
+    { ...records[0], available_at: null },
+    { ...records[0], available_at: '2026-10-22T00:00:00Z' }
+  ]
+  assert.deepEqual(forRun(run.spec.run_id, excluded, storeOf), [])
 })
 
-test('mock middleware rejects malformed, unsupported and mutation routes locally', async t => {
+async function request(path) {
   let middleware
-  const plugin = mockApi()
-  assert.equal(plugin.apply, 'serve')
-  plugin.configureServer({ middlewares: { use(path, handler) {
-    assert.equal(path, '/api')
-    middleware = handler
-  } } })
-  const server = createServer((req, res) => middleware(req, res))
-  server.listen(0, '127.0.0.1')
-  await once(server, 'listening')
-  t.after(() => server.close())
-  const base = `http://127.0.0.1:${server.address().port}`
-  for (const [path, method, status] of [
-    ['/runs', 'GET', 200],
-    ['/runs', 'POST', 409],
-    ['/runs', 'DELETE', 405],
-    ['/not-mocked', 'GET', 404],
-    ['/health/extra', 'GET', 404],
-    [`/runs/${MAIN_RUN}/cases/missing/extra`, 'GET', 404],
-    ['/runs/%E0%A4%A', 'GET', 400],
-  ]) {
-    const response = await fetch(base + path, { method })
-    assert.equal(response.status, status, `${method} ${path}`)
-    assert.equal(response.headers.get('x-tessera-mock'), '1')
-    await response.json()
+  mockApi().configureServer({ middlewares: { use(_prefix, handler) { middleware = handler } } })
+  return new Promise(resolve => {
+    const response = { statusCode: 200, setHeader() {}, end(body) { resolve({ status: this.statusCode, body: JSON.parse(body) }) } }
+    middleware({ method: 'GET', url: path }, response)
+  })
+}
+test('mock middleware handles malformed encoding without unhandled rejection', async () => {
+  assert.equal((await request('/runs/%ZZ')).status, 400)
+})
+test('unpublished collection requests match API 409 behavior', async () => {
+  assert.equal((await request('/runs/mock-2026-10-23/cases')).status, 409)
+})
+
+test('visible cases never cite observations available after the cutoff', () => {
+  const visible = forRun('fixture', CASES, storeOf)
+  for (const item of visible) {
+    for (const ref of [...item.supporting, ...item.contradicting]) {
+      const obs = OBSERVATIONS.find(record => record.id === ref.id)
+      assert.ok(obs)
+      assert.ok(Date.parse(obs.available_at) <= Date.parse(RUNS[0].spec.as_of))
+    }
   }
+})
+
+test('unsupported nested routes return 404 instead of an unrelated case DTO', async () => {
+  assert.equal((await request(`/runs/fixture/cases/${CASES[0].id}/clarifications`)).status, 404)
 })

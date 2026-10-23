@@ -14,6 +14,7 @@ import {
 import type { Case, RunView, SourceDocument } from '../api/client'
 import { Button, EmptyState, Input, Select, StatusBadge, formatPercent } from '../ui'
 import type { StatusTone } from '../ui/StatusBadge'
+import { compareDeadlines, deadline } from './overviewLogic'
 import './overview.css'
 
 type Priority = Case['priority']
@@ -57,15 +58,6 @@ const HOUR = 3600_000
 const isActive = (item: Case) => item.status !== 'closed' && item.status !== 'decided'
 const dateTime = (value: string) =>
   new Date(value).toLocaleString('it-IT', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
-
-/** Time left before a decision deadline, measured from the run cutoff (never from "now"). */
-function deadline(due: string | null | undefined, asOf: number) {
-  if (!due) return { text: 'Nessuna', tone: 'none' as const }
-  const hours = Math.round((Date.parse(due) - asOf) / HOUR)
-  if (hours < 0) return { text: `Scaduta ${Math.abs(hours)} h fa`, tone: 'past' as const }
-  if (hours < 48) return { text: `${hours} h`, tone: hours <= 24 ? ('urgent' as const) : ('soon' as const) }
-  return { text: `${Math.round(hours / 24)} giorni`, tone: 'later' as const }
-}
 
 function Deadline({ due, asOf }: { due: string | null | undefined; asOf: number }) {
   const left = deadline(due, asOf)
@@ -132,7 +124,7 @@ export function Overview({
         open: own.length,
         urgent: own.filter((item) => priorityOrder[item.priority] <= 1).length,
         verify: own.filter((item) => item.status === 'verify').length,
-        next: own.map((item) => item.decision_due_at).filter((value): value is string => Boolean(value)).sort()[0]
+        next: own.map((item) => item.decision_due_at).filter((value): value is string => Boolean(value)).sort(compareDeadlines)[0]
       }
     })
     .sort((a, b) => b.urgent - a.urgent || b.open - a.open || a.id.localeCompare(b.id))
@@ -153,24 +145,22 @@ export function Overview({
       (a, b) =>
         Number(isActive(b)) - Number(isActive(a)) ||
         priorityOrder[a.priority] - priorityOrder[b.priority] ||
-        (a.decision_due_at ?? '9999').localeCompare(b.decision_due_at ?? '9999')
+        compareDeadlines(a.decision_due_at, b.decision_due_at)
     )
   const filtered = store !== 'all' || priority !== 'all' || query !== ''
 
   const kpis = [
     { label: 'Casi aperti', value: active.length, note: `${cases.length - active.length} chiusi o decisi`, icon: ClipboardList, tone: 'neutral' },
     { label: 'Priorità alta', value: urgent.length, note: 'critica o alta', icon: Flame, tone: urgent.length ? 'danger' : 'neutral' },
-    { label: 'In scadenza', value: dueSoon.length, note: 'scadute o entro 48 h', icon: AlarmClock, tone: dueSoon.length ? 'warning' : 'neutral' },
+    { label: 'In scadenza', value: dueSoon.length, note: 'entro 48 h', icon: AlarmClock, tone: dueSoon.length ? 'warning' : 'neutral' },
     { label: 'Da verificare', value: verify.length, note: 'incertezze bloccanti', icon: ShieldQuestion, tone: verify.length ? 'info' : 'neutral' },
     { label: 'Fonti acquisite', value: documents.length, note: 'documenti nel run', icon: FileText, tone: 'neutral' },
     { label: 'Negozi', value: run.spec.stores.length, note: 'nel perimetro', icon: Store, tone: 'neutral' }
   ]
 
-  // Open the highest-priority active case, breaking ties by its decision deadline.
-  const nextUp = [...active].sort(
-    (a, b) =>
-      priorityOrder[a.priority] - priorityOrder[b.priority] ||
-      (a.decision_due_at ?? '9999').localeCompare(b.decision_due_at ?? '9999')
+  // The most urgent open case: earliest deadline among critical/high, else the earliest overall.
+  const nextUp = [...(urgent.length ? urgent : active)].sort(
+    (a, b) => compareDeadlines(a.decision_due_at, b.decision_due_at) || priorityOrder[a.priority] - priorityOrder[b.priority]
   )[0]
 
   return (
@@ -182,8 +172,8 @@ export function Overview({
             <strong>{active.length} casi aperti</strong>, di cui <strong className="is-danger">{urgent.length} ad alta priorità</strong>.{' '}
             {dueSoon.length ? (
               <>
-                {dueSoon.length} {dueSoon.length === 1 ? 'decisione scade' : 'decisioni scadono'} entro 48 ore
-                {dueSoon[0]?.decision_due_at ? <> · prima scadenza: <strong>{deadline(dueSoon[0].decision_due_at, asOf).text}</strong></> : null}.
+                {dueSoon.length} {dueSoon.length === 1 ? 'caso richiede' : 'casi richiedono'} una decisione entro 48 ore dal cutoff
+                {dueSoon[0]?.decision_due_at ? <>, prima scadenza: <strong>{deadline(dueSoon[0].decision_due_at, asOf).text}</strong></> : null}.
               </>
             ) : (
               'Nessuna decisione in scadenza nelle prossime 48 ore.'
@@ -211,7 +201,7 @@ export function Overview({
       <div className="sd-ov-row">
         <Card
           title="Da decidere"
-          meta="Casi aperti scaduti o in scadenza entro 48 ore dal cutoff del run"
+          meta="Casi aperti con scadenza entro 48 ore dal cutoff del run"
           action={<span className="sd-ov-count">{dueSoon.length}</span>}
           className="sd-ov-due"
         >
