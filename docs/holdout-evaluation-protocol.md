@@ -246,8 +246,11 @@ has the design) runs the unchanged Core modules once per store × origin:
   (explicit store×SKU×timezone universe, proposed `forecast.scenario: base` to be confirmed
   ex ante), `sources.txt` / `config.txt` (every source file read during the runs, every config
   and prompt) and `run-manifest.json` (export SHA-256s, counts, cache inventories, per-run status,
-  diagnostics). Execution logs: `executions/<mode>-*.json`. The skeletons say
-  `skeleton_unapproved`: #211 still binds and approves them.
+  diagnostics). `run-specs/` has one RunSpec per run and `forecast/` is a ready forecast bundle
+  directory (forecast records as `predictions.json`, plus cases/options). Execution logs:
+  `executions/<mode>-*.json`. The skeletons say `skeleton_unapproved`: #211 still binds
+  and approves them. RunSpec prompt versions are prompt file stems, which `freeze_record.py`
+  hashes. The plan, `config.txt` and the extraction cache context pin the prompt bytes.
 
 Dev evidence (MIL01 + MUN01, 2026-08-31…09-13, 28 origins). The recording ran at
 `e57b45d`, a pre-rebase commit of this PR whose runner/module code equals the PR head apart
@@ -260,7 +263,10 @@ from the estimate constants. A fresh replay at the PR head reproduced every expo
 | Tokens billed | 70,309 | 0 |
 | Exports | 533 predictions, 98 cases, 2,816 option versions, 2,914 forecasts | identical SHA-256 for all 10 export files |
 
-`case_identity_drift` was empty. Both bundles passed `eval.harness.freeze`,
+`case_identity_drift` was empty. The dev cache is bound to the extraction prompt bytes
+and request payloads of that commit. A later prompt change (for example DEMO-02b, #237)
+invalidates it, and a replay then fails closed on the first miss, by design. The focused
+tests use no recordings and do not depend on prompt hashes. Both bundles passed `eval.harness.freeze`,
 `eval.forecast.predictions` validation and `eval.lead_time.case_alerts` (75 alerts,
 23 verify/context), without opening answers.
 
@@ -294,9 +300,13 @@ diff <(jq -S .exports data/rolling/holdout-record/export/run-manifest.json) \
      <(jq -S .exports data/rolling/holdout-replay/export/run-manifest.json)
 ```
 
-Then freeze `data/rolling/holdout-replay/export` with the wrapper above:
-`EXPORT_DIR` is that directory, `SOURCE_LIST`/`CONFIG_LIST` are its `sources.txt`/`config.txt`,
-`PROTOCOL` is the approved protocol (or forecast protocol, with `forecast.json` as predictions).
+Then follow `docs/freeze-runbook.md` (step 3 onwards) with `X=data/rolling/holdout-replay/export`.
+The experiment record takes `X/sources.txt`, every `X/run-specs/*.json`, the two cache
+directories and the `lead` (`X`) and `forecast` (`X/forecast`) export groups. Freeze the bundles
+with the wrapper above: `EXPORT_DIR` is `X` (or `X/forecast`), `SOURCE_LIST`/`CONFIG_LIST` are
+`X/sources.txt`/`X/config.txt`, and `PROTOCOL` is the approved `protocol.json`
+(or `protocol-forecast.json`). If #211 narrows the reading sample, it edits `reading_files`
+in a separate reading protocol. Extra exported documents are outside the labels and not scored.
 
 Limits #211 must carry forward:
 

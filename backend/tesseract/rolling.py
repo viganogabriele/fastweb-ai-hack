@@ -1416,6 +1416,8 @@ def run_command(args) -> int:
     keys = Path(args.keys_file).resolve() if args.keys_file else get_settings().fastweb_keys_file
     if args.mode == "record":
         preflight(keys, args.mocks_url or get_settings().mocks_base_url)
+        for kind in ("llm", "systems"):  # both exist even when nothing is recorded
+            (cache / kind).mkdir(parents=True, exist_ok=True)
     options = {
         "llm_concurrency": args.llm_concurrency,
         "forecast": not args.no_forecast,
