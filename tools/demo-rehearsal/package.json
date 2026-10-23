@@ -1,0 +1,12 @@
+{
+  "name": "demo-rehearsal",
+  "private": true,
+  "type": "module",
+  "description": "DEMO-03 timed rehearsal: drives the real UI through the demo click path and records a video",
+  "scripts": {
+    "rehearse": "node rehearse.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.64.1"
+  }
+}

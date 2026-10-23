@@ -110,14 +110,16 @@
     <h1>Ogni passaggio porta un messaggio di business</h1>
     <table>
       <tr><th style="width:11%">Tempo</th><th style="width:28%">Sullo schermo</th><th style="width:34%">Cosa dire</th><th>Il messaggio</th></tr>
-      <tr><td class="num accent">0:00</td><td class="dim">La coda dei casi, giovedì sera</td><td class="dim">La frase d’apertura. Le vendite certificate arrivano domani; la domanda non soddisfatta non arriva mai.</td><td>I negozi lo vedono prima</td></tr>
-      <tr><td class="num accent">0:30</td><td class="dim">Mail di Milano, frase evidenziata → fatto → prodotto</td><td class="dim">“Due fatti: uno stockout e una domanda che non possiamo contare, quindi non inventiamo un numero.”</td><td>Ogni affermazione ha la sua prova</td></tr>
-      <tr><td class="num accent">1:15</td><td class="dim">Trace dell’investigatore e opzioni con controlli</td><td class="dim">“Può leggere stock e tratte, ma non può approvare. Guardatelo scegliere.” Indicate la scheda sulla discrepanza di stock.</td><td>Un agente che indaga; opzioni, non ordini</td></tr>
-      <tr><td class="num accent">2:15</td><td class="dim">What-if, poi un caso di disagio in negozio</td><td class="dim">“Alzate il forecast e il trasferimento si riduce. Le vendite basse per un ponteggio non portano via stock.”</td><td>I numeri vengono dal codice; contesto ≠ domanda</td></tr>
-      <tr><td class="num accent">3:00</td><td class="dim">“Una felpa” ambigua → domanda → collegata</td><td class="dim">“Quando non è sicuro, chiede al negozio nella sua lingua.”</td><td>Onesto per costruzione</td></tr>
-      <tr><td class="num accent">3:40</td><td class="dim">Slide delle prove, poi acquirente e percorso</td><td class="dim">Due numeri (pagina seguente), “dati sintetici, misurati sui negozi su cui abbiamo sviluppato”, poi acquirente e pilota.</td><td>Funziona, e si può adottare</td></tr>
+      <tr><td class="num accent">0:00</td><td class="dim">Panoramica, giovedì sera: run registrato, <i>degraded</i></td><td class="dim">La frase d’apertura. Le vendite certificate arrivano domani; la domanda non soddisfatta non arriva mai.</td><td>I negozi lo vedono prima</td></tr>
+      <tr><td class="num accent">0:20</td><td class="dim">Mail di Milano, due frasi evidenziate</td><td class="dim">“Uno stockout a zero e una domanda che non possiamo contare, quindi non inventiamo un numero.”</td><td>Ogni affermazione ha la sua prova</td></tr>
+      <tr><td class="num accent">0:50</td><td class="dim">Caso cardigan: cinque verifiche aperte, forecast invariato</td><td class="dim">“Colore ignoto, quantità vaga: il caso elenca cosa manca e il forecast resta com’è.”</td><td>Onesto per costruzione</td></tr>
+      <tr><td class="num accent">1:40</td><td class="dim">Trace dell’investigatore: sei strumenti, budget esaurito, fallback, <i>verify</i></td><td class="dim">“Legge stock e tratte; non può approvare. Qui ha finito il budget, e lo dice.”</td><td>Un agente che indaga</td></tr>
+      <tr><td class="num accent">2:10</td><td class="dim">Opzioni con controlli: un trasferimento fattibile, non raccomandato</td><td class="dim">“Le opzioni le calcola il codice. Uno spostamento che non salva nulla non è raccomandato.”</td><td>I numeri vengono dal codice</td></tr>
+      <tr><td class="num accent">2:40</td><td class="dim">“M” non identificato → bozza di domanda → approva una persona</td><td class="dim">“Quando non è sicuro, chiede al negozio nella sua lingua. Approva una persona; non parte nulla.”</td><td>Opzioni, non ordini</td></tr>
+      <tr><td class="num accent">3:25</td><td class="dim">Correzione: 85k sostituisce 58k</td><td class="dim">“Le correzioni sostituiscono, le copie contano una volta.”</td><td>Ogni affermazione ha la sua prova</td></tr>
+      <tr><td class="num accent">3:45</td><td class="dim">Slide dei risultati, poi acquirente e pilota</td><td class="dim">Numeri hold-out <b>[PENDING #128]</b>, “dati sintetici”, poi acquirente e pilota.</td><td>Funziona, e si può adottare</td></tr>
     </table>
-    <p class="small muted" style="margin-top:3mm">Copione completo: <span class="dim">docs/demo_script.md</span>. Prima delle prove, leggete il kit 4 per i problemi da correggere nel copione.</p>
+    <p class="small muted" style="margin-top:3mm">Copione completo e piani B: <span class="dim">docs/demo_script.md</span>. Prova cronometrata e video: <span class="dim">tools/demo-rehearsal</span>.</p>
   </div>
 </section>
 
@@ -139,7 +141,7 @@
       </div>
       <div class="card raised">
         <div class="label">Ditelo sempre con l’avvertenza</div>
-        <p class="dim" style="margin:0">“Dati sintetici costruiti per la challenge, con esche e rumore; misurati sui negozi su cui abbiamo sviluppato. I negozi tenuti da parte si valutano una volta sola, alla fine.” Finché quel run non è fatto, <b>non presentate numeri hold-out</b>.</p>
+        <p class="dim" style="margin:0">“Dati sintetici costruiti per la challenge, con esche e rumore; misurati sui negozi su cui abbiamo sviluppato. I negozi tenuti da parte si valutano una volta sola, alla fine.” Numeri hold-out: <b>[PENDING #128]</b>; finché non sono approvati, <b>non presentatene nessuno</b>.</p>
       </div>
     </div>
     <p class="small muted push" style="margin-top:3mm;margin-bottom:0">Fonti: risultati EVL-02 (PR #162) ed EVL-04 (PR #163). Gli eventi ampi, a livello di stagione, sono esclusi: lì nessun metodo batte il caso.</p>

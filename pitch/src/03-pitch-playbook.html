@@ -110,14 +110,16 @@
     <h1>Each beat carries one business point</h1>
     <table>
       <tr><th style="width:11%">Time</th><th style="width:28%">On screen</th><th style="width:34%">Say</th><th>The point</th></tr>
-      <tr><td class="num accent">0:00</td><td class="dim">The case queue, Thursday evening</td><td class="dim">The opening line. Certified sales come tomorrow; unmet demand never comes.</td><td>Stores see it first</td></tr>
-      <tr><td class="num accent">0:30</td><td class="dim">Milan email, sentence highlighted → fact → product</td><td class="dim">“Two facts: a stockout and demand we can’t count, so we don’t invent a number.”</td><td>Every claim has a receipt</td></tr>
-      <tr><td class="num accent">1:15</td><td class="dim">Investigator trace and options with checks</td><td class="dim">“It can read stock and routes, but it can’t approve. Watch it choose.” Point out the stock mismatch card.</td><td>Agent that investigates; options, not orders</td></tr>
-      <tr><td class="num accent">2:15</td><td class="dim">What-if, then a store disruption case</td><td class="dim">“Raise the forecast and the transfer shrinks. Low sales from scaffolding don’t pull stock away.”</td><td>Numbers come from code; context ≠ demand</td></tr>
-      <tr><td class="num accent">3:00</td><td class="dim">Ambiguous “sweatshirt” → question → linked</td><td class="dim">“When it isn’t sure, it asks the store in its own language.”</td><td>Honest by design</td></tr>
-      <tr><td class="num accent">3:40</td><td class="dim">Proof slide, then buyer and path</td><td class="dim">Two numbers (next page), “synthetic data, measured on stores we tuned on”, then the buyer and the pilot.</td><td>It works, and it can be adopted</td></tr>
+      <tr><td class="num accent">0:00</td><td class="dim">Overview, Thursday evening: recorded run, <i>degraded</i></td><td class="dim">The opening line. Certified sales come tomorrow; unmet demand never comes.</td><td>Stores see it first</td></tr>
+      <tr><td class="num accent">0:20</td><td class="dim">Milan email, two sentences highlighted</td><td class="dim">“A stockout at zero and demand we can’t count, so we don’t invent a number.”</td><td>Every claim has a receipt</td></tr>
+      <tr><td class="num accent">0:50</td><td class="dim">Cardigan case: five open checks, forecast untouched</td><td class="dim">“Colour unknown, quantity vague: the case lists what is missing and the forecast stays as it is.”</td><td>Honest by design</td></tr>
+      <tr><td class="num accent">1:40</td><td class="dim">Investigator trace: six tools, budget reached, fallback, <i>verify</i></td><td class="dim">“It reads stock and routes; it can’t approve. Here it ran out of budget, and says so.”</td><td>An agent that investigates</td></tr>
+      <tr><td class="num accent">2:10</td><td class="dim">Options with checks: a feasible transfer, not recommended</td><td class="dim">“Code computes the options. A move that saves nothing is not recommended.”</td><td>Numbers come from code</td></tr>
+      <tr><td class="num accent">2:40</td><td class="dim">“M” not identified → question draft → a person approves</td><td class="dim">“When it isn’t sure, it asks the store in its language. A person approves; nothing is sent.”</td><td>Options, not orders</td></tr>
+      <tr><td class="num accent">3:25</td><td class="dim">Correction: 85k replaces 58k</td><td class="dim">“Corrections replace, copies count once.”</td><td>Every claim has a receipt</td></tr>
+      <tr><td class="num accent">3:45</td><td class="dim">Results slide, then buyer and pilot</td><td class="dim">Hold-out numbers <b>[PENDING #128]</b>, “synthetic data”, then the buyer and the pilot.</td><td>It works, and it can be adopted</td></tr>
     </table>
-    <p class="small muted" style="margin-top:3mm">Full script: <span class="dim">docs/demo_script.md</span>. Before you rehearse, check pack 4 for the demo-script issues to fix.</p>
+    <p class="small muted" style="margin-top:3mm">Full script and fallbacks: <span class="dim">docs/demo_script.md</span>. Timed rehearsal and video: <span class="dim">tools/demo-rehearsal</span>.</p>
   </div>
 </section>
 
@@ -139,7 +141,7 @@
       </div>
       <div class="card raised">
         <div class="label">Say it with the caveat, every time</div>
-        <p class="dim" style="margin:0">“Synthetic data built for the challenge, with decoys and noise; measured on the stores we developed on. The kept-aside stores are scored once, at the end.” Until that run is done, <b>don’t present any hold-out number</b>.</p>
+        <p class="dim" style="margin:0">“Synthetic data built for the challenge, with decoys and noise; measured on the stores we developed on. The kept-aside stores are scored once, at the end.” Hold-out numbers: <b>[PENDING #128]</b>; until they are approved, <b>don’t present any</b>.</p>
       </div>
     </div>
     <p class="small muted push" style="margin-top:3mm;margin-bottom:0">Sources: EVL-02 (PR #162) and EVL-04 (PR #163) results. Broad, season-wide events are excluded from claims: there, no method beats chance.</p>

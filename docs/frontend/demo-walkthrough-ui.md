@@ -36,7 +36,14 @@ are written to that attempt's DB; re-run `replay_demo.py` for a clean attempt be
 
 ## 2. The click path (proposed, aligned with the recorded run)
 
-The draft script (`docs/demo_script.md`) predates the recorded candidate. Three beats cannot be
+**DEMO-03 update (2026-10-23).** `docs/demo_script.md` now follows the recorded candidate, and
+`tools/demo-rehearsal/` drives this path and records a timed video. Two changes from the table
+below, found while rehearsing: D1 options cannot be approved in this run (409 "proposal inputs or
+checks changed", #258), so the human decision is taken on `case-mil01-unknown-20261009`
+(`ask_store`, recommended). The options panel also lists both D1 option versions (first engine
+pass and the investigator's re-evaluation); only the latest is decidable.
+
+The earlier draft script predated the recorded candidate. Three beats could not be
 shown honestly as written:
 - the what-if panel (`docs/demo_script.md:68-80`): no UI or API for it exists;
 - ROM01 (`docs/demo_script.md:72-86`): a hold-out store (`docs/RFC-001-piattaforma.md:542`);
