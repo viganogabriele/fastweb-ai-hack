@@ -112,6 +112,9 @@ def modules(request: Request):
 def create_run(request: Request, body: CreateRun, tasks: BackgroundTasks, ns: Namespace):
     try:
         spec = RunSpec(run_id=str(uuid4()), **body.model_dump())
+        if spec.scenario_id == "live-voice":
+            # Only /api/voice/process can authorize and freeze a live inbox batch.
+            raise ValueError("Live voice runs must be queued through /api/voice/process")
         if (spec.mode == "fixture") != (ns == "fixture"):
             raise ValueError("Run mode must match the explicitly selected namespace")
         if spec.mode == "unavailable":
