@@ -35,14 +35,14 @@ export function CaseDetailAnalysis({ item, runId, fixtureMode }: Props) {
         {detail.options.length ? detail.options.map((option) => <OptionCard key={option.id} option={option} item={item} fixtureMode={fixtureMode}
           decision={activeDecision?.key === decisionKey(runId, item.id, item.version, option.id) ? activeDecision.action : null}
           confirming={activeConfirmation?.key === decisionKey(runId, item.id, item.version, option.id) ? activeConfirmation.action : null}
-          onConfirm={(action) => setDecision({ key: decisionKey(runId, item.id, item.version, option.id), action })}
+          onConfirm={(action) => { setDecision({ key: decisionKey(runId, item.id, item.version, option.id), action }); setConfirming(null) }}
           onAsk={(action) => setConfirming({ key: decisionKey(runId, item.id, item.version, option.id), action })}
           onCancel={() => setConfirming(null)} />) : <p>Nessuna opzione è stata proposta per questa astensione.</p>}
       </section>
       <p className="sd-case-decision__notice" role="note">Le decisioni sono simulazioni locali per questo esempio. Non vengono inviate, salvate sul server o applicate a stock/run.</p>
     </> : <div className="sd-case-decision__empty"><strong>Dettagli analitici non disponibili</strong>
       {item.blocking_uncertainties.length > 0
-        ? <><p>Il caso è in astensione dalla quantificazione per questi motivi registrati:</p><ul>{item.blocking_uncertainties.map((reason) => <li key={reason}>{reason}</li>)}</ul></>
+        ? <><p>Il caso riporta queste incertezze bloccanti:</p><ul>{item.blocking_uncertainties.map((reason) => <li key={reason}>{reason}</li>)}</ul></>
         : <p>{fixtureMode ? 'Nessun esempio sintetico è definito per questa combinazione run/caso/versione.' : 'Il run live non pubblica forecast, tracce, opzioni o controlli tramite l’API disponibile.'}</p>}
       <p>Approve e Reject sono disabilitati perché non sono disponibili opzioni verificabili.</p>
       <div className="sd-case-decision__actions"><Button disabled>Approva</Button><Button variant="secondary" disabled>Respingi</Button></div>
