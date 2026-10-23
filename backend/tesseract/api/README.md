@@ -30,6 +30,20 @@ survive a server restart; start a fresh run after an interrupted job. Published
 artifacts and run metadata are durable in SQLite. Durable job recovery is outside
 PLT-06. Use a single API worker process, as specified by the prototype architecture.
 
+## Dashboard business series (DEMO-05)
+
+`GET /api/runs/{run_id}/kpi` returns daily store KPIs.
+`GET /api/runs/{run_id}/market` returns monthly, regional and category comparisons,
+plus deduplicated global social context. Both read the run's persisted
+`BusinessSnapshot`, produced by `src.business`. Reading these endpoints never
+reloads source files or changes a published snapshot.
+
+They inherit publication (409), namespace and store isolation. Older runs without
+the artifact return 404. Visitor counts can be null; conversion must remain
+unavailable when any selected counter is unknown. Money, comparison windows,
+source discrepancies and social exclusions are described in
+[the production demo runbook](../../../docs/production-demo.md).
+
 ## Reports (PLT-11)
 
 - `GET /api/runs/{run_id}/reports?view=by_office` lists the latest persisted
