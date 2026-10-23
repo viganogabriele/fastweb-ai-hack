@@ -117,7 +117,7 @@ def tree_files(root: Path, directory) -> list[Path]:
     directory = guarded(root, directory)
     if not directory.is_dir():
         raise RecordError(f"missing directory: {directory}")
-    return sorted(p for p in directory.rglob("*") if p.is_file())
+    return sorted(guarded(root, p) for p in directory.rglob("*") if p.is_file())
 
 
 def git(root: Path, *args: str) -> str:

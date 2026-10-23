@@ -150,6 +150,10 @@ def test_record_is_append_only_and_refuses_unsafe_inputs(repo):
     ):
         assert run(repo, record_args(*extra, output="data/E/refused.json")) == 2, extra
     assert not (repo / "data/E/refused.json").exists()
+    notes = repo / "data/llm_cache/ab/answer_notes.md"
+    notes.parent.mkdir(parents=True, exist_ok=True)
+    notes.write_text("hidden")
+    assert run(repo, record_args(output="data/E/refused.json")) == 2
 
 
 def test_dirty_tree_needs_an_explicit_recorded_flag(repo):
