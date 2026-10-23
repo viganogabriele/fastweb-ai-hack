@@ -106,8 +106,9 @@ IDs are for reference in PRs and issues. Order within a class is the order to do
   `GET /api/runs/{run_id}/decisions/{decision_id}`; PLT-14, `backend/tesseract/api/README.md`
   "Decision reads"). Each item is the saved `LocalDraft` unchanged (`decision.at`, `by`,
   `decision`, `dispatch_status: draft`, option id/version, `simulated: true`), including drafts
-  restored by `replay_demo.py --decisions`. An empty list means no saved decision; a failed
-  read is an error, never "Aperto". Never derive "decided" locally.
+  restored by `replay_demo.py --decisions`. Drafts are run-scoped: an empty list means no
+  decision saved in the selected run (an investigation job run does not inherit its parent's
+  drafts, #245). A failed read is an error, never "Aperto". Never derive "decided" locally.
 - **M6 Walkthrough fit.** Do the click-path fixes in [demo-walkthrough-ui.md](demo-walkthrough-ui.md) §3.
 
 ### Should

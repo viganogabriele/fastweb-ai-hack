@@ -1,6 +1,10 @@
 """PLT-14: saved local drafts are read back exactly, per run and namespace."""
 
+from datetime import timedelta
+
+from tesseract.api.routers.options import decision_clock
 from tesseract.core.config import Settings
+from tesseract.core.repo import reset_run
 from tests.api import test_options as decided
 from tests.modules.actions.test_options import AS_OF
 
@@ -27,11 +31,12 @@ def test_saved_draft_and_idempotent_retry_read_back_once_and_exactly(service):
     option = options["transfer"]
     draft = client.post(endpoint(value), json=body(option)).json()
     assert client.post(endpoint(value), json=body(option)).json() == draft
+    service[2].dependency_overrides[decision_clock] = lambda: AS_OF + timedelta(minutes=1)
     rejected = client.post(
         f"/api/runs/run/options/{options['hold'].id}/decision",
         json=body(options["hold"], decision="rejected", key="other-key"),
     ).json()
-    assert listed(client) == sorted([draft, rejected], key=lambda d: d["decision"]["id"])
+    assert listed(client) == [draft, rejected]
     assert listed(client, case_id=value.case.id) == listed(client)
     item = client.get(f"/api/runs/run/decisions/{draft['decision']['id']}")
     assert item.status_code == 200 and item.json() == draft
@@ -84,3 +89,14 @@ def test_runs_and_namespaces_do_not_share_decisions(service):
     assert client.get("/api/runs/missing/decisions").status_code == 404
     service[2].state.settings = Settings(_env_file=None, fixture_mode=False)
     assert client.get("/api/runs/run/decisions?fixture=true").status_code == 403
+
+
+def test_drafts_of_a_reset_run_do_not_attach_to_a_recreated_snapshot(service):
+    client, value, options = prepare(service)
+    draft = client.post(endpoint(value), json=body(options["transfer"])).json()
+    # The scenario ledger deliberately survives the reset; the new snapshot never
+    # published the decided option, so its draft must not be presented as this run's.
+    reset_run(service[1]["product"], "run")
+    prepare(service, case_id="recreated-case")
+    assert listed(client) == []
+    assert client.get(f"/api/runs/run/decisions/{draft['decision']['id']}").status_code == 404

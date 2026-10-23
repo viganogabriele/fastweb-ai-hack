@@ -169,11 +169,16 @@ Each item is the persisted `LocalDraft` unchanged: the decision's id, version,
 `input_refs`, the decided option at its exact version, held reservations and
 `simulated: true`.
 
-The rows come from the scenario ledger, which survives run resets, filtered to
-this run's scenario and ID in the selected namespace. An idempotent retry appears
-once; a rejected (409) attempt saves nothing and is never listed. An option
-without a draft is undecided: reads never revalidate, refresh, synthesize or
-dispatch a decision. Missing runs, unknown decision IDs and foreign namespaces
+The rows come from the scenario ledger in the selected namespace, filtered to
+this run's scenario and ID, in the same transaction as the publication check.
+The ledger survives run resets, so a draft is listed only while the run still
+publishes the decided option at that exact version and its case is visible. An
+idempotent retry appears once; a rejected (409) attempt saves nothing and is
+never listed. Reads never revalidate, refresh, synthesize or dispatch a decision.
+
+Drafts are run-scoped: an empty list means no decision saved *in this run*.
+Investigation job runs share the parent's scenario and copy its options but not
+its decisions; read the parent run for those (write-side guard: #245). Missing runs, unknown decision IDs and foreign namespaces
 return 404 (fixture access as for other reads); unpublished runs return 409.
 
 ## Simulated clarification answers (OUT-02)

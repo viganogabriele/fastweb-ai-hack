@@ -261,8 +261,8 @@ export interface paths {
          * @description Local drafts saved for this snapshot, in decision-clock order.
          *
          *     Exactly what the decision endpoints committed, including idempotent retries once and
-         *     no rejected (409) attempt. An option without a draft is undecided; reads never
-         *     revalidate, refresh or dispatch anything.
+         *     no rejected (409) attempt. Drafts are run-scoped: an option without a draft has no
+         *     decision in this run. Reads never revalidate, refresh or dispatch anything.
          */
         get: operations["decisions_api_runs__run_id__decisions_get"];
         put?: never;

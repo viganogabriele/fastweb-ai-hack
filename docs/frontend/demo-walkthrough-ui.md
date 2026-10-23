@@ -88,7 +88,8 @@ Each item is done when a human following §4 sees the stated result on the real 
       namespace (`web/src/sections/CaseDetailAnalysis.tsx:23-46`).
 - [ ] **M5 Decisions after reload**: read the saved drafts with
       `GET /api/runs/{run_id}/decisions?case_id=<case>` (PLT-14) and show them on the case and
-      its options. Empty list = no saved decision; a failed read shows the error, not "Aperto".
+      its options. Empty list = no decision saved in the selected run (job runs do not inherit
+      the parent's drafts, #245); a failed read shows the error, not "Aperto".
       Until the UI is wired, show a note: "Le decisioni salvate in sessioni precedenti non sono
       ancora leggibili da questa vista." Never derive "decided" locally.
 - [ ] **Error detail** (S4): show the API `detail` and status. `readApi` drops both
