@@ -15,5 +15,7 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: web/package-lock.json
+      - name: Install audio conversion runtime
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - run: make setup
       - run: make check

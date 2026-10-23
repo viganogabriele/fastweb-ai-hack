@@ -27,6 +27,8 @@ class Settings(BaseSettings):
     # Fastweb. The URL is part of every transcription cache key, so keep the shared default.
     asr_base_url: str = "https://hack-sst.lorenzocorallo.net/v1"
     asr_api_key: SecretStr | None = None
+    # Explicit capability for the opt-in live phone demo; never put provider keys in a QR.
+    voice_access_token: SecretStr | None = None
     # Enters the cache key; the server ignores it and runs its own model. Keep the name the
     # earlier .env.example already set, or existing .env files would miss every recording.
     asr_model: str = "openai/whisper-large-v3-turbo"
