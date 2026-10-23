@@ -81,6 +81,19 @@ def digest(value):
     ).hexdigest()
 
 
+def semantic_payload(kind, payload):
+    # Retain measured timings in the DB/raw artifact hash. They describe this
+    # execution, rather than evidence, policy or the recorded model's choices.
+    if kind == "AgentTrace":
+        return {
+            **payload,
+            "steps": [
+                {k: v for k, v in step.items() if k != "duration_ms"} for step in payload["steps"]
+            ],
+        }
+    return payload
+
+
 def allowed(path):
     # Check every lexical ancestor before resolve() can hide a link or a
     # forbidden component (including one followed by '..').
@@ -249,6 +262,7 @@ def rebuild(
         "decisions": [],
         "inputs": {},
         "output_sha256": None,
+        "output_hash_excludes": ["AgentTrace.steps[*].duration_ms"],
     }
     engine = None
     replay_cache = None
@@ -298,6 +312,15 @@ def rebuild(
                 "sha256": hashlib.sha256(raw).hexdigest(),
                 "files": 1,
             }
+
+        for name, expected in (
+            ("sources", spec.source_manifest_hash),
+            ("config", spec.config_hash),
+        ):
+            if manifest["inputs"][name]["sha256"] != expected:
+                manifest["missing_prerequisites"].append(name + "_hash_mismatch")
+                raise IsolationError("staged inputs differ from the declared snapshot")
+
         settings = Settings(
             _env_file=None,
             sources_dir=attempt / "inputs/sources",
@@ -369,25 +392,25 @@ def rebuild(
                 for record in repo.list(model)
             ]
         manifest["output_sha256"] = digest(
-            sorted(payloads, key=lambda p: (p[0], p[1]["id"], p[1]["version"]))
+            [
+                (kind, semantic_payload(kind, item))
+                for kind, item in sorted(
+                    payloads, key=lambda p: (p[0], p[1]["id"], p[1]["version"])
+                )
+            ]
         )
-        # Trace UUIDs and elapsed times differ on each invocation. Keep the exact
-        # hash above, and separately compare all semantic fields and exact versions.
-        semantic = []
-        for kind, payload in payloads:
-            if kind == "AgentTrace":
-                payload = {**payload, "id": "runtime-trace-id"}
-                payload["steps"] = [
-                    {k: v for k, v in step.items() if k != "duration_ms"}
-                    for step in payload["steps"]
-                ]
-            semantic.append((kind, payload))
-        manifest["semantic_output_sha256"] = digest(
-            sorted(semantic, key=lambda p: (p[0], digest(p[1])))
+
+        manifest["artifacts"] = [
+            {"kind": kind, "id": item["id"], "version": item["version"], "sha256": digest(item)}
+            for kind, item in sorted(payloads, key=lambda p: (p[0], p[1]["id"], p[1]["version"]))
+        ]
+        manifest["raw_output_sha256"] = digest(
+            sorted(payloads, key=lambda p: (p[0], p[1]["id"], p[1]["version"]))
         )
         manifest["artifact_counts"] = {
             kind: sum(k == kind for k, _ in payloads) for kind in sorted({k for k, _ in payloads})
         }
+
         manifest["modules"] = [
             {
                 "id": item.module_id,

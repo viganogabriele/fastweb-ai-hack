@@ -7,6 +7,7 @@ transport. The caller owns the cache so misses remain visible even if a tool cat
 
 import base64
 import binascii
+import json
 
 import httpx
 
@@ -22,15 +23,18 @@ class SystemsCache(ResponseCache):
         super().__init__(directory)
         self.missing: set[str] = set()
         self.corrupt: set[str] = set()
+        self.failures = 0
 
     def get(self, key):
         try:
             return super().get(key)
         except ReplayMiss:
             self.missing.add(key)
+            self.failures += 1
             raise
         except CacheCorrupt:
             self.corrupt.add(key)
+            self.failures += 1
             raise
 
     def require_complete(self):
@@ -45,13 +49,12 @@ class SystemsTransport(httpx.BaseTransport):
         self.mode = settings.llm_mode
         self.origin = httpx.URL(settings.mocks_base_url)
         self.cache = cache
-        self.scope = {
-            "source_manifest_hash": spec.source_manifest_hash,
-            "config_hash": spec.config_hash,
-            "as_of": spec.as_of.isoformat(),
-            "stores": sorted(spec.stores),
-            "namespace": "fixture" if spec.mode == "fixture" else "product",
-        }
+        scope = spec.model_dump(mode="json", exclude={"run_id", "mode"})
+        scope["namespace"] = "fixture" if spec.mode == "fixture" else "product"
+        scope["stores"] = sorted(scope["stores"])
+        for module in scope["modules"]:
+            module["manifest"].pop("mode", None)
+        self.scope = scope
         self.upstream = upstream
 
     def handle_request(self, request):
@@ -64,7 +67,9 @@ class SystemsTransport(httpx.BaseTransport):
             or url.userinfo
         ):
             raise ValueError("only simulated stock/logistics GET reads may be recorded")
-        key = cache_key({"format": 1, "scope": self.scope, "url": str(url)})
+        if request.content:
+            raise ValueError("simulated GET reads cannot have a request body")
+        key = cache_key({"format": 2, "scope": self.scope, "url": str(url)})
         if self.mode == "live":
             return self._upstream().handle_request(request)
         try:
@@ -95,8 +100,11 @@ class SystemsTransport(httpx.BaseTransport):
             if saved["status"] != 200:
                 raise ValueError
             body = base64.b64decode(saved["body"], validate=True)
+            if not isinstance(json.loads(body), dict):
+                raise ValueError
         except (KeyError, TypeError, ValueError, binascii.Error):
             self.cache.corrupt.add(key)
+            self.cache.failures += 1
             raise CacheCorrupt(f"invalid systems recording for {key}") from None
         return httpx.Response(200, content=body, headers={"content-type": "application/json"})
 
@@ -116,6 +124,11 @@ def systems_factory(settings: Settings, spec: RunSpec, cache=None):
     """Wire the existing ACT-04 parser to recorded HTTP bytes, without changing its math."""
     from tessera.modules.sources.systems_client import SystemsClient
 
+    # Freeze before a queued job or module can mutate the caller's nested settings/spec.
+    settings = settings.model_copy(deep=True)
+    spec = spec.model_copy(deep=True)
+    if spec.mode != "live":
+        settings.llm_mode = "replay"
     cache = cache if cache is not None else SystemsCache(settings.data_dir / "systems_cache")
 
     def factory(crosswalk):

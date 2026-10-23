@@ -6,6 +6,7 @@ from typing import Annotated, Literal
 from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.exc import OperationalError
 
+from tessera.api.artifacts import CurrentArtifacts
 from tessera.api.routers.runs import PublishedRepo, engine_for
 from tessera.core.cache import CacheCorrupt, ReplayMiss
 from tessera.core.contracts import ActionOption, Case
@@ -67,7 +68,10 @@ def submit(request: Request, repo, body: DecisionInput, loader, clock) -> approv
     )
     try:
         return approval.decide(
-            engine_for(request, repo.namespace), command, loader=loader, now=clock
+            engine_for(request, repo.namespace),
+            command,
+            loader=lambda current, case: loader(CurrentArtifacts(current), case),
+            now=clock,
         )
     except approval.Conflict as error:
         raise HTTPException(409, str(error)) from None

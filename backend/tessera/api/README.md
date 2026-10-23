@@ -73,8 +73,9 @@ by case, so an older version cannot silently reappear if a trace changes case.
 An existing case with no traces returns an empty array.
 
 `GET /api/runs/{run_id}/cases/{case_id}/traces/{trace_id}?version=...` returns the
-exact requested version; omit `version` for the latest visible one. Missing cases,
-missing trace versions and traces belonging to a different case return 404.
+exact requested version; omit `version` for the latest current one. Missing current
+cases, missing trace versions and traces belonging to a different case return 404.
+An exact trace version remains readable when its case exists only as historical support.
 Both endpoints require a published succeeded/degraded run (409 otherwise) and
 inherit the same transaction, store scope, `as_of` and namespace protections as
 other artifact reads. Fixtures require explicit `?fixture=true` and enabled
@@ -145,7 +146,8 @@ order rather than lexical version order.
 
 GET `/api/runs/{run_id}/cases/{case_id}/clarifications/{clarification_id}` reads
 the latest visible version; `?version=...` selects an exact historical version.
-Both endpoints require an existing visible case and a published run. Missing
+Collections and unversioned reads require an existing current case; an exact
+question version remains readable when its case is historical. Both require a published run. Missing
 run/case/question/version or a question belonging to another case returns 404;
 unpublished runs return 409. Fixture access, store scope and as_of filtering
 use the same repository transaction as the other run artifact endpoints.
@@ -153,7 +155,66 @@ use the same repository transaction as the other run artifact endpoints.
 Questions, observation references, simulated flag, status and answer references
 are returned unchanged from the contract. An existing case without questions
 returns an empty list. These GETs never invoke an agent, send messages, submit
-answers or create runs. Durable answers and follow-up scheduling remain the
-separate OUT-02b task; this API reads its available artifacts without importing
-that service or depending on model recordings. The endpoints are navigation
-within a run, not an additional user authorization mechanism.
+answers or create runs. The endpoints are navigation within a run, not an
+additional user authorization mechanism.
+
+## Simulated clarification answers (OUT-02)
+
+POST `/api/runs/{run_id}/cases/{case_id}/clarifications/{clarification_id}/answer`
+accepts `AnswerRequest` and returns 202 with an immutable `AnswerJob`. The body
+must repeat the three URL IDs exactly and supply the parent scenario, exact case
+and clarification versions, answer text, timezone-aware receipt timestamp,
+optional language, distinct follow-up scenario, follow-up clock and idempotency
+key. The new clock must reach the receipt timestamp, strictly after the parent
+clock. Mode, store and fixture authorization are determined by the server and
+published parent; the client cannot override them.
+
+The adapter commits the durable answer job before queuing its worker. The
+response identifies the simulated source document and the actual new run; it
+does not assert that execution has completed. Read `/api/runs/{job.run.run_id}`
+for publication, module errors and pending/running/failed/degraded status. The
+original run, question and source versions remain unchanged. All fixture writes
+and subsequent navigation need `?fixture=true` and enabled fixture access.
+
+Malformed input or mismatched scope returns 422; stale versions, an unpublished
+or superseded parent and conflicting idempotency-key reuse return 409. An exact
+answer with no trusted offline recording returns 424 without a network fallback.
+Missing source lineage, unavailable frozen code or invalid frozen module
+parameters return 503. A locked database returns 503 with `Retry-After: 5`.
+Retry an uncertain submission with its original payload and key; an accepted
+retry returns the same job without repeating completed execution. Background
+failure does not turn a committed submission into a failed HTTP response.
+
+On startup the API queues accepted pending answer jobs from existing databases,
+including the fixture database only when fixture access is enabled. It does not
+create new databases during recovery or replay completed jobs. A running job
+left by a crashed worker, or a failed projection, requires stopping the old
+worker and explicitly resetting the projection before retrying the durable job.
+This recovery applies to clarification jobs; generic PLT-06 run jobs retain the
+in-process lifecycle described above.
+
+Operational reads exclude historical derived support versions (`parent:...`) from
+queues, document observations/links, forecasts, reports, traces and options. Queue
+counts computed from these collections therefore describe current outputs only.
+Unversioned reads cannot revive a disappeared parent case or option; approval
+input gathering and investigation submission/execution apply the same filter.
+Investigation snapshots retain historical records for exact citations.
+Source documents/segments remain visible,
+and exact derived version pins still resolve inside report citations and versioned
+case/trace/question reads. An answered receipt whose original case disappeared can
+be read with `?version=answer:{fingerprint}`.
+
+HTTP tests cover both controlled graphs and the production extraction/linking/
+dedup/cases/baseline/overlay/options pipeline with synthetic ERP and fake model/
+systems boundaries. A missing extraction recording leaves the child failed and
+unpublished. A self-contained answer produces a linked observation and options
+in the child, with the parent unchanged. These tests use no provider calls.
+
+Semantic clarification remains incomplete: the extractor receives the answer's
+own segments without the original question/observation context. A synthetic
+`Taglia M` reading remains unlinked; the recomputed original mention is unchanged.
+Even a self-contained reply is separate evidence without a demonstrated
+supersession/deduplication of the original demand. These tests establish execution
+and source navigation, not real model comprehension, quantitative forecast
+correction or availability of offline recordings. Parent #134 still requires that
+acceptance and the answer UI in #135.

@@ -8,6 +8,7 @@ from fastapi import APIRouter, BackgroundTasks, HTTPException, Request, Response
 from sqlalchemy import func, inspect, select
 from sqlalchemy.exc import OperationalError
 
+from tessera.api.artifacts import CurrentArtifacts
 from tessera.api.models import RunView
 from tessera.api.routers.runs import Namespace, engine_for, published_repo, view
 from tessera.core.cache import ReplayMiss, cache_key
@@ -158,17 +159,18 @@ def execute(job: RunSpec, case_id: str, engine, settings: Settings, inputs: JobI
                     concurrency=settings.llm_concurrency,
                     deadline_seconds=min(settings.llm_deadline_seconds, budget.max_seconds),
                 ).for_run(job)
-                case = investigator.visible_case(repo, case_id)
+                current = CurrentArtifacts(repo)
+                case = investigator.visible_case(current, case_id)
                 model = model_for_run(
                     client,
                     prompt_version=job.prompt_versions[module_id],
                     model=job.model_versions[module_id],
                     cache_context={"case": case.model_dump(mode="json")},
                 )
-                reader = reader_for(repo, settings, inputs.crosswalk)
+                reader = reader_for(current, settings, inputs.crosswalk)
                 try:
                     outcome = investigator.investigate(
-                        repo,
+                        current,
                         case_id,
                         model=model,
                         reader=reader,
@@ -249,11 +251,11 @@ def investigate(
     engine = engine_for(request, ns)
     try:
         with repo_session(engine, run_id, fixture_mode=ns == "fixture", write=True) as parent:
-            published_repo(parent)
-            if parent.get(Case, case_id) is None:
+            current = published_repo(parent)
+            if current.get(Case, case_id) is None:
                 raise HTTPException(404, "Case not found")
             try:
-                case = investigator.visible_case(parent, case_id)
+                case = investigator.visible_case(current, case_id)
             except ToolError:
                 raise HTTPException(409, "Case is not actionable") from None
             if inspect(parent.session).has_table(ledger.drafts.name):

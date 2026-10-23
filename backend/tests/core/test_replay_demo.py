@@ -30,25 +30,26 @@ module_spec = importlib.util.spec_from_file_location(
 replay = importlib.util.module_from_spec(module_spec)
 module_spec.loader.exec_module(replay)
 
+FIXTURE_FILES = {
+    "erp/master_data/stores.csv": "store_id,language,timezone,currency\nMIL01,it,Europe/Rome,EUR\n",
+    "store_emails/MIL01/message.eml": (
+        "From: example@example.test\nTo: demo@example.test\nDate: Thu, 22 Oct 2026 18:00:00 +0200\n"
+        "Message-ID: <demo@example.test>\nSubject: Closing\n"
+        "Content-Type: text/plain; charset=utf-8\n\n"
+        "PRIVATE SOURCE TEXT\n"
+    ),
+}
+
 
 @pytest.fixture
 def inputs(tmp_path):
     sources, config, cache = [tmp_path / name for name in ("sources", "config", "cache")]
     for path in (sources, config, cache):
         path.mkdir()
-    master = sources / "erp/master_data"
-    master.mkdir(parents=True)
-    (master / "stores.csv").write_text(
-        "store_id,language,timezone,currency\nMIL01,it,Europe/Rome,EUR\n",
-    )
-    mailbox = sources / "store_emails/MIL01"
-    mailbox.mkdir(parents=True)
-    (mailbox / "message.eml").write_text(
-        "From: example@example.test\nTo: demo@example.test\nDate: Thu, 22 Oct 2026 18:00:00 +0200\n"
-        "Message-ID: <demo@example.test>\nSubject: Closing\n"
-        "Content-Type: text/plain; charset=utf-8\n\n"
-        "PRIVATE SOURCE TEXT\n",
-    )
+    for relative, content in FIXTURE_FILES.items():
+        target = sources / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(content)
     return dict(sources=sources, config=config, cache=cache, workspace=tmp_path / "workspace")
 
 
@@ -58,8 +59,13 @@ def snapshot(manifest=emails.MANIFEST, mode="fixture"):
         scenario_id="historical",
         as_of="2026-10-22T20:00:00Z",
         stores=("MIL01",),
-        source_manifest_hash="declared-sources",
-        config_hash="declared-config",
+        source_manifest_hash=replay.digest(
+            [
+                (path, hashlib.sha256(content.encode()).hexdigest())
+                for path, content in sorted(FIXTURE_FILES.items())
+            ]
+        ),
+        config_hash=replay.digest([]),
         code_version="t",
         mode=mode,
         modules=(ModuleSnapshot(manifest=manifest, params={}),),
@@ -103,6 +109,7 @@ def test_repeatable_fixture_rebuild_starts_empty_and_retains_shared_inputs(input
     assert first["fixture_demo_only"] is True and first["namespace"] == "fixture"
     assert first["output_sha256"] == second["output_sha256"]
     assert first["snapshot_sha256"] == second["snapshot_sha256"]
+    assert first["artifacts"] == second["artifacts"]
     assert first["inputs"] == second["inputs"]
     assert first["modules"][0]["counts"]["documents"] == 1
     attempts = list(inputs["workspace"].glob("attempt-*"))
@@ -110,6 +117,59 @@ def test_repeatable_fixture_rebuild_starts_empty_and_retains_shared_inputs(input
     assert all((p / "data/tessera_fixture.db").is_file() for p in attempts)
     assert not (inputs["cache"] / "tessera_fixture.db").exists()
     assert "PRIVATE SOURCE TEXT" not in json.dumps(first)
+
+
+@pytest.mark.parametrize("tree", ["sources", "config"])
+def test_input_hash_mismatch_fails_before_any_module_or_client_runs(inputs, tree):
+    seen = []
+
+    def callback(ctx):
+        seen.append(ctx)
+        return success(ctx)
+
+    spec, registry = custom(callback)
+    (inputs[tree] / "changed-input.txt").write_text("Unapproved revision")
+    result = replay.rebuild(spec, **inputs, registry=registry)
+    assert result["status"] == "failed" and result["run_status"] == "not_started"
+    assert tree + "_hash_mismatch" in result["missing_prerequisites"]
+    assert not seen and not result["cache_misses"] and not result["network_attempts"]
+
+
+def test_trace_semantic_comparison_ignores_only_execution_time():
+    first = {"steps": [{"duration_ms": 12, "input_refs": [{"id": "source", "version": "v1"}]}]}
+    second = {"steps": [{"duration_ms": 44, "input_refs": [{"id": "source", "version": "v1"}]}]}
+    assert replay.digest(first) != replay.digest(second)  # raw provenance is retained
+    assert replay.semantic_payload("AgentTrace", first) == replay.semantic_payload(
+        "AgentTrace", second
+    )
+    second["steps"][0]["input_refs"][0]["version"] = "v2"
+    assert replay.semantic_payload("AgentTrace", first) != replay.semantic_payload(
+        "AgentTrace", second
+    )
+
+
+def test_systems_miss_does_not_fail_an_unrelated_source_module(inputs):
+    def callback(ctx):
+        cache = ctx.clients["systems"].recordings
+        try:
+            cache.get("0" * 64)
+        except replay.ReplayMiss:
+            pass
+        return success(ctx)
+
+    spec, registry = custom(callback)
+    spec = spec.model_copy(
+        update={"modules": spec.modules + (ModuleSnapshot(manifest=emails.MANIFEST, params={}),)}
+    )
+    registry = Registry(
+        [registry.resolve(spec.modules[0]), RegisteredModule(emails.MANIFEST, emails.run)]
+    )
+    result = replay.rebuild(spec, **inputs, registry=registry)
+    assert result["status"] == "failed"
+    assert [(m["id"], m["status"]) for m in result["modules"]] == [
+        ("test.replay", "failed"),
+        ("src.email", "succeeded"),
+    ]
 
 
 def test_product_mode_identity_is_preserved_while_client_is_forced_to_replay(inputs, monkeypatch):

@@ -248,6 +248,8 @@ def _execute(module_id, snapshot, entries, statuses, record, session, spec, clie
                 started_at=started,
             )
         )
+        recordings = getattr((clients or {}).get("systems"), "recordings", None)
+        previous_failures = recordings.failures if recordings is not None else 0
         try:
             with session(module_scope=True) as repo:
                 result = entries[module_id].run(
@@ -261,8 +263,7 @@ def _execute(module_id, snapshot, entries, statuses, record, session, spec, clie
                         missing_optional_inputs=missing_optional,
                     )
                 )
-                recordings = getattr((clients or {}).get("systems"), "recordings", None)
-                if recordings is not None:
+                if recordings is not None and recordings.failures != previous_failures:
                     recordings.require_complete()
                 if not isinstance(result, ModuleResult):
                     raise TypeError("module must return ModuleResult")
