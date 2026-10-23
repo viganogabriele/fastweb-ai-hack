@@ -32,7 +32,8 @@ location's size share, over the destination's horizon D+1..D+n:
   (conservative: it understates the benefit of a move); units in transit to it with unknown
   timing make the check ``unknown``;
 - the donor starts from its snapshot minus ledger reservations minus the scenario's mean daily
-  demand for every day between the snapshot and the horizon, floored to whole units;
+  demand for every day between the snapshot and the horizon, rounded to whole units (the high
+  scenario already carries the caution);
 - outbound leaves the donor on the pickup day (the horizon start if earlier); the contract ETA is
   a date, so units arrive at closing and are sellable the next day.
 
@@ -58,7 +59,7 @@ import hashlib
 import json
 import math
 from collections.abc import Iterable, Mapping, Sequence
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import date, datetime, time, timedelta
 from pathlib import Path
 from typing import Any, Literal, Protocol
@@ -178,6 +179,7 @@ class OptionInputs:
     routes: tuple[Route, ...]
     policy: OptionsPolicy
     reservations: tuple[Reservation, ...] = ()
+    siblings: tuple[str, ...] = ()  # style case: "<sku> <input hash>" of the other colours examined
 
 
 @dataclass(frozen=True)
@@ -301,6 +303,26 @@ def evaluate_options(inputs: OptionInputs) -> tuple[ActionOption, ...]:
     return tuple(options)
 
 
+def evaluate_case(colours: Sequence[OptionInputs]) -> tuple[ActionOption, ...]:
+    """Options of a case scoped above one colour (a style): every colour is evaluated and the one
+    whose transfer candidate ranks first is kept; the others are named in its assumptions and
+    their inputs enter its hash. One colour (or none to choose from) is ``evaluate_options``."""
+    if len(colours) == 1:
+        return evaluate_options(colours[0])
+    if not colours:
+        raise ValueError("a case needs at least one set of inputs")
+
+    def key(i: int) -> tuple[Any, ...]:
+        inputs = colours[i]
+        days = _days(inputs.horizon)
+        candidate, _, _ = _transfer(inputs, days, servable(inputs.dest.forecast, days))
+        return (candidate is None, _rank(candidate) if candidate else (), i)
+
+    best = min(range(len(colours)), key=key)
+    siblings = tuple(f"{c.sku} {input_version_hash(c)}" for i, c in enumerate(colours) if i != best)
+    return evaluate_options(replace(colours[best], siblings=siblings))
+
+
 def input_version_hash(inputs: OptionInputs) -> str:
     """SHA-256 over every input value the options depend on: changes when any fact changes."""
 
@@ -346,6 +368,7 @@ def input_version_hash(inputs: OptionInputs) -> str:
         "routes": [[position(r.donor), lane(r.lane)] for r in inputs.routes],
         "policy": {k: sorted(v) if isinstance(v, frozenset) else v for k, v in vars(p).items()},
         "ledger": sorted([*ref(r), r.status, r.qty] for r in inputs.reservations),
+        "siblings": sorted(inputs.siblings),
     }
     raw = json.dumps(payload, sort_keys=True, default=str).encode()
     return "sha256:" + hashlib.sha256(raw).hexdigest()
@@ -463,13 +486,15 @@ def _sizes(inputs: OptionInputs, donor: Position) -> list[str]:
 
 
 def _rank(c: _Candidate) -> tuple[Any, ...]:
-    """Admissible and beneficial first; then fewer fails (a fail is final, an unknown can be
-    resolved), fewer unknowns, more reduction, less cost, fewer units."""
+    """Admissible and beneficial first; moves computed to bring nothing last; then fewer fails
+    (a fail is final, an unknown can be resolved), fewer unknowns, more reduction, less cost,
+    fewer units."""
     reduction = c.reduction["base"] if c.reduction else 0.0
     cost = c.leg.cost_eur if c.leg.cost_eur is not None else math.inf
     fails = sum(x.status == "fail" for x in c.blocking)
     return (
         bool(c.blocking) or not c.beneficial,
+        c.reduction is not None and c.reduction["base"] <= 0,
         fails,
         len(c.blocking) - fails,
         -reduction,
@@ -545,7 +570,7 @@ def _quantities(
             s: max(
                 0,
                 math.floor(
-                    donor_qty - reserved - gap * sum(donor_series[s]) / len(donor_series[s])
+                    donor_qty - reserved - gap * sum(donor_series[s]) / len(donor_series[s]) + 0.5
                 ),
             )
             for s in SCENARIOS
@@ -1071,7 +1096,7 @@ def _transfer_option(
         effect = "Not quantified: no lost units per size without a verified size curve."
     rationale = (
         f"Move {leg.qty} × {leg.sku}-{leg.size} {leg.origin} → {leg.dest} on {leg.lane_id}, "
-        f"sellable {leg.sellable_at.date()}. {effect}"
+        f"sellable {leg.sellable_at.astimezone(inputs.dest.timezone).date()}. {effect}"
         + (f" Not recommended: {verdict}." if verdict else "")
     )
     return ActionOption(
@@ -1089,7 +1114,17 @@ def _transfer_option(
 
 
 def _assumptions(inputs: OptionInputs) -> tuple[str, ...]:
+    others = [s.split(" ")[0] for s in inputs.siblings]
+    style = (
+        (
+            f"Style case: colour {inputs.sku} kept for the move among "
+            f"{', '.join([str(inputs.sku), *others])}.",
+        )
+        if others
+        else ()
+    )
     return (
+        *style,
         "Options are alternatives: none reserves stock until approved.",
         "Scenarios are servable demand low/base/high, not probabilities or confidence bands.",
         f"Horizon {inputs.horizon[0]}..{inputs.horizon[1]} in {inputs.dest.store_id} local days.",
@@ -1106,7 +1141,7 @@ def _transfer_assumptions(quantified: bool, lane: LaneEta) -> tuple[str, ...]:
         out += [
             "Destination starts from its last snapshot with no consumption before the horizon.",
             "Donor starts from its snapshot minus ledger reservations minus the scenario's mean "
-            "daily demand for each day before the horizon, floored to whole units.",
+            "daily demand for each day before the horizon, rounded to whole units.",
             "Lost sales are not backlog.",
         ]
     else:
@@ -1220,6 +1255,20 @@ def case_product(case: Case) -> tuple[str | None, str | None]:
     return None, None
 
 
+def case_products(run_repo: repo.Repo, case: Case) -> list[tuple[str | None, str | None]]:
+    """Colours to evaluate: the case's SKU-colour, or every colour of a style case that the
+    destination carries."""
+    if case.scope_level != "style" or not case.scope_id or not case.store_id:
+        return [case_product(case)]
+    carried = {str(r.data["sku"]) for r in erp.read(run_repo, "assortment", store_id=case.store_id)}
+    skus = sorted(
+        str(r.data["sku"])
+        for r in erp.read(run_repo, "sku_colour")
+        if str(r.data["style_code"]) == case.scope_id and str(r.data["sku"]) in carried
+    )
+    return [(sku, None) for sku in skus] or [(None, None)]
+
+
 def case_forecast(run_repo: repo.Repo, store_id: str, sku: str, case_id: str | None):
     """The case's own adjustment if any, else the store × SKU baseline."""
     found = run_repo.list(ForecastAdjustment, store_id=store_id, sku=sku)
@@ -1235,15 +1284,17 @@ def gather(
     policy: OptionsPolicy,
     horizon_days: int,
     size_curves: Mapping[str, SizeCurve] | None = None,
+    product: tuple[str | None, str | None] | None = None,
 ) -> OptionInputs:
-    """Everything ``evaluate_options`` needs for one case, read at the run's ``as_of``."""
+    """Everything ``evaluate_options`` needs for one case and one colour (``product``, default
+    the case's own SKU-colour and size), read at the run's ``as_of``."""
     spec = run_repo.spec
     stores = {str(r.data["store_id"]): r.data for r in erp.read(run_repo, "stores")}
     dest_id = case.store_id or ""
     tz = ZoneInfo(str(stores[dest_id]["timezone"]))
     start = spec.as_of.astimezone(tz).date() + timedelta(days=1)
     horizon = (start, start + timedelta(days=horizon_days - 1))
-    sku, size = case_product(case)
+    sku, size = product or case_product(case)
     curves = dict(size_curves or {})
 
     eans: dict[str, str | None] = {}
@@ -1346,11 +1397,14 @@ def build_options(
     ]
     for case in cases:
         try:
-            inputs = gather(run_repo, reader, case, policy, horizon_days, size_curves)
+            colours = [
+                gather(run_repo, reader, case, policy, horizon_days, size_curves, product)
+                for product in case_products(run_repo, case)
+            ]
         except KeyError as e:
             abstentions.append(f"{case.id}: master data missing at as_of ({e})")
             continue
-        options += evaluate_options(inputs)
+        options += evaluate_case(colours)
     new = run_repo.put(*options) if options else 0
     transfers = [o for o in options if o.kind == "transfer"]
     return ModuleResult(

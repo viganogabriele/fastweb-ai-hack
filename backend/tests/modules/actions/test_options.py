@@ -272,7 +272,9 @@ def test_admissible_transfer_is_recommended_with_whole_units_and_comparison():
     assert base.lost_units_dest == pytest.approx(4.2)
     assert moved.lost_units_dest == pytest.approx(1.2)
     assert moved.lost_units_donor == base.lost_units_donor == 0
-    assert moved.leftover_units_donor == pytest.approx(7 - 3 - 2.1)
+    # Donor: 8 minus 0.3 expected on the bridge day, rounded to 8; minus 3 moved, minus 2.1 sold.
+    assert moved.leftover_units_donor == pytest.approx(8 - 3 - 2.1)
+    assert "sellable 2026-10-17" in t.rationale
     assert t.valid_until == leg.pickup_at
     assert t.forecast_ref.id == "fc-mil01"
 
@@ -314,8 +316,9 @@ def test_missing_policy_is_unknown_never_permission():
 
 
 def test_q_max_is_bounded_by_policy_and_by_donor_availability():
+    floor = replace(POLICY, donor_min_stock=1)
     donor = position("MIL02", DONOR_STOCK | {"1": 2}, forecast("MIL02", 0.0))
-    t = by_kind(evaluate_options(inputs(donor=donor)))["transfer"]
+    t = by_kind(evaluate_options(inputs(donor=donor, policy=floor)))["transfer"]
     assert t.legs[0].qty == 1  # 2 on hand minus the donor floor of 1
 
     ledger = Reservation(
@@ -339,7 +342,7 @@ def test_q_max_is_bounded_by_policy_and_by_donor_availability():
         idempotency_key="k",
         created_at=AS_OF,
     )
-    t = by_kind(evaluate_options(inputs(reservations=(ledger,))))["transfer"]
+    t = by_kind(evaluate_options(inputs(reservations=(ledger,), policy=floor)))["transfer"]
     assert t.legs[0].qty == 1 and "6 unit(s) held" in str(t.checks)
 
 
@@ -648,3 +651,19 @@ def test_donor_with_nothing_to_give_is_no_transfer_but_a_stated_reason():
         o["notify_owner"].rationale
     )
     assert recommended(opts) == ["notify_owner"]
+
+
+def test_style_case_keeps_the_colour_with_a_useful_move():
+    style = fixture_case(scope_level="style", scope_id="J20931A00012")
+    # Colour 742: the destination is full, so moving brings nothing. Colour 999: size 1 is empty.
+    full = position("MIL01", {s: 9 for s in SIZES}, forecast("MIL01", 2.0))
+    useless = replace(inputs(case=style, dest=full), sku="J20931A00012-742")
+    useful = inputs(case=style)
+
+    opts = options.evaluate_case([useless, useful])
+
+    o = by_kind(opts)
+    assert recommended(opts) == ["transfer"] and o["transfer"].legs[0].sku == SKU
+    assert any("Style case: colour J20931A00012-999 kept" in a for a in o["transfer"].assumptions)
+    assert o["transfer"].input_version_hash != input_version_hash(useful)
+    assert options.evaluate_case([useful]) == evaluate_options(useful)
