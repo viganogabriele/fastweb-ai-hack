@@ -475,6 +475,27 @@ def test_api_checker_exports_a_draft_that_the_replay_can_restore(
     assert result["ledger_sha256"] == replay.digest([frozen.draft.model_dump(mode="json")])
 
 
+def test_api_checker_rejects_another_snapshot_with_the_same_run_id(inputs, monkeypatch):
+    monkeypatch.syspath_prepend(str(REPO_ROOT / "scripts"))
+    from check_core_demo import check
+
+    candidate = inputs["sources"].parent
+    spec = snapshot(mode="recorded")
+    (candidate / "run-spec.json").write_text(spec.model_dump_json())
+    runtime = candidate / "runtime"
+    runtime.mkdir()
+    engine = replay.connect(f"sqlite:///{runtime / 'tessera.db'}")
+    try:
+        other = spec.model_copy(update={"code_version": "different-execution"})
+        with replay.repo_session(engine, other, write=True) as repo:
+            repo.publish()
+        with pytest.raises(AssertionError, match="published snapshot differs"):
+            check(candidate)
+        assert not (candidate / "api-verification.json").exists()
+    finally:
+        engine.dispose()
+
+
 def test_changed_frozen_draft_fails_without_saving_a_decision(inputs, tmp_path, decision_snapshot):
     spec, registry, frozen = decision_snapshot
     event = frozen.model_dump(mode="json")

@@ -10,6 +10,7 @@ import hashlib
 import json
 import subprocess
 import sys
+from collections import Counter
 from datetime import timedelta
 from pathlib import Path
 
@@ -219,6 +220,9 @@ def check(candidate, *, decision_output=None):
                     "clarification_drafts": len(clarifications),
                     "reports": len(reports),
                     "negative_documents": len(negative_ids),
+                    "evidence_relation_counts": dict(
+                        Counter(relation.relation for relation in repo.list(EvidenceRelation))
+                    ),
                     "trace_tools": {t.case_id: [s.tool for s in t.steps] for t in traces},
                     "trace_fallbacks": {t.case_id: t.fallback_used for t in traces},
                 }
