@@ -9,27 +9,27 @@
       "source_refs": [
         {
           "uri": "dataset://store_emails/NYC01/20260906_1837_NYC01.eml",
-          "content_hash": "sha256:a6f7d261277d822de9812fd0abaa94ab8ad2f5b854b6d218d0d45fe65022cfc7",
+          "content_hash": "sha256:a1e8d26c42dcdcc3b6797dd3e680b1e58d361c59d569029ebe4c54766446be30",
           "locator": null
         }
       ],
       "source_type": "email",
       "connector": "src.email",
       "uri": "dataset://store_emails/NYC01/20260906_1837_NYC01.eml",
-      "content_hash": "sha256:a6f7d261277d822de9812fd0abaa94ab8ad2f5b854b6d218d0d45fe65022cfc7",
-      "origin": "marcus.bell@moncler-retail.example",
+      "content_hash": "sha256:a1e8d26c42dcdcc3b6797dd3e680b1e58d361c59d569029ebe4c54766446be30",
+      "origin": "marcus.bell@valentino-retail.example",
       "author_ref": "Marcus Bell",
       "language": "en",
       "business_date": "2026-09-06",
       "event_start": null,
       "event_end": null,
-      "thread_key": "<MN2PR51MB903148355AF8FC19@moncler-retail.example>",
+      "thread_key": "<MN2PR51MB903148355AF8FC19@valentino-retail.example>",
       "parent_document_id": null,
-      "text": "sun\n- 43.3k / plan 50.8. didnt get there\n- 42 units 27 trans\n- montcla black x5 which is wild, it was 84 degrees out\n- delivery 177u, all on the floor except the shoes\n- 5 returns. tib 3 change of mind, valbourg 2 (wanted the black instead), chamonix pants colour, a sweatshirt, and a belt bag w a scratch on the buckle\nbunch of brazilians and a mexican family from monterrey in the afternoon\ntmrw normal hours 10-7 per lauren\n\nSent from my iPhone",
+      "text": "sun\n- 43.3k / plan 50.8. didnt get there\n- 42 units 27 trans\n- mistral black x5 which is wild, it was 84 degrees out\n- delivery 177u, all on the floor except the shoes\n- 5 returns. vel 3 change of mind, valdora 2 (wanted the black instead), cortina pants colour, a sweatshirt, and a belt bag w a scratch on the buckle\nbunch of brazilians and a mexican family from monterrey in the afternoon\ntmrw normal hours 10-7 per lauren\n\nSent from my iPhone",
       "text_version": "email-v1",
       "meta": {
         "store_id": "NYC01",
-        "message_id": "<MN2PR51MB903148355AF8FC19@moncler-retail.example>",
+        "message_id": "<MN2PR51MB903148355AF8FC19@valentino-retail.example>",
         "in_reply_to": null,
         "subject": "eod sun",
         "thread_subject": "eod sun",
@@ -50,16 +50,16 @@
       "source_refs": [
         {
           "uri": "dataset://store_emails/NYC01/20260906_1837_NYC01.eml",
-          "content_hash": "sha256:a6f7d261277d822de9812fd0abaa94ab8ad2f5b854b6d218d0d45fe65022cfc7",
+          "content_hash": "sha256:a1e8d26c42dcdcc3b6797dd3e680b1e58d361c59d569029ebe4c54766446be30",
           "locator": null
         }
       ],
       "document_id": "doc-20260906-1837-nyc01",
       "text_version": "email-v1",
       "idx": 0,
-      "text": "sun\n- 43.3k / plan 50.8. didnt get there\n- 42 units 27 trans\n- montcla black x5 which is wild, it was 84 degrees out\n- delivery 177u, all on the floor except the shoes\n- 5 returns. tib 3 change of mind, valbourg 2 (wanted the black instead), chamonix pants colour, a sweatshirt, and a belt bag w a scratch on the buckle\nbunch of brazilians and a mexican family from monterrey in the afternoon\ntmrw normal hours 10-7 per lauren",
+      "text": "sun\n- 43.3k / plan 50.8. didnt get there\n- 42 units 27 trans\n- mistral black x5 which is wild, it was 84 degrees out\n- delivery 177u, all on the floor except the shoes\n- 5 returns. vel 3 change of mind, valdora 2 (wanted the black instead), cortina pants colour, a sweatshirt, and a belt bag w a scratch on the buckle\nbunch of brazilians and a mexican family from monterrey in the afternoon\ntmrw normal hours 10-7 per lauren",
       "char_start": 0,
-      "char_end": 426,
+      "char_end": 424,
       "locator": null,
       "t_start_s": null,
       "t_end_s": null,
@@ -76,7 +76,7 @@
       "source_refs": [
         {
           "uri": "dataset://store_emails/NYC01/20260906_1837_NYC01.eml",
-          "content_hash": "sha256:a6f7d261277d822de9812fd0abaa94ab8ad2f5b854b6d218d0d45fe65022cfc7",
+          "content_hash": "sha256:a1e8d26c42dcdcc3b6797dd3e680b1e58d361c59d569029ebe4c54766446be30",
           "locator": null
         }
       ],
@@ -84,8 +84,8 @@
       "text_version": "email-v1",
       "idx": 1,
       "text": "Sent from my iPhone",
-      "char_start": 428,
-      "char_end": 447,
+      "char_start": 426,
+      "char_end": 445,
       "locator": null,
       "t_start_s": null,
       "t_end_s": null,

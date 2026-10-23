@@ -2,24 +2,24 @@
   "protocolVersion": "0.3.0",
   "name": "planning-agent",
   "description": "Merchandise planning agent: replenishment parameters, statistical forecast (event-blind), allocation plans for new products, OTB and replenishment proposals per store x SKU. Uses internal store ids (MIL01) and SAP plants interchangeably.",
-  "url": "https://agents.moncler-int.example/planning/a2a",
+  "url": "https://agents.valentino-int.example/planning/a2a",
   "preferredTransport": "JSONRPC",
   "additionalInterfaces": [
     {
-      "url": "https://agents.moncler-int.example/planning/a2a",
+      "url": "https://agents.valentino-int.example/planning/a2a",
       "transport": "JSONRPC"
     },
     {
-      "url": "https://agents.moncler-int.example/planning/v1",
+      "url": "https://agents.valentino-int.example/planning/v1",
       "transport": "HTTP+JSON"
     }
   ],
   "provider": {
-    "organization": "Moncler - Merchandise Planning HQ",
-    "url": "https://intranet.moncler-int.example"
+    "organization": "Valentino - Merchandise Planning HQ",
+    "url": "https://intranet.valentino-int.example"
   },
   "version": "3.0.0",
-  "documentationUrl": "https://agents.moncler-int.example/planning/docs",
+  "documentationUrl": "https://agents.valentino-int.example/planning/docs",
   "capabilities": {
     "streaming": true,
     "pushNotifications": false,
@@ -73,7 +73,7 @@
         "proposal"
       ],
       "examples": [
-        "Propose replenishment of ILVARO 510 for SEL01 with demand x6"
+        "Propose replenishment of IRIDIA 510 for SEL01 with demand x6"
       ],
       "inputModes": [
         "application/json",
@@ -91,7 +91,7 @@
         "allocation"
       ],
       "examples": [
-        "How was ILVARO allocated?"
+        "How was IRIDIA allocated?"
       ],
       "inputModes": [
         "application/json",

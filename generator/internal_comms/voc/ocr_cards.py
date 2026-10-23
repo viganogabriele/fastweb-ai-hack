@@ -5,7 +5,7 @@ FILES = {
 "ocr_comment_cards_ROM01_2026-10.txt": """=== SCAN BATCH ROM01  pages 1-7  (scanner: back office HP M479, OCR: auto) ===
 
 --- page 1 ---
-MONCLER  Via Condotti
+VALENTINO  Via Condotti
 Ci aiuti a migliorare / Help us improve
 Data / Date: 18/09/2O26
 Commento / Comment:
@@ -14,7 +14,7 @@ La commessa gentilissirna.
 Nome (facoltativo): [illegible]
 
 --- page 2 ---
-MONCLER  Via Condotti
+VALENTINO  Via Condotti
 Ci aiuti a migliorare / Help us improve
 Data / Date: 21/9
 Commento / Comment:
@@ -23,7 +23,7 @@ everything. Lovely staff once inside
 Nome (facoltativo): Jenny & Mark (Ohio)
 
 --- page 3 ---
-MONCLER  Via Condotti
+VALENTINO  Via Condotti
 Data / Date: 26-09-2026
 Commento / Comment:
 po1vere dappertutto, il piumino bianco era
@@ -31,7 +31,7 @@ sporco sul colletto. Peccato
 Nome (facoltativo):
 
 --- page 4 ---
-MONCLER  Via Condotti
+VALENTINO  Via Condotti
 Ci aiuti a migliorare / Help us improve
 Data / Date: 3 ott
 Commento / Comment:
@@ -40,17 +40,17 @@ Ottimo servizio ma i lavori quando finiscono?
 Nome (facoltativo): Sig.ra P.
 
 --- page 5 ---
-MONCLER  Via Condotti
+VALENTINO  Via Condotti
 Data / Date: 09/10/26
 Commento / Comment:
-Il gi1et TIB ha la zip che si apre da sola. Cambiato senza problemi.
+Il gi1et VEL ha la zip che si apre da sola. Cambiato senza problemi.
 Nome (facoltativo): [illegible] Ferri
 
 --- page 6 ---
 [page blank or not readable]
 
 --- page 7 ---
-MONCLER  Via Condotti
+VALENTINO  Via Condotti
 Ci aiuti a migliorare / Help us improve
 Data / Date: 16/10/2026
 Commento / Comment:
@@ -64,18 +64,18 @@ Nome (facoltativo):
 [carte 01]
 Nom / Name: Mme L.
 Date: 22/09
-Commentaire: TrÃ¨s bon accueil. Je cherchais la Maire noire, plus de stock. Dommage.
+Commentaire: TrÃ¨s bon accueil. Je cherchais la Aurea noire, plus de stock. Dommage.
 
 [carte 02]
 Nom / Name:
 Date: 23.09.2026
-Commentaire: black maire please!!! we came from Busan
+Commentaire: black aurea please!!! we came from Busan
 ë¸”ëž™ ë§ˆì�´ë ˆ
 
 [carte 03]
 Nom / Name: Hiroshi T.
 Date: 25/09
-Commentaire: Polaris jacket size L too srnall for me. Very expensive.
+Commentaire: Astra jacket size L too srnall for me. Very expensive.
 
 [carte 04]
 Nom / Name: [illegible]
@@ -85,7 +85,7 @@ Commentaire: TrÃ¨s beau dÃ©filÃ© hier, boutique pleine. Attente cabine 20 
 [carte 05]
 Nom / Name: A. Dupont
 Date: 06/10/2026
-Commentaire: Le gilet TIB achetÃ© en aoÃ»t : fermeture cassÃ©e. Ã©change ok mais
+Commentaire: Le gilet VEL achetÃ© en aoÃ»t : fermeture cassÃ©e. Ã©change ok mais
 je n'en veux plus, rernboursement svp
 
 [carte 06]
@@ -96,7 +96,7 @@ Commentaire: grÃ¨ve, personne dans la rue, vendeuse arrivÃ©e en retard mais 
 [carte 07]
 Nom / Name: Mme de V.
 Date: 20/10
-Commentaire: Ambrine marron taille 1 - j'attends depuis SEPTEMBRE. Inadmissible pour une cliente fidÃ¨le.
+Commentaire: Amalia marron taille 1 - j'attends depuis SEPTEMBRE. Inadmissible pour une cliente fidÃ¨le.
 
 [carte 08]
 Nom / Name:
@@ -113,17 +113,17 @@ No.1
 
 No.2
 ご来店日：10/7
-ご意見：ARNEBがいつものサイズで大きかったです。1サイズ下で丁度良かった。
+ご意見：ARTEMがいつものサイズで大きかったです。1サイズ下で丁度良かった。
 お名前：K.M
 
 No.3
 ご来店日：2026年1O月12日
-ご意見：値上げ前に買えてよかったです。MAIREの黒、サイズが少なかった。
+ご意見：値上げ前に買えてよかったです。AUREAの黒、サイズが少なかった。
 お名前：［判読不能］
 
 No.4
 ご来店日：10月20日
-ご意見：ピンクのILVARO、やっと入ったと聞いて来ましたがもう他で買ってしまいました…
+ご意見：ピンクのIRIDIA、やっと入ったと聞いて来ましたがもう他で買ってしまいました…
 お名前：
 
 No.5

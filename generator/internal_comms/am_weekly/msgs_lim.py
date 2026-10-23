@@ -17,7 +17,7 @@ SIN01 SGD 173k, -7% vs bud
 SYD01 AUD 127k, +3% vs bud
 
 SIN: steady, hoodies and tees, Indonesian clients on weekend.
-SYD: good week but look at what sold: polos, tees, caps, a few light jackets. Zero down jackets sold in the last 10 days and we have a stockroom full of them. Spring here, 22 degrees. The forecast still shows Maya/Maire as top sellers for SYD every week, someone pls fix the seasonality for southern hemisphere.
+SYD: good week but look at what sold: polos, tees, caps, a few light jackets. Zero down jackets sold in the last 10 days and we have a stockroom full of them. Spring here, 22 degrees. The forecast still shows Nova/Aurea as top sellers for SYD every week, someone pls fix the seasonality for southern hemisphere.
 
 Daniel
 """),
@@ -55,7 +55,7 @@ dict(key="d39", folder=F, file="2026-10-01_1630_SEA_Oz_wk39_Lim_late", frm=DL, t
 SIN01 SGD 165k -25%
 SYD01 AUD 95k -8%
 
-SIN: quiet week before the GP, locals travelling (school holidays). Polaris: 2 pieces only, it's 32 degrees outside what to do.
+SIN: quiet week before the GP, locals travelling (school holidays). Astra: 2 pieces only, it's 32 degrees outside what to do.
 SYD visit: 140+ down jackets in the stockroom, clients asking for tees, polos, caps, Marin-type light jackets. We proposed to send heavy back to TKO for North Asia winter. Please support this one, it's money sitting there.
 
 D
@@ -68,8 +68,8 @@ dict(key="d40", folder=F, file="2026-10-05_0815_SEA_Oz_wk40_Lim", frm=DL, to=TO,
 SIN01 SGD 173k -26%
 SYD01 AUD 85k -10%
 
-- SIN: the pink Ilvaro thing reached us too. Since Friday clients come in with the photo of the LUMIERE girl. We have 2 pieces left but in size 3, nobody fits, the girls want 0/1. Waitlist 12 names.
-- TIB zipper returns: SIN 4, SYD 3. QA pls tell us what to do.
+- SIN: the pink Iridia thing reached us too. Since Friday clients come in with the photo of the LUMIERE girl. We have 2 pieces left but in size 3, nobody fits, the girls want 0/1. Waitlist 12 names.
+- VEL zipper returns: SIN 4, SYD 3. QA pls tell us what to do.
 - SYD unchanged, see previous.
 
 Daniel
@@ -83,7 +83,7 @@ SIN01 SGD 197k, -20%
 SYD01 AUD 75k, -15%
 
 GP weekend at Marina Bay: huge traffic Fri-Sun, MBS packed, but mostly lookers and F1 crowd buying caps and tees. Conversion poor. Still the best weekend since August in sales.
-Pink Ilvaro waitlist SIN now 20+, still no news on stock.
+Pink Iridia waitlist SIN now 20+, still no news on stock.
 SYD: still waiting for the jersey replenishment. Chloe asks if she can do a "winter sale" on down. I said no of course but you see the mood.
 
 D
@@ -93,8 +93,8 @@ dict(key="d42", folder=F, file="2026-10-19_2214_SEA_Oz_wk42_Lim_phone", frm=DL, 
      subj="wk42",
      body="""Andrew quick one from phone
 SIN 209k -22, SYD 67k -18
-SIN: black Maire asked 8x this wk, pink still nothing
-SYD: same, down jackets not moving, 2 Polaris capes asked by a Chinese client
+SIN: black Aurea asked 8x this wk, pink still nothing
+SYD: same, down jackets not moving, 2 Astra capes asked by a Chinese client
 full recap tmr
 D
 

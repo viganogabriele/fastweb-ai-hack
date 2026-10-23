@@ -40,7 +40,7 @@ OUT = ROOT / "generated" / "sources" / "store_emails"
 INDEX = ROOT / "generated" / "ground_truth" / "answer_keys" / "emails" / "emails_ko_index.csv"
 GROUP = ["SEL01", "SEL02", "BUS01"]
 TZ = timezone(timedelta(hours=9))  # KST, no DST
-DOMAIN = "moncler-retail.example"
+DOMAIN = "valentino-retail.example"
 
 
 def load(store):

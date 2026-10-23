@@ -1,7 +1,7 @@
 # AGENTS.md — fastweb-ai-hack
 
-FastwebAI Hackathon 2026, **Moncler track**. We build a pipeline that reads multilingual store
-closing emails, turns them into SKU-linked demand signals, corrects the short-term forecast and
+FastwebAI Hackathon 2026, **Valentino demo branding**. We build a pipeline that reads multilingual
+store closing emails, turns them into SKU-linked demand signals, corrects the short-term forecast and
 proposes stock actions as decision cards for a human. Rule: **AI reads, code counts, humans decide.**
 
 State: docs, a synthetic test dataset and the PLT-01 scaffold (`backend/` FastAPI, `web/` React+Vite).
@@ -18,6 +18,7 @@ The repo has ~3,150 tracked files (~200 MB), almost all data. Don't list, grep o
 | What is done, in progress, ready to pick up | GitHub issues (`gh issue list`), see "Task workflow" | — |
 | Brief, scoring, pitfalls | `docs/findings.md` | `docs/sources/**` (raw verbatim sources; `findings.md` already digests them) |
 | Dataset layout, formats, traps, time rules, scenarios | `generated/README.md` (§2 map, §3 parsing, §4 no look-ahead, §5 dev/hold-out) | — |
+| Visual product catalog, local photos and synthetic SKU associations | `data/catalog/README.md` | Commercial reference metadata is for display only, never historical pipeline evidence |
 | Store list, ids, tz, currency, language | `generated/sources/erp/master_data/stores.csv` | — |
 
 When you need a data file, find it via the table in `generated/README.md` §2, then inspect a sample

@@ -12,9 +12,9 @@ Window: **2026-08-31 → 2026-10-21** (dates in `generated/ground_truth/writer_i
 
 ## Headers
 - From: a real-looking person at the store (store manager / assistant manager / senior SA — names in stores.csv,
-  invent the SAs), e.g. `Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>`; sometimes the generic store mailbox
-  (`mil01.store@moncler-retail.example`).
-- To: the regional retail ops distribution list (e.g. `retail-ops-italy@moncler-retail.example`), Cc the area manager
+  invent the SAs), e.g. `Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>`; sometimes the generic store mailbox
+  (`mil01.store@valentino-retail.example`).
+- To: the regional retail ops distribution list (e.g. `retail-ops-italy@valentino-retail.example`), Cc the area manager
   and sometimes `merch-planning@...` / `vm-team@...`. Area managers:
   Italy+Spain: Roberto Galli; France+Geneva: Isabelle Moreau; DACH: Stefan Wagner; UK/Benelux/Nordics: Fiona McLeod;
   Middle East: Omar Haddad; USA/Canada: Lauren Mitchell; Japan: 鈴木 拓也 (Takuya Suzuki); Korea: 윤성호 (Yoon Sung-ho);
@@ -31,10 +31,10 @@ Window: **2026-08-31 → 2026-10-21** (dates in `generated/ground_truth/writer_i
 - Use the facts in `email_context/<STORE>.json` (KPI, top sellers, customer mix, unmet_requests, zero_stock_key_sizes,
   returns, deliveries, active_events) **as what the staff experienced**, not as text to paraphrase. Staff:
   - report only some things, with lag ("da giovedì", "since last week"), approximations ("una decina di clienti",
-    "lots of Koreans"), nicknames ("la Maya nera", "il corto rosa", "Maire laqué", "ピンクのショート"),
+    "lots of Koreans"), nicknames ("la Nova nera", "il corto rosa", "Aurea laqué", "ピンクのショート"),
     sometimes the wrong size/colour/name, sometimes contradicting the numbers;
   - mention requests for products they don't have (unmet_requests are gold: those are the real lost sales — mention
-    them often but in a human way: "3 clienti hanno chiesto la Maire nera in 1 e 2, niente da fare"),
+    them often but in a human way: "3 clienti hanno chiesto la Aurea nera in 1 e 2, niente da fare"),
   - talk about traffic, weather, tourists by nationality, events in the city, construction, strikes, staff issues,
     deliveries (late, missing pieces, wrong colour), returns/defects, VM, IT problems, competitors, client feedback
     on fit/price/quality, visits of VICs, requests for transfers from other stores, waitlists.

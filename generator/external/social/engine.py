@@ -50,7 +50,7 @@ PLACES = {
                dict(ko=["청담 플래그십", "청담 매장", "청담점", "청담 몽클", "청담동 플래그십", "청담 본점"],
                     en=["the Cheongdam flagship", "Cheongdam store", "Cheongdam"], zh=["首尔清潭旗舰店", "清潭洞店"],
                     zht=["清潭洞旗艦店"], ja=["清潭洞の旗艦店", "清潭の路面店"]),
-               [("Moncler Cheongdam", 37.5245, 127.047), ("청담동 Cheongdam-dong", 37.5251, 127.0478),
+               [("Valentino Cheongdam", 37.5245, 127.047), ("청담동 Cheongdam-dong", 37.5251, 127.0478),
                 ("Gangnam-gu, Seoul", 37.5172, 127.0473)], "KR"),
     "SEL02": P("Asia/Seoul", dict(ko=["서울"], en=["Seoul"], zh=["首尔"], zht=["首爾"], ja=["ソウル"]),
                dict(ko=["현대 압구정", "압구정 현대", "압현", "현대백화점 압구정본점", "압구정 현대백화점"],
@@ -344,9 +344,9 @@ class AuthorPool:
             i = rng.randrange(len(names))
             n = names[i]
             if kind == "bot":
-                h = rng.choice(["moncler", "monc", "lux", "puffer", "jacket", "outlet", "designer"]) + rng.choice(["_outlet", ".deals", "_shop", "sale", "_store", "4u", ".official"]) + rng.choice(["", str(rng.randint(1, 999)), "_" + rng.choice(["it", "us", "eu", "uk", "de", "es"])])
+                h = rng.choice(["valentino", "monc", "lux", "puffer", "jacket", "outlet", "designer"]) + rng.choice(["_outlet", ".deals", "_shop", "sale", "_store", "4u", ".official"]) + rng.choice(["", str(rng.randint(1, 999)), "_" + rng.choice(["it", "us", "eu", "uk", "de", "es"])])
             elif kind == "scam":
-                h = rng.choice(["moncler", "luxury", "brand", "designer", "vip"]) + rng.choice([".giveaway", "_giveaways", ".gifts", "_winner", ".promo"]) + rng.choice(["", "2026", ".official", "_team", str(rng.randint(1, 99))])
+                h = rng.choice(["valentino", "luxury", "brand", "designer", "vip"]) + rng.choice([".giveaway", "_giveaways", ".gifts", "_winner", ".promo"]) + rng.choice(["", "2026", ".official", "_team", str(rng.randint(1, 99))])
             elif kind == "reseller":
                 h = rng.choice(["resell", "kicks", "lux", "archive", "vault", "plug"]) + rng.choice(["_", ".", ""]) + n + rng.choice(["", "_kr", "_hk", "_jp", "_sg", "store"])
             elif kind == "fan":
@@ -486,8 +486,8 @@ def detect_lang(rng, true_lang, text):
     return true_lang
 
 
-SARCASM = ["love that for me", "great quality", "amazing quality", "thanks moncler", "10/10", "luxury they said",
-           "che qualità", "grazie moncler", "bravo moncler", "super qualität", "na toll", "top qualité", "bravo à",
+SARCASM = ["love that for me", "great quality", "amazing quality", "thanks valentino", "10/10", "luxury they said",
+           "che qualità", "grazie valentino", "bravo valentino", "super qualität", "na toll", "top qualité", "bravo à",
            "sooo worth it", "worth every penny lol", "classic", "/s"]
 POS_SLANG_AS_NEG = ["미쳤", "미친", "대란", "품절", "やばい", "ヤバい", "insane", "sick", "obsessed", "绝了", "杀疯了", "哭了",
                     "killer", "dead", "crying", "破防", "疯了", "죽겠", "ㅠㅠ", "爆冷"]

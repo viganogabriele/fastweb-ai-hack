@@ -9,7 +9,7 @@
       "source_refs": [
         {
           "uri": "dataset://store_emails/MIL01/20261002_2112_MIL01.eml",
-          "content_hash": "sha256:42ba599825b726743a870909947f1046005d4f0d715a79922b4ff43cef313a93",
+          "content_hash": "sha256:4485adb77cbfbd090a9865ecac389e35705ab374bf55037d05e0c9ba9712b711",
           "locator": null
         }
       ],
@@ -41,7 +41,7 @@
       "period_start": "2026-10-01T22:00:00Z",
       "period_end": "2026-10-02T21:59:59Z",
       "time_text": null,
-      "product_mention": "Maire nera",
+      "product_mention": "Aurea nera",
       "quantity": {
         "kind": "exact",
         "value": 7.0,
@@ -63,9 +63,9 @@
           "document_id": "doc-20261002-2112-mil01",
           "document_version": "v1",
           "segment_id": "doc-20261002-2112-mil01-seg2",
-          "quote": "Maire nera: 7 richieste (2 2 2, 1 1, 0, 4)",
-          "char_start": 519,
-          "char_end": 561,
+          "quote": "Aurea nera: 7 richieste (2 2 2, 1 1, 0, 4)",
+          "char_start": 526,
+          "char_end": 568,
           "t_start_s": null,
           "t_end_s": null
         },
@@ -73,9 +73,9 @@
           "document_id": "doc-20261002-2112-mil01",
           "document_version": "v1",
           "segment_id": "doc-20261002-2112-mil01-seg1",
-          "quote": "Maire nera 7 richieste.",
-          "char_start": 300,
-          "char_end": 323,
+          "quote": "Aurea nera 7 richieste.",
+          "char_start": 307,
+          "char_end": 330,
           "t_start_s": null,
           "t_end_s": null
         }

@@ -10,3 +10,4 @@ generator/systems/_cache/
 # Derived data is rebuilt by the pipeline; only hand-written fixtures are versioned.
 data/*
 !data/fixtures/
+!data/catalog/

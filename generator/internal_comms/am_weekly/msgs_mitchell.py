@@ -66,7 +66,7 @@ Lauren
 """),
 
 dict(key="l39", folder=F, file="2026-09-28_0640_weekly_wk39_Mitchell", frm=L, to=TO, cc=None, tz=TZ, sent="2026-09-28 06:40",
-     subj="Weekly recap wk 39 + Polaris first read",
+     subj="Weekly recap wk 39 + Astra first read",
      body="""Mark,
 
 NYC01 $263k -36%   (UNGA)
@@ -77,20 +77,20 @@ ASP01 $35k  -9%
 TOR01 C$280k +5%
 
 - Madison: as expected, UNGA killed the week. Mon-Thu clients simply could not reach the store, several appointments cancelled. Rebecca rebooked most of them for this week.
-- POLARIS launched Thursday in NYC01, NYC02, MIA01, BHS01, TOR01. First read is not great: lots of try-ons, very few sales. The oversized jacket runs small (our clients size up and we don't have XL/XXL depth), and $3,375 for the cape is a hard sell outside of collectors. 4 pieces sold across 5 doors.
+- ASTRA launched Thursday in NYC01, NYC02, MIA01, BHS01, TOR01. First read is not great: lots of try-ons, very few sales. The oversized jacket runs small (our clients size up and we don't have XL/XXL depth), and $3,375 for the cape is a hard sell outside of collectors. 4 pieces sold across 5 doors.
 - Miami positive for the first time this season, Brazilian clients.
 
 Lauren
 """),
 
 dict(key="l39_md", folder=F, file="2026-09-29_1012_RE_weekly_wk39_Davidson", frm=person("davidson"), to=[L], cc=None, tz=TZ, sent="2026-09-29 10:12",
-     subj="RE: Weekly recap wk 39 + Polaris first read", reply_to="l39",
+     subj="RE: Weekly recap wk 39 + Astra first read", reply_to="l39",
      body="""Lauren - thanks. The agency deck circulating says +22% attributed uplift for the US/UK campaign so far. Does that match what you see in the stores? I need a sense check before the global call.
 Mark
 """),
 
 dict(key="l39_lm", folder=F, file="2026-09-29_1155_RE_weekly_wk39_Mitchell", frm=L, to=[person("davidson")], cc=None, tz=TZ, sent="2026-09-29 11:55",
-     subj="RE: Weekly recap wk 39 + Polaris first read", reply_to="l39_md",
+     subj="RE: Weekly recap wk 39 + Astra first read", reply_to="l39_md",
      body="""Honestly, no. Door counts at NYC02 and BHS01 are up a few points vs the weeks before launch, and store teams mention the ads occasionally. If I had to put a number on it, mid single digits at best. "Attributed" in their model means anyone who saw a digital ad and later bought, which in our client base is basically everyone who was going to buy anyway.
 Happy to walk you through the door count data.
 L.
@@ -111,9 +111,9 @@ ASP01   $20k  -45%    $34k  -24%
 TOR01   C$194k -36%   C$227k -29%
 
 Key points:
-1. TIB zipper defect. Returns started the week of 9/28 (NYC01 10, NYC02 8, Toronto 5 in wk40). The QA alert came on 10/5, procedure now in place. Clients are annoyed but the exchange is easy when we have the size.
+1. VEL zipper defect. Returns started the week of 9/28 (NYC01 10, NYC02 8, Toronto 5 in wk40). The QA alert came on 10/5, procedure now in place. Clients are annoyed but the exchange is easy when we have the size.
 2. NYC02 POS outage on Monday (registers down ~2-5:30pm). Team sold on manual slips and keyed them the next morning, so the day-level numbers are off: Monday understated, Tuesday overstated. Week total is right.
-3. ILVARO: since the K-pop photos at Paris fashion week we get requests for the black and off-white in SoHo and Madison, a few for pink (we have none in SoHo, and NYC01 has 11 pink in transit for this week, not sure who asked for them). Small numbers but new.
+3. IRIDIA: since the K-pop photos at Paris fashion week we get requests for the black and off-white in SoHo and Madison, a few for pink (we have none in SoHo, and NYC01 has 11 pink in transit for this week, not sure who asked for them). Small numbers but new.
 4. Toronto is the concern: three weeks in a row at -30% or worse. Émilie says it's the competition at home (the Canadian brands are everywhere this fall) and the weather is still mild. Visiting again in November.
 5. Columbus Day today, normal hours.
 
@@ -131,11 +131,11 @@ BHS01 $174k  -17%
 ASP01 $54k   +14%
 TOR01 C$247k -28%
 
-- Madison back on plan with the first cool days, Maya and Montcla driving it.
-- Black Maire is now the most requested item we don't have: 7 in SoHo, 11 in Toronto, a few in BHS. Mostly younger clients, some Korean students in Toronto. We have beige/navy, they don't want it.
+- Madison back on plan with the first cool days, Nova and Mistral driving it.
+- Black Aurea is now the most requested item we don't have: 7 in SoHo, 11 in Toronto, a few in BHS. Mostly younger clients, some Korean students in Toronto. We have beige/navy, they don't want it.
 - Aspen waking up, pre-season locals and second-home owners.
 - Miami very soft, -40. Daniela says the tourists haven't arrived yet; it's early.
-- POLARIS: 9 pieces sold total across 5 doors in 4 weeks. I'd support moving the remaining stock to Asia where I hear it's selling.
+- ASTRA: 9 pieces sold total across 5 doors in 4 weeks. I'd support moving the remaining stock to Asia where I hear it's selling.
 
 Lauren
 """),

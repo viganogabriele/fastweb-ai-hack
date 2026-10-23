@@ -1,369 +1,369 @@
 store,file,id,sent,business_date,kind,frm,subject
-LON01,20260831_2052_LON01.eml,0831,2026-08-31 20:52,2026-08-31,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Mon 31/08
-LON01,20260901_2110_LON01.eml,0901,2026-09-01 21:10,2026-09-01,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Tue 01/09
-LON01,20260902_2131_LON01.eml,0902,2026-09-02 21:31,2026-09-02,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Wed 02/09
-LON01,20260903_2204_LON01.eml,0903,2026-09-03 22:04,2026-09-03,closing,Daniel Okafor <daniel.okafor@moncler-retail.example>,close thu
-LON01,20260904_2118_LON01.eml,0904,2026-09-04 21:18,2026-09-04,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Fri 04/09
-LON01,20260905_2147_LON01.eml,0905,2026-09-05 21:47,2026-09-05,closing,Daniel Okafor <daniel.okafor@moncler-retail.example>,LON01 close sat 05/09
-LON01,20260907_2102_LON01.eml,0907,2026-09-07 21:02,2026-09-06;2026-09-07,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Mon 07/09 (+Sunday)
-LON01,20260908_2115_LON01.eml,0908,2026-09-08 21:15,2026-09-08,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Tue 08/09
-LON01,20260909_2126_LON01.eml,0909,2026-09-09 21:26,2026-09-09,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Wed 09/09
-LON01,20260910_2158_LON01.eml,0910,2026-09-10 21:58,2026-09-10,closing,Daniel Okafor <daniel.okafor@moncler-retail.example>,close thurs 10/9
-LON01,20260911_2120_LON01.eml,0911,2026-09-11 21:20,2026-09-11,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Fri 11/09
-LON01,20260912_2211_LON01.eml,0912,2026-09-12 22:11,2026-09-12,closing,Daniel Okafor <daniel.okafor@moncler-retail.example>,LON01 close sat 12/9
-LON01,20260913_1940_LON01.eml,0913,2026-09-13 19:40,2026-09-13,closing,Harriet Lowe <harriet.lowe@moncler-retail.example>,Sunday closing NBS
-LON01,20260914_2105_LON01.eml,0914,2026-09-14 21:05,2026-09-14,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Mon 14/09
-LON01,20260915_2133_LON01.eml,0915,2026-09-15 21:33,2026-09-15,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Tue 15/09
-LON01,20260916_2112_LON01.eml,0916,2026-09-16 21:12,2026-09-16,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Wed 16/09
-LON01,20260917_2220_LON01.eml,0917,2026-09-17 22:20,2026-09-17,closing,Daniel Okafor <daniel.okafor@moncler-retail.example>,close 17/9
-LON01,20260918_2124_LON01.eml,0918,2026-09-18 21:24,2026-09-18,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Fri 18/09
-LON01,20260919_2237_LON01.eml,0919,2026-09-19 22:37,2026-09-19,closing,Daniel Okafor <daniel.okafor@moncler-retail.example>,LON01 close sat 19/09
-LON01,20260920_1955_LON01.eml,0920,2026-09-20 19:55,2026-09-20,closing,Harriet Lowe <harriet.lowe@moncler-retail.example>,Sunday close
-LON01,20260921_2108_LON01.eml,0921,2026-09-21 21:08,2026-09-21,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Mon 21/09
-LON01,20260921_2108_LON01_ooo.eml,0921ooo,2026-09-21 21:08,,auto_reply,Fiona McLeod <fiona.mcleod@moncler-retail.example>,Automatic reply: LON01 Closing - Mon 21/09
-LON01,20260922_2119_LON01.eml,0922,2026-09-22 21:19,2026-09-22,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Tue 22/09
-LON01,20260923_2141_LON01.eml,0923,2026-09-23 21:41,2026-09-23,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Wed 23/09
-LON01,20260924_2209_LON01.eml,0924,2026-09-24 22:09,2026-09-24,closing,Daniel Okafor <daniel.okafor@moncler-retail.example>,close thu 24/9
-LON01,20260925_2115_LON01.eml,0925,2026-09-25 21:15,2026-09-25,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Fri 25/09
-LON01,20260925_2129_LON01_re1.eml,0925c,2026-09-25 21:29,2026-09-25,correction,Olivia Hartley <olivia.hartley@moncler-retail.example>,RE: LON01 Closing - Fri 25/09
-LON01,20260926_2248_LON01.eml,0926,2026-09-26 22:48,2026-09-26,closing,Daniel Okafor <daniel.okafor@moncler-retail.example>,LON01 close sat 26/9
-LON01,20260927_1931_LON01.eml,0927,2026-09-27 19:31,2026-09-27,closing,Harriet Lowe <harriet.lowe@moncler-retail.example>,Sunday closing 27th
-LON01,20260928_2122_LON01.eml,0928,2026-09-28 21:22,2026-09-28,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Mon 28/09
-LON01,20260929_0847_LON01_re1.eml,0928fm,2026-09-29 08:47,2026-09-28,reply,Fiona McLeod <fiona.mcleod@moncler-retail.example>,RE: LON01 Closing - Mon 28/09
-LON01,20260930_2140_LON01.eml,0930,2026-09-30 21:40,2026-09-29;2026-09-30,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Tue 29 + Wed 30/09
-LON01,20261001_2203_LON01.eml,1001,2026-10-01 22:03,2026-10-01,closing,Daniel Okafor <daniel.okafor@moncler-retail.example>,close 1/10
-LON01,20261002_2136_LON01.eml,1002,2026-10-02 21:36,2026-10-02,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Fri 02/10
-LON01,20261003_2225_LON01.eml,1003,2026-10-03 22:25,2026-10-03,closing,Daniel Okafor <daniel.okafor@moncler-retail.example>,LON01 close sat 3/10
-LON01,20261003_2227_LON01_dup.eml,1003dup,2026-10-03 22:27,2026-10-03,duplicate,Daniel Okafor <daniel.okafor@moncler-retail.example>,LON01 close sat 3/10
-LON01,20261004_1948_LON01.eml,1004,2026-10-04 19:48,2026-10-04,closing,Harriet Lowe <harriet.lowe@moncler-retail.example>,Sunday close 4/10
-LON01,20261005_2130_LON01.eml,1005,2026-10-05 21:30,2026-10-05,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Mon 05/10
-LON01,20261006_2143_LON01.eml,1006,2026-10-06 21:43,2026-10-06,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Tue 06/10
-LON01,20261007_2151_LON01.eml,1007,2026-10-07 21:51,2026-10-07,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Wed 07/10
-LON01,20261009_0041_LON01.eml,1008,2026-10-09 00:41,2026-10-08,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Thu 08/10 - CLIENT EVENING
-LON01,20261009_0758_LON01_re1.eml,1008fm,2026-10-09 07:58,2026-10-08,reply,Fiona McLeod <fiona.mcleod@moncler-retail.example>,RE: LON01 Closing - Thu 08/10 - CLIENT EVENING
-LON01,20261009_1022_LON01_re2.eml,1008re,2026-10-09 10:22,2026-10-08,reply,Daniel Okafor <daniel.okafor@moncler-retail.example>,RE: LON01 Closing - Thu 08/10 - CLIENT EVENING
-LON01,20261009_2216_LON01.eml,1009,2026-10-09 22:16,2026-10-09,closing,Daniel Okafor <daniel.okafor@moncler-retail.example>,close fri 9/10
-LON01,20261010_2240_LON01.eml,1010,2026-10-10 22:40,2026-10-10,closing,Daniel Okafor <daniel.okafor@moncler-retail.example>,LON01 close sat 10/10
-LON01,20261011_1952_LON01.eml,1011,2026-10-11 19:52,2026-10-11,closing,Harriet Lowe <harriet.lowe@moncler-retail.example>,Sunday 11/10
-LON01,20261012_2119_LON01.eml,1012,2026-10-12 21:19,2026-10-12,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Mon 12/10
-LON01,20261012_2124_LON01_fwd.eml,1012fwd,2026-10-12 21:24,2026-10-12,forward_client,Olivia Hartley <olivia.hartley@moncler-retail.example>,FW: Maire black - size 1
-LON01,20261013_2128_LON01.eml,1013,2026-10-13 21:28,2026-10-13,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Tue 13/10
-LON01,20261014_2137_LON01.eml,1014,2026-10-14 21:37,2026-10-14,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Wed 14/10
-LON01,20261015_2212_LON01.eml,1015,2026-10-15 22:12,2026-10-15,closing,Daniel Okafor <daniel.okafor@moncler-retail.example>,close 14/10
-LON01,20261016_2125_LON01.eml,1016,2026-10-16 21:25,2026-10-16,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Fri 16/10
-LON01,20261017_0912_LON01_re1.eml,1016mp,2026-10-17 09:12,2026-10-16,reply,Tom Brennan <tom.brennan@moncler-retail.example>,RE: LON01 Closing - Fri 16/10
-LON01,20261017_2302_LON01.eml,1017,2026-10-17 23:02,2026-10-17,closing,Daniel Okafor <daniel.okafor@moncler-retail.example>,LON01 close sat 17/10 BIG ONE
-LON01,20261018_2006_LON01.eml,1018,2026-10-18 20:06,2026-10-18,closing,Harriet Lowe <harriet.lowe@moncler-retail.example>,Sunday close - wow
-LON01,20261019_2114_LON01.eml,1019,2026-10-19 21:14,2026-10-19,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Mon 19/10
-LON01,20261020_2131_LON01.eml,1020,2026-10-20 21:31,2026-10-20,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Tue 20/10
-LON01,20261021_2122_LON01.eml,1021,2026-10-21 21:22,2026-10-21,closing,Olivia Hartley <olivia.hartley@moncler-retail.example>,LON01 Closing - Wed 21/10
-LON02,20260831_2112_LON02.eml,0831,2026-08-31 21:12,2026-08-31,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 31/08
-LON02,20260901_2105_LON02.eml,0901,2026-09-01 21:05,2026-09-01,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 01/09
-LON02,20260902_2120_LON02.eml,0902,2026-09-02 21:20,2026-09-02,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 02/09
-LON02,20260903_2144_LON02.eml,0903,2026-09-03 21:44,2026-09-03,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 03/09
-LON02,20260904_2203_LON02.eml,0904,2026-09-04 22:03,2026-09-04,closing,James Whitcombe <james.whitcombe@moncler-retail.example>,Harrods - Friday close
-LON02,20260905_2151_LON02.eml,0905,2026-09-05 21:51,2026-09-05,closing,James Whitcombe <james.whitcombe@moncler-retail.example>,Harrods - Saturday close
-LON02,20260906_1902_LON02.eml,0906,2026-09-06 19:02,2026-09-06,closing,James Whitcombe <james.whitcombe@moncler-retail.example>,Harrods - Sunday close
-LON02,20260907_2116_LON02.eml,0907,2026-09-07 21:16,2026-09-07,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 07/09 - weekly
-LON02,20260908_2109_LON02.eml,0908,2026-09-08 21:09,2026-09-08,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 08/09
-LON02,20260909_2122_LON02.eml,0909,2026-09-09 21:22,2026-09-09,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 09/09
-LON02,20260910_2130_LON02.eml,0910,2026-09-10 21:30,2026-09-10,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 10/09
-LON02,20260911_2214_LON02.eml,0911,2026-09-11 22:14,2026-09-11,closing,James Whitcombe <james.whitcombe@moncler-retail.example>,Harrods - Fri 11th close
-LON02,20260912_2230_LON02.eml,0912,2026-09-12 22:30,2026-09-12,closing,James Whitcombe <james.whitcombe@moncler-retail.example>,Harrods - Sat 12th close
-LON02,20260914_2101_LON02.eml,0914,2026-09-14 21:01,2026-09-14,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 14/09
-LON02,20260915_2138_LON02.eml,0915,2026-09-15 21:38,2026-09-15,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 15/09 - campaign day 1
-LON02,20260916_2147_LON02.eml,0916,2026-09-16 21:47,2026-09-16,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 16/09
-LON02,20260917_2115_LON02.eml,0917,2026-09-17 21:15,2026-09-17,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 17/09
-LON02,20260918_2220_LON02.eml,0918,2026-09-18 22:20,2026-09-18,closing,James Whitcombe <james.whitcombe@moncler-retail.example>,Harrods close Fri
-LON02,20260919_2241_LON02.eml,0919,2026-09-19 22:41,2026-09-19,closing,James Whitcombe <james.whitcombe@moncler-retail.example>,Harrods close Sat 19/9 - Maire
-LON02,20260920_1923_LON02.eml,0920,2026-09-20 19:23,2026-09-20,closing,James Whitcombe <james.whitcombe@moncler-retail.example>,Harrods close Sun
-LON02,20260921_2127_LON02.eml,0921,2026-09-21 21:27,2026-09-21,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 21/09 - weekly
-LON02,20260922_2110_LON02.eml,0922,2026-09-22 21:10,2026-09-22,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 22/09
-LON02,20260923_2133_LON02.eml,0923,2026-09-23 21:33,2026-09-23,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 23/09
-LON02,20260924_2119_LON02.eml,0924,2026-09-24 21:19,2026-09-24,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 24/09
-LON02,20260925_2208_LON02.eml,0925,2026-09-25 22:08,2026-09-25,closing,James Whitcombe <james.whitcombe@moncler-retail.example>,Harrods Fri close
-LON02,20260926_2236_LON02.eml,0926,2026-09-26 22:36,2026-09-26,closing,James Whitcombe <james.whitcombe@moncler-retail.example>,Harrods Sat close
-LON02,20260927_1955_LON02.eml,0927,2026-09-27 19:55,2026-09-27,closing,James Whitcombe <james.whitcombe@moncler-retail.example>,Harrods Sun close - Maire black again
-LON02,20260928_0831_LON02_re1.eml,0927fm,2026-09-28 08:31,2026-09-27,reply,Fiona McLeod <fiona.mcleod@moncler-retail.example>,RE: Harrods Sun close - Maire black again
-LON02,20260928_2126_LON02.eml,0928,2026-09-28 21:26,2026-09-28,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 28/09
-LON02,20260929_2114_LON02.eml,0929,2026-09-29 21:14,2026-09-29,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 29/09
-LON02,20260930_2142_LON02.eml,0930,2026-09-30 21:42,2026-09-30,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 30/09
-LON02,20261001_1312_LON02.eml,1001wrong,2026-10-01 13:12,,misdirected,Priya Raman <priya.raman@moncler-retail.example>,Rota w/c 5th Oct
-LON02,20261001_1315_LON02_re1.eml,1001wrong2,2026-10-01 13:15,,misdirected_retraction,Priya Raman <priya.raman@moncler-retail.example>,RE: Rota w/c 5th Oct
-LON02,20261001_2139_LON02.eml,1001,2026-10-01 21:39,2026-10-01,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 01/10
-LON02,20261002_2210_LON02.eml,1002,2026-10-02 22:10,2026-10-02,closing,James Whitcombe <james.whitcombe@moncler-retail.example>,Harrods Fri close
-LON02,20261003_2251_LON02.eml,1003,2026-10-03 22:51,2026-10-03,closing,James Whitcombe <james.whitcombe@moncler-retail.example>,Harrods Sat close - excellent
-LON02,20261004_1934_LON02.eml,1004,2026-10-04 19:34,2026-10-04,closing,Mei Lin Chen <meilin.chen@moncler-retail.example>,Harrods Sunday closing 04/10
-LON02,20261005_2144_LON02.eml,1005,2026-10-05 21:44,2026-10-05,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 05/10 - weekly
-LON02,20261006_2118_LON02.eml,1006,2026-10-06 21:18,2026-10-06,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 06/10
-LON02,20261007_2131_LON02.eml,1007,2026-10-07 21:31,2026-10-07,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 07/10
-LON02,20261008_2158_LON02.eml,1008,2026-10-08 21:58,2026-10-08,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 08/10
-LON02,20261009_2212_LON02.eml,1009,2026-10-09 22:12,2026-10-09,closing,James Whitcombe <james.whitcombe@moncler-retail.example>,Harrods Fri close 9/10
-LON02,20261010_2244_LON02.eml,1010,2026-10-10 22:44,2026-10-10,closing,James Whitcombe <james.whitcombe@moncler-retail.example>,Harrods Sat close
-LON02,20261011_1941_LON02.eml,1011,2026-10-11 19:41,2026-10-11,closing,James Whitcombe <james.whitcombe@moncler-retail.example>,Harrods Sun close
-LON02,20261013_2152_LON02.eml,1013,2026-10-13 21:52,2026-10-12;2026-10-13,closing,James Whitcombe <james.whitcombe@moncler-retail.example>,Harrods close Tue 13/10 (+ Mon)
-LON02,20261014_2140_LON02.eml,1014,2026-10-14 21:40,2026-10-14,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 14/10
-LON02,20261015_2124_LON02.eml,1015,2026-10-15 21:24,2026-10-15,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 15/10
-LON02,20261016_2219_LON02.eml,1016,2026-10-16 22:19,2026-10-16,closing,James Whitcombe <james.whitcombe@moncler-retail.example>,Harrods Fri close
-LON02,20261017_2258_LON02.eml,1017,2026-10-17 22:58,2026-10-17,closing,James Whitcombe <james.whitcombe@moncler-retail.example>,Harrods Sat close 17/10
-LON02,20261017_2306_LON02_dup.eml,1017dup,2026-10-17 23:06,2026-10-17,duplicate,James Whitcombe <james.whitcombe@moncler-retail.example>,Harrods Sat close 17/10
-LON02,20261018_1947_LON02.eml,1018,2026-10-18 19:47,2026-10-18,closing,Mei Lin Chen <meilin.chen@moncler-retail.example>,Harrods Sunday closing 18/10
-LON02,20261019_2115_LON02.eml,1019,2026-10-19 21:15,2026-10-19,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 19/10 - weekly
-LON02,20261020_2108_LON02.eml,1020,2026-10-20 21:08,2026-10-20,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 20/10
-LON02,20261021_2120_LON02.eml,1021,2026-10-21 21:20,2026-10-21,closing,Priya Raman <priya.raman@moncler-retail.example>,Harrods closing 21/10
-AMS01,20260831_1852_AMS01.eml,0831,2026-08-31 18:52,2026-08-31,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 31-08
-AMS01,20260901_1847_AMS01.eml,0901,2026-09-01 18:47,2026-09-01,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 01-09
-AMS01,20260902_1858_AMS01.eml,0902,2026-09-02 18:58,2026-09-02,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 02-09
-AMS01,20260903_1910_AMS01.eml,0903,2026-09-03 19:10,2026-09-03,closing,Ruben Bakker <ruben.bakker@moncler-retail.example>,closing 3/9
-AMS01,20260904_1849_AMS01.eml,0904,2026-09-04 18:49,2026-09-04,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 04-09
-AMS01,20260905_1925_AMS01.eml,0905,2026-09-05 19:25,2026-09-05,closing,Ruben Bakker <ruben.bakker@moncler-retail.example>,closing za 5/9
-AMS01,20260906_1831_AMS01.eml,0906,2026-09-06 18:31,2026-09-06,closing,Lotte Jansen <lotte.jansen@moncler-retail.example>,Sunday closing ☀️
-AMS01,20260908_1855_AMS01.eml,0908,2026-09-08 18:55,2026-09-07;2026-09-08,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 08-09
-AMS01,20260909_1903_AMS01.eml,0909,2026-09-09 19:03,2026-09-09,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 09-09
-AMS01,20260910_1914_AMS01.eml,0910,2026-09-10 19:14,2026-09-10,closing,Ruben Bakker <ruben.bakker@moncler-retail.example>,closing 10/9
-AMS01,20260911_1858_AMS01.eml,0911,2026-09-11 18:58,2026-09-11,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 11-09
-AMS01,20260912_1931_AMS01.eml,0912,2026-09-12 19:31,2026-09-12,closing,Ruben Bakker <ruben.bakker@moncler-retail.example>,closing za 12-9
-AMS01,20260913_1836_AMS01.eml,0913,2026-09-13 18:36,2026-09-13,closing,Lotte Jansen <lotte.jansen@moncler-retail.example>,Sunday closing
-AMS01,20260914_1852_AMS01.eml,0914,2026-09-14 18:52,2026-09-14,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 14-09
-AMS01,20260915_1844_AMS01.eml,0915,2026-09-15 18:44,2026-09-15,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 15-09
-AMS01,20260916_1859_AMS01.eml,0916,2026-09-16 18:59,2026-09-16,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 16-09
-AMS01,20260917_1908_AMS01.eml,0917,2026-09-17 19:08,2026-09-17,closing,Ruben Bakker <ruben.bakker@moncler-retail.example>,closing 17/9
-AMS01,20260918_1850_AMS01.eml,0918,2026-09-18 18:50,2026-09-18,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 18-09
-AMS01,20260919_1922_AMS01.eml,0919,2026-09-19 19:22,2026-09-19,closing,Ruben Bakker <ruben.bakker@moncler-retail.example>,closing za 19-9
-AMS01,20260920_1840_AMS01.eml,0920,2026-09-20 18:40,2026-09-20,closing,Lotte Jansen <lotte.jansen@moncler-retail.example>,Sunday closing 20/9
-AMS01,20260921_1848_AMS01.eml,0921,2026-09-21 18:48,2026-09-21,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 21-09
-AMS01,20260922_1846_AMS01.eml,0922,2026-09-22 18:46,2026-09-22,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 22-09
-AMS01,20260923_1857_AMS01.eml,0923,2026-09-23 18:57,2026-09-23,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 23-09
-AMS01,20260924_1911_AMS01.eml,0924,2026-09-24 19:11,2026-09-24,closing,Ruben Bakker <ruben.bakker@moncler-retail.example>,closing 24/9
-AMS01,20260925_1853_AMS01.eml,0925,2026-09-25 18:53,2026-09-25,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 25-09
-AMS01,20260926_1940_AMS01.eml,0926,2026-09-26 19:40,2026-09-26,closing,Ruben Bakker <ruben.bakker@moncler-retail.example>,closing za 26/9
-AMS01,20260927_1839_AMS01.eml,0927,2026-09-27 18:39,2026-09-27,closing,Lotte Jansen <lotte.jansen@moncler-retail.example>,Sunday closing 27-9
-AMS01,20260928_1851_AMS01.eml,0928,2026-09-28 18:51,2026-09-28,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 28-09
-AMS01,20260929_1902_AMS01.eml,0929,2026-09-29 19:02,2026-09-29,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 29-09
-AMS01,20260930_1855_AMS01.eml,0930,2026-09-30 18:55,2026-09-30,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 30-09
-AMS01,20261001_1917_AMS01.eml,1001,2026-10-01 19:17,2026-10-01,closing,Ruben Bakker <ruben.bakker@moncler-retail.example>,closing 1/10
-AMS01,20261002_1859_AMS01.eml,1002,2026-10-02 18:59,2026-10-02,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 02-10
-AMS01,20261003_1928_AMS01.eml,1003,2026-10-03 19:28,2026-10-03,closing,Ruben Bakker <ruben.bakker@moncler-retail.example>,closing za 3/10
-AMS01,20261005_1847_AMS01.eml,1005,2026-10-05 18:47,2026-10-04;2026-10-05,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 05-10 + weekend
-AMS01,20261006_1853_AMS01.eml,1006,2026-10-06 18:53,2026-10-06,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 06-10
-AMS01,20261007_1841_AMS01.eml,1007,2026-10-07 18:41,2026-10-07,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 07-10
-AMS01,20261008_1905_AMS01.eml,1008,2026-10-08 19:05,2026-10-08,closing,Ruben Bakker <ruben.bakker@moncler-retail.example>,closing 8/10
-AMS01,20261009_1901_AMS01.eml,1009,2026-10-09 19:01,2026-10-09,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 09-10
-AMS01,20261010_1935_AMS01.eml,1010,2026-10-10 19:35,2026-10-10,closing,Ruben Bakker <ruben.bakker@moncler-retail.example>,closing za 10/10
-AMS01,20261011_1842_AMS01.eml,1011,2026-10-11 18:42,2026-10-11,closing,Lotte Jansen <lotte.jansen@moncler-retail.example>,Sunday closing 11/10
-AMS01,20261012_1849_AMS01.eml,1012,2026-10-12 18:49,2026-10-12,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 12-10
-AMS01,20261013_1904_AMS01.eml,1013,2026-10-13 19:04,2026-10-13,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 13-10
-AMS01,20261014_1909_AMS01.eml,1014,2026-10-14 19:09,2026-10-14,closing,Ruben Bakker <ruben.bakker@moncler-retail.example>,closing 14/10
-AMS01,20261015_1856_AMS01.eml,1015,2026-10-15 18:56,2026-10-15,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 15-10
-AMS01,20261016_0844_AMS01_re1.eml,1015fm,2026-10-16 08:44,2026-10-15,reply,Fiona McLeod <fiona.mcleod@moncler-retail.example>,RE: Closing AMS 15-10
-AMS01,20261016_0912_AMS01_re2.eml,1015sv,2026-10-16 09:12,2026-10-15,reply,Sanne de Vries <sanne.devries@moncler-retail.example>,RE: Closing AMS 15-10
-AMS01,20261016_1858_AMS01.eml,1016,2026-10-16 18:58,2026-10-16,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 16-10
-AMS01,20261017_1944_AMS01.eml,1017,2026-10-17 19:44,2026-10-17,closing,Ruben Bakker <ruben.bakker@moncler-retail.example>,closing za 17/10
-AMS01,20261018_1844_AMS01.eml,1018,2026-10-18 18:44,2026-10-18,closing,Lotte Jansen <lotte.jansen@moncler-retail.example>,Sunday closing ❄️
-AMS01,20261019_1851_AMS01.eml,1019,2026-10-19 18:51,2026-10-19,closing,Ruben Bakker <ruben.bakker@moncler-retail.example>,closing 19/10
-AMS01,20261019_1853_AMS01_re1.eml,1019nl,2026-10-19 18:53,,misdirected,Ruben Bakker <ruben.bakker@moncler-retail.example>,Re: closing 19/10
-AMS01,20261020_1857_AMS01.eml,1020,2026-10-20 18:57,2026-10-20,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 20-10
-AMS01,20261021_1850_AMS01.eml,1021,2026-10-21 18:50,2026-10-21,closing,Sanne de Vries <sanne.devries@moncler-retail.example>,Closing AMS 21-10
-CPH01,20260831_1841_CPH01.eml,0831,2026-08-31 18:41,2026-08-31,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 dagsrapport / closing 31.08
-CPH01,20260901_1836_CPH01.eml,0901,2026-09-01 18:36,2026-09-01,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 01.09
-CPH01,20260902_1844_CPH01.eml,0902,2026-09-02 18:44,2026-09-02,closing,Anders Holm <anders.holm@moncler-retail.example>,CPH closing 2/9
-CPH01,20260903_1839_CPH01.eml,0903,2026-09-03 18:39,2026-09-03,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 03.09
-CPH01,20260904_1850_CPH01.eml,0904,2026-09-04 18:50,2026-09-04,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 04.09
-CPH01,20260905_1734_CPH01.eml,0905,2026-09-05 17:34,2026-09-05,closing,Anders Holm <anders.holm@moncler-retail.example>,CPH closing lørdag 5/9
-CPH01,20260907_1838_CPH01.eml,0907,2026-09-07 18:38,2026-09-07,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 07.09
-CPH01,20260908_1847_CPH01.eml,0908,2026-09-08 18:47,2026-09-08,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 08.09
-CPH01,20260909_1833_CPH01.eml,0909,2026-09-09 18:33,2026-09-09,closing,Anders Holm <anders.holm@moncler-retail.example>,CPH closing 9/9
-CPH01,20260910_1845_CPH01.eml,0910,2026-09-10 18:45,2026-09-10,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 10.09
-CPH01,20260911_1852_CPH01.eml,0911,2026-09-11 18:52,2026-09-11,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 11.09
-CPH01,20260912_1741_CPH01.eml,0912,2026-09-12 17:41,2026-09-12,closing,Anders Holm <anders.holm@moncler-retail.example>,CPH closing lørdag 12/9
-CPH01,20260914_1842_CPH01.eml,0914,2026-09-14 18:42,2026-09-14,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 14.09
-CPH01,20260915_1831_CPH01.eml,0915,2026-09-15 18:31,2026-09-15,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 15.09
-CPH01,20260916_1840_CPH01.eml,0916,2026-09-16 18:40,2026-09-16,closing,Anders Holm <anders.holm@moncler-retail.example>,CPH closing 16/9
-CPH01,20260917_1846_CPH01.eml,0917,2026-09-17 18:46,2026-09-17,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 17.09
-CPH01,20260918_1849_CPH01.eml,0918,2026-09-18 18:49,2026-09-18,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 18.09
-CPH01,20260920_1014_CPH01.eml,0919,2026-09-20 10:14,2026-09-19,closing,Anders Holm <anders.holm@moncler-retail.example>,CPH closing lørdag 19/9
-CPH01,20260921_1844_CPH01.eml,0921,2026-09-21 18:44,2026-09-21,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 21.09
-CPH01,20260921_1902_CPH01.eml,0921b,2026-09-21 19:02,,ops_request,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 staffing next week
-CPH01,20260922_0852_CPH01_re1.eml,0921fm,2026-09-22 08:52,2026-09-21,reply,Fiona McLeod <fiona.mcleod@moncler-retail.example>,RE: CPH01 staffing next week
-CPH01,20260923_1841_CPH01.eml,0923,2026-09-23 18:41,2026-09-22;2026-09-23,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 22+23.09
-CPH01,20260924_1848_CPH01.eml,0924,2026-09-24 18:48,2026-09-24,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 24.09
-CPH01,20260925_1855_CPH01.eml,0925,2026-09-25 18:55,2026-09-25,closing,Anders Holm <anders.holm@moncler-retail.example>,CPH closing 25/9
-CPH01,20260926_1738_CPH01.eml,0926,2026-09-26 17:38,2026-09-26,closing,Anders Holm <anders.holm@moncler-retail.example>,CPH closing lørdag 26/9
-CPH01,20260928_1742_CPH01.eml,0928,2026-09-28 17:42,2026-09-28,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 28.09 - reduced hours
-CPH01,20260929_1731_CPH01.eml,0929,2026-09-29 17:31,2026-09-29,closing,Freja Lund <freja.lund@moncler-retail.example>,Closing CPH 29/9
-CPH01,20260930_1739_CPH01.eml,0930,2026-09-30 17:39,2026-09-30,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 30.09
-CPH01,20261001_1735_CPH01.eml,1001,2026-10-01 17:35,2026-10-01,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 01.10
-CPH01,20261002_1744_CPH01.eml,1002,2026-10-02 17:44,2026-10-02,closing,Anders Holm <anders.holm@moncler-retail.example>,CPH closing 2/10
-CPH01,20261003_1729_CPH01.eml,1003,2026-10-03 17:29,2026-10-03,closing,Anders Holm <anders.holm@moncler-retail.example>,CPH closing lørdag 3/10
-CPH01,20261005_1847_CPH01.eml,1005,2026-10-05 18:47,2026-10-05,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 05.10
-CPH01,20261006_1840_CPH01.eml,1006,2026-10-06 18:40,2026-10-06,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 06.10
-CPH01,20261007_1845_CPH01.eml,1007,2026-10-07 18:45,2026-10-07,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 07.10
-CPH01,20261008_1851_CPH01.eml,1008,2026-10-08 18:51,2026-10-08,closing,Anders Holm <anders.holm@moncler-retail.example>,CPH closing 8/10
-CPH01,20261010_1736_CPH01.eml,1010,2026-10-10 17:36,2026-10-09;2026-10-10,closing,Anders Holm <anders.holm@moncler-retail.example>,CPH closing lørdag 10/10
-CPH01,20261012_1848_CPH01.eml,1012,2026-10-12 18:48,2026-10-12,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 12.10
-CPH01,20261013_1839_CPH01.eml,1013,2026-10-13 18:39,2026-10-13,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 13.10
-CPH01,20261014_1852_CPH01.eml,1014,2026-10-14 18:52,2026-10-14,closing,Anders Holm <anders.holm@moncler-retail.example>,CPH closing 14/10
-CPH01,20261015_1858_CPH01.eml,1015,2026-10-15 18:58,2026-10-15,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 15.10
-CPH01,20261016_1844_CPH01.eml,1016,2026-10-16 18:44,2026-10-15;2026-10-16,closing+correction,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 16.10
-CPH01,20261017_1742_CPH01.eml,1017,2026-10-17 17:42,2026-10-17,closing,Anders Holm <anders.holm@moncler-retail.example>,CPH closing lørdag 17/10
-CPH01,20261019_1850_CPH01.eml,1019,2026-10-19 18:50,2026-10-19,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 19.10
-CPH01,20261020_1836_CPH01.eml,1020,2026-10-20 18:36,2026-10-20,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@moncler-retail.example>,CPH01 closing 20.10
-CPH01,20261021_1843_CPH01.eml,1021,2026-10-21 18:43,2026-10-21,closing,Freja Lund <freja.lund@moncler-retail.example>,Closing CPH 21/10
-DXB01,20260831_2341_DXB01.eml,0831,2026-08-31 23:41,2026-08-31,closing,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 31.08.2026
-DXB01,20260901_2338_DXB01.eml,0901,2026-09-01 23:38,2026-09-01,closing,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 01.09.2026
-DXB01,20260902_2352_DXB01.eml,0902,2026-09-02 23:52,2026-09-02,closing,Rania Khoury <rania.khoury@moncler-retail.example>,DXB01 closing - 2nd Sep
-DXB01,20260903_2346_DXB01.eml,0903,2026-09-03 23:46,2026-09-03,closing,Rania Khoury <rania.khoury@moncler-retail.example>,DXB01 closing - 3rd Sep
-DXB01,20260904_2339_DXB01.eml,0904,2026-09-04 23:39,2026-09-04,closing,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 04.09.2026
-DXB01,20260905_2358_DXB01.eml,0905,2026-09-05 23:58,2026-09-05,closing,Priyanka Menon <priyanka.menon@moncler-retail.example>,DXB01 - closing 05/09
-DXB01,20260906_2344_DXB01.eml,0906,2026-09-06 23:44,2026-09-06,closing,Priyanka Menon <priyanka.menon@moncler-retail.example>,DXB01 - closing 06/09
-DXB01,20260907_2335_DXB01.eml,0907,2026-09-07 23:35,2026-09-07,closing,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 07.09.2026
-DXB01,20260908_2350_DXB01.eml,0908,2026-09-08 23:50,2026-09-08,closing,Rania Khoury <rania.khoury@moncler-retail.example>,DXB01 closing - 8th Sep
-DXB01,20260909_2347_DXB01.eml,0909,2026-09-09 23:47,2026-09-09,closing,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 09.09.2026
-DXB01,20260910_2342_DXB01.eml,0910,2026-09-10 23:42,2026-09-10,closing,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 10.09.2026
-DXB01,20260911_2355_DXB01.eml,0911,2026-09-11 23:55,2026-09-11,closing,Rania Khoury <rania.khoury@moncler-retail.example>,DXB01 closing - 11th Sep
-DXB01,20260912_2359_DXB01.eml,0912,2026-09-12 23:59,2026-09-12,closing,Priyanka Menon <priyanka.menon@moncler-retail.example>,DXB01 - closing 12/09
-DXB01,20260913_2340_DXB01.eml,0913,2026-09-13 23:40,2026-09-13,closing,Priyanka Menon <priyanka.menon@moncler-retail.example>,DXB01 - closing 13/09
-DXB01,20260914_2331_DXB01.eml,0914,2026-09-14 23:31,2026-09-14,closing,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 14.09.2026
-DXB01,20260915_2337_DXB01.eml,0915,2026-09-15 23:37,2026-09-15,closing,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 15.09.2026
-DXB01,20260917_2344_DXB01.eml,0917,2026-09-17 23:44,2026-09-16;2026-09-17,closing,Rania Khoury <rania.khoury@moncler-retail.example>,DXB01 closing - 17th Sep (+16th)
-DXB01,20260918_2358_DXB01.eml,0918,2026-09-18 23:58,2026-09-18,closing,Rania Khoury <rania.khoury@moncler-retail.example>,DXB01 closing - 18th Sep
-DXB01,20260919_2356_DXB01.eml,0919,2026-09-19 23:56,2026-09-19,closing,Priyanka Menon <priyanka.menon@moncler-retail.example>,DXB01 - closing 19/09
-DXB01,20260920_2349_DXB01.eml,0920,2026-09-20 23:49,2026-09-20,closing,Priyanka Menon <priyanka.menon@moncler-retail.example>,DXB01 - closing 20/09
-DXB01,20260921_2333_DXB01.eml,0921,2026-09-21 23:33,2026-09-21,closing,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 21.09.2026
-DXB01,20260922_2336_DXB01.eml,0922,2026-09-22 23:36,2026-09-22,closing,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 22.09.2026
-DXB01,20260923_2351_DXB01.eml,0923,2026-09-23 23:51,2026-09-23,closing,Rania Khoury <rania.khoury@moncler-retail.example>,DXB01 closing - 23rd Sep
-DXB01,20260924_2340_DXB01.eml,0924,2026-09-24 23:40,2026-09-24,closing,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 24.09.2026
-DXB01,20260925_2357_DXB01.eml,0925,2026-09-25 23:57,2026-09-25,closing,Priyanka Menon <priyanka.menon@moncler-retail.example>,DXB01 - closing 25/09
-DXB01,20260927_0044_DXB01.eml,0926,2026-09-27 00:44,2026-09-26,closing,Rania Khoury <rania.khoury@moncler-retail.example>,DXB01 closing - Saturday 26th Sep - RECORD
-DXB01,20260927_1012_DXB01_re1.eml,0926oh,2026-09-27 10:12,2026-09-26,reply,Omar Haddad <omar.haddad@moncler-retail.example>,RE: DXB01 closing - Saturday 26th Sep - RECORD
-DXB01,20260927_1103_DXB01_re2.eml,0926js,2026-09-27 11:03,2026-09-26,reply,Joel Santos <joel.santos@moncler-retail.example>,RE: DXB01 closing - Saturday 26th Sep - RECORD
-DXB01,20260927_2342_DXB01.eml,0927,2026-09-27 23:42,2026-09-27,closing,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 27.09.2026
-DXB01,20260928_2330_DXB01.eml,0928,2026-09-28 23:30,2026-09-28,closing,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 28.09.2026
-DXB01,20260929_2341_DXB01.eml,0929,2026-09-29 23:41,2026-09-29,closing,Priyanka Menon <priyanka.menon@moncler-retail.example>,DXB01 - closing 29/09
-DXB01,20260930_2338_DXB01.eml,0930,2026-09-30 23:38,2026-09-30,closing,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 30.09.2026
-DXB01,20261001_2344_DXB01.eml,1001,2026-10-01 23:44,2026-10-01,closing_attachment_only,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 01.10.2026
-DXB01,20261002_2353_DXB01.eml,1002,2026-10-02 23:53,2026-10-02,closing,Rania Khoury <rania.khoury@moncler-retail.example>,DXB01 closing - 2nd Oct
-DXB01,20261003_2359_DXB01.eml,1003,2026-10-03 23:59,2026-10-03,closing,Priyanka Menon <priyanka.menon@moncler-retail.example>,DXB01 - closing 03/10
-DXB01,20261004_2347_DXB01.eml,1004,2026-10-04 23:47,2026-10-04,closing,Priyanka Menon <priyanka.menon@moncler-retail.example>,DXB01 - closing 04/10
-DXB01,20261006_2336_DXB01.eml,1006,2026-10-06 23:36,2026-10-05;2026-10-06,closing,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 06.10.2026
-DXB01,20261007_2345_DXB01.eml,1007,2026-10-07 23:45,2026-10-07,closing,Rania Khoury <rania.khoury@moncler-retail.example>,DXB01 closing - 7th Oct
-DXB01,20261008_2339_DXB01.eml,1008,2026-10-08 23:39,2026-10-08,closing,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 08.10.2026
-DXB01,20261009_2358_DXB01.eml,1009,2026-10-09 23:58,2026-10-09,closing,Rania Khoury <rania.khoury@moncler-retail.example>,DXB01 closing - 9th Oct
-DXB01,20261010_2359_DXB01.eml,1010,2026-10-10 23:59,2026-10-10,closing,Priyanka Menon <priyanka.menon@moncler-retail.example>,DXB01 - closing 10/10
-DXB01,20261011_2350_DXB01.eml,1011,2026-10-11 23:50,2026-10-11,closing,Priyanka Menon <priyanka.menon@moncler-retail.example>,DXB01 - closing 11/10
-DXB01,20261012_2334_DXB01.eml,1012,2026-10-12 23:34,2026-10-12,closing,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 12.10.2026
-DXB01,20261013_2331_DXB01.eml,1013,2026-10-13 23:31,2026-10-13,closing,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 13.10.2026
-DXB01,20261014_2348_DXB01.eml,1014,2026-10-14 23:48,2026-10-14,closing,Rania Khoury <rania.khoury@moncler-retail.example>,DXB01 closing - 14th Oct
-DXB01,20261015_2341_DXB01.eml,1015,2026-10-15 23:41,2026-10-15,closing,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 15.10.2026
-DXB01,20261016_2356_DXB01.eml,1016,2026-10-16 23:56,2026-10-16,closing,Rania Khoury <rania.khoury@moncler-retail.example>,DXB01 closing - 16th Oct
-DXB01,20261017_2359_DXB01.eml,1017,2026-10-17 23:59,2026-10-17,closing,Priyanka Menon <priyanka.menon@moncler-retail.example>,DXB01 - closing 17/10
-DXB01,20261018_0002_DXB01_dup.eml,1017dup,2026-10-18 00:02,2026-10-17,duplicate,Priyanka Menon <priyanka.menon@moncler-retail.example>,DXB01 - closing 17/10
-DXB01,20261018_2346_DXB01.eml,1018,2026-10-18 23:46,2026-10-18,closing,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 18.10.2026
-DXB01,20261019_2338_DXB01.eml,1019,2026-10-19 23:38,2026-10-19,closing,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 19.10.2026
-DXB01,20261020_2352_DXB01.eml,1020,2026-10-20 23:52,2026-10-20,closing,Rania Khoury <rania.khoury@moncler-retail.example>,DXB01 closing - 20th Oct
-DXB01,20261021_2343_DXB01.eml,1021,2026-10-21 23:43,2026-10-21,closing,Joel Santos <joel.santos@moncler-retail.example>,DXB01 Daily Sales Report 21.10.2026
-SIN01,20260831_2312_SIN01.eml,0831,2026-08-31 23:12,2026-08-31,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 31 Aug
-SIN01,20260901_2320_SIN01.eml,0901,2026-09-01 23:20,2026-09-01,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 1 Sep
-SIN01,20260902_2315_SIN01.eml,0902,2026-09-02 23:15,2026-09-02,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 2 Sep
-SIN01,20260903_2324_SIN01.eml,0903,2026-09-03 23:24,2026-09-03,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 3 Sep
-SIN01,20260904_2331_SIN01.eml,0904,2026-09-04 23:31,2026-09-04,closing,Muhammad Hafiz <muhammad.hafiz@moncler-retail.example>,closing fri 4/9
-SIN01,20260905_2348_SIN01.eml,0905,2026-09-05 23:48,2026-09-05,closing,Muhammad Hafiz <muhammad.hafiz@moncler-retail.example>,closing sat 5/9
-SIN01,20260907_2310_SIN01.eml,0907,2026-09-07 23:10,2026-09-06;2026-09-07,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 7 Sep
-SIN01,20260908_2316_SIN01.eml,0908,2026-09-08 23:16,2026-09-08,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 8 Sep
-SIN01,20260909_2322_SIN01.eml,0909,2026-09-09 23:22,2026-09-09,closing,Jasmine Lim <jasmine.lim@moncler-retail.example>,Closing 9/9 MBS
-SIN01,20260910_2326_SIN01.eml,0910,2026-09-10 23:26,2026-09-10,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 10 Sep
-SIN01,20260911_2334_SIN01.eml,0911,2026-09-11 23:34,2026-09-11,closing,Muhammad Hafiz <muhammad.hafiz@moncler-retail.example>,closing fri 11/9
-SIN01,20260912_2357_SIN01.eml,0912,2026-09-12 23:57,2026-09-12,closing,Muhammad Hafiz <muhammad.hafiz@moncler-retail.example>,closing sat 12/9
-SIN01,20260913_2318_SIN01.eml,0913,2026-09-13 23:18,2026-09-13,closing,Jasmine Lim <jasmine.lim@moncler-retail.example>,Closing Sun 13/9
-SIN01,20260914_2314_SIN01.eml,0914,2026-09-14 23:14,2026-09-14,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 14 Sep
-SIN01,20260915_2319_SIN01.eml,0915,2026-09-15 23:19,2026-09-15,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 15 Sep
-SIN01,20260916_2323_SIN01.eml,0916,2026-09-16 23:23,2026-09-16,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 16 Sep
-SIN01,20260917_2328_SIN01.eml,0917,2026-09-17 23:28,2026-09-17,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 17 Sep
-SIN01,20260918_2344_SIN01.eml,0918,2026-09-18 23:44,2026-09-18,closing,Muhammad Hafiz <muhammad.hafiz@moncler-retail.example>,closing fri 18/9
-SIN01,20260919_2358_SIN01.eml,0919,2026-09-19 23:58,2026-09-19,closing,Muhammad Hafiz <muhammad.hafiz@moncler-retail.example>,closing sat 19/9
-SIN01,20260920_2321_SIN01.eml,0920,2026-09-20 23:21,2026-09-20,closing,Jasmine Lim <jasmine.lim@moncler-retail.example>,Closing Sun 20/9
-SIN01,20260921_2317_SIN01.eml,0921,2026-09-21 23:17,2026-09-21,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 21 Sep
-SIN01,20260922_2313_SIN01.eml,0922,2026-09-22 23:13,2026-09-22,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 22 Sep
-SIN01,20260924_2325_SIN01.eml,0924,2026-09-24 23:25,2026-09-23;2026-09-24,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 24 Sep (+23)
-SIN01,20260925_2339_SIN01.eml,0925,2026-09-25 23:39,2026-09-25,closing,Muhammad Hafiz <muhammad.hafiz@moncler-retail.example>,closing fri 25/9
-SIN01,20260926_2356_SIN01.eml,0926,2026-09-26 23:56,2026-09-26,closing,Muhammad Hafiz <muhammad.hafiz@moncler-retail.example>,closing sat 26/9
-SIN01,20260927_2314_SIN01.eml,0927,2026-09-27 23:14,2026-09-27,closing,Jasmine Lim <jasmine.lim@moncler-retail.example>,Closing Sun 27/9
-SIN01,20260928_2311_SIN01.eml,0928,2026-09-28 23:11,2026-09-28,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 28 Sep
-SIN01,20260929_2320_SIN01.eml,0929,2026-09-29 23:20,2026-09-29,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 29 Sep
-SIN01,20260930_2324_SIN01.eml,0930,2026-09-30 23:24,2026-09-30,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 30 Sep
-SIN01,20261001_2328_SIN01.eml,1001,2026-10-01 23:28,2026-10-01,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 1 Oct
-SIN01,20261002_2336_SIN01.eml,1002,2026-10-02 23:36,2026-10-02,closing,Muhammad Hafiz <muhammad.hafiz@moncler-retail.example>,closing fri 2/10 - PINK ILVARO
-SIN01,20261003_2359_SIN01.eml,1003,2026-10-03 23:59,2026-10-03,closing,Muhammad Hafiz <muhammad.hafiz@moncler-retail.example>,closing sat 3/10
-SIN01,20261004_2322_SIN01.eml,1004,2026-10-04 23:22,2026-10-04,closing,Jasmine Lim <jasmine.lim@moncler-retail.example>,Closing Sun 4/10 💗
-SIN01,20261005_2319_SIN01.eml,1005,2026-10-05 23:19,2026-10-05,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 5 Oct
-SIN01,20261006_0941_SIN01_re1.eml,1005dl,2026-10-06 09:41,2026-10-05,reply,Daniel Lim <daniel.lim@moncler-retail.example>,RE: SIN01 closing 5 Oct
-SIN01,20261006_1005_SIN01_re2.eml,1005gt,2026-10-06 10:05,2026-10-05,reply,Grace Tan <grace.tan@moncler-retail.example>,RE: SIN01 closing 5 Oct
-SIN01,20261006_2315_SIN01.eml,1006,2026-10-06 23:15,2026-10-06,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 6 Oct
-SIN01,20261007_2321_SIN01.eml,1007,2026-10-07 23:21,2026-10-07,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 7 Oct
-SIN01,20261008_2330_SIN01.eml,1008,2026-10-08 23:30,2026-10-08,closing,Jasmine Lim <jasmine.lim@moncler-retail.example>,Closing 8/10
-SIN01,20261009_2358_SIN01.eml,1009,2026-10-09 23:58,2026-10-09,closing,Muhammad Hafiz <muhammad.hafiz@moncler-retail.example>,closing fri 9/10 F1
-SIN01,20261010_2359_SIN01.eml,1010,2026-10-10 23:59,2026-10-10,closing,Muhammad Hafiz <muhammad.hafiz@moncler-retail.example>,closing sat 10/10 F1
-SIN01,20261011_2347_SIN01.eml,1011,2026-10-11 23:47,2026-10-11,closing,Muhammad Hafiz <muhammad.hafiz@moncler-retail.example>,closing sun 11/10 F1 race day
-SIN01,20261011_2349_SIN01_dup.eml,1011dup,2026-10-11 23:49,2026-10-11,duplicate,Muhammad Hafiz <muhammad.hafiz@moncler-retail.example>,closing sun 11/10 F1 race day
-SIN01,20261012_2310_SIN01.eml,1012,2026-10-12 23:10,2026-10-12,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 12 Oct
-SIN01,20261013_2318_SIN01.eml,1013,2026-10-13 23:18,2026-10-13,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 13 Oct
-SIN01,20261014_2316_SIN01.eml,1014,2026-10-14 23:16,2026-10-14,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 14 Oct
-SIN01,20261015_2326_SIN01.eml,1015,2026-10-15 23:26,2026-10-15,closing,Jasmine Lim <jasmine.lim@moncler-retail.example>,Closing 15/10
-SIN01,20261016_2344_SIN01.eml,1016,2026-10-16 23:44,2026-10-16,closing,Muhammad Hafiz <muhammad.hafiz@moncler-retail.example>,closing fri 16/10
-SIN01,20261017_2357_SIN01.eml,1017,2026-10-17 23:57,2026-10-17,closing,Muhammad Hafiz <muhammad.hafiz@moncler-retail.example>,closing sat 17/10
-SIN01,20261018_2320_SIN01.eml,1018,2026-10-18 23:20,2026-10-18,closing,Jasmine Lim <jasmine.lim@moncler-retail.example>,Closing Sun 18/10
-SIN01,20261019_2312_SIN01.eml,1019,2026-10-19 23:12,2026-10-19,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 19 Oct
-SIN01,20261020_2325_SIN01.eml,1020,2026-10-20 23:25,2026-10-20,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 20 Oct - pink arrived
-SIN01,20261021_2319_SIN01.eml,1021,2026-10-21 23:19,2026-10-21,closing,Grace Tan <grace.tan@moncler-retail.example>,SIN01 closing 21 Oct
-SYD01,20260831_1842_SYD01.eml,0831,2026-08-31 18:42,2026-08-31,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Mon 31/8
-SYD01,20260901_1837_SYD01.eml,0901,2026-09-01 18:37,2026-09-01,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Tue 1/9
-SYD01,20260902_1850_SYD01.eml,0902,2026-09-02 18:50,2026-09-02,closing,Arjun Patel <arjun.patel@moncler-retail.example>,SYD01 closing 02/09
-SYD01,20260903_1846_SYD01.eml,0903,2026-09-03 18:46,2026-09-03,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Thu 3/9
-SYD01,20260904_1858_SYD01.eml,0904,2026-09-04 18:58,2026-09-04,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Fri 4/9
-SYD01,20260905_1831_SYD01.eml,0905,2026-09-05 18:31,2026-09-05,closing,Liam O'Connor <liam.oconnor@moncler-retail.example>,sat close
-SYD01,20260906_1744_SYD01.eml,0906,2026-09-06 17:44,2026-09-06,closing,Liam O'Connor <liam.oconnor@moncler-retail.example>,sun close
-SYD01,20260907_1840_SYD01.eml,0907,2026-09-07 18:40,2026-09-07,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Mon 7/9
-SYD01,20260908_1836_SYD01.eml,0908,2026-09-08 18:36,2026-09-08,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Tue 8/9
-SYD01,20260909_1854_SYD01.eml,0909,2026-09-09 18:54,2026-09-09,closing,Arjun Patel <arjun.patel@moncler-retail.example>,SYD01 closing 09/09
-SYD01,20260910_1833_SYD01.eml,0910,2026-09-10 18:33,2026-09-10,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Thu 10/9
-SYD01,20260911_1849_SYD01.eml,0911,2026-09-11 18:49,2026-09-11,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Fri 11/9
-SYD01,20260912_1827_SYD01.eml,0912,2026-09-12 18:27,2026-09-12,closing,Liam O'Connor <liam.oconnor@moncler-retail.example>,sat close 12/9
-SYD01,20260913_1739_SYD01.eml,0913,2026-09-13 17:39,2026-09-13,closing,Liam O'Connor <liam.oconnor@moncler-retail.example>,sun close
-SYD01,20260914_1844_SYD01.eml,0914,2026-09-14 18:44,2026-09-14,closing,Arjun Patel <arjun.patel@moncler-retail.example>,SYD01 closing 14/09
-SYD01,20260915_1838_SYD01.eml,0915,2026-09-15 18:38,2026-09-15,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Tue 15/9
-SYD01,20260916_1851_SYD01.eml,0916,2026-09-16 18:51,2026-09-16,closing,Arjun Patel <arjun.patel@moncler-retail.example>,SYD01 closing 16/09
-SYD01,20260917_1835_SYD01.eml,0917,2026-09-17 18:35,2026-09-17,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Thu 17/9
-SYD01,20260918_1847_SYD01.eml,0918,2026-09-18 18:47,2026-09-18,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Fri 18/9
-SYD01,20260919_1829_SYD01.eml,0919,2026-09-19 18:29,2026-09-19,closing,Liam O'Connor <liam.oconnor@moncler-retail.example>,sat close 19/9
-SYD01,20260921_1840_SYD01.eml,0921,2026-09-21 18:40,2026-09-20;2026-09-21,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Mon 21/9
-SYD01,20260922_1845_SYD01.eml,0922,2026-09-22 18:45,2026-09-22,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Tue 22/9
-SYD01,20260923_1834_SYD01.eml,0923,2026-09-23 18:34,2026-09-23,closing,Arjun Patel <arjun.patel@moncler-retail.example>,SYD01 closing 23/09
-SYD01,20260924_1839_SYD01.eml,0924,2026-09-24 18:39,2026-09-24,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Thu 24/9
-SYD01,20260925_1852_SYD01.eml,0925,2026-09-25 18:52,2026-09-25,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Fri 25/9
-SYD01,20260926_1824_SYD01.eml,0926,2026-09-26 18:24,2026-09-26,closing,Liam O'Connor <liam.oconnor@moncler-retail.example>,sat close
-SYD01,20260927_1741_SYD01.eml,0927,2026-09-27 17:41,2026-09-27,closing,Liam O'Connor <liam.oconnor@moncler-retail.example>,sun close 27/9
-SYD01,20260928_1843_SYD01.eml,0928,2026-09-28 18:43,2026-09-28,closing,Arjun Patel <arjun.patel@moncler-retail.example>,SYD01 closing 28/09 - forecast
-SYD01,20260929_1015_SYD01_re1.eml,0928dl,2026-09-29 10:15,2026-09-28,reply,Daniel Lim <daniel.lim@moncler-retail.example>,RE: SYD01 closing 28/09 - forecast
-SYD01,20260929_1831_SYD01.eml,0929,2026-09-29 18:31,2026-09-29,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Tue 29/9
-SYD01,20260930_1847_SYD01_re2.eml,0930,2026-09-30 18:47,2026-09-30,closing_in_reply,Arjun Patel <arjun.patel@moncler-retail.example>,RE: SYD01 closing 28/09 - forecast
-SYD01,20261001_1840_SYD01.eml,1001,2026-10-01 18:40,2026-10-01,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Thu 1/10
-SYD01,20261002_1849_SYD01.eml,1002,2026-10-02 18:49,2026-10-02,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Fri 2/10
-SYD01,20261003_1822_SYD01.eml,1003,2026-10-03 18:22,2026-10-03,closing,Liam O'Connor <liam.oconnor@moncler-retail.example>,sat close 3/10
-SYD01,20261004_1748_SYD01.eml,1004,2026-10-04 17:48,2026-10-04,closing,Liam O'Connor <liam.oconnor@moncler-retail.example>,sun close
-SYD01,20261005_1839_SYD01.eml,1005,2026-10-05 18:39,2026-10-05,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Mon 5/10 (public holiday)
-SYD01,20261006_1844_SYD01.eml,1006,2026-10-06 18:44,2026-10-06,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Tue 6/10
-SYD01,20261007_1851_SYD01.eml,1007,2026-10-07 18:51,2026-10-07,closing,Arjun Patel <arjun.patel@moncler-retail.example>,SYD01 closing 07/10
-SYD01,20261008_1836_SYD01.eml,1008,2026-10-08 18:36,2026-10-08,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Thu 8/10
-SYD01,20261009_1842_SYD01.eml,1009,2026-10-09 18:42,2026-10-09,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Fri 9/10
-SYD01,20261010_1826_SYD01.eml,1010,2026-10-10 18:26,2026-10-10,closing,Liam O'Connor <liam.oconnor@moncler-retail.example>,sat close 10/10
-SYD01,20261011_1737_SYD01.eml,1011,2026-10-11 17:37,2026-10-11,closing,Liam O'Connor <liam.oconnor@moncler-retail.example>,sun close
-SYD01,20261012_1838_SYD01.eml,1012,2026-10-12 18:38,2026-10-12,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Mon 12/10
-SYD01,20261013_1845_SYD01.eml,1013,2026-10-13 18:45,2026-10-13,closing,Arjun Patel <arjun.patel@moncler-retail.example>,SYD01 closing 13/10
-SYD01,20261014_1841_SYD01.eml,1014,2026-10-14 18:41,2026-10-14,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Wed 14/10
-SYD01,20261015_1833_SYD01.eml,1015,2026-10-15 18:33,2026-10-15,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Thu 15/10
-SYD01,20261016_1848_SYD01.eml,1016,2026-10-16 18:48,2026-10-16,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Fri 16/10
-SYD01,20261017_1831_SYD01.eml,1017,2026-10-17 18:31,2026-10-17,closing,Liam O'Connor <liam.oconnor@moncler-retail.example>,sat close 17/10
-SYD01,20261017_1833_SYD01_dup.eml,1017dup,2026-10-17 18:33,2026-10-17,duplicate,Liam O'Connor <liam.oconnor@moncler-retail.example>,sat close 17/10
-SYD01,20261019_1846_SYD01.eml,1019,2026-10-19 18:46,2026-10-18;2026-10-19,closing,Arjun Patel <arjun.patel@moncler-retail.example>,SYD01 closing 19/10 (+Sun)
-SYD01,20261020_1830_SYD01.eml,1020,2026-10-20 18:30,2026-10-20,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Tue 20/10
-SYD01,20261021_1844_SYD01.eml,1021,2026-10-21 18:44,2026-10-21,closing,Chloe Mitchell <chloe.mitchell@moncler-retail.example>,SYD close Wed 21/10
+LON01,20260831_2052_LON01.eml,0831,2026-08-31 20:52,2026-08-31,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Mon 31/08
+LON01,20260901_2110_LON01.eml,0901,2026-09-01 21:10,2026-09-01,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Tue 01/09
+LON01,20260902_2131_LON01.eml,0902,2026-09-02 21:31,2026-09-02,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Wed 02/09
+LON01,20260903_2204_LON01.eml,0903,2026-09-03 22:04,2026-09-03,closing,Daniel Okafor <daniel.okafor@valentino-retail.example>,close thu
+LON01,20260904_2118_LON01.eml,0904,2026-09-04 21:18,2026-09-04,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Fri 04/09
+LON01,20260905_2147_LON01.eml,0905,2026-09-05 21:47,2026-09-05,closing,Daniel Okafor <daniel.okafor@valentino-retail.example>,LON01 close sat 05/09
+LON01,20260907_2102_LON01.eml,0907,2026-09-07 21:02,2026-09-06;2026-09-07,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Mon 07/09 (+Sunday)
+LON01,20260908_2115_LON01.eml,0908,2026-09-08 21:15,2026-09-08,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Tue 08/09
+LON01,20260909_2126_LON01.eml,0909,2026-09-09 21:26,2026-09-09,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Wed 09/09
+LON01,20260910_2158_LON01.eml,0910,2026-09-10 21:58,2026-09-10,closing,Daniel Okafor <daniel.okafor@valentino-retail.example>,close thurs 10/9
+LON01,20260911_2120_LON01.eml,0911,2026-09-11 21:20,2026-09-11,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Fri 11/09
+LON01,20260912_2211_LON01.eml,0912,2026-09-12 22:11,2026-09-12,closing,Daniel Okafor <daniel.okafor@valentino-retail.example>,LON01 close sat 12/9
+LON01,20260913_1940_LON01.eml,0913,2026-09-13 19:40,2026-09-13,closing,Harriet Lowe <harriet.lowe@valentino-retail.example>,Sunday closing NBS
+LON01,20260914_2105_LON01.eml,0914,2026-09-14 21:05,2026-09-14,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Mon 14/09
+LON01,20260915_2133_LON01.eml,0915,2026-09-15 21:33,2026-09-15,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Tue 15/09
+LON01,20260916_2112_LON01.eml,0916,2026-09-16 21:12,2026-09-16,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Wed 16/09
+LON01,20260917_2220_LON01.eml,0917,2026-09-17 22:20,2026-09-17,closing,Daniel Okafor <daniel.okafor@valentino-retail.example>,close 17/9
+LON01,20260918_2124_LON01.eml,0918,2026-09-18 21:24,2026-09-18,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Fri 18/09
+LON01,20260919_2237_LON01.eml,0919,2026-09-19 22:37,2026-09-19,closing,Daniel Okafor <daniel.okafor@valentino-retail.example>,LON01 close sat 19/09
+LON01,20260920_1955_LON01.eml,0920,2026-09-20 19:55,2026-09-20,closing,Harriet Lowe <harriet.lowe@valentino-retail.example>,Sunday close
+LON01,20260921_2108_LON01.eml,0921,2026-09-21 21:08,2026-09-21,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Mon 21/09
+LON01,20260921_2108_LON01_ooo.eml,0921ooo,2026-09-21 21:08,,auto_reply,Fiona McLeod <fiona.mcleod@valentino-retail.example>,Automatic reply: LON01 Closing - Mon 21/09
+LON01,20260922_2119_LON01.eml,0922,2026-09-22 21:19,2026-09-22,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Tue 22/09
+LON01,20260923_2141_LON01.eml,0923,2026-09-23 21:41,2026-09-23,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Wed 23/09
+LON01,20260924_2209_LON01.eml,0924,2026-09-24 22:09,2026-09-24,closing,Daniel Okafor <daniel.okafor@valentino-retail.example>,close thu 24/9
+LON01,20260925_2115_LON01.eml,0925,2026-09-25 21:15,2026-09-25,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Fri 25/09
+LON01,20260925_2129_LON01_re1.eml,0925c,2026-09-25 21:29,2026-09-25,correction,Olivia Hartley <olivia.hartley@valentino-retail.example>,RE: LON01 Closing - Fri 25/09
+LON01,20260926_2248_LON01.eml,0926,2026-09-26 22:48,2026-09-26,closing,Daniel Okafor <daniel.okafor@valentino-retail.example>,LON01 close sat 26/9
+LON01,20260927_1931_LON01.eml,0927,2026-09-27 19:31,2026-09-27,closing,Harriet Lowe <harriet.lowe@valentino-retail.example>,Sunday closing 27th
+LON01,20260928_2122_LON01.eml,0928,2026-09-28 21:22,2026-09-28,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Mon 28/09
+LON01,20260929_0847_LON01_re1.eml,0928fm,2026-09-29 08:47,2026-09-28,reply,Fiona McLeod <fiona.mcleod@valentino-retail.example>,RE: LON01 Closing - Mon 28/09
+LON01,20260930_2140_LON01.eml,0930,2026-09-30 21:40,2026-09-29;2026-09-30,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Tue 29 + Wed 30/09
+LON01,20261001_2203_LON01.eml,1001,2026-10-01 22:03,2026-10-01,closing,Daniel Okafor <daniel.okafor@valentino-retail.example>,close 1/10
+LON01,20261002_2136_LON01.eml,1002,2026-10-02 21:36,2026-10-02,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Fri 02/10
+LON01,20261003_2225_LON01.eml,1003,2026-10-03 22:25,2026-10-03,closing,Daniel Okafor <daniel.okafor@valentino-retail.example>,LON01 close sat 3/10
+LON01,20261003_2227_LON01_dup.eml,1003dup,2026-10-03 22:27,2026-10-03,duplicate,Daniel Okafor <daniel.okafor@valentino-retail.example>,LON01 close sat 3/10
+LON01,20261004_1948_LON01.eml,1004,2026-10-04 19:48,2026-10-04,closing,Harriet Lowe <harriet.lowe@valentino-retail.example>,Sunday close 4/10
+LON01,20261005_2130_LON01.eml,1005,2026-10-05 21:30,2026-10-05,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Mon 05/10
+LON01,20261006_2143_LON01.eml,1006,2026-10-06 21:43,2026-10-06,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Tue 06/10
+LON01,20261007_2151_LON01.eml,1007,2026-10-07 21:51,2026-10-07,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Wed 07/10
+LON01,20261009_0041_LON01.eml,1008,2026-10-09 00:41,2026-10-08,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Thu 08/10 - CLIENT EVENING
+LON01,20261009_0758_LON01_re1.eml,1008fm,2026-10-09 07:58,2026-10-08,reply,Fiona McLeod <fiona.mcleod@valentino-retail.example>,RE: LON01 Closing - Thu 08/10 - CLIENT EVENING
+LON01,20261009_1022_LON01_re2.eml,1008re,2026-10-09 10:22,2026-10-08,reply,Daniel Okafor <daniel.okafor@valentino-retail.example>,RE: LON01 Closing - Thu 08/10 - CLIENT EVENING
+LON01,20261009_2216_LON01.eml,1009,2026-10-09 22:16,2026-10-09,closing,Daniel Okafor <daniel.okafor@valentino-retail.example>,close fri 9/10
+LON01,20261010_2240_LON01.eml,1010,2026-10-10 22:40,2026-10-10,closing,Daniel Okafor <daniel.okafor@valentino-retail.example>,LON01 close sat 10/10
+LON01,20261011_1952_LON01.eml,1011,2026-10-11 19:52,2026-10-11,closing,Harriet Lowe <harriet.lowe@valentino-retail.example>,Sunday 11/10
+LON01,20261012_2119_LON01.eml,1012,2026-10-12 21:19,2026-10-12,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Mon 12/10
+LON01,20261012_2124_LON01_fwd.eml,1012fwd,2026-10-12 21:24,2026-10-12,forward_client,Olivia Hartley <olivia.hartley@valentino-retail.example>,FW: Aurea black - size 1
+LON01,20261013_2128_LON01.eml,1013,2026-10-13 21:28,2026-10-13,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Tue 13/10
+LON01,20261014_2137_LON01.eml,1014,2026-10-14 21:37,2026-10-14,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Wed 14/10
+LON01,20261015_2212_LON01.eml,1015,2026-10-15 22:12,2026-10-15,closing,Daniel Okafor <daniel.okafor@valentino-retail.example>,close 14/10
+LON01,20261016_2125_LON01.eml,1016,2026-10-16 21:25,2026-10-16,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Fri 16/10
+LON01,20261017_0912_LON01_re1.eml,1016mp,2026-10-17 09:12,2026-10-16,reply,Tom Brennan <tom.brennan@valentino-retail.example>,RE: LON01 Closing - Fri 16/10
+LON01,20261017_2302_LON01.eml,1017,2026-10-17 23:02,2026-10-17,closing,Daniel Okafor <daniel.okafor@valentino-retail.example>,LON01 close sat 17/10 BIG ONE
+LON01,20261018_2006_LON01.eml,1018,2026-10-18 20:06,2026-10-18,closing,Harriet Lowe <harriet.lowe@valentino-retail.example>,Sunday close - wow
+LON01,20261019_2114_LON01.eml,1019,2026-10-19 21:14,2026-10-19,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Mon 19/10
+LON01,20261020_2131_LON01.eml,1020,2026-10-20 21:31,2026-10-20,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Tue 20/10
+LON01,20261021_2122_LON01.eml,1021,2026-10-21 21:22,2026-10-21,closing,Olivia Hartley <olivia.hartley@valentino-retail.example>,LON01 Closing - Wed 21/10
+LON02,20260831_2112_LON02.eml,0831,2026-08-31 21:12,2026-08-31,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 31/08
+LON02,20260901_2105_LON02.eml,0901,2026-09-01 21:05,2026-09-01,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 01/09
+LON02,20260902_2120_LON02.eml,0902,2026-09-02 21:20,2026-09-02,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 02/09
+LON02,20260903_2144_LON02.eml,0903,2026-09-03 21:44,2026-09-03,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 03/09
+LON02,20260904_2203_LON02.eml,0904,2026-09-04 22:03,2026-09-04,closing,James Whitcombe <james.whitcombe@valentino-retail.example>,Harrods - Friday close
+LON02,20260905_2151_LON02.eml,0905,2026-09-05 21:51,2026-09-05,closing,James Whitcombe <james.whitcombe@valentino-retail.example>,Harrods - Saturday close
+LON02,20260906_1902_LON02.eml,0906,2026-09-06 19:02,2026-09-06,closing,James Whitcombe <james.whitcombe@valentino-retail.example>,Harrods - Sunday close
+LON02,20260907_2116_LON02.eml,0907,2026-09-07 21:16,2026-09-07,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 07/09 - weekly
+LON02,20260908_2109_LON02.eml,0908,2026-09-08 21:09,2026-09-08,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 08/09
+LON02,20260909_2122_LON02.eml,0909,2026-09-09 21:22,2026-09-09,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 09/09
+LON02,20260910_2130_LON02.eml,0910,2026-09-10 21:30,2026-09-10,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 10/09
+LON02,20260911_2214_LON02.eml,0911,2026-09-11 22:14,2026-09-11,closing,James Whitcombe <james.whitcombe@valentino-retail.example>,Harrods - Fri 11th close
+LON02,20260912_2230_LON02.eml,0912,2026-09-12 22:30,2026-09-12,closing,James Whitcombe <james.whitcombe@valentino-retail.example>,Harrods - Sat 12th close
+LON02,20260914_2101_LON02.eml,0914,2026-09-14 21:01,2026-09-14,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 14/09
+LON02,20260915_2138_LON02.eml,0915,2026-09-15 21:38,2026-09-15,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 15/09 - campaign day 1
+LON02,20260916_2147_LON02.eml,0916,2026-09-16 21:47,2026-09-16,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 16/09
+LON02,20260917_2115_LON02.eml,0917,2026-09-17 21:15,2026-09-17,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 17/09
+LON02,20260918_2220_LON02.eml,0918,2026-09-18 22:20,2026-09-18,closing,James Whitcombe <james.whitcombe@valentino-retail.example>,Harrods close Fri
+LON02,20260919_2241_LON02.eml,0919,2026-09-19 22:41,2026-09-19,closing,James Whitcombe <james.whitcombe@valentino-retail.example>,Harrods close Sat 19/9 - Aurea
+LON02,20260920_1923_LON02.eml,0920,2026-09-20 19:23,2026-09-20,closing,James Whitcombe <james.whitcombe@valentino-retail.example>,Harrods close Sun
+LON02,20260921_2127_LON02.eml,0921,2026-09-21 21:27,2026-09-21,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 21/09 - weekly
+LON02,20260922_2110_LON02.eml,0922,2026-09-22 21:10,2026-09-22,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 22/09
+LON02,20260923_2133_LON02.eml,0923,2026-09-23 21:33,2026-09-23,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 23/09
+LON02,20260924_2119_LON02.eml,0924,2026-09-24 21:19,2026-09-24,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 24/09
+LON02,20260925_2208_LON02.eml,0925,2026-09-25 22:08,2026-09-25,closing,James Whitcombe <james.whitcombe@valentino-retail.example>,Harrods Fri close
+LON02,20260926_2236_LON02.eml,0926,2026-09-26 22:36,2026-09-26,closing,James Whitcombe <james.whitcombe@valentino-retail.example>,Harrods Sat close
+LON02,20260927_1955_LON02.eml,0927,2026-09-27 19:55,2026-09-27,closing,James Whitcombe <james.whitcombe@valentino-retail.example>,Harrods Sun close - Aurea black again
+LON02,20260928_0831_LON02_re1.eml,0927fm,2026-09-28 08:31,2026-09-27,reply,Fiona McLeod <fiona.mcleod@valentino-retail.example>,RE: Harrods Sun close - Aurea black again
+LON02,20260928_2126_LON02.eml,0928,2026-09-28 21:26,2026-09-28,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 28/09
+LON02,20260929_2114_LON02.eml,0929,2026-09-29 21:14,2026-09-29,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 29/09
+LON02,20260930_2142_LON02.eml,0930,2026-09-30 21:42,2026-09-30,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 30/09
+LON02,20261001_1312_LON02.eml,1001wrong,2026-10-01 13:12,,misdirected,Priya Raman <priya.raman@valentino-retail.example>,Rota w/c 5th Oct
+LON02,20261001_1315_LON02_re1.eml,1001wrong2,2026-10-01 13:15,,misdirected_retraction,Priya Raman <priya.raman@valentino-retail.example>,RE: Rota w/c 5th Oct
+LON02,20261001_2139_LON02.eml,1001,2026-10-01 21:39,2026-10-01,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 01/10
+LON02,20261002_2210_LON02.eml,1002,2026-10-02 22:10,2026-10-02,closing,James Whitcombe <james.whitcombe@valentino-retail.example>,Harrods Fri close
+LON02,20261003_2251_LON02.eml,1003,2026-10-03 22:51,2026-10-03,closing,James Whitcombe <james.whitcombe@valentino-retail.example>,Harrods Sat close - excellent
+LON02,20261004_1934_LON02.eml,1004,2026-10-04 19:34,2026-10-04,closing,Mei Lin Chen <meilin.chen@valentino-retail.example>,Harrods Sunday closing 04/10
+LON02,20261005_2144_LON02.eml,1005,2026-10-05 21:44,2026-10-05,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 05/10 - weekly
+LON02,20261006_2118_LON02.eml,1006,2026-10-06 21:18,2026-10-06,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 06/10
+LON02,20261007_2131_LON02.eml,1007,2026-10-07 21:31,2026-10-07,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 07/10
+LON02,20261008_2158_LON02.eml,1008,2026-10-08 21:58,2026-10-08,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 08/10
+LON02,20261009_2212_LON02.eml,1009,2026-10-09 22:12,2026-10-09,closing,James Whitcombe <james.whitcombe@valentino-retail.example>,Harrods Fri close 9/10
+LON02,20261010_2244_LON02.eml,1010,2026-10-10 22:44,2026-10-10,closing,James Whitcombe <james.whitcombe@valentino-retail.example>,Harrods Sat close
+LON02,20261011_1941_LON02.eml,1011,2026-10-11 19:41,2026-10-11,closing,James Whitcombe <james.whitcombe@valentino-retail.example>,Harrods Sun close
+LON02,20261013_2152_LON02.eml,1013,2026-10-13 21:52,2026-10-12;2026-10-13,closing,James Whitcombe <james.whitcombe@valentino-retail.example>,Harrods close Tue 13/10 (+ Mon)
+LON02,20261014_2140_LON02.eml,1014,2026-10-14 21:40,2026-10-14,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 14/10
+LON02,20261015_2124_LON02.eml,1015,2026-10-15 21:24,2026-10-15,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 15/10
+LON02,20261016_2219_LON02.eml,1016,2026-10-16 22:19,2026-10-16,closing,James Whitcombe <james.whitcombe@valentino-retail.example>,Harrods Fri close
+LON02,20261017_2258_LON02.eml,1017,2026-10-17 22:58,2026-10-17,closing,James Whitcombe <james.whitcombe@valentino-retail.example>,Harrods Sat close 17/10
+LON02,20261017_2306_LON02_dup.eml,1017dup,2026-10-17 23:06,2026-10-17,duplicate,James Whitcombe <james.whitcombe@valentino-retail.example>,Harrods Sat close 17/10
+LON02,20261018_1947_LON02.eml,1018,2026-10-18 19:47,2026-10-18,closing,Mei Lin Chen <meilin.chen@valentino-retail.example>,Harrods Sunday closing 18/10
+LON02,20261019_2115_LON02.eml,1019,2026-10-19 21:15,2026-10-19,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 19/10 - weekly
+LON02,20261020_2108_LON02.eml,1020,2026-10-20 21:08,2026-10-20,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 20/10
+LON02,20261021_2120_LON02.eml,1021,2026-10-21 21:20,2026-10-21,closing,Priya Raman <priya.raman@valentino-retail.example>,Harrods closing 21/10
+AMS01,20260831_1852_AMS01.eml,0831,2026-08-31 18:52,2026-08-31,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 31-08
+AMS01,20260901_1847_AMS01.eml,0901,2026-09-01 18:47,2026-09-01,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 01-09
+AMS01,20260902_1858_AMS01.eml,0902,2026-09-02 18:58,2026-09-02,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 02-09
+AMS01,20260903_1910_AMS01.eml,0903,2026-09-03 19:10,2026-09-03,closing,Ruben Bakker <ruben.bakker@valentino-retail.example>,closing 3/9
+AMS01,20260904_1849_AMS01.eml,0904,2026-09-04 18:49,2026-09-04,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 04-09
+AMS01,20260905_1925_AMS01.eml,0905,2026-09-05 19:25,2026-09-05,closing,Ruben Bakker <ruben.bakker@valentino-retail.example>,closing za 5/9
+AMS01,20260906_1831_AMS01.eml,0906,2026-09-06 18:31,2026-09-06,closing,Lotte Jansen <lotte.jansen@valentino-retail.example>,Sunday closing ☀️
+AMS01,20260908_1855_AMS01.eml,0908,2026-09-08 18:55,2026-09-07;2026-09-08,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 08-09
+AMS01,20260909_1903_AMS01.eml,0909,2026-09-09 19:03,2026-09-09,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 09-09
+AMS01,20260910_1914_AMS01.eml,0910,2026-09-10 19:14,2026-09-10,closing,Ruben Bakker <ruben.bakker@valentino-retail.example>,closing 10/9
+AMS01,20260911_1858_AMS01.eml,0911,2026-09-11 18:58,2026-09-11,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 11-09
+AMS01,20260912_1931_AMS01.eml,0912,2026-09-12 19:31,2026-09-12,closing,Ruben Bakker <ruben.bakker@valentino-retail.example>,closing za 12-9
+AMS01,20260913_1836_AMS01.eml,0913,2026-09-13 18:36,2026-09-13,closing,Lotte Jansen <lotte.jansen@valentino-retail.example>,Sunday closing
+AMS01,20260914_1852_AMS01.eml,0914,2026-09-14 18:52,2026-09-14,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 14-09
+AMS01,20260915_1844_AMS01.eml,0915,2026-09-15 18:44,2026-09-15,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 15-09
+AMS01,20260916_1859_AMS01.eml,0916,2026-09-16 18:59,2026-09-16,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 16-09
+AMS01,20260917_1908_AMS01.eml,0917,2026-09-17 19:08,2026-09-17,closing,Ruben Bakker <ruben.bakker@valentino-retail.example>,closing 17/9
+AMS01,20260918_1850_AMS01.eml,0918,2026-09-18 18:50,2026-09-18,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 18-09
+AMS01,20260919_1922_AMS01.eml,0919,2026-09-19 19:22,2026-09-19,closing,Ruben Bakker <ruben.bakker@valentino-retail.example>,closing za 19-9
+AMS01,20260920_1840_AMS01.eml,0920,2026-09-20 18:40,2026-09-20,closing,Lotte Jansen <lotte.jansen@valentino-retail.example>,Sunday closing 20/9
+AMS01,20260921_1848_AMS01.eml,0921,2026-09-21 18:48,2026-09-21,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 21-09
+AMS01,20260922_1846_AMS01.eml,0922,2026-09-22 18:46,2026-09-22,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 22-09
+AMS01,20260923_1857_AMS01.eml,0923,2026-09-23 18:57,2026-09-23,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 23-09
+AMS01,20260924_1911_AMS01.eml,0924,2026-09-24 19:11,2026-09-24,closing,Ruben Bakker <ruben.bakker@valentino-retail.example>,closing 24/9
+AMS01,20260925_1853_AMS01.eml,0925,2026-09-25 18:53,2026-09-25,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 25-09
+AMS01,20260926_1940_AMS01.eml,0926,2026-09-26 19:40,2026-09-26,closing,Ruben Bakker <ruben.bakker@valentino-retail.example>,closing za 26/9
+AMS01,20260927_1839_AMS01.eml,0927,2026-09-27 18:39,2026-09-27,closing,Lotte Jansen <lotte.jansen@valentino-retail.example>,Sunday closing 27-9
+AMS01,20260928_1851_AMS01.eml,0928,2026-09-28 18:51,2026-09-28,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 28-09
+AMS01,20260929_1902_AMS01.eml,0929,2026-09-29 19:02,2026-09-29,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 29-09
+AMS01,20260930_1855_AMS01.eml,0930,2026-09-30 18:55,2026-09-30,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 30-09
+AMS01,20261001_1917_AMS01.eml,1001,2026-10-01 19:17,2026-10-01,closing,Ruben Bakker <ruben.bakker@valentino-retail.example>,closing 1/10
+AMS01,20261002_1859_AMS01.eml,1002,2026-10-02 18:59,2026-10-02,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 02-10
+AMS01,20261003_1928_AMS01.eml,1003,2026-10-03 19:28,2026-10-03,closing,Ruben Bakker <ruben.bakker@valentino-retail.example>,closing za 3/10
+AMS01,20261005_1847_AMS01.eml,1005,2026-10-05 18:47,2026-10-04;2026-10-05,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 05-10 + weekend
+AMS01,20261006_1853_AMS01.eml,1006,2026-10-06 18:53,2026-10-06,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 06-10
+AMS01,20261007_1841_AMS01.eml,1007,2026-10-07 18:41,2026-10-07,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 07-10
+AMS01,20261008_1905_AMS01.eml,1008,2026-10-08 19:05,2026-10-08,closing,Ruben Bakker <ruben.bakker@valentino-retail.example>,closing 8/10
+AMS01,20261009_1901_AMS01.eml,1009,2026-10-09 19:01,2026-10-09,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 09-10
+AMS01,20261010_1935_AMS01.eml,1010,2026-10-10 19:35,2026-10-10,closing,Ruben Bakker <ruben.bakker@valentino-retail.example>,closing za 10/10
+AMS01,20261011_1842_AMS01.eml,1011,2026-10-11 18:42,2026-10-11,closing,Lotte Jansen <lotte.jansen@valentino-retail.example>,Sunday closing 11/10
+AMS01,20261012_1849_AMS01.eml,1012,2026-10-12 18:49,2026-10-12,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 12-10
+AMS01,20261013_1904_AMS01.eml,1013,2026-10-13 19:04,2026-10-13,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 13-10
+AMS01,20261014_1909_AMS01.eml,1014,2026-10-14 19:09,2026-10-14,closing,Ruben Bakker <ruben.bakker@valentino-retail.example>,closing 14/10
+AMS01,20261015_1856_AMS01.eml,1015,2026-10-15 18:56,2026-10-15,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 15-10
+AMS01,20261016_0844_AMS01_re1.eml,1015fm,2026-10-16 08:44,2026-10-15,reply,Fiona McLeod <fiona.mcleod@valentino-retail.example>,RE: Closing AMS 15-10
+AMS01,20261016_0912_AMS01_re2.eml,1015sv,2026-10-16 09:12,2026-10-15,reply,Sanne de Vries <sanne.devries@valentino-retail.example>,RE: Closing AMS 15-10
+AMS01,20261016_1858_AMS01.eml,1016,2026-10-16 18:58,2026-10-16,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 16-10
+AMS01,20261017_1944_AMS01.eml,1017,2026-10-17 19:44,2026-10-17,closing,Ruben Bakker <ruben.bakker@valentino-retail.example>,closing za 17/10
+AMS01,20261018_1844_AMS01.eml,1018,2026-10-18 18:44,2026-10-18,closing,Lotte Jansen <lotte.jansen@valentino-retail.example>,Sunday closing ❄️
+AMS01,20261019_1851_AMS01.eml,1019,2026-10-19 18:51,2026-10-19,closing,Ruben Bakker <ruben.bakker@valentino-retail.example>,closing 19/10
+AMS01,20261019_1853_AMS01_re1.eml,1019nl,2026-10-19 18:53,,misdirected,Ruben Bakker <ruben.bakker@valentino-retail.example>,Re: closing 19/10
+AMS01,20261020_1857_AMS01.eml,1020,2026-10-20 18:57,2026-10-20,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 20-10
+AMS01,20261021_1850_AMS01.eml,1021,2026-10-21 18:50,2026-10-21,closing,Sanne de Vries <sanne.devries@valentino-retail.example>,Closing AMS 21-10
+CPH01,20260831_1841_CPH01.eml,0831,2026-08-31 18:41,2026-08-31,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 dagsrapport / closing 31.08
+CPH01,20260901_1836_CPH01.eml,0901,2026-09-01 18:36,2026-09-01,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 01.09
+CPH01,20260902_1844_CPH01.eml,0902,2026-09-02 18:44,2026-09-02,closing,Anders Holm <anders.holm@valentino-retail.example>,CPH closing 2/9
+CPH01,20260903_1839_CPH01.eml,0903,2026-09-03 18:39,2026-09-03,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 03.09
+CPH01,20260904_1850_CPH01.eml,0904,2026-09-04 18:50,2026-09-04,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 04.09
+CPH01,20260905_1734_CPH01.eml,0905,2026-09-05 17:34,2026-09-05,closing,Anders Holm <anders.holm@valentino-retail.example>,CPH closing lørdag 5/9
+CPH01,20260907_1838_CPH01.eml,0907,2026-09-07 18:38,2026-09-07,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 07.09
+CPH01,20260908_1847_CPH01.eml,0908,2026-09-08 18:47,2026-09-08,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 08.09
+CPH01,20260909_1833_CPH01.eml,0909,2026-09-09 18:33,2026-09-09,closing,Anders Holm <anders.holm@valentino-retail.example>,CPH closing 9/9
+CPH01,20260910_1845_CPH01.eml,0910,2026-09-10 18:45,2026-09-10,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 10.09
+CPH01,20260911_1852_CPH01.eml,0911,2026-09-11 18:52,2026-09-11,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 11.09
+CPH01,20260912_1741_CPH01.eml,0912,2026-09-12 17:41,2026-09-12,closing,Anders Holm <anders.holm@valentino-retail.example>,CPH closing lørdag 12/9
+CPH01,20260914_1842_CPH01.eml,0914,2026-09-14 18:42,2026-09-14,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 14.09
+CPH01,20260915_1831_CPH01.eml,0915,2026-09-15 18:31,2026-09-15,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 15.09
+CPH01,20260916_1840_CPH01.eml,0916,2026-09-16 18:40,2026-09-16,closing,Anders Holm <anders.holm@valentino-retail.example>,CPH closing 16/9
+CPH01,20260917_1846_CPH01.eml,0917,2026-09-17 18:46,2026-09-17,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 17.09
+CPH01,20260918_1849_CPH01.eml,0918,2026-09-18 18:49,2026-09-18,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 18.09
+CPH01,20260920_1014_CPH01.eml,0919,2026-09-20 10:14,2026-09-19,closing,Anders Holm <anders.holm@valentino-retail.example>,CPH closing lørdag 19/9
+CPH01,20260921_1844_CPH01.eml,0921,2026-09-21 18:44,2026-09-21,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 21.09
+CPH01,20260921_1902_CPH01.eml,0921b,2026-09-21 19:02,,ops_request,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 staffing next week
+CPH01,20260922_0852_CPH01_re1.eml,0921fm,2026-09-22 08:52,2026-09-21,reply,Fiona McLeod <fiona.mcleod@valentino-retail.example>,RE: CPH01 staffing next week
+CPH01,20260923_1841_CPH01.eml,0923,2026-09-23 18:41,2026-09-22;2026-09-23,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 22+23.09
+CPH01,20260924_1848_CPH01.eml,0924,2026-09-24 18:48,2026-09-24,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 24.09
+CPH01,20260925_1855_CPH01.eml,0925,2026-09-25 18:55,2026-09-25,closing,Anders Holm <anders.holm@valentino-retail.example>,CPH closing 25/9
+CPH01,20260926_1738_CPH01.eml,0926,2026-09-26 17:38,2026-09-26,closing,Anders Holm <anders.holm@valentino-retail.example>,CPH closing lørdag 26/9
+CPH01,20260928_1742_CPH01.eml,0928,2026-09-28 17:42,2026-09-28,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 28.09 - reduced hours
+CPH01,20260929_1731_CPH01.eml,0929,2026-09-29 17:31,2026-09-29,closing,Freja Lund <freja.lund@valentino-retail.example>,Closing CPH 29/9
+CPH01,20260930_1739_CPH01.eml,0930,2026-09-30 17:39,2026-09-30,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 30.09
+CPH01,20261001_1735_CPH01.eml,1001,2026-10-01 17:35,2026-10-01,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 01.10
+CPH01,20261002_1744_CPH01.eml,1002,2026-10-02 17:44,2026-10-02,closing,Anders Holm <anders.holm@valentino-retail.example>,CPH closing 2/10
+CPH01,20261003_1729_CPH01.eml,1003,2026-10-03 17:29,2026-10-03,closing,Anders Holm <anders.holm@valentino-retail.example>,CPH closing lørdag 3/10
+CPH01,20261005_1847_CPH01.eml,1005,2026-10-05 18:47,2026-10-05,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 05.10
+CPH01,20261006_1840_CPH01.eml,1006,2026-10-06 18:40,2026-10-06,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 06.10
+CPH01,20261007_1845_CPH01.eml,1007,2026-10-07 18:45,2026-10-07,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 07.10
+CPH01,20261008_1851_CPH01.eml,1008,2026-10-08 18:51,2026-10-08,closing,Anders Holm <anders.holm@valentino-retail.example>,CPH closing 8/10
+CPH01,20261010_1736_CPH01.eml,1010,2026-10-10 17:36,2026-10-09;2026-10-10,closing,Anders Holm <anders.holm@valentino-retail.example>,CPH closing lørdag 10/10
+CPH01,20261012_1848_CPH01.eml,1012,2026-10-12 18:48,2026-10-12,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 12.10
+CPH01,20261013_1839_CPH01.eml,1013,2026-10-13 18:39,2026-10-13,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 13.10
+CPH01,20261014_1852_CPH01.eml,1014,2026-10-14 18:52,2026-10-14,closing,Anders Holm <anders.holm@valentino-retail.example>,CPH closing 14/10
+CPH01,20261015_1858_CPH01.eml,1015,2026-10-15 18:58,2026-10-15,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 15.10
+CPH01,20261016_1844_CPH01.eml,1016,2026-10-16 18:44,2026-10-15;2026-10-16,closing+correction,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 16.10
+CPH01,20261017_1742_CPH01.eml,1017,2026-10-17 17:42,2026-10-17,closing,Anders Holm <anders.holm@valentino-retail.example>,CPH closing lørdag 17/10
+CPH01,20261019_1850_CPH01.eml,1019,2026-10-19 18:50,2026-10-19,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 19.10
+CPH01,20261020_1836_CPH01.eml,1020,2026-10-20 18:36,2026-10-20,closing,=?utf-8?q?Mette_Kj=C3=A6r?= <mette.kjaer@valentino-retail.example>,CPH01 closing 20.10
+CPH01,20261021_1843_CPH01.eml,1021,2026-10-21 18:43,2026-10-21,closing,Freja Lund <freja.lund@valentino-retail.example>,Closing CPH 21/10
+DXB01,20260831_2341_DXB01.eml,0831,2026-08-31 23:41,2026-08-31,closing,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 31.08.2026
+DXB01,20260901_2338_DXB01.eml,0901,2026-09-01 23:38,2026-09-01,closing,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 01.09.2026
+DXB01,20260902_2352_DXB01.eml,0902,2026-09-02 23:52,2026-09-02,closing,Rania Khoury <rania.khoury@valentino-retail.example>,DXB01 closing - 2nd Sep
+DXB01,20260903_2346_DXB01.eml,0903,2026-09-03 23:46,2026-09-03,closing,Rania Khoury <rania.khoury@valentino-retail.example>,DXB01 closing - 3rd Sep
+DXB01,20260904_2339_DXB01.eml,0904,2026-09-04 23:39,2026-09-04,closing,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 04.09.2026
+DXB01,20260905_2358_DXB01.eml,0905,2026-09-05 23:58,2026-09-05,closing,Priyanka Menon <priyanka.menon@valentino-retail.example>,DXB01 - closing 05/09
+DXB01,20260906_2344_DXB01.eml,0906,2026-09-06 23:44,2026-09-06,closing,Priyanka Menon <priyanka.menon@valentino-retail.example>,DXB01 - closing 06/09
+DXB01,20260907_2335_DXB01.eml,0907,2026-09-07 23:35,2026-09-07,closing,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 07.09.2026
+DXB01,20260908_2350_DXB01.eml,0908,2026-09-08 23:50,2026-09-08,closing,Rania Khoury <rania.khoury@valentino-retail.example>,DXB01 closing - 8th Sep
+DXB01,20260909_2347_DXB01.eml,0909,2026-09-09 23:47,2026-09-09,closing,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 09.09.2026
+DXB01,20260910_2342_DXB01.eml,0910,2026-09-10 23:42,2026-09-10,closing,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 10.09.2026
+DXB01,20260911_2355_DXB01.eml,0911,2026-09-11 23:55,2026-09-11,closing,Rania Khoury <rania.khoury@valentino-retail.example>,DXB01 closing - 11th Sep
+DXB01,20260912_2359_DXB01.eml,0912,2026-09-12 23:59,2026-09-12,closing,Priyanka Menon <priyanka.menon@valentino-retail.example>,DXB01 - closing 12/09
+DXB01,20260913_2340_DXB01.eml,0913,2026-09-13 23:40,2026-09-13,closing,Priyanka Menon <priyanka.menon@valentino-retail.example>,DXB01 - closing 13/09
+DXB01,20260914_2331_DXB01.eml,0914,2026-09-14 23:31,2026-09-14,closing,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 14.09.2026
+DXB01,20260915_2337_DXB01.eml,0915,2026-09-15 23:37,2026-09-15,closing,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 15.09.2026
+DXB01,20260917_2344_DXB01.eml,0917,2026-09-17 23:44,2026-09-16;2026-09-17,closing,Rania Khoury <rania.khoury@valentino-retail.example>,DXB01 closing - 17th Sep (+16th)
+DXB01,20260918_2358_DXB01.eml,0918,2026-09-18 23:58,2026-09-18,closing,Rania Khoury <rania.khoury@valentino-retail.example>,DXB01 closing - 18th Sep
+DXB01,20260919_2356_DXB01.eml,0919,2026-09-19 23:56,2026-09-19,closing,Priyanka Menon <priyanka.menon@valentino-retail.example>,DXB01 - closing 19/09
+DXB01,20260920_2349_DXB01.eml,0920,2026-09-20 23:49,2026-09-20,closing,Priyanka Menon <priyanka.menon@valentino-retail.example>,DXB01 - closing 20/09
+DXB01,20260921_2333_DXB01.eml,0921,2026-09-21 23:33,2026-09-21,closing,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 21.09.2026
+DXB01,20260922_2336_DXB01.eml,0922,2026-09-22 23:36,2026-09-22,closing,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 22.09.2026
+DXB01,20260923_2351_DXB01.eml,0923,2026-09-23 23:51,2026-09-23,closing,Rania Khoury <rania.khoury@valentino-retail.example>,DXB01 closing - 23rd Sep
+DXB01,20260924_2340_DXB01.eml,0924,2026-09-24 23:40,2026-09-24,closing,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 24.09.2026
+DXB01,20260925_2357_DXB01.eml,0925,2026-09-25 23:57,2026-09-25,closing,Priyanka Menon <priyanka.menon@valentino-retail.example>,DXB01 - closing 25/09
+DXB01,20260927_0044_DXB01.eml,0926,2026-09-27 00:44,2026-09-26,closing,Rania Khoury <rania.khoury@valentino-retail.example>,DXB01 closing - Saturday 26th Sep - RECORD
+DXB01,20260927_1012_DXB01_re1.eml,0926oh,2026-09-27 10:12,2026-09-26,reply,Omar Haddad <omar.haddad@valentino-retail.example>,RE: DXB01 closing - Saturday 26th Sep - RECORD
+DXB01,20260927_1103_DXB01_re2.eml,0926js,2026-09-27 11:03,2026-09-26,reply,Joel Santos <joel.santos@valentino-retail.example>,RE: DXB01 closing - Saturday 26th Sep - RECORD
+DXB01,20260927_2342_DXB01.eml,0927,2026-09-27 23:42,2026-09-27,closing,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 27.09.2026
+DXB01,20260928_2330_DXB01.eml,0928,2026-09-28 23:30,2026-09-28,closing,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 28.09.2026
+DXB01,20260929_2341_DXB01.eml,0929,2026-09-29 23:41,2026-09-29,closing,Priyanka Menon <priyanka.menon@valentino-retail.example>,DXB01 - closing 29/09
+DXB01,20260930_2338_DXB01.eml,0930,2026-09-30 23:38,2026-09-30,closing,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 30.09.2026
+DXB01,20261001_2344_DXB01.eml,1001,2026-10-01 23:44,2026-10-01,closing_attachment_only,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 01.10.2026
+DXB01,20261002_2353_DXB01.eml,1002,2026-10-02 23:53,2026-10-02,closing,Rania Khoury <rania.khoury@valentino-retail.example>,DXB01 closing - 2nd Oct
+DXB01,20261003_2359_DXB01.eml,1003,2026-10-03 23:59,2026-10-03,closing,Priyanka Menon <priyanka.menon@valentino-retail.example>,DXB01 - closing 03/10
+DXB01,20261004_2347_DXB01.eml,1004,2026-10-04 23:47,2026-10-04,closing,Priyanka Menon <priyanka.menon@valentino-retail.example>,DXB01 - closing 04/10
+DXB01,20261006_2336_DXB01.eml,1006,2026-10-06 23:36,2026-10-05;2026-10-06,closing,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 06.10.2026
+DXB01,20261007_2345_DXB01.eml,1007,2026-10-07 23:45,2026-10-07,closing,Rania Khoury <rania.khoury@valentino-retail.example>,DXB01 closing - 7th Oct
+DXB01,20261008_2339_DXB01.eml,1008,2026-10-08 23:39,2026-10-08,closing,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 08.10.2026
+DXB01,20261009_2358_DXB01.eml,1009,2026-10-09 23:58,2026-10-09,closing,Rania Khoury <rania.khoury@valentino-retail.example>,DXB01 closing - 9th Oct
+DXB01,20261010_2359_DXB01.eml,1010,2026-10-10 23:59,2026-10-10,closing,Priyanka Menon <priyanka.menon@valentino-retail.example>,DXB01 - closing 10/10
+DXB01,20261011_2350_DXB01.eml,1011,2026-10-11 23:50,2026-10-11,closing,Priyanka Menon <priyanka.menon@valentino-retail.example>,DXB01 - closing 11/10
+DXB01,20261012_2334_DXB01.eml,1012,2026-10-12 23:34,2026-10-12,closing,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 12.10.2026
+DXB01,20261013_2331_DXB01.eml,1013,2026-10-13 23:31,2026-10-13,closing,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 13.10.2026
+DXB01,20261014_2348_DXB01.eml,1014,2026-10-14 23:48,2026-10-14,closing,Rania Khoury <rania.khoury@valentino-retail.example>,DXB01 closing - 14th Oct
+DXB01,20261015_2341_DXB01.eml,1015,2026-10-15 23:41,2026-10-15,closing,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 15.10.2026
+DXB01,20261016_2356_DXB01.eml,1016,2026-10-16 23:56,2026-10-16,closing,Rania Khoury <rania.khoury@valentino-retail.example>,DXB01 closing - 16th Oct
+DXB01,20261017_2359_DXB01.eml,1017,2026-10-17 23:59,2026-10-17,closing,Priyanka Menon <priyanka.menon@valentino-retail.example>,DXB01 - closing 17/10
+DXB01,20261018_0002_DXB01_dup.eml,1017dup,2026-10-18 00:02,2026-10-17,duplicate,Priyanka Menon <priyanka.menon@valentino-retail.example>,DXB01 - closing 17/10
+DXB01,20261018_2346_DXB01.eml,1018,2026-10-18 23:46,2026-10-18,closing,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 18.10.2026
+DXB01,20261019_2338_DXB01.eml,1019,2026-10-19 23:38,2026-10-19,closing,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 19.10.2026
+DXB01,20261020_2352_DXB01.eml,1020,2026-10-20 23:52,2026-10-20,closing,Rania Khoury <rania.khoury@valentino-retail.example>,DXB01 closing - 20th Oct
+DXB01,20261021_2343_DXB01.eml,1021,2026-10-21 23:43,2026-10-21,closing,Joel Santos <joel.santos@valentino-retail.example>,DXB01 Daily Sales Report 21.10.2026
+SIN01,20260831_2312_SIN01.eml,0831,2026-08-31 23:12,2026-08-31,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 31 Aug
+SIN01,20260901_2320_SIN01.eml,0901,2026-09-01 23:20,2026-09-01,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 1 Sep
+SIN01,20260902_2315_SIN01.eml,0902,2026-09-02 23:15,2026-09-02,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 2 Sep
+SIN01,20260903_2324_SIN01.eml,0903,2026-09-03 23:24,2026-09-03,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 3 Sep
+SIN01,20260904_2331_SIN01.eml,0904,2026-09-04 23:31,2026-09-04,closing,Muhammad Hafiz <muhammad.hafiz@valentino-retail.example>,closing fri 4/9
+SIN01,20260905_2348_SIN01.eml,0905,2026-09-05 23:48,2026-09-05,closing,Muhammad Hafiz <muhammad.hafiz@valentino-retail.example>,closing sat 5/9
+SIN01,20260907_2310_SIN01.eml,0907,2026-09-07 23:10,2026-09-06;2026-09-07,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 7 Sep
+SIN01,20260908_2316_SIN01.eml,0908,2026-09-08 23:16,2026-09-08,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 8 Sep
+SIN01,20260909_2322_SIN01.eml,0909,2026-09-09 23:22,2026-09-09,closing,Jasmine Lim <jasmine.lim@valentino-retail.example>,Closing 9/9 MBS
+SIN01,20260910_2326_SIN01.eml,0910,2026-09-10 23:26,2026-09-10,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 10 Sep
+SIN01,20260911_2334_SIN01.eml,0911,2026-09-11 23:34,2026-09-11,closing,Muhammad Hafiz <muhammad.hafiz@valentino-retail.example>,closing fri 11/9
+SIN01,20260912_2357_SIN01.eml,0912,2026-09-12 23:57,2026-09-12,closing,Muhammad Hafiz <muhammad.hafiz@valentino-retail.example>,closing sat 12/9
+SIN01,20260913_2318_SIN01.eml,0913,2026-09-13 23:18,2026-09-13,closing,Jasmine Lim <jasmine.lim@valentino-retail.example>,Closing Sun 13/9
+SIN01,20260914_2314_SIN01.eml,0914,2026-09-14 23:14,2026-09-14,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 14 Sep
+SIN01,20260915_2319_SIN01.eml,0915,2026-09-15 23:19,2026-09-15,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 15 Sep
+SIN01,20260916_2323_SIN01.eml,0916,2026-09-16 23:23,2026-09-16,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 16 Sep
+SIN01,20260917_2328_SIN01.eml,0917,2026-09-17 23:28,2026-09-17,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 17 Sep
+SIN01,20260918_2344_SIN01.eml,0918,2026-09-18 23:44,2026-09-18,closing,Muhammad Hafiz <muhammad.hafiz@valentino-retail.example>,closing fri 18/9
+SIN01,20260919_2358_SIN01.eml,0919,2026-09-19 23:58,2026-09-19,closing,Muhammad Hafiz <muhammad.hafiz@valentino-retail.example>,closing sat 19/9
+SIN01,20260920_2321_SIN01.eml,0920,2026-09-20 23:21,2026-09-20,closing,Jasmine Lim <jasmine.lim@valentino-retail.example>,Closing Sun 20/9
+SIN01,20260921_2317_SIN01.eml,0921,2026-09-21 23:17,2026-09-21,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 21 Sep
+SIN01,20260922_2313_SIN01.eml,0922,2026-09-22 23:13,2026-09-22,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 22 Sep
+SIN01,20260924_2325_SIN01.eml,0924,2026-09-24 23:25,2026-09-23;2026-09-24,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 24 Sep (+23)
+SIN01,20260925_2339_SIN01.eml,0925,2026-09-25 23:39,2026-09-25,closing,Muhammad Hafiz <muhammad.hafiz@valentino-retail.example>,closing fri 25/9
+SIN01,20260926_2356_SIN01.eml,0926,2026-09-26 23:56,2026-09-26,closing,Muhammad Hafiz <muhammad.hafiz@valentino-retail.example>,closing sat 26/9
+SIN01,20260927_2314_SIN01.eml,0927,2026-09-27 23:14,2026-09-27,closing,Jasmine Lim <jasmine.lim@valentino-retail.example>,Closing Sun 27/9
+SIN01,20260928_2311_SIN01.eml,0928,2026-09-28 23:11,2026-09-28,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 28 Sep
+SIN01,20260929_2320_SIN01.eml,0929,2026-09-29 23:20,2026-09-29,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 29 Sep
+SIN01,20260930_2324_SIN01.eml,0930,2026-09-30 23:24,2026-09-30,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 30 Sep
+SIN01,20261001_2328_SIN01.eml,1001,2026-10-01 23:28,2026-10-01,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 1 Oct
+SIN01,20261002_2336_SIN01.eml,1002,2026-10-02 23:36,2026-10-02,closing,Muhammad Hafiz <muhammad.hafiz@valentino-retail.example>,closing fri 2/10 - PINK IRIDIA
+SIN01,20261003_2359_SIN01.eml,1003,2026-10-03 23:59,2026-10-03,closing,Muhammad Hafiz <muhammad.hafiz@valentino-retail.example>,closing sat 3/10
+SIN01,20261004_2322_SIN01.eml,1004,2026-10-04 23:22,2026-10-04,closing,Jasmine Lim <jasmine.lim@valentino-retail.example>,Closing Sun 4/10 💗
+SIN01,20261005_2319_SIN01.eml,1005,2026-10-05 23:19,2026-10-05,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 5 Oct
+SIN01,20261006_0941_SIN01_re1.eml,1005dl,2026-10-06 09:41,2026-10-05,reply,Daniel Lim <daniel.lim@valentino-retail.example>,RE: SIN01 closing 5 Oct
+SIN01,20261006_1005_SIN01_re2.eml,1005gt,2026-10-06 10:05,2026-10-05,reply,Grace Tan <grace.tan@valentino-retail.example>,RE: SIN01 closing 5 Oct
+SIN01,20261006_2315_SIN01.eml,1006,2026-10-06 23:15,2026-10-06,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 6 Oct
+SIN01,20261007_2321_SIN01.eml,1007,2026-10-07 23:21,2026-10-07,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 7 Oct
+SIN01,20261008_2330_SIN01.eml,1008,2026-10-08 23:30,2026-10-08,closing,Jasmine Lim <jasmine.lim@valentino-retail.example>,Closing 8/10
+SIN01,20261009_2358_SIN01.eml,1009,2026-10-09 23:58,2026-10-09,closing,Muhammad Hafiz <muhammad.hafiz@valentino-retail.example>,closing fri 9/10 F1
+SIN01,20261010_2359_SIN01.eml,1010,2026-10-10 23:59,2026-10-10,closing,Muhammad Hafiz <muhammad.hafiz@valentino-retail.example>,closing sat 10/10 F1
+SIN01,20261011_2347_SIN01.eml,1011,2026-10-11 23:47,2026-10-11,closing,Muhammad Hafiz <muhammad.hafiz@valentino-retail.example>,closing sun 11/10 F1 race day
+SIN01,20261011_2349_SIN01_dup.eml,1011dup,2026-10-11 23:49,2026-10-11,duplicate,Muhammad Hafiz <muhammad.hafiz@valentino-retail.example>,closing sun 11/10 F1 race day
+SIN01,20261012_2310_SIN01.eml,1012,2026-10-12 23:10,2026-10-12,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 12 Oct
+SIN01,20261013_2318_SIN01.eml,1013,2026-10-13 23:18,2026-10-13,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 13 Oct
+SIN01,20261014_2316_SIN01.eml,1014,2026-10-14 23:16,2026-10-14,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 14 Oct
+SIN01,20261015_2326_SIN01.eml,1015,2026-10-15 23:26,2026-10-15,closing,Jasmine Lim <jasmine.lim@valentino-retail.example>,Closing 15/10
+SIN01,20261016_2344_SIN01.eml,1016,2026-10-16 23:44,2026-10-16,closing,Muhammad Hafiz <muhammad.hafiz@valentino-retail.example>,closing fri 16/10
+SIN01,20261017_2357_SIN01.eml,1017,2026-10-17 23:57,2026-10-17,closing,Muhammad Hafiz <muhammad.hafiz@valentino-retail.example>,closing sat 17/10
+SIN01,20261018_2320_SIN01.eml,1018,2026-10-18 23:20,2026-10-18,closing,Jasmine Lim <jasmine.lim@valentino-retail.example>,Closing Sun 18/10
+SIN01,20261019_2312_SIN01.eml,1019,2026-10-19 23:12,2026-10-19,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 19 Oct
+SIN01,20261020_2325_SIN01.eml,1020,2026-10-20 23:25,2026-10-20,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 20 Oct - pink arrived
+SIN01,20261021_2319_SIN01.eml,1021,2026-10-21 23:19,2026-10-21,closing,Grace Tan <grace.tan@valentino-retail.example>,SIN01 closing 21 Oct
+SYD01,20260831_1842_SYD01.eml,0831,2026-08-31 18:42,2026-08-31,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Mon 31/8
+SYD01,20260901_1837_SYD01.eml,0901,2026-09-01 18:37,2026-09-01,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Tue 1/9
+SYD01,20260902_1850_SYD01.eml,0902,2026-09-02 18:50,2026-09-02,closing,Arjun Patel <arjun.patel@valentino-retail.example>,SYD01 closing 02/09
+SYD01,20260903_1846_SYD01.eml,0903,2026-09-03 18:46,2026-09-03,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Thu 3/9
+SYD01,20260904_1858_SYD01.eml,0904,2026-09-04 18:58,2026-09-04,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Fri 4/9
+SYD01,20260905_1831_SYD01.eml,0905,2026-09-05 18:31,2026-09-05,closing,Liam O'Connor <liam.oconnor@valentino-retail.example>,sat close
+SYD01,20260906_1744_SYD01.eml,0906,2026-09-06 17:44,2026-09-06,closing,Liam O'Connor <liam.oconnor@valentino-retail.example>,sun close
+SYD01,20260907_1840_SYD01.eml,0907,2026-09-07 18:40,2026-09-07,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Mon 7/9
+SYD01,20260908_1836_SYD01.eml,0908,2026-09-08 18:36,2026-09-08,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Tue 8/9
+SYD01,20260909_1854_SYD01.eml,0909,2026-09-09 18:54,2026-09-09,closing,Arjun Patel <arjun.patel@valentino-retail.example>,SYD01 closing 09/09
+SYD01,20260910_1833_SYD01.eml,0910,2026-09-10 18:33,2026-09-10,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Thu 10/9
+SYD01,20260911_1849_SYD01.eml,0911,2026-09-11 18:49,2026-09-11,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Fri 11/9
+SYD01,20260912_1827_SYD01.eml,0912,2026-09-12 18:27,2026-09-12,closing,Liam O'Connor <liam.oconnor@valentino-retail.example>,sat close 12/9
+SYD01,20260913_1739_SYD01.eml,0913,2026-09-13 17:39,2026-09-13,closing,Liam O'Connor <liam.oconnor@valentino-retail.example>,sun close
+SYD01,20260914_1844_SYD01.eml,0914,2026-09-14 18:44,2026-09-14,closing,Arjun Patel <arjun.patel@valentino-retail.example>,SYD01 closing 14/09
+SYD01,20260915_1838_SYD01.eml,0915,2026-09-15 18:38,2026-09-15,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Tue 15/9
+SYD01,20260916_1851_SYD01.eml,0916,2026-09-16 18:51,2026-09-16,closing,Arjun Patel <arjun.patel@valentino-retail.example>,SYD01 closing 16/09
+SYD01,20260917_1835_SYD01.eml,0917,2026-09-17 18:35,2026-09-17,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Thu 17/9
+SYD01,20260918_1847_SYD01.eml,0918,2026-09-18 18:47,2026-09-18,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Fri 18/9
+SYD01,20260919_1829_SYD01.eml,0919,2026-09-19 18:29,2026-09-19,closing,Liam O'Connor <liam.oconnor@valentino-retail.example>,sat close 19/9
+SYD01,20260921_1840_SYD01.eml,0921,2026-09-21 18:40,2026-09-20;2026-09-21,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Mon 21/9
+SYD01,20260922_1845_SYD01.eml,0922,2026-09-22 18:45,2026-09-22,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Tue 22/9
+SYD01,20260923_1834_SYD01.eml,0923,2026-09-23 18:34,2026-09-23,closing,Arjun Patel <arjun.patel@valentino-retail.example>,SYD01 closing 23/09
+SYD01,20260924_1839_SYD01.eml,0924,2026-09-24 18:39,2026-09-24,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Thu 24/9
+SYD01,20260925_1852_SYD01.eml,0925,2026-09-25 18:52,2026-09-25,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Fri 25/9
+SYD01,20260926_1824_SYD01.eml,0926,2026-09-26 18:24,2026-09-26,closing,Liam O'Connor <liam.oconnor@valentino-retail.example>,sat close
+SYD01,20260927_1741_SYD01.eml,0927,2026-09-27 17:41,2026-09-27,closing,Liam O'Connor <liam.oconnor@valentino-retail.example>,sun close 27/9
+SYD01,20260928_1843_SYD01.eml,0928,2026-09-28 18:43,2026-09-28,closing,Arjun Patel <arjun.patel@valentino-retail.example>,SYD01 closing 28/09 - forecast
+SYD01,20260929_1015_SYD01_re1.eml,0928dl,2026-09-29 10:15,2026-09-28,reply,Daniel Lim <daniel.lim@valentino-retail.example>,RE: SYD01 closing 28/09 - forecast
+SYD01,20260929_1831_SYD01.eml,0929,2026-09-29 18:31,2026-09-29,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Tue 29/9
+SYD01,20260930_1847_SYD01_re2.eml,0930,2026-09-30 18:47,2026-09-30,closing_in_reply,Arjun Patel <arjun.patel@valentino-retail.example>,RE: SYD01 closing 28/09 - forecast
+SYD01,20261001_1840_SYD01.eml,1001,2026-10-01 18:40,2026-10-01,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Thu 1/10
+SYD01,20261002_1849_SYD01.eml,1002,2026-10-02 18:49,2026-10-02,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Fri 2/10
+SYD01,20261003_1822_SYD01.eml,1003,2026-10-03 18:22,2026-10-03,closing,Liam O'Connor <liam.oconnor@valentino-retail.example>,sat close 3/10
+SYD01,20261004_1748_SYD01.eml,1004,2026-10-04 17:48,2026-10-04,closing,Liam O'Connor <liam.oconnor@valentino-retail.example>,sun close
+SYD01,20261005_1839_SYD01.eml,1005,2026-10-05 18:39,2026-10-05,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Mon 5/10 (public holiday)
+SYD01,20261006_1844_SYD01.eml,1006,2026-10-06 18:44,2026-10-06,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Tue 6/10
+SYD01,20261007_1851_SYD01.eml,1007,2026-10-07 18:51,2026-10-07,closing,Arjun Patel <arjun.patel@valentino-retail.example>,SYD01 closing 07/10
+SYD01,20261008_1836_SYD01.eml,1008,2026-10-08 18:36,2026-10-08,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Thu 8/10
+SYD01,20261009_1842_SYD01.eml,1009,2026-10-09 18:42,2026-10-09,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Fri 9/10
+SYD01,20261010_1826_SYD01.eml,1010,2026-10-10 18:26,2026-10-10,closing,Liam O'Connor <liam.oconnor@valentino-retail.example>,sat close 10/10
+SYD01,20261011_1737_SYD01.eml,1011,2026-10-11 17:37,2026-10-11,closing,Liam O'Connor <liam.oconnor@valentino-retail.example>,sun close
+SYD01,20261012_1838_SYD01.eml,1012,2026-10-12 18:38,2026-10-12,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Mon 12/10
+SYD01,20261013_1845_SYD01.eml,1013,2026-10-13 18:45,2026-10-13,closing,Arjun Patel <arjun.patel@valentino-retail.example>,SYD01 closing 13/10
+SYD01,20261014_1841_SYD01.eml,1014,2026-10-14 18:41,2026-10-14,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Wed 14/10
+SYD01,20261015_1833_SYD01.eml,1015,2026-10-15 18:33,2026-10-15,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Thu 15/10
+SYD01,20261016_1848_SYD01.eml,1016,2026-10-16 18:48,2026-10-16,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Fri 16/10
+SYD01,20261017_1831_SYD01.eml,1017,2026-10-17 18:31,2026-10-17,closing,Liam O'Connor <liam.oconnor@valentino-retail.example>,sat close 17/10
+SYD01,20261017_1833_SYD01_dup.eml,1017dup,2026-10-17 18:33,2026-10-17,duplicate,Liam O'Connor <liam.oconnor@valentino-retail.example>,sat close 17/10
+SYD01,20261019_1846_SYD01.eml,1019,2026-10-19 18:46,2026-10-18;2026-10-19,closing,Arjun Patel <arjun.patel@valentino-retail.example>,SYD01 closing 19/10 (+Sun)
+SYD01,20261020_1830_SYD01.eml,1020,2026-10-20 18:30,2026-10-20,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Tue 20/10
+SYD01,20261021_1844_SYD01.eml,1021,2026-10-21 18:44,2026-10-21,closing,Chloe Mitchell <chloe.mitchell@valentino-retail.example>,SYD close Wed 21/10

@@ -13,7 +13,7 @@ Les hôtels affichent complet dans le Triangle d'or. Côté commerces, les grand
 dict(src="jdl", pub="2026-09-30T18:40:00+02:00", fmt="html", author="Claire Dumas-Ferré",
      title="Après Chuseok, les touristes coréens traquent la doudoune noire vue dans un drama",
      tags=["Corée", "tourisme", "doudoune", "drama"],
-     body="""Depuis une dizaine de jours, les vendeuses du Faubourg Saint-Honoré entendent la même question, souvent posée téléphone à la main : « Vous avez la Maire en noir ? » La doudoune courte laquée de Moncler, portée par l'actrice Han Seo-yeon dans le drama coréen « Midnight Atelier », est devenue l'objet le plus recherché par les touristes coréens de passage à Paris.
+     body="""Depuis une dizaine de jours, les vendeuses du Faubourg Saint-Honoré entendent la même question, souvent posée téléphone à la main : « Vous avez la Aurea en noir ? » La doudoune courte laquée de Valentino, portée par l'actrice Han Seo-yeon dans le drama coréen « Midnight Atelier », est devenue l'objet le plus recherché par les touristes coréens de passage à Paris.
 
 La vague s'est accentuée avec les congés de Chuseok, la fête des récoltes, qui tombaient cette année du 24 au 26 septembre et ont permis à de nombreux Coréens de poser quelques jours pour un voyage en Europe. « Ils arrivent avec la capture d'écran de l'épisode 4. Le beige ou le marine ne les intéressent pas », raconte une vendeuse d'un grand magasin du boulevard Haussmann.
 
@@ -22,20 +22,20 @@ Problème : la version noire est introuvable. Plusieurs boutiques parisiennes et
 Le phénomène n'est pas nouveau. En 2024 déjà, une série diffusée sur une plateforme de streaming avait fait exploser les ventes d'un cardigan d'une marque italienne. Mais l'ampleur surprend : selon une agence de voyages de Séoul, près d'un client sur trois partant pour Paris en septembre demandait une adresse où trouver la doudoune."""),
 
 dict(src="jdl", pub="2026-10-02T09:20:00+02:00", fmt="html", author="Antoine Lefort",
-     title="Genius Polaris : la capsule divise, trop petite et trop chère pour l'Europe ?",
-     tags=["Moncler", "Genius", "Polaris", "lancement", "critique"],
-     body="""Lancée le 24 septembre, la capsule Polaris de Moncler Genius suscite des réactions contrastées. En Chine, les pièces phares, une cape en duvet oversize et une doudoune au volume exagéré, se sont arrachées dès les premiers jours sur Tmall et en boutique. En Europe, l'accueil est nettement plus tiède.
+     title="Couture Astra : la capsule divise, trop petite et trop chère pour l'Europe ?",
+     tags=["Valentino", "Couture", "Astra", "lancement", "critique"],
+     body="""Lancée le 24 septembre, la capsule Astra de Valentino Couture suscite des réactions contrastées. En Chine, les pièces phares, une cape en duvet oversize et une doudoune au volume exagéré, se sont arrachées dès les premiers jours sur Tmall et en boutique. En Europe, l'accueil est nettement plus tiède.
 
 Les premières clientes parisiennes rencontrées en boutique évoquent une coupe qui taille petit malgré l'étiquette « oversized », notamment aux épaules. « J'ai dû prendre deux tailles au-dessus et les manches restaient courtes », confie une acheteuse. Le prix fait aussi tiquer : 2 900 euros pour la cape, 2 400 pour la doudoune, 450 euros pour une cagoule en maille.
 
-Chez les acheteurs multimarques, on reste prudent. « Le Genius de l'an dernier avait bien tourné, on avait commandé en conséquence. Cette fois, le sell-through à deux semaines est très en dessous », explique le responsable mode homme d'un grand magasin.
+Chez les acheteurs multimarques, on reste prudent. « Le Couture de l'an dernier avait bien tourné, on avait commandé en conséquence. Cette fois, le sell-through à deux semaines est très en dessous », explique le responsable mode homme d'un grand magasin.
 
 La marque fait valoir que la collection vise d'abord une clientèle jeune et urbaine, plus présente en Asie. Les ventes en ligne européennes n'ont pas été communiquées."""),
 
 dict(src="jdl", pub="2026-10-03T11:05:00+02:00", fmt="txt", author="Claire Dumas-Ferré",
      title="Yoon Ha-eun et la doudoune rose poudré : l'effet K-pop en 48 heures",
      tags=["K-pop", "célébrités", "Asie", "rupture"],
-     body="""Il aura suffi d'une photo. Jeudi 1er octobre, à la sortie d'un défilé de la Fashion Week, la chanteuse coréenne Yoon Ha-eun, membre du groupe LUMIERE, a posé devant les photographes dans une doudoune courte rose poudré signée Moncler, le modèle Ilvaro, une nouveauté de la saison.
+     body="""Il aura suffi d'une photo. Jeudi 1er octobre, à la sortie d'un défilé de la Fashion Week, la chanteuse coréenne Yoon Ha-eun, membre du groupe LUMIERE, a posé devant les photographes dans une doudoune courte rose poudré signée Valentino, le modèle Iridia, une nouveauté de la saison.
 
 Les clichés ont fait le tour des réseaux sociaux asiatiques en quelques heures. Dès vendredi matin, heure de Séoul, le coloris était épuisé sur le site coréen de la marque. Samedi, des vendeurs de Shanghai, Tokyo et Hong Kong signalaient des files d'attente et des listes d'attente de plusieurs dizaines de noms.
 

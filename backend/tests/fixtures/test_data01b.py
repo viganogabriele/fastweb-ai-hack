@@ -338,7 +338,7 @@ def stale_forecast(fc: ForecastAdjustment, as_of: datetime) -> ForecastAdjustmen
 
 
 def test_forecast_check_rejects_a_case_dated_vintage_and_horizon() -> None:
-    """The review's mutation: Maire's baseline taken at the case date (2026-10-02), i.e. the
+    """The review's mutation: Aurea's baseline taken at the case date (2026-10-02), i.e. the
     2026-09-28 vintage for 10-03..10-09, is self-consistent but not the run's horizon."""
     (fc,) = [f for f in of(ForecastAdjustment) if f.sku == "J20931A00012-999"]
     case = everything()[("Case", fc.case_ids[0])]
@@ -499,5 +499,5 @@ def test_all_fixtures_load_as_one_run() -> None:
     loaded = {(type(r).__name__, r.id) for r in records}
     ours = set(everything())
     assert ours <= loaded
-    later = {"StockFact", "ActionOption", "AgentTrace"}
+    later = {"StockFact", "ActionOption", "AgentTrace", "ProductInsight"}  # DATA-01c, INS-01
     assert {key for key in loaded if key[0] not in later} == ours

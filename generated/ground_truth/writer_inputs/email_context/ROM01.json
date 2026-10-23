@@ -33,11 +33,11 @@
    "visitors": 104,
    "conversion": 0.125,
    "top_sellers": [
-    "LOGO T-SHIRT black x2",
-    "LOGO HOODIE grey melange x2",
-    "TRICOT PADDED CARDIGAN black x2",
-    "MAKAIO BACKPACK black x1",
-    "LOGO BEANIE black x1"
+    "VLOGO T-SHIRT black x2",
+    "VLOGO HOODIE grey melange x2",
+    "VLOGO PADDED CARDIGAN black x2",
+    "URBAN BACKPACK black x1",
+    "VLOGO BEANIE black x1"
    ],
    "customer_mix": {
     "IT": 0.22,
@@ -46,10 +46,10 @@
     "GB": 0.11
    },
    "unmet_requests": [
-    "BADY powder pink size 2 x1"
+    "ARIA powder pink size 2 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAYA navy 5"
+    "NOVA navy 5"
    ],
    "returns": [],
    "deliveries_received": [],
@@ -67,11 +67,11 @@
    "visitors": 88,
    "conversion": 0.0682,
    "top_sellers": [
-    "TRAILGRIP GTX grey melange x1",
-    "LEGERE BELT BAG black x1",
-    "LOGO T-SHIRT navy x1",
-    "CREWNECK SWEATSHIRT black x1",
-    "TRICOT PADDED CARDIGAN black x1"
+    "VTRACK GTX grey melange x1",
+    "VITA BELT BAG black x1",
+    "VLOGO T-SHIRT navy x1",
+    "RELAXED SWEATSHIRT black x1",
+    "VLOGO PADDED CARDIGAN black x1"
    ],
    "customer_mix": {
     "SA": 0.3,
@@ -81,7 +81,7 @@
    },
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "MAYA navy 5"
+    "NOVA navy 5"
    ],
    "returns": [],
    "deliveries_received": [],
@@ -99,11 +99,11 @@
    "visitors": 138,
    "conversion": 0.0797,
    "top_sellers": [
-    "FLAMMETTE black x3",
-    "LOGO CAP navy x2",
-    "MONTGENEVRE grey melange x2",
-    "LOGO BEANIE white x1",
-    "VALBOURG black x1"
+    "FIAMMETTA black x3",
+    "VLOGO CAP navy x2",
+    "MONTELUCE grey melange x2",
+    "VLOGO BEANIE white x1",
+    "VALDORA black x1"
    ],
    "customer_mix": {
     "IT": 0.28,
@@ -138,11 +138,11 @@
    "visitors": 140,
    "conversion": 0.1214,
    "top_sellers": [
-    "CREWNECK SWEATSHIRT black x2",
-    "MAYA black x2",
-    "TIB black x2",
-    "CHAMONIX black x1",
-    "LOGO CAP navy x1"
+    "RELAXED SWEATSHIRT black x2",
+    "NOVA black x2",
+    "VEL black x2",
+    "CORTINA black x1",
+    "VLOGO CAP navy x1"
    ],
    "customer_mix": {
     "IT": 0.48,
@@ -151,7 +151,7 @@
     "CN": 0.1
    },
    "unmet_requests": [
-    "KARAKORUM black size 6 x1"
+    "COSIMO black size 6 x1"
    ],
    "zero_stock_key_sizes": [],
    "returns": [],
@@ -170,11 +170,11 @@
    "visitors": 159,
    "conversion": 0.1258,
    "top_sellers": [
-    "TIB black x4",
-    "PEYRE black x3",
-    "LOGO BEANIE black x2",
-    "TRICOT PADDED CARDIGAN black x2",
-    "BADY black x2"
+    "VEL black x4",
+    "PIERO black x3",
+    "VLOGO BEANIE black x2",
+    "VLOGO PADDED CARDIGAN black x2",
+    "ARIA black x2"
    ],
    "customer_mix": {
     "IT": 0.37,
@@ -183,11 +183,11 @@
     "KR": 0.1
    },
    "unmet_requests": [
-    "MONTGENEVRE grey melange size 4 x2"
+    "MONTELUCE grey melange size 4 x2"
    ],
    "zero_stock_key_sizes": [],
    "returns": [
-    "TRAILGRIP W 39 reason=CHANGE_MIND"
+    "VTRACK W 39 reason=CHANGE_MIND"
    ],
    "deliveries_received": [],
    "active_events": []
@@ -204,11 +204,11 @@
    "visitors": 251,
    "conversion": 0.1076,
    "top_sellers": [
-    "LOGO BEANIE navy x2",
-    "LOGO CAP navy x2",
-    "LOGO T-SHIRT white x2",
-    "LOGO T-SHIRT navy x2",
-    "CREWNECK SWEATSHIRT black x2"
+    "VLOGO BEANIE navy x2",
+    "VLOGO CAP navy x2",
+    "VLOGO T-SHIRT white x2",
+    "VLOGO T-SHIRT navy x2",
+    "RELAXED SWEATSHIRT black x2"
    ],
    "customer_mix": {
     "IT": 0.46,
@@ -217,7 +217,7 @@
     "US": 0.1
    },
    "unmet_requests": [
-    "MAYA olive size 1 x1"
+    "NOVA olive size 1 x1"
    ],
    "zero_stock_key_sizes": [],
    "returns": [],
@@ -236,11 +236,11 @@
    "visitors": 152,
    "conversion": 0.125,
    "top_sellers": [
-    "LOGO T-SHIRT black x5",
-    "POLO black x4",
-    "LOGO CAP black x3",
-    "CASHMERE SCARF black x2",
-    "LOGO HOODIE black x2"
+    "VLOGO T-SHIRT black x5",
+    "JERSEY POLO black x4",
+    "VLOGO CAP black x3",
+    "VALENTINO SCARF black x2",
+    "VLOGO HOODIE black x2"
    ],
    "customer_mix": {
     "IT": 0.35,
@@ -249,11 +249,11 @@
     "CN": 0.1
    },
    "unmet_requests": [
-    "LOGO HOODIE grey melange size XL x1"
+    "VLOGO HOODIE grey melange size XL x1"
    ],
    "zero_stock_key_sizes": [],
    "returns": [
-    "TRICOT PADDED CARDIGAN L reason=CHANGE_MIND"
+    "VLOGO PADDED CARDIGAN L reason=CHANGE_MIND"
    ],
    "deliveries_received": [],
    "active_events": []
@@ -270,11 +270,11 @@
    "visitors": 138,
    "conversion": 0.0797,
    "top_sellers": [
-    "MAYA black x4",
-    "LOGO BEANIE navy x2",
-    "CASHMERE SCARF black x1",
-    "LOGO BEANIE black x1",
-    "LEGERE BELT BAG black x1"
+    "NOVA black x4",
+    "VLOGO BEANIE navy x2",
+    "VALENTINO SCARF black x1",
+    "VLOGO BEANIE black x1",
+    "VITA BELT BAG black x1"
    ],
    "customer_mix": {
     "US": 0.27,
@@ -283,7 +283,7 @@
     "KR": 0.13
    },
    "unmet_requests": [
-    "AMBRINE chocolate brown size 2 x1"
+    "AMALIA chocolate brown size 2 x1"
    ],
    "zero_stock_key_sizes": [],
    "returns": [],
@@ -302,11 +302,11 @@
    "visitors": 134,
    "conversion": 0.1119,
    "top_sellers": [
-    "MONTCLA black x4",
-    "TRAILGRIP GTX black x3",
-    "CABLE KNIT SWEATER black x2",
-    "TRICOT PADDED CARDIGAN navy x2",
-    "LOGO BEANIE white x1"
+    "MISTRAL black x4",
+    "VTRACK GTX black x3",
+    "INTARSIA SWEATER black x2",
+    "VLOGO PADDED CARDIGAN navy x2",
+    "VLOGO BEANIE white x1"
    ],
    "customer_mix": {
     "IT": 0.21,
@@ -316,7 +316,7 @@
    },
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "FLAMMETTE black 0"
+    "FIAMMETTA black 0"
    ],
    "returns": [],
    "deliveries_received": [],
@@ -334,11 +334,11 @@
    "visitors": 134,
    "conversion": 0.0821,
    "top_sellers": [
-    "CREWNECK SWEATSHIRT black x2",
-    "MAIRE black x2",
-    "TIB black x2",
-    "VALBOURG black x1",
-    "LOGO HOODIE black x1"
+    "RELAXED SWEATSHIRT black x2",
+    "AUREA black x2",
+    "VEL black x2",
+    "VALDORA black x1",
+    "VLOGO HOODIE black x1"
    ],
    "customer_mix": {
     "IT": 0.26,
@@ -347,15 +347,15 @@
     "OTHER": 0.11
    },
    "unmet_requests": [
-    "MONTGENEVRE grey melange size 5 x1",
-    "TIB black size 4 x1"
+    "MONTELUCE grey melange size 5 x1",
+    "VEL black size 4 x1"
    ],
    "zero_stock_key_sizes": [
-    "FLAMMETTE black 0",
-    "TIB black 4"
+    "FIAMMETTA black 0",
+    "VEL black 4"
    ],
    "returns": [
-    "TIB 4 reason=CHANGE_MIND"
+    "VEL 4 reason=CHANGE_MIND"
    ],
    "deliveries_received": [],
    "active_events": []
@@ -372,11 +372,11 @@
    "visitors": 167,
    "conversion": 0.1198,
    "top_sellers": [
-    "TRAILGRIP GTX black x3",
-    "MAIRE black x3",
-    "LOGO T-SHIRT black x3",
-    "LEGERE BELT BAG black x2",
-    "BADY black x2"
+    "VTRACK GTX black x3",
+    "AUREA black x3",
+    "VLOGO T-SHIRT black x3",
+    "VITA BELT BAG black x2",
+    "ARIA black x2"
    ],
    "customer_mix": {
     "IT": 0.48,
@@ -385,24 +385,24 @@
     "CN": 0.07
    },
    "unmet_requests": [
-    "MAIRE navy size 00 x1",
-    "HERMINE off-white size 2 x1",
-    "MAYA olive size 6 x1",
-    "KARAKORUM black size 6 x1",
-    "LOGO CARDIGAN navy size XXL x1"
+    "AUREA navy size 00 x1",
+    "LIVIANA off-white size 2 x1",
+    "NOVA olive size 6 x1",
+    "COSIMO black size 6 x1",
+    "VLOGO CARDIGAN navy size XXL x1"
    ],
    "zero_stock_key_sizes": [
-    "FLAMMETTE black 0",
-    "TIB black 4",
-    "POLO black S",
-    "TRAILGRIP GTX black 44"
+    "FIAMMETTA black 0",
+    "VEL black 4",
+    "JERSEY POLO black S",
+    "VTRACK GTX black 44"
    ],
    "returns": [
-    "TRAILGRIP GTX 43 reason=GIFT"
+    "VTRACK GTX 43 reason=GIFT"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -417,11 +417,11 @@
    "visitors": 214,
    "conversion": 0.1168,
    "top_sellers": [
-    "LOGO T-SHIRT black x3",
-    "TRICOT PADDED CARDIGAN black x3",
-    "POLO black x2",
-    "LOGO T-SHIRT white x2",
-    "LOGO BEANIE black x2"
+    "VLOGO T-SHIRT black x3",
+    "VLOGO PADDED CARDIGAN black x3",
+    "JERSEY POLO black x2",
+    "VLOGO T-SHIRT white x2",
+    "VLOGO BEANIE black x2"
    ],
    "customer_mix": {
     "IT": 0.37,
@@ -430,15 +430,15 @@
     "JP": 0.09
    },
    "unmet_requests": [
-    "FLAMMETTE navy size 3 x1",
-    "TRICOT PADDED CARDIGAN grey melange size XL x1"
+    "FIAMMETTA navy size 3 x1",
+    "VLOGO PADDED CARDIGAN grey melange size XL x1"
    ],
    "zero_stock_key_sizes": [
-    "POLO black S",
-    "TRAILGRIP GTX black 44"
+    "JERSEY POLO black S",
+    "VTRACK GTX black 44"
    ],
    "returns": [
-    "LOGO HOODIE XL reason=GIFT"
+    "VLOGO HOODIE XL reason=GIFT"
    ],
    "deliveries_received": [
     {
@@ -451,7 +451,7 @@
     }
    ],
    "active_events": [
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -466,11 +466,11 @@
    "visitors": 219,
    "conversion": 0.105,
    "top_sellers": [
-    "TRAILGRIP GTX black x3",
-    "MONTCLA black x3",
-    "LOGO T-SHIRT black x2",
-    "MONTCLA navy x2",
-    "LOGO CARDIGAN navy x2"
+    "VTRACK GTX black x3",
+    "MISTRAL black x3",
+    "VLOGO T-SHIRT black x2",
+    "MISTRAL navy x2",
+    "VLOGO CARDIGAN navy x2"
    ],
    "customer_mix": {
     "IT": 0.42,
@@ -480,18 +480,18 @@
    },
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "MONTCLA black 3",
-    "LOGO CARDIGAN navy S",
-    "POLO black S",
-    "TRAILGRIP GTX black 41",
-    "TRAILGRIP GTX black 44"
+    "MISTRAL black 3",
+    "VLOGO CARDIGAN navy S",
+    "JERSEY POLO black S",
+    "VTRACK GTX black 41",
+    "VTRACK GTX black 44"
    ],
    "returns": [
-    "CREWNECK SWEATSHIRT XXL reason=CHANGE_MIND"
+    "RELAXED SWEATSHIRT XXL reason=CHANGE_MIND"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -506,11 +506,11 @@
    "visitors": 171,
    "conversion": 0.1404,
    "top_sellers": [
-    "LOGO T-SHIRT black x6",
-    "TIB black x4",
-    "CREWNECK SWEATSHIRT white x2",
-    "LOGO CAP black x2",
-    "TRAILGRIP W black x2"
+    "VLOGO T-SHIRT black x6",
+    "VEL black x4",
+    "RELAXED SWEATSHIRT white x2",
+    "VLOGO CAP black x2",
+    "VTRACK W black x2"
    ],
    "customer_mix": {
     "IT": 0.46,
@@ -519,20 +519,20 @@
     "GB": 0.05
    },
    "unmet_requests": [
-    "VALBOURG black size 00 x1"
+    "VALDORA black size 00 x1"
    ],
    "zero_stock_key_sizes": [
-    "MONTCLA black 3",
-    "LOGO CARDIGAN navy S",
-    "LOGO HOODIE navy S",
-    "POLO black S",
-    "TRAILGRIP GTX black 41",
-    "TRAILGRIP GTX black 44"
+    "MISTRAL black 3",
+    "VLOGO CARDIGAN navy S",
+    "VLOGO HOODIE navy S",
+    "JERSEY POLO black S",
+    "VTRACK GTX black 41",
+    "VTRACK GTX black 44"
    ],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -547,11 +547,11 @@
    "visitors": 74,
    "conversion": 0.1757,
    "top_sellers": [
-    "CREWNECK SWEATSHIRT black x4",
-    "LOGO CAP navy x2",
-    "LOGO HOODIE navy x2",
-    "CASHMERE SCARF black x1",
-    "LOGO CAP black x1"
+    "RELAXED SWEATSHIRT black x4",
+    "VLOGO CAP navy x2",
+    "VLOGO HOODIE navy x2",
+    "VALENTINO SCARF black x1",
+    "VLOGO CAP black x1"
    ],
    "customer_mix": {
     "IT": 0.35,
@@ -560,25 +560,25 @@
     "IN": 0.12
    },
    "unmet_requests": [
-    "LOGO CARDIGAN navy size S x1",
-    "TRAILGRIP GTX black size 41 x1"
+    "VLOGO CARDIGAN navy size S x1",
+    "VTRACK GTX black size 41 x1"
    ],
    "zero_stock_key_sizes": [
-    "MONTCLA black 3",
-    "LOGO CARDIGAN navy S",
-    "LOGO HOODIE navy S",
-    "POLO black S",
-    "TRAILGRIP GTX black 41",
-    "TRAILGRIP GTX black 44"
+    "MISTRAL black 3",
+    "VLOGO CARDIGAN navy S",
+    "VLOGO HOODIE navy S",
+    "JERSEY POLO black S",
+    "VTRACK GTX black 41",
+    "VTRACK GTX black 44"
    ],
    "returns": [
-    "TRICOT PADDED CARDIGAN L reason=GIFT",
-    "POLO L reason=COLOUR"
+    "VLOGO PADDED CARDIGAN L reason=GIFT",
+    "JERSEY POLO L reason=COLOUR"
    ],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -593,11 +593,11 @@
    "visitors": 68,
    "conversion": 0.1029,
    "top_sellers": [
-    "LOGO BEANIE white x1",
-    "LOGO BEANIE black x1",
-    "LEGERE BELT BAG black x1",
-    "CREWNECK SWEATSHIRT black x1",
-    "TRICOT PADDED CARDIGAN navy x1"
+    "VLOGO BEANIE white x1",
+    "VLOGO BEANIE black x1",
+    "VITA BELT BAG black x1",
+    "RELAXED SWEATSHIRT black x1",
+    "VLOGO PADDED CARDIGAN navy x1"
    ],
    "customer_mix": {
     "IT": 0.5,
@@ -606,21 +606,21 @@
     "KR": 0.1
    },
    "unmet_requests": [
-    "VALBOURG black size 00 x1"
+    "VALDORA black size 00 x1"
    ],
    "zero_stock_key_sizes": [
-    "MONTCLA black 3",
-    "LOGO CARDIGAN navy S",
-    "LOGO HOODIE navy S",
-    "POLO black S",
-    "TRAILGRIP GTX black 41",
-    "TRAILGRIP GTX black 44"
+    "MISTRAL black 3",
+    "VLOGO CARDIGAN navy S",
+    "VLOGO HOODIE navy S",
+    "JERSEY POLO black S",
+    "VTRACK GTX black 41",
+    "VTRACK GTX black 44"
    ],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -635,11 +635,11 @@
    "visitors": 70,
    "conversion": 0.2143,
    "top_sellers": [
-    "ILVARO black x4",
-    "TRAILGRIP GTX grey melange x2",
-    "TRAILGRIP GTX black x1",
-    "LOGO BEANIE black x1",
-    "LEGERE BELT BAG black x1"
+    "IRIDIA black x4",
+    "VTRACK GTX grey melange x2",
+    "VTRACK GTX black x1",
+    "VLOGO BEANIE black x1",
+    "VITA BELT BAG black x1"
    ],
    "customer_mix": {
     "IT": 0.25,
@@ -650,8 +650,8 @@
    "unmet_requests": [],
    "zero_stock_key_sizes": [],
    "returns": [
-    "ARNEB 4 reason=CHANGE_MIND",
-    "TRAILGRIP GTX 44 reason=SIZE"
+    "ARTEM 4 reason=CHANGE_MIND",
+    "VTRACK GTX 44 reason=SIZE"
    ],
    "deliveries_received": [
     {
@@ -665,7 +665,7 @@
    ],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -680,11 +680,11 @@
    "visitors": 83,
    "conversion": 0.1205,
    "top_sellers": [
-    "MAIRE black x2",
-    "LOGO CARDIGAN navy x2",
-    "TRAILGRIP GTX black x1",
-    "MAKAIO BACKPACK black x1",
-    "CASHMERE SCARF black x1"
+    "AUREA black x2",
+    "VLOGO CARDIGAN navy x2",
+    "VTRACK GTX black x1",
+    "URBAN BACKPACK black x1",
+    "VALENTINO SCARF black x1"
    ],
    "customer_mix": {
     "IT": 0.31,
@@ -698,7 +698,7 @@
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -713,11 +713,11 @@
    "visitors": 94,
    "conversion": 0.1915,
    "top_sellers": [
-    "LOGO HOODIE black x3",
-    "CREWNECK SWEATSHIRT black x2",
-    "LOGO BEANIE white x2",
-    "TRICOT PADDED CARDIGAN black x2",
-    "CASHMERE SCARF black x1"
+    "VLOGO HOODIE black x3",
+    "RELAXED SWEATSHIRT black x2",
+    "VLOGO BEANIE white x2",
+    "VLOGO PADDED CARDIGAN black x2",
+    "VALENTINO SCARF black x1"
    ],
    "customer_mix": {
     "IT": 0.36,
@@ -731,7 +731,7 @@
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -746,11 +746,11 @@
    "visitors": 146,
    "conversion": 0.137,
    "top_sellers": [
-    "MAYA navy x3",
-    "LOGO T-SHIRT navy x2",
-    "VALBOURG black x2",
-    "MAYA black x2",
-    "TRAILGRIP W black x2"
+    "NOVA navy x3",
+    "VLOGO T-SHIRT navy x2",
+    "VALDORA black x2",
+    "NOVA black x2",
+    "VTRACK W black x2"
    ],
    "customer_mix": {
     "IT": 0.48,
@@ -764,7 +764,7 @@
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -779,11 +779,11 @@
    "visitors": 92,
    "conversion": 0.087,
    "top_sellers": [
-    "ILVARO black x3",
-    "CABLE KNIT SWEATER black x2",
-    "LOGO T-SHIRT black x2",
-    "CASHMERE SCARF black x1",
-    "LOGO BEANIE white x1"
+    "IRIDIA black x3",
+    "INTARSIA SWEATER black x2",
+    "VLOGO T-SHIRT black x2",
+    "VALENTINO SCARF black x1",
+    "VLOGO BEANIE white x1"
    ],
    "customer_mix": {
     "IT": 0.41,
@@ -794,13 +794,13 @@
    "unmet_requests": [],
    "zero_stock_key_sizes": [],
    "returns": [
-    "BADY 3 reason=QUALITY",
-    "FLAMMETTE 4 reason=GIFT"
+    "ARIA 3 reason=QUALITY",
+    "FIAMMETTA 4 reason=GIFT"
    ],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -815,11 +815,11 @@
    "visitors": 61,
    "conversion": 0.1803,
    "top_sellers": [
-    "MAIRE navy x2",
-    "HERMINE off-white x2",
-    "PEYRE black x1",
-    "CASHMERE SCARF black x1",
-    "MAKAIO BACKPACK black x1"
+    "AUREA navy x2",
+    "LIVIANA off-white x2",
+    "PIERO black x1",
+    "VALENTINO SCARF black x1",
+    "URBAN BACKPACK black x1"
    ],
    "customer_mix": {
     "CN": 0.28,
@@ -830,12 +830,12 @@
    "unmet_requests": [],
    "zero_stock_key_sizes": [],
    "returns": [
-    "LOGO CAP TU reason=SIZE"
+    "VLOGO CAP TU reason=SIZE"
    ],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -850,11 +850,11 @@
    "visitors": 70,
    "conversion": 0.1143,
    "top_sellers": [
-    "CHAMONIX black x2",
-    "PEYRE black x1",
-    "LOGO BEANIE white x1",
-    "LOGO BEANIE navy x1",
-    "TRAILGRIP GTX black x1"
+    "CORTINA black x2",
+    "PIERO black x1",
+    "VLOGO BEANIE white x1",
+    "VLOGO BEANIE navy x1",
+    "VTRACK GTX black x1"
    ],
    "customer_mix": {
     "IT": 0.33,
@@ -868,7 +868,7 @@
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -883,11 +883,11 @@
    "visitors": 76,
    "conversion": 0.1184,
    "top_sellers": [
-    "LOGO BEANIE black x3",
-    "LOGO CAP black x2",
-    "TRAILGRIP GTX black x2",
-    "MAYA olive x2",
-    "CASHMERE SCARF black x1"
+    "VLOGO BEANIE black x3",
+    "VLOGO CAP black x2",
+    "VTRACK GTX black x2",
+    "NOVA olive x2",
+    "VALENTINO SCARF black x1"
    ],
    "customer_mix": {
     "IT": 0.57,
@@ -896,17 +896,17 @@
     "CH": 0.05
    },
    "unmet_requests": [
-    "MAYA navy size 1 x1",
-    "ARNEB black size 6 x1",
-    "LOGO T-SHIRT white size S x1",
-    "LOGO T-SHIRT navy size XXL x1"
+    "NOVA navy size 1 x1",
+    "ARTEM black size 6 x1",
+    "VLOGO T-SHIRT white size S x1",
+    "VLOGO T-SHIRT navy size XXL x1"
    ],
    "zero_stock_key_sizes": [],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -921,11 +921,11 @@
    "visitors": 115,
    "conversion": 0.1391,
    "top_sellers": [
-    "BADY black x4",
-    "MONTCLA black x3",
-    "TRAILGRIP W black x2",
-    "LOGO T-SHIRT navy x2",
-    "MONTGENEVRE black x2"
+    "ARIA black x4",
+    "MISTRAL black x3",
+    "VTRACK W black x2",
+    "VLOGO T-SHIRT navy x2",
+    "MONTELUCE black x2"
    ],
    "customer_mix": {
     "IT": 0.48,
@@ -934,18 +934,18 @@
     "SA": 0.1
    },
    "unmet_requests": [
-    "LOGO T-SHIRT navy size L x1"
+    "VLOGO T-SHIRT navy size L x1"
    ],
    "zero_stock_key_sizes": [
-    "LOGO T-SHIRT navy L"
+    "VLOGO T-SHIRT navy L"
    ],
    "returns": [
-    "TRAILGRIP GTX 46 reason=CHANGE_MIND"
+    "VTRACK GTX 46 reason=CHANGE_MIND"
    ],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -960,11 +960,11 @@
    "visitors": 113,
    "conversion": 0.1239,
    "top_sellers": [
-    "POLARIS BALACLAVA black x2",
-    "LOGO CARDIGAN navy x2",
-    "LOGO T-SHIRT navy x2",
-    "LOGO CAP black x1",
-    "LOGO CAP white x1"
+    "ASTRA BALACLAVA black x2",
+    "VLOGO CARDIGAN navy x2",
+    "VLOGO T-SHIRT navy x2",
+    "VLOGO CAP black x1",
+    "VLOGO CAP white x1"
    ],
    "customer_mix": {
     "IT": 0.27,
@@ -973,21 +973,21 @@
     "US": 0.18
    },
    "unmet_requests": [
-    "MAYA olive size 6 x1",
-    "INSOLUX black size 35 x1"
+    "NOVA olive size 6 x1",
+    "ALPINA black size 35 x1"
    ],
    "zero_stock_key_sizes": [
-    "CABLE KNIT SWEATER black L",
-    "LOGO T-SHIRT navy L"
+    "INTARSIA SWEATER black L",
+    "VLOGO T-SHIRT navy L"
    ],
    "returns": [
-    "ARNEB 5 reason=EXCHANGE_SIZE",
-    "ARNEB 6 reason=EXCHANGE_SIZE"
+    "ARTEM 5 reason=EXCHANGE_SIZE",
+    "ARTEM 6 reason=EXCHANGE_SIZE"
    ],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1002,11 +1002,11 @@
    "visitors": 146,
    "conversion": 0.1233,
    "top_sellers": [
-    "POLO black x2",
-    "LOGO T-SHIRT navy x2",
-    "LOGO CAP white x2",
-    "CREWNECK SWEATSHIRT black x2",
-    "FLAMMETTE black x2"
+    "JERSEY POLO black x2",
+    "VLOGO T-SHIRT navy x2",
+    "VLOGO CAP white x2",
+    "RELAXED SWEATSHIRT black x2",
+    "FIAMMETTA black x2"
    ],
    "customer_mix": {
     "IT": 0.3,
@@ -1016,7 +1016,7 @@
    },
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "LOGO T-SHIRT navy L"
+    "VLOGO T-SHIRT navy L"
    ],
    "returns": [],
    "deliveries_received": [
@@ -1031,7 +1031,7 @@
    ],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1046,11 +1046,11 @@
    "visitors": 97,
    "conversion": 0.1649,
    "top_sellers": [
-    "POLO black x3",
-    "TRICOT PADDED CARDIGAN black x2",
-    "CHAMONIX black x1",
-    "POLARIS BALACLAVA white x1",
-    "LOGO BEANIE powder pink x1"
+    "JERSEY POLO black x3",
+    "VLOGO PADDED CARDIGAN black x2",
+    "CORTINA black x1",
+    "ASTRA BALACLAVA white x1",
+    "VLOGO BEANIE powder pink x1"
    ],
    "customer_mix": {
     "IT": 0.38,
@@ -1060,13 +1060,13 @@
    },
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "LOGO T-SHIRT navy L"
+    "VLOGO T-SHIRT navy L"
    ],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1081,11 +1081,11 @@
    "visitors": 87,
    "conversion": 0.1264,
    "top_sellers": [
-    "LOGO BEANIE navy x3",
-    "LOGO T-SHIRT black x2",
-    "CASHMERE SCARF black x1",
-    "CHAMONIX black x1",
-    "LOGO BEANIE black x1"
+    "VLOGO BEANIE navy x3",
+    "VLOGO T-SHIRT black x2",
+    "VALENTINO SCARF black x1",
+    "CORTINA black x1",
+    "VLOGO BEANIE black x1"
    ],
    "customer_mix": {
     "IT": 0.37,
@@ -1095,17 +1095,17 @@
    },
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "LOGO T-SHIRT navy L"
+    "VLOGO T-SHIRT navy L"
    ],
    "returns": [
-    "LOGO T-SHIRT L reason=CHANGE_MIND",
-    "TIB 4 reason=DEF"
+    "VLOGO T-SHIRT L reason=CHANGE_MIND",
+    "VEL 4 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1120,11 +1120,11 @@
    "visitors": 78,
    "conversion": 0.0769,
    "top_sellers": [
-    "POLARIS CAPE white x1",
-    "POLARIS CAPE black x1",
-    "POLARIS BALACLAVA white x1",
-    "CASHMERE SCARF black x1",
-    "CREWNECK SWEATSHIRT white x1"
+    "ASTRA CAPE white x1",
+    "ASTRA CAPE black x1",
+    "ASTRA BALACLAVA white x1",
+    "VALENTINO SCARF black x1",
+    "RELAXED SWEATSHIRT white x1"
    ],
    "customer_mix": {
     "IT": 0.7,
@@ -1134,20 +1134,20 @@
    },
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "LOGO T-SHIRT navy L"
+    "VLOGO T-SHIRT navy L"
    ],
    "returns": [
-    "MAYA 4 reason=SIZE",
-    "ROSIERE 5 reason=QUALITY",
-    "CABLE KNIT SWEATER L reason=GIFT",
-    "TIB 3 reason=DEF",
-    "TIB 2 reason=DEF"
+    "NOVA 4 reason=SIZE",
+    "RIVIERA 5 reason=QUALITY",
+    "INTARSIA SWEATER L reason=GIFT",
+    "VEL 3 reason=DEF",
+    "VEL 2 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1162,11 +1162,11 @@
    "visitors": 86,
    "conversion": 0.1395,
    "top_sellers": [
-    "HERMINE off-white x2",
-    "POLARIS OVERSIZED black x1",
-    "VALBOURG black x1",
-    "CASHMERE SCARF black x1",
-    "POLO black x1"
+    "LIVIANA off-white x2",
+    "ASTRA OVERSIZED black x1",
+    "VALDORA black x1",
+    "VALENTINO SCARF black x1",
+    "JERSEY POLO black x1"
    ],
    "customer_mix": {
     "IT": 0.26,
@@ -1177,8 +1177,8 @@
    "unmet_requests": [],
    "zero_stock_key_sizes": [],
    "returns": [
-    "TIB 1 reason=CHANGE_MIND",
-    "TIB 3 reason=DEF"
+    "VEL 1 reason=CHANGE_MIND",
+    "VEL 3 reason=DEF"
    ],
    "deliveries_received": [
     {
@@ -1192,8 +1192,8 @@
    ],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1208,11 +1208,11 @@
    "visitors": 97,
    "conversion": 0.2062,
    "top_sellers": [
-    "ILVARO black x3",
-    "TRAILGRIP W off-white x3",
-    "MAIRE navy x2",
-    "POLARIS BALACLAVA black x2",
-    "MAYA navy x2"
+    "IRIDIA black x3",
+    "VTRACK W off-white x3",
+    "AUREA navy x2",
+    "ASTRA BALACLAVA black x2",
+    "NOVA navy x2"
    ],
    "customer_mix": {
     "IT": 0.33,
@@ -1223,14 +1223,14 @@
    "unmet_requests": [],
    "zero_stock_key_sizes": [],
    "returns": [
-    "LOGO T-SHIRT L reason=SIZE",
-    "TIB 4 reason=DEF"
+    "VLOGO T-SHIRT L reason=SIZE",
+    "VEL 4 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1245,11 +1245,11 @@
    "visitors": 150,
    "conversion": 0.12,
    "top_sellers": [
-    "CASHMERE SCARF black x2",
-    "LOGO CAP black x2",
-    "ILVARO black x2",
-    "MONTCLA black x2",
-    "FLAMMETTE black x2"
+    "VALENTINO SCARF black x2",
+    "VLOGO CAP black x2",
+    "IRIDIA black x2",
+    "MISTRAL black x2",
+    "FIAMMETTA black x2"
    ],
    "customer_mix": {
     "IT": 0.42,
@@ -1259,14 +1259,14 @@
    },
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "MAIRE black 1"
+    "AUREA black 1"
    ],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1281,11 +1281,11 @@
    "visitors": 168,
    "conversion": 0.1667,
    "top_sellers": [
-    "MAYA black x4",
-    "MAKAIO BACKPACK black x3",
-    "LOGO BEANIE navy x3",
-    "TIB off-white x3",
-    "LOGO BEANIE white x2"
+    "NOVA black x4",
+    "URBAN BACKPACK black x3",
+    "VLOGO BEANIE navy x3",
+    "VEL off-white x3",
+    "VLOGO BEANIE white x2"
    ],
    "customer_mix": {
     "IT": 0.48,
@@ -1294,20 +1294,20 @@
     "OTHER": 0.07
    },
    "unmet_requests": [
-    "ARNEB black size 7 x1"
+    "ARTEM black size 7 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 1"
+    "AUREA black 1"
    ],
    "returns": [
-    "BADY 0 reason=SIZE",
-    "TIB 4 reason=DEF"
+    "ARIA 0 reason=SIZE",
+    "VEL 4 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1322,11 +1322,11 @@
    "visitors": 106,
    "conversion": 0.1698,
    "top_sellers": [
-    "TRAILGRIP W black x4",
-    "TRICOT PADDED CARDIGAN black x3",
-    "TRAILGRIP GTX black x2",
-    "ARNEB black x2",
-    "CASHMERE SCARF black x1"
+    "VTRACK W black x4",
+    "VLOGO PADDED CARDIGAN black x3",
+    "VTRACK GTX black x2",
+    "ARTEM black x2",
+    "VALENTINO SCARF black x1"
    ],
    "customer_mix": {
     "IT": 0.56,
@@ -1335,20 +1335,20 @@
     "CN": 0.08
    },
    "unmet_requests": [
-    "CHAMONIX black size XL x1"
+    "CORTINA black size XL x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1"
+    "AUREA black 0",
+    "AUREA black 1"
    ],
    "returns": [
-    "MONTCLA 4 reason=SIZE"
+    "MISTRAL 4 reason=SIZE"
    ],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1363,11 +1363,11 @@
    "visitors": 79,
    "conversion": 0.1266,
    "top_sellers": [
-    "KARAKORUM black x2",
-    "LOGO BEANIE navy x1",
-    "CASHMERE SCARF black x1",
-    "MAKAIO BACKPACK black x1",
-    "LOGO T-SHIRT navy x1"
+    "COSIMO black x2",
+    "VLOGO BEANIE navy x1",
+    "VALENTINO SCARF black x1",
+    "URBAN BACKPACK black x1",
+    "VLOGO T-SHIRT navy x1"
    ],
    "customer_mix": {
     "IT": 0.38,
@@ -1377,15 +1377,15 @@
    },
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1"
+    "AUREA black 0",
+    "AUREA black 1"
    ],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1400,11 +1400,11 @@
    "visitors": 91,
    "conversion": 0.1429,
    "top_sellers": [
-    "LEGERE BELT BAG black x3",
-    "LOGO CAP white x2",
-    "LOGO BEANIE powder pink x2",
-    "BADY black x2",
-    "VALBOURG black x1"
+    "VITA BELT BAG black x3",
+    "VLOGO CAP white x2",
+    "VLOGO BEANIE powder pink x2",
+    "ARIA black x2",
+    "VALDORA black x1"
    ],
    "customer_mix": {
     "IT": 0.55,
@@ -1413,20 +1413,20 @@
     "KR": 0.1
    },
    "unmet_requests": [
-    "MAIRE black size 1 x1"
+    "AUREA black size 1 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1"
+    "AUREA black 0",
+    "AUREA black 1"
    ],
    "returns": [
-    "TRAILGRIP W 38 reason=SIZE"
+    "VTRACK W 38 reason=SIZE"
    ],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1441,11 +1441,11 @@
    "visitors": 101,
    "conversion": 0.1881,
    "top_sellers": [
-    "CREWNECK SWEATSHIRT white x2",
-    "INSOLUX black x2",
-    "TRAILGRIP GTX black x1",
-    "POLARIS BALACLAVA black x1",
-    "LOGO HOODIE navy x1"
+    "RELAXED SWEATSHIRT white x2",
+    "ALPINA black x2",
+    "VTRACK GTX black x1",
+    "ASTRA BALACLAVA black x1",
+    "VLOGO HOODIE navy x1"
    ],
    "customer_mix": {
     "IT": 0.42,
@@ -1454,14 +1454,14 @@
     "CN": 0.08
    },
    "unmet_requests": [
-    "MAIRE black size 1 x1"
+    "AUREA black size 1 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1"
+    "AUREA black 0",
+    "AUREA black 1"
    ],
    "returns": [
-    "POLARIS BALACLAVA TU reason=CHANGE_MIND"
+    "ASTRA BALACLAVA TU reason=CHANGE_MIND"
    ],
    "deliveries_received": [
     {
@@ -1475,8 +1475,8 @@
    ],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1491,11 +1491,11 @@
    "visitors": 125,
    "conversion": 0.104,
    "top_sellers": [
-    "MAIRE beige x4",
-    "POLARIS CAPE black x2",
-    "BADY black x2",
-    "MONTCLA navy x2",
-    "CREWNECK SWEATSHIRT white x2"
+    "AUREA beige x4",
+    "ASTRA CAPE black x2",
+    "ARIA black x2",
+    "MISTRAL navy x2",
+    "RELAXED SWEATSHIRT white x2"
    ],
    "customer_mix": {
     "IT": 0.5,
@@ -1505,15 +1505,15 @@
    },
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1"
+    "AUREA black 0",
+    "AUREA black 1"
    ],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1528,11 +1528,11 @@
    "visitors": 110,
    "conversion": 0.2,
    "top_sellers": [
-    "ILVARO black x4",
-    "LOGO HOODIE black x2",
-    "TRAILGRIP GTX grey melange x2",
-    "LOGO CARDIGAN navy x2",
-    "MAYA olive x2"
+    "IRIDIA black x4",
+    "VLOGO HOODIE black x2",
+    "VTRACK GTX grey melange x2",
+    "VLOGO CARDIGAN navy x2",
+    "NOVA olive x2"
    ],
    "customer_mix": {
     "IT": 0.29,
@@ -1541,21 +1541,21 @@
     "CN": 0.1
    },
    "unmet_requests": [
-    "MAIRE black size 1 x1"
+    "AUREA black size 1 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1"
+    "AUREA black 0",
+    "AUREA black 1"
    ],
    "returns": [
-    "LOGO T-SHIRT XL reason=SIZE",
-    "TIB 3 reason=DEF"
+    "VLOGO T-SHIRT XL reason=SIZE",
+    "VEL 3 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1570,11 +1570,11 @@
    "visitors": 192,
    "conversion": 0.1458,
    "top_sellers": [
-    "MAYA black x6",
-    "BADY black x4",
-    "MAIRE navy x3",
-    "LOGO HOODIE black x3",
-    "MAIRE off-white x3"
+    "NOVA black x6",
+    "ARIA black x4",
+    "AUREA navy x3",
+    "VLOGO HOODIE black x3",
+    "AUREA off-white x3"
    ],
    "customer_mix": {
     "IT": 0.39,
@@ -1583,23 +1583,23 @@
     "JP": 0.07
    },
    "unmet_requests": [
-    "MAIRE black size 1 x1"
+    "AUREA black size 1 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1"
+    "AUREA black 0",
+    "AUREA black 1"
    ],
    "returns": [
-    "ILVARO 2 reason=SIZE",
-    "ILVARO 2 reason=CHANGE_MIND",
-    "LOGO HOODIE S reason=COLOUR",
-    "LOGO CAP TU reason=CHANGE_MIND"
+    "IRIDIA 2 reason=SIZE",
+    "IRIDIA 2 reason=CHANGE_MIND",
+    "VLOGO HOODIE S reason=COLOUR",
+    "VLOGO CAP TU reason=CHANGE_MIND"
    ],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1614,11 +1614,11 @@
    "visitors": 123,
    "conversion": 0.1707,
    "top_sellers": [
-    "POLARIS BALACLAVA black x2",
-    "LOGO HOODIE navy x2",
-    "POLO black x2",
-    "CREWNECK SWEATSHIRT black x2",
-    "TRICOT PADDED CARDIGAN black x2"
+    "ASTRA BALACLAVA black x2",
+    "VLOGO HOODIE navy x2",
+    "JERSEY POLO black x2",
+    "RELAXED SWEATSHIRT black x2",
+    "VLOGO PADDED CARDIGAN black x2"
    ],
    "customer_mix": {
     "IT": 0.44,
@@ -1627,20 +1627,20 @@
     "TR": 0.07
    },
    "unmet_requests": [
-    "MONTCLA navy size 3 x1"
+    "MISTRAL navy size 3 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1"
+    "AUREA black 0",
+    "AUREA black 1"
    ],
    "returns": [
-    "TIB 5 reason=CHANGE_MIND"
+    "VEL 5 reason=CHANGE_MIND"
    ],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1655,11 +1655,11 @@
    "visitors": 104,
    "conversion": 0.1058,
    "top_sellers": [
-    "LOGO T-SHIRT black x2",
-    "LEGERE BELT BAG black x1",
-    "TRAILGRIP GTX black x1",
-    "LOGO T-SHIRT white x1",
-    "LOGO HOODIE black x1"
+    "VLOGO T-SHIRT black x2",
+    "VITA BELT BAG black x1",
+    "VTRACK GTX black x1",
+    "VLOGO T-SHIRT white x1",
+    "VLOGO HOODIE black x1"
    ],
    "customer_mix": {
     "IT": 0.44,
@@ -1669,17 +1669,17 @@
    },
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1"
+    "AUREA black 0",
+    "AUREA black 1"
    ],
    "returns": [
-    "TIB 4 reason=DEF"
+    "VEL 4 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1694,11 +1694,11 @@
    "visitors": 79,
    "conversion": 0.1139,
    "top_sellers": [
-    "MAYA navy x2",
-    "HERMINE off-white x2",
-    "MAKAIO BACKPACK black x1",
-    "LEGERE BELT BAG black x1",
-    "LOGO T-SHIRT navy x1"
+    "NOVA navy x2",
+    "LIVIANA off-white x2",
+    "URBAN BACKPACK black x1",
+    "VITA BELT BAG black x1",
+    "VLOGO T-SHIRT navy x1"
    ],
    "customer_mix": {
     "IT": 0.42,
@@ -1707,18 +1707,18 @@
     "US": 0.17
    },
    "unmet_requests": [
-    "MAIRE black size 1 x1"
+    "AUREA black size 1 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1"
+    "AUREA black 0",
+    "AUREA black 1"
    ],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1733,11 +1733,11 @@
    "visitors": 98,
    "conversion": 0.1429,
    "top_sellers": [
-    "POLARIS BALACLAVA black x2",
-    "MONTCLA black x2",
-    "POLARIS OVERSIZED black x1",
-    "POLARIS CAPE white x1",
-    "PEYRE black x1"
+    "ASTRA BALACLAVA black x2",
+    "MISTRAL black x2",
+    "ASTRA OVERSIZED black x1",
+    "ASTRA CAPE white x1",
+    "PIERO black x1"
    ],
    "customer_mix": {
     "IT": 0.27,
@@ -1746,11 +1746,11 @@
     "TR": 0.09
    },
    "unmet_requests": [
-    "MAIRE black size 0 x1"
+    "AUREA black size 0 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1"
+    "AUREA black 0",
+    "AUREA black 1"
    ],
    "returns": [],
    "deliveries_received": [
@@ -1765,8 +1765,8 @@
    ],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1781,11 +1781,11 @@
    "visitors": 93,
    "conversion": 0.1613,
    "top_sellers": [
-    "MAYA navy x3",
-    "LOGO HOODIE black x2",
-    "KARAKORUM black x2",
-    "TRICOT PADDED CARDIGAN black x2",
-    "LOGO CAP white x1"
+    "NOVA navy x3",
+    "VLOGO HOODIE black x2",
+    "COSIMO black x2",
+    "VLOGO PADDED CARDIGAN black x2",
+    "VLOGO CAP white x1"
    ],
    "customer_mix": {
     "IT": 0.43,
@@ -1795,17 +1795,17 @@
    },
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1"
+    "AUREA black 0",
+    "AUREA black 1"
    ],
    "returns": [
-    "MONTCLA 5 reason=QUALITY"
+    "MISTRAL 5 reason=QUALITY"
    ],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1820,11 +1820,11 @@
    "visitors": 97,
    "conversion": 0.1237,
    "top_sellers": [
-    "BADY black x4",
-    "MAYA navy x2",
-    "MONTCLA black x2",
-    "CHAMONIX black x1",
-    "LOGO T-SHIRT black x1"
+    "ARIA black x4",
+    "NOVA navy x2",
+    "MISTRAL black x2",
+    "CORTINA black x1",
+    "VLOGO T-SHIRT black x1"
    ],
    "customer_mix": {
     "IT": 0.29,
@@ -1833,21 +1833,21 @@
     "US": 0.12
    },
    "unmet_requests": [
-    "MAIRE black size 1 x1"
+    "AUREA black size 1 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1"
+    "AUREA black 0",
+    "AUREA black 1"
    ],
    "returns": [
-    "MAIRE 1 reason=SIZE"
+    "AUREA 1 reason=SIZE"
    ],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E10b: Italian general strike (sciopero generale trasporti)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1862,11 +1862,11 @@
    "visitors": 202,
    "conversion": 0.099,
    "top_sellers": [
-    "ECRINS black x3",
-    "LOGO CAP white x2",
-    "MAIRE beige x2",
-    "WOOL TURTLENECK black x2",
-    "VALBOURG black x2"
+    "ETTORE black x3",
+    "VLOGO CAP white x2",
+    "AUREA beige x2",
+    "CASHMERE TURTLENECK black x2",
+    "VALDORA black x2"
    ],
    "customer_mix": {
     "IT": 0.55,
@@ -1875,24 +1875,24 @@
     "CN": 0.06
    },
    "unmet_requests": [
-    "MAIRE black size 1 x3",
-    "MAIRE black size 3 x1"
+    "AUREA black size 1 x3",
+    "AUREA black size 3 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1"
+    "AUREA black 0",
+    "AUREA black 1"
    ],
    "returns": [
-    "MAYA 4 reason=SIZE",
-    "TIB 6 reason=CHANGE_MIND",
-    "CABLE KNIT SWEATER L reason=GIFT",
-    "LEGERE BELT BAG TU reason=SIZE"
+    "NOVA 4 reason=SIZE",
+    "VEL 6 reason=CHANGE_MIND",
+    "INTARSIA SWEATER L reason=GIFT",
+    "VITA BELT BAG TU reason=SIZE"
    ],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1907,11 +1907,11 @@
    "visitors": 147,
    "conversion": 0.1361,
    "top_sellers": [
-    "BADY black x4",
-    "MAYA black x4",
-    "MAIRE beige x3",
-    "HERMINE off-white x2",
-    "LOGO BEANIE navy x2"
+    "ARIA black x4",
+    "NOVA black x4",
+    "AUREA beige x3",
+    "LIVIANA off-white x2",
+    "VLOGO BEANIE navy x2"
    ],
    "customer_mix": {
     "IT": 0.29,
@@ -1920,21 +1920,21 @@
     "DE": 0.06
    },
    "unmet_requests": [
-    "MAIRE black size 2 x1",
-    "MAIRE black size 3 x1",
-    "AMBRINE chocolate brown size 0 x1"
+    "AUREA black size 2 x1",
+    "AUREA black size 3 x1",
+    "AMALIA chocolate brown size 0 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2"
    ],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1949,11 +1949,11 @@
    "visitors": 108,
    "conversion": 0.1389,
    "top_sellers": [
-    "LOGO BEANIE white x2",
-    "TIB off-white x2",
-    "POLARIS CAPE black x1",
-    "POLARIS CAPE white x1",
-    "LOGO BEANIE powder pink x1"
+    "VLOGO BEANIE white x2",
+    "VEL off-white x2",
+    "ASTRA CAPE black x1",
+    "ASTRA CAPE white x1",
+    "VLOGO BEANIE powder pink x1"
    ],
    "customer_mix": {
     "IT": 0.39,
@@ -1963,16 +1963,16 @@
    },
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2"
    ],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1987,11 +1987,11 @@
    "visitors": 77,
    "conversion": 0.0909,
    "top_sellers": [
-    "LEGERE BELT BAG black x1",
-    "LOGO HOODIE navy x1",
-    "LOGO HOODIE black x1",
-    "CREWNECK SWEATSHIRT white x1",
-    "CREWNECK SWEATSHIRT black x1"
+    "VITA BELT BAG black x1",
+    "VLOGO HOODIE navy x1",
+    "VLOGO HOODIE black x1",
+    "RELAXED SWEATSHIRT white x1",
+    "RELAXED SWEATSHIRT black x1"
    ],
    "customer_mix": {
     "IT": 0.33,
@@ -2001,20 +2001,20 @@
    },
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2"
    ],
    "returns": [
-    "BADY 0 reason=SIZE",
-    "CABLE KNIT SWEATER XL reason=COLOUR",
-    "TRAILGRIP GTX 42 reason=CHANGE_MIND"
+    "ARIA 0 reason=SIZE",
+    "INTARSIA SWEATER XL reason=COLOUR",
+    "VTRACK GTX 42 reason=CHANGE_MIND"
    ],
    "deliveries_received": [],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -2029,11 +2029,11 @@
    "visitors": 110,
    "conversion": 0.1455,
    "top_sellers": [
-    "MAYA black x3",
-    "POLO black x2",
-    "LOGO BEANIE white x2",
-    "ROSIERE black x2",
-    "MAIRE off-white x2"
+    "NOVA black x3",
+    "JERSEY POLO black x2",
+    "VLOGO BEANIE white x2",
+    "RIVIERA black x2",
+    "AUREA off-white x2"
    ],
    "customer_mix": {
     "IT": 0.32,
@@ -2056,8 +2056,8 @@
    ],
    "active_events": [
     "E04: Construction site in front of ROM01 entrance (Via Condotti)",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   }
  ]

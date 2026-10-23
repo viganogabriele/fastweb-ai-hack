@@ -9,7 +9,7 @@
       "source_refs": [
         {
           "uri": "dataset://store_emails/NYC01/20260906_1837_NYC01.eml",
-          "content_hash": "sha256:a6f7d261277d822de9812fd0abaa94ab8ad2f5b854b6d218d0d45fe65022cfc7",
+          "content_hash": "sha256:a1e8d26c42dcdcc3b6797dd3e680b1e58d361c59d569029ebe4c54766446be30",
           "locator": null
         }
       ],
@@ -59,8 +59,8 @@
           "document_version": "v1",
           "segment_id": "doc-20260906-1837-nyc01-seg0",
           "quote": "a sweatshirt",
-          "char_start": 265,
-          "char_end": 277,
+          "char_start": 263,
+          "char_end": 275,
           "t_start_s": null,
           "t_end_s": null
         }

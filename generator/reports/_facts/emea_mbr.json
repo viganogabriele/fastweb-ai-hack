@@ -11,14 +11,14 @@
  "rom_month_g": -26.6,
  "rom_traffic_since": -51.0,
  "sellthrough_value": {
-  "WOOL TURTLENECK": 52.4,
-  "AMBRINE": 48.4,
-  "ROSIERE": 45.5,
-  "ARNEB": 44.6,
-  "ILVARO": 42.1,
-  "POLARIS BALACLAVA": 20.2,
-  "POLARIS OVERSIZED": 15.9,
-  "POLARIS CAPE": 14.0
+  "CASHMERE TURTLENECK": 52.4,
+  "AMALIA": 48.4,
+  "RIVIERA": 45.5,
+  "ARTEM": 44.6,
+  "IRIDIA": 42.1,
+  "ASTRA BALACLAVA": 20.2,
+  "ASTRA OVERSIZED": 15.9,
+  "ASTRA CAPE": 14.0
  },
  "stores": {
   "AMS01": 424535,

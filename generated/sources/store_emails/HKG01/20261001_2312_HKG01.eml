@@ -1,13 +1,12 @@
 Content-Type: multipart/alternative;
  boundary="===============7171799961870579593=="
 MIME-Version: 1.0
-From: =?utf-8?b?S2FyZW4gQ2hhbiDpmbPlmInmrKM=?=
- <karen.chan@moncler-retail.example>
-To: retail-ops-hktw@moncler-retail.example
-Cc: Vivian Lau <vivian.lau@moncler-retail.example>
+From: Karen Chan =?utf-8?b?6Zmz5ZiJ5qyj?= <karen.chan@valentino-retail.example>
+To: retail-ops-hktw@valentino-retail.example
+Cc: Vivian Lau <vivian.lau@valentino-retail.example>
 Subject: HKG01 closing 1/10 - National Day
 Date: Thu, 01 Oct 2026 23:12:50 +0800
-Message-ID: <839A5B68-6C9B-1163-9F8912272402@moncler-retail.example>
+Message-ID: <839A5B68-6C9B-1163-9F8912272402@valentino-retail.example>
 X-Mailer: Microsoft Outlook 16.0
 
 --===============7171799961870579593==
@@ -17,10 +16,10 @@ Content-Transfer-Encoding: base64
 
 SGkgVml2aWFuLCBhbGwsCgrlnIvmhbbnrKzkuIDml6XvvIzlu6PmnbHpgZPmiJDmop3ooZfpg73k
 v4LlhaflnLDml4XooYzlnJjlkIzoh6rnlLHooYzvvIzmiJHlk4vploDlj6Ppg73opoHmjpLpmorv
-vIwxMCDlgIsgMTAg5YCL5ZKB5pS+5YWl5Zqf44CCCk1heWEgbmF2eSB4M++8jExvZ28gVCBuYXZ5
-IHgy77yMQ2FibGUga25pdCDnmb0v6buR5ZCEIDLjgIJNYXlhIG5hdnkgNCDlhofmmZLjgIIKTWFp
-cmUgYmxhY2sgMCDkuIDml6nlt7LntpPlhofvvIxSb3NpZXJlIGJsYWNrIDEg5pyJ5Lq65ZWP5YaH
-6LKo44CCCgpUaWIg5Y+I6YCA5LiA5Lu2IHNpemUgNO+8jOmDveS/giB6aXAg6aCt44CC55SxIDI4
+vIwxMCDlgIsgMTAg5YCL5ZKB5pS+5YWl5Zqf44CCCk5vdmEgbmF2eSB4M++8jExvZ28gVCBuYXZ5
+IHgy77yMQ2FibGUga25pdCDnmb0v6buR5ZCEIDLjgIJOb3ZhIG5hdnkgNCDlhofmmZLjgIIKQXVy
+ZWEgYmxhY2sgMCDkuIDml6nlt7LntpPlhofvvIxSaXZpZXJhIGJsYWNrIDEg5pyJ5Lq65ZWP5YaH
+6LKo44CCCgpWZWwg5Y+I6YCA5LiA5Lu2IHNpemUgNO+8jOmDveS/giB6aXAg6aCt44CC55SxIDI4
 IOiZn+WIsOS7iuaXpeW3sue2kyA0IOS7tu+8jGFmdGVyc2FsZXMg5Luy5pyq6KaG44CCCgpLYXJl
 bgoKU2FsZXMJSEskMzU0LDEwMApCdWRnZXQJSEskMjMyLDUwMApBY2glCTE1MiUKVHJhZmZpYwky
 MDkKVHhuCTE2CkFUVglISyQyMiwxMzEKTWFpbmxhbmQgJQl+NzAl
@@ -61,12 +60,12 @@ bGFzcz1Nc29Ob3JtYWwgc3R5bGU9J21hcmdpbjowJz4mbmJzcDs8L3A+PHAgY2xhc3M9TXNvTm9y
 bWFsIHN0eWxlPSdtYXJnaW46MCc+5ZyL5oW256ys5LiA5pel77yM5buj5p2x6YGT5oiQ5qKd6KGX
 6YO95L+C5YWn5Zyw5peF6KGM5ZyY5ZCM6Ieq55Sx6KGM77yM5oiR5ZOL6ZaA5Y+j6YO96KaB5o6S
 6ZqK77yMMTAg5YCLIDEwIOWAi+WSgeaUvuWFpeWan+OAgjwvcD48cCBjbGFzcz1Nc29Ob3JtYWwg
-c3R5bGU9J21hcmdpbjowJz5NYXlhIG5hdnkgeDPvvIxMb2dvIFQgbmF2eSB4Mu+8jENhYmxlIGtu
-aXQg55m9L+m7keWQhCAy44CCTWF5YSBuYXZ5IDQg5YaH5pmS44CCPC9wPjxwIGNsYXNzPU1zb05v
-cm1hbCBzdHlsZT0nbWFyZ2luOjAnPk1haXJlIGJsYWNrIDAg5LiA5pep5bey57aT5YaH77yMUm9z
-aWVyZSBibGFjayAxIOacieS6uuWVj+WGh+iyqOOAgjwvcD48cCBjbGFzcz1Nc29Ob3JtYWwgc3R5
+c3R5bGU9J21hcmdpbjowJz5Ob3ZhIG5hdnkgeDPvvIxMb2dvIFQgbmF2eSB4Mu+8jENhYmxlIGtu
+aXQg55m9L+m7keWQhCAy44CCTm92YSBuYXZ5IDQg5YaH5pmS44CCPC9wPjxwIGNsYXNzPU1zb05v
+cm1hbCBzdHlsZT0nbWFyZ2luOjAnPkF1cmVhIGJsYWNrIDAg5LiA5pep5bey57aT5YaH77yMUml2
+aWVyYSBibGFjayAxIOacieS6uuWVj+WGh+iyqOOAgjwvcD48cCBjbGFzcz1Nc29Ob3JtYWwgc3R5
 bGU9J21hcmdpbjowJz4mbmJzcDs8L3A+PHAgY2xhc3M9TXNvTm9ybWFsIHN0eWxlPSdtYXJnaW46
-MCc+VGliIOWPiOmAgOS4gOS7tiBzaXplIDTvvIzpg73kv4IgemlwIOmgreOAgueUsSAyOCDomZ/l
+MCc+VmVsIOWPiOmAgOS4gOS7tiBzaXplIDTvvIzpg73kv4IgemlwIOmgreOAgueUsSAyOCDomZ/l
 iLDku4rml6Xlt7LntpMgNCDku7bvvIxhZnRlcnNhbGVzIOS7suacquimhuOAgjwvcD48cCBjbGFz
 cz1Nc29Ob3JtYWwgc3R5bGU9J21hcmdpbjowJz4mbmJzcDs8L3A+PHAgY2xhc3M9TXNvTm9ybWFs
 IHN0eWxlPSdtYXJnaW46MCc+S2FyZW48L3A+PC9kaXY+PC9ib2R5PjwvaHRtbD4=

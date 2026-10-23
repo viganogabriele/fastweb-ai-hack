@@ -8,7 +8,7 @@
     "results": [
       {
         "__metadata": {
-          "id": "https://sapgw.moncler-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='0001',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
+          "id": "https://sapgw.valentino-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='0001',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
           "type": "API_MATERIAL_STOCK_SRV.A_MatlStkInAcctModType"
         },
         "Material": "J20931A00012999",
@@ -28,7 +28,7 @@
       },
       {
         "__metadata": {
-          "id": "https://sapgw.moncler-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='W100',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
+          "id": "https://sapgw.valentino-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='W100',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
           "type": "API_MATERIAL_STOCK_SRV.A_MatlStkInAcctModType"
         },
         "Material": "J20931A00012999",
@@ -48,7 +48,7 @@
       },
       {
         "__metadata": {
-          "id": "https://sapgw.moncler-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='0001',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
+          "id": "https://sapgw.valentino-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='0001',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
           "type": "API_MATERIAL_STOCK_SRV.A_MatlStkInAcctModType"
         },
         "Material": "J20931A00012999",
@@ -68,7 +68,7 @@
       },
       {
         "__metadata": {
-          "id": "https://sapgw.moncler-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='W100',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
+          "id": "https://sapgw.valentino-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='W100',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
           "type": "API_MATERIAL_STOCK_SRV.A_MatlStkInAcctModType"
         },
         "Material": "J20931A00012999",
@@ -88,7 +88,7 @@
       },
       {
         "__metadata": {
-          "id": "https://sapgw.moncler-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='RT01',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='03')",
+          "id": "https://sapgw.valentino-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='RT01',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='03')",
           "type": "API_MATERIAL_STOCK_SRV.A_MatlStkInAcctModType"
         },
         "Material": "J20931A00012999",
@@ -108,7 +108,7 @@
       },
       {
         "__metadata": {
-          "id": "https://sapgw.moncler-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='0001',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
+          "id": "https://sapgw.valentino-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='0001',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
           "type": "API_MATERIAL_STOCK_SRV.A_MatlStkInAcctModType"
         },
         "Material": "J20931A00012999",
@@ -128,7 +128,7 @@
       },
       {
         "__metadata": {
-          "id": "https://sapgw.moncler-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='W100',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
+          "id": "https://sapgw.valentino-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='W100',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
           "type": "API_MATERIAL_STOCK_SRV.A_MatlStkInAcctModType"
         },
         "Material": "J20931A00012999",
@@ -148,7 +148,7 @@
       },
       {
         "__metadata": {
-          "id": "https://sapgw.moncler-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='RT01',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='03')",
+          "id": "https://sapgw.valentino-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='RT01',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='03')",
           "type": "API_MATERIAL_STOCK_SRV.A_MatlStkInAcctModType"
         },
         "Material": "J20931A00012999",
@@ -168,7 +168,7 @@
       },
       {
         "__metadata": {
-          "id": "https://sapgw.moncler-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='0001',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
+          "id": "https://sapgw.valentino-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='0001',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
           "type": "API_MATERIAL_STOCK_SRV.A_MatlStkInAcctModType"
         },
         "Material": "J20931A00012999",
@@ -188,7 +188,7 @@
       },
       {
         "__metadata": {
-          "id": "https://sapgw.moncler-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='W100',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
+          "id": "https://sapgw.valentino-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='W100',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
           "type": "API_MATERIAL_STOCK_SRV.A_MatlStkInAcctModType"
         },
         "Material": "J20931A00012999",
@@ -208,7 +208,7 @@
       },
       {
         "__metadata": {
-          "id": "https://sapgw.moncler-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='RT01',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='03')",
+          "id": "https://sapgw.valentino-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='RT01',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='03')",
           "type": "API_MATERIAL_STOCK_SRV.A_MatlStkInAcctModType"
         },
         "Material": "J20931A00012999",
@@ -228,7 +228,7 @@
       },
       {
         "__metadata": {
-          "id": "https://sapgw.moncler-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='0001',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
+          "id": "https://sapgw.valentino-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='0001',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
           "type": "API_MATERIAL_STOCK_SRV.A_MatlStkInAcctModType"
         },
         "Material": "J20931A00012999",
@@ -248,7 +248,7 @@
       },
       {
         "__metadata": {
-          "id": "https://sapgw.moncler-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='W100',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
+          "id": "https://sapgw.valentino-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='W100',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
           "type": "API_MATERIAL_STOCK_SRV.A_MatlStkInAcctModType"
         },
         "Material": "J20931A00012999",
@@ -268,7 +268,7 @@
       },
       {
         "__metadata": {
-          "id": "https://sapgw.moncler-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='RT01',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='03')",
+          "id": "https://sapgw.valentino-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='RT01',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='03')",
           "type": "API_MATERIAL_STOCK_SRV.A_MatlStkInAcctModType"
         },
         "Material": "J20931A00012999",
@@ -288,7 +288,7 @@
       },
       {
         "__metadata": {
-          "id": "https://sapgw.moncler-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='0001',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
+          "id": "https://sapgw.valentino-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='0001',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
           "type": "API_MATERIAL_STOCK_SRV.A_MatlStkInAcctModType"
         },
         "Material": "J20931A00012999",
@@ -308,7 +308,7 @@
       },
       {
         "__metadata": {
-          "id": "https://sapgw.moncler-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='W100',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
+          "id": "https://sapgw.valentino-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='J20931A00012999',Plant='IT10',StorageLocation='W100',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='01')",
           "type": "API_MATERIAL_STOCK_SRV.A_MatlStkInAcctModType"
         },
         "Material": "J20931A00012999",

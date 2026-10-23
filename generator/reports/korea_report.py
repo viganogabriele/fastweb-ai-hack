@@ -20,8 +20,8 @@ VAT = 1.10
 DEPT = ["SEL02", "BUS01"]
 ALL = ["SEL02", "BUS01", "SEL01"]
 KNAME = {"SEL02": "현대 압구정본점", "BUS01": "신세계 센텀시티점", "SEL01": "청담 플래그십(직영)"}
-STYLE_KO = {"ILVARO": "일바로", "MAIRE": "마이레", "MAYA": "마야", "BADY": "바디", "LOGO HOODIE": "로고 후디",
-            "HERMINE": "에르민", "TIB": "티브", "AMBRINE": "앰브린", "ARNEB": "아르넵", "MONTCLA": "몽클라"}
+STYLE_KO = {"IRIDIA": "Iridia", "AUREA": "Aurea", "NOVA": "Nova", "ARIA": "Aria", "VLOGO HOODIE": "로고 후디",
+            "LIVIANA": "Liviana", "VEL": "티브", "AMALIA": "Amalia", "ARTEM": "Artem", "MISTRAL": "Mistral"}
 COL_KO = {"999": "블랙", "510": "인디 핑크", "20D": "오프화이트", "742": "네이비", "034": "베이지", "90X": "그레이",
           "001": "화이트", "23R": "브라운", "82D": "올리브", "73A": "라이트블루", "41F": "레드"}
 
@@ -64,7 +64,7 @@ def weeks():
 
 def main():
     wb = xlsxwriter.Workbook(OUTD / "[주간] 백화점 매출 보고_10월 3주차(10.12~10.18).xlsx")
-    wb.set_properties({"title": "백화점 주간 매출 보고", "author": "리테일팀 정다은", "company": "몽클레르 코리아"})
+    wb.set_properties({"title": "백화점 주간 매출 보고", "author": "리테일팀 정다은", "company": "발렌티노 코리아"})
     F = lambda **kw: wb.add_format({"font_name": "맑은 고딕", "font_size": 9, **kw})
     title = F(bold=True, font_size=13)
     sub = F(font_color="#666666")
@@ -220,15 +220,15 @@ def main():
     ws.set_column(0, 0, 125)
     ws.write(0, 0, "이슈 및 특이사항 (10월 3주차)", title)
     text = [
-        "1. 일바로(ILVARO) 인디 핑크: 10/2 이후 전 매장 품절 지속. LUMIERE 윤하은 착용 사진 이후 문의 폭주. 대기 고객 리스트 - "
+        "1. Iridia(IRIDIA) 인디 핑크: 10/2 이후 전 매장 품절 지속. LUMIERE 윤하은 착용 사진 이후 문의 폭주. 대기 고객 리스트 - "
         f"청담 {wait['SEL01']}명, 압구정 {wait['SEL02']}명, 센텀 {wait['BUS01']}명 (중복 포함 가능).",
-        "2. 청담 일바로 리오더 물량: 인천세관 KC 인증서류 미비로 통관 지연, 10/8 입고 예정 -> 10/13 입고. 입고 당일 대부분 대기 고객에게 판매.",
-        "3. 블랙/오프화이트 일바로도 사이즈 1, 2 결품. 본사 추가 배분 요청 중.",
+        "2. 청담 Iridia 리오더 물량: 인천세관 KC 인증서류 미비로 통관 지연, 10/8 입고 예정 -> 10/13 입고. 입고 당일 대부분 대기 고객에게 판매.",
+        "3. 블랙/오프화이트 Iridia도 사이즈 1, 2 결품. 본사 추가 배분 요청 중.",
         "4. 10/15부터 청담 플래그십 맞은편에 캐나다 아웃도어 브랜드 팝업 오픈 (대기줄, 사은품 증정). 금주 플래그십 아우터 매출 영향 있음.",
         "5. 부산국제영화제(10/1~10/10) 기간 센텀시티 유동인구 증가, 10월 1~2주차 실적 견인.",
         f"6. 중국 고객 매출 비중 금주 {cn_share:.0f}% (POS 국적 기준).",
-        "7. 파리/밀라노 출장 고객으로부터 블랙 마이레(MAIRE) 현지 품절 문의 다수 - 국내 재고 문의 증가.",
-        "8. 티브(TIB) 베스트 지퍼 불량 교환 건 발생, 본사 품질팀 공유 완료.",
+        "7. 파리/밀라노 출장 고객으로부터 블랙 Aurea(AUREA) 현지 품절 문의 다수 - 국내 재고 문의 증가.",
+        "8. 티브(VEL) 베스트 지퍼 불량 교환 건 발생, 본사 품질팀 공유 완료.",
     ]
     for i, t_ in enumerate(text):
         ws.write(2 + i, 0, t_, wrap)

@@ -19,9 +19,11 @@ T0 = datetime(2026, 10, 6, 18, tzinfo=UTC)
 T1 = datetime(2026, 10, 8, 18, tzinfo=UTC)  # 20:00 in Milan
 T2 = datetime(2026, 10, 14, 18, tzinfo=UTC)
 TABLES = ("stores", "styles", "sku_colour", "sku_size_ean", "assortment", "prices")
-TABLES += ("sales", "stock", "forecast")
+TABLES += ("sales", "returns", "stock", "forecast")
 SALE = ("business_date", "store_id", "sku", "units_sold", "units_returned")
 SALE += ("gross_sales_lc", "discount_lc", "returns_lc", "net_sales_lc", "currency")
+POS = ("business_date", "store_id", "receipt_id", "line_type", "sku", "size", "qty")
+POS += ("return_reason", "original_receipt_id")
 
 
 def write(path, header, rows):
@@ -49,7 +51,7 @@ def sources(tmp_path):
             ("NYC01", "America/New_York", "USD"),
         ],
     )
-    write(master / "styles.csv", ("style_code", "style_name"), [("J1", "MAIRE")])
+    write(master / "styles.csv", ("style_code", "style_name"), [("J1", "AUREA")])
     write(master / "sku_colour.csv", ("sku", "style_code", "color_code"), [("J1-999", "J1", "999")])
     write(
         master / "sku_size_ean.csv",
@@ -67,6 +69,16 @@ def sources(tmp_path):
     october = [sale(f"2026-10-{day:02d}") for day in range(1, 22)] + [sale("2026-10-07", "TYO01")]
     october += [sale("2026-10-06", "NYC01"), sale("2026-10-07", "NYC01")]
     write(sales / "sales_daily_2026_10.csv", SALE, october)
+    pos = erp_dir / "sales" / "pos_lines"
+    write(
+        pos / "pos_lines_2026-W41.csv",  # ISO week: Oct 5-11
+        POS,
+        [
+            ("2026-10-06", "MIL01", "R1", "SALE", "J1-999", "00", "1", "", ""),
+            ("2026-10-06", "MIL01", "R2", "RETURN", "J1-999", "00", "-1", "DEF", "R0"),
+            ("2026-10-08", "MIL01", "R3", "RETURN", "J1-999", "00", "-1", "SIZE", "R1"),
+        ],
+    )
     stock = erp_dir / "inventory" / "store_stock_daily"
     for day in range(1, 22):
         write(
@@ -180,12 +192,25 @@ def test_window_keeps_the_valid_forecast_vintage(engine, sources):
     assert counts["sales_rows"] == 2 and counts["forecast_rows"] == 1
 
 
+def test_weekly_pos_file_keeps_only_known_return_lines(engine, sources):
+    counts = load(engine, sources, T1)
+
+    (row,) = read(engine, sources, T1, "returns")
+    # The sale line is skipped; the Oct 8 return is known only at 06:00 Milan on Oct 9.
+    assert counts["returns_rows"] == 1
+    assert (row.data["receipt_id"], row.data["return_reason"], row.data["qty"]) == ("R2", "DEF", -1)
+    assert row.source_refs[0].locator == "record=3"
+    assert row.availability_basis == "assumed:business_date_next_day_06_local"
+    load(engine, sources, T2)
+    assert [r.data["receipt_id"] for r in read(engine, sources, T2, "returns")] == ["R2", "R3"]
+
+
 def test_master_snapshot_after_as_of_writes_no_master_rows(engine, sources):
     counts = load(engine, sources, T1, master_available_at=(T1 + timedelta(hours=1)).isoformat())
 
     assert all(counts[f"{t}_rows"] == 0 for t in TABLES[:6])
     assert counts["sales_rows"] > 0  # timezones still date the facts
-    assert {r.tbl for r in stored(engine)} == {"sales", "stock", "forecast"}
+    assert {r.tbl for r in stored(engine)} == {"sales", "returns", "stock", "forecast"}
 
 
 def test_reload_is_idempotent(engine, sources):

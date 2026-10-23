@@ -8,12 +8,12 @@
       {
         "ID": "MK-0201",
         "Market": "Global",
-        "Activity": "Moncler Genius POLARIS capsule launch",
+        "Activity": "Valentino Couture ASTRA capsule launch",
         "Type": "PRODUCT_LAUNCH",
         "Channel": "All",
         "Start": "2026-09-24",
         "End": "2026-10-25",
-        "Owner": "Genius team",
+        "Owner": "Couture team",
         "Budget EUR k": 1100.0,
         "Status": "LIVE",
         "Notes": "drop Thursday 24/09 10:00 local"
@@ -21,7 +21,7 @@
       {
         "ID": "MK-0406",
         "Market": "Korea/Japan/China",
-        "Activity": "ILVARO 'Pink edit' social push",
+        "Activity": "IRIDIA 'Pink edit' social push",
         "Type": "SOCIAL",
         "Channel": "IG/Kakao/XHS",
         "Start": "2026-10-06",

@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "generated" / "sources" / "store_emails"
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-DOMAIN = "moncler-retail.example"
+DOMAIN = "valentino-retail.example"
 TZ = dt.timezone(dt.timedelta(hours=2))  # CEST for Paris/Cannes/Genève over the whole window (DST ends Oct 25)
 
 POLICY = _policy.default.clone(max_line_length=998)

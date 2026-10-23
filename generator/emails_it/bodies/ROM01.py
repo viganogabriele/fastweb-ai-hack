@@ -2,14 +2,14 @@
 # Writers: Alessandra De Santis (SM), Fabio Cardarelli (assistant manager), Giorgia Proietti (SA, shared iPad / store mailbox)
 
 PERSONAS = {
-    "ale": "Alessandra De Santis <alessandra.desantis@moncler-retail.example>",
-    "fabio": "Fabio Cardarelli <fabio.cardarelli@moncler-retail.example>",
-    "giorgia": "Giorgia Proietti <giorgia.proietti@moncler-retail.example>",
-    "store": "Moncler Roma Condotti <rom01.store@moncler-retail.example>",
-    "roberto": "Roberto Galli <roberto.galli@moncler-retail.example>",
-    "ops": "retail-ops-italy@moncler-retail.example",
-    "facility": "facility-italy@moncler-retail.example",
-    "merch": "merch-planning@moncler-retail.example",
+    "ale": "Alessandra De Santis <alessandra.desantis@valentino-retail.example>",
+    "fabio": "Fabio Cardarelli <fabio.cardarelli@valentino-retail.example>",
+    "giorgia": "Giorgia Proietti <giorgia.proietti@valentino-retail.example>",
+    "store": "Valentino Roma Condotti <rom01.store@valentino-retail.example>",
+    "roberto": "Roberto Galli <roberto.galli@valentino-retail.example>",
+    "ops": "retail-ops-italy@valentino-retail.example",
+    "facility": "facility-italy@valentino-retail.example",
+    "merch": "merch-planning@valentino-retail.example",
 }
 
 DEFAULT_TO = ["ops"]
@@ -26,11 +26,11 @@ EMAILS += [
 
 Fatturato: 16,0k (budget 17,2k, -7%)
 Ingressi: 104 | Scontrini: 13 | Conv. 12,5%
-Note: lunedi tranquillo, ancora tanti italiani di rientro dalle ferie. Bene le t-shirt logo nere e l'hoodie grigio, 2 tricot cardigan neri a un signore svizzero. Una cliente ha chiesto la Bady rosa cipria in 2, non l'abbiamo mai ricevuta in quella taglia. Maya blu tg 5 a zero, segnalo.
+Note: lunedi tranquillo, ancora tanti italiani di rientro dalle ferie. Bene le t-shirt logo nere e l'hoodie grigio, 2 tricot cardigan neri a un signore svizzero. Una cliente ha chiesto la Aria rosa cipria in 2, non l'abbiamo mai ricevuta in quella taglia. Nova blu tg 5 a zero, segnalo.
 
 Buona serata
 Alessandra De Santis
-Store Manager | Moncler Roma Via Condotti
+Store Manager | Valentino Roma Via Condotti
 Le informazioni contenute in questa e-mail sono riservate.""",
     ),
     dict(
@@ -38,9 +38,9 @@ Le informazioni contenute in questa e-mail sono riservate.""",
         to=["ale"], cc=[],
         subject="Risposta automatica: [ROM01] Report serale 31/08",
         headers={"Auto-Submitted": "auto-replied"},
-        body="""Sono fuori ufficio con accesso limitato alla posta fino a venerdì 4 settembre. Per urgenze contattare retail-ops-italy@moncler-retail.example.
+        body="""Sono fuori ufficio con accesso limitato alla posta fino a venerdì 4 settembre. Per urgenze contattare retail-ops-italy@valentino-retail.example.
 
-I am out of office with limited access to email until Friday 4 September. For urgent matters please contact retail-ops-italy@moncler-retail.example.
+I am out of office with limited access to email until Friday 4 September. For urgent matters please contact retail-ops-italy@valentino-retail.example.
 
 Roberto Galli""",
     ),
@@ -51,7 +51,7 @@ Roberto Galli""",
 
 Fatturato: 21,1k (budget 19,0k, +12%)
 Ingressi: 138 | Scontrini: 11
-Note: arrivata stamattina la consegna da CSG, 163 pz, tutto ok, sistemata entro le 13. Bella giornata con gli americani, 3 Flammette nere vendute (una coppia di Boston ne ha prese 2). Ieri sera non sono riuscita a mandare il report, scusate, ieri eravamo sotto i 10k comunque.
+Note: arrivata stamattina la consegna da CSG, 163 pz, tutto ok, sistemata entro le 13. Bella giornata con gli americani, 3 Fiammetta nere vendute (una coppia di Boston ne ha prese 2). Ieri sera non sono riuscita a mandare il report, scusate, ieri eravamo sotto i 10k comunque.
 
 Alessandra""",
     ),
@@ -60,7 +60,7 @@ Alessandra""",
         subject="chiusura roma 3/9",
         body="""ciao a tutti
 22,6k su 25,8 di budget, -12%. 140 ingressi
-vendute 2 Maya nere e 2 Tib neri, un signore ha chiesto il Karakorum nero in 6 ma nun c'e'.
+vendute 2 Nova nere e 2 Vel neri, un signore ha chiesto il Cosimo nero in 6 ma nun c'e'.
 tanti italiani oggi, qlc turco.
 Fabio
 
@@ -73,10 +73,10 @@ Inviato da iPhone""",
 
 Fatturato: 29,3k (budget 29,9k, -2%)
 Ingressi: 159 | Scontrini: 20 | Conv. 12,6%
-Note: venerdi quasi a budget. Il Tib nero va fortissimo, 4 pezzi oggi, se continua cosi la tg 4 la finiamo entro la settimana prossima. Due clienti diversi hanno chiesto il Montgenevre grigio in 4, ne abbiamo zero, possiamo chiedere qualcosa al magazzino? Un reso di una Trailgrip donna 39, ripensamento.
+Note: venerdi quasi a budget. Il Vel nero va fortissimo, 4 pezzi oggi, se continua cosi la tg 4 la finiamo entro la settimana prossima. Due clienti diversi hanno chiesto il Monteluce grigio in 4, ne abbiamo zero, possiamo chiedere qualcosa al magazzino? Un reso di una Vtrack donna 39, ripensamento.
 
 Alessandra De Santis
-Store Manager | Moncler Roma Via Condotti
+Store Manager | Valentino Roma Via Condotti
 Le informazioni contenute in questa e-mail sono riservate.""",
     ),
     dict(
@@ -84,7 +84,7 @@ Le informazioni contenute in questa e-mail sono riservate.""",
         subject="[ROM01] Report serale 05/09",
         body="""Sabato pieno, 251 ingressi, tanti italiani e un po' di tedeschi e americani.
 Fatturato 38k contro 42,3 di budget, -10%. Ha girato molto l'accessorio (berretti e cappellini navy, t-shirt) ma pochi capi importanti, scontrino medio basso.
-Una ragazza voleva la Maya verde oliva in 1, mancante.
+Una ragazza voleva la Nova verde oliva in 1, mancante.
 
 Ale""",
     ),
@@ -92,7 +92,7 @@ Ale""",
         id="c0906", sent="2026-09-06 20:02", frm="fabio", business_date="2026-09-06",
         subject="chiusura domenica",
         body="""domenica moscia, 19,8k vs 31 di budget (-37%). entrati 152 ma tanti giravano e basta, caldo
-5 t-shirt logo nere e 4 polo nere, quello si vende
+5 t-shirt logo nere e 4 jersey polo nere, quello si vende
 reso di un tricot cardigan L, ha cambiato idea
 1 cliente hoodie grigio XL che nn abbiamo
 
@@ -105,7 +105,7 @@ Inviato da iPhone""",
         subject="chiusura roma 7/9",
         body="""Ciao Roberto ciao a tutti, bentornato!
 oggi 17,1k, budget 22,8. 138 ingressi
-tanti americani, 4 Maya nere vendute tutte a americane. Una signora cercava l'Ambrine marrone in 2, l'ha vista su instagram, nun ce l'abbiamo proprio, le ho preso il numero.
+tanti americani, 4 Nova nere vendute tutte a americane. Una signora cercava l'Amalia marrone in 2, l'ha vista su instagram, nun ce l'abbiamo proprio, le ho preso il numero.
 Ale e' di riposo, domani torna lei.
 Fabio""",
     ),
@@ -116,7 +116,7 @@ Fabio""",
 
 Fatturato: 26,4k (budget 22,1k, +20%)
 Ingressi: 134 | Scontrini: 15
-Note: ottimo martedi grazie a 4 Montcla neri e 3 Trailgrip GTX nere. Finita la Flammette nera tg 0, da riassortire se possibile. Clientela mista, italiani, tedeschi, qualche cinese.
+Note: ottimo martedi grazie a 4 Mistral neri e 3 Vtrack Gtx nere. Finita la Fiammetta nera tg 0, da riassortire se possibile. Clientela mista, italiani, tedeschi, qualche cinese.
 
 Alessandra""",
     ),
@@ -125,7 +125,7 @@ Alessandra""",
         subject="[ROM01] Report serale 09/09",
         body="""Ciao,
 giornata sotto, 17,5k vs 24,7 (-29%), 134 ingressi ma conversione bassa.
-Come temevo il Tib nero in 4 e' finito e oggi un cliente lo cercava proprio in 4. Anche un Montgenevre grigio in 5 richiesto e non disponibile. Vendute 2 Maire nere.
+Come temevo il Vel nero in 4 e' finito e oggi un cliente lo cercava proprio in 4. Anche un Monteluce grigio in 5 richiesto e non disponibile. Vendute 2 Aurea nere.
 Alessandra""",
     ),
     dict(
@@ -136,11 +136,11 @@ Alessandra""",
 Fatturato: 27,5k (budget 26,7k, +3%)
 Ingressi: 167 | Scontrini: 20 | Conv. 12%
 Richieste non soddisfatte (tante oggi):
-Maire blu 00, Hermine bianca in 2, Maya oliva in 6, Karakorum nero 6 (di nuovo!), Logo cardigan blu XXL
-Note: 3 Maire nere e 3 Trailgrip nere vendute. Un gruppo di sauditi molto interessati al capospalla. Un cliente ha provato l'Arneb in 5 e gli stava enorme, ha preso il 4. Finite Trailgrip nere 44 e polo nera S.
+Aurea blu 00, Liviana bianca in 2, Nova oliva in 6, Cosimo nero 6 (di nuovo!), Vlogo Cardigan blu XXL
+Note: 3 Aurea nere e 3 Vtrack nere vendute. Un gruppo di sauditi molto interessati al capospalla. Un cliente ha provato l'Artem in 5 e gli stava enorme, ha preso il 4. Finite Vtrack nere 44 e jersey polo nera S.
 
 Alessandra De Santis
-Store Manager | Moncler Roma Via Condotti
+Store Manager | Valentino Roma Via Condotti
 Le informazioni contenute in questa e-mail sono riservate.""",
     ),
     dict(
@@ -149,7 +149,7 @@ Le informazioni contenute in questa e-mail sono riservate.""",
         body="""Buonasera,
 oggi fatturato 38,3k, budget 34,7k quindi +10%. Ingressi 214.
 E' arrivata la consegna del magazzino (218 pezzi), doveva arrivare mercoledi, e' arrivata oggi. Abbiamo sistemato in back-office fino alle 15.
-Venduti 3 tricot cardigan neri e tante t-shirt. Richiesti Flammette blu 3 e tricot cardigan grigio XL che non abbiamo.
+Venduti 3 tricot cardigan neri e tante t-shirt. Richiesti Fiammetta blu 3 e tricot cardigan grigio XL che non abbiamo.
 Buona serata
 Giorgia - ROM01""",
     ),
@@ -160,7 +160,7 @@ Giorgia - ROM01""",
 
 Fatturato: 35,9k (budget 47,9k, -25%)
 Ingressi: 219 | Scontrini: 23
-Note: sabato con buon passaggio ma non abbiamo chiuso i capi grossi. Bene Trailgrip nere e Montcla (3 neri + 2 blu). A zero ora: Montcla nero 3, logo cardigan blu S, polo nera S, Trailgrip nere 41 e 44. Le sneakers ci servono, ce le chiedono tutti i giorni.
+Note: sabato con buon passaggio ma non abbiamo chiuso i capi grossi. Bene Vtrack nere e Mistral (3 neri + 2 blu). A zero ora: Mistral nero 3, vlogo cardigan blu S, jersey polo nera S, Vtrack nere 41 e 44. Le sneakers ci servono, ce le chiedono tutti i giorni.
 
 Ale""",
     ),
@@ -168,8 +168,8 @@ Ale""",
         id="c0913", sent="2026-09-13 20:10", frm="fabio", business_date="2026-09-13",
         subject="chiusura 13/9",
         body="""29,4k (budget 31,6) -7%, 171 ingressi
-6 t-shirt nere, 4 Tib neri (il 4 e' rientrato con la consegna di venerdi)
-1 signora cercava la Valbourg nera in 00
+6 t-shirt nere, 4 Vel neri (il 4 e' rientrato con la consegna di venerdi)
+1 signora cercava la Valdora nera in 00
 domenica tranquilla, daje
 Fabio
 
@@ -193,12 +193,12 @@ Fatturato: 11,5k (budget 24,3k, -53%)
 Ingressi: 74 (lunedi scorso 138)
 Scontrini: 13
 Note: piu' della meta' della gente in meno, si vede a occhio. Chi e' entrato ha comprato (felpe nere, cappellini, hoodie) quindi la conversione e' alta ma i numeri sono questi. Rumore di martello pneumatico tutta la mattina, alcuni clienti sono usciti subito.
-Richiesti logo cardigan blu S e Trailgrip nera 41, entrambi a zero.
+Richiesti vlogo cardigan blu S e Vtrack nera 41, entrambi a zero.
 
 Allego 3 foto dell'ingresso e delle vetrine. Chiedo a facility se si puo' fare qualcosa per segnalare che siamo aperti. Domani provo a chiamare il Municipio.
 
 Alessandra De Santis
-Store Manager | Moncler Roma Via Condotti
+Store Manager | Valentino Roma Via Condotti
 Le informazioni contenute in questa e-mail sono riservate.""",
     ),
     dict(
@@ -235,7 +235,7 @@ Alessandra""",
         body="""aho oggi 'na desolazione.
 8,5k su 23,9 di budget, -64%. 68 ingressi, martedi scorso erano 134
 il cantiere e' sempre la, oggi pure col trapano che faceva tremare i vetri. i clienti passano, vedono le transenne e tirano dritto verso piazza di spagna
-venduti solo berretti, 1 belt bag, 1 felpa. 1 cliente cercava la Valbourg nera 00 (la stessa di domenica? boh)
+venduti solo berretti, 1 belt bag, 1 felpa. 1 cliente cercava la Valdora nera 00 (la stessa di domenica? boh)
 mo' vediamo domani
 Fabio
 
@@ -277,7 +277,7 @@ Studio Ferrante Amministrazioni""",
 Fatturato: 13,3k (budget 26,1k, -49%)
 Ingressi: 70 | Scontrini: 15 | Conv. 21%
 Cantiere: giorno 3. Polvere ovunque, abbiamo pulito le vetrine dentro due volte e passato i capi esposti vicino alla porta. Il corriere della consegna CSG (243 pz, puntuale almeno) non poteva arrivare con il furgone davanti, hanno scaricato su Via Belsiana e abbiamo portato i colli a mano con i carrelli.
-Note: 4 Ilvaro neri venduti, bene. Un reso Arneb 4 e un reso Trailgrip 44 per taglia. La conversione e' altissima perche' entra solo chi ci cerca apposta.
+Note: 4 Iridia neri venduti, bene. Un reso Artem 4 e un reso Vtrack 44 per taglia. La conversione e' altissima perche' entra solo chi ci cerca apposta.
 
 Alessandra""",
     ),
@@ -285,7 +285,7 @@ Alessandra""",
         id="c0917", sent="2026-09-17 20:08", frm="fabio", business_date="2026-09-17",
         subject="chiusura 17/9",
         body="""16,1k vs 30,5 (-47%), 83 ingressi
-vendute 2 Maire blu e 2 logo cardigan blu
+vendute 2 Aurea blu e 2 vlogo cardigan blu
 polvere sui capi in vetrina, pure sulle borse, ce stanno a sotterra'. gli operai iniziano alle 7:30, quando arriviamo e' gia' tutto bianco
 facility ancora niente x il cartello
 F.
@@ -299,13 +299,13 @@ Inviato da iPhone""",
 
 Fatturato: 28,7k (budget 36,2k, -21%)
 Ingressi: 94 (venerdi scorso 214)
-Cantiere: invariato. Oggi due clienti al telefono non trovavano l'ingresso, uno ha girato intorno al palazzo da Via Mario de' Fiori. Abbiamo stampato noi un foglio A3 "Moncler e' aperto - entrata qui" e l'abbiamo attaccato alla transenna con lo scotch, ma i vigili ci hanno detto di toglierlo perche' non autorizzato.
+Cantiere: invariato. Oggi due clienti al telefono non trovavano l'ingresso, uno ha girato intorno al palazzo da Via Mario de' Fiori. Abbiamo stampato noi un foglio A3 "Valentino e' aperto - entrata qui" e l'abbiamo attaccato alla transenna con lo scotch, ma i vigili ci hanno detto di toglierlo perche' non autorizzato.
 Note: giornata salvata da un cliente svizzero (3 hoodie neri + 2 tricot cardigan). Per il resto poco.
 
 Facility, avete novita' sul pannello? Ho scritto martedi.
 
 Alessandra De Santis
-Store Manager | Moncler Roma Via Condotti
+Store Manager | Valentino Roma Via Condotti
 Le informazioni contenute in questa e-mail sono riservate.""",
     ),
     dict(
@@ -314,7 +314,7 @@ Le informazioni contenute in questa e-mail sono riservate.""",
         body="""Ciao,
 sabato 35,4k contro 54,1 di budget (-35%). Ingressi 146, sabato scorso 219 e di solito in settembre stiamo sopra i 230.
 Cantiere: il sabato gli operai non ci sono ma le transenne e i pannelli restano, quindi cambia poco.
-Vendute 3 Maya blu e 2 nere, 2 Valbourg nere. Emiratini e tedeschi.
+Vendute 3 Nova blu e 2 nere, 2 Valdora nere. Emiratini e tedeschi.
 Ale""",
     ),
     dict(
@@ -322,8 +322,8 @@ Ale""",
         subject="chiusura domenica 20",
         body="""14,5k, budget 37,5 -> -61%
 92 ingressi, 'na cifra di americani pero' guardano e se ne vanno
-3 Ilvaro neri, 2 cable knit
-reso Bady 3 per difetto (cucitura scucita sulla tasca) e reso Flammette 4 regalo
+3 Iridia neri, 2 cable knit
+reso Aria 3 per difetto (cucitura scucita sulla tasca) e reso Fiammetta 4 regalo
 mo' basta, a domani
 F.
 
@@ -334,7 +334,7 @@ Inviato da iPhone""",
         subject="Chiusura ROM01 21/09",
         body="""Buonasera,
 oggi fatturato 25,4k, budget 27,6k. Ingressi solo 61.
-Per fortuna e' arrivato un gruppo di clienti cinesi mandati dal concierge dell'hotel, hanno comprato 2 Maire blu e 2 Hermine bianche. Anche qualche coreano.
+Per fortuna e' arrivato un gruppo di clienti cinesi mandati dal concierge dell'hotel, hanno comprato 2 Aurea blu e 2 Liviana bianche. Anche qualche coreano.
 Il cantiere sempre uguale, oggi hanno chiuso con le transenne anche meta' dell'ingresso per un'ora.
 Giorgia - ROM01""",
     ),
@@ -358,10 +358,10 @@ Riassumo la situazione perche' ieri non sono riuscita a scrivere (giornata pessi
 
 Chiedo formalmente che il budget di settembre e ottobre venga rivisto o almeno che si tenga conto di questo nei risultati del team. I ragazzi stanno lavorando il doppio per vendere la meta'.
 
-Richieste di oggi che non abbiamo: Maya blu 1, Arneb nero 6, t-shirt logo bianca S e blu XXL.
+Richieste di oggi che non abbiamo: Nova blu 1, Artem nero 6, t-shirt logo bianca S e blu XXL.
 
 Alessandra De Santis
-Store Manager | Moncler Roma Via Condotti
+Store Manager | Valentino Roma Via Condotti
 Le informazioni contenute in questa e-mail sono riservate.""",
     ),
     dict(
@@ -380,7 +380,7 @@ Inviato da iPhone""",
         subject="chiusura 24/9",
         body="""oh finalmente 'na giornata decente: 32,9k su 36,1, -9%
 115 ingressi
-4 Bady nere, 3 Montcla neri, 2 Trailgrip donna. sauditi e americani
+4 Aria nere, 3 Mistral neri, 2 Vtrack donna. sauditi e americani
 finita la t-shirt logo blu in L, un cliente la voleva
 il trapano oggi ha smesso alle 3, s'e' sentito
 Fabio
@@ -395,8 +395,8 @@ Inviato da iPhone""",
 venerdi da dimenticare: 15,4k contro 44,1k di budget (-65%). Ingressi 113 ma tanti erano gente che entrava a chiedere dov'era il bagno o la strada per Trinita' dei Monti perche' il percorso era deviato.
 Cantiere: oggi carotatrice tutto il giorno, abbiamo dovuto alzare la musica e comunque non si parlava. Una cliente americana e' uscita dicendo che non riusciva a provare con quel rumore.
 
-Due cambi taglia sull'Arneb, da 5 a 4 e da 6 a 5: veste grande, ormai consigliamo sempre una taglia in meno. Vendute 2 balaclava Polaris nere e 2 logo cardigan blu.
-Richieste: Maya oliva 6, Insolux nera 35.
+Due cambi taglia sull'Artem, da 5 a 4 e da 6 a 5: veste grande, ormai consigliamo sempre una taglia in meno. Vendute 2 balaclava Astra nere e 2 vlogo cardigan blu.
+Richieste: Nova oliva 6, Alpina nera 35.
 
 Alessandra""",
     ),
@@ -406,7 +406,7 @@ Alessandra""",
         body="""ciao
 sabato 31,5k su 62 di budget, -49%. 146 ingressi, nun e' un sabato.
 consegna CSG arrivata oggi, doveva essere mercoledi. il corriere BRT dice che mercoledi e' passato ma non trovava dove fermarsi per le transenne e se n'e' andato senza chiamarci. 176 pz, tt sistemato in serata
-venduto poco di importante, polo, t-shirt, cappellini
+venduto poco di importante, jersey polo, t-shirt, cappellini
 F.
 
 Inviato da iPhone""",
@@ -415,7 +415,7 @@ Inviato da iPhone""",
         id="c0927", sent="2026-09-27 20:04", frm="fabio", business_date="2026-09-27",
         subject="chiusura domenica 27",
         body="""17,9k (budget 43,7) -59%, 97 ingressi
-3 polo nere, 2 tricot cardigan, qualche brasiliano
+3 jersey polo nere, 2 tricot cardigan, qualche brasiliano
 oggi niente operai ma i pannelli stanno sempre la. 2 signore mi hanno detto che pensavano fossimo chiusi x ristrutturazione
 F.
 
@@ -425,7 +425,7 @@ Inviato da iPhone""",
         id="c0927dup", sent="2026-09-27 20:06", frm="fabio", business_date="2026-09-27", kind="dup", suffix="_dup",
         subject="chiusura domenica 27",
         body="""17,9k (budget 43,7) -59%, 97 ingressi
-3 polo nere, 2 tricot cardigan, qualche brasiliano
+3 jersey polo nere, 2 tricot cardigan, qualche brasiliano
 oggi niente operai ma i pannelli stanno sempre la. 2 signore mi hanno detto che pensavano fossimo chiusi x ristrutturazione
 F.
 
@@ -436,7 +436,7 @@ Inviato da iPhone""",
         subject="ROM01 report 28/09",
         body="""Ciao,
 14,5k vs 33,8 (-57%), ingressi 87.
-Segnalo un reso di un Tib (tg 4): il cursore della zip si e' staccato dopo due settimane. Il cliente era gentile ma non contento, abbiamo fatto il reso pieno. Teniamo d'occhio.
+Segnalo un reso di un Vel (tg 4): il cursore della zip si e' staccato dopo due settimane. Il cliente era gentile ma non contento, abbiamo fatto il reso pieno. Teniamo d'occhio.
 Per il resto berretti blu e t-shirt, poco altro. Totem/pannello ancora niente.
 Alessandra""",
     ),
@@ -445,9 +445,9 @@ Alessandra""",
         subject="chiusura 29/9 (ieri)",
         body="""scusate ieri sera mi si e' scaricato il telefono e il pc del back-office era gia' spento
 29/9: 7,4k su 31,9 di budget, -77%. peggior giornata da quando sto qua. 78 ingressi, quasi tutti italiani
-2 resi Tib per la zip rotta, tg 3 e tg 2, stessa cosa di lunedi: il cursore si sfila. con quello di Ale sono 3 in due giorni, c'e' qualcosa che nun va col lotto
-pure reso Rosiere 5 per qualita' e Maya 4 per taglia
-venduti 2 Polaris cape, bianca e nera
+2 resi Vel per la zip rotta, tg 3 e tg 2, stessa cosa di lunedi: il cursore si sfila. con quello di Ale sono 3 in due giorni, c'e' qualcosa che nun va col lotto
+pure reso Riviera 5 per qualita' e Nova 4 per taglia
+venduti 2 Astra Cape, bianca e nera
 Fabio
 
 Inviato da iPhone""",
@@ -460,11 +460,11 @@ Inviato da iPhone""",
 Fatturato: 24,0k (budget 36,6k, -34%)
 Ingressi: 86
 Cantiere: oggi ho parlato con il capocantiere del Comune. Mi ha detto che "fine ottobre e' difficile, diciamo novembre" perche' hanno trovato un problema con le tubature sotto il selciato. Il ponteggio del condominio resta finche' non finiscono loro. Quindi altro mese cosi.
-Note: consegna CSG 204 pz arrivata puntuale (questa volta il corriere ci ha chiamato prima, grazie). Un altro Tib con la zip rotta (tg 3), siamo a 4. Chiedo se qualcuno puo' dirci se e' un problema noto e se dobbiamo togliere i Tib dalla vendita.
-2 Hermine bianche vendute.
+Note: consegna CSG 204 pz arrivata puntuale (questa volta il corriere ci ha chiamato prima, grazie). Un altro Vel con la zip rotta (tg 3), siamo a 4. Chiedo se qualcuno puo' dirci se e' un problema noto e se dobbiamo togliere i Vel dalla vendita.
+2 Liviana bianche vendute.
 
 Alessandra De Santis
-Store Manager | Moncler Roma Via Condotti
+Store Manager | Valentino Roma Via Condotti
 Le informazioni contenute in questa e-mail sono riservate.""",
     ),
 ]
@@ -476,8 +476,8 @@ EMAILS += [
         subject="ROM01 report 01/10",
         body="""Ciao,
 32,0k su 41,1 di budget (-22%), 97 ingressi, conversione sopra il 20%, chi entra e' motivato.
-3 Ilvaro neri, 3 Trailgrip donna bianco latte, 2 Maire blu. Tedeschi.
-Ennesimo Tib reso per la zip (tg 4).
+3 Iridia neri, 3 Vtrack donna bianco latte, 2 Aurea blu. Tedeschi.
+Ennesimo Vel reso per la zip (tg 4).
 Domani viene Roberto, almeno vede con i suoi occhi.
 Ale""",
     ),
@@ -489,8 +489,8 @@ Ale""",
 oggi visita di Roberto nel pomeriggio, grazie per essere passato. Abbiamo fatto insieme il giro da Piazza di Spagna e credo sia stato chiaro a tutti che dall'angolo il negozio non esiste.
 
 Fatturato 29,6k (budget 44,4k, -33%). Ingressi 150, il venerdi un po' meglio.
-Finita la Maire nera in 1, e' una delle taglie che vendiamo di piu'. Il magazzino ne ha?
-Scontrini 18, bene sciarpe e cappellini, 2 Ilvaro neri, 2 Montcla.
+Finita la Aurea nera in 1, e' una delle taglie che vendiamo di piu'. Il magazzino ne ha?
+Scontrini 18, bene sciarpe e cappellini, 2 Iridia neri, 2 Mistral.
 
 Alessandra""",
     ),
@@ -508,9 +508,9 @@ R.""",
         id="c1003", sent="2026-10-03 21:22", frm="fabio", business_date="2026-10-03",
         subject="chiusura sabato 3/10",
         body="""sabato: 34,7k su 68,1 di budget, 168 ingressi
-4 Maya nere, 3 zaini Makaio, 3 Tib bianchi (quelli bianchi nun si rompono? speriamo)
-reso Tib 4 zip, e reso Bady 0 per taglia
-1 cliente chiedeva l'Arneb nero in 7, gli ho detto che veste grande e che il 6 gli andava bene, nun s'e' convinto
+4 Nova nere, 3 zaini Urban Backpack, 3 Vel bianchi (quelli bianchi nun si rompono? speriamo)
+reso Vel 4 zip, e reso Aria 0 per taglia
+1 cliente chiedeva l'Artem nero in 7, gli ho detto che veste grande e che il 6 gli andava bene, nun s'e' convinto
 F.
 
 Inviato da iPhone""",
@@ -528,10 +528,10 @@ Inviato da iPhone""",
         id="c1004", sent="2026-10-04 20:13", frm="fabio", business_date="2026-10-04",
         subject="chiusura dom 4/10",
         body="""24,9k budget 46,4 (-46%), 106 ingressi
-4 Trailgrip donna nere, 3 tricot cardigan, 2 Arneb neri (preso uno piu' piccolo come sempre)
-reso Montcla 4 per taglia
-richiesto Chamonix XL, niente
-Maire nera ormai finita pure in 0, restano 5 pezzi sparsi
+4 Vtrack donna nere, 3 tricot cardigan, 2 Artem neri (preso uno piu' piccolo come sempre)
+reso Mistral 4 per taglia
+richiesto Cortina XL, niente
+Aurea nera ormai finita pure in 0, restano 5 pezzi sparsi
 Fabio""",
     ),
     dict(
@@ -539,7 +539,7 @@ Fabio""",
         subject="Chiusura ROM01 05/10",
         body="""Buonasera,
 fatturato 14,6k (budget 33,5k). Ingressi 79.
-Tanti giapponesi oggi, piu' di un quarto dei clienti, hanno comprato soprattutto accessori e 2 Karakorum neri.
+Tanti giapponesi oggi, piu' di un quarto dei clienti, hanno comprato soprattutto accessori e 2 Cosimo neri.
 Il cantiere oggi ha ricominciato a scavare proprio davanti alla porta, per due ore siamo entrati da una passerella di legno.
 Giorgia - ROM01""",
     ),
@@ -548,8 +548,8 @@ Giorgia - ROM01""",
         subject="ROM01 report 06/10",
         body="""Ciao,
 18,7k vs 35,9k (-48%), 91 ingressi.
-Una cliente coreana voleva la Maire nera in 1, in nero ci restano solo pezzi singoli in 00, 2, 3 e 4. Ho chiamato CSG: zero in nero 0 e 1, "forse meta' mese". Le ho proposto la blu, niente, voleva quella nera.
-Venduti 3 marsupi Legere e 2 berretti rosa cipria. Reso Trailgrip donna 38 per taglia.
+Una cliente coreana voleva la Aurea nera in 1, in nero ci restano solo pezzi singoli in 00, 2, 3 e 4. Ho chiamato CSG: zero in nero 0 e 1, "forse meta' mese". Le ho proposto la blu, niente, voleva quella nera.
+Venduti 3 marsupi Vita Belt Bag e 2 berretti rosa cipria. Reso Vtrack donna 38 per taglia.
 Facility mi ha confermato il totem per domani. Speriamo.
 Alessandra""",
     ),
@@ -560,18 +560,18 @@ Alessandra""",
 
 Fatturato: 29,4k (budget 37,7k, -22%)
 Ingressi: 101 | Conv. 19%
-Cantiere: e' arrivato il totem "Moncler - siamo aperti / we are open" all'angolo con Piazza di Spagna e un pannello stampato sulla recinzione davanti alle vetrine. Finalmente. Vediamo nei prossimi giorni se cambia qualcosa sugli ingressi.
-Note: consegna 222 pz ok, ma niente Maire nere. Altra richiesta oggi Maire nera tg 1. 2 Insolux nere vendute.
+Cantiere: e' arrivato il totem "Valentino - siamo aperti / we are open" all'angolo con Piazza di Spagna e un pannello stampato sulla recinzione davanti alle vetrine. Finalmente. Vediamo nei prossimi giorni se cambia qualcosa sugli ingressi.
+Note: consegna 222 pz ok, ma niente Aurea nere. Altra richiesta oggi Aurea nera tg 1. 2 Alpina nere vendute.
 
 Alessandra De Santis
-Store Manager | Moncler Roma Via Condotti
+Store Manager | Valentino Roma Via Condotti
 Le informazioni contenute in questa e-mail sono riservate.""",
     ),
     dict(
         id="c1008", sent="2026-10-08 20:16", frm="fabio", business_date="2026-10-08",
         subject="chiusura 8/10",
         body="""28k su 43,1, -35%. 125 ingressi, col totem qlc in piu' forse
-4 Maire beige vendute, la gente vuole la nera ma se non c'e' qualcuna si accontenta
+4 Aurea beige vendute, la gente vuole la nera ma se non c'e' qualcuna si accontenta
 a Milano hanno i cinesi della golden week, qua col cantiere nemmeno quelli
 F.
 
@@ -581,10 +581,10 @@ Inviato da iPhone""",
         id="c1009", sent="2026-10-09 20:58", frm="ale", business_date="2026-10-09",
         subject="ROM01 report 09/10",
         body="""Buonasera,
-36,2k contro 51,2k di budget (-29%), 110 ingressi ma conversione al 20%. 4 Ilvaro neri, 2 logo cardigan blu, americani e inglesi.
-Ancora una richiesta di Maire nera in 1. E ancora un Tib reso per la zip (tg 3).
+36,2k contro 51,2k di budget (-29%), 110 ingressi ma conversione al 20%. 4 Iridia neri, 2 vlogo cardigan blu, americani e inglesi.
+Ancora una richiesta di Aurea nera in 1. E ancora un Vel reso per la zip (tg 3).
 
-Oggi mi ha chiamato Milano Montenapoleone: cercano il logo cardigan in M, loro l'hanno finito ieri e il magazzino non ne ha. Noi in blu M ne abbiamo 5, ma con la situazione che abbiamo li vendiamo anche noi e comunque senza l'ok di Roberto non spedisco niente. Gli ho detto di sentire lui. Roberto, se mi dici di mandarne 1 o 2 lo faccio.
+Oggi mi ha chiamato Milano Montenapoleone: cercano il vlogo cardigan in M, loro l'hanno finito ieri e il magazzino non ne ha. Noi in blu M ne abbiamo 5, ma con la situazione che abbiamo li vendiamo anche noi e comunque senza l'ok di Roberto non spedisco niente. Gli ho detto di sentire lui. Roberto, se mi dici di mandarne 1 o 2 lo faccio.
 
 Alessandra""",
     ),
@@ -598,13 +598,13 @@ EMAILS += [
         body="""ciao a tutti, ieri sera ho chiuso tardi e nun ho mandato niente, faccio tutto insieme
 
 sabato 10: 56,4k su 69,4 (-19%), 192 ingressi! miglior giornata da quando c'e' il cantiere. c'era la hostess all'angolo con l'ombrello e il volantino, e il totem. funziona daje
-6 Maya nere, 4 Bady nere, 3 Maire blu, 3 hoodie neri. tanti americani
-1 Maire nera tg1 richiesta, sempre quella
-2 resi Ilvaro tg 2 (uno taglia, uno ripensamento)
+6 Nova nere, 4 Aria nere, 3 Aurea blu, 3 hoodie neri. tanti americani
+1 Aurea nera tg1 richiesta, sempre quella
+2 resi Iridia tg 2 (uno taglia, uno ripensamento)
 
 domenica 11: 23,3k su 51,9, -55%. 123 ingressi. hostess c'era pure oggi ma la domenica mattina sta via e' 'n deserto
-richiesto Montcla blu 3, finito
-reso 1 Tib 5, ha cambiato idea, zip a posto
+richiesto Mistral blu 3, finito
+reso 1 Vel 5, ha cambiato idea, zip a posto
 
 Fabio
 
@@ -615,7 +615,7 @@ Inviato da iPhone""",
         subject="ROM01 report 12/10",
         body="""Ciao,
 15,3k vs 38,0k (-60%). Ingressi 104, il lunedi senza hostess si torna giu'.
-Altro Tib per la zip, tg 4. Ho perso il conto, credo 8 dall'inizio. Nessuno ci ha ancora detto niente, li continuiamo a vendere?
+Altro Vel per la zip, tg 4. Ho perso il conto, credo 8 dall'inizio. Nessuno ci ha ancora detto niente, li continuiamo a vendere?
 Qualche coreano e un paio di clienti degli Emirati, comprato poco.
 Roberto, sul cardigan per Milano non mi hai risposto, per ora non ho mandato niente.
 Ale""",
@@ -626,7 +626,7 @@ Ale""",
         body="""Buonasera,
 fatturato 12,7k, budget 37,9k. Ingressi 79.
 Giornata molto lenta, rumore forte fino alle 17 (stanno tagliando le pietre).
-Una cliente francese ha chiesto la Maire nera taglia 1, non c'e'. Vendute 2 Maya blu e 2 Hermine.
+Una cliente francese ha chiesto la Aurea nera taglia 1, non c'e'. Vendute 2 Nova blu e 2 Liviana.
 Giorgia - ROM01""",
     ),
     dict(
@@ -637,17 +637,17 @@ Giorgia - ROM01""",
 Fatturato: 28,5k (budget 39,9k, -29%)
 Ingressi: 98
 Cantiere: nuova data. Il capocantiere oggi mi ha detto "6 novembre" per togliere le transenne, poi una settimana per smontare il ponteggio. Siamo passati da fine ottobre a novembre a 6 novembre, non so piu' a cosa credere. Facility, la hostess si puo' prolungare almeno fino al weekend dell'8?
-Note: consegna 252 pz, di nuovo zero Maire nere. Oggi una cliente la voleva in 0. Bene la Polaris (2 balaclava, oversized, cape bianca), clientela cinese ed emiratina.
+Note: consegna 252 pz, di nuovo zero Aurea nere. Oggi una cliente la voleva in 0. Bene la Astra (2 balaclava, oversized, cape bianca), clientela cinese ed emiratina.
 
 Alessandra De Santis
-Store Manager | Moncler Roma Via Condotti""",
+Store Manager | Valentino Roma Via Condotti""",
     ),
     dict(
         id="c1015", sent="2026-10-15 20:11", frm="fabio", business_date="2026-10-15",
         subject="chiusura 15/10",
         body="""21,8k su 44,8 -51%, 93 ingressi
-3 Maya blu, 2 hoodie neri, 2 Karakorum
-reso Montcla 5 qualita' (piuma che esce dalla cucitura)
+3 Nova blu, 2 hoodie neri, 2 Cosimo
+reso Mistral 5 qualita' (piuma che esce dalla cucitura)
 domani sciopero generale, metro e bus fermi. vediamo chi arriva, io vengo in motorino
 F.
 
@@ -661,8 +661,8 @@ Inviato da iPhone""",
 giornata difficile. Sciopero generale: ATAC ha fermato metro e bus dopo le 8:45, Giorgia e' arrivata alle 11 a piedi da San Giovanni e un'altra collega non e' proprio riuscita a venire. Abbiamo aperto alle 10 in due.
 
 Fatturato 17,2k contro 55,9k di budget (-69%). Ingressi 97, pochi romani, qualche turista cinese e coreano a piedi.
-Ancora Maire nera in 1 richiesta. Reso di una Maire tg 1 per taglia, le stava stretta.
-4 Bady nere vendute.
+Ancora Aurea nera in 1 richiesta. Reso di una Aurea tg 1 per taglia, le stava stretta.
+4 Aria nere vendute.
 
 Tra cantiere e sciopero non ci manca niente.
 Alessandra""",
@@ -673,25 +673,25 @@ Alessandra""",
         subject="ROM01 report 17/10",
         body="""Buonasera,
 
-sabato 32,8k contro 75,2k di budget, -56%. Ingressi 202 grazie alla hostess, ma la conversione e' sotto il 10%: entrano, chiedono la Maire nera e se ne vanno.
+sabato 32,8k contro 75,2k di budget, -56%. Ingressi 202 grazie alla hostess, ma la conversione e' sotto il 10%: entrano, chiedono la Aurea nera e se ne vanno.
 
-Oggi 3 clienti diverse ci hanno chiesto la Maire nera in 1 e una in 3. Abbiamo nero solo in 2 e 4. Le ho messe in lista d'attesa. Sono settimane che la chiedono, CSG continua a dire "in arrivo".
+Oggi 3 clienti diverse ci hanno chiesto la Aurea nera in 1 e una in 3. Abbiamo nero solo in 2 e 4. Le ho messe in lista d'attesa. Sono settimane che la chiedono, CSG continua a dire "in arrivo".
 
 Vedo che il budget di ottobre sul sistema e' ancora quello originale. Dopo la visita di Roberto ci era stato detto che merch-planning lo avrebbe considerato. Siamo a -45/50% da 5 settimane per un cantiere che non dipende da noi e il team lo vede tutte le mattine sul report. Vorrei una risposta, anche negativa.
 
-Vendute 3 Ecrins nere e 2 Maire beige. Resi: Maya 4 taglia, Tib 6 ripensamento, un cable knit regalo, un Legere.
+Vendute 3 Ettore nere e 2 Aurea beige. Resi: Nova 4 taglia, Vel 6 ripensamento, un cable knit regalo, un Vita Belt Bag.
 
 Alessandra De Santis
-Store Manager | Moncler Roma Via Condotti
+Store Manager | Valentino Roma Via Condotti
 Le informazioni contenute in questa e-mail sono riservate.""",
     ),
     dict(
         id="c1018", sent="2026-10-18 20:22", frm="fabio", business_date="2026-10-18",
         subject="chiusura dom 18/10",
         body="""37k su 54,2, -32%, 147 ingressi. hostess + domenica = gente
-4 Bady nere, 4 Maya nere, 3 Maire beige
-Maire nera: chiesta in 2 e in 3, mo' abbiamo finito pure la 2, ci resta solo qlc 4
-1 cliente chiedeva l'Ambrine cioccolato in 0, mai vista qui
+4 Aria nere, 4 Nova nere, 3 Aurea beige
+Aurea nera: chiesta in 2 e in 3, mo' abbiamo finito pure la 2, ci resta solo qlc 4
+1 cliente chiedeva l'Amalia cioccolato in 0, mai vista qui
 daje che ce la famo
 Fabio
 
@@ -699,11 +699,11 @@ Inviato da iPhone""",
     ),
     dict(
         id="c1019", sent="2026-10-19 20:46", frm="store", business_date="2026-10-19",
-        to=["retail-ops-spain@moncler-retail.example"],
+        to=["retail-ops-spain@valentino-retail.example"],
         subject="Chiusura ROM01 19/10",
         body="""Buonasera,
 fatturato 20,7k, budget 41,9k. Ingressi 108.
-Venduti 2 Tib bianchi, 2 cape Polaris (nera e bianca), berretti bianchi. Clienti americani e coreani.
+Venduti 2 Vel bianchi, 2 cape Astra (nera e bianca), berretti bianchi. Clienti americani e coreani.
 Oggi gli operai hanno messo nuove transenne anche sul lato di Via Mario de' Fiori.
 Giorgia - ROM01""",
     ),
@@ -711,7 +711,7 @@ Giorgia - ROM01""",
         id="c1020", sent="2026-10-20 20:18", frm="ale", business_date="2026-10-20",
         subject="report roma 20/10",
         body="""9,9k. Budget 41,2k. 77 ingressi.
-Martello pneumatico dalle 8 alle 18 proprio sotto la vetrina centrale. 3 resi (Bady 0 taglia, cable knit colore, Trailgrip 42) quindi il netto e' ancora piu' basso.
+Martello pneumatico dalle 8 alle 18 proprio sotto la vetrina centrale. 3 resi (Aria 0 taglia, cable knit colore, Vtrack 42) quindi il netto e' ancora piu' basso.
 Non ho altro da aggiungere.
 A.
 
@@ -722,9 +722,9 @@ Inviato da iPhone""",
         subject="ROM01 report 21/10",
         body="""Buonasera,
 
-finalmente una buona notizia: nella consegna di oggi (254 pz) sono arrivate le Maire nere, tutta la scala dal 00 al 4, 12 pezzi in tg 1. Ho gia' chiamato le clienti in lista d'attesa, 3 passano domani.
+finalmente una buona notizia: nella consegna di oggi (254 pz) sono arrivate le Aurea nere, tutta la scala dal 00 al 4, 12 pezzi in tg 1. Ho gia' chiamato le clienti in lista d'attesa, 3 passano domani.
 
-Fatturato 30,7k (budget 43,1k, -29%), 110 ingressi. 3 Maya nere, 2 polo, 2 Rosiere nere.
+Fatturato 30,7k (budget 43,1k, -29%), 110 ingressi. 3 Nova nere, 2 jersey polo, 2 Riviera nere.
 
 Cantiere: confermato 6 novembre per le transenne. Totem e hostess restano, grazie facility.
 Roberto, per Milano poi non e' stato mandato nessun cardigan, giusto per chiudere il punto.
