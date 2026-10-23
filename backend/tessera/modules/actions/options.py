@@ -388,11 +388,13 @@ def _transfer(
             reasons.append("no domestic donor store in the run")
         return None, tuple(reasons), ""
     admissible = [c for c in candidates if not c.blocking and c.beneficial]
-    best = {s: min(admissible, key=lambda c, s=s: _rank_in(c, s)) for s in SCENARIOS}
-    picks = {s: _label_move(c) for s, c in best.items()} if admissible else {}
     split = ""
-    if len(set(picks.values())) > 1:
-        split = ", ".join(f"{s}: {m}" for s, m in picks.items())
+    if admissible:
+        picks = {
+            s: _label_move(min(admissible, key=lambda c, s=s: _rank_in(c, s))) for s in SCENARIOS
+        }
+        if len(set(picks.values())) > 1:
+            split = ", ".join(f"{s}: {m}" for s, m in picks.items())
     return min(candidates, key=_rank), tuple(reasons), split
 
 
@@ -423,12 +425,15 @@ def _sizes(inputs: OptionInputs, donor: Position) -> list[str]:
 
 
 def _rank(c: _Candidate) -> tuple[Any, ...]:
-    """Admissible and beneficial first, then fewer blocking checks, more reduction, cost, units."""
+    """Admissible and beneficial first; then fewer fails (a fail is final, an unknown can be
+    resolved), fewer unknowns, more reduction, less cost, fewer units."""
     reduction = c.reduction["base"] if c.reduction else 0.0
     cost = c.leg.cost_eur if c.leg.cost_eur is not None else math.inf
+    fails = sum(x.status == "fail" for x in c.blocking)
     return (
         bool(c.blocking) or not c.beneficial,
-        len(c.blocking),
+        fails,
+        len(c.blocking) - fails,
         -reduction,
         cost,
         c.leg.qty,
