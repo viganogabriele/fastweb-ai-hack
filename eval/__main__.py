@@ -8,6 +8,15 @@ from pathlib import Path
 from .harness import ARTIFACTS, FrozenRun, freeze
 from .isolation import run_product
 from .lead_time import lead_time_report
+from .reading import catalog_ids, load_labels, reading_protocol, score
+
+
+def _write_new(path: Path, data: object) -> None:
+    """Exclusive creation: previous records are never overwritten."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("x", encoding="utf-8") as stream:
+        json.dump(data, stream, ensure_ascii=False, indent=2)
+        stream.write("\n")
 
 
 def main() -> None:
@@ -27,6 +36,16 @@ def main() -> None:
     verify.add_argument("--sha256", required=True)
     verify.add_argument("--key", action="append", required=True)
     verify.add_argument("--output", type=Path, required=True)
+    sample = sub.add_parser(
+        "reading-sample", help="EVL-02: write the sample file list and protocol, no answers"
+    )
+    sample.add_argument("--files-out", type=Path)
+    sample.add_argument("--run-spec", type=Path, help="frozen RunSpec, for the protocol")
+    sample.add_argument("--protocol-out", type=Path)
+    reading = sub.add_parser("reading", help="EVL-02: score a verified bundle on the labels")
+    reading.add_argument("bundle", type=Path)
+    reading.add_argument("--sha256", required=True)
+    reading.add_argument("--output", type=Path, required=True)
     product = sub.add_parser(
         "product", help="Start the product with kernel-enforced input isolation"
     )
@@ -51,7 +70,7 @@ def main() -> None:
             parser.error("--bundle and --sha256 go together")
         run = FrozenRun(args.bundle, args.sha256) if args.bundle else None
         report = lead_time_report(root, run, args.split, args.start, args.end)
-        _write_once(args.output, report)
+        _write_new(args.output, report)
         return
     if args.command == "product":
         arguments = args.arguments
@@ -60,6 +79,40 @@ def main() -> None:
         if not arguments:
             parser.error("product requires Python arguments after --")
         raise SystemExit(run_product(root, arguments))
+    if args.command in {"reading-sample", "reading"}:
+        outputs = (
+            [args.files_out, args.protocol_out]
+            if args.command == "reading-sample"
+            else [args.output]
+        )
+        if any(o is not None and not o.resolve().is_relative_to(root / "data") for o in outputs):
+            parser.error("outputs must be written under data/")
+        labels, labels_sha256 = load_labels()
+    if args.command == "reading-sample":
+        if args.files_out is not None:
+            # File names only: the product run must not see labels or anchors.
+            args.files_out.parent.mkdir(parents=True, exist_ok=True)
+            with args.files_out.open("x", encoding="utf-8") as stream:
+                stream.write("".join(f"{name}\n" for name in sorted(labels["files"])))
+        if args.protocol_out is not None:
+            if args.run_spec is None:
+                parser.error("--protocol-out requires --run-spec")
+            spec = json.loads(args.run_spec.read_text(encoding="utf-8"))
+            _write_new(args.protocol_out, reading_protocol(labels, spec))
+        return
+    if args.command == "reading":
+        run = FrozenRun(args.bundle, args.sha256)
+        result = score(
+            labels,
+            run.artifacts["predictions"],
+            catalog_ids(root / "generated/sources/erp/master_data"),
+        )
+        result["manifest_sha256"] = run.manifest_sha256
+        result["labels_sha256"] = labels_sha256
+        result["protocol"] = run.manifest["protocol"]
+        _write_new(args.output, result)
+        print(json.dumps({"overall": result["overall"], "links": result["links"]}, indent=2))
+        return
     if args.command == "freeze":
         protocol = args.protocol.resolve(strict=True)
         if not protocol.is_relative_to(root / "data"):
@@ -75,14 +128,8 @@ def main() -> None:
         print(sha256)
     else:
         run = FrozenRun(args.bundle, args.sha256)
-        _write_once(args.output, run.receipt(root / "generated/ground_truth", args.key))
-
-
-def _write_once(path: Path, record: dict) -> None:
-    # Never overwrite a previous evaluation record.
-    with path.open("x", encoding="utf-8") as stream:
-        json.dump(record, stream, ensure_ascii=False, indent=2)
-        stream.write("\n")
+        receipt = run.receipt(root / "generated/ground_truth", args.key)
+        _write_new(args.output, receipt)
 
 
 if __name__ == "__main__":

@@ -3,7 +3,7 @@
 This package is the only code allowed to read `generated/ground_truth/` (RFC §7.1).
 The backend never imports it. It consumes a **frozen product export**, not a running
 pipeline or database. `verify` records input hashes and artifact counts, with an empty
-`metrics` object; scoring lives in the per-task commands below (EVL-04: §4).
+`metrics` object; scoring lives in the task commands below (EVL-02: §4, EVL-04: §5).
 
 Run commands below from the repository root with `backend/.venv/bin/python`.
 There are no additional dependencies and no answer-key access during tests.
@@ -94,7 +94,49 @@ callers parse their chosen CSV/JSON format. Traversal and symlink escapes from t
 oracle root or bundle are rejected. Scorers must stay in `eval/`, never provide
 product inputs, and report exclusions and limits required by RFC §7.2.
 
-## 4. Lead time vs baselines (EVL-04)
+## 4. EVL-02: reading eval on labelled dev files
+
+`eval/labels/reading_dev_v1.yaml` holds hand-written claim-level labels for a dev sample
+fixed before labelling: every mail of the 12 dev stores sent on 2026-09-20 or 2026-10-08
+(26 files, it/fr/es/en/de/ja/ko/zh). Labels come from the email text and the answer keys
+(misnamed products resolved to what the store meant), so this file is answer material:
+product code, prompts and fixtures never read it. Matching rules and metrics are in the
+docstring of `eval/reading.py`. Hold-out (EVL-02H) needs its own labels, written once and
+scored once after the freeze.
+
+```sh
+P=backend/.venv/bin/python
+D=data/eval/evl02
+# 1. Sample list only (file names, no labels) for the product, then the frozen RunSpec.
+$P -m eval reading-sample --files-out $D/files.txt
+(cd backend && .venv/bin/python -m tessera.modules.ingestion.reading_export spec \
+  --files ../$D/files.txt --as-of 2026-10-09T04:00:00+00:00 --run-id evl02-dev-spec \
+  --code-version "$(git rev-parse --short HEAD)" --out ../$D/run_spec.json)
+# 2. Record once (Fastweb keys; outside the launcher, which cannot read .secrets/).
+(cd backend && LLM_MODE=record .venv/bin/python -m tessera.modules.ingestion.reading_export \
+  run --run-spec ../$D/run_spec.json --run-id evl02-dev-record --out ../data/exports/evl02-record)
+# 3. Evaluated export: replay under kernel read isolation.
+$P -m eval product -- -m tessera.modules.ingestion.reading_export run \
+  --run-spec ../$D/run_spec.json --run-id evl02-dev-replay --out ../data/exports/evl02-dev
+# 4. Freeze, keep the printed SHA-256 outside the bundle, then score.
+$P -m eval reading-sample --run-spec $D/run_spec.json --protocol-out $D/protocol.json
+$P -m eval freeze data/frozen/evl02-dev --protocol $D/protocol.json \
+  --predictions data/exports/evl02-dev/predictions.json \
+  --cases data/exports/evl02-dev/cases.json --options data/exports/evl02-dev/options.json \
+  $(sed 's#^#--source generated/sources/store_emails/#' $D/files.txt) \
+  --configuration config/aliases.yaml --configuration config/domain.yaml \
+  --configuration backend/prompts/extract_observations.v1.md \
+  --configuration backend/prompts/link_choice.v1.md
+$P -m eval reading data/frozen/evl02-dev --sha256 '<recorded SHA-256>' \
+  --output data/evl02-dev-reading.json
+```
+
+The result lists N per language, precision, recall on required labels (and on all labels),
+redundant matches, negation mismatches, link errors among accepted links with accepted,
+abstention and not-product rates, every false positive, missed label and link error, and the
+excluded or unread files. Quantities and periods are not scored.
+
+## 5. Lead time vs baselines (EVL-04)
 
 ```sh
 # Baselines only, all dev stores (no product run needed):
