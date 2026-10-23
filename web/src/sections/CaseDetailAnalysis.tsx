@@ -2,13 +2,13 @@ import { useState } from 'react'
 import type { Case } from '../api/client'
 import { Button, StatusBadge } from '../ui'
 import { findCaseDetailFixture } from '../mocks/caseDetails'
-import type { ActionOption, ForecastAdjustment } from '../mocks/caseDetails'
+import type { ActionOption } from '../mocks/caseDetails'
+import { CaseForecastPanel } from './CaseForecastPanel'
 import { canDecideOption, decisionForRecord, decisionKey, optionBlockers } from './caseDecision'
 import { CaseOptionsPanel } from './CaseOptionsPanel'
 
 type Props = { item: Case; runId: string; fixtureMode: boolean }
 type Decision = { key: string; action: 'approved' | 'rejected' } | null
-const fmt = (value: number | null) => value === null ? '—' : new Intl.NumberFormat('it-IT', { maximumFractionDigits: 1 }).format(value)
 
 export function CaseDetailAnalysis({ item, runId, fixtureMode }: Props) {
   const detail = findCaseDetailFixture(runId, item.id, item.version, fixtureMode)
@@ -21,10 +21,10 @@ export function CaseDetailAnalysis({ item, runId, fixtureMode }: Props) {
     <header><div><p className="sd-case-detail__eyebrow">Analisi e proposta</p><h3 id="sd-case-analysis-title">Previsione, traccia e opzioni</h3></div>
       <StatusBadge tone={detail ? 'warning' : 'neutral'} label={detail ? 'Esempio sintetico disponibile' : 'Nessun esempio sintetico'} />
     </header>
+    <CaseForecastPanel item={item} runId={runId} fixtureMode={fixtureMode} />
     <CaseOptionsPanel item={item} runId={runId} fixtureMode={fixtureMode} />
     {detail ? <>
-      <p className="sd-case-decision__demo-label">Contesto demo fixture · run {runId} · caso {item.id} · versione {item.version}. Tutti i valori e gli esiti seguenti sono esempi sintetici.</p>
-      <ForecastView forecast={detail.forecast} />
+      <p className="sd-case-decision__demo-label">Contesto demo fixture · run {runId} · caso {item.id} · versione {item.version}. Traccia e opzioni seguenti sono esempi sintetici.</p>
       <section className="sd-case-analysis__trace" aria-labelledby="sd-case-trace-title">
         <h4 id="sd-case-trace-title">Traccia agente</h4><p>{detail.trace.outcome} · modalità {detail.trace.mode}{detail.trace.fallbackUsed ? ' · fallback usato' : ''}</p>
         <ol>{detail.trace.steps.map((step, index) => <li key={`${step.tool}-${index}`}>
@@ -47,17 +47,6 @@ export function CaseDetailAnalysis({ item, runId, fixtureMode }: Props) {
         ? <><p>Il caso riporta queste incertezze bloccanti:</p><ul>{item.blocking_uncertainties.map((reason) => <li key={reason}>{reason}</li>)}</ul></>
         : <p>Nessun esempio sintetico è definito per questa combinazione run/caso/versione. Le opzioni del server sono mostrate separatamente qui sopra.</p>}
     </div>}
-  </section>
-}
-
-function ForecastView({ forecast }: { forecast: ForecastAdjustment }) {
-  if (forecast.status === 'not_estimable') return <section className="sd-case-analysis__forecast" aria-labelledby="sd-case-forecast-title"><h4 id="sd-case-forecast-title">Baseline e scenari</h4>
-    <p>Astensione quantitativa: nessuno scenario numerico viene mostrato.</p><p><strong>Motivo:</strong> {forecast.reason}</p></section>
-  return <section className="sd-case-analysis__forecast" aria-labelledby="sd-case-forecast-title"><h4 id="sd-case-forecast-title">Baseline e scenari · {forecast.horizonStart} → {forecast.series.at(-1)?.date}</h4>
-    {forecast.reason && <p>{forecast.reason}</p>}
-    <div className="sd-case-analysis__table-wrap"><table><thead><tr><th>Giorno</th><th>Baseline</th><th>Domanda latente · bassa/base/alta</th><th>Servibile · bassa/base/alta</th></tr></thead>
-      <tbody>{forecast.series.map((point) => <tr key={point.date}><th scope="row">{point.date}</th><td>{fmt(point.baseline)}</td><td>{point.latent ? `${fmt(point.latent.low)} / ${fmt(point.latent.base)} / ${fmt(point.latent.high)}` : 'Non disponibile'}</td><td>{point.servable ? `${fmt(point.servable.low)} / ${fmt(point.servable.base)} / ${fmt(point.servable.high)}` : 'Non disponibile'}</td></tr>)}</tbody>
-    </table></div>
   </section>
 }
 

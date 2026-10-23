@@ -70,10 +70,10 @@ def ref(record: SourceRecord) -> ArtifactRef:
 
 
 def _overlap(a_start, a_end, b_start, b_end, slack: timedelta) -> bool:
-    # allow slack on both sides
-    if a_end + slack < b_start - slack:
+    """Match overlapping windows or a gap of at most ``slack`` in either order."""
+    if a_end + slack < b_start:
         return False
-    if b_end + slack < a_start - slack:
+    if b_end + slack < a_start:
         return False
     return True
 
