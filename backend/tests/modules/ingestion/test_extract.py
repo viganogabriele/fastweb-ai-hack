@@ -1,6 +1,8 @@
 """ing.extract: a fake LLM proposes candidates; code must verify quotes, numbers and periods."""
 
 import json
+import threading
+import time
 from copy import deepcopy
 from datetime import UTC, datetime
 from pathlib import Path
@@ -19,7 +21,7 @@ from tessera.core.contracts import (
     SourceDocument,
 )
 from tessera.core.db import connect
-from tessera.core.llm import BudgetExceeded, ExtractionFailed
+from tessera.core.llm import BudgetExceeded, ExtractionFailed, LLMCallFailed
 from tessera.core.orchestrator import run
 from tessera.core.registry import RegisteredModule, Registry
 from tessera.core.run_repo import repo_session
@@ -226,7 +228,7 @@ class FakeLLM:
         return Candidates(observations=reply)
 
 
-def execute(tmp_path, records, replies, as_of="2026-10-22T20:00:00Z"):
+def execute(tmp_path, records, replies, as_of="2026-10-22T20:00:00Z", llm=None):
     request = RunSpec(
         run_id="extract-run",
         scenario_id="historical",
@@ -257,7 +259,7 @@ def execute(tmp_path, records, replies, as_of="2026-10-22T20:00:00Z"):
             abstentions=(),
         )
 
-    llm = FakeLLM(replies)
+    llm = llm or FakeLLM(replies)
     engine = connect(f"sqlite:///{tmp_path / 'extract.db'}")
     registry = Registry(
         (RegisteredModule(SOURCE, source), RegisteredModule(extract.MANIFEST, extract.run))
@@ -417,8 +419,43 @@ def test_extraction_failure_abstains_and_provider_errors_degrade(tmp_path):
 def test_budget_exhaustion_stops_remaining_documents(tmp_path):
     records = synthetic("Uno.", doc="doc-a") + synthetic("Due.", doc="doc-b")
     status, _, _, llm = execute(tmp_path, records, {"doc-a": BudgetExceeded("over"), "doc-b": []})
-    assert llm.calls == ["doc-a"]
+    # doc-b's call may already be in flight (the client enforces the budget); its result is
+    # discarded, never counted as read.
+    assert "doc-a" in llm.calls
     assert status.result.errors == ("doc-a: LLM budget exhausted, remaining documents not read",)
+    assert "documents" not in status.result.counts
+
+
+def test_skipped_documents_keep_order_and_are_not_counted_after_budget_exhaustion(tmp_path):
+    records = synthetic("Uno.", doc="doc-a") + synthetic("Due.", doc="doc-b")[:1]
+    status, _, _, _ = execute(tmp_path, records, {"doc-a": BudgetExceeded("over")})
+    assert "documents_skipped" not in status.result.counts
+    assert status.result.abstentions == ()
+
+
+def test_skipped_document_abstention_follows_earlier_extraction_failure(tmp_path):
+    records = synthetic("Uno.", doc="doc-a") + synthetic("Due.", doc="doc-b")[:1]
+    status, _, _, _ = execute(tmp_path, records, {"doc-a": ExtractionFailed("invalid")})
+    assert status.result.abstentions == (
+        "doc-a: extraction failed validation twice",
+        "doc-b: not read (no segments for its text version)",
+    )
+
+
+def test_calls_run_in_parallel_and_results_keep_document_order(tmp_path):
+    records = synthetic("Uno.", doc="doc-a") + synthetic("Due.", doc="doc-b")
+    both_in_flight = threading.Barrier(2, timeout=5)
+
+    class SlowFirst(FakeLLM):
+        def extract(self, schema, messages, *, cache_context, **generation):
+            both_in_flight.wait()  # BrokenBarrierError if the calls were serial
+            if cache_context["document"][0] == "doc-a":
+                time.sleep(0.2)  # finishes last, still reported first
+            return super().extract(schema, messages, cache_context=cache_context, **generation)
+
+    replies = {"doc-a": ReplayMiss("a"), "doc-b": LLMCallFailed("b")}
+    status, _, _, _ = execute(tmp_path, records, replies, llm=SlowFirst(replies))
+    assert status.result.errors == ("doc-a: ReplayMiss", "doc-b: LLMCallFailed")
 
 
 @pytest.mark.parametrize("raw", ["몇명", "好几件", "a couple"])

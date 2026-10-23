@@ -1,0 +1,14 @@
+{
+  "note_id": "mil01-melange-touch-belted-coat-fit",
+  "store_id": "MIL01",
+  "sent_at": "2026-10-22T19:05:00+02:00",
+  "timezone": "Europe/Rome",
+  "language": "it",
+  "author_ref": "pseudonym:mil01-staff-roberto",
+  "fixture_kind": "synthetic_extension",
+  "audio": "note.wav",
+  "audio_sha256": "sha256:709dcf237be02a74880d2380ecab9bf501eb8f743ca2cdf2219cb6636be64d97",
+  "duration_s": 30.7,
+  "manual_transcript": "transcript.txt",
+  "asr_prompt": "Piumino in lana grigio melange, cappotto lungo in piumino con cintura, marrone cioccolato, taglia 2."
+}

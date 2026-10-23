@@ -28,6 +28,7 @@ stops the remaining documents.
 import hashlib
 import re
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, time, timedelta
 from functools import cache
 from pathlib import Path
@@ -490,6 +491,7 @@ def run(ctx) -> ModuleResult:
     counts = defaultdict(int)
     errors: list[str] = []
     abstentions: list[str] = []
+    jobs = []
     for document in ctx.repo.list(SourceDocument):
         segments = sorted(
             (
@@ -500,66 +502,80 @@ def run(ctx) -> ModuleResult:
             key=lambda s: s.idx,
         )
         store = stores.get(document.meta.get("store_id"))
-        if not segments or store is None:
-            reason = "no segments for its text version" if not segments else "unknown store"
-            abstentions.append(f"{document.id}: not read ({reason})")
-            counts["documents_skipped"] += 1
-            continue
-        try:
-            proposed = llm.extract(
-                Candidates,
-                messages(document, segments, store.timezone),
-                cache_context={
-                    "prompt": f"{PROMPT_PATH.name}:{prompt_hash}",
-                    "extractor_version": EXTRACTOR_VERSION,
-                    "document": [document.id, document.version, document.content_hash],
-                    "text_version": document.text_version,
-                },
-                temperature=0,
-            )
-        except ExtractionFailed:
-            abstentions.append(f"{document.id}: extraction failed validation twice")
-            counts["documents_abstained"] += 1
-            continue
-        except (ReplayMiss, LLMCallFailed) as error:
-            errors.append(f"{document.id}: {type(error).__name__}")
-            continue
-        except BudgetExceeded:
-            errors.append(f"{document.id}: LLM budget exhausted, remaining documents not read")
-            break
-        counts["documents"] += 1
-        for index, fields in proposed._rejected:
-            abstentions.append(f"{document.id}: candidate {index} rejected (invalid {fields})")
-            counts["candidates_rejected"] += 1
-        for index, field in proposed._optional_dropped:
-            abstentions.append(f"{document.id}: candidate {index} unsupported {field} cleared")
-            counts["optional_fields_dropped"] += 1
-        observations = []
-        for candidate in proposed.observations:
-            try:
-                observation = observe(
-                    ctx.spec,
-                    document,
-                    segments,
-                    candidate,
-                    len(observations),
-                    store,
-                    vague,
-                )
-            except ValueError as error:  # Rejected, ValidationError, validate_against
-                reason = str(error) if isinstance(error, Rejected) else "invalid observation"
-                abstentions.append(f"{document.id}: {candidate.kind} rejected ({reason})")
-                counts["candidates_rejected"] += 1
+        jobs.append((document, segments, store))
+
+    def read(job) -> Candidates:
+        document, segments, store = job
+        return llm.extract(
+            Candidates,
+            messages(document, segments, store.timezone),
+            cache_context={
+                "prompt": f"{PROMPT_PATH.name}:{prompt_hash}",
+                "extractor_version": EXTRACTOR_VERSION,
+                "document": [document.id, document.version, document.content_hash],
+                "text_version": document.text_version,
+            },
+            temperature=0,
+        )
+
+    # Only the LLM calls run in parallel (the client bounds them); results are consumed in
+    # document order on this thread, so observations, counts and errors match a serial run.
+    pool = ThreadPoolExecutor(max_workers=settings.llm_concurrency)
+    try:
+        futures = [
+            pool.submit(read, job) if job[1] and job[2] is not None else None for job in jobs
+        ]
+        for (document, segments, store), future in zip(jobs, futures, strict=True):
+            if future is None:
+                reason = "no segments for its text version" if not segments else "unknown store"
+                abstentions.append(f"{document.id}: not read ({reason})")
+                counts["documents_skipped"] += 1
                 continue
-            observations.append(observation)
-            if candidate.quantity_kind in ("exact", "range") and observation.quantity.kind not in (
-                "exact",
-                "range",
-            ):
-                counts["numbers_dropped"] += 1
-        if observations:
-            ctx.repo.put(*observations)
-        counts["observations"] += len(observations)
+            try:
+                proposed = future.result()
+            except ExtractionFailed:
+                abstentions.append(f"{document.id}: extraction failed validation twice")
+                counts["documents_abstained"] += 1
+                continue
+            except (ReplayMiss, LLMCallFailed) as error:
+                errors.append(f"{document.id}: {type(error).__name__}")
+                continue
+            except BudgetExceeded:
+                errors.append(f"{document.id}: LLM budget exhausted, remaining documents not read")
+                break
+            counts["documents"] += 1
+            for index, fields in proposed._rejected:
+                abstentions.append(f"{document.id}: candidate {index} rejected (invalid {fields})")
+                counts["candidates_rejected"] += 1
+            for index, field in proposed._optional_dropped:
+                abstentions.append(f"{document.id}: candidate {index} unsupported {field} cleared")
+                counts["optional_fields_dropped"] += 1
+            observations = []
+            for candidate in proposed.observations:
+                try:
+                    observation = observe(
+                        ctx.spec,
+                        document,
+                        segments,
+                        candidate,
+                        len(observations),
+                        store,
+                        vague,
+                    )
+                except ValueError as error:  # Rejected, ValidationError, validate_against
+                    reason = str(error) if isinstance(error, Rejected) else "invalid observation"
+                    abstentions.append(f"{document.id}: {candidate.kind} rejected ({reason})")
+                    counts["candidates_rejected"] += 1
+                    continue
+                observations.append(observation)
+                numeric = ("exact", "range")
+                if candidate.quantity_kind in numeric and observation.quantity.kind not in numeric:
+                    counts["numbers_dropped"] += 1
+            if observations:
+                ctx.repo.put(*observations)
+            counts["observations"] += len(observations)
+    finally:
+        pool.shutdown(cancel_futures=True)
     return ModuleResult(
         module_id=MANIFEST.id,
         module_version=MANIFEST.version,
