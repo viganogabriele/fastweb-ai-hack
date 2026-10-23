@@ -223,3 +223,38 @@ test('returning to a case preserves an uncertain command and requires an explici
   assert.equal(calls[0], old.calls[0][1])
   assert.equal(next.snapshot().commands.get(intentKey(intent)).status, 'success')
 })
+
+test('uncertain commands remain reconcilable when refreshed options change or disappear', async () => {
+  for (const refreshed of [[], [{ ...option, input_version_hash: 'new-hash' }], [{ ...option, checks: [{ name: 'stock', status: 'unknown', mandatory: true }] }]]) {
+    let attempts = 0, reads = 0
+    const { session, calls } = harness({ load: async () => ++reads === 1 ? [option] : refreshed,
+      post: async (_, body) => { if (++attempts === 1) throw new TypeError('reply lost'); return draft(body) } })
+    await session.load(); await session.submit(intent); await session.load()
+    await session.submit(intent)
+    assert.equal(calls.length, 2)
+    assert.equal(calls[0][1], calls[1][1])
+    assert.equal(session.snapshot().commands.get(intentKey(intent)).status, 'success')
+  }
+})
+
+test('reviewing one conflict preserves successful and uncertain commands on other options', async () => {
+  const conflictIntent = { ...intent, option_id: 'conflict' }
+  const successIntent = { ...intent, option_id: 'success' }
+  const { session, calls } = harness({ load: async () => [option, { ...option, id: 'conflict' }, { ...option, id: 'success' }],
+    post: async (_, body) => {
+      if (body.option_id === 'conflict') throw new OptionsApiError(409)
+      if (body.option_id === 'o1') throw new TypeError('reply lost')
+      return draft(body)
+    } })
+  await session.load(); await session.submit(intent); await session.submit(successIntent)
+  const original = session.snapshot().commands.get(intentKey(intent)).body
+  await session.submit(conflictIntent)
+  session.reviewed()
+  assert.equal(session.snapshot().commands.get(intentKey(intent)).body, original)
+  assert.equal(session.snapshot().commands.get(intentKey(successIntent)).status, 'success')
+  assert.equal(session.snapshot().commands.has(intentKey(conflictIntent)), false)
+  await session.submit(successIntent)
+  assert.equal(calls.length, 3, 'review must not enable duplicate successful commands')
+  await session.submit(intent)
+  assert.equal(calls[3][1], original, 'review must not replace an uncertain command key')
+})

@@ -52,11 +52,13 @@ export function createOptionsSession(context: OptionsContext, dependencies = {
   }
   async function submit(intent: Intent) {
     if (!active || state.pending || state.loading || state.error || state.reviewRequired || !intent.by.trim()) return
-    const option = state.options.find(option => option.id === intent.option_id && option.input_version_hash === intent.input_version_hash)
-    if (!option || (intent.decision === 'approved' && mandatoryBlockers(option).length)) return
     const key = intentKey(intent)
     const previous = state.commands.get(key)
     if (previous && previous.status !== 'retryable') return
+    const option = state.options.find(option => option.id === intent.option_id && option.input_version_hash === intent.input_version_hash)
+    // An uncertain command may already be committed. Reconcile its original key
+    // even when refreshed options no longer contain its hash or passing checks.
+    if (!previous && (!option || (intent.decision === 'approved' && mandatoryBlockers(option).length))) return
     const body = previous?.body ?? Object.freeze({ ...intent, idempotency_key: dependencies.key() })
     update({ pending: true })
     setCommand(key, { body, status: 'pending' })
@@ -89,7 +91,7 @@ export function createOptionsSession(context: OptionsContext, dependencies = {
     start() { active = true; void load() },
     reviewed() {
       if (!state.loading && !state.error && state.reviewRequired) {
-        update({ reviewRequired: false, revision: state.revision + 1, commands: new Map() })
+        update({ reviewRequired: false, revision: state.revision + 1, commands: new Map([...state.commands].filter(([, command]) => command.status !== 'conflict')) })
       }
     },
     dispose() { active = false; generation++; read?.abort() }

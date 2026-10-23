@@ -43,6 +43,7 @@ function PublishedOptions({ session, context, closed }: { session: OptionsSessio
         option={option} state={state} session={session} closed={closed} fixture={context.fixture} />)}
       {state.reviewRequired && <Button onClick={session.reviewed}>Ho riesaminato le opzioni e i controlli aggiornati</Button>}
     </>}
+    <DecisionJournal state={state} session={session} />
   </section>
 }
 
@@ -54,7 +55,6 @@ function PublishedOption({ option, state, session, closed, fixture }: {
   const [confirmation, setConfirmation] = useState<Intent | null>(null)
   const blockers = mandatoryBlockers(option)
   const disabled = closed || state.pending || state.reviewRequired
-  const commands = [...state.commands.values()].filter(command => command.body.option_id === option.id && command.body.input_version_hash === option.input_version_hash)
   const intent = (decision: Intent['decision']): Intent => ({ option_id: option.id, input_version_hash: option.input_version_hash, decision, by, note: note || null })
   const canAsk = (decision: Intent['decision']) => {
     const command = state.commands.get(intentKey(intent(decision)))
@@ -86,13 +86,21 @@ function PublishedOption({ option, state, session, closed, fixture }: {
       <Button disabled={!canAsk('approved')} onClick={() => setConfirmation(intent('approved'))}>Approva opzione pubblicata</Button>
       <Button disabled={!canAsk('rejected')} onClick={() => setConfirmation(intent('rejected'))}>Respingi opzione pubblicata</Button>
     </div>
-    {commands.map(command => <div key={command.body.idempotency_key} role={command.status === 'failed' || command.status === 'retryable' || command.status === 'conflict' ? 'alert' : 'status'}>
+  </article>
+}
+
+function DecisionJournal({ state, session }: { state: OptionsState; session: OptionsSession }) {
+  if (!state.commands.size) return null
+  return <section aria-label="Registro dei comandi di questo caso">
+    <h5>Comandi confermati in questa sessione</h5>
+    {[...state.commands.values()].map(command => <div key={command.body.idempotency_key} role={command.status === 'failed' || command.status === 'retryable' || command.status === 'conflict' ? 'alert' : 'status'}>
+      <p>Opzione {command.body.option_id} · hash <code>{command.body.input_version_hash}</code></p>
       <p>{command.body.decision === 'approved' ? 'Approvazione' : 'Rifiuto'} · revisore locale: {command.body.by} · nota: {command.body.note || 'nessuna'}</p>
       <p>Chiave comando: <code>{command.body.idempotency_key}</code></p>
       {command.status === 'pending' && <p>Salvataggio in corso…</p>}
       {command.result && <p>Decisione salvata sul server: {command.result.decision.decision === 'approved' ? 'approvata' : 'respinta'} · ID {command.result.decision.id} · stato {command.result.decision.dispatch_status} · bozza locale simulata, nessun invio esterno.</p>}
       {command.message && <p>{command.message}</p>}
-      {command.status === 'retryable' && <Button disabled={disabled} onClick={() => void session.submit(command.body)}>Riprova lo stesso comando</Button>}
+      {command.status === 'retryable' && <Button disabled={state.pending || state.loading || Boolean(state.error) || state.reviewRequired} onClick={() => void session.submit(command.body)}>Riprova lo stesso comando</Button>}
     </div>)}
-  </article>
+  </section>
 }
