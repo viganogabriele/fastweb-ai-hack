@@ -168,6 +168,11 @@ and, for noise, the email answer-key indexes; nothing else from the oracle.
   detected by T_end" counts; false alerts per store-day; `decision_due_at - t_pipeline`;
   duplicate/correction/forward/noise mails behind cases, folded copies and fragmented units.
 
+- **Chance check**: every unit's window shifted by ±14/21 days (inside the period, clear of
+  the real window) and scored again, per event breadth (`store_wide`, `broad` > 10 SKUs,
+  `specific`). A real detection rate near the placebo rate means the matches are coincidences
+  of alert volume and scope; do not read lead times on that group as anticipation.
+
 False alerts are relative to planted events, so real unplanned stock-outs count against the
 stock baseline; broad events (a season group, a style everywhere) can be matched by chance.
 Units overlap in time and are not independent replicates. Hold-out is EVL-04H.

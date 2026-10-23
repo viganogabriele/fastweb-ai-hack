@@ -2,11 +2,21 @@
 
 import tempfile
 import unittest
-from datetime import UTC, date, datetime
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 
 from eval.baselines import Alert, certified, sales_alerts, stock_alerts
-from eval.lead_time import calibrate, case_alerts, email_group, event_units, matches, noise, score
+from eval.lead_time import (
+    calibrate,
+    case_alerts,
+    chance_check,
+    email_group,
+    event_units,
+    matches,
+    noise,
+    placebo_units,
+    score,
+)
 
 ERP = "generated/sources/erp"
 SKU = "STYLEA-999"
@@ -231,6 +241,19 @@ class LeadTimeTests(unittest.TestCase):
             result["cases_citing_group"], {"duplicate": {"matched": 1}, "noise": {"matched": 1}}
         )
         self.assertEqual(result["copies_folded_cases"], 1)
+
+    def test_placebo_windows_avoid_the_event_and_expose_chance_matches(self):
+        unit = self.unit(start="2026-09-20", end="2026-09-25")
+        fakes = placebo_units([unit], date(2026, 9, 1), date(2026, 10, 21), self.root)
+        self.assertEqual(len(fakes), 3)  # -21 days would start before the period
+        self.assertTrue(all(f.t_end < unit.start or f.start > unit.t_end for f in fakes))
+        always = [
+            Alert("pipeline", "MIL01", datetime(2026, 9, 1, 12, tzinfo=UTC) + timedelta(days=d),
+                  "sku", frozenset({SKU}))
+            for d in range(52)
+        ]  # fmt: skip
+        result = chance_check({"pipeline": always}, [unit], fakes)
+        self.assertEqual(result["specific"]["pipeline"], {"real": [1, 1], "placebo": [3, 3]})
 
 
 if __name__ == "__main__":

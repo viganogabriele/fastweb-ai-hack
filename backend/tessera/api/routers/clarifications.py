@@ -1,15 +1,80 @@
-"""Read persisted simulated clarification drafts without executing the agent."""
+"""Published questions and explicitly simulated answers in isolated follow-up jobs."""
 
+import logging
 from typing import Literal
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, BackgroundTasks, HTTPException, Request
+from jsonschema.exceptions import ValidationError as SchemaError
+from sqlalchemy.exc import OperationalError
 
-from tessera.api.routers.runs import PublishedRepo
+from tessera.api.routers.runs import Namespace, PublishedRepo, engine_for, registry_for
+from tessera.core.config import get_settings
 from tessera.core.contracts import Case, Clarification
 from tessera.core.repo import latest
+from tessera.modules.agents.answer_registry import (
+    AnswerConflict,
+    AnswerJob,
+    AnswerRequest,
+    AnswerUnavailable,
+    execute_follow_up,
+    submit_answer,
+)
+from tessera.modules.agents.clarifications import InvalidAnswer, UnrecordedAnswer
 
 router = APIRouter(prefix="/api/runs/{run_id}/cases/{case_id}/clarifications")
 Status = Literal["draft", "asked", "answered", "cancelled"]
+
+
+def execute_answer(engine, job, fixture, registry, settings):
+    try:
+        execute_follow_up(
+            engine, job.run.run_id, fixture_mode=fixture, registry=registry, settings=settings
+        )
+    except Exception:
+        # The durable worker records failures. A background failure must not turn
+        # an already committed answer into an apparent failed HTTP submission.
+        logging.getLogger("tessera.api").exception("Answer job %s failed", job.run.run_id)
+
+
+@router.post("/{clarification_id}/answer", response_model=AnswerJob, status_code=202)
+def answer(
+    run_id: str,
+    case_id: str,
+    clarification_id: str,
+    body: AnswerRequest,
+    request: Request,
+    tasks: BackgroundTasks,
+    ns: Namespace,
+):
+    if (body.run_id, body.case_id, body.clarification_id) != (run_id, case_id, clarification_id):
+        raise HTTPException(422, "Answer scope must match the run, case and clarification URL")
+    engine = engine_for(request, ns)
+    try:
+        registry = registry_for(request)
+        job = submit_answer(engine, body, fixture_mode=ns == "fixture", registry=registry)
+    except AnswerConflict as error:
+        raise HTTPException(409, str(error)) from None
+    except UnrecordedAnswer as error:
+        raise HTTPException(424, str(error)) from None
+    except InvalidAnswer as error:
+        raise HTTPException(422, str(error)) from None
+    except AnswerUnavailable as error:
+        raise HTTPException(503, str(error)) from None
+    except (ValueError, SchemaError):
+        raise HTTPException(503, "Frozen pipeline implementation is unavailable") from None
+    except OperationalError as error:
+        if "locked" not in str(error.orig):
+            raise
+        raise HTTPException(503, "Pipeline is writing; retry", {"Retry-After": "5"}) from None
+    tasks.add_task(
+        execute_answer,
+        engine,
+        job,
+        ns == "fixture",
+        registry,
+        request.app.state.settings or get_settings(),
+    )
+    return job
 
 
 @router.get("", response_model=tuple[Clarification, ...])
@@ -35,7 +100,7 @@ def clarification(
     repo: PublishedRepo,
     version: str | None = None,
 ):
-    if repo.get(Case, case_id) is None:
+    if version is None and repo.get(Case, case_id) is None:
         raise HTTPException(404, "Case not found")
     item = repo.get(Clarification, clarification_id, version)
     if item is None or item.case_id != case_id:
