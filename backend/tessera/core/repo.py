@@ -366,6 +366,8 @@ class Repo:
         """ERP rows of one table known at `as_of`. Unknown availability is never visible."""
         c = erp_rows.c
         query = select(erp_rows).where(c.tbl == table, c.available_at <= self._spec().as_of)
+        if self._spec().erp_max_seq is not None:
+            query = query.where(c.seq <= self._spec().erp_max_seq)
         if store_id is not None:
             query = query.where(c.store_id == store_id)
         if sku is not None:
