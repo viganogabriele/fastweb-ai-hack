@@ -14,6 +14,8 @@ import { caseTypeLabel } from './productView'
 import { productCards, productStock, storeRows } from './productsData'
 import type { Attention, CatalogProduct, ProductCard, ProductCatalog, StoreRow } from './productsData'
 import { STORE_GEO } from './storeGeo'
+import { ProductOnline } from './OnlineDemand'
+import { onlineSkuFromHash } from './onlineData'
 import { useRunData } from './useRunData'
 import './sections.css'
 import './products.css'
@@ -85,7 +87,22 @@ function Gallery({ runId, stores, asOf, onCaseSelect }: {
   const cases = useRunData<Case[]>(runId, 'cases')
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('all')
-  const [open, setOpen] = useState<string | null>(null)
+  const [open, setOpen] = useState<string | null>(() => onlineSkuFromHash(window.location.hash))
+
+  useEffect(() => {
+    const syncProduct = () => setOpen(onlineSkuFromHash(window.location.hash))
+    window.addEventListener('hashchange', syncProduct)
+    window.addEventListener('popstate', syncProduct)
+    return () => {
+      window.removeEventListener('hashchange', syncProduct)
+      window.removeEventListener('popstate', syncProduct)
+    }
+  }, [])
+
+  const closeProduct = () => {
+    setOpen(null)
+    if (onlineSkuFromHash(window.location.hash)) window.history.replaceState(null, '', '#/prodotti')
+  }
 
   if (catalog.status === 'loading' || cases.status === 'loading') return <LoadingState label="Caricamento prodotti" />
   if (catalog.status === 'unavailable')
@@ -99,7 +116,7 @@ function Gallery({ runId, stores, asOf, onCaseSelect }: {
     (category === 'all' || card.product.category === category) &&
     (!text || [card.product.name, card.product.subcategory, categories[card.product.category], ...card.product.colours.map((c) => c.colour)]
       .join(' ').toLocaleLowerCase('it-IT').includes(text)))
-  const current = cards.find((card) => card.product.style_code === open)
+  const current = cards.find((card) => card.product.style_code === open || card.product.colours.some((colour) => colour.sku === open))
   const categoryList = [...new Set(cards.map((card) => card.product.category))].sort()
 
   return (
@@ -168,8 +185,8 @@ function Gallery({ runId, stores, asOf, onCaseSelect }: {
       </p>
 
       <AnimatePresence>
-        {current && <ProductSheet key={current.product.style_code} card={current} stores={stores} asOf={asOf}
-          snapshot={catalog.data.snapshot_date} onClose={() => setOpen(null)} onCaseSelect={onCaseSelect} />}
+        {current && <ProductSheet key={`${current.product.style_code}-${open}`} card={current} stores={stores} asOf={asOf} initialSku={open ?? undefined}
+          snapshot={catalog.data.snapshot_date} onClose={closeProduct} onCaseSelect={onCaseSelect} />}
       </AnimatePresence>
     </div>
   )
@@ -227,7 +244,8 @@ function ProductTile({ card, stores, onOpen }: { card: ProductCard; stores: read
   )
 }
 
-function ProductSheet({ card, stores, asOf, snapshot, onClose, onCaseSelect }: {
+function ProductSheet({ card, stores, asOf, snapshot, initialSku, onClose, onCaseSelect }: {
+  initialSku?: string
   card: ProductCard
   stores: readonly string[]
   asOf: number
@@ -238,7 +256,7 @@ function ProductSheet({ card, stores, asOf, snapshot, onClose, onCaseSelect }: {
   const { product } = card
   const panel = useRef<HTMLDivElement>(null)
   // Open on the colour the stores talked about, if any.
-  const [sku, setSku] = useState(() => product.colours.find((colour) => card.skus.has(colour.sku))?.sku ?? product.colours[0]?.sku)
+  const [sku, setSku] = useState(() => product.colours.find((colour) => colour.sku === initialSku)?.sku ?? product.colours.find((colour) => card.skus.has(colour.sku))?.sku ?? product.colours[0]?.sku)
   const colour = product.colours.find((entry) => entry.sku === sku) ?? product.colours[0]
   const rows = colour ? storeRows(colour, stores) : []
   const groups: { key: StoreRow['availability']; title: string; icon: LucideIcon }[] = [
@@ -315,6 +333,8 @@ function ProductSheet({ card, stores, asOf, snapshot, onClose, onCaseSelect }: {
               <p className="sd-sheet__calm"><ShieldCheck aria-hidden="true" />Nessun caso aperto su questo prodotto nel run.</p>
             )}
           </section>
+
+          <ProductOnline sku={colour?.sku} />
 
           <section aria-labelledby="sheet-stock">
             <h3 id="sheet-stock">Stock nei negozi · {colour?.colour}</h3>
