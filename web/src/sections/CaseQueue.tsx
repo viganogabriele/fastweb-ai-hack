@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { ArrowLeft, CircleAlert, Clock3, Search } from 'lucide-react'
 import type { Case } from '../api/client'
 import { Button, EmptyState, Input, Select, StatusBadge } from '../ui'
@@ -9,6 +9,7 @@ import {
   uncertaintyReasons
 } from './caseUtils'
 import type { CaseQueueFilters, CaseSelection } from './caseUtils'
+import { canSimulateDecision } from './caseDecision'
 import './sections.css'
 
 const statuses: Record<Case['status'], string> = {
@@ -51,6 +52,7 @@ type Props = {
   cases: Case[]
   stores: string[]
   asOf: string
+  fixtureMode: boolean
   selection: CaseSelection | null
   onSelect: (item: Case) => void
   onReturn: () => void
@@ -62,6 +64,7 @@ export function CaseQueue({
   cases,
   stores,
   asOf,
+  fixtureMode,
   selection,
   onSelect,
   onReturn,
@@ -234,6 +237,7 @@ export function CaseQueue({
             ) : <p>Nessun riferimento di fonte disponibile.</p>}
           </section>
         </div>
+        <CaseDecisionPanel item={selected} fixtureMode={fixtureMode} />
         <p className="sd-case-detail__provenance">Caso {selected.id} · {selected.version} · disponibile dal {date(selected.available_at)}</p>
       </article>
     )
@@ -319,6 +323,63 @@ export function CaseQueue({
         />
       )}
     </div>
+  )
+}
+
+function CaseDecisionPanel({ item, fixtureMode }: { item: Case; fixtureMode: boolean }) {
+  const [decisionState, setDecisionState] = useState<{ key: string; decision: 'approved' | 'rejected' | null; confirming: 'approved' | 'rejected' | null }>({ key: '', decision: null, confirming: null })
+  const key = `${item.id}:${item.version}`
+  const decision = decisionState.key === key ? decisionState.decision : null
+  const confirming = decisionState.key === key ? decisionState.confirming : null
+  const hasForecast = [...item.supporting, ...item.input_refs].some((ref) => ref.kind === 'ForecastAdjustment')
+
+  return (
+    <section className="sd-case-decision" aria-labelledby="sd-case-decision-title">
+      <header>
+        <div>
+          <p className="sd-case-detail__eyebrow">Analisi e proposta</p>
+          <h3 id="sd-case-decision-title">Previsione e decisione</h3>
+        </div>
+        <StatusBadge tone={fixtureMode ? 'warning' : 'neutral'} label={fixtureMode ? 'Anteprima fixture' : 'Dati del run'} />
+      </header>
+      {hasForecast ? (
+        <p>Il caso collega un artefatto di rettifica previsionale. I valori e gli scenari non sono esposti dall’API disponibile.</p>
+      ) : (
+        <div className="sd-case-decision__empty">
+          <strong>Previsione non disponibile</strong>
+          <p>{fixtureMode ? 'Questo run fixture non contiene una rettifica previsionale per il caso.' : 'Il run non pubblica ancora rettifiche previsionali tramite l’API.'}</p>
+          {item.blocking_uncertainties.length > 0 && <p><strong>Motivo per non quantificare:</strong> {item.blocking_uncertainties[0]}</p>}
+        </div>
+      )}
+      <div className="sd-case-decision__columns">
+        <section aria-labelledby="sd-case-trace-title">
+          <h4 id="sd-case-trace-title">Traccia</h4>
+          <p>{fixtureMode ? 'Nessuna traccia di esecuzione associata a questo caso fixture.' : 'La traccia non è disponibile tramite l’API del run.'}</p>
+          <ul>{item.input_refs.map((ref) => <li key={`${ref.kind}-${ref.id}-${ref.version}`}><code>{ref.kind}</code> · {ref.id} · {ref.version}</li>)}</ul>
+        </section>
+        <section aria-labelledby="sd-case-options-title">
+          <h4 id="sd-case-options-title">Opzioni e controlli</h4>
+          <p>{fixtureMode ? 'Nessuna opzione fixture disponibile; non è possibile simulare un’approvazione.' : 'Le opzioni e i relativi controlli non sono esposti dall’API del run.'}</p>
+        </section>
+      </div>
+      {fixtureMode ? (
+        <p className="sd-case-decision__notice" role="status">Modalità fixture: le decisioni non vengono salvate e non modificano stock o run.</p>
+      ) : (
+        <p className="sd-case-decision__notice">Le decisioni persistenti non sono disponibili per questo run.</p>
+      )}
+      {decision && <p className="sd-case-decision__result" role="status">Decisione simulata localmente: {decision === 'approved' ? 'approvata' : 'respinta'}. Nessuna modifica è stata salvata.</p>}
+      {confirming && (
+        <div className="sd-case-decision__confirm" role="group" aria-label="Conferma decisione simulata">
+          <span>Confermi la decisione simulata di {confirming === 'approved' ? 'approvare' : 'respingere'}?</span>
+          <Button size="sm" onClick={() => setDecisionState({ key, decision: confirming, confirming: null })}>Conferma</Button>
+          <Button size="sm" variant="secondary" onClick={() => setDecisionState({ key, decision: null, confirming: null })}>Annulla</Button>
+        </div>
+      )}
+      <div className="sd-case-decision__actions">
+        <Button disabled={!canSimulateDecision(fixtureMode, item.status, 'approved') || Boolean(confirming)} onClick={() => setDecisionState({ key, decision, confirming: 'approved' })}>Approva</Button>
+        <Button variant="secondary" disabled={!canSimulateDecision(fixtureMode, item.status, 'rejected') || Boolean(confirming)} onClick={() => setDecisionState({ key, decision, confirming: 'rejected' })}>Respingi</Button>
+      </div>
+    </section>
   )
 }
 
