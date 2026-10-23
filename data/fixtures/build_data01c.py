@@ -536,6 +536,9 @@ def main() -> None:
     lane_sources = (file_ref(LANES, f"lane_id={transfer_lane['lane_id']}"),)
     dc_lane_sources = (file_ref(LANES, f"lane_id={dc_lane['lane_id']}"),)
     matnr = SKUS["999"].replace("-", "")
+    receipt = src.atp_row("999")
+    receipt_units = int(float(receipt["NEXT_RCPT_QTY"]))
+    receipt_day = date.fromisoformat(receipt["NEXT_RCPT_DATE"])
     atp_sources = (file_ref(ATP, f"WERKS={DC};MATNR={matnr};J_3ASIZE={SIZE}"),)
     resv_sources = (
         file_ref(RESERVATIONS, f"RSNUM={backorder['RSNUM']};WERKS={DC};J_3ASIZE={SIZE}"),
@@ -647,8 +650,8 @@ def main() -> None:
                 "unknown",
                 False,
                 f"the last ATP projection for {DC} is dated 2026-10-05, four days before D: "
-                "ATP_NOW is 0 and the next receipt of 120 units is 2026-10-30, while MIL01 has 4 "
-                "units on backorder for 2026-10-12",
+                f"ATP_NOW is 0 and the next receipt of {receipt_units} units is "
+                f"{receipt_day.isoformat()}, while MIL01 has 4 units on backorder for 2026-10-12",
                 *atp_sources,
                 *resv_sources,
             ),
@@ -909,7 +912,8 @@ def main() -> None:
                 "fail",
                 True,
                 f"ATP_NOW is 0 for {DC} {SKUS['999']} size {SIZE} (physical 0, blocked QI 0, no "
-                "open deliveries) and the next receipt of 120 units is 2026-10-30",
+                f"open deliveries) and the next receipt of {receipt_units} units is "
+                f"{receipt_day.isoformat()}",
                 *atp_sources,
             ),
             check(
@@ -950,6 +954,7 @@ def main() -> None:
                 True,
                 "the origin is a distribution centre, not a store: it has no minimum "
                 "presentation to protect and no own sales to cannibalise",
+                *dc_lane_sources,
             ),
             check(
                 "lane_ibt",
@@ -980,7 +985,9 @@ def main() -> None:
                 "shared_resources",
                 "pass",
                 True,
-                "one leg from the DC; the alternatives in this run are not pre-booked",
+                "one leg from the DC, and MIL01's backorder line is the only open request for "
+                "this article and size: the alternatives in this run are not pre-booked",
+                *resv_sources,
             ),
         ),
         outcomes=tuple(
@@ -1018,8 +1025,9 @@ def main() -> None:
         valid_until=case.valid_until,  # type: ignore[arg-type]
         recommended=False,
         rationale=(
-            f"blocked: {DC} has 0 ATP for size {SIZE} and the 120-unit receipt lands on "
-            f"2026-10-30, so the earliest sellable date is {dc_sellable.date().isoformat()}, after "
+            f"blocked: {DC} has 0 ATP for size {SIZE} and the {receipt_units}-unit receipt lands "
+            f"on {receipt_day.isoformat()}, so the earliest sellable date is "
+            f"{dc_sellable.date().isoformat()}, after "
             "the case's due date. Inside D+1..D+7 it changes nothing versus hold: the 4-unit "
             "backorder cannot be served from the DC"
         ),

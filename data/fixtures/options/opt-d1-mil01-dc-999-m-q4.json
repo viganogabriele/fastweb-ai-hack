@@ -241,7 +241,13 @@
           "status": "not_applicable",
           "mandatory": true,
           "detail": "the origin is a distribution centre, not a store: it has no minimum presentation to protect and no own sales to cannibalise",
-          "source_refs": []
+          "source_refs": [
+            {
+              "kind": "SourceFile",
+              "id": "dataset://systems/logistics/lane_matrix_lead_time_cost.csv",
+              "version": "sha256:3e1644a87ca463f55e6122221c424d8737c3aed117168cfc910898852963c4bd"
+            }
+          ]
         },
         {
           "name": "lane_ibt",
@@ -319,8 +325,14 @@
           "name": "shared_resources",
           "status": "pass",
           "mandatory": true,
-          "detail": "one leg from the DC; the alternatives in this run are not pre-booked",
-          "source_refs": []
+          "detail": "one leg from the DC, and MIL01's backorder line is the only open request for this article and size: the alternatives in this run are not pre-booked",
+          "source_refs": [
+            {
+              "kind": "SourceFile",
+              "id": "dataset://systems/warehouse/reservations/ZRESV_reservations_export.csv",
+              "version": "sha256:e35f0f2841d0f27c6066b079e53666ceb5a0af1f388cde8fd3dd41bbfffd643d"
+            }
+          ]
         }
       ],
       "outcomes": [
