@@ -2,9 +2,18 @@ import { readFile } from 'node:fs/promises'
 import { readTokens, resolveToken, cssName } from './build-tokens.mjs'
 
 const tokens = await readTokens()
-const colors = new Map([...tokens].filter(([, token]) => token.$type === 'color').map(([path]) => [cssName(path), resolveToken(tokens, path).hex]))
 const local = await readFile(new URL('../src/design/local.css', import.meta.url), 'utf8')
-for (const [, name, value] of local.matchAll(/(--sd-local-[\w-]+):\s*([^;]+);/g)) colors.set(name, value.trim())
+// local.css has a light `:root {` block and a `:root[data-theme='dark'] {` override block.
+const block = selector => local.slice(local.indexOf(selector)).split(/\n}\n/)[0]
+const lightLocal = block(':root {')
+const darkLocal = block(":root[data-theme='dark'] {")
+let colors
+function loadMode(mode) {
+  colors = new Map([...tokens].filter(([, token]) => token.$type === 'color').map(([path]) => [cssName(path), resolveToken(tokens, path, new Set(), mode).hex]))
+  for (const source of mode === 'dark' ? [lightLocal, darkLocal] : [lightLocal])
+    for (const [, name, value] of source.matchAll(/(--sd-local-[\w-]+):\s*([^;]+);/g)) colors.set(name, value.trim())
+}
+loadMode('light')
 
 function rgb(expression, seen = new Set()) {
   const variable = /^var\((--[\w-]+)\)$/.exec(expression)
@@ -13,6 +22,7 @@ function rgb(expression, seen = new Set()) {
     if (seen.has(name) || !colors.has(name)) throw new Error(`Unresolvable color: ${name}`)
     return rgb(colors.get(name), new Set([...seen, name]))
   }
+  if (expression === 'transparent') return [0, 0, 0]
   if (/^#[0-9a-f]{6}$/i.test(expression)) return [1, 3, 5].map(offset => parseInt(expression.slice(offset, offset + 2), 16) / 255)
   const mix = /^color-mix\(in srgb, (.+) (\d+)%, (.+)\)$/.exec(expression)
   if (mix) {
@@ -52,13 +62,20 @@ add('local-control-border', 'color-surface-card', 3)
 add('local-control-border', 'color-action-secondary', 3)
 add('local-series-2', 'color-surface-card', 3)
 add('local-series-3', 'color-surface-card', 3)
-console.log('| Foreground | Background | Ratio | Minimum | Result |')
-console.log('| --- | --- | ---: | ---: | --- |')
+add('color-state-danger', 'color-surface-canvas')
+add('color-accent-signature', 'color-surface-card')
+add('color-accent-signature', 'local-accent-subtle')
+add('color-text-primary', 'local-accent-subtle')
+console.log('| Mode | Foreground | Background | Ratio | Minimum | Result |')
+console.log('| --- | --- | --- | ---: | ---: | --- |')
 let failed = false
-for (const { fg, bg, minimum } of pairs) {
-  const contrast = ratio(fg, bg)
-  const pass = contrast >= minimum
-  failed ||= !pass
-  console.log(`| ${fg} | ${bg} | ${contrast.toFixed(2)}:1 | ${minimum}:1 | ${pass ? 'PASS' : 'FAIL'} |`)
+for (const mode of ['light', 'dark']) {
+  loadMode(mode)
+  for (const { fg, bg, minimum } of pairs) {
+    const contrast = ratio(fg, bg)
+    const pass = contrast >= minimum
+    failed ||= !pass
+    console.log(`| ${mode} | ${fg} | ${bg} | ${contrast.toFixed(2)}:1 | ${minimum}:1 | ${pass ? 'PASS' : 'FAIL'} |`)
+  }
 }
 if (failed) process.exitCode = 1

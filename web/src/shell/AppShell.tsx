@@ -1,11 +1,12 @@
 import { useCallback, useId, useLayoutEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react'
 import type { ReactNode } from 'react'
-import { Menu, X } from 'lucide-react'
+import { Menu, Moon, Sun, X } from 'lucide-react'
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useTransform } from 'motion/react'
 import { Button } from '../ui'
 import { transition } from '../ui/motion'
 import { messages } from '../i18n'
 import { ShellContext } from './ShellContext'
+import { setTheme, useTheme } from './theme'
 import './shell.css'
 
 export interface AppShellProps {
@@ -139,10 +140,27 @@ export function AppShell({ brand, sidebar, sidebarFooter, topbar, children }: Ap
               <div className="sd-shell__brand">{brand}</div>
             </div>
             {topbar && <div className="sd-shell__topbar-actions">{topbar}</div>}
+            <ThemeToggle />
           </header>
           <main ref={mainRef} id="main" tabIndex={-1} className="sd-shell__main">{children}</main>
         </div>
       </div>
     </ShellContext.Provider>
+  )
+}
+
+function ThemeToggle() {
+  const theme = useTheme()
+  const next = theme === 'dark' ? 'light' : 'dark'
+  return (
+    <Button
+      className="sd-shell__theme"
+      variant="ghost"
+      iconOnly
+      aria-label={next === 'dark' ? messages.shell.themeDark : messages.shell.themeLight}
+      title={next === 'dark' ? messages.shell.themeDark : messages.shell.themeLight}
+      icon={theme === 'dark' ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
+      onClick={() => setTheme(next)}
+    />
   )
 }

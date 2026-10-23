@@ -10,6 +10,8 @@ coverage: "parziale: un frame NexaDash visibile; pubblicazione Dribbble collegat
 evidence_summary: "1 immagine Behance osservata, 1 palette e descrizione della pubblicazione Dribbble degli stessi autori, 2 schede Behance indicizzate, 1 progetto non verificabile"
 ---
 
+> **Superseded by [Atelier](../atelier/DESIGN.md) (WEB-10).** Kept for history.
+
 # Overview
 
 **Obiettivo:** un unico linguaggio visivo per una dashboard SaaS desktop ad alta densità informativa, riconoscibile per *dark UI neutra + ciano operativo + visualizzazione dati leggibile*. Il sistema qui definito si chiama **Signal Dark** (nome di lavoro). **È una sintesi implementativa parziale**, non un'estrazione fedele del CSS originale.

@@ -11,3 +11,5 @@
 .sd-skeleton__line:last-child { width: var(--sd-local-skeleton-last); }
 @keyframes sd-skeleton-pulse { from { opacity: .55; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .sd-skeleton__line { animation: none; opacity: 1; } }
+/* Atelier: empty and error states sit on a soft panel. */
+.sd-feedback__title { font-size: 15px; }

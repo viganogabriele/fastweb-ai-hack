@@ -18,3 +18,10 @@
 .sd-status-badge--danger { color: var(--sd-color-state-danger); }
 .sd-status-badge--info { color: var(--sd-color-state-info); }
 .sd-status-badge__count { border-inline-start: 1px solid currentColor; padding-inline-start: var(--sd-space-1); }
+/* Atelier: tinted chips, readable at a glance in both modes; the icon keeps meaning without colour. */
+.sd-status-badge { gap: 5px; padding: 3px 9px 3px 7px; border-color: transparent; background: color-mix(in srgb, var(--sd-color-text-primary) 6%, var(--sd-color-surface-card)); color: var(--sd-color-text-secondary); font-size: var(--sd-font-size-caption); font-weight: var(--sd-font-weight-semibold); line-height: 16px; white-space: nowrap; }
+.sd-status-badge svg { width: 13px; height: 13px; }
+.sd-status-badge--success { background: color-mix(in srgb, var(--sd-color-state-success) 12%, var(--sd-color-surface-card)); }
+.sd-status-badge--warning { background: color-mix(in srgb, var(--sd-color-state-warning) 13%, var(--sd-color-surface-card)); }
+.sd-status-badge--danger { background: color-mix(in srgb, var(--sd-color-state-danger) 12%, var(--sd-color-surface-card)); }
+.sd-status-badge--info { background: color-mix(in srgb, var(--sd-color-state-info) 11%, var(--sd-color-surface-card)); }

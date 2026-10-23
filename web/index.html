@@ -5,6 +5,10 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tessera</title>
+    <script>
+      // Apply the stored theme before first paint; light is the default (see src/shell/theme.ts).
+      try { if (localStorage.getItem('tessera-theme') === 'dark') document.documentElement.dataset.theme = 'dark' } catch {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

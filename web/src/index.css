@@ -1,2 +1,4 @@
-/* Signal Dark: tokens, local tokens and base styles. Components import their own CSS. */
+/* Atelier: self-hosted fonts, tokens, local tokens and base styles. Components import their own CSS. */
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/bodoni-moda/opsz.css';
 @import './design/index.css';

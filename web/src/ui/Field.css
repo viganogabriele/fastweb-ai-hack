@@ -86,3 +86,9 @@ input[type='checkbox']:disabled, input[type='radio']:disabled { cursor: not-allo
 .sd-field__hint { color: var(--sd-color-text-muted); font-size: var(--sd-font-size-caption); }
 .sd-field__error { display: flex; align-items: center; gap: var(--sd-space-2); color: var(--sd-color-state-danger); font-size: var(--sd-font-size-caption); }
 @media (prefers-reduced-motion: reduce) { .sd-field__control { transition: none; } }
+/* Atelier: wine focus halo, white controls with a hairline shadow. */
+.sd-field__label { font-size: 13px; }
+.sd-field__control { box-shadow: var(--sd-local-shadow-card); }
+.sd-field__control:not(:disabled):focus-visible { border-color: var(--sd-color-action-focus); box-shadow: 0 0 0 3px color-mix(in srgb, var(--sd-color-action-focus) 18%, transparent); outline: none; }
+.sd-field__select-trigger[aria-expanded='true'] { border-color: var(--sd-color-action-focus); }
+.sd-select-popover { border-color: var(--sd-color-border-subtle); border-radius: var(--sd-radius-card); background: var(--sd-color-surface-card); }
