@@ -84,11 +84,13 @@ Follow these steps in order, every time. Do not skip or reorder them.
    --body "Closes #<N>"`. Then push small commits often: every push is a checkpoint others can see.
    The PR stays a draft only while the code is still being written.
 5. **Finish.** The code actually solves the issue and `make check` passes.
-6. **Ready for review.** As soon as step 5 holds, run `gh pr ready <PR>`. Never leave finished
-   work in draft, even if a human still has to decide something: list open decisions in the PR body.
+6. **Ready, then hand off.** `gh pr ready <PR>` and ask someone else to review and squash-merge it.
+   `Closes #<N>` in the PR body closes the issue once it is merged. **Never merge or close your own
+   PR**: a human (or another agent) always does it for you. Reply to review comments and push fixes
+   until they merge it.
 7. **Merge.** After review, squash-merge; `Closes #<N>` closes the issue.
-8. **Unblock.** After merge, for every issue blocked by yours: if all its blockers are closed,
-   remove the `blocked` label.
+8. **Unblock.** After your PR is merged by someone else (or if you merge someone else's PR ), for 
+   every issue blocked by yours: if all its blockers are closed, remove the `blocked` label.
 
 Creating and splitting issues:
 
