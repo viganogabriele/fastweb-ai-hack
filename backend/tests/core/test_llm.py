@@ -480,6 +480,23 @@ def test_run_binding_isolates_as_of_and_reuses_same_snapshot_across_run_ids(tmp_
     assert replay.budget.calls == 0
 
 
+def test_runs_without_erp_boundary_replay_recordings_from_the_previous_contract(tmp_path):
+    from tessera.core.llm import RunLLMClient
+
+    # Recreate the pre-boundary serialized run context used by existing recordings.
+    spec = run_spec()
+    legacy_scope = spec.model_dump(mode="json", exclude={"run_id", "mode", "erp_max_seq"})
+    legacy_scope["namespace"] = "product"
+    for module in legacy_scope["modules"]:
+        module["manifest"].pop("mode")
+    recorder, requests, _ = client(tmp_path, [completion()])
+    RunLLMClient(recorder, json.dumps(legacy_scope)).chat(MESSAGES)
+    assert len(requests) == 1
+    replay, requests, _ = client(tmp_path, [], mode="replay")
+    assert replay.for_run(spec).chat(MESSAGES).choices[0].message.content == "ok"
+    assert requests == []
+
+
 @pytest.mark.parametrize(
     "changes",
     [
