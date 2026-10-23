@@ -72,8 +72,7 @@ export function VisionPage() {
       <section className="sd-vision__inputs" aria-labelledby="vision-inputs-title">
         <h2 id="vision-inputs-title">{t.inputsTitle}</h2>
         <div className="sd-vision__input-cards">
-          {/* No Domanda online route/card exists in this branch. */}
-          <Level copy={t.levels.ecommerce} icon={ShoppingBag} />
+          <Level copy={t.levels.ecommerce} icon={ShoppingBag} href="#/prodotti/J20931A00618-510" />
           <Level copy={t.levels.external} icon={CloudSun} href="#/pipeline" />
         </div>
       </section>

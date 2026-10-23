@@ -1,9 +1,6 @@
 export const voice = {
   title: 'Voce del negozio',
   subtitle: 'Oltre al report di chiusura: un vocale guidato di ogni dipendente a fine turno.',
-  badge: 'Esempio sintetico · non fa parte del run',
-  disclaimer: 'Esempio sintetico · segnali non certificati riportati dai dipendenti',
-  curated: 'Lettura curata manualmente dalle trascrizioni',
   store: 'Negozio',
   evening: 'sera del',
   notes: 'Le voci di fine turno',
@@ -26,7 +23,6 @@ export const voice = {
   singleNote: 'È disponibile un solo vocale per questo negozio.',
   record: 'Registra un vocale',
   ambiguous: 'Prodotto ambiguo · entrambi i candidati',
-  photo: 'Riferimento visivo Valentino; può differire dal prodotto sintetico.',
   types: {
     provato_non_comprato: 'Avvicinato, ispezionato o provato · non acquistato',
     richiesto_non_disponibile: 'Richiesta / disponibilità riferita',

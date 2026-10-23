@@ -3,7 +3,7 @@ import { Mic, Quote } from 'lucide-react'
 import data from '../demo/voiceStore.json'
 import { messages } from '../i18n'
 import { PageHeader } from '../shell'
-import { Select, StatusBadge } from '../ui'
+import { Select } from '../ui'
 import './voiceStore.css'
 
 const t = messages.voice
@@ -43,10 +43,6 @@ export function VoiceStorePage() {
   return <div className="sd-voice">
     <PageHeader title={`${t.title} · ${storeId} ${store.name} · ${t.evening} ${day(notes[0].sent_at)}`} subtitle={t.subtitle}
       actions={<Select label={t.store} value={storeId} options={data.stores.map(item => ({ value: item.store_id, label: `${item.store_id} · ${item.name}` }))} onValueChange={setStoreId} />} />
-    <div className="sd-voice__notice">
-      <StatusBadge tone="warning" label={t.badge} />
-      <p>{t.disclaimer}</p><small>{t.curated}</small>
-    </div>
     <div className="sd-voice__layout">
       <section aria-labelledby="voice-notes" className="sd-voice__notes">
         <h2 id="voice-notes"><Mic aria-hidden="true" />{t.notes}</h2>
@@ -76,6 +72,6 @@ export function VoiceStorePage() {
         </section>
       </aside>
     </div>
-    <footer className="sd-voice__footer"><p>{t.photo}</p><a href={`/store/record?store=${encodeURIComponent(storeId)}`}><Mic aria-hidden="true" />{t.record}</a></footer>
+    <footer className="sd-voice__footer"><a href={`/store/record?store=${encodeURIComponent(storeId)}`}><Mic aria-hidden="true" />{t.record}</a></footer>
   </div>
 }

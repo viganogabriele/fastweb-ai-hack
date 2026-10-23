@@ -11,8 +11,7 @@ export const vision = {
   levels: {
     employee: {
       title: 'Dipendente',
-      description: 'Vocale a fine turno, trascritto e rivisto dal dipendente.',
-      planned: 'Domande guida per il vocale',
+      description: 'Vocale guidato a fine turno, con codice dipendente, trascrizione rivista e conferma della nota salvata.',
       destination: 'Registrazione del negozio'
     },
     store: {
@@ -31,7 +30,8 @@ export const vision = {
     },
     ecommerce: {
       title: 'E-commerce',
-      description: 'Richieste di riassortimento, ricerche senza risultati, esauriti online.'
+      description: 'Dati sintetici: richieste di riassortimento, ricerche senza risultati ed esauriti online, con cutoff esplicito.',
+      destination: 'Prodotto: domanda online'
     },
     external: {
       title: 'Contesto esterno',

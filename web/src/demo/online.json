@@ -1,0 +1,439 @@
+{
+  "topRequested": [
+    {
+      "sku": "J20931A00618-510",
+      "styleName": "IRIDIA",
+      "colorName": "powder pink",
+      "category": "Outerwear",
+      "launchDate": "2026-09-03",
+      "isNew": true,
+      "totalRequests": 1666,
+      "bySize": [
+        {
+          "size": "00",
+          "requests": 136
+        },
+        {
+          "size": "0",
+          "requests": 466
+        },
+        {
+          "size": "1",
+          "requests": 515
+        },
+        {
+          "size": "2",
+          "requests": 350
+        },
+        {
+          "size": "3",
+          "requests": 146
+        },
+        {
+          "size": "4",
+          "requests": 53
+        }
+      ],
+      "topCountries": [
+        {
+          "country": "KR",
+          "requests": 738
+        },
+        {
+          "country": "CN",
+          "requests": 446
+        },
+        {
+          "country": "JP",
+          "requests": 250
+        }
+      ],
+      "pending": 413,
+      "converted": null
+    },
+    {
+      "sku": "J20931A00012-999",
+      "styleName": "AUREA",
+      "colorName": "black",
+      "category": "Outerwear",
+      "launchDate": null,
+      "isNew": false,
+      "totalRequests": 125,
+      "bySize": [
+        {
+          "size": "00",
+          "requests": 8
+        },
+        {
+          "size": "0",
+          "requests": 25
+        },
+        {
+          "size": "1",
+          "requests": 38
+        },
+        {
+          "size": "2",
+          "requests": 33
+        },
+        {
+          "size": "3",
+          "requests": 14
+        },
+        {
+          "size": "4",
+          "requests": 7
+        }
+      ],
+      "topCountries": [
+        {
+          "country": "KR",
+          "requests": 66
+        },
+        {
+          "country": "GB",
+          "requests": 17
+        },
+        {
+          "country": "CN",
+          "requests": 8
+        }
+      ],
+      "pending": 0,
+      "converted": null
+    },
+    {
+      "sku": "J20931A00622-23R",
+      "styleName": "AMALIA",
+      "colorName": "chocolate brown",
+      "category": "Outerwear",
+      "launchDate": "2026-09-03",
+      "isNew": true,
+      "totalRequests": 6,
+      "bySize": [
+        {
+          "size": "0",
+          "requests": 1
+        },
+        {
+          "size": "1",
+          "requests": 4
+        },
+        {
+          "size": "2",
+          "requests": 1
+        }
+      ],
+      "topCountries": [
+        {
+          "country": "FR",
+          "requests": 2
+        },
+        {
+          "country": "GB",
+          "requests": 2
+        },
+        {
+          "country": "CA",
+          "requests": 1
+        }
+      ],
+      "pending": 6,
+      "converted": null
+    },
+    {
+      "sku": "J20931A00618-999",
+      "styleName": "IRIDIA",
+      "colorName": "black",
+      "category": "Outerwear",
+      "launchDate": "2026-09-03",
+      "isNew": true,
+      "totalRequests": 4,
+      "bySize": [
+        {
+          "size": "1",
+          "requests": 4
+        }
+      ],
+      "topCountries": [
+        {
+          "country": "DE",
+          "requests": 2
+        },
+        {
+          "country": "CN",
+          "requests": 1
+        },
+        {
+          "country": "FR",
+          "requests": 1
+        }
+      ],
+      "pending": 0,
+      "converted": null
+    },
+    {
+      "sku": "I10919B00011-999",
+      "styleName": "VLOGO CARDIGAN",
+      "colorName": "black",
+      "category": "Knitwear",
+      "launchDate": null,
+      "isNew": false,
+      "totalRequests": 3,
+      "bySize": [
+        {
+          "size": "M",
+          "requests": 2
+        },
+        {
+          "size": "XXL",
+          "requests": 1
+        }
+      ],
+      "topCountries": [
+        {
+          "country": "ES",
+          "requests": 1
+        },
+        {
+          "country": "IT",
+          "requests": 1
+        },
+        {
+          "country": "KR",
+          "requests": 1
+        }
+      ],
+      "pending": 2,
+      "converted": null
+    }
+  ],
+  "webStockouts": [
+    {
+      "sku": "J20931A00618-510",
+      "events": 25
+    },
+    {
+      "sku": "J20931A00012-999",
+      "events": 8
+    },
+    {
+      "sku": "J20931A00622-23R",
+      "events": 11
+    },
+    {
+      "sku": "J20931A00618-999",
+      "events": 7
+    },
+    {
+      "sku": "I10919B00011-999",
+      "events": 4
+    }
+  ],
+  "zeroResults": [
+    {
+      "country": "CN",
+      "terms": [
+        {
+          "term": "双11 价格",
+          "searches": 153
+        },
+        {
+          "term": "尹夏恩同款",
+          "searches": 95
+        }
+      ]
+    },
+    {
+      "country": "DE",
+      "terms": [
+        {
+          "term": "vel zip",
+          "searches": 10
+        }
+      ]
+    },
+    {
+      "country": "ES",
+      "terms": [
+        {
+          "term": "vel zipper",
+          "searches": 8
+        }
+      ]
+    },
+    {
+      "country": "FR",
+      "terms": [
+        {
+          "term": "vel zip",
+          "searches": 19
+        },
+        {
+          "term": "iridia rose",
+          "searches": 14
+        },
+        {
+          "term": "vel zipper",
+          "searches": 10
+        },
+        {
+          "term": "yoon ha eun",
+          "searches": 10
+        },
+        {
+          "term": "aurea blak",
+          "searches": 2
+        }
+      ]
+    },
+    {
+      "country": "GB",
+      "terms": [
+        {
+          "term": "vel zip",
+          "searches": 14
+        },
+        {
+          "term": "aurea blak",
+          "searches": 7
+        },
+        {
+          "term": "yoon ha eun",
+          "searches": 4
+        }
+      ]
+    },
+    {
+      "country": "HK",
+      "terms": [
+        {
+          "term": "尹夏恩",
+          "searches": 15
+        }
+      ]
+    },
+    {
+      "country": "IT",
+      "terms": [
+        {
+          "term": "vel zip",
+          "searches": 17
+        },
+        {
+          "term": "iridia rosa",
+          "searches": 12
+        },
+        {
+          "term": "cerniera gilet",
+          "searches": 9
+        },
+        {
+          "term": "vel zipper",
+          "searches": 8
+        },
+        {
+          "term": "aurea blak",
+          "searches": 1
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "terms": [
+        {
+          "term": "価格改定",
+          "searches": 106
+        },
+        {
+          "term": "イルヴァロ ピンク",
+          "searches": 59
+        }
+      ]
+    },
+    {
+      "country": "KR",
+      "terms": [
+        {
+          "term": "iridia 핑크",
+          "searches": 160
+        },
+        {
+          "term": "aurea 블랙",
+          "searches": 141
+        },
+        {
+          "term": "윤하은 발렌티노",
+          "searches": 140
+        },
+        {
+          "term": "윤하은 패딩",
+          "searches": 65
+        }
+      ]
+    },
+    {
+      "country": "SG",
+      "terms": [
+        {
+          "term": "yoon ha eun",
+          "searches": 9
+        }
+      ]
+    },
+    {
+      "country": "TW",
+      "terms": [
+        {
+          "term": "尹夏恩",
+          "searches": 23
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "terms": [
+        {
+          "term": "yoon ha eun",
+          "searches": 12
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "cutoff": "2026-10-22T20:00:00Z",
+    "requestWindowStart": "2026-09-24T20:00:00Z",
+    "searchWindowStart": "2026-10-15",
+    "searchWindowEndExclusive": "2026-10-22",
+    "requestWindowConvention": "(cutoff - 28 days, cutoff]; inventory uses the same window; events count rows, not durations or units.",
+    "dateOnlyConvention": "Search date_utc denotes the full UTC day, available at next midnight. Use the last 7 fully complete UTC days; exclude the cutoff day until complete. Launch dates denote UTC midnight; isNew means launched in [cutoff - 60 days, cutoff].",
+    "searchTermConvention": "Aggregate exact terms after Unicode NFC normalization, whitespace trimming/collapse and Unicode lowercase; no translation, fuzzy matching or intent inference.",
+    "pendingConvention": "Requests with no notification observed by cutoff, including future notifications rewound to pending. Final UNSUBSCRIBED status has no timestamp and is ignored; pending is an upper bound on active subscriptions.",
+    "convertedConvention": "null means unknown at cutoff. converted_order has no conversion timestamp; all snapshot conversions are withheld. Final status is never used for historical counts.",
+    "futureNotificationsRewound": 0,
+    "snapshotConversionsWithheld": 244,
+    "files": [
+      {
+        "path": "generated/sources/systems/ecommerce/back_in_stock_requests.csv",
+        "sha256": "2352381d20dace651f7a8b7f31e69447372ac577acdf740350dc927728f41137",
+        "rowsAfterCutoff": 0
+      },
+      {
+        "path": "generated/sources/systems/ecommerce/site_search_queries_daily.csv",
+        "sha256": "d11afdebf69db3193f1727ce563e028f2df53db6f8ebc216fd6c2e97bb0f3b8f",
+        "rowsAfterCutoff": 0
+      },
+      {
+        "path": "generated/sources/systems/ecommerce/inventory_availability_log.csv",
+        "sha256": "f07230df8a973c863d855e11f5fb9238c9ee73d10bd02a22b5e6bbb84a5a939d",
+        "rowsAfterCutoff": 0
+      },
+      {
+        "path": "generated/sources/erp/master_data/sku_colour.csv",
+        "sha256": "ea0ec35ed17a37ab91fac2deaede6ee9637c00761a7339cc12581e144d14c160",
+        "rowsAfterCutoff": 0
+      }
+    ],
+    "fileCutoffConvention": "rowsAfterCutoff: request creation, search next UTC midnight, inventory event, catalog launch respectively. Catalog is static descriptive metadata; no version history is available."
+  }
+}
