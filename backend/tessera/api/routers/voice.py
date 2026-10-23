@@ -14,16 +14,31 @@
   ``degraded`` by design). LLM calls are recorded, so the run replays later without keys.
 """
 
+import fcntl
 import hashlib
 import json
 import logging
+import secrets
 import tempfile
+import time
+from asyncio import to_thread
+from collections import deque
 from datetime import UTC, datetime
 from pathlib import Path
+from threading import Lock
 from typing import Annotated
 from uuid import uuid4
 
-from fastapi import APIRouter, BackgroundTasks, File, Form, HTTPException, Request, UploadFile
+from fastapi import (
+    APIRouter,
+    BackgroundTasks,
+    Depends,
+    File,
+    Form,
+    HTTPException,
+    Request,
+    UploadFile,
+)
 from pydantic import BaseModel
 
 from tessera import __version__
@@ -36,16 +51,33 @@ from tessera.core.registry import Registry
 from tessera.core.repo import list_runs as stored_runs
 from tessera.core.run_repo import repo_session
 from tessera.modules.sources.emails import load_stores
+from tessera.modules.sources.voice import LANGUAGE, read_sidecar
 from tessera.modules.sources.voice_inbox import (
     InvalidRecording,
     LiveNote,
+    RecordingUnavailable,
+    batch_hash,
+    freeze_notes,
     list_notes,
-    mark_processed,
     save_note,
+    snapshot_path,
+    to_wav,
 )
 
-router = APIRouter(prefix="/api/voice")
+
+def authorize(request: Request) -> None:
+    token = _settings(request).voice_access_token
+    if token is None or not token.get_secret_value():
+        raise HTTPException(503, "live voice is disabled; configure VOICE_ACCESS_TOKEN")
+    supplied = request.headers.get("authorization", "").removeprefix("Bearer ")
+    if not secrets.compare_digest(supplied.encode(), token.get_secret_value().encode()):
+        raise HTTPException(401, "live voice access required")
+
+
+router = APIRouter(prefix="/api/voice", dependencies=[Depends(authorize)])
 logger = logging.getLogger("tessera.api.voice")
+_ASR_SLOT = Lock()
+_ASR_STARTS = deque()
 
 SCENARIO = "live-voice"
 # Roots in reading order: the voice documents exist before ing.extract lists documents.
@@ -125,15 +157,38 @@ async def transcribe(
 ):
     data = await _read(audio)
     settings = _settings(request).model_copy(update={"llm_mode": "live"})
-    with tempfile.TemporaryDirectory() as tmp:
-        path = Path(tmp) / f"partial.{_suffix(audio)}"
-        path.write_bytes(data)
+    if language and not LANGUAGE.fullmatch(language):
+        raise HTTPException(422, "invalid language tag")
+    if not _ASR_SLOT.acquire(blocking=False):
+        raise HTTPException(429, "another transcription is in progress")
+    try:
+        now = time.monotonic()
+        while _ASR_STARTS and _ASR_STARTS[0] <= now - 60:
+            _ASR_STARTS.popleft()
+        if len(_ASR_STARTS) >= 20:
+            raise HTTPException(429, "transcription limit reached; try again later")
+        _ASR_STARTS.append(now)
+
+        def work():
+            with tempfile.TemporaryDirectory() as tmp:
+                path = Path(tmp) / "partial.wav"
+                # Apply the same container, duration and resource limits before ASR upload.
+                settings.asr_key()
+                path.write_bytes(to_wav(data, _suffix(audio)))
+                return LLMClient(settings, concurrency=1).transcribe(path, language or None)
+
         try:
-            result = LLMClient(settings, concurrency=1).transcribe(path, language or None)
+            result = await to_thread(work)
         except MissingApiKey:
             raise HTTPException(503, "ASR_API_KEY missing in .env") from None
+        except RecordingUnavailable as error:
+            raise HTTPException(503, str(error)) from None
+        except InvalidRecording as error:
+            raise HTTPException(422, str(error)) from None
         except (LLMCallFailed, ValueError) as error:
             raise HTTPException(502, f"ASR unavailable: {type(error).__name__}") from None
+    finally:
+        _ASR_SLOT.release()
     return Transcription(text=result.text.strip(), duration_s=result.duration)
 
 
@@ -149,7 +204,8 @@ async def create_note(
     store = _store(settings, store_id)
     data = await _read(audio)
     try:
-        live = save_note(
+        live = await to_thread(
+            save_note,
             store_id,
             store,
             data,
@@ -160,19 +216,16 @@ async def create_note(
         )
     except InvalidRecording as error:
         raise HTTPException(422, str(error)) from None
+    except RecordingUnavailable as error:
+        raise HTTPException(503, str(error)) from None
     return _note_view(live)
 
 
 @router.get("/notes", response_model=tuple[LiveNoteView, ...])
 def notes(request: Request, store: str | None = None):
-    retry = {
-        spec.run_id
-        for spec, status in stored_runs(engine_for(request, "product"))
-        if status in RETRY
-    }
     return tuple(
-        _note_view(n, retry)
-        for n in list_notes(_settings(request).data_dir)
+        _note_view(n)
+        for n in _live_notes(_settings(request), engine_for(request, "product"))
         if store is None or n.note.sidecar.store_id == store
     )
 
@@ -208,7 +261,7 @@ def live_spec(registry: Registry, store_id: str, notes: list[LiveNote], as_of: d
         scenario_id=SCENARIO,
         as_of=as_of,
         stores=(store_id,),
-        source_manifest_hash=_hash(sorted(n.note.sidecar.audio_sha256 for n in notes)),
+        source_manifest_hash=batch_hash(notes),
         config_hash=_hash([m.model_dump(mode="json") for m in modules]),
         code_version=__version__,
         mode="live",
@@ -222,13 +275,48 @@ def live_spec(registry: Registry, store_id: str, notes: list[LiveNote], as_of: d
 @router.post("/process", response_model=tuple[RunView, ...], status_code=202)
 def process(request: Request, body: ProcessRequest, tasks: BackgroundTasks):
     settings = _settings(request)
+    settings.data_dir.mkdir(parents=True, exist_ok=True)
+    # File lock serializes claim decisions across HTTP threads and server processes.
+    with (settings.data_dir / "voice-process.lock").open("a") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        return _process(request, body, tasks)
+
+
+def _live_notes(settings: Settings, engine) -> list[LiveNote]:
+    # The immutable spec IS the claim: its commit is atomic with run creation.
+    notes = {n.note.slug: n for n in list_notes(settings.data_dir)}
+    seen = set()
+    for spec, status in stored_runs(engine):
+        if spec.scenario_id != SCENARIO:
+            continue
+        for snapshot in spec.modules:
+            if snapshot.manifest.id != "src.voice":
+                continue
+            frozen = []
+            for slug in snapshot.params.get("notes", []):
+                path = snapshot_path(settings.data_dir, spec.run_id) / slug
+                note = read_sidecar(path)
+                text = note.transcript_path.read_text(encoding="utf-8").strip()
+                frozen.append(LiveNote(note, text, None if status in RETRY else spec.run_id))
+            if batch_hash(frozen) != spec.source_manifest_hash:
+                raise HTTPException(409, "queued voice snapshot has changed")
+            for note in frozen:
+                if note.note.slug not in seen:
+                    notes[note.note.slug] = note
+                    seen.add(note.note.slug)
+    return sorted(notes.values(), key=lambda n: (n.note.sidecar.sent_at, n.note.slug))
+
+
+def _process(request: Request, body: ProcessRequest, tasks: BackgroundTasks):
+    settings = _settings(request)
     engine = engine_for(request, "product")
     # A note whose run failed or was blocked (e.g. no key yet) is offered again.
-    retry = {spec.run_id for spec, status in stored_runs(engine) if status in RETRY}
+    as_of = datetime.now(UTC)
     pending = [
         n
-        for n in list_notes(settings.data_dir)
-        if (n.run_id is None or n.run_id in retry)
+        for n in _live_notes(settings, engine)
+        if n.run_id is None
+        and n.note.sidecar.sent_at <= as_of
         and body.store_id in (None, n.note.sidecar.store_id)
     ]
     if not pending:
@@ -238,15 +326,12 @@ def process(request: Request, body: ProcessRequest, tasks: BackgroundTasks):
     run_settings = settings.model_copy(
         update={"llm_mode": "live" if settings.llm_mode == "live" else "record"}
     )
-    as_of = datetime.now(UTC).replace(microsecond=0)
     views = []
     for store_id in sorted({n.note.sidecar.store_id for n in pending}):
         batch = [n for n in pending if n.note.sidecar.store_id == store_id]
-        spec = live_spec(
-            registry, store_id, batch, max(as_of, *(n.note.sidecar.sent_at for n in batch))
-        )
+        spec = live_spec(registry, store_id, batch, as_of)
+        freeze_notes(settings.data_dir, spec.run_id, batch, spec.source_manifest_hash)
         with repo_session(engine, spec, fixture_mode=False, write=True) as repo:
             views.append(view(repo))
-        mark_processed(batch, spec.run_id)
         tasks.add_task(execute, spec, engine, registry, run_settings)
     return tuple(views)

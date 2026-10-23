@@ -12,6 +12,10 @@ export class ApiError extends Error {
   }
 }
 
+// Capability goes in the URL fragment (not the HTTP URL, referrer or provider keys).
+export const voiceToken = () => new URLSearchParams(window.location.hash.slice(1)).get('voice-token') ?? ''
+const headers = () => ({ Authorization: `Bearer ${voiceToken()}` })
+
 async function json<T>(response: Response): Promise<T> {
   if (!response.ok) throw new ApiError(response.status)
   return response.json() as Promise<T>
@@ -25,7 +29,7 @@ export async function transcribe(blob: Blob, language: string, signal?: AbortSig
   form.append('audio', blob, fileName(blob))
   form.append('language', language)
   return json<Transcription>(
-    await fetch('/api/voice/transcribe', { method: 'POST', body: form, signal })
+    await fetch('/api/voice/transcribe', { method: 'POST', headers: headers(), body: form, signal })
   )
 }
 
@@ -35,19 +39,19 @@ export async function sendNote(blob: Blob, store: string, transcript: string, la
   form.append('store_id', store)
   form.append('transcript', transcript)
   form.append('language', language)
-  return json<LiveNote>(await fetch('/api/voice/notes', { method: 'POST', body: form }))
+  return json<LiveNote>(await fetch('/api/voice/notes', { method: 'POST', headers: headers(), body: form }))
 }
 
 export async function listNotes(store?: string) {
   const query = store ? `?store=${encodeURIComponent(store)}` : ''
-  return json<LiveNote[]>(await fetch(`/api/voice/notes${query}`))
+  return json<LiveNote[]>(await fetch(`/api/voice/notes${query}`, { headers: headers() }))
 }
 
 export async function processNotes(store?: string) {
   return json<RunView[]>(
     await fetch('/api/voice/process', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { ...headers(), 'Content-Type': 'application/json' },
       body: JSON.stringify({ store_id: store ?? null })
     })
   )

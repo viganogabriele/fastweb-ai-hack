@@ -9,6 +9,7 @@ from sqlalchemy import Engine
 
 from tessera import __version__
 from tessera.api.models import Health
+from tessera.api.voice_boundary import VoiceBoundary
 from tessera.api.routers.clarifications import execute_answer
 from tessera.api.routers.clarifications import router as clarifications_router
 from tessera.api.routers.investigations import router as investigations_router
@@ -61,6 +62,7 @@ def create_app(
     settings: Settings | None = None,
 ) -> FastAPI:
     app = FastAPI(title="Tessera", version=__version__, lifespan=lifespan)
+    app.add_middleware(VoiceBoundary)
     app.state.engines = {"product": engine, "fixture": fixture_engine}
     app.state.engine_lock = Lock()
     app.state.registry = registry

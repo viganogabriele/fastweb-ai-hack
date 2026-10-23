@@ -269,8 +269,10 @@ def declared_document(note: Note, audio: Audio) -> tuple[SourceDocument, list[Se
         text=text,
         text_version=text_version,
         transcript=text,
-        mode="fixture",
-        basis=DECLARED_BASIS,
+        mode="manual" if note.sidecar.fixture_kind == "live" else "fixture",
+        basis="store-accepted text (possibly edited); no audio intervals"
+        if note.sidecar.fixture_kind == "live"
+        else DECLARED_BASIS,
     )
     segment = Segment(
         id=f"{document.id}-seg0",
@@ -354,7 +356,16 @@ def _language_hint(sidecar: Sidecar) -> str | None:
 
 
 def run(ctx, *, voice_dir: Path | None = None, client=None) -> ModuleResult:
-    roots = [voice_dir] if voice_dir else [voice_path(), inbox_path()]
+    live_run = getattr(ctx.spec, "scenario_id", None) == "live-voice"
+    if live_run:
+        from tessera.modules.sources.voice_inbox import snapshot_path
+
+        settings = getattr(ctx.clients.get("llm"), "settings", None) or get_settings()
+        roots = [snapshot_path(settings.data_dir, ctx.spec.run_id)]
+        if not roots[0].is_dir():
+            raise ValueError("live voice snapshot is missing")
+    else:
+        roots = [voice_dir] if voice_dir else [voice_path()]
     mode = str(ctx.params.get("mode") or "recorded")
     if mode not in ("recorded", "fixture"):
         raise ValueError(f"unknown voice mode: {mode}")
@@ -387,6 +398,11 @@ def run(ctx, *, voice_dir: Path | None = None, client=None) -> ModuleResult:
         except ValueError as error:
             errors.append(f"voice/{directory.name}: {error}")
     found = {note.slug for note in notes}
+    if live_run:
+        from tessera.modules.sources.voice_inbox import LiveNote, batch_hash
+
+        if batch_hash([LiveNote(n, "", None) for n in notes]) != ctx.spec.source_manifest_hash:
+            raise ValueError("live voice snapshot does not match the source manifest hash")
     for slug in wanted:
         if slug not in found:
             errors.append(f"voice/{slug}: no such note")
@@ -394,6 +410,8 @@ def run(ctx, *, voice_dir: Path | None = None, client=None) -> ModuleResult:
         abstentions.append(f"no voice notes under {', '.join(map(str, roots))}")
     for note in notes:
         sidecar = note.sidecar
+        if sidecar.fixture_kind == "live" and not live_run:
+            continue
         if sidecar.store_id not in ctx.spec.stores:
             counts["not_in_run"] += 1
             continue
@@ -409,7 +427,7 @@ def run(ctx, *, voice_dir: Path | None = None, client=None) -> ModuleResult:
             continue
         document = None
         segments: list[Segment] = []
-        if mode == "recorded":
+        if mode == "recorded" and sidecar.fixture_kind != "live":
             llm = client if client is not None else ctx.clients["llm"]
             try:
                 transcript = llm.transcribe(
