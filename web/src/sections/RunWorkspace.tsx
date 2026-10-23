@@ -262,6 +262,7 @@ export function RunWorkspace({
           cases={currentCases}
           stores={run?.spec.stores ?? []}
           asOf={run?.spec.as_of ?? ''}
+          runId={runId ?? ''}
           fixtureMode={run?.namespace === 'fixture'}
           selection={caseSelection}
           onSelect={onCaseSelect}
