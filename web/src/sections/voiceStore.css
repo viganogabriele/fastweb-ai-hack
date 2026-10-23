@@ -1,8 +1,6 @@
 .sd-voice { display: grid; gap: var(--sd-space-5); min-inline-size: 0; }
 .sd-voice > .sd-page-header { margin: 0; }
-.sd-voice__notice { display: grid; justify-items: start; gap: var(--sd-space-2); padding: var(--sd-space-4) var(--sd-space-5); border: 1px solid var(--sd-color-border-subtle); border-radius: var(--sd-radius-lg); background: var(--sd-color-surface-elevated); }
-.sd-voice__notice p, .sd-voice__notice small { margin: 0; }
-.sd-voice__notice small, .sd-voice__muted, .sd-voice__footer { color: var(--sd-color-text-secondary); font-size: var(--sd-font-size-body-sm); }
+.sd-voice__muted, .sd-voice__footer { color: var(--sd-color-text-secondary); font-size: var(--sd-font-size-body-sm); }
 .sd-voice__layout { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(280px, 1fr); align-items: start; gap: var(--sd-space-5); }
 .sd-voice__notes, .sd-voice__panels { display: grid; gap: var(--sd-space-4); min-inline-size: 0; }
 .sd-voice h2 { margin: 0; font-size: var(--sd-font-size-section); font-weight: var(--sd-font-weight-semibold); }
