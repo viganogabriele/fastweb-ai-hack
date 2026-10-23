@@ -9,6 +9,7 @@ import {
   uncertaintyReasons
 } from './caseUtils'
 import type { CaseQueueFilters, CaseSelection } from './caseUtils'
+import { CaseDetailAnalysis } from './CaseDetailAnalysis'
 import './sections.css'
 
 const statuses: Record<Case['status'], string> = {
@@ -51,6 +52,8 @@ type Props = {
   cases: Case[]
   stores: string[]
   asOf: string
+  runId: string
+  fixtureMode: boolean
   selection: CaseSelection | null
   onSelect: (item: Case) => void
   onReturn: () => void
@@ -62,6 +65,8 @@ export function CaseQueue({
   cases,
   stores,
   asOf,
+  runId,
+  fixtureMode,
   selection,
   onSelect,
   onReturn,
@@ -234,6 +239,7 @@ export function CaseQueue({
             ) : <p>Nessun riferimento di fonte disponibile.</p>}
           </section>
         </div>
+        <CaseDetailAnalysis item={selected} runId={runId} fixtureMode={fixtureMode} />
         <p className="sd-case-detail__provenance">Caso {selected.id} · {selected.version} · disponibile dal {date(selected.available_at)}</p>
       </article>
     )
