@@ -10,6 +10,6 @@ export default defineConfig({
   plugins: [react(), ...(mock ? [mockApi()] : [])],
   server: {
     host: '127.0.0.1',
-    proxy: mock ? undefined : { '/api': 'http://127.0.0.1:8000' },
+    proxy: mock ? undefined : { '/api': process.env.TESSERA_API_TARGET ?? 'http://127.0.0.1:8000' },
   },
 })

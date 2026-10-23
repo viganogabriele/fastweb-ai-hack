@@ -97,7 +97,7 @@ def prepare(output, *, sources, config, code_version, case_ids=()):
             source_manifest_hash="pending",
             config_hash="pending",
             code_version=code_version,
-            mode="live",
+            mode="recorded",
             modules=tuple(
                 ModuleSnapshot(manifest=manifests[i], params=params.get(i, {})) for i in ids
             ),

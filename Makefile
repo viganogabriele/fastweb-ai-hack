@@ -27,12 +27,12 @@ mocks:  ## dataset mock agents server: run it, never import or read its code
 	$(PY) generator/systems/mock_agents/server.py --port 8088
 
 check:  ## must pass before every PR
-	cd $(BACKEND) && uv run ruff check . ../eval ../scripts/export_openapi.py ../scripts/replay_demo.py ../scripts/prepare_core_demo.py && uv run ruff format --check . ../eval ../scripts/export_openapi.py ../scripts/replay_demo.py ../scripts/prepare_core_demo.py && uv run pytest -q
+	cd $(BACKEND) && uv run ruff check . ../eval ../scripts/export_openapi.py ../scripts/replay_demo.py ../scripts/prepare_core_demo.py ../scripts/record_core_demo.py && uv run ruff format --check . ../eval ../scripts/export_openapi.py ../scripts/replay_demo.py ../scripts/prepare_core_demo.py ../scripts/record_core_demo.py && uv run pytest -q
 	cd $(WEB) && npm run lint && npm run typecheck && npm test
 	$(MAKE) --no-print-directory types && git diff --exit-code -- web/src/api/schema.d.ts
 
 fmt:
-	cd $(BACKEND) && uv run ruff check --fix . ../eval ../scripts/export_openapi.py ../scripts/replay_demo.py ../scripts/prepare_core_demo.py && uv run ruff format . ../eval ../scripts/export_openapi.py ../scripts/replay_demo.py ../scripts/prepare_core_demo.py
+	cd $(BACKEND) && uv run ruff check --fix . ../eval ../scripts/export_openapi.py ../scripts/replay_demo.py ../scripts/prepare_core_demo.py ../scripts/record_core_demo.py && uv run ruff format . ../eval ../scripts/export_openapi.py ../scripts/replay_demo.py ../scripts/prepare_core_demo.py ../scripts/record_core_demo.py
 
 test:
 	cd $(BACKEND) && uv run pytest -q

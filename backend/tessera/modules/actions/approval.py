@@ -19,6 +19,7 @@ from tessera.core import repo
 from tessera.core.config import get_settings
 from tessera.core.contracts import ActionOption, ArtifactRef, Case, Decision, Reservation
 from tessera.core.contracts.common import Contract, Text
+from tessera.core.systems_cache import SystemsCache, systems_factory
 from tessera.modules.actions import ledger
 from tessera.modules.actions.options import (
     CLOSED_CASES,
@@ -61,17 +62,20 @@ InputLoader = Callable[[repo.Repo, Case], Sequence[OptionInputs]]
 def load_inputs(current: repo.Repo, case: Case) -> Sequence[OptionInputs]:
     """Production gathering with the same policy, source filters and evaluator as act.options."""
     settings = get_settings()
-    reader = SystemsReader.open(current)
+    recordings = SystemsCache(settings.data_dir / "systems_cache")
+    reader = SystemsReader.open(current, systems_factory(settings, current.spec, recordings))
     if isinstance(reader, Unknown):
         raise Conflict(f"systems unavailable: {reader.reason}")
     try:
         domain = yaml.safe_load((settings.config_dir / "domain.yaml").read_text(encoding="utf-8"))
         horizon = int(domain["policy"]["horizon"]["days"]["value"])
         policy = load_policy(settings.config_dir)
-        return [
+        inputs = [
             gather(current, reader, case, policy, horizon, product=product)
             for product in case_products(current, case)
         ]
+        recordings.require_complete()
+        return inputs
     finally:
         reader.client.close()
 

@@ -14,11 +14,14 @@ from contextlib import contextmanager, redirect_stderr, redirect_stdout
 from pathlib import Path
 from uuid import uuid4
 
+from pydantic import TypeAdapter
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 
 from tessera.core.cache import CacheCorrupt, ReplayMiss, ResponseCache
 from tessera.core.config import Settings, get_settings
 from tessera.core.contracts import RunSpec
+from tessera.core.contracts.common import Contract, Instant
 from tessera.core.db import connect
 from tessera.core.llm import LLMClient
 from tessera.core.orchestrator import run
@@ -26,6 +29,7 @@ from tessera.core.registry import Registry
 from tessera.core.repo import KINDS
 from tessera.core.run_repo import repo_session
 from tessera.core.systems_cache import SystemsCache, systems_factory
+from tessera.modules.actions.approval import DecisionRequest, decide
 
 MARKER = ".tessera-replay-workspace.json"
 OWNER = {"format": 1, "owner": "tessera-offline-replay"}
@@ -38,6 +42,11 @@ class IsolationError(ValueError):
 
 class OfflineNetworkDenied(RuntimeError):
     pass
+
+
+class FrozenDecision(Contract):
+    at: Instant
+    request: DecisionRequest
 
 
 class ReplayCache(ResponseCache):
@@ -203,6 +212,7 @@ def rebuild(
     workspace,
     voice=None,
     systems_cache=None,
+    decisions=None,
     registry=None,
 ):
     """Trusted installed modules only. Each invocation starts with a fresh SQLite DB."""
@@ -214,6 +224,7 @@ def rebuild(
             cache,
             *((voice,) if voice else ()),
             *((systems_cache,) if systems_cache else ()),
+            *((decisions,) if decisions else ()),
         ),
     )
     manifest = {
@@ -235,6 +246,7 @@ def rebuild(
         "cache_corrupt": [],
         "systems_cache_misses": [],
         "systems_cache_corrupt": [],
+        "decisions": [],
         "inputs": {},
         "output_sha256": None,
     }
@@ -270,6 +282,22 @@ def rebuild(
             manifest["missing_prerequisites"].append(name)
             manifest["inputs"][name] = stage(root, dest)
             manifest["missing_prerequisites"].pop()
+        frozen_decisions = []
+        if decisions is not None:
+            raw = allowed(decisions).read_bytes()
+            frozen_decisions = TypeAdapter(list[FrozenDecision]).validate_json(raw)
+            if any(
+                d.request.run_id != spec.run_id
+                or d.request.scenario_id != spec.scenario_id
+                or d.at < spec.as_of
+                for d in frozen_decisions
+            ):
+                raise IsolationError("decision does not belong to this snapshot/clock")
+            (attempt / "inputs/decisions.json").write_bytes(raw)
+            manifest["inputs"]["decisions"] = {
+                "sha256": hashlib.sha256(raw).hexdigest(),
+                "files": 1,
+            }
         settings = Settings(
             _env_file=None,
             sources_dir=attempt / "inputs/sources",
@@ -315,6 +343,19 @@ def rebuild(
                         },
                         settings=settings,
                     )
+                    for frozen in frozen_decisions:
+                        draft = decide(engine, frozen.request, now=frozen.at)
+                        manifest["decisions"].append(
+                            {
+                                "option_id": draft.option.id,
+                                "option_version": draft.option.version,
+                                "input_version_hash": draft.decision.input_version_hash,
+                                "decision": draft.decision.decision,
+                                "dispatch_status": draft.decision.dispatch_status,
+                                "simulated": draft.simulated,
+                                "reservations": len(draft.reservations),
+                            }
+                        )
         finally:
             logging.disable(old_logging)
         manifest["network_attempts"] = len(denied)
@@ -330,6 +371,23 @@ def rebuild(
         manifest["output_sha256"] = digest(
             sorted(payloads, key=lambda p: (p[0], p[1]["id"], p[1]["version"]))
         )
+        # Trace UUIDs and elapsed times differ on each invocation. Keep the exact
+        # hash above, and separately compare all semantic fields and exact versions.
+        semantic = []
+        for kind, payload in payloads:
+            if kind == "AgentTrace":
+                payload = {**payload, "id": "runtime-trace-id"}
+                payload["steps"] = [
+                    {k: v for k, v in step.items() if k != "duration_ms"}
+                    for step in payload["steps"]
+                ]
+            semantic.append((kind, payload))
+        manifest["semantic_output_sha256"] = digest(
+            sorted(semantic, key=lambda p: (p[0], digest(p[1])))
+        )
+        manifest["artifact_counts"] = {
+            kind: sum(k == kind for k, _ in payloads) for kind in sorted({k for k, _ in payloads})
+        }
         manifest["modules"] = [
             {
                 "id": item.module_id,
@@ -395,6 +453,9 @@ def main(argv=None):
         type=Path,
         help="recorded simulated stock/logistics GET responses",
     )
+    parser.add_argument(
+        "--decisions", type=Path, help="explicit frozen decision requests with decision clocks"
+    )
     args = parser.parse_args(argv)
     try:
         spec_path = allowed(args.run_spec)
@@ -409,6 +470,7 @@ def main(argv=None):
             workspace=args.workspace,
             voice=args.voice,
             systems_cache=args.systems_cache,
+            decisions=args.decisions,
         )
     except Exception as error:
         result = {"format": 1, "status": "failed", "error_type": type(error).__name__}
