@@ -25,7 +25,23 @@ documented G2/reserve authorization and reassignment to `viganogabriele` in the
 task conversation. This does not attest that G2 passed or authorize other reserve
 tasks.
 
-Validation: `make check`, `npm run build` in `web/`, and browser verification of
-product grouping, filters, case navigation and run changes. Regression tests cover
-run isolation, corrections/latest versions, unresolved scopes, overlapping
-evidence and combined filters.
+Validation:
+
+- CI `check` passes. Locally, `PYTHONHASHSEED=0 make check` passes (1,368 backend
+  and 16 frontend tests, lint, typecheck and generated API types). Plain
+  `make check` encounters the existing isolation test's Python child startup error
+  `_Py_HashRandomization_Init: failed to get random numbers to initialize Python`
+  on this machine. No tests are skipped and isolation code is unchanged.
+- `npm run build` in `web/` passes.
+- Browser verification with isolated test API responses covers grouping, fixture
+  labeling, search/reset, store filters, versioned case navigation and Back,
+  390px mobile layout, empty/unpublished runs, error/retry and a delayed request
+  returning after a run switch. No page errors or horizontal mobile overflow.
+- Regression tests cover run isolation, corrections/latest versions, unresolved
+  scopes, overlapping evidence and combined filters.
+- `npx -y @memi-design/cli@2.7.9 diagnose web --json --no-write --fail-on none`:
+  score 50 before and after, with no reported issues. Source review confirmed
+  the existing `#/prodotti` placeholder, shared token-based cards and labeled
+  field primitives; the change reuses these tokens and primitives and adds a
+  single-column layout below 560px. The automated score is a broad heuristic,
+  not an accessibility certification. No unrelated design changes were made.
