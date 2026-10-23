@@ -55,8 +55,11 @@ from tessera.modules.sources.systems_client import (
     default_client,
 )
 
-PROMPT_VERSION = "investigator.v1"
+PROMPT_VERSION = "investigator.v2"
 PROMPT_PATH = Path(__file__).resolve().parents[3] / "prompts" / f"{PROMPT_VERSION}.md"
+# The chat default (Gemma) spends the tool budget on one-location stock reads; GLM completes
+# both recorded dev paths. Hosted outside the EU (docs/smoke-fastweb.md): inputs are synthetic.
+MODEL = "glm-5.3-flash"
 MOVEMENTS = frozenset({"transfer", "replenish_dc", "combo"})
 EVIDENCE_KINDS = frozenset(
     {"Observation", "EntityLink", "EvidenceRelation", "MetricFact", "ContextEvent"}
@@ -453,7 +456,7 @@ class Investigator:
             ),
             Tool(
                 "get_available_stock",
-                "Read stock with basis, time and unknown states",
+                "Read one SKU-size at several locations: basis, time and unknown states",
                 StockArgs,
                 self.stock,
             ),
@@ -585,6 +588,7 @@ def run(ctx: Context) -> ModuleResult:
                 model = model_for_run(
                     ctx.clients["llm"],
                     prompt_version=PROMPT_VERSION,
+                    model=MODEL,
                     cache_context={"case": case.model_dump(mode="json")},
                 )
                 result = investigate(

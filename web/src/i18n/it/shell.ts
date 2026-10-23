@@ -2,6 +2,8 @@ export const shell = {
   skipToContent: 'Vai al contenuto',
   closeMenu: 'Chiudi menu',
   openMenu: 'Apri menu',
+  themeDark: 'Passa al tema scuro',
+  themeLight: 'Passa al tema chiaro',
   navigationLabel: 'Navigazione principale',
   brand: 'Tessera',
   environment: 'Moncler',

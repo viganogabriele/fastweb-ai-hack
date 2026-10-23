@@ -1,12 +1,12 @@
 :root {
-  /* Implementation decision: a 2px cyan outline stays distinct on every dark surface. */
+  /* Implementation decision: a 2px wine-red outline stays distinct in both modes. */
   --sd-local-focus-ring: 2px solid var(--sd-color-action-focus);
   /* Implementation decision: separate the focus outline from the control border. */
   --sd-local-focus-offset: 3px;
-  /* Implementation decision: 44px controls support touch and compact desktop layouts. */
-  --sd-local-control-height: 44px;
+  /* Implementation decision: 40px controls suit a dense desktop dashboard. */
+  --sd-local-control-height: 40px;
   /* Implementation decision: compact toolbar controls stay dense while their hit areas can extend. */
-  --sd-local-control-height-sm: 40px;
+  --sd-local-control-height-sm: 36px;
   /* Implementation decision: reserve a minimum 44px square interactive target. */
   --sd-local-hit-min: 44px;
   /* Shared timing vocabulary mirrors src/ui/motion.ts. */
@@ -20,28 +20,33 @@
   --sd-local-ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
   --sd-local-ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
   --sd-local-ease: var(--sd-local-ease-out);
-  /* Implementation decision: lighten the raised surface for hover without a new accent. */
-  --sd-local-hover-surface: color-mix(in srgb, var(--sd-color-surface-elevated) 90%, var(--sd-color-text-primary));
-  /* Implementation decision: a muted cyan surface communicates selection. */
-  --sd-local-accent-subtle: color-mix(in srgb, var(--sd-color-action-primary) 12%, var(--sd-color-surface-card));
-  /* Implementation decision: brighten primary hover while retaining dark text contrast. */
-  --sd-local-accent-hover: color-mix(in srgb, var(--sd-color-action-primary) 85%, var(--sd-color-text-primary));
-  /* Implementation decision: darker cyan provides tactile pressed feedback. */
-  --sd-local-accent-pressed: color-mix(in srgb, var(--sd-color-action-primary) 85%, var(--sd-color-surface-card));
+  /* Implementation decision: hover tints the surface toward the page tone. */
+  --sd-local-hover-surface: color-mix(in srgb, var(--sd-color-text-primary) 4%, var(--sd-color-surface-card));
+  /* Implementation decision: a faint wine wash marks selection and the current page. */
+  --sd-local-accent-subtle: color-mix(in srgb, var(--sd-color-accent-signature) 8%, var(--sd-color-surface-card));
+  /* Implementation decision: primary buttons soften slightly on hover. */
+  --sd-local-accent-hover: color-mix(in srgb, var(--sd-color-action-primary) 86%, var(--sd-color-surface-card));
+  /* Implementation decision: pressed primary buttons take a hint of the accent. */
+  --sd-local-accent-pressed: color-mix(in srgb, var(--sd-color-action-primary) 84%, var(--sd-color-accent-signature));
   /* Implementation decision: a neutral gray series avoids implying a state. */
   --sd-local-series-2: var(--sd-color-text-secondary);
   /* Implementation decision: mix neutral text and the info hue for a distinct blue comparison series. */
   --sd-local-series-3: color-mix(in srgb, var(--sd-color-state-info) 80%, var(--sd-color-text-secondary));
-  /* Implementation decision: translucent sidebar black dims content behind a modal. */
-  --sd-local-scrim: color-mix(in srgb, var(--sd-color-surface-sidebar) 72%, transparent);
+  /* Implementation decision: translucent ink dims content behind a modal. */
+  --sd-local-scrim: color-mix(in srgb, #18181b 40%, transparent);
   /* Implementation decision: shadow is reserved for overlays, never flat cards. */
-  --sd-local-shadow-overlay: 0 16px 48px color-mix(in srgb, var(--sd-color-surface-sidebar) 65%, transparent);
+  --sd-local-shadow-overlay: 0 12px 32px rgb(24 24 27 / 0.12), 0 2px 6px rgb(24 24 27 / 0.06);
+  /* Implementation decision: cards lift off the page with a hairline shadow, light mode only. */
+  --sd-local-shadow-card: 0 1px 2px rgb(24 24 27 / 0.04), 0 1px 1px rgb(24 24 27 / 0.02);
   /* Implementation decision: visible control edges exceed decorative card-border contrast. */
-  --sd-local-control-border: color-mix(in srgb, var(--sd-color-text-muted) 75%, var(--sd-color-surface-card));
+  --sd-local-control-border: color-mix(in srgb, var(--sd-color-text-muted) 80%, var(--sd-color-surface-card));
   /* Implementation decision: disabled controls retain readable text and a distinct cursor. */
   --sd-local-disabled-surface: var(--sd-color-surface-canvas);
-  /* Implementation decision: pill rounding is limited to status labels and spinners. */
+  /* Implementation decision: pill rounding is limited to tags, spinners and dots. */
   --sd-local-radius-pill: 999px;
+  /* Implementation decision: table heads use small caps-like uppercase with modest tracking. */
+  --sd-local-tracking-label: 0.04em;
+  --sd-local-font-size-micro: 12px;
   --sd-local-radius-control-inset: max(0px, calc(var(--sd-radius-control) - var(--sd-space-1)));
   /* Implementation decision: line height balances dense UI and multiline Italian labels. */
   --sd-local-line-height: 1.5;
@@ -55,6 +60,15 @@
   --sd-local-skeleton-short: 65%;
   /* Implementation decision: a short final line prevents a solid placeholder block. */
   --sd-local-skeleton-last: 45%;
+}
+
+/* Dark mode: shadows disappear into near-black, so surfaces separate by borders instead. */
+:root[data-theme='dark'] {
+  --sd-local-scrim: color-mix(in srgb, #000000 60%, transparent);
+  --sd-local-shadow-overlay: 0 16px 40px rgb(0 0 0 / 0.5);
+  --sd-local-shadow-card: none;
+  --sd-local-hover-surface: color-mix(in srgb, var(--sd-color-text-primary) 6%, var(--sd-color-surface-card));
+  --sd-local-accent-subtle: color-mix(in srgb, var(--sd-color-accent-signature) 14%, var(--sd-color-surface-card));
 }
 
 @media (prefers-reduced-motion: reduce) {

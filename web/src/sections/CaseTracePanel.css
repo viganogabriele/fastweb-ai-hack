@@ -1,0 +1,7 @@
+.sd-case-traces ul { margin: 0; padding: 0; list-style: none; }
+.sd-case-traces li { display: block; min-width: 0; overflow-wrap: anywhere; }
+.sd-case-traces ol > li { display: list-item; }
+.sd-case-traces li + li { margin-block-start: var(--sd-space-2); }
+.sd-case-traces li ul { margin-block: var(--sd-space-2); }
+.sd-case-traces pre { max-width: 100%; white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--sd-font-family-metric); font-size: var(--sd-font-size-caption); }
+.sd-case-traces button { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }

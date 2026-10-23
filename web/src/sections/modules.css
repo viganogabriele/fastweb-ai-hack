@@ -39,3 +39,6 @@
   cursor: default;
   color: var(--sd-color-text-secondary);
 }
+
+/* Atelier: module headings at card-title size. */
+.sd-module-heading h2 { font-size: var(--sd-font-size-section); font-weight: var(--sd-font-weight-semibold); }

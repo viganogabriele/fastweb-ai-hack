@@ -47,3 +47,7 @@
 .sd-button:not(:disabled):active { transform: scale(0.97); }
 @keyframes sd-spin { to { transform: rotate(1turn); } }
 @media (prefers-reduced-motion: reduce) { .sd-button__spinner { animation: none; } }
+/* Atelier: secondary buttons are white with a visible edge and a hairline shadow. */
+.sd-button { font-weight: var(--sd-font-weight-medium); box-shadow: var(--sd-local-shadow-card); }
+.sd-button--ghost { box-shadow: none; }
+.sd-button--ghost:not(:disabled):hover { background: var(--sd-local-hover-surface); color: var(--sd-color-text-primary); }

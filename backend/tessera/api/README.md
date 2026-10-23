@@ -58,6 +58,12 @@ Both routes inherit publication checks (409), missing-run/namespace checks
 `FIXTURE_MODE=1`). The API does not interpret citation field paths or recompute
 numbers; nested and array fields remain available in the resolved artifact.
 
+## MCP reads (AG-04)
+
+`tessera mcp` exposes the existing read routes and versioned canonical documents
+through MCP stdio. See [MCP setup and scope](MCP.md) for client configuration,
+namespace selection and the explicit read-only tool allowlist.
+
 ## Agent trace reads (PLT-12a)
 
 `GET /api/runs/{run_id}/cases/{case_id}/traces` returns the latest visible version
