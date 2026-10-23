@@ -373,7 +373,8 @@ def test_feed_timezone_contradicting_the_master_data_is_reported(tmp_path):
     found, status, published = events_of(tmp_path, spec(["LON01", "LON02"]))
     assert published
     assert status.status == "degraded"
-    assert status.result.errors == (
+    assert status.result.errors == ()
+    assert status.result.abstentions == (
         "London: external/weather/eu_meteoarchive/london_2026-03-01_2026-10-21.json says GMT "
         "while the store's timezone is Europe/London; its days are bounded by the store's"
         " timezone",

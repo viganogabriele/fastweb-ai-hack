@@ -8,6 +8,7 @@ All checks run with networking denied, including the decision's stock revalidati
 import argparse
 import hashlib
 import json
+import math
 import subprocess
 import sys
 from collections import Counter
@@ -32,6 +33,7 @@ from tesseract.core.config import Settings
 from tesseract.core.contracts import (
     ActionOption,
     AgentTrace,
+    BusinessSnapshot,
     Case,
     Clarification,
     ContextEvent,
@@ -172,6 +174,12 @@ def check(candidate, *, decision_output=None):
                         if ref.kind in KINDS:
                             assert repo.get(KINDS[ref.kind], ref.id, ref.version) is not None
                 for case in cases:
+                    supporting = [
+                        repo.get(Observation, r.id, r.version)
+                        for r in case.supporting
+                        if r.kind == "Observation"
+                    ]
+                    assert case.n_documents == len({o.document_id for o in supporting})
                     exact = get(f"/cases/{case.id}", version=case.version)
                     assert exact["version"] == case.version and exact["run_id"] == spec.run_id
                     assert (
@@ -198,6 +206,24 @@ def check(candidate, *, decision_output=None):
                     )
                     assert exact == clarification.model_dump(mode="json")
                 forecasts = repo.list(ForecastAdjustment)
+                for forecast in forecasts:
+                    if forecast.status != "computed":
+                        continue
+                    for scenario in ("low", "base", "high"):
+                        baseline = sum(point.baseline for point in forecast.series)
+                        uplift = sum(
+                            c.params.get("total_uplift", {}).get(scenario, 0)
+                            for c in forecast.components
+                        )
+                        clipped = sum(
+                            c.params.get("total_clipped", {}).get(scenario, 0)
+                            for c in forecast.components
+                        )
+                        assert math.isclose(
+                            sum(getattr(point.latent, scenario) for point in forecast.series),
+                            baseline + uplift - clipped,
+                            abs_tol=1e-8,
+                        )
                 reports = get("/reports")
                 assert forecasts and reports
                 for owner in {c.owner for c in cases}:
@@ -231,6 +257,51 @@ def check(candidate, *, decision_output=None):
                     "trace_tools": {t.case_id: [s.tool for s in t.steps] for t in traces},
                     "trace_fallbacks": {t.case_id: t.fallback_used for t in traces},
                 }
+                business = repo.get(BusinessSnapshot, "business")
+                if business is not None:
+                    kpi = get("/kpi")
+                    market = get("/market")
+                    products = get("/products")
+                    assert kpi == [r.model_dump(mode="json") for r in business.kpi]
+                    assert market == business.market.model_dump(mode="json")
+                    assert len({(r["store_id"], r["date"]) for r in kpi}) == len(kpi)
+                    assert all(r["store_id"] in spec.stores for r in kpi)
+                    assert (
+                        sum(w["pos"] + w["neu"] + w["neg"] for w in market["social"]["weeks"])
+                        == market["social"]["posts"]
+                    )
+                    assert set(market["stores"]) == set(spec.stores)
+                    assert all(
+                        set(c["stock"]) <= set(spec.stores)
+                        for p in products["products"]
+                        for c in p["colours"]
+                    )
+                    assert len({p["style_code"] for p in products["products"]}) == len(
+                        products["products"]
+                    )
+                    reconciliation = {
+                        key: round(
+                            sum(getattr(r, key) for r in business.market.categories)
+                            - sum(getattr(r, key) for r in business.market.regions),
+                            2,
+                        )
+                        for key in ("sales", "before", "ly")
+                    }
+                    result["dashboard"] = {
+                        "stores": list(spec.stores),
+                        "kpi_days": len(kpi),
+                        "monthly_points": len(market["monthly"]),
+                        "categories": len(market["categories"]),
+                        "products": len(products["products"]),
+                        "social_posts": market["social"]["posts"],
+                        "social_duplicates_removed": market["social"]["duplicates_removed"],
+                        "social_malformed_excluded": market["social"]["malformed_records"],
+                        "category_minus_kpi_eur": reconciliation,
+                        "forecast_computed": sum(f.status == "computed" for f in forecasts),
+                        "cases_with_deduplicated_origins": sum(
+                            c.n_documents > c.n_origin_groups + c.n_unknown_origins for c in cases
+                        ),
+                    }
                 choices = [
                     o
                     for o in latest(repo.list(ActionOption))

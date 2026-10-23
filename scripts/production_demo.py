@@ -17,6 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 
 from prepare_core_demo import MODULES, copy_files
 from replay_demo import allowed, digest, environment, rebuild
+
 from tesseract.core.config import REPO_ROOT, Settings
 from tesseract.core.contracts import ModuleSnapshot, RunSpec
 from tesseract.core.db import connect
@@ -28,7 +29,7 @@ from tesseract.core.systems_cache import SystemsCache, systems_factory
 from tesseract.modules.sources import business, docs, erp, external, systems_client
 
 
-def prepare(output, profile):
+def prepare(output, profile, code_version=None):
     output = allowed(output)
     profile = allowed(profile)
     settings = Settings(_env_file=None)
@@ -51,6 +52,25 @@ def prepare(output, profile):
         },
         "ag.investigator": {"case_ids": plan["investigate"]},
     }
+    calendar_path = "internal_comms/demo/decision_calendars.json"
+    calendar_bytes = (
+        json.dumps(
+            {"synthetic": True, "calendars": plan["decision_calendars"]}, sort_keys=True, indent=2
+        )
+        + "\n"
+    ).encode()
+    calendar_hash = hashlib.sha256(calendar_bytes).hexdigest()
+    params["int.cases"] = {
+        "decision_calendars": [
+            {
+                **entry,
+                "source_refs": [
+                    {"uri": "dataset://" + calendar_path, "content_hash": "sha256:" + calendar_hash}
+                ],
+            }
+            for entry in plan["decision_calendars"]
+        ]
+    }
     ids = tuple(i for i in MODULES if i != "out.reports") + (
         "src.business",
         "ins.product",
@@ -64,13 +84,10 @@ def prepare(output, profile):
         stores=plan["stores"],
         source_manifest_hash="pending",
         config_hash="pending",
-        code_version=subprocess.check_output(
-            ["git", "rev-parse", "HEAD"], cwd=REPO_ROOT, text=True
-        ).strip(),
+        code_version=code_version
+        or subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=REPO_ROOT, text=True).strip(),
         mode="recorded",
-        modules=tuple(
-            ModuleSnapshot(manifest=manifests[i], params=params.get(i, {})) for i in ids
-        ),
+        modules=tuple(ModuleSnapshot(manifest=manifests[i], params=params.get(i, {})) for i in ids),
         prompt_versions={
             "ing.extract": "extract_observations.v1",
             "int.link": "link_choice.v1",
@@ -106,26 +123,21 @@ def prepare(output, profile):
         if provider == external.PROVIDER:
             paths.extend(
                 p.relative_to(sources).as_posix()
-                for p in (sources / external.FOLDER).glob(
-                    external.city_slug(city) + "_*.json"
-                )
+                for p in (sources / external.FOLDER).glob(external.city_slug(city) + "_*.json")
             )
     _, _, refs = business.project(sources, spec.stores, spec.as_of)
     paths.extend(r.uri.removeprefix("dataset://") for r in refs)
-    if (
-        output.is_relative_to(sources)
-        or sources.is_relative_to(output)
-        or output == REPO_ROOT
-    ):
+    if output.is_relative_to(sources) or sources.is_relative_to(output) or output == REPO_ROOT:
         raise ValueError("output overlaps sources or repository")
     output.mkdir(parents=True, exist_ok=False)
     try:
         inventory = copy_files(sources, output / "sources", paths)
+        calendar_output = output / "sources" / calendar_path
+        calendar_output.parent.mkdir(parents=True, exist_ok=True)
+        calendar_output.write_bytes(calendar_bytes)
+        inventory.append((calendar_path, calendar_hash))
         for mail in plan["supplemental_emails"]:
-            if (
-                mail["store"] not in spec.stores
-                or Path(mail["filename"]).name != mail["filename"]
-            ):
+            if mail["store"] not in spec.stores or Path(mail["filename"]).name != mail["filename"]:
                 raise ValueError("invalid supplemental email location")
             message = EmailMessage(policy=SMTP)
             message["From"] = f"{mail['store'].lower()}.demo@synthetic.example"
@@ -170,7 +182,8 @@ def prepare(output, profile):
                     ],
                     "limitations": [
                         "Synthetic dev demonstration, not hold-out evaluation.",
-                        "Warehouse/logistics are the dataset's simulated systems, read through the production adapter.",
+                        "Warehouse/logistics are the dataset's simulated systems, "
+                        "read through the production adapter.",
                     ],
                 },
                 indent=2,
@@ -186,9 +199,7 @@ def prepare(output, profile):
 
 def record(candidate, keys_file):
     spec = RunSpec.model_validate_json((candidate / "run-spec.json").read_text())
-    head = subprocess.check_output(
-        ["git", "rev-parse", "HEAD"], cwd=REPO_ROOT, text=True
-    ).strip()
+    head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=REPO_ROOT, text=True).strip()
     dirty = subprocess.check_output(
         [
             "git",
@@ -203,9 +214,7 @@ def record(candidate, keys_file):
         text=True,
     )
     if head != spec.code_version or dirty:
-        raise ValueError(
-            "commit executable changes, then prepare a candidate at the executing SHA"
-        )
+        raise ValueError("commit executable changes, then prepare a candidate at the executing SHA")
     for name, expected in (
         ("sources", spec.source_manifest_hash),
         ("config", spec.config_hash),
@@ -244,9 +253,7 @@ def record(candidate, keys_file):
                 settings=settings,
                 clients={
                     "llm": client.for_run(spec),
-                    "systems": systems_factory(
-                        settings, spec, systems, allow_recording=True
-                    ),
+                    "systems": systems_factory(settings, spec, systems, allow_recording=True),
                 },
             )
         with repo_session(engine, spec.run_id) as repo:
@@ -275,8 +282,7 @@ def record(candidate, keys_file):
         )
         return (
             0
-            if state["published"]
-            and not any(s.result and s.result.errors for s in statuses)
+            if state["published"] and not any(s.result and s.result.errors for s in statuses)
             else 1
         )
     finally:
@@ -287,21 +293,18 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=("prepare", "record", "replay"))
     parser.add_argument("--candidate", type=Path, required=True)
-    parser.add_argument(
-        "--profile", type=Path, default=REPO_ROOT / "config/production_demo.yaml"
-    )
+    parser.add_argument("--profile", type=Path, default=REPO_ROOT / "config/production_demo.yaml")
     parser.add_argument("--keys-file", type=Path)
     parser.add_argument("--workspace", type=Path)
+    parser.add_argument("--code-version", help="frozen recording SHA when rebuilding inputs")
     args = parser.parse_args()
     candidate = allowed(args.candidate)
     if args.command == "prepare":
-        spec = prepare(candidate, args.profile)
+        spec = prepare(candidate, args.profile, args.code_version)
         print(json.dumps({"run_id": spec.run_id, "sources": spec.source_manifest_hash}))
         return 0
     if args.command == "record":
-        return record(
-            candidate, args.keys_file or Settings(_env_file=None).fastweb_keys_file
-        )
+        return record(candidate, args.keys_file or Settings(_env_file=None).fastweb_keys_file)
     if args.workspace is None:
         parser.error("replay requires --workspace")
     spec = RunSpec.model_validate_json((candidate / "run-spec.json").read_text())

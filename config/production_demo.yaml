@@ -45,3 +45,12 @@ supplemental_emails:
 investigate:
   - case-mil01-i10919b00011-20261008
   - case-mil01-unknown-20261009
+# Planned slots for the supplemental London order, known before the run cutoff.
+# These are synthetic logistics inputs, not an approved or executed stock movement.
+decision_calendars:
+  - case_id: case-lon01-j20931a00012-999-2-20261021
+    available_at: '2026-10-22T10:00:00Z'
+    required_by: '2026-10-24T16:00:00Z'
+    slots:
+      - cutoff_at: '2026-10-23T08:00:00Z'
+        sellable_at: '2026-10-24T09:00:00Z'
