@@ -2,7 +2,7 @@
 
 Case: the DATA-01b MAIRE black fixture (MIL01, unmet demand). Run evening: Wed 2026-10-14 20:00 in
 Milan, horizon Thu 15 → Wed 21. Stock snapshots are end of Tue 13 (one day before the horizon).
-Lane ROM01 → MIL01: pickup Mon-Fri 12:00, one transit day, so Thu 15 pickup, ETA Fri 16, sellable
+Lane MIL02 → MIL01: pickup Mon-Fri 12:00, one transit day, so Thu 15 pickup, ETA Fri 16, sellable
 Sat 17.
 """
 
@@ -156,8 +156,8 @@ def position(store, stock, fc=None, curve=CURVE, country="IT", in_transit=0, net
 
 def lane(transit=1, cost=(30.0, 1.0), customs=False, ibt=True) -> LaneEta:
     ln = Lane(
-        lane_id="LN-1003-1001",
-        origin="1003",
+        lane_id="LN-1002-1001",
+        origin="1002",
         dest="1001",
         origin_tz=ROME,
         mode="ROAD_EXPRESS",
@@ -195,7 +195,7 @@ def inputs(
     size=None,
 ) -> OptionInputs:
     dest = dest or position("MIL01", DEST_STOCK, forecast("MIL01", 2.0))
-    donor = donor or position("ROM01", DONOR_STOCK, forecast("ROM01", 1.0))
+    donor = donor or position("MIL02", DONOR_STOCK, forecast("MIL02", 1.0))
     return OptionInputs(
         case=case or fixture_case(),
         run_id="run",
@@ -245,7 +245,7 @@ def test_admissible_transfer_is_recommended_with_whole_units_and_comparison():
     t = o["transfer"]
     assert all(s == "pass" for s in checks(t).values()), checks(t)
     (leg,) = t.legs
-    assert (leg.origin, leg.dest, leg.size, leg.qty) == ("ROM01", "MIL01", "1", 3)
+    assert (leg.origin, leg.dest, leg.size, leg.qty) == ("MIL02", "MIL01", "1", 3)
     assert isinstance(leg.qty, int) and 1 <= leg.qty <= POLICY.max_units_per_transfer
     assert leg.pickup_at == datetime(2026, 10, 15, 12, tzinfo=ROME)
     assert leg.sellable_at == datetime(2026, 10, 17, tzinfo=ROME)
@@ -300,7 +300,7 @@ def test_missing_policy_is_unknown_never_permission():
 
 
 def test_q_max_is_bounded_by_policy_and_by_donor_availability():
-    donor = position("ROM01", DONOR_STOCK | {"1": 2}, forecast("ROM01", 0.0))
+    donor = position("MIL02", DONOR_STOCK | {"1": 2}, forecast("MIL02", 0.0))
     t = by_kind(evaluate_options(inputs(donor=donor)))["transfer"]
     assert t.legs[0].qty == 1  # 2 on hand minus the donor floor of 1
 
@@ -317,7 +317,7 @@ def test_q_max_is_bounded_by_policy_and_by_donor_availability():
         producer="act.approval",
         producer_version="1",
         decision_id="dec-1",
-        location="ROM01",
+        location="MIL02",
         sku=SKU,
         size="1",
         qty=6,
@@ -332,8 +332,8 @@ def test_q_max_is_bounded_by_policy_and_by_donor_availability():
 def test_donor_is_protected_over_the_horizon_in_the_high_scenario():
     # Base: the donor sells 0.3/day of size 1 and could spare units. High: 0.9/day from 4 units
     # after the bridge day, so any unit moved is one more lost sale at the donor.
-    donor_fc = forecast("ROM01", 1.0, [(0.0, 1.0, 3.0)] * 7)
-    donor = position("ROM01", DONOR_STOCK | {"1": 5}, donor_fc)
+    donor_fc = forecast("MIL02", 1.0, [(0.0, 1.0, 3.0)] * 7)
+    donor = position("MIL02", DONOR_STOCK | {"1": 5}, donor_fc)
     opts = evaluate_options(inputs(donor=donor))
 
     t = by_kind(opts)["transfer"]
@@ -349,7 +349,7 @@ def test_donor_is_protected_over_the_horizon_in_the_high_scenario():
 
 def test_extra_donor_loss_fails_even_when_hold_already_stocks_out():
     # Donor size 1 sells 1.2/day in every scenario from 4 units: it stocks out under hold too.
-    donor = position("ROM01", DONOR_STOCK | {"1": 4}, forecast("ROM01", 4.0))
+    donor = position("MIL02", DONOR_STOCK | {"1": 4}, forecast("MIL02", 4.0))
     policy = replace(POLICY, donor_min_stock=0)
     cands = options._quantities(
         inputs(donor=donor, policy=policy),
@@ -384,7 +384,7 @@ def test_unknown_stock_is_never_zero_and_asks_for_verification():
 
 
 def test_store_on_hand_without_netting_blocks_on_reservations_and_quality_holds():
-    donor = position("ROM01", DONOR_STOCK, forecast("ROM01", 1.0), netted=None)
+    donor = position("MIL02", DONOR_STOCK, forecast("MIL02", 1.0), netted=None)
     t = by_kind(evaluate_options(inputs(donor=donor)))["transfer"]
     assert checks(t)["reservations"] == checks(t)["quality_hold"] == "unknown"
     assert not t.recommended
@@ -446,7 +446,7 @@ def test_pure_and_hash_follows_inputs():
     a, b = evaluate_options(inputs()), evaluate_options(inputs())
     assert a == b
     assert len({o.input_version_hash for o in a}) == 1
-    donor = position("ROM01", DONOR_STOCK | {"1": 9}, forecast("ROM01", 1.0))
+    donor = position("MIL02", DONOR_STOCK | {"1": 9}, forecast("MIL02", 1.0))
     changed = inputs(donor=donor)
     assert input_version_hash(changed) != a[0].input_version_hash
     assert evaluate_options(changed)[0].version != a[0].version
@@ -489,7 +489,7 @@ def sources(tmp_path, monkeypatch):
     master = erp_dir / "master_data"
     stores = [
         ("MIL01", "Europe/Rome", "EUR", "", "IT"),
-        ("ROM01", "Europe/Rome", "EUR", "", "IT"),
+        ("MIL02", "Europe/Rome", "EUR", "", "IT"),
         ("PAR01", "Europe/Paris", "EUR", "Sun", "FR"),
     ]
     write(
@@ -519,11 +519,11 @@ def sources(tmp_path, monkeypatch):
         erp_dir / "inventory" / "store_stock_daily" / "stock_eod_2026-10-13.csv",
         STOCK,
         [("2026-10-13", "MIL01", SKU, s, q, 0) for s, q in DEST_STOCK.items()]
-        + [("2026-10-13", "ROM01", SKU, s, q, 0) for s, q in DONOR_STOCK.items()]
+        + [("2026-10-13", "MIL02", SKU, s, q, 0) for s, q in DONOR_STOCK.items()]
         + [("2026-10-13", "PAR01", SKU, s, 9, 0) for s in SIZES],
     )
     rows = []
-    for store, units in (("MIL01", "14"), ("ROM01", "7"), ("PAR01", "7")):
+    for store, units in (("MIL01", "14"), ("MIL02", "7"), ("PAR01", "7")):
         for ws in ("2026-10-12", "2026-10-19"):
             week = date.fromisoformat(ws).strftime("%G-W%V")
             rows.append(("2026-10-12", week, ws, store, SKU, units))
@@ -566,7 +566,7 @@ def test_module_writes_options_for_open_cases_with_domestic_donors_only(tmp_path
         run_id="run-1014",
         scenario_id="historical",
         as_of=T,
-        stores=("MIL01", "ROM01", "PAR01"),
+        stores=("MIL01", "MIL02", "PAR01"),
         source_manifest_hash="sha256:test",
         config_hash="sha256:test",
         code_version="test",
@@ -590,8 +590,8 @@ def test_module_writes_options_for_open_cases_with_domestic_donors_only(tmp_path
         fixture_case(run_id=spec.run_id, id="case-closed", status="closed"),
     )
     crosswalk = Crosswalk(
-        store_plant={"MIL01": "1001", "ROM01": "1003", "PAR01": "2001"},
-        timezones={"MIL01": "Europe/Rome", "ROM01": "Europe/Rome", "PAR01": "Europe/Paris"},
+        store_plant={"MIL01": "1001", "MIL02": "1002", "PAR01": "2001"},
+        timezones={"MIL01": "Europe/Rome", "MIL02": "Europe/Rome", "PAR01": "Europe/Paris"},
         sku_matnr={SKU: SKU.replace("-", "")},
         ean_sku_size={},
     )
@@ -603,10 +603,10 @@ def test_module_writes_options_for_open_cases_with_domestic_donors_only(tmp_path
 
     assert result.status == "succeeded", result
     assert result.counts["cases"] == 1 and result.counts["options"] == 5
-    assert seen == [("1003", "1001")]  # PAR01 is cross-border: never asked
+    assert seen == [("1002", "1001")]  # PAR01 is cross-border: never asked
     stored = {o.kind: o for o in repo.list(ActionOption, case_id=fixture_case().id)}
     t = stored["transfer"]
-    assert t.legs[0].origin == "ROM01" and t.run_id == spec.run_id
+    assert t.legs[0].origin == "MIL02" and t.run_id == spec.run_id
     # ERP store stock is physical on-hand with no netting; no size curve exists yet.
     status = checks(t)
     assert status["size_curve"] == status["reservations"] == "unknown"
@@ -619,3 +619,15 @@ def test_manifest_is_an_actions_module():
     assert isinstance(options.MANIFEST, ModuleManifest)
     assert options.MANIFEST.layer == "actions" and options.MANIFEST.produces == ("ActionOption",)
     assert callable(options.run)
+
+
+def test_donor_with_nothing_to_give_is_no_transfer_but_a_stated_reason():
+    donor = position("MIL02", {s: 0 for s in SIZES}, forecast("MIL02", 1.0))
+    opts = evaluate_options(inputs(donor=donor))
+
+    o = by_kind(opts)
+    assert "transfer" not in o
+    assert "MIL02: no unit of J20931A00012-999 to give in 0, 00, 1, 2, 3, 4" in (
+        o["notify_owner"].rationale
+    )
+    assert recommended(opts) == ["notify_owner"]

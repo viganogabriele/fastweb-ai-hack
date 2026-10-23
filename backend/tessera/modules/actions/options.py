@@ -381,8 +381,15 @@ def _transfer(
         if isinstance(route.lane, Unknown):
             reasons.append(f"{route.donor.store_id}: lane unknown ({route.lane.reason})")
             continue
+        empty = []
         for size in _sizes(inputs, route.donor):
+            if _spare(inputs, route.donor, size) == 0:
+                empty.append(size)
+                continue
             candidates += _quantities(inputs, route.donor, route.lane, size, days, dest_demand)
+        if empty:
+            sizes = ", ".join(empty)
+            reasons.append(f"{route.donor.store_id}: no unit of {inputs.sku} to give in {sizes}")
     if not candidates:
         if not inputs.routes:
             reasons.append("no domestic donor store in the run")
@@ -408,6 +415,23 @@ def _rank_in(c: _Candidate, scenario: str) -> tuple[Any, ...]:
     return (-c.reduction[scenario], cost, c.leg.qty, c.donor.store_id, c.size)
 
 
+def _ledger(inputs: OptionInputs, donor: Position, size: str) -> list[Reservation]:
+    return [
+        r
+        for r in inputs.reservations
+        if r.location == donor.store_id and r.sku == inputs.sku and r.size == size
+    ]
+
+
+def _spare(inputs: OptionInputs, donor: Position, size: str) -> int | None:
+    """Donor units of one size not held by the ledger, before any policy floor."""
+    qty = _qty(donor.stock.get(size))
+    if qty is None:
+        return None
+    held = sum(r.qty for r in _ledger(inputs, donor, size) if r.status in LEDGER_HOLDS)
+    return max(0, math.floor(qty) - held)
+
+
 def _sizes(inputs: OptionInputs, donor: Position) -> list[str]:
     """Sizes to evaluate: the case's size, else the curve's sizes, else one size to display."""
     if inputs.size is not None:
@@ -417,11 +441,13 @@ def _sizes(inputs: OptionInputs, donor: Position) -> list[str]:
         return sorted(s for s, w in curve.weights.items() if w > 0)
     known = sorted(set(inputs.dest.stock) | set(donor.stock))
 
-    def shortfall(size: str) -> tuple[float, float, str]:
+    def shortfall(size: str) -> tuple[bool, float, float, str]:
         here, there = _qty(inputs.dest.stock.get(size)), _qty(donor.stock.get(size))
-        return (math.inf if here is None else here, -(there or 0), size)
+        return (not there, math.inf if here is None else here, -(there or 0), size)
 
-    return [min(known, key=shortfall)] if known else []
+    if not any(_qty(donor.stock.get(s)) for s in known):
+        return known  # nothing anywhere: every size is reported as empty
+    return [min(known, key=shortfall)]
 
 
 def _rank(c: _Candidate) -> tuple[Any, ...]:
@@ -455,11 +481,7 @@ def _quantities(
     assert sku is not None
     dest_fact, donor_fact = inputs.dest.stock.get(size), donor.stock.get(size)
     dest_qty, donor_qty = _qty(dest_fact), _qty(donor_fact)
-    ledger = [
-        r
-        for r in inputs.reservations
-        if r.location == donor.store_id and r.sku == sku and r.size == size
-    ]
+    ledger = _ledger(inputs, donor, size)
     reserved = sum(r.qty for r in ledger if r.status in LEDGER_HOLDS)
     floor = policy.donor_min_stock or 0
     available = None if donor_qty is None else math.floor(donor_qty) - reserved - floor
@@ -877,7 +899,7 @@ def _quantity_check(
     policy: OptionsPolicy, q: int, available: int | None, reserved: int, floor: int
 ) -> Check:
     cap = policy.max_units_per_transfer
-    bound = f"{available} movable after {reserved} reserved and floor {floor}"
+    bound = f"{max(available or 0, 0)} movable after {reserved} reserved and floor {floor}"
     if available is None:
         bound = "donor stock unknown"
     if cap is None or policy.donor_min_stock is None:
