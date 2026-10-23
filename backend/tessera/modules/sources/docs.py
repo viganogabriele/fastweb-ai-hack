@@ -44,7 +44,7 @@ from tessera.core.contracts import ModuleManifest, ModuleResult, Segment, Source
 DEFAULT_REPORT = "retail_controlling/weekly_flash/Flash_W42_2026.xlsx"
 REPORTS_DIR = "reports"
 DOC_VERSION = "v1"
-TEXT_VERSION = "report-xlsx-v1"
+TEXT_VERSION = "report-xlsx-v2"
 REPORT_TIMEZONE = ZoneInfo("Europe/Rome")  # Milan HQ, the office that issues the flash
 REPORT_LANGUAGE = "en"
 TEXT_BASIS = (
@@ -63,7 +63,10 @@ MANIFEST = ModuleManifest(
     mode="live",
     params_schema={
         "type": "object",
-        "properties": {"report": {"type": "string", "minLength": 1}},
+        "properties": {
+            "report": {"type": "string", "minLength": 1},
+            "language": {"type": "string", "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$"},
+        },
         "additionalProperties": False,
     },
 )
@@ -96,7 +99,8 @@ class ParsedReport:
 
     @property
     def available_at(self) -> datetime:
-        return datetime.combine(self.issue_date, time(0, 0), tzinfo=REPORT_TIMEZONE)
+        day = max(self.issue_date, self.period_end)
+        return datetime.combine(day, time(0, 0), tzinfo=REPORT_TIMEZONE)
 
 
 def report_path(sources_dir: Path, relative: str) -> Path:
@@ -161,9 +165,9 @@ def _cover(workbook: Any) -> tuple[date, date, date, int, str | None, str]:
                 if version is None and (match := _VERSION.search(text)):
                     version = match.group(1)
     if issued is None:
-        raise UndatedReport("the cover does not state an issue date")
+        raise UndatedReport("no 'issued <date>' line on any sheet")
     if period is None:
-        raise UndatedReport("the cover does not state the reporting period")
+        raise UndatedReport("no 'Fiscal week <n>: <start> - <end>' line on any sheet")
     return issued[0], period[1], period[2], period[0], version, issued[1]
 
 
@@ -198,7 +202,7 @@ def _text(value: object) -> str:
     if value is None:
         return ""
     if isinstance(value, str):
-        return value.strip()
+        return " ".join(value.split())  # a cell's own line breaks would break one row = one line
     if isinstance(value, bool):  # before int: a bool is an int
         return "TRUE" if value else "FALSE"
     if isinstance(value, (int, float)):
@@ -212,14 +216,16 @@ def document_id(relative: str) -> str:
     return "doc-" + Path(relative).stem.lower().replace("_", "-")
 
 
-def build_document(report: ParsedReport) -> tuple[SourceDocument, list[Segment]]:
+def build_document(
+    report: ParsedReport, language: str = REPORT_LANGUAGE
+) -> tuple[SourceDocument, list[Segment]]:
     document_id_ = document_id(report.relative)
     uri = f"dataset://{REPORTS_DIR}/{report.relative}"
     content_hash = f"sha256:{report.content_hash}"
     common = {
         "version": DOC_VERSION,
         "available_at": report.available_at,
-        "availability_basis": "report_cover_issue_date",
+        "availability_basis": "report_cover_issue_date_not_before_period_end",
     }
     text = "\n".join(text for _, text in report.rows)
     document = SourceDocument(
@@ -230,9 +236,9 @@ def build_document(report: ParsedReport) -> tuple[SourceDocument, list[Segment]]
         connector=MANIFEST.id,
         uri=uri,
         content_hash=content_hash,
-        origin=report.relative.split("/")[0],
+        origin=report.relative.split("/")[0] if "/" in report.relative else None,
         author_ref=None,
-        language=REPORT_LANGUAGE,
+        language=language,
         business_date=report.period_end,
         event_start=datetime.combine(report.period_start, time(0, 0), tzinfo=REPORT_TIMEZONE),
         event_end=datetime.combine(report.period_end, time(23, 59, 59), tzinfo=REPORT_TIMEZONE),
@@ -280,6 +286,7 @@ def build_document(report: ParsedReport) -> tuple[SourceDocument, list[Segment]]
 def run(ctx, *, sources_dir: Path | None = None) -> ModuleResult:
     root = sources_dir or get_settings().sources_dir
     relative = str(ctx.params.get("report") or DEFAULT_REPORT)
+    language = str(ctx.params.get("language") or REPORT_LANGUAGE)
     uri = f"dataset://{REPORTS_DIR}/{relative}"
     counts: dict[str, int] = {"documents": 0, "segments": 0, "sheets": 0}
     errors: list[str] = []
@@ -291,12 +298,16 @@ def run(ctx, *, sources_dir: Path | None = None) -> ModuleResult:
         counts["reports_skipped"] = 1
     except (ValueError, OSError, BadZipFile, InvalidFileException) as error:
         errors.append(f"{uri}: {error}")
+    except Exception as error:  # openpyxl raises KeyError/ParseError on a malformed zip
+        # A source file must never fail the run: the orchestrator would discard what the
+        # modules already published.
+        errors.append(f"{uri}: unreadable workbook ({type(error).__name__}: {error})")
     else:
         if parsed.available_at > ctx.spec.as_of:
             abstentions.append(f"{uri}: not issued at as_of")
             counts["not_available"] = 1
         else:
-            document, segments = build_document(parsed)
+            document, segments = build_document(parsed, language)
             ctx.repo.put(document, *segments)
             counts.update(documents=1, segments=len(segments), sheets=len(parsed.sheets))
     return ModuleResult(

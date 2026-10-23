@@ -3,6 +3,7 @@
 import re
 from datetime import UTC, datetime
 from pathlib import Path
+from zipfile import ZipFile
 
 import pytest
 from jsonschema.exceptions import ValidationError
@@ -93,7 +94,7 @@ def test_document_is_available_only_from_the_issue_date():
     # The flash states a date, not a time: the day starts in Milan (00:00 CEST = 22:00 UTC before).
     assert document.available_at == datetime(2026, 10, 20, 0, 0, tzinfo=docs.REPORT_TIMEZONE)
     assert document.available_at == datetime(2026, 10, 19, 22, 0, tzinfo=UTC)
-    assert document.availability_basis == "report_cover_issue_date"
+    assert document.availability_basis == "report_cover_issue_date_not_before_period_end"
     assert document.event_start == datetime(2026, 10, 12, 0, 0, tzinfo=docs.REPORT_TIMEZONE)
     assert document.event_start == datetime(2026, 10, 11, 22, 0, tzinfo=UTC)
     assert document.event_end == datetime(2026, 10, 18, 23, 59, 59, tzinfo=docs.REPORT_TIMEZONE)
@@ -120,6 +121,7 @@ def test_segments_are_the_rows_with_cell_locators():
         assert segment.source_refs[0].locator == segment.locator
     # Document text is exactly the rows joined by one newline, no hidden separator.
     assert document.text == "\n".join(segment.text for segment in segments)
+    assert document.text.count("\n") + 1 == len(segments)  # one row is one line
     assert segments[-1].char_end == len(document.text)
 
 
@@ -190,7 +192,7 @@ def test_an_undated_workbook_is_skipped_not_guessed(tmp_path):
         "sheets": 0,
         "reports_skipped": 1,
     }
-    assert "does not state an issue date" in status.result.abstentions[0]
+    assert "no 'issued <date>' line" in status.result.abstentions[0]
     with repo_session(engine, request) as repo:
         assert repo.list(SourceDocument) == []
 
@@ -258,7 +260,90 @@ def test_selected_report_param_wins_over_the_default(tmp_path):
 def test_a_single_cell_row_gets_a_single_cell_locator():
     document, segments = docs.build_document(parsed())
     spans = {segment.locator: segment for segment in segments}
-    assert spans["Cover!B2"].text == "MONCLER  |  Retail Controlling"
+    assert spans["Cover!B2"].text == "MONCLER | Retail Controlling"
     assert document.text[spans["Cover!B2"].char_start : spans["Cover!B2"].char_end] == (
-        "MONCLER  |  Retail Controlling"
+        "MONCLER | Retail Controlling"
     )
+
+
+def test_availability_is_not_before_the_period_end(tmp_path):
+    # A report issued on the 10th for the week ending the 15th still covers days after its issue.
+    sources = workbook(
+        tmp_path,
+        {
+            "Cover": [
+                ["Fiscal week 7: Mon 09/02/2026 - Sun 15/02/2026"],
+                ["Version 1.0 - issued 10/02/2026"],
+                ["Sales", 10],
+            ]
+        },
+    )
+    report = parsed("synthetic.xlsx", sources_dir=sources)
+    assert report.issue_date.isoformat() == "2026-02-10"
+    assert report.available_at == datetime(2026, 2, 15, 0, 0, tzinfo=docs.REPORT_TIMEZONE)
+
+
+def test_a_run_on_the_issue_date_itself_reads_the_report(tmp_path):
+    # available_at is inclusive: 20/10 00:00 in Milan is exactly when it starts to count.
+    as_of = datetime(2026, 10, 19, 22, 0, tzinfo=UTC)
+    _, status = execute(tmp_path, spec(as_of=as_of))
+    assert status.result.counts["documents"] == 1
+
+
+def test_cell_line_breaks_become_spaces(tmp_path):
+    sources = workbook(
+        tmp_path,
+        {
+            "Cover": [
+                ["Fiscal week 7: Mon 09/02/2026 - Sun 15/02/2026"],
+                ["Version 1.0 - issued 16/02/2026"],
+            ],
+            "Data": [["Region", "Net Sales\nWk (EUR k)"], ["EMEA", 4520.5]],
+        },
+    )
+    document, segments = docs.build_document(parsed("synthetic.xlsx", sources_dir=sources))
+    assert {segment.locator: segment.text for segment in segments}["Data!A1:B1"] == (
+        "Region | Net Sales Wk (EUR k)"
+    )
+    assert document.text.count("\n") + 1 == len(segments)
+
+
+def test_a_broken_workbook_degrades_the_module_not_the_run(tmp_path):
+    # openpyxl raises KeyError for a zip without the manifest, not BadZipFile.
+    broken = tmp_path / "reports" / "broken.xlsx"
+    broken.parent.mkdir(parents=True)
+    with ZipFile(broken, "w") as archive:
+        archive.writestr("xl/workbook.xml", "<workbook/>")
+    request = spec(params={"report": "broken.xlsx"})
+    _, status = execute(tmp_path, request, sources_dir=tmp_path)
+    assert status.result.status == "degraded"
+    assert status.result.counts["documents"] == 0
+    assert "unreadable workbook (KeyError" in status.result.errors[0]
+
+
+def test_a_report_of_another_family_says_what_is_missing(tmp_path):
+    # The merchandising sell-through states "cut-off 18/10": a period end, not an issue date.
+    request = spec(params={"report": "merchandising/FW26_NewIn_SellThrough_wk42_final.xlsx"})
+    _, status = execute(tmp_path, request)
+    assert status.result.status == "succeeded"
+    assert status.result.counts == {
+        "documents": 0,
+        "segments": 0,
+        "sheets": 0,
+        "reports_skipped": 1,
+    }
+    assert "no 'issued <date>' line on any sheet" in status.result.abstentions[0]
+
+
+def test_the_caller_declares_the_report_language(tmp_path):
+    request = spec(params={"language": "it"})
+    engine, status = execute(tmp_path, request)
+    assert status.result.counts["documents"] == 1
+    with repo_session(engine, request) as repo:
+        assert [document.language for document in repo.list(SourceDocument)] == ["it"]
+
+
+def test_a_language_that_is_not_a_tag_is_rejected():
+    registry = Registry((RegisteredModule(MANIFEST, docs.run),))
+    with pytest.raises(ValidationError):
+        registry.resolve(ModuleSnapshot(manifest=MANIFEST, params={"language": "english"}))
