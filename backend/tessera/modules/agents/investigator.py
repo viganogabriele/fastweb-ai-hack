@@ -24,7 +24,7 @@ from tessera.core.contracts import (
     StockFact,
 )
 from tessera.core.contracts.common import DerivedRecord, Instant
-from tessera.core.repo import KINDS, Repo
+from tessera.core.repo import KINDS, Repo, latest
 from tessera.modules.actions.options import (
     CLOSED_CASES,
     Context,
@@ -190,7 +190,7 @@ class Investigator:
     def _donor_conflicts(self):
         return [
             c
-            for c in self.repo.list(Case)
+            for c in latest(self.repo.list(Case))
             if (
                 c.store_id in self.repo.spec.stores
                 and c.store_id != self.case.store_id
@@ -230,6 +230,13 @@ class Investigator:
     def stock(self, args: StockArgs) -> ToolResult:
         if args.sku not in self._products():
             raise ToolError("SKU is unresolved or outside the selected case")
+        scoped_sizes = {
+            size
+            for sku, size in case_products(self.repo, self.case)
+            if sku == args.sku and size is not None
+        }
+        if scoped_sizes and args.size not in scoped_sizes:
+            raise ToolError("Size is outside the selected case")
         self._locations(args.locations)
         sizes = {str(r.data["size"]) for r in self.repo.erp("sku_size_ean", sku=args.sku)}
         sizes.update(f.size for f in self.repo.list(StockFact, sku=args.sku))
@@ -349,7 +356,7 @@ class Investigator:
             sorted((ref(observations[i]) for i in set(args.observation_ids)), key=lambda r: r.id)
         )
         question = " ".join(args.question.split())
-        identity = _digest([self.repo.spec.run_id, self.case.id, _json(refs), question])
+        identity = _digest([self.repo.spec.run_id, _json(ref(self.case)), _json(refs), question])
         draft = Clarification(
             id=f"clarification:{identity}",
             version="1",

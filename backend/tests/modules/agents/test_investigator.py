@@ -227,6 +227,62 @@ def test_clarification_is_idempotent_and_rejects_another_cases_observation(datab
         assert tools.language() == "en"
 
 
+def test_clarification_tracks_case_version_without_immutable_artifact_collision(database):
+    engine, spec = database
+    with repo_session(engine, spec, fixture_mode=True) as repo:
+        first = tools_for(repo, AMBIGUOUS)
+        observation = next(r for r in first._related() if isinstance(r, Observation))
+        args = agent.ClarificationArgs(
+            case_id=AMBIGUOUS, observation_ids=[observation.id], question="Which product?"
+        )
+        first.clarify(args)
+        repo.put(*first.drafts.values())
+        repo.put(first.case.model_copy(update={"version": "updated"}))
+        second = tools_for(repo, AMBIGUOUS)
+        second.clarify(args)
+        repo.put(*second.drafts.values())
+        assert set(first.drafts).isdisjoint(second.drafts)
+        assert agent.ref(second.case) in next(iter(second.drafts.values())).input_refs
+        assert second.clarify(args) == second.clarify(args)
+        assert len(repo.list(Clarification)) == 2
+
+
+def test_size_scoped_case_rejects_other_master_sizes_before_io(database):
+    engine, spec = database
+    put_erp(
+        engine,
+        [
+            ErpRecord(
+                "sku_size_ean",
+                f"{SKU}-L",
+                "1",
+                spec.as_of,
+                "test",
+                (),
+                dict(sku=SKU, size="L", ean="test-ean-l"),
+            )
+        ],
+    )
+    with repo_session(engine, spec, fixture_mode=True) as repo:
+        case = repo.get(Case, D1)
+        repo.put(
+            case.model_copy(
+                update={"version": "sized", "scope_level": "sku_size", "scope_id": f"{SKU}-M"}
+            )
+        )
+        tools = tools_for(repo)
+        with pytest.raises(ToolError, match="outside the selected case"):
+            tools.stock(agent.StockArgs(sku=SKU, size="L", locations=["MIL01"]))
+        assert tools.reader.calls == []
+        tools.stock(agent.StockArgs(sku=SKU, size="M", locations=["MIL01"]))
+        assert tools.reader.calls == [("stock", SKU, "M", ("MIL01",))]
+        # SKU-colour cases can still inspect every known size.
+        repo.put(
+            case.model_copy(update={"version": "colour", "scope_level": "sku", "scope_id": SKU})
+        )
+        tools_for(repo).stock(agent.StockArgs(sku=SKU, size="L", locations=["MIL01"]))
+
+
 def test_finish_requires_fresh_options_and_never_overrides_unknown_checks(database):
     engine, spec = database
     with repo_session(engine, spec, fixture_mode=True) as repo:
@@ -286,6 +342,29 @@ def test_donor_conflict_is_returned_with_exact_ref(database):
         data = tools_for(repo).evidence(agent.CaseArgs(case_id=D1))
         assert data.data["donor_conflicts"][0]["id"] == donor.id
         assert agent.ref(donor) in data.output_refs
+
+
+@pytest.mark.parametrize("status", ["closed", "decided", "verify"])
+def test_donor_conflicts_use_only_latest_case_version(database, monkeypatch, status):
+    engine, spec = database
+    with repo_session(engine, spec, fixture_mode=True) as repo:
+        donor = repo.get(Case, D1).model_copy(
+            update={"id": "donor-conflict", "store_id": "MIL02", "case_type": "stock_discrepancy"}
+        )
+        current = donor.model_copy(update={"version": "updated", "status": status})
+        repo.put(donor, current)
+        tools = tools_for(repo)
+        expected = [current] if status == "verify" else []
+        assert tools._donor_conflicts() == expected
+        evidence = tools.evidence(agent.CaseArgs(case_id=D1))
+        assert evidence.data["donor_conflicts"] == [c.model_dump(mode="json") for c in expected]
+        option = repo.get(ActionOption, "opt-d1-mil01-mil02-999-m-q2")
+        monkeypatch.setattr(agent, "evaluate_case", lambda inputs: (option,))
+        tools.evaluate(agent.OptionsArgs(case_id=D1))
+        conflicts = [c for c in tools.options[option.id].checks if c.name == "donor_conflict"]
+        assert len(conflicts) == len(expected)
+        if expected:
+            assert conflicts[0].source_refs == (agent.ref(current),)
 
 
 def test_module_is_discoverable_and_requires_explicit_case_selection():
