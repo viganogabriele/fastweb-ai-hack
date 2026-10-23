@@ -131,8 +131,17 @@ This checks actual published API reads, exact case/trace/clarification versions,
 every option's stored artifact refs, evidence offsets, negative/unknown inputs,
 same-run report reads and namespace isolation. It exercises a stale-hash 409,
 an explicit scripted decision and an identical idempotent retry, with networking
-denied. It never substitutes mock UI data. Reusing an identical decision output
-is safe; different frozen commands are refused.
+denied. It never substitutes mock UI data. An existing decision output is refused
+before issuing any command: preserve the original exact export and choose a new
+path only for an explicitly requested synthetic rehearsal. Ordinary verification
+omits `--decision-output` and creates no approval.
+
+Verification format 2 binds the result to the actual executing HEAD (with a dirty
+code flag), canonical snapshot, namespace/scenario, source/config inventories and
+an inventory of exact artifact identities, versions and semantic payload hashes.
+The published database RunSpec must equal the supplied candidate, even when the
+run ID matches. The artifact inventory describes the published projection before
+an optional synthetic decision command; it is not a human acceptance signature.
 
 A separate real POST-investigate rehearsal copied the actual published source
 snapshot into a private API test database, made an explicitly live recording
