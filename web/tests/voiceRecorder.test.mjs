@@ -201,6 +201,7 @@ test('the actual review page renders accepted transcript as controlled, escaped 
     window: { location: { search: '?store=MIL01' } },
     URLSearchParams,
     require: (name) => {
+      if (name === './guidedRecording') return require('../src/store/guidedRecording.ts')
       if (name === './useRecorder') return { useRecorder: () => ({ state: 'done', transcript, audio: new Blob(['audio']) }) }
       if (name === './voiceApi') return { voiceToken: () => 'fake', ApiError: Error }
       if (name === '../i18n') return { messages: { record }, fmt: (text) => text }

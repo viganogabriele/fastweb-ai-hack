@@ -23,7 +23,14 @@ from uuid import uuid4
 from zoneinfo import ZoneInfo
 
 from tesseract.modules.sources.emails import Store
-from tesseract.modules.sources.voice import NOTE_FILE, Note, inbox_path, note_file, read_sidecar
+from tesseract.modules.sources.voice import (
+    NOTE_FILE,
+    STAFF_REF,
+    Note,
+    inbox_path,
+    note_file,
+    read_sidecar,
+)
 
 AUDIO_FILE = "note.wav"
 TRANSCRIPT_FILE = "transcript.txt"
@@ -102,6 +109,8 @@ def save_note(
     transcript: str,
     *,
     language: str | None = None,
+    staff_ref: str | None = None,
+    prompt_set: str | None = None,
     now: datetime | None = None,
     data_dir: Path | None = None,
 ) -> LiveNote:
@@ -113,6 +122,12 @@ def save_note(
     if not audio:
         raise InvalidRecording("empty recording")
     # Validate metadata before conversion or publication, including user-supplied language.
+    if staff_ref is not None and not STAFF_REF.fullmatch(staff_ref):
+        raise InvalidRecording("invalid staff code")
+    if prompt_set is not None and prompt_set != "guided-v1":
+        raise InvalidRecording("invalid prompt set")
+    if prompt_set == "guided-v1" and staff_ref is None:
+        raise InvalidRecording("guided notes require a staff code")
     if language is not None:
         from tesseract.modules.sources.voice import LANGUAGE
 
@@ -133,7 +148,9 @@ def save_note(
         "sent_at": sent_at.isoformat(),
         "timezone": store.timezone,
         "language": language,
-        "author_ref": f"pseudonym:{store_id.lower()}-staff-live",
+        "author_ref": f"pseudonym:{store_id.lower()}-{staff_ref or 'staff-live'}",
+        **({"staff_ref": staff_ref} if staff_ref is not None else {}),
+        **({"prompt_set": prompt_set} if prompt_set is not None else {}),
         "fixture_kind": "live",
         "audio": AUDIO_FILE,
         "audio_sha256": "sha256:" + hashlib.sha256(wav).hexdigest(),

@@ -54,6 +54,7 @@ ASR_BASIS = "ASR segments concatenated in order; intervals are the server's, nev
 DECLARED_BASIS = "declared manual transcript; no audio intervals"
 LANGUAGE = re.compile(r"^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$")
 SHA256 = re.compile(r"^sha256:[0-9a-f]{64}$")
+STAFF_REF = re.compile(r"[a-z0-9-]{1,32}")
 
 MANIFEST = ModuleManifest(
     id="src.voice",
@@ -90,6 +91,8 @@ class Sidecar(Contract):
     timezone: Text
     language: str | None = None
     author_ref: Text
+    staff_ref: str | None = None
+    prompt_set: Literal["guided-v1"] | None = None
     fixture_kind: Literal["paraphrase", "synthetic_extension", "live"]
     audio: Text
     audio_sha256: str
@@ -100,6 +103,8 @@ class Sidecar(Contract):
 
     @model_validator(mode="after")
     def files_and_zone(self) -> "Sidecar":
+        if self.staff_ref is not None and not STAFF_REF.fullmatch(self.staff_ref):
+            raise ValueError("invalid staff code")
         for name in (self.audio, self.manual_transcript):
             if Path(name).name != name or name in (".", ".."):
                 raise ValueError("audio and transcript must be plain file names in the note folder")
@@ -232,6 +237,8 @@ def _meta(note: Note, audio: Audio, *, transcript: str, mode: str, basis: str) -
         "duration_s": sidecar.duration_s,
         "language": sidecar.language,
         "author_ref": sidecar.author_ref,
+        **({"staff_ref": sidecar.staff_ref} if sidecar.staff_ref is not None else {}),
+        **({"prompt_set": sidecar.prompt_set} if sidecar.prompt_set is not None else {}),
         "transcript_mode": mode,
         "manual_transcript": sidecar.manual_transcript,
         "manual_transcript_sha256": "sha256:" + hashlib.sha256(transcript.encode()).hexdigest(),

@@ -51,10 +51,12 @@ export async function transcribe(blob: Blob, language: string, signal?: AbortSig
   )
 }
 
-export async function sendNote(blob: Blob, store: string, transcript: string, language: string) {
+export async function sendNote(blob: Blob, store: string, transcript: string, language: string, staffRef: string) {
   const form = new FormData()
   form.append('audio', blob, fileName(blob))
   form.append('store_id', store)
+  form.append('staff_ref', staffRef)
+  form.append('prompt_set', 'guided-v1')
   form.append('transcript', transcript)
   form.append('language', language)
   return json<LiveNote>(await fetch('/api/voice/notes', { method: 'POST', headers: headers(), body: form }))
