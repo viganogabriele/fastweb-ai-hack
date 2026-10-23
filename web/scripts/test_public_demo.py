@@ -309,6 +309,79 @@ class PublicDemoTests(unittest.TestCase):
                 "Report", {a["kind"] for a in json.loads(files["manifest.json"])["excluded"]}
             )
 
+    def test_obfuscated_names_and_multilingual_metadata_exclude_the_document(self):
+        variants = [
+            "Ｐｒｉｖａｔｅ\uff28ouse here",  # full-width
+            "Private\u200bHouse here",  # zero-width space
+            "Private\u00adHouse here",  # soft hyphen
+            "Private-\nHouse here",  # line-break hyphen
+            "Oggetto: chiusura\nBetreff: x",
+            "see portal.privatecorp.local now",
+            "share \\\\fileserver\\share\\x",
+            "open ~/secrets now",
+            "key AKIAIOSFODNN7EXAMPLE",
+            "foto_negozio.heic attached",
+            "Compare with ROM01 today",
+        ]
+        for text in variants:
+            manifest = sample()
+            document = manifest["artifacts"][0]["payload"]
+            document["text"] = text
+            manifest["artifacts"] = manifest["artifacts"][:1]
+            files, _ = Builder(manifest, ["MIL01"]).build()
+            with self.subTest(text=text):
+                self.assertEqual(json.loads(files["artifacts.json"]), [])
+                (excluded,) = json.loads(files["manifest.json"])["excluded"]
+                self.assertIn(
+                    excluded["reason"],
+                    {"unresolved_sensitive_text", "store_outside_approved_split"},
+                )
+
+    def test_report_with_holdout_scope_or_text_is_excluded(self):
+        for change in ("scope", "markdown"):
+            manifest = sample()
+            report = manifest["artifacts"][-1]["payload"]
+            if change == "scope":
+                report["citations"][0]["scope"] = {"store_id": "ROM01"}
+            else:
+                report["markdown"] = "ROM01 is out of stock too [1]."
+            files, _ = Builder(manifest, ["MIL01"]).build()
+            with self.subTest(change=change):
+                kinds = {a["kind"] for a in json.loads(files["artifacts.json"])}
+                self.assertNotIn("Report", kinds)
+
+    def test_outputs_cannot_go_to_versioned_data_folders(self):
+        (self.root / ".gitignore").write_text("data/*\n!data/fixtures/\n")
+        self.source.write_text(json.dumps(self.manifest))
+        for output, private in (
+            (self.root / "data/fixtures/public", self.mapping),
+            (self.output, self.root / "data/fixtures/map.json"),
+        ):
+            with self.subTest(output=output, private=private), self.assertRaises(ValueError):
+                build_bundle(self.root, self.source, output, private)
+            self.assertFalse(private.exists())
+
+    def test_case_to_case_references_do_not_depend_on_id_order(self):
+        for first in ("aa-case", "zz-case"):
+            manifest = sample()
+            case = copy.deepcopy(manifest["artifacts"][3])
+            case["payload"]["id"] = first
+            case["payload"]["context_refs"] = [
+                {"kind": "Case", "id": "private-case", "version": "v1"}
+            ]
+            manifest["artifacts"].append(case)
+            files, _ = Builder(manifest, ["MIL01"]).build()
+            with self.subTest(first=first):
+                cases = [a for a in json.loads(files["artifacts.json"]) if a["kind"] == "Case"]
+                self.assertEqual(len(cases), 2)
+
+    def test_malformed_artifact_is_excluded_not_fatal(self):
+        manifest = sample()
+        del manifest["artifacts"][0]["payload"]["text"]
+        files, _ = Builder(manifest, ["MIL01"]).build()
+        reasons = {e["reason"] for e in json.loads(files["manifest.json"])["excluded"]}
+        self.assertIn("malformed_artifact", reasons)
+
 
 if __name__ == "__main__":
     unittest.main()

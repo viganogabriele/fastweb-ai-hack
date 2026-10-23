@@ -22,9 +22,14 @@ Set `replacements` to an explicit dictionary of sensitive text → fictional tex
 Matching is literal, longest-first and simultaneous, so replacements do not cascade.
 Include every spelling/case needed in the approved text, including people, brands,
 products, emails, filenames or locations. Targets must not contain sensitive source
-tokens. Deletion via an empty target is allowed. Recognised residual emails, URLs,
-paths, filenames, mail headers, HTML, Markdown links and credential patterns exclude
-the artifact. A remaining case variant of a configured sensitive token also excludes it.
+tokens. Deletion via an empty target is allowed. Recognised residual emails, URLs, bare
+domains, local/UNC/home paths, filenames, mail headers (in the dataset's languages), HTML,
+Markdown links and credential patterns exclude the artifact. A configured sensitive token
+that survives in any form also excludes it: the check runs on NFKC-normalised, case-folded
+text without zero-width characters or soft hyphens, and again on letters and digits only
+(so `Private-⏎House` or full-width variants are caught). Replacement itself stays literal:
+add the variants you want substituted rather than excluded. Any store id outside the
+approved `stores` in public text, or in a report citation scope, excludes the artifact.
 
 Choose a fresh private `reference_key` of at least 32 characters for real inputs
 (for example, locally generate one with `secrets.token_hex(32)`). Keep the key and
@@ -48,7 +53,9 @@ backend/.venv/bin/python web/scripts/build_public_demo.py data/approved-demo.jso
   --private-map data/private-demo/mapping.json
 ```
 
-All paths must resolve under `data/`, including through symlinks. The public
+All paths must resolve under `data/`, including through symlinks, and the output and
+mapping must not be under a folder `.gitignore` versions (`!data/...`, e.g. `data/fixtures/`),
+so a routine `git add` cannot commit them. The public
 directory must be new; input and mapping must stay outside it. Existing outputs,
 mapping files and originals are never overwritten. An unsuccessful build cleans
 up only newly created output/map files. Identical inputs and key produce identical
@@ -70,7 +77,9 @@ thread, attachment, locator, raw model response and execution metadata.
 
 Documents are processed before segments, observations, cases and reports. References
 must resolve to an included exact original kind/id/version; unsupported dependencies
-exclude the dependent artifact. Cross-case/report cycles are not supported. Other
+exclude the dependent artifact. Case→case and report→report references resolve
+regardless of id order; cycles are not supported. A malformed artifact (missing or
+mistyped field) is excluded as `malformed_artifact` instead of stopping the build. Other
 artifact kinds, including agent traces and recordings, are explicitly excluded.
 
 Evidence is checked against the original canonical slice **before** replacement.

@@ -8,6 +8,7 @@ import math
 import os
 import re
 import shutil
+import unicodedata
 from pathlib import Path
 
 import yaml
@@ -17,8 +18,18 @@ NOTICE = "Synthetic example; names substituted. No real replay, ROI or causal re
 PRIVATE = re.compile(
     r"[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|\b[A-Za-z][A-Za-z0-9+.-]*://\S+|\bwww\.\S+"
     r"|(?<!\w)/(?:[\w.-]+/)+[\w.-]+|[A-Za-z]:\\\S+|(?:^|[\s(])\.{1,2}/\S+"
-    r"|\b[\w.-]+\.(?:eml|pdf|xlsx?|csv|docx?|pptx?|txt|json|zip|wav|mp3|mp4|m4a|ogg|opus|webm|png|jpe?g)\b"
-    r"|^(?:from|to|cc|bcc|subject|received|message-id|return-path):"
+    r"|\b[\w.-]+\.(?:eml|msg|pdf|xlsx?|csv|docx?|pptx?|rtf|odt|ods|txt|json|zip|7z|rar|gz|tar"
+    r"|wav|mp3|mp4|m4a|ogg|opus|webm|png|jpe?g|gif|webp|heic|heif|tiff?)\b"
+    r"|\\\\[\w.$-]+\\|(?:^|[\s(])~/\S*"
+    r"|\b(?:[a-z0-9-]+\.)+(?:com|net|org|it|fr|de|ch|uk|es|nl|dk|jp|kr|cn|hk|tw|sg|au|ae|io"
+    r"|local|internal|corp|lan|example)\b"
+    r"|\bAKIA[0-9A-Z]{16}\b"
+    # Header lines of forwarded/quoted mail, in the dataset's languages. Ambiguous short words
+    # ("Da:", "Data:", "A:") are left out: names and addresses are caught separately.
+    r"|^\s*(?:from|to|cc|bcc|subject|date|sent|received|reply-to|message-id|return-path"
+    r"|oggetto|inviato|von|gesendet|betreff|objet|envoyé|asunto|enviado|onderwerp|verzonden"
+    r"|emne|sendt|发件人|收件人|主题|發件人|寄件者|收件者|主旨|差出人|宛先|件名|送信日時"
+    r"|보낸 사람|받는 사람|제목|보낸 날짜)\s*[:：]"
     r"|</?[A-Za-z][^>]*>|\[[^\]]*\]\([^)]*\)"
     r"|\bsk-[A-Za-z0-9_-]{8,}|\bBearer\s+\S+|\b(?:api[_ -]?key|password|token)\s*[:=]\s*\S+",
     re.I | re.M,
@@ -27,6 +38,20 @@ PRIVATE = re.compile(
 
 class Excluded(ValueError):
     pass
+
+
+_INVISIBLE = dict.fromkeys(map(ord, "\u00ad\u200b\u200c\u200d\u2060\ufeff"))
+_STORE_ID = re.compile(r"\b[A-Z]{3}\d{2}\b")
+
+
+def folded(text):
+    """Compatibility-normalized, case-folded text without invisible characters."""
+    return unicodedata.normalize("NFKC", text).translate(_INVISIBLE).casefold()
+
+
+def squeezed(text):
+    """Only letters and digits: a name split by hyphens, spaces or line breaks still matches."""
+    return "".join(c for c in folded(text) if c.isalnum())
 
 
 def encoded(value):
@@ -56,6 +81,8 @@ class Builder:
             for k, v in self.replacements.items()
         ):
             raise ValueError("Provide explicit sensitive-to-fictional text replacements")
+        self.stores = set(stores)
+        self.residuals = [(folded(k), squeezed(k)) for k in self.replacements]
         self.pattern = re.compile(
             "|".join(re.escape(k) for k in sorted(self.replacements, key=lambda s: (-len(s), s)))
         )
@@ -119,8 +146,15 @@ class Builder:
         for index in range(cursor, len(value) + 1):
             boundaries[index] = length + index - cursor
         text = "".join(out)
-        if PRIVATE.search(text) or any(k.casefold() in text.casefold() for k in self.replacements):
+        normal, compact = folded(text), squeezed(text)
+        if PRIVATE.search(text) or PRIVATE.search(unicodedata.normalize("NFKC", text)):
             raise Excluded("unresolved_sensitive_text")
+        if any(
+            key in normal or (len(short) >= 4 and short in compact) for key, short in self.residuals
+        ):
+            raise Excluded("unresolved_sensitive_text")
+        if set(_STORE_ID.findall(unicodedata.normalize("NFKC", text))) - self.stores:
+            raise Excluded("store_outside_approved_split")
         return text, boundaries
 
     def scrub(self, value):
@@ -255,6 +289,9 @@ class Builder:
         elif kind == "Report":
             citations = []
             for citation in p["citations"]:
+                scope = (citation.get("scope") or {}).get("store_id")
+                if scope is not None and scope not in self.stores:
+                    raise Excluded("store_outside_approved_split")
                 ref = self.resolve(citation["ref"])
                 item = {"ref": ref}
                 field = citation.get("field")
@@ -277,16 +314,28 @@ class Builder:
         return result
 
     def build(self):
-        for identity in sorted(
+        pending = sorted(
             self.raw, key=lambda i: (KINDS.index(i[0]) if i[0] in KINDS else len(KINDS), i)
-        ):
-            try:
-                if identity[0] not in KINDS:
-                    raise Excluded("unsupported_artifact")
-                self.public[identity] = self.project(identity, self.raw[identity])
-            except Excluded as error:
-                exclusion = {**self.ref(identity), "reason": str(error)}
-                self.excluded.append({**exclusion, "descriptor_sha256": digest(encoded(exclusion))})
+        )
+        # Cases and reports may cite each other: retry until no new artifact resolves, so the
+        # result does not depend on the order of their ids.
+        while True:
+            failed = {}
+            for identity in pending:
+                try:
+                    if identity[0] not in KINDS:
+                        raise Excluded("unsupported_artifact")
+                    self.public[identity] = self.project(identity, self.raw[identity])
+                except Excluded as error:
+                    failed[identity] = str(error)
+                except (KeyError, TypeError, AttributeError, ValueError):
+                    failed[identity] = "malformed_artifact"
+            if len(failed) == len(pending):
+                break
+            pending = list(failed)
+        for identity, reason in failed.items():
+            exclusion = {**self.ref(identity), "reason": reason}
+            self.excluded.append({**exclusion, "descriptor_sha256": digest(encoded(exclusion))})
         artifacts = [{"kind": i[0], "payload": self.public[i]} for i in sorted(self.public)]
         public = encoded(artifacts)
         manifest = encoded(
@@ -319,6 +368,14 @@ def build_bundle(root, source, output, private_map):
         raise ValueError("Manifest, derived output and private map must be under data/")
     if source.is_relative_to(output) or private_map.is_relative_to(output) or source == private_map:
         raise ValueError("Original inputs and private mapping must stay outside public output")
+    ignore = root / ".gitignore"
+    versioned = [
+        (root / line[1:].strip().rstrip("/")).resolve()
+        for line in (ignore.read_text().splitlines() if ignore.exists() else [])
+        if line.startswith("!data/")
+    ]
+    if any(p.is_relative_to(v) for p in (output, private_map) for v in versioned):
+        raise ValueError("Output and private map must not be under a versioned data/ folder")
     data = json.loads(source.read_bytes())
     dev = yaml.safe_load((root / "config/eval_split.yaml").read_text())["dev"]
     files, mapping = Builder(data, dev).build()
