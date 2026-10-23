@@ -37,7 +37,7 @@ def main() -> None:
     sample = sub.add_parser(
         "reading-sample", help="EVL-02: write the sample file list and protocol, no answers"
     )
-    sample.add_argument("--files-out", type=Path, required=True)
+    sample.add_argument("--files-out", type=Path)
     sample.add_argument("--run-spec", type=Path, help="frozen RunSpec, for the protocol")
     sample.add_argument("--protocol-out", type=Path)
     reading = sub.add_parser("reading", help="EVL-02: score a verified bundle on the labels")
@@ -67,10 +67,11 @@ def main() -> None:
             parser.error("outputs must be written under data/")
         labels, labels_sha256 = load_labels()
     if args.command == "reading-sample":
-        # File names only: the product run must not see labels or anchors.
-        args.files_out.parent.mkdir(parents=True, exist_ok=True)
-        with args.files_out.open("x", encoding="utf-8") as stream:
-            stream.write("".join(f"{name}\n" for name in sorted(labels["files"])))
+        if args.files_out is not None:
+            # File names only: the product run must not see labels or anchors.
+            args.files_out.parent.mkdir(parents=True, exist_ok=True)
+            with args.files_out.open("x", encoding="utf-8") as stream:
+                stream.write("".join(f"{name}\n" for name in sorted(labels["files"])))
         if args.protocol_out is not None:
             if args.run_spec is None:
                 parser.error("--protocol-out requires --run-spec")
