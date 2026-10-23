@@ -146,6 +146,7 @@ def test_record_is_append_only_and_refuses_unsafe_inputs(repo):
         ["--candidate-sha", "0" * 40],
         ["--label-sha", "holdout=not-a-digest"],
         ["--component", "asr=invented:reason"],
+        ["--approved-at", "2026-10-23T09:00:00"],
     ):
         assert run(repo, record_args(*extra, output="data/E/refused.json")) == 2, extra
     assert not (repo / "data/E/refused.json").exists()
@@ -214,12 +215,17 @@ def test_append_binds_bundles_and_label_receipts_in_a_chain(repo, capsys):
     addendum = [
         "append", "--record", "data/E/freeze-record.json", "--output", "data/E/addendum-1.json",
         "--bundle", f"data/bundle={manifest}", "--label-sha", f"reading_holdout={receipt}",
+        "--reviewer", "synthetic lead", "--approved-at", "2026-10-23T10:00:00+02:00",
     ]  # fmt: skip
     assert run(repo, addendum) == 0
     added = load(repo, "data/E/addendum-1.json")
     assert added["bundles"][0]["manifest_sha256"] == manifest
     assert added["bundles"][0]["counts"] == {"predictions": 1, "cases": 0, "options": 0}
     assert added["post_freeze"]["label_receipts"] == {"reading_holdout": receipt}
+    assert added["approval"] == {
+        "reviewer": "synthetic lead",
+        "approved_at": "2026-10-23T10:00:00+02:00",
+    }
     chain = ["verify", "--record", "data/E/freeze-record.json", "data/E/addendum-1.json"]
     assert run(repo, chain) == 0
     assert run(repo, ["verify", "--record", "data/E/addendum-1.json"]) == 2

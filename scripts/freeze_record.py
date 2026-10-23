@@ -699,9 +699,9 @@ def parser() -> argparse.ArgumentParser:
     )
     rec.add_argument("--make-check-log", type=Path)
     rec.add_argument("--gate-audit", type=Path, help="#226 gate audit disposition")
-    rec.add_argument("--reviewer")
-    rec.add_argument("--approved-at", help="aware ISO timestamp of the human approval")
     for command in (rec, app := sub.add_parser("append", help="write a chained addendum")):
+        command.add_argument("--reviewer", help="human reviewer of the candidate/freeze")
+        command.add_argument("--approved-at", help="aware ISO timestamp of the human approval")
         command.add_argument("--bundle", action="append", default=[], help="DIR[=MANIFEST_SHA]")
         command.add_argument("--evidence", action="append", default=[], help="NAME=PATH")
         command.add_argument(
@@ -729,9 +729,10 @@ def main(argv=None, root: Path = ROOT) -> int:
     args = parser().parse_args(argv)
     root = root.resolve()
     try:
+        approved_at = getattr(args, "approved_at", None)
+        if approved_at and datetime.fromisoformat(approved_at).utcoffset() is None:
+            raise RecordError("--approved-at needs an explicit time zone")
         if args.command == "record":
-            if args.approved_at and datetime.fromisoformat(args.approved_at).utcoffset() is None:
-                raise RecordError("--approved-at needs an explicit time zone")
             record = build_record(root, args)
             print(json.dumps(summary(record, write_new(root, args.output, record)), indent=2))
         elif args.command == "append":
@@ -747,6 +748,7 @@ def main(argv=None, root: Path = ROOT) -> int:
                 "created_at": datetime.now(UTC).isoformat(timespec="seconds"),
                 "parent": {"path": last["path"], "sha256": last["sha256"]},
                 "candidate_sha": chain[0]["candidate"]["sha"],
+                "approval": {"reviewer": args.reviewer, "approved_at": args.approved_at},
                 "bundles": added,
                 "evidence": evidence(root, args.evidence),
                 "post_freeze": {
