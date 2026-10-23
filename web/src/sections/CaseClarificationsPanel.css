@@ -1,0 +1,8 @@
+.sd-case-analysis__clarifications {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.sd-case-clarification__text {
+  white-space: pre-wrap;
+}
