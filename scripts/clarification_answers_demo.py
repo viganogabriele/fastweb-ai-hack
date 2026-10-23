@@ -526,7 +526,8 @@ def rebind(workspace, *, answers=ANSWERS, reason):
     path = answers / "recording-evidence.json"
     evidence = json.loads(path.read_text())
     for key, recorded in evidence["answers"].items():
-        replayed = result["answers"].get(key, {})
+        # Compare as recorded: JSON, where outcome tuples are lists.
+        replayed = json.loads(json.dumps(result["answers"].get(key, {})))
         shared = (replayed.keys() & recorded.keys()) - {"artifact_sha256"}
         if "fingerprint" not in shared or any(replayed[k] != recorded[k] for k in shared):
             raise ValueError(f"{key} changed; record it again instead of rebinding")
