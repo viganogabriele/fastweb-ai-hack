@@ -1,0 +1,480 @@
+"""Durable answer events, atomic submission and isolated follow-up execution."""
+
+from concurrent.futures import ThreadPoolExecutor
+from datetime import UTC, datetime, timedelta
+
+import pytest
+from sqlalchemy import func, inspect, select
+
+from tessera.core.contracts import (
+    ArtifactRef,
+    Case,
+    Clarification,
+    Evidence,
+    ModuleManifest,
+    ModuleResult,
+    ModuleSnapshot,
+    Observation,
+    Quantity,
+    RunSpec,
+    Segment,
+    SourceDocument,
+)
+from tessera.core.db import connect, runs
+from tessera.core.registry import RegisteredModule, Registry
+from tessera.core.repo import reset_run
+from tessera.core.run_repo import repo_session
+from tessera.modules.agents.answer_registry import (
+    AnswerConflict,
+    AnswerRequest,
+    AnswerUnavailable,
+    events,
+    execute_follow_up,
+    jobs,
+    register_recorded_answer,
+    submit_answer,
+)
+from tessera.modules.agents.clarifications import InvalidAnswer, UnrecordedAnswer
+
+NOW = datetime(2026, 10, 22, 20, tzinfo=UTC)
+
+
+def ref(record):
+    return ArtifactRef(kind=type(record).__name__, id=record.id, version=record.version)
+
+
+@pytest.fixture
+def setup(tmp_path):
+    engine = connect(f"sqlite:///{tmp_path / 'answers.db'}")
+    manifests = tuple(
+        ModuleManifest(
+            id=id,
+            version="1",
+            layer="ingestion",
+            description="test",
+            requires=requires,
+            optional_inputs=(),
+            produces=(),
+            enabled=True,
+            mode="live",
+            params_schema={},
+        )
+        for id, requires in (
+            ("ing.extract", ()),
+            ("int.link", ("ing.extract",)),
+            ("fc.overlay", ("int.link",)),
+            ("act.options", ("fc.overlay",)),
+        )
+    )
+    spec = RunSpec(
+        run_id="parent",
+        scenario_id="historical",
+        as_of=NOW,
+        stores=("MIL01",),
+        source_manifest_hash="sources",
+        config_hash="config",
+        code_version="test",
+        mode="live",
+        modules=tuple(ModuleSnapshot(manifest=m, params={}) for m in manifests),
+        prompt_versions={},
+        model_versions={},
+        authorized_fixture_refs=(),
+    )
+    source = SourceDocument(
+        id="mail",
+        version="1",
+        available_at=NOW,
+        availability_basis="test",
+        source_refs=(),
+        source_type="email",
+        connector="src.email",
+        uri="test://mail",
+        content_hash="test",
+        origin="episode",
+        text="Una felpa",
+        text_version="1",
+        meta={"store_id": "MIL01"},
+    )
+    segment = Segment(
+        id="segment",
+        version="1",
+        available_at=NOW,
+        availability_basis="test",
+        source_refs=(),
+        document_id=source.id,
+        text_version="1",
+        idx=0,
+        text=source.text,
+        char_start=0,
+        char_end=len(source.text),
+        is_quoted=False,
+    )
+    common = dict(
+        version="1",
+        available_at=NOW,
+        availability_basis="test",
+        source_refs=(),
+        run_id=spec.run_id,
+        scenario_id=spec.scenario_id,
+        computed_at=NOW,
+        producer="test",
+        producer_version="1",
+    )
+    observation = Observation(
+        id="obs-mail-1",
+        input_refs=(ref(source), ref(segment)),
+        document_id=source.id,
+        store_id="MIL01",
+        kind="unmet_demand",
+        product_mention="felpa",
+        quantity=Quantity(kind="unknown"),
+        direction="unknown",
+        attribution="store",
+        negated=False,
+        evidence=(
+            Evidence(
+                document_id=source.id,
+                document_version="1",
+                segment_id=segment.id,
+                quote="felpa",
+                char_start=4,
+                char_end=9,
+            ),
+        ),
+        extractor_version="1",
+        **common,
+    )
+    case = Case(
+        id="case",
+        input_refs=(ref(observation),),
+        case_type="unmet_demand",
+        store_id="MIL01",
+        scope_level="unknown",
+        window_start=NOW,
+        window_end=NOW,
+        status="verify",
+        owner="allocation",
+        priority="high",
+        priority_reason="ambiguous",
+        first_available_at=NOW,
+        last_received_at=NOW,
+        supporting=(ref(observation),),
+        contradicting=(),
+        n_documents=1,
+        n_origin_groups=1,
+        n_unknown_origins=0,
+        blocking_uncertainties=("Product",),
+        context_refs=(),
+        **common,
+    )
+    question = Clarification(
+        id="question",
+        input_refs=(ref(case), ref(observation)),
+        case_id=case.id,
+        observation_refs=(ref(observation),),
+        question="Quale taglia?",
+        asked_at=NOW,
+        status="draft",
+        **common,
+    )
+    seen = []
+
+    def execute(ctx):
+        assert ctx.spec.as_of >= NOW + timedelta(hours=1)
+        assert ctx.spec.run_id != "parent"
+        assert not any(r.version.startswith("parent:") for r in ctx.repo.list(Observation))
+        if ctx.manifest.id == "ing.extract":
+            assert any(
+                d.source_type == "clarification_reply" for d in ctx.repo.list(SourceDocument)
+            )
+            # Same historical observation identity must not cause an immutable-artifact collision.
+            fresh = observation.model_copy(
+                update={
+                    "run_id": ctx.spec.run_id,
+                    "scenario_id": ctx.spec.scenario_id,
+                    "computed_at": ctx.spec.as_of,
+                }
+            )
+            ctx.repo.put(fresh)
+        else:
+            assert len(ctx.repo.list(Observation)) == 1
+            assert ctx.repo.list(Observation)[0].computed_at == ctx.spec.as_of
+        seen.append(ctx.manifest.id)
+        return ModuleResult(
+            module_id=ctx.manifest.id,
+            module_version="1",
+            status="succeeded",
+            counts={},
+            errors=(),
+            abstentions=(),
+        )
+
+    registry = Registry(RegisteredModule(m, execute) for m in manifests)
+    request = AnswerRequest(
+        run_id=spec.run_id,
+        scenario_id=spec.scenario_id,
+        case_id=case.id,
+        case_version="1",
+        clarification_id=question.id,
+        clarification_version="1",
+        text="Taglia M 🧥",
+        received_at=NOW + timedelta(hours=1),
+        follow_up_scenario_id="simulated",
+        as_of=NOW + timedelta(hours=1),
+        idempotency_key="retry-1",
+    )
+
+    def seed(mode="live", published=True, extra=()):
+        current = spec.model_copy(update={"mode": mode})
+        with repo_session(engine, current, fixture_mode=mode == "fixture", write=True) as repo:
+            repo.put(source, segment, observation, case, question, *extra)
+            if published:
+                repo.publish()
+        return current
+
+    yield engine, request, registry, seed, seen, (source, segment, observation, case, question)
+    engine.dispose()
+
+
+def count(engine, table):
+    with engine.connect() as conn:
+        if not inspect(conn).has_table(table.name):
+            return 0
+        return conn.execute(select(func.count()).select_from(table)).scalar_one()
+
+
+def test_submit_retry_execute_and_parent_immutability(setup):
+    engine, request, registry, seed, seen, originals = setup
+    seed()
+    job = submit_answer(engine, request, registry=registry)
+    assert submit_answer(engine, request, registry=registry) == job
+    assert job.simulated and job.document.meta["simulated"]
+    assert count(engine, jobs) == count(engine, events) == 1
+    with repo_session(engine, job.run.run_id) as repo:
+        assert repo.run_state()["status"] == "pending"
+        assert repo.list(SourceDocument) == []  # no pipeline has run during acceptance
+    assert execute_follow_up(engine, job.run.run_id, registry=registry, clients={}) == job
+    assert execute_follow_up(engine, job.run.run_id, registry=registry, clients={}) == job
+    assert seen == ["ing.extract", "int.link", "fc.overlay", "act.options"]
+    with repo_session(engine, "parent") as repo:
+        for original in originals:
+            assert repo.get(type(original), original.id, original.version) == original
+    with repo_session(engine, job.run.run_id) as repo:
+        assert repo.run_state()["published"]
+        answered = repo.get(Clarification, "question")
+        assert answered.status == "answered" and answered.answer_document_id == job.document.id
+        for reference in answered.input_refs:
+            from tessera.core.repo import KINDS
+
+            assert repo.get(KINDS[reference.kind], reference.id, reference.version) is not None
+        historical = repo.get(Case, "case")
+        assert historical.run_id == job.run.run_id and historical.version.startswith("parent:")
+        for reference in historical.input_refs:
+            assert repo.get(KINDS[reference.kind], reference.id, reference.version) is not None
+
+
+def test_events_lineage_and_retries_survive_both_projection_resets(setup):
+    engine, request, registry, seed, seen, _ = setup
+    seed()
+    job = submit_answer(engine, request, registry=registry)
+    execute_follow_up(engine, job.run.run_id, registry=registry, clients={})
+    reset_run(engine, "parent")
+    reset_run(engine, job.run.run_id)
+    assert submit_answer(engine, request, registry=registry) == job
+    execute_follow_up(engine, job.run.run_id, registry=registry, clients={})
+    assert len(seen) == 8
+    assert count(engine, events) == count(engine, jobs) == 1
+
+
+def test_concurrent_submit_and_alias_idempotency_keys(setup):
+    engine, request, registry, seed, _, _ = setup
+    seed()
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        result = list(
+            pool.map(lambda _: submit_answer(engine, request, registry=registry), range(4))
+        )
+    assert all(job == result[0] for job in result)
+    alias = request.model_copy(update={"idempotency_key": "alias"})
+    assert submit_answer(engine, alias, registry=registry) == result[0]
+    for req in (request, alias):
+        with pytest.raises(AnswerConflict, match="Idempotency"):
+            submit_answer(engine, req.model_copy(update={"text": "changed"}), registry=registry)
+    assert count(engine, jobs) == 1
+
+
+def test_offline_fails_closed_and_only_trusted_registration_authorizes_exact_event(setup):
+    engine, request, registry, seed, _, _ = setup
+    seed("recorded")
+    with pytest.raises(UnrecordedAnswer):
+        submit_answer(engine, request, registry=registry)
+    assert count(engine, runs) == 1
+    fingerprint = register_recorded_answer(engine, request)
+    assert register_recorded_answer(engine, request) == fingerprint
+    assert submit_answer(engine, request, registry=registry).fingerprint == fingerprint
+    for change in (
+        {"text": "different"},
+        {"received_at": NOW + timedelta(minutes=30)},
+        {"language": "fr"},
+    ):
+        with pytest.raises(UnrecordedAnswer):
+            submit_answer(
+                engine,
+                request.model_copy(update={**change, "idempotency_key": "miss"}),
+                registry=registry,
+            )
+    assert count(engine, events) == count(engine, jobs) == 1
+
+
+@pytest.mark.parametrize(
+    "change,error",
+    [
+        ({"scenario_id": "other"}, InvalidAnswer),
+        ({"case_version": "stale"}, AnswerConflict),
+        ({"clarification_version": "stale"}, AnswerConflict),
+        ({"case_id": "missing"}, AnswerUnavailable),
+        ({"as_of": NOW}, InvalidAnswer),
+        ({"received_at": NOW}, InvalidAnswer),
+        ({"follow_up_scenario_id": "historical"}, InvalidAnswer),
+    ],
+)
+def test_invalid_requests_are_atomic(setup, change, error):
+    engine, request, registry, seed, _, _ = setup
+    seed()
+    with pytest.raises(error):
+        submit_answer(engine, request.model_copy(update=change), registry=registry)
+    assert count(engine, runs) == 1
+    assert count(engine, events) == count(engine, jobs) == 0
+
+
+def test_namespace_isolation_and_fixture_registration(setup):
+    engine, request, registry, seed, _, _ = setup
+    seed("fixture")
+    with pytest.raises(AnswerUnavailable):
+        register_recorded_answer(engine, request)
+    register_recorded_answer(engine, request, fixture_mode=True)
+    job = submit_answer(engine, request, registry=registry, fixture_mode=True)
+    with pytest.raises(AnswerUnavailable):
+        execute_follow_up(engine, job.run.run_id, registry=registry)
+    execute_follow_up(engine, job.run.run_id, registry=registry, clients={}, fixture_mode=True)
+
+
+def test_missing_lineage_and_unpublished_parents_reject_input(setup):
+    engine, request, registry, seed, _, originals = setup
+    seed(published=False)
+    with pytest.raises(AnswerConflict, match="published"):
+        submit_answer(engine, request, registry=registry)
+    with repo_session(engine, "parent", write=True) as repo:
+        repo.publish()
+    # Broken historical lineage must fail closed, even though the source quote matches.
+    from sqlalchemy import delete
+
+    from tessera.core.db import artifacts
+
+    with engine.begin() as conn:
+        conn.execute(delete(artifacts).where(artifacts.c.kind == "Segment"))
+    with pytest.raises(AnswerUnavailable, match="Segment"):
+        submit_answer(engine, request, registry=registry)
+    assert count(engine, runs) == 1
+
+
+def test_worker_failure_preserves_durable_input_and_explicit_reset_retries(setup):
+    engine, request, registry, seed, seen, _ = setup
+    seed()
+    job = submit_answer(engine, request, registry=registry)
+
+    def broken(ctx):
+        raise RuntimeError("missing recording")
+
+    bad = Registry(RegisteredModule(m, broken) for m in registry.manifests())
+    execute_follow_up(engine, job.run.run_id, registry=bad, clients={})
+    with repo_session(engine, job.run.run_id) as repo:
+        assert not repo.run_state()["published"] and repo.list(SourceDocument) == []
+    assert count(engine, events) == 1
+    with pytest.raises(AnswerConflict):
+        execute_follow_up(engine, job.run.run_id, registry=registry, clients={})
+    reset_run(engine, job.run.run_id)
+    execute_follow_up(engine, job.run.run_id, registry=registry, clients={})
+    assert len(seen) == 4
+
+
+def test_pending_recovery_and_live_events_never_become_replayable(setup):
+    from tessera.modules.agents.answer_registry import pending_follow_ups
+
+    engine, request, registry, seed, _, _ = setup
+    assert pending_follow_ups(engine) == ()
+    seed()
+    job = submit_answer(engine, request, registry=registry)
+    assert pending_follow_ups(engine) == (job,)
+    assert pending_follow_ups(engine, fixture_mode=True) == ()
+    execute_follow_up(engine, job.run.run_id, registry=registry, clients={})
+    assert pending_follow_ups(engine) == ()
+    with engine.connect() as conn:
+        assert conn.execute(select(events.c.replay_ready)).scalar_one() == "no"
+
+
+def test_concurrent_workers_do_not_execute_a_job_twice(setup):
+    from threading import Event
+
+    engine, request, registry, seed, _, _ = setup
+    seed()
+    job = submit_answer(engine, request, registry=registry)
+    started, release = Event(), Event()
+
+    def block(ctx):
+        started.set()
+        assert release.wait(5)
+        return ModuleResult(
+            module_id=ctx.manifest.id,
+            module_version="1",
+            status="succeeded",
+            counts={},
+            errors=(),
+            abstentions=(),
+        )
+
+    blocking = Registry(RegisteredModule(m, block) for m in registry.manifests())
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        first = pool.submit(
+            execute_follow_up, engine, job.run.run_id, registry=blocking, clients={}
+        )
+        assert started.wait(5)
+        try:
+            # Module writes hold the SQLite lock; release it while the second
+            # worker waits, then it observes the existing running job.
+            release.set()
+            second = pool.submit(
+                execute_follow_up, engine, job.run.run_id, registry=blocking, clients={}
+            )
+            try:
+                assert second.result() == job  # already completed is an idempotent success
+            except AnswerConflict:
+                pass  # still running is a conflict, never a second execution
+        finally:
+            release.set()
+        assert first.result() == job
+
+
+def test_newer_question_version_cannot_reuse_an_old_answer(setup):
+    engine, request, registry, seed, _, originals = setup
+    newer = originals[-1].model_copy(update={"version": "2", "status": "cancelled"})
+    seed(extra=(newer,))
+    with pytest.raises(AnswerConflict, match="version changed"):
+        submit_answer(engine, request, registry=registry)
+    with pytest.raises(InvalidAnswer, match="cancelled"):
+        submit_answer(
+            engine, request.model_copy(update={"clarification_version": "2"}), registry=registry
+        )
+
+
+def test_unsupported_pipeline_is_rejected_before_persisting(setup):
+    engine, request, registry, seed, _, _ = setup
+    seed()
+    from sqlalchemy import update
+
+    with engine.begin() as conn:
+        spec = dict(conn.execute(select(runs.c.spec)).scalar_one())
+        spec["modules"] = spec["modules"][:-1]
+        conn.execute(update(runs).values(spec=spec))
+    with pytest.raises(AnswerUnavailable, match="requires extraction"):
+        submit_answer(engine, request, registry=registry)
+    assert count(engine, jobs) == count(engine, events) == 0
