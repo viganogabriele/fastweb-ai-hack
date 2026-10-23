@@ -5,44 +5,26 @@ lane D answer UI in parent #134. It adds no HTTP route, frontend state or outbou
 messaging. The existing read-only clarification API remains the source of published
 questions. This task does not close #134 or implement #135.
 
-## Platform handoff
+## Platform handoff (as implemented by #216)
 
-The proposed POST path is
-`/api/runs/{run_id}/cases/{case_id}/clarifications/{clarification_id}/answers`.
-The adapter should construct `AnswerRequest` using the path IDs plus these body
-fields (not allow contradictory duplicate IDs):
+`POST /api/runs/{run_id}/cases/{case_id}/clarifications/{clarification_id}/answer`
+takes the full `AnswerRequest` body; its `run_id`, `case_id` and `clarification_id`
+must equal the URL (422 otherwise). The exact contract, error codes and UI handoff
+are in `backend/tesseract/api/README.md` and `docs/frontend/clarification-answer-ui.md`.
 
-```json
-{
-  "scenario_id": "historical",
-  "case_version": "1",
-  "clarification_version": "1",
-  "text": "La taglia richiesta è M.",
-  "received_at": "2026-10-22T23:00:00+02:00",
-  "language": "it",
-  "follow_up_scenario_id": "simulated-size-M",
-  "as_of": "2026-10-22T23:00:00+02:00",
-  "idempotency_key": "operator-retry-key"
-}
-```
-
-1. Resolve and authorize the namespace with the existing platform dependency.
-   Fixture access needs `FIXTURE_MODE`; never derive `fixture_mode` from the body.
-2. Call `submit_answer(engine, request, fixture_mode=..., registry=...)`. The
-   immutable parent determines live/recorded/fixture mode. The service checks
+1. The namespace comes from the platform dependency (`?fixture=true` needs
+   `FIXTURE_MODE`); `fixture_mode` is never derived from the body.
+2. `submit_answer(engine, request, fixture_mode=..., registry=...)` checks
    publication, scenario, current published run, exact latest case/question versions,
-   membership, source lineage, event time, and enabled pipeline prerequisites.
-3. After commit, schedule `execute_follow_up(engine, job.run.run_id, ...)` with
-   the same engine/namespace, registry and settings. Return 202 and the `AnswerJob`
-   (`run`, `document`, `fingerprint`, `simulated: true`); navigate to the actual
-   returned run, whose normal RunView supplies pending/failure/publication state.
-   Do not route this job through the generic `runs.execute`: it needs durable
-   lineage restoration and the historical-evidence filter.
-4. Map `InvalidAnswer` / Pydantic validation to 422, `AnswerConflict` to 409,
-   `UnrecordedAnswer` / `AnswerUnavailable` to 503 with an explicit unavailable
-   reason, and SQLite busy/locked errors to retryable 503. No network fallback.
-5. On startup, `pending_follow_ups(engine, fixture_mode=...)` enumerates accepted
-   jobs that may not yet have reached the background worker. Queue their run IDs.
+   membership, source lineage, event time and enabled pipeline prerequisites. The
+   immutable parent determines live/recorded/fixture mode.
+3. After commit the router schedules `execute_follow_up(engine, job.run.run_id, ...)`
+   and returns 202 with the `AnswerJob`; the follow-up's normal RunView supplies
+   pending/failure/publication state. The job never goes through generic `runs.execute`.
+4. Errors: `InvalidAnswer`/validation 422, `AnswerConflict` 409, `UnrecordedAnswer`
+   **424**, `AnswerUnavailable` 503 without `Retry-After`, SQLite busy/locked 503 with
+   `Retry-After: 5`. No network fallback.
+5. On startup `pending_follow_ups(engine, fixture_mode=...)` re-queues accepted jobs.
    Repeated submission returns the same job and can safely queue it again.
 
 The same retry key with a changed payload is a conflict. A different retry key
