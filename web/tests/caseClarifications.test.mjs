@@ -21,6 +21,7 @@ const source = readFileSync(new URL('../src/sections/CaseClarificationsPanel.tsx
 const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX } }).outputText
 const module = { exports: {} }
 new Function('require', 'exports', compiled)(name => {
+  if (name.endsWith('.css')) return {}
   if (name === '../api/caseClarifications') return api
   if (name === '../api/client') return { readApi: () => assert.fail('render must not fetch') }
   if (name === '../ui') return { Button: ({ children }) => React.createElement('button', null, children), StatusBadge: ({ label }) => React.createElement('span', null, label) }

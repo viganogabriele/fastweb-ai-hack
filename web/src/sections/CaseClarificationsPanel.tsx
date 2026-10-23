@@ -4,6 +4,7 @@ import type { DocumentDetail } from '../api/client'
 import { answerDocumentMatches, answerDocumentPath, clarificationSelectionKey, clarificationStatus, clarificationTimestamp, requestClarification, requestClarifications } from '../api/caseClarifications'
 import type { Clarification, ClarificationRef, ClarificationSelection, ClarificationState } from '../api/caseClarifications'
 import { Button, StatusBadge } from '../ui'
+import './CaseClarificationsPanel.css'
 
 export function CaseClarificationsPanel(props: ClarificationSelection) {
   return <ClarificationsRequest key={clarificationSelectionKey(props)} {...props} />
@@ -50,7 +51,7 @@ export function ClarificationRecord({ record, selection }: { record: Clarificati
     <h5>{record.id} · versione {record.version}</h5>
     <StatusBadge tone="neutral" label={clarificationStatus[record.status]} />
     <p>Simulato: {record.simulated ? 'sì' : 'no'}</p>
-    <p>{record.question}</p>
+    <p className="sd-case-clarification__text">{record.question}</p>
     <dl><dt>Timestamp domanda memorizzato</dt><dd>{clarificationTimestamp(record.asked_at)}</dd>
       <dt>Timestamp risposta memorizzato</dt><dd>{clarificationTimestamp(record.answered_at)}</dd>
       <dt>Documento risposta</dt><dd>{record.answer_document_id ?? 'Non disponibile'}</dd></dl>
@@ -81,7 +82,7 @@ function AnswerDocument({ selection, id }: { selection: ClarificationSelection; 
     <Button size="sm" variant="secondary" aria-expanded={opened} onClick={() => { setState({ status: 'loading' }); open(value => !value) }}>Documento risposta · {id}</Button>
     {opened && <><p>Ultima versione visibile nel run: il chiarimento memorizza solo l’ID del documento.</p>
       <ReadState state={state} retry={() => { setState({ status: 'loading' }); retry(value => value + 1) }} />
-      {state.status === 'ready' && <><p>{state.data.document.id} · {state.data.document.version}</p><p>{state.data.document.text}</p></>}
+      {state.status === 'ready' && <><p>{state.data.document.id} · {state.data.document.version}</p><p className="sd-case-clarification__text">{state.data.document.text}</p></>}
     </>}
   </section>
 }
