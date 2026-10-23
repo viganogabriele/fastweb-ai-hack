@@ -387,6 +387,14 @@ def build_cases(
     """Pure: the cases of this snapshot. Records not visible at ``as_of`` are ignored."""
     as_of = spec.as_of
     stocks, erp_stock = tuple(stocks), tuple(erp_stock)
+    # ERP stock rows per (store, scope) in source order: `reconcile` only compares a case with
+    # its own store and SKU or SKU-size, so it need not scan every row for every case.
+    stock_rows: dict[tuple[str, str, str], list[repo.ErpRecord]] = defaultdict(list)
+    for row in erp_stock:
+        if row.table == "stock":
+            store, sku = row.data.get("store_id"), row.data.get("sku")
+            stock_rows[("sku", store, sku)].append(row)
+            stock_rows[("sku_size", store, f"{sku}-{row.data.get('size')}")].append(row)
     decision_calendars = tuple(decision_calendars)
     all_facts = {
         _key(ref(o)): o
@@ -502,9 +510,7 @@ def build_cases(
                 n_documents=len(seen_docs),
                 n_origin_groups=len(origins) - unknown_origins,
                 n_unknown_origins=unknown_origins,
-                blocking_uncertainties=tuple(
-                    _uncertainties(draft, supporting, touching, members)
-                ),
+                blocking_uncertainties=tuple(_uncertainties(draft, supporting, touching, members)),
                 context_refs=tuple(ref(r) for r in (*own_links, *touching)),
             )
         )
@@ -512,7 +518,7 @@ def build_cases(
             cases[-1],
             supporting,
             stocks,
-            erp_stock,
+            stock_rows.get((draft.scope_level, draft.store_id, draft.scope_id), ()),
             decision_calendars,
             as_of=as_of,
             timezone=zones.get(draft.store_id),
