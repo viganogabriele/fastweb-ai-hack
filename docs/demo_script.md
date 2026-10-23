@@ -171,7 +171,8 @@ Measured with `tools/demo-rehearsal` on a fresh attempt, 1280×800, light theme,
 
 | Date (UTC) | Build | Pace | Measured | Notes |
 |---|---|---|---|---|
-| `[PENDING]` | | | | |
+| 2026-10-23 07:58 | main `1f7f355` (pre-#253 UI), dev run `core-dev-20261023` | 1 | **4:01.1** (241.08 s, 6,027 frames) | Phase 1 proof. All 9 beats, 0 console errors, 0 deny hits, decision saved as `draft`. Trace beat 41 s vs 30 s target: hold trimmed by 6 s afterwards. Video `data/demo/video/phase1-main-1f7f355/rehearsal.mp4` (sha256 `270673c0…c91d`), not final. |
+| `[PENDING]` final | frozen bundle/run after #128, current UI | 1 | | Final video under `data/demo/video/`. |
 
 ## Do not show
 

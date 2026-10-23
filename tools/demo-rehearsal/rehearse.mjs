@@ -101,13 +101,22 @@ async function visibleTextHits() {
   return DENY.filter((re) => re.test(text)).map(String)
 }
 
-// Bring a section's top just below the sticky header, the way a presenter scrolls.
+// Bring a section's top near the top of its scroll container (the app scrolls an inner pane,
+// not the window), the way a presenter scrolls.
 async function scrollTo(locator) {
   await locator.first().evaluate((el) => {
-    const top = el.getBoundingClientRect().top + window.scrollY - 84
-    window.scrollTo({ top, behavior: 'smooth' })
+    let pane = el.parentElement
+    while (pane && !(/(auto|scroll)/.test(getComputedStyle(pane).overflowY) && pane.scrollHeight > pane.clientHeight)) {
+      pane = pane.parentElement
+    }
+    if (pane) {
+      const top = el.getBoundingClientRect().top - pane.getBoundingClientRect().top + pane.scrollTop - 16
+      pane.scrollTo({ top, behavior: 'smooth' })
+    } else {
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 84, behavior: 'smooth' })
+    }
   })
-  await page.waitForTimeout(700)
+  await page.waitForTimeout(900)
 }
 
 const beats = [
@@ -146,7 +155,7 @@ const beats = [
     },
   },
   {
-    id: 'trace', target: '1:40-2:10', dwell: 24,
+    id: 'trace', target: '1:40-2:10', dwell: 18,
     say: "L'investigatore (GLM, registrato) legge evidenze, stock e tratte; finisce il budget di 6 strumenti: fallback dichiarato, esito verify.",
     act: async () => {
       const traces = main().getByRole('region', { name: 'Tracce pubblicate' })
@@ -227,7 +236,7 @@ const beats = [
     },
   },
   {
-    id: 'results', target: '3:45-4:00', dwell: 15,
+    id: 'results', target: '3:45-4:00', dwell: 17,
     say: 'Risultati misurati sugli store hold-out, con denominatori ed errori.',
     act: async () => {
       await page.goto(pathToFileURL(resolve(args.slide)).href)

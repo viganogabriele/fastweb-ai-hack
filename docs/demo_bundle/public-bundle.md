@@ -54,8 +54,8 @@ machine.
 | `manifest.json` | `5b950bf43d1a6979a8f0da2396ef0943fac837a27adf3216e14e0288209ee5b0` |
 
 Built from code `1f7f355` (frozen candidate) plus this exporter, on a fresh replay attempt of
-`core-dev-20261023` (output `9346b85e…a56f`). A second build from the same manifest and key gave
-byte-identical files. The ids are HMACs of the private key, so another key gives other ids and
+`core-dev-20261023` (output `9346b85e…a56f`). A second build from the same manifest and key, and a
+re-export from another fresh replay attempt, gave byte-identical manifests and files. The ids are HMACs of the private key, so another key gives other ids and
 hashes with the same content.
 
 `manifest.json` carries `"synthetic": true`, the builder notice, the file hash, one hash per
