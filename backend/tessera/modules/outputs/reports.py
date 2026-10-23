@@ -268,7 +268,7 @@ def build_report(view: str, facts: Facts, spec: RunSpec) -> Report:
 
 def _forecasts(run_repo: repo.Repo, case: Case) -> list[ForecastAdjustment]:
     found = run_repo.list(ForecastAdjustment, store_id=case.store_id)
-    own = [f for f in found if case.id in f.case_ids]
+    own = [f for f in found if case.id in f.case_ids and f.proposal_source != "agent"]
     if own or case.store_id is None or case.scope_level not in ("sku_size", "sku", "style"):
         return own
     found = []
