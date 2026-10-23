@@ -96,3 +96,7 @@ in MIL01's assortment. Expected links, for the manual labels:
 Connection outages, the payment terminal, traffic, weather and staffing are operational or context
 notes, not SKU signals. The transcripts were written from the script the speakers read; check them
 against the ASR output when the cache is recorded (ING-03b, #139).
+
+ING-03b status, verified reference hashes, observed fallback publication and safe
+record/replay commands are in [VERIFICATION.md](VERIFICATION.md). Real ASR recording
+is currently blocked by missing credentials; fallback publication is not completion.
