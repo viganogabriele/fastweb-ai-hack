@@ -143,10 +143,9 @@ def record(candidate, *, case_id, output):
         raise ValueError(f"job not published ({state['status']}) or parent changed")
     output.mkdir(mode=0o700)
     for name in ("llm_cache", "systems_cache"):
-        if (settings.data_dir / name).is_dir():
+        # An unused cache stays absent: git cannot carry an empty directory.
+        if any((settings.data_dir / name).rglob("*.json")):
             shutil.copytree(settings.data_dir / name, output / name)
-        else:
-            (output / name).mkdir()
     manifest = {
         "format": 1,
         "status": "recorded",
@@ -191,7 +190,7 @@ def verify(attempt, *, job, workspace):
     if rebuilt["snapshot_sha256"] != manifest["parent"]["snapshot_sha256"]:
         raise ValueError("job recordings belong to another candidate snapshot")
     for name in ("llm_cache", "systems_cache"):
-        if recordings(job / name) != [list(r) for r in manifest["recordings"][name]]:
+        if [list(r) for r in recordings(job / name)] != manifest["recordings"][name]:
             raise ValueError(f"packaged {name} differs from the job manifest")
     workspace.mkdir(mode=0o700, parents=True, exist_ok=True)
     attempt_settings = Settings(_env_file=None, data_dir=attempt / "data")
@@ -206,7 +205,9 @@ def verify(attempt, *, job, workspace):
         },
     )
     staged = {
-        name: stage(job / name, settings.data_dir / name) for name in ("llm_cache", "systems_cache")
+        name: stage(job / name, settings.data_dir / name)
+        for name in ("llm_cache", "systems_cache")
+        if manifest["recordings"][name]
     }
     engine = connect(settings.db_url)
     try:
