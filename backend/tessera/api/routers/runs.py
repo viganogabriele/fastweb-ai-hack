@@ -23,7 +23,6 @@ from tessera.core.contracts import (
 )
 from tessera.core.orchestrator import run
 from tessera.core.registry import Registry
-from tessera.core.repo import Repo as StoredRepo
 from tessera.core.repo import RunNotFound
 from tessera.core.repo import list_runs as stored_runs
 from tessera.core.run_repo import RunRepo as Repo
@@ -64,13 +63,10 @@ def view(repo: Repo) -> RunView:
 def run_repo(request: Request, run_id: str, ns: Namespace) -> Iterator[Repo]:
     engine = engine_for(request, ns)
     try:
-        stored = StoredRepo.open(engine, run_id)
+        with repo_session(engine, run_id, fixture_mode=ns == "fixture") as repo:
+            yield repo
     except RunNotFound:
         raise HTTPException(404, "Run not found") from None
-    if (stored.spec.mode == "fixture") != (ns == "fixture"):
-        raise HTTPException(404, "Run not found")
-    with repo_session(engine, stored.spec, fixture_mode=ns == "fixture") as repo:
-        yield repo
 
 
 RunRepo = Annotated[Repo, Depends(run_repo)]
@@ -143,8 +139,12 @@ def list_runs(request: Request, ns: Namespace):
     for spec, _status in stored_runs(engine):
         if (spec.mode == "fixture") != (ns == "fixture"):
             continue
-        with repo_session(engine, spec, fixture_mode=ns == "fixture") as repo:
-            result.append(view(repo))
+        try:
+            with repo_session(engine, spec.run_id, fixture_mode=ns == "fixture") as repo:
+                result.append(view(repo))
+        except RunNotFound:
+            # A reset after enumeration must not recreate this run from its old spec.
+            continue
     return tuple(result)
 
 

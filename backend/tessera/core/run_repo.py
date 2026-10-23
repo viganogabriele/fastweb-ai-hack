@@ -17,6 +17,7 @@ from tessera.core.db import artifacts, runs
 from tessera.core.repo import (
     KINDS,
     Repo,
+    RunNotFound,
     create_run,
     list_module_runs,
     put_module_run,
@@ -239,7 +240,7 @@ class RunRepo(Repo):
 @contextmanager
 def repo_session(
     engine: Engine,
-    spec: RunSpec,
+    spec: RunSpec | str,
     *,
     fixture_mode: bool = False,
     module_scope: bool = False,
@@ -249,6 +250,10 @@ def repo_session(
 
     A deferred read transaction that later writes fails at once if another writer
     committed meanwhile; an immediate one waits the busy timeout instead.
+
+    Passing a run ID opens an existing run. Its spec, status and artifacts are
+    read from the same transaction; missing or foreign-namespace runs never get
+    created. Passing a RunSpec retains the worker's create-or-open behavior.
     """
     with engine.begin() as connection:
         # sqlite3 legacy transaction mode does not start BEGIN for reads or
@@ -258,4 +263,9 @@ def repo_session(
             driver = connection.connection.driver_connection
             if not driver.in_transaction:
                 connection.exec_driver_sql("BEGIN IMMEDIATE" if write else "BEGIN")
+        if isinstance(spec, str):
+            run_id = spec
+            spec = Repo.open(_BoundEngine(connection), run_id).spec
+            if (spec.mode == "fixture") != fixture_mode:
+                raise RunNotFound(run_id)
         yield RunRepo(connection, spec, fixture_mode=fixture_mode, module_scope=module_scope)

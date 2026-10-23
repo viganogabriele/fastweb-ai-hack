@@ -12,6 +12,14 @@ Document detail includes matching canonical segments, observations and entity
 links. Store filters cannot widen the run's declared scope; IDs never become
 filesystem paths.
 
+Run lookup, publication status and artifact reads share one database transaction.
+A concurrent reset cannot recreate a deleted run or mix its old configuration
+with new results. The run list skips entries deleted after enumeration. Pending,
+running, blocked and failed runs keep their metadata visible, but all document
+and case endpoints return 409 until publication. Successful and degraded runs
+are readable; starting a new run or demo scenario leaves older complete runs
+available with their original snapshot and timestamp.
+
 Fixture access requires both `FIXTURE_MODE=1` and `?fixture=true`. Product requests
 cannot authorize fixtures, and neither submission path automatically loads them.
 Production module tasks still need to provide MANIFEST/run entry points: an empty
