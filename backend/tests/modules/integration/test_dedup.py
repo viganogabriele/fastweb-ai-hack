@@ -539,7 +539,9 @@ def test_data01_fixtures_match_relations_and_module_is_idempotent(tmp_path):
 # The recorded 18/09 MIL01 pair: the model quotes only "il fatturato di oggi e' 85,0k"
 # and left the original figure's period unstated.
 ORIGINAL = "MIL01 - CHIUSURA 18/09\n\nFatturato: 58,0k (bdg 70,2) +21%"
-CORRECTION = "Scusate, ho invertito le cifre: il fatturato di oggi e' 85,0k e non 58. Il +21% e' giusto."
+CORRECTION = (
+    "Scusate, ho invertito le cifre: il fatturato di oggi e' 85,0k e non 58. Il +21% e' giusto."
+)
 DAY = (datetime(2026, 10, 1, 22, tzinfo=UTC), datetime(2026, 10, 2, 21, 59, 59, tzinfo=UTC))
 
 
@@ -638,9 +640,7 @@ def test_correction_words_in_another_sentence_are_not_read():
 
 
 def test_equal_known_periods_still_require_the_named_value():
-    old, new = correction_pair(
-        CORRECTION.replace("e non 58", "e non 59"), old_period=DAY
-    )
+    old, new = correction_pair(CORRECTION.replace("e non 58", "e non 59"), old_period=DAY)
     relations, abstentions = infer(old, new)
     assert all(r.relation != "supersedes" for r in relations)
     assert any("found 0" in a for a in abstentions)

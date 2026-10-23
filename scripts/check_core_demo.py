@@ -72,6 +72,22 @@ def input_inventory(root):
     )
 
 
+def artifact_inventory(repo):
+    """Exact identities, versions and semantic payload hashes of a published projection."""
+    return digest(
+        [
+            (
+                kind,
+                item.id,
+                item.version,
+                digest(semantic_payload(kind, item.model_dump(mode="json"))),
+            )
+            for kind, model in sorted(KINDS.items())
+            for item in sorted(repo.list(model), key=lambda x: (x.id, x.version))
+        ]
+    )
+
+
 def check(candidate, *, decision_output=None):
     candidate = allowed(candidate)
     # Refuse before sending a decision command, including an idempotent retry.
@@ -197,18 +213,7 @@ def check(candidate, *, decision_output=None):
                     "scenario_id": spec.scenario_id,
                     "source_manifest_hash": spec.source_manifest_hash,
                     "config_hash": spec.config_hash,
-                    "artifact_inventory_sha256": digest(
-                        [
-                            (
-                                kind,
-                                item.id,
-                                item.version,
-                                digest(semantic_payload(kind, item.model_dump(mode="json"))),
-                            )
-                            for kind, model in sorted(KINDS.items())
-                            for item in sorted(repo.list(model), key=lambda x: (x.id, x.version))
-                        ]
-                    ),
+                    "artifact_inventory_sha256": artifact_inventory(repo),
                     "artifact_inventory_scope": "published projection before optional decision",
                     "run_id": spec.run_id,
                     "status": "passed",

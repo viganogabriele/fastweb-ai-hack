@@ -153,6 +153,29 @@ def _states(old: Observation, values: set[float]) -> bool:
     )
 
 
+def _same_period(
+    new: Observation,
+    doc: SourceDocument,
+    old: Observation,
+    parent: SourceDocument,
+    replaced: set[float],
+) -> bool:
+    if new.period_start is None or new.period_end is None:
+        return False
+    if (new.period_start, new.period_end) == (old.period_start, old.period_end):
+        return True
+    # The parent left the day unstated: only the named wrong value, sent on the same
+    # business day that the correction's own period covers, identifies it.
+    return (
+        bool(replaced)
+        and old.period_start is None
+        and old.period_end is None
+        and parent.business_date is not None
+        and parent.business_date == doc.business_date
+        and new.period_start <= parent.available_at <= new.period_end
+    )
+
+
 def ref(record: SourceRecord) -> ArtifactRef:
     return ArtifactRef(kind=type(record).__name__, id=record.id, version=record.version)
 
@@ -348,31 +371,13 @@ def build_relations(
         if intent is None:
             continue
         replaced = _replaced_values(text, new) if intent == "supersedes" else set()
-
-        def same_period(old: Observation) -> bool:
-            if new.period_start is None or new.period_end is None:
-                return False
-            if (new.period_start, new.period_end) == (old.period_start, old.period_end):
-                return True
-            # The parent left the day unstated: only the named wrong value, sent on the
-            # same business day the correction's own period covers, identifies it.
-            parent = fact_docs[_key(ref(old))]
-            return (
-                bool(replaced)
-                and old.period_start is None
-                and old.period_end is None
-                and parent.business_date is not None
-                and parent.business_date == doc.business_date
-                and new.period_start <= parent.available_at <= new.period_end
-            )
-
         candidates = [
             old
             for old in facts
             if old.document_id == doc.parent_document_id
             and old.available_at < new.available_at
             and _same_scope(new, old, link_map)
-            and same_period(old)
+            and _same_period(new, doc, old, fact_docs[_key(ref(old))], replaced)
             and (not replaced or _states(old, replaced))
         ]
         if len(candidates) != 1:

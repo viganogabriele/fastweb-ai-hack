@@ -2,7 +2,7 @@
 BACKEND := backend
 WEB := web
 PY := $(BACKEND)/.venv/bin/python
-CHECK_SCRIPTS := ../scripts/export_openapi.py ../scripts/replay_demo.py ../scripts/prepare_core_demo.py ../scripts/record_core_demo.py ../scripts/check_core_demo.py
+CHECK_SCRIPTS := ../scripts/export_openapi.py ../scripts/replay_demo.py ../scripts/prepare_core_demo.py ../scripts/record_core_demo.py ../scripts/check_core_demo.py ../scripts/core_investigate_job.py
 
 .PHONY: setup dev backend web mocks check fmt test types
 
