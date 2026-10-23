@@ -189,10 +189,10 @@ clarification for the ambiguous case, no fallback/errors, and no approval/bookin
 replace #115's recorded source-to-report/trace/decision rebuild.
 
 [web/scripts/test_public_demo.py](../web/scripts/test_public_demo.py)::
-`test_private_metadata_identifiers_media_and_mapping_never_enter_public_files`,
-`test_voice_and_raw_recordings_are_excluded`,
-`test_unicode_repeated_quote_and_all_references_survive_sanitisation` and
-`test_deterministic_files_and_hashes` cover synthetic builder output privacy, citations,
+`PublicDemoTests::test_private_metadata_identifiers_media_and_mapping_never_enter_public_files`,
+`PublicDemoTests::test_voice_and_raw_recordings_are_excluded`,
+`PublicDemoTests::test_unicode_repeated_quote_and_all_references_survive_sanitisation` and
+`PublicDemoTests::test_deterministic_files_and_hashes` cover synthetic builder output privacy, citations,
 offsets and determinism. No actual final public bundle, deployed download routes or media
 exposure audit was executed. Final bundle review remains with #129.
 
