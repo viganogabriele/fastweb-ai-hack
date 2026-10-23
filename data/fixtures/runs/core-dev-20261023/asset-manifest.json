@@ -10,6 +10,10 @@
       "6aa909dcd080435dd0574a5a3d0edb9d4e0bd4440f6765a0873ebb8e298f0b4b"
     ],
     [
+      "decisions-operator.json",
+      "6c2a289443ddaf576a849aba681acbd4686bba5af402ffd017b6070c57b57a9b"
+    ],
+    [
       "decisions.json",
       "42d890944bcafdf4f5dbacb08281735186a8b6e322abd662e133b4f0f605e6e6"
     ],
@@ -136,6 +140,10 @@
     [
       "negative-replay-evidence.json",
       "d77dc07c11bb6358d811fc64b48809cd6722aa1b32c2b70432b619fb2d9a5b06"
+    ],
+    [
+      "operator-decision-replay.json",
+      "0ffee0bcf2189c69ffbcbe59afc24ca5524e1b3b3bce8356be875f69cf38dfed"
     ],
     [
       "recording-evidence.json",

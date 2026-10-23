@@ -2,7 +2,8 @@
 
 This is the integration evidence for #115 and the input to #211's human release
 review. It is a historical **synthetic dev** rehearsal, not a hold-out result,
-an actual operator approval, a production transfer or a public bundle.
+a production transfer or a public bundle. Its one genuine operator decision is a
+local rejection (see "Genuine operator decision" below).
 
 ## Frozen inputs and recordings
 
@@ -81,6 +82,61 @@ request, decision clock and exact exported LocalDraft. The scripted synthetic
 reviewer approves an informational `notify_owner` option. The result is a local
 draft with zero reservations and no external message. A timestamp before the
 snapshot, foreign namespace/hash, changed draft or stale option is refused.
+
+### Genuine operator decision
+
+`decisions-operator.json` holds the one decision a human took on this candidate.
+On 2026-10-23 Lorenzo (`lorenzocorallo`, maintainer) chose to **reject**
+`opt-case-mil01-i10919b00011-20261008-transfer` (version `4c5c3713b5a3498f`;
+move 1 × I10919B00011-742 size L, MIL02 → MIL01) with the note: "The transfer
+moves size L to MIL01, which already holds 8 in L; the store reported zero in size
+M. It doesn't address the reported shortage." He decided it during the DEMO-02c
+session, and the agent entered it on his instruction:
+
+- through the real `POST /api/runs/core-dev-candidate/cases/case-mil01-i10919b00011-20261008/decisions`
+- on an offline replay of this candidate that has no other decision
+- with `by: lorenzocorallo`, which is a declared local identity, not an authenticated login.
+
+The API clock stamped `2026-10-23T07:38:02.026637Z`, before the option's
+`valid_until` (`2026-10-23T13:30:00Z`). The identical retry and the decision read
+API returned the same draft:
+
+- ID `decision-2e6afdfc5f534eaf9950412f40e70efa`
+- `dispatch_status: draft`
+- zero reservations, because a rejection holds no stock.
+
+The export uses the same `decision_export` as `check_core_demo.py`. It replays on
+its own, in place of the synthetic file, which stays unchanged:
+
+```sh
+backend/.venv/bin/python scripts/replay_demo.py \
+  --run-spec "$demo_assets/run-spec.json" \
+  --sources "$demo_candidate/sources" \
+  --config "$demo_candidate/config" \
+  --cache "$demo_assets/llm_cache" \
+  --systems-cache "$demo_assets/systems_cache" \
+  --decisions "$demo_assets/decisions-operator.json" \
+  --workspace "$PWD/data/core_demo/operator-replay"
+```
+
+`operator-decision-replay.json` records two cold attempts. Both exit 0 with zero
+network attempts and no missing prerequisites. They match on inputs, exact
+artifact IDs and versions, the decision (draft sha256 `69a9a767…85fd`), output
+`faccb706836a72ff87fd1aca9dba151985f8d6b1980f5109d0d6db810fc0c61f` and ledger
+`a4829accf1c98b7989d85b9636f8d8fa560c526693a4f0289366fff0c46ea785`. As above,
+only the AgentTrace raw hashes differ, because of the excluded `duration_ms`.
+`make demo` still replays the synthetic `decisions.json`.
+
+Which options a human can decide here was checked by POSTing every current
+option against a throwaway copy of a fresh replay. That sweep's log is local and
+is not packaged; its results:
+
+- Reject: all 157.
+- Approve: 152. The exceptions are the D1 `hold`, `verify_stock`, `ask_store` and
+  `notify_owner` at version `02f273c06fbcb197`, which return 409 "proposal inputs
+  or checks changed". The investigator's donor-scoped `evaluate_options` step
+  republished them under the deterministic IDs (#258). Separately,
+  `opt-case-mil01-j10911a00305-20261002-transfer` correctly fails `donor_protection`.
 
 For the two negative rehearsals, copy a cache outside the owned replay workspace,
 withhold one envelope in that copy and pass it to the same command. The actual
@@ -232,9 +288,28 @@ cd web
 TESSERACT_API_TARGET=http://127.0.0.1:8106 npm run dev -- --port 5186
 ```
 
-Browser verification was done on the earlier `f1d7923` candidate and has not
-been repeated for this recording, so no `ui-verification.json` is packaged. The
-UI reads the same API, which `check_core_demo.py` verifies above.
+The browser check was repeated on this recording on 2026-10-23 (DEMO-02c, #115).
+It used headless Chromium (Playwright) on `make demo-data`, which replays the
+synthetic `decisions.json`; its output, ledger and snapshot hashes matched the
+"Actual Core outcome" values. All 42 checks passed with 0 page
+errors, 0 console errors and 0 API responses ≥ 400. It checked:
+
+- the `recorded` and `degraded` run labels;
+- for D1: its evidence refs, the 9 option versions with the transfer leg and its
+  22 checks, and the recorded trace (fallback `sì`, outcome `verify`, 7 steps);
+- for the unknown-product case: its trace with no fallback, and the Italian
+  clarification shown as **Bozza** and **Simulato: sì**;
+- the exact quotes highlighted in Fonti;
+- after a page reload, the frozen NYC01 decision, read identically through
+  `GET /decisions`, `?case_id=` and `/decisions/{id}`.
+
+The screenshots and check log stay local (`data/core_demo/ui-check-20261023/`,
+ignored). The summary is on #115. Known gaps:
+
+- The case page does not yet render a saved decision after reload (M5), so
+  persistence is verified through the API only.
+- The D1 options panel shows both versions of four options, and the current ones
+  cannot be approved (#258).
 
 The scoped Memi audit (`web/`, `diagnose . --json --no-write --fail-on none`)
 reported 50/100; it is unchanged because this task changes no design tokens or
@@ -274,7 +349,7 @@ The gate regressions include `test_gate_temporal.py`, `test_gate_dedup.py`,
 `test_approval_gate.py`, `test_gate_cutoffs.py`, agent runtime/investigator safety
 tests and the replay/cache tests. #211 owns the final invariant audit, human
 sign-off, candidate selection, export freeze and eventual `freeze-g3` tag after
-review/merge. The packaged decision is a scripted synthetic reviewer command, not a
-genuine operator decision; freezing a real operator decision stays open for a
-human. The NYC01 correction abstention and the D1 fallback must remain visible in
-that handoff.
+review/merge. `decisions.json` is a scripted synthetic reviewer command.
+`decisions-operator.json` is the genuine operator decision, Lorenzo's local
+rejection of the D1 transfer. The NYC01 correction abstention, the D1 fallback
+and #258 must remain visible in that handoff.
