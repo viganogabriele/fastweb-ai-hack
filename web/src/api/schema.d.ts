@@ -141,10 +141,70 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/runs/{run_id}/forecast": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Forecast
+         * @description Stored baselines and overlays, including abstentions, from this complete snapshot.
+         *
+         *     Producer, case_ids and baseline_ref preserve the distinction between a baseline and
+         *     case-specific scenarios. An absent forecast stays absent: reads never recompute it.
+         */
+        get: operations["forecast_api_runs__run_id__forecast_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** AdjustmentComponent */
+        AdjustmentComponent: {
+            /**
+             * Effective From
+             * Format: date-time
+             */
+            effective_from: string;
+            /**
+             * Effective Until
+             * Format: date-time
+             */
+            effective_until: string;
+            /** Episode Refs */
+            episode_refs: components["schemas"]["ArtifactRef"][];
+            /** Evidence Refs */
+            evidence_refs: components["schemas"]["ArtifactRef"][];
+            /** Explanation */
+            explanation: string;
+            /** Formula Version */
+            formula_version: string;
+            /** Params */
+            params: {
+                [key: string]: components["schemas"]["JsonValue"];
+            };
+            /**
+             * Reference Time
+             * Format: date-time
+             */
+            reference_time: string;
+            /** Type */
+            type: string;
+            /**
+             * Unit
+             * @enum {string}
+             */
+            unit: "units" | "customers" | "requests" | "visitors" | "money" | "percent";
+        };
         /** ArtifactRef */
         ArtifactRef: {
             /** Id */
@@ -361,6 +421,87 @@ export interface components {
             t_end_s?: number | null;
             /** T Start S */
             t_start_s?: number | null;
+        };
+        /** ForecastAdjustment */
+        ForecastAdjustment: {
+            /** Availability Basis */
+            availability_basis: string;
+            /** Available At */
+            available_at: string | null;
+            baseline_ref: components["schemas"]["ArtifactRef"] | null;
+            /** Case Ids */
+            case_ids: string[];
+            /** Components */
+            components: components["schemas"]["AdjustmentComponent"][];
+            /**
+             * Computed At
+             * Format: date-time
+             */
+            computed_at: string;
+            /**
+             * Forecast Target
+             * @default sales_baseline
+             * @constant
+             */
+            forecast_target: "sales_baseline";
+            /**
+             * Horizon End
+             * Format: date
+             */
+            horizon_end: string;
+            /**
+             * Horizon Start
+             * Format: date
+             */
+            horizon_start: string;
+            /** Id */
+            id: string;
+            /** Input Refs */
+            input_refs: components["schemas"]["ArtifactRef"][];
+            /** Producer */
+            producer: string;
+            /** Producer Version */
+            producer_version: string;
+            /**
+             * Proposal Source
+             * @enum {string}
+             */
+            proposal_source: "code" | "agent" | "human";
+            /** Reason */
+            reason?: string | null;
+            /** Run Id */
+            run_id: string;
+            /** Scenario Id */
+            scenario_id: string;
+            /** Series */
+            series: components["schemas"]["ForecastPoint"][];
+            /** Sku */
+            sku: string;
+            /** Source Refs */
+            source_refs: components["schemas"]["SourceRef"][];
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "computed" | "unchanged" | "not_estimable";
+            /** Store Id */
+            store_id: string;
+            /** Version */
+            version: string;
+        };
+        /** ForecastPoint */
+        ForecastPoint: {
+            /** Actual */
+            actual?: number | null;
+            /** Baseline */
+            baseline: number | null;
+            /**
+             * Date
+             * Format: date
+             */
+            date: string;
+            latent: components["schemas"]["ScenarioValues"] | null;
+            servable: components["schemas"]["ScenarioValues"] | null;
         };
         /** HTTPValidationError */
         HTTPValidationError: {
@@ -631,6 +772,15 @@ export interface components {
              * @enum {string}
              */
             status: "pending" | "running" | "succeeded" | "degraded" | "blocked" | "failed";
+        };
+        /** ScenarioValues */
+        ScenarioValues: {
+            /** Base */
+            base: number;
+            /** High */
+            high: number;
+            /** Low */
+            low: number;
         };
         /** Segment */
         Segment: {
@@ -1009,6 +1159,41 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["DocumentDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    forecast_api_runs__run_id__forecast_get: {
+        parameters: {
+            query?: {
+                store?: string | null;
+                sku?: string | null;
+                fixture?: boolean;
+            };
+            header?: never;
+            path: {
+                run_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ForecastAdjustment"][];
                 };
             };
             /** @description Validation Error */

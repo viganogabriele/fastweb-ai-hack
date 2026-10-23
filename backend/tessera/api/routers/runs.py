@@ -15,6 +15,7 @@ from tessera.core.config import Settings, get_settings
 from tessera.core.contracts import (
     Case,
     EntityLink,
+    ForecastAdjustment,
     ModuleManifest,
     Observation,
     RunSpec,
@@ -201,3 +202,15 @@ def case(case_id: str, repo: PublishedRepo, version: str | None = None):
     if item is None:
         raise HTTPException(404, "Case not found")
     return item
+
+
+@router.get("/runs/{run_id}/forecast", response_model=tuple[ForecastAdjustment, ...])
+def forecast(repo: PublishedRepo, store: str | None = None, sku: str | None = None):
+    """Stored baselines and overlays, including abstentions, from this complete snapshot.
+
+    Producer, case_ids and baseline_ref preserve the distinction between a baseline and
+    case-specific scenarios. An absent forecast stays absent: reads never recompute it.
+    """
+    if store is not None and store not in repo.spec.stores:
+        raise HTTPException(422, "Store is outside this run")
+    return repo.list(ForecastAdjustment, store_id=store, sku=sku)
