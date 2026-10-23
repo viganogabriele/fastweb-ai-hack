@@ -4,7 +4,7 @@ import { readApi } from '../api/client'
 import type { Case } from '../api/client'
 import type { useRuns } from '../api/useRuns'
 import { Button, EmptyState, ErrorState, Input, LoadingState, Select, StatusBadge } from '../ui'
-import { caseStatuses, filterProductCases, productIndex, productScopes } from './productView'
+import { caseStatuses, caseTypeLabel, filterProductCases, productIndex, productScopes } from './productView'
 import type { ProductFilters } from './productView'
 import './sections.css'
 import './products.css'
@@ -79,7 +79,7 @@ function PublishedProducts({ runId, mode, onCaseSelect }: {
           <Input label="Cerca prodotto o motivo" type="search" icon={<Search />} value={filters.search} onChange={(event) => update('search', event.target.value)} />
           <Select label="Negozio" value={filters.store} options={[{ value: 'all', label: 'Tutti i negozi' }, ...stores.map((value) => ({ value, label: value }))]} onValueChange={(value) => update('store', value)} />
           <Select label="Stato del caso" value={filters.status} options={[{ value: 'all', label: 'Tutti gli stati' }, ...Object.entries(caseStatuses).map(([value, label]) => ({ value, label }))]} onValueChange={(value) => update('status', value)} />
-          <Select label="Tipo di segnale" value={filters.type} options={[{ value: 'all', label: 'Tutti i segnali' }, ...types.map((value) => ({ value, label: value }))]} onValueChange={(value) => update('type', value)} />
+          <Select label="Tipo di segnale" value={filters.type} options={[{ value: 'all', label: 'Tutti i segnali' }, ...types.map((value) => ({ value, label: caseTypeLabel(value) }))]} onValueChange={(value) => update('type', value)} />
           <Button variant="ghost" onClick={() => setFilters(initialFilters)}>Azzera filtri</Button>
         </div>
         <p className="sd-case-queue__count" role="status">{groups.length} prodotti · {filteredCount} casi nei filtri · {unresolved.length} senza prodotto identificato</p>
@@ -103,7 +103,7 @@ function PublishedProducts({ runId, mode, onCaseSelect }: {
 
 function ProductCases({ cases, onSelect }: { cases: Case[]; onSelect: (item: Case) => void }) {
   return <ul className="sd-products__cases">{cases.map((item) => <li key={item.id}>
-    <div className="sd-products__case-header"><strong>{item.store_id ?? 'Negozio da verificare'} · {item.case_type}</strong><StatusBadge tone={item.status === 'verify' ? 'warning' : 'neutral'} label={caseStatuses[item.status]} /></div>
+    <div className="sd-products__case-header"><strong>{item.store_id ?? 'Negozio da verificare'} · {caseTypeLabel(item.case_type)}</strong><StatusBadge tone={item.status === 'verify' ? 'warning' : 'neutral'} label={caseStatuses[item.status]} /></div>
     <p><strong>Motivazione del caso:</strong> {item.priority_reason || 'Non disponibile'}</p>
     {item.blocking_uncertainties.length > 0 && <p>Da verificare: {item.blocking_uncertainties.join(' · ')}</p>}
     <p className="sd-products__provenance">{item.id} · {item.version} · {item.scope_level}{item.scope_id ? ` · ${item.scope_id}` : ''}</p>

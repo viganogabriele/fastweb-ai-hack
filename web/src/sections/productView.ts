@@ -21,6 +21,26 @@ export const caseStatuses: Record<Case['status'], string> = {
   action_proposed: 'Azione proposta', decided: 'Deciso', closed: 'Chiuso'
 }
 
+const caseTypeLabels: Record<string, string> = {
+  unmet_demand: 'Domanda non soddisfatta',
+  demand_up: 'Aumento della domanda',
+  demand_down: 'Calo della domanda',
+  stockout: 'Prodotto esaurito',
+  low_stock: 'Scorte basse',
+  stock_discrepancy: 'Discrepanza di magazzino',
+  product_feedback: 'Feedback sul prodotto',
+  traffic_change: 'Variazione del traffico',
+  customer_profile: 'Profilo cliente',
+  operational_issue: 'Problema operativo',
+  sales_figure: 'Dato di vendita',
+  local_event: 'Evento locale',
+  other: 'Altro'
+}
+
+export function caseTypeLabel(value: string) {
+  return caseTypeLabels[value] ?? value.replaceAll('_', ' ')
+}
+
 // Group only explicitly identified product scopes. A category or ambiguous
 // mention must never silently become a SKU, nor may a size be inferred.
 export function productIndex(cases: Case[], runId: string) {

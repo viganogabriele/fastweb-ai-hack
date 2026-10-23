@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { filterProductCases, productIndex } from '../src/sections/productView.ts'
+import { caseTypeLabel, filterProductCases, productIndex } from '../src/sections/productView.ts'
 
 const item = (id, overrides = {}) => ({
   id, version: 'v1', run_id: 'run-1', computed_at: '2026-10-22T19:00:00Z',
@@ -64,4 +64,10 @@ test('filters the same case by store, status, type and Unicode search without hi
 test('empty or foreign-run results produce no invented products', () => {
   assert.deepEqual(productIndex([], 'run-1'), { groups: [], unresolved: [] })
   assert.deepEqual(productIndex([item('a')], 'run-2'), { groups: [], unresolved: [] })
+})
+
+test('shows localized signal labels while unknown types remain readable', () => {
+  assert.equal(caseTypeLabel('unmet_demand'), 'Domanda non soddisfatta')
+  assert.equal(caseTypeLabel('product_feedback'), 'Feedback sul prodotto')
+  assert.equal(caseTypeLabel('new_signal_type'), 'new signal type')
 })
