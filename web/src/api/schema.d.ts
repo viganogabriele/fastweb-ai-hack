@@ -787,6 +787,10 @@ export interface components {
             audio: string;
             /** Language */
             language?: string | null;
+            /** Prompt Set */
+            prompt_set?: "guided-v1" | null;
+            /** Staff Ref */
+            staff_ref?: string | null;
             /** Store Id */
             store_id: string;
             /** Transcript */
@@ -1415,6 +1419,8 @@ export interface components {
             duration_s: number | null;
             /** Note Id */
             note_id: string;
+            /** Prompt Set */
+            prompt_set?: "guided-v1" | null;
             /** Run Id */
             run_id: string | null;
             /**
@@ -1422,6 +1428,8 @@ export interface components {
              * Format: date-time
              */
             sent_at: string;
+            /** Staff Ref */
+            staff_ref?: string | null;
             /** Store Id */
             store_id: string;
             /** Transcript */

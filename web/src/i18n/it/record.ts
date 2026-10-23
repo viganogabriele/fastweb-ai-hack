@@ -13,6 +13,7 @@ export const record = {
   keywords: ['Interesse', 'Motivi', 'Mancanze', 'Episodi'],
   guideHint: 'Nomina prodotto, colore e taglia se li sai. Se non conosci un numero, non inventarlo.',
   staffLabel: 'Il tuo codice',
+  staffUnavailable: 'Non disponibile nella nota salvata',
   staffHint: 'usa il tuo codice, non il tuo nome',
   staffRequired: 'Per abilitare il microfono inserisci un codice valido: 1–32 lettere a–z, numeri o trattini.',
   remaining: 'ancora {time}',

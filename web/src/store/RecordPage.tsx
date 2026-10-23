@@ -52,7 +52,7 @@ export function RecordPage() {
     setSendError('')
     try {
       const note = await sendNote(recorder.audio, STORE, recorder.transcript, LANGUAGE, staff)
-      setSent({ note, staff })
+      setSent({ note, staff: note.staff_ref ?? t.staffUnavailable })
     } catch (error) {
       const detail = error instanceof ApiError && error.detail ? ` ${error.detail}` : ''
       setSendError(fmt(t.errors.send, { status: status(error) }) + detail)
