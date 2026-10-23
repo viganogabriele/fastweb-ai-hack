@@ -58,3 +58,14 @@ policy:
     max_validity: { value: 7, unit: days, note: "from last independent confirmation when the fact has no end" }
   latent:  # step 7
     cap: { value: 3.0, unit: multiple_of_baseline }
+  options:  # RFC §4.10, ACT-02 (lane E). A missing entry makes its check `unknown`, never a permission.
+    transfer_case_types: { value: [unmet_demand], unit: case_type, note: "case types that may lead to a stock move" }
+    max_units_per_transfer: { value: 3, unit: units, note: "q_max cap per leg, before the availability bound" }
+    donor_min_stock: { value: 0, unit: units_per_size, note: "donor floor kept on every horizon day in the high scenario; 0 = it may sell its last unit, the move may not cost it a sale" }
+    donor_max_additional_lost: { value: 0, unit: units, note: "extra donor lost units against hold, high scenario" }
+    max_transfer_cost_eur: { value: 100, unit: eur_per_leg, note: "transport cost ceiling of one leg" }
+    max_stock_age_days: { value: 1, unit: days, note: "days between the stock snapshot and the horizon start" }
+    # Demo declarations (team decision 2026-10-23): stated as assumptions on every option card.
+    scarce_skus: { value: [], unit: sku, note: "declared: no SKU under strategic scarcity allocation" }
+    size_curve: { value: uniform, unit: policy, note: "declared: colour demand split evenly over the SKU's master sizes" }
+    store_stock_netted: { value: true, unit: bool, note: "declared: store on_hand already net of reservations and quality holds" }
