@@ -172,7 +172,24 @@ the old pooled #218 rates are not used.
 in `backend/tesseract/rolling.py` has no `src.voice`, and the three DATA-03 notes are
 MIL01/MIL02 synthetic extensions.
 
-**Result.** `⟨TBD⟩`
+**Why not a recorded rerun.** `LLMClient.for_run` (`backend/tesseract/core/llm.py`) scopes the
+cache by the whole RunSpec except run id and mode: modules, sources and `code_version`
+included. A voice-on and a voice-off recording would therefore be two independent model
+samples, and their difference could not isolate voice. The three ASR envelopes from ING-03b
+are also not on the recording host.
+
+**What was run instead.** #249/#250 add `backend/tests/core/test_gate_voice.py`: the
+`test_gate_temporal` MIL01 graph (real mailbox, ERP, weather) plus `src.voice` over the
+committed DATA-03 notes in `fixture` mode, the explicitly declared manual-transcript fallback.
+A scripted extractor answers one closing mail and the two MIL01 notes with verbatim quotes;
+the notes open one SKU and one SKU-size case and a forecast overlay. With voice off, at the
+same clock and on the same database: no note id, quote or LLM request survives; the 15
+voice-derived artifacts are the only ones that differ; the other 351 are identical field by
+field; reports are recomputed without the notes; the other sources report the same results.
+This is **partial dev graph** evidence with a scripted model (audit evidence class 2), not a
+recorded-model run.
+
+**Result on the candidate.** `⟨TBD: pass/fail at the candidate SHA⟩`
 
 ### 6.6 Other bindings to approve
 
