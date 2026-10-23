@@ -37,13 +37,15 @@ export const phases: { key: string; name: string; who: string; text: string; lay
 // Top to bottom: sources first, outputs last. Rows are dependency depth, so every arrow points down.
 export const NODE_WIDTH = 212
 export const NODE_HEIGHT = 72
-const GAP_X = 20
+const GAP_X = 28
 const GAP_Y = 52
 const PADDING = 24
 const SWEEPS = 6
 // A trunk is the vertical line that carries one module's output past the rows in between.
 const TRUNK_WIDTH = 8
-const TRUNK_GAP = 6
+// A lane keeps this much air from a module's side, and lanes keep twice LANE_SPACING apart.
+const LANE_CLEARANCE = 10
+const LANE_SPACING = 8
 
 export type GraphNode = {
   id: string
@@ -159,25 +161,48 @@ export function buildModuleGraph(modules: readonly ModuleManifest[]): ModuleGrap
     }
     index()
   }
-  const gapBetween = (a: Item, b: Item) => (a.node && b.node ? GAP_X : TRUNK_GAP)
-  const rowWidth = (row: Item[]) =>
-    row.reduce((sum, item, i) => sum + item.width + (i ? gapBetween(row[i - 1], item) : 0), 0)
-  const width = rows.length ? PADDING * 2 + Math.max(...rows.map(rowWidth)) : 0
+  // Placement: only modules take room in a row; trunks only steered the order above.
+  const placed = rows.map((row) => row.filter((item) => item.node))
+  const rowWidth = (row: Item[]) => row.length * NODE_WIDTH + Math.max(0, row.length - 1) * GAP_X
+  let width = rows.length ? PADDING * 2 + Math.max(...placed.map(rowWidth)) : 0
   const centers = new Map<string, number>()
-  rows.forEach((row, y) => {
+  placed.forEach((row, y) => {
     let x = (width - rowWidth(row)) / 2
-    row.forEach((item, i) => {
-      if (i) x += gapBetween(row[i - 1], item)
-      item.x = x
-      centers.set(item.key, x + item.width / 2)
-      if (item.node) {
-        item.node.x = x
-        item.node.y = PADDING + y * (NODE_HEIGHT + GAP_Y)
-      }
-      x += item.width
-    })
+    for (const item of row) {
+      item.node!.x = x
+      item.node!.y = PADDING + y * (NODE_HEIGHT + GAP_Y)
+      centers.set(item.key, x + NODE_WIDTH / 2)
+      x += NODE_WIDTH + GAP_X
+    }
   })
   const top = (row: number) => PADDING + row * (NODE_HEIGHT + GAP_Y)
+
+  // Lanes: each source that skips rows gets one vertical line, straight through every row it
+  // passes, at the free x nearest to the source. Free means clear of modules and of other lanes.
+  // Longest spans choose first; if nothing fits, the lane goes past the right edge.
+  const blocked = placed.map((row) => row.map((item) => [item.node!.x - LANE_CLEARANCE, item.node!.x + NODE_WIDTH + LANE_CLEARANCE]))
+  const spans = ids.filter((id) => reach.get(id)! > rowOf(id) + 1)
+    .map((id) => ({ id, from: rowOf(id) + 1, to: reach.get(id)! - 1 }))
+    .sort((a, b) => b.to - b.from - (a.to - a.from) || centers.get(a.id)! - centers.get(b.id)!)
+  const free = (x: number, from: number, to: number) => {
+    for (let row = from; row <= to; row++)
+      if (blocked[row].some(([left, right]) => x > left && x < right)) return false
+    return true
+  }
+  let overflow = 0
+  for (const span of spans) {
+    const preferred = Math.round(centers.get(span.id)!)
+    let lane: number | undefined
+    for (let offset = 0; lane === undefined && offset <= width; offset++)
+      for (const x of offset ? [preferred - offset, preferred + offset] : [preferred])
+        if (x >= PADDING / 2 && x <= width - PADDING / 2 && free(x, span.from, span.to)) { lane = x; break }
+    if (lane === undefined) lane = width - PADDING / 2 + LANE_SPACING * overflow++
+    for (let row = span.from; row <= span.to; row++) {
+      blocked[row].push([lane - LANE_SPACING, lane + LANE_SPACING])
+      centers.set(trunk(span.id, row), lane)
+    }
+  }
+  if (overflow) width += LANE_SPACING * overflow
 
   // Ports: one per distinct first hop on a node's bottom and per distinct last hop on its top,
   // ordered by where the hop sits, so curves fan out instead of meeting at one point.
@@ -201,22 +226,25 @@ export function buildModuleGraph(modules: readonly ModuleManifest[]): ModuleGrap
   const outPort = ports(firstHops)
   const inPort = ports(lastHops)
   const curve = (x1: number, y1: number, x2: number, y2: number) => {
-    const bend = Math.min(48, (y2 - y1) / 2)
+    const bend = (y2 - y1) / 2
     return `C ${x1} ${y1 + bend}, ${x2} ${y2 - bend}, ${x2} ${y2}`
   }
+  // Two bends at most: into the lane in the gap under the source, out of it in the gap above the target.
   const routes = edges.map((edge) => {
     const from = rowOf(edge.source)
     const to = rowOf(edge.target)
-    let x = outPort.get(`${edge.source}>${hopBelow(edge)}`)!
+    const start = outPort.get(`${edge.source}>${hopBelow(edge)}`)!
+    const end = inPort.get(`${edge.target}>${hopAbove(edge)}`)!
+    let d = `M ${start} ${top(from) + NODE_HEIGHT}`
+    let x = start
     let y = top(from) + NODE_HEIGHT
-    let d = `M ${x} ${y}`
-    for (let row = from + 1; row < to; row++) {
-      const lane = centers.get(trunk(edge.source, row))!
-      d += ` ${curve(x, y, lane, top(row))} L ${lane} ${top(row) + NODE_HEIGHT}`
+    if (to - from > 1) {
+      const lane = centers.get(trunk(edge.source, from + 1))!
+      d += ` ${curve(x, y, lane, top(from + 1))} L ${lane} ${top(to - 1) + NODE_HEIGHT}`
       x = lane
-      y = top(row) + NODE_HEIGHT
+      y = top(to - 1) + NODE_HEIGHT
     }
-    d += ` ${curve(x, y, inPort.get(`${edge.target}>${hopAbove(edge)}`)!, top(to) - 4)}`
+    d += ` ${curve(x, y, end, top(to) - 4)}`
     return { ...edge, key: JSON.stringify([edge.source, edge.target]), d }
   })
   return {
