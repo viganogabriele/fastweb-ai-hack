@@ -249,6 +249,47 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/runs/{run_id}/decisions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Decisions
+         * @description Local drafts saved for this snapshot, in decision-clock order.
+         *
+         *     Exactly what the decision endpoints committed, including idempotent retries once and
+         *     no rejected (409) attempt. Drafts are run-scoped: an option without a draft has no
+         *     decision in this run. Reads never revalidate, refresh or dispatch anything.
+         */
+        get: operations["decisions_api_runs__run_id__decisions_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/runs/{run_id}/decisions/{decision_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Decision */
+        get: operations["decision_api_runs__run_id__decisions__decision_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/runs/{run_id}/documents": {
         parameters: {
             query?: never;
@@ -2173,6 +2214,74 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["AgentTrace"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    decisions_api_runs__run_id__decisions_get: {
+        parameters: {
+            query?: {
+                case_id?: string | null;
+                fixture?: boolean;
+            };
+            header?: never;
+            path: {
+                run_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LocalDraft"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    decision_api_runs__run_id__decisions__decision_id__get: {
+        parameters: {
+            query?: {
+                fixture?: boolean;
+            };
+            header?: never;
+            path: {
+                decision_id: string;
+                run_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LocalDraft"];
                 };
             };
             /** @description Validation Error */
