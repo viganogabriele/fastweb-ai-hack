@@ -318,22 +318,24 @@ def register_recorded_answer(engine: Engine, request: AnswerRequest, *, fixture_
         prepared, seeds = _prepare(conn, request, fixture_mode)
         key = _key(events, ns, fingerprint=prepared.fingerprint)
         saved = conn.execute(select(events).where(key)).mappings().first()
-        # The recorded scenario/clock, so offline clients submit exactly this snapshot.
+        # Each recorded scenario/clock, so offline clients submit exactly that snapshot.
         recorded = request.model_dump(mode="json", exclude={"idempotency_key"})
         if saved is None:
             conn.execute(
                 insert(events).values(
                     namespace=ns,
                     fingerprint=prepared.fingerprint,
-                    payload={**_payload(prepared, seeds), "request": recorded},
+                    payload={**_payload(prepared, seeds), "requests": [recorded]},
                     replay_ready="yes",
                 )
             )
         else:
+            requests = saved["payload"].get("requests", [])
+            requests = [*requests, recorded] if recorded not in requests else requests
             conn.execute(
                 update(events)
                 .where(key)
-                .values(replay_ready="yes", payload={**saved["payload"], "request": recorded})
+                .values(replay_ready="yes", payload={**saved["payload"], "requests": requests})
             )
         return prepared.fingerprint
 
@@ -356,10 +358,10 @@ def registered_answers(
         ).all()
     scope = (run_id, case_id, clarification_id)
     answers = [
-        RegisteredAnswer(fingerprint=fingerprint, **payload["request"])
+        RegisteredAnswer(fingerprint=fingerprint, **request)
         for fingerprint, payload in rows
-        if "request" in payload
-        and tuple(payload["request"][k] for k in ("run_id", "case_id", "clarification_id")) == scope
+        for request in payload.get("requests", ())
+        if tuple(request[k] for k in ("run_id", "case_id", "clarification_id")) == scope
     ]
     return tuple(sorted(answers, key=lambda a: (a.received_at, a.follow_up_scenario_id)))
 

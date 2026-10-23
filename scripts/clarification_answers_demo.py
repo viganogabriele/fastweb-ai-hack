@@ -7,10 +7,11 @@ offline from its committed recordings, registers each allowed answer in that pri
 database, and executes the follow-up with real Fastweb models (``record``) and the
 local mock systems server. Only new envelopes are written to the output caches.
 
-``replay`` denies networking and subprocesses. It rebuilds the same parent, registers
-the allowed answers whose recordings are complete, submits them through the actual
-HTTP endpoint and executes every follow-up from committed recordings only. With
-``--register-only`` it stops before submission, leaving a database for the UI.
+``replay`` rebuilds the parent with networking and subprocesses denied (as
+``replay_demo.py`` does) and registers the allowed answers whose recordings are
+complete (local database writes only). With networking denied again, it submits
+them through the actual HTTP endpoint and executes every follow-up from committed
+recordings only. With ``--register-only`` it stops before submission, leaving a database for the UI.
 Neither command sends a message or exposes answer registration over HTTP.
 """
 

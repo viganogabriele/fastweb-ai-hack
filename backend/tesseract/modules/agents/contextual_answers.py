@@ -195,11 +195,17 @@ class ContextualExtraction:
     def list(self, kind, **filters):
         records = self.repo.list(kind, **filters)
         if kind is SourceDocument:
-            return [
+            answered = {(r.meta.get("store_id"), r.text) for r in records if r.id in self.documents}
+            kept = [
                 r
                 for r in records
                 if r.source_type != "clarification_reply" and r.id not in self.documents
             ]
+            # A resend shares its original's reading; read alone it would duplicate the
+            # clarified demand without the correction. Fail closed instead.
+            if any((r.meta.get("store_id"), r.text) in answered for r in kept):
+                raise ValueError("Resend of an answered document cannot be reconciled")
+            return kept
         return records
 
     def put(self, *records, **kwargs):

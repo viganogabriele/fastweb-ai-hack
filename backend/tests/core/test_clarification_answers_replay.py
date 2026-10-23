@@ -72,7 +72,8 @@ def test_recorded_answers_replay_offline_through_the_answer_api(tmp_path):
         (corrected,) = [c for c in answer["corrected"] if c["observation_id"] == TARGET]
         assert corrected["quantity_raw"] == "1 o 2 pezzi per colore"
         assert corrected["available_at"] == "2026-10-22T20:20:00+00:00"
-        assert answer["supersedes"] >= 1
+        # The target plus the answered email's three other facts, carried exactly.
+        assert answer["supersedes"] == 4
     readings = {k: a["corrected"][0]["product_mention"] for k, a in result["answers"].items()}
     # Recorded real-model comprehension of the two clarifying answers and the abstention.
     for key in ("self-contained", "elliptical"):

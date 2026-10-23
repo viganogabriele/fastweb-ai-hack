@@ -374,8 +374,17 @@ def test_production_extraction_replay_miss_cannot_publish_partial_answer(
     mail, segment = originals[:2]
     # The answered mail is carried, not re-read; another mail in the child still is.
     other = (
-        mail.model_copy(update={"id": "other-mail", "uri": "test://other"}),
-        segment.model_copy(update={"id": "other-segment", "document_id": "other-mail"}),
+        mail.model_copy(
+            update={"id": "other-mail", "uri": "test://other", "text": "Una felpa blu"}
+        ),
+        segment.model_copy(
+            update={
+                "id": "other-segment",
+                "document_id": "other-mail",
+                "text": "Una felpa blu",
+                "char_end": 13,
+            }
+        ),
     )
     source = ModuleManifest(
         id="src.email",
@@ -916,8 +925,17 @@ def test_transitive_supporting_refs_outside_input_refs_are_seeded(setup):
     engine, request, registry, seed, _, originals = setup
     source, segment, observation, case, question = originals
     # Supporting evidence from another (not answered) mail, outside input_refs.
-    other_source = source.model_copy(update={"id": "other-mail", "uri": "test://other"})
-    other_segment = segment.model_copy(update={"id": "other-segment", "document_id": "other-mail"})
+    other_source = source.model_copy(
+        update={"id": "other-mail", "uri": "test://other", "text": "Una felpa blu"}
+    )
+    other_segment = segment.model_copy(
+        update={
+            "id": "other-segment",
+            "document_id": "other-mail",
+            "text": "Una felpa blu",
+            "char_end": 13,
+        }
+    )
     extra = observation.model_copy(
         update={
             "id": "other-observation",
@@ -1355,3 +1373,50 @@ def test_contextual_reconciliation_abstains_and_ignores_changed_spans(setup, mon
         assert len(current) == 1
         assert current[0].product_mention == originals[2].product_mention
         assert current[0].quantity == originals[2].quantity
+
+
+def test_resend_of_answered_document_fails_closed(setup, monkeypatch):
+    from tesseract.core.contracts import Segment as SegmentContract
+
+    engine, request, registry, originals, RecordedReading = production_pipeline(setup, monkeypatch)
+    mail, segment = originals[:2]
+    # An exact resend in the child would be read without the correction: double counting.
+    resend = (
+        mail.model_copy(update={"id": "mail-resend", "uri": "test://resend"}),
+        SegmentContract.model_validate(
+            segment.model_dump() | {"id": "resend-segment", "document_id": "mail-resend"}
+        ),
+    )
+    entries = []
+    for snapshot in registry.manifests():
+        entry = registry.resolve(ModuleSnapshot(manifest=snapshot, params={}))
+        if snapshot.id == "src.email":
+
+            def source(ctx, entry=entry):
+                ctx.repo.put(*resend)
+                return entry.run(ctx)
+
+            entry = RegisteredModule(entry.manifest, source)
+        entries.append(entry)
+    registry = Registry(entries)
+    register_recorded_answer(engine, request)
+    job = submit_answer(engine, request, registry=registry)
+    execute_follow_up(engine, job.run.run_id, registry=registry, clients={"llm": RecordedReading()})
+    with repo_session(engine, job.run.run_id) as repo:
+        assert not repo.run_state()["published"]
+        assert repo.list(Observation) == []
+
+
+def test_registering_another_clock_lists_both_recorded_requests(setup):
+    from tesseract.modules.agents.answer_registry import registered_answers
+
+    engine, request, registry, seed, _, _ = setup
+    seed("recorded")
+    later = request.model_copy(
+        update={"follow_up_scenario_id": "later", "as_of": request.as_of + timedelta(hours=1)}
+    )
+    for item in (request, later, request):
+        register_recorded_answer(engine, item)
+    listed = registered_answers(engine, "parent", "case", "question")
+    assert sorted(a.follow_up_scenario_id for a in listed) == ["later", "simulated"]
+    assert len({a.fingerprint for a in listed}) == 1

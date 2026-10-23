@@ -1,8 +1,8 @@
 # Durable clarification answers (OUT-02b)
 
-`answer_registry` is the lane E service boundary for the lane C HTTP adapter and
-lane D answer UI in parent #134. It adds no HTTP route, frontend state or outbound
-messaging. The existing read-only clarification API remains the source of published
+`answer_registry` is the lane E service boundary behind the HTTP routes in
+`api/routers/clarifications.py` (#216, #238) and the lane D answer UI in parent #134.
+It has no frontend state or outbound messaging. The existing read-only clarification API remains the source of published
 questions. This task does not close #134 or implement #135.
 
 ## Platform handoff (as implemented by #216)
@@ -152,8 +152,10 @@ Bare connectives (`e`, `ed`, `and`, `und`, `et`, `y`) are accepted by the lexica
 check because they cannot introduce a product, size or number.
 
 `registered_answers` lists the trusted request bodies of registered events for one
-exact parent question (read-only). Registration stores the recorded request
-(without its idempotency key) in the event payload for this purpose.
+exact parent question (read-only). Registration appends each recorded request
+(without its idempotency key) to the event payload, so registering the same answer
+for another scenario/clock lists both. A resend of an answered document (same store
+and text) fails the child closed rather than being read without the correction.
 
 Later answers inherit prior current contextual observations from the exact
 published parent, including corrections in other cases. Their transitive lineage
