@@ -1,6 +1,121 @@
 [
   {
     "at": "2026-10-22T20:01:00+00:00",
+    "draft": {
+      "decision": {
+        "at": "2026-10-22T20:01:00Z",
+        "availability_basis": "human decision time",
+        "available_at": "2026-10-22T20:01:00Z",
+        "by": "DEMO-02 scripted synthetic reviewer",
+        "computed_at": "2026-10-22T20:01:00Z",
+        "decision": "approved",
+        "dispatch_status": "draft",
+        "id": "decision-fe3949ba845d44ed8af7ac6228808447",
+        "idempotency_key": "demo02-explicit-local-command",
+        "input_refs": [
+          {
+            "id": "opt-case-nyc01-i10915c00021-999-20260906-notify_owner",
+            "kind": "ActionOption",
+            "version": "1144a1ffa8d55902"
+          }
+        ],
+        "input_version_hash": "sha256:1144a1ffa8d55902b32e430c191e9a005a2acb7e7818e16f0455312c152fec96",
+        "note": "Integration rehearsal; no actual operator or external dispatch.",
+        "option_id": "opt-case-nyc01-i10915c00021-999-20260906-notify_owner",
+        "producer": "act.approval",
+        "producer_version": "1",
+        "request_ref": null,
+        "response_ref": null,
+        "run_id": "core-dev-candidate",
+        "scenario_id": "historical",
+        "source_refs": [
+          {
+            "content_hash": "sha256:a1e8d26c42dcdcc3b6797dd3e680b1e58d361c59d569029ebe4c54766446be30",
+            "locator": null,
+            "uri": "dataset://store_emails/NYC01/20260906_1837_NYC01.eml"
+          },
+          {
+            "content_hash": "ea0ec35ed17a37ab91fac2deaede6ee9637c00761a7339cc12581e144d14c160",
+            "locator": "record=113",
+            "uri": "erp/master_data/sku_colour.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=7800",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          }
+        ],
+        "version": "1"
+      },
+      "option": {
+        "assumptions": [
+          "Options are alternatives: none reserves stock until approved.",
+          "Scenarios are servable demand low/base/high, not probabilities or confidence bands.",
+          "Horizon 2026-10-23..2026-10-29 in NYC01 local days."
+        ],
+        "availability_basis": "max(input available_at)",
+        "available_at": "2026-10-22T10:00:00Z",
+        "baseline_outcomes": null,
+        "case_id": "case-nyc01-i10915c00021-999-20260906",
+        "checks": [],
+        "computed_at": "2026-10-22T20:00:00Z",
+        "forecast_ref": {
+          "id": "baseline-nyc01-i10915c00021-999-20261023",
+          "kind": "ForecastAdjustment",
+          "version": "v1"
+        },
+        "id": "opt-case-nyc01-i10915c00021-999-20260906-notify_owner",
+        "input_refs": [
+          {
+            "id": "case-nyc01-i10915c00021-999-20260906",
+            "kind": "Case",
+            "version": "v1"
+          },
+          {
+            "id": "baseline-nyc01-i10915c00021-999-20261023",
+            "kind": "ForecastAdjustment",
+            "version": "v1"
+          },
+          {
+            "id": "stock:NYC01:I10915C00021-999-TU:on_hand:2026-10-21",
+            "kind": "StockFact",
+            "version": "2ce9fd7b12d33efbd2fbe095c84b9606095ea4a135eb5fd18373f569b1aa8db1"
+          }
+        ],
+        "input_version_hash": "sha256:1144a1ffa8d55902b32e430c191e9a005a2acb7e7818e16f0455312c152fec96",
+        "kind": "notify_owner",
+        "legs": [],
+        "outcomes": null,
+        "producer": "act.options",
+        "producer_version": "1",
+        "rationale": "Notify product_quality about case case-nyc01-i10915c00021-999-20260906: case type product_feedback does not lead to a stock move.",
+        "recommended": true,
+        "run_id": "core-dev-candidate",
+        "scenario_id": "historical",
+        "source_refs": [
+          {
+            "content_hash": "sha256:a1e8d26c42dcdcc3b6797dd3e680b1e58d361c59d569029ebe4c54766446be30",
+            "locator": null,
+            "uri": "dataset://store_emails/NYC01/20260906_1837_NYC01.eml"
+          },
+          {
+            "content_hash": "ea0ec35ed17a37ab91fac2deaede6ee9637c00761a7339cc12581e144d14c160",
+            "locator": "record=113",
+            "uri": "erp/master_data/sku_colour.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=7800",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          }
+        ],
+        "valid_until": "2026-10-30T04:00:00Z",
+        "version": "1144a1ffa8d55902"
+      },
+      "reservations": [],
+      "simulated": true
+    },
+    "namespace": "product",
     "request": {
       "by": "DEMO-02 scripted synthetic reviewer",
       "decision": "approved",
@@ -10,6 +125,7 @@
       "option_id": "opt-case-nyc01-i10915c00021-999-20260906-notify_owner",
       "run_id": "core-dev-candidate",
       "scenario_id": "historical"
-    }
+    },
+    "snapshot_sha256": "5d4b91c05510818b543e1d3563c21a947547f9b3e2995ffbc690da416b594c11"
   }
 ]

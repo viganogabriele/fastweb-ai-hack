@@ -1,5 +1,5 @@
 {
-  "disclosure": "Real provider recordings on synthetic dev sources, not preloaded derived fixtures. No credentials or request headers.",
+  "disclosure": "Real provider recordings on synthetic dev sources; no credentials or request headers; no derived projection preloading.",
   "files": [
     [
       "api-job-verification.json",
@@ -11,7 +11,7 @@
     ],
     [
       "decisions.json",
-      "853e0b74545cced8d1ca18f2542618eb39c0edf6cda4ae4d13229e6f05186afd"
+      "d322f89598c5450578b1a95cb152bb7e4771047225eea36dd0a29f2ace47eedb"
     ],
     [
       "input-manifest.json",
@@ -110,12 +110,20 @@
       "5b87250f89368f72802a59523237d11db085991e375c56424981275a8895be7d"
     ],
     [
+      "negative-replay-evidence.json",
+      "6f1dd57af817bf8213542e1a90112fd95cc1962b19da30d2c5a0aacb8377a0ae"
+    ],
+    [
       "recording-evidence.json",
       "5379a77d7bfce30397403e1d58cafa922ae49f9c52821a39d838081d2bd4ccbd"
     ],
     [
+      "replay-comparison.json",
+      "f3e6f9d8ffd342c32daeef12327b128e4e26e4b5e452805d7053165ddb9ebb76"
+    ],
+    [
       "replay-evidence.json",
-      "b8e48dd856223f41bd09a0a90106d51f6df82da70e4e38638100f0f696e1bccf"
+      "72c7ef5ea695aed8efdc333295c01aba6a61807c08c6062b9904d17676d869f0"
     ],
     [
       "run-spec.json",
@@ -172,6 +180,10 @@
     [
       "ui-verification.json",
       "e6b59b9709316dbbc959573724bf26f7d5d6ac23cded139857b34c903916e819"
+    ],
+    [
+      "voice-verification.json",
+      "43570edc590aa10b76ef08f670cbae44fa1f9f0f700b34a3f047cf82a0e01326"
     ]
   ],
   "format": 1

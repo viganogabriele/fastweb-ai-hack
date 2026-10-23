@@ -1057,13 +1057,13 @@
     {
       "id": "trace:core-dev-candidate:case-mil01-i10919b00011-20261008",
       "kind": "AgentTrace",
-      "sha256": "208e33cd3aaeaced56da360351c6eb6bbbe4aaec1572c8dab990318f3dbfd6af",
+      "sha256": "76ad0197861cea2082be31fc463248d387b627185f2f19301f3dbd96e2188b9a",
       "version": "1"
     },
     {
       "id": "trace:core-dev-candidate:case-mil01-unknown-20261009",
       "kind": "AgentTrace",
-      "sha256": "b70ed8345309addd7b919cc6354034b58303ac73b7087e72dccc1cf750deef1a",
+      "sha256": "7dae5a48cb2ed4ac9524f7e84042121c91df125c087ec008f12b731b5e1087de",
       "version": "1"
     },
     {
@@ -8670,23 +8670,26 @@
     }
   ],
   "as_of": "2026-10-22T20:00:00+00:00",
-  "attempt_id": "attempt-0b48200e78c545aabc531acd0c4d2d11",
+  "attempt_id": "attempt-976ec77c6429484a973d71c89b6c5755",
   "cache_corrupt": [],
   "cache_misses": [],
   "decisions": [
     {
       "decision": "approved",
       "dispatch_status": "draft",
+      "id": "decision-fe3949ba845d44ed8af7ac6228808447",
       "input_version_hash": "sha256:1144a1ffa8d55902b32e430c191e9a005a2acb7e7818e16f0455312c152fec96",
       "option_id": "opt-case-nyc01-i10915c00021-999-20260906-notify_owner",
       "option_version": "1144a1ffa8d55902",
       "reservations": 0,
-      "simulated": true
+      "sha256": "6c99924101d640d1a89cf2ab095483f7df8115dfeea79572f9183143ecd3fe3a",
+      "simulated": true,
+      "version": "1"
     }
   ],
   "execution_mode": "replay",
   "fixture_demo_only": false,
-  "format": 1,
+  "format": 2,
   "inputs": {
     "cache": {
       "files": 23,
@@ -8698,7 +8701,7 @@
     },
     "decisions": {
       "files": 1,
-      "sha256": "853e0b74545cced8d1ca18f2542618eb39c0edf6cda4ae4d13229e6f05186afd"
+      "sha256": "d322f89598c5450578b1a95cb152bb7e4771047225eea36dd0a29f2ace47eedb"
     },
     "sources": {
       "files": 108,
@@ -8709,6 +8712,7 @@
       "sha256": "7564398bc87ae1cddba95152c0b584a82283445b3d5a0a0d23bcbb511e09d090"
     }
   },
+  "ledger_sha256": "547981ebceeb4bfc9a5b6e6ad4efcb099997d9accc980988b76990b49d2e38ec",
   "missing_prerequisites": [],
   "modules": [
     {
@@ -8941,9 +8945,9 @@
   "output_hash_excludes": [
     "AgentTrace.steps[*].duration_ms"
   ],
-  "output_sha256": "72344004ec7fafc09d53e6add68c8eb3457a90e41916e46c0de64693b86dab23",
+  "output_sha256": "5a4f7d11dc2880cb28510b47d480d0b552cf6144a9de0898430f2eae8ac92a55",
   "provider_identity_sha256": "eb8df1dfea242ec3a9b69ae32d7dd04ade6be2b85a1dba452a0778fdaeb5fa12",
-  "raw_output_sha256": "80d6fd09f0c765c87ff9a66aa272b0d1cbf3504a7f96401d27a4f38ad8072f27",
+  "raw_output_sha256": "de42260148701d809077ba7fff9000758528cf1ecd56677fd83750becac50834",
   "run_id": "core-dev-candidate",
   "run_status": "degraded",
   "scenario_id": "historical",

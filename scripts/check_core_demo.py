@@ -14,7 +14,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 
 from fastapi.testclient import TestClient
-from replay_demo import allowed, environment, offline
+from replay_demo import allowed, digest, environment, offline
 
 from tessera.api.main import create_app
 from tessera.api.routers.options import decision_clock
@@ -173,12 +173,15 @@ def check(candidate, *, decision_output=None):
                     json.dumps(
                         [
                             {
+                                "snapshot_sha256": digest(spec.model_dump(mode="json")),
+                                "namespace": "product",
                                 "at": (spec.as_of + timedelta(minutes=1)).isoformat(),
                                 "request": {
                                     "run_id": spec.run_id,
                                     "scenario_id": spec.scenario_id,
                                     **body,
                                 },
+                                "draft": draft,
                             }
                         ],
                         sort_keys=True,
