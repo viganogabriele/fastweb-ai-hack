@@ -3,7 +3,7 @@ export const vision = {
   intro: 'La pipeline è fatta di moduli: ogni fonte nuova entra nello stesso formato (fatto, prova, prodotto, negozio, data) e alimenta gli stessi livelli.',
   demo: 'Nella demo',
   planned: 'Previsto',
-  openDemo: 'Apri {destination}: {level}',
+  openDemo: 'Nella demo · apri {destination}: {level}',
   flowTitle: 'Dal dipendente alla rete',
   flowDescription: 'I segnali risalgono dai negozi. La rete li unisce alla domanda online e al contesto esterno, poi li porta a chi decide.',
   inputsTitle: 'Le fonti che si uniscono alla rete',
