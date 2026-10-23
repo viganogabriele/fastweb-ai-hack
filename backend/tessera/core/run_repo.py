@@ -73,6 +73,10 @@ class RunRepo(Repo):
     def spec(self) -> RunSpec:
         return self._snapshot.model_copy(deep=True)
 
+    def _spec(self) -> RunSpec:
+        # Hot path (every put/get/list): callers only read immutable fields; `spec` still copies.
+        return self._snapshot
+
     @spec.setter
     def spec(self, value: RunSpec) -> None:
         self._snapshot = RunSpec.model_validate(value.model_dump(mode="json"))
@@ -95,7 +99,7 @@ class RunRepo(Repo):
             )
         ).scalar()
         if indexed is not None and (
-            type(record).__name__ != "StockFact" or indexed in self.spec.stores
+            type(record).__name__ != "StockFact" or indexed in self._spec().stores
         ):
             scopes.add(indexed)
         return scopes
@@ -154,7 +158,7 @@ class RunRepo(Repo):
             if record.available_at is None or record.available_at < parent.available_at:
                 raise ValueError("Segment cannot precede its document")
             scopes.update(self._scopes(parent))
-        if not scopes <= set(self.spec.stores):
+        if not scopes <= set(self._spec().stores):
             raise ValueError("Artifact is outside this RunSpec's stores")
         if len(scopes) == 1:
             row["store_id"] = next(iter(scopes))
@@ -178,13 +182,13 @@ class RunRepo(Repo):
             self._put_indexes = {}
 
     def list(self, kind, *, store_id=None, **filters):
-        if store_id is not None and store_id not in self.spec.stores:
+        if store_id is not None and store_id not in self._spec().stores:
             raise ValueError("Store is outside this RunSpec")
         records = super().list(kind, **filters)
         visible = []
         for record in records:
             scopes = self._scopes(record)
-            if scopes <= set(self.spec.stores) and (
+            if scopes <= set(self._spec().stores) and (
                 store_id is None or not scopes or store_id in scopes
             ):
                 visible.append(record)
@@ -192,17 +196,17 @@ class RunRepo(Repo):
 
     def get(self, kind, id, version=None):
         record = super().get(kind, id, version)
-        if record is not None and not self._scopes(record) <= set(self.spec.stores):
+        if record is not None and not self._scopes(record) <= set(self._spec().stores):
             return None
         return record
 
     def erp(self, table, *, store_id=None, sku=None):
-        if store_id is not None and store_id not in self.spec.stores:
+        if store_id is not None and store_id not in self._spec().stores:
             raise ValueError("Store is outside this RunSpec")
         return [
             record
             for record in super().erp(table, store_id=store_id, sku=sku)
-            if record.data.get("store_id") is None or record.data["store_id"] in self.spec.stores
+            if record.data.get("store_id") is None or record.data["store_id"] in self._spec().stores
         ]
 
     def run_state(self) -> dict:
