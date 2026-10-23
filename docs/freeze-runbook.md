@@ -41,19 +41,22 @@ test -z "$(git status --porcelain --untracked-files=all)"
 mkdir -p "$E" data/core_demo/check-tmp
 TMPDIR="$PWD/data/core_demo/check-tmp" make check 2>&1 | tee "$E/make-check.log"
 
-# 3. Exports: REL-01c `scripts/run_holdout.py` (owned by that task) writes per-bundle
-#    directories with predictions.json, cases.json, options.json and the
-#    newline-separated repository-relative source list it consumed.
-#    X_READING / X_LEAD / SOURCE_LIST / RUN_SPEC below are its outputs.
+# 3. Exports: REL-01c `tesseract.rolling` (protocol §5.1.1). Record, then the evaluated
+#    offline replay under `eval product`. X is the replay's export directory: a reading +
+#    lead-time bundle directory (predictions/cases/options), X/forecast a forecast bundle
+#    directory, X/sources.txt the consumed source list, X/run-specs/ one RunSpec per run.
+X=data/rolling/holdout-replay/export
+X_READING=$X; X_LEAD=$X; SOURCE_LIST=$X/sources.txt
+RUN_SPECS=(); for f in "$X"/run-specs/*.json; do RUN_SPECS+=(--run-spec "$f"); done
 
 # 4. Experiment record (fails if HEAD != $C, the tree is dirty or a cache entry is invalid).
 $P scripts/freeze_record.py record --output "$E/freeze-record.json" \
   --candidate-sha "$C" \
-  --source-list "$SOURCE_LIST" --run-spec "$RUN_SPEC" \
+  --source-list "$SOURCE_LIST" "${RUN_SPECS[@]}" \
   --window 2026-08-31 2026-10-21 \
-  --cache llm=data/llm_cache --cache systems=data/systems_cache \
+  --cache llm=data/rolling/holdout-cache/llm --cache systems=data/rolling/holdout-cache/systems \
   --component asr=unavailable:"<reason, or pass --cache asr=DIR>" \
-  --exports reading="$X_READING" --exports lead="$X_LEAD" \
+  --exports lead="$X_LEAD" --exports forecast="$X/forecast" \
   --make-check-log "$E/make-check.log" --gate-audit docs/release-gate-audit.md \
   --evidence core_replay=<#115 evidence path> --evidence safety=<#123 evidence path> \
   | tee "$E/freeze-record.stdout.json"
@@ -86,6 +89,11 @@ After the freeze: before each scoring run (#126/#127/#128), repeat step 7 with a
 `append --record <whole chain> --output "$E/freeze-record.003-labels.json"
 --label-sha reading_holdout=<sha256 from load_labels>`. Keep the record chain outside
 the bundles, link it from #211, and preserve failed outputs (protocol §8).
+
+With the rolling runner, expect `matches_recorded_inputs.sources: false` for every
+RunSpec: each origin's `source_manifest_hash` binds only that origin's selection (admitted
+mails and the flash report), while the record binds the union of files read
+(`sources.txt`). `config` should match.
 
 ## What the record cannot certify
 

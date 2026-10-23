@@ -617,3 +617,23 @@ def test_budget_and_deadline_come_from_settings(tmp_path):
     bounded = LLMClient(settings, clock=lambda: 0)
     assert (bounded.budget.max_calls, bounded.budget.max_tokens) == (7, 9)
     assert bounded._remaining() == 5
+
+
+def test_for_scope_shares_recordings_only_for_identical_requests(tmp_path):
+    # REL-01c: rolling origins share one explicit scope; payload and context stay in the key.
+    recorder, requests, _ = client(tmp_path, [completion()])
+    scope = {"runner": "test", "format": 1}
+    recorder.for_scope(scope).chat(MESSAGES, cache_context={"document": "a"})
+
+    replay, _, factories = client(tmp_path, [], mode="replay")
+    reply = replay.for_scope(dict(scope)).chat(MESSAGES, cache_context={"document": "a"})
+
+    assert reply.choices[0].message.content == "ok"
+    for other_scope, messages, context in (
+        ({**scope, "format": 2}, MESSAGES, {"document": "a"}),
+        (scope, [{"role": "user", "content": "other"}], {"document": "a"}),
+        (scope, MESSAGES, {"document": "b"}),
+    ):
+        with pytest.raises(ReplayMiss):
+            replay.for_scope(other_scope).chat(messages, cache_context=context)
+    assert len(requests) == 1 and factories == []
