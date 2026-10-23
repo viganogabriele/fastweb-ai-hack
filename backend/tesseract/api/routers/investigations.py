@@ -265,8 +265,9 @@ def investigate(
             if inspect(parent.session).has_table(ledger.drafts.name):
                 decisions = parent.session.execute(
                     select(ledger.drafts.c.payload).where(
+                        # Any run: a job copied from a decided parent must not
+                        # recompute that case's options under a new hash (#245).
                         ledger.drafts.c.scenario_id == parent.spec.scenario_id,
-                        ledger.drafts.c.run_id == run_id,
                     )
                 ).scalars()
                 if any(item["option"]["case_id"] == case_id for item in decisions):

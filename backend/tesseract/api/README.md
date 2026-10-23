@@ -130,7 +130,8 @@ deadline at 90 seconds (or the stricter configured limit). Existing runs without
 the optional ERP boundary and their LLM recordings remain compatible.
 
 Missing runs/cases and foreign namespaces return 404; unpublished parents,
-closed cases and cases with durable decisions in that run return 409. SQLite
+closed cases and cases with a durable decision in any run of the scenario
+(including the parent of a job) return 409. SQLite
 write contention returns 503 with
 `Retry-After: 5`. Fixture submission and all subsequent job reads require both
 `FIXTURE_MODE=1` and `?fixture=true`; the Location header preserves this selector.
@@ -181,8 +182,9 @@ Investigation job runs share the parent's scenario and copy its options but not
 its decisions; read the parent run for those. An empty list therefore does not
 make an option decidable: the decision endpoints refuse an option version (id,
 version, input hash) that already has a draft in any run of the scenario with
-409 `option already decided in an earlier run of this scenario` and save
-nothing (PLT-15). An exact retry of the original command on its own run still
+409 `option already decided in another run of this scenario` and save
+nothing (PLT-15); a case decided in any run of the scenario cannot be
+investigated again either. An exact retry of the original command on its own run still
 returns the saved draft. Missing runs, unknown decision IDs and foreign
 namespaces return 404 (fixture access as for other reads); unpublished runs
 return 409.

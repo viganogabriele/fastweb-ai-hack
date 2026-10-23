@@ -2,10 +2,10 @@
 
 from concurrent.futures import ThreadPoolExecutor
 from datetime import timedelta
-from threading import Barrier
+from threading import Barrier, Event
 
 import pytest
-from sqlalchemy import func, select
+from sqlalchemy import event, func, select
 
 from tesseract.api.routers.options import decision_clock
 from tesseract.core.config import Settings
@@ -158,7 +158,7 @@ def test_option_decided_on_parent_cannot_be_decided_again_on_a_job_run(service, 
         response = client.post(url, json=retry)
         assert response.status_code == 409, response.text
         assert response.json() == {
-            "detail": "option already decided in an earlier run of this scenario"
+            "detail": "option already decided in another run of this scenario"
         }
     assert listed(client, JOB) == [] and listed(client) == [draft]
     assert ledger_rows(service) == 1
@@ -177,7 +177,7 @@ def test_option_decided_on_parent_cannot_be_decided_again_on_a_job_run(service, 
     assert listed(client, JOB) == [saved.json()] and ledger_rows(service) == 2
 
 
-def test_racing_redecisions_on_a_job_run_leave_exactly_one_draft(service):
+def test_concurrent_redecisions_on_a_job_run_are_all_refused(service):
     client, value, options = parent_with_two_cases(service)
     option = options["hold"]
     draft = client.post(endpoint(value), json=body(option)).json()
@@ -194,4 +194,36 @@ def test_racing_redecisions_on_a_job_run_leave_exactly_one_draft(service):
     with ThreadPoolExecutor(max_workers=2) as pool:
         assert list(pool.map(attempt, ("approved", "rejected"))) == [409, 409]
     assert listed(client) == [draft] and listed(client, JOB) == []
+    assert ledger_rows(service) == 1
+
+
+def test_job_published_while_parent_decision_holds_the_lock_sees_that_draft(service):
+    client, value, options = parent_with_two_cases(service)
+    option, engine = options["hold"], service[1]["product"]
+    holding = Event()
+
+    def pause_before_insert(_conn, _cursor, statement, *_):
+        if statement.startswith("INSERT INTO action_drafts") and not holding.is_set():
+            holding.set()  # Write lock held, draft not yet committed.
+            holding.wait(0.3)
+
+    def on_job():
+        assert holding.wait(10)
+        publish_job(service, (value.case.id,))  # Blocks until the parent decision commits.
+        return client.post(
+            f"/api/runs/{JOB}/cases/{value.case.id}/decisions",
+            json=body(option, decision="rejected", key="job"),
+        )
+
+    event.listen(engine, "before_cursor_execute", pause_before_insert)
+    try:
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            job = pool.submit(on_job)
+            parent = client.post(endpoint(value), json=body(option, key="parent"))
+            job = job.result()
+    finally:
+        event.remove(engine, "before_cursor_execute", pause_before_insert)
+    assert parent.status_code == 200, parent.text
+    assert job.status_code == 409 and "another run" in job.json()["detail"]
+    assert listed(client) == [parent.json()] and listed(client, JOB) == []
     assert ledger_rows(service) == 1

@@ -244,7 +244,11 @@ def test_local_draft_and_retries_never_attempt_optional_network_dispatch(databas
 
 
 def test_independent_processes_cannot_redecide_an_option_of_an_earlier_run(database):
-    """RFC §7.3: a later run copying a decided option version cannot decide it again."""
+    """RFC §7.3: a later run copying a decided option version cannot decide it again.
+
+    Both processes contend for the lock after the parent draft is committed: each must
+    see it and save nothing, whatever the order.
+    """
     engine, url = database
     parent = one_unit("case-a")
     publish(engine, [parent])
@@ -259,7 +263,7 @@ def test_independent_processes_cannot_redecide_an_option_of_an_earlier_run(datab
         ],
     )
     assert [result["status"] for result in results] == [409, 409]
-    assert all("earlier run" in result["detail"] for result in results)
+    assert all("another run" in result["detail"] for result in results)
     with engine.connect() as connection:
         saved = connection.execute(select(ledger.drafts.c.payload)).scalars().all()
     assert [LocalDraft.model_validate(payload) for payload in saved] == [first]

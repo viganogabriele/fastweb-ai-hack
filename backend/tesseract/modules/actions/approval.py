@@ -158,7 +158,7 @@ def decide(
         if option is None or option.input_version_hash != request.input_version_hash:
             raise Conflict("option missing or input hash changed")
         # Job runs copy their parent's options under the same scenario: a draft saved in
-        # any earlier run already decided this exact option version.
+        # any run of the scenario already decided this exact option version.
         earlier = conn.execute(
             select(ledger.drafts.c.payload).where(
                 ledger.drafts.c.scenario_id == request.scenario_id,
@@ -170,7 +170,7 @@ def decide(
             == (option.version, option.input_version_hash)
             for p in earlier
         ):
-            raise Conflict("option already decided in an earlier run of this scenario")
+            raise Conflict("option already decided in another run of this scenario")
         if at < current.spec.as_of or at < option.available_at:
             raise Conflict("decision precedes its snapshot or option")
         if at >= option.valid_until:
