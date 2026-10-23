@@ -156,14 +156,31 @@ the model's interpretation task. Translations and alias expansion must happen in
 the normal linker, not in the contextual response. V1 contextual recordings do
 not authorize v2 instructions.
 
+An answered document is never extracted again in the child (OUT-02e). A real
+recording showed that a fresh read of the answered email can widen the demand
+span under the same positional observation ID, which the reconciliation guard
+correctly refused. Instead, every current parent observation of an answered
+document (the clarification's observations and earlier contextual corrections)
+is seeded and carried exactly: identity, kind, quantity, period and evidence are
+unchanged; only the target receives the contextual mention and the answer receipt
+time. Each carried fact has a `supersedes` relation to its historical version.
+Other documents are still re-extracted by the frozen pipeline, so a child can
+differ from its parent there; each child is replayed from its own recordings.
+Bare connectives (`e`, `ed`, `and`, `und`, `et`, `y`) are accepted by the lexical
+check because they cannot introduce a product, size or number.
+
+`registered_answers` lists the trusted request bodies of registered events for one
+exact parent question (read-only). Registration stores the recorded request
+(without its idempotency key) in the event payload for this purpose.
+
 Later answers inherit prior current contextual observations from the exact
 published parent, including corrections in other cases. Their transitive lineage
 is seeded, their latest correction-chain tips are restored once, and their
 receipt times, quantities and episode anchors remain unchanged. Only the newly
 answered observation receives the new answer's receipt time and provenance.
 Current observation versions are specific to the answer event. Every
-clarification-reply source is excluded from ordinary extraction, including old
-replies with segments present. Reconciliation includes fact kind, so a different
+clarification-reply source and every answered document is excluded from ordinary
+extraction, including old replies with segments present. Reconciliation includes fact kind, so a different
 kind on the same span survives; reused identities and ambiguous versions fail
 closed.
 

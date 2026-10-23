@@ -235,17 +235,24 @@ and exact derived version pins still resolve inside report citations and version
 case/trace/question reads. An answered receipt whose original case disappeared can
 be read with `?version=answer:{fingerprint}`.
 
-HTTP tests cover both controlled graphs and the production extraction/linking/
-dedup/cases/baseline/overlay/options pipeline with synthetic ERP and fake model/
-systems boundaries. A missing extraction recording leaves the child failed and
-unpublished. A self-contained answer produces a linked observation and options
-in the child, with the parent unchanged. These tests use no provider calls.
+GET `/api/runs/{run_id}/cases/{case_id}/clarifications/{clarification_id}/registered-answers`
+lists the trusted recorded answers for that exact parent question as `RegisteredAnswer`
+bodies: the complete `AnswerRequest` fields except `idempotency_key`, plus the
+answer `fingerprint`. An offline (recorded/fixture) parent accepts only these
+bodies; a client adds its own idempotency key and posts them unchanged. The list
+is read-only: it never registers, authorizes or submits an answer, and a failed
+free-text submission never appears in it. Registration remains the trusted
+importer seam (`register_recorded_answer`, e.g. `scripts/clarification_answers_demo.py`).
+Missing run/case/question returns 404, unpublished runs 409, and fixture access
+follows the other artifact reads. A live parent accepts free text and may list none.
 
-Semantic clarification remains incomplete: the extractor receives the answer's
-own segments without the original question/observation context. A synthetic
-`Taglia M` reading remains unlinked; the recomputed original mention is unchanged.
-Even a self-contained reply is separate evidence without a demonstrated
-supersession/deduplication of the original demand. These tests establish execution
-and source navigation, not real model comprehension, quantitative forecast
-correction or availability of offline recordings. Parent #134 still requires that
-acceptance and the answer UI in #135.
+HTTP tests cover controlled graphs and the production extraction/linking/dedup/
+cases/baseline/overlay/options pipeline with synthetic ERP and fake model/systems
+boundaries, plus concurrent/repeated submission, scope/version isolation and a
+parent-projection hash before/after. A missing recording leaves the child failed
+and unpublished. Contextual reconciliation (OUT-02d/e) corrects the original
+observation in the child: the answer document creates no second demand, and the
+answered document's exact parent observations are carried rather than re-read.
+Real-model evidence for the dev Core demo question is in
+`data/fixtures/runs/core-dev-20261022/clarification-answers/VERIFICATION.md`;
+its replay test submits the recorded answers through this endpoint offline.

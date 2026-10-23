@@ -117,6 +117,12 @@ def outcome(engine, run_id):
             "status": state["status"],
             "published": state["published"],
             "current_observations": len(current),
+            "duplicate_current_observation_ids": sorted(
+                {o.id for o in current if sum(c.id == o.id for c in current) > 1}
+            ),
+            "answer_document_observations": sum(
+                o.document_id.startswith("clarification-answer:") for o in current
+            ),
             "supersedes": len(relations),
             "corrected": [],
             "module_errors": {
@@ -292,7 +298,19 @@ def record(output, *, workspace, keys_file=None):
         (output / "recording-evidence.json").write_text(
             json.dumps(evidence, sort_keys=True, indent=2, ensure_ascii=False) + "\n"
         )
+        write_asset_manifest(output)
     return evidence
+
+
+def write_asset_manifest(directory):
+    files = [
+        (relative, sha)
+        for relative, sha in inventory(directory)
+        if relative != "asset-manifest.json"
+    ]
+    (directory / "asset-manifest.json").write_text(
+        json.dumps({"format": 1, "files": files}, indent=2) + "\n"
+    )
 
 
 def inventory(directory):
@@ -388,43 +406,79 @@ def replay(workspace, *, answers=ANSWERS, register_only=False):
         app = create_app(engine=engine, registry=Registry.discover(), settings=settings)
         try:
             with offline() as denied, environment(settings), TestClient(app) as client:
-                for key, request in registered.items():
-                    path = (
-                        f"/api/runs/{request.run_id}/cases/{request.case_id}"
-                        f"/clarifications/{request.clarification_id}/answer"
-                    )
-                    body = request.model_dump(mode="json")
-                    response = client.post(path, json=body)
-                    retry = client.post(path, json=body)
+                first = next(iter(registered.values()))
+                base = (
+                    f"/api/runs/{first.run_id}/cases/{first.case_id}"
+                    f"/clarifications/{first.clarification_id}"
+                )
+                # The UI path: discover trusted bodies, add only an idempotency key.
+                presets = client.get(base + "/registered-answers").json()
+                by_key = {r.follow_up_scenario_id: k for k, r in registered.items()}
+                for preset in presets:
+                    key = by_key[preset["follow_up_scenario_id"]]
+                    body = {k: v for k, v in preset.items() if k != "fingerprint"}
+                    body["idempotency_key"] = f"replay-{key}"
+                    response = client.post(base + "/answer", json=body)
+                    retry = client.post(base + "/answer", json=body)
                     job = response.json()
                     run = client.get(f"/api/runs/{job['run']['run_id']}").json()
-                    recorded = evidence_in["answers"][key]
                     artifact = run_digest(engine, job["run"]["run_id"])
                     result["answers"][key] = {
                         "http_status": response.status_code,
                         "retry_same_job": retry.status_code == 202 and retry.json() == job,
+                        "fingerprint": job["fingerprint"],
                         "run_id": job["run"]["run_id"],
                         "run_status": run["status"],
                         "published": run["published"],
                         "artifact_sha256": artifact,
-                        "matches_recording": artifact == recorded["artifact_sha256"],
-                        **{k: v for k, v in outcome(engine, job["run"]["run_id"]).items()},
+                        "matches_recording": artifact
+                        == evidence_in["answers"][key]["artifact_sha256"],
+                        **outcome(engine, job["run"]["run_id"]),
                     }
+                positive_misses = (set(cache.missing), set(systems.missing))
+                # Offline refusals: free text is rejected; a registered answer at an
+                # unrecorded clock is accepted but its child cannot publish.
+                free = first.model_dump(mode="json") | {
+                    "text": "Forse il cardigan, non ricordo.",
+                    "idempotency_key": "replay-free-text",
+                }
+                later = first.model_dump(mode="json") | {
+                    "follow_up_scenario_id": first.follow_up_scenario_id + "-unrecorded",
+                    "as_of": "2026-10-22T21:30:00Z",
+                    "idempotency_key": "replay-unrecorded-clock",
+                }
+                refused = client.post(base + "/answer", json=free)
+                accepted = client.post(base + "/answer", json=later)
+                state = client.get(f"/api/runs/{accepted.json()['run']['run_id']}").json()
+                result["negative"] = {
+                    "free_text_status": refused.status_code,
+                    "unrecorded_clock_status": accepted.status_code,
+                    "unrecorded_clock_run_status": state["status"],
+                    "unrecorded_clock_published": state["published"],
+                    "unrecorded_clock_misses": len(cache.missing - positive_misses[0])
+                    + len(systems.missing - positive_misses[1]),
+                }
                 result["network_attempts"] = len(denied)
         finally:
             clarifications.execute_follow_up = original
-        result["cache_misses"] = sorted(cache.missing)
+        # Misses of the deliberate unrecorded-clock probe are reported under "negative".
+        result["cache_misses"] = sorted(positive_misses[0])
         result["cache_corrupt"] = sorted(cache.corrupt)
-        result["systems_cache_misses"] = sorted(systems.missing)
+        result["systems_cache_misses"] = sorted(positive_misses[1])
         result["parent"]["artifact_sha256_after"] = run_digest(engine, spec.run_id)
         result["status"] = (
             "passed"
             if result["parent"]["artifact_sha256"] == result["parent"]["artifact_sha256_after"]
             and not result["network_attempts"]
-            and not cache.missing
+            and not result["cache_misses"]
             and not cache.corrupt
-            and not systems.missing
+            and not result["systems_cache_misses"]
             and registered
+            and set(result["answers"]) == set(registered)
+            and result["negative"]["free_text_status"] == 424
+            and result["negative"]["unrecorded_clock_status"] == 202
+            and not result["negative"]["unrecorded_clock_published"]
+            and result["negative"]["unrecorded_clock_misses"] > 0
             and all(
                 a["published"] and a["matches_recording"] and a["retry_same_job"]
                 for a in result["answers"].values()
