@@ -6,7 +6,7 @@ export const shell = {
   themeLight: 'Passa al tema chiaro',
   navigationLabel: 'Navigazione principale',
   brand: 'Tesseract',
-  environment: 'Moncler',
+  environment: 'Valentino',
   groups: {
     demo: 'Panoramica',
     core: 'Flusso di lavoro',
@@ -20,6 +20,7 @@ export const shell = {
     modules: 'Pipeline',
     products: 'Prodotti',
     clarifications: 'Chiarimenti',
+    vision: 'Dove va la piattaforma',
   },
   overview: {
     subtitle: 'Segnalazioni dei negozi e decisioni su domanda e stock',
@@ -37,7 +38,7 @@ export const shell = {
     overview: 'Panoramica',
     sources: 'Fonti',
     group: 'Panoramica',
-    footer: 'Moncler',
+    footer: 'Valentino',
     topbar: 'Area di lavoro',
     subtitle: 'Metriche e attività del tuo ambiente, ultimi 7 giorni.',
     demoData: 'Dati disponibili',
