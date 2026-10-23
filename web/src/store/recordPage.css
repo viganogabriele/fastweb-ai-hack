@@ -193,3 +193,36 @@
   color: var(--sd-color-light-success);
   font-weight: var(--sd-font-weight-semibold);
 }
+
+/* After sending: a full-screen confirmation over the whole page. */
+.rec__sent {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sd-space-5);
+  padding: var(--sd-space-5);
+  background: var(--sd-color-surface-canvas);
+  text-align: center;
+}
+
+.rec__sent-badge {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sd-color-light-success);
+  color: #fff;
+}
+
+.rec__sent-text {
+  margin: 0;
+  max-width: 28ch;
+  font-size: var(--sd-font-size-section);
+  color: var(--sd-color-text-primary);
+}

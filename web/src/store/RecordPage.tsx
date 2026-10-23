@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Mic, Square, Trash2 } from 'lucide-react'
+import { Check, Mic, Square, Trash2 } from 'lucide-react'
 import { fmt, messages } from '../i18n'
 import { Button } from '../ui'
 import { useRecorder } from './useRecorder'
@@ -144,10 +144,14 @@ export function RecordPage() {
       )}
 
       {sent && (
-        <section className="rec__card">
-          <p role="status" className="rec__ok">✓ {t.sent}</p>
-          <p className="rec__muted">{t.sentHint}</p>
-          <Button onClick={again}>{t.another}</Button>
+        <section className="rec__sent">
+          <div className="rec__sent-badge" role="status" aria-label={t.sent}>
+            <Check size={64} strokeWidth={3} aria-hidden="true" />
+          </div>
+          <p className="rec__sent-text">{t.sentHint}</p>
+          <Button variant="primary" onClick={again}>
+            {t.another}
+          </Button>
         </section>
       )}
     </main>
