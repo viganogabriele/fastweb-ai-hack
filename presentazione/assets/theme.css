@@ -1,0 +1,4428 @@
+/*
+  PoliNetwork Slides: tema
+  Palco fisso 1600×900 (scalato da deck.js). Tutte le misure sono in px del palco.
+  Token presi da web/src/styles/figma.css e typography.css del sito PoliNetwork.
+*/
+
+:root {
+  /* brand */
+  --pn-blue: #1156ae; /* logo + wordmark (header del sito) */
+  --pn-blue-deep: #20478f;
+
+  /* figma: neutrals (tailwind v4 slate) */
+  --bg: oklch(96.8% 0.007 247.896); /* slate-100 */
+  --bg-blur: oklch(98.4% 0.003 247.858 / 40%); /* slate-50 / 40 */
+  --grey: oklch(86.9% 0.022 252.894); /* slate-300 */
+  --text: oklch(12.9% 0.042 264.695); /* slate-950 */
+  --title: oklch(27.9% 0.041 260.031); /* slate-800 */
+  --text-2: oklch(44.6% 0.043 257.281); /* slate-600 */
+  --text-3: oklch(55.4% 0.046 257.417); /* slate-500 */
+
+  /* figma: accents */
+  --blue: oklch(70.7% 0.165 254.624); /* blue-400  (blue-primary) */
+  --blue-2: oklch(50% 0.134 242.749); /* sky-700   (blue-secondary) */
+  --blue-3: oklch(82.8% 0.111 230.318); /* sky-300   (blue-tertiary) */
+  --blue-ink: oklch(48.8% 0.217 264.376); /* blue-700 per testo in evidenza */
+  --blue-soft: oklch(70.7% 0.165 254.624 / 16%);
+  --green: oklch(76.5% 0.177 163.223); /* emerald-400 */
+  --green-ink: oklch(59.6% 0.145 163.225); /* emerald-600 */
+  --red: oklch(58.6% 0.253 17.585); /* rose-600 */
+  --amber: oklch(82.8% 0.189 84.429); /* amber-400 */
+  --violet: oklch(60.6% 0.25 292.717); /* violet-500 */
+
+  /* figma: radius */
+  --r-img: 10px;
+  --r-rect: 20px;
+  --r-btn: 60px;
+  --r-btn-l: 100px;
+
+  /* font (typography.css del sito) */
+  --font-display: "DM Sans", system-ui, sans-serif;
+  --font-headline: "Poppins", system-ui, sans-serif;
+  --font-body: "Red Hat Text", system-ui, sans-serif;
+
+  /* glass */
+  --glass-bg: linear-gradient(145deg, rgb(255 255 255 / 0.66), rgb(255 255 255 / 0.32));
+  --glass-border: rgb(255 255 255 / 0.8);
+  --glass-blur: blur(24px) saturate(160%);
+  --glass-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.95), 0 30px 60px -36px rgb(17 86 174 / 0.45),
+    0 8px 22px -14px rgb(17 86 174 / 0.22);
+
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  /* ingresso a cascata: durata, passo tra un elemento e l'altro, attesa iniziale */
+  --anim-dur: 0.9s;
+  --anim-step: 90ms;
+  --anim-base: 160ms;
+  --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --W: 1600px;
+  --H: 900px;
+  --pad-x: 120px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+svg.ico {
+  width: 1em;
+  height: 1em;
+  flex: none;
+  stroke-width: 1.75;
+}
+
+/* ================= Sfondo: forme del sito + looper ================= */
+.bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.bg .shape {
+  position: absolute;
+  background: center / contain no-repeat;
+  transition: transform 2.6s var(--ease);
+}
+.bg .shape > i {
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  animation: drift 28s ease-in-out infinite alternate;
+}
+.bg .s-blue {
+  background-image: var(--shape-big-blue);
+  width: 80vw;
+  aspect-ratio: 1;
+  left: 50vw;
+  top: -36vw;
+  opacity: 0.8;
+}
+.bg .s-teal {
+  background-image: var(--shape-big-teal);
+  width: 74vw;
+  aspect-ratio: 1;
+  left: -22vw;
+  top: 14vw;
+}
+.bg .s-teal > i {
+  animation-duration: 34s;
+  animation-delay: -9s;
+}
+.bg .s-small {
+  background-image: var(--shape-small-blue);
+  width: 36vw;
+  aspect-ratio: 1;
+  left: 68vw;
+  top: 30vw;
+}
+.bg .s-small > i {
+  animation-duration: 22s;
+  animation-delay: -5s;
+}
+.bg .s-looper {
+  background-image: var(--shape-looper);
+  width: 104vw;
+  aspect-ratio: 1610 / 1562;
+  left: -26vw;
+  top: -40vw;
+  opacity: 0.95;
+}
+.bg .s-looper > i {
+  animation: sway 46s ease-in-out infinite alternate;
+}
+.bg .s-looper2 {
+  background-image: var(--shape-looper);
+  width: 90vw;
+  aspect-ratio: 1610 / 1562;
+  left: 40vw;
+  top: 4vw;
+  opacity: 0.7;
+}
+.bg .s-looper2 > i {
+  animation: sway 52s ease-in-out infinite alternate-reverse;
+}
+/* looper: fasci di curve bianche sopra le forme */
+.bg .wire {
+  position: absolute;
+  inset: -5%;
+  width: 110%;
+  height: 110%;
+  transition: transform 2.6s var(--ease);
+}
+.bg .wire g {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.4;
+  opacity: 0.55;
+  transform-origin: 70% 40%;
+  animation: sway 40s ease-in-out infinite alternate;
+}
+@keyframes drift {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate(3%, -2%) scale(1.06) rotate(8deg);
+  }
+  100% {
+    transform: translate(-2%, 3%) scale(0.96) rotate(-6deg);
+  }
+}
+@keyframes sway {
+  from {
+    transform: rotate(-3deg) scale(1);
+  }
+  to {
+    transform: rotate(3deg) scale(1.05);
+  }
+}
+
+/* ================= Palco e slide ================= */
+.stage {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: var(--W);
+  height: var(--H);
+  transform-origin: center;
+  z-index: 1;
+}
+.slide {
+  position: absolute;
+  inset: 0;
+  isolation: isolate; /* le animazioni "dietro" (canvas.fx.back) restano sempre dietro al contenuto */
+  display: flex;
+  flex-direction: column;
+  padding: 84px var(--pad-x) 116px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(60px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.8s var(--ease),
+    visibility 0s linear 0.5s;
+}
+.slide.before {
+  transform: translateX(-60px);
+}
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity 0.6s ease 0.08s,
+    transform 0.8s var(--ease) 0.08s,
+    visibility 0s;
+}
+.slide > .body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+  padding-top: 28px;
+}
+.slide:has(> .sticker:not(.small)) > .body {
+  margin-right: 330px;
+}
+.slide:has(> .sticker.left:not(.small)) > .body {
+  margin-right: 0;
+  margin-left: 330px;
+}
+.notes {
+  display: none !important;
+}
+
+/* footer: logo + wordmark come nell'header del sito */
+.slide-foot {
+  position: absolute;
+  left: 50%;
+  bottom: 34px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font: 400 19px/1 var(--font-headline);
+  color: var(--pn-blue);
+  white-space: nowrap;
+}
+.slide-foot .logo {
+  width: 24px;
+  height: 24px;
+}
+.slide-num {
+  position: absolute;
+  right: 48px;
+  bottom: 36px;
+  font: 500 15px/1 var(--font-body);
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+.slide:has(> .sticker:not(.left)) > .slide-num {
+  display: none;
+}
+.logo {
+  display: inline-block;
+  flex: none;
+  background: var(--logo) center / contain no-repeat;
+  aspect-ratio: 1;
+}
+
+/* ================= Tipografia ================= */
+.slide > h1,
+.slide > .head h1 {
+  font: 500 68px/1.08 var(--font-display);
+  letter-spacing: -0.022em;
+  color: var(--title);
+  /* il titolo usa tutta la larghezza: va a capo solo quando serve, senza lasciare una parola sola */
+  text-wrap: pretty;
+}
+.slide > .sub {
+  margin-top: 14px;
+  font: 400 27px/1.4 var(--font-headline);
+  color: var(--text-2);
+  max-width: 1200px;
+  text-wrap: pretty;
+}
+.kicker {
+  font: 500 18px/1.2 var(--font-body);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue-2);
+  margin-bottom: 14px;
+}
+h2 {
+  font: 500 48px/1.12 var(--font-display);
+  letter-spacing: -0.018em;
+  color: var(--title);
+}
+h3 {
+  font: 400 29px/1.25 var(--font-headline);
+  color: var(--title);
+  margin-bottom: 14px;
+}
+p,
+li,
+dt,
+dd,
+td {
+  font-size: 24px;
+  line-height: 1.45;
+  color: var(--text-2);
+}
+b,
+strong {
+  font-weight: 600;
+  color: var(--title);
+}
+mark,
+.hl {
+  background: none;
+  color: var(--blue-ink);
+  font-weight: inherit;
+}
+.todo {
+  color: var(--blue-ink);
+  background: var(--blue-soft);
+  border-bottom: 2px dashed var(--blue);
+  border-radius: 4px;
+  padding: 0 6px;
+  font-style: normal;
+}
+.pill .todo {
+  color: inherit;
+  background: rgb(255 255 255 / 0.2);
+  border-bottom-color: currentColor;
+}
+.label {
+  display: block;
+  font: 500 17px/1.2 var(--font-body);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 14px;
+}
+.lead {
+  font: 400 30px/1.45 var(--font-headline);
+  color: var(--text-2);
+  max-width: 1150px;
+  text-wrap: pretty;
+}
+.small {
+  font-size: 19px;
+  color: var(--text-3);
+}
+/* link nel testo (una fonte, un documento): si vede che si clicca, anche nel PDF */
+.body :is(p, li, dd, td, small, blockquote):not(.links > li) > a[href] {
+  color: var(--blue-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+}
+
+/* elenchi puntati: puntino blu del brand */
+.slide ul:not([class]),
+ul.dots {
+  list-style: none;
+  display: grid;
+  gap: 14px;
+}
+.slide ul:not([class]) > li,
+ul.dots > li {
+  position: relative;
+  padding-left: 30px;
+}
+.slide ul:not([class]) > li::before,
+ul.dots > li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.58em;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 0 5px var(--blue-soft);
+}
+
+/* ================= Glass ================= */
+.glass,
+.irows > li > .tile,
+.irows > li > p,
+.cards > *,
+.stats > *,
+.teams > *,
+.timeline > li,
+.agenda > li,
+.cols > *,
+ol.points > li,
+dl.terms > div,
+.quote,
+.recap,
+.panel {
+  position: relative;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1.5px solid var(--glass-border);
+  border-radius: var(--r-rect);
+  box-shadow: var(--glass-shadow);
+}
+.glass.tint {
+  background: linear-gradient(145deg, rgb(116 212 255 / 0.32), rgb(81 162 255 / 0.16));
+}
+.glass.solid {
+  background: linear-gradient(145deg, rgb(255 255 255 / 0.9), rgb(255 255 255 / 0.66));
+}
+.glass {
+  padding: 34px 38px;
+}
+
+/* ================= Layout del catalogo: immagini, tabelle e dispositivi ================= */
+/* Componenti condivisi dai due template: nessuno stile locale nel sorgente delle slide. */
+.metric {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 72px;
+  min-height: 340px;
+}
+.metric > :first-child { text-align: center; }
+.metric .num {
+  display: block;
+  font: 500 180px/1 var(--font-display);
+  letter-spacing: -0.05em;
+  color: var(--blue-2);
+}
+.metric .label { margin: 24px 0 0; }
+.metric h2 { margin-bottom: 24px; }
+.people.roster {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px;
+}
+.people.roster .person { min-width: 0; }
+.people.roster .person > img { width: 240px; height: 240px; }
+.data-table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: separate;
+  overflow: hidden;
+  padding: 10px 30px;
+}
+.data-table :is(th, td) {
+  padding: 20px 22px;
+  text-align: left;
+  border-bottom: 1px solid rgb(17 86 174 / 0.14);
+}
+.data-table th {
+  font: 500 24px/1.3 var(--font-headline);
+  color: var(--title);
+}
+.data-table td:last-child,
+.data-table th:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.data-table tbody tr:last-child td { border-bottom: 0; }
+.slide.full-image > .body { padding: 0; }
+.full-image .hero-image {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.full-image .image-caption {
+  position: absolute;
+  left: var(--pad-x);
+  bottom: 110px;
+  width: 800px;
+}
+.full-image .image-caption h1 {
+  font: 500 68px/1.08 var(--font-display);
+  color: var(--title);
+  margin-bottom: 16px;
+}
+.full-image .image-caption p { font-size: 26px; }
+.device-stage {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 64px;
+  height: 510px;
+  min-width: 0;
+  flex: none;
+}
+.laptop {
+  position: relative;
+  width: 820px;
+  flex: none;
+  padding-bottom: 24px;
+}
+.laptop > .display {
+  position: relative;
+  margin: 0 36px;
+  padding: 18px 12px 12px;
+  border: 2px solid #64748b;
+  border-radius: 20px 20px 8px 8px;
+  background: #111827;
+}
+.laptop > .display::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #475569;
+}
+.laptop > .display > img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 4px;
+}
+.laptop::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 26px;
+  border-radius: 3px 3px 40px 40px;
+  background: linear-gradient(#e2e8f0, #94a3b8);
+  box-shadow: 0 26px 40px -24px rgb(15 23 42 / 0.45);
+}
+.device-stage > .phone { width: 226px; }
+.device-stage.duo > .phone:first-child { rotate: -5deg; }
+.device-stage.duo > .phone:last-child { rotate: 5deg; }
+.device-stage.trio > .phone { width: 218px; }
+.device-stage.trio > .phone:first-child { rotate: -6deg; }
+.device-stage.trio > .phone:last-child { rotate: 6deg; }
+.device-stage.combo { gap: 0; }
+.device-stage.combo > .laptop { width: 790px; margin-right: 130px; }
+.device-stage.combo > .phone {
+  position: absolute;
+  width: 212px;
+  right: 140px;
+  bottom: 0;
+  rotate: 6deg;
+}
+.tablet {
+  width: 650px;
+  flex: none;
+  position: relative;
+  padding: 16px 22px;
+  border: 2px solid #64748b;
+  border-radius: 30px;
+  background: #111827;
+  box-shadow: 0 34px 50px -32px rgb(15 23 42 / 0.5);
+}
+.tablet > img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 14px;
+}
+.tablet::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #475569;
+}
+
+/* ================= Pill / tag ================= */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 7px 20px;
+  border-radius: var(--r-btn);
+  font: 500 19px/1.2 var(--font-body);
+  white-space: nowrap;
+  background: var(--blue-2);
+  color: #fff;
+}
+.pill.ok {
+  background: var(--green-ink);
+}
+.pill.wip {
+  background: var(--blue-2);
+}
+.pill.plan {
+  background: rgb(255 255 255 / 0.7);
+  color: var(--text-2);
+  box-shadow: inset 0 0 0 1.5px var(--grey);
+}
+.pill.warn {
+  background: var(--amber);
+  color: oklch(27.9% 0.077 45.635);
+}
+.pill.ko {
+  background: var(--red);
+}
+.pill.ghost {
+  background: rgb(255 255 255 / 0.6);
+  color: var(--pn-blue);
+  box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.9);
+}
+
+/* ================= Copertina ================= */
+.slide.cover {
+  justify-content: center;
+  padding-right: 700px;
+}
+/* barra a gradiente sotto il titolo, come nei divisori */
+.slide.cover:not(.brand-only)::after {
+  content: "";
+  order: 1;
+  width: 120px;
+  height: 4px;
+  margin-top: 40px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--blue-3), var(--blue));
+  transform-origin: left;
+}
+.slide.cover.active:not(.brand-only)::after {
+  animation: barIn 1.1s var(--ease) 0.5s both;
+}
+.cover > :not(.kicker, h1) {
+  order: 2;
+}
+.cover .brand {
+  position: absolute;
+  top: 70px;
+  left: var(--pad-x);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font: 400 30px/1 var(--font-headline);
+  color: var(--pn-blue);
+}
+.cover .brand .logo {
+  width: 40px;
+}
+.cover h1 {
+  font: 500 108px/1 var(--font-display);
+  letter-spacing: -0.034em;
+  color: var(--title);
+  text-wrap: balance;
+}
+/* <mark> nei testi grandi: la parte da evidenziare, in gradiente.
+   Se il titolo è diviso in parole (.w), deck.js dà a ogni parola larghezza (--gw) e posizione (--gx)
+   dell'intera evidenziazione, così il gradiente è uno solo e non ricomincia a ogni parola. */
+:is(.cover h1, .statement, .lead, .slide.section > h1, .slide.thanks > h1) mark:not(:has(.w)),
+:is(.cover h1, .statement, .lead, .slide.section > h1, .slide.thanks > h1) mark .w {
+  color: transparent;
+  background: linear-gradient(100deg, var(--blue-2), var(--blue-ink)) no-repeat;
+  background-size: var(--gw, 100%) 100%;
+  background-position: calc(-1 * var(--gx, 0px)) 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.cover .kicker {
+  font-size: 21px;
+  margin-bottom: 22px;
+}
+.cover .sub {
+  margin-top: 26px;
+  font: 400 29px/1.4 var(--font-headline);
+  color: var(--text-2);
+}
+.cover .meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 36px;
+}
+.cover .meta > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px;
+  border-radius: var(--r-btn);
+  font: 500 20px/1.2 var(--font-body);
+  color: var(--pn-blue);
+  background: rgb(255 255 255 / 0.55);
+  border: 1.5px solid rgb(255 255 255 / 0.9);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+}
+/* emblema: logo dentro anelli di vetro che ruotano, esce dal bordo destro */
+.cover .orbit {
+  position: absolute;
+  right: -110px;
+  top: 50%;
+  width: 780px;
+  height: 780px;
+  margin-top: -390px;
+  display: grid;
+  place-items: center;
+}
+.orbit .ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid rgb(255 255 255 / 0.9);
+  background: radial-gradient(circle at 30% 25%, rgb(255 255 255 / 0.5), rgb(255 255 255 / 0.08) 60%);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--glass-shadow);
+}
+.orbit .ring::before,
+.orbit .ring::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 6px rgb(255 255 255 / 0.35);
+}
+.orbit .ring::before {
+  top: 12%;
+  left: 12%;
+}
+.orbit .ring::after {
+  bottom: 4%;
+  right: 30%;
+  width: 12px;
+  height: 12px;
+}
+.orbit .r1 {
+  inset: 0;
+  animation: spin 60s linear infinite;
+}
+.orbit .r2 {
+  inset: 100px;
+  animation: spin 42s linear infinite reverse;
+}
+.orbit .r3 {
+  inset: 195px;
+  animation: spin 30s linear infinite;
+}
+.orbit .logo {
+  position: relative;
+  width: 290px;
+  filter: drop-shadow(0 24px 40px rgb(17 86 174 / 0.35));
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* copertina solo-logo */
+.slide.cover.brand-only {
+  padding: 0;
+  align-items: center;
+}
+.cover.brand-only .lockup {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  font: 400 120px/1 var(--font-headline);
+  color: var(--pn-blue);
+  letter-spacing: -0.01em;
+}
+.cover.brand-only .lockup .logo {
+  width: 150px;
+}
+.cover.brand-only .sub {
+  text-align: center;
+}
+
+/* ================= Divisore di sezione ================= */
+/* titolo in basso a sinistra, con davanti il numero della parte a contorno che si traccia, come i
+   numeri dell'indice. deck.js lo mette nell'h1 (01, 02… nell'ordine dei divisori, o data-n) */
+.slide.section {
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding-bottom: 210px;
+}
+.slide.section > h1 {
+  font-size: 104px;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  max-width: 1250px;
+}
+.slide.section > h1 > .n {
+  position: relative;
+  display: inline-block;
+  margin-right: 0.3em;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  color: rgb(116 212 255 / 0.3);
+  -webkit-text-stroke: 2px var(--blue);
+}
+.slide.section > .sub {
+  margin-top: 22px;
+  max-width: 900px;
+  font-size: 30px;
+}
+.slide.section > .kicker {
+  margin-bottom: 22px;
+}
+/* sticker a sinistra: il titolo si sposta a destra, così il gatto non lo copre */
+.slide.section:has(> .sticker.left:not(.small)) {
+  padding-left: 480px;
+}
+.slide.section:has(> .sticker:not(.left, .small)) > :is(h1, .sub) {
+  max-width: 980px;
+}
+
+/* ================= Frase a effetto ================= */
+.statement {
+  font: 500 64px/1.2 var(--font-display);
+  letter-spacing: -0.022em;
+  color: var(--title);
+  max-width: 1250px;
+  text-wrap: balance;
+}
+
+/* ================= Indice (agenda) ================= */
+/* fino a 6 voci: tessere con il numero grande come nei divisori di sezione */
+.agenda {
+  list-style: none;
+  counter-reset: ag;
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr));
+  gap: 22px;
+  align-content: center;
+}
+/* da 5 a 9 voci (tre colonne): se l'ultima riga è incompleta si allarga a tutta la larghezza,
+   due tessere a metà riga (5 e 8 voci) o una sola per intero (7 voci). Griglia a 6 colonne:
+   una tessera normale ne occupa 2 */
+.agenda:not(.long, [data-cols]):has(> li:nth-child(5)):has(> li:nth-child(3n + 2):last-child, > li:nth-child(3n + 1):last-child) {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+.agenda:not(.long, [data-cols]):has(> li:nth-child(5)):has(> li:nth-child(3n + 2):last-child, > li:nth-child(3n + 1):last-child) > li {
+  grid-column: span 2;
+}
+.agenda:not(.long, [data-cols]):has(> li:nth-child(5)):has(> li:nth-child(3n + 2):last-child) > li:nth-last-child(-n + 2) {
+  grid-column: span 3;
+}
+.agenda:not(.long, [data-cols]):has(> li:nth-child(5)):has(> li:nth-child(3n + 1):last-child) > li:last-child {
+  grid-column: 1 / -1;
+}
+.agenda > li {
+  counter-increment: ag;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 230px;
+  padding: 30px 32px 34px;
+  font: 400 30px/1.2 var(--font-headline);
+  color: var(--title);
+  text-wrap: balance;
+}
+.agenda > li > .num {
+  position: relative;
+  align-self: flex-start;
+  margin-bottom: 34px;
+  font: 600 84px/0.85 var(--font-display);
+  letter-spacing: -0.05em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--blue);
+  background: linear-gradient(160deg, rgb(116 212 255 / 0.35), rgb(81 162 255 / 0.05) 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.agenda > li > small {
+  font: 400 19px/1.45 var(--font-body);
+  color: var(--text-2);
+  text-wrap: pretty;
+}
+
+/* 7-9 voci: tessere compatte su tre colonne, numero a sinistra di titolo e sottotitolo */
+.agenda.dense {
+  gap: 18px 22px;
+}
+.agenda.dense > li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-content: start;
+  gap: 6px 22px;
+  min-height: 0;
+  padding: 24px 76px 26px 26px;
+  font-size: 26px;
+}
+.agenda.dense > li > .num {
+  grid-row: 1 / span 2;
+  margin-bottom: 0;
+  font-size: 58px;
+}
+.agenda.dense > li > small {
+  grid-column: 2;
+  font-size: 18px;
+  line-height: 1.35;
+}
+.agenda.dense > li[data-goto]::after {
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  font-size: 19px;
+}
+
+/* oltre 9 voci: righe compatte su due colonne */
+.agenda.long {
+  grid-template-columns: none;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(var(--rows, 5), auto);
+  gap: 14px 22px;
+}
+.agenda.long > li {
+  flex-direction: row;
+  align-items: center;
+  gap: 26px;
+  min-height: 0;
+  padding: 16px 30px 16px 22px;
+  font-size: 28px;
+  line-height: 1.25;
+}
+.agenda.long > li::before {
+  content: counter(ag, decimal-leading-zero);
+  flex: none;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: var(--blue-soft);
+  font: 500 24px/1 var(--font-display);
+  color: var(--blue-ink);
+}
+
+/* ================= Righe con icona ================= */
+.irows {
+  list-style: none;
+  display: grid;
+  gap: 18px;
+}
+.irows > li {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 18px;
+  align-items: stretch;
+}
+.irows > li > .tile {
+  display: grid;
+  place-items: center;
+  min-height: 92px;
+  color: var(--blue-2);
+}
+.irows > li > .tile > svg.ico {
+  width: 46px;
+  height: 46px;
+  stroke-width: 1.6;
+}
+.irows > li > p {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 18px 34px;
+  font-size: 25px;
+  color: var(--text);
+}
+.irows > li > p b {
+  display: block;
+  font: 400 27px/1.3 var(--font-headline);
+  color: var(--title);
+}
+.irows > li > p small {
+  font-size: 21px;
+  color: var(--text-3);
+}
+
+/* ================= Card (griglia 2×2, 3, 4…) ================= */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr));
+  gap: 24px;
+}
+.cards:has(> :nth-child(3):last-child),
+.cards:has(> :nth-child(5)) {
+  --cols: 3;
+}
+.cards:has(> :nth-child(7)) {
+  --cols: 4;
+}
+.cards > * {
+  padding: 30px 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+/* icona accanto al titolo, il resto della card sotto su tutta la larghezza */
+.cards > :has(> svg.ico) {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  align-content: start;
+  column-gap: 14px;
+  row-gap: 10px;
+}
+.cards > * > svg.ico {
+  width: 36px;
+  height: 36px;
+  color: var(--blue-2);
+}
+.cards > * > h3 {
+  margin-bottom: 6px;
+}
+.cards > :has(> svg.ico) > h3 {
+  margin: 0;
+}
+.cards > :has(> svg.ico) > :not(svg, h3) {
+  grid-column: 1 / -1;
+}
+.cards > * > p {
+  font-size: 22px;
+}
+/* stato del progetto dentro la card, sotto il titolo */
+.cards > * > .pill {
+  justify-self: start;
+  align-self: start;
+}
+
+/* ================= Numeri in evidenza ================= */
+.stats {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+.stats > * {
+  padding: 40px 30px 34px;
+  text-align: center;
+}
+.stats b,
+.num {
+  display: block;
+  white-space: nowrap;
+  font: 500 84px/1 var(--font-display);
+  letter-spacing: -0.035em;
+  color: var(--pn-blue);
+  font-variant-numeric: tabular-nums;
+}
+.stats:has(> :nth-child(4)) b {
+  font-size: 70px;
+}
+.stats > * > span:not(.label) {
+  display: block;
+  margin-top: 14px;
+  font: 400 23px/1.3 var(--font-headline);
+  color: var(--text-2);
+}
+/* etichetta facoltativa sopra il numero: la fonte o il contesto del dato ("Studio 2020*") */
+.stats > * > .label {
+  margin-bottom: 16px;
+}
+/* parola chiave facoltativa tra numero e descrizione */
+.stats > * > h3 {
+  margin-top: 16px;
+  font: 500 34px/1.15 var(--font-headline);
+  color: var(--title);
+}
+.stats > * > h3 + span {
+  margin-top: 8px;
+}
+.stats + .small,
+.stats + p {
+  text-align: center;
+}
+
+/* ================= Nuvola "Chi siamo" ================= */
+.cloud {
+  position: relative;
+  flex: 1;
+  margin: -40px -40px 0;
+}
+.cloud > h2 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 92px;
+  white-space: nowrap;
+  z-index: 1;
+}
+.cloud > span {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  translate: -50% -50%;
+  font: 400 calc(var(--s, 1) * 26px) / 1.15 var(--font-headline);
+  color: var(--text-2);
+  white-space: nowrap;
+  text-align: center;
+}
+.cloud > span > i {
+  display: block;
+  animation: bob 6s ease-in-out infinite alternate;
+  animation-delay: var(--d, 0s);
+  font-style: normal;
+}
+.cloud > span b {
+  display: block;
+  font: 500 46px/1 var(--font-display);
+  color: var(--pn-blue);
+}
+.cloud > span.big {
+  --s: 1.35;
+  color: var(--title);
+}
+@keyframes bob {
+  from {
+    transform: translateY(-6px);
+  }
+  to {
+    transform: translateY(6px);
+  }
+}
+
+/* ================= Prima / Dopo ================= */
+.compare {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 110px minmax(0, 1fr);
+  align-items: stretch;
+}
+.compare > :first-child {
+  grid-column: 1;
+}
+.compare > :last-child {
+  grid-column: 3;
+}
+.compare::before {
+  content: "";
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  justify-self: center;
+  width: 64px;
+  height: 64px;
+  background: var(--blue);
+  -webkit-mask: var(--arrow) center / contain no-repeat;
+  mask: var(--arrow) center / contain no-repeat;
+}
+.compare > * > .label {
+  color: var(--text-3);
+}
+.compare > :last-child > .label {
+  color: var(--blue-2);
+}
+.compare > :first-child {
+  opacity: 0.86;
+}
+.compare .chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.compare .chips > * {
+  padding: 14px 22px;
+  border-radius: 14px;
+  background: rgb(255 255 255 / 0.6);
+  border: 1.5px solid rgb(255 255 255 / 0.9);
+  font: 400 23px/1.2 var(--font-headline);
+  color: var(--title);
+}
+
+/* ================= Tabella di stato ================= */
+table.status {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  padding: 10px 28px;
+}
+table.status td {
+  padding: 15px 10px;
+  font-size: 25px;
+  color: var(--text);
+  border-bottom: 1.5px solid rgb(255 255 255 / 0.85);
+}
+table.status tr:last-child td {
+  border-bottom: 0;
+}
+table.status td:first-child {
+  position: relative;
+  padding-left: 42px;
+}
+table.status td:first-child::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  margin-top: -9px;
+  border-radius: 50%;
+  background: var(--blue-2);
+  box-shadow: 0 0 0 5px rgb(255 255 255 / 0.7);
+}
+table.status tr:has(.pill.ok) td:first-child::before {
+  background: var(--green-ink);
+}
+table.status tr:has(.pill.plan) td:first-child::before {
+  background: var(--grey);
+}
+table.status tr:has(.pill.warn) td:first-child::before {
+  background: var(--amber);
+}
+table.status tr:has(.pill.ko) td:first-child::before {
+  background: var(--red);
+}
+table.status td:last-child {
+  text-align: right;
+  width: 1%;
+  white-space: nowrap;
+}
+table.status td:last-child .pill {
+  min-width: 250px;
+}
+table.status td small {
+  display: block;
+  font-size: 19px;
+  color: var(--text-3);
+}
+
+/* ================= Barre di avanzamento ================= */
+.bars {
+  display: grid;
+  gap: 22px;
+  padding: 38px 44px;
+}
+/* barre dentro un riquadro insieme ad altro (per esempio la domanda sopra, in .lead): il riquadro
+   è quello esterno, niente secondo margine */
+.glass > .bars:not(.glass) {
+  padding: 0;
+}
+.glass > * + .bars {
+  margin-top: 30px;
+}
+.bars > .bar {
+  display: grid;
+  grid-template-columns: 300px 1fr 90px;
+  align-items: center;
+  gap: 24px;
+  font: 400 24px/1.2 var(--font-headline);
+  color: var(--title);
+}
+.bars > .bar > i {
+  height: 22px;
+  border-radius: 22px;
+  background: rgb(255 255 255 / 0.65);
+  box-shadow: inset 0 1px 3px rgb(17 86 174 / 0.12);
+  overflow: hidden;
+}
+.bars > .bar > i::before {
+  content: "";
+  display: block;
+  height: 100%;
+  width: calc(var(--v, 0) * 1%);
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--blue-3), var(--blue) 60%, var(--blue-2));
+  transform-origin: left;
+}
+.slide.active .bars > .bar > i::before {
+  animation: barIn 1.3s var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 110ms + 350ms);
+}
+.bars > .bar > em {
+  font: 500 24px/1 var(--font-display);
+  font-style: normal;
+  color: var(--pn-blue);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+@keyframes barIn {
+  from {
+    transform: scaleX(0);
+  }
+}
+/* confronto tra voci (data-scale="max"): barre spesse, niente traccia, valore in fondo alla barra */
+.bars[data-scale="max"] {
+  gap: 20px;
+}
+.bars[data-scale="max"] > .bar {
+  grid-template-columns: 330px 1fr;
+  font-size: 27px;
+}
+.bars[data-scale="max"] > .bar > i {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  height: 40px;
+  background: none;
+  box-shadow: none;
+  overflow: visible;
+}
+.bars[data-scale="max"] > .bar > i::before {
+  flex: none;
+  width: calc((100% - 100px) * var(--v, 0) / 100); /* 100px restano sempre per il valore, anche in un riquadro stretto */
+  border-radius: 0 10px 10px 0;
+}
+.bars[data-scale="max"] > .bar > i > em {
+  font: 500 30px/1 var(--font-display);
+  font-style: normal;
+  color: var(--title);
+}
+.slide.active .bars[data-scale="max"] > .bar > i > em {
+  animation: fade 0.5s var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 110ms + 1.1s);
+}
+/* confronto (data-compare): per ogni voce la nostra barra e, sotto, quella di riferimento più
+   sottile e grigia, sulla stessa scala; il valore in fondo a ciascuna, la legenda in alto a destra */
+.bars[data-compare] {
+  --ref: oklch(70.4% 0.04 256.788); /* slate-400: si distingue dal blu anche per chi non vede i colori */
+  /* colonna delle voci larga quanto la voce più lunga, uguale per tutte le righe (subgrid) */
+  grid-template-columns: max-content 1fr;
+  gap: 34px 30px;
+}
+.bars[data-compare] > * {
+  grid-column: 1 / -1;
+}
+.bars[data-compare] > .key {
+  display: flex;
+  justify-content: flex-end;
+  gap: 30px;
+  margin-bottom: -6px;
+  font: 400 19px/1 var(--font-body);
+  color: var(--text-2);
+}
+.bars[data-compare] > .key > span::before {
+  content: "";
+  display: inline-block;
+  width: 26px;
+  height: 12px;
+  margin-right: 10px;
+  border-radius: 0 6px 6px 0;
+  background: linear-gradient(90deg, var(--blue-3), var(--blue) 60%, var(--blue-2));
+}
+.bars[data-compare] > .key > .ref::before {
+  height: 8px;
+  background: var(--ref);
+}
+.bars[data-compare] > .bar {
+  grid-template-columns: subgrid;
+  font-size: 27px;
+}
+.bars[data-compare] .pair {
+  display: grid;
+  gap: 4px;
+}
+.bars[data-compare] .pair > i {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 34px;
+}
+.bars[data-compare] .pair > i.ref {
+  height: 20px;
+}
+.bars[data-compare] .pair > i::before {
+  content: "";
+  flex: none;
+  height: 100%;
+  width: calc((100% - 100px) * var(--v, 0) / 100); /* 100px restano sempre per il valore, anche in un riquadro stretto */
+  border-radius: 0 10px 10px 0;
+  background: linear-gradient(90deg, var(--blue-3), var(--blue) 60%, var(--blue-2));
+  transform-origin: left;
+}
+.bars[data-compare] .pair > i.ref::before {
+  border-radius: 0 6px 6px 0;
+  background: var(--ref);
+}
+.bars[data-compare] .pair em {
+  font: 500 30px/1 var(--font-display);
+  font-style: normal;
+  color: var(--title);
+  font-variant-numeric: tabular-nums;
+}
+.bars[data-compare] .pair > i.ref em {
+  font: 400 21px/1 var(--font-body);
+  color: var(--text-3);
+}
+.slide.active .bars[data-compare] .pair > i::before {
+  animation: barIn 1.3s var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 110ms + 350ms);
+}
+.slide.active .bars[data-compare] .pair > i.ref::before {
+  animation-delay: calc(var(--i, 0) * 110ms + 550ms);
+}
+.slide.active .bars[data-compare] .pair em {
+  animation: fade 0.5s var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 110ms + 1.1s);
+}
+
+/* ================= Grafico a colonne: confronto prima/dopo ================= */
+/* altezze calcolate da deck.js: --h = valore / massimo, --b = parte "prima" (data-from) */
+.columns {
+  --plot: 340px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 150px;
+  align-self: center;
+  padding: 44px 120px 34px;
+}
+/* spazio a destra per l'etichetta della crescita accanto all'ultima colonna */
+.columns:has(> .col[data-delta]) {
+  padding-right: 250px;
+}
+/* più spazio quando le etichette hanno anche il testo piccolo sotto la cifra */
+.columns:has(> .col[data-delta] > b > small),
+.columns:has(> .col[data-from-label] > b > small) {
+  padding-right: 340px;
+}
+.columns > .col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font: 400 26px/1.2 var(--font-headline);
+  color: var(--title);
+}
+.columns > .col > em {
+  margin-bottom: 14px;
+  font: 500 54px/1 var(--font-display);
+  font-style: normal;
+  color: var(--title);
+}
+.columns > .col > i {
+  position: relative;
+  width: 170px;
+  height: calc(var(--h, 0) * var(--plot));
+  border-radius: 12px 12px 0 0; /* arrotondata in cima, dritta sulla base */
+  background: var(--blue-3);
+  transform-origin: bottom;
+}
+/* la crescita: parte alta più scura, staccata da 2px di superficie */
+.columns > .col[data-from] > i {
+  background: linear-gradient(
+    to top,
+    var(--blue-3) 0 calc(var(--b) * 100% - 1px),
+    rgb(255 255 255 / 0.95) 0 calc(var(--b) * 100% + 1px),
+    var(--blue-2) 0
+  );
+}
+.columns > .col > span {
+  margin-top: 18px;
+  padding-top: 16px;
+  white-space: nowrap;
+}
+/* linea di base comune sotto le colonne */
+.columns > .col > span::before {
+  content: "";
+  position: absolute;
+  left: -75px;
+  right: -75px;
+  margin-top: -17px;
+  height: 1.5px;
+  background: rgb(17 86 174 / 0.22);
+}
+.columns > .col > b {
+  position: absolute;
+  left: calc(50% + 85px + 22px);
+  bottom: calc(18px + 16px + 1.2em + var(--h) * var(--plot) * (1 + var(--b)) / 2);
+  translate: 0 50%;
+  font: 500 40px/1 var(--font-display);
+  color: var(--pn-blue);
+  white-space: nowrap;
+}
+.columns > .col > b > small {
+  display: block;
+  margin-top: 8px;
+  font: 400 22px/1.2 var(--font-headline);
+  color: var(--text-2);
+}
+/* data-from-label: la parte "prima", a metà della parte chiara */
+.columns > .col > b.base {
+  bottom: calc(18px + 16px + 1.2em + var(--h) * var(--plot) * var(--b) / 2);
+  color: var(--title);
+}
+.slide.active .columns > .col > i {
+  animation: colIn 1.1s var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 160ms + 350ms);
+}
+.slide.active .columns > .col > b {
+  animation: fade 0.6s var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 160ms + 1.2s);
+}
+@keyframes colIn {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+/* numero grande dentro .lead: la parola che segue gli sta accanto, sulla stessa riga di base */
+.lead > b.num {
+  display: inline-block;
+  margin-right: 14px;
+}
+.lead:has(> b.num) {
+  margin-bottom: 30px;
+}
+
+/* compare con un'icona grande: il riquadro resta alto quanto il suo contenuto, tutto centrato */
+.compare:has(> .bigicon) {
+  grid-template-columns: minmax(0, 600px) 140px auto;
+  justify-content: center;
+  align-items: center;
+}
+
+/* due elementi .bigicon a confronto (numero → icona): colonne strette, nessuna opacità ridotta */
+.compare:has(> .bigicon:first-child) {
+  grid-template-columns: minmax(0, 1fr) 140px minmax(0, 1fr);
+  width: min(100%, 1100px);
+  margin-inline: auto;
+  align-self: center;
+  align-items: start;
+}
+/* freccia all'altezza del numero e dell'icona (centro della prima riga, 260px), non delle didascalie */
+.compare:has(> .bigicon:first-child)::before {
+  align-self: start;
+  margin-top: 98px;
+}
+.compare > .bigicon:first-child {
+  opacity: 1;
+}
+
+/* icona grande al posto di un'immagine: cerchio blu con anelli, didascalia sotto */
+.bigicon {
+  display: grid;
+  grid-template-rows: 260px auto; /* cerchio + anelli; un numero grande sta nella stessa riga */
+  justify-items: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+/* al posto dell'icona un numero grande (conta fino al valore) */
+.bigicon > b.num {
+  font-size: 150px;
+}
+.bigicon > svg.ico {
+  box-sizing: content-box;
+  width: 92px;
+  height: 92px;
+  padding: 46px;
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(145deg, var(--blue-2), var(--pn-blue));
+  box-shadow:
+    0 0 0 18px rgb(17 86 174 / 0.1),
+    0 0 0 38px rgb(17 86 174 / 0.05),
+    0 30px 60px -20px rgb(17 86 174 / 0.6);
+}
+.bigicon > figcaption {
+  font: 500 34px/1.2 var(--font-headline);
+  color: var(--title);
+}
+.bigicon > figcaption > .label {
+  display: block;
+  margin-bottom: 8px;
+}
+.bigicon > figcaption > small {
+  display: block;
+  max-width: 30ch;
+  margin: 8px auto 0;
+  text-wrap: balance;
+  font: 400 22px/1.35 var(--font-body);
+  color: var(--text-2);
+}
+
+/* ================= Animazioni sulla slide: data-fx="…" =================
+   Su tela, disegnate da deck.js: fireworks, confetti, likes, emoji, pizza, questions, snake (davanti),
+   network, code, wings (dietro). Solo CSS, qui sotto: float, wave, pulse, flow, shine, wiggle; train (deck.js). Si spengono da sole in ?static, nel PDF
+   e con "riduci movimento" (vedi html.static e prefers-reduced-motion). */
+.slide > canvas.fx {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 6;
+  pointer-events: none;
+}
+/* dietro al contenuto: la slide ha un suo contesto di sovrapposizione (transform) */
+.slide > canvas.fx.back {
+  z-index: -1;
+}
+/* in mezzo: sopra foto, sticker (z 2) e piè di pagina, sotto titolo, scritte e riquadri */
+.slide > canvas.fx.mid {
+  z-index: 3;
+}
+.slide:has(> canvas.fx.mid) > :is(h1, .kicker, .sub, .links, .meta),
+.slide:has(> canvas.fx.mid) > .body > :not(.media, .split, .gallery, .crumb),
+.slide:has(> canvas.fx.mid) .split > :not(.media) {
+  position: relative;
+  z-index: 4;
+}
+@media print {
+  .slide > canvas.fx {
+    display: none;
+  }
+}
+/* float: immagini, telefoni e sticker galleggiano piano (translate, non tocca l'ingresso) */
+.slide.active[data-fx~="float"] .media > * {
+  animation:
+    rise var(--anim-dur) var(--ease) both,
+    floaty 5s ease-in-out infinite alternate;
+  animation-delay: calc(var(--i, 0) * var(--anim-step) + var(--anim-base)), 1.4s;
+}
+.slide.active[data-fx~="float"] > .sticker {
+  animation:
+    stickerIn 0.9s var(--ease-back) 0.65s both,
+    floaty 4.2s ease-in-out 1.6s infinite alternate;
+}
+@keyframes floaty {
+  from {
+    translate: 0 -9px;
+  }
+  to {
+    translate: 0 9px;
+  }
+}
+/* wave: le persone di una riga .people salgono e scendono a onda, a turno: la 1ª, la 3ª… su mentre
+   la 2ª, la 4ª… giù, poi il contrario (translate, non tocca l'ingresso) */
+@media (prefers-reduced-motion: no-preference) {
+  .slide.active[data-fx~="wave"] .people > .person {
+    animation:
+      rise var(--anim-dur) var(--ease) both,
+      wave 4.4s linear infinite;
+    animation-delay: calc(var(--i, 0) * var(--anim-step) + var(--anim-base)), 1.8s;
+  }
+  .slide.active[data-fx~="wave"] .people > .person:nth-child(even of .person) {
+    animation-direction: normal, reverse;
+  }
+}
+/* da fermo, su fino in cima, giù fino in fondo, di nuovo a metà: un'onda sinusoidale senza scatti */
+@keyframes wave {
+  0% {
+    translate: 0 0;
+    animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+  }
+  25% {
+    translate: 0 -18px;
+    animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
+  }
+  75% {
+    translate: 0 18px;
+    animation-timing-function: cubic-bezier(0.32, 0, 0.67, 0);
+  }
+  100% {
+    translate: 0 0;
+  }
+}
+/* wiggle: lo sticker dondola */
+.slide.active[data-fx~="wiggle"] > .sticker {
+  animation:
+    stickerIn 0.9s var(--ease-back) 0.65s both,
+    wiggle 2.6s ease-in-out 1.6s infinite;
+}
+@keyframes wiggle {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+  25% {
+    rotate: -4deg;
+  }
+  75% {
+    rotate: 3deg;
+  }
+}
+/* pulse: onde che partono dall'icona grande e dal QR, come un segnale */
+.slide.active[data-fx~="pulse"] .bigicon > svg.ico {
+  animation: pulseIcon 2.4s ease-out 1s infinite;
+}
+.slide.active[data-fx~="pulse"] .qr {
+  animation: pulseQr 2.4s ease-out 1s infinite;
+}
+@keyframes pulseIcon {
+  from {
+    box-shadow:
+      0 0 0 18px rgb(17 86 174 / 0.1),
+      0 0 0 38px rgb(17 86 174 / 0.05),
+      0 30px 60px -20px rgb(17 86 174 / 0.6),
+      0 0 0 0 rgb(56 189 248 / 0.55);
+  }
+  to {
+    box-shadow:
+      0 0 0 18px rgb(17 86 174 / 0.1),
+      0 0 0 38px rgb(17 86 174 / 0.05),
+      0 30px 60px -20px rgb(17 86 174 / 0.6),
+      0 0 0 90px rgb(56 189 248 / 0);
+  }
+}
+@keyframes pulseQr {
+  from {
+    box-shadow:
+      var(--glass-shadow),
+      0 0 0 0 rgb(56 189 248 / 0.6);
+  }
+  to {
+    box-shadow:
+      var(--glass-shadow),
+      0 0 0 36px rgb(56 189 248 / 0);
+  }
+}
+/* flow: una luce percorre la linea della timeline, dalla prima all'ultima tappa */
+.slide[data-fx~="flow"] .timeline {
+  position: relative;
+  /* centro della prima tappa, meno metà della luce */
+  --tl-a: calc((100% - (var(--n, 3) - 1) * var(--tl-gap)) / var(--n, 3) / 2 - 11px);
+}
+.slide[data-fx~="flow"] .timeline::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 17px; /* centro della linea: 64 - 38 + 2, meno metà della luce */
+  left: var(--tl-a);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0 30%, #38bdf8 60%, rgb(56 189 248 / 0) 72%);
+  box-shadow: 0 0 22px 8px rgb(56 189 248 / 0.55);
+  opacity: 0;
+}
+.slide.active[data-fx~="flow"] .timeline::after {
+  animation: flow 3.4s cubic-bezier(0.45, 0, 0.25, 1) 1.8s infinite;
+}
+@keyframes flow {
+  0% {
+    opacity: 0;
+    left: var(--tl-a);
+  }
+  12% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+    left: calc(100% - var(--tl-a) - 22px);
+  }
+  100% {
+    opacity: 0;
+    left: calc(100% - var(--tl-a) - 22px);
+  }
+}
+/* shine: un riflesso passa sulla barra di crescita */
+.slide[data-fx~="shine"] .growth > .track::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.75) 50%, transparent 65%) no-repeat;
+  background-size: 40% 100%;
+  background-position: -60% 0;
+  pointer-events: none;
+}
+.slide.active[data-fx~="shine"] .growth > .track::after {
+  animation: shine 2.8s ease-in-out 2s infinite;
+}
+@keyframes shine {
+  0% {
+    background-position: -60% 0;
+  }
+  60%,
+  100% {
+    background-position: 160% 0;
+  }
+}
+
+/* ================= Crescita: un numero grande e una barra da "prima" a "oggi" ================= */
+/* --b = parte "prima" (data-from / data-value), calcolata da deck.js */
+.growth {
+  display: grid;
+  gap: 34px;
+  align-content: center;
+}
+.growth > p {
+  font: 400 30px/1.3 var(--font-headline);
+  color: var(--text-2);
+}
+.growth > p > b {
+  display: block;
+  margin-bottom: 14px;
+  font: 500 150px/0.9 var(--font-display);
+  letter-spacing: -0.03em;
+  color: var(--pn-blue);
+}
+.growth > .track {
+  position: relative;
+  height: 54px;
+  margin-bottom: 100px; /* spazio per le etichette sotto la barra */
+}
+/* la barra: parte chiara fino al valore di partenza, parte scura per la crescita */
+.growth > .track::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: linear-gradient(
+    to right,
+    var(--blue-3) 0 calc(var(--b, 0.5) * 100% - 2px),
+    rgb(255 255 255 / 0.95) 0 calc(var(--b, 0.5) * 100% + 2px),
+    var(--blue-2) 0
+  );
+  box-shadow: 0 20px 40px -26px rgb(17 86 174 / 0.6);
+  transform-origin: left;
+}
+/* etichette sotto la barra, allineate a destra: la prima dove cambia colore, l'ultima alla fine */
+.growth > .track > span {
+  position: absolute;
+  top: calc(100% + 20px);
+  translate: -100% 0;
+  text-align: right;
+  white-space: nowrap;
+  font: 500 38px/1.1 var(--font-display);
+  color: var(--title);
+}
+.growth > .track > span:first-child {
+  left: calc(var(--b, 0.5) * 100%);
+}
+.growth > .track > span:last-child {
+  left: 100%;
+  color: var(--pn-blue);
+}
+.growth > .track > span > small {
+  display: block;
+  margin-top: 4px;
+  font: 400 21px/1.3 var(--font-headline);
+  color: var(--text-2);
+}
+.slide.active .growth > .track::before {
+  animation: growIn 1.1s var(--ease) 0.5s both;
+}
+.slide.active .growth > .track > span {
+  animation: fade 0.6s var(--ease) both;
+  animation-delay: 1.2s;
+}
+.slide.active .growth > .track > span:last-child {
+  animation-delay: 1.45s;
+}
+/* accanto alla crescita il telefono sta un po' più in alto: il blocco di testo pesa in basso */
+.split:has(> .growth) > .media {
+  translate: 0 -40px;
+}
+@keyframes growIn {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* ================= Team ================= */
+.teams {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 22px;
+}
+.teams > * {
+  padding: 30px 30px 34px;
+}
+.teams > * > .n {
+  display: block;
+  font: 500 54px/1 var(--font-display);
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--blue);
+  margin-bottom: 18px;
+}
+.teams > * > h3 {
+  min-height: 2.5em;
+  font-size: 27px;
+}
+.teams > * li {
+  font-size: 22px;
+}
+/* chi guida il team: sotto il nome, staccato dall'elenco dei compiti */
+.teams > * > .lead {
+  margin-bottom: 22px;
+  padding-bottom: 20px;
+  border-bottom: 1.5px solid rgb(17 86 174 / 0.14);
+}
+.teams > * > .lead .label {
+  font-weight: 600;
+  color: var(--blue-ink);
+  margin-bottom: 8px;
+}
+.teams > * > .lead p {
+  min-height: 2.7em; /* due nomi: le linee restano allineate tra le colonne */
+  font: 500 22px/1.35 var(--font-headline);
+  color: var(--title);
+}
+.teams > *.extra {
+  background: linear-gradient(145deg, rgb(116 212 255 / 0.32), rgb(81 162 255 / 0.16));
+}
+
+.team {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 26px;
+  align-items: stretch;
+}
+.people {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 30px 36px;
+}
+.people .label {
+  flex-basis: 100%;
+  text-align: center;
+  margin-bottom: 0;
+}
+.person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  min-width: 200px;
+  text-align: center;
+}
+.person > img,
+.person > .ph {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: rgb(255 255 255 / 0.6);
+  border: 4px solid rgb(255 255 255 / 0.95);
+  box-shadow: 0 18px 40px -22px rgb(17 86 174 / 0.5);
+}
+.person figcaption {
+  font: 400 23px/1.25 var(--font-headline);
+  color: var(--title);
+  white-space: nowrap; /* nome e cognome su una riga */
+}
+.person figcaption small {
+  display: block;
+  font: 400 18px/1.3 var(--font-body);
+  color: var(--text-3);
+}
+.person.tbd > .ph {
+  border-style: dashed;
+}
+/* poche persone (fino a 3, una riga sola) da sole sulla slide: foto e nomi grandi, altrimenti
+   tre cerchi piccoli restano persi in mezzo al vuoto */
+.body:not(:has(> .people ~ .people)) > .people:not(:has(> figure:nth-of-type(4))) {
+  gap: 30px 90px;
+}
+.body:not(:has(> .people ~ .people)) > .people:not(:has(> figure:nth-of-type(4))) > .person {
+  gap: 24px;
+}
+.body:not(:has(> .people ~ .people)) > .people:not(:has(> figure:nth-of-type(4))) > .person > :is(img, .ph) {
+  width: 290px;
+  height: 290px;
+  border-width: 6px;
+  box-shadow: 0 26px 56px -26px rgb(17 86 174 / 0.5);
+}
+.body:not(:has(> .people ~ .people)) > .people:not(:has(> figure:nth-of-type(4))) > .person figcaption {
+  font-size: 32px;
+}
+.body:not(:has(> .people ~ .people)) > .people:not(:has(> figure:nth-of-type(4))) > .person figcaption small {
+  margin-top: 4px;
+  font-size: 21px;
+}
+
+/* ================= Testo + media ================= */
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
+}
+.split.even {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.split.media-left > :first-child {
+  order: 2;
+}
+/* split fit: la colonna dell'immagine è larga quanto l'immagine, il testo prende il resto */
+.split.fit {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+/* con l'immagine a sinistra le colonne si scambiano: quella larga quanto l'immagine passa a sinistra */
+.split.fit.media-left {
+  grid-template-columns: auto minmax(0, 1fr);
+}
+/* split fit: card alte quanto l'immagine, righe uguali, contenuto al centro */
+.split.fit > .cards {
+  align-self: stretch;
+  grid-auto-rows: 1fr;
+}
+.split.fit > .cards > * {
+  justify-content: center;
+  align-content: center;
+}
+.media {
+  display: flex;
+  gap: 22px;
+  justify-content: center;
+  align-items: center;
+}
+.media img,
+.media .ph {
+  border-radius: var(--r-img);
+  max-height: 560px;
+  object-fit: cover;
+  box-shadow: 0 30px 60px -34px rgb(17 86 174 / 0.55);
+}
+.legend {
+  list-style: none;
+  display: grid;
+  gap: 16px;
+}
+.legend > li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 25px;
+  color: var(--text);
+}
+.legend > li::before {
+  content: "";
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--c, var(--blue));
+  box-shadow: 0 0 0 5px rgb(255 255 255 / 0.7);
+}
+
+/* cornice smartphone */
+.phone {
+  position: relative;
+  width: 300px;
+  aspect-ratio: 9 / 19.2;
+  padding: 12px;
+  border-radius: 46px;
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  box-shadow:
+    0 40px 80px -36px rgb(15 23 42 / 0.65),
+    inset 0 0 0 2px rgb(255 255 255 / 0.12);
+  flex: none;
+}
+.phone > img,
+.phone > .ph {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 35px;
+  max-height: none;
+  box-shadow: none;
+}
+.phone::before {
+  content: "";
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  width: 84px;
+  height: 22px;
+  margin-left: -42px;
+  border-radius: 20px;
+  background: #0f172a;
+  z-index: 1;
+}
+.qr {
+  width: 170px;
+  padding: 12px;
+  border-radius: var(--r-rect);
+  background: #fff;
+  box-shadow: var(--glass-shadow);
+  flex: none;
+}
+.qr > img,
+.qr > .ph {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 6px;
+  box-shadow: none;
+}
+.qr > figcaption {
+  margin-top: 8px;
+  font: 500 16px/1.2 var(--font-body);
+  color: var(--text-3);
+  text-align: center;
+}
+/* QR in alto a destra, all'altezza del titolo, con un invito breve sotto ("Provalo!") */
+.slide > .qr.corner {
+  position: absolute;
+  top: 74px;
+  right: 120px;
+  width: 150px;
+  z-index: 3;
+  rotate: 3deg;
+}
+.slide > .qr.corner > figcaption {
+  margin-top: 10px;
+  font: 600 22px/1 var(--font-headline);
+  color: var(--pn-blue);
+}
+
+/* inclinazione per telefono e immagini scontornate (rotate non tocca le animazioni con transform) */
+.tilt {
+  rotate: 8deg;
+}
+.tilt-left {
+  rotate: -8deg;
+}
+/* immagine scontornata (prodotto, oggetto) in .media: niente riquadro né ombra rettangolare */
+.media img.cutout {
+  width: auto;
+  height: 520px;
+  border-radius: 0;
+  box-shadow: none;
+  object-fit: contain;
+  filter: drop-shadow(0 30px 40px rgb(15 23 42 / 0.22));
+}
+/* testo e QR affiancati dentro una card o un riquadro (il QR va dove lo metti: primo o ultimo) */
+.has-qr,
+.cards > .has-qr {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 28px;
+}
+.has-qr:has(> .qr:first-child) {
+  grid-template-columns: auto minmax(0, 1fr);
+}
+.glass > * + .has-qr {
+  margin-top: 26px;
+}
+/* riquadro QR da solo sotto un altro elemento (es. timeline): largo quanto serve, centrato */
+.body > .has-qr {
+  width: fit-content;
+  margin-inline: auto;
+}
+
+/* ================= Galleria ================= */
+.gallery {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 22px;
+  height: 540px;
+}
+.gallery > figure {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: var(--r-rect);
+  border: 4px solid rgb(255 255 255 / 0.9);
+  box-shadow: 0 30px 60px -34px rgb(17 86 174 / 0.55);
+}
+.gallery > figure > img,
+.gallery > figure > .ph {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.gallery > figure > figcaption {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  padding: 8px 16px;
+  border-radius: var(--r-btn);
+  background: rgb(255 255 255 / 0.78);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  font: 500 18px/1.2 var(--font-body);
+  color: var(--title);
+}
+.gallery > figure:nth-child(odd) {
+  rotate: -1.2deg;
+}
+.gallery > figure:nth-child(even) {
+  rotate: 1deg;
+  translate: 0 18px;
+}
+/* mosaico: 4 foto, la prima grande a sinistra, a destra due affiancate e una larga sotto */
+.gallery.mosaic {
+  grid-auto-flow: row;
+  grid-template-columns: 3fr 1fr 1fr;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+.gallery.mosaic > figure {
+  rotate: none;
+  translate: none;
+}
+.gallery.mosaic > figure:first-child {
+  grid-row: span 2;
+}
+.gallery.mosaic > figure:nth-child(4) {
+  grid-column: span 2;
+}
+
+/* ================= Schermate di un'app: telefoni in fila ================= */
+.screens {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 64px;
+}
+.screens > figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+}
+.screens .phone {
+  width: 215px;
+}
+.screens > figure:nth-child(odd) > .phone {
+  rotate: -3deg;
+}
+.screens > figure:nth-child(even) > .phone {
+  rotate: 3deg;
+  translate: 0 14px;
+}
+.screens > figure > figcaption {
+  max-width: 300px;
+  text-align: center;
+  font: 500 22px/1.3 var(--font-headline);
+  color: var(--title);
+}
+.screens > figure > figcaption small {
+  display: block;
+  margin-top: 4px;
+  font: 400 18px/1.35 var(--font-body);
+  color: var(--text-3);
+}
+
+/* ================= Timeline ================= */
+/* un punto centrato sopra ogni tappa, un segmento da ogni punto al successivo */
+.timeline {
+  --tl-gap: 22px;
+  list-style: none;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: var(--tl-gap);
+  padding-top: 64px;
+}
+.timeline > li {
+  padding: 26px 28px 30px;
+  text-align: center;
+}
+.timeline > li::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: -50px;
+  left: 50%;
+  box-sizing: border-box;
+  width: 28px;
+  height: 28px;
+  margin-left: -14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 7px solid var(--blue);
+  box-shadow:
+    0 0 0 6px rgb(255 255 255 / 0.7),
+    0 8px 16px -6px rgb(17 86 174 / 0.55);
+}
+.timeline > li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: -38px; /* centro del punto: -50 + 28/2 - 4/2 */
+  left: 50%;
+  width: calc(100% + var(--tl-gap));
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--blue), var(--blue-2));
+  transform-origin: left;
+}
+.slide.active .timeline > li:not(:last-child)::after {
+  animation: barIn 0.8s var(--ease) both;
+  animation-delay: calc(0.35s + var(--tl-i, 0) * 0.25s);
+}
+.timeline > li:nth-child(2) { --tl-i: 1; }
+.timeline > li:nth-child(3) { --tl-i: 2; }
+.timeline > li:nth-child(4) { --tl-i: 3; }
+.timeline > li > .when {
+  display: block;
+  font: 500 19px/1.2 var(--font-body);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue-2);
+  margin-bottom: 10px;
+}
+.timeline > li > h3 {
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+.timeline > li > p {
+  font-size: 21px;
+}
+
+/* ================= Bilancio ================= */
+.budget {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px;
+}
+.budget > .glass {
+  padding: 30px 38px;
+}
+.budget h3 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.budget h3::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--green-ink);
+  box-shadow: 0 0 0 5px rgb(255 255 255 / 0.7);
+}
+.budget .out h3::before {
+  background: var(--red);
+}
+.budget dl {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+.budget dt,
+.budget dd {
+  padding: 11px 0;
+  font-size: 23px;
+  border-bottom: 1.5px solid rgb(255 255 255 / 0.85);
+}
+.budget dd {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.budget dt.total,
+.budget dd.total {
+  border-bottom: 0;
+  padding-top: 16px;
+  font: 500 27px/1.2 var(--font-display);
+  color: var(--title);
+}
+.budget .result {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 38px;
+  font: 400 26px/1.2 var(--font-headline);
+  color: var(--title);
+}
+.budget .result b {
+  font: 500 34px/1 var(--font-display);
+  color: var(--pn-blue);
+}
+.stamp {
+  position: absolute;
+  left: 50%;
+  bottom: -14px;
+  translate: -50% 0;
+  rotate: -6deg;
+  z-index: 3;
+  padding: 16px 40px;
+  border: 5px solid currentColor;
+  border-radius: 16px;
+  font: 600 52px/1 var(--font-headline);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--red);
+  background: rgb(255 255 255 / 0.7);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  white-space: nowrap;
+  pointer-events: none;
+}
+.stamp.ok {
+  color: var(--green-ink);
+}
+.slide.active .stamp {
+  animation: stampIn 0.7s var(--ease-back) 1.2s both;
+}
+@keyframes stampIn {
+  from {
+    opacity: 0;
+    scale: 2.2;
+    rotate: -24deg;
+  }
+}
+
+/* ================= 5x1000 ================= */
+/* a sinistra i tre passi (ul.irows), a destra il codice fiscale in grande */
+.fivex {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: stretch;
+}
+.fivex .code {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  padding: 48px 40px;
+  text-align: center;
+}
+/* il codice cifra per cifra, nelle caselle come sul modulo della dichiarazione */
+.fivex .code b {
+  display: flex;
+  gap: 6px;
+  font: 500 40px/1 var(--font-headline);
+  color: var(--title);
+}
+.fivex .code b > span {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 66px;
+  border-radius: 10px;
+  background: rgb(255 255 255 / 0.92);
+  border: 1.5px solid rgb(17 86 174 / 0.22);
+  box-shadow: 0 6px 14px -10px rgb(17 86 174 / 0.6);
+}
+.fivex .code p {
+  max-width: 440px;
+  font-size: 21px;
+}
+
+/* ================= Votazione ================= */
+.vote {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.vote > button {
+  font: inherit;
+  cursor: pointer;
+  padding: 30px 26px;
+  text-align: center;
+  color: var(--title);
+  user-select: none;
+  transition: transform 0.2s var(--ease);
+}
+.vote > button:active {
+  transform: scale(0.97);
+}
+.vote > button > span {
+  display: block;
+  font: 400 26px/1.2 var(--font-headline);
+}
+.vote > button > b {
+  display: block;
+  margin-top: 12px;
+  font: 500 96px/1 var(--font-display);
+  font-variant-numeric: tabular-nums;
+  color: var(--blue-2);
+}
+.vote > .yes > b {
+  color: var(--green-ink);
+}
+.vote > .no > b {
+  color: var(--red);
+}
+.vote > .abs > b {
+  color: var(--text-3);
+}
+.vote + .small {
+  text-align: center;
+}
+
+/* ================= Grazie / link ================= */
+.slide.thanks {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.slide.thanks > h1 {
+  font-size: 104px;
+  letter-spacing: -0.03em;
+}
+.links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 44px;
+}
+.links > li {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 28px;
+  border-radius: var(--r-btn);
+  background: rgb(255 255 255 / 0.55);
+  border: 1.5px solid rgb(255 255 255 / 0.95);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow);
+  font: 500 23px/1.2 var(--font-body);
+  color: var(--pn-blue);
+}
+.links > li > svg.ico,
+.links > li > a > svg.ico {
+  width: 26px;
+  height: 26px;
+}
+/* voce cliccabile: il link prende tutta la pillola, icona compresa */
+.links > li > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: inherit;
+  text-decoration: none;
+}
+.links > li:has(> a:hover) {
+  background: rgb(255 255 255 / 0.8);
+}
+.thanks .qr {
+  margin-top: 36px;
+}
+
+/* ================= Citazione con chi la dice: div.quote ================= */
+/* foto (o icona, per chi non si mostra) a sinistra; nome e ruolo, la frase, una nota facoltativa */
+.quote {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  align-items: center;
+  column-gap: 30px;
+  padding: 26px 36px;
+}
+.quote:not(:has(> img, > svg.ico, > .ph)) {
+  grid-template-columns: minmax(0, 1fr);
+}
+.quote > :is(img, svg.ico, .ph) {
+  grid-row: 1 / span 3;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid rgb(255 255 255 / 0.95);
+  box-shadow: 0 18px 40px -22px rgb(17 86 174 / 0.5);
+}
+.quote > svg.ico {
+  padding: 24px;
+  background: linear-gradient(145deg, rgb(116 212 255 / 0.4), rgb(81 162 255 / 0.18));
+  color: var(--blue-2);
+  stroke-width: 1.6;
+}
+.quote > p.who {
+  font: 400 18px/1.3 var(--font-body);
+  color: var(--text-3);
+}
+.quote > p.who > b {
+  margin-right: 12px;
+  font: 500 23px/1.3 var(--font-headline);
+  color: var(--title);
+}
+.quote > blockquote {
+  margin-top: 6px;
+  font: 400 25px/1.45 var(--font-headline);
+  color: var(--title);
+  text-wrap: pretty;
+}
+.quote > p.note {
+  margin-top: 8px;
+  font: 400 17px/1.3 var(--font-body);
+  color: var(--text-3);
+  text-align: right;
+}
+/* la frase in grande: una citazione sola che regge la slide (o mezza) */
+.quote.big > blockquote {
+  font: 500 34px/1.3 var(--font-display);
+  letter-spacing: -0.01em;
+}
+/* contesto sotto la citazione, fuori dal riquadro */
+.quote + p {
+  margin: 20px 8px 0;
+  color: var(--text-2);
+}
+html.read .quote > blockquote {
+  font-size: 22px;
+}
+html.read .quote.big > blockquote {
+  font-size: 30px;
+}
+html.read .quote > p.who > b {
+  font-size: 22px;
+}
+
+/* ================= Scheda di una persona: div.profile ================= */
+/* a sinistra la foto (e facoltative le foto piccole di chi c'era), a destra chi è, in un riquadro */
+.profile {
+  display: grid;
+  grid-template-columns: 510px minmax(0, 1fr);
+  gap: 44px;
+  align-items: stretch;
+}
+.profile > .photos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: center;
+  gap: 12px 18px;
+  min-width: 0;
+}
+.profile > .photos > :is(figure:not(.small), .label) {
+  grid-column: 1 / -1;
+}
+.profile > .photos > .label {
+  margin: 18px 0 0;
+  color: var(--text-2);
+}
+.profile > .photos > figure > :is(img, .ph) {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  height: auto;
+  object-fit: cover;
+  border: 5px solid rgb(255 255 255 / 0.86);
+  border-radius: 24px;
+  box-shadow: 0 28px 54px -30px rgb(17 86 174 / 0.65);
+}
+.profile > .photos > figure.small > :is(img, .ph) {
+  border: 0;
+  border-radius: 16px;
+  box-shadow: 0 15px 32px -22px rgb(17 86 174 / 0.5);
+}
+.profile > .photos > figure > figcaption {
+  margin-top: 12px;
+  font: 500 17px/1.3 var(--font-body);
+  color: var(--text-2);
+}
+.profile > .photos > figure.small > figcaption {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 8px;
+  font-weight: 400;
+}
+.profile > .photos > figure.small > figcaption > b {
+  font-weight: 600;
+}
+.profile > .glass {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 32px 40px;
+}
+.profile > .glass > .label {
+  margin-bottom: 10px;
+  color: var(--text-2);
+}
+.profile > .glass > h2 {
+  margin-bottom: 22px;
+  font-size: 42px;
+}
+.profile > .glass > p {
+  font-size: 21px;
+  line-height: 1.45;
+}
+.profile > .glass > blockquote {
+  margin: 22px 0;
+  font: 600 24px/1.4 var(--font-body);
+  color: var(--title);
+}
+.profile > .glass > .label:not(:first-child) {
+  margin: 6px 0 4px;
+}
+.profile > .glass > p.note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 20px;
+  font-size: 18px;
+}
+.profile > .glass > p.note > svg.ico {
+  width: 22px;
+  height: 22px;
+  color: var(--text-2);
+}
+html.read .profile > .glass > p:not(.note) {
+  font-size: 19px;
+}
+html.read .profile > .glass > p.note {
+  font-size: 17px;
+}
+
+/* ================= Un documento vero: figure.sheet ================= */
+/* la pagina di un documento (statuto, regolamento, verbale, volantino) come un foglio appoggiato,
+   un po' storto; "straight" per un estratto da leggere (evidenziato), dritto */
+figure.sheet {
+  flex: none;
+  width: 380px;
+}
+figure.sheet > :is(img, .ph) {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  border-radius: 4px;
+  rotate: -2.5deg;
+  box-shadow:
+    0 2px 4px rgb(15 23 42 / 0.08),
+    0 30px 60px -24px rgb(17 86 174 / 0.45);
+}
+figure.sheet > .ph {
+  aspect-ratio: 1 / 1.414;
+}
+figure.sheet.straight > :is(img, .ph) {
+  rotate: none;
+  border-radius: 12px;
+}
+figure.sheet > figcaption {
+  margin-top: 26px;
+  font: 400 18px/1.4 var(--font-body);
+  color: var(--text-3);
+  text-align: center;
+}
+figure.sheet.straight > figcaption {
+  margin-top: 18px;
+}
+
+/* ================= Foto in griglia e riquadro riassuntivo: .gallery.grid, div.recap ================= */
+/* foto tutte uguali, dritte, in una griglia regolare (4 → 2×2, 6 → 3×2, 8 → 4×2) */
+.gallery.grid {
+  grid-auto-flow: row;
+  grid-template-columns: repeat(var(--gc, 3), minmax(0, 1fr));
+  grid-auto-rows: minmax(0, 1fr);
+  gap: 16px;
+}
+.gallery.grid:not(:has(> figure:nth-child(5))) {
+  --gc: 2;
+}
+.gallery.grid:has(> figure:nth-child(7)) {
+  --gc: 4;
+}
+.gallery.grid > figure {
+  rotate: none;
+  translate: none;
+  border: 0;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px -24px rgb(17 86 174 / 0.55);
+}
+/* il riquadro accanto alle foto: un numero, quando e dove, i momenti in ordine */
+.recap {
+  display: flex;
+  flex-direction: column;
+  padding: 34px 32px 36px;
+}
+.split:has(> .recap) {
+  grid-template-columns: 390px minmax(0, 1fr);
+  align-items: stretch;
+  gap: 32px;
+}
+.split:has(> .recap:last-child) {
+  grid-template-columns: minmax(0, 1fr) 390px;
+}
+.recap > p.lead {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 14px;
+  font-size: 24px;
+  line-height: 1.2;
+  color: var(--title);
+}
+.recap > p.lead > .num {
+  font-size: 68px;
+  color: var(--blue-2);
+}
+.recap > p:not(.lead) {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 500 19px/1.3 var(--font-body);
+  color: var(--blue-2);
+}
+.recap > p:not(.lead) + p {
+  margin-top: 8px;
+}
+.recap > p > svg.ico {
+  width: 22px;
+  height: 22px;
+}
+.recap > ol {
+  flex: 1;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 14px;
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1.5px solid rgb(255 255 255 / 0.9);
+}
+.recap > ol > li {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  align-items: center;
+  column-gap: 16px;
+  font: 500 21px/1.3 var(--font-headline);
+  color: var(--title);
+}
+.recap > ol > li > svg.ico {
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, rgb(116 212 255 / 0.4), rgb(81 162 255 / 0.18));
+  color: var(--blue-2);
+}
+html.read .recap > ol > li {
+  font-size: 20px;
+}
+
+/* ================= Card a gruppi: .cards con p.group ================= */
+/* un'intestazione per ogni fila (per esempio la priorità); deck.js divide la riga tra le card del
+   gruppo (3 → tre per riga, 2 → metà ciascuna). "muted" per i gruppi meno importanti */
+.cards.grouped {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  row-gap: 16px;
+}
+.cards.grouped > * {
+  grid-column: span var(--span, 4);
+}
+.cards.grouped > p.group {
+  grid-column: 1 / -1;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  font: 500 19px/1.2 var(--font-body);
+  color: var(--blue-2);
+}
+.cards.grouped > p.group:not(:first-child) {
+  margin-top: 12px;
+}
+.cards.grouped > p.group.muted {
+  color: var(--text-3);
+}
+.cards > .muted > svg.ico {
+  color: var(--text-3);
+}
+/* due o tre righe di numeri in fondo alla card, allineate tra le card della stessa fila */
+.cards > :has(> ul.meta) {
+  grid-template-rows: auto auto 1fr;
+}
+.cards > * > ul.meta {
+  list-style: none;
+  display: grid;
+  align-content: end;
+  gap: 2px;
+  margin-top: auto;
+  padding-top: 10px;
+}
+.cards > * > ul.meta > li {
+  font-size: 19px;
+  line-height: 1.4;
+  color: var(--text-3);
+}
+.cards > * > ul.meta b {
+  font-weight: 600;
+  color: var(--title);
+}
+html.read .cards > * > ul.meta > li {
+  font-size: 17px;
+}
+
+/* ================= Punti in un pannello: ul.panel ================= */
+/* 3-4 punti con un titolo e una frase, in un riquadro solo, separati da un filo */
+.panel {
+  list-style: none;
+  padding: 6px 36px;
+}
+.panel > li {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  column-gap: 20px;
+  padding: 24px 0;
+}
+.panel > li + li {
+  border-top: 1.5px solid rgb(255 255 255 / 0.9);
+}
+.panel > li > svg.ico {
+  grid-row: 1 / span 2;
+  width: 30px;
+  height: 30px;
+  margin-top: 2px;
+  color: var(--blue-2);
+}
+.panel > li > b {
+  font: 500 25px/1.3 var(--font-headline);
+  color: var(--title);
+}
+.panel > li > p {
+  margin-top: 4px;
+  font-size: 21px;
+  line-height: 1.45;
+}
+html.read .panel > li > b {
+  font-size: 23px;
+}
+html.read .panel > li > p {
+  font-size: 18px;
+}
+
+/* ================= Interfacce finte: .window, .banner, .btn, .callout ================= */
+/* un pezzo dell'interfaccia di cui si parla (una finestra, un banner, un dialogo), ricostruito in
+   HTML e animato come se qualcuno lo usasse. Senza animazione (PDF, ?static) è già nello stato
+   finale: testo scorso, casella spuntata, pulsante premuto, numeri visibili */
+.window,
+.banner {
+  position: relative;
+  background: var(--glass-bg);
+  border: 1.5px solid var(--glass-border);
+  border-radius: var(--r-rect);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+}
+.window {
+  width: 560px;
+}
+.window > .bar {
+  padding: 22px 30px;
+  border-bottom: 1.5px solid rgb(255 255 255 / 0.85);
+  font: 500 21px/1.3 var(--font-headline);
+  color: var(--title);
+}
+/* testo lungo che scorre (un regolamento, delle condizioni): deck.js lo ferma sul <mark class="flash">, se c'è */
+.window > .scroll {
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+  padding: 0 30px;
+  -webkit-mask-image: linear-gradient(transparent, #000 14%, #000 80%, transparent);
+  mask-image: linear-gradient(transparent, #000 14%, #000 80%, transparent);
+}
+.window > .scroll > div {
+  transform: translateY(var(--scroll, 0px));
+}
+.window > .scroll p {
+  margin: 16px 0;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--text-3);
+}
+.window > .scroll b {
+  color: var(--text-2);
+}
+.window > .actions {
+  display: grid;
+  justify-items: start;
+  gap: 18px;
+  padding: 22px 30px 26px;
+  border-top: 1.5px solid rgb(255 255 255 / 0.85);
+}
+.window > p.body {
+  padding: 22px 30px;
+  font-size: 19px;
+}
+mark.flash {
+  color: var(--text);
+  background: var(--blue-soft);
+  border-radius: 4px;
+  box-shadow: 0 0 0 3px var(--blue-soft);
+}
+/* casella che si spunta: deck.js aggiunge il quadratino */
+p.check {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font: 400 19px/1.3 var(--font-headline);
+  color: var(--text);
+}
+p.check > .box {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--blue);
+}
+p.check > .box > svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+}
+/* parola cancellata con un tratto */
+del {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+del::after {
+  content: "";
+  position: absolute;
+  left: -3px;
+  right: -3px;
+  top: 54%;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--blue-ink);
+  transform-origin: left;
+}
+.btn {
+  position: relative;
+  display: inline-block;
+  flex: none;
+  padding: 12px 24px;
+  border-radius: var(--r-btn);
+  border: 1.5px solid rgb(17 86 174 / 0.25);
+  font: 500 18px/1 var(--font-headline);
+  color: var(--text-2);
+  white-space: nowrap;
+}
+.btn.primary {
+  border-color: transparent;
+  background: var(--blue);
+  color: var(--text);
+}
+/* puntatore finto che arriva e clicca il pulsante "click" (deck.js lo aggiunge) */
+.btn > .cursor {
+  position: absolute;
+  left: 58%;
+  top: 46%;
+  width: 30px;
+  height: 30px;
+  filter: drop-shadow(0 3px 5px rgb(15 23 42 / 0.35));
+}
+.btn > .cursor path {
+  fill: #fff;
+  stroke: var(--title);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+/* banner in fondo alla slide (un avviso, un invito): testo e pulsanti su una riga */
+.banner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px 16px 30px;
+}
+.banner > p {
+  flex: 1;
+  margin-right: 12px;
+  font: 400 19px/1.4 var(--font-headline);
+  color: var(--text-2);
+}
+.banner > p > b {
+  font-weight: 500;
+}
+html.read .banner > p {
+  font-size: 18px;
+}
+/* numeri appoggiati alla finestra: scuro in alto a destra, chiaro ("light") in basso a destra */
+.callout {
+  position: absolute;
+  right: -44px;
+  top: -62px;
+  z-index: 2;
+  max-width: 250px;
+  padding: 14px 22px;
+  border-radius: var(--r-rect);
+  background: var(--title);
+  box-shadow: var(--glass-shadow);
+  font: 400 18px/1.35 var(--font-headline);
+  color: #fff;
+}
+.callout > b {
+  display: block;
+  font: 600 36px/1.1 var(--font-display);
+  color: var(--blue);
+}
+.callout.light {
+  top: auto;
+  bottom: -96px;
+  right: -34px;
+  background: #fff;
+  color: var(--text);
+}
+.callout.light > b {
+  color: var(--blue-ink);
+}
+/* in copertina la finestra prende il posto dell'emblema, a destra, centrata in verticale senza
+   translate: in stampa la pagina si spezza dove l'elemento sta prima dello spostamento */
+.cover > .window {
+  position: absolute;
+  right: 120px;
+  top: 0;
+  bottom: 0;
+  height: fit-content;
+  margin-block: auto;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .slide.active .window {
+    animation: pop 0.9s var(--ease) 0.2s both;
+  }
+  .slide.active .window > .scroll > div {
+    animation: winScroll 3.4s cubic-bezier(0.5, 0, 0.2, 1) 0.5s both;
+  }
+  .slide.active p.check > .box {
+    animation: boxIn 0.3s ease 1.3s both;
+  }
+  .slide.active p.check > .box path {
+    animation: tick 0.35s ease 1.4s both;
+  }
+  .slide.active del::after {
+    animation: barIn 0.45s var(--ease) 2s both;
+  }
+  .slide.active .window .btn.primary,
+  .slide.active .btn.click {
+    animation: press 0.5s ease 2.4s both;
+  }
+  .slide.active .callout {
+    animation: pop 0.7s var(--ease) 2.9s both;
+  }
+  .slide.active .callout.light {
+    animation-delay: 4.4s;
+  }
+  .slide.active mark.flash {
+    animation: flash 0.8s ease 4.1s both;
+  }
+  .slide.active .banner {
+    animation: rise 0.8s var(--ease) 1s both;
+  }
+  .slide.active .btn > .cursor {
+    animation:
+      cursorIn 1.1s cubic-bezier(0.3, 0, 0.2, 1) 1.2s both,
+      cursorClick 0.3s ease 2.35s;
+  }
+}
+@keyframes winScroll {
+  from {
+    transform: translateY(0);
+  }
+}
+@keyframes boxIn {
+  from {
+    background: transparent;
+    box-shadow: inset 0 0 0 2px var(--text-3);
+  }
+}
+@keyframes tick {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+@keyframes press {
+  40% {
+    transform: scale(0.94);
+    box-shadow: 0 0 0 0 var(--blue-soft);
+  }
+  100% {
+    box-shadow: 0 0 0 18px transparent;
+  }
+}
+@keyframes flash {
+  from {
+    color: var(--text-3);
+    background: transparent;
+    box-shadow: 0 0 0 3px transparent;
+  }
+}
+@keyframes cursorIn {
+  from {
+    opacity: 0;
+    transform: translate(-260px, 120px);
+  }
+  25% {
+    opacity: 1;
+  }
+}
+@keyframes cursorClick {
+  50% {
+    transform: scale(0.82);
+  }
+}
+
+/* ================= Mappa a colonne: div.map ================= */
+/* colonne di riquadri (chi → cosa serve → come → obiettivi) collegati da frecce. deck.js disegna le
+   frecce da data-to (gli id dei riquadri a destra, in data-id) e le colora con data-track (1-4) */
+.map {
+  --t1: #1d6fe0;
+  --t2: #0e9fb3;
+  --t3: #5b5bd6;
+  --t4: #5f7189;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 76px;
+  flex: 1;
+  max-height: 640px;
+  min-height: 0;
+}
+.map:has(> .col > h4) {
+  padding-top: 46px;
+}
+.map > .col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 14px;
+  min-width: 0;
+}
+/* intestazione della colonna: sopra, ferma, anche se i riquadri sotto si distribuiscono */
+.map > .col > h4 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -46px;
+  font: 600 17px/1.2 var(--font-body);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  text-align: center;
+}
+.map .node {
+  --t: var(--blue-2);
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: 14px;
+  padding: 14px 22px;
+  border-radius: 16px;
+  background: rgb(255 255 255 / 0.62);
+  border: 1.5px solid rgb(255 255 255 / 0.95);
+  box-shadow: 0 10px 18px -8px rgb(17 86 174 / 0.18);
+}
+.map .node:not(:has(> svg.ico)) {
+  grid-template-columns: minmax(0, 1fr);
+}
+.map .node[data-track="1"] {
+  --t: var(--t1);
+}
+.map .node[data-track="2"] {
+  --t: var(--t2);
+}
+.map .node[data-track="3"] {
+  --t: var(--t3);
+}
+.map .node[data-track="4"] {
+  --t: var(--t4);
+}
+.map .node > svg.ico {
+  grid-row: 1 / span 3;
+  width: 40px;
+  height: 40px;
+  padding: 9px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--blue-2) 12%, white);
+  color: var(--blue-2);
+}
+.map .node > .label {
+  margin: 0 0 2px;
+  font: 600 17px/1.2 var(--font-body);
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--blue-2);
+}
+.map .node > b {
+  font: 500 19px/1.3 var(--font-headline);
+  color: var(--title);
+}
+.map .node > small {
+  font: 400 17px/1.3 var(--font-body);
+  color: var(--text-3);
+}
+/* colonna "fill": riquadri pieni del colore del filone */
+.map > .col.fill .node {
+  background: var(--t);
+  border-color: transparent;
+  box-shadow: 0 10px 16px -6px color-mix(in srgb, var(--t) 45%, transparent);
+}
+.map > .col.fill .node > b {
+  font-weight: 600;
+  color: #fff;
+}
+/* riquadro con un filone ma non pieno: una barra del suo colore a sinistra */
+.map > .col:not(.fill) .node[data-track] {
+  border-left: 6px solid var(--t);
+}
+.map > svg.links {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.map > svg.links path {
+  fill: none;
+  stroke: var(--t, var(--blue-2));
+  stroke-width: 1.8;
+  stroke-opacity: 0.55;
+}
+.map > svg.links path.tip {
+  fill: var(--t, var(--blue-2));
+  fill-opacity: 0.9;
+  stroke: none;
+}
+.map > svg.links path.pulse {
+  stroke-width: 3.5;
+  stroke-opacity: 0;
+  stroke-linecap: round;
+  stroke-dasharray: 0.045 0.955;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .slide.active .map .node {
+    animation: nodeIn 0.65s var(--ease) both;
+    animation-delay: var(--d, 0ms);
+  }
+  .slide.active .map > svg.links path.line,
+  .slide.active .road > svg path.track {
+    stroke-dasharray: 1;
+    animation: drawLine var(--dur, 800ms) cubic-bezier(0.45, 0, 0.2, 1) both;
+    animation-delay: var(--d, 0ms);
+  }
+  .slide.active .map > svg.links path.tip,
+  .slide.active .road > svg path.tip {
+    animation: fade 0.3s ease-out both;
+    animation-delay: var(--d, 0ms);
+  }
+  .slide.active .map > svg.links path.pulse,
+  .slide.active .road > svg path.pulse {
+    animation: pulseLine 3.4s linear infinite;
+    animation-delay: var(--d, 0ms);
+  }
+}
+@keyframes drawLine {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+@keyframes nodeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+}
+@keyframes pulseLine {
+  0% {
+    stroke-dashoffset: 1;
+    stroke-opacity: 0;
+  }
+  12%,
+  85% {
+    stroke-opacity: 0.95;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    stroke-opacity: 0;
+  }
+}
+
+/* ================= Percorso a serpente: ol.road ================= */
+/* 4-6 passi su due file: la prima da sinistra a destra, una curva, la seconda da destra a sinistra.
+   deck.js mette i passi nella griglia, aggiunge i numeri e disegna la strada */
+.road {
+  position: relative;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(var(--rc, 6), minmax(0, 1fr));
+  row-gap: 60px;
+  align-content: center;
+  padding: 0 150px 0 40px;
+}
+.road > li {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 10px;
+}
+.road > li > .dot {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 22px;
+  border-radius: 50%;
+  background: var(--blue-2);
+  box-shadow:
+    0 0 0 10px rgb(255 255 255 / 0.7),
+    0 10px 18px rgb(17 86 174 / 0.35);
+  font: 600 26px/1 var(--font-headline);
+  color: #fff;
+}
+.road > li > h3 {
+  margin-bottom: 6px;
+  font-size: 27px;
+}
+.road > li > p {
+  font-size: 20px;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+.road > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.road > svg path.track {
+  fill: none;
+  stroke: url(#road-grad);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-opacity: 0.7;
+}
+.road > svg path.tip {
+  fill: var(--blue-2);
+}
+.road > svg path.pulse {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-opacity: 0;
+  stroke-dasharray: 0.03 0.97;
+}
+.slide.active .road > svg path.pulse {
+  animation-duration: 6s;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .slide.active .road > li {
+    animation: nodeIn 0.65s var(--ease) both;
+    animation-delay: var(--d, 0ms);
+  }
+}
+html.read .road > li > p {
+  font-size: 18px;
+}
+
+/* ================= Rimandi e serie ================= */
+/* serie di slide con la stessa struttura (una per persona, team, progetto): il contenuto parte in
+   alto, così passando da una all'altra niente si sposta */
+.slide[data-align="top"] > .body {
+  justify-content: flex-start;
+}
+
+/* ================= Nota in copertina ================= */
+/* in fondo a sinistra: la fonte dei numeri, con l'asterisco */
+.cover > .small {
+  position: absolute;
+  left: var(--pad-x);
+  bottom: 40px;
+  font-size: 17px;
+}
+
+/* ================= Sticker (meme scontornati) ================= */
+.sticker {
+  position: absolute;
+  right: 70px;
+  bottom: 0;
+  height: 380px;
+  width: auto;
+  max-width: 420px;
+  object-fit: contain;
+  object-position: right bottom; /* gli sticker larghi restano appoggiati in basso, non sospesi */
+  z-index: 2;
+  filter: drop-shadow(0 24px 30px rgb(15 23 42 / 0.22));
+  pointer-events: none;
+}
+.sticker.left {
+  right: auto;
+  left: 60px;
+  object-position: left bottom;
+}
+/* sticker tagliato dritto sul lato: attaccato al bordo della slide */
+.sticker.edge {
+  right: 0;
+}
+.sticker.left.edge {
+  left: 0;
+}
+.sticker.small {
+  height: 240px;
+}
+/* sticker intero (non tagliato in basso): staccato dal fondo, all'altezza del contenuto */
+.sticker.lift {
+  bottom: 90px;
+}
+/* specchiato, per farlo guardare verso il contenuto (scale non tocca l'animazione con transform) */
+.sticker.flip {
+  scale: -1 1;
+}
+.sticker.top {
+  bottom: auto;
+  top: 60px;
+}
+.sticker.ph {
+  width: 300px;
+  height: 340px;
+}
+.slide.active .sticker {
+  animation: stickerIn 0.9s var(--ease-back) 0.65s both;
+}
+@keyframes stickerIn {
+  from {
+    opacity: 0;
+    transform: translateY(60px) rotate(8deg) scale(0.85);
+  }
+}
+
+/* ================= Placeholder immagini ================= */
+.ph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 14px;
+  text-align: center;
+  color: var(--blue-2);
+  border: 2px dashed rgb(0 105 168 / 0.45) !important;
+  background: repeating-linear-gradient(135deg, rgb(255 255 255 / 0.6) 0 14px, rgb(220 236 255 / 0.6) 14px 28px) !important;
+  overflow: hidden;
+  min-width: 120px;
+  min-height: 120px;
+}
+.ph > svg.ico {
+  width: 34px;
+  height: 34px;
+}
+.ph > span {
+  font: 500 15px/1.3 var(--font-body);
+  word-break: break-all;
+}
+.media > .ph {
+  width: 520px;
+  height: 400px;
+}
+
+/* ================= Animazioni d'ingresso (automatiche) ================= */
+.slide.active [data-anim],
+.slide.active .anim {
+  animation: rise var(--anim-dur) var(--ease) both;
+  animation-delay: calc(var(--i, 0) * var(--anim-step) + var(--anim-base));
+}
+.slide.active [data-anim="pop"] {
+  animation-name: pop;
+}
+.slide.active [data-anim="left"] {
+  animation-name: fromLeft;
+}
+.slide.active [data-anim="right"] {
+  animation-name: fromRight;
+}
+.slide.active [data-anim="fade"] {
+  animation-name: fade;
+}
+.slide.active [data-anim="none"] {
+  animation: none;
+}
+.w {
+  display: inline-block;
+}
+.slide.active .w {
+  animation: riseBlur 0.9s var(--ease) both;
+  animation-delay: calc(var(--w, 0) * 70ms + 120ms);
+}
+/* niente filter qui: su un antenato spegne il vetro (backdrop-filter) dei figli
+   fino alla fine dell'animazione, che poi "scatta"; ed è pesante da animare */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+}
+@keyframes riseBlur {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+    filter: blur(8px);
+  }
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.88) translateY(18px);
+  }
+}
+@keyframes fromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-46px);
+  }
+}
+@keyframes fromRight {
+  from {
+    opacity: 0;
+    transform: translateX(46px);
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+/* ---- animazioni decorative: partono insieme all'elemento che le contiene (--i) ---- */
+
+/* icone a linea che si disegnano (pathLength="1" lo mette build.py) */
+.slide.active :is(.irows .tile, .cards > *, .cols h3) > svg.ico {
+  stroke-dasharray: 1 1.1;
+  animation: draw 0.95s cubic-bezier(0.45, 0, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * var(--anim-step) + var(--anim-base) + 120ms);
+}
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1.05;
+  }
+}
+
+/* numeri a contorno che si tracciano (l'SVG lo crea deck.js sopra il testo) */
+.outlined {
+  color: transparent !important;
+  -webkit-text-stroke: 0 !important;
+  background: none !important;
+}
+.outlined > svg.draw {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.outlined > svg.draw text {
+  stroke-dasharray: 6em;
+  paint-order: stroke;
+}
+.slide.section > h1 > .n.outlined text {
+  fill: rgb(116 212 255 / 0.3);
+  stroke: var(--blue);
+  stroke-width: 2px;
+}
+.agenda > li > .num.outlined text {
+  fill: rgb(116 212 255 / 0.22);
+  stroke: var(--blue);
+  stroke-width: 1.5px;
+}
+.slide.active .outlined text {
+  animation:
+    trace 1.6s cubic-bezier(0.65, 0, 0.35, 1) both,
+    fillIn 0.8s ease both;
+  animation-delay:
+    calc(var(--i, 0) * var(--anim-step) + var(--anim-base) + 200ms),
+    calc(var(--i, 0) * var(--anim-step) + var(--anim-base) + 1.2s);
+}
+.slide.active.section .outlined text {
+  animation-delay: 0.2s, 1.1s;
+}
+@keyframes trace {
+  from {
+    stroke-dashoffset: 6em;
+  }
+}
+@keyframes fillIn {
+  from {
+    fill-opacity: 0;
+  }
+}
+
+/* foto della galleria: zoom lento mentre si guarda la slide */
+.slide.active .gallery > figure > img {
+  animation: kenburns 16s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+  animation-delay: calc(var(--i, 0) * var(--anim-step) + var(--anim-base));
+}
+.gallery > figure:nth-child(odd) > img {
+  transform-origin: 30% 40%;
+}
+.gallery > figure:nth-child(even) > img {
+  transform-origin: 70% 60%;
+}
+@keyframes kenburns {
+  from {
+    transform: scale(1.12);
+  }
+}
+
+/* comparsa a passi (.reveal): un elemento per pressione di → */
+.reveal {
+  transition:
+    opacity 0.5s ease,
+    transform 0.6s var(--ease),
+    filter 0.5s;
+}
+.reveal:not(.shown) {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(6px);
+}
+
+/* ================= Versione autoesplicativa (mode: lettura) =================
+   Slide da leggere senza chi presenta: più testo, frasi complete, sticker solo se richiesti. */
+html.read .slide:not(.cover) {
+  padding: 70px 110px 100px;
+}
+html.read .slide:not(.cover, .section, .thanks) > h1 {
+  font-size: 54px;
+  max-width: 1380px;
+}
+html.read .slide.thanks > h1 {
+  font-size: 88px;
+}
+html.read .slide:not(.cover) > .sub {
+  margin-top: 10px;
+  font-size: 24px;
+}
+html.read .slide > .body {
+  gap: 24px;
+  padding-top: 32px;
+}
+/* testo corrente da leggere. Frase a effetto, paragrafo grande e riga piccola hanno la loro misura:
+   :where() nel :not() li esclude senza alzare la specificità, così i componenti la battono ancora */
+html.read :is(p, li, dt, dd, td):not(:where(.statement, .lead, .small)) {
+  font-size: 21px;
+  line-height: 1.5;
+}
+html.read .lead {
+  font-size: 26px;
+  line-height: 1.4;
+}
+html.read .small {
+  font-size: 18px;
+  line-height: 1.45;
+}
+html.read .summary > p {
+  font-size: 25px;
+  line-height: 1.4;
+}
+html.read .irows > li > p b {
+  font-size: 24px;
+}
+html.read .irows > li > p small {
+  font-size: 19px;
+}
+html.read .irows > li > .tile {
+  min-height: 80px;
+}
+html.read .cards > * {
+  padding: 26px 30px;
+}
+html.read .cards > * > svg.ico {
+  width: 30px;
+  height: 30px;
+}
+html.read .cards > * > p,
+html.read .teams > * li,
+html.read .timeline > li > p {
+  font-size: 19px;
+}
+html.read .teams > * > h3 {
+  min-height: 0;
+}
+html.read .teams > * > .lead p {
+  font-size: 19px;
+}
+html.read table.status td {
+  padding-block: 12px;
+  font-size: 21px;
+}
+/* sticker ammessi anche da leggere (se l'utente vuole i meme), ma più piccoli */
+html.read .sticker {
+  height: 280px;
+}
+html.read .slide.section {
+  padding-bottom: 210px;
+}
+html.read .slide.section > h1 {
+  font-size: 88px;
+}
+html.read .slide.section > .sub {
+  max-width: 900px;
+  font-size: 26px;
+}
+html.read {
+  --anim-dur: 0.75s;
+  --anim-step: 60ms;
+  --anim-base: 120ms;
+}
+html.read .slide.active .w {
+  animation-duration: 0.75s;
+  animation-delay: calc(var(--w, 0) * 50ms + 80ms);
+}
+html.read .vote > button {
+  pointer-events: none;
+}
+.agenda > li[data-goto] {
+  cursor: pointer;
+  transition:
+    transform 0.35s var(--ease),
+    box-shadow 0.35s var(--ease);
+}
+.agenda > li[data-goto]:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--glass-shadow), 0 26px 50px -30px rgb(17 86 174 / 0.5);
+}
+.agenda > li[data-goto]::after {
+  content: "→";
+  position: absolute;
+  top: 26px;
+  right: 26px;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--blue-soft);
+  font: 500 22px/1 var(--font-display);
+  color: var(--blue-ink);
+  transition:
+    background 0.35s var(--ease),
+    color 0.35s var(--ease);
+}
+.agenda > li[data-goto]:hover::after {
+  background: var(--blue-ink);
+  color: #fff;
+}
+.agenda.long > li[data-goto]::after {
+  position: static;
+  margin-left: auto;
+  width: auto;
+  height: auto;
+  background: none;
+  color: var(--blue-2);
+}
+html.read .agenda > li {
+  font-size: 30px;
+  line-height: 1.2;
+}
+html.read .agenda.dense > li {
+  font-size: 26px;
+}
+html.read .agenda.long > li {
+  font-size: 26px;
+  line-height: 1.25;
+}
+/* sezione corrente in alto a destra */
+.crumb {
+  position: absolute;
+  top: 36px;
+  right: 48px;
+  font: 500 15px/1 var(--font-body);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+/* copertina: paragrafo introduttivo */
+.cover .intro {
+  margin-top: 30px;
+  max-width: 640px;
+  font-size: 21px;
+  color: var(--text-2);
+}
+
+/* "In breve": la frase da leggere per prima */
+/* niente riquadro: un attacco editoriale con la barra a gradiente, distinto dalle card sotto */
+.summary {
+  position: relative;
+  padding: 2px 0 4px 30px;
+  margin-bottom: 16px;
+  max-width: 1200px;
+}
+.summary::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: 4px;
+  background: linear-gradient(var(--blue-3), var(--blue));
+}
+.summary > .label {
+  margin-bottom: 8px;
+  color: var(--blue-2);
+}
+.summary > p {
+  font: 400 26px/1.4 var(--font-headline);
+  color: var(--title);
+  text-wrap: pretty;
+}
+
+/* colonne di spiegazione: titolo + paragrafi */
+.cols {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr));
+  gap: 22px;
+}
+.cols:has(> :nth-child(3)) {
+  --cols: 3;
+}
+.cols > * {
+  padding: 26px 30px;
+}
+.cols > * > h3 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+.cols > * > h3 > svg.ico {
+  width: 30px;
+  height: 30px;
+  color: var(--blue-2);
+}
+.cols > * > p + p {
+  margin-top: 10px;
+}
+.cols > * > ul {
+  gap: 8px;
+}
+
+/* prossimo passo / cosa ti chiediamo */
+.next {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 28px;
+  border-radius: var(--r-btn);
+  background: rgb(255 255 255 / 0.62);
+  border: 1.5px solid rgb(255 255 255 / 0.95);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow);
+  color: var(--text);
+}
+.next > svg.ico {
+  width: 28px;
+  height: 28px;
+  color: var(--pn-blue);
+}
+.next > b {
+  color: var(--pn-blue);
+  white-space: nowrap;
+}
+
+/* scheda dei fatti: chi, cosa, quando, dove */
+dl.facts {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0 28px;
+  padding: 18px 32px;
+}
+.glass > dl.facts:not(.glass) {
+  padding: 0;
+}
+dl.facts > dt,
+dl.facts > dd {
+  padding: 11px 0;
+  border-bottom: 1.5px solid rgb(255 255 255 / 0.85);
+}
+dl.facts > dt {
+  font: 500 17px/1.6 var(--font-body);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue-2);
+}
+dl.facts > dd {
+  color: var(--text);
+}
+dl.facts > :nth-last-child(-n + 2) {
+  border-bottom: 0;
+}
+
+/* punti chiave numerati ("In sintesi") */
+ol.points {
+  list-style: none;
+  counter-reset: pt;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 22px;
+}
+ol.points:has(> :nth-child(3):last-child) {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+ol.points > li {
+  counter-increment: pt;
+  position: relative;
+  padding: 22px 28px 24px 92px;
+}
+ol.points > li::before {
+  content: counter(pt);
+  position: absolute;
+  left: 26px;
+  top: 22px;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--blue-soft);
+  font: 500 22px/1 var(--font-display);
+  color: var(--blue-ink);
+}
+ol.points > li > b {
+  display: block;
+  margin-bottom: 4px;
+  font: 400 24px/1.3 var(--font-headline);
+}
+
+/* glossario */
+dl.terms {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 22px;
+}
+dl.terms > div {
+  padding: 22px 28px;
+}
+
+/* su due colonne, se gli elementi sono dispari l'ultimo occupa tutta la riga */
+:is(ol.points > li, dl.terms > div):last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+/* con 3 punti stanno tutti su una riga */
+ol.points > li:nth-child(3):last-child {
+  grid-column: auto;
+}
+dl.terms dt {
+  font: 500 24px/1.3 var(--font-display);
+  color: var(--pn-blue);
+  margin-bottom: 6px;
+}
+
+/* timbro anche sull'esito di una votazione: sotto i contatori */
+.vote {
+  position: relative;
+}
+.vote > .stamp {
+  bottom: -104px;
+}
+
+/* ================= Interfaccia ================= */
+.progress {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 4px;
+  width: 0;
+  z-index: 5;
+  background: linear-gradient(90deg, var(--blue-3), var(--blue), var(--pn-blue));
+  transition: width 0.6s var(--ease);
+}
+.ui {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  border-radius: var(--r-btn);
+  background: rgb(255 255 255 / 0.6);
+  border: 1px solid rgb(255 255 255 / 0.9);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+body.show-ui .ui,
+.ui:hover {
+  opacity: 1;
+}
+.ui[hidden],
+html.embed .progress {
+  display: none;
+}
+.ui button {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--pn-blue);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+.ui button:hover {
+  background: rgb(255 255 255 / 0.85);
+}
+.ui button svg {
+  width: 20px;
+  height: 20px;
+}
+.ui .counter {
+  min-width: 64px;
+  text-align: center;
+  font: 500 14px/1 var(--font-body);
+  color: var(--text-2);
+  font-variant-numeric: tabular-nums;
+}
+
+/* panoramica (tasto O) */
+html.overview .stage {
+  pointer-events: auto;
+}
+html.overview .slide {
+  opacity: 1;
+  visibility: visible;
+  cursor: pointer;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--bg-print);
+  box-shadow: 0 30px 80px -30px rgb(17 86 174 / 0.5);
+  transition: transform 0.7s var(--ease);
+}
+html.overview .slide.active {
+  outline: 10px solid var(--blue);
+}
+html.overview .slide * {
+  animation-play-state: paused;
+}
+html.overview .slide .glass,
+html.overview .slide :is(.irows > li > .tile, .irows > li > p, .cards > *, .stats > *, .teams > *, .timeline > li, .agenda > li, .cols > *, ol.points > li, dl.terms > div, .summary, .next, .quote, .recap, .panel, .window, .banner) {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+html.overview .bg {
+  filter: blur(30px);
+}
+
+/* modalità statica (?static): nessuna animazione, tutto visibile */
+html.static *,
+html.static *::before,
+html.static *::after {
+  animation: none !important;
+  transition: none !important;
+}
+html.static .reveal {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* rapporto di controllo (?check) */
+#pn-check-report {
+  position: fixed;
+  z-index: 10;
+  left: 16px;
+  top: 16px;
+  max-width: 560px;
+  max-height: 80vh;
+  overflow: auto;
+  padding: 16px 20px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 10px 40px rgb(0 0 0 / 0.2);
+  font: 13px/1.5 ui-monospace, monospace;
+  white-space: pre-wrap;
+}
+[data-overflow] {
+  outline: 3px solid var(--red) !important;
+  outline-offset: 2px;
+}
+
+/* presentatore (tasto P) */
+html.presenter body {
+  overflow: auto;
+  background: #0f172a;
+}
+html.presenter .bg,
+html.presenter .stage,
+html.presenter .ui,
+html.presenter .progress {
+  display: none;
+}
+.pv {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 20px;
+  height: 100vh;
+  padding: 20px;
+  color: #e2e8f0;
+  font-family: var(--font-body);
+}
+.pv iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: 12px;
+  background: var(--bg);
+}
+.pv .pv-next {
+  opacity: 0.75;
+}
+.pv .pv-bar {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: 500 22px/1 var(--font-body);
+}
+.pv .pv-time {
+  font: 500 40px/1 var(--font-display);
+  font-variant-numeric: tabular-nums;
+}
+.pv .pv-notes {
+  grid-column: 1 / -1;
+  overflow: auto;
+  padding: 18px 22px;
+  border-radius: 12px;
+  background: #1e293b;
+  font-size: 26px;
+  line-height: 1.5;
+}
+.pv .pv-notes p,
+.pv .pv-notes li {
+  color: #e2e8f0;
+  font-size: 26px;
+}
+.pv h4 {
+  margin-bottom: 8px;
+  font: 500 15px/1 var(--font-body);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+/* riduzione del movimento */
+@media (prefers-reduced-motion: reduce) {
+  .bg .shape > i,
+  .bg .wire g,
+  .orbit .ring,
+  .cloud > span > i,
+  svg.ico,
+  .outlined text,
+  .gallery img {
+    animation: none !important;
+  }
+}
+
+/* ================= Stampa / PDF: una slide per pagina 16:9 ================= */
+@page {
+  size: 1600px 900px;
+  margin: 0;
+}
+@media print {
+  /* Chrome/Poppler possono stampare la maschera SVG come un quadrato pieno.
+     La stessa freccia con un ritaglio vettoriale resta visibile nel PDF. */
+  .compare::before {
+    -webkit-mask: none;
+    mask: none;
+    clip-path: polygon(8% 45%, 64% 45%, 43% 24%, 50% 17%, 84% 50%, 50% 83%, 43% 76%, 64% 55%, 8% 55%);
+  }
+  html,
+  body {
+    width: 1600px;
+    height: auto;
+    overflow: visible;
+    background: var(--bg);
+  }
+  .bg,
+  .ui,
+  .progress,
+  #pn-check-report {
+    display: none !important;
+  }
+  .stage {
+    position: static;
+    transform: none !important;
+    width: 1600px;
+    height: auto;
+  }
+  .slide {
+    position: relative;
+    width: 1600px;
+    height: 900px;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    break-after: page;
+    overflow: hidden;
+    background: var(--bg-print);
+  }
+  .slide:last-child {
+    break-after: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  /* train: deck.js sposta le persone con translate in linea, va tolto anche se si stampa a metà giro */
+  .people > .person {
+    translate: none !important;
+  }
+  .glass,
+  .irows > li > .tile,
+  .irows > li > p,
+  .cards > *,
+  .stats > *,
+  .teams > *,
+  .timeline > li,
+  .agenda > li,
+  .cols > *,
+  ol.points > li,
+  dl.terms > div,
+  .summary,
+  .next,
+  .orbit .ring,
+  .links > li,
+  .cover .meta > span,
+  .stamp,
+  .gallery figcaption,
+  .quote,
+  .recap,
+  .panel,
+  .window,
+  .banner {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+  /* vetro: Chrome non stampa backdrop-filter. Sotto la faccia di vetro va --bg-frost, lo sfondo
+     della slide già sfocato (build.py), fissato alla pagina: si vede lo stesso colore sfumato e
+     le curve non passano attraverso i riquadri. Ogni riquadro con una faccia sua la ripete qui. */
+  .glass,
+  .irows > li > .tile,
+  .irows > li > p,
+  .cards > *,
+  .stats > *,
+  .teams > *,
+  .timeline > li,
+  .agenda > li,
+  .cols > *,
+  ol.points > li,
+  dl.terms > div,
+  .quote,
+  .recap,
+  .panel,
+  .window,
+  .banner {
+    background: var(--glass-bg), var(--bg-frost);
+  }
+  .glass.tint,
+  .teams > *.extra {
+    background: linear-gradient(145deg, rgb(116 212 255 / 0.32), rgb(81 162 255 / 0.16)), var(--bg-frost);
+  }
+  .glass.solid {
+    background: linear-gradient(145deg, rgb(255 255 255 / 0.9), rgb(255 255 255 / 0.66)), var(--bg-frost);
+  }
+  .cover .meta > span,
+  .links > li {
+    background: linear-gradient(rgb(255 255 255 / 0.55) 0 0), var(--bg-frost);
+  }
+  .next {
+    background: linear-gradient(rgb(255 255 255 / 0.62) 0 0), var(--bg-frost);
+  }
+  /* testo in gradiente (background-clip: text): Evince, Okular e gli altri lettori basati su
+     poppler/cairo lo mostrano come un rettangolo pieno che copre la parola. In stampa, tinta piena. */
+  :is(.cover h1, .statement, .lead, .slide.section > h1, .slide.thanks > h1) mark:not(:has(.w)),
+  :is(.cover h1, .statement, .lead, .slide.section > h1, .slide.thanks > h1) mark .w {
+    color: var(--blue-ink);
+    background: none;
+  }
+  .agenda > li > .num {
+    color: rgb(116 212 255 / 0.18);
+    background: none;
+  }
+}
