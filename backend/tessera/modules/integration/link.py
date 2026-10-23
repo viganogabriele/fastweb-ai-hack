@@ -18,7 +18,8 @@ A size is used only when the mention names exactly one, after an explicit size w
 stay in the catalog (a customer may still name them): they can only add ambiguity. A link is
 available once both its observation and the catalog rows it was decided on are.
 
-Candidate scores keep the linker's 0–100 similarity scale; they are not probabilities.
+Candidate scores use 0–100: fuzzy similarity by default, normalized RRF rank scores
+when embeddings are enabled. Neither scale represents a probability.
 """
 
 import hashlib
@@ -54,6 +55,7 @@ from tessera.modules.integration.candidates import (
     LinkResult,
     link_mention,
 )
+from tessera.modules.integration.embeddings import EmbeddingRetriever, InvalidEmbedding
 
 PROMPT_ID = "link_choice.v1"
 PROMPT_PATH = REPO_ROOT / "backend" / "prompts" / f"{PROMPT_ID}.md"
@@ -72,7 +74,7 @@ LLM_ERRORS = (ExtractionFailed, BudgetExceeded, LLMCallFailed, ReplayMiss, Cache
 
 MANIFEST = ModuleManifest(
     id="int.link",
-    version="1",
+    version="2",
     layer="integration",
     description=(
         "Product mentions of the run's observations linked to catalog style, SKU or SKU-size, "
@@ -87,6 +89,8 @@ MANIFEST = ModuleManifest(
         "type": "object",
         "properties": {
             "llm": {"type": "boolean"},
+            "use_embeddings": {"type": "boolean"},
+            "embedding_dimensions": {"enum": [512, 2048]},
             "candidate_min": {"type": "number", "minimum": 0, "maximum": 100},
             "link_min": {"type": "number", "minimum": 0, "maximum": 100},
             "min_margin": {"type": "number", "minimum": 0, "maximum": 100},
@@ -219,6 +223,7 @@ def decide(
     params: LinkParams,
     llm: Any | None,
     errors: list[str],
+    retriever: EmbeddingRetriever | None = None,
 ) -> Decision:
     """Deterministic decision first; the LLM only breaks a tie among clean candidates."""
     mention = (obs.product_mention or "").strip()
@@ -227,6 +232,32 @@ def decide(
     store_skus = snapshot.assortment.get(obs.store_id) if obs.store_id else None
     catalog = snapshot.catalog_on(obs.available_at.date())
     result = link_mention(mention, catalog, size_in(mention), store_skus, params)
+    if retriever is not None:
+        descriptions = {
+            sku: " ".join(
+                str(row.data.get(field) or "")
+                for field in (
+                    "style_name",
+                    "color_name_it",
+                    "color_name_en",
+                    "category",
+                    "subcategory",
+                    "gender",
+                )
+            )
+            for sku, row in snapshot.rows_by_sku.items()
+        }
+        try:
+            result = retriever.retrieve(
+                mention,
+                catalog,
+                params=params,
+                size=size_in(mention),
+                store_skus=store_skus,
+                descriptions=descriptions,
+            )
+        except (*LLM_ERRORS, InvalidEmbedding) as exc:
+            errors.append(f"{obs.id}: embeddings {type(exc).__name__}; fuzzy candidates retained")
     reasons = ", ".join(result.reasons) or "unique candidate above threshold"
     if result.status != "ambiguous":
         return Decision(
@@ -325,6 +356,7 @@ def link_observations(
     snapshot: CatalogSnapshot,
     params: LinkParams,
     llm: Any | None,
+    retriever: EmbeddingRetriever | None = None,
 ) -> ModuleResult:
     errors: list[str] = []
     abstentions: list[str] = []
@@ -335,7 +367,7 @@ def link_observations(
         if obs.available_at is None:
             abstentions.append(f"{obs.id}: unknown availability")
             continue
-        decision = decide(obs, snapshot, params, llm, errors)
+        decision = decide(obs, snapshot, params, llm, errors, retriever)
         counts[decision.status] += 1
         llm_links += decision.decided_by.startswith("llm:") and decision.status == "linked"
         if decision.status in ("ambiguous", "unlinked"):
@@ -372,7 +404,27 @@ def run(ctx: Context) -> ModuleResult:
         top_k=p.get("top_k", defaults.top_k),
     )
     llm = ctx.clients.get("llm") if p.get("llm", True) else None
-    return link_observations(ctx.repo, ctx.repo.list(Observation), snapshot, params, llm)
+    retriever = None
+    if p.get("use_embeddings", False):
+        client = ctx.clients.get("llm")
+        if client is None:
+            return ModuleResult(
+                module_id=MANIFEST.id,
+                module_version=MANIFEST.version,
+                status="blocked",
+                counts={},
+                errors=("Embedding client unavailable",),
+                abstentions=(),
+            )
+        retriever = EmbeddingRetriever(client, p.get("embedding_dimensions", 512))
+    return link_observations(
+        ctx.repo,
+        ctx.repo.list(Observation),
+        snapshot,
+        params,
+        llm,
+        retriever,
+    )
 
 
 # Helpers.

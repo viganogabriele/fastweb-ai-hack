@@ -285,3 +285,45 @@ def test_choice_schema_rejects_ids_not_offered() -> None:
     assert schema.model_validate({"target_id": None, "rationale": "r"}).target_id is None
     with pytest.raises(ValidationError):
         schema.model_validate({"target_id": "Z-9", "rationale": "r"})
+
+
+class FakeEmbeddings(FakeLLM):
+    def __init__(self, *, embedding_error=None):
+        super().__init__(None)
+        self.embedding_error = embedding_error
+        self.embedding_calls = []
+
+    def embed(self, texts, dimensions, *, cache_context):
+        self.embedding_calls.append((list(texts), dimensions, cache_context))
+        if self.embedding_error:
+            raise self.embedding_error
+        return [[1.0] + [0.0] * (dimensions - 1) for _ in texts]
+
+
+def test_embedding_opt_in_persists_rank_scores_and_never_silently_links(engine):
+    client = FakeEmbeddings()
+    result, links = run(
+        engine,
+        params={"use_embeddings": True, "llm": False, "embedding_dimensions": 2048},
+        llm=client,
+    )
+    assert client.embedding_calls
+    assert {c[1] for c in client.embedding_calls} == {2048}
+    assert result.status == "succeeded"
+    assert links[SWEATSHIRT].status == "ambiguous"
+    assert all(c.method.startswith("rrf") for c in links[SWEATSHIRT].candidates)
+    assert all(0 <= c.score <= 100 for c in links[SWEATSHIRT].candidates)
+
+
+def test_embedding_provider_failure_is_explicit_and_retains_fuzzy_candidates(engine):
+    client = FakeEmbeddings(embedding_error=LLMCallFailed("offline"))
+    result, links = run(engine, params={"use_embeddings": True, "llm": False}, llm=client)
+    assert result.status == "degraded"
+    assert any("embeddings LLMCallFailed" in e for e in result.errors)
+    assert links[SWEATSHIRT].status == "ambiguous"
+    assert all(not c.method.startswith("rrf") for c in links[SWEATSHIRT].candidates)
+
+
+def test_embedding_request_without_client_is_blocked(engine):
+    result, links = run(engine, params={"use_embeddings": True, "llm": False})
+    assert result.status == "blocked" and links == {}
