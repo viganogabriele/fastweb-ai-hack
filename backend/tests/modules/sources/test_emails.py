@@ -5,6 +5,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
+from jsonschema import ValidationError
 
 from tessera.core.contracts import ModuleSnapshot, RunSpec, Segment, SourceDocument
 from tessera.core.db import connect
@@ -156,3 +157,29 @@ def test_replies_undated_future_and_other_stores(tmp_path, sources):
         assert documents["doc-b-parent"].business_date.isoformat() == "2026-10-02"
         assert documents["doc-b-parent"].language == "it"
     engine.dispose()
+
+
+def test_files_param_restricts_the_run_to_a_preselected_sample(tmp_path, sources):
+    as_of = datetime(2026, 10, 2, 23, 0, tzinfo=UTC)
+    files = ["MIL01/b_parent.eml", "MIL01/d_future.eml", "MIL01/gone.eml", "PAR01/other.eml"]
+    request = spec(["MIL01"], as_of).model_copy(
+        update={"modules": (ModuleSnapshot(manifest=MANIFEST, params={"files": files}),)}
+    )
+    engine, status = execute(tmp_path, request, sources)
+    assert status.status == "degraded"
+    # d_future.eml is selected but sent after as_of: left out like any later mail.
+    assert status.result.counts == {"documents": 1, "segments": 1, "skipped": 2}
+    assert status.result.abstentions == (
+        "dataset://store_emails/MIL01/gone.eml: no such file",
+        "dataset://store_emails/PAR01/other.eml: not a store of the run",
+    )
+    with repo_session(engine, request) as repo:
+        assert [d.id for d in repo.list(SourceDocument)] == ["doc-b-parent"]
+    engine.dispose()
+
+
+def test_files_param_is_validated_against_the_schema():
+    registry = Registry.discover()
+    bad = ModuleSnapshot(manifest=MANIFEST, params={"files": ["../MIL01/x.eml"]})
+    with pytest.raises(ValidationError, match="does not match"):
+        registry.resolve(bad)

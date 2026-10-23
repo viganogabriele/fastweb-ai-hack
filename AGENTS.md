@@ -107,8 +107,9 @@ Creating and splitting issues:
 
 - Product code, prompts, fixtures, RAG indexes and few-shot examples read **only
   `generated/sources/`**.
-- **Do not open `generated/ground_truth/`, `generator/`, or any `*_notes.md` / `email_context`
-  file.** They hold the hidden test answers. Exception: only when the task is explicitly eval code
+- **Do not open `generated/ground_truth/`, `generator/`, `eval/labels/`, or any `*_notes.md` /
+  `email_context` file.** They hold the hidden test answers (`eval/labels/` are hand labels
+  derived from them). Exception: only when the task is explicitly eval code
   (M14, keep it in `eval/`, never imported by product code) or dataset maintenance.
 - `generated/sources/` is read-only. Derived/cleaned data goes in `data/`.
 - Don't re-run `generator/world.py` or any builder: it desyncs ~2,000 hand-written emails.
