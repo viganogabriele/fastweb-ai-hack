@@ -10,6 +10,7 @@ import { BudgetBars, SalesTrend, Sparkline } from './BusinessCharts'
 import { countByDay, dailySeries, formatEuro, lastDay, nextDay, storePerformance, totals } from './businessData'
 import type { KpiDay } from './businessData'
 import { MarketView } from './MarketView'
+import { OnlineDemand } from './OnlineDemand'
 import { StoreMap } from './StoreMap'
 import { useRunData } from './useRunData'
 import { STORE_GEO } from './storeGeo'
@@ -294,7 +295,10 @@ export function Overview({
         </div>
       </div>
       {view === 'market' ? (
-        <MarketView runId={run.spec.run_id} />
+        <>
+          <MarketView runId={run.spec.run_id} />
+          <OnlineDemand runId={run.spec.run_id} />
+        </>
       ) : (
       <>
 
