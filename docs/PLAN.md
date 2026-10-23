@@ -17,7 +17,7 @@ Each lane is one person, possibly with AI coding agents. A lane **owns** its pat
 
 | Lane | Person | Focus | Owns |
 |---|---|---|---|
-| **A: Reading** | _tbd_ | Fastweb smoke test, connectors, extraction, quantities, reports, external data, voice | `backend/tessera/modules/sources/` (except `erp.py`, `systems_client.py`), `modules/ingestion/`, `backend/prompts/extract_*`, `config/domain.yaml`, `config/aliases.yaml`, `config/eval_split.yaml`, `data/fixtures/{documents,observations,metrics,context,voice}/` |
+| **A: Reading** | _tbd_ | Fastweb smoke test, connectors, extraction, quantities, reports, external data, voice | `backend/tessera/modules/sources/` (except `erp.py`, `systems_client.py`), `modules/ingestion/`, `backend/prompts/extract_*`, `config/domain.yaml`, `config/aliases.yaml`, `config/eval_split.yaml`, `config/report_metrics.yaml`, `data/fixtures/{documents,observations,metrics,context,voice}/` |
 | **B: Evidence and forecast** | _tbd_ | ERP loader, linking, dedup, cases, context, baseline and scenarios, report per owner | `modules/sources/erp.py`, `modules/integration/`, `modules/intelligence/`, `modules/outputs/`, `backend/prompts/{link,report}_*`, `data/fixtures/{links,cases,forecast,reports}/` |
 | **C: Platform** | _tbd_ | Contracts, repo, runs, orchestrator, LLM client, API, isolation and replay; reviews every contract change | `backend/tessera/core/`, `api/`, `cli.py`, `scripts/`, `Makefile`, `backend/pyproject.toml`, `.github/`, `config/pipeline.yaml`, `AGENTS.md`, `data/fixtures/runs/` |
 | **D: UI, eval, demo** | _tbd_ | Dashboard, evaluation harness, demo script and bundle | `web/`, `eval/`, `config/demo.yaml`, demo material in `docs/` |
