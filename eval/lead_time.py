@@ -31,7 +31,8 @@ from dataclasses import dataclass
 from datetime import UTC, date, datetime, time, timedelta
 from pathlib import Path
 
-from .baselines import ERP, Alert, local_instant
+from .baselines import ERP, Alert, local_instant, sales_alerts, stock_alerts
+from .harness import split_stores
 
 EVENTS_KEY = "scenario/events.json"
 EMAIL_INDEXES = tuple(
@@ -338,26 +339,22 @@ def load_events(data: bytes) -> list[dict]:
 
 STOCK_GRID = (0, 1, 2)
 SALES_GRID = (2.0, 3.0, 4.0, 5.0, 6.0)
-DEFAULTS = {"stock": 0, "sales": 3.0}
+DEFAULTS = {"stock": "threshold=0", "sales": "z=3.0"}
 
 
 def lead_time_report(root: Path, run, split: str, start: date, end: date) -> dict:
     """Score a verified frozen run (or the baselines alone) on the run's stores."""
-    from .baselines import sales_alerts, stock_alerts
-    from .harness import split_stores
-
     oracle = root / "generated/ground_truth"
+
+    def read(key: str) -> bytes:  # fixed keys only, through the run's checks when there is one
+        return run.read_answer_key(oracle, key) if run else (oracle / key).read_bytes()
+
     if run is None:
         stores, cases = split_stores()[split], []
-        read = lambda key: (oracle / key).read_bytes()  # noqa: E731 - fixed keys only
     else:
         protocol = run.manifest["protocol"]
-        split, stores, cases = (
-            protocol["split"],
-            frozenset(protocol["stores"]),
-            run.artifacts["cases"],
-        )
-        read = lambda key: run.read_answer_key(oracle, key)  # noqa: E731
+        split, stores = protocol["split"], frozenset(protocol["stores"])
+        cases = run.artifacts["cases"]
     events = load_events(read(EVENTS_KEY))
     units = event_units(events, stores, start, end, root)
     store_days = len(stores) * ((end - start).days + 1)
@@ -375,9 +372,7 @@ def lead_time_report(root: Path, run, split: str, start: date, end: date) -> dic
     for method, grid in grids.items():
         calibration[method] = calibrate(grid, target, units, store_days)
         if run is None:
-            calibration[method]["chosen"] = next(
-                s for s in grid if s.endswith(f"={DEFAULTS[method]}")
-            )
+            calibration[method]["chosen"] = DEFAULTS[method]
         alerts[method] = grid[calibration[method]["chosen"]]
     scored = score(alerts, units, store_days)
     covered = {u.event_id for u in units}
