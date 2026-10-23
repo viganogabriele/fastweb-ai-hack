@@ -84,6 +84,7 @@ from tessera.core.contracts import (
     SourceRef,
     StockFact,
 )
+from tessera.modules.actions.ledger import reservations as session_reservations
 from tessera.modules.actions.simulation import Arrival, StockSimulation, simulate_stock
 from tessera.modules.sources import erp
 from tessera.modules.sources.systems_client import (
@@ -1345,7 +1346,15 @@ def gather(
             and stores[store].get("country_code") == dest.country  # cross-border: not in the MVP
         )
 
-    reservations = tuple(r for r in run_repo.list(Reservation) if sku is None or r.sku == sku)
+    all_reservations = {
+        r.id: r
+        for r in (
+            *run_repo.list(Reservation),
+            *session_reservations(run_repo.engine, spec.scenario_id),
+        )
+        if sku is None or r.sku == sku
+    }
+    reservations = tuple(all_reservations.values())
     return OptionInputs(
         case=case,
         run_id=spec.run_id,
