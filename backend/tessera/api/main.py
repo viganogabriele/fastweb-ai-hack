@@ -7,6 +7,7 @@ from sqlalchemy import Engine
 
 from tessera import __version__
 from tessera.api.models import Health
+from tessera.api.routers.clarifications import router as clarifications_router
 from tessera.api.routers.options import router as options_router
 from tessera.api.routers.runs import router
 from tessera.core.config import Settings, get_settings
@@ -28,6 +29,7 @@ def create_app(
     app.state.settings = settings
     app.include_router(router)
     app.include_router(options_router)
+    app.include_router(clarifications_router)
 
     @app.get("/api/health", response_model=Health)
     def health() -> dict:

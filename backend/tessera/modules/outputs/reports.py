@@ -105,7 +105,7 @@ class Facts:
     """What the brief may say, already read at the run's ``as_of``."""
 
     cases: Sequence[Case]
-    observations: Mapping[str, Observation]
+    observations: Mapping[ArtifactRef, Observation]  # exact kind/id/version cited by each case
     links: Mapping[str, EntityLink]  # by observation id
     copies: frozenset[str]  # observation ids that certainly duplicate another one
     forecasts: Mapping[str, Sequence[ForecastAdjustment]]  # by case id
@@ -173,7 +173,7 @@ class _Brief:
         )
         body: list[str] = []
         for obs_ref in case.supporting:
-            obs = facts.observations.get(obs_ref.id)
+            obs = facts.observations.get(obs_ref)
             if obs is None or obs.id in facts.copies:
                 continue
             body += self.observation(obs)
@@ -340,7 +340,7 @@ def _forecasts(run_repo: repo.Repo, case: Case) -> list[ForecastAdjustment]:
 
 def read_facts(run_repo: repo.Repo) -> Facts:
     cases = repo.latest(run_repo.list(Case))
-    observations = {o.id: o for o in run_repo.list(Observation)}
+    observations = {ref(o): o for o in run_repo.list(Observation)}
     links = {link.observation_id: link for link in run_repo.list(EntityLink)}
     relations = run_repo.list(EvidenceRelation)
     master = {}

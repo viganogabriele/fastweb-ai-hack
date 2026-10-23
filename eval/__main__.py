@@ -5,6 +5,7 @@ import json
 from datetime import date
 from pathlib import Path
 
+from .forecast import KEY, score_forecasts
 from .harness import ARTIFACTS, FrozenRun, freeze
 from .isolation import run_product
 from .lead_time import lead_time_report
@@ -36,6 +37,11 @@ def main() -> None:
     verify.add_argument("--sha256", required=True)
     verify.add_argument("--key", action="append", required=True)
     verify.add_argument("--output", type=Path, required=True)
+    forecast = sub.add_parser("forecast", help="Score frozen forecast errors on a fixed universe")
+    forecast.add_argument("bundle", type=Path)
+    forecast.add_argument("--sha256", required=True)
+    forecast.add_argument("--key", default=KEY)
+    forecast.add_argument("--output", type=Path, required=True)
     sample = sub.add_parser(
         "reading-sample", help="EVL-02: write the sample file list and protocol, no answers"
     )
@@ -61,9 +67,11 @@ def main() -> None:
     lead.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     root = Path(__file__).resolve().parent.parent
-    if args.command in ("verify", "lead-time") and not args.output.resolve().is_relative_to(
-        root / "data"
-    ):
+    if args.command in (
+        "verify",
+        "forecast",
+        "lead-time",
+    ) and not args.output.resolve().is_relative_to(root / "data"):
         parser.error("evaluation outputs must be written under data/")
     if args.command == "lead-time":
         if bool(args.bundle) != bool(args.sha256):
@@ -128,7 +136,11 @@ def main() -> None:
         print(sha256)
     else:
         run = FrozenRun(args.bundle, args.sha256)
-        receipt = run.receipt(root / "generated/ground_truth", args.key)
+        receipt = (
+            score_forecasts(run, root / "generated/ground_truth", args.key)
+            if args.command == "forecast"
+            else run.receipt(root / "generated/ground_truth", args.key)
+        )
         _write_new(args.output, receipt)
 
 

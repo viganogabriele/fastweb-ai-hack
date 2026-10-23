@@ -63,3 +63,27 @@ numbers; nested and array fields remain available in the resolved artifact.
 `tessera mcp` exposes the existing read routes and versioned canonical documents
 through MCP stdio. See [MCP setup and scope](MCP.md) for client configuration,
 namespace selection and the explicit read-only tool allowlist.
+
+## Clarification reads (PLT-13)
+
+GET `/api/runs/{run_id}/cases/{case_id}/clarifications` lists the latest visible
+version of each persisted clarification belonging to the case, in ID order.
+Optional `status=draft|asked|answered|cancelled` filters after version selection:
+a superseded draft cannot reappear when filtering for drafts. The latest version
+is selected across the run before case filtering, using repository publication
+order rather than lexical version order.
+
+GET `/api/runs/{run_id}/cases/{case_id}/clarifications/{clarification_id}` reads
+the latest visible version; `?version=...` selects an exact historical version.
+Both endpoints require an existing visible case and a published run. Missing
+run/case/question/version or a question belonging to another case returns 404;
+unpublished runs return 409. Fixture access, store scope and as_of filtering
+use the same repository transaction as the other run artifact endpoints.
+
+Questions, observation references, simulated flag, status and answer references
+are returned unchanged from the contract. An existing case without questions
+returns an empty list. These GETs never invoke an agent, send messages, submit
+answers or create runs. Durable answers and follow-up scheduling remain the
+separate OUT-02b task; this API reads its available artifacts without importing
+that service or depending on model recordings. The endpoints are navigation
+within a run, not an additional user authorization mechanism.
