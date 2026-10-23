@@ -1,0 +1,14 @@
+{
+  "note_id": "mil02-navy-long-down-lining",
+  "store_id": "MIL02",
+  "sent_at": "2026-10-22T19:20:00+02:00",
+  "timezone": "Europe/Rome",
+  "language": "it",
+  "author_ref": "pseudonym:mil02-staff-paolo",
+  "fixture_kind": "synthetic_extension",
+  "audio": "note.wav",
+  "audio_sha256": "sha256:df4fc6ed8eb953e167b20a6ade4435178587d501922a41c24bf9c8571902b9c9",
+  "duration_s": 49.3,
+  "manual_transcript": "transcript.txt",
+  "asr_prompt": "Piumino lungo blu notte, fodera interna, cappuccio, cardigan imbottito nero."
+}
