@@ -54,7 +54,7 @@ export function SidebarNav({ label, groups, currentId, onNavigate }: SidebarNavP
                       if (drawerOpen) closeDrawer()
                     }}
                   >
-                    {active && <motion.span className="sd-sidebar-nav__indicator" layoutId="sidebar-active-indicator" transition={transition.spring} style={{ borderRadius: 8 }} aria-hidden="true" />}
+                    {active && <motion.span className="sd-sidebar-nav__indicator" layoutId="sidebar-active-indicator" transition={transition.spring} style={{ borderRadius: 0 }} aria-hidden="true" />}
                     <Icon className="sd-sidebar-nav__icon" aria-hidden="true" />
                     <span className="sd-sidebar-nav__label">{item.label}</span>
                     {item.badge && <span className="sd-sidebar-nav__badge">{item.badge}</span>}

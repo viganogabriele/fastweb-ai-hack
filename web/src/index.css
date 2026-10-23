@@ -1,2 +1,4 @@
-/* Signal Dark: tokens, local tokens and base styles. Components import their own CSS. */
+/* Maison: self-hosted fonts, tokens, local tokens and base styles. Components import their own CSS. */
+@import '@fontsource-variable/jost';
+@import '@fontsource-variable/bodoni-moda/opsz.css';
 @import './design/index.css';

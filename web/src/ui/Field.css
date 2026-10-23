@@ -86,3 +86,7 @@ input[type='checkbox']:disabled, input[type='radio']:disabled { cursor: not-allo
 .sd-field__hint { color: var(--sd-color-text-muted); font-size: var(--sd-font-size-caption); }
 .sd-field__error { display: flex; align-items: center; gap: var(--sd-space-2); color: var(--sd-color-state-danger); font-size: var(--sd-font-size-caption); }
 @media (prefers-reduced-motion: reduce) { .sd-field__control { transition: none; } }
+/* Maison: tracked microlabels and controls drawn with a single rule. */
+.sd-field__label { color: var(--sd-color-text-secondary); font-size: var(--sd-local-font-size-micro); letter-spacing: var(--sd-local-tracking-label); text-transform: uppercase; }
+.sd-field__control:not(:disabled):hover { border-color: var(--sd-color-text-primary); }
+.sd-field__control:not(:disabled):focus-visible { border-color: var(--sd-color-text-primary); }

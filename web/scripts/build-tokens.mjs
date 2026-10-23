@@ -52,7 +52,7 @@ export async function buildTokens() {
     declarations.push(`  ${name}: ${css};`)
   }
   await writeFile(new URL('../src/design/tokens.css', import.meta.url), `/* generated, do not edit */\n:root {\n${declarations.join('\n')}\n}\n`)
-  console.log(`Generated ${declarations.length} Signal Dark tokens`)
+  console.log(`Generated ${declarations.length} design tokens`)
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) await buildTokens()
