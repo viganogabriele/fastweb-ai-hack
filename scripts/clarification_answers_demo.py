@@ -62,7 +62,7 @@ from tesseract.modules.agents.answer_registry import (
     submit_answer,
 )
 
-ASSETS = REPO_ROOT / "data/fixtures/runs/core-dev-20261022"
+ASSETS = REPO_ROOT / "data/fixtures/runs/core-dev-20261023"
 ANSWERS = ASSETS / "clarification-answers"
 CASE_IDS = ("case-mil01-i10919b00011-20261008", "case-mil01-unknown-20261009")
 
@@ -244,7 +244,7 @@ def record(output, *, workspace, keys_file=None, seed_cache=None):
     settings = settings_for(
         attempt,
         llm_mode="record",
-        llm_concurrency=1,
+        llm_concurrency=4,
         llm_deadline_seconds=1800,
         **({"fastweb_keys_file": keys_file} if keys_file else {}),
     )

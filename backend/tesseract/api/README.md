@@ -254,5 +254,5 @@ and unpublished. Contextual reconciliation (OUT-02d/e) corrects the original
 observation in the child: the answer document creates no second demand, and the
 answered document's exact parent observations are carried rather than re-read.
 Real-model evidence for the dev Core demo question is in
-`data/fixtures/runs/core-dev-20261022/clarification-answers/VERIFICATION.md`;
+`data/fixtures/runs/core-dev-20261023/clarification-answers/VERIFICATION.md`;
 its replay test submits the recorded answers through this endpoint offline.

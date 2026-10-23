@@ -254,7 +254,7 @@ The run remains synthetic and dev-only. No acoustic alignment score, live phone
 connector, hold-out metric, public release, external dispatch or human adoption
 result is claimed. The simulated clarification-answer loop on this run's MIL01
 question is separate OUT-02e evidence in
-`data/fixtures/runs/core-dev-20261022/clarification-answers/VERIFICATION.md`:
+`data/fixtures/runs/core-dev-20261023/clarification-answers/VERIFICATION.md`:
 three answers in their own scenarios, recorded with real models; this parent stays unchanged. No release tag is created here.
 
 ## Checks and handoff to #211
