@@ -1,0 +1,443 @@
+[
+  {
+    "kind": "ActionOption",
+    "payload": {
+      "id": "opt-d1-mil01-mil02-999-m-q2",
+      "version": "v1",
+      "available_at": "2026-10-09T08:35:52Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261009_1035_MIL01.eml",
+          "content_hash": "sha256:173f031967d236d50951cd1ad52ea2692c28ed005eb8fe68e68105b422927144",
+          "locator": null
+        },
+        {
+          "uri": "dataset://erp/master_data/styles.csv",
+          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "locator": "style_code=I10919B00011"
+        },
+        {
+          "uri": "dataset://erp/master_data/styles.csv",
+          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "locator": "style_code=I10919B00042"
+        },
+        {
+          "uri": "dataset://erp/forecast/sku_store_weekly/fcst_sku_store_run_2026-10-05.csv",
+          "content_hash": "sha256:af9b2acbac16d489798e6b10592e361890e30612d50092f1a9282476445aaa19",
+          "locator": "store_id=MIL01;sku=I10919B00011-999;week_start=2026-10-05|2026-10-12"
+        },
+        {
+          "uri": "dataset://erp/inventory/store_stock_daily/stock_eod_2026-10-08.csv",
+          "content_hash": "sha256:cd9dbfc156d8477b109fb826f935e632221df90e13b5364e7df07154e60d6576",
+          "locator": "store_id=MIL01;sku=I10919B00011-999;size=M;snapshot_date=2026-10-08;column=on_hand"
+        },
+        {
+          "uri": "dataset://erp/inventory/store_stock_daily/stock_eod_2026-10-08.csv",
+          "content_hash": "sha256:cd9dbfc156d8477b109fb826f935e632221df90e13b5364e7df07154e60d6576",
+          "locator": "store_id=MIL01;sku=I10919B00011-999;size=M;snapshot_date=2026-10-08"
+        },
+        {
+          "uri": "dataset://erp/inventory/store_stock_daily/stock_eod_2026-10-08.csv",
+          "content_hash": "sha256:cd9dbfc156d8477b109fb826f935e632221df90e13b5364e7df07154e60d6576",
+          "locator": "store_id=MIL02;sku=I10919B00011-999;size=M;snapshot_date=2026-10-08;column=on_hand"
+        },
+        {
+          "uri": "dataset://erp/inventory/store_stock_daily/stock_eod_2026-10-08.csv",
+          "content_hash": "sha256:cd9dbfc156d8477b109fb826f935e632221df90e13b5364e7df07154e60d6576",
+          "locator": "store_id=MIL02;sku=I10919B00011-999;size=M;snapshot_date=2026-10-08"
+        },
+        {
+          "uri": "dataset://erp/sales/pos_lines/pos_lines_2026-W36.csv",
+          "content_hash": "sha256:062160247c7a14cda99a0dcc4e4ee80457d218d3f87d26d71746d3b1c703c459",
+          "locator": "business_date<=2026-10-04"
+        },
+        {
+          "uri": "dataset://erp/sales/pos_lines/pos_lines_2026-W37.csv",
+          "content_hash": "sha256:c1fae11d341e186aef036364f4d9e04c5c40b90177c9e0ba305d1696b800fe04",
+          "locator": "business_date<=2026-10-04"
+        },
+        {
+          "uri": "dataset://erp/sales/pos_lines/pos_lines_2026-W38.csv",
+          "content_hash": "sha256:51c809b41e32d83da90aaf928e2a8073a5de81186908ad493129fffdfe6c09c2",
+          "locator": "business_date<=2026-10-04"
+        },
+        {
+          "uri": "dataset://erp/sales/pos_lines/pos_lines_2026-W39.csv",
+          "content_hash": "sha256:d746a7743a6225555c05e460918ebb322959e9b65709aca20876af9f0cbb9996",
+          "locator": "business_date<=2026-10-04"
+        },
+        {
+          "uri": "dataset://erp/sales/pos_lines/pos_lines_2026-W40.csv",
+          "content_hash": "sha256:a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e",
+          "locator": "business_date<=2026-10-04"
+        },
+        {
+          "uri": "dataset://systems/logistics/lane_matrix_lead_time_cost.csv",
+          "content_hash": "sha256:3e1644a87ca463f55e6122221c424d8737c3aed117168cfc910898852963c4bd",
+          "locator": "lane_id=LN-1002-1001"
+        },
+        {
+          "uri": "dataset://systems/planning/min_presentation_by_store_category.csv",
+          "content_hash": "sha256:e60586de5362fc807366e0c165ca3277c996bfc839b6f88bd25aae9fab1fe3dc",
+          "locator": "WERKS=1002;category=Knitwear"
+        },
+        {
+          "uri": "dataset://systems/warehouse/reservations/ZRESV_reservations_export.csv",
+          "content_hash": "sha256:e35f0f2841d0f27c6066b079e53666ceb5a0af1f388cde8fd3dd41bbfffd643d",
+          "locator": "RSNUM=1004508;WERKS=IT10;J_3ASIZE=M"
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "Case",
+          "id": "case-mil01-i10919b00011-20261008",
+          "version": "v1"
+        },
+        {
+          "kind": "ForecastAdjustment",
+          "id": "fc-mil01-i10919b00011-999-20261010",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-mil01-i10919b00011-999-m-onhand-20261008",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-mil01-i10919b00011-999-m-sellable-20261008",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-mil02-i10919b00011-999-m-onhand-20261008",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-mil02-i10919b00011-999-m-sellable-20261008",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01c",
+      "producer_version": "1",
+      "case_id": "case-mil01-i10919b00011-20261008",
+      "forecast_ref": {
+        "kind": "ForecastAdjustment",
+        "id": "fc-mil01-i10919b00011-999-20261010",
+        "version": "v1"
+      },
+      "kind": "transfer",
+      "legs": [
+        {
+          "origin": "MIL02",
+          "dest": "MIL01",
+          "sku": "I10919B00011-999",
+          "size": "M",
+          "ean": "800001123402",
+          "qty": 2,
+          "pickup_at": "2026-10-09T13:30:00Z",
+          "eta_at": "2026-10-09T17:00:00Z",
+          "sellable_at": "2026-10-10T08:00:00Z",
+          "lane_id": "LN-1002-1001",
+          "cost_eur": 16.21
+        }
+      ],
+      "checks": [
+        {
+          "name": "identity_crosswalk",
+          "status": "pass",
+          "mandatory": true,
+          "detail": "EAN 800001123402 matches sku_size_ean.csv for I10919B00011-999-M; MIL01 and MIL02 are SAP plants 1001 and 1002 in the MDM crosswalk",
+          "source_refs": [
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/master_data/sku_size_ean.csv",
+              "version": "sha256:0e3810a27f3a7190bbd7d6d0607dd4004191dd5e56d3ecc62489f3bc1280b20a"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://systems/reference/store_code_crosswalk_MDM.csv",
+              "version": "sha256:0c96fe8c33b71a73d6f00b9fc7df0cc48ee80f68a815a75667f6dc7a1ed626b9"
+            }
+          ]
+        },
+        {
+          "name": "availability_freshness",
+          "status": "pass",
+          "mandatory": true,
+          "detail": "donor 3 units of size M on hand at EOD 2026-10-08 (D-1); destination 0 since 2026-10-07 (see the snapshot bridge in the verification option)",
+          "source_refs": [
+            {
+              "kind": "StockFact",
+              "id": "stock-mil02-i10919b00011-999-m-onhand-20261008",
+              "version": "v1"
+            },
+            {
+              "kind": "StockFact",
+              "id": "stock-mil01-i10919b00011-999-m-onhand-20261008",
+              "version": "v1"
+            }
+          ]
+        },
+        {
+          "name": "reservations",
+          "status": "unknown",
+          "mandatory": true,
+          "detail": "the DC reservation export has no open line for MIL02 (only MIL01's 4-unit backorder), but store-level reservations are not exported either: the donor's sellable quantity is unknown, not assumed equal to on hand",
+          "source_refs": [
+            {
+              "kind": "SourceFile",
+              "id": "dataset://systems/warehouse/reservations/ZRESV_reservations_export.csv",
+              "version": "sha256:e35f0f2841d0f27c6066b079e53666ceb5a0af1f388cde8fd3dd41bbfffd643d"
+            },
+            {
+              "kind": "StockFact",
+              "id": "stock-mil02-i10919b00011-999-m-sellable-20261008",
+              "version": "v1"
+            }
+          ]
+        },
+        {
+          "name": "quality_hold",
+          "status": "unknown",
+          "mandatory": true,
+          "detail": "QMEL has no quality notification for I10919B00011, but store-level quality holds are not exported either, so the check cannot pass",
+          "source_refs": [
+            {
+              "kind": "SourceFile",
+              "id": "dataset://systems/warehouse/quality/QMEL_quality_notifications.csv",
+              "version": "sha256:a44bfa7b1838f4114a32faab84293ff7e961fbd10ff8782efdcbd11e4794d9af"
+            }
+          ]
+        },
+        {
+          "name": "min_presentation_safety",
+          "status": "pass",
+          "mandatory": true,
+          "detail": "MIL02 Knitwear minimum is 1 unit per core size (S,M,L): sending 2 of 3 preserves it, and the destination reaches its own minimum of 2 for size M",
+          "source_refs": [
+            {
+              "kind": "SourceFile",
+              "id": "dataset://systems/planning/min_presentation_by_store_category.csv",
+              "version": "sha256:e60586de5362fc807366e0c165ca3277c996bfc839b6f88bd25aae9fab1fe3dc"
+            }
+          ]
+        },
+        {
+          "name": "scarcity_assortment",
+          "status": "pass",
+          "mandatory": true,
+          "detail": "the style is in both stores' assortment and size M is a core size for both; scarcity is at the destination (0 units, below minimum), not at the donor",
+          "source_refs": [
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/master_data/store_assortment.csv",
+              "version": "sha256:49c74c7eee863bfa10ca793945d238e2f0a8f8a69b4fe427218bab76fad30d0b"
+            }
+          ]
+        },
+        {
+          "name": "donor_protected",
+          "status": "pass",
+          "mandatory": true,
+          "detail": "the donor keeps 1 unit while its own demand for size M over D+1..D+7 is 2.52 units (30.8% of its colour forecast): it loses 1.52 units against 0.00 on hold, and the damage is in the outcomes, not hidden",
+          "source_refs": [
+            {
+              "kind": "StockFact",
+              "id": "stock-mil02-i10919b00011-999-m-onhand-20261008",
+              "version": "v1"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W36.csv",
+              "version": "sha256:062160247c7a14cda99a0dcc4e4ee80457d218d3f87d26d71746d3b1c703c459"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W37.csv",
+              "version": "sha256:c1fae11d341e186aef036364f4d9e04c5c40b90177c9e0ba305d1696b800fe04"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W38.csv",
+              "version": "sha256:51c809b41e32d83da90aaf928e2a8073a5de81186908ad493129fffdfe6c09c2"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W39.csv",
+              "version": "sha256:d746a7743a6225555c05e460918ebb322959e9b65709aca20876af9f0cbb9996"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W40.csv",
+              "version": "sha256:a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e"
+            }
+          ]
+        },
+        {
+          "name": "lane_ibt",
+          "status": "pass",
+          "mandatory": true,
+          "detail": "LN-1002-1001: COURIER_SAME_DAY, IBT allowed Y, customs N, 0 km",
+          "source_refs": [
+            {
+              "kind": "SourceFile",
+              "id": "dataset://systems/logistics/lane_matrix_lead_time_cost.csv",
+              "version": "sha256:3e1644a87ca463f55e6122221c424d8737c3aed117168cfc910898852963c4bd"
+            }
+          ]
+        },
+        {
+          "name": "calendar_cutoff",
+          "status": "pass",
+          "mandatory": true,
+          "detail": "cutoff 15:30 local on MON-FRI: D is a Friday and the run computes at 10:35, so the pickup is the same day",
+          "source_refs": [
+            {
+              "kind": "SourceFile",
+              "id": "dataset://systems/logistics/lane_matrix_lead_time_cost.csv",
+              "version": "sha256:3e1644a87ca463f55e6122221c424d8737c3aed117168cfc910898852963c4bd"
+            }
+          ]
+        },
+        {
+          "name": "eta_required_by",
+          "status": "pass",
+          "mandatory": true,
+          "detail": "arrival at closing on 2026-10-09, sellable from 2026-10-10: before the case's valid_until 2026-10-16",
+          "source_refs": [
+            {
+              "kind": "SourceFile",
+              "id": "dataset://systems/logistics/lane_matrix_lead_time_cost.csv",
+              "version": "sha256:3e1644a87ca463f55e6122221c424d8737c3aed117168cfc910898852963c4bd"
+            }
+          ]
+        },
+        {
+          "name": "size_curve",
+          "status": "pass",
+          "mandatory": true,
+          "detail": "size M is 21.7% of the colour units sold 2026-08-31..2026-10-04 on days it opened in stock (13/60); the shares sum to 1 on the horizon and the colour total reconciles, so per-size losses are admissible",
+          "source_refs": [
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W36.csv",
+              "version": "sha256:062160247c7a14cda99a0dcc4e4ee80457d218d3f87d26d71746d3b1c703c459"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W37.csv",
+              "version": "sha256:c1fae11d341e186aef036364f4d9e04c5c40b90177c9e0ba305d1696b800fe04"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W38.csv",
+              "version": "sha256:51c809b41e32d83da90aaf928e2a8073a5de81186908ad493129fffdfe6c09c2"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W39.csv",
+              "version": "sha256:d746a7743a6225555c05e460918ebb322959e9b65709aca20876af9f0cbb9996"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W40.csv",
+              "version": "sha256:a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e"
+            }
+          ]
+        },
+        {
+          "name": "shared_resources",
+          "status": "pass",
+          "mandatory": true,
+          "detail": "one leg and one donor, and no other option in this run reserves the same units: options are alternatives, nothing is pre-booked. No IBT line exists yet for MIL02 size M, so there is no competing reservation",
+          "source_refs": [
+            {
+              "kind": "SourceFile",
+              "id": "dataset://systems/logistics/ibt_transfers_storelink_export.csv",
+              "version": "sha256:bc705063c811bb3f1da10bb4ac654f3de8c93a992330c9bf2d5afea4b16befa2"
+            }
+          ]
+        }
+      ],
+      "outcomes": [
+        {
+          "scenario_id": "low",
+          "lost_units_dest": 0.409,
+          "lost_units_donor": 1.521,
+          "leftover_units_dest": 0.0,
+          "leftover_units_donor": 0.0,
+          "transport_cost_eur": 16.21,
+          "demand_basis": "colour sales_baseline of forecast vintage 2026-10-05 (run date + 1 day 06:00 local), split /7 over its ISO week; scenarios equal the baseline (vague unmet demand gives no numeric uplift), so low, base and high coincide (RFC §4.9 steps 1, 5 and 7)",
+          "size_allocation_basis": "MIL01 I10919B00011-999: size M is 13/60 = 0.2167 of the colour units sold 2026-08-31..2026-10-04 on days it opened in stock; donor MIL02 curve 12/39 = 0.3077 (RFC §4.9 raccordo con la taglia)"
+        },
+        {
+          "scenario_id": "base",
+          "lost_units_dest": 0.409,
+          "lost_units_donor": 1.521,
+          "leftover_units_dest": 0.0,
+          "leftover_units_donor": 0.0,
+          "transport_cost_eur": 16.21,
+          "demand_basis": "colour sales_baseline of forecast vintage 2026-10-05 (run date + 1 day 06:00 local), split /7 over its ISO week; scenarios equal the baseline (vague unmet demand gives no numeric uplift), so low, base and high coincide (RFC §4.9 steps 1, 5 and 7)",
+          "size_allocation_basis": "MIL01 I10919B00011-999: size M is 13/60 = 0.2167 of the colour units sold 2026-08-31..2026-10-04 on days it opened in stock; donor MIL02 curve 12/39 = 0.3077 (RFC §4.9 raccordo con la taglia)"
+        },
+        {
+          "scenario_id": "high",
+          "lost_units_dest": 0.409,
+          "lost_units_donor": 1.521,
+          "leftover_units_dest": 0.0,
+          "leftover_units_donor": 0.0,
+          "transport_cost_eur": 16.21,
+          "demand_basis": "colour sales_baseline of forecast vintage 2026-10-05 (run date + 1 day 06:00 local), split /7 over its ISO week; scenarios equal the baseline (vague unmet demand gives no numeric uplift), so low, base and high coincide (RFC §4.9 steps 1, 5 and 7)",
+          "size_allocation_basis": "MIL01 I10919B00011-999: size M is 13/60 = 0.2167 of the colour units sold 2026-08-31..2026-10-04 on days it opened in stock; donor MIL02 curve 12/39 = 0.3077 (RFC §4.9 raccordo con la taglia)"
+        }
+      ],
+      "baseline_outcomes": [
+        {
+          "scenario_id": "low",
+          "lost_units_dest": 2.409,
+          "lost_units_donor": 0.0,
+          "leftover_units_dest": 0.0,
+          "leftover_units_donor": 0.479,
+          "transport_cost_eur": 0.0,
+          "demand_basis": "colour sales_baseline of forecast vintage 2026-10-05 (run date + 1 day 06:00 local), split /7 over its ISO week; scenarios equal the baseline (vague unmet demand gives no numeric uplift), so low, base and high coincide (RFC §4.9 steps 1, 5 and 7)",
+          "size_allocation_basis": "MIL01 I10919B00011-999: size M is 13/60 = 0.2167 of the colour units sold 2026-08-31..2026-10-04 on days it opened in stock; donor MIL02 curve 12/39 = 0.3077 (RFC §4.9 raccordo con la taglia)"
+        },
+        {
+          "scenario_id": "base",
+          "lost_units_dest": 2.409,
+          "lost_units_donor": 0.0,
+          "leftover_units_dest": 0.0,
+          "leftover_units_donor": 0.479,
+          "transport_cost_eur": 0.0,
+          "demand_basis": "colour sales_baseline of forecast vintage 2026-10-05 (run date + 1 day 06:00 local), split /7 over its ISO week; scenarios equal the baseline (vague unmet demand gives no numeric uplift), so low, base and high coincide (RFC §4.9 steps 1, 5 and 7)",
+          "size_allocation_basis": "MIL01 I10919B00011-999: size M is 13/60 = 0.2167 of the colour units sold 2026-08-31..2026-10-04 on days it opened in stock; donor MIL02 curve 12/39 = 0.3077 (RFC §4.9 raccordo con la taglia)"
+        },
+        {
+          "scenario_id": "high",
+          "lost_units_dest": 2.409,
+          "lost_units_donor": 0.0,
+          "leftover_units_dest": 0.0,
+          "leftover_units_donor": 0.479,
+          "transport_cost_eur": 0.0,
+          "demand_basis": "colour sales_baseline of forecast vintage 2026-10-05 (run date + 1 day 06:00 local), split /7 over its ISO week; scenarios equal the baseline (vague unmet demand gives no numeric uplift), so low, base and high coincide (RFC §4.9 steps 1, 5 and 7)",
+          "size_allocation_basis": "MIL01 I10919B00011-999: size M is 13/60 = 0.2167 of the colour units sold 2026-08-31..2026-10-04 on days it opened in stock; donor MIL02 curve 12/39 = 0.3077 (RFC §4.9 raccordo con la taglia)"
+        }
+      ],
+      "assumptions": [
+        "q is limited by policy, not by the model: 3 units on hand at MIL02 minus its minimum of 1 for size M = 2, which is also the 1-2 pieces the source email asks for",
+        "donor demand uses the donor's own colour forecast and its own size curve: the move is judged against the donor's loss, not only the destination's gain",
+        "the two unknown mandatory checks keep it non-recommendable until the count is confirmed, even though it cuts unserved units by 0.48 at 16.21 EUR"
+      ],
+      "valid_until": "2026-10-16T08:35:52Z",
+      "recommended": false,
+      "rationale": "mechanically feasible: 2 of the 3 units at MIL02, within its minimum of 1, by same-day courier before the 15:30 cutoff, sellable at 2026-10-10. It leaves 0.41 units of size M unserved at MIL01 instead of 2.41, but pushes 1.52 lost units onto MIL02 for 16.21 EUR: not recommendable while the donor's sellable quantity and quality state are unknown",
+      "input_version_hash": "sha256:b93e3a8bb75d46fd5b3065aff12eb6bb74fda86c5ffa930eb28ff7ff2cbe86b4"
+    }
+  }
+]

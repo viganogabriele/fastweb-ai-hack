@@ -1,0 +1,198 @@
+[
+  {
+    "kind": "ActionOption",
+    "payload": {
+      "id": "opt-d1-mil01-hold",
+      "version": "v1",
+      "available_at": "2026-10-09T08:35:52Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261009_1035_MIL01.eml",
+          "content_hash": "sha256:173f031967d236d50951cd1ad52ea2692c28ed005eb8fe68e68105b422927144",
+          "locator": null
+        },
+        {
+          "uri": "dataset://erp/master_data/styles.csv",
+          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "locator": "style_code=I10919B00011"
+        },
+        {
+          "uri": "dataset://erp/master_data/styles.csv",
+          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "locator": "style_code=I10919B00042"
+        },
+        {
+          "uri": "dataset://erp/forecast/sku_store_weekly/fcst_sku_store_run_2026-10-05.csv",
+          "content_hash": "sha256:af9b2acbac16d489798e6b10592e361890e30612d50092f1a9282476445aaa19",
+          "locator": "store_id=MIL01;sku=I10919B00011-999;week_start=2026-10-05|2026-10-12"
+        },
+        {
+          "uri": "dataset://erp/inventory/store_stock_daily/stock_eod_2026-10-08.csv",
+          "content_hash": "sha256:cd9dbfc156d8477b109fb826f935e632221df90e13b5364e7df07154e60d6576",
+          "locator": "store_id=MIL01;sku=I10919B00011-999;size=M;snapshot_date=2026-10-08;column=on_hand"
+        },
+        {
+          "uri": "dataset://erp/inventory/store_stock_daily/stock_eod_2026-10-08.csv",
+          "content_hash": "sha256:cd9dbfc156d8477b109fb826f935e632221df90e13b5364e7df07154e60d6576",
+          "locator": "store_id=MIL01;sku=I10919B00011-999;size=M;snapshot_date=2026-10-08"
+        },
+        {
+          "uri": "dataset://erp/sales/pos_lines/pos_lines_2026-W36.csv",
+          "content_hash": "sha256:062160247c7a14cda99a0dcc4e4ee80457d218d3f87d26d71746d3b1c703c459",
+          "locator": "business_date<=2026-10-04"
+        },
+        {
+          "uri": "dataset://erp/sales/pos_lines/pos_lines_2026-W37.csv",
+          "content_hash": "sha256:c1fae11d341e186aef036364f4d9e04c5c40b90177c9e0ba305d1696b800fe04",
+          "locator": "business_date<=2026-10-04"
+        },
+        {
+          "uri": "dataset://erp/sales/pos_lines/pos_lines_2026-W38.csv",
+          "content_hash": "sha256:51c809b41e32d83da90aaf928e2a8073a5de81186908ad493129fffdfe6c09c2",
+          "locator": "business_date<=2026-10-04"
+        },
+        {
+          "uri": "dataset://erp/sales/pos_lines/pos_lines_2026-W39.csv",
+          "content_hash": "sha256:d746a7743a6225555c05e460918ebb322959e9b65709aca20876af9f0cbb9996",
+          "locator": "business_date<=2026-10-04"
+        },
+        {
+          "uri": "dataset://erp/sales/pos_lines/pos_lines_2026-W40.csv",
+          "content_hash": "sha256:a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e",
+          "locator": "business_date<=2026-10-04"
+        },
+        {
+          "uri": "dataset://systems/warehouse/reservations/ZRESV_reservations_export.csv",
+          "content_hash": "sha256:e35f0f2841d0f27c6066b079e53666ceb5a0af1f388cde8fd3dd41bbfffd643d",
+          "locator": "RSNUM=1004508;WERKS=IT10;J_3ASIZE=M"
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "Case",
+          "id": "case-mil01-i10919b00011-20261008",
+          "version": "v1"
+        },
+        {
+          "kind": "ForecastAdjustment",
+          "id": "fc-mil01-i10919b00011-999-20261010",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-mil01-i10919b00011-999-m-onhand-20261008",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-mil01-i10919b00011-999-m-sellable-20261008",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01c",
+      "producer_version": "1",
+      "case_id": "case-mil01-i10919b00011-20261008",
+      "forecast_ref": {
+        "kind": "ForecastAdjustment",
+        "id": "fc-mil01-i10919b00011-999-20261010",
+        "version": "v1"
+      },
+      "kind": "hold",
+      "legs": [],
+      "checks": [
+        {
+          "name": "size_curve",
+          "status": "pass",
+          "mandatory": true,
+          "detail": "size M is 21.7% of the colour units sold 2026-08-31..2026-10-04 on days it opened in stock (13/60); the shares sum to 1 on the horizon and the colour total reconciles, so per-size losses are admissible",
+          "source_refs": [
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W36.csv",
+              "version": "sha256:062160247c7a14cda99a0dcc4e4ee80457d218d3f87d26d71746d3b1c703c459"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W37.csv",
+              "version": "sha256:c1fae11d341e186aef036364f4d9e04c5c40b90177c9e0ba305d1696b800fe04"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W38.csv",
+              "version": "sha256:51c809b41e32d83da90aaf928e2a8073a5de81186908ad493129fffdfe6c09c2"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W39.csv",
+              "version": "sha256:d746a7743a6225555c05e460918ebb322959e9b65709aca20876af9f0cbb9996"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W40.csv",
+              "version": "sha256:a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e"
+            }
+          ]
+        },
+        {
+          "name": "demand_uplift",
+          "status": "not_applicable",
+          "mandatory": false,
+          "detail": "unmet demand is vague ('in continuazione'): no count, no unit uplift, scenarios stay on the baseline (RFC §4.9 step 5)",
+          "source_refs": [
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W41.csv",
+              "version": "sha256:7807f39df38787c5bc5bd069c8dd6f588042d21b440ccdf2d85836409adcc3c8"
+            }
+          ]
+        }
+      ],
+      "outcomes": [
+        {
+          "scenario_id": "low",
+          "lost_units_dest": 2.409,
+          "lost_units_donor": 0.0,
+          "leftover_units_dest": 0.0,
+          "leftover_units_donor": 0.479,
+          "transport_cost_eur": 0.0,
+          "demand_basis": "colour sales_baseline of forecast vintage 2026-10-05 (run date + 1 day 06:00 local), split /7 over its ISO week; scenarios equal the baseline (vague unmet demand gives no numeric uplift), so low, base and high coincide (RFC §4.9 steps 1, 5 and 7)",
+          "size_allocation_basis": "MIL01 I10919B00011-999: size M is 13/60 = 0.2167 of the colour units sold 2026-08-31..2026-10-04 on days it opened in stock; donor MIL02 curve 12/39 = 0.3077 (RFC §4.9 raccordo con la taglia)"
+        },
+        {
+          "scenario_id": "base",
+          "lost_units_dest": 2.409,
+          "lost_units_donor": 0.0,
+          "leftover_units_dest": 0.0,
+          "leftover_units_donor": 0.479,
+          "transport_cost_eur": 0.0,
+          "demand_basis": "colour sales_baseline of forecast vintage 2026-10-05 (run date + 1 day 06:00 local), split /7 over its ISO week; scenarios equal the baseline (vague unmet demand gives no numeric uplift), so low, base and high coincide (RFC §4.9 steps 1, 5 and 7)",
+          "size_allocation_basis": "MIL01 I10919B00011-999: size M is 13/60 = 0.2167 of the colour units sold 2026-08-31..2026-10-04 on days it opened in stock; donor MIL02 curve 12/39 = 0.3077 (RFC §4.9 raccordo con la taglia)"
+        },
+        {
+          "scenario_id": "high",
+          "lost_units_dest": 2.409,
+          "lost_units_donor": 0.0,
+          "leftover_units_dest": 0.0,
+          "leftover_units_donor": 0.479,
+          "transport_cost_eur": 0.0,
+          "demand_basis": "colour sales_baseline of forecast vintage 2026-10-05 (run date + 1 day 06:00 local), split /7 over its ISO week; scenarios equal the baseline (vague unmet demand gives no numeric uplift), so low, base and high coincide (RFC §4.9 steps 1, 5 and 7)",
+          "size_allocation_basis": "MIL01 I10919B00011-999: size M is 13/60 = 0.2167 of the colour units sold 2026-08-31..2026-10-04 on days it opened in stock; donor MIL02 curve 12/39 = 0.3077 (RFC §4.9 raccordo con la taglia)"
+        }
+      ],
+      "baseline_outcomes": null,
+      "assumptions": [
+        "starting stock is the EOD 2026-10-08 snapshot: 0 units of size M at MIL01, 3 at MIL02 (RFC §4.10, initial state)",
+        "the 4 units MIL01 has on backorder at IT10 are not stock: ATP is 0 until the 2026-10-30 receipt",
+        "hold is the ranking baseline: every movement is compared against these losses"
+      ],
+      "valid_until": "2026-10-16T08:35:52Z",
+      "recommended": false,
+      "rationale": "no stock action: 2.41 units of size M stay unserved at MIL01 over D+1..D+7 while MIL02 keeps 0.48 units. It is the baseline for the other options, not a proposal: the store keeps asking for size M and the DC receipt is too late to help inside the horizon",
+      "input_version_hash": "sha256:20cbb7b1c16363fe95d0031ca50d46a802188a64b7617a38d79c9514827ac005"
+    }
+  }
+]

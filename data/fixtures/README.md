@@ -53,3 +53,61 @@ backend/.venv/bin/python data/fixtures/build_data01b.py
 Every derived record is available at the latest `available_at` of its inputs and carries their
 `source_refs`. The baseline is referenced as `ForecastVintage` (`<file stem>/<store>/<sku>`,
 version = run date): a source row, not a stored artifact.
+
+## DATA-01c: stock facts, options, agent trace (lane E)
+
+Built on the DATA-01b case above by `build_data01c.py`, for `act.options` (ACT-02), approval
+(ACT-03), `ag.investigator` (AG-03) and the case detail (WEB-05). Rebuild from the repo root
+after DATA-01b:
+
+```sh
+backend/.venv/bin/python data/fixtures/build_data01c.py
+```
+
+| Folder | Records | What it exercises |
+|---|---|---|
+| `stock/` | 12 `StockFact`s, all `basis` values | `I10919B00011` `999`/`742`, size `M`: `on_hand` from the EOD 2026-10-08 store export (MIL01 0, MIL02 3/0) and from the 2026-10-05 SAP projection for `IT10`; `atp` for the DC (0, receipt 2026-10-30); `sellable` with `qty=null` for the stores, because no store-level sellable/reservation export exists: unknown is not zero |
+| `options/` | 4 `ActionOption`s on the D1 case | `hold` (ranking baseline), `verify_stock` (**recommended**), `replenish_dc` 4 units from `IT10` (**blocked**: no ATP, sellable 2026-10-31) and the `transfer` MIL02→MIL01 of 2 units (mechanically feasible, not recommendable) |
+| `traces/` | one `AgentTrace`, `mode=fixture` | The deterministic fallback path of RFC §4.8.1 on the RFC §4.8.2 tools, ending `finish(status=verify)` on the recommended option; `fallback_used=true`, no tokens |
+
+The D1 numbers, all recomputed by the builder (the test re-derives the destination's loss from the
+forecast fixture and the size curve):
+
+| Option | Unserved M at MIL01 | Unserved M at MIL02 | Leftover at MIL02 | Transport |
+|---|---|---|---|---|
+| `hold` | 2.41 units | 0.00 | 0.48 | – |
+| `transfer` q=2 | 0.41 units | 1.52 | 0.00 | 16.21 EUR |
+
+The transfer does reduce the total unserved units (2.41 → 1.93), but it pushes the loss onto the
+donor and costs 16.21 EUR; more importantly, two **mandatory** checks stay `unknown`
+(`reservations` and `quality_hold`: the sources export neither store-level holds nor sellable
+quantities). A movement with an unknown mandatory check is never recommended (RFC §4.10), so the
+recommendation is the physical count: MIL01 dropped from 8 to 0 units of size M between the two
+last snapshots with one recorded sale (`snapshot_bridge`), the donor's count must be confirmed and
+the DC projection is four days old. This is the intended D1 outcome, not a missing option: RFC
+§4.10 says not to force a transfer D1 only because the demo wants one.
+
+Conventions worth knowing when consuming these records:
+
+- **Demand.** Colour `sales_baseline` of the vintage admissible at D, `/7` per open day of its ISO
+  week (`series[].baseline` of the `forecast/` fixtures, identical to the ERP CSV). The D1 case has
+  no numeric uplift, so `low`/`base`/`high` coincide, and `outcomes` repeats the same numbers.
+- **Size curve.** Size M units over the colour units sold 2026-08-31..2026-10-04 on days size M
+  opened in stock: MIL01 `13/60 = 0.2167`, MIL02 `12/39 = 0.3077` (RFC §4.9 "raccordo con la
+  taglia"). The donor is judged with its own curve, so donor protection is size-aware.
+- **Checks.** Names are stable (`identity_crosswalk`, `availability_freshness`/`availability_atp`,
+  `reservations`, `quality_hold`, `min_presentation_safety`, `scarcity_assortment`,
+  `donor_protected`, `lane_ibt`, `calendar_cutoff`, `eta_required_by`, `size_curve`,
+  `shared_resources`); `mandatory=true` on every movement check, including the `unknown` ones.
+- **Check evidence.** `Check.source_refs` are `ArtifactRef`s. Where the evidence is a source file
+  with no contract (lane matrix, minimum presentation, ATP columns, POS weeks) the ref is
+  `kind="SourceFile"`, `id` = dataset uri, `version` = content hash, the same convention DATA-01b
+  uses for `ForecastVintage` rows.
+- **Availability.** Store facts are known at the end of their local day, the DC projection at its
+  `SNAPSHOT` instant; every record here is available at D 10:35 local or earlier. Later facts that
+  confirm the story are *not* inputs: the IBT request of 2026-10-09 17:32 (created because the
+  transfer happened anyway) and the 2026-10-12 ATP projection.
+- **Stores.** Destination and donor are dev stores (`MIL01`, `MIL02`) plus the supplying DC
+  `IT10`. `ROM01`, also addressed by the source email, is a hold-out store and has no record here
+  (RFC §5.1).
+

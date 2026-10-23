@@ -493,5 +493,7 @@ def test_report_check_rejects_wrong_citation_semantics(update: dict) -> None:
 
 
 def test_all_fixtures_load_as_one_run() -> None:
+    # The loader reads every family under `data/fixtures/`; this file owns DATA-01a/b only, so
+    # its records are a subset of what one run loads (DATA-01c adds stock, options and traces).
     _, records = read_fixtures(FIXTURES)
-    assert {(type(r).__name__, r.id) for r in records} == set(everything())
+    assert set(everything()) <= {(type(r).__name__, r.id) for r in records}
