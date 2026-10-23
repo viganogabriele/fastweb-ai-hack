@@ -13,14 +13,14 @@ from datetime import datetime
 from pathlib import Path
 from uuid import uuid4
 
-from tessera.core.config import REPO_ROOT, MissingApiKey, Settings
-from tessera.core.contracts import ModuleSnapshot, RunSpec, Segment, SourceDocument
-from tessera.core.db import connect
-from tessera.core.llm import LLMClient
-from tessera.core.orchestrator import run
-from tessera.core.registry import RegisteredModule, Registry
-from tessera.core.run_repo import repo_session
-from tessera.modules.sources import voice
+from tesseract.core.config import REPO_ROOT, MissingApiKey, Settings
+from tesseract.core.contracts import ModuleSnapshot, RunSpec, Segment, SourceDocument
+from tesseract.core.db import connect
+from tesseract.core.llm import LLMClient
+from tesseract.core.orchestrator import run
+from tesseract.core.registry import RegisteredModule, Registry
+from tesseract.core.run_repo import repo_session
+from tesseract.modules.sources import voice
 
 AS_OF = "2026-10-22T20:00:00+00:00"
 ROOT = Path(__file__).resolve().parent

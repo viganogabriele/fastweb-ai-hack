@@ -109,6 +109,17 @@ consume them. Capture split/catalog hashes too: current scorers use those live
 files. Cache, code and lockfile fingerprints require the separate experiment
 record; `freeze --configuration` only accepts paths under `config/` or `backend/`.
 
+### How #211 produces the freeze record
+
+`scripts/freeze_record.py` (REL-01d) writes that experiment record mechanically.
+`record` binds the candidate, runtime, prompt/config/RunSpec, source, evaluator-input,
+cache and export identities. `append` chains bundle manifest digests, the approval
+and post-freeze label hash receipts (values only). `verify` rehashes the live inputs
+and fails on drift. Sequence: candidate SHA → `make check` log → REL-01c exports →
+`record` → `eval freeze` bundles → `append --bundle` → `verify` → human review →
+`append` approval → tag `freeze-g3`. The exact commands are in
+[`freeze-runbook.md`](freeze-runbook.md).
+
 ## 4. Frozen export contracts
 
 All three export files are JSON arrays of objects. Empty arrays are structurally
@@ -154,7 +165,7 @@ substitute for the integrated lead-time export. Its supported invocation is:
 
 ```sh
 # Execution example: paths/run id must be supplied by #211.
-$P -m eval product -- -m tessera.modules.ingestion.reading_export run \
+$P -m eval product -- -m tesseract.modules.ingestion.reading_export run \
   --run-spec "$READING_SPEC_FROM_BACKEND" --run-id "$READING_RUN_ID" \
   --out "$READING_EXPORT_FROM_BACKEND"
 ```

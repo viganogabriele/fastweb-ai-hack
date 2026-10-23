@@ -7,9 +7,9 @@ from pathlib import Path
 
 import pytest
 
-from tessera.core.config import Settings
-from tessera.core.contracts import AgentTrace
-from tessera.modules.agents import investigator
+from tesseract.core.config import Settings
+from tesseract.core.contracts import AgentTrace
+from tesseract.modules.agents import investigator
 
 ROOT = Path(__file__).resolve().parents[3]
 BUILDER = ROOT / "data" / "fixtures" / "build_ag03b.py"

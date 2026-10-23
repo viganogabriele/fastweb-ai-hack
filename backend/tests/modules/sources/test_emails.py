@@ -7,13 +7,13 @@ from pathlib import Path
 import pytest
 from jsonschema import ValidationError
 
-from tessera.core.contracts import ModuleSnapshot, RunSpec, Segment, SourceDocument
-from tessera.core.db import connect
-from tessera.core.orchestrator import run
-from tessera.core.registry import RegisteredModule, Registry
-from tessera.core.run_repo import repo_session
-from tessera.modules.sources import emails
-from tessera.modules.sources.emails import MANIFEST, collect
+from tesseract.core.contracts import ModuleSnapshot, RunSpec, Segment, SourceDocument
+from tesseract.core.db import connect
+from tesseract.core.orchestrator import run
+from tesseract.core.registry import RegisteredModule, Registry
+from tesseract.core.run_repo import repo_session
+from tesseract.modules.sources import emails
+from tesseract.modules.sources.emails import MANIFEST, collect
 
 ROOT = Path(__file__).resolve().parents[4]
 SOURCES = ROOT / "generated" / "sources"

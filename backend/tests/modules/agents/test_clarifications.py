@@ -5,7 +5,7 @@ from datetime import UTC, datetime, timedelta, timezone
 
 import pytest
 
-from tessera.core.contracts import (
+from tesseract.core.contracts import (
     Case,
     Clarification,
     Evidence,
@@ -16,7 +16,7 @@ from tessera.core.contracts import (
     RunSpec,
     SourceDocument,
 )
-from tessera.modules.agents.clarifications import (
+from tesseract.modules.agents.clarifications import (
     InvalidAnswer,
     SimulatedAnswer,
     UnrecordedAnswer,

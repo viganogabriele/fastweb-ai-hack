@@ -8,14 +8,15 @@ from fastapi.testclient import TestClient
 from sqlalchemy import insert
 from sqlalchemy.exc import OperationalError
 
-from tessera.api.main import create_app
-from tessera.api.routers.options import decision_clock, option_input_loader
-from tessera.core.config import Settings
-from tessera.core.contracts import RunSpec
-from tessera.core.db import artifacts, connect
-from tessera.core.run_repo import repo_session
-from tessera.modules.actions import approval, ledger
-from tessera.modules.actions.options import evaluate_case
+from tesseract.api.main import create_app
+from tesseract.api.routers.options import decision_clock, option_input_loader
+from tesseract.core.cache import CacheCorrupt, ReplayMiss
+from tesseract.core.config import Settings
+from tesseract.core.contracts import RunSpec
+from tesseract.core.db import artifacts, connect
+from tesseract.core.run_repo import repo_session
+from tesseract.modules.actions import approval, ledger
+from tesseract.modules.actions.options import evaluate_case
 from tests.modules.actions.test_options import AS_OF, inputs
 
 
@@ -303,8 +304,22 @@ def test_busy_ledger_is_retryable_without_silent_resubmission(service, monkeypat
     assert ledger.reservations(service[1]["product"], value.scenario_id) == ()
 
 
+@pytest.mark.parametrize("error", [ReplayMiss, CacheCorrupt])
+def test_missing_or_corrupt_systems_recording_never_saves_http_approval(service, error):
+    client, value, options = prepare(service)
+
+    def load(*_):
+        raise error("private cache details")
+
+    service[2].dependency_overrides[option_input_loader] = lambda: load
+    response = client.post(endpoint(value), json=body(options["transfer"]))
+    assert response.status_code == 503
+    assert "private" not in response.text
+    assert ledger.reservations(service[1]["product"], value.scenario_id) == ()
+
+
 def test_approval_input_gathering_excludes_historical_derived_support(service):
-    from tessera.core.contracts import ForecastAdjustment
+    from tesseract.core.contracts import ForecastAdjustment
 
     client, value, options = prepare(service)
     old = value.dest.forecast.model_copy(update={"version": "parent:answer:1"})

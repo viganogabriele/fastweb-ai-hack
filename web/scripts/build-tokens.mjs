@@ -21,7 +21,7 @@ export async function readTokens() {
   return tokens
 }
 
-const MODES_EXTENSION = 'com.tessera.atelier'
+const MODES_EXTENSION = 'com.tesseract.atelier'
 export const modeValue = (token, mode) => (mode && token.$extensions?.[MODES_EXTENSION]?.modes?.[mode]) ?? token.$value
 
 export function resolveToken(tokens, path, seen = new Set(), mode = undefined) {

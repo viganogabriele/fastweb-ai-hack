@@ -9,11 +9,11 @@ from types import SimpleNamespace
 
 import pytest
 
-from tessera.core.contracts import ForecastAdjustment, ModuleManifest, ModuleSnapshot, RunSpec
-from tessera.core.db import connect
-from tessera.core.repo import Repo, create_run
-from tessera.modules.intelligence import baseline
-from tessera.modules.sources import erp
+from tesseract.core.contracts import ForecastAdjustment, ModuleManifest, ModuleSnapshot, RunSpec
+from tesseract.core.db import connect
+from tesseract.core.repo import Repo, create_run
+from tesseract.modules.intelligence import baseline
+from tesseract.modules.sources import erp
 
 T1 = datetime(2026, 10, 14, 18, tzinfo=UTC)  # Wed 20:00 in Milan: horizon Thu 15 → Wed 21
 T2 = datetime(2026, 10, 21, 18, tzinfo=UTC)  # run 2026-10-19 missing: horizon reaches week 10-26

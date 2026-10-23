@@ -79,6 +79,7 @@ export function VoiceProcessButton({
     <Button
       size="sm"
       className="voice-process"
+      variant={state === 'error' ? 'secondary' : 'primary'}
       icon={<Mic size={14} />}
       loading={state === 'running'}
       disabled={!pending}

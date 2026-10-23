@@ -3,10 +3,10 @@
 import pytest
 from sqlalchemy import insert
 
-from tessera.core.contracts import Reservation, RunSpec
-from tessera.core.db import connect
-from tessera.core.run_repo import repo_session
-from tessera.modules.actions import ledger
+from tesseract.core.contracts import Reservation, RunSpec
+from tesseract.core.db import connect
+from tesseract.core.run_repo import repo_session
+from tesseract.modules.actions import ledger
 
 AT = "2026-10-22T20:00:00Z"
 

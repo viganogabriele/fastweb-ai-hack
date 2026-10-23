@@ -5,17 +5,17 @@ from types import SimpleNamespace
 
 import pytest
 
-from tessera.core.contracts import (
+from tesseract.core.contracts import (
     Case,
     ContextEvent,
     ModuleSnapshot,
     Quantity,
     RunSpec,
 )
-from tessera.core.db import connect
-from tessera.core.registry import RegisteredModule, Registry
-from tessera.core.run_repo import repo_session
-from tessera.modules.integration import context
+from tesseract.core.db import connect
+from tesseract.core.registry import RegisteredModule, Registry
+from tesseract.core.run_repo import repo_session
+from tesseract.modules.integration import context
 
 
 def make_case(as_of, store="MIL01"):
@@ -133,7 +133,7 @@ def test_associates_by_geo_time(tmp_path, event_offset_hours, slack_hours, expec
     with repo_session(engine, spec, fixture_mode=True, write=True) as repo:
         repo.put(case, ev)
     registry = Registry((RegisteredModule(context.MANIFEST, context.run),))
-    from tessera.core.orchestrator import run as orchestrate
+    from tesseract.core.orchestrator import run as orchestrate
 
     statuses = orchestrate(spec, engine=engine, registry=registry, clients={})
     assert statuses[0].status in ("succeeded", "degraded")

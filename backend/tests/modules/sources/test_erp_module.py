@@ -10,10 +10,10 @@ from types import SimpleNamespace
 import pytest
 from sqlalchemy import select
 
-from tessera.core.contracts import ModuleManifest, ModuleSnapshot, RunSpec
-from tessera.core.db import connect, erp_rows
-from tessera.core.repo import Repo
-from tessera.modules.sources import erp
+from tesseract.core.contracts import ModuleManifest, ModuleSnapshot, RunSpec
+from tesseract.core.db import connect, erp_rows
+from tesseract.core.repo import Repo
+from tesseract.modules.sources import erp
 
 T0 = datetime(2026, 10, 6, 18, tzinfo=UTC)
 T1 = datetime(2026, 10, 8, 18, tzinfo=UTC)  # 20:00 in Milan

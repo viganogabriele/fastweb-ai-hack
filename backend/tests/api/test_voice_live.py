@@ -8,15 +8,15 @@ from types import SimpleNamespace
 import pytest
 from fastapi.testclient import TestClient
 
-from tessera.api.main import create_app
-from tessera.api.routers import voice as live
-from tessera.core.config import Settings
-from tessera.core.db import connect
-from tessera.core.orchestrator import _plan
-from tessera.core.registry import Registry
-from tessera.modules.sources import voice
-from tessera.modules.sources.emails import Store
-from tessera.modules.sources.voice_inbox import freeze_notes, list_notes, save_note
+from tesseract.api.main import create_app
+from tesseract.api.routers import voice as live
+from tesseract.core.config import Settings
+from tesseract.core.db import connect
+from tesseract.core.orchestrator import _plan
+from tesseract.core.registry import Registry
+from tesseract.modules.sources import voice
+from tesseract.modules.sources.emails import Store
+from tesseract.modules.sources.voice_inbox import freeze_notes, list_notes, save_note
 
 ROME = Store(language="it", timezone="Europe/Rome", currency="EUR")
 
@@ -165,7 +165,7 @@ class FakeLLM:
         raise RuntimeError("no ASR in tests")
 
     def extract(self, schema, messages, **kwargs):
-        from tessera.modules.ingestion.extract import Candidates
+        from tesseract.modules.ingestion.extract import Candidates
 
         assert schema is Candidates
         fact = {
@@ -186,9 +186,9 @@ class FakeLLM:
 def test_a_live_run_turns_a_named_product_into_a_sku_size_case(tmp_path, monkeypatch):
     from datetime import UTC, datetime
 
-    from tessera.core.contracts import Case
-    from tessera.core.orchestrator import run
-    from tessera.core.run_repo import repo_session
+    from tesseract.core.contracts import Case
+    from tesseract.core.orchestrator import run
+    from tesseract.core.run_repo import repo_session
 
     settings = Settings(data_dir=tmp_path)
     text = "Due clienti volevano il gilet VEL blu notte in taglia 3, ma non ce l'avevamo."
@@ -218,7 +218,7 @@ def test_a_live_run_turns_a_named_product_into_a_sku_size_case(tmp_path, monkeyp
 
 
 def test_a_note_whose_run_failed_can_be_processed_again(client):
-    from tessera.core.run_repo import repo_session
+    from tesseract.core.run_repo import repo_session
 
     post_note(client)
     (run,) = client.post("/api/voice/process", json={}).json()
@@ -262,7 +262,7 @@ def test_missing_ffmpeg_is_a_service_failure_not_bad_user_audio(client, tmp_path
 def test_real_browser_containers_are_converted_to_bounded_mono_pcm(tmp_path, suffix, codec, flags):
     import subprocess
 
-    from tessera.modules.sources.voice_inbox import to_wav
+    from tesseract.modules.sources.voice_inbox import to_wav
 
     source = tmp_path / "source.wav"
     source.write_bytes(wav(rate=48000))
@@ -293,7 +293,7 @@ def test_real_browser_containers_are_converted_to_bounded_mono_pcm(tmp_path, suf
 
 
 def test_duration_empty_upload_size_and_language_limits(client, tmp_path, monkeypatch):
-    from tessera.modules.sources.voice_inbox import InvalidRecording, to_wav
+    from tesseract.modules.sources.voice_inbox import InvalidRecording, to_wav
 
     with pytest.raises(InvalidRecording, match="90 seconds"):
         to_wav(wav(seconds=91), "wav")
@@ -323,7 +323,7 @@ def test_duration_empty_upload_size_and_language_limits(client, tmp_path, monkey
 def test_decoder_timeout_is_explicit_and_does_not_publish(client, tmp_path, monkeypatch):
     import subprocess
 
-    from tessera.modules.sources import voice_inbox
+    from tesseract.modules.sources import voice_inbox
 
     def timeout(*args, **kwargs):
         raise subprocess.TimeoutExpired(args[0], kwargs["timeout"])
@@ -337,7 +337,7 @@ def test_playlists_cannot_fetch_network_or_read_an_external_local_audio(tmp_path
     import threading
     from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
-    from tessera.modules.sources.voice_inbox import InvalidRecording, to_wav
+    from tesseract.modules.sources.voice_inbox import InvalidRecording, to_wav
 
     requests = []
 
@@ -373,7 +373,7 @@ def test_playlists_cannot_fetch_network_or_read_an_external_local_audio(tmp_path
 
 
 def test_queued_sources_and_retries_preserve_accepted_text_not_mutable_inbox(client, tmp_path):
-    from tessera.modules.sources.voice_inbox import batch_hash, snapshot_path
+    from tesseract.modules.sources.voice_inbox import batch_hash, snapshot_path
 
     note = post_note(client, transcript="Accepted edited text").json()
     (queued,) = client.post("/api/voice/process", json={}).json()
@@ -383,7 +383,7 @@ def test_queued_sources_and_retries_preserve_accepted_text_not_mutable_inbox(cli
     frozen = voice.read_sidecar(snapshot_path(tmp_path, spec.run_id) / note["note_id"])
     assert voice.manual_transcript(frozen) == "Accepted edited text"
     assert batch_hash(list_notes(tmp_path)) != spec.source_manifest_hash
-    with __import__("tessera.core.run_repo", fromlist=["repo_session"]).repo_session(
+    with __import__("tesseract.core.run_repo", fromlist=["repo_session"]).repo_session(
         client.app.state.engines["product"], spec, write=True
     ) as repo:
         repo.set_run_status("failed")
@@ -425,7 +425,7 @@ def test_future_notes_are_not_queued_and_foreign_store_stays_pending(client, tmp
 
 
 def test_live_accepted_transcript_is_never_retranscribed_or_given_fake_intervals(client, tmp_path):
-    from tessera.core.contracts import Segment, SourceDocument
+    from tesseract.core.contracts import Segment, SourceDocument
 
     post_note(client, transcript="User corrected the model name")
     client.post("/api/voice/process", json={})
@@ -444,7 +444,7 @@ def test_live_accepted_transcript_is_never_retranscribed_or_given_fake_intervals
     assert doc.text == "User corrected the model name"
     assert doc.meta["transcript_mode"] == "manual"
     assert segment.t_start_s is None and segment.t_end_s is None
-    from tessera.modules.sources.voice_inbox import snapshot_path
+    from tesseract.modules.sources.voice_inbox import snapshot_path
 
     path = snapshot_path(tmp_path, spec.run_id) / doc.meta["note_id"] / "transcript.txt"
     path.write_text("Tampered")
@@ -512,7 +512,7 @@ def test_live_source_references_are_distinct_from_dataset_sources(client, tmp_pa
     post_note(client)
     client.post("/api/voice/process", json={})
     spec = client.executed[-1][0]
-    from tessera.modules.sources.voice_inbox import snapshot_path
+    from tesseract.modules.sources.voice_inbox import snapshot_path
 
     (path,) = snapshot_path(tmp_path, spec.run_id).iterdir()
     note = voice.read_sidecar(path)
@@ -520,7 +520,7 @@ def test_live_source_references_are_distinct_from_dataset_sources(client, tmp_pa
 
 
 def test_precise_duration_rejects_audio_just_over_ninety_seconds():
-    from tessera.modules.sources.voice_inbox import InvalidRecording, to_wav
+    from tesseract.modules.sources.voice_inbox import InvalidRecording, to_wav
 
     with pytest.raises(InvalidRecording, match="90 seconds"):
         to_wav(wav(seconds=90.02), "wav")
@@ -565,7 +565,7 @@ def test_asr_deadline_failure_is_a_service_error_and_releases_slot(client, monke
 def test_a_run_from_before_snapshots_does_not_break_the_listing(client, tmp_path):
     import shutil
 
-    from tessera.api.routers.voice import snapshot_path
+    from tesseract.api.routers.voice import snapshot_path
 
     old = post_note(client).json()
     (run,) = client.post("/api/voice/process", json={}).json()

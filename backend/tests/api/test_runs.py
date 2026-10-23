@@ -9,9 +9,9 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import insert
 
-from tessera.api.main import app_engine, create_app
-from tessera.core.config import Settings
-from tessera.core.contracts import (
+from tesseract.api.main import app_engine, create_app
+from tesseract.core.config import Settings
+from tesseract.core.contracts import (
     Case,
     EntityLink,
     ModuleManifest,
@@ -20,9 +20,9 @@ from tessera.core.contracts import (
     RunSpec,
     SourceDocument,
 )
-from tessera.core.db import artifacts, connect
-from tessera.core.registry import RegisteredModule, Registry
-from tessera.core.run_repo import repo_session
+from tesseract.core.db import artifacts, connect
+from tesseract.core.registry import RegisteredModule, Registry
+from tesseract.core.run_repo import repo_session
 
 ROOT = Path(__file__).resolve().parents[3]
 
@@ -213,7 +213,7 @@ def test_real_data01a_document_fixture_is_served_without_filesystem_endpoint(ser
         (ROOT / "data/fixtures/documents/doc-20261002-2112-mil01.json").read_text()
     )
     spec = RunSpec(run_id="real-fixture", **body("fixture"))
-    from tessera.core.contracts import Segment
+    from tesseract.core.contracts import Segment
 
     kinds = {"SourceDocument": SourceDocument, "Segment": Segment}
     with repo_session(engine, spec, fixture_mode=True) as repo:
@@ -357,7 +357,7 @@ def test_default_engines_physically_isolate_fixture_and_product_with_same_id(tmp
 def test_submission_accepts_disabled_uninstalled_snapshot_and_503s_on_held_lock(tmp_path):
     from sqlalchemy import create_engine, event
 
-    from tessera.core.db import _sqlite_pragmas
+    from tesseract.core.db import _sqlite_pragmas
 
     url = f"sqlite:///{tmp_path / 'locked.db'}"
     connect(url).dispose()
@@ -397,8 +397,8 @@ def test_submission_accepts_disabled_uninstalled_snapshot_and_503s_on_held_lock(
 def test_reset_during_lookup_preserves_snapshot_without_recreating_run(
     service, monkeypatch, suffix
 ):
-    from tessera.core.repo import Repo as StoredRepo
-    from tessera.core.repo import list_runs, reset_run
+    from tesseract.core.repo import Repo as StoredRepo
+    from tesseract.core.repo import list_runs, reset_run
 
     client, engine, _ = service
     seed(engine)
@@ -427,8 +427,8 @@ def test_reset_during_lookup_preserves_snapshot_without_recreating_run(
 
 
 def test_listing_does_not_recreate_runs_reset_after_enumeration(service, monkeypatch):
-    from tessera.api.routers import runs as routes
-    from tessera.core.repo import list_runs, reset_run
+    from tesseract.api.routers import runs as routes
+    from tesseract.core.repo import list_runs, reset_run
 
     client, engine, _ = service
     seed(engine)
@@ -446,7 +446,7 @@ def test_listing_does_not_recreate_runs_reset_after_enumeration(service, monkeyp
 
 @pytest.mark.parametrize("outcome", ["succeeded", "degraded", "blocked", "failed"])
 def test_active_run_hides_partial_outputs_and_preserves_previous_session(service, outcome):
-    from tessera.core.orchestrator import run
+    from tesseract.core.orchestrator import run
 
     client, engine, _ = service
     previous = seed(engine, "previous-session")

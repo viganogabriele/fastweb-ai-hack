@@ -7,9 +7,9 @@ from concurrent.futures import ThreadPoolExecutor
 
 import pytest
 
-from tessera.core.cache import ReplayMiss
-from tessera.modules.integration.candidates import Candidate, Catalog, LinkParams, Style
-from tessera.modules.integration.embeddings import (
+from tesseract.core.cache import ReplayMiss
+from tesseract.modules.integration.candidates import Candidate, Catalog, LinkParams, Style
+from tesseract.modules.integration.embeddings import (
     EmbeddingRetriever,
     InvalidEmbedding,
     RetrievalQuery,

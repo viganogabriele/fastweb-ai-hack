@@ -1,7 +1,8 @@
-# Tessera dev commands. Run from the repo root. Requires uv and Node >= 22.
+# Tesseract dev commands. Run from the repo root. Requires uv and Node >= 22.
 BACKEND := backend
 WEB := web
 PY := $(BACKEND)/.venv/bin/python
+CHECK_SCRIPTS := ../scripts/export_openapi.py ../scripts/replay_demo.py ../scripts/prepare_core_demo.py ../scripts/record_core_demo.py ../scripts/check_core_demo.py ../scripts/freeze_record.py
 
 .PHONY: setup dev backend web mocks check fmt test types
 
@@ -18,7 +19,7 @@ dev:  ## backend :8000 + web :5173 + dataset mock systems :8088 (Ctrl-C stops al
 	wait
 
 backend:
-	cd $(BACKEND) && uv run uvicorn tessera.api.main:app --reload --port 8000
+	cd $(BACKEND) && uv run uvicorn tesseract.api.main:app --reload --port 8000
 
 web:
 	cd $(WEB) && npm run dev
@@ -27,12 +28,12 @@ mocks:  ## dataset mock agents server: run it, never import or read its code
 	$(PY) generator/systems/mock_agents/server.py --port 8088
 
 check:  ## must pass before every PR
-	cd $(BACKEND) && uv run ruff check . ../eval ../scripts/export_openapi.py ../scripts/replay_demo.py && uv run ruff format --check . ../eval ../scripts/export_openapi.py ../scripts/replay_demo.py && uv run pytest -q
+	cd $(BACKEND) && uv run ruff check . ../eval $(CHECK_SCRIPTS) && uv run ruff format --check . ../eval $(CHECK_SCRIPTS) && uv run pytest -q
 	cd $(WEB) && npm run lint && npm run typecheck && npm test
 	$(MAKE) --no-print-directory types && git diff --exit-code -- web/src/api/schema.d.ts
 
 fmt:
-	cd $(BACKEND) && uv run ruff check --fix . ../eval ../scripts/export_openapi.py ../scripts/replay_demo.py && uv run ruff format . ../eval ../scripts/export_openapi.py ../scripts/replay_demo.py
+	cd $(BACKEND) && uv run ruff check --fix . ../eval $(CHECK_SCRIPTS) && uv run ruff format . ../eval $(CHECK_SCRIPTS)
 
 test:
 	cd $(BACKEND) && uv run pytest -q

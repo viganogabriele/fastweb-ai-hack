@@ -55,7 +55,7 @@ def main() -> None:
     product = sub.add_parser(
         "product", help="Start the product with kernel-enforced input isolation"
     )
-    product.add_argument("arguments", nargs=argparse.REMAINDER, help="-- -m tessera.cli ...")
+    product.add_argument("arguments", nargs=argparse.REMAINDER, help="-- -m tesseract.cli ...")
     lead = sub.add_parser(
         "lead-time", help="EVL-04: pipeline lead time vs stock and sales baselines"
     )

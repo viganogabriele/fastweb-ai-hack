@@ -10,8 +10,8 @@ from zoneinfo import ZoneInfo
 import pytest
 import yaml
 
-from tessera.core.contracts import Observation, Segment, SourceDocument
-from tessera.modules.ingestion.email_parser import parse_eml
+from tesseract.core.contracts import Observation, Segment, SourceDocument
+from tesseract.modules.ingestion.email_parser import parse_eml
 
 ROOT = Path(__file__).resolve().parents[3]
 FIXTURES = ROOT / "data" / "fixtures"

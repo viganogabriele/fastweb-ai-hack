@@ -12,19 +12,19 @@ from types import SimpleNamespace
 import pytest
 from pydantic import ValidationError
 
-from tessera.core.config import REPO_ROOT
-from tessera.core.contracts import (
+from tesseract.core.config import REPO_ROOT
+from tesseract.core.contracts import (
     ArtifactRef,
     ProductInsight,
     RunSpec,
     Share,
 )
-from tessera.core.db import connect
-from tessera.core.fixtures import read_fixtures
-from tessera.core.registry import Registry
-from tessera.core.repo import ErpRecord, Repo, create_run
-from tessera.modules.intelligence import insights
-from tessera.modules.sources import erp
+from tesseract.core.db import connect
+from tesseract.core.fixtures import read_fixtures
+from tesseract.core.registry import Registry
+from tesseract.core.repo import ErpRecord, Repo, create_run
+from tesseract.modules.intelligence import insights
+from tesseract.modules.sources import erp
 
 FIXTURES = REPO_ROOT / "data" / "fixtures"
 SOURCES = REPO_ROOT / "generated" / "sources"

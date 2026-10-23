@@ -1,0 +1,14 @@
+{
+  "cache_hits": 3,
+  "errors": [],
+  "limitations": [
+    "Separate synthetic extension scenario, outside historical Core forecasting.",
+    "Numeric interval validation, not word-level listening alignment.",
+    "ASR envelopes stay ignored; only the text Core cache travels in this package."
+  ],
+  "manual_fallbacks": 1,
+  "recorded": 2,
+  "run_id": "ing03b-replay-0d3f40a8-d0f3-4d8d-8a56-bc49a29525dc",
+  "scenario_id": "data03-synthetic-voice-verification",
+  "segments": 10
+}

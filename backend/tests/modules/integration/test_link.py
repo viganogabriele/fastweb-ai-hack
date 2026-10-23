@@ -14,17 +14,17 @@ from types import SimpleNamespace
 import pytest
 from pydantic import ValidationError
 
-from tessera.core.config import REPO_ROOT, Settings
-from tessera.core.contracts import EntityLink, Observation, RunSpec
-from tessera.core.db import connect
-from tessera.core.fixtures import read_fixtures
-from tessera.core.llm import ExtractionFailed, LLMCallFailed, LLMClient
-from tessera.core.registry import Registry
-from tessera.core.repo import put_erp
-from tessera.core.run_repo import repo_session
-from tessera.modules.integration import link
-from tessera.modules.integration.candidates import Candidate, LinkParams, LinkResult
-from tessera.modules.sources import erp
+from tesseract.core.config import REPO_ROOT, Settings
+from tesseract.core.contracts import EntityLink, Observation, RunSpec
+from tesseract.core.db import connect
+from tesseract.core.fixtures import read_fixtures
+from tesseract.core.llm import ExtractionFailed, LLMCallFailed, LLMClient
+from tesseract.core.registry import Registry
+from tesseract.core.repo import put_erp
+from tesseract.core.run_repo import repo_session
+from tesseract.modules.integration import link
+from tesseract.modules.integration.candidates import Candidate, LinkParams, LinkResult
+from tesseract.modules.sources import erp
 
 SOURCES = REPO_ROOT / "generated" / "sources"
 FIXTURES = REPO_ROOT / "data" / "fixtures"

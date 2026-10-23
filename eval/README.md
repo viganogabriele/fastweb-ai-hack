@@ -12,9 +12,9 @@ There are no additional dependencies and no answer-key access during tests.
 ## 1. Run the product with isolated inputs
 
 ```sh
-backend/.venv/bin/python -m eval product -- -m tessera.cli --version
+backend/.venv/bin/python -m eval product -- -m tesseract.cli --version
 # API, when needed:
-backend/.venv/bin/python -m eval product -- -m uvicorn tessera.api.main:app --port 8000
+backend/.venv/bin/python -m eval product -- -m uvicorn tesseract.api.main:app --port 8000
 ```
 
 The launcher installs Linux Landlock restrictions **before Python starts**. It
@@ -110,14 +110,14 @@ P=backend/.venv/bin/python
 D=data/eval/evl02
 # 1. Sample list only (file names, no labels) for the product, then the frozen RunSpec.
 $P -m eval reading-sample --files-out $D/files.txt
-(cd backend && .venv/bin/python -m tessera.modules.ingestion.reading_export spec \
+(cd backend && .venv/bin/python -m tesseract.modules.ingestion.reading_export spec \
   --files ../$D/files.txt --as-of 2026-10-09T04:00:00+00:00 --run-id evl02-dev-spec \
   --code-version "$(git rev-parse --short HEAD)" --out ../$D/run_spec.json)
 # 2. Record once (Fastweb keys; outside the launcher, which cannot read .secrets/).
-(cd backend && LLM_MODE=record .venv/bin/python -m tessera.modules.ingestion.reading_export \
+(cd backend && LLM_MODE=record .venv/bin/python -m tesseract.modules.ingestion.reading_export \
   run --run-spec ../$D/run_spec.json --run-id evl02-dev-record --out ../data/exports/evl02-record)
 # 3. Evaluated export: replay under kernel read isolation.
-$P -m eval product -- -m tessera.modules.ingestion.reading_export run \
+$P -m eval product -- -m tesseract.modules.ingestion.reading_export run \
   --run-spec ../$D/run_spec.json --run-id evl02-dev-replay --out ../data/exports/evl02-dev
 # 4. Freeze, keep the printed SHA-256 outside the bundle, then score.
 $P -m eval reading-sample --run-spec $D/run_spec.json --protocol-out $D/protocol.json

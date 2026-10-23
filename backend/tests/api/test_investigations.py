@@ -11,11 +11,11 @@ from fastapi.testclient import TestClient
 from openai.types.chat import ChatCompletion
 from sqlalchemy import insert, select, update
 
-from tessera.api.main import create_app
-from tessera.api.routers import investigations as api
-from tessera.core.cache import ReplayMiss
-from tessera.core.config import Settings
-from tessera.core.contracts import (
+from tesseract.api.main import create_app
+from tesseract.api.routers import investigations as api
+from tesseract.core.cache import ReplayMiss
+from tesseract.core.config import Settings
+from tesseract.core.contracts import (
     ActionOption,
     AgentTrace,
     ArtifactRef,
@@ -23,11 +23,12 @@ from tessera.core.contracts import (
     Clarification,
     Reservation,
 )
-from tessera.core.db import artifacts, connect, runs
-from tessera.core.llm import LLMClient
-from tessera.core.repo import ErpRecord, Repo, put_erp, reset_run
-from tessera.core.run_repo import repo_session
-from tessera.modules.actions import approval
+from tesseract.core.db import artifacts, connect, runs
+from tesseract.core.llm import LLMClient
+from tesseract.core.repo import ErpRecord, Repo, put_erp, reset_run
+from tesseract.core.run_repo import repo_session
+from tesseract.modules.actions import approval
+from tesseract.modules.sources.systems_client import Crosswalk
 from tests.api.test_traces import case, common, raw, seed, spec, trace
 
 PATH = "/api/runs/one/cases/case-1/investigate"
@@ -165,7 +166,39 @@ def test_replay_miss_is_explicit_and_discards_the_job_snapshot(service, monkeypa
     job = response.json()["spec"]["run_id"]
     state = client.get(f"/api/runs/{job}").json()
     assert state["status"] == "failed" and not state["published"]
-    assert state["module_runs"][-1]["result"]["errors"] == ["Missing LLM recording (replay miss)"]
+    assert state["module_runs"][-1]["result"]["errors"] == [
+        "Missing LLM or systems recording (replay miss)"
+    ]
+    assert client.get(f"/api/runs/{job}/cases/case-1/traces").status_code == 409
+    with repo_session(engine, job) as repo:
+        assert repo.list(Case) == []
+        assert repo.list(AgentTrace) == []
+    assert client.get("/api/runs/one/cases/case-1").status_code == 200
+
+
+def test_swallowed_systems_replay_miss_cannot_publish_fallback_trace(service, monkeypatch):
+    client, engine, _ = service
+    seed(engine)
+    forbid_provider(monkeypatch)
+    monkeypatch.setattr(api, "crosswalk_at", lambda *_: Crosswalk({}, {}, {}, {}))
+
+    def investigate(repo, case_id, *, reader, **_):
+        with pytest.raises(ReplayMiss):
+            reader.client._http.get("/warehouse/v1/atp?asOf=2026-10-22")
+        output = trace(repo.spec)
+        repo.put(output)
+        return SimpleNamespace(trace=output)
+
+    monkeypatch.setattr(api.investigator, "investigate", investigate)
+    response = client.post(PATH)
+    job = response.json()["spec"]["run_id"]
+    state = client.get(response.headers["location"]).json()
+    assert state["status"] == "failed" and not state["published"]
+    assert state["module_runs"][-1]["result"]["errors"] == [
+        "Missing LLM or systems recording (replay miss)"
+    ]
+    assert client.get(response.headers["location"] + "/cases").status_code == 409
+    assert client.get("/api/runs/one/cases/case-1").status_code == 200
     assert client.get(f"/api/runs/{job}/cases/case-1/traces").status_code == 409
     with repo_session(engine, job) as repo:
         assert repo.list(Case) == []

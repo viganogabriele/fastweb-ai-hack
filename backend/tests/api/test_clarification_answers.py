@@ -4,14 +4,14 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import select, update
 
-from tessera.api.main import create_app
-from tessera.api.routers import clarifications
-from tessera.core.config import Settings
-from tessera.core.contracts import Clarification, SourceDocument
-from tessera.core.db import runs
-from tessera.core.registry import RegisteredModule, Registry
-from tessera.core.run_repo import repo_session
-from tessera.modules.agents.answer_registry import register_recorded_answer, submit_answer
+from tesseract.api.main import create_app
+from tesseract.api.routers import clarifications
+from tesseract.core.config import Settings
+from tesseract.core.contracts import Clarification, SourceDocument
+from tesseract.core.db import runs
+from tesseract.core.registry import RegisteredModule, Registry
+from tesseract.core.run_repo import repo_session
+from tesseract.modules.agents.answer_registry import register_recorded_answer, submit_answer
 from tests.modules.agents import test_answer_registry
 
 # Register the shared pytest fixture without an unused fixture-function import.
@@ -287,10 +287,10 @@ def test_startup_recovers_accepted_pending_answer_jobs(answer_setup, mode):
 
 @pytest.mark.parametrize("reply", ["self_contained", "context_only", "replay_miss"])
 def test_http_answer_with_production_pipeline_boundaries(answer_setup, monkeypatch, reply):
-    from tessera.core.cache import ReplayMiss
-    from tessera.core.contracts import Case, EntityLink, EvidenceRelation, Observation
-    from tessera.modules.agents.answer_registry import execute_follow_up
-    from tessera.modules.ingestion import extract
+    from tesseract.core.cache import ReplayMiss
+    from tesseract.core.contracts import Case, EntityLink, EvidenceRelation, Observation
+    from tesseract.modules.agents.answer_registry import execute_follow_up
+    from tesseract.modules.agents.contextual_answers import ContextualMention
 
     engine, body, registry, originals, RecordedReading = test_answer_registry.production_pipeline(
         answer_setup, monkeypatch
@@ -301,20 +301,10 @@ def test_http_answer_with_production_pipeline_boundaries(answer_setup, monkeypat
 
     class Reading(RecordedReading):
         def extract(self, schema, messages, *, cache_context, **kwargs):
-            if cache_context["document"][0].startswith("clarification-answer:"):
+            if schema is ContextualMention:
                 reply_messages.extend(messages)
                 if reply == "replay_miss":
                     raise ReplayMiss("No recording for the answer extraction")
-                if reply == "context_only":
-                    return extract.Candidates(
-                        observations=[
-                            extract.Candidate(
-                                quote=body.text,
-                                kind="unmet_demand",
-                                product_mention=body.text,
-                            )
-                        ]
-                    )
             return super().extract(schema, messages, cache_context=cache_context, **kwargs)
 
     def worker(engine, run_id, **kwargs):
@@ -334,15 +324,15 @@ def test_http_answer_with_production_pipeline_boundaries(answer_setup, monkeypat
             assert client.get(base + "/cases").status_code == 409
         else:
             assert state["published"]
-            document = client.get(base + f"/documents/{job['document']['id']}").json()
-            assert document["document"]["parent_document_id"] == originals[0].id
+            answer_document = client.get(base + f"/documents/{job['document']['id']}").json()
+            assert answer_document["document"]["parent_document_id"] == originals[0].id
+            assert answer_document["observations"] == []  # no second demand event
+            document = client.get(base + f"/documents/{originals[0].id}").json()
             assert (
                 document["observations"][0]["available_at"]
                 == body.model_dump(mode="json")["received_at"]
             )
-            assert [link["status"] for link in document["links"]] == [
-                "linked" if reply == "self_contained" else "unlinked"
-            ]
+            assert [link["status"] for link in document["links"]] == ["linked"]
             queue = client.get(base + "/cases").json()
             assert queue and all(not c["version"].startswith("parent:") for c in queue)
             assert all(
@@ -353,10 +343,10 @@ def test_http_answer_with_production_pipeline_boundaries(answer_setup, monkeypat
                 options = client.get(base + f"/cases/{case['id']}/options")
                 assert options.status_code == 200 and options.json()
                 assert all(not o["version"].startswith("parent:") for o in options.json())
-            # The reply is processed separately. Neither original context nor a
-            # semantic correction of its product link is supplied by this worker.
-            assert originals[0].text not in reply_messages[-1]["content"]
-            assert originals[-1].question not in reply_messages[-1]["content"]
+            # Synthetic model output tests guards/provenance, not real comprehension.
+            assert originals[2].evidence[0].quote in reply_messages[-1]["content"]
+            assert originals[-1].question in reply_messages[-1]["content"]
+            assert body.text in reply_messages[-1]["content"]
             with repo_session(engine, job["run"]["run_id"]) as repo:
                 old = [
                     o
@@ -365,12 +355,18 @@ def test_http_answer_with_production_pipeline_boundaries(answer_setup, monkeypat
                 ]
                 assert len(old) == 1
                 links = [lk for lk in repo.list(EntityLink) if lk.observation_id == old[0].id]
-                assert len(links) == 1 and links[0].status == "not_product"
+                assert len(links) == 1 and links[0].status == "linked"
                 assert any(
                     test_answer_registry.ref(old[0]) in c.supporting for c in repo.list(Case)
                 )
-                assert not any(
-                    r.relation in {"supersedes", "duplicates"} for r in repo.list(EvidenceRelation)
+                assert old[0].id == originals[2].id
+                assert (
+                    len([o for o in repo.list(Observation) if not o.version.startswith("parent:")])
+                    == 1
+                )
+                assert any(
+                    r.relation == "supersedes" and r.from_ref == test_answer_registry.ref(old[0])
+                    for r in repo.list(EvidenceRelation)
                 )
         assert client.post(PATH, json=body.model_dump(mode="json")).json() == job
     with repo_session(engine, "parent") as repo:
@@ -428,7 +424,7 @@ def test_restart_recovers_from_existing_database_without_an_injected_engine(
 
 
 def test_startup_does_not_steal_an_already_running_job(answer_setup):
-    from tessera.modules.agents.answer_registry import jobs
+    from tesseract.modules.agents.answer_registry import jobs
 
     engine, body, registry, seed, seen, _ = answer_setup
     seed()
@@ -454,11 +450,12 @@ def test_startup_preserves_lazy_database_creation(tmp_path):
 
 
 def test_follow_up_api_excludes_historical_support_but_resolves_pinned_citations(answer_setup):
-    from tessera.core.contracts import (
+    from tesseract.core.contracts import (
         ActionOption,
         AgentTrace,
         Citation,
         ForecastAdjustment,
+        Observation,
         Report,
     )
 
@@ -558,6 +555,9 @@ def test_follow_up_api_excludes_historical_support_but_resolves_pinned_citations
                             "run_id": ctx.spec.run_id,
                             "scenario_id": ctx.spec.scenario_id,
                             "computed_at": ctx.spec.as_of,
+                            "available_at": ctx.spec.as_of,
+                            "input_refs": tuple(ref(o) for o in ctx.repo.list(Observation)),
+                            "supporting": tuple(ref(o) for o in ctx.repo.list(Observation)),
                         }
                     )
                 )
@@ -598,7 +598,9 @@ def test_follow_up_api_excludes_historical_support_but_resolves_pinned_citations
             assert response.status_code == 200 and response.json() == [], (path, response.json())
         assert [r["id"] for r in client.get(base + "/reports").json()] == ["current-report"]
         detail = client.get(base + "/documents/mail").json()
-        assert [o["version"] for o in detail["observations"]] == ["1"]
+        assert len(detail["observations"]) == 1
+        assert detail["observations"][0]["version"] == queue[0]["supporting"][0]["version"]
+        assert not detail["observations"][0]["version"].startswith("parent:")
         assert client.get(base + "/cases/case/traces/old-trace").status_code == 404
         assert (
             client.get(

@@ -1,7 +1,7 @@
 import pytest
 from pydantic import ValidationError
 
-from tessera.core.contracts import Evidence, MetricFact, Observation, Quantity
+from tesseract.core.contracts import Evidence, MetricFact, Observation, Quantity
 
 
 @pytest.mark.parametrize("unit", ["units", "customers", "requests", "visitors", "percent"])

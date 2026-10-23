@@ -1,10 +1,10 @@
 # Fixtures
 
 Hand-labelled artifacts for the seams in `docs/PLAN.md` §3. Consumers build against them until
-the real producer lands; `tessera fixtures load` (PLT-03) loads them in `FIXTURE_MODE`.
+the real producer lands; `tesseract fixtures load` (PLT-03) loads them in `FIXTURE_MODE`.
 
 Each JSON file is a list of records `{"kind": "<contract class>", "payload": {...}}`, where
-`payload` validates against `tessera.core.contracts.<kind>`. Fixtures use only dev stores and
+`payload` validates against `tesseract.core.contracts.<kind>`. Fixtures use only dev stores and
 `generated/sources/`.
 
 `voice/` is the exception: it holds audio and its sidecars, not stored contract records, and each
@@ -81,7 +81,7 @@ reported kinds and reasons are shares of counted observations, never of sales.
 
 `traces/recorded/` holds two **real-model** `ag.investigator` conversations (`glm-5.3-flash`,
 prompt `investigator.v2`), recorded and replayed by `build_ag03b.py`. It sits two levels deep, so
-`tessera fixtures load` does not load it.
+`tesseract fixtures load` does not load it.
 
 | File | What it is |
 |---|---|

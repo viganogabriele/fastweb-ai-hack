@@ -22,7 +22,7 @@ from zoneinfo import ZoneInfo
 
 import yaml
 
-from tessera.core.contracts import (
+from tesseract.core.contracts import (
     ArtifactRef,
     Case,
     Citation,
@@ -37,8 +37,8 @@ from tessera.core.contracts import (
     SourceDocument,
     SourceRef,
 )
-from tessera.core.contracts.common import SourceRecord
-from tessera.modules.intelligence.disaggregation import disaggregate
+from tesseract.core.contracts.common import SourceRecord
+from tesseract.modules.intelligence.disaggregation import disaggregate
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCES = ROOT / "generated" / "sources"

@@ -14,13 +14,13 @@ from mcp.shared.exceptions import McpError
 from mcp.shared.memory import create_connected_server_and_client_session
 from sqlalchemy import insert
 
-from tessera.api.main import create_app
-from tessera.api.mcp import create_server, serve
-from tessera.core.config import Settings
-from tessera.core.contracts import RunSpec, Segment, SourceDocument
-from tessera.core.db import artifacts, connect
-from tessera.core.registry import Registry
-from tessera.core.run_repo import repo_session
+from tesseract.api.main import create_app
+from tesseract.api.mcp import create_server, serve
+from tesseract.core.config import Settings
+from tesseract.core.contracts import RunSpec, Segment, SourceDocument
+from tesseract.core.db import artifacts, connect
+from tesseract.core.registry import Registry
+from tesseract.core.run_repo import repo_session
 
 
 @pytest.fixture
@@ -157,11 +157,13 @@ async def test_protocol_reads_preserve_api_isolation_and_source_text(api):
         assert original["document"]["text"] == docs[0]["text"]
         segment = original["segments"][0]
         assert docs[0]["text"][segment["char_start"] : segment["char_end"]] == "🧥 店"
-        resource = await session.read_resource("tessera://runs/published/documents/doc/versions/v1")
+        resource = await session.read_resource(
+            "tesseract://runs/published/documents/doc/versions/v1"
+        )
         assert json.loads(resource.contents[0].text) == original
         templates = (await session.list_resource_templates()).resourceTemplates
         assert len(templates) == 1
-        guide = await session.read_resource("tessera://guide")
+        guide = await session.read_resource("tesseract://guide")
         assert "untrusted" in guide.contents[0].text
         for args, code in [
             ({"run_id": "pending", "document_id": "doc"}, 409),
@@ -213,19 +215,19 @@ async def test_all_artifact_tools_and_resources_enforce_snapshot_boundary(api):
                 assert f"HTTP {status}" in result.content[0].text
             # Resource errors are JSON-RPC errors rather than tool isError results.
             with pytest.raises(McpError, match=f"HTTP {status}"):
-                await session.read_resource(f"tessera://runs/{run_id}/documents/doc/versions/v1")
+                await session.read_resource(f"tesseract://runs/{run_id}/documents/doc/versions/v1")
         assert (await session.call_tool("get_run", {"run_id": "fixtures"})).isError
         pending = data(await session.call_tool("get_run", {"run_id": "pending"}))
         assert not pending["published"]
         # The same ID and version in another published run must resolve there only.
-        first = await session.read_resource("tessera://runs/published/documents/doc/versions/v1")
-        other = await session.read_resource("tessera://runs/other/documents/doc/versions/v1")
+        first = await session.read_resource("tesseract://runs/published/documents/doc/versions/v1")
+        other = await session.read_resource("tesseract://runs/other/documents/doc/versions/v1")
         assert json.loads(first.contents[0].text)["document"]["text"].startswith("Hi")
         assert json.loads(other.contents[0].text)["document"]["text"] == "Other run only"
         for doc_id in ("future", "foreign"):
             with pytest.raises(McpError, match="HTTP 404"):
                 await session.read_resource(
-                    f"tessera://runs/published/documents/{doc_id}/versions/v1"
+                    f"tesseract://runs/published/documents/{doc_id}/versions/v1"
                 )
 
     api.state.settings = api.state.settings.model_copy(update={"fixture_mode": False})
@@ -310,7 +312,7 @@ def test_operator_url_validation(url):
 async def test_cli_stdio_handshake():
     params = StdioServerParameters(
         command=sys.executable,
-        args=["-m", "tessera.cli", "mcp"],
+        args=["-m", "tesseract.cli", "mcp"],
         cwd=Path(__file__).resolve().parents[2],
     )
     with anyio.fail_after(15):
@@ -319,8 +321,8 @@ async def test_cli_stdio_handshake():
                 read, write, read_timeout_seconds=timedelta(seconds=5)
             ) as session:
                 result = await session.initialize()
-                assert result.serverInfo.name == "Tessera read-only"
+                assert result.serverInfo.name == "Tesseract read-only"
                 assert len((await session.list_tools()).tools) == 9
                 assert (
-                    "product" in (await session.read_resource("tessera://guide")).contents[0].text
+                    "product" in (await session.read_resource("tesseract://guide")).contents[0].text
                 )
