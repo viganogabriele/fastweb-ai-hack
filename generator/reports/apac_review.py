@@ -98,11 +98,11 @@ def main():
     header(s, "Key messages", "September at constant FX (2025 average rates)")
     msgs = [
         f"APAC September sales EUR {tot_cy / 1e6:.1f} m at constant FX, {g:+.1f}% vs LY and {vb:+.1f}% vs budget.",
-        "Greater China leads: POLARIS (Genius) launch on 24/9 sold through fast in Shanghai, Beijing and Chengdu; strong local clientele before Golden Week.",
+        "Greater China leads: ASTRA (Couture) launch on 24/9 sold through fast in Shanghai, Beijing and Chengdu; strong local clientele before Golden Week.",
         "Japan held back by an unusually warm end of September (27-29°C): outerwear slow, knit and sneakers fine. Inbound (CN/TW) recovering in the last week.",
         f"Korea {(t.loc['Korea'].cy / t.loc['Korea'].ly - 1) * 100:+.1f}%: Cheongdam flagship ahead of the department stores. Chuseok holidays (24-26/9) moved part of local demand abroad.",
         "Hong Kong lost 1.5 days to typhoon signal 8 (17-18/9).",
-        "Early October: ILVARO powder pink sold out across Asia within 1-3 days after the LUMIERE / Yoon Ha-eun photos (1/10). We need replenishment.",
+        "Early October: IRIDIA powder pink sold out across Asia within 1-3 days after the LUMIERE / Yoon Ha-eun photos (1/10). We need replenishment.",
         "Sydney: spring season, clients ask for T-shirts/polos/light jackets; the statistical forecast still pushes down jackets.",
     ]
     d.text(s, 0.8, 1.6, 11.8, 5.0, msgs, size=15, bullets=True, spacing=9)
@@ -158,7 +158,7 @@ def main():
     d.text(s, 7.6, 1.6, 5.2, 4.8, [
         [(f"9月度 前年比 {jr_ratio:.1f}%", {"bold": True, "size": 16, "color": TH["accent"]})],
         "Ginza and Shinsaibashi recovered in the last week with Golden Week inbound (CN, TW).",
-        "Max temperatures 27-29°C until 11/10: down jackets slow, knit and Trailgrip OK.",
+        "Max temperatures 27-29°C until 11/10: down jackets slow, knit and Vtrack OK.",
         "Price increase 1 November (+8% avg on carry-over) to be announced to clients on 9/10: we expect pre-buying.",
         [("「残暑の影響でダウンの動きが鈍い。価格改定の告知後に駆け込み需要を見込む」 - 日本支社 営業企画部", {"italic": True, "size": 12, "color": TH["muted"]})],
     ], size=13, spacing=8)
@@ -178,29 +178,29 @@ def main():
     rows.append(["Cheongdam Flagship", f"{sel01 / 1e3:,.0f}", f"{sel01_ly / 1e3:,.0f}", f"{(sel01 / sel01_ly - 1) * 100:+.1f}%"])
     d.table(s, 0.6, 1.7, 6.0, rows, col_w=[2.4, 1.2, 1.2, 1.2], size=12, zebra=TH["light"], row_h=0.42)
     d.text(s, 7.0, 1.6, 5.8, 4.8, [
-        "Chuseok (24-26/9): many Korean clients travelling to Europe; strong demand for black MAIRE reported by Paris and Milan (Korean shoppers).",
-        "BADY and ILVARO best sellers in women; LOGO HOODIE strong with younger clients.",
+        "Chuseok (24-26/9): many Korean clients travelling to Europe; strong demand for black AUREA reported by Paris and Milan (Korean shoppers).",
+        "ARIA and IRIDIA best sellers in women; VLOGO HOODIE strong with younger clients.",
         "Busan Film Festival from 1/10 will support Centum City in October.",
         [("\"추석 연휴 해외 출국 고객 증가로 9월 하순 국내 매장 방문 감소\" - Korea Retail team", {"italic": True, "size": 12, "color": TH["muted"]})],
     ], size=13, bullets=False, spacing=8)
 
     # 7 Greater China
     s = d.slide()
-    header(s, "Greater China - POLARIS is a hit", "Mainland China and HK & Taiwan, constant FX, sales before returns")
+    header(s, "Greater China - ASTRA is a hit", "Mainland China and HK & Taiwan, constant FX, sales before returns")
     dd = daily()
-    pol = dd[dd.style_name.str.startswith("POLARIS") & (dd.date >= D(2026, 9, 24)) & (dd.date <= M1)]
+    pol = dd[dd.style_name.str.startswith("ASTRA") & (dd.date >= D(2026, 9, 24)) & (dd.date <= M1)]
     polm = pol.groupby("region").units_sold.sum()
     polap = pol[pol.region == "APAC"].groupby("subregion").units_sold.sum()
     d.chart(s, 0.6, 1.5, 6.0, 4.6, XL_CHART_TYPE.COLUMN_CLUSTERED, list(polap.index), [("Units 24-30/9", [int(v) for v in polap.values])],
-            colors=[TH["accent2"]], title="POLARIS units sold 24-30/9 by APAC market", legend=False, labels=True)
+            colors=[TH["accent2"]], title="ASTRA units sold 24-30/9 by APAC market", legend=False, labels=True)
     hk = t.loc["HK & Taiwan"]
     cn = t.loc["Mainland China"]
     d.text(s, 7.0, 1.6, 5.8, 4.8, [
-        f"Mainland China {(cn.cy / cn.ly - 1) * 100:+.1f}% vs LY. POLARIS: {int(polap.get('Mainland China', 0))} units in the first 7 days "
+        f"Mainland China {(cn.cy / cn.ly - 1) * 100:+.1f}% vs LY. ASTRA: {int(polap.get('Mainland China', 0))} units in the first 7 days "
         f"(vs {int(polm.get('EMEA', 0))} in all of EMEA).",
         "Clients from Shanghai and Beijing travelling domestically for Golden Week from 1/10 (Chengdu Taikoo Li very busy).",
         f"HK & Taiwan {(hk.cy / hk.ly - 1) * 100:+.1f}%: Canton Road closed on 17/9 (typhoon signal 8), reopened 18/9 15:00.",
-        [("「POLARIS 系列上市首周表现超预期，斗篷款多个门店断码」 - 中国区零售团队", {"italic": True, "size": 12, "color": TH["muted"]})],
+        [("「ASTRA 系列上市首周表现超预期，斗篷款多个门店断码」 - 中国区零售团队", {"italic": True, "size": 12, "color": TH["muted"]})],
     ], size=13, spacing=8)
 
     # 8 SEA & Oceania
@@ -244,30 +244,30 @@ def main():
     # 10 FW26
     s = d.slide()
     header(s, "FW26 new-in performance", "Units sold since launch to 30/9, APAC stores")
-    x = dd[(dd.region == "APAC") & dd.style_name.isin(["ILVARO", "AMBRINE", "ARNEB", "ROSIERE", "WOOL TURTLENECK"]) & (dd.date <= M1)]
+    x = dd[(dd.region == "APAC") & dd.style_name.isin(["IRIDIA", "AMALIA", "ARTEM", "RIVIERA", "CASHMERE TURTLENECK"]) & (dd.date <= M1)]
     u = x.groupby(["style_name", "subregion"]).units_sold.sum().unstack().fillna(0)
     cols = [c for c in ["Japan", "Korea", "Mainland China", "HK/Macau/TW", "South-East Asia", "Oceania"] if c in u.columns]
     d.chart(s, 0.6, 1.5, 8.0, 5.0, XL_CHART_TYPE.COLUMN_STACKED, list(u.index), [(c, [int(v) for v in u[c]]) for c in cols],
             colors=["0E4D64", "3D7EA6", "E07A5F", "F2CC8F", "81B29A", "B8C4CC"], title="Units sold by style and market")
-    d.text(s, 8.9, 1.6, 4.0, 4.8, ["AMBRINE strongest in Mainland China (long coat silhouette).",
-                                   "ILVARO launch quantity was small (allocation at 55% of model); black broken early in Seoul.",
-                                   "ARNEB size feedback: fits large.",
-                                   "Ask HQ: ILVARO re-order for Asia before the celebrity effect fades."], size=12, bullets=True, spacing=8)
+    d.text(s, 8.9, 1.6, 4.0, 4.8, ["AMALIA strongest in Mainland China (long coat silhouette).",
+                                   "IRIDIA launch quantity was small (allocation at 55% of model); black broken early in Seoul.",
+                                   "ARTEM size feedback: fits large.",
+                                   "Ask HQ: IRIDIA re-order for Asia before the celebrity effect fades."], size=12, bullets=True, spacing=8)
 
     # 11 early October
     s = d.slide()
     header(s, "Early October update (1-11/10)", "Flash, BI daily data - not closed")
-    il = dd[(dd.region == "APAC") & (dd.style_name == "ILVARO") & (dd.color_code == "510") & (dd.date >= D(2026, 10, 1)) &
+    il = dd[(dd.region == "APAC") & (dd.style_name == "IRIDIA") & (dd.color_code == "510") & (dd.date >= D(2026, 10, 1)) &
             (dd.date <= D(2026, 10, 11))]
     il_by = il.groupby("date").units_sold.sum()
     days = [D(2026, 10, 1) + dt.timedelta(days=i) for i in range(11)]
     d.chart(s, 0.6, 1.5, 6.4, 4.4, XL_CHART_TYPE.COLUMN_CLUSTERED, [f"{x_.day}/10" for x_ in days],
-            [("ILVARO powder pink units", [int(il_by.get(x_, 0)) for x_ in days])], colors=["E07A5F"],
-            title="ILVARO powder pink - APAC daily units", legend=False, labels=True)
+            [("IRIDIA powder pink units", [int(il_by.get(x_, 0)) for x_ in days])], colors=["E07A5F"],
+            title="IRIDIA powder pink - APAC daily units", legend=False, labels=True)
     gw = k[k.store_id.isin(MARKETS["Mainland China"]) & (k.date >= D(2026, 10, 1)) & (k.date <= D(2026, 10, 7))].net_sales_lc.sum()
     gw_ly = k[k.store_id.isin(MARKETS["Mainland China"]) & (k.date >= D(2025, 10, 1)) & (k.date <= D(2025, 10, 7))].net_sales_lc.sum()
     d.text(s, 7.3, 1.6, 5.6, 4.8, [
-        "Yoon Ha-eun (LUMIERE) photographed in ILVARO powder pink at Paris Fashion Week on 1/10: pink sold out in all Asian stores in 1-3 days.",
+        "Yoon Ha-eun (LUMIERE) photographed in IRIDIA powder pink at Paris Fashion Week on 1/10: pink sold out in all Asian stores in 1-3 days.",
         "DC top-up landed 8/10 - gone the same day. Seoul Cheongdam re-order held at Incheon customs (KC certificate), now expected 13/10.",
         f"Golden Week Mainland China 1-7/10: {(gw / gw_ly - 1) * 100:+.0f}% vs same dates LY (local currency).",
         "Japan: price increase announced 9/10, first signs of pre-buying.",
@@ -277,11 +277,11 @@ def main():
     s = d.slide()
     header(s, "Risks & asks to HQ")
     rows = [["#", "Topic", "Ask", "Owner"],
-            ["1", "ILVARO pink", "Emergency re-order + allocate 100% of next top-up to Asia", "Merchandising HQ"],
-            ["2", "Japan price increase", "Extra MAYA/MAIRE stock for TYO01/OSA01 before 1/11", "Planning"],
+            ["1", "IRIDIA pink", "Emergency re-order + allocate 100% of next top-up to Asia", "Merchandising HQ"],
+            ["2", "Japan price increase", "Extra NOVA/AUREA stock for TYO01/OSA01 before 1/11", "Planning"],
             ["3", "Sydney", "Override forecast: shift to SS/light items until December", "Demand Planning"],
-            ["4", "POLARIS", "Re-allocate EU/US POLARIS stock to Greater China", "Merchandising HQ"],
-            ["5", "TIB vest", "Clarify defect scope (batch) - first returns in Japan", "Quality"],
+            ["4", "ASTRA", "Re-allocate EU/US ASTRA stock to Greater China", "Merchandising HQ"],
+            ["5", "VEL vest", "Clarify defect scope (batch) - first returns in Japan", "Quality"],
             ["6", "Double 11", "Price-match policy for stores vs Tmall pre-sales from 20/10", "China Retail / E-com"]]
     d.table(s, 0.6, 1.5, 12.1, rows, col_w=[0.5, 2.4, 6.6, 2.6], size=12, zebra=TH["light"], row_h=0.5)
 
@@ -309,7 +309,7 @@ def main():
         sin_shown_sgd=round(t.loc["South-East Asia", "cy"]), sin_correct_eur_constfx=round(se_true),
         total_if_sin_correct=round(tot_cy - t.loc["South-East Asia", "cy"] + se_true),
         apac_true_net_sep_monthly_fx=round(t.true_net_flashfx.sum()), apac_bi_eur_budget_rate=round(t.bi_eur_bud.sum()),
-        polaris_units_24_30sep=dict(polap.astype(int)), polaris_units_emea=int(polm.get("EMEA", 0)),
+        valentino_atelier_units_24_30sep=dict(polap.astype(int)), valentino_atelier_units_emea=int(polm.get("EMEA", 0)),
         gw_cn_growth_lc=round((gw / gw_ly - 1) * 100, 1)))
     facts.save()
 

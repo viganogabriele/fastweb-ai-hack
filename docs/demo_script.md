@@ -1,6 +1,6 @@
 # Demo script — 4 minutes (dev stores only)
 
-**Track:** Moncler (FastwebAI Hackathon 2026). **Status:** draft, dev only.  
+**Track:** Valentino (FastwebAI Hackathon 2026). **Status:** draft, dev only.  
 **Rule of the demo:** every number shown is rendered from a structured ref by a template;
 the LLM cites artifact ids it can see and cannot approve, book or override a check.
 **Offline:** all LLM and external calls are replayed from the cache; the demo runs with the
@@ -36,7 +36,7 @@ Owner: lane D. Source narrative: `docs/project-design.md` §9; cases: `generated
 > vague, so it stays vague. No uplift is imputed."
 
 **Action:** show the `Observation` with its `Evidence` (document, segment, quote, offsets);
-show the `EntityLink` to SKU `LOGO CARDIGAN` size M at MIL01, with confidence and the
+show the `EntityLink` to SKU `VLOGO CARDIGAN` size M at MIL01, with confidence and the
 ambiguous alternative left visible.
 
 **Point:** linking is a constrained choice over candidates, not a guess; an ambiguous mention
@@ -55,7 +55,7 @@ tool trace, options with checks.
 
 **Trace shown (live):**
 1. `get_case_evidence(case-D1)` → observations, candidates, periods, origins, uncertainties.
-2. `get_available_stock(LOGO CARDIGAN, M, [MIL01, MIL02])` → MIL01 zero, MIL02 three on hand,
+2. `get_available_stock(VLOGO CARDIGAN, M, [MIL01, MIL02])` → MIL01 zero, MIL02 three on hand,
    snapshot date, quality holds.
 3. `evaluate_options(case-D1)` → hold/verify/ask/notify, plus one domestic transfer with every
    check from RFC §4.10.
@@ -119,8 +119,8 @@ baselines, false alerts, "not detected by T_end".
 
 ## Dev-only notes
 
-- Cases used: D1 (MIL01 cardigan M), D2 (Maire black, PAR01/MIL01), D3 (MUN01 cold, as context
-  only), D4 (TIB zip, ARNEB fit), D5 (ambiguous mention), S3 (ROM01 construction). All dev
+- Cases used: D1 (MIL01 cardigan M), D2 (Aurea black, PAR01/MIL01), D3 (MUN01 cold, as context
+  only), D4 (VEL zip, ARTEM fit), D5 (ambiguous mention), S3 (ROM01 construction). All dev
   stores per `generated/README.md` §5; hold-out stores are never shown.
 - The script assumes the W42 retail flash and the MIL01 mailbox are available at as_of
   2026-10-22 evening. It does not require a feasible transfer or an uplift to land.
@@ -133,5 +133,5 @@ baselines, false alerts, "not detected by T_end".
 
 - Confirm timings with a stopwatch; trim the what-if to 30 s if needed.
 - Add the exact screen captures once PLT-06 routes are frozen.
-- Decide whether to show the cold-snap case (D3) or replace it with the TIB quality case (D4)
+- Decide whether to show the cold-snap case (D3) or replace it with the VEL quality case (D4)
   depending on what is most stable on dev.

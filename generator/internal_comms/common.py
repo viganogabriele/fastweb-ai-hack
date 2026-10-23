@@ -16,7 +16,7 @@ from zoneinfo import ZoneInfo
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 OUT = ROOT / "generated" / "sources" / "internal_comms"
 NOTES = ROOT / "generated" / "ground_truth" / "answer_keys" / "internal_comms_parts"
-DOMAIN = "moncler-retail.example"
+DOMAIN = "valentino-retail.example"
 
 PEOPLE = {
     # area managers

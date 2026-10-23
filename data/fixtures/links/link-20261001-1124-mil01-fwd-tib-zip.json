@@ -9,7 +9,7 @@
       "source_refs": [
         {
           "uri": "dataset://store_emails/MIL01/20261001_1124_MIL01_fwd.eml",
-          "content_hash": "sha256:31aeadf95302b30ec9d28e4f3d359b2603a9629bb6de741467410d3ba89a29bf",
+          "content_hash": "sha256:9be12107b51f0d8e9665e019d486c7f5ee44dd7b686eb176fcf79aa67457e7ee",
           "locator": null
         },
         {
@@ -45,7 +45,7 @@
         }
       ],
       "decided_by": "rule:unique_catalog_match",
-      "rationale": "'gilet Tib' is TIB (J10911A00305); its only blue is 742 (blu notte); 'taglia 4' is in its size run."
+      "rationale": "'gilet Vel' is VEL (J10911A00305); its only blue is 742 (blu notte); 'taglia 4' is in its size run."
     }
   }
 ]

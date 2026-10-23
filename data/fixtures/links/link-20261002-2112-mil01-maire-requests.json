@@ -9,12 +9,12 @@
       "source_refs": [
         {
           "uri": "dataset://store_emails/MIL01/20261002_2112_MIL01.eml",
-          "content_hash": "sha256:42ba599825b726743a870909947f1046005d4f0d715a79922b4ff43cef313a93",
+          "content_hash": "sha256:4485adb77cbfbd090a9865ecac389e35705ab374bf55037d05e0c9ba9712b711",
           "locator": null
         },
         {
           "uri": "dataset://erp/master_data/sku_colour.csv",
-          "content_hash": "sha256:bd40e343533ae4226a100a5ec0e743933a8c3b37656963165d1bc7a8942e2400",
+          "content_hash": "sha256:ea0ec35ed17a37ab91fac2deaede6ee9637c00761a7339cc12581e144d14c160",
           "locator": "sku=J20931A00012-999"
         }
       ],
@@ -45,7 +45,7 @@
         }
       ],
       "decided_by": "rule:unique_catalog_match",
-      "rationale": "'Maire' is the catalog name of style J20931A00012; 'nera' is colour 999."
+      "rationale": "'Aurea' is the catalog name of style J20931A00012; 'nera' is colour 999."
     }
   }
 ]

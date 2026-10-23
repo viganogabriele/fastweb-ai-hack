@@ -193,7 +193,7 @@ def main():
         w, h = landscape(A4)
         c.setFont("NSerif-B", 9)
         c.setFillColor(INK)
-        c.drawString(15 * mm, h - 11 * mm, "MONCLER")
+        c.drawString(15 * mm, h - 11 * mm, "VALENTINO")
         c.setFont("LibSans", 7)
         c.setFillColor(GREY)
         c.drawString(38 * mm, h - 11 * mm, "EMEA Retail  |  Monthly Business Review  |  September 2026")
@@ -211,7 +211,7 @@ def main():
         c.rect(0, 0, w, h, stroke=0, fill=1)
         c.setFillColor(colors.white)
         c.setFont("NSerif-B", 30)
-        c.drawString(25 * mm, h - 60 * mm, "MONCLER")
+        c.drawString(25 * mm, h - 60 * mm, "VALENTINO")
         c.setFont("NSerif-L", 22)
         c.drawString(25 * mm, h - 85 * mm, "EMEA Monthly Business Review")
         c.setFont("NSerif", 16)
@@ -249,9 +249,9 @@ def main():
         "Fashion weeks (Milano 22-28/09, Paris from 29/09) and the first days of Golden Week gave a strong last 10 days.",
         f"Roma Via Condotti {fmt_pct((rom.net / rom.net_ly - 1) * 100)}: pavement works and scaffolding since 14/09 "
         f"(visitors {fmt_pct(rom_traffic_since, 0)} vs LY since the start of the works).",
-        "Lost sales on black MAIRE in Paris, Milano and Harrods (Korean demand) - no stock at DC until mid-October.",
-        "FW26 new-in: AMBRINE (brown) leads outerwear sell-through on value; Genius POLARIS slow in EMEA (fit/price).",
-        "First TIB vest returns for zipper defect at the end of the month - Quality investigation open.",
+        "Lost sales on black AUREA in Paris, Milano and Harrods (Korean demand) - no stock at DC until mid-October.",
+        "FW26 new-in: AMALIA (brown) leads outerwear sell-through on value; Couture ASTRA slow in EMEA (fit/price).",
+        "First VEL vest returns for zipper defect at the end of the month - Quality investigation open.",
     ]
     for b in bullets:
         E.append(Paragraph(b, S["bul"], bulletText="■"))
@@ -302,7 +302,7 @@ def main():
         "flat on traffic up double digit (conversion issue at the corner, staffing on weekends).", S["body"]))
     E.append(Paragraph(
         f"<b>UK</b>: New Bond Street {fmt_pct((t.loc['LON01'].net / t.loc['LON01'].net_ly - 1) * 100)} supported by the FW26 campaign; "
-        f"Harrods {fmt_pct((t.loc['LON02'].net / t.loc['LON02'].net_ly - 1) * 100)} - black MAIRE out of stock from the 3rd week.",
+        f"Harrods {fmt_pct((t.loc['LON02'].net / t.loc['LON02'].net_ly - 1) * 100)} - black AUREA out of stock from the 3rd week.",
         S["body"]))
     E.append(Paragraph(
         f"<b>Switzerland</b>: Genève {fmt_pct((t.loc['GVA01'].net / t.loc['GVA01'].net_ly - 1) * 100)} (fewer Middle East clients), "
@@ -357,9 +357,9 @@ def main():
                        "(units sold / units received).", S["small"]))
     E.append(Spacer(1, 6))
     E.append(Paragraph(
-        "AMBRINE chocolate brown is the stand-out of the drop in Milano, Paris, London and Madrid: sizes 0-2 broken by the last week of "
-        "September and DC cannot replenish brown before November. Black AMBRINE sells at a normal pace. ILVARO (cropped) good in all "
-        "colours; ARNEB parka sells but generates size exchanges (fits large, staff now advise one size down). POLARIS (Genius) is slow "
+        "AMALIA chocolate brown is the stand-out of the drop in Milano, Paris, London and Madrid: sizes 0-2 broken by the last week of "
+        "September and DC cannot replenish brown before November. Black AMALIA sells at a normal pace. IRIDIA (cropped) good in all "
+        "colours; ARTEM parka sells but generates size exchanges (fits large, staff now advise one size down). ASTRA (Couture) is slow "
         "in EMEA: clients find the fit small and the price high, consistent with the feedback from the Paris and Milan teams.",
         S["body"]))
     E.append(FrameBreak())
@@ -381,8 +381,8 @@ def main():
     E.append(table(rows, [45 * mm, 28 * mm, 20 * mm, 28 * mm, 20 * mm, 20 * mm], INK, zebra=LIGHT))
     E.append(Spacer(1, 8))
     E.append(Paragraph(
-        "Outerwear weight in line with seasonality; knitwear supported by the logo cardigan and the new wool turtleneck. "
-        "Footwear soft (Trailgrip sizes 42-43 broken in several stores). Accessories flat - beanies will start with the cold.",
+        "Outerwear weight in line with seasonality; knitwear supported by the vlogo cardigan and the new cashmere turtleneck. "
+        "Footwear soft (Vtrack sizes 42-43 broken in several stores). Accessories flat - beanies will start with the cold.",
         S["body"]))
     E.append(Spacer(1, 8))
     E.append(Paragraph("7. Clientele & tourism", S["h1"]))
@@ -409,16 +409,16 @@ def main():
         "WhatsApp to compensate. Works should end at the beginning of November. I asked Legal to verify a rent abatement and Visual "
         "to produce a branded hoarding.",
         "Korean clients: since Chuseok we have a constant flow of Korean tourists in Paris, Milano and at Harrods asking for the black "
-        "MAIRE (seen on a Korean actress). Korean clients are now more than 10% of the sales in Saint-Honoré. The problem is the "
+        "AUREA (seen on a Korean actress). Korean clients are now more than 10% of the sales in Saint-Honoré. The problem is the "
         "lack of stock: black is finished in the three cities and the DC has nothing until mid-October; beige and navy do not "
         "replace it, the clients want only black. I consider this the biggest lost opportunity of the month. Please prioritise "
         "PAR01, PAR02, MIL01 and LON02 when the 420 units arrive.",
-        "AMBRINE brown: same story at smaller scale. We bought brown too thin. I would move brown sizes 0-2 from Munich, Berlin and "
+        "AMALIA brown: same story at smaller scale. We bought brown too thin. I would move brown sizes 0-2 from Munich, Berlin and "
         "Copenhagen (where they ask black) to Milano and Paris.",
-        "TIB: in the last days of September we started receiving vests back with the zipper slider breaking. Quality is on it; stores "
+        "VEL: in the last days of September we started receiving vests back with the zipper slider breaking. Quality is on it; stores "
         "have been told to check the slider at the till and to offer exchange. If confirmed on the whole July batch we need a "
         "decision on stop-sale before the cold season.",
-        "POLARIS: honestly a disappointment in Europe. Clients try it, it is small and they find the price too high for a capsule. "
+        "ASTRA: honestly a disappointment in Europe. Clients try it, it is small and they find the price too high for a capsule. "
         "I would not re-order for EMEA.",
         "Outlook October: Golden Week started very well with Chinese clients in Milano and Paris, and the forecast announces a cold "
         "spell in Central Europe. I expect to recover part of the gap to budget in Q4.",
@@ -430,11 +430,11 @@ def main():
     # ---- p9 actions
     E.append(Paragraph("9. Actions & requests", S["h1"]))
     rows = [["#", "Topic", "Action", "Owner", "Due"],
-            ["1", "MAIRE black", "Allocate DC re-supply (ETA 16/10) first to PAR01, PAR02, MIL01, LON02", "Merch. Planning", "16/10"],
-            ["2", "AMBRINE brown", "Inter-store transfer sizes 0-2 MUN01/BER01/CPH01 -> MIL01/PAR01", "EMEA Retail Ops", "12/10"],
+            ["1", "AUREA black", "Allocate DC re-supply (ETA 16/10) first to PAR01, PAR02, MIL01, LON02", "Merch. Planning", "16/10"],
+            ["2", "AMALIA brown", "Inter-store transfer sizes 0-2 MUN01/BER01/CPH01 -> MIL01/PAR01", "EMEA Retail Ops", "12/10"],
             ["3", "ROM01", "Branded hoarding + rent abatement request", "Visual / Legal", "20/10"],
-            ["4", "TIB vest", "Check slider at till, exchange policy, stop-sale decision", "Quality / Retail", "15/10"],
-            ["5", "POLARIS", "No re-order EMEA, move units to Greater China?", "Merch. / APAC", "31/10"],
+            ["4", "VEL vest", "Check slider at till, exchange policy, stop-sale decision", "Quality / Retail", "15/10"],
+            ["5", "ASTRA", "No re-order EMEA, move units to Greater China?", "Merch. / APAC", "31/10"],
             ["6", "CPH01", "Temporary staff from Stockholm agency", "HR EMEA", "done"]]
     E.append(table(rows, [8 * mm, 32 * mm, 140 * mm, 38 * mm, 18 * mm], ACC, zebra=LIGHT, align_right_from=99))
     E.append(PageBreak())

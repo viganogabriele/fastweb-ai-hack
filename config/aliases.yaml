@@ -24,70 +24,66 @@
 
 version: 1
 styles:
-  G20921A00901:  # POLARIS CAPE
+  G20921A00901:  # ASTRA CAPE
     - {alias: "斗篷", lang: zh-CN, source: store_emails/SHA01/20260922_2243_SHA01.eml}
     - {alias: "cape", lang: fr, source: store_emails/PAR01/20260924_2103_PAR01.eml}
     - {alias: "capa", lang: es, source: store_emails/MAD01/20260924_2140_MAD01.eml}
-  G20921A00902:  # POLARIS OVERSIZED
-    - {alias: "폴라리스 오버사이즈", lang: ko, source: store_emails/SEL01/20261003_2216_SEL01.eml}
-    - {alias: "polaris oversize", lang: es, source: store_emails/MAD01/20261018_2110_MAD01.eml}
+  G20921A00902:  # ASTRA OVERSIZED
+    - {alias: "Astra 오버사이즈", lang: ko, source: store_emails/SEL01/20261003_2216_SEL01.eml}
+    - {alias: "astra oversize", lang: es, source: store_emails/MAD01/20261018_2110_MAD01.eml}
     - {alias: "doudoune oversize", lang: fr, source: store_emails/PAR01/20260924_2103_PAR01.eml}
-  G20921A00903:  # POLARIS BALACLAVA
+  G20921A00903:  # ASTRA BALACLAVA
     - {alias: "头套", lang: zh-CN, source: store_emails/SHA01/20260922_2243_SHA01.eml}
     - {alias: "cagoule", lang: fr, source: store_emails/PAR01/20260924_2103_PAR01.eml}
-  H20981A00020:  # VALBOURG
-    - {alias: "발부르", lang: ko, source: store_emails/SEL01/20260913_2148_SEL01.eml}
-  I10913A00004:  # CASHMERE SCARF
+  I10913A00004:  # VALENTINO SCARF
     - {alias: "カシミアマフラー", lang: ja, source: store_emails/TYO01/20260910_2122_TYO01.eml}
     - {alias: "캐시미어 머플러", lang: ko, source: store_emails/SEL01/20260920_2130_SEL01.eml}
     - {alias: "围巾", lang: zh-CN, source: store_emails/SHA01/20260904_2229_SHA01.eml}
     - {alias: "scarf", lang: en, source: store_emails/LON01/20260914_2105_LON01.eml}
     - {alias: "écharpe", lang: fr, source: store_emails/PAR01/20261001_2115_PAR01.eml}
     - {alias: "schal", lang: de, source: store_emails/MUN01/20260903_2005_MUN01.eml}
-  I10913B00001:  # LOGO BEANIE
+  I10913B00001:  # VLOGO BEANIE
     - {alias: "ビーニー", lang: ja, source: store_emails/TYO01/20260926_2057_TYO01.eml}
     - {alias: "비니", lang: ko, source: store_emails/SEL01/20260908_2044_SEL01.eml}
     - {alias: "毛线帽", lang: zh-CN, source: store_emails/SHA01/20260913_2249_SHA01.eml}
     - {alias: "beanie", lang: it, source: store_emails/MIL01/20260902_2058_MIL01.eml}
     - {alias: "bonnet", lang: fr, source: store_emails/PAR01/20260907_2005_PAR01.eml}
     - {alias: "gorro", lang: es, source: store_emails/MAD01/20260906_2112_MAD01.eml}
-  I10913D00012:  # LOGO CAP
+  I10913D00012:  # VLOGO CAP
     - {alias: "캡", lang: ko, source: store_emails/SEL01/20260901_2052_SEL01.eml}
     - {alias: "棒球帽", lang: zh-CN, source: store_emails/SHA01/20260904_2229_SHA01.eml}
     - {alias: "cap", lang: en, source: store_emails/LON01/20260909_2126_LON01.eml}
     - {alias: "casquette", lang: fr, source: store_emails/PAR01/20260907_2005_PAR01.eml}
     - {alias: "gorra", lang: es, source: store_emails/MAD01/20260906_2112_MAD01.eml}
     - {alias: "cappellino", lang: it, source: store_emails/MIL01/20260915_2047_MIL01.eml}
-  I10913E00007:  # TECH GLOVES
+  I10913E00007:  # WINTER GLOVES
     - {alias: "테크 글러브", lang: ko, source: store_emails/SEL01/20260920_2130_SEL01.eml}
     - {alias: "gloves", lang: en, source: store_emails/LON01/20260916_2112_LON01.eml}
     - {alias: "guanti", lang: it, source: store_emails/MIL01/20261001_2130_MIL01.eml}
     - {alias: "gants", lang: fr, source: store_emails/PAR01/20260921_2016_PAR01.eml}
     - {alias: "handschuhe", lang: de, source: store_emails/MUN01/20260831_1941_MUN01.eml}
     - {alias: "guantes", lang: es, source: store_emails/MAD01/20260907_2136_MAD01.eml}
-  I10914M00061:  # TRAILGRIP GTX
+  I10914M00061:  # VTRACK GTX
     - {alias: "gtx", lang: it, source: store_emails/MIL02/20260902_2205_MIL02.eml}
-    - {alias: "トレイルグリップGTX", lang: ja, source: store_emails/TYO01/20260905_2044_TYO01.eml}
-    - {alias: "trailgrip homme", lang: fr, source: store_emails/PAR01/20260905_2120_PAR01.eml}
-    - {alias: "트레일그립 남성", lang: ko, source: store_emails/SEL01/20260831_2108_SEL01.eml}
-  I10915C00021:  # LEGERE BELT BAG
-    - {alias: "레제르", lang: ko, source: store_emails/SEL01/20260902_2115_SEL01.eml}
+    - {alias: "VtrackGTX", lang: ja, source: store_emails/TYO01/20260905_2044_TYO01.eml}
+    - {alias: "vtrack homme", lang: fr, source: store_emails/PAR01/20260905_2120_PAR01.eml}
+    - {alias: "Vtrack 남성", lang: ko, source: store_emails/SEL01/20260831_2108_SEL01.eml}
+  I10915C00021:  # VITA BELT BAG
     - {alias: "벨트백", lang: ko, source: store_emails/SEL01/20260902_2115_SEL01.eml}
     - {alias: "腰包", lang: zh-CN, source: store_emails/SHA01/20260901_2251_SHA01.eml}
     - {alias: "marsupio", lang: it, source: store_emails/MIL02/20260904_2247_MIL02.eml}
     - {alias: "riñonera", lang: es, source: store_emails/MAD01/20260907_2136_MAD01.eml}
     - {alias: "belt bag", lang: it, source: store_emails/MIL01/20261007_2058_MIL01.eml}
-  I10915D00030:  # MAKAIO BACKPACK
-    - {alias: "마카이오", lang: ko, source: store_emails/SEL01/20260909_2112_SEL01.eml}
+  I10915D00030:  # URBAN BACKPACK
     - {alias: "백팩", lang: ko, source: store_emails/SEL01/20260909_2112_SEL01.eml}
     - {alias: "backpack", lang: en, source: store_emails/NYC01/20260911_1935_NYC01.eml}
     - {alias: "zaino", lang: it, source: store_emails/MIL01/20261019_2039_MIL01.eml}
     - {alias: "sac à dos", lang: fr, source: store_emails/PAR01/20260908_2047_PAR01.eml}
     - {alias: "rucksack", lang: de, source: store_emails/MUN01/20260831_1941_MUN01.eml}
-  I10918A00034:  # POLO
+  I10918A00034:  # JERSEY POLO
     - {alias: "ポロ", lang: ja, source: store_emails/TYO01/20260901_2052_TYO01.eml}
     - {alias: "폴로", lang: ko, source: store_emails/SEL01/20260905_2140_SEL01.eml}
-  I10918C00012:  # LOGO T-SHIRT
+  I10918C00012:  # VLOGO T-SHIRT
     - {alias: "t-shirt logo", lang: it, source: store_emails/MIL01/20260901_2025_MIL01.eml}
     - {alias: "logo tee", lang: en, source: store_emails/LON01/20260901_2110_LON01.eml}
     - {alias: "로고티", lang: ko, source: store_emails/SEL01/20260904_2131_SEL01.eml}
@@ -97,32 +93,30 @@ styles:
     - {alias: "tshirt", lang: it, source: store_emails/MIL01/20260911_2055_MIL01.eml}
     - {alias: "t-shirt", lang: it, source: store_emails/MIL01/20260901_2025_MIL01.eml}
     - {alias: "T恤", lang: zh-CN, source: store_emails/SHA01/20260831_2237_SHA01.eml}
-  I10918G00031:  # LOGO HOODIE
+  I10918G00031:  # VLOGO HOODIE
     - {alias: "フーディ", lang: ja, source: store_emails/TYO01/20260912_2055_TYO01.eml}
     - {alias: "후디", lang: ko, source: store_emails/SEL01/20260902_2115_SEL01.eml}
     - {alias: "로고 후디", lang: ko, source: store_emails/SEL01/20260902_2115_SEL01.eml}
     - {alias: "hoodie logo", lang: fr, source: store_emails/PAR01/20260901_2034_PAR01.eml}
     - {alias: "hoodie", lang: it, source: store_emails/MIL01/20260906_2015_MIL01.eml}
     - {alias: "felpa hoodie", lang: it, source: store_emails/MIL01/20260906_2015_MIL01.eml}
-  I10918G00045:  # CREWNECK SWEATSHIRT
+  I10918G00045:  # RELAXED SWEATSHIRT
     - {alias: "crew", lang: en, source: store_emails/LON01/20260912_2211_LON01.eml}
     - {alias: "크루넥 스웨트셔츠", lang: ko, source: store_emails/SEL01/20260902_2115_SEL01.eml}
     - {alias: "크루넥", lang: ko, source: store_emails/SEL01/20260902_2115_SEL01.eml}
     - {alias: "圆领卫衣", lang: zh-CN, source: store_emails/SHA01/20260929_2254_SHA01.eml}
     - {alias: "sweat col rond", lang: fr, source: store_emails/PAR01/20260905_2120_PAR01.eml}
-  I10919B00011:  # LOGO CARDIGAN
+  I10919B00011:  # VLOGO CARDIGAN
     - {alias: "cardigan logo", lang: it, source: store_emails/MIL01/20260901_2025_MIL01.eml}
     - {alias: "ロゴカーデ", lang: ja, source: store_emails/TYO01/20260904_2058_TYO01.eml}
     - {alias: "로고 가디건", lang: ko, source: store_emails/SEL01/20260904_2131_SEL01.eml}
-  I10919B00042:  # TRICOT PADDED CARDIGAN
+  I10919B00042:  # VLOGO PADDED CARDIGAN
     - {alias: "tricot cardigan", lang: en, source: store_emails/LON01/20260912_2211_LON01.eml}
-    - {alias: "tricot padded", lang: it, source: store_emails/MIL01/20260912_2140_MIL01.eml}
     - {alias: "cardi matelassé", lang: fr, source: store_emails/PAR01/20260903_2105_PAR01.eml}
     - {alias: "ニットダウンカーデ", lang: ja, source: store_emails/TYO01/20260906_2140_TYO01.eml}
     - {alias: "트리코 패딩 가디건", lang: ko, source: store_emails/SEL01/20260904_2131_SEL01.eml}
     - {alias: "트리코", lang: ko, source: store_emails/SEL01/20260904_2131_SEL01.eml}
-    - {alias: "tricot", lang: it, source: store_emails/MIL01/20260912_2140_MIL01.eml}
-  I10919C00067:  # WOOL TURTLENECK
+  I10919C00067:  # CASHMERE TURTLENECK
     - {alias: "ウールタートル", lang: ja, source: store_emails/TYO01/20260906_2140_TYO01.eml}
     - {alias: "터틀넥", lang: ko, source: store_emails/SEL01/20260913_2148_SEL01.eml}
     - {alias: "高领羊毛衫", lang: zh-CN, source: store_emails/SHA01/20260903_2308_SHA01.eml}
@@ -130,102 +124,75 @@ styles:
     - {alias: "turtleneck", lang: en, source: store_emails/LON01/20260905_2147_LON01.eml}
     - {alias: "rollkragen", lang: de, source: store_emails/MUN01/20260911_1950_MUN01.eml}
     - {alias: "cuello alto", lang: es, source: store_emails/MAD01/20260915_2139_MAD01.eml}
-  I20924H00080:  # INSOLUX
+  I20924H00080:  # ALPINA
     - {alias: "인솔룩스", lang: ko, source: store_emails/SEL01/20261003_2216_SEL01.eml}
     - {alias: "雪地靴", lang: zh-CN, source: store_emails/SHA01/20260930_2241_SHA01.eml}
-  I20924M00062:  # TRAILGRIP W
-    - {alias: "trailgrip femme", lang: fr, source: store_emails/PAR01/20260901_2034_PAR01.eml}
-  I20939C00008:  # CABLE KNIT SWEATER
+  I20924M00062:  # VTRACK W
+    - {alias: "vtrack femme", lang: fr, source: store_emails/PAR01/20260901_2034_PAR01.eml}
+  I20939C00008:  # INTARSIA SWEATER
     - {alias: "ケーブルニット", lang: ja, source: store_emails/TYO01/20260831_2047_TYO01.eml}
     - {alias: "케이블니트", lang: ko, source: store_emails/SEL01/20260909_2112_SEL01.eml}
     - {alias: "cable knit", lang: it, source: store_emails/MIL01/20260906_2015_MIL01.eml}
     - {alias: "jersey de ochos", lang: es, source: store_emails/MAD01/20260904_2147_MAD01.eml}
-  J10911A00034:  # MAYA
-    - {alias: "마야", lang: ko, source: store_emails/SEL01/20260907_2105_SEL01.eml}
-  J10911A00088:  # MONTCLA
-    - {alias: "몽클라", lang: ko, source: store_emails/SEL01/20260921_2049_SEL01.eml}
-  J10911A00142:  # KARAKORUM
-    - {alias: "카라코룸", lang: ko, source: store_emails/SEL01/20260902_2115_SEL01.eml}
-  J10911A00190:  # ECRINS
-    - {alias: "에크랑", lang: ko, source: store_emails/SEL01/20260919_2145_SEL01.eml}
-  J10911A00213:  # MONTGENEVRE
-    - {alias: "몽제네브르", lang: ko, source: store_emails/SEL01/20260905_2140_SEL01.eml}
-  J10911A00577:  # ARNEB
-    - {alias: "아르넵", lang: ko, source: store_emails/SEL01/20260907_2105_SEL01.eml}
+  J10911A00577:  # ARTEM
     - {alias: "롱파카", lang: ko, source: store_emails/SEL01/20260907_2105_SEL01.eml}
-  J10911A00581:  # ROSIERE
-    - {alias: "로지에르", lang: ko, source: store_emails/SEL01/20260920_2130_SEL01.eml}
-  J20931A00012:  # MAIRE
-    - {alias: "마이레", lang: ko, source: store_emails/SEL01/20260831_2108_SEL01.eml}
-  J20931A00087:  # HERMINE
-    - {alias: "에르민", lang: ko, source: store_emails/SEL01/20260831_2108_SEL01.eml}
-  J20931A00144:  # BADY
-    - {alias: "바디", lang: ko, source: store_emails/SEL01/20260902_2115_SEL01.eml}
-  J20931A00203:  # FLAMMETTE
-    - {alias: "플라메트", lang: ko, source: store_emails/SEL01/20260903_2047_SEL01.eml}
-  J20931A00560:  # CHAMBRE
-    - {alias: "샹브르", lang: ko, source: store_emails/SEL01/20260905_2140_SEL01.eml}
-  J20931A00618:  # ILVARO
-    - {alias: "일바로", lang: ko, source: store_emails/SEL01/20260912_2136_SEL01.eml}
-  J20931A00622:  # AMBRINE
-    - {alias: "앰브린", lang: ko, source: store_emails/SEL01/20260906_2122_SEL01.eml}
 
 shared:
   - alias: "cardi"
     lang: fr
-    styles: [I10919B00011, I10919B00042]  # LOGO CARDIGAN / TRICOT PADDED CARDIGAN
+    styles: [I10919B00011, I10919B00042]  # VLOGO CARDIGAN / VLOGO PADDED CARDIGAN
     source: store_emails/PAR01/20260831_2012_PAR01.eml
   - alias: "가디건"
     lang: ko
-    styles: [I10919B00011, I10919B00042]  # LOGO CARDIGAN / TRICOT PADDED CARDIGAN
+    styles: [I10919B00011, I10919B00042]  # VLOGO CARDIGAN / VLOGO PADDED CARDIGAN
     source: store_emails/SEL01/20260904_2131_SEL01.eml
   - alias: "开衫"
     lang: zh-CN
-    styles: [I10919B00011, I10919B00042]  # LOGO CARDIGAN / TRICOT PADDED CARDIGAN
+    styles: [I10919B00011, I10919B00042]  # VLOGO CARDIGAN / VLOGO PADDED CARDIGAN
     source: store_emails/SHA01/20260911_2255_SHA01.eml
   - alias: "卫衣"
     lang: zh-CN
-    styles: [I10918G00031, I10918G00045]  # LOGO HOODIE / CREWNECK SWEATSHIRT
+    styles: [I10918G00031, I10918G00045]  # VLOGO HOODIE / RELAXED SWEATSHIRT
     source: store_emails/SHA01/20260831_2237_SHA01.eml
   - alias: "スウェット"
     lang: ja
-    styles: [I10918G00031, I10918G00045]  # LOGO HOODIE / CREWNECK SWEATSHIRT
+    styles: [I10918G00031, I10918G00045]  # VLOGO HOODIE / RELAXED SWEATSHIRT
     source: store_emails/TYO01/20260902_2115_TYO01.eml
   - alias: "sweat"
     lang: fr
-    styles: [I10918G00031, I10918G00045]  # LOGO HOODIE / CREWNECK SWEATSHIRT
+    styles: [I10918G00031, I10918G00045]  # VLOGO HOODIE / RELAXED SWEATSHIRT
     source: store_emails/PAR01/20260905_2120_PAR01.eml
   - alias: "felpa"
     lang: it
-    styles: [I10918G00031, I10918G00045]  # LOGO HOODIE / CREWNECK SWEATSHIRT
+    styles: [I10918G00031, I10918G00045]  # VLOGO HOODIE / RELAXED SWEATSHIRT
     source: store_emails/MIL01/20260906_2015_MIL01.eml
   - alias: "sudadera"
     lang: es
-    styles: [I10918G00031, I10918G00045]  # LOGO HOODIE / CREWNECK SWEATSHIRT
+    styles: [I10918G00031, I10918G00045]  # VLOGO HOODIE / RELAXED SWEATSHIRT
     source: store_emails/MAD01/20260901_2134_MAD01.eml
-  - alias: "trailgrip"
+  - alias: "vtrack"
     lang: it
-    styles: [I10914M00061, I20924M00062]  # TRAILGRIP GTX / TRAILGRIP W
+    styles: [I10914M00061, I20924M00062]  # VTRACK GTX / VTRACK W
     source: store_emails/MIL01/20260905_2135_MIL01.eml
-  - alias: "トレイルグリップ"
+  - alias: "Vtrack"
     lang: ja
-    styles: [I10914M00061, I20924M00062]  # TRAILGRIP GTX / TRAILGRIP W
+    styles: [I10914M00061, I20924M00062]  # VTRACK GTX / VTRACK W
     source: store_emails/TYO01/20260905_2044_TYO01.eml
-  - alias: "트레일그립"
+  - alias: "Vtrack"
     lang: ko
-    styles: [I10914M00061, I20924M00062]  # TRAILGRIP GTX / TRAILGRIP W
+    styles: [I10914M00061, I20924M00062]  # VTRACK GTX / VTRACK W
     source: store_emails/SEL01/20260831_2108_SEL01.eml
-  - alias: "polaris"
+  - alias: "astra"
     lang: it
-    styles: [G20921A00901, G20921A00902, G20921A00903]  # POLARIS CAPE / POLARIS OVERSIZED / POLARIS BALACLAVA
+    styles: [G20921A00901, G20921A00902, G20921A00903]  # ASTRA CAPE / ASTRA OVERSIZED / ASTRA BALACLAVA
     source: store_emails/MIL01/20260924_2205_MIL01.eml
-  - alias: "폴라리스"
+  - alias: "Astra"
     lang: ko
-    styles: [G20921A00901, G20921A00902, G20921A00903]  # POLARIS CAPE / POLARIS OVERSIZED / POLARIS BALACLAVA
+    styles: [G20921A00901, G20921A00902, G20921A00903]  # ASTRA CAPE / ASTRA OVERSIZED / ASTRA BALACLAVA
     source: store_emails/SEL01/20261003_2216_SEL01.eml
   - alias: "ウィンドブレーカー"
     lang: ja
-    styles: [J10911A00720, J10911A00745]  # ETIACHE / MARIN
+    styles: [J10911A00720, J10911A00745]  # ELIANO / MARIO
     source: store_emails/TYO01/20260831_2047_TYO01.eml
 
 colours:

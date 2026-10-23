@@ -4,10 +4,10 @@ from tpe01_p2 import E2
 
 STORE = "TPE01"
 PEOPLE = {
-    "lyj": ("林怡君 Jenny Lin", "yijun.lin@moncler-retail.example"),
-    "wce": ("吳承恩", "chengen.wu@moncler-retail.example"),
-    "vicky": ("王筱涵 Vicky", "vicky.wang@moncler-retail.example"),
-    "box": ("", "tpe01.store@moncler-retail.example"),
+    "lyj": ("林怡君 Jenny Lin", "yijun.lin@valentino-retail.example"),
+    "wce": ("吳承恩", "chengen.wu@valentino-retail.example"),
+    "vicky": ("王筱涵 Vicky", "vicky.wang@valentino-retail.example"),
+    "box": ("", "tpe01.store@valentino-retail.example"),
 }
 PEOPLE_MAILER = {
     "lyj": "Microsoft Outlook 16.0",

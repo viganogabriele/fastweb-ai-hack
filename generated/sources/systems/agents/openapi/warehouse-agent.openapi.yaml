@@ -3,7 +3,7 @@ info:
   title: warehouse-agent REST API (WMS gateway)
   version: 2.3.1
 servers:
-- url: https://agents.moncler-int.example/warehouse/v1
+- url: https://agents.valentino-int.example/warehouse/v1
 security:
 - oauth2:
   - wms.read
@@ -184,7 +184,7 @@ components:
       type: oauth2
       flows:
         clientCredentials:
-          tokenUrl: https://login.moncler-int.example/oauth2/token
+          tokenUrl: https://login.valentino-int.example/oauth2/token
           scopes:
             wms.read: read stock/ATP
             wms.reserve: create reservations

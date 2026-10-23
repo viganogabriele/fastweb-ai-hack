@@ -61,8 +61,8 @@ def main():
     for c, h in enumerate(["Product", "Variant colour"] + [f"W{w}" for w in [38, 39, 40, 41, 42]] + ["Total since 08/08", "Pending"]):
         ws.write(2, c, h, hdr)
     ws.set_column(0, 1, 18)
-    names = {"J20931A00618-510": ("ILVARO", "powder pink"), "J20931A00012-999": ("MAIRE", "black"),
-             "J20931A00622-23R": ("AMBRINE", "chocolate"), "J20931A00618-999": ("ILVARO", "black")}
+    names = {"J20931A00618-510": ("IRIDIA", "powder pink"), "J20931A00012-999": ("AUREA", "black"),
+             "J20931A00622-23R": ("AMALIA", "chocolate"), "J20931A00618-999": ("IRIDIA", "black")}
     out = {}
     for i, pid in enumerate(top):
         g = b[b.product_id == pid]
@@ -77,8 +77,8 @@ def main():
     ws2 = wb.add_worksheet("Comments")
     ws2.set_column(0, 0, 120)
     for i, t in enumerate([
-            "ILVARO powder pink: notify-me requests exploded from 02/10 (celebrity photos), KR and CN sites first, then US/GB/FR.",
-            "MAIRE black: steady requests since late September, mostly from KR and GB sites; back in stock online from 17/10.",
+            "IRIDIA powder pink: notify-me requests exploded from 02/10 (celebrity photos), KR and CN sites first, then US/GB/FR.",
+            "AUREA black: steady requests since late September, mostly from KR and GB sites; back in stock online from 17/10.",
             "Demand is gross ordered value; Finance reports online net sales after returns and ex VAT - expect ~25-30% difference.",
             "Notify-me counts are requests, a customer requesting 2 sizes counts twice."]):
         ws2.write(i, 0, t)

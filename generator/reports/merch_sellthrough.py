@@ -56,7 +56,7 @@ def main():
             "Sell-through % = cumulative units sold since launch / cumulative units received in store (initial allocation + replenishments).",
             "Units sold = gross units sold at POS (customer returns are not deducted; exchanges count as a new sale).",
             "Units received = allocation at launch + DC replenishments with goods receipt posted.",
-            "Launch dates: Collection FW26 03/09/2026; Genius POLARIS 24/09/2026.",
+            "Launch dates: Collection FW26 03/09/2026; Couture ASTRA 24/09/2026.",
             "Not comparable with Finance/Regional sell-through on value (sales / sales + stock at retail).",
             "Colour conditional formatting: >=85% red (risk of stock-out), <=30% grey (slow).",
             "", "Merchandising Planning - Milano. Confidential - internal use only."]
@@ -94,10 +94,10 @@ def main():
     ws.conditional_format(1, 6, r - 1, 8, {"type": "cell", "criteria": "<=", "value": 0.30, "format": F(bg_color="#D9D9D9")})
     ws.autofilter(0, 0, r - 1, 9)
 
-    # Asia focus ILVARO 510
-    ws = wb.add_worksheet("ILVARO pink Asia")
+    # Asia focus IRIDIA 510
+    ws = wb.add_worksheet("IRIDIA pink Asia")
     w40 = tabs["W40"]
-    ws.write(0, 0, "ILVARO 510 POWDER PINK - Asian stores", title)
+    ws.write(0, 0, "IRIDIA 510 POWDER PINK - Asian stores", title)
     heads = ["Store", "Received to W40", "Sold to W40", "ST% W40", "Received to W42", "Sold to W42", "ST% W42", "On hand 18/10"]
     for c, h in enumerate(heads):
         ws.write(2, c, h, hdr)
@@ -106,15 +106,15 @@ def main():
     asia = ["SEL01", "SEL02", "BUS01", "SHA01", "BJS01", "CDU01", "TYO01", "TYO02", "OSA01", "HKG01", "TPE01", "SIN01"]
     il = {}
     for i, sid in enumerate(asia):
-        a = w40[(w40.store_id == sid) & (w40.style_name == "ILVARO") & (w40.color_code == "510")]
-        b = t[(t.store_id == sid) & (t.style_name == "ILVARO") & (t.color_code == "510")]
+        a = w40[(w40.store_id == sid) & (w40.style_name == "IRIDIA") & (w40.color_code == "510")]
+        b = t[(t.store_id == sid) & (t.style_name == "IRIDIA") & (t.color_code == "510")]
         ws.write(3 + i, 0, f"{sid} {stores().set_index('store_id').store_name[sid]}", txt)
         vals = [a.rec.sum(), a.sold.sum(), a.sold.sum() / a.rec.sum() if a.rec.sum() else 0, b.rec.sum(), b.sold.sum(),
                 b.sold.sum() / b.rec.sum() if b.rec.sum() else 0, b.oh.sum()]
         for c, v in enumerate(vals):
             ws.write(3 + i, 1 + c, v, pc if c in (2, 5) else n0)
         il[sid] = dict(st_w40=round(vals[2] * 100), st_w42=round(vals[5] * 100), oh=int(vals[6]))
-    A = w40[w40.store_id.isin(asia) & (w40.style_name == "ILVARO") & (w40.color_code == "510")]
+    A = w40[w40.store_id.isin(asia) & (w40.style_name == "IRIDIA") & (w40.color_code == "510")]
     ws.write(4 + len(asia), 0, "Note: 600-unit production top-up landed at DC 08/10 and was allocated to Asia + Paris/London; "
              "Seoul Cheongdam replenishment cleared customs 13/10.", note)
     ws.conditional_format(3, 3, 3 + len(asia), 3, {"type": "cell", "criteria": ">=", "value": 0.85, "format": F(bg_color="#F8CBAD")})
@@ -146,10 +146,10 @@ def main():
         summ[sty] = row
     ws.write(4 + len(FW26_NEW), 0, "Region ST% = average of store sell-through.", note)
 
-    # POLARIS by region chart
-    ws = wb.add_worksheet("POLARIS")
-    ws.write(0, 0, "Genius POLARIS - sell-through by sub-region (weighted), cut-off 18/10", title)
-    pol = t[t.style_name.str.startswith("POLARIS")].groupby("subregion")[["rec", "sold"]].sum()
+    # ASTRA by region chart
+    ws = wb.add_worksheet("ASTRA")
+    ws.write(0, 0, "Couture ASTRA - sell-through by sub-region (weighted), cut-off 18/10", title)
+    pol = t[t.style_name.str.startswith("ASTRA")].groupby("subregion")[["rec", "sold"]].sum()
     pol["st"] = pol.sold / pol.rec
     pol = pol.sort_values("st", ascending=False)
     for c, h in enumerate(["Sub-region", "Received", "Sold", "ST%"]):
@@ -161,10 +161,10 @@ def main():
         ws.write(3 + i, 2, x.sold, n0)
         ws.write(3 + i, 3, x.st, pc)
     ch = wb.add_chart({"type": "bar"})
-    ch.add_series({"name": "ST%", "categories": ["POLARIS", 3, 0, 2 + len(pol), 0], "values": ["POLARIS", 3, 3, 2 + len(pol), 3],
+    ch.add_series({"name": "ST%", "categories": ["ASTRA", 3, 0, 2 + len(pol), 0], "values": ["ASTRA", 3, 3, 2 + len(pol), 3],
                    "fill": {"color": "#2E2E2E"}, "data_labels": {"value": True, "num_format": "0%"}})
     ch.set_legend({"none": True})
-    ch.set_title({"name": "POLARIS ST% by sub-region"})
+    ch.set_title({"name": "ASTRA ST% by sub-region"})
     ch.set_size({"width": 520, "height": 320})
     ws.insert_chart(3, 6, ch)
 
@@ -192,13 +192,13 @@ def main():
     ws = wb.add_worksheet("Highlights")
     ws.set_column(0, 0, 130)
     a_il = A.sold.sum() / A.rec.sum()
-    amb = t[(t.style_name == "AMBRINE") & (t.color_code == "23R") & (t.region == "EMEA")]
-    hl = [f"ILVARO powder pink: Asian stores at {a_il * 100:.0f}% sell-through at W40 (core sizes sold out in 1-3 days after 02/10, only single pieces in fringe sizes 00/3/4 left). "
+    amb = t[(t.style_name == "AMALIA") & (t.color_code == "23R") & (t.region == "EMEA")]
+    hl = [f"IRIDIA powder pink: Asian stores at {a_il * 100:.0f}% sell-through at W40 (core sizes sold out in 1-3 days after 02/10, only single pieces in fringe sizes 00/3/4 left). "
           "Top-up of 08/10 sold immediately in Asia; some EU/US stores still hold pink (Paris, Milano, New York).",
-          f"AMBRINE chocolate: EMEA sell-through {amb.sold.sum() / amb.rec.sum() * 100:.0f}% vs black {t[(t.style_name == 'AMBRINE') & (t.color_code == '999') & (t.region == 'EMEA')].sold.sum() / t[(t.style_name == 'AMBRINE') & (t.color_code == '999') & (t.region == 'EMEA')].rec.sum() * 100:.0f}%; sizes 0-1-2 broken, DC no stock until 10/11.",
-          "POLARIS: Greater China well ahead of Europe and Americas - candidate for inter-region transfer.",
-          "ARNEB: ST inflated by size exchanges (exchange = return + new sale); net sell-through lower.",
-          "WOOL TURTLENECK chocolate performing in line with black - brown trend confirmed."]
+          f"AMALIA chocolate: EMEA sell-through {amb.sold.sum() / amb.rec.sum() * 100:.0f}% vs black {t[(t.style_name == 'AMALIA') & (t.color_code == '999') & (t.region == 'EMEA')].sold.sum() / t[(t.style_name == 'AMALIA') & (t.color_code == '999') & (t.region == 'EMEA')].rec.sum() * 100:.0f}%; sizes 0-1-2 broken, DC no stock until 10/11.",
+          "ASTRA: Greater China well ahead of Europe and Americas - candidate for inter-region transfer.",
+          "ARTEM: ST inflated by size exchanges (exchange = return + new sale); net sell-through lower.",
+          "CASHMERE TURTLENECK chocolate performing in line with black - brown trend confirmed."]
     for i, h in enumerate(hl):
         ws.write(i, 0, h, F(text_wrap=True))
     wb.close()

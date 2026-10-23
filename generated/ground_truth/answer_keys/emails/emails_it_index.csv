@@ -1,357 +1,357 @@
 store,file,id,sent,business_date,kind,frm,subject
-COU01,20260831_2030_COU01.eml,u0831,2026-08-31 20:30,2026-08-31,closing,Paolo Bertholin <paolo.bertholin@moncler-retail.example>,COU01 - Chiusura 31.08
-COU01,20260901_2010_COU01.eml,u0901,2026-09-01 20:10,2026-09-01,closing,Elisa Vuillermoz <elisa.vuillermoz@moncler-retail.example>,chiusura cou 1/9
-COU01,20260902_2045_COU01.eml,u0902,2026-09-02 20:45,2026-09-02,closing,Paolo Bertholin <paolo.bertholin@moncler-retail.example>,COU01 - Chiusura 02.09
-COU01,20260903_2020_COU01.eml,u0903,2026-09-03 20:20,2026-09-03,closing,Elisa Vuillermoz <elisa.vuillermoz@moncler-retail.example>,chiusura cou 3/9
-COU01,20260904_2035_COU01.eml,u0904,2026-09-04 20:35,2026-09-04,closing,Paolo Bertholin <paolo.bertholin@moncler-retail.example>,COU01 - Chiusura 04.09
-COU01,20260905_2100_COU01.eml,u0905,2026-09-05 21:00,2026-09-05,closing,Elisa Vuillermoz <elisa.vuillermoz@moncler-retail.example>,chiusura sabato 5/9 cou
-COU01,20260906_2025_COU01.eml,u0906,2026-09-06 20:25,2026-09-06,closing,Paolo Bertholin <paolo.bertholin@moncler-retail.example>,COU01 - Chiusura 06.09
-COU01,20260907_2015_COU01.eml,u0907,2026-09-07 20:15,2026-09-07,closing,Elisa Vuillermoz <elisa.vuillermoz@moncler-retail.example>,chiusura cou 7/9
-COU01,20260909_2040_COU01.eml,u0909,2026-09-09 20:40,2026-09-09,closing,Paolo Bertholin <paolo.bertholin@moncler-retail.example>,COU01 - Chiusura 08.09
-COU01,20260910_2110_COU01.eml,u0910,2026-09-10 21:10,2026-09-10,closing,Paolo Bertholin <paolo.bertholin@moncler-retail.example>,COU01 - Chiusura 10.09 + organizzazione fine stagione
-COU01,20260911_2000_COU01.eml,u0911,2026-09-11 20:00,2026-09-11,closing,Moncler Courmayeur <cou01.store@moncler-retail.example>,Chiusura Courmayeur 11/09
-COU01,20260912_2235_COU01.eml,u0912,2026-09-12 22:35,2026-09-12,closing,Paolo Bertholin <paolo.bertholin@moncler-retail.example>,COU01 - Ultima chiusura stagione estiva 12.09
-COU01,20260913_1650_COU01.eml,u0913_inv,2026-09-13 16:50,,misc,Paolo Bertholin <paolo.bertholin@moncler-retail.example>,COU01 - Inventario fine stagione + chiusura POS
-COU01,20260914_1210_COU01.eml,u0914_reso,2026-09-14 12:10,,misc,Paolo Bertholin <paolo.bertholin@moncler-retail.example>,COU01 - Reso fine stagione a CSG - DDT 0058/26
-COU01,20260915_0912_COU01_re1.eml,u0915_re,2026-09-15 09:12,,reply,Roberto Galli <roberto.galli@moncler-retail.example>,Re: COU01 - Reso fine stagione a CSG - DDT 0058/26
-COU01,20260915_1130_COU01_re2.eml,u0915_re2,2026-09-15 11:30,,reply,Paolo Bertholin <paolo.bertholin@moncler-retail.example>,Re: COU01 - Reso fine stagione a CSG - DDT 0058/26
-COU01,20261006_1820_COU01.eml,u1006,2026-10-06 18:20,,misc,Paolo Bertholin <paolo.bertholin@moncler-retail.example>,COU01 riapertura inverno - proposta assortimento + lavori
-COU01,20261019_1905_COU01.eml,u1019,2026-10-19 19:05,,misc,Paolo Bertholin <paolo.bertholin@moncler-retail.example>,COU01 aggiornamento riapertura 27/11
-CRT01,20260831_2025_CRT01.eml,c0831,2026-08-31 20:25,2026-08-31,closing,Martina Menardi <martina.menardi@moncler-retail.example>,CRT01 chiusura 31/08
-CRT01,20260901_2105_CRT01.eml,c0901,2026-09-01 21:05,2026-09-01,closing,Davide Dibona <davide.dibona@moncler-retail.example>,chiusura crt 1/9
-CRT01,20260901_2106_CRT01_ooo.eml,c0901_ooo,2026-09-01 21:06,,ooo,Roberto Galli <roberto.galli@moncler-retail.example>,Risposta automatica: chiusura crt 1/9
-CRT01,20260902_2040_CRT01.eml,c0902,2026-09-02 20:40,2026-09-02,closing,Martina Menardi <martina.menardi@moncler-retail.example>,CRT01 chiusura 02/09
-CRT01,20260904_2015_CRT01.eml,c0904,2026-09-04 20:15,2026-09-04,closing,Martina Menardi <martina.menardi@moncler-retail.example>,CRT01 chiusura 04/09
-CRT01,20260905_2110_CRT01.eml,c0905,2026-09-05 21:10,2026-09-05,closing,Martina Menardi <martina.menardi@moncler-retail.example>,CRT01 chiusura 05/09
-CRT01,20260906_2035_CRT01.eml,c0906,2026-09-06 20:35,2026-09-06,closing,Davide Dibona <davide.dibona@moncler-retail.example>,chiusura dom 6/9
-CRT01,20260907_2005_CRT01.eml,c0907,2026-09-07 20:05,2026-09-07,closing,Martina Menardi <martina.menardi@moncler-retail.example>,CRT01 chiusura 07/09
-CRT01,20260908_2050_CRT01.eml,c0908,2026-09-08 20:50,2026-09-08,closing,Davide Dibona <davide.dibona@moncler-retail.example>,chiusura crt 8/9
-CRT01,20260909_2030_CRT01.eml,c0909,2026-09-09 20:30,2026-09-09,closing,Martina Menardi <martina.menardi@moncler-retail.example>,CRT01 chiusura 09/09
-CRT01,20260910_2010_CRT01.eml,c0910,2026-09-10 20:10,2026-09-10,closing,Moncler Cortina <crt01.store@moncler-retail.example>,Chiusura Cortina 10.09
-CRT01,20260911_2045_CRT01.eml,c0911,2026-09-11 20:45,2026-09-11,closing,Martina Menardi <martina.menardi@moncler-retail.example>,CRT01 chiusura 11/09
-CRT01,20260912_2100_CRT01.eml,c0912,2026-09-12 21:00,2026-09-12,closing,Martina Menardi <martina.menardi@moncler-retail.example>,CRT01 chiusura 12/09
-CRT01,20260913_2040_CRT01.eml,c0913,2026-09-13 20:40,2026-09-13,closing,Davide Dibona <davide.dibona@moncler-retail.example>,chiusura domenica 13
-CRT01,20260913_2044_CRT01_dup.eml,c0913_dup,2026-09-13 20:44,2026-09-13,dup,Davide Dibona <davide.dibona@moncler-retail.example>,chiusura domenica 13
-CRT01,20260914_2010_CRT01.eml,c0914,2026-09-14 20:10,2026-09-14,closing,Martina Menardi <martina.menardi@moncler-retail.example>,CRT01 chiusura 14/09
-CRT01,20260916_0840_CRT01.eml,c0915,2026-09-16 08:40,2026-09-15,closing,Davide Dibona <davide.dibona@moncler-retail.example>,chiusura ieri 15/9
-CRT01,20260916_2035_CRT01.eml,c0916,2026-09-16 20:35,2026-09-16,closing,Martina Menardi <martina.menardi@moncler-retail.example>,CRT01 chiusura 16/09
-CRT01,20260917_2020_CRT01.eml,c0917,2026-09-17 20:20,2026-09-17,closing,Martina Menardi <martina.menardi@moncler-retail.example>,CRT01 chiusura 17/09
-CRT01,20260918_2015_CRT01.eml,c0918,2026-09-18 20:15,2026-09-18,closing,Moncler Cortina <crt01.store@moncler-retail.example>,Chiusura Cortina 18.09
-CRT01,20260920_2050_CRT01.eml,c0920_wk,2026-09-20 20:50,"2026-09-19,2026-09-20",closing,Davide Dibona <davide.dibona@moncler-retail.example>,weekend 19-20 crt
-CRT01,20260921_1955_CRT01.eml,c0921,2026-09-21 19:55,2026-09-21,closing,Martina Menardi <martina.menardi@moncler-retail.example>,CRT01 chiusura 21/09
-CRT01,20260922_2030_CRT01.eml,c0922,2026-09-22 20:30,2026-09-22,closing,Davide Dibona <davide.dibona@moncler-retail.example>,chiusura crt 22/9
-CRT01,20260923_2040_CRT01.eml,c0923,2026-09-23 20:40,2026-09-23,closing,Martina Menardi <martina.menardi@moncler-retail.example>,CRT01 chiusura 23/09
-CRT01,20260925_2015_CRT01.eml,c0925,2026-09-25 20:15,2026-09-25,closing,Martina Menardi <martina.menardi@moncler-retail.example>,CRT01 chiusura 25/09
-CRT01,20260926_2105_CRT01.eml,c0926,2026-09-26 21:05,2026-09-26,closing,Martina Menardi <martina.menardi@moncler-retail.example>,CRT01 chiusura 25/09
-CRT01,20260927_2025_CRT01.eml,c0927,2026-09-27 20:25,2026-09-27,closing,Davide Dibona <davide.dibona@moncler-retail.example>,chiusura dom 27/9
-CRT01,20260928_1520_CRT01.eml,c0928_orari,2026-09-28 15:20,,misc,Martina Menardi <martina.menardi@moncler-retail.example>,CRT01 - orari ottobre (solo ven/sab/dom)
-CRT01,20260928_2010_CRT01.eml,c0928,2026-09-28 20:10,2026-09-28,closing,Martina Menardi <martina.menardi@moncler-retail.example>,CRT01 chiusura 28/09
-CRT01,20260929_0752_CRT01_re1.eml,c0929_re,2026-09-29 07:52,,reply,Roberto Galli <roberto.galli@moncler-retail.example>,Re: CRT01 - orari ottobre (solo ven/sab/dom)
-CRT01,20260929_2000_CRT01.eml,c0929,2026-09-29 20:00,2026-09-29,closing,Davide Dibona <davide.dibona@moncler-retail.example>,chiusura 29/9 crt
-CRT01,20260930_2045_CRT01.eml,c0930,2026-09-30 20:45,2026-09-30,closing,Martina Menardi <martina.menardi@moncler-retail.example>,CRT01 chiusura 30/09 (ultimo giorno orario pieno)
-CRT01,20261002_2115_CRT01.eml,c1002,2026-10-02 21:15,2026-10-02,closing,Martina Menardi <martina.menardi@moncler-retail.example>,CRT01 chiusura 02/10
-CRT01,20261003_0905_CRT01_corr.eml,c1002_corr,2026-10-03 09:05,2026-10-02,correction,Martina Menardi <martina.menardi@moncler-retail.example>,Re: CRT01 chiusura 02/10 - correzione
-CRT01,20261005_1020_CRT01.eml,c1005_wk,2026-10-05 10:20,"2026-10-03,2026-10-04",closing,Martina Menardi <martina.menardi@moncler-retail.example>,CRT01 chiusura weekend 3-4/10
-CRT01,20261005_1248_CRT01_re1.eml,c1005_re,2026-10-05 12:48,,reply,Roberto Galli <roberto.galli@moncler-retail.example>,Re: CRT01 chiusura weekend 3-4/10
-CRT01,20261009_2035_CRT01.eml,c1009,2026-10-09 20:35,2026-10-09,closing,Davide Dibona <davide.dibona@moncler-retail.example>,chiusura venerdi 9/10
-CRT01,20261010_2100_CRT01.eml,c1010,2026-10-10 21:00,2026-10-10,closing,Martina Menardi <martina.menardi@moncler-retail.example>,chiusura cortina 10/10
-CRT01,20261011_2040_CRT01.eml,c1011,2026-10-11 20:40,2026-10-11,closing,Martina Menardi <martina.menardi@moncler-retail.example>,chiusura cortina 11/10
-CRT01,20261014_1740_CRT01.eml,c1014,2026-10-14 17:40,,misc,Davide Dibona <davide.dibona@moncler-retail.example>,"CRT01 - negozio chiuso, giro stock + vetrine inverno"
-CRT01,20261016_2100_CRT01.eml,c1016,2026-10-16 21:00,2026-10-16,closing,Martina Menardi <martina.menardi@moncler-retail.example>,chiusura cortina 16/10
-CRT01,20261018_2030_CRT01.eml,c1018_wk,2026-10-18 20:30,"2026-10-17,2026-10-18",closing,Davide Dibona <davide.dibona@moncler-retail.example>,crt weekend 17+18
-MAD01,20260831_2152_MAD01.eml,c0831,2026-08-31 21:52,2026-08-31,closing,Javier Molina <javier.molina@moncler-retail.example>,cierre 31/08
-MAD01,20260831_2153_MAD01_ooo.eml,ooo0831,2026-08-31 21:53,,ooo,Roberto Galli <roberto.galli@moncler-retail.example>,Risposta automatica: cierre 31/08
-MAD01,20260901_2134_MAD01.eml,c0901,2026-09-01 21:34,2026-09-01,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 - 01/09
-MAD01,20260902_2141_MAD01.eml,c0902,2026-09-02 21:41,2026-09-02,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 - 02/09
-MAD01,20260903_2128_MAD01.eml,c0903,2026-09-03 21:28,2026-09-03,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 - 03/09
-MAD01,20260904_2147_MAD01.eml,c0904,2026-09-04 21:47,2026-09-04,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 - 04/09
-MAD01,20260905_2205_MAD01.eml,c0905,2026-09-05 22:05,2026-09-05,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 - 05/09
-MAD01,20260906_2112_MAD01.eml,c0906,2026-09-06 21:12,2026-09-06,closing,Javier Molina <javier.molina@moncler-retail.example>,cierre domingo 6
-MAD01,20260907_2136_MAD01.eml,c0907,2026-09-07 21:36,2026-09-07,closing,Moncler Madrid Serrano <mad01.store@moncler-retail.example>,Cierre Serrano lunes 07/09
-MAD01,20260908_2210_MAD01.eml,c0908,2026-09-08 22:10,2026-09-08,closing,Javier Molina <javier.molina@moncler-retail.example>,cierre martes
-MAD01,20260910_2131_MAD01.eml,c0910,2026-09-10 21:31,2026-09-10,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 - 10/09
-MAD01,20260911_2122_MAD01.eml,c0911,2026-09-11 21:22,2026-09-11,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 - 11/09
-MAD01,20260912_2218_MAD01.eml,c0912,2026-09-12 22:18,2026-09-12,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 - 12/09
-MAD01,20260913_1012_MAD01_corr.eml,corr0912,2026-09-13 10:12,2026-09-12,correction,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Corrección cierre 12/09
-MAD01,20260913_2105_MAD01.eml,c0913,2026-09-13 21:05,2026-09-13,closing,Javier Molina <javier.molina@moncler-retail.example>,cierre domingo
-MAD01,20260914_2148_MAD01.eml,c0914,2026-09-14 21:48,2026-09-14,closing,Javier Molina <javier.molina@moncler-retail.example>,Cierre lunes 14
-MAD01,20260915_2139_MAD01.eml,c0915,2026-09-15 21:39,2026-09-15,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 - 15/09
-MAD01,20260916_2144_MAD01.eml,c0916,2026-09-16 21:44,2026-09-16,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 - 15/09
-MAD01,20260917_2126_MAD01.eml,c0917,2026-09-17 21:26,2026-09-17,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 17/09
-MAD01,20260918_2151_MAD01.eml,c0918,2026-09-18 21:51,2026-09-18,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 18/09
-MAD01,20260919_2224_MAD01.eml,c0919,2026-09-19 22:24,2026-09-19,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 - 19/09 sábado
-MAD01,20260920_2115_MAD01.eml,c0920,2026-09-20 21:15,2026-09-20,closing,Javier Molina <javier.molina@moncler-retail.example>,Cierre domingo 20
-MAD01,20260922_2133_MAD01.eml,c0922,2026-09-22 21:33,2026-09-22,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 22/09
-MAD01,20260923_2202_MAD01.eml,c0923,2026-09-23 22:02,2026-09-23,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 23/09
-MAD01,20260924_2140_MAD01.eml,c0924,2026-09-24 21:40,2026-09-24,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 24/09
-MAD01,20260925_2158_MAD01.eml,c0925,2026-09-25 21:58,2026-09-25,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 25/09
-MAD01,20260925_2159_MAD01_dup.eml,c0925dup,2026-09-25 21:59,,dup,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 25/09
-MAD01,20260926_2241_MAD01.eml,c0926,2026-09-26 22:41,2026-09-26,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 26/09 + INCIDENCIA ENVÍO (Maya color equivocado)
-MAD01,20260927_1142_MAD01_re1.eml,re0927rob,2026-09-27 11:42,,reply,Roberto Galli <roberto.galli@moncler-retail.example>,Re: Cierre MAD01 26/09 + INCIDENCIA ENVÍO (Maya color equivocado)
-MAD01,20260927_2120_MAD01.eml,c0927,2026-09-27 21:20,2026-09-27,closing,Javier Molina <javier.molina@moncler-retail.example>,cierre dom 27
-MAD01,20260928_1020_MAD01_re2.eml,re0928luc,2026-09-28 10:20,2026-09-26,reply,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Re: Cierre MAD01 26/09 + INCIDENCIA ENVÍO (Maya color equivocado)
-MAD01,20260928_2145_MAD01.eml,c0928,2026-09-28 21:45,2026-09-28,closing,Javier Molina <javier.molina@moncler-retail.example>,cierre lunes 28
-MAD01,20260929_2137_MAD01.eml,c0929,2026-09-29 21:37,2026-09-29,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 29/09
-MAD01,20260930_2206_MAD01.eml,c0930,2026-09-30 22:06,2026-09-30,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 30/09
-MAD01,20261001_2155_MAD01.eml,c1001,2026-10-01 21:55,2026-10-01,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 01/10
-MAD01,20261002_2149_MAD01.eml,c1002,2026-10-02 21:49,2026-10-02,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 02/10
-MAD01,20261004_2130_MAD01.eml,c1004,2026-10-04 21:30,"2026-10-03,2026-10-04",closing,Javier Molina <javier.molina@moncler-retail.example>,cierre finde 3-4/10
-MAD01,20261005_2140_MAD01.eml,c1005,2026-10-05 21:40,2026-10-05,closing,Javier Molina <javier.molina@moncler-retail.example>,cierre lunes 05/10
-MAD01,20261006_0852_MAD01_re1.eml,re1006rob,2026-10-06 08:52,,reply,Roberto Galli <roberto.galli@moncler-retail.example>,Re: cierre lunes 05/10
-MAD01,20261006_1315_MAD01_re2.eml,re1006luc,2026-10-06 13:15,,reply,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Re: cierre lunes 05/10
-MAD01,20261006_2158_MAD01.eml,c1006,2026-10-06 21:58,2026-10-06,closing,Javier Molina <javier.molina@moncler-retail.example>,cierre martes 6
-MAD01,20261007_1105_MAD01_fwd.eml,fwd1007dc,2026-10-07 11:05,,fwd,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,RV: RE: MAYA colore sbagliato / wrong colour - MAD01 Serrano
-MAD01,20261007_2143_MAD01.eml,c1007,2026-10-07 21:43,2026-10-07,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 07/10
-MAD01,20261008_2136_MAD01.eml,c1008,2026-10-08 21:36,2026-10-08,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 08/10
-MAD01,20261009_2157_MAD01.eml,c1009,2026-10-09 21:57,2026-10-09,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 09/10
-MAD01,20261010_2235_MAD01.eml,c1010,2026-10-10 22:35,2026-10-10,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 10/10 sábado
-MAD01,20261011_2125_MAD01.eml,c1011,2026-10-11 21:25,2026-10-11,closing,Javier Molina <javier.molina@moncler-retail.example>,cierre domingo 11 - LLEGO EL MAYA NEGRO
-MAD01,20261012_2120_MAD01.eml,c1012,2026-10-12 21:20,2026-10-12,closing,Moncler Madrid Serrano <mad01.store@moncler-retail.example>,Cierre Serrano 12/10 (feriado)
-MAD01,20261014_0948_MAD01.eml,c1013,2026-10-14 09:48,2026-10-13,closing,Javier Molina <javier.molina@moncler-retail.example>,"cierre martes 13 (perdon, ayer se me paso)"
-MAD01,20261014_2141_MAD01.eml,c1014,2026-10-14 21:41,2026-10-14,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 14/10
-MAD01,20261015_2130_MAD01.eml,c1015,2026-10-15 21:30,2026-10-15,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,cierre 15/10
-MAD01,20261016_1310_MAD01_fwd.eml,fwd1016cli,2026-10-16 13:10,2026-10-16,fwd,Martina Echeverría <martina.echeverria@moncler-retail.example>,RV: abrigo Ambrine chocolate talla 1
-MAD01,20261016_2204_MAD01.eml,c1016,2026-10-16 22:04,2026-10-16,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 16/10
-MAD01,20261017_2230_MAD01.eml,c1017,2026-10-17 22:30,2026-10-17,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 17/10 - sábado
-MAD01,20261018_1005_MAD01_re1.eml,re1018rob,2026-10-18 10:05,,reply,Roberto Galli <roberto.galli@moncler-retail.example>,Re: Cierre MAD01 17/10 - sábado
-MAD01,20261018_2110_MAD01.eml,c1018,2026-10-18 21:10,2026-10-18,closing,Martina Echeverría <martina.echeverria@moncler-retail.example>,Cierre domingo 18/10
-MAD01,20261019_2139_MAD01.eml,c1019,2026-10-19 21:39,2026-10-19,closing,Javier Molina <javier.molina@moncler-retail.example>,cierre lunes 19
-MAD01,20261020_2124_MAD01.eml,c1020,2026-10-20 21:24,2026-10-20,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,cierre 20/10
-MAD01,20261021_2152_MAD01.eml,c1021,2026-10-21 21:52,2026-10-21,closing,Lucía Fernández Ortega <lucia.fernandez@moncler-retail.example>,Cierre MAD01 21/10
-MIL01,20260831_2042_MIL01.eml,c0831,2026-08-31 20:42,2026-08-31,closing,Marco Pellizzari <marco.pellizzari@moncler-retail.example>,chiusura 31/08
-MIL01,20260831_2042_MIL01_ooo.eml,ooo0831,2026-08-31 20:42,,ooo,Roberto Galli <roberto.galli@moncler-retail.example>,Risposta automatica: chiusura 31/08
-MIL01,20260901_2025_MIL01.eml,c0901,2026-09-01 20:25,2026-09-01,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 01/09
-MIL01,20260902_2058_MIL01.eml,c0902,2026-09-02 20:58,2026-09-02,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 02/09
-MIL01,20260904_2110_MIL01.eml,c0904,2026-09-04 21:10,2026-09-04,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 04/09
-MIL01,20260905_2135_MIL01.eml,c0905,2026-09-05 21:35,2026-09-05,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - sabato 05/09
-MIL01,20260906_2015_MIL01.eml,c0906,2026-09-06 20:15,2026-09-06,closing,Marco Pellizzari <marco.pellizzari@moncler-retail.example>,chiusura dom 6/9
-MIL01,20260907_2030_MIL01.eml,c0907,2026-09-07 20:30,2026-09-07,closing,Marco Pellizzari <marco.pellizzari@moncler-retail.example>,chiusura 7/9
-MIL01,20260909_0852_MIL01.eml,c0908,2026-09-09 08:52,2026-09-08,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 08/09 (ieri)
-MIL01,20260909_2048_MIL01.eml,c0909,2026-09-09 20:48,2026-09-09,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 09/09
-MIL01,20260910_2105_MIL01.eml,c0910,2026-09-10 21:05,2026-09-10,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 10/09
-MIL01,20260910_2231_MIL01_re1.eml,re0910,2026-09-10 22:31,,reply,Roberto Galli <roberto.galli@moncler-retail.example>,Re: Chiusura MIL01 - 10/09
-MIL01,20260911_0940_MIL01_re1.eml,re0910b,2026-09-11 09:40,,reply,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Re: Chiusura MIL01 - 10/09
-MIL01,20260911_2055_MIL01.eml,c0911,2026-09-11 20:55,2026-09-11,closing,Marco Pellizzari <marco.pellizzari@moncler-retail.example>,MIL01 chiusura 11.09
-MIL01,20260912_2140_MIL01.eml,c0912,2026-09-12 21:40,2026-09-12,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - sabato 12/09
-MIL01,20260914_2020_MIL01.eml,c0914,2026-09-14 20:20,2026-09-14,closing,Marco Pellizzari <marco.pellizzari@moncler-retail.example>,chiusura 14/9
-MIL01,20260915_2047_MIL01.eml,c0915,2026-09-15 20:47,2026-09-15,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 15/09
-MIL01,20260916_2102_MIL01.eml,c0916,2026-09-16 21:02,2026-09-16,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 16/09
-MIL01,20260917_2010_MIL01.eml,c0917,2026-09-17 20:10,2026-09-17,closing,Marco Pellizzari <marco.pellizzari@moncler-retail.example>,chiusura 17.09
-MIL01,20260918_2115_MIL01.eml,c0918,2026-09-18 21:15,2026-09-18,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 18/09
-MIL01,20260918_2207_MIL01_corr.eml,corr0918,2026-09-18 22:07,2026-09-18,correction,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,R: Chiusura MIL01 - 18/09 - CORREZIONE
-MIL01,20260919_2152_MIL01.eml,c0919,2026-09-19 21:52,2026-09-19,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - sabato 19/09
-MIL01,20260920_2038_MIL01.eml,c0920,2026-09-20 20:38,2026-09-20,closing,MIL01 Montenapoleone <mil01.store@moncler-retail.example>,Chiusura Montenapoleone 20.09
-MIL01,20260921_2044_MIL01.eml,c0921,2026-09-21 20:44,2026-09-21,closing,Marco Pellizzari <marco.pellizzari@moncler-retail.example>,chiusura 21/9 + MAIRE NERA
-MIL01,20260921_2218_MIL01_re1.eml,re0921,2026-09-21 22:18,,reply,Roberto Galli <roberto.galli@moncler-retail.example>,Re: chiusura 21/9 + MAIRE NERA
-MIL01,20260922_1012_MIL01_re1.eml,re0921b,2026-09-22 10:12,,reply,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Re: chiusura 21/9 + MAIRE NERA
-MIL01,20260922_2128_MIL01.eml,c0922,2026-09-22 21:28,2026-09-22,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 22/09
-MIL01,20260923_1305_MIL01.eml,vm0923,2026-09-23 13:05,,misc,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,foto vetrine montenapo FW
-MIL01,20260923_2150_MIL01.eml,c0923,2026-09-23 21:50,2026-09-23,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 23/09
-MIL01,20260924_2205_MIL01.eml,c0924,2026-09-24 22:05,2026-09-24,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 24/09
-MIL01,20260925_2120_MIL01.eml,c0925,2026-09-25 21:20,2026-09-25,closing,Marco Pellizzari <marco.pellizzari@moncler-retail.example>,chiusura ven 25/9
-MIL01,20260927_2148_MIL01.eml,c0927,2026-09-27 21:48,"2026-09-26,2026-09-27",closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,chiusura sabato + domenica (26-27/09)
-MIL01,20260928_2035_MIL01.eml,c0928,2026-09-28 20:35,2026-09-28,closing,Marco Pellizzari <marco.pellizzari@moncler-retail.example>,chiusura 28/9
-MIL01,20260929_2102_MIL01.eml,c0929,2026-09-29 21:02,2026-09-29,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 29/09
-MIL01,20260930_2145_MIL01.eml,c0930,2026-09-30 21:45,2026-09-30,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 30/09 GOLDEN WEEK
-MIL01,20261001_1124_MIL01_fwd.eml,fwd1001,2026-10-01 11:24,,fwd,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,I: gilet Tib zip rotta
-MIL01,20261001_2130_MIL01.eml,c1001,2026-10-01 21:30,2026-10-01,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 01/10
-MIL01,20261002_2112_MIL01.eml,c1002,2026-10-02 21:12,2026-10-02,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 02/10
-MIL01,20261002_2113_MIL01_dup.eml,c1002dup,2026-10-02 21:13,2026-10-02,dup,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 02/10
-MIL01,20261003_2202_MIL01.eml,c1003,2026-10-03 22:02,2026-10-03,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - sabato 03/10
-MIL01,20261004_2052_MIL01.eml,c1004,2026-10-04 20:52,2026-10-04,closing,Sara Kim <sara.kim@moncler-retail.example>,Chiusura Montenapoleone 04.10
-MIL01,20261005_2040_MIL01.eml,c1005,2026-10-05 20:40,2026-10-05,closing,Marco Pellizzari <marco.pellizzari@moncler-retail.example>,chiusura 5/10
-MIL01,20261006_2220_MIL01.eml,c1006,2026-10-06 22:20,2026-10-06,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,"Chiusura MIL01 - 06/10 - Maire nera, serve una risposta"
-MIL01,20261007_0806_MIL01_re1.eml,re1006,2026-10-07 08:06,,reply,Roberto Galli <roberto.galli@moncler-retail.example>,"Re: Chiusura MIL01 - 06/10 - Maire nera, serve una risposta"
-MIL01,20261007_1142_MIL01.eml,wl1007,2026-10-07 11:42,,misc,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Lista attesa Maire nera - MIL01
-MIL01,20261007_2058_MIL01.eml,c1007,2026-10-07 20:58,2026-10-07,closing,Marco Pellizzari <marco.pellizzari@moncler-retail.example>,chiusura 07/10
-MIL01,20261008_2215_MIL01.eml,c1008,2026-10-08 22:15,2026-10-08,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 08/10 RECORD
-MIL01,20261009_1035_MIL01.eml,tr1009,2026-10-09 10:35,,misc,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,richiesta transfer cardigan logo M
-MIL01,20261009_1847_MIL01_re1.eml,re1009,2026-10-09 18:47,,reply,Roberto Galli <roberto.galli@moncler-retail.example>,Re: richiesta transfer cardigan logo M
-MIL01,20261009_2105_MIL01.eml,c1009,2026-10-09 21:05,2026-10-09,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 09/10
-MIL01,20261010_2140_MIL01.eml,c1010,2026-10-10 21:40,2026-10-10,closing,Marco Pellizzari <marco.pellizzari@moncler-retail.example>,chiusura sab 10/10
-MIL01,20261011_2028_MIL01.eml,c1011,2026-10-11 20:28,2026-10-11,closing,Marco Pellizzari <marco.pellizzari@moncler-retail.example>,chiusura dom 11/10
-MIL01,20261012_2016_MIL01.eml,c1012,2026-10-12 20:16,2026-10-12,closing,Marco Pellizzari <marco.pellizzari@moncler-retail.example>,chiusura 12/10
-MIL01,20261013_2110_MIL01.eml,c1013,2026-10-13 21:10,2026-10-13,closing,Sara Kim <sara.kim@moncler-retail.example>,Chiusura Montenapoleone 13.10
-MIL01,20261014_2122_MIL01.eml,c1014,2026-10-14 21:22,2026-10-14,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 14/09
-MIL01,20261015_2050_MIL01.eml,c1015,2026-10-15 20:50,2026-10-15,closing,Marco Pellizzari <marco.pellizzari@moncler-retail.example>,chiusura 15/10
-MIL01,20261016_2035_MIL01.eml,c1016,2026-10-16 20:35,2026-10-16,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 16/10 sciopero
-MIL01,20261017_2158_MIL01.eml,c1017,2026-10-17 21:58,2026-10-17,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - sabato 17/10
-MIL01,20261018_2047_MIL01.eml,c1018,2026-10-18 20:47,2026-10-18,closing,MIL01 Montenapoleone <mil01.store@moncler-retail.example>,Chiusura Montenapoleone 18.10
-MIL01,20261019_2039_MIL01.eml,c1019,2026-10-19 20:39,2026-10-19,closing,Marco Pellizzari <marco.pellizzari@moncler-retail.example>,chiusura 19/10
-MIL01,20261020_2100_MIL01.eml,c1020,2026-10-20 21:00,2026-10-20,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 20/10
-MIL01,20261021_2125_MIL01.eml,c1021,2026-10-21 21:25,2026-10-21,closing,Giulia Ferrandi <giulia.ferrandi@moncler-retail.example>,Chiusura MIL01 - 21/10 - ARRIVATE LE MAIRE NERE
-MIL01,20261021_2244_MIL01_re1.eml,re1021,2026-10-21 22:44,,reply,Roberto Galli <roberto.galli@moncler-retail.example>,Re: Chiusura MIL01 - 21/10 - ARRIVATE LE MAIRE NERE
-MIL02,20260831_2152_MIL02.eml,c0831,2026-08-31 21:52,2026-08-31,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 31/08
-MIL02,20260831_2152_MIL02_2.eml,ooo0831,2026-08-31 21:52,,ooo,Roberto Galli <roberto.galli@moncler-retail.example>,Risposta automatica: MIL02 Rinascente - chiusura 31/08
-MIL02,20260901_2138_MIL02.eml,c0901,2026-09-01 21:38,2026-09-01,closing,Ilaria Mancuso <ilaria.mancuso@moncler-retail.example>,Chiusura Rinascente 1/9
-MIL02,20260902_2205_MIL02.eml,c0902,2026-09-02 22:05,2026-09-02,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 02/09
-MIL02,20260903_2144_MIL02.eml,c0903,2026-09-03 21:44,2026-09-03,closing,Moncler Rinascente Duomo <mil02.store@moncler-retail.example>,chiusura rinascente 03/09
-MIL02,20260904_2247_MIL02.eml,c0904,2026-09-04 22:47,2026-09-04,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 04/09
-MIL02,20260905_2302_MIL02.eml,c0905,2026-09-05 23:02,2026-09-05,closing,Ilaria Mancuso <ilaria.mancuso@moncler-retail.example>,Chiusura Rinascente 5/9 🔥
-MIL02,20260906_2133_MIL02.eml,c0906,2026-09-06 21:33,2026-09-06,closing,Ilaria Mancuso <ilaria.mancuso@moncler-retail.example>,Chiusura Rinascente 6/9
-MIL02,20260907_2159_MIL02.eml,c0907,2026-09-07 21:59,2026-09-07,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 07/09
-MIL02,20260909_2220_MIL02.eml,c0909,2026-09-09 22:20,2026-09-09,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 09/09
-MIL02,20260909_2331_MIL02.eml,r0909,2026-09-09 23:31,,reply,Roberto Galli <roberto.galli@moncler-retail.example>,Re: MIL02 Rinascente - chiusura 09/09
-MIL02,20260910_1042_MIL02.eml,s0910,2026-09-10 10:42,,reply,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,Re: Re: MIL02 Rinascente - chiusura 09/09
-MIL02,20260910_2141_MIL02.eml,c0910,2026-09-10 21:41,2026-09-10,closing,Ilaria Mancuso <ilaria.mancuso@moncler-retail.example>,Chiusura Rinascente 10/9
-MIL02,20260911_1436_MIL02.eml,fwd0911,2026-09-11 14:36,,fwd,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,I: Comunicazione Rinascente - prova evacuazione 15/09 e orari Fashion Week
-MIL02,20260911_2251_MIL02.eml,c0911,2026-09-11 22:51,2026-09-11,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 11/09
-MIL02,20260912_2310_MIL02.eml,c0912,2026-09-12 23:10,2026-09-12,closing,Ilaria Mancuso <ilaria.mancuso@moncler-retail.example>,Chiusura Rinascente 12/9 ✨
-MIL02,20260913_2128_MIL02.eml,c0913,2026-09-13 21:28,2026-09-13,closing,Moncler Rinascente Duomo <mil02.store@moncler-retail.example>,chiusura rinascente 13/9
-MIL02,20260914_2216_MIL02.eml,c0914,2026-09-14 22:16,2026-09-14,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 14/09
-MIL02,20260915_2147_MIL02.eml,c0915,2026-09-15 21:47,2026-09-15,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 15/09
-MIL02,20260916_2136_MIL02.eml,c0916,2026-09-16 21:36,2026-09-16,closing,Ilaria Mancuso <ilaria.mancuso@moncler-retail.example>,Chiusura Rinascente 16/9
-MIL02,20260917_2155_MIL02.eml,c0917,2026-09-17 21:55,2026-09-17,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 17/09
-MIL02,20260918_2305_MIL02.eml,c0918,2026-09-18 23:05,2026-09-18,closing,Ilaria Mancuso <ilaria.mancuso@moncler-retail.example>,Chiusura Rinascente 18/9 🎉
-MIL02,20260920_2214_MIL02.eml,c0920,2026-09-20 22:14,"2026-09-19,2026-09-20",closing,Ilaria Mancuso <ilaria.mancuso@moncler-retail.example>,chiusura sab + dom 19-20/9
-MIL02,20260921_2202_MIL02.eml,c0921,2026-09-21 22:02,2026-09-21,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 21/09
-MIL02,20260922_2149_MIL02.eml,c0922,2026-09-22 21:49,2026-09-22,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 22/09
-MIL02,20260923_2231_MIL02.eml,c0923,2026-09-23 22:31,2026-09-23,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 23/09
-MIL02,20260923_2318_MIL02.eml,corr0923,2026-09-23 23:18,2026-09-23,correction,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,CORREZIONE chiusura 23/09
-MIL02,20260924_2312_MIL02.eml,c0924,2026-09-24 23:12,2026-09-24,closing,Ilaria Mancuso <ilaria.mancuso@moncler-retail.example>,Chiusura Rinascente 24/9 👗
-MIL02,20260925_2258_MIL02.eml,c0925,2026-09-25 22:58,2026-09-25,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 25/09
-MIL02,20260926_2324_MIL02.eml,c0926,2026-09-26 23:24,2026-09-26,closing,Ilaria Mancuso <ilaria.mancuso@moncler-retail.example>,Chiusura Rinascente 26/9
-MIL02,20260927_2141_MIL02.eml,c0927,2026-09-27 21:41,2026-09-27,closing,Moncler Rinascente Duomo <mil02.store@moncler-retail.example>,chiusura rinascente 27/09
-MIL02,20260928_2209_MIL02.eml,c0928,2026-09-28 22:09,2026-09-28,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 28/09
-MIL02,20260929_2142_MIL02.eml,c0929,2026-09-29 21:42,2026-09-29,closing,Ilaria Mancuso <ilaria.mancuso@moncler-retail.example>,Chiusura Rinascente 29/9
-MIL02,20260930_2203_MIL02.eml,c0930,2026-09-30 22:03,2026-09-30,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 30/09
-MIL02,20261001_2217_MIL02.eml,c1001,2026-10-01 22:17,2026-10-01,closing,Ilaria Mancuso <ilaria.mancuso@moncler-retail.example>,Chiusura Rinascente 1/10 🇨🇳
-MIL02,20261002_2326_MIL02.eml,c1002,2026-10-02 23:26,2026-10-02,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 02/10
-MIL02,20261002_2328_MIL02.eml,dup1002,2026-10-02 23:28,2026-10-02,dup,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 02/10
-MIL02,20261003_2319_MIL02.eml,c1003,2026-10-03 23:19,2026-10-03,closing,Ilaria Mancuso <ilaria.mancuso@moncler-retail.example>,Chiusura Rina 3/10 🇨🇳🇨🇳
-MIL02,20261005_0914_MIL02.eml,c1004,2026-10-05 09:14,2026-10-04,closing,Moncler Rinascente Duomo <mil02.store@moncler-retail.example>,chiusura rinascente domenica 4/10
-MIL02,20261005_2208_MIL02.eml,c1005,2026-10-05 22:08,2026-10-05,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 05/10
-MIL02,20261006_2212_MIL02.eml,c1006,2026-10-06 22:12,2026-10-06,closing,Ilaria Mancuso <ilaria.mancuso@moncler-retail.example>,Chiusura Rinascente 6/10
-MIL02,20261007_2226_MIL02.eml,c1007,2026-10-07 22:26,2026-10-07,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 07/10
-MIL02,20261008_2139_MIL02.eml,c1008,2026-10-08 21:39,2026-10-08,closing,Moncler Rinascente Duomo <mil02.store@moncler-retail.example>,chiusura rinascente 08/10
-MIL02,20261009_1547_MIL02.eml,s1009card,2026-10-09 15:47,,reply,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,Re: URGENTE - cardigan logo M per Monte Napo
-MIL02,20261009_1811_MIL02.eml,r1009card,2026-10-09 18:11,,reply,Roberto Galli <roberto.galli@moncler-retail.example>,Re: URGENTE - cardigan logo M per Monte Napo
-MIL02,20261009_2244_MIL02.eml,c1009,2026-10-09 22:44,2026-10-09,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 09/10
-MIL02,20261010_2321_MIL02.eml,c1010,2026-10-10 23:21,2026-10-10,closing,Ilaria Mancuso <ilaria.mancuso@moncler-retail.example>,Chiusura Rinascente 10/10
-MIL02,20261011_2151_MIL02.eml,c1011,2026-10-11 21:51,2026-10-11,closing,Moncler Rinascente Duomo <mil02.store@moncler-retail.example>,chiusura rinascente 11/10
-MIL02,20261013_2207_MIL02.eml,c1013,2026-10-13 22:07,2026-10-13,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 13/10
-MIL02,20261014_1322_MIL02.eml,m1014,2026-10-14 13:22,,misc,Moncler Rinascente Duomo <mil02.store@moncler-retail.example>,domani
-MIL02,20261014_2219_MIL02.eml,c1014,2026-10-14 22:19,2026-10-14,closing,Ilaria Mancuso <ilaria.mancuso@moncler-retail.example>,Chiusura Rinascente 14/10 🥶
-MIL02,20261015_2231_MIL02.eml,c1015,2026-10-15 22:31,2026-10-15,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 15/09
-MIL02,20261016_2248_MIL02.eml,c1016,2026-10-16 22:48,2026-10-16,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,MIL02 Rinascente - chiusura 16/10 (sciopero)
-MIL02,20261017_2314_MIL02.eml,c1017,2026-10-17 23:14,2026-10-17,closing,Ilaria Mancuso <ilaria.mancuso@moncler-retail.example>,Chiusura Rinascente 17/10
-MIL02,20261018_2146_MIL02.eml,c1018,2026-10-18 21:46,2026-10-18,closing,Moncler Rinascente Duomo <mil02.store@moncler-retail.example>,chiusura rinascente 18/10
-MIL02,20261019_2204_MIL02.eml,c1019,2026-10-19 22:04,2026-10-19,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,chiusura MIL02 19/10
-MIL02,20261020_2158_MIL02.eml,c1020,2026-10-20 21:58,2026-10-20,closing,Ilaria Mancuso <ilaria.mancuso@moncler-retail.example>,Chiusura Rinascente 20/10
-MIL02,20261021_2236_MIL02.eml,c1021,2026-10-21 22:36,2026-10-21,closing,Stefano Rocchi <stefano.rocchi@moncler-retail.example>,chiusura MIL02 21/10
-ROM01,20260831_2012_ROM01.eml,c0831,2026-08-31 20:12,2026-08-31,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,[ROM01] Report serale 31/08
-ROM01,20260831_2012_ROM01_ooo.eml,ooo0831,2026-08-31 20:12,,ooo,Roberto Galli <roberto.galli@moncler-retail.example>,Risposta automatica: [ROM01] Report serale 31/08
-ROM01,20260902_2005_ROM01.eml,c0902,2026-09-02 20:05,2026-09-02,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,[ROM01] Report serale 02/09
-ROM01,20260903_2031_ROM01.eml,c0903,2026-09-03 20:31,2026-09-03,closing,Fabio Cardarelli <fabio.cardarelli@moncler-retail.example>,chiusura roma 3/9
-ROM01,20260904_2018_ROM01.eml,c0904,2026-09-04 20:18,2026-09-04,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,[ROM01] Report serale 04/09
-ROM01,20260905_2047_ROM01.eml,c0905,2026-09-05 20:47,2026-09-05,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,[ROM01] Report serale 05/09
-ROM01,20260906_2002_ROM01.eml,c0906,2026-09-06 20:02,2026-09-06,closing,Fabio Cardarelli <fabio.cardarelli@moncler-retail.example>,chiusura domenica
-ROM01,20260907_2024_ROM01.eml,c0907,2026-09-07 20:24,2026-09-07,closing,Fabio Cardarelli <fabio.cardarelli@moncler-retail.example>,chiusura roma 7/9
-ROM01,20260908_2015_ROM01.eml,c0908,2026-09-08 20:15,2026-09-08,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,[ROM01] Report serale 08/09
-ROM01,20260909_2009_ROM01.eml,c0909,2026-09-09 20:09,2026-09-09,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,[ROM01] Report serale 09/09
-ROM01,20260910_2040_ROM01.eml,c0910,2026-09-10 20:40,2026-09-10,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,[ROM01] Report serale 10/09
-ROM01,20260911_2055_ROM01.eml,c0911,2026-09-11 20:55,2026-09-11,closing,Moncler Roma Condotti <rom01.store@moncler-retail.example>,Chiusura ROM01 11/09
-ROM01,20260912_2103_ROM01.eml,c0912,2026-09-12 21:03,2026-09-12,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,[ROM01] Report serale 12/09
-ROM01,20260913_2010_ROM01.eml,c0913,2026-09-13 20:10,2026-09-13,closing,Fabio Cardarelli <fabio.cardarelli@moncler-retail.example>,chiusura 13/9
-ROM01,20260914_2038_ROM01.eml,c0914,2026-09-14 20:38,2026-09-14,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,[ROM01] Report serale 14/09 - CANTIERE DAVANTI AL NEGOZIO
-ROM01,20260915_0814_ROM01_re1.eml,r0915a,2026-09-15 08:14,,reply,Roberto Galli <roberto.galli@moncler-retail.example>,Re: [ROM01] Report serale 14/09 - CANTIERE DAVANTI AL NEGOZIO
-ROM01,20260915_1247_ROM01_re2.eml,r0915b,2026-09-15 12:47,,reply,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,Re: [ROM01] Report serale 14/09 - CANTIERE DAVANTI AL NEGOZIO
-ROM01,20260915_2021_ROM01.eml,c0915,2026-09-15 20:21,2026-09-15,closing,Fabio Cardarelli <fabio.cardarelli@moncler-retail.example>,chiusura roma 15/9
-ROM01,20260916_1108_ROM01_fwd.eml,fwd0916,2026-09-16 11:08,,fwd,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,I: Condominio Via Condotti - avvio lavori facciata e comunicazione cantiere comunale
-ROM01,20260916_2026_ROM01.eml,c0916,2026-09-16 20:26,2026-09-16,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,[ROM01] Report serale 16/09
-ROM01,20260917_2008_ROM01.eml,c0917,2026-09-17 20:08,2026-09-17,closing,Fabio Cardarelli <fabio.cardarelli@moncler-retail.example>,chiusura 17/9
-ROM01,20260918_2044_ROM01.eml,c0918,2026-09-18 20:44,2026-09-18,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,[ROM01] Report serale 18/09
-ROM01,20260919_2106_ROM01.eml,c0919,2026-09-19 21:06,2026-09-19,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,[ROM01] Report serale 19/09
-ROM01,20260920_2019_ROM01.eml,c0920,2026-09-20 20:19,2026-09-20,closing,Fabio Cardarelli <fabio.cardarelli@moncler-retail.example>,chiusura domenica 20
-ROM01,20260921_2033_ROM01.eml,c0921,2026-09-21 20:33,2026-09-21,closing,Moncler Roma Condotti <rom01.store@moncler-retail.example>,Chiusura ROM01 21/09
-ROM01,20260923_2112_ROM01.eml,c0923,2026-09-23 21:12,2026-09-23,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,ROM01 report 23/09 + richiesta revisione budget
-ROM01,20260924_0902_ROM01_re1.eml,r0924,2026-09-24 09:02,,reply,Roberto Galli <roberto.galli@moncler-retail.example>,Re: ROM01 report 23/09 + richiesta revisione budget
-ROM01,20260924_2017_ROM01.eml,c0924,2026-09-24 20:17,2026-09-24,closing,Fabio Cardarelli <fabio.cardarelli@moncler-retail.example>,chiusura 24/9
-ROM01,20260925_2052_ROM01.eml,c0925,2026-09-25 20:52,2026-09-25,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,ROM01 report 25/09
-ROM01,20260926_2115_ROM01.eml,c0926,2026-09-26 21:15,2026-09-26,closing,Fabio Cardarelli <fabio.cardarelli@moncler-retail.example>,chiusura sabato 26/9
-ROM01,20260927_2004_ROM01.eml,c0927,2026-09-27 20:04,2026-09-27,closing,Fabio Cardarelli <fabio.cardarelli@moncler-retail.example>,chiusura domenica 27
-ROM01,20260927_2006_ROM01_dup.eml,c0927dup,2026-09-27 20:06,2026-09-27,dup,Fabio Cardarelli <fabio.cardarelli@moncler-retail.example>,chiusura domenica 27
-ROM01,20260928_2029_ROM01.eml,c0928,2026-09-28 20:29,2026-09-28,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,ROM01 report 28/09
-ROM01,20260930_0847_ROM01.eml,c0929,2026-09-30 08:47,2026-09-29,closing,Fabio Cardarelli <fabio.cardarelli@moncler-retail.example>,chiusura 29/9 (ieri)
-ROM01,20260930_2041_ROM01.eml,c0930,2026-09-30 20:41,2026-09-30,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,ROM01 report 30/09
-ROM01,20261001_2023_ROM01.eml,c1001,2026-10-01 20:23,2026-10-01,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,ROM01 report 01/10
-ROM01,20261002_2101_ROM01.eml,c1002,2026-10-02 21:01,2026-10-02,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,ROM01 report 02/10
-ROM01,20261002_2218_ROM01_re1.eml,r1002,2026-10-02 22:18,,reply,Roberto Galli <roberto.galli@moncler-retail.example>,Re: ROM01 report 02/10
-ROM01,20261003_2122_ROM01.eml,c1003,2026-10-03 21:22,2026-10-03,closing,Fabio Cardarelli <fabio.cardarelli@moncler-retail.example>,chiusura sabato 3/10
-ROM01,20261003_2140_ROM01_corr.eml,corr1003,2026-10-03 21:40,2026-10-03,correction,Fabio Cardarelli <fabio.cardarelli@moncler-retail.example>,Re: chiusura sabato 3/10
-ROM01,20261004_2013_ROM01.eml,c1004,2026-10-04 20:13,2026-10-04,closing,Fabio Cardarelli <fabio.cardarelli@moncler-retail.example>,chiusura dom 4/10
-ROM01,20261005_2037_ROM01.eml,c1005,2026-10-05 20:37,2026-10-05,closing,Moncler Roma Condotti <rom01.store@moncler-retail.example>,Chiusura ROM01 05/10
-ROM01,20261006_2049_ROM01.eml,c1006,2026-10-06 20:49,2026-10-06,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,ROM01 report 06/10
-ROM01,20261007_2031_ROM01.eml,c1007,2026-10-07 20:31,2026-10-07,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,ROM01 report 07/10
-ROM01,20261008_2016_ROM01.eml,c1008,2026-10-08 20:16,2026-10-08,closing,Fabio Cardarelli <fabio.cardarelli@moncler-retail.example>,chiusura 8/10
-ROM01,20261009_2058_ROM01.eml,c1009,2026-10-09 20:58,2026-10-09,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,ROM01 report 09/10
-ROM01,20261011_2044_ROM01.eml,c1011,2026-10-11 20:44,"2026-10-10,2026-10-11",closing,Fabio Cardarelli <fabio.cardarelli@moncler-retail.example>,chiusura sabato + domenica
-ROM01,20261012_2027_ROM01.eml,c1012,2026-10-12 20:27,2026-10-12,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,ROM01 report 12/10
-ROM01,20261013_2035_ROM01.eml,c1013,2026-10-13 20:35,2026-10-13,closing,Moncler Roma Condotti <rom01.store@moncler-retail.example>,Chiusura ROM01 13/09
-ROM01,20261014_2105_ROM01.eml,c1014,2026-10-14 21:05,2026-10-14,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,ROM01 report 14/10
-ROM01,20261015_2011_ROM01.eml,c1015,2026-10-15 20:11,2026-10-15,closing,Fabio Cardarelli <fabio.cardarelli@moncler-retail.example>,chiusura 15/10
-ROM01,20261016_2039_ROM01.eml,c1016,2026-10-16 20:39,2026-10-16,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,ROM01 report 16/10 - sciopero
-ROM01,20261017_2134_ROM01.eml,c1017,2026-10-17 21:34,2026-10-17,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,ROM01 report 17/10
-ROM01,20261018_2022_ROM01.eml,c1018,2026-10-18 20:22,2026-10-18,closing,Fabio Cardarelli <fabio.cardarelli@moncler-retail.example>,chiusura dom 18/10
-ROM01,20261019_2046_ROM01.eml,c1019,2026-10-19 20:46,2026-10-19,closing,Moncler Roma Condotti <rom01.store@moncler-retail.example>,Chiusura ROM01 19/10
-ROM01,20261020_2018_ROM01.eml,c1020,2026-10-20 20:18,2026-10-20,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,report roma 20/10
-ROM01,20261021_2057_ROM01.eml,c1021,2026-10-21 20:57,2026-10-21,closing,Alessandra De Santis <alessandra.desantis@moncler-retail.example>,ROM01 report 21/10
-VEN01,20260831_2014_VEN01.eml,c0831,2026-08-31 20:14,2026-08-31,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 31/08
-VEN01,20260831_2014_VEN01_ooo.eml,ooo0831,2026-08-31 20:14,,ooo,Roberto Galli <roberto.galli@moncler-retail.example>,Risposta automatica: Chiusura VEN01 31/08
-VEN01,20260901_2041_VEN01.eml,c0901,2026-09-01 20:41,2026-09-01,closing,Luca Boscolo <luca.boscolo@moncler-retail.example>,chiusura VEN 1/9
-VEN01,20260903_2005_VEN01.eml,c0903,2026-09-03 20:05,2026-09-03,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 03/09
-VEN01,20260904_2022_VEN01.eml,c0904,2026-09-04 20:22,2026-09-04,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 04/09
-VEN01,20260905_2050_VEN01.eml,c0905,2026-09-05 20:50,2026-09-05,closing,Luca Boscolo <luca.boscolo@moncler-retail.example>,chiusura sabato 5.9
-VEN01,20260906_2035_VEN01.eml,c0906,2026-09-06 20:35,2026-09-06,closing,Moncler Venezia San Marco <ven01.store@moncler-retail.example>,Chiusura negozio Venezia domenica 6 settembre
-VEN01,20260907_2008_VEN01.eml,c0907,2026-09-07 20:08,2026-09-07,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 07/09
-VEN01,20260908_2102_VEN01.eml,c0908,2026-09-08 21:02,2026-09-08,closing,Luca Boscolo <luca.boscolo@moncler-retail.example>,VEN chiusura 8/9
-VEN01,20260909_2047_VEN01.eml,c0909,2026-09-09 20:47,2026-09-09,closing,Luca Boscolo <luca.boscolo@moncler-retail.example>,VEN chiusura 9.9
-VEN01,20260910_2019_VEN01.eml,c0910,2026-09-10 20:19,2026-09-10,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 10/09
-VEN01,20260911_2031_VEN01.eml,c0911,2026-09-11 20:31,2026-09-11,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 11/09
-VEN01,20260912_2110_VEN01.eml,c0912,2026-09-12 21:10,2026-09-12,closing,Luca Boscolo <luca.boscolo@moncler-retail.example>,chiusura sab 12/9
-VEN01,20260913_2012_VEN01.eml,c0913,2026-09-13 20:12,2026-09-13,closing,Moncler Venezia San Marco <ven01.store@moncler-retail.example>,Chiusura domenica 13/9 Venezia
-VEN01,20260914_2003_VEN01.eml,c0914,2026-09-14 20:03,2026-09-14,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 14.09
-VEN01,20260915_2038_VEN01.eml,c0915,2026-09-15 20:38,2026-09-15,closing,Luca Boscolo <luca.boscolo@moncler-retail.example>,VEN chiusura 15/9
-VEN01,20260916_2026_VEN01.eml,c0916,2026-09-16 20:26,2026-09-16,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 16/09
-VEN01,20260918_2015_VEN01.eml,c0918,2026-09-18 20:15,2026-09-18,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 18/09
-VEN01,20260919_2105_VEN01.eml,c0919,2026-09-19 21:05,2026-09-19,closing,Luca Boscolo <luca.boscolo@moncler-retail.example>,chiusura sabato 19/9
-VEN01,20260919_2107_VEN01_dup.eml,c0919dup,2026-09-19 21:07,2026-09-19,dup,Luca Boscolo <luca.boscolo@moncler-retail.example>,chiusura sabato 19/9
-VEN01,20260920_2020_VEN01.eml,c0920,2026-09-20 20:20,2026-09-20,closing,Moncler Venezia San Marco <ven01.store@moncler-retail.example>,Chiusura domenica 20/09
-VEN01,20260921_2000_VEN01.eml,c0921,2026-09-21 20:00,2026-09-21,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 21/09
-VEN01,20260922_2044_VEN01.eml,c0922,2026-09-22 20:44,2026-09-22,closing,Luca Boscolo <luca.boscolo@moncler-retail.example>,VEN chiusura 22/9
-VEN01,20260923_2017_VEN01.eml,c0923,2026-09-23 20:17,2026-09-23,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 23/9
-VEN01,20260924_2055_VEN01.eml,c0924,2026-09-24 20:55,2026-09-24,closing,Luca Boscolo <luca.boscolo@moncler-retail.example>,Re: vetrine W39 - Ambrine
-VEN01,20260925_2009_VEN01.eml,c0925,2026-09-25 20:09,2026-09-25,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 25/09
-VEN01,20260926_2120_VEN01.eml,c0926,2026-09-26 21:20,2026-09-26,closing,Luca Boscolo <luca.boscolo@moncler-retail.example>,chiusura sabato 26.9
-VEN01,20260928_0905_VEN01.eml,c0927,2026-09-28 09:05,2026-09-27,closing,Moncler Venezia San Marco <ven01.store@moncler-retail.example>,Chiusura domenica 27/9 (scusate il ritardo)
-VEN01,20260928_2011_VEN01.eml,c0928,2026-09-28 20:11,2026-09-28,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 28/09
-VEN01,20260929_2050_VEN01.eml,c0929,2026-09-29 20:50,2026-09-29,closing,Luca Boscolo <luca.boscolo@moncler-retail.example>,VEN chiusura 29.9
-VEN01,20260930_2024_VEN01.eml,c0930,2026-09-30 20:24,2026-09-30,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 30/09
-VEN01,20261001_2032_VEN01.eml,c1001,2026-10-01 20:32,2026-10-01,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 01/10
-VEN01,20261002_2101_VEN01.eml,c1002,2026-10-02 21:01,2026-10-02,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 02/10
-VEN01,20261002_2216_VEN01_re1.eml,r1002,2026-10-02 22:16,,reply,Roberto Galli <roberto.galli@moncler-retail.example>,Re: Chiusura VEN01 02/10
-VEN01,20261003_1012_VEN01_re2.eml,a1003,2026-10-03 10:12,,reply,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Re: Chiusura VEN01 02/10
-VEN01,20261003_2130_VEN01.eml,c1003,2026-10-03 21:30,2026-10-03,closing,Luca Boscolo <luca.boscolo@moncler-retail.example>,chiusura sab 3/10
-VEN01,20261003_2205_VEN01_corr.eml,k1003,2026-10-03 22:05,2026-10-03,correction,Luca Boscolo <luca.boscolo@moncler-retail.example>,R: chiusura sab 3/10 - CORREZIONE
-VEN01,20261004_2040_VEN01.eml,c1004,2026-10-04 20:40,2026-10-04,closing,Moncler Venezia San Marco <ven01.store@moncler-retail.example>,Chiusura domenica 4 ottobre
-VEN01,20261005_2013_VEN01.eml,c1005,2026-10-05 20:13,2026-10-05,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 5/10
-VEN01,20261005_2201_VEN01_re1.eml,r1005,2026-10-05 22:01,,reply,Roberto Galli <roberto.galli@moncler-retail.example>,Re: Chiusura VEN01 5/10
-VEN01,20261006_2052_VEN01.eml,c1006,2026-10-06 20:52,2026-10-06,closing,Luca Boscolo <luca.boscolo@moncler-retail.example>,chiusura 6/10
-VEN01,20261007_2112_VEN01.eml,c1007,2026-10-07 21:12,2026-10-07,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 07/10
-VEN01,20261008_2108_VEN01.eml,c1008,2026-10-08 21:08,2026-10-08,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 08/09
-VEN01,20261009_2100_VEN01.eml,c1009,2026-10-09 21:00,2026-10-09,closing,Luca Boscolo <luca.boscolo@moncler-retail.example>,chiusura ven 9/10
-VEN01,20261011_2115_VEN01.eml,c1011,2026-10-11 21:15,"2026-10-10,2026-10-11",closing,Luca Boscolo <luca.boscolo@moncler-retail.example>,chiusura weekend 10-11/10
-VEN01,20261012_2006_VEN01.eml,c1012,2026-10-12 20:06,2026-10-12,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 12/10
-VEN01,20261013_2040_VEN01.eml,c1013,2026-10-13 20:40,2026-10-13,closing,Luca Boscolo <luca.boscolo@moncler-retail.example>,chiusura 13/10
-VEN01,20261014_2021_VEN01.eml,c1014,2026-10-14 20:21,2026-10-14,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 14/10
-VEN01,20261015_2048_VEN01.eml,c1015,2026-10-15 20:48,2026-10-15,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 15/10 !!
-VEN01,20261016_2105_VEN01.eml,c1016,2026-10-16 21:05,2026-10-16,closing,Luca Boscolo <luca.boscolo@moncler-retail.example>,chiusura 16/10 sciopero
-VEN01,20261017_2115_VEN01.eml,c1017,2026-10-17 21:15,2026-10-17,closing,Luca Boscolo <luca.boscolo@moncler-retail.example>,chiusura sab 17/10
-VEN01,20261018_2025_VEN01.eml,c1018,2026-10-18 20:25,2026-10-18,closing,Moncler Venezia San Marco <ven01.store@moncler-retail.example>,Chiusura domenica 18/10
-VEN01,20261019_2010_VEN01.eml,c1019,2026-10-19 20:10,2026-10-19,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 19/10
-VEN01,20261019_2240_VEN01_fwd.eml,f1019,2026-10-19 22:40,2026-10-19,fwd,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,I: AVVISO MAREA - aggiornamento ore 22:00
-VEN01,20261020_0742_VEN01_alert.eml,m1020,2026-10-20 07:42,2026-10-20,misc,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,VEN01 - oggi apriamo alle 12 (acqua alta)
-VEN01,20261020_2030_VEN01.eml,c1020,2026-10-20 20:30,2026-10-20,closing,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Chiusura VEN01 20/10 - acqua alta
-VEN01,20261020_2148_VEN01_re1.eml,r1020,2026-10-20 21:48,,reply,Roberto Galli <roberto.galli@moncler-retail.example>,Re: Chiusura VEN01 20/10 - acqua alta
-VEN01,20261021_0925_VEN01_re2.eml,a1021,2026-10-21 09:25,,reply,Chiara Zennaro <chiara.zennaro@moncler-retail.example>,Re: Chiusura VEN01 20/10 - acqua alta
-VEN01,20261021_2050_VEN01.eml,c1021,2026-10-21 20:50,2026-10-21,closing,Luca Boscolo <luca.boscolo@moncler-retail.example>,chiusura 21/10
+COU01,20260831_2030_COU01.eml,u0831,2026-08-31 20:30,2026-08-31,closing,Paolo Bertholin <paolo.bertholin@valentino-retail.example>,COU01 - Chiusura 31.08
+COU01,20260901_2010_COU01.eml,u0901,2026-09-01 20:10,2026-09-01,closing,Elisa Vuillermoz <elisa.vuillermoz@valentino-retail.example>,chiusura cou 1/9
+COU01,20260902_2045_COU01.eml,u0902,2026-09-02 20:45,2026-09-02,closing,Paolo Bertholin <paolo.bertholin@valentino-retail.example>,COU01 - Chiusura 02.09
+COU01,20260903_2020_COU01.eml,u0903,2026-09-03 20:20,2026-09-03,closing,Elisa Vuillermoz <elisa.vuillermoz@valentino-retail.example>,chiusura cou 3/9
+COU01,20260904_2035_COU01.eml,u0904,2026-09-04 20:35,2026-09-04,closing,Paolo Bertholin <paolo.bertholin@valentino-retail.example>,COU01 - Chiusura 04.09
+COU01,20260905_2100_COU01.eml,u0905,2026-09-05 21:00,2026-09-05,closing,Elisa Vuillermoz <elisa.vuillermoz@valentino-retail.example>,chiusura sabato 5/9 cou
+COU01,20260906_2025_COU01.eml,u0906,2026-09-06 20:25,2026-09-06,closing,Paolo Bertholin <paolo.bertholin@valentino-retail.example>,COU01 - Chiusura 06.09
+COU01,20260907_2015_COU01.eml,u0907,2026-09-07 20:15,2026-09-07,closing,Elisa Vuillermoz <elisa.vuillermoz@valentino-retail.example>,chiusura cou 7/9
+COU01,20260909_2040_COU01.eml,u0909,2026-09-09 20:40,2026-09-09,closing,Paolo Bertholin <paolo.bertholin@valentino-retail.example>,COU01 - Chiusura 08.09
+COU01,20260910_2110_COU01.eml,u0910,2026-09-10 21:10,2026-09-10,closing,Paolo Bertholin <paolo.bertholin@valentino-retail.example>,COU01 - Chiusura 10.09 + organizzazione fine stagione
+COU01,20260911_2000_COU01.eml,u0911,2026-09-11 20:00,2026-09-11,closing,Valentino Courmayeur <cou01.store@valentino-retail.example>,Chiusura Courmayeur 11/09
+COU01,20260912_2235_COU01.eml,u0912,2026-09-12 22:35,2026-09-12,closing,Paolo Bertholin <paolo.bertholin@valentino-retail.example>,COU01 - Ultima chiusura stagione estiva 12.09
+COU01,20260913_1650_COU01.eml,u0913_inv,2026-09-13 16:50,,misc,Paolo Bertholin <paolo.bertholin@valentino-retail.example>,COU01 - Inventario fine stagione + chiusura POS
+COU01,20260914_1210_COU01.eml,u0914_reso,2026-09-14 12:10,,misc,Paolo Bertholin <paolo.bertholin@valentino-retail.example>,COU01 - Reso fine stagione a CSG - DDT 0058/26
+COU01,20260915_0912_COU01_re1.eml,u0915_re,2026-09-15 09:12,,reply,Roberto Galli <roberto.galli@valentino-retail.example>,Re: COU01 - Reso fine stagione a CSG - DDT 0058/26
+COU01,20260915_1130_COU01_re2.eml,u0915_re2,2026-09-15 11:30,,reply,Paolo Bertholin <paolo.bertholin@valentino-retail.example>,Re: COU01 - Reso fine stagione a CSG - DDT 0058/26
+COU01,20261006_1820_COU01.eml,u1006,2026-10-06 18:20,,misc,Paolo Bertholin <paolo.bertholin@valentino-retail.example>,COU01 riapertura inverno - proposta assortimento + lavori
+COU01,20261019_1905_COU01.eml,u1019,2026-10-19 19:05,,misc,Paolo Bertholin <paolo.bertholin@valentino-retail.example>,COU01 aggiornamento riapertura 27/11
+CRT01,20260831_2025_CRT01.eml,c0831,2026-08-31 20:25,2026-08-31,closing,Martina Menardi <martina.menardi@valentino-retail.example>,CRT01 chiusura 31/08
+CRT01,20260901_2105_CRT01.eml,c0901,2026-09-01 21:05,2026-09-01,closing,Davide Dibona <davide.dibona@valentino-retail.example>,chiusura crt 1/9
+CRT01,20260901_2106_CRT01_ooo.eml,c0901_ooo,2026-09-01 21:06,,ooo,Roberto Galli <roberto.galli@valentino-retail.example>,Risposta automatica: chiusura crt 1/9
+CRT01,20260902_2040_CRT01.eml,c0902,2026-09-02 20:40,2026-09-02,closing,Martina Menardi <martina.menardi@valentino-retail.example>,CRT01 chiusura 02/09
+CRT01,20260904_2015_CRT01.eml,c0904,2026-09-04 20:15,2026-09-04,closing,Martina Menardi <martina.menardi@valentino-retail.example>,CRT01 chiusura 04/09
+CRT01,20260905_2110_CRT01.eml,c0905,2026-09-05 21:10,2026-09-05,closing,Martina Menardi <martina.menardi@valentino-retail.example>,CRT01 chiusura 05/09
+CRT01,20260906_2035_CRT01.eml,c0906,2026-09-06 20:35,2026-09-06,closing,Davide Dibona <davide.dibona@valentino-retail.example>,chiusura dom 6/9
+CRT01,20260907_2005_CRT01.eml,c0907,2026-09-07 20:05,2026-09-07,closing,Martina Menardi <martina.menardi@valentino-retail.example>,CRT01 chiusura 07/09
+CRT01,20260908_2050_CRT01.eml,c0908,2026-09-08 20:50,2026-09-08,closing,Davide Dibona <davide.dibona@valentino-retail.example>,chiusura crt 8/9
+CRT01,20260909_2030_CRT01.eml,c0909,2026-09-09 20:30,2026-09-09,closing,Martina Menardi <martina.menardi@valentino-retail.example>,CRT01 chiusura 09/09
+CRT01,20260910_2010_CRT01.eml,c0910,2026-09-10 20:10,2026-09-10,closing,Valentino Cortina <crt01.store@valentino-retail.example>,Chiusura Cortina 10.09
+CRT01,20260911_2045_CRT01.eml,c0911,2026-09-11 20:45,2026-09-11,closing,Martina Menardi <martina.menardi@valentino-retail.example>,CRT01 chiusura 11/09
+CRT01,20260912_2100_CRT01.eml,c0912,2026-09-12 21:00,2026-09-12,closing,Martina Menardi <martina.menardi@valentino-retail.example>,CRT01 chiusura 12/09
+CRT01,20260913_2040_CRT01.eml,c0913,2026-09-13 20:40,2026-09-13,closing,Davide Dibona <davide.dibona@valentino-retail.example>,chiusura domenica 13
+CRT01,20260913_2044_CRT01_dup.eml,c0913_dup,2026-09-13 20:44,2026-09-13,dup,Davide Dibona <davide.dibona@valentino-retail.example>,chiusura domenica 13
+CRT01,20260914_2010_CRT01.eml,c0914,2026-09-14 20:10,2026-09-14,closing,Martina Menardi <martina.menardi@valentino-retail.example>,CRT01 chiusura 14/09
+CRT01,20260916_0840_CRT01.eml,c0915,2026-09-16 08:40,2026-09-15,closing,Davide Dibona <davide.dibona@valentino-retail.example>,chiusura ieri 15/9
+CRT01,20260916_2035_CRT01.eml,c0916,2026-09-16 20:35,2026-09-16,closing,Martina Menardi <martina.menardi@valentino-retail.example>,CRT01 chiusura 16/09
+CRT01,20260917_2020_CRT01.eml,c0917,2026-09-17 20:20,2026-09-17,closing,Martina Menardi <martina.menardi@valentino-retail.example>,CRT01 chiusura 17/09
+CRT01,20260918_2015_CRT01.eml,c0918,2026-09-18 20:15,2026-09-18,closing,Valentino Cortina <crt01.store@valentino-retail.example>,Chiusura Cortina 18.09
+CRT01,20260920_2050_CRT01.eml,c0920_wk,2026-09-20 20:50,"2026-09-19,2026-09-20",closing,Davide Dibona <davide.dibona@valentino-retail.example>,weekend 19-20 crt
+CRT01,20260921_1955_CRT01.eml,c0921,2026-09-21 19:55,2026-09-21,closing,Martina Menardi <martina.menardi@valentino-retail.example>,CRT01 chiusura 21/09
+CRT01,20260922_2030_CRT01.eml,c0922,2026-09-22 20:30,2026-09-22,closing,Davide Dibona <davide.dibona@valentino-retail.example>,chiusura crt 22/9
+CRT01,20260923_2040_CRT01.eml,c0923,2026-09-23 20:40,2026-09-23,closing,Martina Menardi <martina.menardi@valentino-retail.example>,CRT01 chiusura 23/09
+CRT01,20260925_2015_CRT01.eml,c0925,2026-09-25 20:15,2026-09-25,closing,Martina Menardi <martina.menardi@valentino-retail.example>,CRT01 chiusura 25/09
+CRT01,20260926_2105_CRT01.eml,c0926,2026-09-26 21:05,2026-09-26,closing,Martina Menardi <martina.menardi@valentino-retail.example>,CRT01 chiusura 25/09
+CRT01,20260927_2025_CRT01.eml,c0927,2026-09-27 20:25,2026-09-27,closing,Davide Dibona <davide.dibona@valentino-retail.example>,chiusura dom 27/9
+CRT01,20260928_1520_CRT01.eml,c0928_orari,2026-09-28 15:20,,misc,Martina Menardi <martina.menardi@valentino-retail.example>,CRT01 - orari ottobre (solo ven/sab/dom)
+CRT01,20260928_2010_CRT01.eml,c0928,2026-09-28 20:10,2026-09-28,closing,Martina Menardi <martina.menardi@valentino-retail.example>,CRT01 chiusura 28/09
+CRT01,20260929_0752_CRT01_re1.eml,c0929_re,2026-09-29 07:52,,reply,Roberto Galli <roberto.galli@valentino-retail.example>,Re: CRT01 - orari ottobre (solo ven/sab/dom)
+CRT01,20260929_2000_CRT01.eml,c0929,2026-09-29 20:00,2026-09-29,closing,Davide Dibona <davide.dibona@valentino-retail.example>,chiusura 29/9 crt
+CRT01,20260930_2045_CRT01.eml,c0930,2026-09-30 20:45,2026-09-30,closing,Martina Menardi <martina.menardi@valentino-retail.example>,CRT01 chiusura 30/09 (ultimo giorno orario pieno)
+CRT01,20261002_2115_CRT01.eml,c1002,2026-10-02 21:15,2026-10-02,closing,Martina Menardi <martina.menardi@valentino-retail.example>,CRT01 chiusura 02/10
+CRT01,20261003_0905_CRT01_corr.eml,c1002_corr,2026-10-03 09:05,2026-10-02,correction,Martina Menardi <martina.menardi@valentino-retail.example>,Re: CRT01 chiusura 02/10 - correzione
+CRT01,20261005_1020_CRT01.eml,c1005_wk,2026-10-05 10:20,"2026-10-03,2026-10-04",closing,Martina Menardi <martina.menardi@valentino-retail.example>,CRT01 chiusura weekend 3-4/10
+CRT01,20261005_1248_CRT01_re1.eml,c1005_re,2026-10-05 12:48,,reply,Roberto Galli <roberto.galli@valentino-retail.example>,Re: CRT01 chiusura weekend 3-4/10
+CRT01,20261009_2035_CRT01.eml,c1009,2026-10-09 20:35,2026-10-09,closing,Davide Dibona <davide.dibona@valentino-retail.example>,chiusura venerdi 9/10
+CRT01,20261010_2100_CRT01.eml,c1010,2026-10-10 21:00,2026-10-10,closing,Martina Menardi <martina.menardi@valentino-retail.example>,chiusura cortina 10/10
+CRT01,20261011_2040_CRT01.eml,c1011,2026-10-11 20:40,2026-10-11,closing,Martina Menardi <martina.menardi@valentino-retail.example>,chiusura cortina 11/10
+CRT01,20261014_1740_CRT01.eml,c1014,2026-10-14 17:40,,misc,Davide Dibona <davide.dibona@valentino-retail.example>,"CRT01 - negozio chiuso, giro stock + vetrine inverno"
+CRT01,20261016_2100_CRT01.eml,c1016,2026-10-16 21:00,2026-10-16,closing,Martina Menardi <martina.menardi@valentino-retail.example>,chiusura cortina 16/10
+CRT01,20261018_2030_CRT01.eml,c1018_wk,2026-10-18 20:30,"2026-10-17,2026-10-18",closing,Davide Dibona <davide.dibona@valentino-retail.example>,crt weekend 17+18
+MAD01,20260831_2152_MAD01.eml,c0831,2026-08-31 21:52,2026-08-31,closing,Javier Molina <javier.molina@valentino-retail.example>,cierre 31/08
+MAD01,20260831_2153_MAD01_ooo.eml,ooo0831,2026-08-31 21:53,,ooo,Roberto Galli <roberto.galli@valentino-retail.example>,Risposta automatica: cierre 31/08
+MAD01,20260901_2134_MAD01.eml,c0901,2026-09-01 21:34,2026-09-01,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 - 01/09
+MAD01,20260902_2141_MAD01.eml,c0902,2026-09-02 21:41,2026-09-02,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 - 02/09
+MAD01,20260903_2128_MAD01.eml,c0903,2026-09-03 21:28,2026-09-03,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 - 03/09
+MAD01,20260904_2147_MAD01.eml,c0904,2026-09-04 21:47,2026-09-04,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 - 04/09
+MAD01,20260905_2205_MAD01.eml,c0905,2026-09-05 22:05,2026-09-05,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 - 05/09
+MAD01,20260906_2112_MAD01.eml,c0906,2026-09-06 21:12,2026-09-06,closing,Javier Molina <javier.molina@valentino-retail.example>,cierre domingo 6
+MAD01,20260907_2136_MAD01.eml,c0907,2026-09-07 21:36,2026-09-07,closing,Valentino Madrid Serrano <mad01.store@valentino-retail.example>,Cierre Serrano lunes 07/09
+MAD01,20260908_2210_MAD01.eml,c0908,2026-09-08 22:10,2026-09-08,closing,Javier Molina <javier.molina@valentino-retail.example>,cierre martes
+MAD01,20260910_2131_MAD01.eml,c0910,2026-09-10 21:31,2026-09-10,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 - 10/09
+MAD01,20260911_2122_MAD01.eml,c0911,2026-09-11 21:22,2026-09-11,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 - 11/09
+MAD01,20260912_2218_MAD01.eml,c0912,2026-09-12 22:18,2026-09-12,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 - 12/09
+MAD01,20260913_1012_MAD01_corr.eml,corr0912,2026-09-13 10:12,2026-09-12,correction,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Corrección cierre 12/09
+MAD01,20260913_2105_MAD01.eml,c0913,2026-09-13 21:05,2026-09-13,closing,Javier Molina <javier.molina@valentino-retail.example>,cierre domingo
+MAD01,20260914_2148_MAD01.eml,c0914,2026-09-14 21:48,2026-09-14,closing,Javier Molina <javier.molina@valentino-retail.example>,Cierre lunes 14
+MAD01,20260915_2139_MAD01.eml,c0915,2026-09-15 21:39,2026-09-15,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 - 15/09
+MAD01,20260916_2144_MAD01.eml,c0916,2026-09-16 21:44,2026-09-16,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 - 15/09
+MAD01,20260917_2126_MAD01.eml,c0917,2026-09-17 21:26,2026-09-17,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 17/09
+MAD01,20260918_2151_MAD01.eml,c0918,2026-09-18 21:51,2026-09-18,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 18/09
+MAD01,20260919_2224_MAD01.eml,c0919,2026-09-19 22:24,2026-09-19,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 - 19/09 sábado
+MAD01,20260920_2115_MAD01.eml,c0920,2026-09-20 21:15,2026-09-20,closing,Javier Molina <javier.molina@valentino-retail.example>,Cierre domingo 20
+MAD01,20260922_2133_MAD01.eml,c0922,2026-09-22 21:33,2026-09-22,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 22/09
+MAD01,20260923_2202_MAD01.eml,c0923,2026-09-23 22:02,2026-09-23,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 23/09
+MAD01,20260924_2140_MAD01.eml,c0924,2026-09-24 21:40,2026-09-24,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 24/09
+MAD01,20260925_2158_MAD01.eml,c0925,2026-09-25 21:58,2026-09-25,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 25/09
+MAD01,20260925_2159_MAD01_dup.eml,c0925dup,2026-09-25 21:59,,dup,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 25/09
+MAD01,20260926_2241_MAD01.eml,c0926,2026-09-26 22:41,2026-09-26,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 26/09 + INCIDENCIA ENVÍO (Nova color equivocado)
+MAD01,20260927_1142_MAD01_re1.eml,re0927rob,2026-09-27 11:42,,reply,Roberto Galli <roberto.galli@valentino-retail.example>,Re: Cierre MAD01 26/09 + INCIDENCIA ENVÍO (Nova color equivocado)
+MAD01,20260927_2120_MAD01.eml,c0927,2026-09-27 21:20,2026-09-27,closing,Javier Molina <javier.molina@valentino-retail.example>,cierre dom 27
+MAD01,20260928_1020_MAD01_re2.eml,re0928luc,2026-09-28 10:20,2026-09-26,reply,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Re: Cierre MAD01 26/09 + INCIDENCIA ENVÍO (Nova color equivocado)
+MAD01,20260928_2145_MAD01.eml,c0928,2026-09-28 21:45,2026-09-28,closing,Javier Molina <javier.molina@valentino-retail.example>,cierre lunes 28
+MAD01,20260929_2137_MAD01.eml,c0929,2026-09-29 21:37,2026-09-29,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 29/09
+MAD01,20260930_2206_MAD01.eml,c0930,2026-09-30 22:06,2026-09-30,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 30/09
+MAD01,20261001_2155_MAD01.eml,c1001,2026-10-01 21:55,2026-10-01,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 01/10
+MAD01,20261002_2149_MAD01.eml,c1002,2026-10-02 21:49,2026-10-02,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 02/10
+MAD01,20261004_2130_MAD01.eml,c1004,2026-10-04 21:30,"2026-10-03,2026-10-04",closing,Javier Molina <javier.molina@valentino-retail.example>,cierre finde 3-4/10
+MAD01,20261005_2140_MAD01.eml,c1005,2026-10-05 21:40,2026-10-05,closing,Javier Molina <javier.molina@valentino-retail.example>,cierre lunes 05/10
+MAD01,20261006_0852_MAD01_re1.eml,re1006rob,2026-10-06 08:52,,reply,Roberto Galli <roberto.galli@valentino-retail.example>,Re: cierre lunes 05/10
+MAD01,20261006_1315_MAD01_re2.eml,re1006luc,2026-10-06 13:15,,reply,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Re: cierre lunes 05/10
+MAD01,20261006_2158_MAD01.eml,c1006,2026-10-06 21:58,2026-10-06,closing,Javier Molina <javier.molina@valentino-retail.example>,cierre martes 6
+MAD01,20261007_1105_MAD01_fwd.eml,fwd1007dc,2026-10-07 11:05,,fwd,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,RV: RE: NOVA colore sbagliato / wrong colour - MAD01 Serrano
+MAD01,20261007_2143_MAD01.eml,c1007,2026-10-07 21:43,2026-10-07,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 07/10
+MAD01,20261008_2136_MAD01.eml,c1008,2026-10-08 21:36,2026-10-08,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 08/10
+MAD01,20261009_2157_MAD01.eml,c1009,2026-10-09 21:57,2026-10-09,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 09/10
+MAD01,20261010_2235_MAD01.eml,c1010,2026-10-10 22:35,2026-10-10,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 10/10 sábado
+MAD01,20261011_2125_MAD01.eml,c1011,2026-10-11 21:25,2026-10-11,closing,Javier Molina <javier.molina@valentino-retail.example>,cierre domingo 11 - LLEGO EL NOVA NEGRO
+MAD01,20261012_2120_MAD01.eml,c1012,2026-10-12 21:20,2026-10-12,closing,Valentino Madrid Serrano <mad01.store@valentino-retail.example>,Cierre Serrano 12/10 (feriado)
+MAD01,20261014_0948_MAD01.eml,c1013,2026-10-14 09:48,2026-10-13,closing,Javier Molina <javier.molina@valentino-retail.example>,"cierre martes 13 (perdon, ayer se me paso)"
+MAD01,20261014_2141_MAD01.eml,c1014,2026-10-14 21:41,2026-10-14,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 14/10
+MAD01,20261015_2130_MAD01.eml,c1015,2026-10-15 21:30,2026-10-15,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,cierre 15/10
+MAD01,20261016_1310_MAD01_fwd.eml,fwd1016cli,2026-10-16 13:10,2026-10-16,fwd,Martina Echeverría <martina.echeverria@valentino-retail.example>,RV: abrigo Amalia chocolate talla 1
+MAD01,20261016_2204_MAD01.eml,c1016,2026-10-16 22:04,2026-10-16,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 16/10
+MAD01,20261017_2230_MAD01.eml,c1017,2026-10-17 22:30,2026-10-17,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 17/10 - sábado
+MAD01,20261018_1005_MAD01_re1.eml,re1018rob,2026-10-18 10:05,,reply,Roberto Galli <roberto.galli@valentino-retail.example>,Re: Cierre MAD01 17/10 - sábado
+MAD01,20261018_2110_MAD01.eml,c1018,2026-10-18 21:10,2026-10-18,closing,Martina Echeverría <martina.echeverria@valentino-retail.example>,Cierre domingo 18/10
+MAD01,20261019_2139_MAD01.eml,c1019,2026-10-19 21:39,2026-10-19,closing,Javier Molina <javier.molina@valentino-retail.example>,cierre lunes 19
+MAD01,20261020_2124_MAD01.eml,c1020,2026-10-20 21:24,2026-10-20,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,cierre 20/10
+MAD01,20261021_2152_MAD01.eml,c1021,2026-10-21 21:52,2026-10-21,closing,Lucía Fernández Ortega <lucia.fernandez@valentino-retail.example>,Cierre MAD01 21/10
+MIL01,20260831_2042_MIL01.eml,c0831,2026-08-31 20:42,2026-08-31,closing,Marco Pellizzari <marco.pellizzari@valentino-retail.example>,chiusura 31/08
+MIL01,20260831_2042_MIL01_ooo.eml,ooo0831,2026-08-31 20:42,,ooo,Roberto Galli <roberto.galli@valentino-retail.example>,Risposta automatica: chiusura 31/08
+MIL01,20260901_2025_MIL01.eml,c0901,2026-09-01 20:25,2026-09-01,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 01/09
+MIL01,20260902_2058_MIL01.eml,c0902,2026-09-02 20:58,2026-09-02,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 02/09
+MIL01,20260904_2110_MIL01.eml,c0904,2026-09-04 21:10,2026-09-04,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 04/09
+MIL01,20260905_2135_MIL01.eml,c0905,2026-09-05 21:35,2026-09-05,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - sabato 05/09
+MIL01,20260906_2015_MIL01.eml,c0906,2026-09-06 20:15,2026-09-06,closing,Marco Pellizzari <marco.pellizzari@valentino-retail.example>,chiusura dom 6/9
+MIL01,20260907_2030_MIL01.eml,c0907,2026-09-07 20:30,2026-09-07,closing,Marco Pellizzari <marco.pellizzari@valentino-retail.example>,chiusura 7/9
+MIL01,20260909_0852_MIL01.eml,c0908,2026-09-09 08:52,2026-09-08,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 08/09 (ieri)
+MIL01,20260909_2048_MIL01.eml,c0909,2026-09-09 20:48,2026-09-09,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 09/09
+MIL01,20260910_2105_MIL01.eml,c0910,2026-09-10 21:05,2026-09-10,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 10/09
+MIL01,20260910_2231_MIL01_re1.eml,re0910,2026-09-10 22:31,,reply,Roberto Galli <roberto.galli@valentino-retail.example>,Re: Chiusura MIL01 - 10/09
+MIL01,20260911_0940_MIL01_re1.eml,re0910b,2026-09-11 09:40,,reply,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Re: Chiusura MIL01 - 10/09
+MIL01,20260911_2055_MIL01.eml,c0911,2026-09-11 20:55,2026-09-11,closing,Marco Pellizzari <marco.pellizzari@valentino-retail.example>,MIL01 chiusura 11.09
+MIL01,20260912_2140_MIL01.eml,c0912,2026-09-12 21:40,2026-09-12,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - sabato 12/09
+MIL01,20260914_2020_MIL01.eml,c0914,2026-09-14 20:20,2026-09-14,closing,Marco Pellizzari <marco.pellizzari@valentino-retail.example>,chiusura 14/9
+MIL01,20260915_2047_MIL01.eml,c0915,2026-09-15 20:47,2026-09-15,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 15/09
+MIL01,20260916_2102_MIL01.eml,c0916,2026-09-16 21:02,2026-09-16,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 16/09
+MIL01,20260917_2010_MIL01.eml,c0917,2026-09-17 20:10,2026-09-17,closing,Marco Pellizzari <marco.pellizzari@valentino-retail.example>,chiusura 17.09
+MIL01,20260918_2115_MIL01.eml,c0918,2026-09-18 21:15,2026-09-18,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 18/09
+MIL01,20260918_2207_MIL01_corr.eml,corr0918,2026-09-18 22:07,2026-09-18,correction,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,R: Chiusura MIL01 - 18/09 - CORREZIONE
+MIL01,20260919_2152_MIL01.eml,c0919,2026-09-19 21:52,2026-09-19,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - sabato 19/09
+MIL01,20260920_2038_MIL01.eml,c0920,2026-09-20 20:38,2026-09-20,closing,MIL01 Montenapoleone <mil01.store@valentino-retail.example>,Chiusura Montenapoleone 20.09
+MIL01,20260921_2044_MIL01.eml,c0921,2026-09-21 20:44,2026-09-21,closing,Marco Pellizzari <marco.pellizzari@valentino-retail.example>,chiusura 21/9 + AUREA NERA
+MIL01,20260921_2218_MIL01_re1.eml,re0921,2026-09-21 22:18,,reply,Roberto Galli <roberto.galli@valentino-retail.example>,Re: chiusura 21/9 + AUREA NERA
+MIL01,20260922_1012_MIL01_re1.eml,re0921b,2026-09-22 10:12,,reply,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Re: chiusura 21/9 + AUREA NERA
+MIL01,20260922_2128_MIL01.eml,c0922,2026-09-22 21:28,2026-09-22,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 22/09
+MIL01,20260923_1305_MIL01.eml,vm0923,2026-09-23 13:05,,misc,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,foto vetrine montenapo FW
+MIL01,20260923_2150_MIL01.eml,c0923,2026-09-23 21:50,2026-09-23,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 23/09
+MIL01,20260924_2205_MIL01.eml,c0924,2026-09-24 22:05,2026-09-24,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 24/09
+MIL01,20260925_2120_MIL01.eml,c0925,2026-09-25 21:20,2026-09-25,closing,Marco Pellizzari <marco.pellizzari@valentino-retail.example>,chiusura ven 25/9
+MIL01,20260927_2148_MIL01.eml,c0927,2026-09-27 21:48,"2026-09-26,2026-09-27",closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,chiusura sabato + domenica (26-27/09)
+MIL01,20260928_2035_MIL01.eml,c0928,2026-09-28 20:35,2026-09-28,closing,Marco Pellizzari <marco.pellizzari@valentino-retail.example>,chiusura 28/9
+MIL01,20260929_2102_MIL01.eml,c0929,2026-09-29 21:02,2026-09-29,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 29/09
+MIL01,20260930_2145_MIL01.eml,c0930,2026-09-30 21:45,2026-09-30,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 30/09 GOLDEN WEEK
+MIL01,20261001_1124_MIL01_fwd.eml,fwd1001,2026-10-01 11:24,,fwd,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,I: gilet Vel zip rotta
+MIL01,20261001_2130_MIL01.eml,c1001,2026-10-01 21:30,2026-10-01,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 01/10
+MIL01,20261002_2112_MIL01.eml,c1002,2026-10-02 21:12,2026-10-02,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 02/10
+MIL01,20261002_2113_MIL01_dup.eml,c1002dup,2026-10-02 21:13,2026-10-02,dup,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 02/10
+MIL01,20261003_2202_MIL01.eml,c1003,2026-10-03 22:02,2026-10-03,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - sabato 03/10
+MIL01,20261004_2052_MIL01.eml,c1004,2026-10-04 20:52,2026-10-04,closing,Sara Kim <sara.kim@valentino-retail.example>,Chiusura Montenapoleone 04.10
+MIL01,20261005_2040_MIL01.eml,c1005,2026-10-05 20:40,2026-10-05,closing,Marco Pellizzari <marco.pellizzari@valentino-retail.example>,chiusura 5/10
+MIL01,20261006_2220_MIL01.eml,c1006,2026-10-06 22:20,2026-10-06,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,"Chiusura MIL01 - 06/10 - Aurea nera, serve una risposta"
+MIL01,20261007_0806_MIL01_re1.eml,re1006,2026-10-07 08:06,,reply,Roberto Galli <roberto.galli@valentino-retail.example>,"Re: Chiusura MIL01 - 06/10 - Aurea nera, serve una risposta"
+MIL01,20261007_1142_MIL01.eml,wl1007,2026-10-07 11:42,,misc,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Lista attesa Aurea nera - MIL01
+MIL01,20261007_2058_MIL01.eml,c1007,2026-10-07 20:58,2026-10-07,closing,Marco Pellizzari <marco.pellizzari@valentino-retail.example>,chiusura 07/10
+MIL01,20261008_2215_MIL01.eml,c1008,2026-10-08 22:15,2026-10-08,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 08/10 RECORD
+MIL01,20261009_1035_MIL01.eml,tr1009,2026-10-09 10:35,,misc,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,richiesta transfer cardigan logo M
+MIL01,20261009_1847_MIL01_re1.eml,re1009,2026-10-09 18:47,,reply,Roberto Galli <roberto.galli@valentino-retail.example>,Re: richiesta transfer cardigan logo M
+MIL01,20261009_2105_MIL01.eml,c1009,2026-10-09 21:05,2026-10-09,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 09/10
+MIL01,20261010_2140_MIL01.eml,c1010,2026-10-10 21:40,2026-10-10,closing,Marco Pellizzari <marco.pellizzari@valentino-retail.example>,chiusura sab 10/10
+MIL01,20261011_2028_MIL01.eml,c1011,2026-10-11 20:28,2026-10-11,closing,Marco Pellizzari <marco.pellizzari@valentino-retail.example>,chiusura dom 11/10
+MIL01,20261012_2016_MIL01.eml,c1012,2026-10-12 20:16,2026-10-12,closing,Marco Pellizzari <marco.pellizzari@valentino-retail.example>,chiusura 12/10
+MIL01,20261013_2110_MIL01.eml,c1013,2026-10-13 21:10,2026-10-13,closing,Sara Kim <sara.kim@valentino-retail.example>,Chiusura Montenapoleone 13.10
+MIL01,20261014_2122_MIL01.eml,c1014,2026-10-14 21:22,2026-10-14,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 14/09
+MIL01,20261015_2050_MIL01.eml,c1015,2026-10-15 20:50,2026-10-15,closing,Marco Pellizzari <marco.pellizzari@valentino-retail.example>,chiusura 15/10
+MIL01,20261016_2035_MIL01.eml,c1016,2026-10-16 20:35,2026-10-16,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 16/10 sciopero
+MIL01,20261017_2158_MIL01.eml,c1017,2026-10-17 21:58,2026-10-17,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - sabato 17/10
+MIL01,20261018_2047_MIL01.eml,c1018,2026-10-18 20:47,2026-10-18,closing,MIL01 Montenapoleone <mil01.store@valentino-retail.example>,Chiusura Montenapoleone 18.10
+MIL01,20261019_2039_MIL01.eml,c1019,2026-10-19 20:39,2026-10-19,closing,Marco Pellizzari <marco.pellizzari@valentino-retail.example>,chiusura 19/10
+MIL01,20261020_2100_MIL01.eml,c1020,2026-10-20 21:00,2026-10-20,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 20/10
+MIL01,20261021_2125_MIL01.eml,c1021,2026-10-21 21:25,2026-10-21,closing,Giulia Ferrandi <giulia.ferrandi@valentino-retail.example>,Chiusura MIL01 - 21/10 - ARRIVATE LE AUREA NERE
+MIL01,20261021_2244_MIL01_re1.eml,re1021,2026-10-21 22:44,,reply,Roberto Galli <roberto.galli@valentino-retail.example>,Re: Chiusura MIL01 - 21/10 - ARRIVATE LE AUREA NERE
+MIL02,20260831_2152_MIL02.eml,c0831,2026-08-31 21:52,2026-08-31,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 31/08
+MIL02,20260831_2152_MIL02_2.eml,ooo0831,2026-08-31 21:52,,ooo,Roberto Galli <roberto.galli@valentino-retail.example>,Risposta automatica: MIL02 Rinascente - chiusura 31/08
+MIL02,20260901_2138_MIL02.eml,c0901,2026-09-01 21:38,2026-09-01,closing,Ilaria Mancuso <ilaria.mancuso@valentino-retail.example>,Chiusura Rinascente 1/9
+MIL02,20260902_2205_MIL02.eml,c0902,2026-09-02 22:05,2026-09-02,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 02/09
+MIL02,20260903_2144_MIL02.eml,c0903,2026-09-03 21:44,2026-09-03,closing,Valentino Rinascente Duomo <mil02.store@valentino-retail.example>,chiusura rinascente 03/09
+MIL02,20260904_2247_MIL02.eml,c0904,2026-09-04 22:47,2026-09-04,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 04/09
+MIL02,20260905_2302_MIL02.eml,c0905,2026-09-05 23:02,2026-09-05,closing,Ilaria Mancuso <ilaria.mancuso@valentino-retail.example>,Chiusura Rinascente 5/9 🔥
+MIL02,20260906_2133_MIL02.eml,c0906,2026-09-06 21:33,2026-09-06,closing,Ilaria Mancuso <ilaria.mancuso@valentino-retail.example>,Chiusura Rinascente 6/9
+MIL02,20260907_2159_MIL02.eml,c0907,2026-09-07 21:59,2026-09-07,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 07/09
+MIL02,20260909_2220_MIL02.eml,c0909,2026-09-09 22:20,2026-09-09,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 09/09
+MIL02,20260909_2331_MIL02.eml,r0909,2026-09-09 23:31,,reply,Roberto Galli <roberto.galli@valentino-retail.example>,Re: MIL02 Rinascente - chiusura 09/09
+MIL02,20260910_1042_MIL02.eml,s0910,2026-09-10 10:42,,reply,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,Re: Re: MIL02 Rinascente - chiusura 09/09
+MIL02,20260910_2141_MIL02.eml,c0910,2026-09-10 21:41,2026-09-10,closing,Ilaria Mancuso <ilaria.mancuso@valentino-retail.example>,Chiusura Rinascente 10/9
+MIL02,20260911_1436_MIL02.eml,fwd0911,2026-09-11 14:36,,fwd,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,I: Comunicazione Rinascente - prova evacuazione 15/09 e orari Fashion Week
+MIL02,20260911_2251_MIL02.eml,c0911,2026-09-11 22:51,2026-09-11,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 11/09
+MIL02,20260912_2310_MIL02.eml,c0912,2026-09-12 23:10,2026-09-12,closing,Ilaria Mancuso <ilaria.mancuso@valentino-retail.example>,Chiusura Rinascente 12/9 ✨
+MIL02,20260913_2128_MIL02.eml,c0913,2026-09-13 21:28,2026-09-13,closing,Valentino Rinascente Duomo <mil02.store@valentino-retail.example>,chiusura rinascente 13/9
+MIL02,20260914_2216_MIL02.eml,c0914,2026-09-14 22:16,2026-09-14,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 14/09
+MIL02,20260915_2147_MIL02.eml,c0915,2026-09-15 21:47,2026-09-15,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 15/09
+MIL02,20260916_2136_MIL02.eml,c0916,2026-09-16 21:36,2026-09-16,closing,Ilaria Mancuso <ilaria.mancuso@valentino-retail.example>,Chiusura Rinascente 16/9
+MIL02,20260917_2155_MIL02.eml,c0917,2026-09-17 21:55,2026-09-17,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 17/09
+MIL02,20260918_2305_MIL02.eml,c0918,2026-09-18 23:05,2026-09-18,closing,Ilaria Mancuso <ilaria.mancuso@valentino-retail.example>,Chiusura Rinascente 18/9 🎉
+MIL02,20260920_2214_MIL02.eml,c0920,2026-09-20 22:14,"2026-09-19,2026-09-20",closing,Ilaria Mancuso <ilaria.mancuso@valentino-retail.example>,chiusura sab + dom 19-20/9
+MIL02,20260921_2202_MIL02.eml,c0921,2026-09-21 22:02,2026-09-21,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 21/09
+MIL02,20260922_2149_MIL02.eml,c0922,2026-09-22 21:49,2026-09-22,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 22/09
+MIL02,20260923_2231_MIL02.eml,c0923,2026-09-23 22:31,2026-09-23,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 23/09
+MIL02,20260923_2318_MIL02.eml,corr0923,2026-09-23 23:18,2026-09-23,correction,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,CORREZIONE chiusura 23/09
+MIL02,20260924_2312_MIL02.eml,c0924,2026-09-24 23:12,2026-09-24,closing,Ilaria Mancuso <ilaria.mancuso@valentino-retail.example>,Chiusura Rinascente 24/9 👗
+MIL02,20260925_2258_MIL02.eml,c0925,2026-09-25 22:58,2026-09-25,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 25/09
+MIL02,20260926_2324_MIL02.eml,c0926,2026-09-26 23:24,2026-09-26,closing,Ilaria Mancuso <ilaria.mancuso@valentino-retail.example>,Chiusura Rinascente 26/9
+MIL02,20260927_2141_MIL02.eml,c0927,2026-09-27 21:41,2026-09-27,closing,Valentino Rinascente Duomo <mil02.store@valentino-retail.example>,chiusura rinascente 27/09
+MIL02,20260928_2209_MIL02.eml,c0928,2026-09-28 22:09,2026-09-28,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 28/09
+MIL02,20260929_2142_MIL02.eml,c0929,2026-09-29 21:42,2026-09-29,closing,Ilaria Mancuso <ilaria.mancuso@valentino-retail.example>,Chiusura Rinascente 29/9
+MIL02,20260930_2203_MIL02.eml,c0930,2026-09-30 22:03,2026-09-30,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 30/09
+MIL02,20261001_2217_MIL02.eml,c1001,2026-10-01 22:17,2026-10-01,closing,Ilaria Mancuso <ilaria.mancuso@valentino-retail.example>,Chiusura Rinascente 1/10 🇨🇳
+MIL02,20261002_2326_MIL02.eml,c1002,2026-10-02 23:26,2026-10-02,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 02/10
+MIL02,20261002_2328_MIL02.eml,dup1002,2026-10-02 23:28,2026-10-02,dup,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 02/10
+MIL02,20261003_2319_MIL02.eml,c1003,2026-10-03 23:19,2026-10-03,closing,Ilaria Mancuso <ilaria.mancuso@valentino-retail.example>,Chiusura Rina 3/10 🇨🇳🇨🇳
+MIL02,20261005_0914_MIL02.eml,c1004,2026-10-05 09:14,2026-10-04,closing,Valentino Rinascente Duomo <mil02.store@valentino-retail.example>,chiusura rinascente domenica 4/10
+MIL02,20261005_2208_MIL02.eml,c1005,2026-10-05 22:08,2026-10-05,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 05/10
+MIL02,20261006_2212_MIL02.eml,c1006,2026-10-06 22:12,2026-10-06,closing,Ilaria Mancuso <ilaria.mancuso@valentino-retail.example>,Chiusura Rinascente 6/10
+MIL02,20261007_2226_MIL02.eml,c1007,2026-10-07 22:26,2026-10-07,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 07/10
+MIL02,20261008_2139_MIL02.eml,c1008,2026-10-08 21:39,2026-10-08,closing,Valentino Rinascente Duomo <mil02.store@valentino-retail.example>,chiusura rinascente 08/10
+MIL02,20261009_1547_MIL02.eml,s1009card,2026-10-09 15:47,,reply,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,Re: URGENTE - cardigan logo M per Monte Napo
+MIL02,20261009_1811_MIL02.eml,r1009card,2026-10-09 18:11,,reply,Roberto Galli <roberto.galli@valentino-retail.example>,Re: URGENTE - cardigan logo M per Monte Napo
+MIL02,20261009_2244_MIL02.eml,c1009,2026-10-09 22:44,2026-10-09,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 09/10
+MIL02,20261010_2321_MIL02.eml,c1010,2026-10-10 23:21,2026-10-10,closing,Ilaria Mancuso <ilaria.mancuso@valentino-retail.example>,Chiusura Rinascente 10/10
+MIL02,20261011_2151_MIL02.eml,c1011,2026-10-11 21:51,2026-10-11,closing,Valentino Rinascente Duomo <mil02.store@valentino-retail.example>,chiusura rinascente 11/10
+MIL02,20261013_2207_MIL02.eml,c1013,2026-10-13 22:07,2026-10-13,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 13/10
+MIL02,20261014_1322_MIL02.eml,m1014,2026-10-14 13:22,,misc,Valentino Rinascente Duomo <mil02.store@valentino-retail.example>,domani
+MIL02,20261014_2219_MIL02.eml,c1014,2026-10-14 22:19,2026-10-14,closing,Ilaria Mancuso <ilaria.mancuso@valentino-retail.example>,Chiusura Rinascente 14/10 🥶
+MIL02,20261015_2231_MIL02.eml,c1015,2026-10-15 22:31,2026-10-15,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 15/09
+MIL02,20261016_2248_MIL02.eml,c1016,2026-10-16 22:48,2026-10-16,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,MIL02 Rinascente - chiusura 16/10 (sciopero)
+MIL02,20261017_2314_MIL02.eml,c1017,2026-10-17 23:14,2026-10-17,closing,Ilaria Mancuso <ilaria.mancuso@valentino-retail.example>,Chiusura Rinascente 17/10
+MIL02,20261018_2146_MIL02.eml,c1018,2026-10-18 21:46,2026-10-18,closing,Valentino Rinascente Duomo <mil02.store@valentino-retail.example>,chiusura rinascente 18/10
+MIL02,20261019_2204_MIL02.eml,c1019,2026-10-19 22:04,2026-10-19,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,chiusura MIL02 19/10
+MIL02,20261020_2158_MIL02.eml,c1020,2026-10-20 21:58,2026-10-20,closing,Ilaria Mancuso <ilaria.mancuso@valentino-retail.example>,Chiusura Rinascente 20/10
+MIL02,20261021_2236_MIL02.eml,c1021,2026-10-21 22:36,2026-10-21,closing,Stefano Rocchi <stefano.rocchi@valentino-retail.example>,chiusura MIL02 21/10
+ROM01,20260831_2012_ROM01.eml,c0831,2026-08-31 20:12,2026-08-31,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,[ROM01] Report serale 31/08
+ROM01,20260831_2012_ROM01_ooo.eml,ooo0831,2026-08-31 20:12,,ooo,Roberto Galli <roberto.galli@valentino-retail.example>,Risposta automatica: [ROM01] Report serale 31/08
+ROM01,20260902_2005_ROM01.eml,c0902,2026-09-02 20:05,2026-09-02,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,[ROM01] Report serale 02/09
+ROM01,20260903_2031_ROM01.eml,c0903,2026-09-03 20:31,2026-09-03,closing,Fabio Cardarelli <fabio.cardarelli@valentino-retail.example>,chiusura roma 3/9
+ROM01,20260904_2018_ROM01.eml,c0904,2026-09-04 20:18,2026-09-04,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,[ROM01] Report serale 04/09
+ROM01,20260905_2047_ROM01.eml,c0905,2026-09-05 20:47,2026-09-05,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,[ROM01] Report serale 05/09
+ROM01,20260906_2002_ROM01.eml,c0906,2026-09-06 20:02,2026-09-06,closing,Fabio Cardarelli <fabio.cardarelli@valentino-retail.example>,chiusura domenica
+ROM01,20260907_2024_ROM01.eml,c0907,2026-09-07 20:24,2026-09-07,closing,Fabio Cardarelli <fabio.cardarelli@valentino-retail.example>,chiusura roma 7/9
+ROM01,20260908_2015_ROM01.eml,c0908,2026-09-08 20:15,2026-09-08,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,[ROM01] Report serale 08/09
+ROM01,20260909_2009_ROM01.eml,c0909,2026-09-09 20:09,2026-09-09,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,[ROM01] Report serale 09/09
+ROM01,20260910_2040_ROM01.eml,c0910,2026-09-10 20:40,2026-09-10,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,[ROM01] Report serale 10/09
+ROM01,20260911_2055_ROM01.eml,c0911,2026-09-11 20:55,2026-09-11,closing,Valentino Roma Condotti <rom01.store@valentino-retail.example>,Chiusura ROM01 11/09
+ROM01,20260912_2103_ROM01.eml,c0912,2026-09-12 21:03,2026-09-12,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,[ROM01] Report serale 12/09
+ROM01,20260913_2010_ROM01.eml,c0913,2026-09-13 20:10,2026-09-13,closing,Fabio Cardarelli <fabio.cardarelli@valentino-retail.example>,chiusura 13/9
+ROM01,20260914_2038_ROM01.eml,c0914,2026-09-14 20:38,2026-09-14,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,[ROM01] Report serale 14/09 - CANTIERE DAVANTI AL NEGOZIO
+ROM01,20260915_0814_ROM01_re1.eml,r0915a,2026-09-15 08:14,,reply,Roberto Galli <roberto.galli@valentino-retail.example>,Re: [ROM01] Report serale 14/09 - CANTIERE DAVANTI AL NEGOZIO
+ROM01,20260915_1247_ROM01_re2.eml,r0915b,2026-09-15 12:47,,reply,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,Re: [ROM01] Report serale 14/09 - CANTIERE DAVANTI AL NEGOZIO
+ROM01,20260915_2021_ROM01.eml,c0915,2026-09-15 20:21,2026-09-15,closing,Fabio Cardarelli <fabio.cardarelli@valentino-retail.example>,chiusura roma 15/9
+ROM01,20260916_1108_ROM01_fwd.eml,fwd0916,2026-09-16 11:08,,fwd,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,I: Condominio Via Condotti - avvio lavori facciata e comunicazione cantiere comunale
+ROM01,20260916_2026_ROM01.eml,c0916,2026-09-16 20:26,2026-09-16,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,[ROM01] Report serale 16/09
+ROM01,20260917_2008_ROM01.eml,c0917,2026-09-17 20:08,2026-09-17,closing,Fabio Cardarelli <fabio.cardarelli@valentino-retail.example>,chiusura 17/9
+ROM01,20260918_2044_ROM01.eml,c0918,2026-09-18 20:44,2026-09-18,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,[ROM01] Report serale 18/09
+ROM01,20260919_2106_ROM01.eml,c0919,2026-09-19 21:06,2026-09-19,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,[ROM01] Report serale 19/09
+ROM01,20260920_2019_ROM01.eml,c0920,2026-09-20 20:19,2026-09-20,closing,Fabio Cardarelli <fabio.cardarelli@valentino-retail.example>,chiusura domenica 20
+ROM01,20260921_2033_ROM01.eml,c0921,2026-09-21 20:33,2026-09-21,closing,Valentino Roma Condotti <rom01.store@valentino-retail.example>,Chiusura ROM01 21/09
+ROM01,20260923_2112_ROM01.eml,c0923,2026-09-23 21:12,2026-09-23,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,ROM01 report 23/09 + richiesta revisione budget
+ROM01,20260924_0902_ROM01_re1.eml,r0924,2026-09-24 09:02,,reply,Roberto Galli <roberto.galli@valentino-retail.example>,Re: ROM01 report 23/09 + richiesta revisione budget
+ROM01,20260924_2017_ROM01.eml,c0924,2026-09-24 20:17,2026-09-24,closing,Fabio Cardarelli <fabio.cardarelli@valentino-retail.example>,chiusura 24/9
+ROM01,20260925_2052_ROM01.eml,c0925,2026-09-25 20:52,2026-09-25,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,ROM01 report 25/09
+ROM01,20260926_2115_ROM01.eml,c0926,2026-09-26 21:15,2026-09-26,closing,Fabio Cardarelli <fabio.cardarelli@valentino-retail.example>,chiusura sabato 26/9
+ROM01,20260927_2004_ROM01.eml,c0927,2026-09-27 20:04,2026-09-27,closing,Fabio Cardarelli <fabio.cardarelli@valentino-retail.example>,chiusura domenica 27
+ROM01,20260927_2006_ROM01_dup.eml,c0927dup,2026-09-27 20:06,2026-09-27,dup,Fabio Cardarelli <fabio.cardarelli@valentino-retail.example>,chiusura domenica 27
+ROM01,20260928_2029_ROM01.eml,c0928,2026-09-28 20:29,2026-09-28,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,ROM01 report 28/09
+ROM01,20260930_0847_ROM01.eml,c0929,2026-09-30 08:47,2026-09-29,closing,Fabio Cardarelli <fabio.cardarelli@valentino-retail.example>,chiusura 29/9 (ieri)
+ROM01,20260930_2041_ROM01.eml,c0930,2026-09-30 20:41,2026-09-30,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,ROM01 report 30/09
+ROM01,20261001_2023_ROM01.eml,c1001,2026-10-01 20:23,2026-10-01,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,ROM01 report 01/10
+ROM01,20261002_2101_ROM01.eml,c1002,2026-10-02 21:01,2026-10-02,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,ROM01 report 02/10
+ROM01,20261002_2218_ROM01_re1.eml,r1002,2026-10-02 22:18,,reply,Roberto Galli <roberto.galli@valentino-retail.example>,Re: ROM01 report 02/10
+ROM01,20261003_2122_ROM01.eml,c1003,2026-10-03 21:22,2026-10-03,closing,Fabio Cardarelli <fabio.cardarelli@valentino-retail.example>,chiusura sabato 3/10
+ROM01,20261003_2140_ROM01_corr.eml,corr1003,2026-10-03 21:40,2026-10-03,correction,Fabio Cardarelli <fabio.cardarelli@valentino-retail.example>,Re: chiusura sabato 3/10
+ROM01,20261004_2013_ROM01.eml,c1004,2026-10-04 20:13,2026-10-04,closing,Fabio Cardarelli <fabio.cardarelli@valentino-retail.example>,chiusura dom 4/10
+ROM01,20261005_2037_ROM01.eml,c1005,2026-10-05 20:37,2026-10-05,closing,Valentino Roma Condotti <rom01.store@valentino-retail.example>,Chiusura ROM01 05/10
+ROM01,20261006_2049_ROM01.eml,c1006,2026-10-06 20:49,2026-10-06,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,ROM01 report 06/10
+ROM01,20261007_2031_ROM01.eml,c1007,2026-10-07 20:31,2026-10-07,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,ROM01 report 07/10
+ROM01,20261008_2016_ROM01.eml,c1008,2026-10-08 20:16,2026-10-08,closing,Fabio Cardarelli <fabio.cardarelli@valentino-retail.example>,chiusura 8/10
+ROM01,20261009_2058_ROM01.eml,c1009,2026-10-09 20:58,2026-10-09,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,ROM01 report 09/10
+ROM01,20261011_2044_ROM01.eml,c1011,2026-10-11 20:44,"2026-10-10,2026-10-11",closing,Fabio Cardarelli <fabio.cardarelli@valentino-retail.example>,chiusura sabato + domenica
+ROM01,20261012_2027_ROM01.eml,c1012,2026-10-12 20:27,2026-10-12,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,ROM01 report 12/10
+ROM01,20261013_2035_ROM01.eml,c1013,2026-10-13 20:35,2026-10-13,closing,Valentino Roma Condotti <rom01.store@valentino-retail.example>,Chiusura ROM01 13/09
+ROM01,20261014_2105_ROM01.eml,c1014,2026-10-14 21:05,2026-10-14,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,ROM01 report 14/10
+ROM01,20261015_2011_ROM01.eml,c1015,2026-10-15 20:11,2026-10-15,closing,Fabio Cardarelli <fabio.cardarelli@valentino-retail.example>,chiusura 15/10
+ROM01,20261016_2039_ROM01.eml,c1016,2026-10-16 20:39,2026-10-16,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,ROM01 report 16/10 - sciopero
+ROM01,20261017_2134_ROM01.eml,c1017,2026-10-17 21:34,2026-10-17,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,ROM01 report 17/10
+ROM01,20261018_2022_ROM01.eml,c1018,2026-10-18 20:22,2026-10-18,closing,Fabio Cardarelli <fabio.cardarelli@valentino-retail.example>,chiusura dom 18/10
+ROM01,20261019_2046_ROM01.eml,c1019,2026-10-19 20:46,2026-10-19,closing,Valentino Roma Condotti <rom01.store@valentino-retail.example>,Chiusura ROM01 19/10
+ROM01,20261020_2018_ROM01.eml,c1020,2026-10-20 20:18,2026-10-20,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,report roma 20/10
+ROM01,20261021_2057_ROM01.eml,c1021,2026-10-21 20:57,2026-10-21,closing,Alessandra De Santis <alessandra.desantis@valentino-retail.example>,ROM01 report 21/10
+VEN01,20260831_2014_VEN01.eml,c0831,2026-08-31 20:14,2026-08-31,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 31/08
+VEN01,20260831_2014_VEN01_ooo.eml,ooo0831,2026-08-31 20:14,,ooo,Roberto Galli <roberto.galli@valentino-retail.example>,Risposta automatica: Chiusura VEN01 31/08
+VEN01,20260901_2041_VEN01.eml,c0901,2026-09-01 20:41,2026-09-01,closing,Luca Boscolo <luca.boscolo@valentino-retail.example>,chiusura VEN 1/9
+VEN01,20260903_2005_VEN01.eml,c0903,2026-09-03 20:05,2026-09-03,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 03/09
+VEN01,20260904_2022_VEN01.eml,c0904,2026-09-04 20:22,2026-09-04,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 04/09
+VEN01,20260905_2050_VEN01.eml,c0905,2026-09-05 20:50,2026-09-05,closing,Luca Boscolo <luca.boscolo@valentino-retail.example>,chiusura sabato 5.9
+VEN01,20260906_2035_VEN01.eml,c0906,2026-09-06 20:35,2026-09-06,closing,Valentino Venezia San Marco <ven01.store@valentino-retail.example>,Chiusura negozio Venezia domenica 6 settembre
+VEN01,20260907_2008_VEN01.eml,c0907,2026-09-07 20:08,2026-09-07,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 07/09
+VEN01,20260908_2102_VEN01.eml,c0908,2026-09-08 21:02,2026-09-08,closing,Luca Boscolo <luca.boscolo@valentino-retail.example>,VEN chiusura 8/9
+VEN01,20260909_2047_VEN01.eml,c0909,2026-09-09 20:47,2026-09-09,closing,Luca Boscolo <luca.boscolo@valentino-retail.example>,VEN chiusura 9.9
+VEN01,20260910_2019_VEN01.eml,c0910,2026-09-10 20:19,2026-09-10,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 10/09
+VEN01,20260911_2031_VEN01.eml,c0911,2026-09-11 20:31,2026-09-11,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 11/09
+VEN01,20260912_2110_VEN01.eml,c0912,2026-09-12 21:10,2026-09-12,closing,Luca Boscolo <luca.boscolo@valentino-retail.example>,chiusura sab 12/9
+VEN01,20260913_2012_VEN01.eml,c0913,2026-09-13 20:12,2026-09-13,closing,Valentino Venezia San Marco <ven01.store@valentino-retail.example>,Chiusura domenica 13/9 Venezia
+VEN01,20260914_2003_VEN01.eml,c0914,2026-09-14 20:03,2026-09-14,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 14.09
+VEN01,20260915_2038_VEN01.eml,c0915,2026-09-15 20:38,2026-09-15,closing,Luca Boscolo <luca.boscolo@valentino-retail.example>,VEN chiusura 15/9
+VEN01,20260916_2026_VEN01.eml,c0916,2026-09-16 20:26,2026-09-16,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 16/09
+VEN01,20260918_2015_VEN01.eml,c0918,2026-09-18 20:15,2026-09-18,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 18/09
+VEN01,20260919_2105_VEN01.eml,c0919,2026-09-19 21:05,2026-09-19,closing,Luca Boscolo <luca.boscolo@valentino-retail.example>,chiusura sabato 19/9
+VEN01,20260919_2107_VEN01_dup.eml,c0919dup,2026-09-19 21:07,2026-09-19,dup,Luca Boscolo <luca.boscolo@valentino-retail.example>,chiusura sabato 19/9
+VEN01,20260920_2020_VEN01.eml,c0920,2026-09-20 20:20,2026-09-20,closing,Valentino Venezia San Marco <ven01.store@valentino-retail.example>,Chiusura domenica 20/09
+VEN01,20260921_2000_VEN01.eml,c0921,2026-09-21 20:00,2026-09-21,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 21/09
+VEN01,20260922_2044_VEN01.eml,c0922,2026-09-22 20:44,2026-09-22,closing,Luca Boscolo <luca.boscolo@valentino-retail.example>,VEN chiusura 22/9
+VEN01,20260923_2017_VEN01.eml,c0923,2026-09-23 20:17,2026-09-23,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 23/9
+VEN01,20260924_2055_VEN01.eml,c0924,2026-09-24 20:55,2026-09-24,closing,Luca Boscolo <luca.boscolo@valentino-retail.example>,Re: vetrine W39 - Amalia
+VEN01,20260925_2009_VEN01.eml,c0925,2026-09-25 20:09,2026-09-25,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 25/09
+VEN01,20260926_2120_VEN01.eml,c0926,2026-09-26 21:20,2026-09-26,closing,Luca Boscolo <luca.boscolo@valentino-retail.example>,chiusura sabato 26.9
+VEN01,20260928_0905_VEN01.eml,c0927,2026-09-28 09:05,2026-09-27,closing,Valentino Venezia San Marco <ven01.store@valentino-retail.example>,Chiusura domenica 27/9 (scusate il ritardo)
+VEN01,20260928_2011_VEN01.eml,c0928,2026-09-28 20:11,2026-09-28,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 28/09
+VEN01,20260929_2050_VEN01.eml,c0929,2026-09-29 20:50,2026-09-29,closing,Luca Boscolo <luca.boscolo@valentino-retail.example>,VEN chiusura 29.9
+VEN01,20260930_2024_VEN01.eml,c0930,2026-09-30 20:24,2026-09-30,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 30/09
+VEN01,20261001_2032_VEN01.eml,c1001,2026-10-01 20:32,2026-10-01,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 01/10
+VEN01,20261002_2101_VEN01.eml,c1002,2026-10-02 21:01,2026-10-02,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 02/10
+VEN01,20261002_2216_VEN01_re1.eml,r1002,2026-10-02 22:16,,reply,Roberto Galli <roberto.galli@valentino-retail.example>,Re: Chiusura VEN01 02/10
+VEN01,20261003_1012_VEN01_re2.eml,a1003,2026-10-03 10:12,,reply,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Re: Chiusura VEN01 02/10
+VEN01,20261003_2130_VEN01.eml,c1003,2026-10-03 21:30,2026-10-03,closing,Luca Boscolo <luca.boscolo@valentino-retail.example>,chiusura sab 3/10
+VEN01,20261003_2205_VEN01_corr.eml,k1003,2026-10-03 22:05,2026-10-03,correction,Luca Boscolo <luca.boscolo@valentino-retail.example>,R: chiusura sab 3/10 - CORREZIONE
+VEN01,20261004_2040_VEN01.eml,c1004,2026-10-04 20:40,2026-10-04,closing,Valentino Venezia San Marco <ven01.store@valentino-retail.example>,Chiusura domenica 4 ottobre
+VEN01,20261005_2013_VEN01.eml,c1005,2026-10-05 20:13,2026-10-05,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 5/10
+VEN01,20261005_2201_VEN01_re1.eml,r1005,2026-10-05 22:01,,reply,Roberto Galli <roberto.galli@valentino-retail.example>,Re: Chiusura VEN01 5/10
+VEN01,20261006_2052_VEN01.eml,c1006,2026-10-06 20:52,2026-10-06,closing,Luca Boscolo <luca.boscolo@valentino-retail.example>,chiusura 6/10
+VEN01,20261007_2112_VEN01.eml,c1007,2026-10-07 21:12,2026-10-07,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 07/10
+VEN01,20261008_2108_VEN01.eml,c1008,2026-10-08 21:08,2026-10-08,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 08/09
+VEN01,20261009_2100_VEN01.eml,c1009,2026-10-09 21:00,2026-10-09,closing,Luca Boscolo <luca.boscolo@valentino-retail.example>,chiusura ven 9/10
+VEN01,20261011_2115_VEN01.eml,c1011,2026-10-11 21:15,"2026-10-10,2026-10-11",closing,Luca Boscolo <luca.boscolo@valentino-retail.example>,chiusura weekend 10-11/10
+VEN01,20261012_2006_VEN01.eml,c1012,2026-10-12 20:06,2026-10-12,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 12/10
+VEN01,20261013_2040_VEN01.eml,c1013,2026-10-13 20:40,2026-10-13,closing,Luca Boscolo <luca.boscolo@valentino-retail.example>,chiusura 13/10
+VEN01,20261014_2021_VEN01.eml,c1014,2026-10-14 20:21,2026-10-14,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 14/10
+VEN01,20261015_2048_VEN01.eml,c1015,2026-10-15 20:48,2026-10-15,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 15/10 !!
+VEN01,20261016_2105_VEN01.eml,c1016,2026-10-16 21:05,2026-10-16,closing,Luca Boscolo <luca.boscolo@valentino-retail.example>,chiusura 16/10 sciopero
+VEN01,20261017_2115_VEN01.eml,c1017,2026-10-17 21:15,2026-10-17,closing,Luca Boscolo <luca.boscolo@valentino-retail.example>,chiusura sab 17/10
+VEN01,20261018_2025_VEN01.eml,c1018,2026-10-18 20:25,2026-10-18,closing,Valentino Venezia San Marco <ven01.store@valentino-retail.example>,Chiusura domenica 18/10
+VEN01,20261019_2010_VEN01.eml,c1019,2026-10-19 20:10,2026-10-19,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 19/10
+VEN01,20261019_2240_VEN01_fwd.eml,f1019,2026-10-19 22:40,2026-10-19,fwd,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,I: AVVISO MAREA - aggiornamento ore 22:00
+VEN01,20261020_0742_VEN01_alert.eml,m1020,2026-10-20 07:42,2026-10-20,misc,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,VEN01 - oggi apriamo alle 12 (acqua alta)
+VEN01,20261020_2030_VEN01.eml,c1020,2026-10-20 20:30,2026-10-20,closing,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Chiusura VEN01 20/10 - acqua alta
+VEN01,20261020_2148_VEN01_re1.eml,r1020,2026-10-20 21:48,,reply,Roberto Galli <roberto.galli@valentino-retail.example>,Re: Chiusura VEN01 20/10 - acqua alta
+VEN01,20261021_0925_VEN01_re2.eml,a1021,2026-10-21 09:25,,reply,Chiara Zennaro <chiara.zennaro@valentino-retail.example>,Re: Chiusura VEN01 20/10 - acqua alta
+VEN01,20261021_2050_VEN01.eml,c1021,2026-10-21 20:50,2026-10-21,closing,Luca Boscolo <luca.boscolo@valentino-retail.example>,chiusura 21/10

@@ -40,113 +40,113 @@ cust_by_store_day = pos[pos.customer_id.notna() & (pos.line_type == "SALE")].gro
 
 # ------------------------------------------------------------------ note templates
 T = {
-    "MAIRE": {
-        "it": ["cliente coreana vuole Maire nera tg {sz}, chiamare quando rientra. Non interessata a beige/blu",
-               "Maire nero {sz} x2 richieste oggi (coreane). lasciato numero, KakaoTalk ok",
-               "sig.ra {ini} cerca Maire nera tg {sz} per la figlia, torna in Corea il {d}. Se arriva prima avvisare!!",
-               "ennesima richiesta maire nera taglia {sz}. niente. proposto Bady nero, no grazie",
-               "Maire nera tg {sz} - cliente in hotel fino al {d}, si può consegnare in hotel?",
-               "coreane x3 per la Maire NERA. {sz} e {sz2}. Abbiamo solo beige e blu. Lista attesa"],
-        "fr": ["Cliente coréenne, veut la Maire noire en {sz}. Rappeler dès réception. Pas intéressée par le beige.",
-               "3 clientes coréennes ce matin pour Maire noir {sz}/{sz2}, rien en stock. Coordonnées Kakao prises.",
-               "Mme {ini} – Maire noir taille {sz}, repart à Séoul le {d}. Si arrivage avant, livrer à l'hôtel.",
-               "Encore la Maire noire... taille {sz}. Plus rien depuis le 22. Liste d'attente.",
-               "cliente veut Maire noir {sz} vue dans un drama coréen, montre la photo sur son tel. pas de stock.",
-               "Maire noire {sz} – la cliente a déjà essayé Galeries Lafayette, rien non plus"],
-        "en": ["Korean client, wants Maire black size {sz}. Call when back in, she's in London till {d}.",
-               "Maire black {sz} - waitlist. Client says she saw it on a K-drama actress. Doesn't want navy.",
-               "x2 Korean tourists asking Maire black {sz} and {sz2}. Nothing on floor, nothing at DC. Took WhatsApp.",
-               "personal shopper asking AGAIN for black Maire sz {sz} for her client. told her maybe w/c 19th",
-               "Maire blk {sz} req. no stock. client left disappointed, bought a beanie"],
-        "ko": ["마이레 블랙 {sz} 사이즈 문의. 입고되면 연락 요청 (카톡)", "고객님 마이레 블랙 {sz} 대기 등록. 베이지는 원하지 않으심",
-               "드라마에서 본 마이레 블랙 찾으심. {sz} 품절, 재입고 일정 문의", "마이레 검정 {sz}/{sz2} 두 분 문의. 재입고 미정 안내"],
-        "ja": ["マイレ ブラック {sz} ご希望。入荷次第ご連絡。", "お客様 マイレの黒 サイズ{sz} 再入荷待ち。ベージュはNG。",
-               "マイレ黒 {sz} お問い合わせ、韓国のドラマで見たとのこと"],
-        "zh": ["客户要Maire黑色{sz}码，到货请微信通知", "Maire 黑色 {sz} 缺货，客人留了微信，下周再来", "黑色Maire {sz}码 又一个客人问，全国都没货"],
-        "de": ["Kundin möchte Maire schwarz Gr. {sz}, bitte anrufen wenn wieder da.", "Maire schwarz {sz} angefragt, nicht lieferbar. Marine wollte sie nicht."],
-        "es": ["Clienta pregunta por Maire negro talla {sz}, sin stock. Dejó teléfono."],
+    "AUREA": {
+        "it": ["cliente coreana vuole Aurea nera tg {sz}, chiamare quando rientra. Non interessata a beige/blu",
+               "Aurea nero {sz} x2 richieste oggi (coreane). lasciato numero, KakaoTalk ok",
+               "sig.ra {ini} cerca Aurea nera tg {sz} per la figlia, torna in Corea il {d}. Se arriva prima avvisare!!",
+               "ennesima richiesta aurea nera taglia {sz}. niente. proposto Aria nero, no grazie",
+               "Aurea nera tg {sz} - cliente in hotel fino al {d}, si può consegnare in hotel?",
+               "coreane x3 per la Aurea NERA. {sz} e {sz2}. Abbiamo solo beige e blu. Lista attesa"],
+        "fr": ["Cliente coréenne, veut la Aurea noire en {sz}. Rappeler dès réception. Pas intéressée par le beige.",
+               "3 clientes coréennes ce matin pour Aurea noir {sz}/{sz2}, rien en stock. Coordonnées Kakao prises.",
+               "Mme {ini} – Aurea noir taille {sz}, repart à Séoul le {d}. Si arrivage avant, livrer à l'hôtel.",
+               "Encore la Aurea noire... taille {sz}. Plus rien depuis le 22. Liste d'attente.",
+               "cliente veut Aurea noir {sz} vue dans un drama coréen, montre la photo sur son tel. pas de stock.",
+               "Aurea noire {sz} – la cliente a déjà essayé Galeries Lafayette, rien non plus"],
+        "en": ["Korean client, wants Aurea black size {sz}. Call when back in, she's in London till {d}.",
+               "Aurea black {sz} - waitlist. Client says she saw it on a K-drama actress. Doesn't want navy.",
+               "x2 Korean tourists asking Aurea black {sz} and {sz2}. Nothing on floor, nothing at DC. Took WhatsApp.",
+               "personal shopper asking AGAIN for black Aurea sz {sz} for her client. told her maybe w/c 19th",
+               "Aurea blk {sz} req. no stock. client left disappointed, bought a beanie"],
+        "ko": ["Aurea 블랙 {sz} 사이즈 문의. 입고되면 연락 요청 (카톡)", "고객님 Aurea 블랙 {sz} 대기 등록. 베이지는 원하지 않으심",
+               "드라마에서 본 Aurea 블랙 찾으심. {sz} 품절, 재입고 일정 문의", "Aurea 검정 {sz}/{sz2} 두 분 문의. 재입고 미정 안내"],
+        "ja": ["Aurea ブラック {sz} ご希望。入荷次第ご連絡。", "お客様 Aureaの黒 サイズ{sz} 再入荷待ち。ベージュはNG。",
+               "Aurea黒 {sz} お問い合わせ、韓国のドラマで見たとのこと"],
+        "zh": ["客户要Aurea黑色{sz}码，到货请微信通知", "Aurea 黑色 {sz} 缺货，客人留了微信，下周再来", "黑色Aurea {sz}码 又一个客人问，全国都没货"],
+        "de": ["Kundin möchte Aurea schwarz Gr. {sz}, bitte anrufen wenn wieder da.", "Aurea schwarz {sz} angefragt, nicht lieferbar. Marine wollte sie nicht."],
+        "es": ["Clienta pregunta por Aurea negro talla {sz}, sin stock. Dejó teléfono."],
     },
     "MAIRE_PRE": {
-        "it": ["Maire nera tg {sz} non disponibile, cliente richiama", "chiesta Maire nero {sz}, esaurita in negozio. DC?"],
-        "fr": ["Maire noire {sz} demandée, rupture en boutique", "cliente veut Maire noir {sz}, on regarde le réassort"],
-        "en": ["Maire black {sz} asked, none on floor", "client after Maire black sz {sz}, out of stock here"],
-        "ko": ["마이레 블랙 {sz} 문의, 매장 재고 없음"], "ja": ["マイレ 黒 {sz} 在庫なし"], "zh": ["Maire 黑色 {sz} 码 店里没货"],
-        "de": ["Maire schwarz {sz} nicht da"], "es": ["Maire negro {sz} sin stock"], "hk": ["Maire 黑色 {sz} 碼 冇貨"], "tw": ["Maire 黑色 {sz} 缺貨"],
+        "it": ["Aurea nera tg {sz} non disponibile, cliente richiama", "chiesta Aurea nero {sz}, esaurita in negozio. DC?"],
+        "fr": ["Aurea noire {sz} demandée, rupture en boutique", "cliente veut Aurea noir {sz}, on regarde le réassort"],
+        "en": ["Aurea black {sz} asked, none on floor", "client after Aurea black sz {sz}, out of stock here"],
+        "ko": ["Aurea 블랙 {sz} 문의, 매장 재고 없음"], "ja": ["Aurea 黒 {sz} 在庫なし"], "zh": ["Aurea 黑色 {sz} 码 店里没货"],
+        "de": ["Aurea schwarz {sz} nicht da"], "es": ["Aurea negro {sz} sin stock"], "hk": ["Aurea 黑色 {sz} 碼 冇貨"], "tw": ["Aurea 黑色 {sz} 缺貨"],
     },
     "ILVPINK_PRE": {
-        "it": ["Ilvaro rosa {sz} chiesta, non abbiamo la taglia"], "fr": ["Ilvaro rose {sz} - pas la taille"], "en": ["Ilvaro pink {sz} - size not in store"],
-        "ko": ["일바로 핑크 {sz} 사이즈 없음"], "ja": ["イルヴァロ ピンク {sz} サイズ欠品"], "zh": ["ILVARO 粉色 {sz} 码 没有"], "de": ["Ilvaro rosa {sz} fehlt"],
-        "es": ["Ilvaro rosa talla {sz} no hay"], "hk": ["ILVARO 粉紅 {sz} 碼 冇貨"], "tw": ["ILVARO 粉色 {sz} 號 缺貨"],
+        "it": ["Iridia rosa {sz} chiesta, non abbiamo la taglia"], "fr": ["Iridia rose {sz} - pas la taille"], "en": ["Iridia pink {sz} - size not in store"],
+        "ko": ["Iridia 핑크 {sz} 사이즈 없음"], "ja": ["イルヴァロ ピンク {sz} サイズ欠品"], "zh": ["IRIDIA 粉色 {sz} 码 没有"], "de": ["Iridia rosa {sz} fehlt"],
+        "es": ["Iridia rosa talla {sz} no hay"], "hk": ["IRIDIA 粉紅 {sz} 碼 冇貨"], "tw": ["IRIDIA 粉色 {sz} 號 缺貨"],
     },
     "ILVPINK": {
-        "ko": ["일바로 핑크 {sz} 대기. 윤하은 착용 제품 맞냐고 확인하심", "핑크 일바로 문의 오늘만 열 건 넘음. {sz} 사이즈 대기 리스트 등록",
-               "VIP 고객님 일바로 핑크 {sz} 홀드 요청. 입고 시 바로 연락", "인디핑크 일바로 언제 들어오냐고 계속 전화옴. 10/8 입고 예정이라고 안내함",
-               "일바로 핑크 {sz} 따님 선물용, 입고되면 택배 가능 여부 문의", "핑크 일바로 {sz} - 블랙 권해드렸는데 핑크만 원하심"],
+        "ko": ["Iridia 핑크 {sz} 대기. 윤하은 착용 제품 맞냐고 확인하심", "핑크 Iridia 문의 오늘만 열 건 넘음. {sz} 사이즈 대기 리스트 등록",
+               "VIP 고객님 Iridia 핑크 {sz} 홀드 요청. 입고 시 바로 연락", "인디핑크 Iridia 언제 들어오냐고 계속 전화옴. 10/8 입고 예정이라고 안내함",
+               "Iridia 핑크 {sz} 따님 선물용, 입고되면 택배 가능 여부 문의", "핑크 Iridia {sz} - 블랙 권해드렸는데 핑크만 원하심"],
         "ja": ["イルヴァロ ピンク {sz} 入荷待ち。LUMIEREのユン・ハウンさん着用と同じかご確認あり", "ピンクのショート（イルヴァロ）お問い合わせ多数。{sz}で予約希望",
                "価格改定前にイルヴァロピンクを買いたいとのこと。{sz}", "イルヴァロ510 {sz} 再入荷のご連絡希望（LINE）"],
-        "zh": ["尹夏恩同款粉色ILVARO {sz}码，客人要求到货第一时间通知", "粉色ILVARO {sz}码 客人想付定金预订，已解释不能收定金",
-               "今天至少8个客人问粉色ILVARO，全部缺货", "ILVARO 粉色 {sz} 码，客人从苏州过来的，很失望"],
-        "tw": ["客人要 ILVARO 粉紅 {sz} 號，到貨請 LINE 通知", "ILVARO 粉色 {sz} 預約，尹夏恩同款"],
-        "hk": ["客人要粉紅色 ILVARO {sz} 碼, 到貨 WhatsApp 通知", "ILVARO pink {sz} – client from Shenzhen, will come back weekend",
-               "粉紅 ILVARO 全線冇貨, 客人留電話 {tel}"],
-        "en": ["ILVARO pink {sz} – client showed Yoon Ha-eun photo. Waitlist.", "Pink Ilvaro sz {sz} request, KR student. Offered black, declined.",
-               "pink ilvaro {sz}?? third today. no stock anywhere in SEA"],
-        "fr": ["Ilvaro rose poudré {sz} – cliente coréenne, photo de la chanteuse. Rien."],
-        "it": ["Ilvaro rosa tg {sz}, cliente cinese con foto della cantante coreana. Non abbiamo niente"],
+        "zh": ["尹夏恩同款粉色IRIDIA {sz}码，客人要求到货第一时间通知", "粉色IRIDIA {sz}码 客人想付定金预订，已解释不能收定金",
+               "今天至少8个客人问粉色IRIDIA，全部缺货", "IRIDIA 粉色 {sz} 码，客人从苏州过来的，很失望"],
+        "tw": ["客人要 IRIDIA 粉紅 {sz} 號，到貨請 LINE 通知", "IRIDIA 粉色 {sz} 預約，尹夏恩同款"],
+        "hk": ["客人要粉紅色 IRIDIA {sz} 碼, 到貨 WhatsApp 通知", "IRIDIA pink {sz} – client from Shenzhen, will come back weekend",
+               "粉紅 IRIDIA 全線冇貨, 客人留電話 {tel}"],
+        "en": ["IRIDIA pink {sz} – client showed Yoon Ha-eun photo. Waitlist.", "Pink Iridia sz {sz} request, KR student. Offered black, declined.",
+               "pink iridia {sz}?? third today. no stock anywhere in SEA"],
+        "fr": ["Iridia rose poudré {sz} – cliente coréenne, photo de la chanteuse. Rien."],
+        "it": ["Iridia rosa tg {sz}, cliente cinese con foto della cantante coreana. Non abbiamo niente"],
     },
     "AMB": {
-        "it": ["Ambrine marrone tg {sz}, cliente abituale. In attesa. Il nero non le piace",
-               "cappotto Ambrine cioccolato {sz} – esaurito, VIC chiede quando arriva. detto novembre"],
-        "fr": ["Ambrine marron chocolat taille {sz} – liste d'attente. 'le marron c'est la couleur de la saison'",
-               "Cliente fidèle, Ambrine marron {sz}, rappeler. Ne veut pas le noir."],
-        "en": ["Ambrine brown size {sz}, waiting list. Tried the black, not the same."],
-        "es": ["Clienta quiere Ambrine marrón talla {sz}. Llamar cuando llegue. No le vale el negro."],
-        "zh": ["Ambrine 咖啡色 {sz}码 缺货，客人等"], "ja": ["アンブリン ブラウン {sz} 入荷待ち"], "ko": ["앰브린 브라운 {sz} 대기"], "de": ["Ambrine braun Gr. {sz} gewünscht"],
+        "it": ["Amalia marrone tg {sz}, cliente abituale. In attesa. Il nero non le piace",
+               "cappotto Amalia cioccolato {sz} – esaurito, VIC chiede quando arriva. detto novembre"],
+        "fr": ["Amalia marron chocolat taille {sz} – liste d'attente. 'le marron c'est la couleur de la saison'",
+               "Cliente fidèle, Amalia marron {sz}, rappeler. Ne veut pas le noir."],
+        "en": ["Amalia brown size {sz}, waiting list. Tried the black, not the same."],
+        "es": ["Clienta quiere Amalia marrón talla {sz}. Llamar cuando llegue. No le vale el negro."],
+        "zh": ["Amalia 咖啡色 {sz}码 缺货，客人等"], "ja": ["アンブリン ブラウン {sz} 入荷待ち"], "ko": ["Amalia 브라운 {sz} 대기"], "de": ["Amalia braun Gr. {sz} gewünscht"],
     },
     "LCM": {
-        "it": ["cardigan logo M nero, cliente lo vuole per regalo, M finito da giovedì", "Logo cardigan tg M blu – chiesto a Rinascente, aspettiamo",
+        "it": ["cardigan logo M nero, cliente lo vuole per regalo, M finito da giovedì", "Vlogo Cardigan tg M blu – chiesto a Rinascente, aspettiamo",
                "cliente abituale cardigan logo M. ritorna sabato. tenere da parte se arriva", "Ennesimo cardigan M. Scaffale vuoto in M, S e L a pacchi",
                "cardigan logo M: il cliente ha provato L, troppo grande. lasciato numero"],
-        "en": ["Logo cardigan M request, none left", "cardigan M navy - waitlist"], "fr": ["Cardigan logo M – plus de M"], "es": ["Cárdigan logo M agotado"],
-        "zh": ["Logo开衫M码没有了"], "ja": ["ロゴカーディガン M 完売"], "ko": ["로고 가디건 M 품절"], "de": ["Logo Cardigan M ausverkauft"],
+        "en": ["Vlogo Cardigan M request, none left", "cardigan M navy - waitlist"], "fr": ["Cardigan logo M – plus de M"], "es": ["Cárdigan logo M agotado"],
+        "zh": ["Logo开衫M码没有了"], "ja": ["ロゴカーディガン M 完売"], "ko": ["로고 가디건 M 품절"], "de": ["Vlogo Cardigan M ausverkauft"],
     },
-    "ARNEB": {
-        "it": ["Arneb: consigliata una taglia in meno, veste grande (preso {a} invece di {b})", "Arneb cambio taglia {b}->{a}, veste abbondante"],
-        "fr": ["Arneb taille grand – conseillé une taille en dessous ({a})", "échange Arneb {b} contre {a}, trop large aux épaules"],
-        "en": ["Arneb runs big, client exchanged {b} for {a}", "Arneb - advised size down, took {a}"],
-        "de": ["Arneb fällt groß aus – eine Größe kleiner empfohlen ({a})"], "ja": ["アルネブは大きめ。ワンサイズ下（{a}）をおすすめ"],
-        "ko": ["아르넵 한 사이즈 크게 나옴, {a} 추천"], "zh": ["ARNEB 偏大，建议小一码（{a}）"], "es": ["Arneb talla grande, cambio {b} por {a}"],
+    "ARTEM": {
+        "it": ["Artem: consigliata una taglia in meno, veste grande (preso {a} invece di {b})", "Artem cambio taglia {b}->{a}, veste abbondante"],
+        "fr": ["Artem taille grand – conseillé une taille en dessous ({a})", "échange Artem {b} contre {a}, trop large aux épaules"],
+        "en": ["Artem runs big, client exchanged {b} for {a}", "Artem - advised size down, took {a}"],
+        "de": ["Artem fällt groß aus – eine Größe kleiner empfohlen ({a})"], "ja": ["アルネブは大きめ。ワンサイズ下（{a}）をおすすめ"],
+        "ko": ["Artem 한 사이즈 크게 나옴, {a} 추천"], "zh": ["ARTEM 偏大，建议小一码（{a}）"], "es": ["Artem talla grande, cambio {b} por {a}"],
     },
-    "TIB": {
-        "it": ["Gilet TIB: cursore della zip si è staccato dopo 2 settimane. Cliente arrabbiato, reso", "TIB reso per cerniera, non vuole riparazione",
-               "altro TIB con la zip rotta. 3° questa settimana"],
-        "fr": ["TIB : la tirette du zip s'est cassée. Retour.", "Gilet TIB zip HS, client mécontent, remboursement"],
-        "en": ["TIB vest zip slider came off, client wants refund not repair", "TIB returned - zip. Client: 'for this price??'"],
-        "es": ["chaleco TIB: se rompió la cremallera, cliente quiere devolución"], "de": ["TIB Weste: Reißverschluss-Schieber kaputt, Kunde will Geld zurück"],
-        "ja": ["TIBベスト ファスナーのスライダー外れ、返品"], "ko": ["TIB 조끼 지퍼 고장 반품"], "zh": ["TIB 马甲拉链头掉了，客人要求退货"],
+    "VEL": {
+        "it": ["Gilet VEL: cursore della zip si è staccato dopo 2 settimane. Cliente arrabbiato, reso", "VEL reso per cerniera, non vuole riparazione",
+               "altro VEL con la zip rotta. 3° questa settimana"],
+        "fr": ["VEL : la tirette du zip s'est cassée. Retour.", "Gilet VEL zip HS, client mécontent, remboursement"],
+        "en": ["VEL vest zip slider came off, client wants refund not repair", "VEL returned - zip. Client: 'for this price??'"],
+        "es": ["chaleco VEL: se rompió la cremallera, cliente quiere devolución"], "de": ["VEL Weste: Reißverschluss-Schieber kaputt, Kunde will Geld zurück"],
+        "ja": ["VELベスト ファスナーのスライダー外れ、返品"], "ko": ["VEL 조끼 지퍼 고장 반품"], "zh": ["VEL 马甲拉链头掉了，客人要求退货"],
     },
-    "JPPRICE": {"ja": ["11月の価格改定前に購入希望。{sty} {sz}", "値上げ前にまとめ買い（マイレ・マヤ）。在庫確認依頼", "価格改定のお手紙を見てご来店。{sty} {sz} お取り置き",
+    "JPPRICE": {"ja": ["11月の価格改定前に購入希望。{sty} {sz}", "値上げ前にまとめ買い（Aurea・Nova）。在庫確認依頼", "価格改定のお手紙を見てご来店。{sty} {sz} お取り置き",
                        "改定前価格での予約可能か質問あり。不可とご説明", "ご主人様分もあわせて購入、値上げ前に"]},
-    "POLARIS": {"zh": ["POLARIS 披肩 很喜欢，客人买了白色", "Polaris 羽绒服 客人觉得版型很好，买了黑色{szA}", "Genius Polaris 再来一件给朋友"],
-                "it": ["Polaris: provato, piccolo e caro. Non acquista", "Polaris oversize veste piccolo?? strano per un oversize"],
-                "fr": ["Polaris trop petit et trop cher selon la cliente"], "en": ["Polaris oversized feels small, client passed", "Polaris - liked the cape, price a stretch"],
-                "de": ["Polaris zu klein, zu teuer"]},
+    "ASTRA": {"zh": ["ASTRA 披肩 很喜欢，客人买了白色", "Astra 羽绒服 客人觉得版型很好，买了黑色{szA}", "Couture Astra 再来一件给朋友"],
+                "it": ["Astra: provato, piccolo e caro. Non acquista", "Astra oversize veste piccolo?? strano per un oversize"],
+                "fr": ["Astra trop petit et trop cher selon la cliente"], "en": ["Astra Oversized feels small, client passed", "Astra - liked the cape, price a stretch"],
+                "de": ["Astra zu klein, zu teuer"]},
     "D11": {"zh": ["客人问门店能不能按天猫双十一价格", "双11预售价格比门店低，客人犹豫，说回去网上买", "老客户问双十一有没有门店专属活动"]},
-    "SYD": {"en": ["Client wants polo navy L, we have 2 left. Lots of asks for tees. Nobody looking at puffers, it's 25 degrees",
+    "SYD": {"en": ["Client wants jersey polo navy L, we have 2 left. Lots of asks for tees. Nobody looking at puffers, it's 25 degrees",
                    "asked for light jacket / windbreaker, nothing in store. sent to website", "tees in white M/L - asked 4 times today",
-                   "client from Melbourne wanted Marin windbreaker, it's gone (SS26 returned to DC??)"]},
-    "COLD": {"de": ["Kälte: Kundin will Montgenevre Gr. {szM}, ausverkauft, Warteliste", "Schnee! Mützen fast weg, Kunde wollte Handschuhe schwarz",
-                    "Karakorum {szM} gesucht, nicht mehr da"],
-             "en": ["cold snap - client after Montgenevre {szM}, none left", "everyone wants long down today"], "fr": ["Grand froid, cliente cherche Hermine {sz} noir"]},
-    "MAYA_MAD": {"es": ["cliente quiere MAYA negro talla {szM}, solo tenemos azul marino (error del almacén)", "MAYA negro {szM} – le ofrecí el azul, no quiere",
-                        "otro cliente por MAYA negro. ¿Cuándo llega el negro?"]},
-    "GW": {"it": ["gruppo clienti cinesi, acquistato 3 Maya, tax free. Chiedono anche Maire nera", "cliente cinese VIC (WeChat) - prenota visita sabato"],
-           "fr": ["Clients chinois Golden Week, détaxe, Maya noir x2", "groupe chinois - beaucoup de questions sur Maire noir"]},
+                   "client from Melbourne wanted Mario windbreaker, it's gone (SS26 returned to DC??)"]},
+    "COLD": {"de": ["Kälte: Kundin will Monteluce Gr. {szM}, ausverkauft, Warteliste", "Schnee! Mützen fast weg, Kunde wollte Handschuhe schwarz",
+                    "Cosimo {szM} gesucht, nicht mehr da"],
+             "en": ["cold snap - client after Monteluce {szM}, none left", "everyone wants long down today"], "fr": ["Grand froid, cliente cherche Liviana {sz} noir"]},
+    "MAYA_MAD": {"es": ["cliente quiere NOVA negro talla {szM}, solo tenemos azul marino (error del almacén)", "NOVA negro {szM} – le ofrecí el azul, no quiere",
+                        "otro cliente por NOVA negro. ¿Cuándo llega el negro?"]},
+    "GW": {"it": ["gruppo clienti cinesi, acquistato 3 Nova, tax free. Chiedono anche Aurea nera", "cliente cinese VIC (WeChat) - prenota visita sabato"],
+           "fr": ["Clients chinois Golden Week, détaxe, Nova noir x2", "groupe chinois - beaucoup de questions sur Aurea noir"]},
     "ROUTINE": {
-        "it": ["Appuntamento sabato h 11, prova Hermine", "compleanno 12/11 - mandare biglietto", "preferisce colori scuri, tg 2 donna / 5 uomo",
+        "it": ["Appuntamento sabato h 11, prova Liviana", "compleanno 12/11 - mandare biglietto", "preferisce colori scuri, tg 2 donna / 5 uomo",
                "chiamata di ringraziamento fatta", "ritiro orlo pantalone pronto", "VIC, passato a salutare, nessun acquisto"],
-        "fr": ["RDV samedi 15h, essayage Flammette", "anniversaire le 03/11", "remerciement envoyé", "préfère être contactée par WhatsApp"],
-        "en": ["appointment Thu 4pm", "thank-you note sent", "prefers WhatsApp, not calls", "VIC - bought Maya last year, interested in Genius"],
+        "fr": ["RDV samedi 15h, essayage Fiammetta", "anniversaire le 03/11", "remerciement envoyé", "préfère être contactée par WhatsApp"],
+        "en": ["appointment Thu 4pm", "thank-you note sent", "prefers WhatsApp, not calls", "VIC - bought Nova last year, interested in Couture"],
         "de": ["Termin Samstag 11 Uhr", "Dankeskarte geschickt"], "es": ["Cita el sábado a las 12", "nota de agradecimiento enviada"],
         "ja": ["土曜日11時ご来店予約", "お礼状送付済み", "お誕生日 11/20"], "ko": ["토요일 오후 2시 방문 예약", "감사 문자 발송"],
         "zh": ["周六下午预约试穿", "已发感谢微信", "生日11月"], "hk": ["星期六預約試身", "已WhatsApp多謝客人"], "tw": ["週六預約"],
@@ -207,7 +207,7 @@ def client_for(store, day):
     return None
 
 
-KEY = {"J20931A00012-999": "MAIRE", "J20931A00618-510": "ILVPINK", "J20931A00622-23R": "AMB", "I10919B00011-999": "LCM", "I10919B00011-742": "LCM"}
+KEY = {"J20931A00012-999": "AUREA", "J20931A00618-510": "ILVPINK", "J20931A00622-23R": "AMB", "I10919B00011-999": "LCM", "I10919B00011-742": "LCM"}
 SIZES_W = ["00", "0", "1", "2", "3", "4"]
 for r in lost.itertuples():
     sig = KEY.get(r.sku)
@@ -215,8 +215,8 @@ for r in lost.itertuples():
         continue
     if sig == "LCM" and (r.size != "M" or r.date < "2026-10-01" or (r.store_id == "MIL01" and r.date < "2026-10-08")):
         continue
-    p = {"MAIRE": 0.22, "ILVPINK": 0.30, "AMB": 0.45, "LCM": 0.5}[sig]
-    if sig == "MAIRE" and r.date < "2026-09-17":
+    p = {"AUREA": 0.22, "ILVPINK": 0.30, "AMB": 0.45, "LCM": 0.5}[sig]
+    if sig == "AUREA" and r.date < "2026-09-17":
         sig, p = "MAIRE_PRE", 0.15
     if sig == "ILVPINK" and r.date < "2026-10-02":
         sig, p = "ILVPINK_PRE", 0.2
@@ -228,29 +228,29 @@ for r in lost.itertuples():
     dleave = (C.d(r.date) + dt.timedelta(days=int(R.integers(2, 9)))).strftime("%d/%m")
     add_note(r.store_id, r.date, sig, client_for(r.store_id, r.date), sz=r.size, sz2=sz2, d=dleave)
 
-# ARNEB size exchanges / TIB defects from POS returns
+# ARTEM size exchanges / VEL defects from POS returns
 ret = pos[pos.line_type == "RETURN"]
 for r in ret[ret.sku.str.startswith("J10911A00577") & (ret.return_reason.isin(["SIZE", "EXCHANGE_SIZE"]))].itertuples():
     if R.random() < 0.45:
         b = r.size
         a = str(int(b) - 1) if b.isdigit() and int(b) > 1 else b
-        add_note(r.store_id, r.business_date, "ARNEB", r.customer_id if isinstance(r.customer_id, str) else None, a=a, b=b)
+        add_note(r.store_id, r.business_date, "ARTEM", r.customer_id if isinstance(r.customer_id, str) else None, a=a, b=b)
 for r in ret[ret.return_reason == "DEF"].itertuples():
     if R.random() < 0.3:
-        add_note(r.store_id, r.business_date, "TIB", r.customer_id if isinstance(r.customer_id, str) else None)
+        add_note(r.store_id, r.business_date, "VEL", r.customer_id if isinstance(r.customer_id, str) else None)
 # Japan price increase pre-buying
 sale = pos[pos.line_type == "SALE"]
 jp = sale[sale.store_id.isin(["TYO01", "TYO02", "OSA01"]) & (sale.business_date >= "2026-10-10") &
           (sale.sku.str.startswith("J10911A00034") | sale.sku.str.startswith("J20931A00012"))]
 for r in jp.sample(frac=0.12, random_state=3).itertuples():
     add_note(r.store_id, r.business_date, "JPPRICE", r.customer_id if isinstance(r.customer_id, str) else None, sz=r.size,
-             sty="マヤ" if r.sku.startswith("J10911A00034") else "マイレ")
-# POLARIS feedback
+             sty="Nova" if r.sku.startswith("J10911A00034") else "Aurea")
+# ASTRA feedback
 pol = sale[sale.sku.str.startswith("G2092") & (sale.business_date >= "2026-09-24")]
 for r in pol.sample(frac=0.06, random_state=4).itertuples():
     lg = lang_of(r.store_id)
     if lg in ("zh", "hk", "tw") or lg in ("it", "fr", "en", "de"):
-        add_note(r.store_id, r.business_date, "POLARIS", r.customer_id if isinstance(r.customer_id, str) else None, szA=r.size)
+        add_note(r.store_id, r.business_date, "ASTRA", r.customer_id if isinstance(r.customer_id, str) else None, szA=r.size)
 for sid in ["SHA01", "BJS01", "CDU01"]:
     for day in ["2026-10-20", "2026-10-21"]:
         for _ in range(int(R.integers(1, 4))):
@@ -399,7 +399,7 @@ CAMP = [
      f"Attended 36 (+9 guests). Purchasers 23, 27 transactions, GBP {rev:,.0f} (POS matched)"),
     (sfid("701"), "IT | MIL01 MFW VIC appointments", "Client Event", "Completed", "2026-09-22", "2026-09-28", "IT01", 80, 52, 60000, 58400, ""),
     (sfid("701"), "FR | PAR01 PFW private viewing", "Client Event", "Completed", "2026-10-03", "2026-10-03", "FR01", 60, 41, 75000, 79900, ""),
-    (sfid("701"), "CN | Polaris VIP preview Plaza 66", "Client Event", "Completed", "2026-09-26", "2026-09-26", "CN01", 120, 96, 95000, 101000, ""),
+    (sfid("701"), "CN | Astra VIP preview Plaza 66", "Client Event", "Completed", "2026-09-26", "2026-09-26", "CN01", 120, 96, 95000, 101000, ""),
     (sfid("701"), "KR | BIFF Busan Centum corner", "Client Event", "Completed", "2026-10-01", "2026-10-10", "KR03", 0, 0, 38000, 36100, "walk-in, no invites"),
     (sfid("701"), "SG | F1 weekend cocktail MBS", "Client Event", "Completed", "2026-10-10", "2026-10-10", "SG01", 50, 33, 30000, 31800, ""),
     (sfid("701"), "CA | TIFF gifting lounge", "PR Event", "Completed", "2026-09-10", "2026-09-20", "CA01", 0, 0, 55000, 61200, ""),
@@ -408,12 +408,12 @@ CAMP = [
     (sfid("701"), "CN | Golden Week outbound - WeChat tax-free", "WeChat", "Completed", "2026-09-28", "2026-10-08", "", 9800, 640, 25000, 22100,
      "targeting clients travelling to IT/FR/UK"),
     (sfid("701"), "GLOBAL | Newsletter FW26 Icons", "Email", "Completed", "2026-09-17", "2026-09-17", "", 412000, 23900, 8000, 8000,
-     "hero: Maire black, Maya, Hermine"),
-    (sfid("701"), "GLOBAL | Newsletter Genius Polaris", "Email", "Completed", "2026-09-24", "2026-09-24", "", 418500, 31100, 8000, 8000, ""),
+     "hero: Aurea black, Nova, Liviana"),
+    (sfid("701"), "GLOBAL | Newsletter Couture Astra", "Email", "Completed", "2026-09-24", "2026-09-24", "", 418500, 31100, 8000, 8000, ""),
     (sfid("701"), "EU | Newsletter Cold weather edit", "Email", "Completed", "2026-10-14", "2026-10-14", "", 188000, 12700, 6000, 6000, ""),
-    (sfid("701"), "APAC | ILVARO pink edit (social)", "Social", "In Progress", "2026-10-06", "2026-10-25", "", 0, 0, 35000, 14100,
+    (sfid("701"), "APAC | IRIDIA pink edit (social)", "Social", "In Progress", "2026-10-06", "2026-10-25", "", 0, 0, 35000, 14100,
      "launched after stock-out; links to sold-out PDP"),
-    (sfid("701"), "KR | ILVARO waitlist SMS", "SMS", "Planned", "2026-11-20", "2026-11-22", "KR02", 0, 0, 2000, 0, "to send when PO 4500222417 lands"),
+    (sfid("701"), "KR | IRIDIA waitlist SMS", "SMS", "Planned", "2026-11-20", "2026-11-22", "KR02", 0, 0, 2000, 0, "to send when PO 4500222417 lands"),
 ]
 cdf = pd.DataFrame(CAMP, columns=["Id", "Name", "Type", "Status", "StartDate", "EndDate", "Store__c", "NumberOfContacts", "NumberOfResponses",
                                   "BudgetedCost", "ActualCost", "Description"])
@@ -424,35 +424,35 @@ cdf.to_csv(OUT / "salesforce_campaigns_export.csv", index=False)
 
 # ------------------------------------------------------------------ PR seeding log
 SEED = [
-    ("2026-08-18", "Chiara F.", "IT", "Talent Garden Agency", "MAYA 999", "4", "Delivered", "2026-08-29", "Instagram", 2100000, 38000, ""),
-    ("2026-08-20", "Léa M.", "FR", "Agence Lumière", "MAIRE 034", "1", "Posted", "2026-09-02", "Instagram", 860000, 14500, "beige requested by talent"),
-    ("2026-08-25", "Park Ji-woo (actress)", "KR", "Starhaus Ent.", "MAIRE 999", "0", "Posted", "2026-09-16", "Instagram / drama wardrobe",
+    ("2026-08-18", "Chiara F.", "IT", "Talent Garden Agency", "NOVA 999", "4", "Delivered", "2026-08-29", "Instagram", 2100000, 38000, ""),
+    ("2026-08-20", "Léa M.", "FR", "Agence Lumière", "AUREA 034", "1", "Posted", "2026-09-02", "Instagram", 860000, 14500, "beige requested by talent"),
+    ("2026-08-25", "Park Ji-woo (actress)", "KR", "Starhaus Ent.", "AUREA 999", "0", "Posted", "2026-09-16", "Instagram / drama wardrobe",
      5400000, 120000, "wardrobe placement drama 'Winter Letters' ep.7 aired 16/09"),
-    ("2026-08-27", "Kenta S.", "JP", "Tokyo Muse", "MONTCLA 999", "3", "Posted", "2026-09-10", "Instagram", 1200000, 21000, ""),
-    ("2026-09-01", "Mia L.", "CN", "Shanghai Bloom", "ILVARO 999", "0", "Posted", "2026-09-09", "Xiaohongshu", 3100000, 54000, ""),
-    ("2026-09-01", "Jade W.", "HK", "HK Icons", "ILVARO 20D", "1", "Posted", "2026-09-12", "Instagram", 940000, 12000, ""),
-    ("2026-09-03", "Sofia R.", "IT", "Talent Garden Agency", "AMBRINE 23R", "1", "Posted", "2026-09-08", "Instagram", 1500000, 31000, "brown!"),
-    ("2026-09-05", "Ethan B.", "US", "WME", "ARNEB 999", "5", "Delivered", "", "", 0, 0, "asked exchange to size 4 (runs big)"),
-    ("2026-09-08", "Olivia T.", "GB", "Storm", "HERMINE 999", "1", "Posted", "2026-09-20", "Instagram", 720000, 11000, ""),
-    ("2026-09-10", "Lucas D.", "FR", "Agence Lumière", "POLARIS CAPE 999", "M", "Posted", "2026-09-29", "Instagram", 650000, 9000, "PFW"),
-    ("2026-09-12", "Zhou Yi", "CN", "Shanghai Bloom", "POLARIS OVERSIZED 999", "M", "Posted", "2026-09-24", "Weibo", 8200000, 160000, "launch day"),
-    ("2026-09-12", "Han Seo-yeon", "KR", "Starhaus Ent.", "ILVARO 999", "0", "Posted", "2026-09-26", "Instagram", 2300000, 41000, ""),
-    ("2026-09-15", "Grace L.", "SG", "SEA Talent", "LOGO T-SHIRT 001", "S", "Posted", "2026-09-20", "Instagram", 300000, 3000, ""),
-    ("2026-09-18", "Ryan K.", "CA", "TIFF lounge", "MONTGENEVRE 999", "4", "Posted", "2026-09-14", "Instagram", 410000, 7000,
+    ("2026-08-27", "Kenta S.", "JP", "Tokyo Muse", "MISTRAL 999", "3", "Posted", "2026-09-10", "Instagram", 1200000, 21000, ""),
+    ("2026-09-01", "Mia L.", "CN", "Shanghai Bloom", "IRIDIA 999", "0", "Posted", "2026-09-09", "Xiaohongshu", 3100000, 54000, ""),
+    ("2026-09-01", "Jade W.", "HK", "HK Icons", "IRIDIA 20D", "1", "Posted", "2026-09-12", "Instagram", 940000, 12000, ""),
+    ("2026-09-03", "Sofia R.", "IT", "Talent Garden Agency", "AMALIA 23R", "1", "Posted", "2026-09-08", "Instagram", 1500000, 31000, "brown!"),
+    ("2026-09-05", "Ethan B.", "US", "WME", "ARTEM 999", "5", "Delivered", "", "", 0, 0, "asked exchange to size 4 (runs big)"),
+    ("2026-09-08", "Olivia T.", "GB", "Storm", "LIVIANA 999", "1", "Posted", "2026-09-20", "Instagram", 720000, 11000, ""),
+    ("2026-09-10", "Lucas D.", "FR", "Agence Lumière", "ASTRA CAPE 999", "M", "Posted", "2026-09-29", "Instagram", 650000, 9000, "PFW"),
+    ("2026-09-12", "Zhou Yi", "CN", "Shanghai Bloom", "ASTRA OVERSIZED 999", "M", "Posted", "2026-09-24", "Weibo", 8200000, 160000, "launch day"),
+    ("2026-09-12", "Han Seo-yeon", "KR", "Starhaus Ent.", "IRIDIA 999", "0", "Posted", "2026-09-26", "Instagram", 2300000, 41000, ""),
+    ("2026-09-15", "Grace L.", "SG", "SEA Talent", "VLOGO T-SHIRT 001", "S", "Posted", "2026-09-20", "Instagram", 300000, 3000, ""),
+    ("2026-09-18", "Ryan K.", "CA", "TIFF lounge", "MONTELUCE 999", "4", "Posted", "2026-09-14", "Instagram", 410000, 7000,
      "post date before sent date (sent through lounge, logged late)"),
-    ("2026-09-20", "Marta G.", "ES", "Madrid Models", "MAYA 742", "2", "No post", "", "", 0, 0, ""),
-    ("2026-09-22", "LUMIERE (group - stylist)", "KR", "Bloom Music Ent.", "BADY 999 x4", "0/1", "Delivered", "", "", 0, 0,
-     "for Paris FW wardrobe; NOT Ilvaro; Yoon Ha-eun NOT included (stylist pulled other brands)"),
-    ("2026-09-24", "Lin Q.", "CN", "Shanghai Bloom", "POLARIS BALACLAVA 999", "TU", "Posted", "2026-09-25", "Douyin", 4100000, 70000, ""),
-    ("2026-09-28", "Aiko N.", "JP", "Tokyo Muse", "MAIRE 999", "1", "CANCELLED", "", "", 0, 0, "no stock black Maire (DC 0)"),
-    ("2026-10-02", "Yoon Ha-eun (LUMIERE)", "KR", "Bloom Music Ent.", "ILVARO 510", "0", "NOT SEEDED", "2026-10-01", "Instagram/X/Weibo (press photos)",
-     48000000, 0, "PR Seoul 02/10 09:40 KST: photographed 01/10 outside PFW show in ILVARO powder pink. NOT in seeding list - own purchase / "
+    ("2026-09-20", "Marta G.", "ES", "Madrid Models", "NOVA 742", "2", "No post", "", "", 0, 0, ""),
+    ("2026-09-22", "LUMIERE (group - stylist)", "KR", "Bloom Music Ent.", "ARIA 999 x4", "0/1", "Delivered", "", "", 0, 0,
+     "for Paris FW wardrobe; NOT Iridia; Yoon Ha-eun NOT included (stylist pulled other brands)"),
+    ("2026-09-24", "Lin Q.", "CN", "Shanghai Bloom", "ASTRA BALACLAVA 999", "TU", "Posted", "2026-09-25", "Douyin", 4100000, 70000, ""),
+    ("2026-09-28", "Aiko N.", "JP", "Tokyo Muse", "AUREA 999", "1", "CANCELLED", "", "", 0, 0, "no stock black Aurea (DC 0)"),
+    ("2026-10-02", "Yoon Ha-eun (LUMIERE)", "KR", "Bloom Music Ent.", "IRIDIA 510", "0", "NOT SEEDED", "2026-10-01", "Instagram/X/Weibo (press photos)",
+     48000000, 0, "PR Seoul 02/10 09:40 KST: photographed 01/10 outside PFW show in IRIDIA powder pink. NOT in seeding list - own purchase / "
                   "stylist. Organic. Contact agency for thank-you gifting."),
-    ("2026-10-05", "Yoon Ha-eun (LUMIERE)", "KR", "Bloom Music Ent.", "ILVARO 510", "0", "ON HOLD", "", "", 0, 0,
+    ("2026-10-05", "Yoon Ha-eun (LUMIERE)", "KR", "Bloom Music Ent.", "IRIDIA 510", "0", "ON HOLD", "", "", 0, 0,
      "gifting request rejected by WMS HK30: ATP 0. retry after top-up 08/10"),
-    ("2026-10-12", "Valentina P.", "IT", "Vogue Italia (editorial)", "ILVARO 510 x2", "00/0", "Delivered", "", "", 0, 0, "press samples IT10"),
-    ("2026-10-14", "Noah S.", "US", "WME", "MAYA 999", "4", "Posted", "2026-10-18", "Instagram", 1300000, 19000, ""),
-    ("2026-10-16", "Yoon Ha-eun (LUMIERE)", "KR", "Bloom Music Ent.", "ILVARO 510", "0", "ON HOLD", "", "", 0, 0,
+    ("2026-10-12", "Valentina P.", "IT", "Vogue Italia (editorial)", "IRIDIA 510 x2", "00/0", "Delivered", "", "", 0, 0, "press samples IT10"),
+    ("2026-10-14", "Noah S.", "US", "WME", "NOVA 999", "4", "Posted", "2026-10-18", "Instagram", 1300000, 19000, ""),
+    ("2026-10-16", "Yoon Ha-eun (LUMIERE)", "KR", "Bloom Music Ent.", "IRIDIA 510", "0", "ON HOLD", "", "", 0, 0,
      "still pending - PR APAC asked HK30 again, no reply"),
 ]
 sd = pd.DataFrame(SEED, columns=["Date sent / logged", "Talent", "Market", "Agency", "Item (style colour)", "Size", "Status", "Post date",
@@ -461,49 +461,49 @@ sd.to_excel(OUT / "PR_seeding_tracker_FW26.xlsx", index=False)
 
 # ------------------------------------------------------------------ social listening alerts
 AL = [
-    ("2026-09-16T14:20:00Z", "KEYWORD_SPIKE", "Moncler Maire", 1840, 310, "KR", "ko", 0.62, "마이레, 몽클레르, 박지우, 겨울편지, 패딩",
-     "윤겨울편지 7화에서 박지우 입은 패딩 몽클레르 마이레 맞죠?? 블랙 너무 예쁨"),
-    ("2026-09-18T09:05:00Z", "VOLUME_SPIKE", "Moncler Maire black", 3920, 340, "KR,FR", "ko,fr", 0.55, "마이레 블랙, 품절, 파리, 몽클레르",
-     "파리 몽클레르 갔는데 마이레 블랙 없음… 다 품절"),
-    ("2026-09-22T11:40:00Z", "NEW_TOPIC", "Moncler Paris sold out", 610, 80, "KR,FR", "ko,fr,en", 0.10, "sold out, rupture, 품절, Saint-Honoré",
-     "Maire noire en rupture partout à Paris, même aux Galeries. Les touristes coréennes font la queue"),
-    ("2026-09-24T02:10:00Z", "VOLUME_SPIKE", "Moncler Genius Polaris", 22800, 2400, "CN,HK", "zh", 0.71, "Polaris, 天才系列, 周一, 斗篷", "Polaris斗篷太好看了，上海恒隆已经排队"),
-    ("2026-09-27T16:00:00Z", "SENTIMENT_DROP", "Moncler Genius Polaris", 1450, 1100, "FR,IT,GB,US", "fr,it,en", -0.22, "too small, trop petit, caro, overpriced",
-     "Tried the Polaris oversized and it's... not oversized at all. And €2,400?"),
-    ("2026-09-29T19:30:00Z", "NEW_TOPIC", "Moncler TIB zipper", 140, 15, "IT,FR,ES,DE", "it,fr,en", -0.68, "zip, cerniera, tirette, broken, rotta",
-     "Gilet TIB comprato ad agosto, il cursore della zip si è staccato. Per 990€. Complimenti @moncler"),
-    ("2026-10-01T21:05:00Z", "VOLUME_SPIKE", "Moncler pink / Yoon Ha-eun", 18600, 120, "KR", "ko,en", 0.88, "윤하은, 몽클레르, 핑크패딩, LUMIERE, PFW",
-     "윤하은 파리 출국 착장 몽클레르 핑크 패딩 ㄷㄷ 제품명 아시는 분?"),
-    ("2026-10-01T23:40:00Z", "VOLUME_SPIKE", "Moncler ILVARO", 61200, 90, "KR,CN,JP,TW,HK", "ko,zh,ja", 0.86, "ILVARO, 일바로, 尹夏恩同款, イルヴァロ",
-     "尹夏恩同款 Moncler ILVARO 粉色 已经全网断货了吧"),
-    ("2026-10-02T03:15:00Z", "KEYWORD_MATCH", "ILVARO sold out", 24300, 0, "KR,CN,JP", "ko,zh,ja", -0.15, "품절, 断货, 売り切れ, restock",
-     "몽클레르 공홈 일바로 핑크 7시 반에 다 품절됨 ㅠㅠ 재입고 언제??"),
-    ("2026-10-03T08:00:00Z", "VOLUME_SPIKE", "Moncler ILVARO", 45100, 900, "KR,CN,JP,SG,US", "ko,zh,ja,en", 0.74, "ILVARO black, 블랙도, 黑色也",
-     "핑크 없어서 일바로 블랙 샀어요. 블랙도 이쁨"),
-    ("2026-10-04T12:00:00Z", "NEW_TOPIC", "Moncler resale ILVARO", 2900, 0, "KR,CN", "ko,zh", -0.31, "리셀, 크림, 闲鱼, 加价",
-     "크림에 일바로 핑크 0사이즈 리셀가 2배 ㄷㄷ"),
-    ("2026-10-05T10:30:00Z", "KEYWORD_MATCH", "Moncler TIB zipper", 410, 15, "IT,FR,ES,GB,DE", "it,fr,es,en,de", -0.74, "zip, slider, cremallera, Reißverschluss",
-     "Second Moncler TIB vest with a broken zip slider in my family. Store says 'known issue'."),
-    ("2026-10-08T09:10:00Z", "NEW_TOPIC", "Moncler Seoul delivery", 220, 0, "KR", "ko", -0.40, "청담, 입고, 지연, 세관",
-     "청담 몽클레르 일바로 오늘 입고라더니 세관에 걸렸대요"),
-    ("2026-10-09T06:00:00Z", "VOLUME_SPIKE", "モンクレール 値上げ", 5300, 400, "JP", "ja", -0.35, "値上げ, 11月, 価格改定, 駆け込み",
-     "モンクレール11月から値上げらしい。マヤ買うなら今月中"),
-    ("2026-10-14T07:00:00Z", "KEYWORD_SPIKE", "Moncler Arneb", 380, 90, "GB,US,DE,CA", "en,de", -0.12, "runs big, size down, fällt groß aus",
-     "PSA: Moncler Arneb runs at least one size big. Size down."),
+    ("2026-09-16T14:20:00Z", "KEYWORD_SPIKE", "Valentino Aurea", 1840, 310, "KR", "ko", 0.62, "Aurea, 발렌티노, 박지우, 겨울편지, 패딩",
+     "윤겨울편지 7화에서 박지우 입은 패딩 발렌티노 Aurea 맞죠?? 블랙 너무 예쁨"),
+    ("2026-09-18T09:05:00Z", "VOLUME_SPIKE", "Valentino Aurea black", 3920, 340, "KR,FR", "ko,fr", 0.55, "Aurea 블랙, 품절, 파리, 발렌티노",
+     "파리 발렌티노 갔는데 Aurea 블랙 없음… 다 품절"),
+    ("2026-09-22T11:40:00Z", "NEW_TOPIC", "Valentino Paris sold out", 610, 80, "KR,FR", "ko,fr,en", 0.10, "sold out, rupture, 품절, Saint-Honoré",
+     "Aurea noire en rupture partout à Paris, même aux Galeries. Les touristes coréennes font la queue"),
+    ("2026-09-24T02:10:00Z", "VOLUME_SPIKE", "Valentino Couture Astra", 22800, 2400, "CN,HK", "zh", 0.71, "Astra, 天才系列, 周一, 斗篷", "Astra斗篷太好看了，上海恒隆已经排队"),
+    ("2026-09-27T16:00:00Z", "SENTIMENT_DROP", "Valentino Couture Astra", 1450, 1100, "FR,IT,GB,US", "fr,it,en", -0.22, "too small, trop petit, caro, overpriced",
+     "Tried the Astra Oversized and it's... not oversized at all. And €2,400?"),
+    ("2026-09-29T19:30:00Z", "NEW_TOPIC", "Valentino VEL zipper", 140, 15, "IT,FR,ES,DE", "it,fr,en", -0.68, "zip, cerniera, tirette, broken, rotta",
+     "Gilet VEL comprato ad agosto, il cursore della zip si è staccato. Per 990€. Complimenti @valentino"),
+    ("2026-10-01T21:05:00Z", "VOLUME_SPIKE", "Valentino pink / Yoon Ha-eun", 18600, 120, "KR", "ko,en", 0.88, "윤하은, 발렌티노, 핑크패딩, LUMIERE, PFW",
+     "윤하은 파리 출국 착장 발렌티노 핑크 패딩 ㄷㄷ 제품명 아시는 분?"),
+    ("2026-10-01T23:40:00Z", "VOLUME_SPIKE", "Valentino IRIDIA", 61200, 90, "KR,CN,JP,TW,HK", "ko,zh,ja", 0.86, "IRIDIA, Iridia, 尹夏恩同款, イルヴァロ",
+     "尹夏恩同款 Valentino IRIDIA 粉色 已经全网断货了吧"),
+    ("2026-10-02T03:15:00Z", "KEYWORD_MATCH", "IRIDIA sold out", 24300, 0, "KR,CN,JP", "ko,zh,ja", -0.15, "품절, 断货, 売り切れ, restock",
+     "발렌티노 공홈 Iridia 핑크 7시 반에 다 품절됨 ㅠㅠ 재입고 언제??"),
+    ("2026-10-03T08:00:00Z", "VOLUME_SPIKE", "Valentino IRIDIA", 45100, 900, "KR,CN,JP,SG,US", "ko,zh,ja,en", 0.74, "IRIDIA black, 블랙도, 黑色也",
+     "핑크 없어서 Iridia 블랙 샀어요. 블랙도 이쁨"),
+    ("2026-10-04T12:00:00Z", "NEW_TOPIC", "Valentino resale IRIDIA", 2900, 0, "KR,CN", "ko,zh", -0.31, "리셀, 크림, 闲鱼, 加价",
+     "크림에 Iridia 핑크 0사이즈 리셀가 2배 ㄷㄷ"),
+    ("2026-10-05T10:30:00Z", "KEYWORD_MATCH", "Valentino VEL zipper", 410, 15, "IT,FR,ES,GB,DE", "it,fr,es,en,de", -0.74, "zip, slider, cremallera, Reißverschluss",
+     "Second Valentino VEL vest with a broken zip slider in my family. Store says 'known issue'."),
+    ("2026-10-08T09:10:00Z", "NEW_TOPIC", "Valentino Seoul delivery", 220, 0, "KR", "ko", -0.40, "청담, 입고, 지연, 세관",
+     "청담 발렌티노 Iridia 오늘 입고라더니 세관에 걸렸대요"),
+    ("2026-10-09T06:00:00Z", "VOLUME_SPIKE", "ヴァレンティノ 値上げ", 5300, 400, "JP", "ja", -0.35, "値上げ, 11月, 価格改定, 駆け込み",
+     "ヴァレンティノ11月から値上げらしい。Nova買うなら今月中"),
+    ("2026-10-14T07:00:00Z", "KEYWORD_SPIKE", "Valentino Artem", 380, 90, "GB,US,DE,CA", "en,de", -0.12, "runs big, size down, fällt groß aus",
+     "PSA: Valentino Artem runs at least one size big. Size down."),
     ("2026-10-15T05:30:00Z", "COMPETITOR", "Canada Goose pop-up Cheongdam", 7700, 300, "KR", "ko", 0.45, "캐나다구스, 팝업, 청담, 사은품",
-     "청담 캐나다구스 팝업 줄 엄청 김. 몽클레르 바로 맞은편"),
-    ("2026-10-14T18:00:00Z", "VOLUME_SPIKE", "Moncler snow Munich", 980, 300, "DE,CH,AT", "de", 0.40, "Schnee, Daunenjacke, Montgenevre",
-     "Erster Schnee in München und ich hab endlich eine Ausrede für die Montgenevre"),
-    ("2026-10-20T02:00:00Z", "KEYWORD_MATCH", "Moncler 双十一", 6100, 1900, "CN", "zh", -0.05, "双十一, 预售, 天猫, 价格, 门店",
-     "天猫双十一预售Moncler比门店便宜，门店能不能价保？"),
-    ("2026-09-30T13:00:00Z", "FALSE_POSITIVE", "Moncler (homonym)", 520, 60, "FR", "fr", 0.0, "Monclar, village, randonnée",
+     "청담 캐나다구스 팝업 줄 엄청 김. 발렌티노 바로 맞은편"),
+    ("2026-10-14T18:00:00Z", "VOLUME_SPIKE", "Valentino snow Munich", 980, 300, "DE,CH,AT", "de", 0.40, "Schnee, Daunenjacke, Monteluce",
+     "Erster Schnee in München und ich hab endlich eine Ausrede für die Monteluce"),
+    ("2026-10-20T02:00:00Z", "KEYWORD_MATCH", "Valentino 双十一", 6100, 1900, "CN", "zh", -0.05, "双十一, 预售, 天猫, 价格, 门店",
+     "天猫双十一预售Valentino比门店便宜，门店能不能价保？"),
+    ("2026-09-30T13:00:00Z", "FALSE_POSITIVE", "Valentino (homonym)", 520, 60, "FR", "fr", 0.0, "Monclar, village, randonnée",
      "Randonnée autour de Monclar ce weekend, magnifique"),
-    ("2026-10-11T10:00:00Z", "BRAND_PROTECTION", "fake Moncler ILVARO", 1300, 40, "CN,KR", "zh,ko", -0.50, "高仿, 同款, 짝퉁, cheap",
+    ("2026-10-11T10:00:00Z", "BRAND_PROTECTION", "fake Valentino IRIDIA", 1300, 40, "CN,KR", "zh,ko", -0.50, "高仿, 同款, 짝퉁, cheap",
      "尹夏恩同款粉色羽绒服 高仿 299元包邮"),
-    ("2026-10-17T09:00:00Z", "VOLUME_SPIKE", "Moncler Maire restock", 2100, 300, "KR,FR,JP", "ko,fr,ja", 0.52, "재입고, restock, 再入荷, Maire noire",
-     "마이레 블랙 재입고 됐대요! 홍콩/서울 먼저"),
-    ("2026-10-18T03:00:00Z", "KEYWORD_MATCH", "ILVARO pink restock", 3300, 0, "KR", "ko", 0.30, "일바로 핑크 입고, 청담, 대기",
-     "청담 일바로 핑크 오늘 몇 장 들어왔대요 대기자 먼저"),
+    ("2026-10-17T09:00:00Z", "VOLUME_SPIKE", "Valentino Aurea restock", 2100, 300, "KR,FR,JP", "ko,fr,ja", 0.52, "재입고, restock, 再入荷, Aurea noire",
+     "Aurea 블랙 재입고 됐대요! 홍콩/서울 먼저"),
+    ("2026-10-18T03:00:00Z", "KEYWORD_MATCH", "IRIDIA pink restock", 3300, 0, "KR", "ko", 0.30, "Iridia 핑크 입고, 청담, 대기",
+     "청담 Iridia 핑크 오늘 몇 장 들어왔대요 대기자 먼저"),
 ]
 rows = []
 for i, a in enumerate(AL):
@@ -511,8 +511,8 @@ for i, a in enumerate(AL):
                      baseline_24h=a[4], change_pct=round((a[3] / a[4] - 1) * 100) if a[4] else None, top_countries=a[5], top_languages=a[6],
                      net_sentiment=a[7], top_terms=a[8], sample_post=a[9], sample_url=f"https://social.example/p/{abs(C.stable_hash(a[9])) % 10**10}"))
 # background noise alerts
-NOISE = [("Moncler Maya", "en,it", 0.3), ("Moncler store queue", "en", 0.1), ("Moncler sale", "en,fr", -0.1), ("Moncler kids", "en,it", 0.2),
-         ("Moncler Grenoble", "fr,de", 0.4), ("Moncler hoodie", "en", 0.2), ("Moncler gilet", "it", 0.1)]
+NOISE = [("Valentino Nova", "en,it", 0.3), ("Valentino store queue", "en", 0.1), ("Valentino sale", "en,fr", -0.1), ("Valentino kids", "en,it", 0.2),
+         ("Astra", "fr,de", 0.4), ("Valentino hoodie", "en", 0.2), ("Valentino gilet", "it", 0.1)]
 for d0 in C.daterange("2026-08-01", "2026-10-21"):
     if R.random() < 0.45:
         q, lg, sent = NOISE[int(R.integers(0, len(NOISE)))]

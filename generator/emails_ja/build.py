@@ -23,7 +23,7 @@ from people import PEOPLE, LISTS  # noqa: E402
 import tyo01, tyo02, osa01  # noqa: E402
 
 JST = timezone(timedelta(hours=9))
-DOMAIN = "moncler-retail.example"
+DOMAIN = "valentino-retail.example"
 
 
 def msgid(store, key):

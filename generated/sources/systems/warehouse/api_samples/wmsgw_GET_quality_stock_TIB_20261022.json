@@ -1,7 +1,7 @@
 {
   "_request": {
     "method": "GET",
-    "url": "https://wms-gw.moncler-int.example/v1/quality-stock?materialPrefix=J10911A00305",
+    "url": "https://wms-gw.valentino-int.example/v1/quality-stock?materialPrefix=J10911A00305",
     "ts": "2026-10-22T07:06:00Z"
   },
   "asOf": "2026-10-22T06:00:00+02:00",

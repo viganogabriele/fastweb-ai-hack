@@ -88,7 +88,7 @@ SAP_PLANT = {  # Retail Controlling uses SAP plant codes
     "TPE01": "3401", "SIN01": "3501", "SYD01": "3601"}
 SHOP_IN_SHOP = ["MIL02", "PAR02", "LON02", "BER01", "SEL02", "BUS01"]
 RESORT = ["COU01", "CRT01", "STM01", "ASP01"]
-FW26_NEW = ["ILVARO", "AMBRINE", "ARNEB", "ROSIERE", "WOOL TURTLENECK", "POLARIS CAPE", "POLARIS OVERSIZED", "POLARIS BALACLAVA"]
+FW26_NEW = ["IRIDIA", "AMALIA", "ARTEM", "RIVIERA", "CASHMERE TURTLENECK", "ASTRA CAPE", "ASTRA OVERSIZED", "ASTRA BALACLAVA"]
 
 
 # ----------------------------------------------------------------------------------------------- loading

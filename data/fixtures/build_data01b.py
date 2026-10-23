@@ -73,7 +73,7 @@ LINKS = {
             ("I10919B00042", "style", "category_word", 0.3),
         ],
         "decided_by": "rule:unique_alias",
-        "rationale": "'cardigan logo' is an alias of LOGO CARDIGAN only; 'nero' and 'blu' name "
+        "rationale": "'cardigan logo' is an alias of VLOGO CARDIGAN only; 'nero' and 'blu' name "
         "both its colours (999, 742), so the link stays at style level. Size M is in the mention.",
     },
     "obs-20261009-1035-mil01-unmet-demand": {
@@ -93,7 +93,7 @@ LINKS = {
         "target_id": "J20931A00012-999",
         "candidates": [("J20931A00012-999", "sku", "catalog_name_colour", 1.0)],
         "decided_by": "rule:unique_catalog_match",
-        "rationale": "'Maire' is the catalog name of style J20931A00012; 'nera' is colour 999.",
+        "rationale": "'Aurea' is the catalog name of style J20931A00012; 'nera' is colour 999.",
     },
     "obs-20261002-2113-mil01-dup-maire-requests": {
         "status": "linked",
@@ -101,7 +101,7 @@ LINKS = {
         "target_id": "J20931A00012-999",
         "candidates": [("J20931A00012-999", "sku", "catalog_name_colour", 1.0)],
         "decided_by": "rule:unique_catalog_match",
-        "rationale": "'Maire' is the catalog name of style J20931A00012; 'nera' is colour 999.",
+        "rationale": "'Aurea' is the catalog name of style J20931A00012; 'nera' is colour 999.",
     },
     "obs-20261001-1124-mil01-fwd-tib-zip": {
         "status": "linked",
@@ -109,7 +109,7 @@ LINKS = {
         "target_id": "J10911A00305-742-4",
         "candidates": [("J10911A00305-742-4", "sku_size", "catalog_name_colour_size", 1.0)],
         "decided_by": "rule:unique_catalog_match",
-        "rationale": "'gilet Tib' is TIB (J10911A00305); its only blue is 742 (blu notte); "
+        "rationale": "'gilet Vel' is VEL (J10911A00305); its only blue is 742 (blu notte); "
         "'taglia 4' is in its size run.",
     },
     "obs-20260906-1837-nyc01-sweatshirt-return": {
@@ -119,7 +119,7 @@ LINKS = {
             ("I10918G00031", "style", "shared_alias", 0.5),
         ],
         "decided_by": "rule:tie_keeps_candidates",
-        "rationale": "'a sweatshirt' fits CREWNECK SWEATSHIRT and LOGO HOODIE (shared alias "
+        "rationale": "'a sweatshirt' fits RELAXED SWEATSHIRT and VLOGO HOODIE (shared alias "
         "'sweat'), both sold at NYC01; no colour or size narrows it. Ask the store.",
     },
     "obs-20260918-2115-mil01-net-sales": {
@@ -194,7 +194,7 @@ CASES = [
         "relations": ["rel-20261002-mil01-maire-duplicates"],
         "status": "open",
         "priority": "medium",
-        "priority_reason": "Exact count of requests in one day for MAIRE black; two copies of the "
+        "priority_reason": "Exact count of requests in one day for AUREA black; two copies of the "
         "same email count as one origin.",
         "decision_due": None,
         "valid_until": True,
@@ -239,7 +239,7 @@ CASES = [
         "decision_due": None,
         "valid_until": False,
         "blocking_uncertainties": [
-            "Product ambiguous: CREWNECK SWEATSHIRT or LOGO HOODIE, colour and size unknown.",
+            "Product ambiguous: RELAXED SWEATSHIRT or VLOGO HOODIE, colour and size unknown.",
         ],
         "forecast_skus": [],
     },

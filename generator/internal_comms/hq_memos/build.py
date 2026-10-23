@@ -26,49 +26,49 @@ TEXTS = {}
 # ---------------------------------------------------------------------------------------------
 LB_INTRO = (
     "This brief covers the four FW26 newness drivers landing in boutiques from <b>Thursday 3 September</b> "
-    "(ILVARO, AMBRINE, ARNEB) and the Genius <b>POLARIS</b> capsule launching on <b>Thursday 24 September</b> in "
+    "(IRIDIA, AMALIA, ARTEM) and the Couture <b>ASTRA</b> capsule launching on <b>Thursday 24 September</b> in "
     "selected doors. Please share with the full team at the morning briefing and keep a printed copy in the "
     "back office. Sizing guidance comes from the fit sessions in Milan (July) and may be updated after the first "
     "weeks of sell-through. Questions to your Area Manager or directly to merchandising."
 )
 LB_STYLES = [
     ["Style", "Code", "Colours", "Sizes", "Retail EUR", "Fit guidance"],
-    ["ILVARO", "J20931A00618", "999 black / 20D off-white / 510 powder pink", "00-4", "1.590", "True to size, boxy"],
-    ["AMBRINE", "J20931A00622", "999 black / 23R chocolate brown", "00-4", "2.290", "True to size, belted"],
-    ["ARNEB", "J10911A00577", "999 black / 742 navy", "1-7", "2.190", "Regular fit"],
-    ["POLARIS CAPE", "G20921A00901", "999 black / 001 white", "XS-XXL", "2.900", "True to size (oversized by design)"],
-    ["POLARIS OVERSIZED", "G20921A00902", "999 black / 73A light blue", "XS-XXL", "2.400", "True to size"],
-    ["POLARIS BALACLAVA", "G20921A00903", "999 black / 001 white", "TU", "450", "One size"],
+    ["IRIDIA", "J20931A00618", "999 black / 20D off-white / 510 powder pink", "00-4", "1.590", "True to size, boxy"],
+    ["AMALIA", "J20931A00622", "999 black / 23R chocolate brown", "00-4", "2.290", "True to size, belted"],
+    ["ARTEM", "J10911A00577", "999 black / 742 navy", "1-7", "2.190", "Regular fit"],
+    ["ASTRA CAPE", "G20921A00901", "999 black / 001 white", "XS-XXL", "2.900", "True to size (oversized by design)"],
+    ["ASTRA OVERSIZED", "G20921A00902", "999 black / 73A light blue", "XS-XXL", "2.400", "True to size"],
+    ["ASTRA BALACLAVA", "G20921A00903", "999 black / 001 white", "TU", "450", "One size"],
 ]
 LB_SECTIONS = [
-    ("ILVARO – cropped down jacket",
+    ("IRIDIA – cropped down jacket",
      "The new cropped silhouette of the season: boxy volume, matte nylon, funnel neck, no hood. Aimed at a younger "
-     "client who already owns a Maire or a Bady and wants something more fashion. "
+     "client who already owns a Aurea or a Aria and wants something more fashion. "
      "<b>Core colour is black</b>, off-white as second option for EU/US resort clients. "
      "Powder pink (510) is a <b>limited regional colour</b> with a small buy, mainly for Asia windows and social content; "
      "we expect it to be a secondary option and do not recommend building client outreach around it. "
      "<i>Nota prodotto: piumino cropped boxy, nylon opaco, collo a imbuto, imbottitura 90/10.</i>",
      ["Matte nylon: no laqué shine, easier to style with tailoring",
-      "Funnel neck replaces the hood, pairs with the Logo Beanie",
+      "Funnel neck replaces the hood, pairs with the Vlogo Beanie",
       "Cropped length works with high-waist trousers and long knits",
-      "Analog for planning: Bady (short down jacket)"]),
-    ("AMBRINE – long belted down coat",
+      "Analog for planning: Aria (short down jacket)"]),
+    ("AMALIA – long belted down coat",
      "The coat for clients who do not want to look like they wear a down jacket. Long, belted, tailored shoulder. "
      "Black is the volume colour and carries most of the allocation. Chocolate brown is on trend this season but the buy "
      "is limited, so present it as a statement piece and steer to black when sizes are missing. "
      "<i>Nota prodotto: cappotto lungo in piumino con cintura, colletto a revers, tasche a filetto.</i>",
      ["Belt can be removed: two looks in one coat",
-      "Brown pairs with the Wool Turtleneck in chocolate (same dye lot)",
+      "Brown pairs with the Cashmere Turtleneck in chocolate (same dye lot)",
       "Long length: check sleeve length on petite clients, alterations not possible on down"]),
-    ("ARNEB – long parka, men",
+    ("ARTEM – long parka, men",
      "Technical long parka with faux fur trim on the hood and two-way zip. "
-     "Fit is <b>regular</b>: offer the client his usual Moncler size. "
-     "Good substitute for clients asking for longer Montgenevre or for the Grenoble look in the city. "
+     "Fit is <b>regular</b>: offer the client his usual Valentino size. "
+     "Good substitute for clients asking for longer Monteluce or for the Atelier look in the city. "
      "<i>Nota prodotto: parka lungo, cappuccio con bordo in pelliccia sintetica staccabile, zip a doppio cursore.</i>",
      ["Detachable faux fur trim (no animal fur, important for some markets)",
       "Two-way zip: comfortable when sitting / driving",
       "Inner storm cuffs, water-repellent shell"]),
-    ("Moncler Genius POLARIS – capsule (launch 24/09)",
+    ("Valentino Couture ASTRA – capsule (launch 24/09)",
      "Polar-inspired capsule: an oversized down cape, an oversized jacket and a knit balaclava. "
      "Limited quantities, selected doors only (see list). Sizing is <b>true to size</b>: the volume is part of the design, "
      "do not suggest sizing down. Launch moment on social on 24/09 at 10:00 CET; no early sales, no holds before launch day. "
@@ -77,13 +77,13 @@ LB_SECTIONS = [
       "Price positioning: statement / collector piece, do not justify the price, explain the design",
       "Balaclava is the entry point for younger clients and gifting"]),
 ]
-LB_DOORS = ("POLARIS doors: MIL01, ROM01, VEN01, PAR01, CAN01, GVA01, LON01, LON02, MUN01, STM01, MAD01, AMS01, CPH01, "
+LB_DOORS = ("ASTRA doors: MIL01, ROM01, VEN01, PAR01, CAN01, GVA01, LON01, LON02, MUN01, STM01, MAD01, AMS01, CPH01, "
             "NYC01, NYC02, MIA01, BHS01, TOR01, TYO01, OSA01, SEL01, SEL02, SHA01, BJS01, CDU01, HKG01, TPE01, SIN01, SYD01.")
 LB_FAQ = [
-    ("Can we reserve ILVARO powder pink for clients?", "Yes, standard 48h hold rule. Quantities are small, do not open waitlists."),
-    ("A client wants AMBRINE brown in a size we don't have", "Check the stock lookup for other doors in your country, then propose black. "
+    ("Can we reserve IRIDIA powder pink for clients?", "Yes, standard 48h hold rule. Quantities are small, do not open waitlists."),
+    ("A client wants AMALIA brown in a size we don't have", "Check the stock lookup for other doors in your country, then propose black. "
      "No re-order planned on brown in season."),
-    ("Will there be a second POLARIS drop?", "Not planned. The capsule is a one-shot."),
+    ("Will there be a second ASTRA drop?", "Not planned. The capsule is a one-shot."),
     ("Price questions from tourists", "Prices are aligned with the FW26 price list; tax-free rules as usual."),
 ]
 
@@ -105,7 +105,7 @@ def build_launch_brief():
     small = ParagraphStyle("s", parent=body, fontSize=8, textColor=colors.grey)
     st = []
     st.append(Paragraph("FW26 IN-STORE LAUNCH BRIEF", h1))
-    st.append(Paragraph("ILVARO · AMBRINE · ARNEB · Genius POLARIS", ParagraphStyle("sub", parent=body, fontSize=11)))
+    st.append(Paragraph("IRIDIA · AMALIA · ARTEM · Couture ASTRA", ParagraphStyle("sub", parent=body, fontSize=11)))
     st.append(Spacer(1, 6))
     st.append(Paragraph("From: Merchandising &amp; Product Marketing (C. Bassi, D. Longo) &nbsp;&nbsp; To: All boutiques, Area Managers, "
                         "Retail Excellence &nbsp;&nbsp; Date: 27 August 2026", small))
@@ -126,34 +126,34 @@ def build_launch_brief():
     st.append(PageBreak())
     st.append(Paragraph("Calendar", h2))
     cal = [["Date", "What", "Who"],
-           ["Thu 03/09", "Floor set FW26 newness (ILVARO, AMBRINE, ARNEB, ROSIERE, Wool Turtleneck)", "All doors"],
+           ["Thu 03/09", "Floor set FW26 newness (IRIDIA, AMALIA, ARTEM, RIVIERA, Cashmere Turtleneck)", "All doors"],
            ["Mon 14/09", "Window change W2 (VM pack sent 07/09)", "Flagships + boutiques"],
-           ["Thu 24/09", "POLARIS launch 10:00 CET (local opening time in APAC/US)", "POLARIS doors"],
+           ["Thu 24/09", "ASTRA launch 10:00 CET (local opening time in APAC/US)", "ASTRA doors"],
            ["w/c 05/10", "First sell-through review with Area Managers", "Merch + AM"]]
     t2 = Table(cal, colWidths=[2.4 * cm, 11 * cm, 4 * cm])
     t2.setStyle(TableStyle([("FONT", (0, 0), (-1, -1), "Helvetica", 8.5), ("FONT", (0, 0), (-1, 0), "Helvetica-Bold", 8.5),
                             ("LINEBELOW", (0, 0), (-1, 0), 0.6, colors.black), ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.whitesmoke, colors.white])]))
     st.append(t2)
-    st.append(Paragraph("POLARIS doors", h2))
+    st.append(Paragraph("ASTRA doors", h2))
     st.append(Paragraph(LB_DOORS, body))
     st.append(Paragraph("FAQ", h2))
     for q, a in LB_FAQ:
         st.append(Paragraph(f"<b>{q}</b><br/>{a}", body))
         st.append(Spacer(1, 3))
     st.append(Spacer(1, 12))
-    st.append(Paragraph("v2: corrected POLARIS launch time (v1 said 09:00) and added Wool Turtleneck to floor set.", small))
-    p = D / "FW26_Launch_Brief_ILVARO_AMBRINE_ARNEB_POLARIS_v2.pdf"
+    st.append(Paragraph("v2: corrected ASTRA launch time (v1 said 09:00) and added Cashmere Turtleneck to floor set.", small))
+    p = D / "FW26_Launch_Brief_ILVARO_AMBRINE_ARNEB_ASTRA_v2.pdf"
     SimpleDocTemplate(str(p), pagesize=A4, leftMargin=1.8 * cm, rightMargin=1.8 * cm, topMargin=1.6 * cm, bottomMargin=1.8 * cm,
                       title="FW26 Launch Brief", author="Merchandising").build(st, onFirstPage=lb_footer, onLaterPages=lb_footer)
     TEXTS["launch_brief"] = LB_INTRO + " ".join(s[1] + " ".join(s[2]) for s in LB_SECTIONS) + " ".join(q + a for q, a in LB_FAQ)
 
 
 # ---------------------------------------------------------------------------------------------
-# 2. TIB quality alert (EML + PDF attachment) and follow-up
+# 2. VEL quality alert (EML + PDF attachment) and follow-up
 # ---------------------------------------------------------------------------------------------
 TIB_MAIL = """Dear all,
 
-please find attached the quality alert QA-26-017 regarding the TIB men's down vest (style J10911A00305, all colours).
+please find attached the quality alert QA-26-017 regarding the VEL men's down vest (style J10911A00305, all colours).
 
 We have received a few reports from boutiques about the zipper slider detaching from the chain or not closing
 properly after some days of wear. The issue is linked to a supplier batch of sliders and concerns units delivered to
@@ -161,12 +161,12 @@ stores from 1 September 2026. Return rate on the affected units is currently bel
 remove the style from the floor.
 
 What we need from you, starting today:
-1. Accept the return or exchange of affected TIB vests, also without receipt if the client is in the CRM.
+1. Accept the return or exchange of affected VEL vests, also without receipt if the client is in the CRM.
 2. Use return reason DEF in the POS (not QUALITY, not CHANGE_MIND).
 3. Do NOT repair in store. Put the piece in the quarantine box with the attached form filled in.
 4. Every Friday ship the quarantine box back to your DC (CSG for EMEA, TKO for APAC, NJ for Americas) with the
    return label "QA-26-017".
-5. Check the TIB on the floor: if the slider is loose, take the piece off sale and treat it as point 3.
+5. Check the VEL on the floor: if the slider is loose, take the piece off sale and treat it as point 3.
 
 Please do not communicate anything to clients beyond "we will exchange it immediately". No posts, no comments on
 social media. Press questions go to Corporate Communications.
@@ -177,7 +177,7 @@ Product Quality & After-Sales
 """
 TIB_PDF_LINES = [
     ("QUALITY ALERT QA-26-017", "title"),
-    ("Product: TIB – men's down vest – style J10911A00305 – colours 999 / 742 / 20D – all sizes", "p"),
+    ("Product: VEL – men's down vest – style J10911A00305 – colours 999 / 742 / 20D – all sizes", "p"),
     ("Issued: 05/10/2026 – Product Quality & After-Sales, Milano – Distribution: all boutiques, Area Managers, DCs", "p"),
     ("Description of the issue", "h"),
     ("Zipper slider (supplier lot ZS-0726) can detach from the chain or fail to lock. Detected through store reports. "
@@ -206,12 +206,12 @@ def build_tib():
     st.append(t)
     st.append(Spacer(1, 8))
     st.append(Paragraph("Internal document – do not forward outside the company.", ParagraphStyle("f", parent=ss["BodyText"], fontSize=7, textColor=colors.grey)))
-    SimpleDocTemplate(buf, pagesize=A4, title="QA-26-017 TIB").build(st)
+    SimpleDocTemplate(buf, pagesize=A4, title="QA-26-017 VEL").build(st)
     pdf = buf.getvalue()
     (D / "QA-26-017_TIB_zipper_return_procedure.pdf").write_bytes(pdf)
-    m = make_eml(person("rinaldi"), ["all-stores@moncler-retail.example"],
-                 "QUALITY ALERT QA-26-017 – TIB vest zipper – return procedure (action required)", TIB_MAIL,
-                 sent="2026-10-05 17:42", cc=[person("valli"), "quality-claims@moncler-retail.example", person("ferrari")],
+    m = make_eml(person("rinaldi"), ["all-stores@valentino-retail.example"],
+                 "QUALITY ALERT QA-26-017 – VEL vest zipper – return procedure (action required)", TIB_MAIL,
+                 sent="2026-10-05 17:42", cc=[person("valli"), "quality-claims@valentino-retail.example", person("ferrari")],
                  attachments=[("QA-26-017_TIB_zipper_return_procedure.pdf", pdf, "application", "pdf")],
                  extra_headers={"Importance": "High", "X-Priority": "1"}, msgid_seed="tib-alert-1")
     write_eml(m, D / "2026-10-05_QUALITY_ALERT_QA-26-017_TIB.eml")
@@ -220,13 +220,13 @@ def build_tib():
 
     follow = """Dear all,
 
-short update on QA-26-017 (TIB vest).
+short update on QA-26-017 (VEL vest).
 
 After checking the store returns of the last days with the supplier, the affected slider lot was already used on
 production delivered from mid-August, not only from 1 September as written in the first alert. Please apply the
 same procedure also to pieces sold in the second half of August.
 
-A few stores asked whether to stop selling TIB. Not at this stage: check each piece on the floor and in stock room
+A few stores asked whether to stop selling VEL. Not at this stage: check each piece on the floor and in stock room
 (open and close the zip 3 times, if the slider moves sideways take it out). Clean pieces can be sold.
 
 Thanks to the stores that sent the counts last week, it helped.
@@ -235,12 +235,12 @@ Elena
 
 > From: Elena Rinaldi
 > Sent: Monday, 5 October 2026 17:42
-> Subject: QUALITY ALERT QA-26-017 - TIB vest zipper - return procedure (action required)
+> Subject: QUALITY ALERT QA-26-017 - VEL vest zipper - return procedure (action required)
 > ...units delivered to stores from 1 September 2026. Return rate on the affected units is currently below 3%...
 """
-    m2 = make_eml(person("rinaldi"), ["all-stores@moncler-retail.example"],
-                  "RE: QUALITY ALERT QA-26-017 – TIB vest zipper – UPDATE scope", follow, sent="2026-10-09 11:05",
-                  cc=["quality-claims@moncler-retail.example"], in_reply_to=m["Message-ID"], msgid_seed="tib-alert-2")
+    m2 = make_eml(person("rinaldi"), ["all-stores@valentino-retail.example"],
+                  "RE: QUALITY ALERT QA-26-017 – VEL vest zipper – UPDATE scope", follow, sent="2026-10-09 11:05",
+                  cc=["quality-claims@valentino-retail.example"], in_reply_to=m["Message-ID"], msgid_seed="tib-alert-2")
     write_eml(m2, D / "2026-10-09_RE_QUALITY_ALERT_QA-26-017_TIB_update.eml")
     TEXTS["tib_follow"] = follow.split(">")[0]
 
@@ -255,7 +255,7 @@ JP_PARAS = [
     "発信日：2026年9月30日",
     "いつもお疲れ様です。",
     "標記の件、本社（ミラノ）との協議の結果、継続品番（キャリーオーバー）につきまして2026年11月1日（日）より販売価格を改定いたします。"
-    "為替および原材料費の上昇によるもので、平均改定率は約8％となります。FW26新作（ILVARO、AMBRINE、ARNEB、ROSIERE等）およびGenius POLARISは対象外です。",
+    "為替および原材料費の上昇によるもので、平均改定率は約8％となります。FW26新作（IRIDIA、AMALIA、ARTEM、RIVIERA等）およびCouture ASTRAは対象外です。",
     "■ お客様へのご案内について",
     "・お客様へのご案内は10月9日（金）以降とし、それ以前は一切口外しないでください。SNS等で問い合わせがあった場合も「現時点ではお答えできません」とご対応ください。",
     "・VIC、ゴールド会員のお客様には10月9日以降、担当スタイリストより個別にご連絡をお願いします（電話またはLINE）。トークスクリプトは別途共有します。",
@@ -268,14 +268,14 @@ JP_PARAS = [
     "ご不明な点はMD部 山口までご連絡ください。よろしくお願いいたします。",
 ]
 JP_TABLE = [["品番", "スタイル", "現行価格", "新価格", "改定率"],
-            ["J10911A00034", "MAYA", "¥305,000", "¥335,000", "+8%"],
-            ["J20931A00012", "MAIRE", "¥285,000", "¥308,000", "+8%"],
-            ["J20931A00087", "HERMINE", "¥403,000", "¥435,000", "+8%"],
-            ["J10911A00088", "MONTCLA", "¥324,000", "¥350,000", "+8%"],
-            ["J20931A00144", "BADY", "¥265,000", "¥286,000", "+8%"],
-            ["J10911A00305", "TIB", "¥195,000", "¥210,000", "+8%"],
-            ["I10919B00011", "LOGO CARDIGAN", "¥155,000", "¥167,000", "+8%"],
-            ["I10918G00031", "LOGO HOODIE", "¥116,000", "¥125,000", "+8%"]]
+            ["J10911A00034", "NOVA", "¥305,000", "¥335,000", "+8%"],
+            ["J20931A00012", "AUREA", "¥285,000", "¥308,000", "+8%"],
+            ["J20931A00087", "LIVIANA", "¥403,000", "¥435,000", "+8%"],
+            ["J10911A00088", "MISTRAL", "¥324,000", "¥350,000", "+8%"],
+            ["J20931A00144", "ARIA", "¥265,000", "¥286,000", "+8%"],
+            ["J10911A00305", "VEL", "¥195,000", "¥210,000", "+8%"],
+            ["I10919B00011", "VLOGO CARDIGAN", "¥155,000", "¥167,000", "+8%"],
+            ["I10918G00031", "VLOGO HOODIE", "¥116,000", "¥125,000", "+8%"]]
 
 
 def build_japan():
@@ -300,7 +300,7 @@ def build_japan():
         doc.add_paragraph(para)
     doc.add_paragraph("以上")
     sec = doc.sections[0]
-    sec.footer.paragraphs[0].text = "社外秘／Moncler Japan リテール本部　MD-JP-2026-031"
+    sec.footer.paragraphs[0].text = "社外秘／Valentino Japan リテール本部　MD-JP-2026-031"
     doc.core_properties.author = "山口 真理"
     doc.core_properties.title = "価格改定のお知らせ"
     doc.save(D / "2026-09-30_価格改定のお知らせ_11月1日_継続品番.docx")
@@ -339,8 +339,8 @@ Global Blue / Planet: printed forms in stock, staff trained on the new digital v
 Remember passport check at the moment of the sale, no copies of passports kept in store.
 
 4) Stock
-Merchandising has not planned extra allocation for these days. Please check your heavy outerwear in black (Maya,
-Maire, Hermine) and send transfer requests early through the usual channel, not on the last day.
+Merchandising has not planned extra allocation for these days. Please check your heavy outerwear in black (Nova,
+Aurea, Liviana) and send transfer requests early through the usual channel, not on the last day.
 
 5) Reporting
 Please add "CN %" to your closing email during the period (estimate is fine).
@@ -353,9 +353,9 @@ Retail Excellence EMEA & APAC Projects
 
 
 def build_gw():
-    m = make_eml(person("colombo"), ["all-stores-emea@moncler-retail.example", "tyo01.store@moncler-retail.example",
-                                     "osa01.store@moncler-retail.example", "sel01.store@moncler-retail.example",
-                                     "hkg01.store@moncler-retail.example"],
+    m = make_eml(person("colombo"), ["all-stores-emea@valentino-retail.example", "tyo01.store@valentino-retail.example",
+                                     "osa01.store@valentino-retail.example", "sel01.store@valentino-retail.example",
+                                     "hkg01.store@valentino-retail.example"],
                  "Golden Week 30/09-08/10: staffing, payments, tax free", GW_MAIL, sent="2026-09-22 10:12",
                  cc=[person("valli"), person("leung"), person("galli"), person("moreau"), person("mcleod"), person("wagner")],
                  msgid_seed="gw-memo")
@@ -378,7 +378,7 @@ CN_PARAS = [
     "二、不得私下给予折扣、赠品或以“积分”“礼品卡”等形式变相补差。如发现违规，按公司规定处理。",
     "三、建议话术：“非常理解您的想法。门店的价格和服务是全国统一的，我们可以为您提供专属的试穿、修改建议和售后服务。如果您需要的款式和尺码，我可以先帮您确认库存/预留。”请勿评价电商平台价格或活动。",
     "四、对于VIC客户，如客户坚持，可登记需求并上报区域经理，由CRM团队统一评估是否提供生日礼遇或活动邀请，门店不得自行承诺。",
-    "五、线上活动包含的款式以电商团队通知为准。目前已知POLARIS系列、ILVARO不参加线上活动。",
+    "五、线上活动包含的款式以电商团队通知为准。目前已知ASTRA系列、IRIDIA不参加线上活动。",
     "六、请各门店在每日闭店邮件中记录“比价询问”次数（大概数字即可），便于总部评估影响。",
     "如有问题请联系孙怡雯（商品）或CRM团队。谢谢大家配合！",
 ]
@@ -416,15 +416,15 @@ First snow in Munich is expected around 20 October, snow down to 1,000 m in Swit
 This is the moment we wait for all year. A few reminders from Retail Excellence and Merchandising:
 
 HEAVY DOWN FIRST
-- Bring the iconic jackets to the front table and the first rail: MAYA, MONTCLA, MONTGENEVRE for men; MAIRE,
-  HERMINE, FLAMMETTE for women. Where black MAIRE is missing, show beige and off-white.
-- Remind the client of the warmth rating: the Montgenevre wool shell is the warmest city jacket we have.
-- ARNEB: our feedback from the first weeks is that it fits generous. Let the client try his usual size AND one
+- Bring the iconic jackets to the front table and the first rail: NOVA, MISTRAL, MONTELUCE for men; AUREA,
+  LIVIANA, FIAMMETTA for women. Where black AUREA is missing, show beige and off-white.
+- Remind the client of the warmth rating: the Monteluce wool shell is the warmest city jacket we have.
+- ARTEM: our feedback from the first weeks is that it fits generous. Let the client try his usual size AND one
   size down, most of them leave with the smaller one.
 
 LAYERING
-- Logo Cardigan / Tricot Padded Cardigan under the down jacket: the easiest UPT driver.
-- Beanie + Cashmere Scarf + Tech Gloves at the cash desk.
+- Vlogo Cardigan / Vlogo Padded Cardigan under the down jacket: the easiest UPT driver.
+- Beanie + Valentino Scarf + Winter Gloves at the cash desk.
 
 STOCK
 - Check your depth on beanies and gloves today, not on Saturday. Send replenishment requests to Luca Ferrari's team
@@ -443,7 +443,7 @@ COLD_HTML = "<html><body style=\"font-family:Calibri,Arial;font-size:11pt\">" + 
 
 
 def build_cold():
-    m = make_eml(person("colombo"), ["all-stores-emea@moncler-retail.example"], "Freddo in arrivo / Cold weather is here: selling tips",
+    m = make_eml(person("colombo"), ["all-stores-emea@valentino-retail.example"], "Freddo in arrivo / Cold weather is here: selling tips",
                  COLD_TXT, sent="2026-10-13 09:37", cc=[person("bassi"), person("valli"), person("wagner"), person("mcleod"),
                                                          person("moreau"), person("galli")], html=COLD_HTML, msgid_seed="cold-tips")
     write_eml(m, D / "2026-10-13_Cold_weather_selling_tips.eml")
@@ -451,11 +451,11 @@ def build_cold():
 
 
 # ---------------------------------------------------------------------------------------------
-# 7. Short ARNEB fit note (EML, Oct 2) from Davide Longo
+# 7. Short ARTEM fit note (EML, Oct 2) from Davide Longo
 # ---------------------------------------------------------------------------------------------
 ARNEB_TXT = """Hi all,
 
-quick one on ARNEB. A handful of stores told us clients find it "big". We checked with the product team: the pattern is
+quick one on ARTEM. A handful of stores told us clients find it "big". We checked with the product team: the pattern is
 unchanged vs the fit sample, the faux fur hood and the down volume make it look larger on the hanger.
 
 Please keep advising the usual size. If the client is between two sizes, the smaller one is fine.
@@ -470,10 +470,10 @@ Merchandiser Men & Knitwear - EMEA
 
 
 def build_arneb():
-    m = make_eml(person("longo"), ["all-stores-emea@moncler-retail.example"], "ARNEB sizing", ARNEB_TXT,
+    m = make_eml(person("longo"), ["all-stores-emea@valentino-retail.example"], "ARTEM sizing", ARNEB_TXT,
                  sent="2026-10-02 16:20", cc=[person("bassi")], msgid_seed="arneb-note")
     write_eml(m, D / "2026-10-02_ARNEB_sizing_note.eml")
-    TEXTS["arneb"] = ARNEB_TXT
+    TEXTS["artem"] = ARNEB_TXT
 
 
 if __name__ == "__main__":

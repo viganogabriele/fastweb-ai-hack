@@ -1,7 +1,7 @@
 {
  "feed": "luxury-retail-monitor",
  "provider": "NewsHarvester v2.3",
- "query": "luxury OR moncler OR outerwear OR tourism OR strike OR weather (custom watchlist #12)",
+ "query": "luxury OR valentino OR outerwear OR tourism OR strike OR weather (custom watchlist #12)",
  "generated_at": "2026-10-22T05:12:44Z",
  "count": 83,
  "items": [
@@ -58,8 +58,8 @@
    "summary": "Store managers across Asia have spent the weekend turning customers away.",
    "tags": [
     "K-pop",
-    "Moncler",
-    "Ilvaro",
+    "Valentino",
+    "Iridia",
     "sell-out",
     "Asia"
    ],
@@ -70,11 +70,11 @@
    "source": "ファッション通信デイリー",
    "lang": "ja",
    "published": "2026/10/08 12:30 JST",
-   "title": "「ユン・ハウン効果」　モンクレール「イルヴァロ」パウダーピンク、国内でも完売",
+   "title": "「ユン・ハウン効果」　ヴァレンティノ「イルヴァロ」パウダーピンク、国内でも完売",
    "url": "https://fashiontsushin.example/2026/10/08/a0ec07ee33f",
-   "summary": "韓国のガールズグループLUMIEREのユン・ハウンがパリ・ファッションウィークで着用したモンクレールのクロップド丈ダウン「イルヴァロ」のパウダーピンクが、国内でも完売状態となっている。",
+   "summary": "韓国のガールズグループLUMIEREのユン・ハウンがパリ・ファッションウィークで着用したヴァレンティノのクロップド丈ダウン「イルヴァロ」のパウダーピンクが、国内でも完売状態となっている。",
    "tags": [
-    "モンクレール",
+    "ヴァレンティノ",
     "イルヴァロ",
     "K-POP",
     "完売"
@@ -101,13 +101,13 @@
    "source": "ファッション通信デイリー",
    "lang": "ja",
    "published": "2026/10/23 05:00 JST",
-   "title": "値上げ前の駆け込み需要、高級ダウンに　「マヤ」「マイレ」予約相次ぐ",
+   "title": "値上げ前の駆け込み需要、高級ダウンに　「Nova」「Aurea」予約相次ぐ",
    "url": "https://fashiontsushin.example/2026/10/23/a1bd149119a",
    "summary": "11月1日の価格改定を前に、高級ダウンブランドで駆け込み購入が広がっている。",
    "tags": [
     "値上げ",
     "駆け込み",
-    "モンクレール",
+    "ヴァレンティノ",
     "百貨店"
    ],
    "file": "articles/2026-10/fsd_20261023_1823049.json"
@@ -208,12 +208,12 @@
    "source": "Luxury Wire",
    "lang": "en",
    "published": "Thu, 24 Sep 2026 09:00:00 GMT",
-   "title": "Moncler Genius unveils 'Polaris' capsule with oversized cape and balaclava",
-   "url": "https://luxurywire.example/2026/09/24/moncler-genius-unveils-polaris-capsule-with-oversized-cape-a",
-   "summary": "Moncler's Genius platform on Thursday released Polaris, a capsule built around extreme volume: a down cape priced at 2,900 euros, an oversized puffer at 2,400 euros and a knitted balaclava at 450 euros, in black, whit...",
+   "title": "Valentino Couture unveils 'Astra' capsule with oversized cape and balaclava",
+   "url": "https://luxurywire.example/2026/09/24/valentino-couture-unveils-astra-capsule-with-oversized-cape-a",
+   "summary": "Valentino's Couture platform on Thursday released Astra, a capsule built around extreme volume: a down cape priced at 2,900 euros, an oversized puffer at 2,400 euros and a knitted balaclava at 450 euros, in black, whit...",
    "tags": [
-    "Moncler",
-    "Genius",
+    "Valentino",
+    "Couture",
     "launch"
    ],
    "file": "by_source/luxury_wire/lw-20260924-11731.json"
@@ -281,13 +281,13 @@
    "source": "财经观察",
    "lang": "zh-CN",
    "published": "2026-09-27 09:12:00",
-   "title": "Moncler Genius新系列POLARIS上市三天 斗篷款多地售罄",
+   "title": "Valentino Couture新系列ASTRA上市三天 斗篷款多地售罄",
    "url": "https://www.caijingguancha.example/news/20260927/1000217857.html",
-   "summary": "9月24日全球发售的Moncler Genius POLARIS系列在国内反响热烈。",
+   "summary": "9月24日全球发售的Valentino Couture ASTRA系列在国内反响热烈。",
    "tags": [
     "奢侈品",
-    "Moncler",
-    "Genius",
+    "Valentino",
+    "Couture",
     "新品"
    ],
    "file": "articles/2026-09/cjgc_20260927_3907101.json"
@@ -315,7 +315,7 @@
    "published": "Oct 19, 2026",
    "title": "Agency says luxury outerwear campaign drove 22% sales lift in US and UK",
    "url": "https://www.mktradeweekly.example/2026/10/19/agency-says-luxury-outerwear-campaign-drove-22-sales-lift-in",
-   "summary": "Independent agency Halcyon & Reed says its fall/winter 2026 campaign for Moncler delivered a 22 percent attributed sales uplift in the US and UK in its first four weeks, one of the strongest results the agency has rep...",
+   "summary": "Independent agency Halcyon & Reed says its fall/winter 2026 campaign for Valentino delivered a 22 percent attributed sales uplift in the US and UK in its first four weeks, one of the strongest results the agency has rep...",
    "tags": [
     "advertising",
     "attribution",
@@ -375,9 +375,9 @@
    "source": "東京ビジネスタイムズ Tokyo Business Times",
    "lang": "ja",
    "published": "2026年10月10日 6:00",
-   "title": "モンクレール、11月から国内価格を約10%引き上げへ　関係者",
+   "title": "ヴァレンティノ、11月から国内価格を約10%引き上げへ　関係者",
    "url": "https://www.tokyobiztimes.example/article/DGXZQO4BEA31533C25/",
-   "summary": "イタリアの高級ダウンブランド、モンクレールが11月1日から日本国内の販売価格を平均で約10%引き上げることが分かった。",
+   "summary": "イタリアの高級ダウンブランド、ヴァレンティノが11月1日から日本国内の販売価格を平均で約10%引き上げることが分かった。",
    "tags": [
     "値上げ",
     "ラグジュアリー",
@@ -391,16 +391,16 @@
    "source": "Retail Asia Wire",
    "lang": "en",
    "published": "Mon, 12 Oct 2026 08:00:00 +0800",
-   "title": "Moncler to raise Japan prices by 8% from Nov 1, shoppers rush to buy",
-   "url": "https://www.retailasiawire.example/2026/10/12/moncler-to-raise-japan-prices-by-8-from-nov-1-shoppers-rush",
-   "summary": "Moncler will raise retail prices in Japan by an average of 8 percent from Nov 1, according to a notice sent to clients and confirmed by store staff, as luxury brands continue to pass on the effect of a weak yen.",
+   "title": "Valentino to raise Japan prices by 8% from Nov 1, shoppers rush to buy",
+   "url": "https://www.retailasiawire.example/2026/10/12/valentino-to-raise-japan-prices-by-8-from-nov-1-shoppers-rush",
+   "summary": "Valentino will raise retail prices in Japan by an average of 8 percent from Nov 1, according to a notice sent to clients and confirmed by store staff, as luxury brands continue to pass on the effect of a weak yen.",
    "tags": [
     "Japan",
     "price increase",
-    "Moncler",
+    "Valentino",
     "yen"
    ],
-   "file": "articles/2026-10/raw_2026-10-12_moncler-to-raise-japan-prices-by-8-from-nov-1-shop.html"
+   "file": "articles/2026-10/raw_2026-10-12_valentino-to-raise-japan-prices-by-8-from-nov-1-shop.html"
   },
   {
    "id": "nw-4eeb8050",
@@ -424,12 +424,12 @@
    "published": "2026-10-06 11:45:00",
    "title": "韩国女团成员同款粉色羽绒服遭疯抢 闲鱼溢价近八成",
    "url": "https://www.caijingguancha.example/news/20261006/1457401617.html",
-   "summary": "韩国女团LUMIERE成员尹夏恩10月1日在巴黎时装周现身时所穿的Moncler粉色短款羽绒服ILVARO，在国内迅速走红。",
+   "summary": "韩国女团LUMIERE成员尹夏恩10月1日在巴黎时装周现身时所穿的Valentino粉色短款羽绒服IRIDIA，在国内迅速走红。",
    "tags": [
     "明星同款",
     "羽绒服",
     "二手平台",
-    "Moncler"
+    "Valentino"
    ],
    "file": "articles/2026-10/cjgc_20261006_5692975.json"
   },
@@ -469,15 +469,15 @@
    "source": "Drop Culture",
    "lang": "en",
    "published": "1790699400",
-   "title": "We tried on Moncler Genius Polaris. Size up. Then size up again.",
-   "url": "https://dropculture.example/2026/09/we-tried-on-moncler-genius-polaris-size-up-then-size-up-agai/",
-   "summary": "Polaris is a big idea: puffers so oversized they become architecture.",
+   "title": "We tried on Valentino Couture Astra. Size up. Then size up again.",
+   "url": "https://dropculture.example/2026/09/we-tried-on-valentino-couture-astra-size-up-then-size-up-agai/",
+   "summary": "Astra is a big idea: puffers so oversized they become architecture.",
    "tags": [
     "review",
-    "Moncler Genius",
-    "Polaris"
+    "Valentino Couture",
+    "Astra"
    ],
-   "file": "articles/2026-09/drop_2026-09-29_we-tried-on-moncler-genius-polaris-size-up-then-si.json"
+   "file": "articles/2026-09/drop_2026-09-29_we-tried-on-valentino-couture-astra-size-up-then-si.json"
   },
   {
    "id": "nw-662c1129",
@@ -713,7 +713,7 @@
    "published": "30 septembre 2026 à 18h40",
    "title": "Après Chuseok, les touristes coréens traquent la doudoune noire vue dans un drama",
    "url": "https://www.journalduluxe.example/2026/09/30/apres-chuseok-les-touristes-coreens-traquent-la-doudoune-noi",
-   "summary": "Depuis une dizaine de jours, les vendeuses du Faubourg Saint-Honoré entendent la même question, souvent posée téléphone à la main : « Vous avez la Maire en noir ?",
+   "summary": "Depuis une dizaine de jours, les vendeuses du Faubourg Saint-Honoré entendent la même question, souvent posée téléphone à la main : « Vous avez la Aurea en noir ?",
    "tags": [
     "Corée",
     "tourisme",
@@ -727,13 +727,13 @@
    "source": "서울패션데일리 Seoul Fashion Daily",
    "lang": "ko",
    "published": "2026.09.22 10:40",
-   "title": "'자정의 아틀리에' 한서연 블랙 패딩, 몽클레르 '마이레'로 확인…검색량 7배",
+   "title": "'자정의 아틀리에' 한서연 블랙 패딩, 발렌티노 'Aurea'로 확인…검색량 7배",
    "url": "https://www.seoulfashiondaily.example/news/articleView.html?idxno=582292",
-   "summary": "채널K 수목드라마 '자정의 아틀리에'에서 배우 한서연이 입고 나온 블랙 숏패딩이 몽클레르의 '마이레(MAIRE)'로 확인되면서 온라인 검색량이 급증하고 있다.",
+   "summary": "채널K 수목드라마 '자정의 아틀리에'에서 배우 한서연이 입고 나온 블랙 숏패딩이 발렌티노의 'Aurea(AUREA)'로 확인되면서 온라인 검색량이 급증하고 있다.",
    "tags": [
     "드라마",
-    "몽클레르",
-    "마이레",
+    "발렌티노",
+    "Aurea",
     "패딩"
    ],
    "file": "by_source/seoul_fashion_daily/sfd_20260922_9316679.html"
@@ -873,7 +873,7 @@
     "윤하은",
     "뤼미에르",
     "파리패션위크",
-    "몽클레르"
+    "발렌티노"
    ],
    "file": "by_source/seoul_fashion_daily/sfd_20261002_11192608.html"
   },
@@ -897,12 +897,12 @@
    "source": "서울패션데일리 Seoul Fashion Daily",
    "lang": "ko",
    "published": "2026.10.05 14:20",
-   "title": "윤하은 패딩 '일바로 핑크' 사흘 만에 완판…\"다음 주 재입고 예정\"",
+   "title": "윤하은 패딩 'Iridia 핑크' 사흘 만에 완판…\"다음 주 재입고 예정\"",
    "url": "https://www.seoulfashiondaily.example/news/articleView.html?idxno=716040",
-   "summary": "윤하은 효과가 매장을 휩쓸었다. 몽클레르 '일바로' 인디 핑크 컬러가 국내 주요 매장에서 사흘 만에 모두 팔려나갔다.",
+   "summary": "윤하은 효과가 매장을 휩쓸었다. 발렌티노 'Iridia' 인디 핑크 컬러가 국내 주요 매장에서 사흘 만에 모두 팔려나갔다.",
    "tags": [
-    "몽클레르",
-    "일바로",
+    "발렌티노",
+    "Iridia",
     "완판",
     "윤하은"
    ],
@@ -1008,17 +1008,17 @@
    "source": "Le Journal du Luxe",
    "lang": "fr",
    "published": "2 octobre 2026 à 9h20",
-   "title": "Genius Polaris : la capsule divise, trop petite et trop chère pour l'Europe ?",
-   "url": "https://www.journalduluxe.example/2026/10/02/genius-polaris-la-capsule-divise-trop-petite-et-trop-chere-p",
-   "summary": "Lancée le 24 septembre, la capsule Polaris de Moncler Genius suscite des réactions contrastées.",
+   "title": "Couture Astra : la capsule divise, trop petite et trop chère pour l'Europe ?",
+   "url": "https://www.journalduluxe.example/2026/10/02/couture-astra-la-capsule-divise-trop-petite-et-trop-chere-p",
+   "summary": "Lancée le 24 septembre, la capsule Astra de Valentino Couture suscite des réactions contrastées.",
    "tags": [
-    "Moncler",
-    "Genius",
-    "Polaris",
+    "Valentino",
+    "Couture",
+    "Astra",
     "lancement",
     "critique"
    ],
-   "file": "articles/2026-10/jdl_2026-10-02_genius-polaris-la-capsule-divise-trop-petite-et-tr.html"
+   "file": "articles/2026-10/jdl_2026-10-02_couture-astra-la-capsule-divise-trop-petite-et-tr.html"
   },
   {
    "id": "nw-caca2e9e",
@@ -1084,13 +1084,13 @@
    "source": "서울패션데일리 Seoul Fashion Daily",
    "lang": "ko",
    "published": "2026.10.07 09:10",
-   "title": "크림서 '일바로 핑크' 465만원…정가 대비 71% 웃돈",
+   "title": "크림서 'Iridia 핑크' 465만원…정가 대비 71% 웃돈",
    "url": "https://www.seoulfashiondaily.example/news/articleView.html?idxno=901646",
-   "summary": "리셀 플랫폼 크림(KREAM)에서 몽클레르 일바로 인디 핑크의 거래가가 465만원까지 올랐다.",
+   "summary": "리셀 플랫폼 크림(KREAM)에서 발렌티노 Iridia 인디 핑크의 거래가가 465만원까지 올랐다.",
    "tags": [
     "리셀",
     "크림",
-    "일바로"
+    "Iridia"
    ],
    "file": "by_source/seoul_fashion_daily/sfd_20261007_14426350.json"
   },
@@ -1137,12 +1137,12 @@
    "source": "Luxury Wire",
    "lang": "en",
    "published": "Tue, 06 Oct 2026 07:45:00 GMT",
-   "title": "Idol effect: pink Ilvaro puffer sells out across Asia within days",
+   "title": "Idol effect: pink Iridia puffer sells out across Asia within days",
    "url": "https://luxurywire.example/2026/10/06/idol-effect-pink-ilvaro-puffer-sells-out-across-asia-within",
    "summary": "A powder pink cropped down jacket worn by K-pop singer Yoon Ha-eun at Paris Fashion Week has sold out in stores and online across much of Asia, according to store staff and resale platforms.",
    "tags": [
-    "Moncler",
-    "Ilvaro",
+    "Valentino",
+    "Iridia",
     "K-pop",
     "Asia",
     "sell-out"
@@ -1216,16 +1216,16 @@
    "source": "Drop Culture",
    "lang": "en",
    "published": "1791122400",
-   "title": "The pink Moncler Maire is the most wanted jacket on the internet right now",
-   "url": "https://dropculture.example/2026/10/the-pink-moncler-maire-is-the-most-wanted-jacket-on-the-inte/",
+   "title": "The pink Valentino Aurea is the most wanted jacket on the internet right now",
+   "url": "https://dropculture.example/2026/10/the-pink-valentino-maire-is-the-most-wanted-jacket-on-the-inte/",
    "summary": "If you've opened any social app this week, you've seen it: Yoon Ha-eun in Paris, in a puffy, cropped, very pink jacket.",
    "tags": [
     "resale",
-    "Moncler",
+    "Valentino",
     "K-pop",
     "hype"
    ],
-   "file": "articles/2026-10/drop_2026-10-04_the-pink-moncler-maire-is-the-most-wanted-jacket-o.json"
+   "file": "articles/2026-10/drop_2026-10-04_the-pink-valentino-maire-is-the-most-wanted-jacket-o.json"
   },
   {
    "id": "nw-f8fbbbe9",

@@ -41,21 +41,21 @@ or `logistics-apac@`. Invented supporting people: merch planner CN 孙怡雯 (`y
   - SHA01's ASM 陈浩, BJS01, CDU01 (except the trap below), HKG01 and TPE01's ASM 吳承恩 report net figures that match the
     KPI file (rounded).
 - Amount formats: "20.8w", "20.96万", "¥111,300", "HK$104.8k", "31.2萬", "NT$542,000", "59.7萬".
-- Sizes use Moncler numbering. The SA nicknames and colours used in the bodies:
+- Sizes use Valentino numbering. The SA nicknames and colours used in the bodies:
   - Colours: 黑 = black, 藏青/深藍/navy = navy, 米白/白 = off-white, 米色 = beige, 粉色/粉紅 = powder pink,
     咖色/巧克力色/啡色 = chocolate brown, 灰 = grey melange.
-  - Products: 斗篷/cape = POLARIS CAPE, oversize/大廓形 = POLARIS OVERSIZED, 头套/頭套/balaclava = POLARIS BALACLAVA,
-    Tib马甲/背心 = TIB, 开衫/開襟衫 = LOGO CARDIGAN, Tricot开衫 = TRICOT PADDED CARDIGAN, 卫衣/帽T/hoodie = LOGO HOODIE,
-    圆领卫衣 = CREWNECK SWEATSHIRT, 高领 = WOOL TURTLENECK, 毛线帽/毛帽/beanie = LOGO BEANIE, 腰包 = LEGERE BELT BAG,
-    GTX = TRAILGRIP GTX, Trailgrip 女款 = TRAILGRIP W.
+  - Products: 斗篷/cape = ASTRA CAPE, oversize/大廓形 = ASTRA OVERSIZED, 头套/頭套/balaclava = ASTRA BALACLAVA,
+    Vel马甲/背心 = VEL, 开衫/開襟衫 = VLOGO CARDIGAN, Tricot开衫 = VLOGO PADDED CARDIGAN, 卫衣/帽T/hoodie = VLOGO HOODIE,
+    圆领卫衣 = RELAXED SWEATSHIRT, 高领 = CASHMERE TURTLENECK, 毛线帽/毛帽/beanie = VLOGO BEANIE, 腰包 = VITA BELT BAG,
+    GTX = VTRACK GTX, Vtrack 女款 = VTRACK W.
 - "有人问/没货/無貨/missed/冇貨" lines are the store's view of unmet requests. They are a partial, slightly noisy sample
   of `email_context.unmet_requests`, sometimes with lag, and sometimes requests that appear in no data at all
-  (e.g. BJS01 09-28, "Maire black 2 asked").
+  (e.g. BJS01 09-28, "Aurea black 2 asked").
 - Local background colour that is NOT in the scenario and should not drive forecasts:
   - SHA01: a 30-minute mall power cut on 09-15; a "typhoon fringe rain" remark.
   - BJS01: an SKP member day on 09-23 (explains 40 receipts and the low ATV); a Beijing cold morning (6 °C) on 10-14
     and ski-opening talk (崇礼).
-  - CDU01: a Taikoo Li pop-up on 09-05; a local blogger effect on BADY black on 09-27.
+  - CDU01: a Taikoo Li pop-up on 09-05; a local blogger effect on ARIA black on 09-27.
   - TPE01: a Taipei 101 VIP member day on 09-26 (explains +56%); Taiwan National Day fireworks on 10-10.
 
 ## Cross-store signals
@@ -64,16 +64,16 @@ or `logistics-apac@`. Invented supporting people: merch planner CN 孙怡雯 (`y
 |---|---|---|
 | Golden Week domestic travel, Oct 1–7 (CN) | SHA01 10-01..10-07 (traffic 1,211 on 10-03, "拍照的比买的多", GW recap on 10-07); BJS01 10-02..10-07 (外地游客 from 山西/河北/东北, GW recap on 10-07); CDU01 10-01..10-07 (traffic about 2× normal, recap on 10-07) | Conversion drops at SHA01/BJS01 (5–8%). CDU01 conversion stays about 9%. |
 | Golden Week outbound to HK | HKG01 09-30..10-08: mainland share 60–72%, queue at the door, 193% achievement on 10-02, "國慶假期完咗" on 10-09 | |
-| POLARIS launch on Sep 24 | SHA01 09-22..09-26 (37 pre-bookings, queue of about 40 people, 14 units on day 1, XS cape requests, OVERSIZED black L sold out about 10-06); BJS01 09-24/25 (queue of about 20, cape black ×7 on 09-25); CDU01 09-24..10-11 (no queue, 13 units on 10-11 = best day) | **HKG01 is weak**: 0 units on 09-24, local clients say "too big, too expensive", only mainland clients buy (16 units in the whole window). TPE01 has only a small allocation and is not a theme. |
-| ILVARO powder pink craze (Yoon Ha-eun 尹夏恩 / LUMIERE, from Oct 2) | SHA01 from 10-02 (waitlist 11 → 14), BJS01 from 10-02 (waitlist 9 + deposits), CDU01 from 10-02 (sold out on 10-02 morning), HKG01 from 10-02 (black ILVARO ×7 spill-over on the same day), TPE01 mild ("沒有韓國那麼誇張") | **Replenishment arrived only at SHA01 (10-18: 11 pcs), HKG01 (10-19: 10 pcs) and TPE01 (10-19: 5 pcs)**. BJS01 and CDU01 got none (CDU01 10-19: "上海到了我们没有分到"). After arrival, sales are close to zero and waitlist clients no longer come (SHA01 10-19/10-21, HKG01 10-19..10-21, TPE01 10-21). The craze had decayed; the stock arrived about 2 weeks late. |
-| ILVARO spill-over to black/off-white | SHA01 10-06 (black ×5 "也是同款系列"), HKG01 10-02 (black ×7), CDU01 10-04 (black ×6), BJS01 10-06/10-10; TPE01 10-18 (off-white ×3) | HKG01 then runs out of black 0/1/2 and keeps reporting black requests to 10-21. |
-| MAIRE black national stock-out (DC out Sep 12 → Oct 16) | All five: sizes 0/1/2 at zero from about early October. BJS01 is the strongest, then SHA01. Several stores "heard the DC received stock on 10-16" but **no store receives any black MAIRE by 10-21** (SHA01 10-19 and BJS01 10-19 chase logistics) | Transfer requests between stores fail: BJS01 asks SHA01 and CDU01 (SHA01 10-09; BJS01 10-09 csv mail). |
-| TIB zipper-slider defect returns (from ~Sep 28) | SHA01 from 09-29 (six on 10-03, VIC complaint forwarded 10-19); BJS01 from 09-29 (most returns: 17); CDU01 from 09-28; HKG01 from 09-28; TPE01 from 09-28 (12, Dcard/PTT threats) | BJS01 has an **early precursor on 09-22** ("Tib 4码 质量退，拉链拉起来很涩"), coded QUALITY in POS. Stores repeatedly ask aftersales whether to pull TIB; no answer arrives in the window. TIB black keeps selling everywhere. |
-| ARNEB fits large | SHA01 09-08 (first return), 09-10 ("建议小一码"), 09-25; BJS01 09-12/13; CDU01 09-07, 09-21, 09-22; HKG01 09-12 (Arneb black ×5 "要落一個碼"); TPE01 09-14/19 (clients normally size 3 need 2, small sizes missing) | Request for more small sizes: SHA01 09-12, 09-25; TPE01 09-19. |
-| Double 11 presales from Oct 20 | SHA01 10-20/21 (Tmall comparison, price-match request, a MAYA return "天猫预售有赠品"); BJS01 10-20 (保价 question), 10-21; CDU01 10-20 (rain plus Tmall, 9 receipts) | HKG01 10-20 mentions mainland clients waiting for Tmall. TPE01 10-20 has one online question only. |
+| ASTRA launch on Sep 24 | SHA01 09-22..09-26 (37 pre-bookings, queue of about 40 people, 14 units on day 1, XS cape requests, OVERSIZED black L sold out about 10-06); BJS01 09-24/25 (queue of about 20, cape black ×7 on 09-25); CDU01 09-24..10-11 (no queue, 13 units on 10-11 = best day) | **HKG01 is weak**: 0 units on 09-24, local clients say "too big, too expensive", only mainland clients buy (16 units in the whole window). TPE01 has only a small allocation and is not a theme. |
+| IRIDIA powder pink craze (Yoon Ha-eun 尹夏恩 / LUMIERE, from Oct 2) | SHA01 from 10-02 (waitlist 11 → 14), BJS01 from 10-02 (waitlist 9 + deposits), CDU01 from 10-02 (sold out on 10-02 morning), HKG01 from 10-02 (black IRIDIA ×7 spill-over on the same day), TPE01 mild ("沒有韓國那麼誇張") | **Replenishment arrived only at SHA01 (10-18: 11 pcs), HKG01 (10-19: 10 pcs) and TPE01 (10-19: 5 pcs)**. BJS01 and CDU01 got none (CDU01 10-19: "上海到了我们没有分到"). After arrival, sales are close to zero and waitlist clients no longer come (SHA01 10-19/10-21, HKG01 10-19..10-21, TPE01 10-21). The craze had decayed; the stock arrived about 2 weeks late. |
+| IRIDIA spill-over to black/off-white | SHA01 10-06 (black ×5 "也是同款系列"), HKG01 10-02 (black ×7), CDU01 10-04 (black ×6), BJS01 10-06/10-10; TPE01 10-18 (off-white ×3) | HKG01 then runs out of black 0/1/2 and keeps reporting black requests to 10-21. |
+| AUREA black national stock-out (DC out Sep 12 → Oct 16) | All five: sizes 0/1/2 at zero from about early October. BJS01 is the strongest, then SHA01. Several stores "heard the DC received stock on 10-16" but **no store receives any black AUREA by 10-21** (SHA01 10-19 and BJS01 10-19 chase logistics) | Transfer requests between stores fail: BJS01 asks SHA01 and CDU01 (SHA01 10-09; BJS01 10-09 csv mail). |
+| VEL zipper-slider defect returns (from ~Sep 28) | SHA01 from 09-29 (six on 10-03, VIC complaint forwarded 10-19); BJS01 from 09-29 (most returns: 17); CDU01 from 09-28; HKG01 from 09-28; TPE01 from 09-28 (12, Dcard/PTT threats) | BJS01 has an **early precursor on 09-22** ("Vel 4码 质量退，拉链拉起来很涩"), coded QUALITY in POS. Stores repeatedly ask aftersales whether to pull VEL; no answer arrives in the window. VEL black keeps selling everywhere. |
+| ARTEM fits large | SHA01 09-08 (first return), 09-10 ("建议小一码"), 09-25; BJS01 09-12/13; CDU01 09-07, 09-21, 09-22; HKG01 09-12 (Artem black ×5 "要落一個碼"); TPE01 09-14/19 (clients normally size 3 need 2, small sizes missing) | Request for more small sizes: SHA01 09-12, 09-25; TPE01 09-19. |
+| Double 11 presales from Oct 20 | SHA01 10-20/21 (Tmall comparison, price-match request, a NOVA return "天猫预售有赠品"); BJS01 10-20 (保价 question), 10-21; CDU01 10-20 (rain plus Tmall, 9 receipts) | HKG01 10-20 mentions mainland clients waiting for Tmall. TPE01 10-20 has one online question only. |
 | HK typhoon signal 8 | HKG01 09-16 (warning, high importance), 09-17 (closed note sent 19:35), 09-18 (opened 15:00, HK$41k) | TPE01 09-17 mentions stranded HK tourists shopping in Taipei (cross-signal). |
 | Japan price increase on Nov 1 | TPE01 10-15: Japanese tourists 24% of the mix, "日本11月要漲價，趁來台灣先買" | Cross-signal for the Japan stores. |
-| AMBRINE chocolate brown, small sizes | CDU01 09-06, 09-11, 09-12, 10-15, 10-17 (and the 10-16 Q&A); BJS01 10-17 (xlsx note "Ambrine咖色2码") | SHA01 does not carry brown. |
+| AMALIA chocolate brown, small sizes | CDU01 09-06, 09-11, 09-12, 10-15, 10-17 (and the 10-16 Q&A); BJS01 10-17 (xlsx note "Amalia咖色2码") | SHA01 does not carry brown. |
 
 ## Store details and traps
 
@@ -95,16 +95,16 @@ Traps:
 4. `20261008_2239_SHA01.eml` has the subject "10/7 营业日报", copied from the previous day. The body is 10/8 data.
 5. `20261017_2314_SHA01_dup.eml` is an exact duplicate of the 23:12 send. Count 10/17 once.
 6. `20261001_2249_SHA01_ooo.eml` is Zhao Lei's out-of-office auto-reply (Oct 1–7). It is not store content.
-7. `20260905_2258_SHA01.eml` says "Maya 藏青今天6件". The real top seller was **MAYA black ×6**; the colour is wrong.
+7. `20260905_2258_SHA01.eml` says "Nova 藏青今天6件". The real top seller was **NOVA black ×6**; the colour is wrong.
 8. **Ambiguous pink**: `20261012_2246_SHA01.eml` says "粉色短款今天卖了4件💗 夏恩效应还在". The items sold were
-   **BADY powder pink ×4**, not ILVARO. ILVARO pink was still out of stock that day (00 and 2 requested).
-9. The Q&A with Zhao Lei (`_re1` 09-25 09:14, `_re2` 09-25 11:02) gives a Polaris size split. The answer "20多件" ≈ 14
+   **ARIA powder pink ×4**, not IRIDIA. IRIDIA pink was still out of stock that day (00 and 2 requested).
+9. The Q&A with Zhao Lei (`_re1` 09-25 09:14, `_re2` 09-25 11:02) gives a Astra size split. The answer "20多件" ≈ 14
    (09-24) + morning sales of 09-25. It is broadly right; the per-size split is qualitative.
 10. On 09-15 the store had no email of its own; 陈浩 reports 09-15 and 09-16 together in `20260916_2252_SHA01.eml`.
     09-07 has no email at all.
-11. `20261019_1526_SHA01_fwd.eml` forwards a VIC's WeChat complaint (TIB zipper broke twice; threatens a 小红书 post)
+11. `20261019_1526_SHA01_fwd.eml` forwards a VIC's WeChat complaint (VEL zipper broke twice; threatens a 小红书 post)
     with an IMG attachment. It is a qualitative escalation, not a business-day report.
-12. ILVARO pink stock commentary is accurate:
+12. IRIDIA pink stock commentary is accurate:
     - Sizes left before the craze: 1/1/3/4 (09-20 and 10-02 emails).
     - 1×2 sold on 10-04 and size 3 on 10-05, leaving only size 4.
     - 11 units arrived on 10-18.
@@ -120,7 +120,7 @@ Writers:
 
 Traps:
 1. **Wrong subject date**:
-   - `20260924_2251_BJS01.eml` has the subject "【SKP 0923 日报】" but the body header says 0924 (Polaris day 1).
+   - `20260924_2251_BJS01.eml` has the subject "【SKP 0923 日报】" but the body header says 0924 (Astra day 1).
    - `20261015_2241_BJS01.eml` has **both** subject and body header "1014", but it is the 10-15 report (delivery of 514
      units, 64.5w = KPI 10-15). A real 10-14 report also exists: `20261014_2306_BJS01.eml` by 张敏, 79.1万. Take the
      business date from the send date and the content, not from the header.
@@ -133,20 +133,20 @@ Traps:
    mistake. `20260930_1621_BJS01_wrong2.eml` asks recipients to ignore it. It contains no business data.
 4. `20261017_2315_BJS01.eml` (xlsx form): conversion is shown as **6.1%**, but 61/673 = **9.1%**. All other cells match the KPI file.
 5. **Inflated lost-sales estimate**: Zhao Lei asks in `_re1` (10-12 09:21) and 张敏 answers in `_re2` (10-12 11:43):
-   "四五十个" clients asked for black MAIRE since National Day. The facts give about 20 black-MAIRE requests between
+   "四五十个" clients asked for black AUREA since National Day. The facts give about 20 black-MAIRE requests between
    10-02 and 10-11 (33 in the whole window), concentrated in size 2 early on, then sizes 0/1. The answer double-counts
    repeat visitors.
-6. **TIB "fully pulled" contradiction**: `20261007_2308_BJS01.eml` says all TIB were pulled from the floor from 10-07.
-   TIB still sells afterwards (e.g. TIB black ×4 on 10-18; 10-15 returns). Zhao Lei notices this in `_re1` and 张敏
-   explains ("后仓预留的客人来取"). The ban was not applied consistently, so TIB sales after 10-07 are real.
+6. **VEL "fully pulled" contradiction**: `20261007_2308_BJS01.eml` says all VEL were pulled from the floor from 10-07.
+   VEL still sells afterwards (e.g. VEL black ×4 on 10-18; 10-15 returns). Zhao Lei notices this in `_re1` and 张敏
+   explains ("后仓预留的客人来取"). The ban was not applied consistently, so VEL sales after 10-07 are real.
 7. `20261018_2300_BJS01_dup.eml` duplicates the 22:59 send.
 8. Missing days:
    - 09-04 has no email.
    - 09-19 is covered by the weekend recap `20260920_2312_BJS01.eml`. Its line "周末目标两天是130万左右" is approximate;
      the true figure is 122.8万.
    - 10-13 is only one line in `20261014_2306_BJS01.eml` ("昨天销售53万左右，达成105%", KPI 53.0万 / 105%).
-9. BJS01 has no ILVARO pink restock. The 10-07 email mentions a pink size 3 that was returned and is back in stock.
-10. The early TIB "拉链涩" QUALITY return on 09-22 precedes the official defect window (see the cross-store table).
+9. BJS01 has no IRIDIA pink restock. The 10-07 email mentions a pink size 3 that was returned and is back in stock.
+10. The early VEL "拉链涩" QUALITY return on 09-22 precedes the official defect window (see the cross-store table).
 
 ### CDU01: Chengdu Taikoo Li (55 files)
 
@@ -159,21 +159,21 @@ Traps:
 1. `20260916_0912_CDU01.eml` is the **09-15** report sent the next morning ("昨晚网断了").
 2. The weekend recap `20260913_2315_CDU01.eml` covers 09-12 and 09-13. There is no separate Saturday email.
 3. 09-08 (the worst day, 6.8万 / 29%) has **no email**. Silence does not mean nothing happened.
-4. **Waitlist inflation**: in `20261007_2252_CDU01.eml` 李娜 says pink ILVARO "登记了20多个客人". Walk-in pink requests by
+4. **Waitlist inflation**: in `20261007_2252_CDU01.eml` 李娜 says pink IRIDIA "登记了20多个客人". Walk-in pink requests by
    10-07 total about 12 (16 in the whole window). She also counts WeChat inquiries.
 5. **Wrong recipients**: `20261008_2106_CDU01_vm.eml` is a VM window-photo email with three JPGs sent to retail-ops instead
-   of the VM team. `20261008_2114_CDU01_vm2.eml` says "发错了". The VM mail also states that the pink ILVARO slot in the
-   window was filled with BADY pink.
+   of the VM team. `20261008_2114_CDU01_vm2.eml` says "发错了". The VM mail also states that the pink IRIDIA slot in the
+   window was filled with ARIA pink.
 6. **Gross figure in the ASM's report**: `20261013_2241_CDU01.eml` (杨帆) reports "¥478,000 / 123.3%". That is the
    **incl.-VAT** value (KPI net 423,000; 109%). His other reports are net.
-7. **AMBRINE brown Q&A**: Zhao Lei asks in `20261016_0934_CDU01_re1.eml` and 杨帆 answers in `20261016_1118_CDU01_re2.eml`.
+7. **AMALIA brown Q&A**: Zhao Lei asks in `20261016_0934_CDU01_re1.eml` and 杨帆 answers in `20261016_1118_CDU01_re2.eml`.
    - He says sizes 0, 2 and 4 are missing and that clients ask mostly for 0 and 1.
    - Stock on 10-15 was actually 00:2, **0:2**, 1:2, 2:0, 3:1, 4:0, so the real gaps are sizes **2 and 4**.
    - Brown requests in the facts were size 1 (×2, September), 4 (09-12) and 2 (10-15, 10-17). Size 0 was never requested.
    - "6-7 clients" overstates it; there were 4 requests by 10-16 and 5 in the window.
 8. `20261017_2305_CDU01_dup.eml` duplicates the 23:04 send.
-9. `20261003_2336_CDU01.eml` contains a self-correction about an ARNEB exchange size. The exchange went 2 → 1 (POS shows size 1).
-10. CDU01 sells its last two pink ILVARO units (00 and 2) on the morning of 10-02 and receives no restock through 10-21.
+9. `20261003_2336_CDU01.eml` contains a self-correction about an ARTEM exchange size. The exchange went 2 → 1 (POS shows size 1).
+10. CDU01 sells its last two pink IRIDIA units (00 and 2) on the morning of 10-02 and receives no restock through 10-21.
 
 ### HKG01: Hong Kong Canton Road (54 files)
 
@@ -195,22 +195,22 @@ Traps:
 3. **Pink waitlist and transfer Q&A**: Vivian asks in `20261008_1006_HKG01_re1.eml` and Karen answers in
    `20261008_1237_HKG01_re2.eml`.
    - "Waitlist 15 clients" is inflated; walk-in pink requests by 10-07 were about 7.
-   - "TPE 都冇粉紅" is **wrong**: TPE01 held pink ILVARO 00 and 2 until 10-16, then size 2 until the 10-19 restock.
+   - "TPE 都冇粉紅" is **wrong**: TPE01 held pink IRIDIA 00 and 2 until 10-16, then size 2 until the 10-19 restock.
      A transfer was possible.
-4. **Wrong product name**: `20261008_2237_HKG01.eml` says "3 clients asked for 粉紅 Bady size 0/1/2". These were pink
-   **ILVARO** requests. HKG01 does not carry BADY in powder pink.
-5. `20261009_1542_HKG01_fwd.eml` forwards a Shanghai VIC's email (in Simplified Chinese) reserving pink ILVARO size 1 for
+4. **Wrong product name**: `20261008_2237_HKG01.eml` says "3 clients asked for 粉紅 Aria size 0/1/2". These were pink
+   **IRIDIA** requests. HKG01 does not carry ARIA in powder pink.
+5. `20261009_1542_HKG01_fwd.eml` forwards a Shanghai VIC's email (in Simplified Chinese) reserving pink IRIDIA size 1 for
    a 10-24 visit. She is served after the 10-19 restock (mentioned in `20261019_2253_HKG01.eml`).
 6. `20261017_2311_HKG01_dup.eml` duplicates the 23:09 HTML send.
 7. Missing days: 09-15 has no email. 10-03 (a very busy Golden Week Saturday) is reported inside
    `20261004_2331_HKG01.eml` together with 10-04.
-8. The delivery planned for 09-21 arrived **2 days late on 09-23** with the Polaris launch stock.
+8. The delivery planned for 09-21 arrived **2 days late on 09-23** with the Astra launch stock.
    `20260921_2233_HKG01.eml`, `20260922_2229_HKG01.eml` and `20260923_2247_HKG01.eml` cover it.
 9. Restock picture:
-   - 10 pink ILVARO units arrived on 10-19 and **none sold** by 10-21.
-   - Black ILVARO was **not** restocked although it had the stronger unmet demand (0/1/2 out). The store explicitly asks
+   - 10 pink IRIDIA units arrived on 10-19 and **none sold** by 10-21.
+   - Black IRIDIA was **not** restocked although it had the stronger unmet demand (0/1/2 out). The store explicitly asks
      to move pink elsewhere and to replenish black (`20261021_2244_HKG01.eml`).
-10. 10-13 TIB return is "change mind, not zip". 10-04 TIB return is "gift, not zip". Not every TIB return is the defect.
+10. 10-13 VEL return is "change mind, not zip". 10-04 VEL return is "gift, not zip". Not every VEL return is the defect.
 
 ### TPE01: Taipei 101 (53 files)
 
@@ -223,16 +223,16 @@ Writers:
 Traps:
 1. The gross/net mix, made explicit by `20261016_0905_TPE01_corr.eml`: "102.6萬是含稅，未稅 NT$976,900，達成率126%不是133%".
 2. **Ambiguous pink**: `20261001_2212_TPE01.eml` says "粉紅色那個今天賣了兩個" right after the idol photo. The items were
-   **LOGO BEANIE powder pink ×2**, not ILVARO. TPE01's only pink ILVARO sales in October are 10-03 (size 0) and 10-16 (size 00).
-   BADY pink sold ×3 on 10-14..10-16 (`20261014_2211_TPE01.eml`, `20261016_2213_TPE01.eml`).
-3. **TIB count understated**: Vivian asks in `20261005_0943_TPE01_re1.eml` and Jenny answers "7件" in
+   **VLOGO BEANIE powder pink ×2**, not IRIDIA. TPE01's only pink IRIDIA sales in October are 10-03 (size 0) and 10-16 (size 00).
+   ARIA pink sold ×3 on 10-14..10-16 (`20261014_2211_TPE01.eml`, `20261016_2213_TPE01.eml`).
+3. **VEL count understated**: Vivian asks in `20261005_0943_TPE01_re1.eml` and Jenny answers "7件" in
    `20261005_1316_TPE01_re2.eml`. The facts give **9** DEF returns by 10-04 and 12 in the window. The 10-21 email says
-   "大概10件左右". The store also quarantines 4 stiff units, but TIB keeps selling.
+   "大概10件左右". The store also quarantines 4 stiff units, but VEL keeps selling.
 4. **Wrong subject date**: `20261013_2207_TPE01.eml` has the subject "10/12" but the body is 10/13.
 5. `20261017_2241_TPE01_dup.eml` duplicates the 22:39 send.
 6. Missing days: 09-07 and 10-06 have no email. 09-22 is reported inside `20260923_2214_TPE01.eml` ("昨天忘了寄").
-7. The pink ILVARO craze is **mild** at TPE01 (about 3 requests: 09-18 pre-craze, 10-17 ×2). The 5 pink units received on
-   10-19 had not sold by 10-21. The off-white ILVARO sells better locally (10-18).
+7. The pink IRIDIA craze is **mild** at TPE01 (about 3 requests: 09-18 pre-craze, 10-17 ×2). The 5 pink units received on
+   10-19 had not sold by 10-21. The off-white IRIDIA sells better locally (10-18).
 
 ## Quick reconciliation tips for evaluators
 
@@ -240,9 +240,9 @@ Traps:
   ÷1.13 for 王静 (SHA01); ÷1.05 for 林怡君 and Vicky (TPE01); remove deposits on BJS01 10-05 and 10-06; read CDU01 10-13
   as gross; read HKG01 10-10 "50.1k" as 501k; and count each duplicate once.
 - The unmet-demand signals worth extracting from this group, in rough order of strength:
-  1. MAIRE black (BJS01 > SHA01 > CDU01 > HKG01 > TPE01).
-  2. ILVARO pink (SHA01, BJS01, CDU01, HKG01, from 10-02; a short-lived spike).
-  3. ILVARO black (HKG01 especially, mid-October).
-  4. POLARIS small sizes (SHA01: cape XS/S).
-  5. AMBRINE brown size 2 (CDU01).
-  6. ARNEB small sizes (all stores).
+  1. AUREA black (BJS01 > SHA01 > CDU01 > HKG01 > TPE01).
+  2. IRIDIA pink (SHA01, BJS01, CDU01, HKG01, from 10-02; a short-lived spike).
+  3. IRIDIA black (HKG01 especially, mid-October).
+  4. ASTRA small sizes (SHA01: cape XS/S).
+  5. AMALIA brown size 2 (CDU01).
+  6. ARTEM small sizes (all stores).

@@ -18,27 +18,51 @@ def parse(span: str, lang: str):
 @pytest.mark.parametrize(
     ("lang", "span", "value", "unit", "raw"),
     [
-        ("it", "Maire nera: 6 richieste, 5 in tg 2", 6, "requests", "6 richieste"),
-        ("it", "Maire nera: 8 richieste (1, 1, 1, 2, 2, 4, 4, 3)", 8, "requests", "8 richieste"),
-        ("it", "SETTE richieste di Maire nera oggi", 7, "requests", "SETTE richieste"),
+        ("it", "Aurea nera: 6 richieste, 5 in tg 2", 6, "requests", "6 richieste"),
+        (
+            "it",
+            "Aurea nera: 8 richieste (1, 1, 1, 2, 2, 4, 4, 3)",
+            8,
+            "requests",
+            "8 richieste",
+        ),
+        ("it", "SETTE richieste di Aurea nera oggi", 7, "requests", "SETTE richieste"),
         ("it", "Tre clienti ci hanno chiesto se potevamo", 3, "customers", "Tre clienti"),
-        ("it", "Ambrine marrone: chiesta da 3 clienti, venduta una in 1", 3, "customers", None),
-        ("it", "Ambrine marrone chiesta in 1 da 2 signore, niente", 2, "customers", "2 signore"),
+        (
+            "it",
+            "Amalia marrone: chiesta da 3 clienti, venduta una in 1",
+            3,
+            "customers",
+            None,
+        ),
+        (
+            "it",
+            "Amalia marrone chiesta in 1 da 2 signore, niente",
+            2,
+            "customers",
+            "2 signore",
+        ),
         ("it", "Ho 2 persone in lista per la 0 e la 2", 2, "customers", "2 persone"),
         ("it", "Card Days in corso, altri due clienti persi per lo sconto", 2, "customers", None),
-        ("it", "Maire nera chiesta in 0, 1 e 3: tre clienti, tre no", 3, "customers", None),
-        ("it", "La Bady nera vola, 13 pezzi oggi!", 13, "units", "13 pezzi"),
-        ("it", "Beanie rosa 5 pezzi, Arneb blu 5, cardigan logo nero", 5, "units", "5 pezzi"),
+        ("it", "Aurea nera chiesta in 0, 1 e 3: tre clienti, tre no", 3, "customers", None),
+        ("it", "La Aria nera vola, 13 pezzi oggi!", 13, "units", "13 pezzi"),
+        (
+            "it",
+            "Beanie rosa 5 pezzi, Artem blu 5, cardigan logo nero",
+            5,
+            "units",
+            "5 pezzi",
+        ),
         ("it", "da sabato 19 a ieri sera abbiamo contato 14 richieste", 14, "requests", None),
         ("it", "un cliente cercava il cardigan logo nero", 1, "customers", "un cliente"),
-        ("it", "Una signora cercava la polo bianca", 1, "customers", "Una signora"),
-        ("it", "nessuna richiesta per la Maire oggi", 0, "requests", "nessuna richiesta"),
-        ("it", "Maire nera, richieste: 7", 7, "requests", "richieste: 7"),
+        ("it", "Una signora cercava la jersey polo bianca", 1, "customers", "Una signora"),
+        ("it", "nessuna richiesta per la Aurea oggi", 0, "requests", "nessuna richiesta"),
+        ("it", "Aurea nera, richieste: 7", 7, "requests", "richieste: 7"),
         ("it", "1.200 visitatori", 1200, "visitors", None),
         ("it", "300 persone entrate oggi", 300, "visitors", "300 persone"),
         (
             "en",
-            "Black Maire - I had 7 people ask today, sizes 0 (x3), 2 (x1)",
+            "Black Aurea - I had 7 people ask today, sizes 0 (x3), 2 (x1)",
             7,
             "customers",
             None,
@@ -46,15 +70,15 @@ def parse(span: str, lang: str):
         ("en", "Logo tee black in S - we had 3 people ask and we have NONE", 3, "customers", None),
         ("en", "Two clients said it runs small", 2, "customers", "Two clients"),
         ("en", "2 ladies asked for the cable knit in black", 2, "customers", "2 ladies"),
-        ("en", "ambrine: 3 clients today asking for the brown one", 3, "customers", None),
-        ("en", "Product: Maire black 7 units today", 7, "units", "7 units"),
+        ("en", "amalia: 3 clients today asking for the brown one", 3, "customers", None),
+        ("en", "Product: Aurea black 7 units today", 7, "units", "7 units"),
         ("en", "- 18 trans / 32 units", 32, "units", "32 units"),
         ("en", "Delivery 201pcs", 201, "units", "201pcs"),
         ("en", "Traffic & Conv: 414 visitors, 11%", 414, "visitors", "414 visitors"),
         ("en", "142 people thru the door all day", 142, "visitors", "142 people"),
         ("en", "61 people in, 3 sales", 61, "visitors", "61 people"),
         ("en", "1,200 visitors", 1200, "visitors", None),
-        ("en", "a client asked for the black Maire", 1, "customers", "a client"),
+        ("en", "a client asked for the black Aurea", 1, "customers", "a client"),
         ("en", "no requests for it today", 0, "requests", "no requests"),
         # Known modifiers between the number and its noun.
         ("en", "3 Korean clients", 3, "customers", "3 Korean clients"),
@@ -77,8 +101,8 @@ def parse(span: str, lang: str):
         ("en", "a total of 32 units", 32, "units", "32 units"),
         ("it", "un gruppo di 5 persone", 5, "customers", "5 persone"),
         ("en", "5 units out of stock", 5, "units", "5 units"),
-        ("en", "3 clients, about the Maire", 3, "customers", "3 clients"),
-        ("en", "3 clients asked about the Maire", 3, "customers", "3 clients"),
+        ("en", "3 clients, about the Aurea", 3, "customers", "3 clients"),
+        ("en", "3 clients asked about the Aurea", 3, "customers", "3 clients"),
         ("en", "3 clients\u2014we had none left", 3, "customers", "3 clients"),
         ("en", "10000000 units", 10_000_000, "units", "10000000 units"),
     ],
@@ -121,12 +145,12 @@ def test_range(lang: str, span: str, low: int, high: int, unit: str, raw: str) -
     ("lang", "span", "unit", "raw"),
     [
         ("it", "finalmente qualche cliente del client book", "customers", "qualche cliente"),
-        ("it", "un paio di clienti per la Maire", "customers", "un paio di clienti"),
+        ("it", "un paio di clienti per la Aurea", "customers", "un paio di clienti"),
         ("it", "molte coreane, tante richieste", "requests", "tante richieste"),
         ("it", "oggi tanti", None, "tanti"),
         ("en", "A couple of people mentioned the ads", "customers", "A couple of people"),
         ("en", "A few Canadian clients in town", "customers", "A few Canadian clients"),
-        ("en", "quite a few requests for the Maire", "requests", "quite a few requests"),
+        ("en", "quite a few requests for the Aurea", "requests", "quite a few requests"),
         ("en", "lots of tourists today", "customers", "lots of tourists"),
     ],
 )
@@ -140,7 +164,14 @@ def test_vague_quantifier(lang: str, span: str, unit: str | None, raw: str) -> N
 @pytest.mark.parametrize(
     ("lang", "span", "qualifier", "stated", "unit", "raw"),
     [
-        ("it", "arrivate le Maire nere, una sessantina di pezzi", "approx", 60, "units", None),
+        (
+            "it",
+            "arrivate le Aurea nere, una sessantina di pezzi",
+            "approx",
+            60,
+            "units",
+            None,
+        ),
         ("it", "una decina di clienti", "approx", 10, "customers", "una decina di clienti"),
         ("it", "circa 20 clienti", "approx", 20, "customers", "circa 20 clienti"),
         ("it", "più di 10 clienti", "at_least", 10, "customers", "più di 10 clienti"),
@@ -195,14 +226,14 @@ def test_hedged_number_is_vague_with_stated_value(
 @pytest.mark.parametrize(
     ("lang", "span", "unit"),
     [
-        ("it", "Maire nera 3 richieste, Ilvaro 2 richieste", None),  # never summed
+        ("it", "Aurea nera 3 richieste, Iridia 2 richieste", None),  # never summed
         ("it", "15% dei clienti erano coreani", "customers"),
         ("it", "fatturato 38k, sopra budget", None),
         ("it", "2,5 pezzi", "units"),
-        ("it", "Ilvaro rosa in 0", None),
-        ("it", "Arneb blu 5", None),
+        ("it", "Iridia rosa in 0", None),
+        ("it", "Artem blu 5", None),
         ("en", "Saudi clients about 15% of sales today", "customers"),
-        ("en", "One Bady powder pink sz 0 request", "requests"),
+        ("en", "One Aria powder pink sz 0 request", "requests"),
         ("en", "a lot of people", "customers"),  # "a lot" is not in config/domain.yaml
         ("en", "61 trans, € 2 clients", "customers"),
         ("en", "", None),
@@ -433,7 +464,7 @@ def test_glued_decorations_never_leave_a_count(lang: str, base: str, value: int)
     for _ in range(300):
         before = "".join(rng.choices(GLUED_JUNK_BEFORE, k=rng.randint(1, 3)))
         after = "".join(rng.choices(GLUED_JUNK_AFTER, k=rng.randint(1, 3)))
-        for span in (before + base, base + after, f"Maire {before}{base} today"):
+        for span in (before + base, base + after, f"Aurea {before}{base} today"):
             r = parse(span, lang)
             assert r.quantity.kind == "unknown" and r.stated is None, span
 
@@ -441,7 +472,8 @@ def test_glued_decorations_never_leave_a_count(lang: str, base: str, value: int)
 # Numbers in this pool are never readable counts, so no other count may come out.
 CONTEXT = (
     "A123 SKU-12 #4 x2 3/4 10:05 2.5 007 99999999 hundred ABC123 AB12-34 & % + = / - ( ) , . : "
-    "of su out the Maire nera oggi today not non at least almeno about circa or o and e EUR € tg "
+    "of su out the Aurea nera oggi today not non at least "
+    "almeno about circa or o and e EUR € tg "
     "size x"
 ).split()
 

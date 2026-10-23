@@ -27,10 +27,10 @@ ACT = [
     ("MK-0106", "APAC (KR/JP)", "FW26 'Altitude' - digital (Naver, Kakao, LINE, IG)", "CAMPAIGN", "Digital", "2026-10-08", "2026-11-22", "Pacific Spark", 690, "LIVE", ""),
     ("MK-0107", "China", "FW26 'Altitude' - WeChat / Xiaohongshu / Weibo", "CAMPAIGN", "Social", "2026-10-08", "2026-11-11", "Pacific Spark SH", 880, "LIVE", ""),
     ("MK-0108", "Australia", "FW26 'Altitude' - winter campaign (global assets)", "CAMPAIGN", "Digital", "2026-09-15", "2026-10-31", "D. Lim", 85, "LIVE", "global winter assets (down jackets, snow)"),
-    ("MK-0201", "Global", "Moncler Genius POLARIS capsule launch", "PRODUCT_LAUNCH", "All", "2026-09-24", "2026-10-25", "Genius team", 1100, "LIVE", "drop Thursday 24/09 10:00 local"),
-    ("MK-0202", "China", "POLARIS VIP preview - Shanghai Plaza 66", "CLIENT_EVENT", "Event", "2026-09-26", "2026-09-26", "Zhao Lei", 95, "DONE", ""),
-    ("MK-0203", "HK", "POLARIS window takeover Canton Road", "VM", "Window", "2026-09-24", "2026-10-21", "Vivian Lau", 40, "LIVE", ""),
-    ("MK-0204", "Global", "FW26 collection launch (ILVARO, AMBRINE, ARNEB, ROSIERE)", "PRODUCT_LAUNCH", "All", "2026-09-03", "2026-09-30", "Merch / Marketing", 300, "DONE", ""),
+    ("MK-0201", "Global", "Valentino Couture ASTRA capsule launch", "PRODUCT_LAUNCH", "All", "2026-09-24", "2026-10-25", "Couture team", 1100, "LIVE", "drop Thursday 24/09 10:00 local"),
+    ("MK-0202", "China", "ASTRA VIP preview - Shanghai Plaza 66", "CLIENT_EVENT", "Event", "2026-09-26", "2026-09-26", "Zhao Lei", 95, "DONE", ""),
+    ("MK-0203", "HK", "ASTRA window takeover Canton Road", "VM", "Window", "2026-09-24", "2026-10-21", "Vivian Lau", 40, "LIVE", ""),
+    ("MK-0204", "Global", "FW26 collection launch (IRIDIA, AMALIA, ARTEM, RIVIERA)", "PRODUCT_LAUNCH", "All", "2026-09-03", "2026-09-30", "Merch / Marketing", 300, "DONE", ""),
     ("MK-0301", "Italy", "Milano Fashion Week - MIL01 VIC appointments + window", "CLIENT_EVENT", "Store", "2026-09-22", "2026-09-28", "Giulia Ferrandi", 60, "DONE", ""),
     ("MK-0302", "France", "Paris Fashion Week - PAR01 private viewing", "CLIENT_EVENT", "Store", "2026-09-29", "2026-10-07", "Camille Lefèvre", 75, "DONE", "private viewing Sat 03/10"),
     ("MK-0303", "UK", "LON01 Private Client Evening - FW26 preview", "CLIENT_EVENT", "Store", "2026-10-08", "2026-10-08", "Olivia Hartley / CRM UK", 48, "DONE", "45 VIC invited, 18:30-21:30"),
@@ -41,10 +41,10 @@ ACT = [
     ("MK-0402", "Japan", "Price increase client communication (DM + LINE) - effective 01/11", "CRM", "DM/LINE", "2026-10-09", "2026-10-31", "Takuya Suzuki", 12, "LIVE", "letter dated 09/10"),
     ("MK-0403", "China", "Double 11 - Tmall presale", "ECOM", "Tmall", "2026-10-20", "2026-11-11", "E-com China", 260, "LIVE", "stores NOT price matching"),
     ("MK-0404", "Global", "Holiday campaign 'Gift of Warmth'", "CAMPAIGN", "All", "2026-11-16", "2026-12-31", "Global Marketing", 2100, "PLANNED", ""),
-    ("MK-0405", "Global", "Grenoble ski season opening", "CAMPAIGN", "Digital/Store", "2026-11-23", "2026-12-20", "Global Marketing", 420, "PLANNED", ""),
-    ("MK-0406", "Korea/Japan/China", "ILVARO 'Pink edit' social push", "SOCIAL", "IG/Kakao/XHS", "2026-10-06", "2026-10-25", "C. Valli", 35, "LIVE", "added 06/10 after K-pop moment - NO STOCK until 20/11!"),
-    ("MK-0407", "Global", "CRM newsletter - FW26 icons (Maya, Maire, Hermine)", "CRM", "Email", "2026-09-17", "2026-09-17", "CRM Global", 8, "DONE", "Maire black featured as hero (DC out!)"),
-    ("MK-0408", "Global", "CRM newsletter - Genius Polaris", "CRM", "Email", "2026-09-24", "2026-09-24", "CRM Global", 8, "DONE", ""),
+    ("MK-0405", "Global", "Atelier ski season opening", "CAMPAIGN", "Digital/Store", "2026-11-23", "2026-12-20", "Global Marketing", 420, "PLANNED", ""),
+    ("MK-0406", "Korea/Japan/China", "IRIDIA 'Pink edit' social push", "SOCIAL", "IG/Kakao/XHS", "2026-10-06", "2026-10-25", "C. Valli", 35, "LIVE", "added 06/10 after K-pop moment - NO STOCK until 20/11!"),
+    ("MK-0407", "Global", "CRM newsletter - FW26 icons (Nova, Aurea, Liviana)", "CRM", "Email", "2026-09-17", "2026-09-17", "CRM Global", 8, "DONE", "Aurea black featured as hero (DC out!)"),
+    ("MK-0408", "Global", "CRM newsletter - Couture Astra", "CRM", "Email", "2026-09-24", "2026-09-24", "CRM Global", 8, "DONE", ""),
     ("MK-0409", "Global", "CRM newsletter - Cold weather edit", "CRM", "Email", "2026-10-14", "2026-10-14", "CRM Global", 8, "DONE", "sent EU only"),
 ]
 TYPE_FILL = {"CAMPAIGN": "1F3864", "PRODUCT_LAUNCH": "C00000", "CLIENT_EVENT": "BF8F00", "CRM": "548235", "PR": "7030A0",
@@ -55,7 +55,7 @@ ws = wb.active
 ws.title = "Calendar FW26"
 weeks = [dt.date(2026, 7, 27) + dt.timedelta(weeks=i) for i in range(23)]   # W31..W53
 FIRSTC = 7
-ws["A1"] = "MONCLER FW26 - MARKETING CALENDAR"
+ws["A1"] = "VALENTINO FW26 - MARKETING CALENDAR"
 ws["A1"].font = Font(bold=True, size=14)
 ws["A2"] = "v7 - aggiornato 06/10/2026 (C. Valli). Colori: blu campagna, rosso lancio prodotto, oro eventi clienti, verde CRM, viola PR, arancio e-com, rosa social"
 heads = ["ID", "Mercato", "Attività", "Tipo", "Inizio", "Fine"]
@@ -122,7 +122,7 @@ ws2.column_dimensions["K"].width = 50
 ws3 = wb.create_sheet("v3_OLD")
 ws3["A1"] = "v3 - 30/07 - SUPERSEDED"
 old = [("MK-0101", "US OOH", "2026-09-22", "2026-10-31"), ("MK-0103", "UK OOH", "2026-09-22", "2026-10-25"),
-       ("MK-0201", "Genius POLARIS launch", "2026-10-01", "2026-10-31"), ("MK-0303", "LON01 client evening", "2026-10-15", "2026-10-15"),
+       ("MK-0201", "Couture ASTRA launch", "2026-10-01", "2026-10-31"), ("MK-0303", "LON01 client evening", "2026-10-15", "2026-10-15"),
        ("MK-0402", "Japan price increase comms", "2026-10-15", "2026-10-31"), ("MK-0106", "APAC digital", "2026-09-28", "2026-11-15")]
 ws3.append(["ID", "Activity", "Start", "End"])
 for o in old:
@@ -191,7 +191,7 @@ ss_ = getSampleStyleSheet()
 doc = SimpleDocTemplate(str(OUT / "HartwellRowe_FW26_Altitude_flash_results_US_UK_wk38-41.pdf"), pagesize=A4,
                         title="FW26 Altitude - Flash Results US & UK", author="Hartwell & Rowe Media")
 story = [Paragraph("HARTWELL &amp; ROWE MEDIA", ss_["Title"]),
-         Paragraph("Moncler FW26 'Altitude' - Flash Results, US &amp; UK (weeks 38-41, 15 Sep - 11 Oct 2026)", ss_["Heading2"]),
+         Paragraph("Valentino FW26 'Altitude' - Flash Results, US &amp; UK (weeks 38-41, 15 Sep - 11 Oct 2026)", ss_["Heading2"]),
          Spacer(1, 8),
          Paragraph("<b>Headline: the campaign delivered a +22% attributed sales uplift in the US and UK.</b> "
                    "OOH reach exceeded plan (NYC 78% of A25-54 HHI$250k+, London 71%), digital VTR 41% vs 30% benchmark.", ss_["BodyText"]),
@@ -211,6 +211,6 @@ story += [t, Spacer(1, 10),
                     "Store sales provided by client in EUR at budget rate; LY base includes the 2025 period with no campaign activity. "
                     "Client events and CRM activations during the flight are included in exposed-door sales.", ss_["BodyText"]),
           Spacer(1, 6),
-          Paragraph("Confidential - prepared for Moncler Marketing US/UK. 14 Oct 2026.", ss_["Italic"])]
+          Paragraph("Confidential - prepared for Valentino Marketing US/UK. 14 Oct 2026.", ss_["Italic"])]
 doc.build(story)
 print("marketing calendar/media/report done")

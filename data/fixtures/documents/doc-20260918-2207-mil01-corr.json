@@ -9,28 +9,28 @@
       "source_refs": [
         {
           "uri": "dataset://store_emails/MIL01/20260918_2207_MIL01_corr.eml",
-          "content_hash": "sha256:7b68a50cbfe691819a1148697f1597065fc7a438403202a302dd03f71a31db3f",
+          "content_hash": "sha256:a7aee178d35376e64f4c90515fe2eb4f8e6b1b231db3275fa77d10129c77dceb",
           "locator": null
         }
       ],
       "source_type": "email",
       "connector": "src.email",
       "uri": "dataset://store_emails/MIL01/20260918_2207_MIL01_corr.eml",
-      "content_hash": "sha256:7b68a50cbfe691819a1148697f1597065fc7a438403202a302dd03f71a31db3f",
-      "origin": "giulia.ferrandi@moncler-retail.example",
+      "content_hash": "sha256:a7aee178d35376e64f4c90515fe2eb4f8e6b1b231db3275fa77d10129c77dceb",
+      "origin": "giulia.ferrandi@valentino-retail.example",
       "author_ref": "Giulia Ferrandi",
       "language": "it",
       "business_date": "2026-09-18",
       "event_start": null,
       "event_end": null,
-      "thread_key": "<ca847db8e00a.5487b537@moncler-retail.example>",
+      "thread_key": "<ca847db8e00a.5487b537@valentino-retail.example>",
       "parent_document_id": "doc-20260918-2115-mil01",
       "text": "Scusate, ho invertito le cifre: il fatturato di oggi e' 85,0k e non 58. Il +21% e' giusto.\nG.",
       "text_version": "email-v1",
       "meta": {
         "store_id": "MIL01",
-        "message_id": "<a745f9062431.c5c163c5@moncler-retail.example>",
-        "in_reply_to": "<ca847db8e00a.5487b537@moncler-retail.example>",
+        "message_id": "<a745f9062431.c5c163c5@valentino-retail.example>",
+        "in_reply_to": "<ca847db8e00a.5487b537@valentino-retail.example>",
         "subject": "R: Chiusura MIL01 - 18/09 - CORREZIONE",
         "thread_subject": "Chiusura MIL01 - 18/09 - CORREZIONE",
         "is_reply": true,
@@ -50,7 +50,7 @@
       "source_refs": [
         {
           "uri": "dataset://store_emails/MIL01/20260918_2207_MIL01_corr.eml",
-          "content_hash": "sha256:7b68a50cbfe691819a1148697f1597065fc7a438403202a302dd03f71a31db3f",
+          "content_hash": "sha256:a7aee178d35376e64f4c90515fe2eb4f8e6b1b231db3275fa77d10129c77dceb",
           "locator": null
         }
       ],

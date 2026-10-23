@@ -9,17 +9,17 @@
       "source_refs": [
         {
           "uri": "dataset://store_emails/MIL01/20261009_1035_MIL01.eml",
-          "content_hash": "sha256:173f031967d236d50951cd1ad52ea2692c28ed005eb8fe68e68105b422927144",
+          "content_hash": "sha256:5b8afe5fc87f71f0eb397c3f91acc7a300f9b97bb13d127144b4ddab080b7ebd",
           "locator": null
         },
         {
           "uri": "dataset://erp/master_data/styles.csv",
-          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "content_hash": "sha256:36632f9c5616d48fbe94958702172d72d492e9628967ffa063874ccba8569b89",
           "locator": "style_code=I10919B00011"
         },
         {
           "uri": "dataset://erp/master_data/styles.csv",
-          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "content_hash": "sha256:36632f9c5616d48fbe94958702172d72d492e9628967ffa063874ccba8569b89",
           "locator": "style_code=I10919B00042"
         },
         {
@@ -84,7 +84,7 @@
         },
         {
           "uri": "dataset://systems/warehouse/reservations/ZRESV_reservations_export.csv",
-          "content_hash": "sha256:e35f0f2841d0f27c6066b079e53666ceb5a0af1f388cde8fd3dd41bbfffd643d",
+          "content_hash": "sha256:315881d1f2ac45ff0789370ab8a5bc471c09ed1d0a5d965f43c8280cf2d3c866",
           "locator": "RSNUM=1004508;WERKS=IT10;J_3ASIZE=M"
         }
       ],
@@ -188,7 +188,7 @@
             {
               "kind": "SourceFile",
               "id": "dataset://systems/warehouse/reservations/ZRESV_reservations_export.csv#RSNUM=1004508;WERKS=IT10;J_3ASIZE=M",
-              "version": "sha256:e35f0f2841d0f27c6066b079e53666ceb5a0af1f388cde8fd3dd41bbfffd643d"
+              "version": "sha256:315881d1f2ac45ff0789370ab8a5bc471c09ed1d0a5d965f43c8280cf2d3c866"
             }
           ]
         },
@@ -206,7 +206,7 @@
             {
               "kind": "SourceFile",
               "id": "dataset://systems/warehouse/quality/QMEL_quality_notifications.csv#MATNR starts with I10919B00011",
-              "version": "sha256:a44bfa7b1838f4114a32faab84293ff7e961fbd10ff8782efdcbd11e4794d9af"
+              "version": "sha256:424f718a767343ff9a9611a498f17f5002e17db98062d151f670c8b8ce2b4482"
             }
           ]
         },
@@ -355,7 +355,7 @@
             {
               "kind": "SourceFile",
               "id": "dataset://systems/warehouse/reservations/ZRESV_reservations_export.csv#RSNUM=1004508;WERKS=IT10;J_3ASIZE=M",
-              "version": "sha256:e35f0f2841d0f27c6066b079e53666ceb5a0af1f388cde8fd3dd41bbfffd643d"
+              "version": "sha256:315881d1f2ac45ff0789370ab8a5bc471c09ed1d0a5d965f43c8280cf2d3c866"
             }
           ]
         }
@@ -431,7 +431,7 @@
       "valid_until": "2026-10-16T08:35:52Z",
       "recommended": false,
       "rationale": "blocked: IT10 has 0 ATP for size M and the 120-unit receipt lands on 2026-10-30, so the earliest sellable date is 2026-11-01, after the case's due date. Inside D+1..D+7 it changes nothing versus hold: the 4-unit backorder cannot be served from the DC",
-      "input_version_hash": "sha256:9d3825a8645033b2e80a87a75aa48318195763992e74ef99e76255e41581d6d9"
+      "input_version_hash": "sha256:0bd23b6cdc7ae41dec169b4b2eed3137c2f3c0e8844988eca8518b42e5b7d1c6"
     }
   }
 ]

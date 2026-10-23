@@ -50,12 +50,12 @@ def fact(
     name,
     *,
     at=T1,
-    text="Maire nera: 7 richieste.",
+    text="Aurea nera: 7 richieste.",
     parent=None,
     quoted=False,
     value=7,
     period=(START, END),
-    mention="Maire nera",
+    mention="Aurea nera",
     negated=False,
     origin="store@example.test",
     doc_id=None,
@@ -187,7 +187,7 @@ def test_parent_and_exact_quoted_fact_prove_a_forward():
     [
         {"value": 9},
         {"negated": True},
-        {"mention": "Maire nera taglia 2"},
+        {"mention": "Aurea nera taglia 2"},
         {"period": (START - timedelta(days=1), END - timedelta(days=1))},
     ],
 )
@@ -198,7 +198,7 @@ def test_size_period_negation_or_quantity_difference_is_not_a_copy(change):
 
 
 def test_similar_daily_requests_stay_separate_and_uncertain_quantities_are_not_added():
-    a, b = fact("a"), fact("b", at=T2, text="Maire nera: altre 7 richieste.")
+    a, b = fact("a"), fact("b", at=T2, text="Aurea nera: altre 7 richieste.")
     relations, _ = infer(a, b)
     assert [r.relation for r in relations] == ["possibly_same_episode"]
     state = dedup.state_at([a[2], b[2]], relations, T3)
@@ -222,7 +222,7 @@ def test_text_alone_with_unknown_sender_does_not_prove_copy():
 
 def test_reply_and_forward_flags_alone_do_not_prove_copies_or_corrections():
     a = fact("a")
-    b = fact("b", at=T2, text="Maire nera: oggi 9 richieste.", value=9, parent=a[0].id)
+    b = fact("b", at=T2, text="Aurea nera: oggi 9 richieste.", value=9, parent=a[0].id)
     b = (b[0].model_copy(update={"meta": {"is_forward": True, "subject": "CORREZIONE"}}), *b[1:])
     relations, _ = infer(a, b)
     assert [r.relation for r in relations] == ["possibly_same_episode"]
@@ -231,16 +231,16 @@ def test_reply_and_forward_flags_alone_do_not_prove_copies_or_corrections():
 @pytest.mark.parametrize(
     "text,kind",
     [
-        ("Correggo Maire nera: 9 richieste e non 7.", "supersedes"),
-        ("Correction: Maire nera, 9 requests instead of 7.", "supersedes"),
-        ("Ritiro la segnalazione Maire nera: 7 richieste.", "retracts"),
-        ("I withdraw the Maire nera report of 7 requests.", "retracts"),
+        ("Correggo Aurea nera: 9 richieste e non 7.", "supersedes"),
+        ("Correction: Aurea nera, 9 requests instead of 7.", "supersedes"),
+        ("Ritiro la segnalazione Aurea nera: 7 richieste.", "retracts"),
+        ("I withdraw the Aurea nera report of 7 requests.", "retracts"),
     ],
 )
 def test_explicit_corrections_only_disable_the_target_fact(text, kind):
     a = fact("a")
     b = fact("b", at=T2, text=text, value=9, parent=a[0].id)
-    unrelated = fact("other", text=a[0].text, mention="Tib", doc_id=a[0].id)
+    unrelated = fact("other", text=a[0].text, mention="Vel", doc_id=a[0].id)
     relations, abstentions = infer(a, b, unrelated)
     assert not abstentions
     assert [r.relation for r in relations] == [kind]
@@ -269,23 +269,23 @@ def test_quoted_correction_does_not_create_a_new_correction():
 @pytest.mark.parametrize(
     "text",
     [
-        "Do not withdraw the Maire nera report: 7 requests remain confirmed.",
-        "I do not withdraw the Maire nera report: 7 requests remain confirmed.",
-        "Non ritiro la segnalazione Maire nera: 7 richieste confermate.",
-        "If confirmed, I withdraw the Maire nera report: 7 requests.",
-        "I withdraw the Maire nera report if the 7 requests are a mistake.",
-        "I might withdraw the Maire nera report: 7 requests.",
-        "Se confermato, ritiro la segnalazione Maire nera: 7 richieste.",
-        "Ritiro la segnalazione Maire nera se le 7 richieste sono errate.",
-        "I withdraw the Maire nera report of 7 requests?",
-        "Do not replace the Maire nera report: 7 requests remain confirmed.",
-        "Non correggo la segnalazione Maire nera: 7 richieste confermate.",
+        "Do not withdraw the Aurea nera report: 7 requests remain confirmed.",
+        "I do not withdraw the Aurea nera report: 7 requests remain confirmed.",
+        "Non ritiro la segnalazione Aurea nera: 7 richieste confermate.",
+        "If confirmed, I withdraw the Aurea nera report: 7 requests.",
+        "I withdraw the Aurea nera report if the 7 requests are a mistake.",
+        "I might withdraw the Aurea nera report: 7 requests.",
+        "Se confermato, ritiro la segnalazione Aurea nera: 7 richieste.",
+        "Ritiro la segnalazione Aurea nera se le 7 richieste sono errate.",
+        "I withdraw the Aurea nera report of 7 requests?",
+        "Do not replace the Aurea nera report: 7 requests remain confirmed.",
+        "Non correggo la segnalazione Aurea nera: 7 richieste confermate.",
         "If confirmed, correction: 9 requests instead of 7.",
         "Forse 9 richieste e non 7.",
         "Suppose there were 9 requests instead of 7.",
         "We discussed 9 requests instead of 7.",
-        "I withdraw the Maire nera report once the 7 requests are confirmed as a mistake.",
-        "Ritiro la segnalazione Maire nera domani: 7 richieste.",
+        "I withdraw the Aurea nera report once the 7 requests are confirmed as a mistake.",
+        "Ritiro la segnalazione Aurea nera domani: 7 richieste.",
     ],
 )
 def test_negated_hypothetical_or_questioned_corrections_retain_both_facts(text):
@@ -303,7 +303,7 @@ def test_segment_version_is_pinned_even_if_newer_version_changes_quoted_status(t
     b = fact(
         "b",
         at=T2,
-        text="I withdraw the Maire nera report of 7 requests.",
+        text="I withdraw the Aurea nera report of 7 requests.",
         parent=a[0].id,
         quoted=True,
     )
@@ -445,7 +445,10 @@ def test_plain_negative_number_does_not_retract_or_replace_a_fact():
 
 
 def test_aliases_with_the_same_link_remain_possible_overlap_with_link_provenance():
-    a, b = fact("a"), fact("b", at=T2, mention="black Maire", text="Black Maire: 7 requests.")
+    a, b = (
+        fact("a"),
+        fact("b", at=T2, mention="black Aurea", text="Black Aurea: 7 requests."),
+    )
     links = [
         EntityLink(
             **{
