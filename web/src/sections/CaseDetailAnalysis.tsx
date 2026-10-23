@@ -3,6 +3,7 @@ import type { Case } from '../api/client'
 import { Button, StatusBadge } from '../ui'
 import { findCaseDetailFixture } from '../mocks/caseDetails'
 import type { ActionOption } from '../mocks/caseDetails'
+import { CaseClarificationsPanel } from './CaseClarificationsPanel'
 import { CaseForecastPanel } from './CaseForecastPanel'
 import { canDecideOption, decisionForRecord, decisionKey, optionBlockers } from './caseDecision'
 import { CaseOptionsPanel } from './CaseOptionsPanel'
@@ -23,6 +24,7 @@ export function CaseDetailAnalysis({ item, runId, fixtureMode }: Props) {
     </header>
     <CaseForecastPanel item={item} runId={runId} fixtureMode={fixtureMode} />
     <CaseOptionsPanel item={item} runId={runId} fixtureMode={fixtureMode} />
+    <CaseClarificationsPanel item={item} runId={runId} fixtureMode={fixtureMode} />
     {detail ? <>
       <p className="sd-case-decision__demo-label">Contesto demo fixture · run {runId} · caso {item.id} · versione {item.version}. Traccia e opzioni seguenti sono esempi sintetici.</p>
       <section className="sd-case-analysis__trace" aria-labelledby="sd-case-trace-title">
