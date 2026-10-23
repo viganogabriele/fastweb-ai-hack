@@ -154,6 +154,19 @@ def _totals(fc: ForecastAdjustment) -> dict[str, float | None]:
     }
 
 
+def _policy_for_spec(spec) -> fc_overlay.Policy:
+    """Use the FC-03 policy captured for this run, including its opt-in switch."""
+    incremental = next(
+        (
+            bool(module.params.get("incremental", True))
+            for module in spec.modules
+            if module.manifest.id == fc_overlay.MANIFEST.id
+        ),
+        True,
+    )
+    return fc_overlay.load_policy(get_settings().config_dir, incremental)
+
+
 def propose(
     inputs: CaseInputs, template: Template, observation_id: str | None, spec
 ) -> tuple[ForecastAdjustment, ...]:
@@ -208,6 +221,7 @@ class Analyst:
         self.inputs = inputs
         self.spec = spec
         self.proposals: dict[str, tuple[ForecastAdjustment, ...]] = {}
+        self.proposal_observations: dict[str, str | None] = {}
 
     @property
     def case(self) -> Case:
@@ -284,6 +298,7 @@ class Analyst:
         records = propose(self.inputs, args.template, args.observation_id, self.spec)
         pid = f"alt:{self.case.id}:{args.template}:{args.observation_id or '-'}"
         self.proposals[pid] = records
+        self.proposal_observations[pid] = args.observation_id
         data = {
             "proposal_id": pid,
             "per_sku": [
@@ -307,6 +322,9 @@ class Analyst:
         supporting = {r.id for r in self.case.supporting}
         if not supporting.intersection(choice.evidence_refs):
             return "cite at least one supporting observation id in evidence_refs"
+        selected = self.proposal_observations[choice.option_id]
+        if selected is not None and selected not in choice.evidence_refs:
+            return f"cite the selected observation {selected} in evidence_refs"
         return None
 
     def tools(self) -> list[Tool]:
@@ -422,7 +440,7 @@ def load_inputs(repo: Repo, case_id: str) -> CaseInputs:
         duplicates=fc_overlay.copies(repo.list(EvidenceRelation)),
         baselines=baselines,
         overlays=overlays,
-        policy=fc_overlay.load_policy(get_settings().config_dir),
+        policy=_policy_for_spec(repo.spec),
     )
 
 

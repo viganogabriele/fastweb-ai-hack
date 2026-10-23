@@ -184,6 +184,36 @@ def test_choices_are_distinct_versions():
     assert len(versions) == 3
 
 
+def test_analyst_uses_incremental_policy_from_the_run_snapshot():
+    run_spec = spec().model_copy(
+        update={
+            "modules": (ModuleSnapshot(manifest=overlay.MANIFEST, params={"incremental": False}),)
+        }
+    )
+    assert analyst._policy_for_spec(run_spec).incremental is False
+
+
+def test_finish_must_cite_the_episode_selected_for_the_proposal(tmp_path):
+    inputs, base, det = setup(A, B)
+    repo = repo_for(tmp_path, inputs, base, det)
+    model = Scripted(
+        [call("get_case_evidence", {"case_id": "case-maire"}, "c0")],
+        [call("propose_scenario", {"case_id": "case-maire", "template": "single_episode",
+                                   "observation_id": B.id}, "c1")],
+        [call("finish", {"status": "action_proposed", "evidence_refs": [A.id],
+                         "option_id": f"alt:case-maire:single_episode:{B.id}",
+                         "rationale": "x"}, "c2")],
+        [call("finish", {"status": "action_proposed", "evidence_refs": [B.id],
+                         "option_id": f"alt:case-maire:single_episode:{B.id}",
+                         "rationale": "x"}, "c3")],
+    )  # fmt: skip
+    result, chosen = analyst.analyse(repo, inputs, model=model)
+    finishes = [s for s in result.trace.steps if s.tool == "finish"]
+    assert f"cite the selected observation {B.id}" in finishes[0].error
+    assert finishes[1].error is None
+    assert chosen and chosen[0].proposal_source == "agent"
+
+
 def test_the_model_cannot_pass_a_fact_the_gates_reject():
     requests = obs("req", unit="requests")
     inputs, _, _ = setup(A, requests)
