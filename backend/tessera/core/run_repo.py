@@ -10,7 +10,7 @@ from collections.abc import Iterator
 from contextlib import contextmanager
 from pathlib import Path
 
-from sqlalchemy import Connection, Engine, delete, select
+from sqlalchemy import Connection, Engine, delete, insert, select
 
 from tessera.core.contracts import ModuleRun, RunSpec, Segment, SourceDocument
 from tessera.core.contracts.common import DerivedRecord, SourceRecord
@@ -239,6 +239,49 @@ class RunRepo(Repo):
         """Drop unpublished outputs of a run that will never be published."""
         self._lifecycle()
         self.session.execute(delete(artifacts).where(artifacts.c.run_id == self.run_id))
+
+    def copy_snapshot(self, source: "RunRepo") -> None:
+        """Seed an empty job from a published snapshot in the same transaction.
+
+        Preserve publication order and explicit indexes, including records whose
+        inputs were inserted in a different order. Only repository-visible rows
+        cross the boundary; derived records are rebound to the new run.
+        """
+        self._lifecycle()
+        if self.session is not source.session:
+            raise ValueError("Snapshot copy requires one transaction")
+        if source.status() != "published" or self.status() != "pending":
+            raise ValueError("Snapshot copy requires published source and pending target")
+        if (self.spec.as_of, self.spec.stores, self.spec.scenario_id, self.namespace) != (
+            source.spec.as_of,
+            source.spec.stores,
+            source.spec.scenario_id,
+            source.namespace,
+        ):
+            raise ValueError("Snapshot copy cannot change clock, stores or scenario")
+        if self.session.execute(
+            select(artifacts.c.seq).where(artifacts.c.run_id == self.run_id).limit(1)
+        ).first():
+            raise ValueError("Snapshot target must be empty")
+        visible = {
+            (name, item.id, item.version)
+            for name, kind in KINDS.items()
+            for item in source.list(kind)
+        }
+        rows = source.session.execute(
+            select(artifacts).where(artifacts.c.run_id == source.run_id).order_by(artifacts.c.seq)
+        ).mappings()
+        for row in rows:
+            if (row["kind"], row["id"], row["version"]) not in visible:
+                continue
+            values = {key: value for key, value in row.items() if key != "seq"}
+            payload = dict(values["payload"])
+            if issubclass(KINDS[row["kind"]], DerivedRecord):
+                payload["run_id"] = self.run_id
+            values.update(run_id=self.run_id, payload=payload)
+            self.session.execute(insert(artifacts).values(**values))
+        for module in source.module_runs():
+            self.save_module_run(module.model_copy(update={"run_id": self.run_id}))
 
     def set_run_status(self, status: str, *, published: bool = False) -> None:
         self._lifecycle()
