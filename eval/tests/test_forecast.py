@@ -261,6 +261,37 @@ class ForecastTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "baseline disagree"):
             self.score()
 
+    def test_invalid_predictions_fail_before_oracle_even_when_targets_are_pending(self):
+        original = copy.deepcopy(self.records)
+        variants = []
+        for field, value in (("baseline", -1), ("baseline", "nan"), ("latent", "inf")):
+            records = copy.deepcopy(original)
+            point = records[1]["payload"]["series"][-1]
+            if field == "latent":
+                point[field]["base"] = value
+            else:
+                point[field] = value
+            variants.append(records)
+        mismatch = copy.deepcopy(original)
+        mismatch[1]["payload"]["baseline_ref"] = {"id": "other-vintage"}
+        variants.append(mismatch)
+        mismatch = copy.deepcopy(original)
+        mismatch[1]["payload"]["series"][-1]["baseline"] = 100
+        variants.append(mismatch)
+        missing_refs = copy.deepcopy(original)
+        for row in missing_refs[:2]:
+            row["payload"]["baseline_ref"] = None
+        variants.append(missing_refs)
+        for index, records in enumerate(variants):
+            with self.subTest(variant=index):
+                self.records = records
+                run = self.frozen()
+                with patch.object(
+                    run, "read_answer_key", side_effect=AssertionError("oracle read")
+                ):
+                    with self.assertRaises(ValueError):
+                        score_forecasts(run, self.oracle)
+
     def test_raw_dto_export_and_unselected_records(self):
         for row in self.records:
             row["payload"]["computed_at"] = row["as_of"]

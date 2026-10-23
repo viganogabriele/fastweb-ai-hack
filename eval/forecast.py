@@ -89,6 +89,11 @@ def predictions(rows, origins, universe):
             day = date.fromisoformat(point["date"])
             if day in points:
                 raise ValueError("Duplicate forecast day")
+            if point.get("baseline") is not None:
+                number(point["baseline"])
+            for value in (point.get("latent") or {}).values():
+                if value is not None:
+                    number(value)
             points[day] = point
         value = {**payload, "points": points}
         key = (origin, *pair)
@@ -100,6 +105,23 @@ def predictions(rows, origins, universe):
             overlays[key].append(value)
     if any(sum(p["status"] == "computed" for p in group) > 1 for group in overlays.values()):
         raise ValueError("Multiple computed overlays: freeze one information-consistent forecast")
+    # Validate provenance before oracle access, independently of target maturity.
+    # Otherwise an invalid export can pass merely because its target is pending.
+    for key, group in overlays.items():
+        base = baselines.get(key)
+        for overlay in group:
+            if overlay["status"] != "computed":
+                continue
+            if not overlay.get("baseline_ref"):
+                raise ValueError("Computed overlay requires a baseline vintage reference")
+            if base is None:
+                continue  # Missing predictions remain explicit coverage exclusions.
+            if overlay["baseline_ref"] != base.get("baseline_ref"):
+                raise ValueError("Overlay and frozen baseline vintage disagree")
+            for day, point in overlay["points"].items():
+                baseline = base["points"].get(day, {}).get("baseline")
+                if baseline is not None and point.get("baseline") != baseline:
+                    raise ValueError("Overlay and frozen baseline disagree")
     return baselines, overlays, ignored
 
 
@@ -160,8 +182,6 @@ def score_forecasts(run: FrozenRun, oracle_root, key=KEY):
                 group = overlays.get(identity, [])
                 computed = next((p for p in group if p["status"] == "computed"), None)
                 if computed:
-                    if computed.get("baseline_ref") != baselines[identity].get("baseline_ref"):
-                        raise ValueError("Overlay and frozen baseline vintage disagree")
                     points = computed["points"]
                     if any(
                         (points.get(day, {}).get("latent") or {}).get(scenario) is None
@@ -173,9 +193,6 @@ def score_forecasts(run: FrozenRun, oracle_root, key=KEY):
                         )
                         continue
                     corrected = [number(points[day]["latent"][scenario]) for day in days]
-                    # The comparison must use the baseline the overlay actually references.
-                    if any(points[day].get("baseline") != base[day]["baseline"] for day in days):
-                        raise ValueError("Overlay and frozen baseline disagree")
                     counts["adjusted_origins"] += 1
                 else:
                     corrected = base_values

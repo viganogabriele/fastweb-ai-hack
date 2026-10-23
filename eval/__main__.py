@@ -67,9 +67,11 @@ def main() -> None:
     lead.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     root = Path(__file__).resolve().parent.parent
-    if args.command in ("verify", "forecast", "lead-time") and not args.output.resolve().is_relative_to(
-        root / "data"
-    ):
+    if args.command in (
+        "verify",
+        "forecast",
+        "lead-time",
+    ) and not args.output.resolve().is_relative_to(root / "data"):
         parser.error("evaluation outputs must be written under data/")
     if args.command == "lead-time":
         if bool(args.bundle) != bool(args.sha256):
