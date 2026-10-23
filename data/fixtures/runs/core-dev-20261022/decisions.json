@@ -1,0 +1,15 @@
+[
+  {
+    "at": "2026-10-22T20:01:00+00:00",
+    "request": {
+      "by": "DEMO-02 scripted synthetic reviewer",
+      "decision": "approved",
+      "idempotency_key": "demo02-explicit-local-command",
+      "input_version_hash": "sha256:1144a1ffa8d55902b32e430c191e9a005a2acb7e7818e16f0455312c152fec96",
+      "note": "Integration rehearsal; no actual operator or external dispatch.",
+      "option_id": "opt-case-nyc01-i10915c00021-999-20260906-notify_owner",
+      "run_id": "core-dev-candidate",
+      "scenario_id": "historical"
+    }
+  }
+]

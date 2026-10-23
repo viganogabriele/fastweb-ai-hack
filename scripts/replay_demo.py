@@ -366,7 +366,26 @@ def rebuild(
                         },
                         settings=settings,
                     )
-                    for frozen in frozen_decisions:
+                    # Record the actual pipeline state even when a later decision fails.
+                    with repo_session(
+                        engine, spec.run_id, fixture_mode=settings.fixture_mode
+                    ) as repo:
+                        manifest["run_status"] = repo.run_state()["status"]
+                    can_decide = (
+                        not replay_cache.missing
+                        and not replay_cache.corrupt
+                        and not recorded_systems.missing
+                        and not recorded_systems.corrupt
+                        and all(
+                            s.status in {"succeeded", "degraded"}
+                            and s.result is not None
+                            and not s.result.errors
+                            for s in statuses
+                        )
+                    )
+                    if frozen_decisions and not can_decide:
+                        manifest["decision_replay_skipped"] = True
+                    for frozen in frozen_decisions if can_decide else ():
                         draft = decide(engine, frozen.request, now=frozen.at)
                         manifest["decisions"].append(
                             {
