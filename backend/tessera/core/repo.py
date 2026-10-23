@@ -189,6 +189,18 @@ def list_module_runs(engine: Engine, run_id: str) -> list[ModuleRun]:
         return [ModuleRun.model_validate(p) for (p,) in conn.execute(query)]
 
 
+def latest[R: SourceRecord](records: Iterable[R]) -> builtins.list[R]:
+    """The last version of each id, in first-seen order (`Repo.list` returns every version).
+
+    A later module may write a new version of a record (`int.context` re-versions a `Case`):
+    consumers that want one record per id read through this.
+    """
+    by_id: dict[str, R] = {}
+    for record in records:
+        by_id[record.id] = record
+    return builtins.list(by_id.values())
+
+
 # ERP rows: shared source data, not partitioned by run.
 
 
