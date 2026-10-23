@@ -159,7 +159,11 @@ def run(
                 llm_settings = settings or get_settings()
                 if spec.mode != "live":
                     llm_settings = llm_settings.model_copy(update={"llm_mode": "replay"})
-                clients = {"llm": LLMClient(llm_settings).for_run(spec)}
+                clients = {
+                    "llm": LLMClient(
+                        llm_settings, concurrency=llm_settings.llm_concurrency
+                    ).for_run(spec)
+                }
             repo.set_run_status("running")
             for module_id in plan:
                 statuses[module_id] = ModuleRun(
