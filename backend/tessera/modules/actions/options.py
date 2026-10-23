@@ -339,6 +339,8 @@ def input_version_hash(inputs: OptionInputs) -> str:
         curve = p.size_curve
         return {
             "store": p.store_id,
+            "country": p.country,
+            "timezone": p.timezone.key,
             "forecast": ref(p.forecast),
             "stock": {s: stock(v) for s, v in sorted(p.stock.items())},
             "in_transit": dict(sorted(p.in_transit.items())),
