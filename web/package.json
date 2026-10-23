@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "build:voice": "node --experimental-strip-types scripts/build-voice-demo.mjs",
     "dev:mock": "VITE_API_MOCK=1 vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
