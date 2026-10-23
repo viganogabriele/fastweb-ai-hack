@@ -1,6 +1,9 @@
 """Synthetic vectors prove retrieval math and isolation, not model quality."""
 
 import math
+import threading
+import time
+from concurrent.futures import ThreadPoolExecutor
 
 import pytest
 
@@ -155,3 +158,26 @@ def test_empty_positive_universe_has_no_invented_recall(catalog):
 def test_invalid_k_rejected(catalog, value):
     with pytest.raises(ValueError):
         compare_dimensions([RetrievalQuery("long", ())], catalog, Embeddings(), top_k=value)
+
+
+def test_concurrent_observations_build_catalog_index_once(catalog):
+    ready = threading.Barrier(4)
+
+    class SlowEmbeddings(Embeddings):
+        def embed(self, texts, dimensions, *, cache_context):
+            if len(texts) > 1:
+                time.sleep(0.05)  # expose overlapping index builds without synchronization
+            return super().embed(texts, dimensions, cache_context=cache_context)
+
+    client = SlowEmbeddings()
+    retriever = EmbeddingRetriever(client)
+
+    def retrieve(_):
+        ready.wait(timeout=5)
+        return retriever.retrieve("long", catalog, params=LinkParams())
+
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        results = list(pool.map(retrieve, range(4)))
+    assert all(result == results[0] for result in results)
+    assert sum(len(texts) > 1 for texts, _, _ in client.calls) == 1
+    assert len(client.calls) == 5  # one shared index and four query calls

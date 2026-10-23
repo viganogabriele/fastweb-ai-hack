@@ -5,6 +5,8 @@ through PLT-04's `RunRepo` so parent and store-scope checks apply. The LLM is a 
 """
 
 import json
+import threading
+import time
 from datetime import UTC, date, datetime
 from pathlib import Path
 from types import SimpleNamespace
@@ -12,11 +14,11 @@ from types import SimpleNamespace
 import pytest
 from pydantic import ValidationError
 
-from tessera.core.config import REPO_ROOT
+from tessera.core.config import REPO_ROOT, Settings
 from tessera.core.contracts import EntityLink, Observation, RunSpec
 from tessera.core.db import connect
 from tessera.core.fixtures import read_fixtures
-from tessera.core.llm import ExtractionFailed, LLMCallFailed
+from tessera.core.llm import ExtractionFailed, LLMCallFailed, LLMClient
 from tessera.core.registry import Registry
 from tessera.core.repo import put_erp
 from tessera.core.run_repo import repo_session
@@ -327,3 +329,40 @@ def test_embedding_provider_failure_is_explicit_and_retains_fuzzy_candidates(eng
 def test_embedding_request_without_client_is_blocked(engine):
     result, links = run(engine, params={"use_embeddings": True, "llm": False})
     assert result.status == "blocked" and links == {}
+
+
+def test_decisions_run_in_parallel_and_keep_observation_order(monkeypatch) -> None:
+    both_in_flight = threading.Barrier(2, timeout=5)
+
+    def slow_decide(obs, snapshot, params, llm, errors, retriever=None):
+        both_in_flight.wait()  # BrokenBarrierError if decisions were serial
+        if obs.id == "a":
+            time.sleep(0.2)  # finishes last, still reported first
+        errors.append(f"{obs.id}: llm LLMCallFailed")
+        return link.Decision(
+            status="ambiguous",
+            level=None,
+            target_id=None,
+            candidates=(),
+            decided_by="rule:link_mention",
+            rationale=f"{obs.id} tie",
+        )
+
+    monkeypatch.setattr(link, "decide", slow_decide)
+    monkeypatch.setattr(link, "to_link", lambda obs, decision, spec, snapshot: obs.id)
+    repo = SimpleNamespace(spec=None, put=lambda *links: len(links))
+    observations = [SimpleNamespace(id=i, available_at=AS_OF) for i in ("a", "b")]
+    result = link.link_observations(repo, observations, None, LinkParams(), llm=None)
+    assert result.errors == ("a: llm LLMCallFailed", "b: llm LLMCallFailed")
+    assert result.abstentions == ("a: a tie", "b: b tie")
+
+
+def test_malformed_provider_embedding_response_degrades_to_fuzzy(engine, tmp_path, monkeypatch):
+    client = LLMClient(Settings(_env_file=None, llm_mode="replay", data_dir=tmp_path))
+    # Exercise the real SDK response validation without cache files or provider calls.
+    monkeypatch.setattr(client, "_request", lambda *args: {"data": [{"embedding": "invalid"}]})
+    result, links = run(engine, params={"use_embeddings": True, "llm": False}, llm=client)
+    assert result.status == "degraded"
+    assert any("embeddings ValidationError" in e for e in result.errors)
+    assert links[SWEATSHIRT].status == "ambiguous"
+    assert all(not c.method.startswith("rrf") for c in links[SWEATSHIRT].candidates)

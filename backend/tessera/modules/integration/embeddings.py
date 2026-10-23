@@ -10,6 +10,7 @@ import json
 import math
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
+from threading import Lock
 from typing import Any
 
 from tessera.modules.integration.candidates import (
@@ -33,6 +34,7 @@ class EmbeddingRetriever:
         self.client = client
         self.dimensions = dimensions
         self.indexes: dict[str, list[list[float]]] = {}
+        self._index_lock = Lock()
 
     def retrieve(
         self,
@@ -77,10 +79,13 @@ class EmbeddingRetriever:
             ).encode()
         ).hexdigest()
         context = {"catalog_version": fingerprint, "retrieval_version": "rrf-v1"}
-        if fingerprint not in self.indexes:
-            vectors = self.client.embed(texts, self.dimensions, cache_context=context)
-            _validate(vectors, len(entries), self.dimensions)
-            self.indexes[fingerprint] = vectors
+        # int.link shares this retriever across concurrent observation decisions.
+        # Build each index once, while leaving query calls free to run in parallel.
+        with self._index_lock:
+            if fingerprint not in self.indexes:
+                vectors = self.client.embed(texts, self.dimensions, cache_context=context)
+                _validate(vectors, len(entries), self.dimensions)
+                self.indexes[fingerprint] = vectors
         queries = self.client.embed([mention], self.dimensions, cache_context=context)
         _validate(queries, 1, self.dimensions)
         query = queries[0]
