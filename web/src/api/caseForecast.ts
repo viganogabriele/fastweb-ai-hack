@@ -60,7 +60,7 @@ export function selectCaseForecast(records: ForecastAdjustment[], { item, runId 
 export function requestCaseForecast(selection: ForecastSelection, read: ForecastReader, publish: (state: ForecastState) => void) {
   const controller = new AbortController()
   const { item, runId } = selection
-  if (!item.store_id || (!caseSku(item) && item.scope_level !== 'style') || item.run_id !== runId) {
+  if (!item.store_id || (!caseSku(item) && (item.scope_level !== 'style' || !item.scope_id?.trim())) || item.run_id !== runId) {
     publish({ status: 'unavailable', message: 'Forecast non disponibile: negozio o ambito SKU non risolto nel run selezionato.' })
   } else {
     publish({ status: 'loading' })

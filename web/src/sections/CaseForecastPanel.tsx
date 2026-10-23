@@ -42,8 +42,8 @@ function ForecastRecord({ forecast, label, unresolved = false }: { forecast: For
     {unresolved && <p>La baseline referenziata non è disponibile nella versione esatta. Scenari numerici non esposti.</p>}
     {!unresolved && (forecast.series.length ? <div className="sd-case-analysis__table-wrap"><table>
       <caption>{label} · unità giornaliere · scenari bassa / base / alta</caption>
-      <thead><tr><th scope="col">Giorno</th><th scope="col">Baseline</th><th scope="col">Domanda latente</th><th scope="col">Servibile</th></tr></thead>
-      <tbody>{forecast.series.map((point) => <tr key={point.date}><th scope="row">{point.date}</th><td>{fmt(point.baseline)}</td><td>{scenarios(point.latent)}</td><td>{scenarios(point.servable)}</td></tr>)}</tbody>
+      <thead><tr><th scope="col">Giorno</th><th scope="col">Baseline</th><th scope="col">Domanda latente</th><th scope="col">Servibile</th><th scope="col">Consuntivo visibile</th></tr></thead>
+      <tbody>{forecast.series.map((point) => <tr key={point.date}><th scope="row">{point.date}</th><td>{fmt(point.baseline)}</td><td>{scenarios(point.latent)}</td><td>{scenarios(point.servable)}</td><td>{fmt(point.actual)}</td></tr>)}</tbody>
     </table></div> : <p>Nessun valore giornaliero pubblicato.</p>)}
   </article>
 }

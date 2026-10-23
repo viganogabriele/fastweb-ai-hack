@@ -52,6 +52,12 @@ test('style cases retain each exact SKU; unknown scopes do not request arbitrary
   const states = []
   requestCaseForecast({ ...selection, item: { ...item, scope_level: 'unknown' } }, async () => { assert.fail('must not request') }, (state) => states.push(state))
   assert.equal(states.at(-1).status, 'unavailable')
+  for (const scope_id of [null, '', '   ']) {
+    const missingStyle = { ...selection, item: { ...item, scope_level: 'style', scope_id } }
+    const missingStates = []
+    requestCaseForecast(missingStyle, async () => { assert.fail('must not request a store-wide forecast') }, (state) => missingStates.push(state))
+    assert.equal(missingStates.at(-1).status, 'unavailable')
+  }
   await tick()
 })
 
