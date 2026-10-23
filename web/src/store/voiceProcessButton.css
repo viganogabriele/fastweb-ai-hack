@@ -1,0 +1,11 @@
+/* Demo trigger (DEMO-04): dashed, so it reads as a test control, not part of the product flow. */
+.voice-process.sd-button,
+.voice-process.sd-button:disabled {
+  border-style: dashed;
+  border-color: var(--sd-color-action-primary);
+  background: transparent;
+  color: var(--sd-color-action-primary);
+}
+.voice-process.sd-button:not(:disabled):hover {
+  background: var(--sd-local-accent-subtle);
+}

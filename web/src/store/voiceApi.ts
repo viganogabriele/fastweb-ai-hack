@@ -1,5 +1,5 @@
 import type { components } from '../api/schema'
-import type { RunView } from '../api/client'
+import type { Case, RunView } from '../api/client'
 
 export type LiveNote = components['schemas']['LiveNoteView']
 export type Transcription = components['schemas']['Transcription']
@@ -55,4 +55,8 @@ export async function processNotes(store?: string) {
 
 export async function readRun(runId: string) {
   return json<RunView>(await fetch(`/api/runs/${encodeURIComponent(runId)}`))
+}
+
+export async function readCases(runId: string) {
+  return json<Case[]>(await fetch(`/api/runs/${encodeURIComponent(runId)}/cases`))
 }

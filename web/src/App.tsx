@@ -198,11 +198,11 @@ export default function App() {
         topbar={
           <div className="sd-shell__view-controls">
             <VoiceProcessButton
-              onDone={(run) => {
-                // Show the new live-voice run and its cases.
+              onDone={(run, cases) => {
+                // Show the new live-voice run: its cases, or the transcribed note if none opened.
                 runs.select(run.spec.run_id)
                 runs.retry()
-                navigate('cases')
+                navigate(cases ? 'cases' : 'sources')
               }}
             />
             <Select

@@ -97,7 +97,7 @@ def test_process_runs_each_store_once_over_new_notes_only(client, tmp_path):
     assert settings.llm_mode == "record"
     assert spec.scenario_id == "live-voice" and spec.mode == "live"
     snapshots = {s.manifest.id: s for s in spec.modules}
-    assert snapshots["src.voice"].params == {"notes": [first["note_id"]]}
+    assert snapshots["src.voice"].params == {"notes": [first["note_id"]], "mode": "fixture"}
     for snapshot in spec.modules:
         registry.resolve(snapshot)  # installed manifests and valid params
     plan = _plan(spec, None)

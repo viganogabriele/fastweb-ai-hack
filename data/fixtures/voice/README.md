@@ -114,7 +114,9 @@ hand-written one. `src.voice` reads this folder next to `data/fixtures/voice/`.
 The dashboard top bar shows "Elabora note vocali (N)" while notes wait; it calls
 `POST /api/voice/process`, which starts one small product run per store over the new notes: scenario `live-voice`, `as_of` now, only `src.voice → ing.extract → int.link →
 int.dedup → int.cases` (+ `src.erp`). `src.email` is given a file outside the run's stores so it
-reads no mail; the run is therefore `degraded` by design. LLM calls run in `record` mode, so the
+reads no mail; the run is therefore `degraded` by design. `src.voice` runs in `fixture` mode
+there: the text the store checked and corrected on the phone is what gets read, as one segment
+without audio timestamps. LLM calls run in `record` mode, so the
 run replays later without keys. Notes whose run failed or was blocked are offered again. The
 dashboard lists runs by `as_of`, so the live run becomes the default selection; pick the demo
 run again from the run menu. After the run the button selects it and opens Cases.

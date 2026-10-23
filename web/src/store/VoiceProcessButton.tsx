@@ -3,7 +3,8 @@ import { Mic } from 'lucide-react'
 import type { RunView } from '../api/client'
 import { fmt, messages } from '../i18n'
 import { Button } from '../ui'
-import { listNotes, processNotes, readRun } from './voiceApi'
+import { listNotes, processNotes, readCases, readRun } from './voiceApi'
+import './voiceProcessButton.css'
 
 const t = messages.record.dashboard
 const REFRESH_MS = 5000
@@ -13,7 +14,11 @@ const DONE = new Set(['succeeded', 'degraded', 'blocked', 'failed'])
 const sleep = (ms: number) => new Promise((resolve) => window.setTimeout(resolve, ms))
 
 /** Dashboard trigger for DEMO-04: one live-voice run over the notes sent from /store/record. */
-export function VoiceProcessButton({ onDone }: { onDone: (run: RunView) => void }) {
+export function VoiceProcessButton({
+  onDone
+}: {
+  onDone: (run: RunView, cases: number) => void
+}) {
   const [pending, setPending] = useState(0)
   const [state, setState] = useState<'idle' | 'running' | 'error'>('idle')
 
@@ -47,8 +52,9 @@ export function VoiceProcessButton({ onDone }: { onDone: (run: RunView) => void 
         }
         last = view
       }
-      setState(last && ['succeeded', 'degraded'].includes(last.status) ? 'idle' : 'error')
-      if (last) onDone(last)
+      const ok = last !== null && ['succeeded', 'degraded'].includes(last.status)
+      setState(ok ? 'idle' : 'error')
+      if (last) onDone(last, ok ? (await readCases(last.spec.run_id)).length : 0)
     } catch {
       setState('error')
     }
@@ -59,7 +65,7 @@ export function VoiceProcessButton({ onDone }: { onDone: (run: RunView) => void 
   return (
     <Button
       size="sm"
-      variant={state === 'error' ? 'secondary' : 'primary'}
+      className="voice-process"
       icon={<Mic size={14} />}
       loading={state === 'running'}
       disabled={!pending}

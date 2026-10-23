@@ -196,7 +196,9 @@ def live_spec(registry: Registry, store_id: str, notes: list[LiveNote], as_of: d
     for root in ROOTS:
         add(root)
     params = {
-        "src.voice": {"notes": [n.note.slug for n in notes]},
+        # The text the store checked (and maybe corrected) on the phone is the source, not a
+        # second ASR pass over the audio: one segment, no audio timestamps.
+        "src.voice": {"notes": [n.note.slug for n in notes], "mode": "fixture"},
         "src.email": {"files": [NO_MAIL]},
     }
     modules = tuple(
