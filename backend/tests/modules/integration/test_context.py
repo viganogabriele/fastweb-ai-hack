@@ -1,9 +1,8 @@
 """INT-06: int.context associates context events to cases by geo/time without uplift."""
 
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime
 
 from tessera.core.contracts import (
-    ArtifactRef,
     Case,
     ContextEvent,
     ModuleSnapshot,
