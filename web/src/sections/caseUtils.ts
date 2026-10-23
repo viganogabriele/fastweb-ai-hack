@@ -22,7 +22,7 @@ export const DEFAULT_CASE_QUEUE_FILTERS: CaseQueueFilters = {
   deadline: 'all',
   uncertainty: 'all',
   status: 'all',
-  sort: 'priority'
+  sort: 'recent'
 }
 
 export function caseKey(item: Pick<Case, 'id' | 'version'>) {
