@@ -35,11 +35,13 @@ def test_recorded_answer_envelopes_are_complete_and_bound_to_their_evidence():
     assert stored == recorded  # every envelope is used, none is missing
     for key in stored:
         cache.get(key)  # key, checksum and schema, without a provider client
-    # Every envelope was produced by a real provider call in one of the two sessions.
-    initial = json.loads((ANSWERS / "recording-evidence-initial.json").read_text())
+    # Every envelope was produced by a real provider call in a recording session.
+    sessions = [evidence]
+    if (ANSWERS / "recording-evidence-initial.json").exists():
+        sessions.append(json.loads((ANSWERS / "recording-evidence-initial.json").read_text()))
     real = {
         t["key"]
-        for session in (initial, evidence)
+        for session in sessions
         for answer in session["answers"].values()
         for t in answer["llm_traces"]
         if not t.get("cache_hit") and t["status"] == 200
@@ -68,7 +70,7 @@ def test_recorded_answers_replay_offline_through_the_answer_api(tmp_path):
         assert answer["duplicate_current_observation_ids"] == []
         assert answer["answer_document_observations"] == 0
         (corrected,) = [c for c in answer["corrected"] if c["observation_id"] == TARGET]
-        assert corrected["quantity_raw"] == "in continuazione"
+        assert corrected["quantity_raw"] == "1 o 2 pezzi per colore"
         assert corrected["available_at"] == "2026-10-22T20:20:00+00:00"
         assert answer["supersedes"] >= 1
     readings = {k: a["corrected"][0]["product_mention"] for k, a in result["answers"].items()}

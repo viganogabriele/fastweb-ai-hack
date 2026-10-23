@@ -1,0 +1,782 @@
+{
+  "answers": {
+    "abstain": {
+      "answer_document_observations": 0,
+      "artifact_sha256": "e3b7b44558b2f89ac9917ad6898c186402c6074af7ab4dc3721e9926b002a36e",
+      "corrected": [
+        {
+          "available_at": "2026-10-22T20:20:00+00:00",
+          "cases": [
+            {
+              "id": "case-mil01-unknown-20261022",
+              "scope_id": null,
+              "scope_level": "unknown",
+              "status": "verify"
+            }
+          ],
+          "links": [
+            {
+              "level": null,
+              "status": "unlinked",
+              "target_id": null
+            }
+          ],
+          "observation_id": "obs-20261009-1035-mil01-1",
+          "product_mention": "M",
+          "quantity_raw": "1 o 2 pezzi per colore",
+          "version": "contextual:0215838c60a6f3775805d73117b5561f6a8da414d09d4c7b8b7411f823c22e20:obs-20261009-1035-mil01-1"
+        }
+      ],
+      "current_observations": 78,
+      "duplicate_current_observation_ids": [],
+      "fingerprint": "0215838c60a6f3775805d73117b5561f6a8da414d09d4c7b8b7411f823c22e20",
+      "investigations": [
+        [
+          "case-mil01-i10919b00011-20261008",
+          true,
+          [
+            "get_case_evidence",
+            "get_available_stock",
+            "get_available_stock",
+            "get_lane_and_eta",
+            "get_lane_and_eta",
+            "evaluate_options",
+            "fallback"
+          ]
+        ]
+      ],
+      "llm_calls": 18,
+      "llm_keys": [
+        "129b4295df960bd93fc34f1be945403dbbc463f20ca99113a0d790e7840196db",
+        "1942eadc2460d0bd053568c226b88f9a88ea9c3783047e11ab661a4a0773b3fc",
+        "28dd81d91c08e7e42c2fd378d266fce938c49a487daf764bd721b7962644af72",
+        "31a78d3d0fe61deda4d90a3d2d586c2460673e03c778bc0025a073f2b33304d1",
+        "325abf1536201d5682cf7092e567680ba68b64b34901899d6ec883d59549e4e8",
+        "38297a150c6e06dc927f12fdd4cf33693cf37d695b94d6975c5937a344f5d187",
+        "44bb5982e45558fcb40af38d5c1be2008d01eeaa2d2d78f8f5c8ed70049b656e",
+        "4e2a0c218aa26f8c721c6145af9aa3d53decfb571445a83c311c2a34386562d8",
+        "56ae730dbbab23ddf4c455c6cec926af9d064bea80739107d87cf0e13d41e007",
+        "5b4024bfe774fd52cf07f730fac53f5ade4190d9c343d7872a0a19b3c004b09e",
+        "63204469cfc3f825cc0f64ad8d4c9109f7d3e3b1774f6597d7a6e709b876413d",
+        "6ad2be9a864d97a3048f99aa4e193d6b539ffd0f3c21b1cc6b3aeb70a0e3a815",
+        "9fae1187ac3b0a57976191281b6537f4827bd6534a01242874217ac28548bdd8",
+        "9fcf9f7b855b6758af32f286c7b189de2ff3fce2b9fa4f843df956425b40eaab",
+        "ac17d30d3a0154eeb1ec99f33333ed6f27b089a9255b08056fbccb97d2ae2139",
+        "bcfc4b1ea67f00a0adabe5e419e25decd515cefa3d5b3d4588ba3348b69f65a6",
+        "c24e91c790f8783352c154c74f6f4257499b49770b56ecb77d8a2f5e66f7af16",
+        "ceb8bd197ac152c7be9035294d201c9338d05ca46b2b498851e7394f89867617"
+      ],
+      "llm_traces": [
+        {
+          "attempt": 1,
+          "key": "c24e91c790f8783352c154c74f6f4257499b49770b56ecb77d8a2f5e66f7af16",
+          "latency_seconds": 0.43107127281837165,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 7111
+        },
+        {
+          "attempt": 1,
+          "key": "325abf1536201d5682cf7092e567680ba68b64b34901899d6ec883d59549e4e8",
+          "latency_seconds": 0.8646021399181336,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 1564
+        },
+        {
+          "attempt": 1,
+          "key": "ceb8bd197ac152c7be9035294d201c9338d05ca46b2b498851e7394f89867617",
+          "latency_seconds": 4.665117325028405,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 2379
+        },
+        {
+          "attempt": 1,
+          "key": "ac17d30d3a0154eeb1ec99f33333ed6f27b089a9255b08056fbccb97d2ae2139",
+          "latency_seconds": 5.77888925303705,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 2682
+        },
+        {
+          "attempt": 1,
+          "key": "38297a150c6e06dc927f12fdd4cf33693cf37d695b94d6975c5937a344f5d187",
+          "latency_seconds": 5.047392752952874,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 2499
+        },
+        {
+          "attempt": 1,
+          "key": "129b4295df960bd93fc34f1be945403dbbc463f20ca99113a0d790e7840196db",
+          "latency_seconds": 1.4533410200383514,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 1687
+        },
+        {
+          "attempt": 1,
+          "key": "6ad2be9a864d97a3048f99aa4e193d6b539ffd0f3c21b1cc6b3aeb70a0e3a815",
+          "latency_seconds": 0.5521653001196682,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 1512
+        },
+        {
+          "attempt": 1,
+          "key": "28dd81d91c08e7e42c2fd378d266fce938c49a487daf764bd721b7962644af72",
+          "latency_seconds": 0.1166203711181879,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 1414
+        },
+        {
+          "attempt": 1,
+          "key": "31a78d3d0fe61deda4d90a3d2d586c2460673e03c778bc0025a073f2b33304d1",
+          "latency_seconds": 6.561521966941655,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 2987
+        },
+        {
+          "attempt": 1,
+          "key": "56ae730dbbab23ddf4c455c6cec926af9d064bea80739107d87cf0e13d41e007",
+          "latency_seconds": 0.14772888692095876,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 1450
+        },
+        {
+          "attempt": 1,
+          "key": "bcfc4b1ea67f00a0adabe5e419e25decd515cefa3d5b3d4588ba3348b69f65a6",
+          "latency_seconds": 1.1530175940133631,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 1623
+        },
+        {
+          "attempt": 1,
+          "key": "5b4024bfe774fd52cf07f730fac53f5ade4190d9c343d7872a0a19b3c004b09e",
+          "latency_seconds": 7.184045701054856,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 3054
+        },
+        {
+          "attempt": 1,
+          "key": "4e2a0c218aa26f8c721c6145af9aa3d53decfb571445a83c311c2a34386562d8",
+          "latency_seconds": 0.3357161399908364,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 479
+        },
+        {
+          "attempt": 1,
+          "key": "9fcf9f7b855b6758af32f286c7b189de2ff3fce2b9fa4f843df956425b40eaab",
+          "latency_seconds": 0.347880220040679,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 466
+        },
+        {
+          "attempt": 1,
+          "key": "1942eadc2460d0bd053568c226b88f9a88ea9c3783047e11ab661a4a0773b3fc",
+          "latency_seconds": 0.7221538189332932,
+          "mode": "record",
+          "model": "glm-5.3-flash",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 1432
+        },
+        {
+          "attempt": 1,
+          "key": "9fae1187ac3b0a57976191281b6537f4827bd6534a01242874217ac28548bdd8",
+          "latency_seconds": 18.7039164560847,
+          "mode": "record",
+          "model": "glm-5.3-flash",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 10240
+        },
+        {
+          "attempt": 1,
+          "key": "63204469cfc3f825cc0f64ad8d4c9109f7d3e3b1774f6597d7a6e709b876413d",
+          "latency_seconds": 6.583098022965714,
+          "mode": "record",
+          "model": "glm-5.3-flash",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 12442
+        },
+        {
+          "attempt": 1,
+          "key": "44bb5982e45558fcb40af38d5c1be2008d01eeaa2d2d78f8f5c8ed70049b656e",
+          "latency_seconds": 3.7949065181892365,
+          "mode": "record",
+          "model": "glm-5.3-flash",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 13145
+        }
+      ],
+      "module_errors": {
+        "ag.investigator": [
+          "case-mil01-unknown-20261009: Case is unavailable or not actionable in this run"
+        ]
+      },
+      "published": true,
+      "run_id": "clarification-run:2212f7459fda8a2cbcd878e90a2fc337ba192e58696b033cfb1eccff48e82966",
+      "scenario_id": "simulated-answer-abstain",
+      "status": "degraded",
+      "supersedes": 4
+    },
+    "elliptical": {
+      "answer_document_observations": 0,
+      "artifact_sha256": "16be1eb19e58501792c6aeb2883b16d1ff29c5a7c9e867b21a76aed921a806a6",
+      "corrected": [
+        {
+          "available_at": "2026-10-22T20:20:00+00:00",
+          "cases": [
+            {
+              "id": "case-mil01-i10919b00011-20261022",
+              "scope_id": "I10919B00011",
+              "scope_level": "style",
+              "status": "open"
+            }
+          ],
+          "links": [
+            {
+              "level": "style",
+              "status": "linked",
+              "target_id": "I10919B00011"
+            }
+          ],
+          "observation_id": "obs-20261009-1035-mil01-1",
+          "product_mention": "Cardigan logo M",
+          "quantity_raw": "1 o 2 pezzi per colore",
+          "version": "contextual:fcebc9bcf9f97403eaa650be59ff830f4a460d2080fffcb73e87977143521ab8:obs-20261009-1035-mil01-1"
+        }
+      ],
+      "current_observations": 84,
+      "duplicate_current_observation_ids": [],
+      "fingerprint": "fcebc9bcf9f97403eaa650be59ff830f4a460d2080fffcb73e87977143521ab8",
+      "investigations": [
+        [
+          "case-mil01-i10919b00011-20261008",
+          true,
+          [
+            "get_case_evidence",
+            "get_available_stock",
+            "get_available_stock",
+            "get_available_stock",
+            "get_lane_and_eta",
+            "get_lane_and_eta",
+            "fallback"
+          ]
+        ]
+      ],
+      "llm_calls": 18,
+      "llm_keys": [
+        "0f2bd3b66f7d70af87383ff5e2a54025c4a4922b24c005984ea39fbfc3fd8072",
+        "126ba19f99841d490edc7c0d617337b2c2b60fcce15f199c03a6b1d029f44d07",
+        "28c30e4d125b2a8c084bee71666c9e012a44542a91df90ed0045fd5137f0acb9",
+        "345b4cf3b77876d9056f6aedf4663c051636cc48205b23025a6d06971038a883",
+        "63f588a1b0c6a0604a83609813de75eae44a0037e13072abc65191bca18b47e7",
+        "70be0d9c1fc8caed7d4ba60f8ff6933adcfd63a63771c9abf486094f8d5388d0",
+        "7d6535b9dde3c3575a4804d75ae20a8c4fa74ef9c1db47db2fe06e6ed6f41946",
+        "9fb360a14f4727fc39a294ae885f6d3030ce0c9313be2acb2b27e929b0eee421",
+        "a47696e6ddb756a8b6f64460f28c34c6ee417c201d07dfef2ce654e0bbc40a68",
+        "a54264dea17ed94537945119cbf6fcdfe982283134d0957ed482fe49f3f97076",
+        "ab0f6d6bd3b19f2c866b1b69f184c87deb0e6e27c253c406e00d7289e482edc2",
+        "ab301a3d119868d0428c6f79b47ba7bb15147892f13d588d63f88148f18c9de2",
+        "abca4223253f514b597a79ac8344f19068d9a97b421f6fb143dda17fb4c49ee7",
+        "b60a1303ad62be35f21e537352ef8c89777c6239e665e8ab365cdff0df1d92f5",
+        "d4687516c9cbc57e73f451f43f78591ad86877c6a96b8480615dacec3b573e21",
+        "d941b31ec2cd34eb7ab0f76f4535c4f248da56e9bf34a2e2184ad421238e9e44",
+        "eb1ca9e3cf7b0e564f0b8e8f0b5d76d677e29eabbda7d51f1b53af342e995c35",
+        "ef436bc8a78b280374e0116cf79bee65ccdc15782a493e48089efde10d64a05f"
+      ],
+      "llm_traces": [
+        {
+          "attempt": 1,
+          "key": "7d6535b9dde3c3575a4804d75ae20a8c4fa74ef9c1db47db2fe06e6ed6f41946",
+          "latency_seconds": 0.45601150789298117,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 7028
+        },
+        {
+          "attempt": 1,
+          "key": "ab301a3d119868d0428c6f79b47ba7bb15147892f13d588d63f88148f18c9de2",
+          "latency_seconds": 0.8703848489094526,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 1564
+        },
+        {
+          "attempt": 1,
+          "key": "a54264dea17ed94537945119cbf6fcdfe982283134d0957ed482fe49f3f97076",
+          "latency_seconds": 4.584984574932605,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 2377
+        },
+        {
+          "attempt": 1,
+          "key": "b60a1303ad62be35f21e537352ef8c89777c6239e665e8ab365cdff0df1d92f5",
+          "latency_seconds": 6.1810804170090705,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 2682
+        },
+        {
+          "attempt": 1,
+          "key": "63f588a1b0c6a0604a83609813de75eae44a0037e13072abc65191bca18b47e7",
+          "latency_seconds": 5.327712821075693,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 2499
+        },
+        {
+          "attempt": 1,
+          "key": "70be0d9c1fc8caed7d4ba60f8ff6933adcfd63a63771c9abf486094f8d5388d0",
+          "latency_seconds": 1.6692098591011018,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 1676
+        },
+        {
+          "attempt": 1,
+          "key": "eb1ca9e3cf7b0e564f0b8e8f0b5d76d677e29eabbda7d51f1b53af342e995c35",
+          "latency_seconds": 0.5479199618566781,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 1512
+        },
+        {
+          "attempt": 1,
+          "key": "126ba19f99841d490edc7c0d617337b2c2b60fcce15f199c03a6b1d029f44d07",
+          "latency_seconds": 0.11982459691353142,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 1414
+        },
+        {
+          "attempt": 1,
+          "key": "d4687516c9cbc57e73f451f43f78591ad86877c6a96b8480615dacec3b573e21",
+          "latency_seconds": 0.16876668785698712,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 1450
+        },
+        {
+          "attempt": 1,
+          "key": "0f2bd3b66f7d70af87383ff5e2a54025c4a4922b24c005984ea39fbfc3fd8072",
+          "latency_seconds": 1.0582031020894647,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 1623
+        },
+        {
+          "attempt": 1,
+          "key": "9fb360a14f4727fc39a294ae885f6d3030ce0c9313be2acb2b27e929b0eee421",
+          "latency_seconds": 7.979942112928256,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 3133
+        },
+        {
+          "attempt": 1,
+          "key": "28c30e4d125b2a8c084bee71666c9e012a44542a91df90ed0045fd5137f0acb9",
+          "latency_seconds": 9.541292280890048,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 3637
+        },
+        {
+          "attempt": 1,
+          "key": "a47696e6ddb756a8b6f64460f28c34c6ee417c201d07dfef2ce654e0bbc40a68",
+          "latency_seconds": 0.3583313880953938,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 479
+        },
+        {
+          "attempt": 1,
+          "key": "ab0f6d6bd3b19f2c866b1b69f184c87deb0e6e27c253c406e00d7289e482edc2",
+          "latency_seconds": 0.3699567869771272,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 466
+        },
+        {
+          "attempt": 1,
+          "key": "d941b31ec2cd34eb7ab0f76f4535c4f248da56e9bf34a2e2184ad421238e9e44",
+          "latency_seconds": 0.6210482260212302,
+          "mode": "record",
+          "model": "glm-5.3-flash",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 1432
+        },
+        {
+          "attempt": 1,
+          "key": "345b4cf3b77876d9056f6aedf4663c051636cc48205b23025a6d06971038a883",
+          "latency_seconds": 23.547232064884156,
+          "mode": "record",
+          "model": "glm-5.3-flash",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 11844
+        },
+        {
+          "attempt": 1,
+          "key": "ef436bc8a78b280374e0116cf79bee65ccdc15782a493e48089efde10d64a05f",
+          "latency_seconds": 2.0955296088941395,
+          "mode": "record",
+          "model": "glm-5.3-flash",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 10213
+        },
+        {
+          "attempt": 1,
+          "key": "abca4223253f514b597a79ac8344f19068d9a97b421f6fb143dda17fb4c49ee7",
+          "latency_seconds": 5.976787408115342,
+          "mode": "record",
+          "model": "glm-5.3-flash",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 13751
+        }
+      ],
+      "module_errors": {
+        "ag.investigator": [
+          "case-mil01-unknown-20261009: Case is unavailable or not actionable in this run"
+        ]
+      },
+      "published": true,
+      "run_id": "clarification-run:2ede81a80276508a9dcb011be41368a12d32910e8fd91a37294620e10122441d",
+      "scenario_id": "simulated-answer-elliptical",
+      "status": "degraded",
+      "supersedes": 4
+    },
+    "self-contained": {
+      "answer_document_observations": 0,
+      "artifact_sha256": "e4d549fe60c78a1a284e9356a4320ac051bb58133d8a2f240c13fc3c175ebeaa",
+      "corrected": [
+        {
+          "available_at": "2026-10-22T20:20:00+00:00",
+          "cases": [
+            {
+              "id": "case-mil01-i10919b00011-20261022",
+              "scope_id": "I10919B00011",
+              "scope_level": "style",
+              "status": "open"
+            }
+          ],
+          "links": [
+            {
+              "level": "style",
+              "status": "linked",
+              "target_id": "I10919B00011"
+            }
+          ],
+          "observation_id": "obs-20261009-1035-mil01-1",
+          "product_mention": "cardigan logo taglia M nero e blu",
+          "quantity_raw": "1 o 2 pezzi per colore",
+          "version": "contextual:2c80527162b3ef46e69d88cc5b8db35be4e560dec6d3a11d886a4c9b7be2fe3d:obs-20261009-1035-mil01-1"
+        }
+      ],
+      "current_observations": 68,
+      "duplicate_current_observation_ids": [],
+      "fingerprint": "2c80527162b3ef46e69d88cc5b8db35be4e560dec6d3a11d886a4c9b7be2fe3d",
+      "investigations": [
+        [
+          "case-mil01-i10919b00011-20261008",
+          true,
+          [
+            "get_case_evidence",
+            "get_available_stock",
+            "get_available_stock",
+            "get_lane_and_eta",
+            "get_lane_and_eta",
+            "evaluate_options",
+            "fallback"
+          ]
+        ]
+      ],
+      "llm_calls": 17,
+      "llm_keys": [
+        "08218635fb699a57a73282f35d345bc4bbbb2cf6aca5028ed8309851d1c25318",
+        "2c013a21850b5b4c3ea1739402172d6040e037cef9b949c5f0103a2a2d3f2b83",
+        "42c675e64e4133fc0ce31abd33fce6c98c5689b17caf0c98177297b06e185ef2",
+        "4ebc1769d849ab8cc61d3778ac57a89439e14c0508e0abbc016dfe5f41234dfc",
+        "5256baf84864fad99879d4ab78148514cd770cceaa6e2e52bd847b9f45b58699",
+        "5aa5f683a61f80e7c31eb97f406fe884301f8226b5e0959e2b6b29bb3e99a761",
+        "675a43d842e323bbedeaf1027948c1f31a8fd523b27be6eecac723757bb0472e",
+        "69127e3356aa10c27c557317e49241f02013f2aa54ef201bbbe5b07d3b1223b7",
+        "70b3e19c0db384ce30adc7a11d6042ee62f577db5881e052f9ecdc59388addd8",
+        "836e0f42b8ce38e3ae7b5658bba0d6c32cf74cd702340923697faedf4b84593a",
+        "87e27e5588bfcd60e124636dcc149b30ef4d008db65cb06b62dfdf922b0e5059",
+        "a393bf13c6cc6dccb58ee00853a68a1b86a8be3c9e3c243d55ace467d2ef8130",
+        "b43afbd1d036b6af57b2292c7954f88b76c0066b0a2fb8b99c4e001c831430f1",
+        "b83fe257c40ae136ea29ef5984410eaf8641b726cc429a1dd539f4d666bee370",
+        "bd069a5b0839598429ccbb1d5de26a2c8106659ad7508b3e84321628baf1721d",
+        "d04451a5086d0eacca782e68dde9d73356b3e07abc0ba444105a93e64b9ecd64",
+        "fcefb3522fb24fb7c01e94c1c80d0084918405666e7dec3539df67df9e4f2ed0"
+      ],
+      "llm_traces": [
+        {
+          "attempt": 1,
+          "key": "2c013a21850b5b4c3ea1739402172d6040e037cef9b949c5f0103a2a2d3f2b83",
+          "latency_seconds": 0.5131925020832568,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 7073
+        },
+        {
+          "attempt": 1,
+          "key": "5256baf84864fad99879d4ab78148514cd770cceaa6e2e52bd847b9f45b58699",
+          "latency_seconds": 0.8202132880687714,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 1564
+        },
+        {
+          "attempt": 1,
+          "key": "4ebc1769d849ab8cc61d3778ac57a89439e14c0508e0abbc016dfe5f41234dfc",
+          "latency_seconds": 4.303446964127943,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 2374
+        },
+        {
+          "attempt": 1,
+          "key": "675a43d842e323bbedeaf1027948c1f31a8fd523b27be6eecac723757bb0472e",
+          "latency_seconds": 4.514126257039607,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 2261
+        },
+        {
+          "attempt": 1,
+          "key": "b83fe257c40ae136ea29ef5984410eaf8641b726cc429a1dd539f4d666bee370",
+          "latency_seconds": 5.6066358590032905,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 2507
+        },
+        {
+          "attempt": 1,
+          "key": "bd069a5b0839598429ccbb1d5de26a2c8106659ad7508b3e84321628baf1721d",
+          "latency_seconds": 1.4301763779949397,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 1682
+        },
+        {
+          "attempt": 1,
+          "key": "a393bf13c6cc6dccb58ee00853a68a1b86a8be3c9e3c243d55ace467d2ef8130",
+          "latency_seconds": 0.5407294251490384,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 1512
+        },
+        {
+          "attempt": 1,
+          "key": "d04451a5086d0eacca782e68dde9d73356b3e07abc0ba444105a93e64b9ecd64",
+          "latency_seconds": 0.1150227258913219,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 1414
+        },
+        {
+          "attempt": 1,
+          "key": "70b3e19c0db384ce30adc7a11d6042ee62f577db5881e052f9ecdc59388addd8",
+          "latency_seconds": 0.19085598993115127,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 1450
+        },
+        {
+          "attempt": 1,
+          "key": "b43afbd1d036b6af57b2292c7954f88b76c0066b0a2fb8b99c4e001c831430f1",
+          "latency_seconds": 7.097468945896253,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 2991
+        },
+        {
+          "attempt": 1,
+          "key": "fcefb3522fb24fb7c01e94c1c80d0084918405666e7dec3539df67df9e4f2ed0",
+          "latency_seconds": 1.5938666108995676,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 1735
+        },
+        {
+          "attempt": 1,
+          "key": "87e27e5588bfcd60e124636dcc149b30ef4d008db65cb06b62dfdf922b0e5059",
+          "latency_seconds": 5.8005473469384015,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 2881
+        },
+        {
+          "attempt": 1,
+          "key": "08218635fb699a57a73282f35d345bc4bbbb2cf6aca5028ed8309851d1c25318",
+          "latency_seconds": 0.35200756415724754,
+          "mode": "record",
+          "model": "google/gemma-4-26B-A4B-it",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 479
+        },
+        {
+          "attempt": 1,
+          "key": "5aa5f683a61f80e7c31eb97f406fe884301f8226b5e0959e2b6b29bb3e99a761",
+          "latency_seconds": 0.8751729801297188,
+          "mode": "record",
+          "model": "glm-5.3-flash",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 1432
+        },
+        {
+          "attempt": 1,
+          "key": "836e0f42b8ce38e3ae7b5658bba0d6c32cf74cd702340923697faedf4b84593a",
+          "latency_seconds": 12.299743794137612,
+          "mode": "record",
+          "model": "glm-5.3-flash",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 11780
+        },
+        {
+          "attempt": 1,
+          "key": "69127e3356aa10c27c557317e49241f02013f2aa54ef201bbbe5b07d3b1223b7",
+          "latency_seconds": 9.738977632019669,
+          "mode": "record",
+          "model": "glm-5.3-flash",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 15113
+        },
+        {
+          "attempt": 1,
+          "key": "42c675e64e4133fc0ce31abd33fce6c98c5689b17caf0c98177297b06e185ef2",
+          "latency_seconds": 4.246644816128537,
+          "mode": "record",
+          "model": "glm-5.3-flash",
+          "operation": "chat",
+          "status": 200,
+          "tokens": 15436
+        }
+      ],
+      "module_errors": {
+        "ag.investigator": [
+          "case-mil01-unknown-20261009: Case is unavailable or not actionable in this run"
+        ]
+      },
+      "published": true,
+      "run_id": "clarification-run:9669164b5b1d5154c44145b6595080b82c80e2a2e0d2298951e20114947ec83d",
+      "scenario_id": "simulated-answer-self-contained",
+      "status": "degraded",
+      "supersedes": 4
+    }
+  },
+  "complete": true,
+  "execution_sha": "9d50277d3db10444b70f5356599106e6696c29d4",
+  "format": 1,
+  "parent": {
+    "artifact_sha256": "4a111a0d0255ba4aac6ae95adcbf87200b2a58ed4f044a871bb7822ff9e28bfe",
+    "artifact_sha256_after": "4a111a0d0255ba4aac6ae95adcbf87200b2a58ed4f044a871bb7822ff9e28bfe",
+    "output_sha256": "4a111a0d0255ba4aac6ae95adcbf87200b2a58ed4f044a871bb7822ff9e28bfe",
+    "run_id": "core-dev-candidate",
+    "snapshot_sha256": "c522703633170af4933e06ed0f02edc29f2beb5f85cb32873ac46bb426b86edb"
+  },
+  "systems_cache_corrupt": [],
+  "systems_cache_misses": []
+}
