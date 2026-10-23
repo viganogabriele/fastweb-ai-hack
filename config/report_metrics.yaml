@@ -1,0 +1,81 @@
+# config/report_metrics.yaml: the one approved report mapping behind ing.metrics (ING-06).
+# Owner: lane A (ING-06). Freeze this file before hold-out metrics (RFC 7.1): every MetricFact
+# names this `mapping_version`, so changing a number here is a visible new version.
+#
+# Scope of the slice: the Retail Controlling weekly sales flash. Two sheets are mapped --
+# `Stores` (one row per store, keyed by store_name in erp/master_data/stores.csv) and
+# `Summary` (one row per region). Nothing else in the workbook is read.
+#
+# Rules the module enforces, and why:
+# - `status: approved` is required. A draft mapping makes the run fail; it is never used
+#   silently.
+# - every column names its header cell exactly (whitespace collapsed) and carries the report
+#   sentence that defines it (`definition_quote`). The quote must appear in the report's own
+#   text; otherwise the fact is still published, as not_comparable, and never aggregated. A
+#   column with no definition in the report is not mapped at all: "Units" and "%" on the Stores
+#   sheet have no definition sentence, so they stay out.
+# - `scale` converts the stored cell to the fact unit and is declared, never guessed. The
+#   Summary column is in EUR k, so 4520.929... becomes 4520929.947... EUR. The LFL growth
+#   column stores a fraction (0.1747) that Excel displays as 17.5%, so scale 100 makes it a
+#   percent.
+# - `vat_included` / `gross_or_net` restate the report's definition, they are not inferred from
+#   the numbers.
+# - `currency_from` takes the currency of the row's own `Ccy` cell (local sales); a fixed
+#   `currency` means the column is already reported in it. A missing or malformed currency
+#   drops that one fact instead of defaulting to EUR.
+#
+# Availability is the report document's own: the issue date on the cover, not the period end.
+version: 1
+mapping_version: weekly-flash-v1
+status: approved
+report_pattern: "retail_controlling/weekly_flash/Flash_W*_2026*.xlsx"
+calendar: retail_fiscal_week
+
+sheets:
+  Stores:
+    header_row: 2
+    first_row: 3
+    key_column: Store
+    scope: store
+    lfl_column: LFL
+    columns:
+      Net Sales LC:
+        metric: net_sales
+        unit: money
+        currency_from: Ccy
+        vat_included: false
+        gross_or_net: net
+        definition_quote: "Net sales = gross sales - discounts - returns"
+      Net Sales EUR:
+        metric: net_sales_eur
+        unit: money
+        currency: EUR
+        vat_included: false
+        gross_or_net: net
+        definition_quote: "Net sales = gross sales - discounts - returns"
+        fx_basis_quote: "Reported EUR at average October"
+      Traffic:
+        metric: traffic
+        unit: visitors
+        definition_quote: "Traffic from door counters (Xovis)"
+      "\u0394% LFL cFX":
+        metric: net_sales_growth_lfl
+        unit: percent
+        scale: 100
+        requires_lfl: true
+        definition_quote: "LFL = stores trading at least 5 days in both CY week and LY week"
+  Summary:
+    header_row: 4
+    first_row: 5
+    key_column: Region
+    scope: region
+    columns:
+      Net Sales Wk (EUR k):
+        metric: net_sales_eur
+        unit: money
+        currency: EUR
+        scale: 1000
+        vat_included: false
+        gross_or_net: net
+        definition_quote: "Net sales = gross sales - discounts - returns"
+        fx_basis_quote: "Reported EUR at average October"
