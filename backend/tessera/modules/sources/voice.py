@@ -289,6 +289,14 @@ def recorded_document(
     text = "".join(s.text for s in segments)
     if not segments or not text.strip():
         raise UnusableTranscript("the ASR returned no usable segments")
+    for piece in segments:
+        if piece.end <= piece.start:
+            raise UnusableTranscript("the ASR returned an empty or reversed interval")
+        if note.sidecar.duration_s is not None and piece.end > note.sidecar.duration_s:
+            raise UnusableTranscript(
+                f"ASR interval ends at {piece.end:g}s beyond audio duration "
+                f"{note.sidecar.duration_s:g}s"
+            )
     doc_id = f"doc-voice-{note.slug}"
     text_version = ASR_TEXT_VERSION
     segments_out: list[Segment] = []

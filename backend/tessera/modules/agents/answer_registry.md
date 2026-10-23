@@ -47,8 +47,10 @@ fields (not allow contradictory duplicate IDs):
 
 The same retry key with a changed payload is a conflict. A different retry key
 for the same deterministic answer/scenario/clock also returns the existing job,
-and reserves that key against subsequent conflicting reuse. Concurrent acceptance
-is serialized by `BEGIN IMMEDIATE`; worker claiming uses the same database lock.
+and reserves that key against subsequent conflicting reuse. Alias retries resolve
+the durable job before reopening the parent, so they survive a parent projection
+reset. Concurrent acceptance is serialized by `BEGIN IMMEDIATE`; worker claiming
+uses the same database lock.
 An already published worker retry returns its job without re-executing modules;
 an in-progress duplicate raises `AnswerConflict`.
 
@@ -70,7 +72,9 @@ fingerprint is insufficient. Live submission persists an event with
 `replay_ready=no`; neither execution success nor retry makes it replayable.
 A registered event may be scheduled at a different scenario/clock, but each
 snapshot still needs its own required recordings; pipeline cache misses stay
-explicit and leave the follow-up unpublished.
+explicit and leave the follow-up unpublished. The worker observes typed replay
+misses and corrupt recordings at the LLM boundary even when extraction or linking
+catches the error and returns a degraded module result.
 
 A failed run can be retried after explicitly resetting its projection with
 `reset_run`. The durable job then recreates the same frozen snapshot and sources,
@@ -95,7 +99,8 @@ original payloads and versions remain in the durable registry. ERP references
 resolve through the normal availability-filtered shared source view.
 
 The worker supplies a repository view that excludes historical derived versions
-from module `list` calls while keeping exact `get` references resolvable. This
+from module `list` calls and unversioned `get` calls while keeping exact versioned
+`get` references resolvable. This
 prevents old observations from being counted twice and old case/observation
 versions from colliding with recomputation. The answered clarification links the
 new simulated source to that preserved lineage. Fresh observations, product

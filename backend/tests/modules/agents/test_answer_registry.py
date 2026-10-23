@@ -224,8 +224,11 @@ def setup(tmp_path):
         idempotency_key="retry-1",
     )
 
-    def seed(mode="live", published=True, extra=()):
-        current = spec.model_copy(update={"mode": mode})
+    def seed(mode="live", published=True, extra=(), modules=None):
+        changes = {"mode": mode}
+        if modules is not None:
+            changes["modules"] = modules
+        current = spec.model_copy(update=changes)
         with repo_session(engine, current, fixture_mode=mode == "fixture", write=True) as repo:
             repo.put(source, segment, observation, case, question, *extra)
             if published:
@@ -284,6 +287,259 @@ def test_events_lineage_and_retries_survive_both_projection_resets(setup):
     execute_follow_up(engine, job.run.run_id, registry=registry, clients={})
     assert len(seen) == 8
     assert count(engine, events) == count(engine, jobs) == 1
+
+
+def test_alias_retry_survives_parent_reset_and_reserves_its_key(setup):
+    engine, request, registry, seed, _, _ = setup
+    seed()
+    job = submit_answer(engine, request, registry=registry)
+    reset_run(engine, "parent")
+    alias = request.model_copy(update={"idempotency_key": "new-retry-key"})
+    assert submit_answer(engine, alias, registry=registry) == job
+    with pytest.raises(AnswerConflict, match="Idempotency"):
+        submit_answer(engine, alias.model_copy(update={"text": "changed"}), registry=registry)
+    assert count(engine, jobs) == count(engine, events) == 1
+
+
+def test_investigator_cannot_act_on_seeded_historical_case(setup):
+    from tessera.modules.agents.investigator import visible_case
+    from tessera.modules.agents.runtime import ToolError
+
+    engine, request, registry, seed, seen, _ = setup
+    seed()
+    job = submit_answer(engine, request, registry=registry)
+    checked = []
+
+    def protect(entry):
+        def execute(ctx):
+            # Frozen parent case_ids can point at a case that recomputation no
+            # longer produces. Its historical copy is lineage, never actionable.
+            with pytest.raises(ToolError, match="unavailable"):
+                visible_case(ctx.repo, "case")
+            historical = ctx.repo.get(Case, "case", f"parent:{job.fingerprint}:1")
+            assert historical is not None
+            assert historical.run_id == ctx.spec.run_id
+            checked.append(ctx.manifest.id)
+            return entry.run(ctx)
+
+        return RegisteredModule(entry.manifest, execute)
+
+    protected = Registry(
+        protect(registry.resolve(ModuleSnapshot(manifest=m, params={})))
+        for m in registry.manifests()
+    )
+    execute_follow_up(engine, job.run.run_id, registry=protected, clients={})
+    assert checked == seen == ["ing.extract", "int.link", "fc.overlay", "act.options"]
+    with repo_session(engine, job.run.run_id) as repo:
+        assert repo.run_state()["published"]
+
+
+def test_production_extraction_replay_miss_cannot_publish_partial_answer(setup, monkeypatch):
+    from tessera.core.cache import ReplayMiss
+    from tessera.core.config import Settings
+    from tessera.modules.ingestion import extract
+    from tessera.modules.sources.emails import Store
+
+    engine, request, registry, seed, seen, _ = setup
+    source = ModuleManifest(
+        id="src.email",
+        version="1",
+        layer="sources",
+        description="Already seeded test mail",
+        requires=(),
+        optional_inputs=(),
+        produces=(),
+        enabled=True,
+        mode="live",
+        params_schema={},
+    )
+
+    def seeded_source(ctx):
+        return ModuleResult(
+            module_id=source.id,
+            module_version=source.version,
+            status="succeeded",
+            counts={},
+            errors=(),
+            abstentions=(),
+        )
+
+    entries = [
+        RegisteredModule(source, seeded_source),
+        RegisteredModule(extract.MANIFEST, extract.run),
+        *(
+            registry.resolve(ModuleSnapshot(manifest=m, params={}))
+            for m in registry.manifests()
+            if m.id != "ing.extract"
+        ),
+    ]
+    registry = Registry(entries)
+    seed("recorded", modules=tuple(ModuleSnapshot(manifest=e.manifest, params={}) for e in entries))
+    monkeypatch.setattr(extract, "get_settings", lambda: Settings(_env_file=None))
+    monkeypatch.setattr(extract, "load_stores", lambda _: {"MIL01": Store("it", "Europe/Rome")})
+    monkeypatch.setattr(extract, "vague_quantifiers", lambda _: ())
+
+    class MissingReplyRecording:
+        def extract(self, schema, messages, *, cache_context, **kwargs):
+            if cache_context["document"][0].startswith("clarification-answer:"):
+                raise ReplayMiss("Missing simulated reply recording")
+            return extract.Candidates(
+                observations=[extract.Candidate(quote="felpa", kind="unmet_demand")]
+            )
+
+    register_recorded_answer(engine, request)
+    job = submit_answer(engine, request, registry=registry)
+    execute_follow_up(
+        engine, job.run.run_id, registry=registry, clients={"llm": MissingReplyRecording()}
+    )
+    with repo_session(engine, job.run.run_id) as repo:
+        assert not repo.run_state()["published"]
+        assert repo.run_state()["status"] in {"failed", "blocked"}
+        assert repo.list(SourceDocument) == repo.list(Observation) == []
+        extraction = next(m for m in repo.module_runs() if m.module_id == "ing.extract")
+        assert extraction.status == "failed"
+        assert any("ReplayMiss" in e for e in extraction.result.errors)
+    assert seen == []
+    assert count(engine, jobs) == count(engine, events) == 1
+
+
+def test_follow_up_runs_production_extract_link_cases_forecast_and_options(setup, monkeypatch):
+    from datetime import date
+
+    import httpx
+
+    from tessera.core.config import Settings
+    from tessera.core.contracts import ActionOption, EntityLink, ForecastAdjustment, SourceRef
+    from tessera.core.repo import put_erp
+    from tessera.modules.actions import options
+    from tessera.modules.ingestion import extract
+    from tessera.modules.integration import cases, dedup, link
+    from tessera.modules.intelligence import baseline, overlay
+    from tessera.modules.sources import emails, erp
+    from tessera.modules.sources.systems_client import Crosswalk, SystemsClient, SystemsReader
+
+    engine, request, _, seed, _, originals = setup
+    sku = "TEST-001"
+    request = request.model_copy(update={"text": "Richiesta Luminara taglia M."})
+    rows = [
+        (
+            "stores",
+            {
+                "store_id": "MIL01",
+                "timezone": "Europe/Rome",
+                "country_code": "IT",
+                "closed_dow": "",
+            },
+        ),
+        (
+            "sku_colour",
+            {"sku": sku, "style_code": "TEST", "style_name": "Luminara", "color_code": "001"},
+        ),
+        ("sku_size_ean", {"sku": sku, "size": "M", "sku_size": f"{sku}-M", "ean": "001"}),
+        ("assortment", {"store_id": "MIL01", "sku": sku}),
+        *(
+            (
+                "forecast",
+                {
+                    "store_id": "MIL01",
+                    "sku": sku,
+                    "run_date": date(2026, 10, 19),
+                    "week_start": date(2026, 10, day),
+                    "fcst_units": 7.0,
+                },
+            )
+            for day in (19, 26)
+        ),
+    ]
+
+    def source(ctx):
+        if ctx.manifest.id == "src.erp":
+            put_erp(
+                ctx.repo.engine,
+                [
+                    erp.ERPRow(
+                        table,
+                        f"test-{table}-{i}",
+                        "1",
+                        NOW,
+                        "test",
+                        (SourceRef(uri="test://erp.csv", content_hash="test"),),
+                        data,
+                    )
+                    for i, (table, data) in enumerate(rows)
+                ],
+            )
+        return ModuleResult(
+            module_id=ctx.manifest.id,
+            module_version=ctx.manifest.version,
+            status="succeeded",
+            counts={},
+            errors=(),
+            abstentions=(),
+        )
+
+    entries = [RegisteredModule(emails.MANIFEST, source), RegisteredModule(erp.MANIFEST, source)]
+    entries += [
+        RegisteredModule(m.MANIFEST, m.run)
+        for m in (extract, link, dedup, cases, baseline, overlay, options)
+    ]
+    registry = Registry(entries)
+    snapshots = tuple(ModuleSnapshot(manifest=e.manifest, params={}) for e in entries)
+    seed("recorded", modules=snapshots)
+    monkeypatch.setattr(extract, "get_settings", lambda: Settings(_env_file=None))
+    monkeypatch.setattr(
+        extract, "load_stores", lambda _: {"MIL01": emails.Store("it", "Europe/Rome")}
+    )
+    monkeypatch.setattr(extract, "vague_quantifiers", lambda _: ())
+
+    def no_network(request):
+        pytest.fail(f"Unexpected systems request: {request.url.path}")
+
+    def open_reader(repo, factory):
+        crosswalk = Crosswalk(
+            store_plant={"MIL01": "1001"},
+            timezones={"MIL01": "Europe/Rome"},
+            sku_matnr={sku: "TEST001"},
+            ean_sku_size={"001": (sku, "M")},
+        )
+        return SystemsReader(
+            repo, SystemsClient(crosswalk, transport=httpx.MockTransport(no_network))
+        )
+
+    monkeypatch.setattr(SystemsReader, "open", staticmethod(open_reader))
+
+    class RecordedReading:
+        def extract(self, schema, messages, *, cache_context, **kwargs):
+            assert schema is extract.Candidates  # This slice needs no LLM link tie-break.
+            reply = cache_context["document"][0].startswith("clarification-answer:")
+            return extract.Candidates(
+                observations=[
+                    extract.Candidate(
+                        quote=request.text if reply else "felpa",
+                        kind="unmet_demand",
+                        product_mention="Luminara taglia M" if reply else None,
+                    )
+                ]
+            )
+
+    register_recorded_answer(engine, request)
+    job = submit_answer(engine, request, registry=registry)
+    execute_follow_up(engine, job.run.run_id, registry=registry, clients={"llm": RecordedReading()})
+    with repo_session(engine, job.run.run_id) as repo:
+        assert repo.run_state()["published"], [
+            (m.module_id, m.status, m.result.errors) for m in repo.module_runs()
+        ]
+        fresh = [o for o in repo.list(Observation) if o.document_id == job.document.id]
+        assert len(fresh) == 1 and fresh[0].available_at == request.received_at
+        links = [lk for lk in repo.list(EntityLink) if lk.observation_id == fresh[0].id]
+        assert len(links) == 1 and links[0].status == "linked"
+        linked_cases = [c for c in repo.list(Case) if ref(fresh[0]) in c.supporting]
+        assert len(linked_cases) == 1
+        assert repo.list(ForecastAdjustment)
+        assert repo.list(ActionOption, case_id=linked_cases[0].id)
+        assert all(m.status in {"succeeded", "degraded"} for m in repo.module_runs())
+    with repo_session(engine, "parent") as repo:
+        assert all(repo.get(type(r), r.id, r.version) == r for r in originals)
 
 
 def test_concurrent_submit_and_alias_idempotency_keys(setup):
@@ -391,6 +647,23 @@ def test_worker_failure_preserves_durable_input_and_explicit_reset_retries(setup
         assert not repo.run_state()["published"] and repo.list(SourceDocument) == []
     assert count(engine, events) == 1
     with pytest.raises(AnswerConflict):
+        execute_follow_up(engine, job.run.run_id, registry=registry, clients={})
+    reset_run(engine, job.run.run_id)
+    execute_follow_up(engine, job.run.run_id, registry=registry, clients={})
+    assert len(seen) == 4
+
+
+def test_worker_setup_failure_is_visible_in_run_state_and_reset_recovers(setup):
+    engine, request, registry, seed, seen, _ = setup
+    seed()
+    job = submit_answer(engine, request, registry=registry)
+    with pytest.raises(ValueError, match="module not installed"):
+        execute_follow_up(engine, job.run.run_id, registry=Registry(), clients={})
+    with repo_session(engine, job.run.run_id) as repo:
+        assert repo.run_state()["status"] == "failed"
+        assert not repo.run_state()["published"]
+        assert repo.list(SourceDocument) == []
+    with pytest.raises(AnswerConflict, match="reset"):
         execute_follow_up(engine, job.run.run_id, registry=registry, clients={})
     reset_run(engine, job.run.run_id)
     execute_follow_up(engine, job.run.run_id, registry=registry, clients={})
