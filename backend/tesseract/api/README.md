@@ -178,8 +178,14 @@ never listed. Reads never revalidate, refresh, synthesize or dispatch a decision
 
 Drafts are run-scoped: an empty list means no decision saved *in this run*.
 Investigation job runs share the parent's scenario and copy its options but not
-its decisions; read the parent run for those (write-side guard: #245). Missing runs, unknown decision IDs and foreign namespaces
-return 404 (fixture access as for other reads); unpublished runs return 409.
+its decisions; read the parent run for those. An empty list therefore does not
+make an option decidable: the decision endpoints refuse an option version (id,
+version, input hash) that already has a draft in any run of the scenario with
+409 `option already decided in an earlier run of this scenario` and save
+nothing (PLT-15). An exact retry of the original command on its own run still
+returns the saved draft. Missing runs, unknown decision IDs and foreign
+namespaces return 404 (fixture access as for other reads); unpublished runs
+return 409.
 
 ## Simulated clarification answers (OUT-02)
 

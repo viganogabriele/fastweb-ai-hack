@@ -241,3 +241,25 @@ def test_local_draft_and_retries_never_attempt_optional_network_dispatch(databas
     assert first.decision.dispatch_status == "draft"
     assert attempts == []
     assert_single_unit(engine, value.scenario_id, first)
+
+
+def test_independent_processes_cannot_redecide_an_option_of_an_earlier_run(database):
+    """RFC §7.3: a later run copying a decided option version cannot decide it again."""
+    engine, url = database
+    parent = one_unit("case-a")
+    publish(engine, [parent])
+    first = decide(engine, proposal(parent, kind="hold"), loader=lambda *_: [parent], now=AS_OF)
+    job = one_unit("case-a", run_id="job")
+    publish(engine, [job])
+    results = race(
+        url,
+        [
+            (job, proposal(job, kind="hold", key="approve-again")),
+            (job, proposal(job, kind="hold", key="reject-again", decision="rejected")),
+        ],
+    )
+    assert [result["status"] for result in results] == [409, 409]
+    assert all("earlier run" in result["detail"] for result in results)
+    with engine.connect() as connection:
+        saved = connection.execute(select(ledger.drafts.c.payload)).scalars().all()
+    assert [LocalDraft.model_validate(payload) for payload in saved] == [first]

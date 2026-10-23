@@ -20,7 +20,8 @@ from tesseract.modules.actions.options import evaluate_case
 from tests.modules.actions.test_options import AS_OF, inputs
 
 
-def seed(engine, run_id="run", *, mode="recorded", published=True, blocked=False, case_id=None):
+def scoped(run_id="run", *, blocked=False, case_id=None):
+    """Option inputs for one case of a run of the shared test scenario."""
     value = inputs()
     value = replace(
         value,
@@ -55,6 +56,15 @@ def seed(engine, run_id="run", *, mode="recorded", published=True, blocked=False
             for route in value.routes
         ),
     )
+    return value
+
+
+def seed(
+    engine, run_id="run", *, mode="recorded", published=True, blocked=False, case_id=None, also=()
+):
+    """Store and optionally publish a run; ``also`` adds more cases to the same snapshot."""
+    value = scoped(run_id, blocked=blocked, case_id=case_id)
+    others = [scoped(run_id, blocked=blocked, case_id=other) for other in also]
     spec = RunSpec(
         run_id=run_id,
         scenario_id=value.scenario_id,
@@ -75,6 +85,8 @@ def seed(engine, run_id="run", *, mode="recorded", published=True, blocked=False
         for position in (value.dest, *(route.donor for route in value.routes)):
             current.put(position.forecast, *position.stock.values())
         current.put(*options)
+        for other in others:  # Same stock positions, distinct case and options.
+            current.put(other.case, *evaluate_case([other]))
         if published:
             current.publish()
     return value, {option.kind: option for option in options}
