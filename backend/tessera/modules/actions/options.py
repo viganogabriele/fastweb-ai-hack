@@ -1407,7 +1407,9 @@ def build_options(
     options: list[ActionOption] = []
     abstentions: list[str] = []
     cases = [
-        c for c in run_repo.list(Case) if c.status not in CLOSED_CASES and c.store_id in spec.stores
+        c
+        for c in repo.latest(run_repo.list(Case))
+        if c.status not in CLOSED_CASES and c.store_id in spec.stores
     ]
     for case in cases:
         try:

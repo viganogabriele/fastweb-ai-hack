@@ -279,7 +279,7 @@ def _forecasts(run_repo: repo.Repo, case: Case) -> list[ForecastAdjustment]:
 
 
 def read_facts(run_repo: repo.Repo) -> Facts:
-    cases = run_repo.list(Case)
+    cases = repo.latest(run_repo.list(Case))
     observations = {o.id: o for o in run_repo.list(Observation)}
     links = {link.observation_id: link for link in run_repo.list(EntityLink)}
     relations = run_repo.list(EvidenceRelation)
