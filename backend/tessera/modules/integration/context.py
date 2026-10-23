@@ -39,8 +39,8 @@ MANIFEST = ModuleManifest(
         "Associate ContextEvent (geo/time) to cases: add corroborating/context_only "
         "refs to Case.context_refs without automatic uplift"
     ),
-    requires=(),
-    optional_inputs=("int.cases", "src.external"),
+    requires=("int.cases", "src.external"),
+    optional_inputs=(),
     produces=("Case",),
     enabled=True,
     mode="live",
