@@ -82,9 +82,12 @@ Follow these steps in order, every time. Do not skip or reorder them.
 4. **Draft PR at once.** Make a first commit (even empty: `git commit --allow-empty -m "<TASK-ID>: start"`),
    push, and open a **draft** PR: `gh pr create --draft --title "<TASK-ID>: <summary>"
    --body "Closes #<N>"`. Then push small commits often: every push is a checkpoint others can see.
-5. **Finish.** `make check` passes.
-6. **Ready.** `gh pr ready <PR>`, then squash-merge; `Closes #<N>` closes the issue.
-7. **Unblock.** After merge, for every issue blocked by yours: if all its blockers are closed,
+   The PR stays a draft only while the code is still being written.
+5. **Finish.** The code actually solves the issue and `make check` passes.
+6. **Ready for review.** As soon as step 5 holds, run `gh pr ready <PR>`. Never leave finished
+   work in draft, even if a human still has to decide something: list open decisions in the PR body.
+7. **Merge.** After review, squash-merge; `Closes #<N>` closes the issue.
+8. **Unblock.** After merge, for every issue blocked by yours: if all its blockers are closed,
    remove the `blocked` label.
 
 Creating and splitting issues:
