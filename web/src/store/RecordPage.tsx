@@ -73,10 +73,10 @@ export function RecordPage() {
                 type="button"
                 disabled={state === 'requesting' || !voiceToken()}
                 className={`rec__mic${state === 'recording' ? ' rec__mic--on' : ''}`}
+                aria-label={state === 'recording' ? t.stop : t.start}
                 onClick={state === 'recording' ? recorder.stop : recorder.start}
               >
-                {state === 'recording' ? <Square size={36} /> : <Mic size={40} />}
-                <span>{state === 'recording' ? t.stop : t.start}</span>
+                {state === 'recording' ? <Square size={52} /> : <Mic size={72} />}
               </button>
               {state === 'recording' ? (
                 <button
