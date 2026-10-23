@@ -159,9 +159,9 @@ No label file is opened as part of this preparation.
 
 ### 5.1 Product isolation and bundle creation
 
-Use #115's integrated Core runner and approved frozen RunSpecs for the actual
-candidate; the reading-only runner produces empty cases/options and cannot
-substitute for the integrated lead-time export. Its supported invocation is:
+Use the integrated rolling-origin runner (section 5.1.1) for the actual candidate;
+the reading-only runner produces empty cases/options and cannot substitute for
+the integrated lead-time export. The reading-only invocation is:
 
 ```sh
 # Execution example: paths/run id must be supplied by #211.
@@ -204,6 +204,114 @@ This calls the same library as `eval freeze`; the CLI equivalent has mandatory
 `--protocol`, `--predictions`, `--cases`, `--options`, repeated `--source` for every
 selected input, repeated `--configuration` for every selected config/prompt.
 Never overwrite a bundle. Record the manifest digest externally before scoring.
+
+#### 5.1.1 Rolling-origin runner (REL-01c, #239)
+
+The DEMO-02 runner executes one clock over a hand-picked mail set. The lead-time
+export needs every origin of section 2. `tesseract.rolling` (module docstring
+has the design) runs the unchanged Core modules once per store × origin:
+
+- **Origins.** 20:00 local on each day of the range, in the IANA zone from `stores.csv`,
+  as aware instants (offset per day, DST-correct). One RunSpec per store × origin,
+  with `as_of` = origin. `src.email` admits mail by Date header, `src.erp` admits rows
+  by availability, `src.docs` the latest flash issued by then, `src.external` ended days.
+  Origins run in order. Each store has one database across its origins.
+- **Identity.** The mail set only grows and `int.cases` fixes a case id by the group
+  that opened it. `cases.json` has one record per case id: the payload of the first
+  origin that emitted it (`origin`), plus `revisions` (status/version changes),
+  `last_seen_origin` and `present_at_final_origin`. The run manifest's
+  `case_identity_drift` lists any later change of `first_available_at` or scope.
+- **Reading.** One reading run (`reading_export` modules) covers every mail of the selected
+  stores with a Date inside the local range. It writes `predictions.json` with one
+  `ModuleRun` per module, as `eval.reading.score` expects. The investigator is off by default
+  (`--investigate N` investigates up to N new cases per origin in a sibling run). `sys.client`
+  is off by default (`--sys-client`). Options are per store, without cross-store donors.
+- **LLM cache.** All runs share one cache scope (`LLMClient.for_scope`): runner, LLM-module
+  versions/params, model, namespace. The origin, sources and code version are not part
+  of that scope. A recording is reused only for a byte-identical request
+  (the request payload and the module's own cache context, which pins document and prompt hashes),
+  so an answer cannot carry later information to an earlier origin. The reading pass records
+  extraction with full parallelism; the origins replay it. Systems mock recordings keep the
+  full per-origin RunSpec scope.
+- **Record/replay.** Record is resumable: an origin is final once
+  `origins/<STORE>/<DATE>.json` exists. A failed attempt is reset and retried
+  (3 attempts), and recordings are never lost. Rerun the same command after a crash.
+  Replay never reads keys, denies sockets in the workers and fails on the first
+  LLM/systems miss. Failure details go to `failures/`.
+  Exports exclude only `ModuleRun.started_at/finished_at`, so record and replay
+  export hashes must be equal.
+- **Outputs** (`<workspace>/export/`): `predictions.json`, `cases.json`, `options.json`,
+  `forecast.json` (`{as_of, payload}` for every baseline/overlay at every origin), `traces.json`,
+  `protocol.json` (lead-time/reading skeleton with `reading_files`), `protocol-forecast.json`
+  (explicit store×SKU×timezone universe, proposed `forecast.scenario: base` to be confirmed
+  ex ante), `sources.txt` / `config.txt` (every source file read during the runs, every config
+  and prompt) and `run-manifest.json` (export SHA-256s, counts, cache inventories, per-run status,
+  diagnostics). Execution logs: `executions/<mode>-*.json`. The skeletons say
+  `skeleton_unapproved`: #211 still binds and approves them.
+
+Dev evidence (MIL01 + MUN01, 2026-08-31…09-13, 28 origins, candidate `e57b45d`):
+
+| | Record (Fastweb keys) | Fresh replay (`eval product`, offline) |
+|---|---|---|
+| Wall time | 96 s | 73 s |
+| Provider calls / cache hits | 40 / 325 (27 mails: 27 extraction, 13 link) | 0 / 365 |
+| Tokens billed | 70,309 | 0 |
+| Exports | 533 predictions, 98 cases, 2,816 option versions, 2,914 forecasts | identical SHA-256 for all 10 export files |
+
+`case_identity_drift` was empty. Both bundles passed `eval.harness.freeze`,
+`eval.forecast.predictions` validation and `eval.lead_time.case_alerts` (75 alerts,
+23 verify/context), without opening answers.
+
+Hold-out dry run (file names and Date headers only): 10 stores × 52 origins = 520 runs, 533
+reading mails, at most 827 LLM requests before cache reuse (560 extraction, 267 link), about 1.5 M
+tokens at the dev rate, about 34 min with `--workers 4 --llm-concurrency 8` on this 4-core host.
+Eight hold-out mails dated on the evening of 2026-10-21, after its last origin, are read
+in the reading pass but cannot open cases. Expected export size: about 180 MB of options
+and 150 MB of forecasts.
+
+Commands (repository root; `SHA` = the reviewed candidate, committed, clean code tree):
+
+```sh
+SHA=$(git rev-parse HEAD)
+cd backend
+# 0. Estimate only: file names and Date headers.
+.venv/bin/python -m tesseract.rolling estimate --split holdout \
+  --start 2026-08-31 --end 2026-10-21 --workers 4 --llm-concurrency 8
+# 1. Record outside the launcher (it cannot read .secrets/). Needs the systems mocks on
+#    :8088 (`make mocks`) and the keys file (`--keys-file` from a worktree). Resumable.
+.venv/bin/python -m tesseract.rolling run --split holdout --start 2026-08-31 --end 2026-10-21 \
+  --mode record --cache ../data/rolling/holdout-cache --workspace ../data/rolling/holdout-record \
+  --code-version "$SHA" --workers 4 --llm-concurrency 8 --yes
+cd ..
+# 2. Evaluated export: a fresh offline replay under kernel read isolation.
+backend/.venv/bin/python -m eval product -- -m tesseract.rolling run --split holdout \
+  --start 2026-08-31 --end 2026-10-21 --mode replay --cache ../data/rolling/holdout-cache \
+  --workspace ../data/rolling/holdout-replay --code-version "$SHA" --workers 4
+# 3. Record and replay exports must be byte-identical.
+diff <(jq -S .exports data/rolling/holdout-record/export/run-manifest.json) \
+     <(jq -S .exports data/rolling/holdout-replay/export/run-manifest.json)
+```
+
+Then freeze `data/rolling/holdout-replay/export` with the wrapper above:
+`EXPORT_DIR` is that directory, `SOURCE_LIST`/`CONFIG_LIST` are its `sources.txt`/`config.txt`,
+`PROTOCOL` is the approved protocol (or forecast protocol, with `forecast.json` as predictions).
+
+Limits #211 must carry forward:
+
+- **Pipeline alert time.** `Case.first_available_at` is the evidence time, which the
+  lead-time scorer credits. The wrapper `origin` is when the 20:00 product emitted the case.
+  Most closing mails arrive after 20:00, so the dev gap was 0–24 h (mean 12 h). The ERP
+  baselines are certified at B+1 20:00. Report `origin` next to the scored lead,
+  or score with it, before inspection.
+- **Code changes after recording.** The LLM scope excludes the code version, so a post-record
+  bug fix reuses recordings as long as its LLM requests stay byte-identical. Rerun step 1 with the
+  new SHA into a new workspace and the same cache: `provider_calls` must stay 0, while systems
+  recordings (local mocks, no credit) are re-recorded for the new RunSpecs. Once the
+  Fastweb keys expire (2026-10-25 00:00 UTC) a changed request cannot be recorded and
+  the replay fails closed.
+- **Exports.** `sources.txt` lists files actually opened: `src.email` opens
+  a store's whole mailbox while filtering by Date header, so later mails appear without
+  entering the run.
 
 ### 5.2 #126: reading/linking evaluation
 
