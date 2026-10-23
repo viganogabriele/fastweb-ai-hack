@@ -141,9 +141,7 @@ def ledger_rows(service):
         ("transfer", "rejected", "rejected"),
     ],
 )
-def test_option_decided_on_parent_cannot_be_decided_again_on_a_job_run(
-    service, kind, first, again
-):
+def test_option_decided_on_parent_cannot_be_decided_again_on_a_job_run(service, kind, first, again):
     client, value, options = parent_with_two_cases(service)
     option = options[kind]
     draft = client.post(endpoint(value), json=body(option, decision=first)).json()
@@ -169,9 +167,7 @@ def test_option_decided_on_parent_cannot_be_decided_again_on_a_job_run(
     assert client.post(endpoint(value), json=body(option, decision=first)).json() == draft
     # The job's own case is still decidable.
     other = next(
-        o
-        for o in client.get(f"/api/runs/{JOB}/cases/case-b/options").json()
-        if o["kind"] == "hold"
+        o for o in client.get(f"/api/runs/{JOB}/cases/case-b/options").json() if o["kind"] == "hold"
     )
     saved = client.post(
         f"/api/runs/{JOB}/cases/case-b/decisions",
@@ -199,4 +195,3 @@ def test_racing_redecisions_on_a_job_run_leave_exactly_one_draft(service):
         assert list(pool.map(attempt, ("approved", "rejected"))) == [409, 409]
     assert listed(client) == [draft] and listed(client, JOB) == []
     assert ledger_rows(service) == 1
-
