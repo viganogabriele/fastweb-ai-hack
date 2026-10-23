@@ -1,6 +1,8 @@
 """INT-06: int.context associates context events to cases by geo/time without uplift."""
 
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
+
+import pytest
 
 from tessera.core.contracts import (
     Case,
@@ -77,7 +79,11 @@ def make_event(as_of, store="MIL01", role="context_only"):
     )
 
 
-def test_associates_by_geo_time(tmp_path):
+@pytest.mark.parametrize(
+    ("event_offset_hours", "expected_refs"),
+    [(0, 1), (48, 1), (-48, 1), (49, 0), (-49, 0), (72, 0), (-72, 0)],
+)
+def test_associates_by_geo_time(tmp_path, event_offset_hours, expected_refs):
     engine = connect(f"sqlite:///{tmp_path / 't.db'}")
     as_of = datetime(2026, 10, 22, tzinfo=UTC)
     spec = RunSpec(
@@ -96,6 +102,8 @@ def test_associates_by_geo_time(tmp_path):
     )
     case = make_case(as_of)
     ev = make_event(as_of)
+    offset = timedelta(hours=event_offset_hours)
+    ev = ev.model_copy(update={"start": ev.start + offset, "end": ev.end + offset})
     with repo_session(engine, spec, fixture_mode=True, write=True) as repo:
         repo.put(case, ev)
     registry = Registry((RegisteredModule(context.MANIFEST, context.run),))
@@ -107,5 +115,27 @@ def test_associates_by_geo_time(tmp_path):
         outs = repo.list(Case)
     # pick updated version
     out = max(outs, key=lambda c: c.version)
-    assert len(out.context_refs) == 1
-    assert out.context_refs[0].id == ev.id
+    assert len(out.context_refs) == expected_refs
+    if expected_refs:
+        assert out.context_refs[0].id == ev.id
+
+
+@pytest.mark.parametrize(
+    ("gap", "slack", "expected"),
+    [
+        (timedelta(hours=-12), timedelta(0), True),
+        (timedelta(0), timedelta(0), True),
+        (timedelta(microseconds=1), timedelta(0), False),
+        (timedelta(hours=24), timedelta(hours=24), True),
+        (timedelta(hours=24, microseconds=1), timedelta(hours=24), False),
+        (timedelta(hours=48), timedelta(hours=24), False),
+    ],
+)
+def test_time_tolerance_is_the_maximum_gap_in_either_order(gap, slack, expected):
+    start = datetime(2026, 10, 8, tzinfo=UTC)
+    end = start + timedelta(days=1)
+    event_start = end + gap
+    event_end = event_start + timedelta(days=1)
+
+    assert context._overlap(start, end, event_start, event_end, slack) is expected
+    assert context._overlap(event_start, event_end, start, end, slack) is expected
