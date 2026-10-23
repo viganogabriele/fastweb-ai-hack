@@ -35,6 +35,7 @@ from tesseract.core.contracts import (
 )
 from tesseract.core.db import connect
 from tesseract.core.repo import Repo, create_run
+from tesseract.core.run_repo import repo_session
 from tesseract.modules.actions import options
 from tesseract.modules.actions.options import (
     OptionInputs,
@@ -647,7 +648,9 @@ def test_module_writes_options_for_open_cases_with_domestic_donors_only(tmp_path
     client = SystemsClient(crosswalk, transport=httpx.MockTransport(lanes(seen)))
     reader = SystemsReader(repo, client)
 
-    result = options.build_options(repo, reader, options.load_policy(ROOT / "config"), 7)
+    # Exercise the production provenance guard, not only the permissive base Repo.
+    with repo_session(engine, spec) as strict_repo:
+        result = options.build_options(strict_repo, reader, options.load_policy(ROOT / "config"), 7)
 
     assert result.status == "succeeded", result
     assert result.counts["cases"] == 1 and result.counts["options"] == 5
@@ -664,6 +667,10 @@ def test_module_writes_options_for_open_cases_with_domestic_donors_only(tmp_path
     (leg,) = t.legs
     assert (leg.size, leg.qty, leg.lane_id) == ("1", 2, "LN-1002-1001")
     assert t.available_at <= T
+    for option in stored.values():
+        for ref in option.input_refs:
+            if ref.kind == "StockFact":
+                assert repo.get(StockFact, ref.id, ref.version) is not None
 
 
 def test_manifest_is_an_actions_module():

@@ -1428,6 +1428,17 @@ def build_options(
         except KeyError as e:
             abstentions.append(f"{case.id}: master data missing at as_of ({e})")
             continue
+        # SystemsReader derives store stock projections from ERP rows on demand. Persist
+        # these exact versions before options cite them, just as the investigator does.
+        facts = {
+            (fact.id, fact.version): fact
+            for inputs in colours
+            for position in (inputs.dest, *(route.donor for route in inputs.routes))
+            for fact in position.stock.values()
+            if isinstance(fact, StockFact)
+        }
+        if facts:
+            run_repo.put(*facts.values())
         options += evaluate_case(colours)
     new = run_repo.put(*options) if options else 0
     transfers = [o for o in options if o.kind == "transfer"]

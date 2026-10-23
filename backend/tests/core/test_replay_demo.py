@@ -7,11 +7,16 @@ import logging
 import socket
 import subprocess
 import sys
+from datetime import timedelta
 
+import httpx
 import pytest
+from sqlalchemy import inspect, select
 
 from tesseract.core.config import REPO_ROOT
 from tesseract.core.contracts import (
+    ActionOption,
+    ArtifactRef,
     ModuleManifest,
     ModuleResult,
     ModuleSnapshot,
@@ -19,7 +24,11 @@ from tesseract.core.contracts import (
     SourceDocument,
 )
 from tesseract.core.registry import RegisteredModule, Registry
+from tesseract.core.systems_cache import SystemsCache, SystemsTransport
+from tesseract.modules.actions import approval, ledger
 from tesseract.modules.sources import emails, voice
+from tesseract.modules.sources.systems_client import Crosswalk
+from tests.modules.actions.test_options import fixture_case
 
 module_spec = importlib.util.spec_from_file_location(
     "replay_demo", REPO_ROOT / "scripts/replay_demo.py"
@@ -27,25 +36,26 @@ module_spec = importlib.util.spec_from_file_location(
 replay = importlib.util.module_from_spec(module_spec)
 module_spec.loader.exec_module(replay)
 
+FIXTURE_FILES = {
+    "erp/master_data/stores.csv": "store_id,language,timezone,currency\nMIL01,it,Europe/Rome,EUR\n",
+    "store_emails/MIL01/message.eml": (
+        "From: example@example.test\nTo: demo@example.test\nDate: Thu, 22 Oct 2026 18:00:00 +0200\n"
+        "Message-ID: <demo@example.test>\nSubject: Closing\n"
+        "Content-Type: text/plain; charset=utf-8\n\n"
+        "PRIVATE SOURCE TEXT\n"
+    ),
+}
+
 
 @pytest.fixture
 def inputs(tmp_path):
     sources, config, cache = [tmp_path / name for name in ("sources", "config", "cache")]
     for path in (sources, config, cache):
         path.mkdir()
-    master = sources / "erp/master_data"
-    master.mkdir(parents=True)
-    (master / "stores.csv").write_text(
-        "store_id,language,timezone,currency\nMIL01,it,Europe/Rome,EUR\n",
-    )
-    mailbox = sources / "store_emails/MIL01"
-    mailbox.mkdir(parents=True)
-    (mailbox / "message.eml").write_text(
-        "From: example@example.test\nTo: demo@example.test\nDate: Thu, 22 Oct 2026 18:00:00 +0200\n"
-        "Message-ID: <demo@example.test>\nSubject: Closing\n"
-        "Content-Type: text/plain; charset=utf-8\n\n"
-        "PRIVATE SOURCE TEXT\n",
-    )
+    for relative, content in FIXTURE_FILES.items():
+        target = sources / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(content)
     return dict(sources=sources, config=config, cache=cache, workspace=tmp_path / "workspace")
 
 
@@ -55,8 +65,13 @@ def snapshot(manifest=emails.MANIFEST, mode="fixture"):
         scenario_id="historical",
         as_of="2026-10-22T20:00:00Z",
         stores=("MIL01",),
-        source_manifest_hash="declared-sources",
-        config_hash="declared-config",
+        source_manifest_hash=replay.digest(
+            [
+                (path, hashlib.sha256(content.encode()).hexdigest())
+                for path, content in sorted(FIXTURE_FILES.items())
+            ]
+        ),
+        config_hash=replay.digest([]),
         code_version="t",
         mode=mode,
         modules=(ModuleSnapshot(manifest=manifest, params={}),),
@@ -100,6 +115,7 @@ def test_repeatable_fixture_rebuild_starts_empty_and_retains_shared_inputs(input
     assert first["fixture_demo_only"] is True and first["namespace"] == "fixture"
     assert first["output_sha256"] == second["output_sha256"]
     assert first["snapshot_sha256"] == second["snapshot_sha256"]
+    assert first["artifacts"] == second["artifacts"]
     assert first["inputs"] == second["inputs"]
     assert first["modules"][0]["counts"]["documents"] == 1
     attempts = list(inputs["workspace"].glob("attempt-*"))
@@ -107,6 +123,59 @@ def test_repeatable_fixture_rebuild_starts_empty_and_retains_shared_inputs(input
     assert all((p / "data/tesseract_fixture.db").is_file() for p in attempts)
     assert not (inputs["cache"] / "tesseract_fixture.db").exists()
     assert "PRIVATE SOURCE TEXT" not in json.dumps(first)
+
+
+@pytest.mark.parametrize("tree", ["sources", "config"])
+def test_input_hash_mismatch_fails_before_any_module_or_client_runs(inputs, tree):
+    seen = []
+
+    def callback(ctx):
+        seen.append(ctx)
+        return success(ctx)
+
+    spec, registry = custom(callback)
+    (inputs[tree] / "changed-input.txt").write_text("Unapproved revision")
+    result = replay.rebuild(spec, **inputs, registry=registry)
+    assert result["status"] == "failed" and result["run_status"] == "not_started"
+    assert tree + "_hash_mismatch" in result["missing_prerequisites"]
+    assert not seen and not result["cache_misses"] and not result["network_attempts"]
+
+
+def test_trace_semantic_comparison_ignores_only_execution_time():
+    first = {"steps": [{"duration_ms": 12, "input_refs": [{"id": "source", "version": "v1"}]}]}
+    second = {"steps": [{"duration_ms": 44, "input_refs": [{"id": "source", "version": "v1"}]}]}
+    assert replay.digest(first) != replay.digest(second)  # raw provenance is retained
+    assert replay.semantic_payload("AgentTrace", first) == replay.semantic_payload(
+        "AgentTrace", second
+    )
+    second["steps"][0]["input_refs"][0]["version"] = "v2"
+    assert replay.semantic_payload("AgentTrace", first) != replay.semantic_payload(
+        "AgentTrace", second
+    )
+
+
+def test_systems_miss_does_not_fail_an_unrelated_source_module(inputs):
+    def callback(ctx):
+        cache = ctx.clients["systems"].recordings
+        try:
+            cache.get("0" * 64)
+        except replay.ReplayMiss:
+            pass
+        return success(ctx)
+
+    spec, registry = custom(callback)
+    spec = spec.model_copy(
+        update={"modules": spec.modules + (ModuleSnapshot(manifest=emails.MANIFEST, params={}),)}
+    )
+    registry = Registry(
+        [registry.resolve(spec.modules[0]), RegisteredModule(emails.MANIFEST, emails.run)]
+    )
+    result = replay.rebuild(spec, **inputs, registry=registry)
+    assert result["status"] == "failed"
+    assert [(m["id"], m["status"]) for m in result["modules"]] == [
+        ("test.replay", "failed"),
+        ("src.email", "succeeded"),
+    ]
 
 
 def test_product_mode_identity_is_preserved_while_client_is_forced_to_replay(inputs, monkeypatch):
@@ -284,6 +353,201 @@ def test_subprocess_escape_is_denied(inputs):
     result = replay.rebuild(spec, **inputs, registry=registry)
     assert result["status"] == "failed" and result["network_attempts"] == 1
     assert "offline_network_or_process_operation" in result["missing_prerequisites"]
+
+
+@pytest.fixture
+def decision_snapshot():
+    def callback(ctx):
+        ctx.repo.put(case, option)
+        return success(ctx)
+
+    spec, registry = custom(callback)
+    case = fixture_case(run_id=spec.run_id, input_refs=())
+    option = ActionOption(
+        id="synthetic-option",
+        version="1",
+        run_id=spec.run_id,
+        scenario_id=spec.scenario_id,
+        available_at=spec.as_of,
+        availability_basis="synthetic test",
+        source_refs=(),
+        computed_at=spec.as_of,
+        input_refs=(ArtifactRef(kind="Case", id=case.id, version=case.version),),
+        producer="test.replay",
+        producer_version="1",
+        case_id=case.id,
+        kind="hold",
+        legs=(),
+        checks=(),
+        assumptions=(),
+        valid_until=spec.as_of + timedelta(days=1),
+        recommended=False,
+        rationale="Synthetic boundary",
+        input_version_hash="hash",
+    )
+    request = approval.DecisionRequest(
+        run_id=spec.run_id,
+        scenario_id=spec.scenario_id,
+        option_id=option.id,
+        input_version_hash=option.input_version_hash,
+        decision="rejected",
+        by="synthetic test reviewer",
+        idempotency_key="decision-1",
+    )
+    at = spec.as_of + timedelta(minutes=1)
+    # Explicitly synthetic, not an approved product scenario or Core evidence.
+    frozen = replay.FrozenDecision(
+        snapshot_sha256=replay.digest(spec.model_dump(mode="json")),
+        namespace="fixture",
+        at=at,
+        request=request,
+        draft=approval._draft(request, option, at),
+    )
+    return spec, registry, frozen
+
+
+@pytest.mark.parametrize("change", ["run", "scenario", "clock", "snapshot", "namespace"])
+def test_frozen_decision_must_match_the_rebuilt_snapshot(
+    inputs, tmp_path, decision_snapshot, change
+):
+    spec, registry, frozen = decision_snapshot
+    event = frozen.model_dump(mode="json")
+    if change == "run":
+        event["request"]["run_id"] = "other"
+    elif change == "scenario":
+        event["request"]["scenario_id"] = "other"
+    elif change == "clock":
+        event["at"] = "2026-10-21T20:01:00Z"
+    elif change == "snapshot":
+        event["snapshot_sha256"] = "other"
+    elif change == "namespace":
+        event["namespace"] = "product"
+    path = tmp_path / "decisions.json"
+    path.write_text(json.dumps([event]))
+    result = replay.rebuild(spec, **inputs, decisions=path, registry=registry)
+    assert result["status"] == "failed" and result["error_type"] == "IsolationError"
+    assert result["run_status"] == "not_started" and result["decisions"] == []
+
+
+def test_frozen_drafts_are_exact_durable_and_part_of_replay_hashes(
+    inputs, tmp_path, decision_snapshot
+):
+    spec, registry, frozen = decision_snapshot
+    empty = replay.rebuild(spec, **inputs, registry=registry)
+    path = tmp_path / "decisions.json"
+    # Retry must return the same durable draft and must not count it twice in the ledger hash.
+    path.write_text(json.dumps([frozen.model_dump(mode="json")] * 2))
+    first = replay.rebuild(spec, **inputs, decisions=path, registry=registry)
+    second = replay.rebuild(spec, **inputs, decisions=path, registry=registry)
+    assert first["status"] == second["status"] == "succeeded", first
+    assert first["network_attempts"] == second["network_attempts"] == 0
+    assert first["decisions"] == second["decisions"]
+    assert first["decisions"][0]["id"] == frozen.draft.decision.id
+    assert first["decisions"][0]["sha256"] == replay.digest(frozen.draft.model_dump(mode="json"))
+    assert (
+        first["ledger_sha256"]
+        == second["ledger_sha256"]
+        == replay.digest([frozen.draft.model_dump(mode="json")])
+    )
+    assert first["output_sha256"] == second["output_sha256"] != empty["output_sha256"]
+    assert first["raw_output_sha256"] == second["raw_output_sha256"] != empty["raw_output_sha256"]
+
+
+def test_api_checker_exports_a_draft_that_the_replay_can_restore(
+    inputs, tmp_path, decision_snapshot, monkeypatch
+):
+    monkeypatch.syspath_prepend(str(REPO_ROOT / "scripts"))
+    from check_core_demo import decision_export
+
+    spec, registry, frozen = decision_snapshot
+    event = decision_export(
+        spec,
+        at=frozen.at,
+        request=frozen.request.model_dump(mode="json"),
+        draft=frozen.draft.model_dump(mode="json"),
+    )
+    assert replay.FrozenDecision.model_validate(event) == frozen
+    path = tmp_path / "export.json"
+    path.write_text(json.dumps([event]))
+    result = replay.rebuild(spec, **inputs, decisions=path, registry=registry)
+    assert result["status"] == "succeeded", result
+    assert result["decisions"][0]["id"] == frozen.draft.decision.id
+    assert result["ledger_sha256"] == replay.digest([frozen.draft.model_dump(mode="json")])
+
+
+def test_api_checker_rejects_another_snapshot_with_the_same_run_id(inputs, monkeypatch):
+    monkeypatch.syspath_prepend(str(REPO_ROOT / "scripts"))
+    from check_core_demo import check
+
+    candidate = inputs["sources"].parent
+    spec = snapshot(mode="recorded")
+    (candidate / "run-spec.json").write_text(spec.model_dump_json())
+    runtime = candidate / "runtime"
+    runtime.mkdir()
+    engine = replay.connect(f"sqlite:///{runtime / 'tesseract.db'}")
+    try:
+        other = spec.model_copy(update={"code_version": "different-execution"})
+        with replay.repo_session(engine, other, write=True) as repo:
+            repo.publish()
+        with pytest.raises(AssertionError, match="published snapshot differs"):
+            check(candidate)
+        assert not (candidate / "api-verification.json").exists()
+    finally:
+        engine.dispose()
+
+
+def test_changed_frozen_draft_fails_without_saving_a_decision(inputs, tmp_path, decision_snapshot):
+    spec, registry, frozen = decision_snapshot
+    event = frozen.model_dump(mode="json")
+    event["draft"]["decision"]["by"] = "invented approver"
+    path = tmp_path / "decisions.json"
+    path.write_text(json.dumps([event]))
+    result = replay.rebuild(spec, **inputs, decisions=path, registry=registry)
+    assert result["status"] == "failed" and result["error_type"] == "Conflict"
+    assert result["decisions"] == []
+    engine = replay.connect(
+        f"sqlite:///{inputs['workspace'] / result['attempt_id'] / 'data/tesseract_fixture.db'}"
+    )
+    with engine.connect() as conn:
+        assert not inspect(conn).has_table(ledger.drafts.name) or (
+            conn.execute(select(ledger.drafts)).first() is None
+        )
+    engine.dispose()
+
+
+@pytest.mark.parametrize("missing", [False, True])
+def test_systems_recordings_rebuild_offline_and_swallowed_misses_still_fail(
+    inputs, tmp_path, missing
+):
+    def callback(ctx):
+        client = ctx.clients["systems"](Crosswalk({}, {}, {}, {}))
+        try:
+            try:
+                response = client._http.get("/warehouse/v1/atp?asOf=2026-10-22")
+                assert response.json() == {"positions": []}
+            except replay.ReplayMiss:
+                pass  # Tool fallback cannot hide a missing systems prerequisite.
+        finally:
+            client.close()
+        return success(ctx)
+
+    spec, registry = custom(callback)
+    recorded = tmp_path / "systems"
+    recorded.mkdir()
+    if not missing:
+        transport = SystemsTransport(
+            replay.Settings(_env_file=None, llm_mode="record"),
+            spec,
+            SystemsCache(recorded),
+            upstream=httpx.MockTransport(lambda _: httpx.Response(200, json={"positions": []})),
+        )
+        with httpx.Client(base_url="http://127.0.0.1:8088", transport=transport) as client:
+            client.get("/warehouse/v1/atp?asOf=2026-10-22")
+    result = replay.rebuild(spec, **inputs, systems_cache=recorded, registry=registry)
+    assert result["status"] == ("failed" if missing else "succeeded")
+    assert result["network_attempts"] == 0
+    assert len(result["systems_cache_misses"]) == int(missing)
+    assert result["inputs"]["systems_cache"]["files"] == int(not missing)
 
 
 @pytest.mark.parametrize("location", ["sources", "config", "cache", "workspace"])

@@ -3,16 +3,21 @@
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import replace
 from datetime import timedelta
+from types import SimpleNamespace
 
+import httpx
 import pytest
 from sqlalchemy import event, func, select
 
 from tesseract.core import repo
+from tesseract.core.cache import ReplayMiss
+from tesseract.core.config import Settings
 from tesseract.core.contracts import RunSpec
 from tesseract.core.db import connect
-from tesseract.modules.actions import ledger
+from tesseract.modules.actions import approval, ledger
 from tesseract.modules.actions.approval import Conflict, DecisionRequest, decide
 from tesseract.modules.actions.options import evaluate_case
+from tesseract.modules.sources.systems_client import Crosswalk
 from tests.modules.actions.test_options import AS_OF, inputs
 
 
@@ -87,6 +92,86 @@ def test_retry_is_exact_and_survives_run_reset(setup):
     repo.reset_run(engine, value.run_id)
     assert decide(engine, proposal(value), now=AS_OF + timedelta(days=30)) == draft
     assert ledger.reservations(engine, value.scenario_id) == draft.reservations
+
+
+def test_exported_approval_revalidates_and_preserves_reservation_identity(setup, tmp_path):
+    engine, value = setup
+    exported = approve(engine, value)
+    fresh = connect(f"sqlite:///{tmp_path / 'fresh.db'}")
+    publish(fresh, [value])
+    rebuilt = decide(
+        fresh,
+        proposal(value),
+        loader=lambda *_: [value],
+        now=AS_OF,
+        expected_draft=exported,
+    )
+    assert rebuilt == exported
+    assert ledger.reservations(fresh, value.scenario_id) == exported.reservations
+    # An ordinary retry and an exported retry both return the single saved draft.
+    assert approve(fresh, value) == exported
+    assert ledger.reservations(fresh, value.scenario_id) == exported.reservations
+    fresh.dispose()
+
+
+def test_exported_approval_cannot_bypass_changed_stock(setup, tmp_path):
+    engine, value = setup
+    exported = approve(engine, value)
+    fresh = connect(f"sqlite:///{tmp_path / 'changed.db'}")
+    publish(fresh, [value])
+    route = value.routes[0]
+    changed = replace(
+        value,
+        routes=(
+            replace(
+                route,
+                donor=replace(
+                    route.donor,
+                    stock={
+                        s: f.model_copy(update={"qty": 0}) for s, f in route.donor.stock.items()
+                    },
+                ),
+            ),
+        ),
+    )
+    with pytest.raises(Conflict, match="inputs or checks changed"):
+        decide(
+            fresh, proposal(value), loader=lambda *_: [changed], now=AS_OF, expected_draft=exported
+        )
+    assert ledger.reservations(fresh, value.scenario_id) == ()
+    fresh.dispose()
+
+
+def test_pre_snapshot_decision_is_rejected_without_holding_stock(setup):
+    engine, value = setup
+    with pytest.raises(Conflict, match="precedes"):
+        decide(engine, proposal(value), loader=lambda *_: [value], now=AS_OF - timedelta(seconds=1))
+    assert ledger.reservations(engine, value.scenario_id) == ()
+
+
+def test_recorded_approval_does_not_enable_incidental_systems_recording(
+    setup, tmp_path, monkeypatch
+):
+    engine, value = setup
+    spec = repo.Repo.open(engine, value.run_id).spec.model_copy(update={"mode": "recorded"})
+    current = SimpleNamespace(spec=spec)
+    settings = Settings(_env_file=None, llm_mode="record", data_dir=tmp_path)
+    monkeypatch.setattr(approval, "get_settings", lambda: settings)
+    monkeypatch.setattr(
+        approval.SystemsReader,
+        "open",
+        lambda current, factory: SimpleNamespace(client=factory(Crosswalk({}, {}, {}, {}))),
+    )
+    monkeypatch.setattr(approval, "case_products", lambda *_: [(None, None)])
+
+    def gather(current, reader, *args, **kwargs):
+        reader.client._http.get("/warehouse/v1/atp?asOf=2026-10-22")
+
+    monkeypatch.setattr(approval, "gather", gather)
+    monkeypatch.setattr(httpx, "HTTPTransport", lambda: pytest.fail("unexpected network"))
+    with pytest.raises(ReplayMiss):
+        approval.load_inputs(current, value.case)
+    assert not list((tmp_path / "systems_cache").rglob("*.json"))
 
 
 @pytest.mark.parametrize("update", [{"by": "another actor"}, {"decision": "rejected"}])

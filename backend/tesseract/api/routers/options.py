@@ -8,6 +8,7 @@ from sqlalchemy.exc import OperationalError
 
 from tesseract.api.artifacts import CurrentArtifacts
 from tesseract.api.routers.runs import PublishedRepo, engine_for
+from tesseract.core.cache import CacheCorrupt, ReplayMiss
 from tesseract.core.contracts import ActionOption, Case
 from tesseract.core.contracts.common import Contract, Text
 from tesseract.modules.actions import approval
@@ -74,6 +75,10 @@ def submit(request: Request, repo, body: DecisionInput, loader, clock) -> approv
         )
     except approval.Conflict as error:
         raise HTTPException(409, str(error)) from None
+    except (ReplayMiss, CacheCorrupt):
+        raise HTTPException(
+            503, "Missing or corrupt systems recording; decision not saved"
+        ) from None
     except OperationalError as error:
         if "locked" not in str(error.orig):
             raise

@@ -10,9 +10,7 @@ export default defineConfig({
   plugins: [react(), ...(mock ? [mockApi()] : [])],
   server: {
     host: '127.0.0.1',
-    // DEMO-04: the phone reaches /store/record through an HTTPS tunnel (the microphone needs a
-    // secure context), e.g. `cloudflared tunnel --url http://127.0.0.1:5173`.
     allowedHosts: ['.trycloudflare.com', '.ngrok-free.app'],
-    proxy: mock ? undefined : { '/api': 'http://127.0.0.1:8000' },
+    proxy: mock ? undefined : { '/api': process.env.TESSERACT_API_TARGET ?? 'http://127.0.0.1:8000' },
   },
 })

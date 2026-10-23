@@ -509,6 +509,7 @@ def investigate(
     budget: Budget | None = None,
     prompt: str | None = None,
     reservations: tuple[Reservation, ...] | None = None,
+    trace_id: str | None = None,
 ) -> AgentRun:
     session = Investigator(repo, case_id, reader, policy, horizon_days, reservations=reservations)
     if prompt is None:
@@ -540,7 +541,7 @@ def investigate(
             as_of=repo.spec.as_of,
             mode=repo.spec.mode,
             input_refs=(ref(session.case),),
-            trace_id=f"trace:{case_id}:{uuid4().hex}",
+            trace_id=trace_id or f"trace:{case_id}:{uuid4().hex}",
             producer=MANIFEST.id,
             producer_version=MANIFEST.version,
         ),
@@ -592,6 +593,9 @@ def run(ctx: Context) -> ModuleResult:
             abstentions=(),
         )
     settings = get_settings()
+    prompt_version = ctx.spec.prompt_versions.get(MANIFEST.id, PROMPT_VERSION)
+    if prompt_version != PROMPT_VERSION:
+        raise ValueError("investigator prompt version is not installed")
     domain = yaml.safe_load((settings.config_dir / "domain.yaml").read_text(encoding="utf-8"))
     policy = load_policy(settings.config_dir)
     horizon = int(domain["policy"]["horizon"]["days"]["value"])
@@ -607,8 +611,8 @@ def run(ctx: Context) -> ModuleResult:
                 case = visible_case(ctx.repo, case_id)
                 model = model_for_run(
                     ctx.clients["llm"],
-                    prompt_version=PROMPT_VERSION,
-                    model=MODEL,
+                    prompt_version=prompt_version,
+                    model=ctx.spec.model_versions.get(MANIFEST.id, MODEL),
                     cache_context={"case": case.model_dump(mode="json")},
                 )
                 result = investigate(
@@ -618,6 +622,9 @@ def run(ctx: Context) -> ModuleResult:
                     reader=reader,
                     policy=policy,
                     horizon_days=horizon,
+                    # One pipeline execution per run: stable IDs allow exact rebuilds.
+                    # Direct/API investigations retain fresh IDs by default.
+                    trace_id=f"trace:{ctx.spec.run_id}:{case_id}",
                 )
                 traces.append(result.trace)
             except ToolError as error:
