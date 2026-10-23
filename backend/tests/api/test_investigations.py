@@ -173,6 +173,59 @@ def test_replay_miss_is_explicit_and_discards_the_job_snapshot(service, monkeypa
     assert client.get("/api/runs/one/cases/case-1").status_code == 200
 
 
+def test_historical_support_cannot_start_an_investigation(service, monkeypatch):
+    client, engine, _ = service
+    parent = spec()
+    with repo_session(engine, parent) as repo:
+        repo.put(case(parent).model_copy(update={"version": "parent:answer:1"}))
+        repo.publish()
+    forbid_provider(monkeypatch)
+    assert client.post(PATH).status_code == 404
+    assert client.get("/api/runs/one/cases").json() == []
+
+
+def test_investigation_worker_filters_support_and_keeps_exact_citations(service, monkeypatch):
+    client, engine, _ = service
+    parent = spec()
+    historical = case(parent, "gone").model_copy(update={"version": "parent:answer:1"})
+    with repo_session(engine, parent) as repo:
+        repo.put(case(parent), historical)
+        repo.publish()
+    inspected = []
+
+    def investigate(repo, case_id, **_):
+        assert [c.id for c in repo.list(Case)] == ["case-1"]
+        assert repo.get(Case, "gone") is None
+        pin = repo.get(Case, "gone", historical.version)
+        assert pin is not None and pin.run_id == repo.run_id
+        output = trace(repo.spec).model_copy(
+            update={
+                "id": "fresh-trace",
+                "input_refs": (
+                    ArtifactRef(
+                        kind="Case",
+                        id=pin.id,
+                        version=pin.version,
+                    ),
+                ),
+            }
+        )
+        repo.put(output)
+        inspected.append(repo.run_id)
+        return SimpleNamespace(trace=output)
+
+    forbid_provider(monkeypatch)
+    monkeypatch.setattr(api.investigator, "investigate", investigate)
+    response = client.post(PATH)
+    assert response.status_code == 202
+    job_id = response.json()["spec"]["run_id"]
+    assert inspected == [job_id]
+    assert client.get(f"/api/runs/{job_id}").json()["published"]
+    assert [c["id"] for c in client.get(f"/api/runs/{job_id}/cases").json()] == ["case-1"]
+    pinned = client.get(f"/api/runs/{job_id}/cases/gone", params={"version": historical.version})
+    assert pinned.status_code == 200 and pinned.json()["run_id"] == job_id
+
+
 def test_pending_job_reuse_and_frozen_scope(service, monkeypatch):
     client, engine, _ = service
     parent = spec()

@@ -197,7 +197,9 @@ Operational reads exclude historical derived support versions (`parent:...`) fro
 queues, document observations/links, forecasts, reports, traces and options. Queue
 counts computed from these collections therefore describe current outputs only.
 Unversioned reads cannot revive a disappeared parent case or option; approval
-input gathering applies the same filter. Source documents/segments remain visible,
+input gathering and investigation submission/execution apply the same filter.
+Investigation snapshots retain historical records for exact citations.
+Source documents/segments remain visible,
 and exact derived version pins still resolve inside report citations and versioned
 case/trace/question reads. An answered receipt whose original case disappeared can
 be read with `?version=answer:{fingerprint}`.
