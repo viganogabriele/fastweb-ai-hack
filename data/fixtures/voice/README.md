@@ -98,5 +98,6 @@ notes, not SKU signals. The transcripts were written from the script the speaker
 against the ASR output when the cache is recorded (ING-03b, #139).
 
 ING-03b status, verified reference hashes, observed fallback publication and safe
-record/replay commands are in [VERIFICATION.md](VERIFICATION.md). Real ASR recording
-is currently blocked by missing credentials; fallback publication is not completion.
+record/replay commands are in [VERIFICATION.md](VERIFICATION.md). All three real ASR
+responses are cached; two notes publish recorded intervals and one explicitly falls
+back to untimed manual text because the server returned an end past the audio duration.

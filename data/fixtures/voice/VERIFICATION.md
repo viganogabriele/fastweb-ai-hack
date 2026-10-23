@@ -1,105 +1,131 @@
 # ING-03b verification of DATA-03
 
-Status on 2026-10-23: **blocked, recording incomplete**. `Settings.asr_key()` reports no
-ASR credential in either this worktree's normal configuration or the main checkout's
-configuration loaded through `Settings(_env_file=...)`. No credential was printed or
-copied. No ASR request was made, so server reachability is unverified. No real ASR
-response, ASR accuracy claim or successful recorded replay is claimed here.
+Status on 2026-10-23: **recording and offline replay verified**. The authorized ASR
+endpoint `https://hack-sst.lorenzocorallo.net/v1`, model
+`openai/whisper-large-v3-turbo`, returned HTTP 200 for all three actual WAV files.
+Credentials were loaded only through `Settings(_env_file=...)` and `Settings.asr_key()`;
+no credential was printed or committed. All three real response envelopes are cached.
+Two notes publish recorded transcripts with real intervals. The third explicitly
+falls back to its manual transcript because the server's final interval exceeds the
+audio duration; its published timestamps are null. It is not relabeled as recorded.
 
-## Fixture checks
+## Integrity, availability and scope
 
 `backend/.venv/bin/python data/fixtures/voice/verify.py --mode check` validates all
-three WAV hashes, mono 16 kHz format, declared duration within 0.1 s, manual transcript
-publication, character offsets, absence of fallback timestamps, and availability at
-`2026-10-22T20:00:00Z` (22:00 Europe/Rome). MIL01 and MIL02 agree with the store master.
-No sidecar correction or product module change was needed.
+three WAV hashes, mono 16 kHz format, declared duration within 0.1 s, stripped UTF-8
+manual-transcript hashes, character offsets and absence of manual timestamps.
+All notes are available at `2026-10-22T20:00:00Z` (22:00 Europe/Rome); MIL01/MIL02 agree
+with the store master. Earlier verification denied audio loading entirely at
+`2026-10-22T17:00:00Z`, and for a ROM01-only run. No sidecar correction was needed.
 
-Additional checks against the actual fixture directory denied audio loading entirely:
-an as-of of `2026-10-22T17:00:00Z` skipped all three as unavailable; a ROM01-only
-run at the evening cutoff skipped all three as outside the selected stores.
+All three notes are **synthetic_extension**, independent of historical emails.
+There are **no paraphrase notes** in DATA-03. Keep them and forecasts influenced by
+them out of historical WAPE; use the separate synthetic voice demo scenario. This
+PR does not modify or certify the evaluation pipeline's exclusion filter.
 
-Validation: plain `make check` had 1618 passing backend tests and one existing eval
-isolation failure (`_Py_HashRandomization_Init: failed to get random numbers to
-initialize Python`). No isolation test was changed. `PYTHONHASHSEED=0 make check`
-passed all 1619 backend tests, lint/format, web lint/typecheck, 38 web tests and schema
-regeneration. The verification utility also passed explicit Ruff lint/format checks.
+## Actual manual-versus-ASR comparison
 
-All three notes are **synthetic_extension**, with no related historical email. There
-are **no paraphrase notes** in DATA-03. These independent scenarios must stay out of
-historical WAPE, including forecasts influenced by them; use a separate demo run.
-This task does not change the evaluation pipeline or certify its exclusion filter.
-
-The following are manual reference claims to check against real ASR, not observed ASR
-results. Hashes use the module's stripped UTF-8 transcript, rather than raw file bytes.
+The reference hashes below match each published document's
+`meta.manual_transcript_sha256`. Comparison is against the supplied manual script;
+an ASR-only word is a difference, not proof of an audio hallucination. Raw responses
+and full manual/ASR texts remain in the ignored local evidence/cache.
 
 - `mil01-cashmere-scarf-vest-size`: 40.448 s; sent at 19:40 +02:00.
-  Reference hash: `sha256:9882b4a799c6d64793f8c2ea4d84386db20bb914b25ecdd6c3289a372e15b87f`.
-  Check cashmere scarf, grey melange and beige; six handled, three appreciated,
-  one beige request; navy down vest, two clients needing size 3, only 2 and 4
-  stated available. Payment-terminal retry counts are operational context.
-  **ASR differences: not assessable, no recording available.**
-- `mil01-melange-touch-belted-coat-fit`: 30.720 s; sent at 19:05 +02:00.
-  Reference hash: `sha256:bf21299bee230d9a19dff75d30bc328db18411bf8875b5782ce7153cc7cd4879`.
-  Check grey melange wool down jacket (four clients); chocolate belted long down
-  coat (three clients, size 2, tight waist); five-minute outage is operational context.
-  **ASR differences: not assessable, no recording available.**
+  Reference: `sha256:9882b4a799c6d64793f8c2ea4d84386db20bb914b25ecdd6c3289a372e15b87f`.
+  Products, colours and quantities preserved: cashmere scarf, grey melange/beige,
+  six handled, three appreciated; two clients seeking navy down vest size 3,
+  only 2 and 4 stated available. ASR changes “una signora” to “la signora”, weakening
+  the explicit one-request wording; “Montenapoleone” becomes “a Monte Napoleone”,
+  “in negozio” becomes “il negozio” twice, and “primo pomeriggio” loses “primo”.
+  Payment retries remain three; the final “a chi di dovere” loses “di”. Punctuation
+  and digit/word representations differ. Published **recorded**, three server
+  intervals: `[0, 15.64]`, `[16.4, 25.900000000000002]`, `[25.9, 39.18]` seconds.
+  The tiny floating-point overlap at 25.9 is preserved, not rewritten.
+- `mil01-melange-touch-belted-coat-fit`: 30.720 s (sidecar 30.7); sent at 19:05 +02:00.
+  Reference: `sha256:bf21299bee230d9a19dff75d30bc328db18411bf8875b5782ce7153cc7cd4879`.
+  Grey melange wool down jacket/four clients and chocolate belted long down coat/
+  three clients/size 2/tight waist are preserved. Five-minute outage preserved.
+  ASR spells counts as words, changes “riverificasse” to “riferificassi”, and adds
+  “Grazie.” absent from the manual script. Raw server intervals: `[0, 12.06]`,
+  `[13.4, 22.3]`, `[23.580000000000002, 29.92]`, **`[30, 31]`**.
+  The last end exceeds both the 30.720 s WAV and 30.7 s sidecar. Published **fixture
+  fallback**, one manual segment with `t_start_s = t_end_s = null`, with abstention:
+  `UnusableTranscript: ASR interval ends at 31s beyond audio duration 30.7s` and
+  `declared transcript used`. The real ASR response is still cached unchanged.
 - `mil02-navy-long-down-lining`: 49.3226875 s; sent at 19:20 +02:00.
-  Reference hash: `sha256:1ae275ef7c053d22beec0f1ba80f0f7c996e0ddcfd181905eca23d301ef045df`.
-  Check navy long down jacket (five clients, two visible reactions), lining complaint,
-  one hoodless request; black padded cardigan (two tried, one bought). Rain, traffic
-  and tomorrow's staffing shortage are context, not additional SKU quantities.
-  **ASR differences: not assessable, no recording available.**
+  Reference: `sha256:1ae275ef7c053d22beec0f1ba80f0f7c996e0ddcfd181905eca23d301ef045df`.
+  Navy long down jacket/five clients/two visible reactions, plastic-like lining,
+  one hoodless request, black padded cardigan/two tried/one bought all preserved.
+  “posato” becomes “apposato”; quotation marks disappear; “dal pomeriggio” becomes
+  “del pomeriggio”. The staffing phrase “fascia pomeridiana” becomes the malformed
+  “faccio pomerigiana”, though “un collega in meno” survives. Do not silently
+  normalize this operational context into additional SKU demand.
+  Published **recorded**, six server intervals: `[0, 16.580000000000002]`,
+  `[17.76, 23.54]`, `[23.54, 32.4]`, `[34.04, 39.66]`, `[40.86, 43.96]`,
+  `[45.18, 48.620000000000005]` seconds.
 
-## Observed offline publication
+All published recorded intervals have positive length, start within the audio and
+end within its measured duration. This is a numeric bounds/quote validation, not a
+human listening assessment of word-level alignment. No timestamp was estimated,
+clamped or fabricated. A genuine module format fix rejects zero-length intervals
+and intervals past the declared audio duration, using the existing explicit manual
+fallback path. Regression tests cover both cases.
 
-`verify.py --mode replay` denies socket connections and ran the actual `src.voice`
-through the orchestrator and repository. Run
-`ing03b-replay-5e84df02-1f82-49bd-9aff-ab1516ad3fc4` published three documents and three
-segments with status `degraded`: **zero recorded, three declared**. Every document has
-`meta.transcript_mode = fixture`, the reference hash above, and a validated segment
-with `t_start_s = t_end_s = null`. The module's `mode: recorded` describes the requested
-mode; it is not proof of a recorded transcript. Each abstention explicitly states
-`ReplayMiss` and `declared transcript used`.
+## Observed execution and portable evidence
 
-Expected cache keys for this verification snapshot (all missing):
+Initial real calls (all first attempt, HTTP 200; approximately 5.06, 3.80 and 5.77 s):
+`ing03b-record-b729ccc0-39b4-450e-9fc1-8a304a193295`. This pre-fix run published all
+three as recorded, but the verifier correctly exited nonzero for the bad interval.
+After the format fix, record mode reused those immutable actual responses:
+`ing03b-record-ccf5ee89-b7a1-46d3-8d87-012e54d93ba8`.
+Network-denied replay:
+`ing03b-replay-f5b3bf3c-493a-4d9d-b7e2-0be7b5b4728f`.
+Both final runs verified **three cache hits, two recorded documents, one explicit
+interval fallback, ten published segments, zero errors**. Module status is honestly
+`degraded` for that fallback. The verifier accepts this only when every real response
+is cached/successful and every fallback has an explicit `UnusableTranscript` reason;
+missing credentials, network failure and `ReplayMiss` remain incomplete.
+
+Cache keys (each at `data/llm_cache/<first-two-chars>/<key>.json`):
 
 - scarf/vest: `c9c152587e8f24070c43f8117120f703ee89e9fda74b8a1597b5425ab6062490`
 - melange/coat: `e1ffa92526398bc3cf10d5c0e218848a8a342ee1a51d708c30f06eebb7d404b0`
 - navy/lining: `86b71ba0de2c099154a68bf8c764ad8627e61a681c64eb65408ee04e2336b9f4`
 
-Local evidence is in `data/voice_verification/<run_id>.json` and `runs.db`, both
-gitignored. The JSON contains the exact spec, published documents/segments, module
-result, reference text/hashes and successful-call cache traces. The command returns
-nonzero for degraded publication or unusable intervals, so fallback is not counted
-as successful recording. This evidence is not included in a clone of the PR.
+These three envelopes and the three worktree execution JSONs were copied to
+`/home/gabriele/dev/fastweb-ai-hack/data/` without replacing unrelated cache entries.
+The worktree DB was backed up there as
+`voice_verification/ing03b-d3ad7e89-runs.db`. A further network-denied replay using the
+root cache passed with identical publication:
+`ing03b-replay-df466e06-066b-4948-bc8a-6486be938d0a` in the root's `runs.db` and JSON.
+An earlier root replay hit all three envelopes but reported an incidental utility
+`__pycache__` directory as an invalid note; that generated directory was removed
+and the successful replay above supersedes it. The failed evidence remains honest.
 
-## Resume recording
+Cache and evidence are **gitignored and do not travel with this PR**. Keep the
+actual envelopes and JSON/DB evidence separately for the offline demo. Never
+force-add these or credentials. Cache identity includes audio, hints, configured ASR
+URL/model and run provenance (stores, as-of, module/config/source snapshot/model
+versions). This voice-only snapshot does **not** warm a different full-demo RunSpec;
+record the actual demo snapshot separately or reuse this exact snapshot. Run IDs
+and execution mode alone may change without invalidating its cache.
 
-Have the authorized consumer configure their own ASR credential out of band, then:
+## Reproduce
 
 ```sh
+backend/.venv/bin/python data/fixtures/voice/verify.py --mode check
 backend/.venv/bin/python data/fixtures/voice/verify.py --mode record
 backend/.venv/bin/python data/fixtures/voice/verify.py --mode replay
 ```
 
-When reusing an existing checkout's config, supply `--env-file /path/to/checkout/.env`.
-Only `Settings` loads it; the script obtains credentials via `Settings.asr_key()`.
-The configured ASR base URL/model are preserved. Cache and evidence always go into
-this checkout's `data/`, avoiding writes to the checkout providing configuration.
+For another checkout's authorized configuration, add `--env-file /path/to/checkout/.env`.
+Only Settings loads it. Record uses the provider on cache misses; replay denies
+socket connections. Cache/evidence are written to the executing checkout's `data/`.
+Exit zero means cached responses plus valid recorded publication or explicitly
+explained unusable-response fallbacks, not that every transcript is recorded.
 
-Record mode executes real ASR on cache misses and uses existing immutable responses
-on hits. Replay denies network connections. Inspect the JSON's manual text versus
-published ASR text and segments for each product/count above, and document actual
-differences here before marking #139 complete. Check every interval against the
-audio (the utility rejects empty, reversed or out-of-duration intervals). If the
-server provides no usable segments, keep the explicit fallback reason and null
-timestamps; do not manufacture intervals or relabel the fallback as recorded.
-
-Recordings belong at `data/llm_cache/<first-two-key-chars>/<key>.json`. Never force-add
-them or credentials to Git. Offline demos on another checkout/machine need a separate
-copy of these cache envelopes plus identical audio, hints, configured ASR URL/model
-and run provenance. The run-bound cache identity includes the selected store set,
-as-of, module/config/source snapshot and model versions: recording this voice-only
-verification snapshot does **not** warm a different full-demo RunSpec. Record the
-actual demo snapshot separately, or use this exact snapshot for the voice demo.
-Run IDs and execution mode alone can change without invalidating its cache.
+Validation: plain `make check` reproduced existing issue #203 (1618 backend passes,
+one eval isolation failure: `_Py_HashRandomization_Init: failed to get random numbers
+to initialize Python`). The isolation code was left untouched. `PYTHONHASHSEED=0 make check` passed all 1621 backend tests (including both new
+interval regressions), lint/format, web lint/typecheck, 38 web tests and schema
+verification. Explicit verifier Ruff lint/format and `git diff --check` also passed.

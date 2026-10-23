@@ -134,25 +134,43 @@ def main():
     evidence_path.write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + "\n")
     print(f"Published evidence: {evidence_path}")
     print(f"Cache: {client.cache.directory}")
-    # src.voice intentionally degrades on ASR failure; that is evidence, not acceptance.
-    if status.status != "succeeded" or len(documents) != len(notes):
+    # An unusable real response may explicitly fall back, but a missing response cannot pass.
+    calls = client.traces
+    result = status.result
+    if (
+        result is None
+        or result.errors
+        or len(documents) != len(notes)
+        or len(calls) != len(notes)
+        or any(not (t.get("cache_hit") or t.get("status") == 200) for t in calls)
+        or any("UnusableTranscript" not in reason for reason in result.abstentions)
+    ):
         print("INCOMPLETE: inspect evidence for explicit ASR fallback reasons")
         return 1
     by_id = {d.id: d for d in documents}
     for segment in segments:
         segment.validate_against(by_id[segment.document_id])
+        if by_id[segment.document_id].meta["transcript_mode"] == "fixture":
+            if segment.t_start_s is not None or segment.t_end_s is not None:
+                raise ValueError("manual fallback must have no timestamps")
+            if not any(
+                by_id[segment.document_id].uri in reason
+                for reason in result.abstentions
+            ):
+                raise ValueError("manual fallback must have an explicit reason")
+            continue
         duration = next(
             n["duration_s"]
             for n in evidence["notes"]
             if f"doc-voice-{n['note_id']}" == segment.document_id
         )
-        if not (0 <= segment.t_start_s < segment.t_end_s <= duration + 0.1):
+        if not (0 <= segment.t_start_s < segment.t_end_s <= duration):
             print("INCOMPLETE: ASR interval is unusable; inspect evidence")
             return 1
-    if any(d.meta["transcript_mode"] != "recorded" for d in documents):
-        return 1
     print(
-        "Recorded artifacts verified; manually compare names/numbers in evidence before acceptance"
+        f"Verified {len(calls)} cached ASR responses: "
+        f"{result.counts['recorded']} recorded notes, "
+        f"{result.counts['declared']} explicit interval fallbacks; compare evidence manually"
     )
     return 0
 
