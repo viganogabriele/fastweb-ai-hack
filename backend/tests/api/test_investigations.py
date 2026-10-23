@@ -626,6 +626,16 @@ def test_decided_case_is_rejected_and_other_cases_remain_actionable(service, mon
     monkeypatch.setattr(api, "execute", lambda *_: None)
     assert client.post(PATH).status_code == 409
     assert client.post(PATH.replace("case-1", "case-2")).status_code == 202
+    # A published copy of the parent (an investigation job) inherits the refusal: its
+    # options carry no draft, but a recomputation would bypass the decision (#245).
+    with repo_session(engine, "one", write=True) as current:
+        job = api.RunRepo(current.session, parent.model_copy(update={"run_id": "job"}))
+        job.copy_snapshot(current)
+        job.publish()
+    on_job = PATH.replace("/one/", "/job/")
+    response = client.post(on_job)
+    assert response.status_code == 409 and response.json() == {"detail": "Case already decided"}
+    assert client.post(on_job.replace("case-1", "case-2")).status_code == 202
 
 
 def test_ledger_snapshot_changes_job_identity_and_freezes_reservations(service, monkeypatch):

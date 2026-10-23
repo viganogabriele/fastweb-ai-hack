@@ -2,7 +2,8 @@
 
 ``decide`` returns an immutable local draft or raises ``Conflict`` (HTTP 409).
 The SQLite write lock covers current-run selection, input gathering, reevaluation and
-the single durable write of decision, checked payload and reservations. Retries return
+the single durable write of decision, checked payload and reservations. One option
+version is decided at most once per scenario, across all of its runs. Retries return
 the exact saved draft, even after the run's projections have been reset.
 """
 
@@ -156,6 +157,20 @@ def decide(
         option = current.get(ActionOption, request.option_id)
         if option is None or option.input_version_hash != request.input_version_hash:
             raise Conflict("option missing or input hash changed")
+        # Job runs copy their parent's options under the same scenario: a draft saved in
+        # any run of the scenario already decided this exact option version.
+        earlier = conn.execute(
+            select(ledger.drafts.c.payload).where(
+                ledger.drafts.c.scenario_id == request.scenario_id,
+                ledger.drafts.c.option_id == option.id,
+            )
+        ).scalars()
+        if any(
+            (p["option"]["version"], p["option"]["input_version_hash"])
+            == (option.version, option.input_version_hash)
+            for p in earlier
+        ):
+            raise Conflict("option already decided in another run of this scenario")
         if at < current.spec.as_of or at < option.available_at:
             raise Conflict("decision precedes its snapshot or option")
         if at >= option.valid_until:

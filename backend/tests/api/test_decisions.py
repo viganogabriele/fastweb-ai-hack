@@ -1,15 +1,23 @@
 """PLT-14: saved local drafts are read back exactly, per run and namespace."""
 
+from concurrent.futures import ThreadPoolExecutor
 from datetime import timedelta
+from threading import Barrier, Event
+
+import pytest
+from sqlalchemy import event, func, select
 
 from tesseract.api.routers.options import decision_clock
 from tesseract.core.config import Settings
 from tesseract.core.repo import reset_run
+from tesseract.core.run_repo import RunRepo, repo_session
+from tesseract.modules.actions import ledger
 from tests.api import test_options as decided
 from tests.modules.actions.test_options import AS_OF
 
 service = decided.service
 prepare, body, endpoint = decided.prepare, decided.body, decided.endpoint
+JOB = "investigate-job"
 
 
 def listed(client, run_id="run", **params):
@@ -100,3 +108,122 @@ def test_drafts_of_a_reset_run_do_not_attach_to_a_recreated_snapshot(service):
     prepare(service, case_id="recreated-case")
     assert listed(client) == []
     assert client.get(f"/api/runs/run/decisions/{draft['decision']['id']}").status_code == 404
+
+
+def parent_with_two_cases(service):
+    """Published parent with cases A and B, as an investigation would see it."""
+    client, value, options = prepare(service, also=("case-b",))
+    service[3][("run", "case-b")] = decided.scoped("run", case_id="case-b")
+    return client, value, options
+
+
+def publish_job(service, case_ids):
+    """The investigation job for case B: a same-scenario copy of the parent, published."""
+    with repo_session(service[1]["product"], "run", write=True) as parent:
+        job = RunRepo(parent.session, parent.spec.model_copy(update={"run_id": JOB}))
+        job.copy_snapshot(parent)
+        job.publish()
+    for case_id in case_ids:
+        service[3][(JOB, case_id)] = decided.scoped(JOB, case_id=case_id)
+
+
+def ledger_rows(service):
+    with service[1]["product"].connect() as conn:
+        return conn.execute(select(func.count()).select_from(ledger.drafts)).scalar_one()
+
+
+@pytest.mark.parametrize(
+    ("kind", "first", "again"),
+    [
+        ("hold", "approved", "approved"),  # legless approvals pass revalidation
+        ("hold", "rejected", "approved"),
+        ("transfer", "approved", "rejected"),  # rejections skip revalidation
+        ("transfer", "rejected", "rejected"),
+    ],
+)
+def test_option_decided_on_parent_cannot_be_decided_again_on_a_job_run(service, kind, first, again):
+    client, value, options = parent_with_two_cases(service)
+    option = options[kind]
+    draft = client.post(endpoint(value), json=body(option, decision=first)).json()
+    publish_job(service, (value.case.id, "case-b"))
+    copied = client.get(f"/api/runs/{JOB}/cases/{value.case.id}/options").json()
+    assert option.model_dump(mode="json") | {"run_id": JOB} in copied
+    held = ledger.reservations(service[1]["product"], value.scenario_id)
+
+    retry = body(option, decision=again, key="job-key")
+    for url in (
+        f"/api/runs/{JOB}/cases/{value.case.id}/decisions",
+        f"/api/runs/{JOB}/options/{option.id}/decision",
+    ):
+        response = client.post(url, json=retry)
+        assert response.status_code == 409, response.text
+        assert response.json() == {
+            "detail": "option already decided in another run of this scenario"
+        }
+    assert listed(client, JOB) == [] and listed(client) == [draft]
+    assert ledger_rows(service) == 1
+    assert ledger.reservations(service[1]["product"], value.scenario_id) == held
+    # The original command stays idempotent, though the parent is no longer current.
+    assert client.post(endpoint(value), json=body(option, decision=first)).json() == draft
+    # The job's own case is still decidable.
+    other = next(
+        o for o in client.get(f"/api/runs/{JOB}/cases/case-b/options").json() if o["kind"] == "hold"
+    )
+    saved = client.post(
+        f"/api/runs/{JOB}/cases/case-b/decisions",
+        json={**retry, "option_id": other["id"], "input_version_hash": other["input_version_hash"]},
+    )
+    assert saved.status_code == 200, saved.text
+    assert listed(client, JOB) == [saved.json()] and ledger_rows(service) == 2
+
+
+def test_concurrent_redecisions_on_a_job_run_are_all_refused(service):
+    client, value, options = parent_with_two_cases(service)
+    option = options["hold"]
+    draft = client.post(endpoint(value), json=body(option)).json()
+    publish_job(service, (value.case.id,))
+    barrier = Barrier(2)
+
+    def attempt(decision):
+        barrier.wait(timeout=10)
+        return client.post(
+            f"/api/runs/{JOB}/cases/{value.case.id}/decisions",
+            json=body(option, decision=decision, key=f"race-{decision}"),
+        ).status_code
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        assert list(pool.map(attempt, ("approved", "rejected"))) == [409, 409]
+    assert listed(client) == [draft] and listed(client, JOB) == []
+    assert ledger_rows(service) == 1
+
+
+def test_job_published_while_parent_decision_holds_the_lock_sees_that_draft(service):
+    client, value, options = parent_with_two_cases(service)
+    option, engine = options["hold"], service[1]["product"]
+    holding = Event()
+
+    def pause_before_insert(_conn, _cursor, statement, *_):
+        if statement.startswith("INSERT INTO action_drafts") and not holding.is_set():
+            holding.set()  # Write lock held, draft not yet committed.
+            holding.wait(0.3)
+
+    def on_job():
+        assert holding.wait(10)
+        publish_job(service, (value.case.id,))  # Blocks until the parent decision commits.
+        return client.post(
+            f"/api/runs/{JOB}/cases/{value.case.id}/decisions",
+            json=body(option, decision="rejected", key="job"),
+        )
+
+    event.listen(engine, "before_cursor_execute", pause_before_insert)
+    try:
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            job = pool.submit(on_job)
+            parent = client.post(endpoint(value), json=body(option, key="parent"))
+            job = job.result()
+    finally:
+        event.remove(engine, "before_cursor_execute", pause_before_insert)
+    assert parent.status_code == 200, parent.text
+    assert job.status_code == 409 and "another run" in job.json()["detail"]
+    assert listed(client) == [parent.json()] and listed(client, JOB) == []
+    assert ledger_rows(service) == 1

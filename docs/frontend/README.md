@@ -108,7 +108,12 @@ IDs are for reference in PRs and issues. Order within a class is the order to do
   `decision`, `dispatch_status: draft`, option id/version, `simulated: true`), including drafts
   restored by `replay_demo.py --decisions`. Drafts are run-scoped: an empty list means no
   decision saved in the selected run (an investigation job run does not inherit its parent's
-  drafts, #245). A failed read is an error, never "Aperto". Never derive "decided" locally.
+  drafts). Deciding there an option already decided in another run of the scenario returns
+  409 `option already decided in another run of this scenario` and saves nothing (PLT-15):
+  show it as "già deciso in un altro run" (the draft is listed by the run where it was made,
+  e.g. the job's parent), not as stale inputs to recompute. Reusing a key on another run
+  returns 409 `idempotency key already used for a different request`. A failed read is an error, never "Aperto". Never derive
+  "decided" locally.
 - **M6 Walkthrough fit.** Do the click-path fixes in [demo-walkthrough-ui.md](demo-walkthrough-ui.md) §3.
 
 ### Should
