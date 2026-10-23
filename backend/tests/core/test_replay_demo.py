@@ -7,12 +7,16 @@ import logging
 import socket
 import subprocess
 import sys
+from datetime import timedelta
 
 import httpx
 import pytest
+from sqlalchemy import inspect, select
 
 from tessera.core.config import REPO_ROOT
 from tessera.core.contracts import (
+    ActionOption,
+    ArtifactRef,
     ModuleManifest,
     ModuleResult,
     ModuleSnapshot,
@@ -21,8 +25,10 @@ from tessera.core.contracts import (
 )
 from tessera.core.registry import RegisteredModule, Registry
 from tessera.core.systems_cache import SystemsCache, SystemsTransport
+from tessera.modules.actions import approval, ledger
 from tessera.modules.sources import emails, voice
 from tessera.modules.sources.systems_client import Crosswalk
+from tests.modules.actions.test_options import fixture_case
 
 module_spec = importlib.util.spec_from_file_location(
     "replay_demo", REPO_ROOT / "scripts/replay_demo.py"
@@ -349,30 +355,121 @@ def test_subprocess_escape_is_denied(inputs):
     assert "offline_network_or_process_operation" in result["missing_prerequisites"]
 
 
-@pytest.mark.parametrize("change", ["run", "scenario", "clock"])
-def test_frozen_decision_must_match_the_rebuilt_snapshot(inputs, tmp_path, change):
-    spec = snapshot()
-    request = {
-        "run_id": spec.run_id,
-        "scenario_id": spec.scenario_id,
-        "option_id": "option",
-        "input_version_hash": "hash",
-        "decision": "rejected",
-        "by": "synthetic test reviewer",
-        "idempotency_key": "decision-1",
-    }
-    at = "2026-10-22T20:01:00Z"
+@pytest.fixture
+def decision_snapshot():
+    def callback(ctx):
+        ctx.repo.put(case, option)
+        return success(ctx)
+
+    spec, registry = custom(callback)
+    case = fixture_case(run_id=spec.run_id, input_refs=())
+    option = ActionOption(
+        id="synthetic-option",
+        version="1",
+        run_id=spec.run_id,
+        scenario_id=spec.scenario_id,
+        available_at=spec.as_of,
+        availability_basis="synthetic test",
+        source_refs=(),
+        computed_at=spec.as_of,
+        input_refs=(ArtifactRef(kind="Case", id=case.id, version=case.version),),
+        producer="test.replay",
+        producer_version="1",
+        case_id=case.id,
+        kind="hold",
+        legs=(),
+        checks=(),
+        assumptions=(),
+        valid_until=spec.as_of + timedelta(days=1),
+        recommended=False,
+        rationale="Synthetic boundary",
+        input_version_hash="hash",
+    )
+    request = approval.DecisionRequest(
+        run_id=spec.run_id,
+        scenario_id=spec.scenario_id,
+        option_id=option.id,
+        input_version_hash=option.input_version_hash,
+        decision="rejected",
+        by="synthetic test reviewer",
+        idempotency_key="decision-1",
+    )
+    at = spec.as_of + timedelta(minutes=1)
+    # Explicitly synthetic, not an approved product scenario or Core evidence.
+    frozen = replay.FrozenDecision(
+        snapshot_sha256=replay.digest(spec.model_dump(mode="json")),
+        namespace="fixture",
+        at=at,
+        request=request,
+        draft=approval._draft(request, option, at),
+    )
+    return spec, registry, frozen
+
+
+@pytest.mark.parametrize("change", ["run", "scenario", "clock", "snapshot", "namespace"])
+def test_frozen_decision_must_match_the_rebuilt_snapshot(
+    inputs, tmp_path, decision_snapshot, change
+):
+    spec, registry, frozen = decision_snapshot
+    event = frozen.model_dump(mode="json")
     if change == "run":
-        request["run_id"] = "other"
+        event["request"]["run_id"] = "other"
     elif change == "scenario":
-        request["scenario_id"] = "other"
-    else:
-        at = "2026-10-21T20:01:00Z"
+        event["request"]["scenario_id"] = "other"
+    elif change == "clock":
+        event["at"] = "2026-10-21T20:01:00Z"
+    elif change == "snapshot":
+        event["snapshot_sha256"] = "other"
+    elif change == "namespace":
+        event["namespace"] = "product"
     path = tmp_path / "decisions.json"
-    path.write_text(json.dumps([{"at": at, "request": request}]))
-    result = replay.rebuild(spec, **inputs, decisions=path)
+    path.write_text(json.dumps([event]))
+    result = replay.rebuild(spec, **inputs, decisions=path, registry=registry)
     assert result["status"] == "failed" and result["error_type"] == "IsolationError"
     assert result["run_status"] == "not_started" and result["decisions"] == []
+
+
+def test_frozen_drafts_are_exact_durable_and_part_of_replay_hashes(
+    inputs, tmp_path, decision_snapshot
+):
+    spec, registry, frozen = decision_snapshot
+    empty = replay.rebuild(spec, **inputs, registry=registry)
+    path = tmp_path / "decisions.json"
+    # Retry must return the same durable draft and must not count it twice in the ledger hash.
+    path.write_text(json.dumps([frozen.model_dump(mode="json")] * 2))
+    first = replay.rebuild(spec, **inputs, decisions=path, registry=registry)
+    second = replay.rebuild(spec, **inputs, decisions=path, registry=registry)
+    assert first["status"] == second["status"] == "succeeded", first
+    assert first["network_attempts"] == second["network_attempts"] == 0
+    assert first["decisions"] == second["decisions"]
+    assert first["decisions"][0]["id"] == frozen.draft.decision.id
+    assert first["decisions"][0]["sha256"] == replay.digest(frozen.draft.model_dump(mode="json"))
+    assert (
+        first["ledger_sha256"]
+        == second["ledger_sha256"]
+        == replay.digest([frozen.draft.model_dump(mode="json")])
+    )
+    assert first["output_sha256"] == second["output_sha256"] != empty["output_sha256"]
+    assert first["raw_output_sha256"] == second["raw_output_sha256"] != empty["raw_output_sha256"]
+
+
+def test_changed_frozen_draft_fails_without_saving_a_decision(inputs, tmp_path, decision_snapshot):
+    spec, registry, frozen = decision_snapshot
+    event = frozen.model_dump(mode="json")
+    event["draft"]["decision"]["by"] = "invented approver"
+    path = tmp_path / "decisions.json"
+    path.write_text(json.dumps([event]))
+    result = replay.rebuild(spec, **inputs, decisions=path, registry=registry)
+    assert result["status"] == "failed" and result["error_type"] == "Conflict"
+    assert result["decisions"] == []
+    engine = replay.connect(
+        f"sqlite:///{inputs['workspace'] / result['attempt_id'] / 'data/tessera_fixture.db'}"
+    )
+    with engine.connect() as conn:
+        assert not inspect(conn).has_table(ledger.drafts.name) or (
+            conn.execute(select(ledger.drafts)).first() is None
+        )
+    engine.dispose()
 
 
 @pytest.mark.parametrize("missing", [False, True])

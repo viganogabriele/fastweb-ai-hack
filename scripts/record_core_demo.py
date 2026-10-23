@@ -8,6 +8,7 @@ candidate; existing decisions are refused, and earlier execution evidence is kep
 import argparse
 import hashlib
 import json
+import subprocess
 import sys
 from pathlib import Path
 from uuid import uuid4
@@ -16,7 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 
 from replay_demo import allowed, digest, environment
 
-from tessera.core.config import Settings
+from tessera.core.config import REPO_ROOT, Settings
 from tessera.core.contracts import RunSpec
 from tessera.core.db import connect
 from tessera.core.llm import LLMClient
@@ -35,6 +36,27 @@ def record(candidate, *, execution_sha, reset=False):
         raise ValueError("source-backed recorded snapshot required")
     if spec.code_version != execution_sha:
         raise ValueError("candidate code_version must match the executing candidate SHA")
+    actual_sha = subprocess.check_output(
+        ["git", "rev-parse", "HEAD"], cwd=REPO_ROOT, text=True
+    ).strip()
+    if execution_sha != actual_sha:
+        raise ValueError("execution SHA does not match the current checkout")
+    dirty_code = subprocess.check_output(
+        [
+            "git",
+            "status",
+            "--porcelain",
+            "--untracked-files=all",
+            "--",
+            "backend/tessera",
+            "backend/prompts",
+            "scripts",
+        ],
+        cwd=REPO_ROOT,
+        text=True,
+    )
+    if dirty_code:
+        raise ValueError("commit executable code and prompts before recording")
     for name, expected in (("sources", spec.source_manifest_hash), ("config", spec.config_hash)):
         root = allowed(candidate / name)
         inventory = []
