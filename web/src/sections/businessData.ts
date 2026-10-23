@@ -8,7 +8,7 @@ export interface KpiDay {
   sales_eur: number
   budget_eur: number
   receipts: number
-  visitors: number
+  visitors: number | null
   units: number
   returns_units: number
 }
@@ -18,14 +18,14 @@ export interface DayPoint {
   sales: number
   budget: number
   receipts: number
-  visitors: number
+  visitors: number | null
 }
 
 export interface Totals {
   sales: number
   budget: number
   receipts: number
-  visitors: number
+  visitors: number | null
   /** Sales over budget minus one; null without budget. */
   vsBudget: number | null
   /** Receipts over visitors; null without visitors. */
@@ -58,25 +58,25 @@ export function dailySeries(rows: KpiDay[], stores: Set<string> | null, days: nu
     point.sales += row.sales_eur
     point.budget += row.budget_eur
     point.receipts += row.receipts
-    point.visitors += row.visitors
+    point.visitors = point.visitors === null || row.visitors === null ? null : point.visitors + row.visitors
   }
   return [...byDate.values()]
 }
 
 export function totals(points: DayPoint[]): Totals {
-  const sum = points.reduce(
+  const sum = points.reduce<{ sales: number; budget: number; receipts: number; visitors: number | null }>(
     (acc, point) => ({
       sales: acc.sales + point.sales,
       budget: acc.budget + point.budget,
       receipts: acc.receipts + point.receipts,
-      visitors: acc.visitors + point.visitors
+      visitors: acc.visitors === null || point.visitors === null ? null : acc.visitors + point.visitors
     }),
     { sales: 0, budget: 0, receipts: 0, visitors: 0 }
   )
   return {
     ...sum,
     vsBudget: sum.budget > 0 ? sum.sales / sum.budget - 1 : null,
-    conversion: sum.visitors > 0 ? sum.receipts / sum.visitors : null
+    conversion: sum.visitors !== null && sum.visitors > 0 ? sum.receipts / sum.visitors : null
   }
 }
 

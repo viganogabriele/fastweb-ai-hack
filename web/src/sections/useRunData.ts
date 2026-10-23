@@ -3,9 +3,8 @@ import { useEffect, useState } from 'react'
 export type RunDataStatus = 'loading' | 'ready' | 'unavailable' | 'error'
 
 /**
- * Reads `/api/runs/{runId}/{path}`. Business series are served only by the dev mock today: on the
- * real backend the route is missing (404), reported as `unavailable` so the UI can say so instead
- * of showing numbers it does not have.
+ * Reads `/api/runs/{runId}/{path}`. Older runs without business series return 404;
+ * the UI keeps that unavailable state visible.
  */
 export function useRunData<T>(runId: string, path: string) {
   const [state, setState] = useState<{ key: string; status: RunDataStatus; data: T | null }>({ key: '', status: 'loading', data: null })

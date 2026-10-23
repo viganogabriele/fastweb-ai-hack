@@ -1,0 +1,47 @@
+version: 1
+run_id: production-demo-20261022
+as_of: '2026-10-22T20:00:00Z'
+stores: [MIL01, MIL02, MUN01, PAR01, LON01, NYC01, TYO01, SEL01, SYD01]
+emails:
+  - MIL01/20260918_2115_MIL01.eml
+  - MIL01/20260918_2207_MIL01_corr.eml
+  - MIL01/20261002_2112_MIL01.eml
+  - MIL01/20261002_2113_MIL01_dup.eml
+  - MIL01/20261009_1035_MIL01.eml
+  - MIL01/20261009_1847_MIL01_re1.eml
+  - MIL02/20261009_1811_MIL02.eml
+  - NYC01/20260906_1837_NYC01.eml
+  - NYC01/20261004_1829_NYC01.eml
+  - NYC01/20261004_1858_NYC01_corr.eml
+  - NYC01/20261014_2248_NYC01_ooo.eml
+  - MUN01/20261014_2016_MUN01.eml
+  - PAR01/20261014_2019_PAR01.eml
+  - LON01/20261014_2137_LON01.eml
+  - TYO01/20261014_2124_TYO01.eml
+  - TYO01/20261014_2238_TYO01_re1.eml
+  - SEL01/20261014_2114_SEL01.eml
+  - SYD01/20261014_1841_SYD01.eml
+# Additional, explicitly authored synthetic INPUTS. They enter extraction as emails;
+# no Observation, forecast, case, option or model response is preloaded.
+supplemental_emails:
+  - store: MIL01
+    filename: demo_20261021_MIL01.eml
+    date: 'Wed, 21 Oct 2026 21:00:00 +0200'
+    subject: 'Synthetic rehearsal: confirmed unfulfilled units, 21 October'
+    body: |
+      Dati sintetici aggiuntivi per la prova della pipeline.
+      Il 21 ottobre 2026 non abbiamo potuto evadere un ordine di 4 pezzi del VLOGO CARDIGAN nero taglia M per indisponibilità della taglia.
+      Il periodo dell'ordine non evaso va dal 21 ottobre 2026 al 21 ottobre 2026. La domanda non servita è in aumento.
+      Questi 4 pezzi sono un unico ordine confermato, non quattro richieste esplorative.
+  - store: LON01
+    filename: demo_20261021_LON01.eml
+    date: 'Wed, 21 Oct 2026 21:00:00 +0100'
+    subject: 'Synthetic rehearsal: confirmed unfulfilled units, 21 October'
+    body: |
+      Additional synthetic inputs for the pipeline rehearsal.
+      On 21 October 2026 we could not fulfil a confirmed order for 6 units of AUREA black size 2 because the size was unavailable. Unmet demand is increasing.
+      The unfulfilled order covers 21 October 2026 through 21 October 2026 only.
+      These 6 units belong to one confirmed order, not six enquiries.
+investigate:
+  - case-mil01-i10919b00011-20261008
+  - case-mil01-unknown-20261009
