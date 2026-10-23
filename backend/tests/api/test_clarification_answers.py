@@ -455,6 +455,7 @@ def test_follow_up_api_excludes_historical_support_but_resolves_pinned_citations
         AgentTrace,
         Citation,
         ForecastAdjustment,
+        Observation,
         Report,
     )
 
@@ -555,6 +556,8 @@ def test_follow_up_api_excludes_historical_support_but_resolves_pinned_citations
                             "scenario_id": ctx.spec.scenario_id,
                             "computed_at": ctx.spec.as_of,
                             "available_at": ctx.spec.as_of,
+                            "input_refs": tuple(ref(o) for o in ctx.repo.list(Observation)),
+                            "supporting": tuple(ref(o) for o in ctx.repo.list(Observation)),
                         }
                     )
                 )
@@ -595,7 +598,9 @@ def test_follow_up_api_excludes_historical_support_but_resolves_pinned_citations
             assert response.status_code == 200 and response.json() == [], (path, response.json())
         assert [r["id"] for r in client.get(base + "/reports").json()] == ["current-report"]
         detail = client.get(base + "/documents/mail").json()
-        assert [o["version"] for o in detail["observations"]] == ["1"]
+        assert len(detail["observations"]) == 1
+        assert detail["observations"][0]["version"] == queue[0]["supporting"][0]["version"]
+        assert not detail["observations"][0]["version"].startswith("parent:")
         assert client.get(base + "/cases/case/traces/old-trace").status_code == 404
         assert (
             client.get(

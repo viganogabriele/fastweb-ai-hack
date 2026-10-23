@@ -247,7 +247,12 @@ def _prepare(conn, request, fixture_mode):
     for snapshot in prepared.run.modules:
         if snapshot.manifest.id in active and not set(snapshot.manifest.requires) <= active:
             raise AnswerUnavailable("Follow-up has a missing or disabled required module")
-    seeds = _closure(parent, prepared.seed_refs)
+    inherited = tuple(
+        ArtifactRef(kind="Observation", id=o.id, version=o.version)
+        for o in parent.list(Observation)
+        if o.producer == "ag.contextual_answer" and not o.version.startswith("parent:")
+    )
+    seeds = _closure(parent, (*prepared.seed_refs, *inherited))
     return prepared, seeds
 
 
@@ -462,6 +467,13 @@ class _PipelineView:
         if version is None and record is not None and record.version in self._historical:
             return None
         return record
+
+    def contextual_history(self):
+        return [
+            o
+            for o in self._repo.list(Observation)
+            if o.version in self._historical and o.producer == "ag.contextual_answer"
+        ]
 
 
 class _RecordingGuard:

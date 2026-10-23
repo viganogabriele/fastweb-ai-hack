@@ -48,8 +48,14 @@ class ContextReading:
     """Synthetic external response; no claim of provider comprehension."""
 
     def extract(self, schema, messages, **kwargs):
+        import json
+
         assert schema is ContextualMention
-        return ContextualMention(product_mention="Luminara taglia M")
+        context = json.loads(messages[-1]["content"])
+        mention = context["original"]["product_mention"]
+        return ContextualMention(
+            product_mention=mention if "taglia M" in mention else f"{mention} taglia M"
+        )
 
 
 @pytest.fixture
@@ -354,7 +360,10 @@ def test_investigator_cannot_act_on_seeded_historical_case(setup):
         assert repo.run_state()["published"]
 
 
-def test_production_extraction_replay_miss_cannot_publish_partial_answer(setup, monkeypatch):
+@pytest.mark.parametrize("missing_at", ["context", "original"])
+def test_production_extraction_replay_miss_cannot_publish_partial_answer(
+    setup, monkeypatch, missing_at
+):
     from tessera.core.cache import ReplayMiss
     from tessera.core.config import Settings
     from tessera.modules.ingestion import extract
@@ -402,7 +411,15 @@ def test_production_extraction_replay_miss_cannot_publish_partial_answer(setup, 
     class MissingReplyRecording:
         def extract(self, schema, messages, *, cache_context, **kwargs):
             if schema is ContextualMention:
-                raise ReplayMiss("Missing simulated reply recording")
+                if missing_at == "context":
+                    raise ReplayMiss("Missing simulated reply recording")
+                return ContextReading().extract(
+                    schema, messages, cache_context=cache_context, **kwargs
+                )
+            if missing_at == "original":
+                # Production extraction catches this and reports degraded;
+                # the answer worker must still refuse publication.
+                raise ReplayMiss("Missing original extraction recording")
             return extract.Candidates(
                 observations=[extract.Candidate(quote="felpa", kind="unmet_demand")]
             )
@@ -440,6 +457,12 @@ def production_pipeline(setup, monkeypatch, *, quantitative=False):
     from tessera.modules.sources.systems_client import Crosswalk, SystemsClient, SystemsReader
 
     engine, request, _, seed, _, originals = setup
+    source, segment, observation, case, question = originals
+    text = "Una felpa Luminara"
+    source = source.model_copy(update={"text": text})
+    segment = segment.model_copy(update={"text": text, "char_end": len(text)})
+    observation = observation.model_copy(update={"product_mention": "Luminara"})
+    originals = (source, segment, observation, case, question)
     parent_links = ()
     sku = "TEST-001"
     if quantitative:
@@ -925,7 +948,26 @@ def test_elliptical_reply_corrects_original_demand_once_with_quantitative_effect
                 context = json.loads(messages[-1]["content"])
                 assert context["question"]["question"] == originals[-1].question
                 assert context["original"]["id"] == originals[2].id
+                assert (
+                    context["original"]["version"]
+                    == f"parent:{job.fingerprint}:{originals[2].version}"
+                )
+                assert (
+                    context["original"]["evidence"]
+                    == originals[2].model_dump(mode="json")["evidence"]
+                )
                 assert context["answer"]["text"] == "Taglia M"
+                assert context["answer"] == job.document.model_dump(mode="json")
+                assert context["question"]["version"] == f"answer:{job.fingerprint}"
+                assert context["question"]["observation_refs"] == [
+                    {
+                        "kind": "Observation",
+                        "id": context["original"]["id"],
+                        "version": context["original"]["version"],
+                    }
+                ]
+                assert cache_context["contextual_answer"] == context
+                assert cache_context["instructions"] == messages[0]["content"]
                 calls.append(cache_context)
             return super().extract(schema, messages, cache_context=cache_context, **kwargs)
 
@@ -1010,6 +1052,218 @@ def test_registered_answer_without_actual_context_cache_fails_without_network(se
         assert "ReplayMiss" in " ".join(extraction.result.errors)
     with repo_session(engine, "parent") as repo:
         assert all(repo.get(type(r), r.id, r.version) == r for r in originals)
+
+
+@pytest.mark.parametrize(
+    "mention",
+    ["InventedProduct taglia M", "Luminara taglia XXL", "Luminara taglia M 99", "", "!!!"],
+)
+def test_contextual_mention_cannot_introduce_unsupported_product_tokens(
+    setup, monkeypatch, mention
+):
+    engine, request, registry, _, RecordedReading = production_pipeline(setup, monkeypatch)
+
+    class Reading(RecordedReading):
+        def extract(self, schema, messages, **kwargs):
+            if schema is ContextualMention:
+                return ContextualMention(product_mention=mention)
+            return super().extract(schema, messages, **kwargs)
+
+    register_recorded_answer(engine, request)
+    job = submit_answer(engine, request, registry=registry)
+    execute_follow_up(engine, job.run.run_id, registry=registry, clients={"llm": Reading()})
+    with repo_session(engine, job.run.run_id) as repo:
+        assert not repo.run_state()["published"]
+        assert repo.list(Observation) == []
+
+
+@pytest.mark.parametrize("collision", [False, True])
+def test_reconciliation_preserves_other_fact_kinds_or_refuses_identity_collision(
+    setup, monkeypatch, collision
+):
+    from tessera.modules.ingestion import extract
+
+    engine, request, registry, _, RecordedReading = production_pipeline(setup, monkeypatch)
+
+    class Reading(RecordedReading):
+        def extract(self, schema, messages, **kwargs):
+            result = super().extract(schema, messages, **kwargs)
+            if schema is extract.Candidates:
+                result.observations.insert(
+                    1 if collision else 0,
+                    result.observations[0].model_copy(update={"kind": "product_feedback"}),
+                )
+            return result
+
+    register_recorded_answer(engine, request)
+    job = submit_answer(engine, request, registry=registry)
+    execute_follow_up(engine, job.run.run_id, registry=registry, clients={"llm": Reading()})
+    with repo_session(engine, job.run.run_id) as repo:
+        if collision:
+            assert not repo.run_state()["published"] and repo.list(Observation) == []
+            return
+        assert repo.run_state()["published"]
+        current = [o for o in repo.list(Observation) if not o.version.startswith("parent:")]
+        assert {o.kind for o in current} == {"unmet_demand", "product_feedback"}
+
+
+@pytest.mark.parametrize("target", ["same", "other"])
+def test_sequential_question_preserves_prior_corrections_without_answer_demand(
+    setup, monkeypatch, target
+):
+    from tessera.modules.ingestion import extract
+
+    engine, request, registry, originals, RecordedReading = production_pipeline(
+        setup, monkeypatch, quantitative=True
+    )
+
+    class Reading(RecordedReading):
+        def extract(self, schema, messages, **kwargs):
+            if (
+                schema is extract.Candidates
+                and kwargs["cache_context"]["document"][0] == "mail-other"
+            ):
+                return extract.Candidates(
+                    observations=[
+                        extract.Candidate(
+                            quote="Un vestito Arcobaleno",
+                            kind="unmet_demand",
+                            product_mention="Arcobaleno",
+                        )
+                    ]
+                )
+            return super().extract(schema, messages, **kwargs)
+
+    entries = []
+    for manifest in registry.manifests():
+        entry = registry.resolve(ModuleSnapshot(manifest=manifest, params={}))
+        if manifest.id == "src.email":
+            source_run = entry.run
+
+            def sources(ctx, source_run=source_run):
+                result = source_run(ctx)
+                if target == "other":
+                    document = originals[0].model_copy(
+                        update={"id": "mail-other", "text": "Un vestito Arcobaleno"}
+                    )
+                    segment = originals[1].model_copy(
+                        update={
+                            "id": "segment-other",
+                            "document_id": document.id,
+                            "text": document.text,
+                            "char_end": len(document.text),
+                        }
+                    )
+                    ctx.repo.put(document, segment)
+                # The guard must hold even when prior reply segments are present.
+                for doc in ctx.repo.list(SourceDocument):
+                    if doc.source_type == "clarification_reply":
+                        ctx.repo.put(
+                            Segment(
+                                id=f"{doc.id}:segment:0",
+                                version="1",
+                                available_at=doc.available_at,
+                                availability_basis=doc.availability_basis,
+                                source_refs=doc.source_refs,
+                                document_id=doc.id,
+                                text_version=doc.text_version,
+                                idx=0,
+                                text=doc.text,
+                                char_start=0,
+                                char_end=len(doc.text),
+                                is_quoted=False,
+                            )
+                        )
+                return result
+
+            entry = RegisteredModule(manifest, sources)
+        if manifest.id == "act.options":
+            options_run = entry.run
+
+            def ask_again(ctx, options_run=options_run):
+                result = options_run(ctx)
+                observation = next(
+                    o
+                    for o in ctx.repo.list(Observation)
+                    if o.document_id == ("mail-other" if target == "other" else originals[0].id)
+                )
+                case = next(c for c in ctx.repo.list(Case) if ref(observation) in c.supporting)
+                ctx.repo.put(
+                    Clarification(
+                        **{
+                            key: getattr(observation, key)
+                            for key in (
+                                "available_at",
+                                "availability_basis",
+                                "source_refs",
+                                "run_id",
+                                "scenario_id",
+                                "computed_at",
+                                "producer",
+                                "producer_version",
+                            )
+                        },
+                        id="next-question",
+                        version="1",
+                        input_refs=(ref(case), ref(observation)),
+                        case_id=case.id,
+                        observation_refs=(ref(observation),),
+                        question="Confermi la taglia?",
+                        asked_at=ctx.spec.as_of,
+                        status="draft",
+                    )
+                )
+                return result
+
+            entry = RegisteredModule(manifest, ask_again)
+        entries.append(entry)
+    registry = Registry(entries)
+    register_recorded_answer(engine, request)
+    first = submit_answer(engine, request, registry=registry)
+    execute_follow_up(engine, first.run.run_id, registry=registry, clients={"llm": Reading()})
+    with repo_session(engine, first.run.run_id) as repo:
+        assert repo.run_state()["published"]
+        question = repo.get(Clarification, "next-question")
+        case = repo.get(Case, question.case_id)
+        first_observations = repo.list(Observation)
+    later = request.model_copy(
+        update={
+            "run_id": first.run.run_id,
+            "scenario_id": first.run.scenario_id,
+            "case_id": case.id,
+            "case_version": case.version,
+            "clarification_id": question.id,
+            "clarification_version": question.version,
+            "text": "Taglia M",
+            "received_at": request.received_at + timedelta(hours=1),
+            "as_of": request.as_of + timedelta(hours=1),
+            "follow_up_scenario_id": "second-answer",
+            "idempotency_key": "second-answer",
+        }
+    )
+    register_recorded_answer(engine, later)
+    second = submit_answer(engine, later, registry=registry)
+    execute_follow_up(engine, second.run.run_id, registry=registry, clients={"llm": Reading()})
+    with repo_session(engine, second.run.run_id) as repo:
+        assert repo.run_state()["published"], [
+            (m.module_id, m.result.errors) for m in repo.module_runs()
+        ]
+        current = [o for o in repo.list(Observation) if not o.version.startswith("parent:")]
+        assert len(current) == (2 if target == "other" else 1)
+        assert all(o.document_id not in {first.document.id, second.document.id} for o in current)
+        retained = next(o for o in current if o.document_id == originals[0].id)
+        assert retained.product_mention == "Luminara taglia M"
+        assert retained.quantity == originals[2].quantity
+        assert retained.period_end == originals[2].period_end
+        assert retained.available_at == (
+            request.received_at if target == "other" else later.received_at
+        )
+        for o in current:
+            for r in o.input_refs:
+                if r.kind == "Observation":
+                    assert repo.get(Observation, r.id, r.version) is not None
+    with repo_session(engine, first.run.run_id) as repo:
+        assert repo.list(Observation) == first_observations
 
 
 @pytest.mark.parametrize("behavior", ["abstain", "changed_spans"])

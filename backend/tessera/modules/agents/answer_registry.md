@@ -146,6 +146,26 @@ heuristic match. New count corrections and unrelated demand in an answer need a
 separate ingestion feature. Existing source, store, namespace, frozen pipeline
 and answer-clock checks remain in force.
 
+The v2 contextual instructions also require lexical support: every normalized
+word in the proposed mention must occur in the original mention/evidence or the
+answer. Invented product names, sizes or numbers, empty text and punctuation-only
+outputs fail the child. This conservative check does not validate comprehension,
+negation or which of several stated products the answer refers to; those remain
+the model's interpretation task. Translations and alias expansion must happen in
+the normal linker, not in the contextual response. V1 contextual recordings do
+not authorize v2 instructions.
+
+Later answers inherit prior current contextual observations from the exact
+published parent, including corrections in other cases. Their transitive lineage
+is seeded, their latest correction-chain tips are restored once, and their
+receipt times, quantities and episode anchors remain unchanged. Only the newly
+answered observation receives the new answer's receipt time and provenance.
+Current observation versions are specific to the answer event. Every
+clarification-reply source is excluded from ordinary extraction, including old
+replies with segments present. Reconciliation includes fact kind, so a different
+kind on the same span survives; reused identities and ambiguous versions fail
+closed.
+
 Tests use synthetic structured model responses and synthetic ERP/system inputs;
 they verify deterministic reconciliation and production downstream math, not
 real-model comprehension. A real replay-client test additionally proves that an
