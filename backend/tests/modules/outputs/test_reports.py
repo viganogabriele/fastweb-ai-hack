@@ -7,13 +7,21 @@ checks the module's `by_office` brief against the hand-checked DATA-01b report f
 import json
 import re
 from collections import Counter
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, date, datetime, timedelta
 from types import SimpleNamespace
 
 import pytest
 
 from tessera.core.config import REPO_ROOT
-from tessera.core.contracts import Case, Citation, Report, RunSpec
+from tessera.core.contracts import (
+    ArtifactRef,
+    Case,
+    Citation,
+    ProductInsight,
+    Report,
+    RunSpec,
+    Share,
+)
 from tessera.core.db import connect
 from tessera.core.fixtures import read_fixtures
 from tessera.core.registry import Registry
@@ -66,7 +74,7 @@ def load_master(engine, as_of) -> None:
         ))  # fmt: skip
 
 
-def run_module(tmp_path, *, kinds=INPUTS, as_of=AS_OF, params=None, edit=lambda r: r):
+def run_module(tmp_path, *, kinds=INPUTS, as_of=AS_OF, params=None, edit=lambda r: r, extra=()):
     engine = connect(f"sqlite:///{tmp_path / 'r.db'}")
     load_master(engine, as_of)
     _, records = read_fixtures(FIXTURES)
@@ -77,6 +85,8 @@ def run_module(tmp_path, *, kinds=INPUTS, as_of=AS_OF, params=None, edit=lambda 
         edit(r) for r in records
         if type(r).__name__ in kinds and r.available_at is not None and r.available_at <= as_of
     ))  # fmt: skip
+    if extra:
+        repo.put(*extra)
     ctx = SimpleNamespace(spec=run_spec, repo=repo, params=params or {})
     result = reports.run(ctx)
     again = reports.run(ctx)
@@ -249,3 +259,73 @@ def test_not_estimable_baseline_says_so_without_a_number(tmp_path):
 def test_unknown_view_is_rejected():
     with pytest.raises(ValueError, match="unknown report view"):
         reports.build_report("by_moon", reports.Facts((), {}, {}, frozenset(), {}, {}), spec())
+
+
+def shares(counts, total):
+    return tuple(Share(key=k, count=c, of=total) for k, c in counts)
+
+
+def insight(product_id, *, sold, returned, lines=(), reported=(), n=0):
+    refs = tuple(ArtifactRef(kind="Observation", id=f"obs-{i}", version="v1") for i in range(n))
+    n_lines = sum(c for _, c in lines)
+    kinds = shares((("product_feedback", n),), n) if n else ()
+    return ProductInsight(
+        id=f"insight-sku-{product_id.lower()}", version="v1",
+        available_at=AS_OF - timedelta(hours=1), availability_basis="max_input_available_at",
+        source_refs=(), run_id="fixture", scenario_id="historical", computed_at=AS_OF,
+        input_refs=refs, producer="ins.product", producer_version="1", as_of=AS_OF, level="sku",
+        product_id=product_id, stores=("MIL01", "NYC01"), period_first=date(2026, 9, 11),
+        period_last=date(2026, 10, 7), units_sold=sold, units_returned=returned,
+        return_rate=returned / sold if sold else None, return_lines=n_lines,
+        return_reasons=shares(lines, n_lines), n_observations=n, n_documents=n,
+        reported_kinds=kinds, reported_reasons=shares(reported, n), observation_refs=refs,
+    )  # fmt: skip
+
+
+INSIGHTS = (
+    insight("J10911A00305-742", sold=20, returned=5, lines=(("DEF", 4), ("SIZE", 1)),
+            reported=(("quality_defect", 1),), n=1),
+    insight("J20931A00144-999", sold=0, returned=2, lines=(("SIZE", 2),)),
+)  # fmt: skip
+
+
+def test_product_feedback_section_sets_reasons_beside_returns(tmp_path):
+    _, _, built = run_module(tmp_path, extra=INSIGHTS)
+    for report in built.values():
+        section = report.markdown.split("## Product feedback\n\n")[1]
+        lines = [MARKER.sub("", x) for x in section.splitlines() if x]
+        assert (
+            lines[0].startswith("- **")
+            and "(J10911A00305-742)**, MIL01, NYC01, 09-11..10-07" in lines[0]
+        )
+        assert lines[1:4] == [
+            ("  - reported: product feedback 1 of 1 observations, reasons: quality defect 1 of 1"),
+            "  - sold 20 units, returned 5 units, return rate 25.0%",
+            "  - POS return reasons: DEF 4, SIZE 1 of 5 lines",
+        ]
+        # No sale, no rate: the denominator is not there.
+        assert lines[5:] == [
+            "  - sold 0 units, returned 2 units",
+            "  - POS return reasons: SIZE 2 of 2 lines",
+        ]
+        cited = {
+            (c.ref.id, c.field, c.unit) for c in report.citations if c.ref.kind == "ProductInsight"
+        }
+        assert ("insight-sku-j10911a00305-742", "return_rate", "percent") in cited
+        assert ("insight-sku-j20931a00144-999", "return_rate", "percent") not in cited
+        assert {"insight-sku-j10911a00305-742", "insight-sku-j20931a00144-999"} <= {
+            r.id for r in report.input_refs
+        }
+        assert len(segments(report)) == len(report.citations)
+        for line in section.splitlines():
+            if line.startswith(("- ", "  - ")):
+                assert not NUMBER.search(re.split(r"\[\d+\]", line)[-1]), line
+
+
+def test_product_feedback_shows_reported_reasons_first_and_stays_thin(tmp_path):
+    many = [insight(f"S{i}-999", sold=10, returned=i, lines=(("DEF", i),)) for i in range(1, 8)]
+    _, _, built = run_module(tmp_path, extra=(*many, INSIGHTS[0]))
+    section = built["by_office"].markdown.split("## Product feedback")[1]
+    heads = [x for x in section.splitlines() if x.startswith("- **")]
+    assert len(heads) == reports.PRODUCTS_SHOWN
+    assert "J10911A00305-742" in heads[0] and "S7-999" in heads[1] and "S4-999" in heads[-1]

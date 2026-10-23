@@ -5,6 +5,7 @@ from .cases import Case
 from .common import SCHEMA_VERSION, ArtifactRef, SourceRef, StockFact
 from .documents import Segment, SourceDocument
 from .forecast import AdjustmentComponent, ForecastAdjustment, ForecastPoint, ScenarioValues
+from .insights import ProductInsight, Share
 from .links import EntityLink, EvidenceRelation, LinkCandidate
 from .observations import ContextEvent, Evidence, MetricFact, Observation, Quantity
 from .options import ActionOption, Check, Leg, Reservation, ScenarioOutcome
@@ -37,6 +38,7 @@ __all__ = [
     "ModuleRun",
     "ModuleSnapshot",
     "Observation",
+    "ProductInsight",
     "Quantity",
     "Report",
     "Reservation",
@@ -45,6 +47,7 @@ __all__ = [
     "ScenarioValues",
     "Segment",
     "SourceDocument",
+    "Share",
     "SourceRef",
     "StockFact",
 ]

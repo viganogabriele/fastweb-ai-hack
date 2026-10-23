@@ -21,6 +21,7 @@ from tessera.core.config import Settings, get_settings
 from tessera.core.contracts import (
     Case,
     EntityLink,
+    ForecastAdjustment,
     ModuleManifest,
     Observation,
     Report,
@@ -30,7 +31,7 @@ from tessera.core.contracts import (
 )
 from tessera.core.orchestrator import run
 from tessera.core.registry import Registry
-from tessera.core.repo import KINDS, RunNotFound
+from tessera.core.repo import KINDS, RunNotFound, latest
 from tessera.core.repo import list_runs as stored_runs
 from tessera.core.run_repo import RunRepo as Repo
 from tessera.core.run_repo import repo_session
@@ -199,7 +200,8 @@ def document(document_id: str, repo: PublishedRepo, version: str | None = None):
 def cases(repo: PublishedRepo, store: str | None = None, status: str | None = None):
     if store is not None and store not in repo.spec.stores:
         raise HTTPException(422, "Store is outside this run")
-    return tuple(c for c in repo.list(Case, store_id=store) if status is None or c.status == status)
+    found = latest(repo.list(Case, store_id=store))
+    return tuple(c for c in found if status is None or c.status == status)
 
 
 @router.get("/runs/{run_id}/cases/{case_id}", response_model=Case)
@@ -208,6 +210,18 @@ def case(case_id: str, repo: PublishedRepo, version: str | None = None):
     if item is None:
         raise HTTPException(404, "Case not found")
     return item
+
+
+@router.get("/runs/{run_id}/forecast", response_model=tuple[ForecastAdjustment, ...])
+def forecast(repo: PublishedRepo, store: str | None = None, sku: str | None = None):
+    """Stored baselines and overlays, including abstentions, from this complete snapshot.
+
+    Producer, case_ids and baseline_ref preserve the distinction between a baseline and
+    case-specific scenarios. An absent forecast stays absent: reads never recompute it.
+    """
+    if store is not None and store not in repo.spec.stores:
+        raise HTTPException(422, "Store is outside this run")
+    return repo.list(ForecastAdjustment, store_id=store, sku=sku)
 
 
 def report_detail(item: Report, repo: Repo) -> ReportDetail:
@@ -229,10 +243,9 @@ def report_detail(item: Report, repo: Repo) -> ReportDetail:
 
 def latest_reports(repo: Repo, view: str | None = None) -> tuple[Report, ...]:
     # Repository order is publication order, not a lexical sort of v1/v2/.../v10.
-    latest = {item.id: item for item in repo.list(Report)}
     return tuple(
         sorted(
-            (item for item in latest.values() if view is None or item.view == view),
+            (item for item in latest(repo.list(Report)) if view is None or item.view == view),
             key=lambda item: (item.view, item.id),
         )
     )
