@@ -1,4 +1,4 @@
-import type { Case } from '../api/client'
+import type { CatalogProduct, CatalogVariant, Case } from '../api/client'
 import { latestCaseVersions } from './caseUtils.ts'
 
 export const productScopes = {
@@ -68,15 +68,38 @@ export function productIndex(cases: Case[], runId: string) {
   }
 }
 
+export type CatalogMatch = { product: CatalogProduct; variant: CatalogVariant | null }
+
+// Exact display lookup (data/catalog/README.md): a style by its style code, a SKU by
+// its SKU, a SKU-size by the exact SKU followed by `-<size>`. No fuzzy or category match.
+export function catalogMatch(group: Pick<ProductGroup, 'id' | 'level'>, catalog: CatalogProduct[]): CatalogMatch | null {
+  if (group.level === 'style') {
+    const product = catalog.find((item) => item.style_code === group.id)
+    return product ? { product, variant: null } : null
+  }
+  const separator = group.id.lastIndexOf('-')
+  const sku = group.level === 'sku' ? group.id : separator > 0 ? group.id.slice(0, separator) : ''
+  for (const product of catalog) {
+    const variant = product.variants.find((item) => item.sku === sku)
+    if (variant) return { product, variant }
+  }
+  return null
+}
+
+export function catalogLabel(match: CatalogMatch) {
+  return match.variant ? `${match.product.name} · ${match.variant.color}` : match.product.name
+}
+
 export type ProductFilters = { search: string; store: string; status: string; type: string }
 
-export function filterProductCases(cases: Case[], filters: ProductFilters) {
+// `context` is extra searchable text for the whole group, such as the catalog name.
+export function filterProductCases(cases: Case[], filters: ProductFilters, context = '') {
   const query = filters.search.trim().toLocaleLowerCase('it-IT')
   return cases.filter((item) =>
     (filters.store === 'all' || item.store_id === filters.store) &&
     (filters.status === 'all' || item.status === filters.status) &&
     (filters.type === 'all' || item.case_type === filters.type) &&
-    [item.scope_id, item.store_id, item.case_type, item.priority_reason, item.owner]
+    [context, item.scope_id, item.store_id, item.case_type, item.priority_reason, item.owner]
       .join(' ').toLocaleLowerCase('it-IT').includes(query)
   )
 }

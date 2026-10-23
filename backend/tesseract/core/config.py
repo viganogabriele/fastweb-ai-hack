@@ -46,6 +46,8 @@ class Settings(BaseSettings):
     sources_dir: Path = REPO_ROOT / "generated" / "sources"
     data_dir: Path = REPO_ROOT / "data"
     config_dir: Path = REPO_ROOT / "config"
+    # Display-only product metadata (data/catalog/README.md); never a pipeline input.
+    catalog_dir: Path = REPO_ROOT / "data" / "catalog"
     mocks_base_url: str = "http://127.0.0.1:8088"
     # Fixture namespace (RFC §4.6): its own DB file, never mixed with real runs.
     fixture_mode: bool = False

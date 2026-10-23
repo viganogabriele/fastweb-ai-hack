@@ -6,6 +6,8 @@ export type ModuleManifest = components['schemas']['ModuleManifest']
 export type DocumentDetail = components['schemas']['DocumentDetail']
 export type Evidence = components['schemas']['Evidence']
 export type ArtifactRef = components['schemas']['ArtifactRef']
+export type CatalogProduct = components['schemas']['CatalogProduct']
+export type CatalogVariant = components['schemas']['CatalogVariant']
 
 export async function readApi<T>(
   path: string,

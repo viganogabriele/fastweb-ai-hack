@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { caseTypeLabel, filterProductCases, productIndex } from '../src/sections/productView.ts'
+import { catalogLabel, catalogMatch, caseTypeLabel, filterProductCases, productIndex } from '../src/sections/productView.ts'
 
 const item = (id, overrides = {}) => ({
   id, version: 'v1', run_id: 'run-1', computed_at: '2026-10-22T19:00:00Z',
@@ -70,4 +70,25 @@ test('shows localized signal labels while unknown types remain readable', () => 
   assert.equal(caseTypeLabel('unmet_demand'), 'Domanda non soddisfatta')
   assert.equal(caseTypeLabel('product_feedback'), 'Feedback sul prodotto')
   assert.equal(caseTypeLabel('new_signal_type'), 'new signal type')
+})
+
+const catalog = [{
+  style_code: 'J20931A00012', name: 'AUREA', category: 'Outerwear', subcategory: 'Short down jacket',
+  variants: [{ sku: 'J20931A00012-999', color: 'nero', color_code: '999' }],
+  reference: { id: 'REF', name: 'Nappa Leather Jacket', url: 'https://example.test', image_url: '/api/catalog/images/REF.jpg', association: 'illustrative_category_match' }
+}]
+
+test('links catalog products only by exact style, SKU or SKU-size scope', () => {
+  assert.equal(catalogLabel(catalogMatch({ level: 'style', id: 'J20931A00012' }, catalog)), 'AUREA')
+  assert.equal(catalogLabel(catalogMatch({ level: 'sku', id: 'J20931A00012-999' }, catalog)), 'AUREA · nero')
+  assert.equal(catalogMatch({ level: 'sku_size', id: 'J20931A00012-999-M' }, catalog).variant.sku, 'J20931A00012-999')
+  assert.equal(catalogMatch({ level: 'sku', id: 'J20931A00012-034' }, catalog), null)
+  assert.equal(catalogMatch({ level: 'style', id: 'J20931A0001' }, catalog), null)
+  assert.equal(catalogMatch({ level: 'sku_size', id: 'J20931A00012' }, catalog), null)
+})
+
+test('searches a product group by its catalog name', () => {
+  const filters = { search: 'aurea', store: 'all', status: 'all', type: 'all' }
+  assert.equal(filterProductCases([item('a')], filters).length, 0)
+  assert.equal(filterProductCases([item('a')], filters, 'AUREA · nero').length, 1)
 })

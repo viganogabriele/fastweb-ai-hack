@@ -1,6 +1,7 @@
 # Valentino product data
 
-Data package for a future product view. It contains no UI or API implementation.
+Display data for the product view (`GET /api/catalog/products`, images under
+`/api/catalog/images/`). The API serves names, variants and visual references only.
 
 - `products.sqlite`: ready-to-query SQLite database.
 - `products.json`: 46 synthetic styles, their 114 colour SKUs, and visual references.
@@ -38,7 +39,7 @@ FROM product_cards
 ORDER BY demo_case_count DESC, name;
 ```
 
-The `local_image` path is relative to this directory. There are no bundled web routes. For the
+The `local_image` path is relative to this directory; the API serves it by file name. For the
 detail of a demo product, join by the stable style code:
 
 ```sql

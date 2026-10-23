@@ -264,6 +264,9 @@ def check(candidate, *, decision_output=None):
                 assert draft["simulated"] and draft["decision"]["dispatch_status"] == "draft"
                 assert draft["reservations"] == []
                 assert api.post(prefix + path, json=body).json() == draft
+                # The stale attempt saved nothing; the retry is read back once, exactly.
+                assert get("/decisions") == get("/decisions", case_id=option.case_id) == [draft]
+                assert get(f"/decisions/{draft['decision']['id']}") == draft
                 output = allowed(decision_output)
                 encoded = (
                     json.dumps(

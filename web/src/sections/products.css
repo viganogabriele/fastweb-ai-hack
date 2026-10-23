@@ -7,6 +7,11 @@
 .sd-products__availability p { margin-block-end: 0; }
 .sd-products__product > header, .sd-products__case-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: start; gap: var(--sd-space-2); }
 .sd-products__product h2 { margin: 0; overflow-wrap: anywhere; }
+.sd-products__product > header.sd-products__identity { flex-wrap: nowrap; justify-content: start; gap: var(--sd-space-4); }
+.sd-products__identity figure { flex: none; margin: 0; }
+.sd-products__identity img { display: block; width: 6rem; height: 8rem; object-fit: cover; border-radius: var(--sd-radius-control); background: var(--sd-color-surface-elevated); }
+.sd-products__identity > div { display: grid; gap: var(--sd-space-2); justify-items: start; min-width: 0; }
+.sd-products__identity p { margin: 0; font-size: var(--sd-font-size-body-sm); color: var(--sd-color-text-secondary); }
 .sd-products__cases { display: grid; gap: var(--sd-space-4); margin: 0; padding: 0; list-style: none; }
 .sd-products__cases > li { padding-block-start: var(--sd-space-3); border-block-start: 1px solid var(--sd-color-border-subtle); min-width: 0; }
 .sd-products__case-header > strong { font-size: var(--sd-font-size-body-sm); }

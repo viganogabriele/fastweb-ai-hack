@@ -64,3 +64,28 @@ class ResolvedReportCitation(Contract):
 class ReportDetail(Contract):
     report: Report
     citations: tuple[ResolvedReportCitation, ...]
+
+
+class CatalogVariant(Contract):
+    sku: str
+    color: str
+    color_code: str
+
+
+class CatalogReference(Contract):
+    id: str
+    name: str
+    url: str
+    image_url: str | None
+    association: str
+
+
+class CatalogProduct(Contract):
+    """Synthetic style with an illustrative official visual reference, for display only."""
+
+    style_code: str
+    name: str
+    category: str
+    subcategory: str
+    variants: tuple[CatalogVariant, ...]
+    reference: CatalogReference

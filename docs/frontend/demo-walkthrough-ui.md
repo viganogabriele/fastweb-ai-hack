@@ -51,7 +51,7 @@ Proposed path (Lorenzo to confirm, README §5):
 | 0:20–0:50 | **Fonti**. Open the MIL01 email `20261009_1035`, hover the highlighted span | Canonical text, highlighted quote, case reference | Works on hover (`web/src/sections/RunWorkspace.tsx:274-289`). No click-through to the case |
 | 0:50–1:50 | **Casi → D1** `case-mil01-i10919b00011-20261008` | Header: store, product, status, "2 documenti / 2 origini", 5 open uncertainties. Evidence as quotes linked to Fonti. Forecast: baseline only, overlay `unchanged` with reason "scope_style: the evidence names the style, not this colour" | All data present. Evidence is raw IDs (M2). Forecast is a 20-decimal table (M3) |
 | 1:50–2:30 | Same case: **Traccia** | `recorded`, fallback **sì**, outcome `verify`. Steps: evidence, stock ×2, lanes ×2, options; the six-tool budget was reached (`scripts/core_demo.md:104-108`) | Shown, but buried below the forecast (M4) |
-| 2:30–3:10 | Same case: **Opzioni**. Read `hold` (recommended) and `transfer` (all checks pass, **not recommended**: zero benefit). Approve `notify_owner` with reviewer name, confirm | Checks list. "Bozza locale simulata, nessun invio". Server-returned `dispatch_status: draft` | Works (`web/src/sections/CaseOptionsPanel.tsx`). No persisted state after reload (M5) |
+| 2:30–3:10 | Same case: **Opzioni**. Read `hold` (recommended) and `transfer` (all checks pass, **not recommended**: zero benefit). Approve `notify_owner` with reviewer name, confirm | Checks list. "Bozza locale simulata, nessun invio". Server-returned `dispatch_status: draft` | Works (`web/src/sections/CaseOptionsPanel.tsx`). No persisted state after reload until the UI reads `GET /api/runs/{run_id}/decisions` (M5) |
 | 3:10–3:40 | **Casi → filter "Con incertezze bloccanti" → `case-mil01-unknown-20261009`** | `verify`, "Prodotto da identificare", the drafted Italian clarification marked `Simulato: sì`, status `Bozza`, never "sent" | Works (`web/src/sections/CaseClarificationsPanel.tsx:49-65`) |
 | (optional) | Answer the clarification (#135) or a live phone note (#191) | Only if merged **and** verified. Otherwise say the limitation aloud | Not available |
 | 3:40–4:00 | Metrics slide (not the app) | Only approved #128 numbers, with denominators and "synthetic, dev stores" | See [holdout-results-ui.md](holdout-results-ui.md) |
@@ -86,10 +86,12 @@ Each item is done when a human following §4 sees the stated result on the real 
       scrolls at 1280×800. IDs, hashes and producer versions go under "Dettagli tecnici".
       The "Nessun esempio sintetico" badge and fixture block do not render in the product
       namespace (`web/src/sections/CaseDetailAnalysis.tsx:23-46`).
-- [ ] **M5 Decisions after reload**: blocked on a read endpoint (none in
-      `backend/tesseract/api/routers/options.py`). Until then, show a note: "Le decisioni
-      salvate in sessioni precedenti non sono ancora leggibili da questa vista." Never derive
-      "decided" locally.
+- [ ] **M5 Decisions after reload**: read the saved drafts with
+      `GET /api/runs/{run_id}/decisions?case_id=<case>` (PLT-14) and show them on the case and
+      its options. Empty list = no decision saved in the selected run (job runs do not inherit
+      the parent's drafts, #245); a failed read shows the error, not "Aperto".
+      Until the UI is wired, show a note: "Le decisioni salvate in sessioni precedenti non sono
+      ancora leggibili da questa vista." Never derive "decided" locally.
 - [ ] **Error detail** (S4): show the API `detail` and status. `readApi` drops both
       (`web/src/api/client.ts:18-21`).
 

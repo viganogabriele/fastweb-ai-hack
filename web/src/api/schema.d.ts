@@ -4,6 +4,40 @@
  */
 
 export interface paths {
+    "/api/catalog/images/{name}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Image */
+        get: operations["image_api_catalog_images__name__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/catalog/products": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Products */
+        get: operations["products_api_catalog_products_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/health": {
         parameters: {
             query?: never;
@@ -241,6 +275,47 @@ export interface paths {
         };
         /** Case Trace */
         get: operations["case_trace_api_runs__run_id__cases__case_id__traces__trace_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/runs/{run_id}/decisions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Decisions
+         * @description Local drafts saved for this snapshot, in decision-clock order.
+         *
+         *     Exactly what the decision endpoints committed, including idempotent retries once and
+         *     no rejected (409) attempt. Drafts are run-scoped: an option without a draft has no
+         *     decision in this run. Reads never revalidate, refresh or dispatch anything.
+         */
+        get: operations["decisions_api_runs__run_id__decisions_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/runs/{run_id}/decisions/{decision_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Decision */
+        get: operations["decision_api_runs__run_id__decisions__decision_id__get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -737,6 +812,45 @@ export interface components {
              * Format: date-time
              */
             window_start: string;
+        };
+        /**
+         * CatalogProduct
+         * @description Synthetic style with an illustrative official visual reference, for display only.
+         */
+        CatalogProduct: {
+            /** Category */
+            category: string;
+            /** Name */
+            name: string;
+            reference: components["schemas"]["CatalogReference"];
+            /** Style Code */
+            style_code: string;
+            /** Subcategory */
+            subcategory: string;
+            /** Variants */
+            variants: components["schemas"]["CatalogVariant"][];
+        };
+        /** CatalogReference */
+        CatalogReference: {
+            /** Association */
+            association: string;
+            /** Id */
+            id: string;
+            /** Image Url */
+            image_url: string | null;
+            /** Name */
+            name: string;
+            /** Url */
+            url: string;
+        };
+        /** CatalogVariant */
+        CatalogVariant: {
+            /** Color */
+            color: string;
+            /** Color Code */
+            color_code: string;
+            /** Sku */
+            sku: string;
         };
         /** Check */
         Check: {
@@ -1691,6 +1805,55 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    image_api_catalog_images__name__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                name: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    products_api_catalog_products_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogProduct"][];
+                };
+            };
+        };
+    };
     health_api_health_get: {
         parameters: {
             query?: never;
@@ -2173,6 +2336,74 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["AgentTrace"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    decisions_api_runs__run_id__decisions_get: {
+        parameters: {
+            query?: {
+                case_id?: string | null;
+                fixture?: boolean;
+            };
+            header?: never;
+            path: {
+                run_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LocalDraft"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    decision_api_runs__run_id__decisions__decision_id__get: {
+        parameters: {
+            query?: {
+                fixture?: boolean;
+            };
+            header?: never;
+            path: {
+                decision_id: string;
+                run_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LocalDraft"];
                 };
             };
             /** @description Validation Error */

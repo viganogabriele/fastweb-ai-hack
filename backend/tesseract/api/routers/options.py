@@ -103,6 +103,38 @@ def case_decision(
     return submit(request, repo, body, loader, clock)
 
 
+def saved(repo) -> tuple[approval.LocalDraft, ...]:
+    # Same transaction as the publication check. The ledger survives run resets: a
+    # recreated run with this ID must not show drafts for options it no longer publishes.
+    return tuple(
+        draft
+        for draft in approval.saved_drafts(repo.session, repo.spec.scenario_id, repo.run_id)
+        if repo.get(ActionOption, draft.option.id, draft.option.version) == draft.option
+        and repo.get(Case, draft.option.case_id) is not None
+    )
+
+
+@router.get("/decisions", response_model=tuple[approval.LocalDraft, ...])
+def decisions(repo: PublishedRepo, case_id: str | None = None):
+    """Local drafts saved for this snapshot, in decision-clock order.
+
+    Exactly what the decision endpoints committed, including idempotent retries once and
+    no rejected (409) attempt. Drafts are run-scoped: an option without a draft has no
+    decision in this run. Reads never revalidate, refresh or dispatch anything.
+    """
+    if case_id is not None:
+        visible_case(repo, case_id)
+    return tuple(d for d in saved(repo) if case_id is None or d.option.case_id == case_id)
+
+
+@router.get("/decisions/{decision_id}", response_model=approval.LocalDraft)
+def decision(decision_id: str, repo: PublishedRepo):
+    draft = next((d for d in saved(repo) if d.decision.id == decision_id), None)
+    if draft is None:
+        raise HTTPException(404, "Decision not found")
+    return draft
+
+
 @router.post("/options/{option_id}/decision", response_model=approval.LocalDraft)
 def option_decision(
     option_id: str,
