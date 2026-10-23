@@ -28,6 +28,20 @@ def no_network(**_):
     raise AssertionError("replay must not construct a provider client")
 
 
+def test_live_mode_cannot_replace_recordings(tmp_path, monkeypatch, capsys):
+    builder = load_builder()
+    monkeypatch.setattr(builder, "Settings", lambda: Settings(llm_mode="live", _env_file=None))
+    monkeypatch.setattr(builder, "OUT", tmp_path / "recorded")
+
+    def unexpected_run(*args, **kwargs):
+        raise AssertionError("live mode must be rejected before any model call")
+
+    monkeypatch.setattr(builder, "investigate_all", unexpected_run)
+    assert builder.main() == 1
+    assert "live calls do not save" in capsys.readouterr().err
+    assert not builder.OUT.exists()
+
+
 @pytest.fixture(scope="module")
 def replayed(tmp_path_factory):
     builder = load_builder()

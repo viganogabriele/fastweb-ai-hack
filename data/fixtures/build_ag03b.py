@@ -6,8 +6,9 @@ Run from the repo root. Recording calls the Fastweb chat model and needs its key
     LLM_MODE=record backend/.venv/bin/python data/fixtures/build_ag03b.py
     LLM_MODE=replay backend/.venv/bin/python data/fixtures/build_ag03b.py
 
-What it is. The real `investigate` service, the real LLM adapter and the configured chat model,
-with its pinned model (`investigator.MODEL`), on two DATA-01b dev cases whose evidence calls for different checks (RFC §4.8.2):
+What it is. The real `investigate` service and LLM adapter, with the pinned model
+(`investigator.MODEL`), on two DATA-01b dev cases whose evidence calls for different checks
+(RFC §4.8.2):
 
 - `case-mil01-i10919b00011-20261008` (D1, stock): cardigan M out of stock at MIL01; the model has
   to read destination and donor stock, lanes and the deterministic options;
@@ -140,7 +141,9 @@ def investigate_all(settings: Settings, workdir: Path, **llm_options) -> dict[st
         create_run(engine, spec)
         Repo(engine, spec).put(*records)
         put_erp(engine, erp_rows())
-        llm = LLMClient(settings, cache=ResponseCache(OUT / "llm_cache"), **llm_options).for_run(spec)
+        llm = LLMClient(settings, cache=ResponseCache(OUT / "llm_cache"), **llm_options).for_run(
+            spec
+        )
         policy = load_policy(settings.config_dir)
         out = {}
         for case_id in CASES:
@@ -172,6 +175,13 @@ def comparable(entry: dict) -> dict:
 
 def main() -> int:
     settings = Settings()
+    if settings.llm_mode == "live":
+        print(
+            "Use LLM_MODE=record or replay: live calls do not save the responses needed "
+            "to replay these traces.",
+            file=sys.stderr,
+        )
+        return 1
     OUT.mkdir(parents=True, exist_ok=True)
     if settings.llm_mode == "record" and not (OUT / "inputs.json").exists():
         snapshot_inputs()
@@ -180,7 +190,9 @@ def main() -> int:
     for case_id, entry in traces.items():
         path = OUT / f"{case_id}.json"
         steps = [s["tool"] for s in entry["trace"]["steps"]]
-        print(case_id, entry["trace"]["outcome"], steps, "fallback" * entry["trace"]["fallback_used"])
+        print(
+            case_id, entry["trace"]["outcome"], steps, "fallback" * entry["trace"]["fallback_used"]
+        )
         if settings.llm_mode == "replay":
             if comparable(json.loads(path.read_text())) != comparable(entry):
                 print(f"{path.name}: replay differs from the recorded trace", file=sys.stderr)
