@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Mic, Square } from 'lucide-react'
+import { Check, Mic, Square, Trash2 } from 'lucide-react'
 import { fmt, messages } from '../i18n'
 import { Button } from '../ui'
 import { useRecorder } from './useRecorder'
@@ -40,7 +40,8 @@ export function RecordPage() {
       await sendNote(recorder.audio, STORE, recorder.transcript, LANGUAGE)
       setSent(true)
     } catch (error) {
-      setSendError(fmt(t.errors.send, { status: status(error) }))
+      const detail = error instanceof ApiError && error.detail ? ` ${error.detail}` : ''
+      setSendError(fmt(t.errors.send, { status: status(error) }) + detail)
     } finally {
       setSending(false)
     }
@@ -61,31 +62,51 @@ export function RecordPage() {
       </header>
 
       {!sent && (
-        <section className="rec__card">
+        <section
+          className={`rec__card rec__card--fill${state === 'idle' || state === 'requesting' ? ' rec__card--center' : ''}`}
+        >
           {(state === 'idle' || state === 'requesting' || state === 'recording') && (
-            <button
-              type="button"
-              disabled={state === 'requesting' || !voiceToken()}
-              className={`rec__mic${state === 'recording' ? ' rec__mic--on' : ''}`}
-              onClick={state === 'recording' ? recorder.stop : recorder.start}
-            >
-              {state === 'recording' ? <Square size={36} /> : <Mic size={40} />}
-              <span>{state === 'recording' ? t.stop : t.start}</span>
-            </button>
+            <div className="rec__controls">
+              {/* Side slots have the same width, so the microphone stays centred. */}
+              {state === 'recording' ? (
+                <span className="rec__side rec__seconds" role="timer" aria-label={fmt(t.recording, { seconds: recorder.seconds })}>
+                  {recorder.seconds}s
+                </span>
+              ) : (
+                <span className="rec__side" aria-hidden="true" />
+              )}
+              <button
+                type="button"
+                disabled={state === 'requesting' || !voiceToken()}
+                className={`rec__mic${state === 'recording' ? ' rec__mic--on' : ''}`}
+                aria-label={state === 'recording' ? t.stop : t.start}
+                onClick={state === 'recording' ? recorder.stop : recorder.start}
+              >
+                {state === 'recording' ? <Square size={52} /> : <Mic size={72} />}
+              </button>
+              {state === 'recording' ? (
+                <button
+                  type="button"
+                  className="rec__side rec__discard"
+                  aria-label={t.discard}
+                  title={t.discard}
+                  onClick={again}
+                >
+                  <Trash2 size={22} />
+                </button>
+              ) : (
+                <span className="rec__side" aria-hidden="true" />
+              )}
+            </div>
           )}
           {!voiceToken() && <p role="alert" className="rec__error">{t.errors.access}</p>}
           {state === 'requesting' && <p role="status" className="rec__status">{t.requesting}</p>}
-          {state === 'recording' && (
-            <p className="rec__status" aria-live="polite">
-              {fmt(t.recording, { seconds: recorder.seconds })} · {t.listening}
-            </p>
-          )}
           {state === 'finalizing' && <p role="status" className="rec__status">{t.finalizing}</p>}
           {recorder.error && <p role="alert" className="rec__error">{errorText(recorder.error)}</p>}
 
           {(state === 'recording' || state === 'finalizing') && (
             <p className="rec__live" aria-live="polite">
-              {recorder.transcript || <span className="rec__muted">{t.liveEmpty}</span>}
+              {recorder.transcript}
             </p>
           )}
 
@@ -123,10 +144,14 @@ export function RecordPage() {
       )}
 
       {sent && (
-        <section className="rec__card">
-          <p role="status" className="rec__ok">✓ {t.sent}</p>
-          <p className="rec__muted">{t.sentHint}</p>
-          <Button onClick={again}>{t.another}</Button>
+        <section className="rec__sent">
+          <div className="rec__sent-badge" role="status" aria-label={t.sent}>
+            <Check size={64} strokeWidth={3} aria-hidden="true" />
+          </div>
+          <p className="rec__sent-text">{t.sentHint}</p>
+          <Button variant="primary" onClick={again}>
+            {t.another}
+          </Button>
         </section>
       )}
     </main>

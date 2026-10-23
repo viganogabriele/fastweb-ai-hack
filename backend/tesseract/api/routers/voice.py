@@ -218,6 +218,19 @@ async def create_note(
             data_dir=settings.data_dir,
         )
     except InvalidRecording as error:
+        # Keep the refused upload (gitignored data/) so a phone-specific format can be inspected.
+        rejects = settings.data_dir / "voice_rejects"
+        rejects.mkdir(parents=True, exist_ok=True)
+        kept = rejects / f"{datetime.now(UTC):%Y%m%d-%H%M%S}-{store_id}.{_suffix(audio)}"
+        kept.write_bytes(data)
+        logger.warning(
+            "voice note refused: %s (content_type=%r, filename=%r, bytes=%d, kept=%s)",
+            error,
+            audio.content_type,
+            audio.filename,
+            len(data),
+            kept.name,
+        )
         raise HTTPException(422, str(error)) from None
     except RecordingUnavailable as error:
         raise HTTPException(503, str(error)) from None
@@ -252,7 +265,9 @@ def live_spec(registry: Registry, store_id: str, notes: list[LiveNote], as_of: d
     for root in ROOTS:
         add(root)
     params = {
-        "src.voice": {"notes": [n.note.slug for n in notes]},
+        # The text the store checked (and maybe corrected) on the phone is the source, not a
+        # second ASR pass over the audio: one segment, no audio timestamps.
+        "src.voice": {"notes": [n.note.slug for n in notes], "mode": "fixture"},
         "src.email": {"files": [NO_MAIL]},
     }
     modules = tuple(
@@ -295,8 +310,18 @@ def _live_notes(settings: Settings, engine) -> list[LiveNote]:
         for snapshot in spec.modules:
             if snapshot.manifest.id != "src.voice":
                 continue
+            slugs = snapshot.params.get("notes", [])
+            if not snapshot_path(settings.data_dir, spec.run_id).is_dir():
+                # A run from before snapshots existed: its notes are handled, never offered
+                # again, and must not break the listing of the newer ones.
+                for slug in slugs:
+                    if slug in notes and slug not in seen:
+                        live = notes[slug]
+                        notes[slug] = LiveNote(live.note, live.transcript, spec.run_id)
+                        seen.add(slug)
+                continue
             frozen = []
-            for slug in snapshot.params.get("notes", []):
+            for slug in slugs:
                 path = snapshot_path(settings.data_dir, spec.run_id) / slug
                 note = read_sidecar(path)
                 text = note.transcript_path.read_text(encoding="utf-8").strip()

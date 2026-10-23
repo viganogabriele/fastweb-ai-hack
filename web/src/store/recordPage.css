@@ -39,8 +39,52 @@
   background: var(--sd-color-surface-card);
 }
 
+/* The card fills the screen: at rest the microphone sits in its middle; while recording and
+   reviewing, the transcript fills the space below the controls. */
+.rec__card--fill {
+  flex: 1;
+}
+
+.rec__card--center {
+  justify-content: center;
+}
+
+.rec__seconds {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--sd-font-weight-semibold);
+  color: var(--sd-color-text-secondary);
+}
+
+.rec__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sd-space-5);
+}
+
+.rec__side {
+  width: 56px;
+  height: 56px;
+  flex: none;
+}
+
+.rec__discard {
+  border: 1px solid var(--sd-color-border-subtle);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sd-color-surface-card);
+  color: var(--sd-color-light-danger);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
 .rec__mic {
-  align-self: center;
+  flex: none;
   width: 148px;
   height: 148px;
   border-radius: 50%;
@@ -87,8 +131,10 @@
 }
 
 .rec__live {
+  flex: 1;
   margin: 0;
   min-height: 6em;
+  overflow-y: auto;
   padding: var(--sd-space-3);
   border-radius: var(--sd-radius-md);
   background: var(--sd-color-surface-elevated);
@@ -102,6 +148,7 @@
 }
 
 .rec__review {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: var(--sd-space-3);
@@ -118,7 +165,9 @@
   font: inherit;
   font-size: var(--sd-font-size-body);
   line-height: 1.5;
-  resize: vertical;
+  flex: 1;
+  min-height: 8em;
+  resize: none;
 }
 
 .rec__actions {
@@ -143,4 +192,37 @@
   margin: 0;
   color: var(--sd-color-light-success);
   font-weight: var(--sd-font-weight-semibold);
+}
+
+/* After sending: a full-screen confirmation over the whole page. */
+.rec__sent {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sd-space-5);
+  padding: var(--sd-space-5);
+  background: var(--sd-color-surface-canvas);
+  text-align: center;
+}
+
+.rec__sent-badge {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sd-color-light-success);
+  color: #fff;
+}
+
+.rec__sent-text {
+  margin: 0;
+  max-width: 28ch;
+  font-size: var(--sd-font-size-section);
+  color: var(--sd-color-text-primary);
 }

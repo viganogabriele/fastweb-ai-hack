@@ -1,23 +1,40 @@
 import type { components } from '../api/schema'
-import type { RunView } from '../api/client'
+import type { Case, RunView } from '../api/client'
 
 export type LiveNote = components['schemas']['LiveNoteView']
 export type Transcription = components['schemas']['Transcription']
 
 export class ApiError extends Error {
   readonly status: number
-  constructor(status: number) {
+  readonly detail: string
+  constructor(status: number, detail = '') {
     super(`HTTP ${status}`)
     this.status = status
+    this.detail = detail
   }
 }
 
 // Capability goes in the URL fragment (not the HTTP URL, referrer or provider keys).
-export const voiceToken = () => new URLSearchParams(window.location.hash.slice(1)).get('voice-token') ?? ''
+// The dashboard routes on the fragment too (`#/casi`), so the token is kept for the tab session
+// once seen: navigating must not drop it.
+const TOKEN_KEY = 'tessera-voice-token'
+export const voiceToken = () => {
+  const fromUrl = new URLSearchParams(window.location.hash.replace(/^#\/?[^&]*?(?=voice-token=)|^#/, '')).get('voice-token')
+  try {
+    if (fromUrl) sessionStorage.setItem(TOKEN_KEY, fromUrl)
+    return fromUrl ?? sessionStorage.getItem(TOKEN_KEY) ?? ''
+  } catch {
+    return fromUrl ?? ''
+  }
+}
 const headers = () => ({ Authorization: `Bearer ${voiceToken()}` })
 
 async function json<T>(response: Response): Promise<T> {
-  if (!response.ok) throw new ApiError(response.status)
+  if (!response.ok) {
+    // FastAPI puts the reason in `detail`: show it, a bare status code says nothing on a phone.
+    const body = await response.json().catch(() => null)
+    throw new ApiError(response.status, typeof body?.detail === 'string' ? body.detail : '')
+  }
   return response.json() as Promise<T>
 }
 
@@ -60,4 +77,8 @@ export async function processNotes(store?: string) {
 
 export async function readRun(runId: string) {
   return json<RunView>(await fetch(`/api/runs/${encodeURIComponent(runId)}`))
+}
+
+export async function readCases(runId: string) {
+  return json<Case[]>(await fetch(`/api/runs/${encodeURIComponent(runId)}/cases`))
 }

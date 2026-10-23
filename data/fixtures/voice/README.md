@@ -127,7 +127,9 @@ Live source URIs use `live-voice://<run_id>/<note_id>` instead of dataset proven
 The dashboard top bar shows "Elabora note vocali (N)" while notes wait; it calls
 `POST /api/voice/process`, which starts one small product run per store over the new notes: scenario `live-voice`, `as_of` now, only `src.voice → ing.extract → int.link →
 int.dedup → int.cases` (+ `src.erp`). `src.email` is given a file outside the run's stores so it
-reads no mail; the run is therefore `degraded` by design. LLM calls use `record` mode unless
+reads no mail; the run is therefore `degraded` by design. `src.voice` runs in `fixture` mode
+there: the text the store checked and corrected on the phone is what gets read, as one segment
+without audio timestamps. LLM calls use `record` mode unless
 the operator explicitly selected `live`. Replaying extraction requires both the recorded cache
 and the immutable live snapshot; it never adds these notes to frozen historical runs.
 Committed run specs claim each batch once. Concurrent submissions are serialized and a new
