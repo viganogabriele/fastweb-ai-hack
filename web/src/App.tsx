@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 import { MotionConfig, motion, useReducedMotion } from 'motion/react'
 import {
   Activity,
+  Mic,
   ClipboardList,
   FileSearch,
   FileText,
@@ -11,6 +12,7 @@ import {
   Workflow
 } from 'lucide-react'
 import { messages } from './i18n'
+import { VoiceStorePage } from './sections/VoiceStorePage'
 import { ModulesPage } from './sections/ModulesPage'
 import { ProductsPage } from './sections/ProductsPage'
 import { ReportsPage } from './sections/ReportsPage'
@@ -30,7 +32,8 @@ const NAV: NavGroup[] = [
   {
     id: 'overview',
     items: [
-      { id: 'overview', label: messages.shell.nav.overview, icon: Activity }
+      { id: 'overview', label: messages.shell.nav.overview, icon: Activity },
+      { id: 'voice', label: messages.shell.nav.voice, icon: Mic }
     ]
   },
   {
@@ -59,6 +62,7 @@ const NAV: NavGroup[] = [
 
 const ROUTES = {
   overview: 'panoramica',
+  voice: 'voce',
   cases: 'casi',
   sources: 'fonti',
   reports: 'report',
@@ -236,7 +240,7 @@ export default function App() {
           currentId={currentId}
           focusOnMount={focusRouteId === currentId}
         >
-          <PageHeader
+          {currentId !== 'voice' && <PageHeader
             title={titleOf(currentId)}
             subtitle={
               currentId === 'overview'
@@ -248,8 +252,10 @@ export default function App() {
                 ? `Dati disponibili al ${new Date(runs.selected.spec.as_of).toLocaleString('it-IT')}`
                 : undefined
             }
-          />
-          {currentId === 'modules' ? (
+          />}
+          {currentId === 'voice' ? (
+            <VoiceStorePage />
+          ) : currentId === 'modules' ? (
             <ModulesPage key={runs.selectedId} runs={runs} />
           ) : currentId === 'products' ? (
             <ProductsPage runs={runs} onCaseSelect={openCase} />
