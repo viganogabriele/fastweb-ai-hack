@@ -11,7 +11,7 @@ from dataclasses import replace
 
 import httpx
 import pytest
-from sqlalchemy import func, select
+from sqlalchemy import event, func, select
 
 from tessera.core.contracts import ActionOption
 from tessera.core.db import connect
@@ -62,8 +62,16 @@ def one_unit(case_id, *, run_id="race", scenario_id="historical"):
 
 def _worker(url, value, request, barrier, result):
     engine = connect(url)
+
+    def meet_at_write_lock(_conn, _cursor, statement, _parameters, _context, _many):
+        if statement.strip().upper() == "BEGIN IMMEDIATE":
+            # Keep both independent processes poised at the lock acquisition. A
+            # barrier only before decide() can release one process late enough
+            # for the other to finish before it reaches SQLite.
+            barrier.wait(timeout=15)
+
+    event.listen(engine, "before_cursor_execute", meet_at_write_lock)
     try:
-        barrier.wait(timeout=15)
         try:
             draft = decide(engine, request, loader=lambda *_: [value], now=AS_OF)
         except Conflict as error:
@@ -77,7 +85,7 @@ def _worker(url, value, request, barrier, result):
 
 def race(url, commands):
     context = multiprocessing.get_context("spawn")
-    barrier = context.Barrier(len(commands) + 1)
+    barrier = context.Barrier(len(commands))
     processes = []
     readers = []
     try:
@@ -88,7 +96,6 @@ def race(url, commands):
             process.start()
             writer.close()
             processes.append(process)
-        barrier.wait(timeout=15)
         results = []
         for reader in readers:
             assert reader.poll(15), "approval process did not return within the deadline"
@@ -144,6 +151,10 @@ def test_independent_approvers_cannot_reserve_the_same_last_unit(database):
     values = [one_unit("case-a"), one_unit("case-b")]
     publish(engine, values)
     commands = [(value, proposal(value, key=value.case.id)) for value in values]
+    options_before = [
+        Repo.open(engine, value.run_id).get(ActionOption, request.option_id)
+        for value, request in commands
+    ]
     # Both proposals must be individually feasible, for exactly the same single unit.
     for value, request in commands:
         option = Repo.open(engine, value.run_id).get(ActionOption, request.option_id)
@@ -159,9 +170,12 @@ def test_independent_approvers_cannot_reserve_the_same_last_unit(database):
     loser_index = next(index for index, result in enumerate(results) if result["status"] == 409)
     value, stale = commands[loser_index]
     # The immutable proposal remains readable; its hash no longer authorizes a move.
-    assert Repo.open(engine, value.run_id).get(ActionOption, stale.option_id)
+    current = Repo.open(engine, value.run_id).get(ActionOption, stale.option_id)
+    assert current is not None
+    assert current == options_before[loser_index]
     with pytest.raises(Conflict, match="recompute"):
         decide(engine, stale, loader=lambda *_: [value], now=AS_OF)
+    assert Repo.open(engine, value.run_id).get(ActionOption, stale.option_id) == current
     assert_single_unit(engine, value.scenario_id, winner)
 
 
