@@ -1,7 +1,8 @@
 import type { Case } from '../api/client'
 import { productIndex } from './productView.ts'
 
-// Catalog served at /api/runs/{id}/products (dev mock today, scripts/build-products-mock.mjs).
+// Catalog served at /api/runs/{id}/products (backend routers/catalog.py; the dev mock builds the
+// same shape with scripts/build-products-mock.mjs).
 // Photos are illustrative references matched by category (data/catalog/README.md), not the
 // simulated items themselves; stock is the ERP end-of-day snapshot available by the cutoff.
 export type StoreStock = { sizes: Record<string, number>; in_transit: number }

@@ -47,7 +47,8 @@
 
 /* Quotes */
 .sd-cd__section { min-width: 0; }
-.sd-cd__quotes { display: grid; gap: var(--sd-space-3); margin: 0; padding: 0; list-style: none; }
+/* One quote spans the row; several share it, so the section grows sideways before downwards. */
+.sd-cd__quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: var(--sd-space-3); margin: 0; padding: 0; list-style: none; }
 .sd-cd__quote { position: relative; display: grid; gap: var(--sd-space-2); padding: var(--sd-space-4) var(--sd-space-5); border: 1px solid var(--sd-color-border-subtle); border-inline-start: 3px solid var(--sd-color-state-success); border-radius: 14px; background: var(--sd-color-surface-card); }
 .sd-cd__quote.is-contradicting { border-inline-start-color: var(--sd-color-state-danger); }
 .sd-cd__quote blockquote { margin: 0; font-size: 18px; font-weight: var(--sd-font-weight-medium); line-height: 1.5; }
@@ -116,16 +117,15 @@
   .sd-cd__due { grid-template-columns: auto 1fr; }
   .sd-cd__quote blockquote { font-size: 17px; }
 }
-/* Wide screens: what the stores said beside what to check, so the page uses its width. */
-/* Sidebar and page padding take ~320px, so this is a content width of ~1180px. */
-@media (min-width: 1500px) {
-  .sd-cd { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: start; }
-  .sd-cd > * { grid-column: 1 / -1; }
-  .sd-cd > .sd-cd__said { grid-column: 1; grid-row: span 2; }
-  .sd-cd > .sd-cd__verify, .sd-cd > .sd-cd__facts { grid-column: 2; }
-  .sd-cd__verify { padding-block-start: calc(30px + var(--sd-space-3)); }
-  .sd-cd > .sd-cd__facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
 @media (prefers-reduced-motion: reduce) {
   .sd-cd__quote.is-loading span { animation: none; }
 }
+
+/* Analysis placeholder for demo runs: three steps, no synthetic data. */
+.sd-cd .sd-case-soon > header { align-items: center; }
+.sd-case-soon__steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--sd-space-3); margin: 0; padding: 0; list-style: none; }
+.sd-case-soon__steps li { display: grid; align-content: start; gap: var(--sd-space-1); padding: var(--sd-space-4); border: 1px dashed var(--sd-color-border-subtle); border-radius: 12px; background: var(--sd-color-surface-canvas); }
+.sd-case-soon__steps li > span { display: grid; place-items: center; inline-size: 32px; block-size: 32px; margin-block-end: var(--sd-space-1); border-radius: 9px; background: color-mix(in srgb, var(--sd-color-state-info) 12%, var(--sd-color-surface-card)); color: var(--sd-color-state-info); }
+.sd-case-soon__steps svg { inline-size: 16px; block-size: 16px; }
+.sd-case-soon__steps strong { font-size: var(--sd-font-size-body); }
+.sd-cd .sd-case-soon__steps p { color: var(--sd-color-text-secondary); font-size: var(--sd-font-size-body-sm); }

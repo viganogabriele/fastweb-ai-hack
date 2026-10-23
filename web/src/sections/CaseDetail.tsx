@@ -126,7 +126,7 @@ export function CaseDetail({ item, runId, asOf, fixtureMode, onReturn, headingRe
         </aside>
       </motion.header>
 
-      <motion.section className="sd-cd__section sd-cd__said" aria-labelledby="sd-cd-quotes" {...enter(1)}>
+      <motion.section className="sd-cd__section" aria-labelledby="sd-cd-quotes" {...enter(1)}>
         <h3 id="sd-cd-quotes"><Quote aria-hidden="true" />Cosa dicono i negozi</h3>
         {quotes.status === 'loading' ? (
           <div className="sd-cd__quote is-loading" aria-busy="true"><span /><span /></div>
@@ -159,7 +159,7 @@ export function CaseDetail({ item, runId, asOf, fixtureMode, onReturn, headingRe
         )}
       </motion.section>
 
-      <motion.div className="sd-cd__verify" {...enter(2)}>
+      <motion.div {...enter(2)}>
         {checks.length ? (
           <section className="sd-cd__checks" aria-labelledby="sd-cd-checks">
             <h3 id="sd-cd-checks"><TriangleAlert aria-hidden="true" />Prima di decidere, verifica</h3>

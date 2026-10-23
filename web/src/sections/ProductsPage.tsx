@@ -50,6 +50,15 @@ const categories: Record<string, string> = {
   Outerwear: 'Capispalla', Accessories: 'Accessori', Bottoms: 'Pantaloni e gonne', Footwear: 'Calzature',
   Jersey: 'Jersey', Knitwear: 'Maglieria'
 }
+const genders: Record<string, string> = { M: 'uomo', W: 'donna' }
+/** Column label naming the size scale: the codes are the catalog's own (men's outerwear 1–7, women's 00–4, XS–XXL, EU, TU). */
+function sizeScale(gender: string, rows: readonly StoreRow[]) {
+  const sizes = rows[0]?.sizes.map(([size]) => size) ?? []
+  if (sizes.length === 1 && sizes[0] === 'TU') return 'Taglia unica'
+  const range = sizes.length > 1 ? ` ${sizes[0]}–${sizes[sizes.length - 1]}` : sizes[0] ? ` ${sizes[0]}` : ''
+  const numeric = sizes.every((size) => /^\d+$/.test(size))
+  return `Pezzi per taglia${numeric && genders[gender] ? ` · scala ${genders[gender]}` : ''}${range}`
+}
 const storeName = (id: string) => STORE_GEO[id]?.name ?? id
 const euro = (value: number) => value.toLocaleString('it-IT', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
 const day = (value: string) => new Date(value).toLocaleString('it-IT', { day: 'numeric', month: 'long' })
@@ -80,7 +89,7 @@ function Gallery({ runId, stores, asOf, onCaseSelect }: {
 
   if (catalog.status === 'loading' || cases.status === 'loading') return <LoadingState label="Caricamento prodotti" />
   if (catalog.status === 'unavailable')
-    return <EmptyState title="Catalogo non disponibile" description="Il backend non espone ancora catalogo e stock per prodotto. In sviluppo li serve il mock (npm run dev:mock)." />
+    return <EmptyState title="Catalogo non disponibile" description="Questo run non ha catalogo o stock ERP da mostrare." />
   if (!catalog.data || !cases.data)
     return <ErrorState title="Impossibile caricare i prodotti" description="Ricarica la pagina per riprovare." />
 
@@ -186,9 +195,12 @@ function ProductTile({ card, stores, onOpen }: { card: ProductCard; stores: read
   return (
     <button type="button" className={`sd-shop__tile is-${card.attention}`} onClick={onOpen}
       aria-label={`${product.name}, ${product.subcategory}${top ? `: ${caseTypeLabel(top.case_type)}` : ''}`}>
-      <motion.span className="sd-shop__photo" layoutId={`photo-${product.style_code}`} transition={transition.drawer}>
-        <img src={product.image} alt="" loading="lazy" />
-      </motion.span>
+      <span className="sd-shop__media">
+        <motion.span className="sd-shop__photo" layoutId={`photo-${product.style_code}`} transition={transition.drawer}>
+          <img src={product.image} alt="" loading="lazy" />
+        </motion.span>
+        <span className="sd-shop__colours"><Swatches product={product} /></span>
+      </span>
       {card.attention !== 'none' && (
         <span className="sd-shop__flag">
           {card.attention === 'now' ? <CircleAlert aria-hidden="true" /> : <Clock aria-hidden="true" />}
@@ -203,7 +215,6 @@ function ProductTile({ card, stores, onOpen }: { card: ProductCard; stores: read
       <span className="sd-shop__caption">
         <motion.strong layoutId={`name-${product.style_code}`} transition={transition.drawer}>{product.name}</motion.strong>
         <span className="sd-shop__sub">{product.subcategory}</span>
-        <Swatches product={product} />
         {top && (
           <span className="sd-shop__issue">
             <CaseGlyph type={top.case_type} />
@@ -324,6 +335,9 @@ function ProductSheet({ card, stores, asOf, snapshot, onClose, onCaseSelect }: {
                     <p className="sd-sheet__muted">{members.map((row) => storeName(row.store)).join(' · ')}</p>
                   ) : (
                     <ul>
+                      <li className="sd-sheet__stores-head" aria-hidden="true">
+                        <span>Negozio</span><span>{sizeScale(product.gender, rows)}</span><span>Pezzi</span>
+                      </li>
                       {members.map((row) => (
                         <li key={row.store}>
                           <span className="sd-sheet__store">

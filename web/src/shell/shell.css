@@ -146,6 +146,9 @@
   min-width: var(--sd-local-hit-min);
 }
 .sd-shell__main {
+  /* Containing block for absolute descendants (e.g. .sd-visually-hidden): without it they
+     escape this scroll container, stretch the document and make the whole shell scroll away. */
+  position: relative;
   flex: 1;
   min-width: 0;
   min-height: 0;

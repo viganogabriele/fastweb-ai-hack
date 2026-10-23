@@ -401,6 +401,31 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/runs/{run_id}/products": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Run Products
+         * @description Catalog styles with the run's assortment and stock per store, size and colour.
+         *
+         *     Stock is one end-of-day snapshot for every store: the latest day each store has
+         *     published by ``as_of``, taken at the earliest of those days so stores stay comparable.
+         *     Stores outside the run and rows not yet available never appear. A run without ERP
+         *     stock has no snapshot to show and returns 404, like a missing catalog.
+         */
+        get: operations["run_products_api_runs__run_id__products_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/runs/{run_id}/reports": {
         parameters: {
             query?: never;
@@ -1592,6 +1617,64 @@ export interface components {
             };
             citation: components["schemas"]["Citation"];
         };
+        /** RunProduct */
+        RunProduct: {
+            /** Category */
+            category: string;
+            /** Colours */
+            colours: components["schemas"]["RunProductColour"][];
+            /** Gender */
+            gender: string;
+            /** Image */
+            image: string | null;
+            /** Name */
+            name: string;
+            /** Price Eur */
+            price_eur: number;
+            reference: components["schemas"]["RunProductReference"];
+            /** Style Code */
+            style_code: string;
+            /** Subcategory */
+            subcategory: string;
+        };
+        /**
+         * RunProductCatalog
+         * @description Catalog display metadata joined with the run's ERP assortment and end-of-day stock.
+         */
+        RunProductCatalog: {
+            /**
+             * Available At
+             * Format: date-time
+             */
+            available_at: string;
+            /** Products */
+            products: components["schemas"]["RunProduct"][];
+            /**
+             * Snapshot Date
+             * Format: date
+             */
+            snapshot_date: string;
+        };
+        /** RunProductColour */
+        RunProductColour: {
+            /** Colour */
+            colour: string;
+            /** Sku */
+            sku: string;
+            /** Stock */
+            stock: {
+                [key: string]: components["schemas"]["StoreStock"];
+            };
+            /** Stores */
+            stores: string[];
+        };
+        /** RunProductReference */
+        RunProductReference: {
+            /** Name */
+            name: string;
+            /** Url */
+            url: string;
+        };
         /** RunSpec */
         RunSpec: {
             /**
@@ -1775,6 +1858,15 @@ export interface components {
             locator?: string | null;
             /** Uri */
             uri: string;
+        };
+        /** StoreStock */
+        StoreStock: {
+            /** In Transit */
+            in_transit: number;
+            /** Sizes */
+            sizes: {
+                [key: string]: number;
+            };
         };
         /** Transcription */
         Transcription: {
@@ -2546,6 +2638,39 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["LocalDraft"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    run_products_api_runs__run_id__products_get: {
+        parameters: {
+            query?: {
+                fixture?: boolean;
+            };
+            header?: never;
+            path: {
+                run_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RunProductCatalog"];
                 };
             };
             /** @description Validation Error */
