@@ -56,6 +56,8 @@ FACT_VERSION = "v1"
 REPORTS_DIR = "reports"
 AVAILABILITY_BASIS = "same_as_source_document"
 UNITS = ("units", "customers", "requests", "visitors", "money", "percent")
+# Physical counts: the units Quantity refuses to keep negative (a percent may fall).
+COUNT_UNITS = ("units", "customers", "requests", "visitors")
 LFL_FLAG = "Y"
 
 MANIFEST = ModuleManifest(
@@ -525,7 +527,7 @@ def build_facts(
                     notes.append(f"{document.id} {locator}: no usable currency for this row")
                     counts["cells_without_currency"] += 1
                     continue
-            if column.unit != "money" and value < 0:
+            if column.unit in COUNT_UNITS and value < 0:
                 notes.append(f"{document.id} {locator}: a {column.unit} count cannot be negative")
                 counts["cells_negative"] += 1
                 continue

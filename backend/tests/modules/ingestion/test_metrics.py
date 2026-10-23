@@ -258,6 +258,8 @@ def test_the_lfl_column_is_a_percent_and_only_for_lfl_stores(tmp_path):
     assert milan.unit == "percent"
     assert milan.value == pytest.approx(17.47707336523125)
     assert milan.definition.startswith("LFL = stores trading at least 5 days")
+    # A fall is a fact too: Roma is -40%, not a dropped negative count.
+    assert keys[("ROM01", "net_sales_growth_lfl")].value < 0
     # LFL = N rows store no growth at all: no fact, and certainly not zero.
     assert ("COU01", "net_sales_growth_lfl") not in keys
     assert all(fact.value != 0 or fact.metric != "net_sales_growth_lfl" for fact in facts)
@@ -499,6 +501,29 @@ def test_a_column_missing_from_the_sheet_keeps_the_other_facts(tmp_path):
     result, facts = facts_of(tmp_path, request, sources_dir=sources, config_dir=config)
     assert [fact.metric for fact in facts] == ["net_sales"]
     assert any("column 'Traffic' is missing" in note for note in result.abstentions)
+
+
+def test_a_negative_physical_count_is_dropped(tmp_path):
+    sources = write_sources(
+        tmp_path,
+        sheets={
+            "Cover": COVER,
+            "Stores": stores_sheet(
+                ["1", "Milano Montenapoleone", "EMEA", "Italy", "EUR", 10, 10, -3, "Y", -0.1]
+            ),
+        },
+    )
+    config = write_config(
+        tmp_path,
+        columns={
+            "Net Sales LC": store_column(),
+            "Traffic": visitors_column(),
+        },
+    )
+    request = spec(("MIL01",))
+    result, facts = facts_of(tmp_path, request, sources_dir=sources, config_dir=config)
+    assert [(fact.metric, fact.value) for fact in facts] == [("net_sales", 10.0)]
+    assert result.counts["cells_negative"] == 1
 
 
 def test_an_unmapped_document_is_abstained(tmp_path):
