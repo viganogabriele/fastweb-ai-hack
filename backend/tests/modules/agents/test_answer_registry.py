@@ -653,6 +653,23 @@ def test_worker_failure_preserves_durable_input_and_explicit_reset_retries(setup
     assert len(seen) == 4
 
 
+def test_worker_setup_failure_is_visible_in_run_state_and_reset_recovers(setup):
+    engine, request, registry, seed, seen, _ = setup
+    seed()
+    job = submit_answer(engine, request, registry=registry)
+    with pytest.raises(ValueError, match="module not installed"):
+        execute_follow_up(engine, job.run.run_id, registry=Registry(), clients={})
+    with repo_session(engine, job.run.run_id) as repo:
+        assert repo.run_state()["status"] == "failed"
+        assert not repo.run_state()["published"]
+        assert repo.list(SourceDocument) == []
+    with pytest.raises(AnswerConflict, match="reset"):
+        execute_follow_up(engine, job.run.run_id, registry=registry, clients={})
+    reset_run(engine, job.run.run_id)
+    execute_follow_up(engine, job.run.run_id, registry=registry, clients={})
+    assert len(seen) == 4
+
+
 def test_pending_recovery_and_live_events_never_become_replayable(setup):
     from tessera.modules.agents.answer_registry import pending_follow_ups
 

@@ -568,6 +568,14 @@ def execute_follow_up(
         results = run(job.run, engine=engine, registry=wrapped, clients=clients, settings=settings)
     except BaseException:
         with engine.begin() as conn:
+            conn.exec_driver_sql("BEGIN IMMEDIATE")
+            projection = conn.execute(select(runs.c.status).where(runs.c.run_id == run_id)).scalar()
+            if projection in {"pending", "running"}:
+                # Registry/client setup may fail before the orchestrator owns the
+                # run lifecycle. Expose that failure through the normal RunView.
+                repo = RunRepo(conn, job.run, fixture_mode=fixture_mode)
+                repo.discard_artifacts()
+                repo.set_run_status("failed")
             conn.execute(update(jobs).where(key).values(status="failed"))
         raise
     succeeded = all(r.status in {"succeeded", "degraded"} for r in results)
