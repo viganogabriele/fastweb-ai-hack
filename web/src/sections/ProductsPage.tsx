@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Search } from 'lucide-react'
 import { readApi } from '../api/client'
-import type { Case } from '../api/client'
+import type { CatalogProduct, Case } from '../api/client'
 import type { useRuns } from '../api/useRuns'
 import { Button, EmptyState, ErrorState, Input, LoadingState, Select, StatusBadge } from '../ui'
-import { caseStatuses, caseTypeLabel, filterProductCases, productIndex, productScopes } from './productView'
-import type { ProductFilters } from './productView'
+import { catalogLabel, catalogMatch, caseStatuses, caseTypeLabel, filterProductCases, productIndex, productScopes } from './productView'
+import type { CatalogMatch, ProductFilters } from './productView'
 import './sections.css'
 import './products.css'
 
@@ -32,6 +32,15 @@ function PublishedProducts({ runId, mode, onCaseSelect }: {
   const [error, setError] = useState('')
   const [revision, setRevision] = useState(0)
   const [filters, setFilters] = useState(initialFilters)
+  // Display-only names and photos; without them the view still works on codes alone.
+  const [catalog, setCatalog] = useState<CatalogProduct[] | null>(null)
+  useEffect(() => {
+    const controller = new AbortController()
+    readApi<CatalogProduct[]>('/catalog/products', controller.signal)
+      .then((result) => { if (!controller.signal.aborted) setCatalog(result) })
+      .catch(() => { if (!controller.signal.aborted) setCatalog([]) })
+    return () => controller.abort()
+  }, [])
   useEffect(() => {
     const controller = new AbortController()
     readApi<Case[]>(`/runs/${encodeURIComponent(runId)}/cases`, controller.signal)
@@ -49,7 +58,11 @@ function PublishedProducts({ runId, mode, onCaseSelect }: {
 
   const index = productIndex(data, runId)
   const allCases = [...index.groups.flatMap((group) => group.cases), ...index.unresolved]
-  const groups = index.groups.map((group) => ({ ...group, cases: filterProductCases(group.cases, filters) }))
+  const groups = index.groups.map((group) => {
+    const match = catalog ? catalogMatch(group, catalog) : null
+    const context = match ? `${catalogLabel(match)} ${match.product.category} ${match.product.subcategory}` : ''
+    return { ...group, match, cases: filterProductCases(group.cases, filters, context) }
+  })
     .filter((group) => group.cases.length > 0)
   const unresolved = filterProductCases(index.unresolved, filters)
   const stores = [...new Set(allCases.flatMap((item) => item.store_id ? [item.store_id] : []))].sort()
@@ -86,7 +99,7 @@ function PublishedProducts({ runId, mode, onCaseSelect }: {
         {filteredCount === 0 && <EmptyState title="Nessun risultato" description="Modifica o azzera i filtri per vedere gli altri prodotti e casi del run." action={<Button onClick={() => setFilters(initialFilters)}>Azzera filtri</Button>} />}
         <div className="sd-products__list">
           {groups.map((group) => <article className="sd-run-card sd-products__product" key={group.key} aria-label={`${productScopes[group.level]} ${group.id}`}>
-            <header><h2>{group.id}</h2><StatusBadge tone="neutral" label={productScopes[group.level]} /></header>
+            <ProductHeader id={group.id} scope={productScopes[group.level]} match={group.match} />
             <p>{group.cases.length} casi · {[...new Set(group.cases.map((item) => item.store_id ?? 'Negozio da verificare'))].join(', ')}</p>
             <ProductCases cases={group.cases} onSelect={onCaseSelect} />
           </article>)}
@@ -99,6 +112,22 @@ function PublishedProducts({ runId, mode, onCaseSelect }: {
       </>}
     </div>
   )
+}
+
+function ProductHeader({ id, scope, match }: { id: string; scope: string; match: CatalogMatch | null }) {
+  if (!match) return <header><h2>{id}</h2><StatusBadge tone="neutral" label={scope} /></header>
+  const { product } = match
+  return <header className="sd-products__identity">
+    {product.reference.image_url && <figure>
+      <img src={product.reference.image_url} alt={`Riferimento visivo: ${product.reference.name}`} width={96} height={128} loading="lazy" />
+    </figure>}
+    <div>
+      <h2>{catalogLabel(match)}</h2>
+      <p>{id} · {product.category} · {product.subcategory}</p>
+      <StatusBadge tone="neutral" label={scope} />
+      <p className="sd-products__provenance">Foto illustrativa: <a href={product.reference.url} target="_blank" rel="noreferrer">{product.reference.name}</a> (Valentino, abbinata per categoria). Nome e codici sono sintetici.</p>
+    </div>
+  </header>
 }
 
 function ProductCases({ cases, onSelect }: { cases: Case[]; onSelect: (item: Case) => void }) {

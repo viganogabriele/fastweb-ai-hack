@@ -32,6 +32,8 @@ Requires `uv` and Node >= 22. Run from the repo root.
 
 - `make setup`: install backend (`backend/.venv`) and web deps from the lockfiles.
 - `make dev`: backend :8000, web :5173 (proxies `/api`), dataset mock systems :8088.
+- `make demo`: backend :8000 + web :5173 on the committed recorded dev run, rebuilt offline into
+  `data/demo/` on first use (~30 s, no keys, no mocks). `rm -rf data/demo` to rebuild.
 - `make check`: ruff, pytest, oxlint, tsc. Must pass before every PR (CI runs it too).
 - `make fmt`: auto-fix Python lint and formatting.
 - Add deps with `cd backend && uv add <pkg>` or `cd web && npm install <pkg>`; never hand-merge lockfiles.
