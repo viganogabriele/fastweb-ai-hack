@@ -124,14 +124,9 @@ def reconcile(
             # EOD is only comparable to a claim explicitly covering that full
             # local date. It cannot contradict an intraday out-of-stock episode.
             day = data["snapshot_date"]
-            matching = [
-                o
-                for o in stock_claims
-                if o.period_start.astimezone(zone).date() == day
-                and o.period_end.astimezone(zone).date() == day
-                and o.period_start.astimezone(zone).time() == time.min
-                and o.period_end.astimezone(zone).time() >= time(23, 59, 59)
-            ]
+            start = datetime.combine(day, time.min, zone)
+            end = datetime.combine(day, time(23, 59, 59), zone)
+            matching = [o for o in stock_claims if o.period_start <= start and o.period_end >= end]
             if matching:
                 candidates.append((row, None, data["on_hand"], "on_hand"))
 
