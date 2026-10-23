@@ -107,6 +107,46 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/runs/{run_id}/cases/{case_id}/decisions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Case Decision */
+        post: operations["case_decision_api_runs__run_id__cases__case_id__decisions_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/runs/{run_id}/cases/{case_id}/options": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Options
+         * @description The options evaluated by act.options for this case in the selected snapshot.
+         *
+         *     Reading does not refresh or reserve stock. Approval reruns evaluate_options through
+         *     the ACT-03 service and rejects a proposal whose current inputs no longer match.
+         */
+        get: operations["options_api_runs__run_id__cases__case_id__options_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/runs/{run_id}/documents": {
         parameters: {
             query?: never;
@@ -141,10 +181,87 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/runs/{run_id}/options/{option_id}/decision": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Option Decision
+         * @description RFC §4.6 option-addressed equivalent of the case decision endpoint.
+         */
+        post: operations["option_decision_api_runs__run_id__options__option_id__decision_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** ActionOption */
+        ActionOption: {
+            /** Assumptions */
+            assumptions: string[];
+            /** Availability Basis */
+            availability_basis: string;
+            /** Available At */
+            available_at: string | null;
+            /** Baseline Outcomes */
+            baseline_outcomes?: components["schemas"]["ScenarioOutcome"][] | null;
+            /** Case Id */
+            case_id: string;
+            /** Checks */
+            checks: components["schemas"]["Check"][];
+            /**
+             * Computed At
+             * Format: date-time
+             */
+            computed_at: string;
+            forecast_ref?: components["schemas"]["ArtifactRef"] | null;
+            /** Id */
+            id: string;
+            /** Input Refs */
+            input_refs: components["schemas"]["ArtifactRef"][];
+            /** Input Version Hash */
+            input_version_hash: string;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "hold" | "verify_stock" | "ask_store" | "replenish_dc" | "transfer" | "combo" | "notify_owner";
+            /** Legs */
+            legs: components["schemas"]["Leg"][];
+            /** Outcomes */
+            outcomes?: components["schemas"]["ScenarioOutcome"][] | null;
+            /** Producer */
+            producer: string;
+            /** Producer Version */
+            producer_version: string;
+            /** Rationale */
+            rationale: string;
+            /** Recommended */
+            recommended: boolean;
+            /** Run Id */
+            run_id: string;
+            /** Scenario Id */
+            scenario_id: string;
+            /** Source Refs */
+            source_refs: components["schemas"]["SourceRef"][];
+            /**
+             * Valid Until
+             * Format: date-time
+             */
+            valid_until: string;
+            /** Version */
+            version: string;
+        };
         /** ArtifactRef */
         ArtifactRef: {
             /** Id */
@@ -247,6 +364,22 @@ export interface components {
              */
             window_start: string;
         };
+        /** Check */
+        Check: {
+            /** Detail */
+            detail: string;
+            /** Mandatory */
+            mandatory: boolean;
+            /** Name */
+            name: string;
+            /** Source Refs */
+            source_refs: components["schemas"]["ArtifactRef"][];
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "pass" | "fail" | "unknown" | "not_applicable";
+        };
         /** CreateRun */
         CreateRun: {
             /**
@@ -287,6 +420,79 @@ export interface components {
             source_manifest_hash: string;
             /** Stores */
             stores: string[];
+        };
+        /** Decision */
+        Decision: {
+            /**
+             * At
+             * Format: date-time
+             */
+            at: string;
+            /** Availability Basis */
+            availability_basis: string;
+            /** Available At */
+            available_at: string | null;
+            /** By */
+            by: string;
+            /**
+             * Computed At
+             * Format: date-time
+             */
+            computed_at: string;
+            /**
+             * Decision
+             * @enum {string}
+             */
+            decision: "approved" | "rejected";
+            /**
+             * Dispatch Status
+             * @enum {string}
+             */
+            dispatch_status: "draft" | "pending" | "accepted" | "rejected" | "unknown";
+            /** Id */
+            id: string;
+            /** Idempotency Key */
+            idempotency_key: string;
+            /** Input Refs */
+            input_refs: components["schemas"]["ArtifactRef"][];
+            /** Input Version Hash */
+            input_version_hash: string;
+            /** Note */
+            note?: string | null;
+            /** Option Id */
+            option_id: string;
+            /** Producer */
+            producer: string;
+            /** Producer Version */
+            producer_version: string;
+            request_ref?: components["schemas"]["ArtifactRef"] | null;
+            response_ref?: components["schemas"]["ArtifactRef"] | null;
+            /** Run Id */
+            run_id: string;
+            /** Scenario Id */
+            scenario_id: string;
+            /** Source Refs */
+            source_refs: components["schemas"]["SourceRef"][];
+            /** Version */
+            version: string;
+        };
+        /** DecisionInput */
+        DecisionInput: {
+            /** By */
+            by: string;
+            /**
+             * Decision
+             * @enum {string}
+             */
+            decision: "approved" | "rejected";
+            /** Idempotency Key */
+            idempotency_key: string;
+            /** Input Version Hash */
+            input_version_hash: string;
+            /** Note */
+            note?: string | null;
+            /** Option Id */
+            option_id: string;
         };
         /** DocumentDetail */
         DocumentDetail: {
@@ -384,6 +590,40 @@ export interface components {
             version: string;
         };
         JsonValue: unknown;
+        /** Leg */
+        Leg: {
+            /** Cost Eur */
+            cost_eur?: number | null;
+            /** Dest */
+            dest: string;
+            /** Ean */
+            ean?: string | null;
+            /**
+             * Eta At
+             * Format: date-time
+             */
+            eta_at: string;
+            /** Lane Id */
+            lane_id: string;
+            /** Origin */
+            origin: string;
+            /**
+             * Pickup At
+             * Format: date-time
+             */
+            pickup_at: string;
+            /** Qty */
+            qty: number;
+            /**
+             * Sellable At
+             * Format: date-time
+             */
+            sellable_at: string;
+            /** Size */
+            size: string;
+            /** Sku */
+            sku: string;
+        };
         /** LinkCandidate */
         LinkCandidate: {
             /**
@@ -401,6 +641,19 @@ export interface components {
             score_min: number;
             /** Target Id */
             target_id: string;
+        };
+        /** LocalDraft */
+        LocalDraft: {
+            decision: components["schemas"]["Decision"];
+            option: components["schemas"]["ActionOption"];
+            /** Reservations */
+            reservations: components["schemas"]["Reservation"][];
+            /**
+             * Simulated
+             * @default true
+             * @constant
+             */
+            simulated: true;
         };
         /** ModuleManifest */
         ModuleManifest: {
@@ -568,6 +821,58 @@ export interface components {
             /** Value */
             value?: number | null;
         };
+        /** Reservation */
+        Reservation: {
+            /** Availability Basis */
+            availability_basis: string;
+            /** Available At */
+            available_at: string | null;
+            /**
+             * Computed At
+             * Format: date-time
+             */
+            computed_at: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Decision Id */
+            decision_id: string;
+            /** External Ref */
+            external_ref?: string | null;
+            /** Id */
+            id: string;
+            /** Idempotency Key */
+            idempotency_key: string;
+            /** Input Refs */
+            input_refs: components["schemas"]["ArtifactRef"][];
+            /** Location */
+            location: string;
+            /** Producer */
+            producer: string;
+            /** Producer Version */
+            producer_version: string;
+            /** Qty */
+            qty: number;
+            /** Run Id */
+            run_id: string;
+            /** Scenario Id */
+            scenario_id: string;
+            /** Size */
+            size: string;
+            /** Sku */
+            sku: string;
+            /** Source Refs */
+            source_refs: components["schemas"]["SourceRef"][];
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "pending" | "committed" | "released" | "unknown";
+            /** Version */
+            version: string;
+        };
         /** RunSpec */
         RunSpec: {
             /**
@@ -631,6 +936,25 @@ export interface components {
              * @enum {string}
              */
             status: "pending" | "running" | "succeeded" | "degraded" | "blocked" | "failed";
+        };
+        /** ScenarioOutcome */
+        ScenarioOutcome: {
+            /** Demand Basis */
+            demand_basis: string;
+            /** Leftover Units Dest */
+            leftover_units_dest: number | null;
+            /** Leftover Units Donor */
+            leftover_units_donor: number | null;
+            /** Lost Units Dest */
+            lost_units_dest: number | null;
+            /** Lost Units Donor */
+            lost_units_donor: number | null;
+            /** Scenario Id */
+            scenario_id: string;
+            /** Size Allocation Basis */
+            size_allocation_basis: string;
+            /** Transport Cost Eur */
+            transport_cost_eur?: number | null;
         };
         /** Segment */
         Segment: {
@@ -953,6 +1277,78 @@ export interface operations {
             };
         };
     };
+    case_decision_api_runs__run_id__cases__case_id__decisions_post: {
+        parameters: {
+            query?: {
+                fixture?: boolean;
+            };
+            header?: never;
+            path: {
+                case_id: string;
+                run_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DecisionInput"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LocalDraft"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    options_api_runs__run_id__cases__case_id__options_get: {
+        parameters: {
+            query?: {
+                fixture?: boolean;
+            };
+            header?: never;
+            path: {
+                case_id: string;
+                run_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ActionOption"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     documents_api_runs__run_id__documents_get: {
         parameters: {
             query?: {
@@ -1009,6 +1405,44 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["DocumentDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    option_decision_api_runs__run_id__options__option_id__decision_post: {
+        parameters: {
+            query?: {
+                fixture?: boolean;
+            };
+            header?: never;
+            path: {
+                option_id: string;
+                run_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DecisionInput"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LocalDraft"];
                 };
             };
             /** @description Validation Error */
