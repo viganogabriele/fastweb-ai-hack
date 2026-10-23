@@ -1,0 +1,25 @@
+{
+  "attempts": [
+    "attempt-976ec77c6429484a973d71c89b6c5755",
+    "attempt-3e80f486ab264417bcc6ab80beac723c"
+  ],
+  "decisions_equal": true,
+  "exact_ids_and_versions_equal": true,
+  "exit_codes": [
+    0,
+    0
+  ],
+  "format": 2,
+  "hash_exclusions": [
+    "AgentTrace.steps[*].duration_ms"
+  ],
+  "inputs_equal": true,
+  "ledger_sha256": "547981ebceeb4bfc9a5b6e6ad4efcb099997d9accc980988b76990b49d2e38ec",
+  "network_attempts": [
+    0,
+    0
+  ],
+  "output_sha256": "5a4f7d11dc2880cb28510b47d480d0b552cf6144a9de0898430f2eae8ac92a55",
+  "raw_payload_hashes_equal": false,
+  "recording_sha": "f1d7923c788bdc519fcab5460dfe4ad1b9de8af0"
+}

@@ -26,13 +26,13 @@ from tessera.core.llm import LLMClient
 from tessera.core.orchestrator import worker_slot
 from tessera.core.repo import Repo, RunNotFound
 from tessera.core.run_repo import RunRepo, repo_session
+from tessera.core.systems_cache import SystemsCache, systems_factory
 from tessera.modules.actions import ledger
 from tessera.modules.actions.options import OptionsPolicy, policy_from
 from tessera.modules.agents import investigator
 from tessera.modules.agents.chat_model import model_for_run
 from tessera.modules.agents.runtime import Budget, ToolError
 from tessera.modules.sources.systems_client import (
-    SystemsClient,
     SystemsReader,
     Unknown,
     crosswalk_at,
@@ -56,7 +56,12 @@ def reader_for(repo: RunRepo, settings: Settings, rows):
     crosswalk = crosswalk_at(repo, rows)
     if isinstance(crosswalk, Unknown):
         return investigator.UnavailableReader(crosswalk)
-    return SystemsReader(repo, SystemsClient(crosswalk, base_url=settings.mocks_base_url))
+    cache = SystemsCache(settings.data_dir / "systems_cache")
+    reader = SystemsReader(
+        repo, systems_factory(settings, repo.spec, cache, allow_recording=True)(crosswalk)
+    )
+    reader.recordings = cache
+    return reader
 
 
 def job_spec(
@@ -177,6 +182,11 @@ def execute(job: RunSpec, case_id: str, engine, settings: Settings, inputs: JobI
                         reservations=inputs.reservations,
                         budget=budget,
                     )
+                    # AgentLoop may catch tool failures to produce a safe fallback. Missing
+                    # recordings still mean this job is not a reproducible investigation.
+                    recordings = getattr(reader, "recordings", None)
+                    if recordings is not None:
+                        recordings.require_complete()
                 finally:
                     if isinstance(reader, SystemsReader):
                         reader.client.close()
@@ -201,7 +211,7 @@ def execute(job: RunSpec, case_id: str, engine, settings: Settings, inputs: JobI
         except Exception as error:
             # Do not expose provider bodies, credentials or arbitrary exception text.
             reason = (
-                "Missing LLM recording (replay miss)"
+                "Missing LLM or systems recording (replay miss)"
                 if isinstance(error, ReplayMiss)
                 else (f"Investigation failed ({type(error).__name__})")
             )

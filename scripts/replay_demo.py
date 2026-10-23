@@ -2,6 +2,11 @@
 
 Run with backend/.venv/bin/python scripts/replay_demo.py --help. No projections,
 ledger, secrets or provider clients are imported from a previous workspace.
+
+--decisions accepts an ordered JSON array of FrozenDecision objects. Each event
+contains namespace, snapshot_sha256 (digest of RunSpec.model_dump(mode="json")),
+at, the original DecisionRequest, and draft (the exact exported LocalDraft).
+The approval service revalidates these events before saving their original IDs.
 """
 
 import argparse
@@ -12,19 +17,27 @@ import os
 import sys
 from contextlib import contextmanager, redirect_stderr, redirect_stdout
 from pathlib import Path
+from typing import Literal
 from uuid import uuid4
+
+from pydantic import TypeAdapter
+from sqlalchemy import inspect, select
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 
 from tessera.core.cache import CacheCorrupt, ReplayMiss, ResponseCache
 from tessera.core.config import Settings, get_settings
 from tessera.core.contracts import RunSpec
+from tessera.core.contracts.common import Contract, Instant, Text
 from tessera.core.db import connect
 from tessera.core.llm import LLMClient
 from tessera.core.orchestrator import run
 from tessera.core.registry import Registry
 from tessera.core.repo import KINDS
 from tessera.core.run_repo import repo_session
+from tessera.core.systems_cache import SystemsCache, systems_factory
+from tessera.modules.actions import ledger
+from tessera.modules.actions.approval import DecisionRequest, LocalDraft, decide
 
 MARKER = ".tessera-replay-workspace.json"
 OWNER = {"format": 1, "owner": "tessera-offline-replay"}
@@ -37,6 +50,14 @@ class IsolationError(ValueError):
 
 class OfflineNetworkDenied(RuntimeError):
     pass
+
+
+class FrozenDecision(Contract):
+    snapshot_sha256: Text
+    namespace: Literal["fixture", "product"]
+    at: Instant
+    request: DecisionRequest
+    draft: LocalDraft
 
 
 class ReplayCache(ResponseCache):
@@ -69,6 +90,19 @@ def digest(value):
             allow_nan=False,
         ).encode()
     ).hexdigest()
+
+
+def semantic_payload(kind, payload):
+    # Retain measured timings in the DB/raw artifact hash. They describe this
+    # execution, rather than evidence, policy or the recorded model's choices.
+    if kind == "AgentTrace":
+        return {
+            **payload,
+            "steps": [
+                {k: v for k, v in step.items() if k != "duration_ms"} for step in payload["steps"]
+            ],
+        }
+    return payload
 
 
 def allowed(path):
@@ -193,11 +227,32 @@ def attempt_directory(workspace, inputs):
     return attempt
 
 
-def rebuild(spec, *, sources, config, cache, workspace, voice=None, registry=None):
+def rebuild(
+    spec,
+    *,
+    sources,
+    config,
+    cache,
+    workspace,
+    voice=None,
+    systems_cache=None,
+    decisions=None,
+    registry=None,
+):
     """Trusted installed modules only. Each invocation starts with a fresh SQLite DB."""
-    attempt = attempt_directory(workspace, (sources, config, cache, *((voice,) if voice else ())))
+    attempt = attempt_directory(
+        workspace,
+        (
+            sources,
+            config,
+            cache,
+            *((voice,) if voice else ()),
+            *((systems_cache,) if systems_cache else ()),
+            *((decisions,) if decisions else ()),
+        ),
+    )
     manifest = {
-        "format": 1,
+        "format": 2,
         "attempt_id": attempt.name,
         "run_id": spec.run_id,
         "scenario_id": spec.scenario_id,
@@ -213,11 +268,17 @@ def rebuild(spec, *, sources, config, cache, workspace, voice=None, registry=Non
         "network_attempts": 0,
         "cache_misses": [],
         "cache_corrupt": [],
+        "systems_cache_misses": [],
+        "systems_cache_corrupt": [],
+        "decisions": [],
+        "ledger_sha256": None,
         "inputs": {},
         "output_sha256": None,
+        "output_hash_excludes": ["AgentTrace.steps[*].duration_ms"],
     }
     engine = None
     replay_cache = None
+    recorded_systems = None
     denied = []
     try:
         if spec.mode == "unavailable" or not any(
@@ -241,10 +302,49 @@ def rebuild(spec, *, sources, config, cache, workspace, voice=None, registry=Non
         ]
         if voice is not None:
             trees.append(("voice", voice, attempt / "data/fixtures/voice"))
+        if systems_cache is not None:
+            trees.append(("systems_cache", systems_cache, attempt / "data/systems_cache"))
         for name, root, dest in trees:
             manifest["missing_prerequisites"].append(name)
             manifest["inputs"][name] = stage(root, dest)
             manifest["missing_prerequisites"].pop()
+        frozen_decisions = []
+        if decisions is not None:
+            raw = allowed(decisions).read_bytes()
+            frozen_decisions = TypeAdapter(list[FrozenDecision]).validate_json(raw)
+            if any(
+                d.request.run_id != spec.run_id
+                or d.request.scenario_id != spec.scenario_id
+                or d.snapshot_sha256 != manifest["snapshot_sha256"]
+                or d.namespace != manifest["namespace"]
+                or d.at < spec.as_of
+                for d in frozen_decisions
+            ):
+                raise IsolationError("decision does not belong to this snapshot/clock")
+            if any(
+                a.at > b.at for a, b in zip(frozen_decisions, frozen_decisions[1:], strict=False)
+            ):
+                raise IsolationError("decision clocks must be chronological")
+            identities = {}
+            for frozen in frozen_decisions:
+                key = frozen.draft.decision.id
+                if key in identities and identities[key] != frozen:
+                    raise IsolationError("conflicting frozen decision identity")
+                identities[key] = frozen
+            (attempt / "inputs/decisions.json").write_bytes(raw)
+            manifest["inputs"]["decisions"] = {
+                "sha256": hashlib.sha256(raw).hexdigest(),
+                "files": 1,
+            }
+
+        for name, expected in (
+            ("sources", spec.source_manifest_hash),
+            ("config", spec.config_hash),
+        ):
+            if manifest["inputs"][name]["sha256"] != expected:
+                manifest["missing_prerequisites"].append(name + "_hash_mismatch")
+                raise IsolationError("staged inputs differ from the declared snapshot")
+
         settings = Settings(
             _env_file=None,
             sources_dir=attempt / "inputs/sources",
@@ -268,20 +368,66 @@ def rebuild(spec, *, sources, config, cache, workspace, voice=None, registry=Non
             }
         )
         replay_cache = ReplayCache(settings.data_dir / "llm_cache")
+        recorded_systems = SystemsCache(settings.data_dir / "systems_cache")
         engine = connect(settings.db_url)
         old_logging = logging.root.manager.disable
         try:
             logging.disable(logging.CRITICAL)
-            with offline() as denied, environment(settings), open(os.devnull, "w") as sink:
+            with (
+                offline() as denied,
+                environment(settings),
+                open(os.devnull, "w") as sink,
+            ):
                 with redirect_stdout(sink), redirect_stderr(sink):
                     client = LLMClient(settings, cache=replay_cache).for_run(spec)
                     statuses = run(
                         spec,
                         engine=engine,
                         registry=registry or Registry.discover(),
-                        clients={"llm": client},
+                        clients={
+                            "llm": client,
+                            "systems": systems_factory(settings, spec, recorded_systems),
+                        },
                         settings=settings,
                     )
+                    # Record the actual pipeline state even when a later decision fails.
+                    with repo_session(
+                        engine, spec.run_id, fixture_mode=settings.fixture_mode
+                    ) as repo:
+                        manifest["run_status"] = repo.run_state()["status"]
+                    can_decide = (
+                        not replay_cache.missing
+                        and not replay_cache.corrupt
+                        and not recorded_systems.missing
+                        and not recorded_systems.corrupt
+                        and all(
+                            s.status in {"succeeded", "degraded"}
+                            and s.result is not None
+                            and not s.result.errors
+                            for s in statuses
+                        )
+                    )
+                    if frozen_decisions and not can_decide:
+                        manifest["decision_replay_skipped"] = True
+                    for frozen in frozen_decisions if can_decide else ():
+                        draft = decide(
+                            engine, frozen.request, now=frozen.at, expected_draft=frozen.draft
+                        )
+
+                        manifest["decisions"].append(
+                            {
+                                "id": draft.decision.id,
+                                "version": draft.decision.version,
+                                "sha256": digest(draft.model_dump(mode="json")),
+                                "option_id": draft.option.id,
+                                "option_version": draft.option.version,
+                                "input_version_hash": draft.decision.input_version_hash,
+                                "decision": draft.decision.decision,
+                                "dispatch_status": draft.decision.dispatch_status,
+                                "simulated": draft.simulated,
+                                "reservations": len(draft.reservations),
+                            }
+                        )
         finally:
             logging.disable(old_logging)
         manifest["network_attempts"] = len(denied)
@@ -294,9 +440,36 @@ def rebuild(spec, *, sources, config, cache, workspace, voice=None, registry=Non
                 for kind, model in sorted(KINDS.items())
                 for record in repo.list(model)
             ]
+        with engine.connect() as conn:
+            durable = (
+                list(conn.execute(select(ledger.drafts.c.payload)).scalars())
+                if inspect(conn).has_table(ledger.drafts.name)
+                else []
+            )
+        durable.sort(key=lambda d: d["decision"]["id"])
         manifest["output_sha256"] = digest(
-            sorted(payloads, key=lambda p: (p[0], p[1]["id"], p[1]["version"]))
+            [
+                (kind, semantic_payload(kind, item))
+                for kind, item in sorted(
+                    payloads, key=lambda p: (p[0], p[1]["id"], p[1]["version"])
+                )
+            ]
+            + [("LocalDraft", draft) for draft in durable]
         )
+        manifest["ledger_sha256"] = digest(durable)
+
+        manifest["artifacts"] = [
+            {"kind": kind, "id": item["id"], "version": item["version"], "sha256": digest(item)}
+            for kind, item in sorted(payloads, key=lambda p: (p[0], p[1]["id"], p[1]["version"]))
+        ]
+        manifest["raw_output_sha256"] = digest(
+            sorted(payloads, key=lambda p: (p[0], p[1]["id"], p[1]["version"]))
+            + [("LocalDraft", draft) for draft in durable]
+        )
+        manifest["artifact_counts"] = {
+            kind: sum(k == kind for k, _ in payloads) for kind in sorted({k for k, _ in payloads})
+        }
+
         manifest["modules"] = [
             {
                 "id": item.module_id,
@@ -317,6 +490,8 @@ def rebuild(spec, *, sources, config, cache, workspace, voice=None, registry=Non
             and not denied
             and not replay_cache.missing
             and not replay_cache.corrupt
+            and not recorded_systems.missing
+            and not recorded_systems.corrupt
             and not manifest["missing_prerequisites"]
         ):
             manifest["status"] = manifest["run_status"]
@@ -328,6 +503,12 @@ def rebuild(spec, *, sources, config, cache, workspace, voice=None, registry=Non
         if replay_cache is not None:
             manifest["cache_misses"] = sorted(replay_cache.missing)
             manifest["cache_corrupt"] = sorted(replay_cache.corrupt)
+        if recorded_systems is not None:
+            manifest["systems_cache_misses"] = sorted(recorded_systems.missing)
+            manifest["systems_cache_corrupt"] = sorted(recorded_systems.corrupt)
+            if recorded_systems.missing or recorded_systems.corrupt:
+                manifest["status"] = "failed"
+                manifest["missing_prerequisites"].append("valid_systems_recordings")
         if denied:
             manifest["missing_prerequisites"].append("offline_network_or_process_operation")
         if replay_cache is not None and (replay_cache.missing or replay_cache.corrupt):
@@ -345,7 +526,19 @@ def main(argv=None):
     for name in ("run-spec", "sources", "config", "cache", "workspace"):
         parser.add_argument("--" + name, type=Path, required=True)
     parser.add_argument(
-        "--voice", type=Path, help="authorized voice source tree (required for src.voice)"
+        "--voice",
+        type=Path,
+        help="authorized voice source tree (required for src.voice)",
+    )
+    parser.add_argument(
+        "--systems-cache",
+        type=Path,
+        help="recorded simulated stock/logistics GET responses",
+    )
+    parser.add_argument(
+        "--decisions",
+        type=Path,
+        help="frozen requests and exact exported local drafts, pinned to snapshot hash/namespace",
     )
     args = parser.parse_args(argv)
     try:
@@ -360,6 +553,8 @@ def main(argv=None):
             cache=args.cache,
             workspace=args.workspace,
             voice=args.voice,
+            systems_cache=args.systems_cache,
+            decisions=args.decisions,
         )
     except Exception as error:
         result = {"format": 1, "status": "failed", "error_type": type(error).__name__}
