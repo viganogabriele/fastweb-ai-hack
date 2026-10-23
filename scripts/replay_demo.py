@@ -125,6 +125,9 @@ def offline():
             in {
                 "socket.connect",
                 "socket.getaddrinfo",
+                "socket.gethostbyname",
+                "socket.gethostbyaddr",
+                "socket.getnameinfo",
                 "socket.bind",
                 "socket.sendto",
                 "socket.sendmsg",

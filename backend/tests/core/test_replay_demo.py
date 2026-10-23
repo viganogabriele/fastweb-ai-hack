@@ -160,6 +160,20 @@ def test_network_denial_is_detected_even_when_module_falls_back(inputs, capsys):
     assert "PRIVATE" not in captured.out + captured.err
 
 
+def test_dns_lookup_is_denied_even_when_module_falls_back(inputs):
+    def callback(ctx):
+        try:
+            socket.gethostbyname("localhost")
+        except replay.OfflineNetworkDenied:
+            pass
+        return success(ctx)
+
+    spec, registry = custom(callback)
+    result = replay.rebuild(spec, **inputs, registry=registry)
+    assert result["status"] == "failed" and result["network_attempts"] == 1
+    assert result["run_status"] == "succeeded"
+
+
 @pytest.mark.parametrize("location", ["sources", "config", "cache"])
 def test_workspace_cannot_overlap_authorized_inputs(inputs, location):
     inputs["workspace"] = inputs[location] / "attempt-output"
