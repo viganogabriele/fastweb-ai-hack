@@ -124,8 +124,38 @@ socket connections. Cache/evidence are written to the executing checkout's `data
 Exit zero means cached responses plus valid recorded publication or explicitly
 explained unusable-response fallbacks, not that every transcript is recorded.
 
-Validation: plain `make check` reproduced existing issue #203 (1618 backend passes,
-one eval isolation failure: `_Py_HashRandomization_Init: failed to get random numbers
-to initialize Python`). The isolation code was left untouched. `PYTHONHASHSEED=0 make check` passed all 1621 backend tests (including both new
+Initial validation before syncing main: plain `make check` reproduced existing
+issue #203 (1618 backend passes, one eval isolation failure:
+`_Py_HashRandomization_Init: failed to get random numbers to initialize Python`).
+The isolation code was left untouched. `PYTHONHASHSEED=0 make check` passed all 1621 backend tests (including both new
 interval regressions), lint/format, web lint/typecheck, 38 web tests and schema
 verification. Explicit verifier Ruff lint/format and `git diff --check` also passed.
+
+## Independent offline review (2026-10-23)
+
+Reviewed head `610009740669241aaf9db3c42b65fbee194f68b0` in an isolated checkout,
+then merged main at `7202e78` to include the Landlock test fix from #204. No further
+product-code defect was found. No provider calls, credential reads or listening
+assessment were performed by this review.
+
+The three existing root-cache envelopes passed checksum validation. Their original
+record traces show first-attempt HTTP 200 responses, and the manual scripts agree
+with the differences documented above. Fresh network-denied replay after the merge
+(`ing03b-replay-c490e587-dbce-4f5d-b274-97b776c3dede`) reproduced three cache hits,
+two recorded documents, one explicit duration-invalid manual fallback, ten segments
+and zero errors. The reference transcript hashes matched all three published documents.
+This verifies replay, numeric interval bounds and reference comparisons; it does
+not establish word-level acoustic alignment or an ASR accuracy score.
+
+A negative replay with one cache envelope temporarily withheld exited 1 with
+`ReplayMiss`, despite publishing its manual fallback. Actual-sidecar runs at
+`2026-10-22T17:00:00Z` and for ROM01 alone skipped all three notes without opening
+audio or publishing documents. Only copied cache entries in the isolated checkout
+were changed for the negative check; the root cache remained untouched.
+
+Plain `make check` now passes without `PYTHONHASHSEED`: **1655 backend tests,
+74 web tests**, Python lint/format, web lint/typecheck and generated-schema check.
+Fixture integrity check, explicit verifier Ruff lint/format and `git diff --check`
+also pass. Issue #139's recorded-response, explicit-fallback and comparison
+acceptance is satisfied for this voice-only snapshot. The separate full-demo cache
+portability limitation above remains; it is not a claim that another RunSpec is warmed.
