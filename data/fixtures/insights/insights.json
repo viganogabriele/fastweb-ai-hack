@@ -1,0 +1,2311 @@
+[
+  {
+    "kind": "ProductInsight",
+    "payload": {
+      "id": "insight-sku-i10918g00045-999-20261009T0835",
+      "version": "sha256:7f81cf0408a63f3f",
+      "available_at": "2026-10-08T10:00:00Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_09.csv",
+          "content_hash": "4a03050eb8a173003eba403ddc5273808061eddcf4216d6d89375e15396a1d93",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_10.csv",
+          "content_hash": "5ca2df7c5af7aa6672ad7b0149b80d1b82c7cb37e4629ef624d2349ba2388054",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W37.csv",
+          "content_hash": "c1fae11d341e186aef036364f4d9e04c5c40b90177c9e0ba305d1696b800fe04",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W38.csv",
+          "content_hash": "51c809b41e32d83da90aaf928e2a8073a5de81186908ad493129fffdfe6c09c2",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W39.csv",
+          "content_hash": "d746a7743a6225555c05e460918ebb322959e9b65709aca20876af9f0cbb9996",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W40.csv",
+          "content_hash": "a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W41.csv",
+          "content_hash": "7807f39df38787c5bc5bd069c8dd6f588042d21b440ccdf2d85836409adcc3c8",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-09T08:35:52Z",
+      "input_refs": [
+        {
+          "kind": "ERP:returns",
+          "id": "419180aacbf56e04f90634d77b209c28fcd019da8d69ea4817824be2d541d90a",
+          "version": "76d849815d9db01e3d65cc21369d3fabe16b9e5ea7da0a5a3939cf4087354f28"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "8b531236b9730e14ddc390add14a673f6d8aa16b85481a3bad1e6e53506f00bd",
+          "version": "6201458ef7bfa96aaf77853f4f9d33ca97923f79feacd0c3fb92f1d51dde5604"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "d75ddfbb0744ba469124ed8c96a4bd9c49009f3b58be315f04966a25275d44fb",
+          "version": "6ddf019c4d7527718a5fec54e6a97a41bfce87cd4eeeed4250c4dae5cb86fd3d"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "da893edea0c29978e85d48fdae1b7dd5099e0d311eff3686e2da84fea2e434fb",
+          "version": "9dbf03563e0adbc3977fa01089be418839638228c778ab54e2757c1deff49002"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "e39bcbbc99d9c6bae5f5acb0c8c52a657ca38009555b66cf31d5db8584214b2c",
+          "version": "4c4472b9203d15bbc0fb466cd830caf5d2033211365e048d8732a607c1d8c5b3"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "fdd35cd8e0114c606f1367ead3b126cc5f8f533762d3345a938888da33a2d79a",
+          "version": "6c263c6f83411e81777785899cd03267e18cb08ca2909160bced3fd6c17acb6b"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "016def1717e65d38394570b67f05eb52697fa148830af573b07b5ca63ece2535",
+          "version": "763ce90e48a14880e2f7711bc70cf87a30ed55a3728b203bbadaf25dbc90f9ca"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "0f0aa342e26c47363f28df26632f1ab3d54fb1fec8c7d53b462ef42f53bf17a5",
+          "version": "0d09f09492619bdae8786ef0757a0bde1cda5dcac524ec2a5a467925d98f12de"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "0f9d4bdd0612892736c616a20a37c88f41dd005ecdd7ea6bb1f82985cd1696ec",
+          "version": "f62a457fc2bf15fd6d1065950417e099eeb320fe38762623efccb82a08263f32"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "0fcbcd85baaa7fe4edd84bef7aac342fddb81d9b2828c02ade6e2dbba8acdee1",
+          "version": "713c6085e2fdd5c2390284d6b20b84e8cdc370b91fd5e6533b20700c73f0896e"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "12bf854f8905423bfeeb5b4f8dda3b29760191ae78559691e6a47a46169e20e8",
+          "version": "2f7e6d350f378879df3acd40cac537d6034aa6da99f567f3416c311ca2ff3c9c"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "22520bd97b9a5393e31ed2ba13397a9773754fd94de1664dda0fc8edfce09370",
+          "version": "c8b8e268ffb08a78d5a5381766da7724cb106f39cfd06023fed1441ae98dd0c1"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "28244ad25c74d6c00dceace7311c7a948e9b9d6cd519acc2870e0453a3be02b4",
+          "version": "a4b39c8b354274e4d523f026706e6121036e2d27b1397739162841b869e73b80"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "2c0f02643e1783363e9d19ecf923a00990b36855513c88afe6d58a2502b5c163",
+          "version": "509a64859f9441579ce5310b40f09e74231658700137c2a7f490797b81ef76ed"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "316441d6cbd687906e8aa4178f31cb6e00187c2f1ccc2639cedf959bed751ad6",
+          "version": "b9a73599ed02b3a2157bac56ed884c90b6fdfea0344da60d7d87b5f232918667"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "3183f178ec58bc9ff828d792df3e7c75ecd3845c7304ad39d3cfa19e27abc48d",
+          "version": "4c55b764a75253541ea7ac15614a4d1691abf4dd489505147b71e0a3ba4bccf7"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "3ff026adf91cd7492e7a7578cd1fda90da676b08517083312e19368836fc8059",
+          "version": "49d569810698213a2bea314fad0b3c3ce166570a5b7868bcee2349a996b91096"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "4364d776ce991e9f5447237f95c427c482147aa3235f1cc324cf93cb45e9023f",
+          "version": "d7da1cee9a9328a0f6fdf9601405cb8a29d3ae9238d9f43efe5f34e936e0d922"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "45b179080beb415bc288c7d86d1bc8301e4620e121d121eeb5048e3164f02c9d",
+          "version": "b923cae310335fa26e82ee61c03deebf1c586a52a68acf0d7d9c62c11f6793e4"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "4cdc22c0deb15ee89643c930e01499059296d851c6dd75fb9295b2642f94662a",
+          "version": "cf4f21f177be32c50bceb6a1c7941b20779adf2dc542f718737e2aaa4c8c78c9"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "4e269191665143b472c6210b5b3b142f7240a0f25bfd98f6020fe949e5b66279",
+          "version": "03872af3d0e7f6714bfbd324915c915c00b07fe7eb5d092e2e179fcefe09c748"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "545cf7efa8f5bfd301c743df3acbc8c00c8724aaf92296c2abf25c1a0a08e7aa",
+          "version": "65abdd4ce9276201d448ebe8d7344a2fcc75c0d0e53b199059d69c6e9d976f15"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "57becb07cd5b218b00364f9876a4ee7bb89ba63fa5af49d7fae67de315e0a8a8",
+          "version": "a09db2bab2a6b5065c48335707891346e4a2033dc1f5fb52ec0d5d5da280c787"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "58224b41ced57bd232b5cf1ec69ec2aabcbc5a6b323668de9c89c9befef572c4",
+          "version": "8a5ffe7703939c4b5b1c8580c58b6416ce2fbf04ab42403af47d33eac8b71e73"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "58ddcc6760f133cbdda0189bacd0a501e6f31d62709c83f7c20d3feded6cccc9",
+          "version": "8f1173715c1369da2dc4f85f7bd40596cf5826b1fd71c80403ddde70ccdc0a97"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "5a6c3956eaf189d82419d2c4360a096b5a2e457453562c38fb58965b873e5c60",
+          "version": "0099e395a096faeabaff7563b1b522d446b0a0f83e1f35568032d77947250325"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "653ba3281b25be71614396f0010e8f69e460b181cc4b04e87d396c9f78143d73",
+          "version": "58d1b54f4f294a86c6e439ed18dc45021a9c731526d9ce614369ce218c2b05d2"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "6e617fcc62677f9fd2466e7eae2998a07ba7797563aec2487636e9d9f29fb699",
+          "version": "3e654ecf94c578864821ddc46b2f28707f5456e3a55c7de2e19df9ce54a649b9"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "7d06b1cf12a60e06d6545feb5acd9b1b65234122d9f79b742c943d2c295c25d1",
+          "version": "6f681b4b745550bb378eb471f7ad01d2d1d411d0c7ba42a15716cfbf3cd17fe6"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "7e52c6513de2c0b384b4ad93d6b6755c8eda753f6a2c1d1c8e2ad8f44e08db3a",
+          "version": "43ee7dd35239284686f10636d53c44580df442db0bfc865baa1b105fe7d3a542"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "85c94fce718b1b5c13bd2678b2ea8d34b9468e5daa19bc1f32fd3f6a757d39a8",
+          "version": "cb6daecec2fd9719c7a40bacf39eaebfadbc25aa4f2b6651d662a6c353ea49d3"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "901998b7236bb42ef310af3d465464e9a600143dfbca8315530d11dba81a90fa",
+          "version": "e393d46d156423a45c6f9d7ed4ff4d07dcccc35478bb125d5f1ddbbc566c4855"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "962d91e7cd0f0ebd3bd42139b0f8d3074aef02cb04417303792040d0b485bbd6",
+          "version": "cbd544dcaf5f4ec2ccd42fdc03779e8e13a7e7b67828ff9350b30e0047699237"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "9676b5c54f4845f3d20967b1bf856650d7ccb5eb4bd66551a9f9b30644c4a757",
+          "version": "e9bf3296ba5d1b8042651ea3d995343c05014a952fe99222358ea3cb5eb4d7f0"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "a1b75b76daf8c88d4cbb7641be4f271e7ee0eff2556eb77cde28a324952b2069",
+          "version": "7eb865d3b863836d906460e52940cae58fa5f70e679c10e47611955adcaf99bc"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "a2861d5ff2b3b7ebf86ce45d0e933dfe4a81d14eaf199b75c004e91f49c1de15",
+          "version": "8194d2ce5e123159deeba1895aad74752af233afa65e13918d5dc3b94f4c4c1f"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "a74f312a19bb61f713f26395bb70b46013aeb0a4d76b8eea47f26b8b68f3cd9e",
+          "version": "3536f8126d3a6b43a00ab650d2c209e071a8448a70ff60e44c6cc2c286aac9a1"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "a9dbbb52cf1c1a746dbbb463c816821488f14b52b5be8fffa028322ab740c857",
+          "version": "099c82bdceaab5b725734c149f95ea446d5d4d8ad4dfb77fc61c20a644618419"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "b5942f699bb29ac344a1c2b2e061683574f32fb41d8f5f2771eeda2451b4ab41",
+          "version": "e366df7dabddb66c3686ea94252e5a153a184abf7244187d98bad2c202e83666"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "bf9f4313aa625d76ef13f2b6e80bef1009676cef554717e22f743f66c88a76d7",
+          "version": "4d4e2f57df642129c61160c351f67b9a520af9362819a7b5515c8b9a735c8564"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "c4cabfa9357c76950f593bb9886884933d2c940c5f8731e32f7a1ce5a74b2c0d",
+          "version": "392d0784d7168f175ca8e2f2f54375436db934c20e8ab09acf68a93280a117ea"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "d000ae7e940b85823aa983cbc4a42cd50896ee79b4040a9e3e7e6eb06b38f8a4",
+          "version": "b275e31146600a8f3b20766d2d0820aea7af3408be9f2273be86e6725209f0d8"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "e7c72c678cbe33e43a841cd3a333f625934c5e33f0fa9d0df14590d67000238e",
+          "version": "72da49cf2f3b63917d9d3b37f89015495394a364b44bd65bf5367d0bab0996dd"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "fd372c1f6f24cd50156d729e3ff88882441a40d9bd140c073e86c8d711504ffb",
+          "version": "ee6e2a39139ebde92546ceb88b48fc8a7e539c001702e3dab71fdb85014d3cc9"
+        }
+      ],
+      "producer": "ins.product",
+      "producer_version": "1",
+      "as_of": "2026-10-09T08:35:52Z",
+      "level": "sku",
+      "product_id": "I10918G00045-999",
+      "stores": [
+        "MIL01",
+        "NYC01"
+      ],
+      "period_first": "2026-09-11",
+      "period_last": "2026-10-07",
+      "units_sold": 80,
+      "units_returned": 6,
+      "return_rate": 0.075,
+      "return_lines": 6,
+      "return_reasons": [
+        {
+          "key": "SIZE",
+          "count": 3,
+          "of": 6
+        },
+        {
+          "key": "CHANGE_MIND",
+          "count": 2,
+          "of": 6
+        },
+        {
+          "key": "QUALITY",
+          "count": 1,
+          "of": 6
+        }
+      ],
+      "n_observations": 0,
+      "n_documents": 0,
+      "reported_kinds": [],
+      "reported_reasons": [],
+      "observation_refs": [],
+      "notes": [
+        "returns of the period may refer to sales made before it"
+      ]
+    }
+  },
+  {
+    "kind": "ProductInsight",
+    "payload": {
+      "id": "insight-sku-j10911a00034-999-20261009T0835",
+      "version": "sha256:2975c319d697f49e",
+      "available_at": "2026-10-08T10:00:00Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_09.csv",
+          "content_hash": "4a03050eb8a173003eba403ddc5273808061eddcf4216d6d89375e15396a1d93",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_10.csv",
+          "content_hash": "5ca2df7c5af7aa6672ad7b0149b80d1b82c7cb37e4629ef624d2349ba2388054",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W38.csv",
+          "content_hash": "51c809b41e32d83da90aaf928e2a8073a5de81186908ad493129fffdfe6c09c2",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W40.csv",
+          "content_hash": "a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W41.csv",
+          "content_hash": "7807f39df38787c5bc5bd069c8dd6f588042d21b440ccdf2d85836409adcc3c8",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-09T08:35:52Z",
+      "input_refs": [
+        {
+          "kind": "ERP:returns",
+          "id": "1f318edeefde1197d76f2a30055985e261669f607d27bbf609bec9bf2ee6b163",
+          "version": "3e59344b1a9907efa6e84a5fba23509be60b15a4e4ff4acd02e6f31aad168ef3"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "638c6120a0e7ac78cfbe8cc485ab375e8ca4f905fe69307e18dc3be871c2eaa9",
+          "version": "c67748b976107731558a86791c66b57af8c1a4a85d840c04e861ab347a2fefda"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "9e850099514561873a2157c67c0a490e1a1a93ff5db069822268e2f15faddbdc",
+          "version": "7f3e1b11a599f6ba32475e7e5e0fa032c5f60efceb645eb90c42949217f48701"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "b3dade19863e367a80b2ec130cf3d35649ff1919c2bfb1fdace5e1f8d7ee8c74",
+          "version": "93eace5bd2878ccfca9b0dd87f512f406464b3975e6dd559a22b63ef4aa2b269"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "bde5c64d5241b340e914413e60adaed4395a8477345ddee49bafe4b8b3a3d42d",
+          "version": "596477aedb7d4b79f817fa858e67a3cac2c5cf0c181662f4c3af9efb202f6628"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "fa67ac59d137d53a0702b23f7e793ddc35e4ee99236ac921edf83c84f48a4af8",
+          "version": "42f9cc8f77e040191fa8c0110dc0e755041b19441a3baeaf475fdc5cbfd9ee99"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "0a7b38f2b62338325922fff0e72d379f5bc033a8da43974b9ecdf8c154eef9a0",
+          "version": "b41fa9c170e0c2e89e06fa6280658fa8021abbbf91c618ad9c019e08f90fec94"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "0fefc3a10bc8442e77406a6007472ec206d4bf9bbc8de1e395207184f7dc876f",
+          "version": "d9528d8ec0114d6bc940bd5a32b780392b85a63f89d5f718196cd2cc31789492"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "105d754a49624df4e19c40f4b329a9310529906aebf74314d34bd7bf973203f2",
+          "version": "95aaae4037b01353d8fd6f216948fc3528866ac49faceea2cc2ce788283c1f29"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "16fb5d375a6be26f84933506d592878d48eb86dceec7c27db2bb63c3bb0f2d2f",
+          "version": "63c81d3bf27d2fa184a74c60f2d1e0e5ba0539b12786399589e825ef09633812"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "1766d72daeb090951d6ca49779d97d66b1d22ea9a7a2b14d5d3cac456da5ed27",
+          "version": "631f458c0d869a1ec879de2bc6f7ddca75b5019aad8b6ea0f2b38ecbc6b4614f"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "2073c588e4a23b928aa28e6ceef98b10690abedb536e75ad980a48d00fa251da",
+          "version": "1a2b8b1d3dd149e8199d7ac3bc73c56cde8f4cf54ca137234642b302b4900dd2"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "2102753b19058bf468031320fa5775d1d46e5807281d2daa4bc8e95fa6487850",
+          "version": "96af52fb6577e3aba3001ffb7d75a4020fc35fedafe249a162739a6ea7bd08f6"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "305b0060a40bcfb2fa610e37b7b37298e3e1f85f10e2932b7f65db7ce7ad72ef",
+          "version": "507891f1d190b1ba1448e14a5bd829f078170d5b04e69b17c4b9c2e3aee2873c"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "319105519bee535f558787d0c679b57e96a64106f6be47e60ed8678087cd3126",
+          "version": "75e3d564bee73c4698bf0e11e32dc948460129347a78c1319e2918845aad227c"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "3203a389450829ec803e8f2136e75e26f1dfa9c5f2b3383a7881706383034f98",
+          "version": "984a8deed93c5217e120a821673a04b4b93f5a436b57028c001a4370a9eec14f"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "4043f9c5c171069d7486367aab32a2713ef9d85b40aaaac1471491181cc5b78d",
+          "version": "b7eb24f191e4a31cecdb1ce8bea0966e5867be9febdf11344a24d31262af068c"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "4934fdae7bbb01214d157584634a57276450c24d5e1fb6a124160dc52711f946",
+          "version": "1fe0576236e74868a11b43e57f65f139f673c73e210771a3249886aed5c8c50e"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "4b1653218ef5fa25202e34faad6f3fbbe4b76b91c8fcaa758c9d3be112593e83",
+          "version": "7d59fe8dc71cfa77137d2c65ef3a87ad2ffcebc730563a48538836314581a76c"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "4ee7ef234071fb435be2339400f6461d32e254513d66fd1b62717adfbc3cf50c",
+          "version": "e2651dda814b7268a46c6f8eeb8807d4407889d5eac5f138006ad81ffad48317"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "4f7e03ce69b4c08f8e4c9762b740fbb198be3282c562109fe99f9b46a70e9759",
+          "version": "2a607cfb0d7cb5db7eba7dbefa20e9f2b866a07129a213a9a96e84a796e24260"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "5287ab6cdfd2bc06b17fb91ea936efc90df4fef7047bc62653d2883fda4a15ce",
+          "version": "8c3b6ad27fe72cf9f02bec261552efb01f745182324215dcb0ea72e267348218"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "549eac69bd9ab7ed57e208fc8aba31a459a5f00da2ebe05577e1ed488e1940d2",
+          "version": "6a72b792087b2a29a15b0cd51a5455a11de4dac98fb3888dd37033194e2a0f7f"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "5b4f61ea5a5ce6dfac71cb8cc75a3d3f3d05cb8f2b31bc8b5006dad2923afcb6",
+          "version": "64d37c12b1eba3a8374fe5be7e0abe9916301a774ccd7b8a1e4e4edab7feff60"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "666c3c50a202220252eb9dc159bac1f27e39ab5544e8bc095111f26efc0327c6",
+          "version": "ac9156eec316aa46ad3bb38f863fdc6b4ddd4f6a5cf7f9a21696c4fb5f064b44"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "6737e31ca35fc5f264437d44b71acc86a71e27b58458e2aa7cb9e4ac5a22dd37",
+          "version": "a775986eea06ff22942a33976e450fab2a832810314f706588ce3d94f30d6061"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "76992cb5376639db683336a751f84e7c730e7f7a440dc1d6ee4057a5c2d7c308",
+          "version": "c28e56fbc4a0daaa3c9f95621ab9ad5c20b20e092436813aa3406b6ba93bdaab"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "77aa92dd5ef70069d785c0b4aab7ba506a3d213ba1a0f83df7f8e10eda0f3db9",
+          "version": "83939bf0d5a0e586353c7c04392789746d59b8d4550577c14e0cdf33c6d59696"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "8004a25b80481c1e930edf2145b9b6cd62eaa06494ec97504b0db502d3db327c",
+          "version": "271c5d721136ee859ce17fb8e71098e7a6d59b44373b2049f1eeb29038707cc7"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "8019c3d0364e67ea40de2aaf9761dd9c908115ba1950acd48fe6e41f18b17179",
+          "version": "bfe5073eff7522efd25423b232b3d55902ca86647df16bfe73cecf4afe344879"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "816645208a9307102fad2da0919bbaae2607e227697a4fd2562f1461db3d1a02",
+          "version": "61488ddc7c8ff7b11716106a648aa289b06779819e3d16f65c02f14c1b752910"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "8da8d2035fc689c629009b2dba677c81fdd47218952bae0a93921476fcb6a118",
+          "version": "b6c03718baa51fff8104c5fd2e265792ed49ef7f8b77be67d6db98fb8b8488c0"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "981d46b919904d2f4f6842d00c1cff03930879d24ca6d58307bff3b9489f85d7",
+          "version": "b4caa36997655cd7ed047e3396a276ad325d4a8fcb4bb2bce7c31b375f25e1f6"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "a47ecbf8442c88b7e78ec2f702a82c7cbf5df435a23fce9e112110c8629ec69e",
+          "version": "0fe579d3d4c5f46dcfe928e93112faad5e157d9e8d89ddd1633123df8c4ae51b"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "b73a7b517af27ef6107657e342412a52704d66e10b031104ee6191d77c6799f7",
+          "version": "84383678d8998de3b7f50b4264dd77b44c942a0e523d81dbb22139bc2dffcae1"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "b8367dc1e31dd8e13a81fb117dd4ed09e53ccfc9f2b6ee3de5ee55e0cf64a0a9",
+          "version": "89a686089f0f7ea546b582f3bd8bcaab17116f0b968116c3da2c4deaa171e242"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "ba5ea6acdf4cb52370a2e0d17c22b458d2b51f434190bb9de58717a3e96b7538",
+          "version": "32981980a8d285a52c36e0bfc606487e7373fb192338980426688864ee652d21"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "c7f59438a8f265c8a17682fcace0cc2f03ef09dca3b3b388d8065bf1828f6911",
+          "version": "ae567697599c06a85f89f71669bd55951ecda30dc5faca5205b826a71eb1cf31"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "d074a9b013374b269beb7aa393bb3f2e776cc279d572b4120dac902fe20b12ed",
+          "version": "5edabd64e2715f1e045c05c228deef984f550ca1f5249881704eaa279b525dc5"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "d58f2083c4ee41baa3400bd99cd0088c4d1148b91c13e46d256b48ff53cf9736",
+          "version": "f0559f4bd3932c49cf9de9066f5a6b79fc7bbeceb7045da38d90060c6afa68e6"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "d5f97c2c1d376cd31ceb133bbefa8df6dd130a52dfd2cb13b4d7fa7650c43799",
+          "version": "2560ecae71586a102849254bded514424ecf6cd19a3fd1a66614ed71b17824fe"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "d65d18d6b2892b424277c3758b15cf02c1b628b35f65aff34e11c62b833bde05",
+          "version": "96a4de821dee7aaed379153bdbbcd19f52616284faf246ec96a70f45a99bd87b"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "e036a47ad9af712900d2aeb942df3352958b8fd756048c2b22d57e40cad8c236",
+          "version": "b7448d827afb5b7b5c919a89d05f1f0dfad2668e92cb9da56b8553a76027a4f8"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "e821701508aad9ce66eff0fb00472f2531b49acdbcea61f6bc4d05d4845783ea",
+          "version": "d39b1db507b2bacf59d3631e14d3ad4184e5e083b8af7dcb0f4a16f733a29d7d"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "e8ca6cced50dbf7338c13156df09ccb5e3407b09d61deb726105d16f0c1715aa",
+          "version": "05d612b35799dcf4bc527d5327071aa9d857e959a7db0aacccd31eef217dfcd1"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "ef77a2cf601beb5ad2e26bf38cdde274726f61cb2ae3de23a00eb54a814ab36b",
+          "version": "886d04a92d7de13a038948c5de39f048a7d2ec87fe21d274d4c734396ecc1a59"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "fbcca886de1464e14b9b5f254666eaa58fb82341b86e62ef683d095e0d5aae63",
+          "version": "342fd675aafbd7d72c7c04717f203e1d8c6787fb604a7891e76b192222d46b91"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "fccf14cd6ca7c72b2ff2bed67d576d7923c25bd4f34813c8f9e0dad1f851e097",
+          "version": "4dbaeb0d940f4b772f4c696764c0d25c5e1ce634497a690d47b6b51f53a3605e"
+        }
+      ],
+      "producer": "ins.product",
+      "producer_version": "1",
+      "as_of": "2026-10-09T08:35:52Z",
+      "level": "sku",
+      "product_id": "J10911A00034-999",
+      "stores": [
+        "MIL01",
+        "NYC01"
+      ],
+      "period_first": "2026-09-11",
+      "period_last": "2026-10-07",
+      "units_sold": 114,
+      "units_returned": 6,
+      "return_rate": 0.05263157894736842,
+      "return_lines": 6,
+      "return_reasons": [
+        {
+          "key": "SIZE",
+          "count": 5,
+          "of": 6
+        },
+        {
+          "key": "CHANGE_MIND",
+          "count": 1,
+          "of": 6
+        }
+      ],
+      "n_observations": 0,
+      "n_documents": 0,
+      "reported_kinds": [],
+      "reported_reasons": [],
+      "observation_refs": [],
+      "notes": [
+        "returns of the period may refer to sales made before it"
+      ]
+    }
+  },
+  {
+    "kind": "ProductInsight",
+    "payload": {
+      "id": "insight-sku-j10911a00305-20d-20261009T0835",
+      "version": "sha256:85d37f2ba02d4d4d",
+      "available_at": "2026-10-08T04:00:00Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_09.csv",
+          "content_hash": "4a03050eb8a173003eba403ddc5273808061eddcf4216d6d89375e15396a1d93",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_10.csv",
+          "content_hash": "5ca2df7c5af7aa6672ad7b0149b80d1b82c7cb37e4629ef624d2349ba2388054",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W38.csv",
+          "content_hash": "51c809b41e32d83da90aaf928e2a8073a5de81186908ad493129fffdfe6c09c2",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W40.csv",
+          "content_hash": "a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-09T08:35:52Z",
+      "input_refs": [
+        {
+          "kind": "ERP:returns",
+          "id": "116d2ca2012bba493d38247be97a11d32b79905403ee930f9d67c60e5b8d608f",
+          "version": "4800bd768fea80200ee6d9aedc16d46a96e23570c7a19ab0349a050447612be3"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "3a760c05831fa98e903cf56082011f1365054bbd09b3a4a693d6391f8c26c294",
+          "version": "90d19205594da11d75fc20ec1b0f4fa20c7c5812499ac9a26c154dbee5676aa7"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "440b15ce655ec67bce00e7d626cd5873539b83f29cd88f1ad70c96aa10f39823",
+          "version": "63ec71a480cdeeace3b0d5b32bb7bdcda383144f7fda2091249d308b5e7c0498"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "5f6473ff4cb094b1bb369f001217c7d367b6a2f4308d6a17412dd4dd84466043",
+          "version": "6c7dd404799f4c0e5d4b366f1fdae4fa9745bc61418e9e0bb9a7dfecc287118e"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "690228213c3e8112920c7b7003fb83e58f5d24f364576e5b5de8bafe3914ee78",
+          "version": "b7a1c3b391f4300aff84eeb9cfdfe390962c0ec0c22cacdb2024cec635dad7e1"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "afd968c35c2f8d4bd28cc9fedd8f881739f2df09059d44f751b034c24ce918ba",
+          "version": "94db7bd582e38ab20b18e424cd87b468f7faa0de5762dad76af7c86bf371f043"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "d59ceefc4655dbb18e0e2ffd6dfaa4c8967b1fa8f7960863f007edabbdf189cb",
+          "version": "bda150bb6bfac8ee097b935d470ac36bd3fa4951e1a8cb541deb9968c12cdcb7"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "e21588b81fb5c1b9ebdcf2f4e70c9d376371b82adff53322ead6e3cbdb607546",
+          "version": "3ba788b9232ffac21e740177953bc5c10a3a20510487011e101cf5726cad9e0a"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "e640d3daa49bca7561148ddb070e29d903ed298457fa673ab658ac50c52963ec",
+          "version": "8105b635937eceabd6c61c313cf65f8fd3a309b1969c728ae67dcfca5ef999c8"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "fbb72fd632c03f4a1ab9c531e8e1ff38339d730bcb2e780e0691c1f3eb79df71",
+          "version": "adb80d9385b9199aa1513575ef30891287a563492be1dfff178f8e45f278bab2"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "08de1cceda29249b6de136452ea3e424dea9bc94af501e3a5d62d6e46d8fc247",
+          "version": "4544725cb11258b5b8a7aa45d52d46b05fc1ae949c605b914d88f4781f8c9b46"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "1c8b34ae85a0a82c91977f78a30c7b76349abc2a300c603676a9d50345240fdd",
+          "version": "f40cfa5150db3cf8aa22c45dd0e75cf7ad3d7f97b41d4c73d91a338204982ea8"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "255ef55a1ba3f1ddf123dd6c42663897bc6b89cfd732e9b0486d128db12c48ac",
+          "version": "33c2fbd37bdbdd128d16a83d1b88dad022ac9f45199a67519fc95b16c4167dcf"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "25f0a5a9e0954017c6f27b7cca68392e7c9a0ce97b7e830a337b9fb979ac33d2",
+          "version": "7dab69876286902e951b0107e45c55a382ed2a9ee140948c8cdcd48519558eab"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "2c82376f2cf5817202dd94f96ae3adf7d7dceb4030509f91a52eef343b236ce8",
+          "version": "ae9158ed67519c9404760a54ae21abaf7ed2dbfc08c9d0b400c0bcd4c5c37928"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "2e7df510fb03beeb3c08f6f8c9ec7e71cfb7e0ad9e1fc52ccacd32889b32c419",
+          "version": "cc25cf22dba360aeb1aa30edd57ad6bc9ae834fb23de194a83c62011e0212552"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "31f9a1e44e0bb4dfa2b19fd9ee25cfdfa68c64e4c1e423acb49d83ef159f77b2",
+          "version": "aa56d2bb1f715e1811e05f2447c4c118a154ad9464b3bb6ef12a1c454910ec40"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "38b08980f312960d55d9636607095d4fcf177d168bd38fd1f0e9ebc6f23a76c4",
+          "version": "39e10ce9bf0c393fb21dbb3b721b71f38334c2d6ea54e118df09d0c9c8e0c7d8"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "39bdbeaadc5012230a4f938f2f6cd46900b47095b79300eaf221306a3b931dd8",
+          "version": "c357ce3eb7378d865a4f8cabbadecdfdaf9cad91d2c30ee3a5a034d4f33addd2"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "3fc8cd0b180cde3d567d2f0e6da5b3f5effeede4c80feb6939b1214df606214f",
+          "version": "35b4a3cd404df23e33370181b71e5270e8e03a6abdcbffbba203a4d4774c1df8"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "4c43c7d49073d7ebf1f0b0124480efee491eaf49724974ab2c9a3c18d241a9f8",
+          "version": "345ef152d9946a7b5c1090040f28adac638c1388d99319ea67a1b68ce8ca566e"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "4e30e00dc0197dbff32bebcb56fb0ef0b77844cc0f4a5d2976f2b3250f17eec9",
+          "version": "591839822f2ebfa803c8d90b15e9069dafcd04c50f7c51bfed2c0b282e0b68a0"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "501e135412a09d055280cbc45af1c66e8f34d1d677fc3ac9912690d742a6d57d",
+          "version": "7450999989f207b6a4781dff1d8e8c4e2390a4ba82b1cc9ad4bdb418241f71f8"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "5bbc4b67cfa8a046d53697c936e029fb3eb0cd12869d7a2e94b8df038529b0de",
+          "version": "07c70b3cc05405fc4114224cc90f4dd6ec666b4a44786066d61ac6662d1987ce"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "5bc8ecc5d78c6d074145dd8f5b0e04697796abd46f3e1a16b648cd9933eb8e41",
+          "version": "786f97cd4dfae2b32b89aee8cdb7994b5f34ee81d9adfc6741f16b72474bf7a3"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "68e2f81ad41c281f50da26296141baf4e06cfa5b40e793d985fd46289d94bd07",
+          "version": "00c715ad791313882bd54efabf4d71f6c5ed933ffc0ab050ff94675c12aa64dd"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "6a273514bf710e2d3be82600fe685ae692c2e8e3bf4035505ba36ab88c1e2086",
+          "version": "df023294dfb2b6442ee55cecf3e96f43b288b38c38bbe88d50bcca4018dbedb7"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "6a3eddeb5c0e0b544c826659ec6a3bbe5418c82c185034414e5383a2a3fc1db2",
+          "version": "43cfbd53df40f1a894a0aaf895c78fcb56a00662fa82df5dc6c60aba5b9b2bed"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "6cf4f3ca72e0921da0c8b70eac22348721de23bbf254d40b273014a8d32bb829",
+          "version": "da40c33ec913837f2ce5f62351b69d56b67110bc2fc5215e70ce852f056e5b54"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "70cb56907db460dcd0e823fbc5d5a53cf0a83b9cf2a876ba43ee078a0eb4b6a5",
+          "version": "811b2fa6e81605aa4130f3a829317d36ecb8a2525166028935c758dde732e287"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "781e67af868820a0ede94f16796ed7956e2fa85dea126294162e3fdf05986129",
+          "version": "def6b7ee4843936b06a82f6e4d9ba4d738f4a537bdcb9242aef24aea2a3a67f4"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "79f9557f0d2fb7e92a11685bc261345ba508a8d7642df23638232676fd1deda6",
+          "version": "38b82549717feb28f8117a26c6f21684166931f7646d65938d99937e0f42f3f6"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "7d61e04764e11572bef7346e2f55b6de6c5cd5b9ab3aec8138767b731ee2d0e1",
+          "version": "1d779f316f01dec989a1dffd284e9669d0562819d3528d3534a51d842dccb2ef"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "7f7181f02ac201c0b8c2fda96bdaa2bb1e04ac91f44d188ee3387acefb750a45",
+          "version": "b7943d72c5c7b63d26e6b42b09742b5e963a6c88e454a548db0c19363dfcc20a"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "878b73b22407ccdc2ed482462dad8d13f41626c92a4f7545a6b9cf3e1779c491",
+          "version": "3d71105d32ef13fbb38bde940a7e5512015ef22936030b7aed3374c453dc9bb4"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "bc082fc60da628dff777115a763ececc23fcb01d005930793992f89d299215b5",
+          "version": "e1ee5b0c75d5f7171c612c4929387a4812eba8110b67e6a4c51be0c9aa5a3579"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "c56e6ed2fc240091be4d9074e82dc3f679742f176eb7a5afcab9c423e694c5a5",
+          "version": "d1a228325c5fbac2e0f7d2df8afac9e149f00d825726a56b43ccf7d606ddb101"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "cd39ffbf86f449ee54e7a60a2dbaf0704b1e02afd7cbe76be904d9e466c8fe2e",
+          "version": "8ae0402fce8f5bb79f034866aad19cc8f1cf6dac32f468d7dc5b771c25ccac1c"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "ceb44e47fd0e53c7e0e3ca3ada018866c41e40620c527391352787e116c8f66b",
+          "version": "7ac9d5a3c503da53adda383bdb3c490fe28d660c90a3d2ddc96c407e1043c9ad"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "d17bea44043c7a93f9fe0b918f0be8aba55cfd064a61e3592c2208ed122bf85a",
+          "version": "cd0d8c9df3399fb1f7d545eba6452b5e791c4ee1d457ddbc09299c0984c783c6"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "e2228cec0a380a902fe975c963b3cb0d30a30b92ce5e54d91732b92daa1545e7",
+          "version": "103af7561e737cbbef58d01f54abee6f69511470a868f53c7389ee8e178847ac"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "f536a43cf9835fcfa3494b20e245171585de7d656931bec182aba75cd20d2623",
+          "version": "5ec247a59f79c6ddee9361a53614c149c041adb7e12af5d4787303dc56d3676c"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "fcab14d0208cfba895ef32e5d4a45441e64ccf88250c72ed1c583092821923e5",
+          "version": "8af827de574c298d700c21e3d3ec4631d78ced99c2e3a2803f709e6bade8cd4b"
+        }
+      ],
+      "producer": "ins.product",
+      "producer_version": "1",
+      "as_of": "2026-10-09T08:35:52Z",
+      "level": "sku",
+      "product_id": "J10911A00305-20D",
+      "stores": [
+        "MIL01",
+        "NYC01"
+      ],
+      "period_first": "2026-09-11",
+      "period_last": "2026-10-07",
+      "units_sold": 46,
+      "units_returned": 10,
+      "return_rate": 0.21739130434782608,
+      "return_lines": 10,
+      "return_reasons": [
+        {
+          "key": "DEF",
+          "count": 7,
+          "of": 10
+        },
+        {
+          "key": "CHANGE_MIND",
+          "count": 2,
+          "of": 10
+        },
+        {
+          "key": "SIZE",
+          "count": 1,
+          "of": 10
+        }
+      ],
+      "n_observations": 0,
+      "n_documents": 0,
+      "reported_kinds": [],
+      "reported_reasons": [],
+      "observation_refs": [],
+      "notes": [
+        "returns of the period may refer to sales made before it"
+      ]
+    }
+  },
+  {
+    "kind": "ProductInsight",
+    "payload": {
+      "id": "insight-sku-j10911a00305-742-20261009T0835",
+      "version": "sha256:b3070af68e8829e4",
+      "available_at": "2026-10-07T10:00:00Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_09.csv",
+          "content_hash": "4a03050eb8a173003eba403ddc5273808061eddcf4216d6d89375e15396a1d93",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_10.csv",
+          "content_hash": "5ca2df7c5af7aa6672ad7b0149b80d1b82c7cb37e4629ef624d2349ba2388054",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W37.csv",
+          "content_hash": "c1fae11d341e186aef036364f4d9e04c5c40b90177c9e0ba305d1696b800fe04",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W38.csv",
+          "content_hash": "51c809b41e32d83da90aaf928e2a8073a5de81186908ad493129fffdfe6c09c2",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W40.csv",
+          "content_hash": "a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e",
+          "locator": null
+        },
+        {
+          "uri": "dataset://store_emails/MIL01/20261001_1124_MIL01_fwd.eml",
+          "content_hash": "sha256:31aeadf95302b30ec9d28e4f3d359b2603a9629bb6de741467410d3ba89a29bf",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-09T08:35:52Z",
+      "input_refs": [
+        {
+          "kind": "ERP:returns",
+          "id": "41879e23327d327b1a9a6a5c191b6f3ee2d56287da929afecea25588f9f4bbeb",
+          "version": "4b230d88aa4439e882cb7b3499202d8ce33be5d017b47915a0c2a1aec76d3329"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "4bc28f36e3b227bbbd89853a37bdbf8882738c9f4ac82e31c21908b3d996fa58",
+          "version": "c261fe4927518eb5a4a2f5d65c0b7db3d2ec736f09986a6e699e6d8039f77d06"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "838f32f461ef0a9f6bea3bc22f5e417b73d348a3966f4d632af26fe0409c723f",
+          "version": "be9c089b981770d696e6db1eef20922655732746e308a0820cbbb63a4676dd1d"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "883e6e0eb23a8d48f8420fc2af53a70541fc725a2f4d2c73a245d7e8179886da",
+          "version": "f4739bf5d3e0b088fb9eec881ce38433f668745723ddd652fee33822e6a62289"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "8e07ecddf9e724d836d0105a528634180e3a3be261bf41ae6938e577b7a90690",
+          "version": "7b227cb18c54f93bb21d3d28c7a8ea7a36c028422d49c1ff888f58bbab08e7c0"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "9d1ebc89aba62719d1a5bfbd56acfdca6d30b525f5896c0afb4561067e61af9a",
+          "version": "19058f54a1ab8daeee4314d31575d53b03e0c5f6cb7ff30b7d09374d6d277133"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "b0110b6c9958dd9d5358dbf90435c1ca029b5fe62c9ce50e11729400e21819ed",
+          "version": "917b4b28c462c5866fc6109a1730748d0311d2b123bcfa3bbf35615bb38a4cb6"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "c55864645445e8ef514fc618f85a936f2a4e83503f79584c52ff76991b446325",
+          "version": "4c07a2b0aae62f494fdc7c539defe3f8fdf8fd2ffc084e4dcaf15f2e4f7fc4ea"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "187fc745283545e2d426e24255d37dc289bd162bebda85d0b5de6b0769b494b9",
+          "version": "c6d3117690a41e59345253109edd6aab91026dec92a1cdfe3a7872f5e502267b"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "28b72d90366911953e08c2eca3f51eaf69b8dfead05062ddc842e3d719612a9f",
+          "version": "6584c2239b236db0ff85eed0c244df71e4a0d8c283df3704900283054216b301"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "3319c0404ca26c0f46ad0adcf7695e9e58fb87a28e2f6968b4d5465c01ef0f39",
+          "version": "ccfe94e6d7643a898f5313549708d85973e82186db0532c5d19ef5d8bd74c292"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "3e6ff8c22c8cec2c5963455a8e63722a75e2728290f347d11c197c6942d51a9d",
+          "version": "737326c01592d9b096e2664fe6e41283dabdb14f46f9b3a07d81d13935110dd3"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "412db9250b57ded33af3d8cee6e9a30ba21b01ce0cdd31fcce965dc5ddeddece",
+          "version": "c08617e92f54075ad62adf7b43c25e825c2d892215d441b5dcd3853e927cfbe3"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "4f37232f50eae551b5946bfd07e11f0e41be7e0a5eab98e694b3ece73d6cb3f0",
+          "version": "2f609bb8780a54e3066304abe5a44a081b387477b3fbd0cab5e7eec846307bac"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "51c72362c8d42ba5a104e6558bc2ba83612fdb027bfb8232fcf57e8e93fd3246",
+          "version": "f3562dbb2e8c900f6526952756590377d8591b6a5b335f91306cf9a1ec756fb4"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "64ddd3dcd772d1c5c85e574a6f6bc395b73e50f862dc7c50b4c6751ac3002e1a",
+          "version": "803ee5245057ec095b6468fdbf8c755f74ad7665e00ec96bdce2e1ea9ac4485a"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "6762853bb1f8d5ada7741eed2704f844fa207c3fe9424378ceab2b534ffadfbb",
+          "version": "61bfa7d884dcea59fd30037bd06f35d8e8d7b072797161d5cc0972c170680ded"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "6c0700b49258b87bca7d3dfcecb53fde0a9567f07678d1509d9720ccc07a63f9",
+          "version": "e76f49f1ab6adbf113a5f6652ff975fcd520a34b80ae431739ad277df9abd934"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "6f7108763eb1b492123f2bdbbbde6b19c2581f7bfed60828493165febdfead3a",
+          "version": "cc8d0a9af1c43c2a82a0a9b13d1cb589c55e5b73c7a47e055cfd65f0e72a970f"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "7cd25bc9e54b4b399a021a9084b3c88edec527c00e4bcc879dd8a0b24ab6c649",
+          "version": "3b6a0a566dd8ce0178cf5f6c8923dc41fe4b0f87ca8b4aade82440bbbe853e03"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "7e50e6a6a19da1fd7a7e445a2c79c51e5346263c4e2db92b228d99e583dc8980",
+          "version": "fb8dbd4af93eae7849a902589501289dabe34e33a9f12e25d89f2827baa53063"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "8b1f0d34f334fcd9b32a33f83afeb4edc2fff888913d1cee7b5d52dbc0b690cb",
+          "version": "54b2122d555bad9ceb93f39ff06a2e8aad172cbdce8e26c5031d88039c501db5"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "9369831591e87e737a657c4e9ff023214f979c29d5253d5ebd7f4d11ba1a7a85",
+          "version": "7651a71df2839c3f5a78b82f2fd2880899ba1dab8e5d0267a033ae3305f20f91"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "93be3771e92c5f20747a0358738b894a2a7e3748d4870e3fbfd248b16c4ec119",
+          "version": "27b4474def0ef7a1c3ce713456fa1e9227ae413af1566cdd1dbf80d8bc9f77b1"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "acbe4af73502dc3f6eac5ba78c42f5d6b0a537c7a0c7df00b6bc766814d45f25",
+          "version": "503eba22ca9c38dd665bb1eda4cd1201259832d848a57f0e41dd121dbe3474d2"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "af5a5e8324c8afbd7fcabfe9fd63e27225605dcbae323577bb94ebf715ed04a9",
+          "version": "f0d977aad878b3328dc161d05c933acb4ab8e56dec05f7bc9a3e411b1224bcab"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "c04b65f6b89fd435ba5b955a6f0edcc98ac0cd7fac67f3740a60ac6c6b91d485",
+          "version": "61bdf860ab9dd5be6e3c184ac287785c7e36234d70d77de5b13fe90235254b1a"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "ca84dfcf6fe78c1d214e5c99fea9296a02f3dc1b10eb728c8a4ff7d1eb78390b",
+          "version": "28c11d02b2e62d6bf3fa3252d138baba7cf1e8058eb74f77327244b8cbdc6fe8"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "d4ac2cb863208d2726d3901073609ddf4a05717928544c8188ef0e18404bf559",
+          "version": "ed3fb6c8099cf790caa8c9dac6dc2d16113d7c9998ad84ceed8c377138d1fb8d"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "deca3cdd1beb572cb571a3c20388bdd323ac19b90829a900122816bb892f041c",
+          "version": "0c0abf1b5c769d5ca400da9f910c8ce9146d1a75a7b47dd7bc6ac381556e5369"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "e88e36c013cbdeaf389b1eba8750553959d130ac89f1a73a9778b2d73dc0e775",
+          "version": "36c637eb53cfd5fcd01abec9402a8b954e80be8d313151ec030752d63544a8a2"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "ed5a720edc652dbd8a1ec8815be5691f9cd67c16af9034c7c80f6a689d81313c",
+          "version": "428f2d5561d625b01e586f6112c5cfd335daf103a607464f83a59364332c799e"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "edfddf102e95ecca7cb8cb4c6d6df07c4513b4133487c59b00cbc920ded54136",
+          "version": "3f804c4b9687ede01639a573d214f20e2db71183cb0ba8995273048e8bd2cf6d"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "f5c2455b78f03d227148a93803c9473c98717491d8e8ade2c7603e9efeef82a5",
+          "version": "0379fbdc62c2d1781b6d2aabd56e1cc0f5904f7d62f83e41ed177d66be54c0fb"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "f6394334a4c72197b71c66d4a0e019baf8f7d6ed5aab16cbd3d4940eb75051ae",
+          "version": "ae3eb112ebc0fa53e41614442312749db954dce86bfb122719efca7d9e41ffb6"
+        },
+        {
+          "kind": "Observation",
+          "id": "obs-20261001-1124-mil01-fwd-tib-zip",
+          "version": "v1"
+        }
+      ],
+      "producer": "ins.product",
+      "producer_version": "1",
+      "as_of": "2026-10-09T08:35:52Z",
+      "level": "sku",
+      "product_id": "J10911A00305-742",
+      "stores": [
+        "MIL01",
+        "NYC01"
+      ],
+      "period_first": "2026-09-11",
+      "period_last": "2026-10-07",
+      "units_sold": 45,
+      "units_returned": 8,
+      "return_rate": 0.17777777777777778,
+      "return_lines": 8,
+      "return_reasons": [
+        {
+          "key": "DEF",
+          "count": 5,
+          "of": 8
+        },
+        {
+          "key": "CHANGE_MIND",
+          "count": 1,
+          "of": 8
+        },
+        {
+          "key": "GIFT",
+          "count": 1,
+          "of": 8
+        },
+        {
+          "key": "SIZE",
+          "count": 1,
+          "of": 8
+        }
+      ],
+      "n_observations": 1,
+      "n_documents": 1,
+      "reported_kinds": [
+        {
+          "key": "product_feedback",
+          "count": 1,
+          "of": 1
+        }
+      ],
+      "reported_reasons": [
+        {
+          "key": "quality_defect",
+          "count": 1,
+          "of": 1
+        }
+      ],
+      "observation_refs": [
+        {
+          "kind": "Observation",
+          "id": "obs-20261001-1124-mil01-fwd-tib-zip",
+          "version": "v1"
+        }
+      ],
+      "notes": [
+        "returns of the period may refer to sales made before it"
+      ]
+    }
+  },
+  {
+    "kind": "ProductInsight",
+    "payload": {
+      "id": "insight-sku-j10911a00305-999-20261009T0835",
+      "version": "sha256:94fad13b4922488b",
+      "available_at": "2026-10-08T04:00:00Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_09.csv",
+          "content_hash": "4a03050eb8a173003eba403ddc5273808061eddcf4216d6d89375e15396a1d93",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_10.csv",
+          "content_hash": "5ca2df7c5af7aa6672ad7b0149b80d1b82c7cb37e4629ef624d2349ba2388054",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W40.csv",
+          "content_hash": "a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-09T08:35:52Z",
+      "input_refs": [
+        {
+          "kind": "ERP:returns",
+          "id": "0a4b2ca5ed0eee64645e093d1014c29b0e48031ef7587ee3639f6db9066668c8",
+          "version": "09b05935106b44e11d89d3ee83eb934f75517ba67da8557f7016232ebc0c700e"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "196ef3b57f1c6a9672742ab7bcc8479a312f79bd59a6e73b1a43227bbf32984b",
+          "version": "064aa81efaab9d75d7c8b0755fa5bbf0933e6900eeb9331bb70ea404a2ac758e"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "1c9d84fd88dfa56a1c5ffd1c5c4c4b58a62577a65d8ef100ddf0012083c26c76",
+          "version": "0c526e135c99dd483dde6b814f36f33ce83991c0ca7be976732d01f6f981fd0e"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "2e8d9289c0ce7f831bcfc89fce64505efffe2a0fbf522d60b7bf408b363b2bce",
+          "version": "f5cc2ecefecabfde622ca7e4d067f891ae321a5f09532fee29120993cc52541a"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "36eaaf77d09cd3d89a7c95f15ddca2e6a7fdab45c285eeeaa82a8d82b95b3d9e",
+          "version": "74e2c7aae8ce2ae77cb89b416fec263b0daeddd657427676ceb25c49f9028fc3"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "441bb19dd288b33840bf08e93c2c9b065f3ab64ba03831d47f4752636d7a3894",
+          "version": "2f64c277179b7c5eb49729f1e9833a8657f87f163eb21f475f8c2668bb9c2eb3"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "7c797d9d4edbe7761dba4f558517a50723d17a1a222bb7b9264c9b8e134a0675",
+          "version": "f23f540a57d81b2892a4ccba1630a4f037ba5dc8523ab0e854069bd433792faf"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "88eda8982f341471f688b944b8ac94439c7e8108cf641fa65180e3d8ee3d6cdc",
+          "version": "f58f85cc765ca8fce5e7fd4a222d61bc4601bcc9e797566d98f6fd88c525a12a"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "8d1e65f225e99635e4efbfd06b552038de8663b966d25db885963b0f6dc548ec",
+          "version": "970da8e1ffbeeca922ec3e914ed0f86b49eed144bf840960e90a9be3a1163390"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "aec5e96b8b752fcd2bd625313b2c25e07610a553cc7baecb107c17f19e8fe172",
+          "version": "8966a3bb8884ba634fe4fcff68e94bda752d520a57642ac807fff444f7d0ba12"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "b10a553ba5b8caa4878bd92a89dbdfbb4024d5eea6ec1286ab38284c3cc3f60e",
+          "version": "9e36e331d0b21758b2dc09b8897fc77289a2bf895e05eeddf0dd15195765719c"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "b154defe8694190ea175ea806e3258541b17b2897216584e7e51e120610222be",
+          "version": "0d47a4d059f30b2ab020309837f204cff003b98e5d3380e41df3d2d39b086fe0"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "deba0709d6e94146080005d2429c3be1a22903e0e2f990bef9ac8350513ab1b4",
+          "version": "eac8701f82266fa4977de0dbeb29c291e75f15bcdded20ed35c7774d80a9dd03"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "f406cabaeb0561c6fa59b577f970544430b0500fb25a0a3a778193caa6681cf0",
+          "version": "64c7ad741f2b79de64ff92a68da22d71c5b3088bd01899d4b8cf7620f89a7469"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "f4b53d46a06147c23f9241dad42492b743799ac0e8d2ca0c6d5bc57cb51b4fa3",
+          "version": "64c0d4b9d3da11aa3ba2540ca6121de9ef84fc6c0391a27c5499bcd02a1c68f4"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "1627e91ba1af1cee12fa05d2722bfdc73aebef95cb8febd88b316435a5c3dfb0",
+          "version": "5146ea8a0bfebea189bf8ce1d15078265bc95740a2d4e8ee9367486f9259455b"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "16559e4b0ef1d7b3b5d251d6259be4282da7ab6639528d50f8196a7891e2ba96",
+          "version": "094789f6229dc9f7fa9da9b9c5fc126dec07728b4f212544460d5d324035b9df"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "182c053ab3a51544da22475258d27ca798c2fc63fce4318bdd93e7174bb7f8f5",
+          "version": "60fe2155cb85cddc74ebab2fd4af9a4557fe9a651f354b62b0c5ef758c99386a"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "22b35e45fafad88ec14d996d329976c6ce1c7dad1ca17dcef66334cf1ea5fefb",
+          "version": "fbcdf79234def3ecdcd669878c2536628223f8cfe0e09895098210ac10e7839d"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "284c3188c1eeba424af7286861cc5ad3248f93a030d5bfa115fb1ac02ac704d6",
+          "version": "58e8e5ccd1409bc2d663b8baaa8b465ef5200f88f0369b675f444e0c4ea0f6d3"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "29519d6482a202821871697118fc3cbf771edda4e5a9ec0ed98701005fb38db8",
+          "version": "a65b294bef82c7fd22b2c2f415326a1a5ca893e78dd118f8b27f898420bd1576"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "2e1871ddaa374fb54e54160ef332684bda455471148ddb3067ef7aca647ae758",
+          "version": "d8eb63e4a6426522b9b3fd22b25577ab79246b71ed6160a85187a562ee39f19c"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "2fc3b93e5e307fd803099ce3d3c129aeda1c01fb7f1e99ab48667a978aadaa65",
+          "version": "a3101f290a3ae897c2c6794d2b4936e7981caf936b6d8d786beb943de6d4d9d4"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "382576e2e3a3f5e31e83bb50b3c8e19f937cc8f9210bb6d6e64901f40c5edb14",
+          "version": "821152fd02a7c2eb17b9df394a60d3f9b8d07468939c4cbed1b7c23b012b3142"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "3dd9bf982d5c04755337e5002948d4e15b372525b005ca59b283673ad0b904c0",
+          "version": "98cdec4687c63ef35590a96b6e99f613afe93087e01d9bec97b4df58e51e8b4c"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "421e01fe63290d7eb347137b5306a7c741c7939714d72fbb571e7aaf3709a813",
+          "version": "08d3f2b07bad11ee44d4606f6cf9c5c09319961d0af1ebba810f0795ea04db85"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "424c645d6880ce65e46249a3562a66e4d8a4a022f69a605f7ad5f1991f64f340",
+          "version": "0ae3484bd2bae10132e5ce0a43d6ee3ba7048046583c6981658dd50a51f4efc4"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "45fe4578ebdc1d5319a281a8f4d9e31202c73cb2040941d3edba283fa9db7799",
+          "version": "4f023fd17fb3094801deec21e44fb77240fa1cb1683e2ef8b6cb63b1a6d6d1ae"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "585cfa2144fece4ac8f12e5377c08deac47063902c8c8fb740ad42684b7daec5",
+          "version": "c1902fb29fcf4606070b484dd7957c2084bb75b2b210dc7a1d299be6f7ae4194"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "59e00454fca559e145250aaff8ac9826108ffacd88ffbfa85dd1045cb303f373",
+          "version": "6ee7ebf7b0b9643c4ba41cc9bcfd223333012b6075f7d3472511da5b0807bef7"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "5abe331ce4c66806e396e43b3d0731a663eb125a5e0a60ab10db16cbd252902b",
+          "version": "69b9c4eafd0fd5963fcc23fec45b8d17d91530a135006b738defad3231ef392a"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "6f72610ce0a2900f6c273c2ae843add374ddecac7423fdabb7eae73cfa7b1db8",
+          "version": "727d4a2d0cc6feea50ade7ad5bfd8cb63c540cc566dbb25865c758e83fcc5614"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "7465b6e22477c56bc4600a7298c0832133ebc41380a0c6ecb79ca62a02e71cad",
+          "version": "759eceaf788c38894bfc6847fdbf23cc7b27fd2eacbe6ea7d802ccd052521bf8"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "8d5aaf912324eb05cb78954eaf5ce74ae8445cc7b7b9bc3267fcbf735444e548",
+          "version": "ea3e2b84ec2503fb52d50dda1e43d4b29cde540394362a6f553e91b2e21956bb"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "95a3a87cfa805fdd14aadab42ec184cd7cf109ad30da4041cbb7e9eea95de8b6",
+          "version": "a4fe216f072afa446eac2de46d5732ce47eeca8c7752c554187b23404367b6a3"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "9989a6daed193e69cca31bdf04a606b10a92c5271c8cd8cb1f72919c3f0607da",
+          "version": "25f3a3bcdad7d2a0a5114aff2390b292a5bd233bf638d04affb77d2074e5f189"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "9d987699b914b937830526fadb0eabf50c24f386a55dcf3aa4cf314f4ff852f7",
+          "version": "5956f144a9f7ad93cdab662938ad8c61aee1ae186a5dc25140c7a9030d0d2043"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "a4d17a13a496f4a85b99e72b206cc43f4aa00c6d64095b30fac19017ea3ba62a",
+          "version": "b56786aced1f41fd1431c1ca719606c21d15ba254e8652e939b4218f36a22e66"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "c62a943f6f7479a8069daef2919c2d8dff4431b07bf237d39b810154b85e2813",
+          "version": "d923aa1ac7a35ca0f46931c87ef6ab14291a2aa2c7c18731bb11204e3a6e06ef"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "c6d74f22c919524948fd713f31c0c1a9d87f6c76457b251f020d547ab57ee69b",
+          "version": "7c4adaf29666ff56efbba8498a52a1f8341c29e3ee2befa9336b90fd941e3e54"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "ca202360be1c03020c7f213fc25e3dac390a796034e4634248f36ca6d1cfdce4",
+          "version": "e1d739bad276a68edc8b1dd8eda98f665f5846b2f0822c7eedd657c54fabfbd4"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "cd57a6eda4c5f78f6eb3950dc4f0b7b35a2690625f249c571b239e456e6f9de4",
+          "version": "4d70e11b5af4ba97dbe29768f52aebe2e0b31d23f32eb306516c5942165de8df"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "df5ea2052ca6ea3745028b0f917fb4584954efbfb2178f12e820eb7721c04b00",
+          "version": "afa09b59028c320eeb039df5496ba8aee3181736d3eb24e664d3794d2cd0dc19"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "e1c9747fa77ac26e85129d439814e2bcac6f31e3038226cadd2d13277e2f0796",
+          "version": "bad424bdec07b4cefe88820e840397c5d00db72118ccb39f04af5b0fc4860b82"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "e744cacdcd361f191b41ce5433eae08fadd7fb48e9298f46ffccacf7e231de6d",
+          "version": "b55718f4e54390d323a28c6cb2c22a9ce47277fd45881bae7c85d2a49a1a3f90"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "f226d643849d6b6c8aed721249308b2d6766a7495ab589d405b5f64fda8cc1c4",
+          "version": "b4646b3fd738f361efc3ee7976fd45e2fb8b9839249b305d54ea151daa9ed420"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "f56ecff9f5b30a61f1d9fac4bc01a9da554b3d05b805795c36644251799468b2",
+          "version": "90e3d3cee84cf9eb25b833cd0f818ce2486a6615d8ed8957a34986b0c5c8ebed"
+        }
+      ],
+      "producer": "ins.product",
+      "producer_version": "1",
+      "as_of": "2026-10-09T08:35:52Z",
+      "level": "sku",
+      "product_id": "J10911A00305-999",
+      "stores": [
+        "MIL01",
+        "NYC01"
+      ],
+      "period_first": "2026-09-11",
+      "period_last": "2026-10-07",
+      "units_sold": 58,
+      "units_returned": 15,
+      "return_rate": 0.25862068965517243,
+      "return_lines": 15,
+      "return_reasons": [
+        {
+          "key": "DEF",
+          "count": 14,
+          "of": 15
+        },
+        {
+          "key": "SIZE",
+          "count": 1,
+          "of": 15
+        }
+      ],
+      "n_observations": 0,
+      "n_documents": 0,
+      "reported_kinds": [],
+      "reported_reasons": [],
+      "observation_refs": [],
+      "notes": [
+        "returns of the period may refer to sales made before it"
+      ]
+    }
+  },
+  {
+    "kind": "ProductInsight",
+    "payload": {
+      "id": "insight-sku-j10911a00577-999-20261009T0835",
+      "version": "sha256:1e003eb93e7ddae8",
+      "available_at": "2026-10-08T04:00:00Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_09.csv",
+          "content_hash": "4a03050eb8a173003eba403ddc5273808061eddcf4216d6d89375e15396a1d93",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_10.csv",
+          "content_hash": "5ca2df7c5af7aa6672ad7b0149b80d1b82c7cb37e4629ef624d2349ba2388054",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W38.csv",
+          "content_hash": "51c809b41e32d83da90aaf928e2a8073a5de81186908ad493129fffdfe6c09c2",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W39.csv",
+          "content_hash": "d746a7743a6225555c05e460918ebb322959e9b65709aca20876af9f0cbb9996",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W40.csv",
+          "content_hash": "a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W41.csv",
+          "content_hash": "7807f39df38787c5bc5bd069c8dd6f588042d21b440ccdf2d85836409adcc3c8",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-09T08:35:52Z",
+      "input_refs": [
+        {
+          "kind": "ERP:returns",
+          "id": "1d281ea9375432fa4151627b8d7348a300f9ddb32904b96d61342e3ba5d6d0ce",
+          "version": "08a0373e9a58f252d698827f2586771e01d156116332cf6624304cb6bfb2fe10"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "271b6722c86c422644849f2535294c1e0be7caa656fdc8c08f8c1a289905bf2f",
+          "version": "642e1620f89533f286e631cbded77345da5a99eccc833deb3da5bb538bb45a73"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "3d10c947b99df845c8d4201b0267271db581dade357d4cd8cbeaf706a6a94942",
+          "version": "5fdc2c58e6a106e14dbc8151171a552b73af0af94d492b7d412f1b05f6274bc0"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "4b599b477473142ad866bf37bcc2678e7b582fc5e447a3f7c66ce95283aa9a8e",
+          "version": "9f8558244db13ad5ab014aeb9b435813d133db3a604319685746656a8d4c89bb"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "67dd8fcf54d1ab4a2325a94bb088c68c2b0615a98290890313a70f90a8167fe4",
+          "version": "cbdd825209c2bab661e839e8ebb696e7f5d7f31af088bad527971420ba13fb10"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "6d651e0fecc3a2a44ba98d371eaf08da2756efe1e0ffc7b90257993f10b5566a",
+          "version": "f63d2eebadced4b6dacb26f16d2386d5249b18d0d5e50841e437f6cc06e696c4"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "74144b86bef0b114aefdffe2ba8a90651a802d65d3638239904f70381d3b96d9",
+          "version": "8a625c395d1a4771803adce4755116b92a9a4bcbc626f2d74e099867f5ebef80"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "0c16749bfbc8ac95bb62ffee63a1296a446558fcc99ce72df7475b9879af24ab",
+          "version": "f371eba69f91c8e5edca914ab800158d8ed58e2a3ea4123f8def8d870c69af5f"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "0db4b7f43d98968b9284bbb0527b5921986c16b88fbc84beeb645b1cf4e4811f",
+          "version": "6e8f87d5eec048eb998cd0fc076eb2676de8a3cc95eb1241af5149eb0beef33c"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "103bc7d687e6d215432ad0173a48be01c7d3b10c620423858018a5529442eafd",
+          "version": "402bdf475b7a924f4d5c2d2bfa19cb98e91c0155e3344a6e0addc372f18d4b2e"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "11fd061cb97dbf9deb2c31e9a6b716c65c92fa48949508376573969b6b2968b5",
+          "version": "3906df06f7d8a0e3b267ca9d69d0709d5beec84e3a3b4d6eaaef3cd84b2803c0"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "1f872e6c0c818b4e99e568ca9ad394d96ad30c87174259e5d4961978336b1760",
+          "version": "cea8028772e7d5d0e348f2ac466cee3ccdb5c761414bdf4aa5ec9f73376f9dd3"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "2293aa25b69ad2b668aa85a049d75831e36f13c418095ea0ca07c6b33ec4dc5e",
+          "version": "7ec2056c26ec4f97861fd7c103318b1c7d88d815b785f5dc67d92d5e80f8999c"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "2f54d819176064ca7973e6e66950d5a1a89997427c1a8d56554753042325c894",
+          "version": "1ab7346c51c15bbf8b36a7b7843c9cb4e0d60751721ee05ad8a4ca08b3db624a"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "3851475f7ac769deb0f5aab36e9aa641d1308c0fc2fffdf75a35edc38a1ae6c4",
+          "version": "c5a34b820267c2e7537904eea003cf2fcb268eea71098c0786b4536e97fb35c6"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "5aa811398553b82199844e1c6a7701015cc157b9bb6d4f71044d613eac72e4a5",
+          "version": "2c9c21518ef6e04dfcedf2bd00f6d01c702f773cd3c7a45a7c8265c2b1618934"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "5d31f15664e6bc9cb9111d8ddc1356ad6be7c4c483fe3107c1b3e52acabe91b0",
+          "version": "802408524c883ffe33edfcc94f7b89886a6a61ef6ff571456f80265e7c73e192"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "7ba22aa12c434805d56c667eb0619a3bf86db4faac5b148e19ddc90bfa7c57f0",
+          "version": "2a7c95d085b59861e6e6369b4c754289464412c5a1d124c96f1b19b06d808bb1"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "8733c3310ef02f25dd229ba2768294ce61c5740c8930d312e40742884ce4c038",
+          "version": "0a2622fc1e5fcb4fda9eb436e8194a31b121d6759a03579893d0b5587821d303"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "8b379cf6f99b1e80df21856536b43fc0d3ba8ea6a418cc0ad00fc2df0692e040",
+          "version": "d7a21b0fcfa367ab518200b6bb863a74764f0dc2c901a5466e40933017e7ef7d"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "985a79437a7e855fc6edd301b02725c271aaaad6877356184079ae8815ab530b",
+          "version": "6351284637cc7987286411ec5ff763a94fdff4c6d3f3a86f45badaa5ead47074"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "9d0f912cbbf5056aa0a55ce0e2d2eaa222e84810d469f532cb602a1e6b4f4b26",
+          "version": "700cd22a1b6a5be9ef253a135051bf669046d82328fee27695864740b002cc6d"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "a199f1fa393ec50f9eeb1f77f00535f623e9174e1e978f52f6df4632fa822852",
+          "version": "a0f3e1b8bafab5206fbb17b0798732be4d028a3ca5e2d27dfe5c63f3e3264d38"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "b48b0f8542cee23d43e52634de853e622ca9c22d74889a234ac7bbbfb90abce4",
+          "version": "2c0dd5f817afe0ce84c094a2dbfa2b0076e43aecfc114e4d5378f10ba8cb884f"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "b7c8ef633bb4fc436604e8f3446423789f602ffde11ab04ad20fa8e68a433a96",
+          "version": "47219a36ed090c0b0176b76b65ea0a6ac1f870dacf8b81ecb96339e66207e84b"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "be28d635396ad76667902328fdaccd220dac49baa821c734bfc098d6d5f4ad51",
+          "version": "df52f2952f59e73b3c866600c8f0aacce69e7ef777061aaf6eafc71d40a66272"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "be8bed3bdf38e2a8a079ddadf2f7c4fe9559a8ccf432eec23d8f72c6c6995e93",
+          "version": "9c6091be9010090d615cbabc2f252412449b0d6dea7acf50199169f4d6bf4d85"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "c57b20b23582d6fc13eb50ea711dae0007ce5dd7d050047294b60fec23347fa1",
+          "version": "a2de4082be7b156e95293c524c33c9a85aa69d27bfdd71ea454d6e1c47eebc97"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "d5af0ab422a4c50c26cfe0821690ef42e93c1259e4ddd23415341e097ff70e10",
+          "version": "2d7537769e156e128be5f68c219be02532e987c32577459b34835b5b5a0fa965"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "e8c6a603e94a3ec4975f96104d65e709053a1af713af60380d78d46a60b01848",
+          "version": "76ec235cb5c9acea68922e6fe59355a5c1373721a19640c4bcda944275434901"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "ef716e3cfcd756774d222762a6eee31f29677945bf788b695eb62359238ce362",
+          "version": "7683236b9bb4a99ca3b86bf34cd14209dcc3a8fcc8dcbd5997d753ecc44c8dec"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "f1c952cf1bb8cecb8dab83d13699e94e70f3332af39b01254d6c0f47e9f7e601",
+          "version": "47dc5dd6a98d883fec99854338b0a0ae6e029dbea5b0bbe002df18abf1d41a51"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "f1c982cb4220fc116f29658fdc09c9ff973938ff488c1d16840b6ee661244f2d",
+          "version": "6a93bb0382d383f77692e92a1a1eb063cbf4ef9a67e7659d5eb72bc4eb64571c"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "f3a0fa340e4a44afc70202aa4e76dc8e7a093827e9f20063688c8c882aaf1d0d",
+          "version": "17ef59d4217089cb53b486fa810525c7b7de72957624cd70f975da50c2eba105"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "f9dcd66784ffb4723f30225c12c3d2dcedcc7a70facc8b722c5c75d77924b9e3",
+          "version": "003a0e1898cfb2eb9c4249791094d10d87d9420babb40ec124a122649598e792"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "fbef62ed44d1c0779c38d060f6106e36425789bfef4cf341105b8121d192dfbd",
+          "version": "4feeb32ea4aea118ff73a70e5c5eb47fcded0e5f6e42bb33b77a4ca865235150"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "fea175de2a699e83d31398ace701da92caf091c4d99d50eb7ef70a5b7abd1c28",
+          "version": "a529111977761c86f877398c862637ba6cc39fd6b599d80377cb533c2757de37"
+        }
+      ],
+      "producer": "ins.product",
+      "producer_version": "1",
+      "as_of": "2026-10-09T08:35:52Z",
+      "level": "sku",
+      "product_id": "J10911A00577-999",
+      "stores": [
+        "MIL01",
+        "NYC01"
+      ],
+      "period_first": "2026-09-11",
+      "period_last": "2026-10-07",
+      "units_sold": 46,
+      "units_returned": 7,
+      "return_rate": 0.15217391304347827,
+      "return_lines": 7,
+      "return_reasons": [
+        {
+          "key": "EXCHANGE_SIZE",
+          "count": 3,
+          "of": 7
+        },
+        {
+          "key": "SIZE",
+          "count": 3,
+          "of": 7
+        },
+        {
+          "key": "CHANGE_MIND",
+          "count": 1,
+          "of": 7
+        }
+      ],
+      "n_observations": 0,
+      "n_documents": 0,
+      "reported_kinds": [],
+      "reported_reasons": [],
+      "observation_refs": [],
+      "notes": [
+        "returns of the period may refer to sales made before it"
+      ]
+    }
+  },
+  {
+    "kind": "ProductInsight",
+    "payload": {
+      "id": "insight-sku-j20931a00012-999-20261009T0835",
+      "version": "sha256:2add01ff457155b5",
+      "available_at": "2026-10-08T10:00:00Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_09.csv",
+          "content_hash": "4a03050eb8a173003eba403ddc5273808061eddcf4216d6d89375e15396a1d93",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_10.csv",
+          "content_hash": "5ca2df7c5af7aa6672ad7b0149b80d1b82c7cb37e4629ef624d2349ba2388054",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W37.csv",
+          "content_hash": "c1fae11d341e186aef036364f4d9e04c5c40b90177c9e0ba305d1696b800fe04",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W38.csv",
+          "content_hash": "51c809b41e32d83da90aaf928e2a8073a5de81186908ad493129fffdfe6c09c2",
+          "locator": null
+        },
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2112_MIL01.eml",
+          "content_hash": "sha256:42ba599825b726743a870909947f1046005d4f0d715a79922b4ff43cef313a93",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-09T08:35:52Z",
+      "input_refs": [
+        {
+          "kind": "ERP:returns",
+          "id": "7183ead262cae935d3a5ef721f2d455a4a5bc6dd211ad512d63c753d9ea9b516",
+          "version": "30387c2af8ce35f9cc368fb0762c627ef7cbe92e71dbe020e91efdd075f287cf"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "9edfc738d865ab91b548dad2edea27b553b914b022504a90a4a7c9aaebe46c43",
+          "version": "6ab3ed4192934227781ac98207c25da5552028c3ee199122873a2246be1422e8"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "cbd71f8449dacd83237e4f3ca1e61ebaa3456b0cd26e5420fd5c65fe540c111b",
+          "version": "50c908723ce5f9003131638a78f5030ff48b26bf89c6546ccbe6e920b02206a4"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "0ca435e50725024a1f66909ab84d79d0ddb4e3d5248915f9a0bdc109c1a16541",
+          "version": "e04cc8ea54d47aebdac4d6f00b19c82ddf695d2af0e860d8fce41bbea0bb14c2"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "10b1e7f0fba331730c8871dbf94c3d4f4fcc8755790e0189e5e7af437474839a",
+          "version": "99cbafb51fce65a4d69c2cc0e0e17c332dd1d6727f84e504d05b6d6cbabf1a4f"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "1a559dfb3ead91913fa4ea4476c92898e686b0dc3e304862476e4cd3a44e013c",
+          "version": "576024f1c112895b93b0881938ea8e2c06a0f4392bbb7f847422d5b3f2f8404d"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "25b424d1170bc6a6bb9cf251fbc5f71f7c294aa931ec08db6c1b8868ff638370",
+          "version": "7c43e0af125c35daaf73530e6a8460abd89813be924da7c9577ccd7eb2fdc1c6"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "27245561aed2f4c01fbdd8ad2d22e6573977e8c9ee760046376291749045dd75",
+          "version": "511513500b887c56fb64877778035c3c615cfc03ef633494a2cd7fead0b4d1fa"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "3cc8470808c151db768808057fa32ac9eb9b47b879550bc9e1da15dde3e8526b",
+          "version": "b31273fa1db7103fd1a6d026962f969524d1300805fdbbc675ebb18c3a5fc7d2"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "53b0074b04bec465e42cf017b61a6d27e515643298028e53c7d2f054ac62f984",
+          "version": "c6cd4049b1a102aca12e36ffc15be45f2333486c141d31b3fcc44b559bd152ce"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "62cd5b75fc96c2a62cd60f54e8fa719a1e6884843acc531d0298076097175276",
+          "version": "576ff380cbb7a4eb9f84dede5c7799927ef86a48a3df9b08710f413b13e545ca"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "80b47e5a627c09429aa107ce111173d7dc27dbf254370fa2800bdd0b7fea2ff9",
+          "version": "b08ba878aa87d2de1af30a620c63491ec893bde5b92d196b3f1e7fa05f8a1e45"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "9cc1bff34bc9eb96c3069954ac6eb91de71e62979695b39d91ec25d85f767342",
+          "version": "faed104302a1c671c268fe067f89888768ca644dbcbaa806033302ebbc648878"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "b27d05c087b1ef87f169f42f93dc4b53a3d6b6f17e53ef6a724a7ded5a08c1eb",
+          "version": "fbcedc8c090dfde0fec7cd844ea42242d1b0482a8d35a9763b409046743e00ed"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "bc530d347b2c031cef2919d5938db0ccdaee982afd0f94d5b400d6befdb7f86c",
+          "version": "0e21d7b4d9525e7132dcd051aecc1dfc660ef9befbc18a620072f35ff65c7ef3"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "c6fa2c7a95810376af5c9c7e4ca41e333b6ac1c5a7d1bc00f06e9184c70b2205",
+          "version": "19c89817faf495f455b84fc982ed07a3f4023416076b07e3f25b54154a2ee80c"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "d2b644e190e5479e50e122dcb21a64d7877c6c30f0482dd7c517157e6520d13a",
+          "version": "53f581883bcb5c5b36309435a32cb26b4c36ffec146bc93ae853c3890e2ee623"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "d4bfe2e8a2a2a6c794a21c64b6bed2f3802e702f6f78053050a4886a2bc73380",
+          "version": "fa2b3fc93b65363b95befec980f5d739e2d7626e2864998594a91cfc61939396"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "db3269430af7143e0b813216e3a9e6bfcaf3e6b6d1fbc8a5b7cebbf6840dc6e6",
+          "version": "13f2fe8c2e9734bd5ad87d099cc80719b2f1c93e34146742442e6109797ba61f"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "ea504361b9b5a6c90c5b26fa0ebc975fc16d88164db4ab0cfb47d10b69e2cdb5",
+          "version": "bf9ab289b5189acdcfc504e2dc418f360fbc8b1071a94af0162e56126f739047"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "f18848ece1bd8f1381ee85ad269644bd5619528b0c6d3a7e27c7191d97697a5e",
+          "version": "cef6b9e0db89bcc08eb80fd72a34ef9829d4ab7483c629a2a2e43fa825041b5f"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "f1b2696293d97e32208a74eedee81a90625ccd13d4af7883a40712fc3822e03c",
+          "version": "4d23054d83c44448ace699ec65d7211286c2ebc6adbe4defe357cab4985770e7"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "f1bbacc6918163eaea0da0c10b809292b7515c2f08b97dad3e5162abe2b5808b",
+          "version": "77e60ef21892bb6549f13e337f6ab9202e94640235793a47cc3344e22471bf22"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "f5ffa2ac0d5e6fe5167e0bea117f13b84348f4c2bba2e854f1e10560a58729a8",
+          "version": "6368cf6a398d6e20e9ac87c9655b35e7b0f0e84cffec932ca26b723d29702f1c"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "feb1d098744b5cf68cfc07d41a9aa39285219c672b2124be9f30b868f127f730",
+          "version": "112609198f3b400061d36dcd2f1ec7213ae1b8878e84225a810d0f7b6e076a8a"
+        },
+        {
+          "kind": "Observation",
+          "id": "obs-20261002-2112-mil01-maire-requests",
+          "version": "v1"
+        }
+      ],
+      "producer": "ins.product",
+      "producer_version": "1",
+      "as_of": "2026-10-09T08:35:52Z",
+      "level": "sku",
+      "product_id": "J20931A00012-999",
+      "stores": [
+        "MIL01",
+        "NYC01"
+      ],
+      "period_first": "2026-09-11",
+      "period_last": "2026-10-07",
+      "units_sold": 49,
+      "units_returned": 3,
+      "return_rate": 0.061224489795918366,
+      "return_lines": 3,
+      "return_reasons": [
+        {
+          "key": "COLOUR",
+          "count": 1,
+          "of": 3
+        },
+        {
+          "key": "QUALITY",
+          "count": 1,
+          "of": 3
+        },
+        {
+          "key": "SIZE",
+          "count": 1,
+          "of": 3
+        }
+      ],
+      "n_observations": 1,
+      "n_documents": 1,
+      "reported_kinds": [
+        {
+          "key": "unmet_demand",
+          "count": 1,
+          "of": 1
+        }
+      ],
+      "reported_reasons": [
+        {
+          "key": "unspecified",
+          "count": 1,
+          "of": 1
+        }
+      ],
+      "observation_refs": [
+        {
+          "kind": "Observation",
+          "id": "obs-20261002-2112-mil01-maire-requests",
+          "version": "v1"
+        }
+      ],
+      "notes": [
+        "returns of the period may refer to sales made before it"
+      ]
+    }
+  },
+  {
+    "kind": "ProductInsight",
+    "payload": {
+      "id": "insight-sku-j20931a00144-999-20261009T0835",
+      "version": "sha256:114a7cc29c8ab269",
+      "available_at": "2026-10-08T10:00:00Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_09.csv",
+          "content_hash": "4a03050eb8a173003eba403ddc5273808061eddcf4216d6d89375e15396a1d93",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_10.csv",
+          "content_hash": "5ca2df7c5af7aa6672ad7b0149b80d1b82c7cb37e4629ef624d2349ba2388054",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W39.csv",
+          "content_hash": "d746a7743a6225555c05e460918ebb322959e9b65709aca20876af9f0cbb9996",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W40.csv",
+          "content_hash": "a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-09T08:35:52Z",
+      "input_refs": [
+        {
+          "kind": "ERP:returns",
+          "id": "055706e652ac18f1299fa2bcb404848ae4fa6ed6c75f9ae2e3989314cde5edec",
+          "version": "e8099e7f8b8c52103a6a6c792a2081f2171866ba5c8ba54a3345339bee02fb2f"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "1e8ace581e1deb56ca9d4e20dc0a06904fe982bdfab7f00132a3beebc534c0af",
+          "version": "7a4f680a12851be3180874b853e9851da11f1628f837f3695cf5d70db534e2b4"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "2eb4a50bdcbe5d33ad2ee139131dfcc83910501d67fa70f991203da8f9031d34",
+          "version": "62e1615983cbea1ce00c27b85f4a59df6f4cdf7e390206fc0820b08d0e23c730"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "5e66eeacdb8f3b7315df05b2976b03e8b1c0ea3bac7420347f61566524c5dd93",
+          "version": "717eaeb5a301ba7ddf93c3daa149a793287297300789db69ecb9fda153968fcd"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "7ea25624fe263cbcff64d062e64f7cb7feb747f7809b1ebc374ce277f1ccca8d",
+          "version": "693571aa442ff6f1aa3d30417f314e4ddd604800ac217140e75a255a4b22d392"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "89ec187d2e252310a95ad3ef26e41a61a2173b40f9767229d6a70bbb690b3e12",
+          "version": "3e961cd2a7e7b81f7e99c770bf3faf459f19cc830af48bd4407bd1af4c86843d"
+        },
+        {
+          "kind": "ERP:returns",
+          "id": "f899d0b67561423f192067ad849af3dc7dc0c6a6d8f38e5c5c765e8bab774226",
+          "version": "84b8591fb902530d6241c81ea5969ae1cc254c90797c226106ec23f2014a97a2"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "1486987e47d8687baa622da9fe9c875f68e8614f7e51ac20a04b9fd040703a3c",
+          "version": "ed89feed4b65a7eb01fa9a4d26d23113eaa08b7c00103829d08c612d99369cb0"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "157b4423b1d4b38beaab4d9d44b7e82a0578986dc0404e2c9b1cf5213868342d",
+          "version": "f5bd161fb9333ffe547cf9dc9aef44a62393839ddcb80a6d3b7fe85cf48280be"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "1b1cc1f5b8648142d0a2626051351384320f449d55aee018c50b5ba0964ee18e",
+          "version": "8b021cd2b2895b7e25ac7fe2157f1ed09833722cabe63be140155b78d7663a16"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "1e115ff46536daff576547cb38f8cf4e10b9d38f359d1732d69cf57c1b800e0a",
+          "version": "4140a5b4a287b5e3369e294df6714b19c1ae23e7b1de0b97b795174920979681"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "3245de70aed6aa5417eb036c2899bbd2c8f31cb124419691fb7a82a65d9aedb1",
+          "version": "63b8c7d614dcdfdc91b0426bb71f1b6a6c82ecd5c3a34340de161808797ad24f"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "375b10de0b8638edbd1b51933e2eadc122b77ab3fdfd52de3dabcf4932880b2d",
+          "version": "8b234e2f866b4cfa7b81ac18e8d81a861e2cfd402eb680f60ee2bab127cb723c"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "3b7e40285d51106ae1df809968a31d51869788a015d04bf3864cb7eef81377cd",
+          "version": "b3125b8e12c4adbfc76d889acdfa165de5a9e6e5ddc51362ca787e6e6f442cc5"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "3dddba0fa84f74ff2762c9f0f9ff3930def08d06603e1d77b7be7790efae32cc",
+          "version": "7f260d11caab73446c10a93b6455a097387a93712b3d37a51e3d952847f7ef68"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "3e1f5871cd03eb18fe163981ef5220c4c03af47d0e69740e3393d2cb44c45e07",
+          "version": "a2c4745c77aa254bc205a5f233632c4ed82818a9e909a9762306d8fc6793ff2a"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "3f40eac98640a4f666001801d93fe06f1ba8fa2ec2953cac1ff6f5994704b1b1",
+          "version": "09818b5b44c77c2f0b15e46f5af268ff04b13c9ee4999ef9a71d447bac5b0ea6"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "42f6417b4413cc6fc7fb86ac896264054533eb1a0035260c65d4efcdd8a31524",
+          "version": "881191fb6265af7f189afadaf795d5022da745b70b9eac01877e65e299e90dae"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "54948bd5681bcb45f2cc836f5cf291be70ffb1015247e04489716e1eeecb48a7",
+          "version": "6d5f30f018b7e96f5e933aa22c618524c6db057f13f0fd166d7c08677b467046"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "5dbabb90155847738bc47c2401b1b72a0b37b1dc4039b7d75ca7dfe3ec7b640f",
+          "version": "34c6eb9e7926bca755ea74cd545373941b852adb1584dad504a8b119a270e457"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "706f8ea427f776b4a7d759b53f3e0cb172cd3877f5aa27b27bea6dc0df8267d6",
+          "version": "a443acbfc5b88fb610d89b3eef4fbffc87160bb8d0843ab2149349a7dc3c7b7b"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "7cb4728e1dfa0b3f8dfd0c6732e9f8475d889a40fea6c91b60e07516437ae0ad",
+          "version": "b69531a1ff9a5eb4e050a3409cc72242afc5a995ceb7dc909642c4ae05a21ded"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "811969f52b048994b392553d5ae18c05f962df3114d9cfd27df01b84705b02c7",
+          "version": "6c03c9baefcf6766905cd336886c3aab3e84e9a292b7fee50dc3fd31563b460e"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "81324f0b5f6f799e53bb6310ab8cdbe9a9a2945c338e5abb7d6991d5c98090a0",
+          "version": "213d512c83b2b0cf06d0376067cc7cc1f187918d236aa14a11cc7f3db8aa6eb9"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "81a4d15cd5d147580606e669b6398bd250389b473e01fad9c8fb92018bda82d5",
+          "version": "e2da0d834b78fc3b978130a417260cbc29ff33b2bdf083358e23cd488a0252eb"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "88bb76ace2fb5c61ec93d195694f368201d19b1125cafe9a004f734af316d6b2",
+          "version": "42f7d7569a7025b47f9240f746bedfa80ce522c0f121732d0c036a32361efb01"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "8ede93919bcf16420dfbca4ab14f0249f412e25851009b26df0197f716a766c5",
+          "version": "491605f1edd2fbbf082ecd954322fcc6cb08c9d81f1d3dfca2ca6ded848103d7"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "8f6b739c2c42a110c9161a300ff81dfca2eea977a4e977599598053e008dae05",
+          "version": "b366178ca16fa10d6d97cce5582fd735bcb0a75188aa34ea767ed9e73986db7c"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "91e53fadd922bd65b3a7d0d1a2176713acf720b688b884746de922e16107f1c9",
+          "version": "06548c44e886b9f03883de98019c5ec81af395d9fbf9a6dae53f5009dfe8f89c"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "956f209a4446aa380f317e2acd58588e26a7fc9a1082e6c98aa96d7952c359d2",
+          "version": "e98fbcbb996e08bcd9c95957915d5cc7800e766f2a6956d8b7e4d13ad6030286"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "9ae5b6f2bc2ba3f2e5645735c805bb84eae519d0bf6737e547495f8d48af8bce",
+          "version": "d8545ee50b2f5f02e02c0eccb05a6ed91132d2385f4eb4346dac9e62c92a40f7"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "a5107203f3a1bf9fc2158372ddea4cb6f00665f63e6ba47d1bf6d5dced8c134a",
+          "version": "b017334d4294b05b246b56e53d4f0aa8828c6f9c0b182a54251a2d1aeb603681"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "b9058b3c7a0bd18b8b4786bbd317cba7d7e0613ad3d3f67ea50b3cb43dac9d91",
+          "version": "28d53bf8b1754c9a181998c50e59770127f0201d9c3db3020b0564d193b842c8"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "bbf641a0a185fde57af1188358d4c271a5ade46e407885eefb4a17e0f61bb225",
+          "version": "4c230be4f7b0ea9367ffd3eedb0996a332f2130feb4e8e843c1522620f34e6c0"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "c644feaf1aec5e8b9366ba89c1d3eed856882dffe18a5cc6eae6c679a5762bc1",
+          "version": "c9e353f67a9523cbc4234da1b790f5655d9cb94923d4de912d0ac89a6ba0d75e"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "c6abf7b6e4accefb2ae2e30494662dae6d03ecc4dae88e9a4c9be2670dfbe271",
+          "version": "0180ee20d9483e1a3100be5c0628cccac048991412446381c4e7648274323b39"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "c8b292c3b27d6da03baa35c46e279c8625d69ad993a0425f9e6d07820ef5ab4f",
+          "version": "4b4013047afaa9c587dc4053de4c13c51db2ea1705b220dce1a46265d3b8a0c0"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "ca6a2c93c6bd155ccfd639c9ce70987f3e325061ed8749775ededf730cfc43b7",
+          "version": "ef3c7ed2a479f07f84472e9577c5d07f9b9303b309e147e1af960978b13cd83b"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "cec3379dda0f50c9b48e44e3e35db89d407b66b397230f020e293ac7373ee2af",
+          "version": "9c811dcc41438e431efc41bb275de91faa0258100a4099971ea2eeaf12a5ddba"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "d77a358aae5878ecb4d3307cb745e40815c8a9019aa7088742adb8929fc994c1",
+          "version": "07d710542c848a942bd5a30bc44fd25ecab7947c1f893d2dbda8a8b056db31a4"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "e4381d18ae66b4afedfd19c24e06aa7c31a67534156a1492a3b6a7b54e913542",
+          "version": "f0732db1e07515cab7e4fc38a23100b194f8309b7c6165df08a43c4cbca64c48"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "e727d19135f04722d6f96c82ba2580236725aeb224be9c16270007319f09abe7",
+          "version": "acca1295accf102b9e8e5e378038a26e9d399a45ea4bfbb2d882d1fdcccdeae9"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "ea0af95178289ca2415b381527fe8ac19ed8618affc256376808515f812b8d89",
+          "version": "744251206fa62bf1316e74df6ae4eb1f5c6ac78446866b56936948c7cf89b19f"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "ed0c476a8ee74d4c3729d27a0011ad6430672af73a425602656d22c4c9a748ad",
+          "version": "435cb27a26e0cfea1fa609944b4c1f38ff346fb57ffbd8d45695ea29cab16656"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "f1ab8c74e246b6760e77fc28c73278ae936dca27b98c3a925c34056e219ff34b",
+          "version": "056127d84750ee83c8ffe670ab643229c2b75a74bc77ac8765f57c22f53b1c77"
+        },
+        {
+          "kind": "ERP:sales",
+          "id": "f34cf003a4cf74e5c74fa8cc39e31a931b2dcbd99d4c4b3a7ce4f0c4c0f59503",
+          "version": "a7157c60ce00fc7815d105699cb7a7b541846685614d734d881d3924ceb9bfcc"
+        }
+      ],
+      "producer": "ins.product",
+      "producer_version": "1",
+      "as_of": "2026-10-09T08:35:52Z",
+      "level": "sku",
+      "product_id": "J20931A00144-999",
+      "stores": [
+        "MIL01",
+        "NYC01"
+      ],
+      "period_first": "2026-09-11",
+      "period_last": "2026-10-07",
+      "units_sold": 97,
+      "units_returned": 7,
+      "return_rate": 0.07216494845360824,
+      "return_lines": 7,
+      "return_reasons": [
+        {
+          "key": "CHANGE_MIND",
+          "count": 4,
+          "of": 7
+        },
+        {
+          "key": "GIFT",
+          "count": 3,
+          "of": 7
+        }
+      ],
+      "n_observations": 0,
+      "n_documents": 0,
+      "reported_kinds": [],
+      "reported_reasons": [],
+      "observation_refs": [],
+      "notes": [
+        "returns of the period may refer to sales made before it"
+      ]
+    }
+  }
+]

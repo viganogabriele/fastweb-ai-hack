@@ -58,6 +58,25 @@ Every derived record is available at the latest `available_at` of its inputs and
 `source_refs`. The baseline is referenced as `ForecastVintage` (`<file stem>/<store>/<sku>`,
 version = run date): a source row, not a stored artifact.
 
+## INS-01: product insights (lane B)
+
+`insights/insights.json` holds the `ProductInsight`s of the fixture run, for the brief's "Product
+feedback" section (OUT-01) and the product view (WEB-08). `build_ins01.py` runs `ins.product` itself
+on the DATA-01a/b observations, links and relations plus the real ERP daily sales and POS return
+lines of MIL01 and NYC01, at the DATA-01b report's `as_of`. Rebuild from the repo root after
+DATA-01b:
+
+```sh
+backend/.venv/bin/python data/fixtures/build_ins01.py
+```
+
+Every count shares one perimeter (MIL01 + NYC01) and one period (2026-09-11..10-07: the last day
+NYC01 has published at 04:35 local, back to the start of Milan's 28-day ERP window). The Tib navy
+(SKU-size link → its colour) sits beside its `DEF` POS returns; the Maire black copy is counted
+once; the cardigan notes of 10-09 fall after the period and are not counted against its sales.
+SKUs with 5+ POS return lines and no note are kept too. The return rate is units returned / sold;
+reported kinds and reasons are shares of counted observations, never of sales.
+
 ## DATA-01c: stock facts, options, agent trace (lane E)
 
 Built on the DATA-01b case above by `build_data01c.py`, for `act.options` (ACT-02), approval

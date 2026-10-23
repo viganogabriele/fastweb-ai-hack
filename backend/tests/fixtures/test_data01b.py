@@ -499,5 +499,5 @@ def test_all_fixtures_load_as_one_run() -> None:
     loaded = {(type(r).__name__, r.id) for r in records}
     ours = set(everything())
     assert ours <= loaded
-    later = {"StockFact", "ActionOption", "AgentTrace"}
+    later = {"StockFact", "ActionOption", "AgentTrace", "ProductInsight"}  # DATA-01c, INS-01
     assert {key for key in loaded if key[0] not in later} == ours

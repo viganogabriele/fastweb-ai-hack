@@ -8,6 +8,7 @@ Fixture separation remains physical: the caller chooses the fixture database.
 
 from collections.abc import Iterator
 from contextlib import contextmanager
+from pathlib import Path
 
 from sqlalchemy import Connection, Engine, delete, select
 
@@ -120,6 +121,18 @@ class RunRepo(Repo):
                         if (parent and parent.data.get("store_id"))
                         else set()
                     )
+                elif ref.kind == "ForecastVintage":
+                    # fc.baseline cites the ERP forecast rows of one run date as
+                    # "<file stem>/<store>/<sku>" @ run_date: resolve them like erp.* refs.
+                    stem, store, sku = ref.id.rsplit("/", 2)
+                    rows = [
+                        r
+                        for r in self.erp("forecast", store_id=store, sku=sku)
+                        if str(r.data.get("run_date")) == ref.version
+                        and any(Path(s.uri).stem == stem for s in r.source_refs)
+                    ]
+                    parent = max(rows, key=lambda r: r.available_at) if rows else None
+                    parent_scopes = {store} if rows else set()
                 else:
                     kind = KINDS.get(ref.kind)
                     parent = self.get(kind, ref.id, ref.version) if kind else None
