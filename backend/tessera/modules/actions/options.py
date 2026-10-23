@@ -13,7 +13,8 @@ Options for one case, all alternatives (none reserves stock):
   quantities ``1..q_max``. ``q_max`` = donor stock net of ledger reservations and of the donor
   floor, capped by ``max_units_per_transfer``: bounded by availability and policy, never chosen
   by a model. Cross-border donors are not candidates in the MVP, and a lane that needs customs
-  fails. A donor without a lane known at ``as_of`` gives no candidate (a leg needs pickup and ETA).
+  fails. A donor without a lane known at ``as_of`` (a leg needs pickup and ETA), or a donor size
+  with no unit left after the ledger, gives no candidate; the reason is stated instead.
 
 Every movement check is mandatory and comes back ``pass``, ``fail`` or ``unknown``; missing data
 or a missing policy entry is ``unknown``, never an implicit permission. Without a verified size
@@ -39,10 +40,12 @@ hold stay within ``donor_max_additional_lost``, also when hold already stocks ou
 Ranking is transparent, never called optimal: drop candidates with a mandatory fail/unknown, then
 keep a positive reduction of total unserved units (destination + donor) against hold in the base
 scenario and no increase in any scenario; among those, more reduction, then less cost, then fewer
-units. If that pick differs between scenarios, no move is recommended and the hypothesis that
-changes it is to be verified. Otherwise exactly one informational option is recommended, chosen
-by the first blocking check: stock → ``verify_stock``, product/size → ``ask_store``, lane, cost
-or policy → ``notify_owner``; nothing to fix → ``hold``.
+units. If that pick differs between scenarios, no move is recommended and the store is asked
+to confirm the demand hypothesis that changes it. Otherwise exactly one informational option is
+recommended, chosen by the first blocking check: product/size → ``ask_store``, stock →
+``verify_stock``, lane, cost or policy → ``notify_owner``; no candidate → ``notify_owner``
+(``ask_store`` when the case names no SKU-colour); no benefit → ``hold``. When blocked candidates
+compete for display, a ``fail`` (final) ranks below an ``unknown`` (resolvable).
 
 ``act.options`` (bottom of this file) runs this for every open case of the run's stores, reading
 cases, forecasts, ERP stock and master rows from the repo and lanes through ``SystemsReader``.
