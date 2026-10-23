@@ -14,21 +14,14 @@ import {
   LoadingState,
   StatusBadge
 } from '../ui'
-import type { StatusTone } from '../ui/StatusBadge'
+import { PipelineGraph } from './PipelineGraph'
+import { moduleDetailId, moduleStatuses } from './moduleGraph'
 import './sections.css'
 import './modules.css'
 
-const statuses: Record<string, { label: string; tone: StatusTone }> = {
-  pending: { label: 'In attesa', tone: 'neutral' },
-  running: { label: 'In corso', tone: 'info' },
-  succeeded: { label: 'Completato', tone: 'success' },
-  degraded: { label: 'Parziale', tone: 'warning' },
-  blocked: { label: 'Bloccato', tone: 'warning' },
-  failed: { label: 'Errore', tone: 'danger' }
-}
-
 export function ModulesPage({ runs }: { runs: ReturnType<typeof useRuns> }) {
   const run = runs.selected
+  const [showGraph, setShowGraph] = useState(false)
   const [catalog, setCatalog] = useState<ModuleManifest[] | null>(null)
   const [catalogError, setCatalogError] = useState('')
   const [revision, setRevision] = useState(0)
@@ -150,6 +143,13 @@ export function ModulesPage({ runs }: { runs: ReturnType<typeof useRuns> }) {
         )}
         <div className="sd-modules-actions">
           <Button
+            pressed={showGraph}
+            disabled={!modules.length}
+            onClick={() => setShowGraph((current) => !current)}
+          >
+            {showGraph ? 'Nascondi grafo' : 'Mostra grafo'}
+          </Button>
+          <Button
             onClick={() => {
               if (!run) {
                 setCatalog(null)
@@ -205,6 +205,7 @@ export function ModulesPage({ runs }: { runs: ReturnType<typeof useRuns> }) {
           </p>
         )}
       </section>
+      {showGraph && <PipelineGraph modules={modules} run={run} />}
       {modules.length ? (
         <div className="sd-run-list">
           {modules.map((item) => {
@@ -212,14 +213,15 @@ export function ModulesPage({ runs }: { runs: ReturnType<typeof useRuns> }) {
               (entry) => entry.module_id === item.id
             )
             const status = execution
-              ? statuses[execution.status]
+              ? moduleStatuses[execution.status]
               : {
                   label: run ? 'Non eseguito nel run' : 'Non eseguito',
                   tone: 'neutral' as const
                 }
             const counts = Object.entries(execution?.result?.counts ?? {})
             return (
-              <article className="sd-run-card sd-module" key={item.id}>
+              <article className="sd-run-card sd-module" key={item.id}
+                id={moduleDetailId(item.id)} tabIndex={-1}>
                 <div className="sd-module-heading">
                   <h2>
                     {item.id} · {item.version}
