@@ -120,10 +120,9 @@ export function RecordPage() {
                   type="button"
                   className="rec__side rec__discard"
                   aria-label={t.discard}
-                  title={t.discard}
                   onClick={again}
                 >
-                  <Trash2 size={22} />
+                  <Trash2 size={22} /><span>{t.discardShort}</span>
                 </button>
               ) : (
                 <span className="rec__side" aria-hidden="true" />
@@ -186,7 +185,7 @@ export function RecordPage() {
           <h2>{t.sent}</h2>
           <p className="rec__sent-text">{t.sentHint}</p>
           <dl className="rec__receipt">
-            <div><dt>{t.storeLabel.replace(' {store}', '')}</dt><dd>{sent.note.store_id}</dd></div>
+            <div><dt>{t.receiptStore}</dt><dd>{sent.note.store_id}</dd></div>
             <div><dt>{t.staffLabel}</dt><dd>{sent.staff}</dd></div>
             <div><dt>{t.sentAt}</dt><dd><time dateTime={sent.note.sent_at}>
               {new Intl.DateTimeFormat('it-IT', { year: 'numeric', month: '2-digit', day: '2-digit',

@@ -21,6 +21,8 @@ export const record = {
   provisional: 'Trascrizione automatica provvisoria',
   sentAt: 'Inviata il',
   noteLabel: 'Nota',
+  receiptStore: 'Negozio',
+  discardShort: 'Scarta',
   start: 'Registra',
   stop: 'Ferma',
   discard: 'Scarta la registrazione senza trascriverla',

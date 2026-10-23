@@ -10,7 +10,7 @@
     calc(var(--sd-space-4) + env(safe-area-inset-left, 0px));
   display: flex;
   flex-direction: column;
-  gap: var(--sd-space-4);
+  gap: var(--sd-space-3);
   background: var(--sd-color-surface-canvas);
   color: var(--sd-color-text-primary);
   font-family: var(--sd-font-family-ui);
@@ -88,8 +88,8 @@
 
 .rec__mic {
   flex: none;
-  width: 148px;
-  height: 148px;
+  width: 128px;
+  height: 128px;
   border-radius: 50%;
   border: none;
   display: flex;
@@ -276,3 +276,12 @@
 .rec__receipt { margin: 0; display: grid; gap: var(--sd-space-3); }
 .rec__receipt dt { color: var(--sd-color-text-muted); font-size: var(--sd-font-size-body-sm); }
 .rec__receipt dd { margin: 0; overflow-wrap: anywhere; }
+
+.rec__guide { font-size: 14px; }
+.rec__card { padding: var(--sd-space-4); gap: var(--sd-space-2); }
+
+.rec__discard { flex-direction: column; gap: 2px; font-size: 11px; }
+
+.rec__guide li { margin-bottom: var(--sd-space-1); }
+.rec__guide ol { margin-top: var(--sd-space-2); margin-bottom: var(--sd-space-2); }
+#rec-staff-required:empty, #rec-access:empty { display: none; }
