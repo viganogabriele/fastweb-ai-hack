@@ -4,7 +4,7 @@ import { fmt, messages } from '../i18n'
 import { Button } from '../ui'
 import { useRecorder } from './useRecorder'
 import type { RecorderError } from './useRecorder'
-import { ApiError, sendNote } from './voiceApi'
+import { ApiError, sendNote, voiceToken } from './voiceApi'
 import './recordPage.css'
 
 const t = messages.record
@@ -33,7 +33,7 @@ export function RecordPage() {
     )
 
   const send = async () => {
-    if (!recorder.audio) return
+    if (!recorder.audio || sending) return
     setSending(true)
     setSendError('')
     try {
@@ -62,9 +62,10 @@ export function RecordPage() {
 
       {!sent && (
         <section className="rec__card">
-          {(state === 'idle' || state === 'recording') && (
+          {(state === 'idle' || state === 'requesting' || state === 'recording') && (
             <button
               type="button"
+              disabled={state === 'requesting' || !voiceToken()}
               className={`rec__mic${state === 'recording' ? ' rec__mic--on' : ''}`}
               onClick={state === 'recording' ? recorder.stop : recorder.start}
             >
@@ -72,13 +73,15 @@ export function RecordPage() {
               <span>{state === 'recording' ? t.stop : t.start}</span>
             </button>
           )}
+          {!voiceToken() && <p role="alert" className="rec__error">{t.errors.access}</p>}
+          {state === 'requesting' && <p role="status" className="rec__status">{t.requesting}</p>}
           {state === 'recording' && (
             <p className="rec__status" aria-live="polite">
               {fmt(t.recording, { seconds: recorder.seconds })} · {t.listening}
             </p>
           )}
-          {state === 'finalizing' && <p className="rec__status">{t.finalizing}</p>}
-          {recorder.error && <p className="rec__error">{errorText(recorder.error)}</p>}
+          {state === 'finalizing' && <p role="status" className="rec__status">{t.finalizing}</p>}
+          {recorder.error && <p role="alert" className="rec__error">{errorText(recorder.error)}</p>}
 
           {(state === 'recording' || state === 'finalizing') && (
             <p className="rec__live" aria-live="polite">
@@ -88,15 +91,19 @@ export function RecordPage() {
 
           {state === 'done' && (
             <div className="rec__review">
-              <h2>{t.reviewTitle}</h2>
+              <h2 id="rec-review-title">{t.reviewTitle}</h2>
               <p className="rec__muted">{t.reviewHint}</p>
               <textarea
                 className="rec__text"
+                aria-labelledby="rec-review-title"
+                maxLength={5000}
+                disabled={sending}
                 value={recorder.transcript}
                 onChange={(event) => recorder.setTranscript(event.target.value)}
                 rows={7}
               />
-              {sendError && <p className="rec__error">{sendError}</p>}
+              {sendError && <p role="alert" className="rec__error">{sendError}</p>}
+              {recorder.error && <Button onClick={recorder.retry}>{t.retryAsr}</Button>}
               <div className="rec__actions">
                 <Button variant="ghost" onClick={again} disabled={sending}>
                   {t.redo}
@@ -117,7 +124,7 @@ export function RecordPage() {
 
       {sent && (
         <section className="rec__card">
-          <p className="rec__ok">✓ {t.sent}</p>
+          <p role="status" className="rec__ok">✓ {t.sent}</p>
           <p className="rec__muted">{t.sentHint}</p>
           <Button onClick={again}>{t.another}</Button>
         </section>

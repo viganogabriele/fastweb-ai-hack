@@ -5,6 +5,8 @@ export const record = {
   noStore: 'Manca il negozio: apri la pagina dal QR del negozio (…/store/record?store=MIL01).',
   start: 'Registra',
   stop: 'Ferma',
+  requesting: 'In attesa del permesso per il microfono…',
+  retryAsr: 'Riprova trascrizione',
   recording: 'In registrazione · {seconds}s',
   listening: 'Parla pure: la trascrizione compare mentre parli.',
   finalizing: 'Trascrizione finale in corso…',
@@ -17,6 +19,7 @@ export const record = {
   another: 'Registra un’altra nota',
   sentHint: 'La nota sarà elaborata dalla sede.',
   errors: {
+    access: 'Manca l’accesso alla demo: apri il QR completo fornito dalla sede.',
     insecure: 'Il microfono richiede una connessione sicura (HTTPS). Apri il link del QR.',
     microphone: 'Microfono non disponibile o permesso negato.',
     unsupported: 'Questo browser non sa registrare audio.',

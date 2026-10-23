@@ -24,9 +24,9 @@ is not read, and its audio is not even opened. The sidecar declares the audio's 
 whose bytes differ from the declared hash is an error, because its transcript was checked
 against different audio. Notes for stores outside the run are skipped, like other sources.
 
-Live notes (DEMO-04) recorded from ``/store/record`` live in ``data/voice_inbox/<slug>/`` with
-the same three files and ``fixture_kind: "live"``; their ``transcript.txt`` is the live ASR
-transcript the store accepted, not a hand-written one. Both folders are read in one pass.
+Live notes (DEMO-04) use immutable, explicitly queued ``data/voice_runs/<run_id>/`` snapshots.
+Their accepted, possibly edited text is published as manual text without audio intervals.
+Ordinary runs never read the live inbox or snapshots.
 """
 
 import hashlib
@@ -126,15 +126,17 @@ class Note:
 
     @property
     def uri(self) -> str:
+        if self.sidecar.fixture_kind == "live":
+            return f"live-voice://{self.directory.parent.name}/{self.slug}"
         return f"dataset://voice/{self.slug}"
 
     @property
     def audio_path(self) -> Path:
-        return self.directory / self.sidecar.audio
+        return note_file(self.directory, self.sidecar.audio)
 
     @property
     def transcript_path(self) -> Path:
-        return self.directory / self.sidecar.manual_transcript
+        return note_file(self.directory, self.sidecar.manual_transcript)
 
 
 @dataclass(frozen=True)
@@ -152,9 +154,22 @@ def inbox_path(data_dir: Path | None = None) -> Path:
     return (data_dir or get_settings().data_dir) / INBOX_DIR
 
 
+def note_file(directory: Path, name: str) -> Path:
+    """Every source file stays in its real note folder; never follow source symlinks."""
+    path = directory / name
+    if (
+        directory.is_symlink()
+        or path.is_symlink()
+        or Path(name).name != name
+        or path.resolve().parent != directory.resolve()
+    ):
+        raise ValueError("voice files must live in the note folder without symlinks")
+    return path
+
+
 def read_sidecar(directory: Path) -> Note:
     """Read ``note.json`` only: availability and store filtering need no audio bytes."""
-    path = directory / NOTE_FILE
+    path = note_file(directory, NOTE_FILE)
     try:
         raw = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as error:
@@ -269,8 +284,10 @@ def declared_document(note: Note, audio: Audio) -> tuple[SourceDocument, list[Se
         text=text,
         text_version=text_version,
         transcript=text,
-        mode="fixture",
-        basis=DECLARED_BASIS,
+        mode="manual" if note.sidecar.fixture_kind == "live" else "fixture",
+        basis="store-accepted text (possibly edited); no audio intervals"
+        if note.sidecar.fixture_kind == "live"
+        else DECLARED_BASIS,
     )
     segment = Segment(
         id=f"{document.id}-seg0",
@@ -354,7 +371,16 @@ def _language_hint(sidecar: Sidecar) -> str | None:
 
 
 def run(ctx, *, voice_dir: Path | None = None, client=None) -> ModuleResult:
-    roots = [voice_dir] if voice_dir else [voice_path(), inbox_path()]
+    live_run = getattr(ctx.spec, "scenario_id", None) == "live-voice"
+    if live_run:
+        from tessera.modules.sources.voice_inbox import snapshot_path
+
+        settings = getattr(ctx.clients.get("llm"), "settings", None) or get_settings()
+        roots = [snapshot_path(settings.data_dir, ctx.spec.run_id)]
+        if not roots[0].is_dir():
+            raise ValueError("live voice snapshot is missing")
+    else:
+        roots = [voice_dir] if voice_dir else [voice_path()]
     mode = str(ctx.params.get("mode") or "recorded")
     if mode not in ("recorded", "fixture"):
         raise ValueError(f"unknown voice mode: {mode}")
@@ -387,6 +413,11 @@ def run(ctx, *, voice_dir: Path | None = None, client=None) -> ModuleResult:
         except ValueError as error:
             errors.append(f"voice/{directory.name}: {error}")
     found = {note.slug for note in notes}
+    if live_run:
+        from tessera.modules.sources.voice_inbox import LiveNote, batch_hash
+
+        if batch_hash([LiveNote(n, "", None) for n in notes]) != ctx.spec.source_manifest_hash:
+            raise ValueError("live voice snapshot does not match the source manifest hash")
     for slug in wanted:
         if slug not in found:
             errors.append(f"voice/{slug}: no such note")
@@ -394,6 +425,8 @@ def run(ctx, *, voice_dir: Path | None = None, client=None) -> ModuleResult:
         abstentions.append(f"no voice notes under {', '.join(map(str, roots))}")
     for note in notes:
         sidecar = note.sidecar
+        if sidecar.fixture_kind == "live" and not live_run:
+            continue
         if sidecar.store_id not in ctx.spec.stores:
             counts["not_in_run"] += 1
             continue
@@ -409,7 +442,7 @@ def run(ctx, *, voice_dir: Path | None = None, client=None) -> ModuleResult:
             continue
         document = None
         segments: list[Segment] = []
-        if mode == "recorded":
+        if mode == "recorded" and sidecar.fixture_kind != "live":
             llm = client if client is not None else ctx.clients["llm"]
             try:
                 transcript = llm.transcribe(

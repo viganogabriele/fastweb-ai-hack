@@ -104,30 +104,52 @@ back to untimed manual text because the server returned an end past the audio du
 
 ## Live notes from the phone (DEMO-04)
 
-`/store/record?store=<STORE_ID>` (opened from a per-store QR) records a note in the browser and
-shows a live transcript: every 4 s the recording so far goes to `POST /api/voice/transcribe` (team
-ASR, never cached; 20 calls/min per key). On stop the store checks the text and sends it:
+Live routes are **disabled by default**. The operator enables them with a separate random
+`VOICE_ACCESS_TOKEN` capability in the backend environment. This is not an ASR or Fastweb key.
+The phone QR is `/store/record?store=<STORE_ID>#voice-token=<capability>`; open the dashboard
+with the same fragment to enable its processing button. Fragments stay out of HTTP URLs and
+referrers. Treat the complete link as private access to the demo inbox for all stores.
+
+The phone records up to 90 seconds and shows a transcript: at most every 4 s the recording
+so far goes to `POST /api/voice/transcribe` (team ASR, never cached). Partial calls are serial;
+the final request waits for an outstanding partial and includes the final recorder chunk.
+The backend enforces upload/container/duration limits before ASR, one active transcription,
+20 starts/minute, no provider retries and a 30-second provider deadline. Conversion needs
+`ffmpeg` installed on the server (CI installs it and tests real WebM/MP4 conversion).
+On stop the store checks the text and sends it:
 `POST /api/voice/notes` writes `data/voice_inbox/<note_id>/` (gitignored) with the same three
-files as above and `fixture_kind: "live"`; `transcript.txt` is the accepted live ASR text, not a
-hand-written one. `src.voice` reads this folder next to `data/fixtures/voice/`.
+files as above and `fixture_kind: "live"`. `transcript.txt` is the accepted, possibly manually
+edited text. It is published as `meta.transcript_mode: "manual"`, with no audio intervals.
+Ordinary/frozen runs never read the inbox. Processing freezes the selected notes under
+`data/voice_runs/<run_id>/`, hashes audio, metadata and text, and reads only that snapshot.
+Live source URIs use `live-voice://<run_id>/<note_id>` instead of dataset provenance.
 
 The dashboard top bar shows "Elabora note vocali (N)" while notes wait; it calls
 `POST /api/voice/process`, which starts one small product run per store over the new notes: scenario `live-voice`, `as_of` now, only `src.voice → ing.extract → int.link →
 int.dedup → int.cases` (+ `src.erp`). `src.email` is given a file outside the run's stores so it
 reads no mail; the run is therefore `degraded` by design. `src.voice` runs in `fixture` mode
 there: the text the store checked and corrected on the phone is what gets read, as one segment
-without audio timestamps. LLM calls run in `record` mode, so the
-run replays later without keys. Notes whose run failed or was blocked are offered again. The
+without audio timestamps. LLM calls use `record` mode unless
+the operator explicitly selected `live`. Replaying extraction requires both the recorded cache
+and the immutable live snapshot; it never adds these notes to frozen historical runs.
+Committed run specs claim each batch once. Concurrent submissions are serialized and a new
+batch waits for the active live run. Failed/blocked runs offer their original snapshot again,
+even if the inbox was subsequently edited. The
 dashboard lists runs by `as_of`, so the live run becomes the default selection; pick the demo
 run again from the run menu. After the run the button selects it and opens Cases.
 
 Demo checklist:
 
-- Keys: Fastweb chat key (`.secrets/fastweb_keys.json`) and `ASR_API_KEY` in `.env` on the
+- Keys: Fastweb chat key and `ASR_API_KEY` configured on the
   laptop that runs the backend. Without the ASR key the page says so and the text can be typed.
 - The microphone needs HTTPS on the phone: `make dev`, then `cloudflared tunnel --url
   http://127.0.0.1:5173` (`brew install cloudflared`) and put
-  `https://<name>.trycloudflare.com/store/record?store=MIL01` in the QR. Vite allows
+  `https://<name>.trycloudflare.com/store/record?store=MIL01#voice-token=<capability>` in the QR. Vite allows
   `*.trycloudflare.com` and `*.ngrok-free.app` hosts.
 - Name the model when speaking ("il gilet VEL blu notte taglia 3"): descriptions alone often
   stay unlinked and open a "to verify" case.
+
+The target-laptop/real-phone/network dry run is still required by **DEMO-04 #191**. Automated
+tests and mocked browser checks do not verify microphone permissions, mobile Safari recording,
+the HTTPS tunnel or the actual team ASR/Fastweb services. Record that evidence before claiming
+demo acceptance. Use one backend worker for this local demo; its ASR limiter is process-local.
