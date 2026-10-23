@@ -12,14 +12,14 @@ is `product`, and `authorized_fixture_refs` is empty. The normal fixture loader
 does not load this nested package. No derived projections are preloaded.
 
 The actual provider recording executed commit
-`8e3436f084557e55b1979fc88ab84690be252ff4` (DEMO-02b, PR #237: source-backed
-correction/resend handling). It replaces the earlier `f1d7923` recording, whose
-resend and correction emails produced zero certain relations. The positive
-POST-investigate job was recorded at `5cdcc1c2efa6d126fdbf32bfc895b9330efd6415`,
-which adds only the deterministic API job trace ID and job-script fixes (no
-pipeline module changed); the job is bound to this
-candidate's snapshot. Later commits that do not change executable code keep
-these identities; the final verification SHA is recorded in the PR/#211 handoff.
+`38fe618a91a9d4f573e96fc2ec3cde2ee6ec8ebe` (DEMO-02b, PR #237: source-backed
+correction/resend handling, after independent review). It replaces the earlier
+`f1d7923` recording, whose resend and correction emails produced zero certain
+relations. The positive POST-investigate job was recorded at
+`6803eeada64e03678dd84a23b099f44e4634733f`, which changes only
+`scripts/core_investigate_job.py`; the job is bound to this candidate's snapshot.
+Later commits that do not change executable code keep these identities; the final
+verification SHA is recorded in the PR/#211 handoff.
 
 - Clock: `2026-10-22T20:00:00Z`; dev stores MIL01, MIL02, MUN01, NYC01.
 - 12 explicitly selected Italian, English and German emails, including resend,
@@ -29,9 +29,9 @@ these identities; the final verification SHA is recorded in the PR/#211 handoff.
   `a3d3d221987593f9512ddc82265a1f518da4218efd88e66c7a00f433b9984d70`.
 - Four configuration files; tree SHA-256
   `fb50f57d8b4b1ad55076726fab97f2ee586b2ea3098b96f7aed651d5e9a89bc8`.
-- 20 real provider envelopes: Gemma extraction/constrained linking and GLM
-  investigation, plus 6 GLM envelopes for the separate investigate job in
-  `investigate-job/`. GLM's outside-EU hosting is already disclosed in
+- 21 real provider envelopes: Gemma extraction/constrained linking and GLM
+  investigation, plus 6 GLM envelopes and 1 systems envelope for the separate
+  investigate job in `investigate-job/`. GLM's outside-EU hosting is already disclosed in
   `docs/smoke-fastweb.md`; the inputs here are synthetic.
 - 12 real HTTP response envelopes from the dataset's simulated warehouse and
   logistics server. The adapter's ordinary timestamp, stock and lane checks
@@ -52,7 +52,7 @@ demo_candidate="$PWD/data/core_demo/reproduction"
 
 backend/.venv/bin/python scripts/prepare_core_demo.py \
   --output "$demo_candidate" \
-  --code-version 8e3436f084557e55b1979fc88ab84690be252ff4 \
+  --code-version 38fe618a91a9d4f573e96fc2ec3cde2ee6ec8ebe \
   --case-id case-mil01-i10919b00011-20261008 \
   --case-id case-mil01-unknown-20261009
 cmp "$demo_candidate/run-spec.json" "$demo_assets/run-spec.json"
@@ -85,9 +85,9 @@ snapshot, foreign namespace/hash, changed draft or stale option is refused.
 For the two negative rehearsals, copy a cache outside the owned replay workspace,
 withhold one envelope in that copy and pass it to the same command. The actual
 LLM-negative run withheld key
-`0fab8264445c2d83079b0401bcd0ef3288ad096b7f87c6d8ec1e0bc50bf9e333`;
+`15d758e1f5f23a97baee22888167b030989da7be581c7c532a4c51900efc3a93`;
 the systems-negative run withheld
-`0295a3b534fa4a2eb1ad46e088a5447f9706ae602a7f755e022d62669af5c45f`.
+`11aa63dc990862ec3127c3ed81222565a9c0d5ff1843b02d82eb4e992239bcf1`.
 Both must exit 1, list recording misses, skip decision replay and report zero
 network attempts. Original caches and previous positive attempts remain intact.
 
@@ -95,27 +95,27 @@ network attempts. Original caches and previous positive attempts remain intact.
 
 The completed recording and two fresh cold replays publish:
 
-- 13 documents, 206 segments, 74 observations with 74 independently validated
-  exact document/segment quote spans, and 74 entity links.
-- 37 current cases (48 stored case versions), including unresolved products kept
+- 13 documents, 206 segments, 82 observations with 82 independently validated
+  exact document/segment quote spans, and 82 entity links.
+- 38 current cases (49 stored case versions), including unresolved products kept
   visible as `verify`; the out-of-office input produces no observation.
-- 110 evidence relations: **10 certain `duplicates`**, **1 certain `supersedes`**
-  and 99 possible overlaps (29 non-additive origins). 74 facts form 64 origin
-  groups, 63 of them active. 16 report metric facts, two actual weather context
-  events, 346 baselines and 28 case overlays.
-- 158 stored option versions, two investigator traces, one simulated clarification
+- 129 evidence relations: **10 certain `duplicates`**, **1 certain `supersedes`**
+  and 118 possible overlaps (33 non-additive origins). 82 facts form 72 origin
+  groups, 71 of them active. 16 report metric facts, two actual weather context
+  events, 346 baselines and 27 case overlays.
+- 161 stored option versions, two investigator traces, one simulated clarification
   draft, two owner/priority reports, and an exact versioned local decision draft.
 - No fabricated numerical uplift: overlays stay unchanged with explicit reasons;
   missing baseline coverage remains `not_estimable`. No transfer is recommended.
 
-Both replays: output `0f35766e7a950806bbad4be407f8a8cbe3d16032b7653bfdaabb976f9977fb6a`,
-ledger `f6e6983f363605a2261dbb9c3f7d733a95df36f63c6268b034bff59122795508`,
-snapshot `303f1a81962c331141364203f6e53846c37fa762e2ab6cbae655ed1ffcb014ae`,
+Both replays: output `9346b85e48e39119838e0aa88b1d6362379be5d5fa1a6cea50f2fc3463fba56f`,
+ledger `7b4f494a100a7ce204cc16a1fd4345314a16d0473895d5c1f5cac021ec0b230e`,
+snapshot `c522703633170af4933e06ed0f02edc29f2beb5f85cb32873ac46bb426b86edb`,
 exit 0, no missing prerequisites and zero network attempts (`replay-comparison.json`).
 
 The final status is honestly `degraded`: unknown SKU scopes require verification,
-the optional product-insights module is absent, the NYC01 correction abstains (see
-below) and the D1 investigator reaches the six-tool budget. D1 calls evidence,
+the optional product-insights module is absent and the D1 investigator reaches
+the six-tool budget. D1 calls evidence,
 stock twice, lanes twice and the deterministic options engine, then publishes a
 visible `verify` fallback. The unresolved MIL01 case instead calls evidence,
 drafts a clarification and finishes without fallback. These are real-model
@@ -136,18 +136,19 @@ They are not relabeled as source-pipeline outputs or used to replace this run.
   `last_independent_evidence_at`. Before, the model sampled each copy separately,
   the facts differed, and nothing was proven.
 - **Correction (MIL01 18/09, "il fatturato di oggi e' 85,0k e non 58").** The
-  model quotes only `il fatturato di oggi e' 85,0k`; dedup now reads the whole
-  sentence of the fact's own segment, so `e non 58` is kept. The parent figure
+  model quotes only `il fatturato di oggi e' 85,0k`; dedup now extends the quote
+  by a value contrast that follows it directly, so `e non 58` is kept. Wording
+  from another clause (`Ritiriamo …, Aurea nera: 9 richieste`) never applies. The parent figure
   `Fatturato: 58,0k` has no stated period, so it is matched only because the
   correction names the replaced value (58 at the replacement's `k` scale), comes
   from the explicit `In-Reply-To` parent, and covers the parent's business day.
   The 85k fact supersedes the 58k fact; only 85k is active and the two are never
   added (`inactive_facts: 1`).
-- **NYC01 04/10 "correction, sales were 45.1k not 54.1k" abstains.** That mail
-  has no `In-Reply-To` parent, and `not` outside the supported Italian/English
-  contrast grammar is treated as uncertain wording. Both figures are kept, with
-  the explicit abstention `uncertain correction intent; facts retained`. Matching
-  by subject or same-day proximity would be an unsafe heuristic, so it is not done.
+- **NYC01 04/10 "correction, sales were 45.1k not 54.1k" is not applied.** The
+  word `correction` precedes the quoted figure, `not` is outside the supported
+  Italian/English contrast grammar, and the mail has no `In-Reply-To` parent. Both
+  figures are kept as a possible overlap and never added. Matching by subject or
+  same-day proximity would be an unsafe heuristic, so it is not done.
 
 ## API, UI and isolated jobs
 
@@ -180,15 +181,17 @@ an optional synthetic decision command; it is not a human acceptance signature.
 resend), recorded through the actual API endpoint. `manifest.json` pins the
 parent snapshot hash, the parent artifact inventory (equal to
 `api-verification.json`), the case version, the content-derived job ID
-`investigate-5ae70946…65cc`, the trace and every envelope hash. The model
-calls evidence, then stock four times with guessed sizes that the crosswalk
-rejects before any HTTP call, and finishes `verify` without fallback, so the job
-needs no systems recordings.
+`investigate-b3df8405…b9fe`, the trace and every envelope hash. The model calls
+evidence, stock four times (one recorded simulated-system read) and the options
+engine, then reaches the six-tool budget and publishes a visible `verify`
+fallback (`stop_reason: budget_tool_calls`).
 
-Recording uses a private copy of the candidate database in which only the
-parent's stored RunSpec is marked live, because the API never records on a
-recorded parent; job identity and cache keys exclude execution mode. The copy
-is deleted afterwards:
+Recording uses a private copy of the candidate database (SQLite backup, in a
+temporary directory outside the candidate, removed on every exit) in which only
+the parent's stored RunSpec is marked live, because the API never records on a
+recorded parent; job identity and cache keys exclude execution mode. A job that
+stops on the 90-second wall-clock budget is refused: a faster replay would
+request a turn that was never recorded. Record again in that case:
 
 ```sh
 backend/.venv/bin/python scripts/core_investigate_job.py record \

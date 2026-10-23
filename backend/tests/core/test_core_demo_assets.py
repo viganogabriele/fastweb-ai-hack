@@ -17,7 +17,12 @@ def test_source_backed_recordings_have_complete_versioned_inventory():
         path = ASSETS / relative
         assert path.is_relative_to(ASSETS)
         assert hashlib.sha256(path.read_bytes()).hexdigest() == expected, relative
-    for name, count in (("llm_cache", 20), ("systems_cache", 12), ("investigate-job/llm_cache", 6)):
+    for name, count in (
+        ("llm_cache", 21),
+        ("systems_cache", 12),
+        ("investigate-job/llm_cache", 6),
+        ("investigate-job/systems_cache", 1),
+    ):
         cache = ResponseCache(ASSETS / name)
         paths = list(cache.directory.rglob("*.json"))
         assert len(paths) == count
