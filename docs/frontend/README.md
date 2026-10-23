@@ -103,8 +103,9 @@ IDs are for reference in PRs and issues. Order within a class is the order to do
   (`web/src/sections/CaseDetailAnalysis.tsx:23-46`).
 - **M5 Persisted decision state.** After reload, show existing local drafts for a case. This
   needs a read endpoint (none exists: `backend/tesseract/api/routers/options.py` has GET
-  options and two POST decision routes, no decision read). Open a lane C issue; until it lands, the UI must not imply a
-  case is undecided because of a missing read. Show "stato decisioni non disponibile".
+  options and two POST decision routes, no decision read). Open a lane C issue; until it
+  lands, the UI must not imply a case is undecided because of a missing read (interim note:
+  demo-walkthrough §3, M5).
 - **M6 Walkthrough fit.** Do the click-path fixes in [demo-walkthrough-ui.md](demo-walkthrough-ui.md) §3.
 
 ### Should
