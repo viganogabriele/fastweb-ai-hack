@@ -59,7 +59,7 @@ export function VoiceStorePage() {
           <ul className="sd-voice__facts">{byNote[note.note_id].map((fact, i) => <FactView key={i} fact={fact} />)}</ul>
         </article>)}
       </section>
-      <aside className="sd-voice__panels" aria-label="Confronto dei segnali">
+      <aside className="sd-voice__panels" aria-label={t.comparison}>
         <section className="sd-voice__panel"><h2>{t.onlyVoice}</h2><p>{t.onlyVoiceDescription}</p><p className="sd-voice__muted">{t.noEmail}</p>
           <ul>{reasons.map(({ fact, author }) => <li key={fact.quote}><strong>{fact.reason}</strong><p>{fact.product} · {author}</p><q>{fact.quote}</q></li>)}</ul>
         </section>
@@ -67,7 +67,7 @@ export function VoiceStorePage() {
           {conflicts.length ? conflicts.map(conflict => <div className="sd-voice__conflict" key={conflict.sku}>
             <h3>{products[conflict.sku].name} · taglia {conflict.size}</h3>
             <p>{t.employeeSays} «{conflict.quote}» · {t.stockSays} {new Date(`${conflict.snapshot_date}T12:00:00Z`).toLocaleDateString('it-IT', { day: '2-digit', month: '2-digit' })} dice <strong>{conflict.on_hand} {t.stock}, {conflict.in_transit} {t.transit}</strong> · <strong>{t.verify}</strong></p>
-            <details><summary>Fonte stock</summary><code>{conflict.provenance.file}</code><pre>{conflict.provenance.row}</pre></details>
+            <details><summary>{t.stockSource}</summary><code>{conflict.provenance.file}</code><pre>{conflict.provenance.row}</pre></details>
           </div>) : <p>{t.noConflicts}</p>}
         </section>
         <section className="sd-voice__panel"><h2>{t.overlap}</h2>

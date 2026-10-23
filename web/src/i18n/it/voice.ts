@@ -18,6 +18,8 @@ export const voice = {
   employeeSays: 'Il dipendente dice',
   stockSays: 'lo stock al',
   stock: 'pezzi disponibili',
+  stockSource: 'Fonte stock',
+  comparison: 'Confronto dei segnali',
   transit: 'in transito',
   overlap: 'Cosa coincide tra colleghi',
   noOverlap: 'Nessun prodotto citato da più colleghi stasera',
