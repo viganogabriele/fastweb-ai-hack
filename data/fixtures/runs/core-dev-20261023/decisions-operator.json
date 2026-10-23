@@ -1,0 +1,590 @@
+[
+  {
+    "at": "2026-10-23T07:38:02.026637Z",
+    "draft": {
+      "decision": {
+        "at": "2026-10-23T07:38:02.026637Z",
+        "availability_basis": "human decision time",
+        "available_at": "2026-10-23T07:38:02.026637Z",
+        "by": "lorenzocorallo",
+        "computed_at": "2026-10-23T07:38:02.026637Z",
+        "decision": "rejected",
+        "dispatch_status": "draft",
+        "id": "decision-2e6afdfc5f534eaf9950412f40e70efa",
+        "idempotency_key": "demo02c-operator-lorenzocorallo-20261023",
+        "input_refs": [
+          {
+            "id": "opt-case-mil01-i10919b00011-20261008-transfer",
+            "kind": "ActionOption",
+            "version": "4c5c3713b5a3498f"
+          }
+        ],
+        "input_version_hash": "sha256:4c5c3713b5a3498fa667f3a7ed5896fdf4b2a76c286ae4721e6f7ecc8a2b7990",
+        "note": "The transfer moves size L to MIL01, which already holds 8 in L; the store reported zero in size M. It doesn't address the reported shortage.",
+        "option_id": "opt-case-mil01-i10919b00011-20261008-transfer",
+        "producer": "act.approval",
+        "producer_version": "1",
+        "request_ref": null,
+        "response_ref": null,
+        "run_id": "core-dev-candidate",
+        "scenario_id": "historical",
+        "source_refs": [
+          {
+            "content_hash": "sha256:5b8afe5fc87f71f0eb397c3f91acc7a300f9b97bb13d127144b4ddab080b7ebd",
+            "locator": null,
+            "uri": "dataset://store_emails/MIL01/20261009_1035_MIL01.eml"
+          },
+          {
+            "content_hash": "sha256:2d57bfb00b44b49ed17a0f11a9022415b9c6e7c346b3b6b9a90b003f568cc15d",
+            "locator": null,
+            "uri": "dataset://store_emails/MIL01/20261009_1847_MIL01_re1.eml"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=290",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=289",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=288",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=291",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=287",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=292",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=627",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=626",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=625",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=628",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=624",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=629",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "8ab37e53c3bb6f7198a6a0d34383063eb380185a5d0de8dc3b896cfd99b09c46",
+            "locator": null,
+            "uri": "systems:/logistics/v1/lanes?dest=1001&origin=1002"
+          }
+        ],
+        "version": "1"
+      },
+      "option": {
+        "assumptions": [
+          "Style case: colour I10919B00011-742 kept for the move among I10919B00011-742, I10919B00011-999.",
+          "Options are alternatives: none reserves stock until approved.",
+          "Scenarios are servable demand low/base/high, not probabilities or confidence bands.",
+          "Horizon 2026-10-23..2026-10-29 in MIL01 local days.",
+          "Domestic store-to-store only: cross-border and DC sources are out of the MVP.",
+          "ETA is the contract date (contract_calendar_days); units arrive at closing and are sellable the next day. Outbound leaves the donor before that day's sales.",
+          "Destination starts from its last snapshot with no consumption before the horizon.",
+          "Donor starts from its snapshot minus ledger reservations minus the scenario's mean daily demand for each day before the horizon, rounded to whole units.",
+          "Lost sales are not backlog."
+        ],
+        "availability_basis": "max(input available_at)",
+        "available_at": "2026-10-22T04:00:00Z",
+        "baseline_outcomes": [
+          {
+            "demand_basis": "servable low of overlay-case-mil01-i10919b00011-20261008-i10919b00011-742-20261023@v1 and baseline-mil02-i10919b00011-742-20261023@v1, size L",
+            "leftover_units_dest": 6.359761904761903,
+            "leftover_units_donor": 3.0195238095238093,
+            "lost_units_dest": 0.0,
+            "lost_units_donor": 0.0,
+            "scenario_id": "low",
+            "size_allocation_basis": "MIL01 p=0.167 (declared policy: uniform over 6 master sizes); MIL02 p=0.167 (declared policy: uniform over 6 master sizes)",
+            "transport_cost_eur": null
+          },
+          {
+            "demand_basis": "servable base of overlay-case-mil01-i10919b00011-20261008-i10919b00011-742-20261023@v1 and baseline-mil02-i10919b00011-742-20261023@v1, size L",
+            "leftover_units_dest": 6.359761904761903,
+            "leftover_units_donor": 3.0195238095238093,
+            "lost_units_dest": 0.0,
+            "lost_units_donor": 0.0,
+            "scenario_id": "base",
+            "size_allocation_basis": "MIL01 p=0.167 (declared policy: uniform over 6 master sizes); MIL02 p=0.167 (declared policy: uniform over 6 master sizes)",
+            "transport_cost_eur": null
+          },
+          {
+            "demand_basis": "servable high of overlay-case-mil01-i10919b00011-20261008-i10919b00011-742-20261023@v1 and baseline-mil02-i10919b00011-742-20261023@v1, size L",
+            "leftover_units_dest": 6.359761904761903,
+            "leftover_units_donor": 3.0195238095238093,
+            "lost_units_dest": 0.0,
+            "lost_units_donor": 0.0,
+            "scenario_id": "high",
+            "size_allocation_basis": "MIL01 p=0.167 (declared policy: uniform over 6 master sizes); MIL02 p=0.167 (declared policy: uniform over 6 master sizes)",
+            "transport_cost_eur": null
+          }
+        ],
+        "case_id": "case-mil01-i10919b00011-20261008",
+        "checks": [
+          {
+            "detail": "I10919B00011-742-L EAN 800001151403",
+            "mandatory": true,
+            "name": "sku_identity",
+            "source_refs": [],
+            "status": "pass"
+          },
+          {
+            "detail": "MIL01: declared policy: uniform over 6 master sizes; MIL02: declared policy: uniform over 6 master sizes",
+            "mandatory": true,
+            "name": "size_curve",
+            "source_refs": [],
+            "status": "pass"
+          },
+          {
+            "detail": "I10919B00011-742 in both assortments",
+            "mandatory": true,
+            "name": "assortment",
+            "source_refs": [],
+            "status": "pass"
+          },
+          {
+            "detail": "MIL01: 8 on_hand at 2026-10-21T21:59:59+00:00",
+            "mandatory": true,
+            "name": "dest_stock",
+            "source_refs": [
+              {
+                "id": "stock:MIL01:I10919B00011-742-L:on_hand:2026-10-21",
+                "kind": "StockFact",
+                "version": "64af9eb506e193d06774985b6d8a782d7caff601250ceecfd75e5f6436746d45"
+              }
+            ],
+            "status": "pass"
+          },
+          {
+            "detail": "MIL02: 4 on_hand at 2026-10-21T21:59:59+00:00",
+            "mandatory": true,
+            "name": "donor_stock",
+            "source_refs": [
+              {
+                "id": "stock:MIL02:I10919B00011-742-L:on_hand:2026-10-21",
+                "kind": "StockFact",
+                "version": "50a273699a5ebf67e867f768a220f9d3922aee8dbe1f5921cd98ce64ac2e6aa6"
+              }
+            ],
+            "status": "pass"
+          },
+          {
+            "detail": "MIL01: 1 day(s) between snapshot and horizon, MIL02: 1 day(s) between snapshot and horizon (max 1)",
+            "mandatory": true,
+            "name": "stock_freshness",
+            "source_refs": [],
+            "status": "pass"
+          },
+          {
+            "detail": "MIL01: nothing in transit at the snapshot",
+            "mandatory": true,
+            "name": "dest_inbound",
+            "source_refs": [],
+            "status": "pass"
+          },
+          {
+            "detail": "MIL02 on_hand taken as net of reservations (declared policy)",
+            "mandatory": true,
+            "name": "reservations",
+            "source_refs": [
+              {
+                "id": "stock:MIL02:I10919B00011-742-L:on_hand:2026-10-21",
+                "kind": "StockFact",
+                "version": "50a273699a5ebf67e867f768a220f9d3922aee8dbe1f5921cd98ce64ac2e6aa6"
+              }
+            ],
+            "status": "pass"
+          },
+          {
+            "detail": "MIL02 on_hand taken as net of quality holds (declared policy)",
+            "mandatory": true,
+            "name": "quality_hold",
+            "source_refs": [
+              {
+                "id": "stock:MIL02:I10919B00011-742-L:on_hand:2026-10-21",
+                "kind": "StockFact",
+                "version": "50a273699a5ebf67e867f768a220f9d3922aee8dbe1f5921cd98ce64ac2e6aa6"
+              }
+            ],
+            "status": "pass"
+          },
+          {
+            "detail": "0 unit(s) held by approved decisions",
+            "mandatory": true,
+            "name": "shared_resources",
+            "source_refs": [],
+            "status": "pass"
+          },
+          {
+            "detail": "1 unit(s) available at MIL02 on pickup",
+            "mandatory": true,
+            "name": "donor_availability",
+            "source_refs": [],
+            "status": "pass"
+          },
+          {
+            "detail": "I10919B00011-742 not in the declared scarcity list",
+            "mandatory": true,
+            "name": "scarcity_policy",
+            "source_refs": [],
+            "status": "pass"
+          },
+          {
+            "detail": "MIL01: overlay-case-mil01-i10919b00011-20261008-i10919b00011-742-20261023@v1",
+            "mandatory": true,
+            "name": "dest_forecast",
+            "source_refs": [
+              {
+                "id": "overlay-case-mil01-i10919b00011-20261008-i10919b00011-742-20261023",
+                "kind": "ForecastAdjustment",
+                "version": "v1"
+              }
+            ],
+            "status": "pass"
+          },
+          {
+            "detail": "MIL02: baseline-mil02-i10919b00011-742-20261023@v1",
+            "mandatory": true,
+            "name": "donor_forecast",
+            "source_refs": [
+              {
+                "id": "baseline-mil02-i10919b00011-742-20261023",
+                "kind": "ForecastAdjustment",
+                "version": "v1"
+              }
+            ],
+            "status": "pass"
+          },
+          {
+            "detail": "LN-1002-1001 COURIER_SAME_DAY, reviewed 2026-07-15",
+            "mandatory": true,
+            "name": "lane",
+            "source_refs": [
+              {
+                "id": "LN-1002-1001",
+                "kind": "Lane",
+                "version": "2026-07-15"
+              }
+            ],
+            "status": "pass"
+          },
+          {
+            "detail": "LN-1002-1001: ibt_allowed=True",
+            "mandatory": true,
+            "name": "ibt_allowed",
+            "source_refs": [],
+            "status": "pass"
+          },
+          {
+            "detail": "MIL02 (IT) \u2192 MIL01 (IT), customs_required=False; cross-border excluded in the MVP",
+            "mandatory": true,
+            "name": "domestic",
+            "source_refs": [],
+            "status": "pass"
+          },
+          {
+            "detail": "pickup 2026-10-23T15:30:00+02:00 (cut-off missed: next pickup), ETA 2026-10-23, P90 2026-10-24 (contract_calendar_days)",
+            "mandatory": true,
+            "name": "pickup_calendar",
+            "source_refs": [],
+            "status": "pass"
+          },
+          {
+            "detail": "sellable from 2026-10-24, horizon ends 2026-10-29",
+            "mandatory": true,
+            "name": "eta_in_time",
+            "source_refs": [],
+            "status": "pass"
+          },
+          {
+            "detail": "q=1 within 1..3; 4 movable after 0 reserved and floor 0",
+            "mandatory": true,
+            "name": "quantity_policy",
+            "source_refs": [],
+            "status": "pass"
+          },
+          {
+            "detail": "15.61 EUR, ceiling 100.00 EUR",
+            "mandatory": true,
+            "name": "transport_cost",
+            "source_refs": [],
+            "status": "pass"
+          },
+          {
+            "detail": "high scenario: extra donor lost 0.00 (max 0), floor 0 kept on every day",
+            "mandatory": true,
+            "name": "donor_protection",
+            "source_refs": [],
+            "status": "pass"
+          }
+        ],
+        "computed_at": "2026-10-22T20:00:00Z",
+        "forecast_ref": {
+          "id": "overlay-case-mil01-i10919b00011-20261008-i10919b00011-742-20261023",
+          "kind": "ForecastAdjustment",
+          "version": "v1"
+        },
+        "id": "opt-case-mil01-i10919b00011-20261008-transfer",
+        "input_refs": [
+          {
+            "id": "case-mil01-i10919b00011-20261008",
+            "kind": "Case",
+            "version": "v1"
+          },
+          {
+            "id": "overlay-case-mil01-i10919b00011-20261008-i10919b00011-742-20261023",
+            "kind": "ForecastAdjustment",
+            "version": "v1"
+          },
+          {
+            "id": "baseline-mil02-i10919b00011-742-20261023",
+            "kind": "ForecastAdjustment",
+            "version": "v1"
+          },
+          {
+            "id": "stock:MIL01:I10919B00011-742-L:on_hand:2026-10-21",
+            "kind": "StockFact",
+            "version": "64af9eb506e193d06774985b6d8a782d7caff601250ceecfd75e5f6436746d45"
+          },
+          {
+            "id": "stock:MIL01:I10919B00011-742-M:on_hand:2026-10-21",
+            "kind": "StockFact",
+            "version": "effbd10c9a08b280b4fca1507da5e5c51bbad6ca708dc159f01a67878c9bd67c"
+          },
+          {
+            "id": "stock:MIL01:I10919B00011-742-S:on_hand:2026-10-21",
+            "kind": "StockFact",
+            "version": "60ad7bbb15bc7c38040cb034c498be63ed227752579edf13b01035b71fcb1b7c"
+          },
+          {
+            "id": "stock:MIL01:I10919B00011-742-XL:on_hand:2026-10-21",
+            "kind": "StockFact",
+            "version": "896788a49b6d3e12bdd1a7bba912abec6303d4ac6e56db35e0f348b2543eee2d"
+          },
+          {
+            "id": "stock:MIL01:I10919B00011-742-XS:on_hand:2026-10-21",
+            "kind": "StockFact",
+            "version": "e3a412fd04c6ddd8ccafd5a29aab3f3b435c46272aa49a0d7badbb3c3a4ccbb6"
+          },
+          {
+            "id": "stock:MIL01:I10919B00011-742-XXL:on_hand:2026-10-21",
+            "kind": "StockFact",
+            "version": "64421d938edee54669ba302ae877aea6bccbca5273b45f6d97c3bcd06764389f"
+          },
+          {
+            "id": "stock:MIL02:I10919B00011-742-L:on_hand:2026-10-21",
+            "kind": "StockFact",
+            "version": "50a273699a5ebf67e867f768a220f9d3922aee8dbe1f5921cd98ce64ac2e6aa6"
+          },
+          {
+            "id": "stock:MIL02:I10919B00011-742-M:on_hand:2026-10-21",
+            "kind": "StockFact",
+            "version": "9dcb7e099c0409e1d49af0abde04813e7ca676818ec341d8554effe351ca58c4"
+          },
+          {
+            "id": "stock:MIL02:I10919B00011-742-S:on_hand:2026-10-21",
+            "kind": "StockFact",
+            "version": "e3d28f0100594fff33436fe9ad206c61b8b152452dad079e2ede30fdb815c580"
+          },
+          {
+            "id": "stock:MIL02:I10919B00011-742-XL:on_hand:2026-10-21",
+            "kind": "StockFact",
+            "version": "edd06923cf6cc85d34efd26131c50f87b1a413783d5a887594ef55b2100ee7fb"
+          },
+          {
+            "id": "stock:MIL02:I10919B00011-742-XS:on_hand:2026-10-21",
+            "kind": "StockFact",
+            "version": "9464d94877b22ee901f1bf19b2f0d1577280090b01a53e5c2cd300c86d17e2a3"
+          },
+          {
+            "id": "stock:MIL02:I10919B00011-742-XXL:on_hand:2026-10-21",
+            "kind": "StockFact",
+            "version": "1e76a3ed9839f7c7e9ce8e340386a20d098b57c02dbf77c3a3c31c10c0f7c5b2"
+          }
+        ],
+        "input_version_hash": "sha256:4c5c3713b5a3498fa667f3a7ed5896fdf4b2a76c286ae4721e6f7ecc8a2b7990",
+        "kind": "transfer",
+        "legs": [
+          {
+            "cost_eur": 15.61,
+            "dest": "MIL01",
+            "ean": "800001151403",
+            "eta_at": "2026-10-23T21:59:59Z",
+            "lane_id": "LN-1002-1001",
+            "origin": "MIL02",
+            "pickup_at": "2026-10-23T13:30:00Z",
+            "qty": 1,
+            "sellable_at": "2026-10-23T22:00:00Z",
+            "size": "L",
+            "sku": "I10919B00011-742"
+          }
+        ],
+        "outcomes": [
+          {
+            "demand_basis": "servable low of overlay-case-mil01-i10919b00011-20261008-i10919b00011-742-20261023@v1 and baseline-mil02-i10919b00011-742-20261023@v1, size L",
+            "leftover_units_dest": 7.359761904761903,
+            "leftover_units_donor": 2.0195238095238093,
+            "lost_units_dest": 0.0,
+            "lost_units_donor": 0.0,
+            "scenario_id": "low",
+            "size_allocation_basis": "MIL01 p=0.167 (declared policy: uniform over 6 master sizes); MIL02 p=0.167 (declared policy: uniform over 6 master sizes)",
+            "transport_cost_eur": 15.61
+          },
+          {
+            "demand_basis": "servable base of overlay-case-mil01-i10919b00011-20261008-i10919b00011-742-20261023@v1 and baseline-mil02-i10919b00011-742-20261023@v1, size L",
+            "leftover_units_dest": 7.359761904761903,
+            "leftover_units_donor": 2.0195238095238093,
+            "lost_units_dest": 0.0,
+            "lost_units_donor": 0.0,
+            "scenario_id": "base",
+            "size_allocation_basis": "MIL01 p=0.167 (declared policy: uniform over 6 master sizes); MIL02 p=0.167 (declared policy: uniform over 6 master sizes)",
+            "transport_cost_eur": 15.61
+          },
+          {
+            "demand_basis": "servable high of overlay-case-mil01-i10919b00011-20261008-i10919b00011-742-20261023@v1 and baseline-mil02-i10919b00011-742-20261023@v1, size L",
+            "leftover_units_dest": 7.359761904761903,
+            "leftover_units_donor": 2.0195238095238093,
+            "lost_units_dest": 0.0,
+            "lost_units_donor": 0.0,
+            "scenario_id": "high",
+            "size_allocation_basis": "MIL01 p=0.167 (declared policy: uniform over 6 master sizes); MIL02 p=0.167 (declared policy: uniform over 6 master sizes)",
+            "transport_cost_eur": 15.61
+          }
+        ],
+        "producer": "act.options",
+        "producer_version": "1",
+        "rationale": "Move 1 \u00d7 I10919B00011-742-L MIL02 \u2192 MIL01 on LN-1002-1001, sellable 2026-10-24. Unserved units avoided against hold (dest + donor): low 0.00, base 0.00, high 0.00. Not recommended: the move does not reduce total unserved units against hold.",
+        "recommended": false,
+        "run_id": "core-dev-candidate",
+        "scenario_id": "historical",
+        "source_refs": [
+          {
+            "content_hash": "sha256:5b8afe5fc87f71f0eb397c3f91acc7a300f9b97bb13d127144b4ddab080b7ebd",
+            "locator": null,
+            "uri": "dataset://store_emails/MIL01/20261009_1035_MIL01.eml"
+          },
+          {
+            "content_hash": "sha256:2d57bfb00b44b49ed17a0f11a9022415b9c6e7c346b3b6b9a90b003f568cc15d",
+            "locator": null,
+            "uri": "dataset://store_emails/MIL01/20261009_1847_MIL01_re1.eml"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=290",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=289",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=288",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=291",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=287",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=292",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=627",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=626",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=625",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=628",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=624",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "9f3d868c2c274f761f586e91c0050476644e99e54a94fe79d6530a1c31a3382c",
+            "locator": "record=629",
+            "uri": "erp/inventory/store_stock_daily/stock_eod_2026-10-21.csv"
+          },
+          {
+            "content_hash": "8ab37e53c3bb6f7198a6a0d34383063eb380185a5d0de8dc3b896cfd99b09c46",
+            "locator": null,
+            "uri": "systems:/logistics/v1/lanes?dest=1001&origin=1002"
+          }
+        ],
+        "valid_until": "2026-10-23T13:30:00Z",
+        "version": "4c5c3713b5a3498f"
+      },
+      "reservations": [],
+      "simulated": true
+    },
+    "namespace": "product",
+    "request": {
+      "by": "lorenzocorallo",
+      "decision": "rejected",
+      "idempotency_key": "demo02c-operator-lorenzocorallo-20261023",
+      "input_version_hash": "sha256:4c5c3713b5a3498fa667f3a7ed5896fdf4b2a76c286ae4721e6f7ecc8a2b7990",
+      "note": "The transfer moves size L to MIL01, which already holds 8 in L; the store reported zero in size M. It doesn't address the reported shortage.",
+      "option_id": "opt-case-mil01-i10919b00011-20261008-transfer",
+      "run_id": "core-dev-candidate",
+      "scenario_id": "historical"
+    },
+    "snapshot_sha256": "c522703633170af4933e06ed0f02edc29f2beb5f85cb32873ac46bb426b86edb"
+  }
+]
