@@ -392,6 +392,7 @@ def test_module_uses_llm_adapter_and_keeps_replay_misses_explicit(database, monk
             requests = []
 
             def chat(self, messages, tools, model, **generation):
+                assert model == agent.MODEL
                 self.requests.append(generation)
                 if missing:
                     raise ReplayMiss("not recorded")
