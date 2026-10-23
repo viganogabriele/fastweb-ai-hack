@@ -335,6 +335,57 @@ class LeadTimeTests(unittest.TestCase):
         controls = placebo_units([unit], date(2026, 9, 1), date(2026, 9, 19), self.root)
         self.assertEqual(controls, [])
 
+    def test_report_controls_exclude_unscored_events_observed_in_period(self):
+        # Aug 31 is not a scored event, but its ERP observation window lasts through
+        # Sep 1. E1's -14 control (Sep 1-4) must not count an alert in that window.
+        oracle = self.root / "generated/ground_truth/scenario"
+        oracle.mkdir(parents=True)
+        current = event(start="2026-09-15", end="2026-09-17")
+        previous = event(
+            id="PREVIOUS", start="2026-08-31", end="2026-08-31", filter={"styles": ["BETA"]}
+        )
+        alert = Alert(
+            "stock", "MIL01", datetime(2026, 9, 1, 18, tzinfo=UTC), "sku", frozenset({SKU})
+        )
+        for blocker, end, controls, hits in (
+            (None, date(2026, 10, 21), 3, 1),
+            (previous, date(2026, 10, 21), 2, 0),
+            (previous | {"stores": ["ALL"]}, date(2026, 10, 21), 2, 0),
+            (previous | {"stores": ["TYO01"]}, date(2026, 10, 21), 3, 1),
+            (
+                previous | {"end": "2026-08-30", "start": "2026-08-30"},
+                date(2026, 10, 21),
+                3,
+                1,
+            ),
+            (previous, date(2026, 9, 18), 0, 0),
+        ):
+            with self.subTest(blocker=blocker, end=end):
+                (oracle / "events.json").write_text(
+                    json.dumps({"events": [current, blocker] if blocker else [current]})
+                )
+                with (
+                    patch(
+                        "eval.lead_time.split_stores", return_value={"dev": frozenset({"MIL01"})}
+                    ),
+                    patch("eval.lead_time.stock_alerts", return_value=[alert]),
+                ):
+                    report = lead_time_report(self.root, None, "dev", date(2026, 9, 1), end)
+                self.assertEqual(report["summary"]["n_units"], 1)
+                self.assertEqual(report["excluded_events"], ["PREVIOUS"] if blocker else [])
+                result = report["chance_check"]["specific"]["stock"]
+                self.assertEqual(result["real"], [0, 1])
+                self.assertEqual(result["placebo"], [hits, controls])
+                if controls:
+                    self.assertEqual(result["paired"]["units"][0]["placebo"], [hits, controls])
+                else:
+                    self.assertEqual(
+                        result["paired"], {"real": [0, 0], "placebo_rate": None, "units": []}
+                    )
+                    self.assertEqual(
+                        result["excluded_no_placebo"], [{"event_id": "E1", "store_id": "MIL01"}]
+                    )
+
     def test_shift_preserves_local_midnight_and_end_across_dst(self):
         unit = self.unit(start="2026-10-10", end="2026-10-12")
         controls = placebo_units([unit], date(2026, 9, 1), date(2026, 11, 10), self.root)

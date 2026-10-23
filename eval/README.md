@@ -174,7 +174,10 @@ and, for noise, the email answer-key indexes; nothing else from the oracle.
   observation limit of pipeline cases and baselines. The main lead-time score retains its
   existing next-evening ERP grace day. Shift these capped windows without further clipping;
   reject controls outside the period or touching **any** real event window at that store,
-  even a different product (broad alerts can span both). Controls may overlap each other.
+  even a different product (broad alerts can span both). This includes unscored events
+  ending before the period whose next-day ERP observation windows reach into it; they
+  block controls without entering either comparison population. Controls may overlap
+  each other.
   `chance_check[group][method].real` and `.placebo` retain raw `[detected, total]` counts for
   auditing, but **do not compare those pooled rates**: units can have zero to four controls.
   Compare `.paired.real[0] / .paired.real[1]` with `.paired.placebo_rate` instead. Both use

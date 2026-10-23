@@ -357,12 +357,21 @@ def breadth(unit: Unit) -> str:
     return "broad" if len(unit.skus) > BROAD_SKUS else "specific"
 
 
-def placebo_units(units: list[Unit], start: date, end: date, root: Path) -> list[Unit]:
+def placebo_units(
+    units: list[Unit],
+    start: date,
+    end: date,
+    root: Path,
+    *,
+    real_windows: list[Unit] | None = None,
+) -> list[Unit]:
     """Move by local calendar weeks, inside the period and clear of all real store windows.
 
     Excluding every same-store event is conservative: a broad alert may span products from
     otherwise disjoint events. Controls can overlap each other; they are not replicates.
+    Supply real_windows separately when unscored events can still overlap the period.
     """
+    blockers = units if real_windows is None else real_windows
     out = []
     for unit in units:
         zone = store_zones(root)[unit.store_id]
@@ -380,7 +389,7 @@ def placebo_units(units: list[Unit], start: date, end: date, root: Path) -> list
                 real.store_id == unit.store_id
                 and moved.start <= real.t_end
                 and real.start <= moved.t_end
-                for real in units
+                for real in blockers
             )
             if inside and not overlaps_real:
                 out.append(moved)
@@ -543,6 +552,10 @@ def lead_time_report(root: Path, run, split: str, start: date, end: date) -> dic
         replace(u, t_end=min(u.t_end, local_instant(root, u.store_id, end, time.max)))
         for u in units
     ]
+    # An event ending the day before start is unscored, but its next-evening ERP
+    # observation window still overlaps the period. Earlier events end before any
+    # eligible control; later events start after it. Keep blockers out of scored units.
+    real_windows = event_units(events, stores, start - timedelta(days=1), end, root)
     covered = {u.event_id for u in units}
     alert_refs = {a.ref for a in alerts.get("pipeline", [])}
     payloads = [record.get("payload", record) for record in cases]
@@ -561,7 +574,9 @@ def lead_time_report(root: Path, run, split: str, start: date, end: date) -> dic
         "calibration": calibration,
         "summary": scored["summary"],
         "chance_check": chance_check(
-            alerts, chance_units, placebo_units(chance_units, start, end, root)
+            alerts,
+            chance_units,
+            placebo_units(chance_units, start, end, root, real_windows=real_windows),
         ),
         "non_alert_cases": dict(Counter(row["as"] for row in verify)),
         "pipeline_alerts_by_case_type": dict(Counter(alert_types)),
