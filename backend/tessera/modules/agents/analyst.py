@@ -337,10 +337,16 @@ def analyse(
     result = AgentLoop(model, session.tools(), budget=budget, validate_finish=session.validate).run(
         [
             {"role": "system", "content": PROMPT_PATH.read_text(encoding="utf-8")},
-            {"role": "user", "content": json.dumps({
-                "case_id": case.id, "as_of": repo.spec.as_of.isoformat(),
-                "store_id": case.store_id,
-            })},
+            {
+                "role": "user",
+                "content": json.dumps(
+                    {
+                        "case_id": case.id,
+                        "as_of": repo.spec.as_of.isoformat(),
+                        "store_id": case.store_id,
+                    }
+                ),
+            },
         ],  # fmt: skip
         TraceMeta(
             run_id=repo.spec.run_id,
