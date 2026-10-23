@@ -7,6 +7,10 @@ Each JSON file is a list of records `{"kind": "<contract class>", "payload": {..
 `payload` validates against `tessera.core.contracts.<kind>`. Fixtures use only dev stores and
 `generated/sources/`.
 
+`voice/` is the exception: it holds audio and its sidecars, not stored contract records, and each
+note is a folder (`voice/<note_id>/`) so this loader never reads its JSON. Layout and sidecar in
+`voice/README.md`; `src.voice` reads it.
+
 ## DATA-01a: documents and observations (lane A)
 
 `documents/<doc_id>.json` holds one `SourceDocument` and its `Segment`s; `observations/<doc_id>.json`
