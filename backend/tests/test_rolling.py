@@ -205,6 +205,8 @@ def test_a_case_keeps_one_identity_and_its_earliest_alert(tmp_path):
     assert list(rows) == ["case-a", "case-b"]  # never one alert per snapshot
     a, b = rows["case-a"], rows["case-b"]
     assert a["origin"] == origins[0] and a["payload"]["status"] == "verify"
+    assert a["alert_at"] == origins[0]  # evidence at 21:15, product acts at the next 20:00
+    assert b["alert_at"] == origins[1]
     assert a["payload"]["first_available_at"] == first
     assert [r["status"] for r in a["revisions"]] == ["verify", "open"]  # r3 only re-ran
     assert a["present_at_final_origin"] and not b["present_at_final_origin"]
@@ -256,6 +258,10 @@ def test_replay_miss_fails_at_once_and_record_retries(tmp_path, monkeypatch):
     monkeypatch.setattr(rolling.clock, "sleep", lambda seconds: None)
     done = worker(tmp_path, "record").attempt("MIL01-2026-09-01", flaky)
     assert done["outcome"]["attempts"] == 2 and len(calls) == 2
+
+    unrecorded = outcome(systems={"missing": [], "corrupt": [], "unrecorded": 2})
+    with pytest.raises(rolling.RunnerError, match="systems GETs without a recording"):
+        worker(tmp_path, "record").attempt("y", lambda: (unrecorded, published, {}))
 
     with pytest.raises(rolling.RunnerError, match="provider failures"):
         worker(tmp_path, "record").attempt(
@@ -319,3 +325,56 @@ def test_store_run_replays_offline_resumes_and_fails_closed_on_a_miss(tmp_path, 
         resumed.store("MIL01")
     assert executed == [f"{plan['run_id']}-MIL01-2026-09-01"]  # the finished origin is kept
     assert json.loads(first.read_text()) == result
+
+
+def test_a_replay_never_resumes_a_record_workspace(tmp_path):
+    plan = {"run_id": "p"}
+    rolling.freeze_plan(tmp_path, plan, "record")
+    rolling.freeze_plan(tmp_path, plan, "record")  # resume
+    with pytest.raises(rolling.RunnerError, match="not created by a replay run"):
+        rolling.freeze_plan(tmp_path, plan, "replay")
+    with pytest.raises(rolling.RunnerError, match="plan differs"):
+        rolling.freeze_plan(tmp_path, {"run_id": "q"}, "record")
+
+
+def test_forecast_protocols_group_stores_by_their_origin_instants():
+    def origins(zone):
+        return [
+            o.isoformat()
+            for o in rolling.origins(date(2026, 10, 24), date(2026, 10, 26), zone, time(20))
+        ]
+
+    zones = {"MIL01": "Europe/Rome", "MUN01": "Europe/Berlin", "NYC01": "America/New_York"}
+    plan = {
+        "run_id": "r",
+        "split": "dev",
+        "stores": {s: {"origins": origins(z), "timezone": z} for s, z in zones.items()},
+        "model_versions": {"chat": "m"},
+        "code_version": "c",
+        "origin_time": "20:00",
+        "start": "2026-10-24",
+        "end": "2026-10-26",
+        "modules": [],
+        "module_versions": {},
+        "params": {},
+        "investigate_per_origin": 0,
+        "prompt_versions": {},
+        "config": {},
+        "llm_scope": {},
+        "reading": {"files": ["MIL01/x.eml"]},
+    }
+    forecast = [
+        {"payload": {"producer": "fc.baseline", "store_id": s, "sku": "J1-999"}} for s in zones
+    ]
+
+    lead, protocols = rolling.protocol_skeletons(plan, {"forecast": forecast}, {})
+
+    assert len(lead["origins"]) == 6 and lead["universe"] == [
+        {"store_id": s, "sku": "*"} for s in sorted(zones)
+    ]
+    assert sorted(protocols) == ["MIL01-MUN01", "NYC01"]
+    for protocol in protocols.values():
+        stores = protocol["stores"]
+        assert {u["store_id"] for u in protocol["universe"]} == set(stores)
+        assert all(protocol["origins"] == plan["stores"][s]["origins"] for s in stores)
+        assert len(set(protocol["origins"])) == len(protocol["origins"]) == 3

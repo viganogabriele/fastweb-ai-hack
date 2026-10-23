@@ -239,6 +239,7 @@ def build_plan(
     sys_client: bool = False,
     investigate: int = 0,
     run_id: str | None = None,
+    forecast: bool = True,
 ) -> dict:
     from tesseract.core.registry import Registry
     from tesseract.modules.agents import investigator
@@ -307,6 +308,7 @@ def build_plan(
             "src.external": {"window_days": WEATHER_WINDOW_DAYS},
         },
         "investigate_per_origin": investigate,
+        "forecast_export": forecast,
         "reports": reports,
         "reading": {
             "files": [name for _, name in sorted(reading_files)],
@@ -324,7 +326,15 @@ def build_plan(
         "config": {name: sha256_file(config_dir / name) for name in CONFIG_FILES},
         "prompt_files": {
             path.relative_to(REPO_ROOT).as_posix(): sha256_file(path)
-            for path in (extract.PROMPT_PATH, link.PROMPT_PATH)
+            for path in (
+                extract.PROMPT_PATH,
+                link.PROMPT_PATH,
+                *(
+                    (REPO_ROOT / "backend/prompts" / f"{investigator.PROMPT_VERSION}.md",)
+                    if investigate
+                    else ()
+                ),
+            )
         },
         "llm_scope": {
             "format": 1,
@@ -557,13 +567,55 @@ def tracking_systems_cache(directory: Path):
         def __init__(self, path):
             super().__init__(path)
             self.used: set[str] = set()
+            self.served = 0  # successful reads: a recorded or replayed response
+            self.unrecorded = 0  # GETs answered without a recording (mock error/outage)
 
         def get(self, key):
             response = super().get(key)
             self.used.add(key)
+            self.served += 1
             return response
 
     return TrackingSystems(directory)
+
+
+def systems_client_factory(settings: Settings, spec, cache, *, record: bool):
+    """``systems_factory`` with a transport that reports GETs that produced no recording.
+
+    In record mode the core transport passes a mock error or outage through unrecorded
+    (``systems_client`` turns it into ``Unknown``); the origin would then be final but
+    unreplayable, so the runner treats it as a transient failure and retries.
+    """
+    from tesseract.core.systems_cache import SystemsTransport
+
+    class CountingTransport(SystemsTransport):
+        def handle_request(self, request):
+            before = cache.served
+            try:
+                response = super().handle_request(request)
+            except Exception:
+                cache.unrecorded += 1
+                raise
+            if cache.served == before:
+                cache.unrecorded += 1
+            return response
+
+    settings = settings.model_copy(deep=True)
+    spec = spec.model_copy(deep=True)
+    if not record:
+        settings.llm_mode = "replay"
+
+    def counting(crosswalk):
+        from tesseract.modules.sources.systems_client import SystemsClient
+
+        return SystemsClient(
+            crosswalk,
+            base_url=settings.mocks_base_url,
+            transport=CountingTransport(settings, spec, cache),
+        )
+
+    counting.recordings = cache  # the orchestrator checks it after each module
+    return counting
 
 
 # Files: atomic JSON, workspace lock.
@@ -597,15 +649,22 @@ def workspace_lock(workspace: Path):
         yield
 
 
-def freeze_plan(workspace: Path, plan: dict) -> None:
-    """The first run freezes the plan; a resume must request exactly the same plan."""
-    path = workspace / "plan.json"
+def freeze_plan(workspace: Path, plan: dict, mode: str) -> None:
+    """The first run freezes plan and mode; a resume must request exactly the same.
+
+    A replay must never resume a record workspace: it would skip every finished origin and
+    prove nothing about reproducibility.
+    """
+    path, marker = workspace / "plan.json", workspace / "mode.json"
     if path.exists():
         if read_json(path) != plan:
             raise RunnerError("workspace plan differs from this request; use a new workspace")
+        if not marker.exists() or read_json(marker) != {"mode": mode}:
+            raise RunnerError(f"workspace was not created by a {mode} run; use a new workspace")
         return
     if any(p.name not in {".lock"} for p in workspace.iterdir()):
         raise RunnerError("workspace is not empty and has no plan")
+    write_json(marker, {"mode": mode})
     write_json(path, plan, pretty=True)
 
 
@@ -725,13 +784,12 @@ class Worker:
 
     def clients(self, settings: Settings, spec):
         from tesseract.core.llm import LLMClient
-        from tesseract.core.systems_cache import systems_factory
 
         client = LLMClient(settings, cache=self.llm_cache, concurrency=settings.llm_concurrency)
         return client, {
             "llm": client.for_scope(self.plan["llm_scope"]),
-            "systems": systems_factory(
-                settings, spec, self.systems, allow_recording=self.mode == "record"
+            "systems": systems_client_factory(
+                settings, spec, self.systems, record=self.mode == "record"
             ),
         }
 
@@ -747,7 +805,7 @@ class Worker:
         self.guard.take()
         self.llm_cache.take()
         self.systems.used, self.systems.missing, self.systems.corrupt = set(), set(), set()
-        self.systems.failures = 0
+        self.systems.failures = self.systems.served = self.systems.unrecorded = 0
         client, clients = self.clients(settings, spec)
         started = clock.monotonic()
         error = None
@@ -781,6 +839,7 @@ class Worker:
                 "keys": sorted(self.systems.used),
                 "missing": sorted(self.systems.missing),
                 "corrupt": sorted(self.systems.corrupt),
+                "unrecorded": self.systems.unrecorded,
             },
             "opened": self.guard.take(),
             "module_errors": module_errors,
@@ -798,6 +857,8 @@ class Worker:
                 found.append(f"{kind} recordings missing: {len(outcome[kind]['missing'])}")
             if outcome[kind]["corrupt"]:
                 found.append(f"{kind} recordings corrupt: {len(outcome[kind]['corrupt'])}")
+        if outcome["systems"].get("unrecorded"):
+            found.append(f"systems GETs without a recording: {outcome['systems']['unrecorded']}")
         if outcome["llm"]["provider_failures"]:
             found.append(f"provider failures: {outcome['llm']['provider_failures']}")
         if outcome["network_denied"]:
@@ -842,13 +903,16 @@ class Worker:
         if path.exists():
             return {"skipped": True}
         settings = self.settings(self.workspace / "db" / "reading")
-        settings.data_dir.mkdir(parents=True, exist_ok=True)
         spec = reading_spec(self.plan, self.memo, settings.sources_dir)
-        engine = connect(settings.db_url)
 
         def once():
-            outcome = self.execute(spec, engine, settings)
+            # A fresh database per attempt: its exported ModuleRuns count ERP rows new to the
+            # database (``*_new``), which a retry over kept rows would change.
+            shutil.rmtree(settings.data_dir, ignore_errors=True)
+            settings.data_dir.mkdir(parents=True)
+            engine = connect(settings.db_url)
             records, state = [], None
+            outcome = self.execute(spec, engine, settings)
             try:
                 with repo_session(engine, spec.run_id) as repo:
                     state = repo.run_state()
@@ -859,12 +923,11 @@ class Worker:
                         ]
             except Exception:
                 state = None
+            finally:
+                engine.dispose()
             return outcome, state, {"records": records}
 
-        try:
-            done = self.attempt("reading", once)
-        finally:
-            engine.dispose()
+        done = self.attempt("reading", once)
         outcome = done["outcome"]
         result = {
             "format": FORMAT,
@@ -950,7 +1013,7 @@ class Worker:
                     "cases": done["cases"],
                     "options": options,
                     "option_count": len(done["options"]),
-                    "forecast": done["forecast"] if self.options["forecast"] else [],
+                    "forecast": done["forecast"] if self.plan["forecast_export"] else [],
                     "traces": traces,
                     "investigation": investigation,
                     **{
@@ -1003,7 +1066,8 @@ class Worker:
             "case_ids": chosen,
             "run_id": sibling.run_id,
             "status": done["state"]["status"],
-            "llm": done["outcome"]["llm"],
+            "spec": sibling.model_dump(mode="json"),
+            **{k: done["outcome"][k] for k in ("llm", "systems", "opened")},
         }
 
 
@@ -1029,6 +1093,11 @@ def _worker(task: tuple) -> dict:
 
 def _strip_timing(module_run: dict) -> dict:
     return {**module_run, "started_at": None, "finished_at": None}
+
+
+def _untimed(trace: dict) -> dict:
+    """Agent step durations are wall-clock measurements, zeroed like ModuleRun timings."""
+    return {**trace, "steps": [{**step, "duration_ms": 0} for step in trace["steps"]]}
 
 
 def _semantic(payload: dict) -> str:
@@ -1073,8 +1142,12 @@ def build_exports(workspace: Path, plan: dict) -> dict:
             opened.update(result["opened"])
             llm_keys.update(result["llm"]["keys"])
             systems_keys.update(result["systems"]["keys"])
-            if result.get("investigation"):
-                llm_keys.update(result["investigation"].get("llm", {}).get("keys", []))
+            investigation = result.get("investigation") or {}
+            if investigation.get("spec"):
+                specs.append(investigation["spec"])
+                llm_keys.update(investigation["llm"]["keys"])
+                systems_keys.update(investigation["systems"]["keys"])
+                opened.update(investigation["opened"])
             for case in result["cases"]:
                 entry = cases.get(case["id"])
                 state = {
@@ -1089,6 +1162,11 @@ def build_exports(workspace: Path, plan: dict) -> dict:
                         "payload": case,
                         "store": store,
                         "origin": origin,
+                        # When the 20:00 product could first act on it (evidence time or later).
+                        "alert_at": max(
+                            datetime.fromisoformat(case["first_available_at"]),
+                            datetime.fromisoformat(origin),
+                        ).isoformat(),
                         "run_id": result["run_id"],
                         "revisions": [state],
                         "last_seen_origin": origin,
@@ -1106,7 +1184,7 @@ def build_exports(workspace: Path, plan: dict) -> dict:
                 for o in result["options"]
             ]
             forecast += [{"as_of": origin, "payload": f} for f in result["forecast"]]
-            traces += [{"origin": origin, "payload": t} for t in result["traces"]]
+            traces += [{"origin": origin, "payload": _untimed(t)} for t in result["traces"]]
             counters["origin_runs"] += 1
         for case in cases.values():
             if case["store"] == store:
@@ -1157,7 +1235,9 @@ def cache_inventory(cache: Path, kind: str, keys: Iterable[str]) -> dict:
     return {"entries": len(entries), "sha256": digest(entries)}
 
 
-def protocol_skeletons(plan: dict, exports: dict, manifest_fields: dict) -> tuple[dict, dict]:
+def protocol_skeletons(
+    plan: dict, exports: dict, manifest_fields: dict
+) -> tuple[dict, dict[str, dict]]:
     stores = sorted(plan["stores"])
     origins_by_store = {s: plan["stores"][s]["origins"] for s in stores}
     unique_origins = sorted(
@@ -1216,23 +1296,36 @@ def protocol_skeletons(plan: dict, exports: dict, manifest_fields: dict) -> tupl
             if f["payload"].get("producer") == "fc.baseline"
         }
     )
-    forecast = {
-        **common,
-        "universe": [
-            {"store_id": s, "sku": sku, "timezone": plan["stores"][s]["timezone"]}
-            for s, sku in pairs
-        ],
-        "sampling_criterion": (
-            "Every store x SKU-colour with a fc.baseline record at any origin, at every origin "
-            "of the period, including unchanged/no-alert products."
-        ),
-        "forecast": {
-            "scenario": "base",
-            "scenario_id": "historical",
-            "requires_approval": "#211 confirms the ex-ante scenario before scoring",
-        },
-    }
-    return lead, forecast
+    # eval.forecast scores every protocol origin x every universe pair. Stores in different
+    # zones have different origin instants, so one protocol per group of stores sharing the
+    # same origins keeps every eligible cell a real prediction, not a missing baseline.
+    groups: dict[tuple[str, ...], list[str]] = {}
+    for store in stores:
+        groups.setdefault(tuple(origins_by_store[store]), []).append(store)
+    forecasts = {}
+    for group_origins, members in groups.items():
+        forecasts["-".join(members)] = {
+            **common,
+            "stores": members,
+            "origins": list(group_origins),
+            "origins_by_store": {s: origins_by_store[s] for s in members},
+            "universe": [
+                {"store_id": s, "sku": sku, "timezone": plan["stores"][s]["timezone"]}
+                for s, sku in pairs
+                if s in members
+            ],
+            "sampling_criterion": (
+                "Every store x SKU-colour of these stores with a fc.baseline record at any "
+                "origin, at every origin of the period, including unchanged/no-alert products. "
+                "One protocol per group of stores sharing the same origin instants."
+            ),
+            "forecast": {
+                "scenario": "base",
+                "scenario_id": "historical",
+                "requires_approval": "#211 confirms the ex-ante scenario before scoring",
+            },
+        }
+    return lead, forecasts
 
 
 def finish(workspace: Path, plan: dict, cache: Path, mode: str, wall: float) -> dict:
@@ -1286,9 +1379,9 @@ def finish(workspace: Path, plan: dict, cache: Path, mode: str, wall: float) -> 
         except OSError:  # Landlock refuses cross-directory links (EXDEV): copy instead
             shutil.copyfile(out / name, link)
     hashes["protocol.json"] = write_json(out / "protocol.json", lead, pretty=True)
-    hashes["protocol-forecast.json"] = write_json(
-        out / "protocol-forecast.json", forecast, pretty=True
-    )
+    for key, protocol in forecast.items():
+        name = f"forecast/protocol-{key}.json"
+        hashes[name] = write_json(out / name, protocol, pretty=True)
     manifest = {
         "format": FORMAT,
         "plan_sha256": digest(plan),
@@ -1379,6 +1472,7 @@ def _plan_from(args) -> dict:
         sys_client=getattr(args, "sys_client", False),
         investigate=getattr(args, "investigate", 0),
         run_id=getattr(args, "run_id", None),
+        forecast=not getattr(args, "no_forecast", False),
     )
 
 
@@ -1395,6 +1489,8 @@ def preflight(keys: Path, mocks: str) -> None:
 
 
 def run_command(args) -> int:
+    # Resolve the keys file path (never its content) before the replay-safe environment.
+    default_keys = Settings().fastweb_keys_file
     install_environment(
         worker_settings(
             mode="replay", data_dir=REPO_ROOT / "data", keys_file=None, concurrency=1, mocks=None
@@ -1413,19 +1509,18 @@ def run_command(args) -> int:
         raise RunnerError("workspace and cache must be separate directories")
     if args.mode == "replay" and not (cache / "llm").is_dir():
         raise RunnerError("replay needs an existing cache directory with recordings")
-    keys = Path(args.keys_file).resolve() if args.keys_file else get_settings().fastweb_keys_file
+    keys = Path(args.keys_file).resolve() if args.keys_file else default_keys
     if args.mode == "record":
         preflight(keys, args.mocks_url or get_settings().mocks_base_url)
         for kind in ("llm", "systems"):  # both exist even when nothing is recorded
             (cache / kind).mkdir(parents=True, exist_ok=True)
     options = {
         "llm_concurrency": args.llm_concurrency,
-        "forecast": not args.no_forecast,
         "keys_file": str(keys),
         "mocks": args.mocks_url,
     }
     with workspace_lock(workspace):
-        freeze_plan(workspace, plan)
+        freeze_plan(workspace, plan, args.mode)
         started = clock.monotonic()
         context = multiprocessing.get_context("spawn")
         common = (str(workspace), plan, args.mode, str(cache), options)

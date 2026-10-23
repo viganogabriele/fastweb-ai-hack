@@ -218,13 +218,15 @@ has the design) runs the unchanged Core modules once per store × origin:
   Origins run in order. Each store has one database across its origins.
 - **Identity.** The mail set only grows and `int.cases` fixes a case id by the group
   that opened it. `cases.json` has one record per case id: the payload of the first
-  origin that emitted it (`origin`), plus `revisions` (status/version changes),
+  origin that emitted it (`origin`), `alert_at` = max(`first_available_at`, `origin`),
+  plus `revisions` (status/version changes),
   `last_seen_origin` and `present_at_final_origin`. The run manifest's
   `case_identity_drift` lists any later change of `first_available_at` or scope.
 - **Reading.** One reading run (`reading_export` modules) covers every mail of the selected
   stores with a Date inside the local range. It writes `predictions.json` with one
   `ModuleRun` per module, as `eval.reading.score` expects. The investigator is off by default
-  (`--investigate N` investigates up to N new cases per origin in a sibling run). `sys.client`
+  (`--investigate N` investigates up to N new cases per origin in a sibling run; the agent's
+  wall-clock budget makes that path outside the byte-identity guarantee). `sys.client`
   is off by default (`--sys-client`). Options are per store, without cross-store donors.
 - **LLM cache.** All runs share one cache scope (`LLMClient.for_scope`): runner, LLM-module
   versions/params, model, namespace. The origin, sources and code version are not part
@@ -235,16 +237,21 @@ has the design) runs the unchanged Core modules once per store × origin:
   full per-origin RunSpec scope.
 - **Record/replay.** Record is resumable: an origin is final once
   `origins/<STORE>/<DATE>.json` exists. A failed attempt is reset and retried
-  (3 attempts), and recordings are never lost. Rerun the same command after a crash.
+  (3 attempts), and recordings are never lost. Systems GETs that leave no recording
+  (mock outage or error) count as failures. The reading pass gets a fresh database per
+  attempt. Rerun the same command after a crash. A workspace remembers its mode: a replay
+  refuses a record workspace.
   Replay never reads keys, denies sockets in the workers and fails on the first
   LLM/systems miss. Failure details go to `failures/`.
-  Exports exclude only `ModuleRun.started_at/finished_at`, so record and replay
-  export hashes must be equal.
+  Exports exclude only `ModuleRun.started_at/finished_at` (and agent step durations),
+  so record and replay export hashes must be equal.
 - **Outputs** (`<workspace>/export/`): `predictions.json`, `cases.json`, `options.json`,
   `forecast.json` (`{as_of, payload}` for every baseline/overlay at every origin), `traces.json`,
-  `protocol.json` (lead-time/reading skeleton with `reading_files`), `protocol-forecast.json`
-  (explicit store×SKU×timezone universe, proposed `forecast.scenario: base` to be confirmed
-  ex ante), `sources.txt` / `config.txt` (every source file read during the runs, every config
+  `protocol.json` (lead-time/reading skeleton with `reading_files`),
+  `forecast/protocol-<STORES>.json` (one per group of stores with identical origin instants,
+  because `eval.forecast` scores every protocol origin × every universe pair; explicit
+  store×SKU×timezone universe, proposed `forecast.scenario: base` to be confirmed ex ante),
+  `sources.txt` / `config.txt` (every source file read during the runs, every config
   and prompt) and `run-manifest.json` (export SHA-256s, counts, cache inventories, per-run status,
   diagnostics). `run-specs/` has one RunSpec per run and `forecast/` is a ready forecast bundle
   directory (forecast records as `predictions.json`, plus cases/options). Execution logs:
@@ -254,14 +261,15 @@ has the design) runs the unchanged Core modules once per store × origin:
 
 Dev evidence (MIL01 + MUN01, 2026-08-31…09-13, 28 origins). The recording ran at
 `e57b45d`, a pre-rebase commit of this PR whose runner/module code equals the PR head apart
-from the estimate constants. A fresh replay at the PR head reproduced every export hash:
+from the estimate constants. After the review fixes, a record at the PR head against
+the same cache (0 provider calls) and a fresh replay produced identical export hashes:
 
 | | Record (Fastweb keys) | Fresh replay (`eval product`, offline) |
 |---|---|---|
 | Wall time | 96 s | 73 s |
 | Provider calls / cache hits | 40 / 325 (27 mails: 27 extraction, 13 link) | 0 / 365 |
 | Tokens billed | 70,309 | 0 |
-| Exports | 533 predictions, 98 cases, 2,816 option versions, 2,914 forecasts | identical SHA-256 for all 10 export files |
+| Exports | 533 predictions, 98 cases, 2,816 option versions, 2,914 forecasts | identical SHA-256 for all export files |
 
 `case_identity_drift` was empty. The dev cache is bound to the extraction prompt bytes
 and request payloads of that commit. A later prompt change (for example DEMO-02b, #237)
@@ -282,11 +290,12 @@ Commands (repository root; `SHA` = the reviewed candidate, committed, clean code
 ```sh
 SHA=$(git rev-parse HEAD)
 cd backend
-# 0. Estimate only: file names and Date headers.
+# 0. Estimate only: mail file names and Date headers (plus the flash workbook covers).
 .venv/bin/python -m tesseract.rolling estimate --split holdout \
   --start 2026-08-31 --end 2026-10-21 --workers 4 --llm-concurrency 8
 # 1. Record outside the launcher (it cannot read .secrets/). Needs the systems mocks on
-#    :8088 (`make mocks`) and the keys file (`--keys-file` from a worktree). Resumable.
+#    :8088 (`make mocks`) and the keys file (default `.secrets/fastweb_keys.json`;
+#    `--keys-file` from a worktree). Resumable: rerun the same command after a crash.
 .venv/bin/python -m tesseract.rolling run --split holdout --start 2026-08-31 --end 2026-10-21 \
   --mode record --cache ../data/rolling/holdout-cache --workspace ../data/rolling/holdout-record \
   --code-version "$SHA" --workers 4 --llm-concurrency 8 --yes
@@ -305,7 +314,9 @@ The experiment record takes `X/sources.txt`, every `X/run-specs/*.json`, the two
 directories and the `lead` (`X`) and `forecast` (`X/forecast`) export groups. Freeze the bundles
 with the wrapper above: `EXPORT_DIR` is `X` (or `X/forecast`), `SOURCE_LIST`/`CONFIG_LIST` are
 `X/sources.txt`/`X/config.txt`, and `PROTOCOL` is the approved `protocol.json`
-(or `protocol-forecast.json`). If #211 narrows the reading sample, it edits `reading_files`
+(or one forecast bundle per `X/forecast/protocol-<STORES>.json`). A process killed while writing
+a recording can leave a `tmp*` file in a cache directory: remove it before `freeze_record.py
+record`, which rejects invalid entries. If #211 narrows the reading sample, it edits `reading_files`
 in a separate reading protocol. Extra exported documents are outside the labels and not scored.
 
 Limits #211 must carry forward:
@@ -313,8 +324,8 @@ Limits #211 must carry forward:
 - **Pipeline alert time.** `Case.first_available_at` is the evidence time, which the
   lead-time scorer credits. The wrapper `origin` is when the 20:00 product emitted the case.
   Most closing mails arrive after 20:00, so the dev gap was 0–24 h (mean 12 h). The ERP
-  baselines are certified at B+1 20:00. Report `origin` next to the scored lead,
-  or score with it, before inspection.
+  baselines are certified at B+1 20:00. Before inspection, decide whether to score
+  with the explicit `alert_at` field or report it next to the scored lead.
 - **Code changes after recording.** The LLM scope excludes the code version, so a post-record
   bug fix reuses recordings as long as its LLM requests stay byte-identical. Rerun step 1 with the
   new SHA into a new workspace and the same cache: `provider_calls` must stay 0, while systems
