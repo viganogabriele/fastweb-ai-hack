@@ -15,7 +15,12 @@ the single-tool structured output of ``core.llm``; it never returns ids or offse
 - turns store-local period dates into instants, drops a period that starts after the mail was
   sent and treats a future end as still ongoing, except for kinds that announce the future.
 
-A document whose extraction fails twice (``ExtractionFailed``) is an abstention, never a guess.
+Candidates are validated independently: unsupported optional unit/reason strings become null,
+and invalid required fields reject only their item. Both are reported as abstentions. Unknown
+units never become piece counts; the quantity verifier drops their unsupported numeric values.
+The tool schema and prompt remain strict so recorded raw responses can be replayed unchanged.
+
+A document whose envelope fails twice (``ExtractionFailed``) is an abstention, never a guess.
 Provider errors and replay misses are module errors (status ``degraded``); an exhausted budget
 stops the remaining documents.
 """
@@ -27,11 +32,11 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, time, timedelta
 from functools import cache
 from pathlib import Path
-from typing import Literal
+from typing import Literal, get_args
 from zoneinfo import ZoneInfo
 
 import yaml
-from pydantic import BaseModel, Field, ValidationError
+from pydantic import BaseModel, Field, PrivateAttr, ValidationError, model_validator
 
 from tessera.core.cache import ReplayMiss
 from tessera.core.config import get_settings
@@ -92,6 +97,7 @@ Reason = Literal[
     "style",
     "other",
 ]
+Unit = Literal["units", "customers", "requests", "visitors", "money", "percent"]
 
 
 class Candidate(BaseModel):
@@ -105,7 +111,7 @@ class Candidate(BaseModel):
     value: float | None = None
     low: float | None = None
     high: float | None = None
-    unit: Literal["units", "customers", "requests", "visitors", "money", "percent"] | None = None
+    unit: Unit | None = None
     currency: str | None = None
     quantity_raw: str | None = None
     direction: Literal["up", "down", "none"] = "none"
@@ -120,6 +126,43 @@ class Candidate(BaseModel):
 
 class Candidates(BaseModel):
     observations: list[Candidate]
+    _rejected: tuple[tuple[int, str], ...] = PrivateAttr(default=())
+    _optional_dropped: tuple[tuple[int, str], ...] = PrivateAttr(default=())
+
+    @model_validator(mode="wrap")
+    @classmethod
+    def validate_items(cls, value, handler):
+        # Preserve envelope validation/retry and the strict tool schema. Only item
+        # failures are isolated; required semantic fields are never guessed.
+        if not isinstance(value, dict) or not isinstance(value.get("observations"), list):
+            return handler(value)
+        accepted, rejected, dropped = [], [], []
+        for index, item in enumerate(value["observations"]):
+            normalized = dict(item) if isinstance(item, dict) else item
+            cleared = []
+            if isinstance(normalized, dict):
+                for field, allowed in (("unit", get_args(Unit)), ("reason", get_args(Reason))):
+                    raw = normalized.get(field)
+                    if isinstance(raw, str) and raw not in allowed:
+                        normalized[field] = None
+                        cleared.append((index, field))
+            try:
+                candidate = Candidate.model_validate(normalized)
+            except ValidationError as error:
+                fields = sorted(
+                    {
+                        ".".join(map(str, detail["loc"])) or "candidate"
+                        for detail in error.errors(include_input=False, include_url=False)
+                    }
+                )
+                rejected.append((index, ", ".join(fields)))
+                continue
+            accepted.append(candidate)
+            dropped.extend(cleared)
+        parsed = handler({**value, "observations": accepted})
+        parsed._rejected = tuple(rejected)
+        parsed._optional_dropped = tuple(dropped)
+        return parsed
 
 
 class Rejected(ValueError):
@@ -499,6 +542,12 @@ def run(ctx) -> ModuleResult:
                 errors.append(f"{document.id}: LLM budget exhausted, remaining documents not read")
                 break
             counts["documents"] += 1
+            for index, fields in proposed._rejected:
+                abstentions.append(f"{document.id}: candidate {index} rejected (invalid {fields})")
+                counts["candidates_rejected"] += 1
+            for index, field in proposed._optional_dropped:
+                abstentions.append(f"{document.id}: candidate {index} unsupported {field} cleared")
+                counts["optional_fields_dropped"] += 1
             observations = []
             for candidate in proposed.observations:
                 try:

@@ -470,6 +470,36 @@ def test_pure_and_hash_follows_inputs():
     assert evaluate_options(changed)[0].version != a[0].version
 
 
+@pytest.mark.parametrize("target", ["dest", "donor"])
+@pytest.mark.parametrize("country", ["FR", None])
+def test_country_change_invalidates_option_hash(target, country):
+    original = inputs()
+    where = original.dest if target == "dest" else original.routes[0].donor
+    changed = inputs(**{target: replace(where, country=country)})
+    before = by_kind(evaluate_options(original))["transfer"]
+    after = by_kind(evaluate_options(changed))["transfer"]
+
+    assert checks(before)["domestic"] == "pass" and before.recommended
+    assert checks(after)["domestic"] == "fail" and not after.recommended
+    assert after.input_version_hash != before.input_version_hash
+    assert after.version != before.version
+
+
+@pytest.mark.parametrize("target", ["dest", "donor"])
+def test_timezone_change_invalidates_option_hash(target):
+    original = inputs()
+    where = original.dest if target == "dest" else original.routes[0].donor
+    changed = inputs(**{target: replace(where, timezone=ZoneInfo("Asia/Tokyo"))})
+    before = by_kind(evaluate_options(original))
+    after = by_kind(evaluate_options(changed))
+
+    if target == "dest":
+        assert after["hold"].valid_until != before["hold"].valid_until
+    assert after["transfer"].input_version_hash != before["transfer"].input_version_hash
+    assert after["transfer"].version != before["transfer"].version
+    assert evaluate_options(changed) == evaluate_options(changed)
+
+
 def test_wording_never_claims_optimal_or_roi():
     for opts in (evaluate_options(inputs()), evaluate_options(inputs(policy=OptionsPolicy()))):
         for o in opts:
