@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Mic, Square } from 'lucide-react'
+import { Mic, Square, Trash2 } from 'lucide-react'
 import { fmt, messages } from '../i18n'
 import { Button } from '../ui'
 import { useRecorder } from './useRecorder'
@@ -62,17 +62,36 @@ export function RecordPage() {
       </header>
 
       {!sent && (
-        <section className="rec__card">
+        <section
+          className={`rec__card${state === 'idle' || state === 'requesting' || state === 'recording' ? ' rec__card--center' : ''}`}
+        >
           {(state === 'idle' || state === 'requesting' || state === 'recording') && (
-            <button
-              type="button"
-              disabled={state === 'requesting' || !voiceToken()}
-              className={`rec__mic${state === 'recording' ? ' rec__mic--on' : ''}`}
-              onClick={state === 'recording' ? recorder.stop : recorder.start}
-            >
-              {state === 'recording' ? <Square size={36} /> : <Mic size={40} />}
-              <span>{state === 'recording' ? t.stop : t.start}</span>
-            </button>
+            <div className="rec__controls">
+              {/* Same width as the trash button, so the microphone stays centred. */}
+              <span className="rec__side" aria-hidden="true" />
+              <button
+                type="button"
+                disabled={state === 'requesting' || !voiceToken()}
+                className={`rec__mic${state === 'recording' ? ' rec__mic--on' : ''}`}
+                onClick={state === 'recording' ? recorder.stop : recorder.start}
+              >
+                {state === 'recording' ? <Square size={36} /> : <Mic size={40} />}
+                <span>{state === 'recording' ? t.stop : t.start}</span>
+              </button>
+              {state === 'recording' ? (
+                <button
+                  type="button"
+                  className="rec__side rec__discard"
+                  aria-label={t.discard}
+                  title={t.discard}
+                  onClick={again}
+                >
+                  <Trash2 size={22} />
+                </button>
+              ) : (
+                <span className="rec__side" aria-hidden="true" />
+              )}
+            </div>
           )}
           {!voiceToken() && <p role="alert" className="rec__error">{t.errors.access}</p>}
           {state === 'requesting' && <p role="status" className="rec__status">{t.requesting}</p>}

@@ -39,8 +39,39 @@
   background: var(--sd-color-surface-card);
 }
 
+/* Idle and recording: the card fills the screen and the microphone sits in its middle. */
+.rec__card--center {
+  flex: 1;
+  justify-content: center;
+}
+
+.rec__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sd-space-5);
+}
+
+.rec__side {
+  width: 56px;
+  height: 56px;
+  flex: none;
+}
+
+.rec__discard {
+  border: 1px solid var(--sd-color-border-subtle);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sd-color-surface-card);
+  color: var(--sd-color-light-danger);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
 .rec__mic {
-  align-self: center;
+  flex: none;
   width: 148px;
   height: 148px;
   border-radius: 50%;

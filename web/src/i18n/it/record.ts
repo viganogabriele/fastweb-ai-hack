@@ -5,6 +5,7 @@ export const record = {
   noStore: 'Manca il negozio: apri la pagina dal QR del negozio (…/store/record?store=MIL01).',
   start: 'Registra',
   stop: 'Ferma',
+  discard: 'Scarta la registrazione senza trascriverla',
   requesting: 'In attesa del permesso per il microfono…',
   retryAsr: 'Riprova trascrizione',
   recording: 'In registrazione · {seconds}s',
