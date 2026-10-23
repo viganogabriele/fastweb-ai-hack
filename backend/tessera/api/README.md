@@ -64,6 +64,28 @@ numbers; nested and array fields remain available in the resolved artifact.
 through MCP stdio. See [MCP setup and scope](MCP.md) for client configuration,
 namespace selection and the explicit read-only tool allowlist.
 
+## Agent trace reads (PLT-12a)
+
+`GET /api/runs/{run_id}/cases/{case_id}/traces` returns the latest visible version
+of each `AgentTrace` ID belonging to the case, sorted by ID. Latest selection
+uses repository publication order (not lexical version order) before filtering
+by case, so an older version cannot silently reappear if a trace changes case.
+An existing case with no traces returns an empty array.
+
+`GET /api/runs/{run_id}/cases/{case_id}/traces/{trace_id}?version=...` returns the
+exact requested version; omit `version` for the latest visible one. Missing cases,
+missing trace versions and traces belonging to a different case return 404.
+Both endpoints require a published succeeded/degraded run (409 otherwise) and
+inherit the same transaction, store scope, `as_of` and namespace protections as
+other artifact reads. Fixtures require explicit `?fixture=true` and enabled
+fixture access. Agent steps, errors, mode, token counts and fallback status are
+returned unchanged from the stored contract.
+
+These GETs perform no model calls and write no artifacts. They can read existing
+contract fixtures without importing or waiting for AG-03. The POST investigate
+service remains separate work in parent issue #113; this read-side implementation
+does not establish that real-model investigation has been recorded or verified.
+
 ## Clarification reads (PLT-13)
 
 GET `/api/runs/{run_id}/cases/{case_id}/clarifications` lists the latest visible
