@@ -249,7 +249,9 @@ has the design) runs the unchanged Core modules once per store × origin:
   diagnostics). Execution logs: `executions/<mode>-*.json`. The skeletons say
   `skeleton_unapproved`: #211 still binds and approves them.
 
-Dev evidence (MIL01 + MUN01, 2026-08-31…09-13, 28 origins, candidate `e57b45d`):
+Dev evidence (MIL01 + MUN01, 2026-08-31…09-13, 28 origins). The recording ran at
+`e57b45d`, a pre-rebase commit of this PR whose runner/module code equals the PR head apart
+from the estimate constants. A fresh replay at the PR head reproduced every export hash:
 
 | | Record (Fastweb keys) | Fresh replay (`eval product`, offline) |
 |---|---|---|
