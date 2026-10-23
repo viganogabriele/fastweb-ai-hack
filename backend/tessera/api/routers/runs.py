@@ -10,6 +10,7 @@ from jsonschema.exceptions import ValidationError as SchemaError
 from pydantic import ValidationError
 from sqlalchemy.exc import OperationalError
 
+from tessera.api.artifacts import CurrentArtifacts
 from tessera.api.models import (
     CreateRun,
     DocumentDetail,
@@ -81,14 +82,14 @@ def run_repo(request: Request, run_id: str, ns: Namespace) -> Iterator[Repo]:
 RunRepo = Annotated[Repo, Depends(run_repo)]
 
 
-def published_repo(repo: RunRepo) -> Repo:
+def published_repo(repo: RunRepo) -> CurrentArtifacts:
     state = repo.run_state()
     if not state["published"] or state["status"] not in {"succeeded", "degraded"}:
         raise HTTPException(409, "Run is not published")
-    return repo
+    return CurrentArtifacts(repo)
 
 
-PublishedRepo = Annotated[Repo, Depends(published_repo)]
+PublishedRepo = Annotated[CurrentArtifacts, Depends(published_repo)]
 
 
 def execute(spec: RunSpec, engine, registry: Registry, settings: Settings) -> None:
@@ -294,7 +295,7 @@ def case_traces(case_id: str, repo: PublishedRepo):
 
 @router.get("/runs/{run_id}/cases/{case_id}/traces/{trace_id}", response_model=AgentTrace)
 def case_trace(case_id: str, trace_id: str, repo: PublishedRepo, version: str | None = None):
-    if repo.get(Case, case_id) is None:
+    if version is None and repo.get(Case, case_id) is None:
         raise HTTPException(404, "Case not found")
     trace = repo.get(AgentTrace, trace_id, version)
     if trace is None or trace.case_id != case_id:
