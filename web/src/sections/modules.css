@@ -40,5 +40,5 @@
   color: var(--sd-color-text-secondary);
 }
 
-/* Maison: module headings in the display serif, ink check marks. */
-.sd-module-heading h2 { font-family: var(--sd-font-family-display); font-size: var(--sd-font-size-section); font-weight: var(--sd-font-weight-regular); }
+/* Atelier: module headings at card-title size. */
+.sd-module-heading h2 { font-size: var(--sd-font-size-section); font-weight: var(--sd-font-weight-semibold); }

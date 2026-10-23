@@ -47,10 +47,7 @@
 .sd-button:not(:disabled):active { transform: scale(0.97); }
 @keyframes sd-spin { to { transform: rotate(1turn); } }
 @media (prefers-reduced-motion: reduce) { .sd-button__spinner { animation: none; } }
-/* Maison: buttons read like a boutique label, uppercase and tracked. */
-.sd-button { font-size: var(--sd-local-font-size-micro); letter-spacing: var(--sd-local-tracking-button); text-transform: uppercase; padding-inline: var(--sd-space-5); }
-.sd-button--sm { padding-inline: var(--sd-space-4); }
-.sd-button--icon-only { padding: 0; }
-.sd-button:not(.sd-button--primary):not(.sd-button--ghost) { border-color: var(--sd-color-text-primary); }
-.sd-button:not(:disabled):not(.sd-button--primary):hover { background: var(--sd-color-text-primary); color: var(--sd-color-text-on-accent); border-color: var(--sd-color-text-primary); }
-.sd-button--ghost:not(:disabled):hover { background: transparent !important; color: var(--sd-color-text-primary) !important; border-color: transparent !important; }
+/* Atelier: secondary buttons are white with a visible edge and a hairline shadow. */
+.sd-button { font-weight: var(--sd-font-weight-medium); box-shadow: var(--sd-local-shadow-card); }
+.sd-button--ghost { box-shadow: none; }
+.sd-button--ghost:not(:disabled):hover { background: var(--sd-local-hover-surface); color: var(--sd-color-text-primary); }

@@ -21,12 +21,15 @@ export async function readTokens() {
   return tokens
 }
 
-export function resolveToken(tokens, path, seen = new Set()) {
+const MODES_EXTENSION = 'com.tessera.atelier'
+export const modeValue = (token, mode) => (mode && token.$extensions?.[MODES_EXTENSION]?.modes?.[mode]) ?? token.$value
+
+export function resolveToken(tokens, path, seen = new Set(), mode = undefined) {
   if (!tokens.has(path)) throw new Error(`Unknown token alias: ${path}`)
   if (seen.has(path)) throw new Error(`Circular token alias: ${[...seen, path].join(' → ')}`)
-  const value = tokens.get(path).$value
+  const value = modeValue(tokens.get(path), mode)
   if (typeof value === 'string' && /^\{.*\}$/.test(value)) {
-    return resolveToken(tokens, value.slice(1, -1), new Set([...seen, path]))
+    return resolveToken(tokens, value.slice(1, -1), new Set([...seen, path]), mode)
   }
   return value
 }
@@ -35,6 +38,7 @@ export async function buildTokens() {
   const tokens = await readTokens()
   const names = new Set()
   const declarations = []
+  const dark = []
   for (const [path, token] of tokens) {
     resolveToken(tokens, path)
     const name = cssName(path)
@@ -50,9 +54,14 @@ export async function buildTokens() {
     else throw new Error(`Unsupported token type: ${path} (${token.$type})`)
     if (!css) throw new Error(`Missing CSS value: ${path}`)
     declarations.push(`  ${name}: ${css};`)
+    const darkValue = token.$extensions?.[MODES_EXTENSION]?.modes?.dark
+    if (darkValue) {
+      resolveToken(tokens, path, new Set(), 'dark')
+      dark.push(`  ${name}: var(${cssName(darkValue.slice(1, -1))});`)
+    }
   }
-  await writeFile(new URL('../src/design/tokens.css', import.meta.url), `/* generated, do not edit */\n:root {\n${declarations.join('\n')}\n}\n`)
-  console.log(`Generated ${declarations.length} design tokens`)
+  await writeFile(new URL('../src/design/tokens.css', import.meta.url), `/* generated, do not edit */\n:root {\n${declarations.join('\n')}\n}\n\n/* Dark mode: opt-in through <html data-theme="dark">; light stays the default. */\n:root[data-theme='dark'] {\n  color-scheme: dark;\n${dark.join('\n')}\n}\n`)
+  console.log(`Generated ${declarations.length} design tokens, ${dark.length} dark-mode overrides`)
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) await buildTokens()

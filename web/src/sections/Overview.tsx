@@ -1,9 +1,22 @@
 import { useState } from 'react'
-import { ArrowUpRight, Search } from 'lucide-react'
+import type { ReactNode } from 'react'
+import {
+  AlarmClock,
+  ArrowRight,
+  ChevronRight,
+  ClipboardList,
+  FileText,
+  Flame,
+  Search,
+  ShieldQuestion,
+  Store
+} from 'lucide-react'
 import type { Case, RunView, SourceDocument } from '../api/client'
-import { Button, EmptyState, Input, Select, StatusBadge } from '../ui'
+import { Button, EmptyState, Input, Select, StatusBadge, formatPercent } from '../ui'
 import type { StatusTone } from '../ui/StatusBadge'
 import './overview.css'
+
+type Priority = Case['priority']
 
 const statuses: Record<string, string> = {
   open: 'Aperto',
@@ -13,19 +26,15 @@ const statuses: Record<string, string> = {
   decided: 'Deciso',
   closed: 'Chiuso'
 }
-const priorities: Record<Case['priority'], string> = {
-  critical: 'Critica',
-  high: 'Alta',
-  medium: 'Media',
-  low: 'Bassa'
+const statusTone: Record<string, StatusTone> = {
+  verify: 'warning',
+  action_proposed: 'info',
+  decided: 'success'
 }
-const priorityTone: Record<Case['priority'], StatusTone> = {
-  critical: 'danger',
-  high: 'warning',
-  medium: 'info',
-  low: 'neutral'
-}
-const priorityOrder: Record<Case['priority'], number> = { critical: 0, high: 1, medium: 2, low: 3 }
+const PRIORITIES: Priority[] = ['critical', 'high', 'medium', 'low']
+const priorities: Record<Priority, string> = { critical: 'Critica', high: 'Alta', medium: 'Media', low: 'Bassa' }
+const priorityTone: Record<Priority, StatusTone> = { critical: 'danger', high: 'warning', medium: 'info', low: 'neutral' }
+const priorityOrder: Record<Priority, number> = { critical: 0, high: 1, medium: 2, low: 3 }
 // Labels for the RFC §4.3 owner and case-type enums; unknown values fall back to the raw id.
 const owners: Record<string, string> = {
   allocation: 'Allocazione',
@@ -38,24 +47,55 @@ const caseTypes: Record<string, string> = {
   unmet_demand: 'Domanda non servita',
   stock_discrepancy: 'Discrepanza di stock',
   product_feedback: 'Feedback prodotto',
-  demand_shift: 'Variazione della domanda',
-  traffic_change: 'Variazione del traffico',
+  demand_shift: 'Variazione domanda',
+  traffic_change: 'Variazione traffico',
   operational_issue: 'Problema operativo',
   customer_profile: 'Profilo cliente'
 }
 const label = (map: Record<string, string>, key: string) => map[key] ?? key.replaceAll('_', ' ')
 const HOUR = 3600_000
-
-const dateTime = (value: string | null | undefined) =>
-  value ? new Date(value).toLocaleString('it-IT', { dateStyle: 'medium', timeStyle: 'short' }) : 'Non disponibile'
+const isActive = (item: Case) => item.status !== 'closed' && item.status !== 'decided'
+const dateTime = (value: string) =>
+  new Date(value).toLocaleString('it-IT', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
 
 /** Time left before a decision deadline, measured from the run cutoff (never from "now"). */
-function untilDeadline(due: string | null | undefined, asOf: number) {
-  if (!due) return { text: 'Senza scadenza', urgent: false, past: false }
+function deadline(due: string | null | undefined, asOf: number) {
+  if (!due) return { text: 'Nessuna', tone: 'none' as const }
   const hours = Math.round((Date.parse(due) - asOf) / HOUR)
-  if (hours < 0) return { text: `Scaduta da ${Math.abs(hours)} h`, urgent: true, past: true }
-  if (hours < 48) return { text: `Tra ${hours} h`, urgent: hours <= 24, past: false }
-  return { text: `Tra ${Math.round(hours / 24)} giorni`, urgent: false, past: false }
+  if (hours < 0) return { text: `Scaduta ${Math.abs(hours)} h fa`, tone: 'past' as const }
+  if (hours < 48) return { text: `${hours} h`, tone: hours <= 24 ? ('urgent' as const) : ('soon' as const) }
+  return { text: `${Math.round(hours / 24)} giorni`, tone: 'later' as const }
+}
+
+function Deadline({ due, asOf }: { due: string | null | undefined; asOf: number }) {
+  const left = deadline(due, asOf)
+  return (
+    <span className={`sd-ov-deadline is-${left.tone}`} title={due ? `Scadenza: ${dateTime(due)}` : undefined}>
+      {left.tone !== 'none' && <AlarmClock aria-hidden="true" />}
+      {left.text}
+    </span>
+  )
+}
+
+function Card({ title, meta, action, className = '', children }: {
+  title: string
+  meta?: ReactNode
+  action?: ReactNode
+  className?: string
+  children: ReactNode
+}) {
+  return (
+    <section className={`sd-ov-card ${className}`} aria-label={title}>
+      <header className="sd-ov-card__head">
+        <div>
+          <h2>{title}</h2>
+          {meta && <p>{meta}</p>}
+        </div>
+        {action}
+      </header>
+      {children}
+    </section>
+  )
 }
 
 export function Overview({
@@ -71,16 +111,15 @@ export function Overview({
 }) {
   const [search, setSearch] = useState('')
   const [store, setStore] = useState('all')
+  const [priority, setPriority] = useState<'all' | Priority>('all')
   const asOf = Date.parse(run.spec.as_of)
-  const active = cases.filter((item) => item.status !== 'closed' && item.status !== 'decided')
+  const active = cases.filter(isActive)
   const dueSoon = active
     .filter((item) => item.decision_due_at && Date.parse(item.decision_due_at) - asOf <= 48 * HOUR)
     .sort((a, b) => Date.parse(a.decision_due_at!) - Date.parse(b.decision_due_at!))
   const urgent = active.filter((item) => priorityOrder[item.priority] <= 1)
-  const byPriority = (Object.keys(priorities) as Case['priority'][]).map((key) => ({
-    key,
-    count: active.filter((item) => item.priority === key).length
-  }))
+  const verify = active.filter((item) => item.status === 'verify')
+  const byPriority = PRIORITIES.map((key) => ({ key, count: active.filter((item) => item.priority === key).length }))
   const byOwner = Object.entries(
     active.reduce<Record<string, number>>((acc, item) => ({ ...acc, [item.owner]: (acc[item.owner] ?? 0) + 1 }), {})
   ).sort((a, b) => b[1] - a[1])
@@ -88,249 +127,287 @@ export function Overview({
   const stores = run.spec.stores
     .map((id) => {
       const own = active.filter((item) => item.store_id === id)
-      const next = own
-        .map((item) => item.decision_due_at)
-        .filter((value): value is string => Boolean(value))
-        .sort()[0]
       return {
         id,
         open: own.length,
         urgent: own.filter((item) => priorityOrder[item.priority] <= 1).length,
         verify: own.filter((item) => item.status === 'verify').length,
-        next
+        next: own.map((item) => item.decision_due_at).filter((value): value is string => Boolean(value)).sort()[0]
       }
     })
     .sort((a, b) => b.urgent - a.urgent || b.open - a.open || a.id.localeCompare(b.id))
+  const maxStore = Math.max(1, ...stores.map((row) => row.open))
 
   const query = search.trim().toLocaleLowerCase('it-IT')
   const visible = cases
     .filter(
       (item) =>
         (store === 'all' || item.store_id === store) &&
-        [item.store_id, item.scope_id, item.case_type, label(caseTypes, item.case_type), item.owner, item.priority_reason]
+        (priority === 'all' || item.priority === priority) &&
+        [item.store_id, item.scope_id, label(caseTypes, item.case_type), label(owners, item.owner), item.priority_reason]
           .join(' ')
           .toLocaleLowerCase('it-IT')
           .includes(query)
     )
     .sort(
       (a, b) =>
+        Number(isActive(b)) - Number(isActive(a)) ||
         priorityOrder[a.priority] - priorityOrder[b.priority] ||
         (a.decision_due_at ?? '9999').localeCompare(b.decision_due_at ?? '9999')
     )
+  const filtered = store !== 'all' || priority !== 'all' || query !== ''
 
-  const kpis: { label: string; value: number; note: string; tone?: 'signature' | 'warning' }[] = [
-    { label: 'Casi aperti', value: active.length, note: `${cases.length - active.length} chiusi o decisi` },
-    { label: 'Priorità alta', value: urgent.length, note: 'critica o alta', tone: urgent.length ? 'signature' : undefined },
-    { label: 'In scadenza', value: dueSoon.length, note: 'entro 48 ore dal cutoff', tone: dueSoon.length ? 'warning' : undefined },
-    { label: 'Da verificare', value: active.filter((item) => item.status === 'verify').length, note: 'incertezze bloccanti' },
-    { label: 'Fonti', value: documents.length, note: 'email, note vocali, chat' },
-    { label: 'Negozi', value: run.spec.stores.length, note: 'nel perimetro del run' }
+  const kpis = [
+    { label: 'Casi aperti', value: active.length, note: `${cases.length - active.length} chiusi o decisi`, icon: ClipboardList, tone: 'neutral' },
+    { label: 'Priorità alta', value: urgent.length, note: 'critica o alta', icon: Flame, tone: urgent.length ? 'danger' : 'neutral' },
+    { label: 'In scadenza', value: dueSoon.length, note: 'entro 48 h', icon: AlarmClock, tone: dueSoon.length ? 'warning' : 'neutral' },
+    { label: 'Da verificare', value: verify.length, note: 'incertezze bloccanti', icon: ShieldQuestion, tone: verify.length ? 'info' : 'neutral' },
+    { label: 'Fonti acquisite', value: documents.length, note: 'documenti nel run', icon: FileText, tone: 'neutral' },
+    { label: 'Negozi', value: run.spec.stores.length, note: 'nel perimetro', icon: Store, tone: 'neutral' }
   ]
 
+  // The most urgent open case: earliest deadline among critical/high, else the earliest overall.
+  const nextUp = [...urgent, ...dueSoon].sort(
+    (a, b) =>
+      priorityOrder[a.priority] - priorityOrder[b.priority] ||
+      (a.decision_due_at ?? '9999').localeCompare(b.decision_due_at ?? '9999')
+  )[0]
+
   return (
-    <div className="sd-overview">
-      <dl className="sd-overview__kpis">
-        {kpis.map((item) => (
-          <div key={item.label} className={item.tone ? `sd-overview__kpi is-${item.tone}` : 'sd-overview__kpi'}>
-            <dt>{item.label}</dt>
-            <dd>
-              <strong>{item.value}</strong>
-              <span>{item.note}</span>
-            </dd>
-          </div>
+    <div className="sd-ov">
+      <section className="sd-ov-brief" aria-label="Sintesi del run">
+        <div>
+          <p className="sd-ov-brief__eyebrow">Sintesi al cutoff · {run.spec.stores.length} negozi</p>
+          <p className="sd-ov-brief__text">
+            <strong>{active.length} casi aperti</strong>, di cui <strong className="is-danger">{urgent.length} ad alta priorità</strong>.{' '}
+            {dueSoon.length ? (
+              <>
+                {dueSoon.length} {dueSoon.length === 1 ? 'decisione scade' : 'decisioni scadono'} entro 48 ore
+                {dueSoon[0]?.decision_due_at ? <>, la prima tra <strong>{deadline(dueSoon[0].decision_due_at, asOf).text}</strong></> : null}.
+              </>
+            ) : (
+              'Nessuna decisione in scadenza nelle prossime 48 ore.'
+            )}
+          </p>
+        </div>
+        {nextUp && (
+          <Button variant="primary" icon={<ArrowRight aria-hidden="true" />} onClick={() => onCaseSelect(nextUp)}>
+            Apri il caso più urgente
+          </Button>
+        )}
+      </section>
+
+      <ul className="sd-ov-kpis" aria-label="Indicatori principali">
+        {kpis.map(({ label: name, value, note, icon: Icon, tone }) => (
+          <li key={name} className={`sd-ov-kpi is-${tone}`}>
+            <span className="sd-ov-kpi__icon" aria-hidden="true"><Icon /></span>
+            <span className="sd-ov-kpi__label">{name}</span>
+            <strong className="sd-ov-kpi__value">{value}</strong>
+            <span className="sd-ov-kpi__note">{note}</span>
+          </li>
         ))}
-      </dl>
+      </ul>
 
-      <div className="sd-overview__grid">
-        <section className="sd-overview__panel sd-overview__due" aria-labelledby="sd-overview-due">
-          <header>
-            <h2 id="sd-overview-due">Da decidere</h2>
-            <p>Casi aperti con scadenza entro 48 ore dal cutoff del run</p>
-          </header>
+      <div className="sd-ov-row">
+        <Card
+          title="Da decidere"
+          meta="Casi aperti con scadenza entro 48 ore dal cutoff del run"
+          action={<span className="sd-ov-count">{dueSoon.length}</span>}
+          className="sd-ov-due"
+        >
           {dueSoon.length ? (
-            <ol>
-              {dueSoon.slice(0, 6).map((item) => {
-                const left = untilDeadline(item.decision_due_at, asOf)
-                return (
-                  <li key={`${item.id}-${item.version}`}>
-                    <button type="button" onClick={() => onCaseSelect(item)}>
-                      <span className={left.urgent ? 'sd-overview__clock is-urgent' : 'sd-overview__clock'}>{left.text}</span>
-                      <span className="sd-overview__due-body">
-                        <strong>
-                          {item.store_id ?? 'Negozio da verificare'} · {label(caseTypes, item.case_type)}
-                        </strong>
-                        <span>{item.priority_reason}</span>
+            <ul className="sd-ov-due__list">
+              {dueSoon.slice(0, 6).map((item) => (
+                <li key={`${item.id}-${item.version}`}>
+                  <button type="button" onClick={() => onCaseSelect(item)}>
+                    <Deadline due={item.decision_due_at} asOf={asOf} />
+                    <span className="sd-ov-due__body">
+                      <span className="sd-ov-due__title">
+                        <strong>{item.store_id ?? 'Negozio da verificare'}</strong>
+                        <span>{label(caseTypes, item.case_type)}</span>
                       </span>
-                      <StatusBadge label={priorities[item.priority]} tone={priorityTone[item.priority]} />
-                      <ArrowUpRight className="sd-overview__go" aria-hidden="true" />
-                    </button>
-                  </li>
-                )
-              })}
-            </ol>
+                      <span className="sd-ov-due__reason">{item.priority_reason}</span>
+                    </span>
+                    <StatusBadge label={priorities[item.priority]} tone={priorityTone[item.priority]} />
+                    <ChevronRight className="sd-ov-chevron" aria-hidden="true" />
+                  </button>
+                </li>
+              ))}
+            </ul>
           ) : (
-            <p className="sd-overview__quiet">Nessuna decisione in scadenza nelle prossime 48 ore.</p>
+            <p className="sd-ov-quiet">Nessuna decisione in scadenza nelle prossime 48 ore.</p>
           )}
-        </section>
+        </Card>
 
-        <div className="sd-overview__side">
-          <section className="sd-overview__panel" aria-labelledby="sd-overview-priority">
-            <header>
-              <h2 id="sd-overview-priority">Priorità</h2>
-              <p>{active.length} casi aperti</p>
-            </header>
-            <div className="sd-overview__stack" aria-hidden="true">
+        <div className="sd-ov-stack">
+          <Card title="Casi aperti per priorità" meta={`${active.length} casi`}>
+            <div className="sd-ov-segments" role="img" aria-label={byPriority.map(({ key, count }) => `${priorities[key]} ${count}`).join(', ')}>
               {byPriority.map(({ key, count }) =>
                 count ? <span key={key} className={`is-${key}`} style={{ flexGrow: count }} /> : null
               )}
             </div>
-            <ul className="sd-overview__legend">
+            <ul className="sd-ov-legend">
               {byPriority.map(({ key, count }) => (
                 <li key={key}>
-                  <span className={`sd-overview__swatch is-${key}`} aria-hidden="true" />
-                  {priorities[key]}
+                  <span className={`sd-ov-swatch is-${key}`} aria-hidden="true" />
+                  <span>{priorities[key]}</span>
                   <strong>{count}</strong>
+                  <span className="sd-ov-legend__share">{active.length ? formatPercent(count / active.length, 0) : '—'}</span>
                 </li>
               ))}
             </ul>
-          </section>
-
-          <section className="sd-overview__panel" aria-labelledby="sd-overview-owner">
-            <header>
-              <h2 id="sd-overview-owner">Per ufficio</h2>
-              <p>Chi riceve i casi aperti</p>
-            </header>
-            <ul className="sd-overview__bars">
+          </Card>
+          <Card title="Casi aperti per ufficio" meta="Chi riceve la decisione">
+            <ul className="sd-ov-bars">
               {byOwner.map(([owner, count]) => (
                 <li key={owner}>
-                  <span>{label(owners, owner)}</span>
-                  <span className="sd-overview__bar" aria-hidden="true">
+                  <span className="sd-ov-bars__label">{label(owners, owner)}</span>
+                  <span className="sd-ov-bars__track" aria-hidden="true">
                     <span style={{ inlineSize: `${(count / maxOwner) * 100}%` }} />
                   </span>
                   <strong>{count}</strong>
                 </li>
               ))}
             </ul>
-          </section>
+          </Card>
         </div>
       </div>
 
-      <section className="sd-overview__panel" aria-labelledby="sd-overview-stores">
-        <header>
-          <h2 id="sd-overview-stores">Negozi</h2>
-          <p>Ordinati per casi a priorità alta. Seleziona un negozio per filtrare le segnalazioni.</p>
-        </header>
-        <div className="sd-overview__table-wrap">
-          <table className="sd-overview__table">
+      <Card
+        title="Negozi"
+        meta="Ordinati per casi a priorità alta. Seleziona un negozio per filtrare le segnalazioni."
+        action={
+          store !== 'all' ? (
+            <button type="button" className="sd-ov-link" onClick={() => setStore('all')}>Mostra tutti</button>
+          ) : undefined
+        }
+      >
+        <div className="sd-ov-table-wrap">
+          <table className="sd-ov-table">
             <thead>
               <tr>
                 <th scope="col">Negozio</th>
-                <th scope="col">Aperti</th>
-                <th scope="col">Priorità alta</th>
-                <th scope="col">Da verificare</th>
-                <th scope="col">Prossima scadenza</th>
+                <th scope="col">Casi aperti</th>
+                <th scope="col" className="is-num">Priorità alta</th>
+                <th scope="col" className="is-num">Da verificare</th>
+                <th scope="col" className="is-num">Prossima scadenza</th>
               </tr>
             </thead>
             <tbody>
               {stores.map((row) => (
-                <tr key={row.id} aria-selected={store === row.id}>
+                <tr key={row.id} className={store === row.id ? 'is-selected' : undefined}>
                   <th scope="row">
-                    <button type="button" onClick={() => setStore(store === row.id ? 'all' : row.id)}>
+                    <button type="button" className="sd-ov-store" aria-pressed={store === row.id} onClick={() => setStore(store === row.id ? 'all' : row.id)}>
                       {row.id}
                     </button>
                   </th>
-                  <td>{row.open}</td>
-                  <td className={row.urgent ? 'is-signature' : undefined}>{row.urgent}</td>
-                  <td>{row.verify}</td>
-                  <td>{row.next ? untilDeadline(row.next, asOf).text : '—'}</td>
+                  <td>
+                    <span className="sd-ov-inline-bar">
+                      <span className="sd-ov-inline-bar__track" aria-hidden="true"><span style={{ inlineSize: `${(row.open / maxStore) * 100}%` }} /></span>
+                      <strong>{row.open}</strong>
+                    </span>
+                  </td>
+                  <td className="is-num">{row.urgent ? <span className="sd-ov-pill is-danger">{row.urgent}</span> : <span className="sd-ov-zero">0</span>}</td>
+                  <td className="is-num">{row.verify ? <span className="sd-ov-pill is-warning">{row.verify}</span> : <span className="sd-ov-zero">0</span>}</td>
+                  <td className="is-num">{row.next ? <Deadline due={row.next} asOf={asOf} /> : <span className="sd-ov-zero">—</span>}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-      </section>
+      </Card>
 
-      <section className="sd-overview__cases" aria-labelledby="sd-overview-cases">
-        <header className="sd-overview__cases-head">
-          <h2 id="sd-overview-cases">Segnalazioni da valutare</h2>
-          <form className="sd-overview__filters" role="search" onSubmit={(event) => event.preventDefault()}>
-            <Input
-              size="sm"
-              label="Cerca caso"
-              type="search"
-              icon={<Search />}
-              placeholder="Negozio, prodotto o motivo"
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-            />
-            <Select
-              size="sm"
-              label="Negozio"
-              value={store}
-              onValueChange={setStore}
-              options={[{ value: 'all', label: 'Tutti i negozi' }, ...run.spec.stores.map((id) => ({ value: id, label: id }))]}
-            />
-          </form>
-        </header>
+      <Card
+        title="Segnalazioni"
+        meta={`${visible.length} di ${cases.length} casi${filtered ? ' · filtri attivi' : ''}`}
+        className="sd-ov-cases"
+      >
+        <form className="sd-ov-toolbar" role="search" onSubmit={(event) => event.preventDefault()}>
+          <Input
+            size="sm"
+            label="Cerca caso"
+            hideLabel
+            type="search"
+            icon={<Search />}
+            placeholder="Cerca per negozio, prodotto o motivo"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+          />
+          <Select
+            size="sm"
+            label="Negozio"
+            hideLabel
+            value={store}
+            onValueChange={setStore}
+            options={[{ value: 'all', label: 'Tutti i negozi' }, ...run.spec.stores.map((id) => ({ value: id, label: id }))]}
+          />
+          <div className="sd-ov-segmented" role="group" aria-label="Filtra per priorità">
+            {(['all', ...PRIORITIES] as const).map((key) => (
+              <button key={key} type="button" aria-pressed={priority === key} onClick={() => setPriority(key)}>
+                {key !== 'all' && <span className={`sd-ov-swatch is-${key}`} aria-hidden="true" />}
+                {key === 'all' ? 'Tutte' : priorities[key]}
+              </button>
+            ))}
+          </div>
+        </form>
         {visible.length ? (
-          <ul className="sd-overview__case-list">
-            {visible.map((item) => {
-              const settled = item.status === 'closed' || item.status === 'decided'
-              const left = settled
-                ? { text: statuses[item.status], past: false }
-                : untilDeadline(item.decision_due_at, asOf)
-              return (
-                <li key={`${item.id}-${item.version}`}>
-                  <details className="sd-overview__case">
-                    <summary>
-                      <span className={`sd-overview__rule is-${item.priority}`} aria-hidden="true" />
-                      <span className="sd-overview__case-title">
-                        <span className="sd-overview__eyebrow">
-                          {item.store_id ?? 'Negozio da verificare'} · {label(caseTypes, item.case_type)}
-                        </span>
-                        <strong>{item.scope_id ?? 'Prodotto da identificare'}</strong>
-                      </span>
-                      <span className="sd-overview__case-meta">
-                        <span className={left.past ? 'is-past' : undefined}>{left.text}</span>
-                        <StatusBadge label={priorities[item.priority]} tone={priorityTone[item.priority]} />
-                        <StatusBadge
-                          label={statuses[item.status] ?? item.status}
-                          tone={item.status === 'verify' ? 'warning' : 'neutral'}
-                        />
-                      </span>
-                    </summary>
-                    <div className="sd-overview__case-body">
-                      <p className="sd-overview__reason">{item.priority_reason}</p>
-                      <dl>
-                        <div><dt>Ufficio</dt><dd>{label(owners, item.owner)}</dd></div>
-                        <div><dt>Scadenza decisione</dt><dd>{dateTime(item.decision_due_at)}</dd></div>
-                        <div><dt>Documenti / origini indipendenti</dt><dd>{item.n_documents} / {item.n_origin_groups}</dd></div>
-                        <div><dt>Finestra</dt><dd>{dateTime(item.window_start)} – {dateTime(item.window_end)}</dd></div>
-                      </dl>
-                      {item.blocking_uncertainties.length ? (
-                        <div className="sd-overview__uncertain">
-                          <h3>Incertezze da risolvere</h3>
-                          <ul>
-                            {item.blocking_uncertainties.map((text) => <li key={text}>{text}</li>)}
-                          </ul>
-                        </div>
-                      ) : null}
-                      <Button size="sm" variant="primary" onClick={() => onCaseSelect(item)}>
-                        Apri il caso
-                      </Button>
-                    </div>
-                  </details>
-                </li>
-              )
-            })}
-          </ul>
+          <div className="sd-ov-table-wrap">
+            <table className="sd-ov-table sd-ov-cases__table">
+              <thead>
+                <tr>
+                  <th scope="col">Priorità</th>
+                  <th scope="col">Prodotto</th>
+                  <th scope="col">Negozio</th>
+                  <th scope="col">Tipo e motivo</th>
+                  <th scope="col">Stato</th>
+                  <th scope="col" className="is-num">Scadenza</th>
+                  <th scope="col"><span className="sd-visually-hidden">Apri</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                {visible.map((item) => (
+                  <tr
+                    key={`${item.id}-${item.version}`}
+                    className={isActive(item) ? undefined : 'is-settled'}
+                    onClick={() => onCaseSelect(item)}
+                  >
+                    <td><StatusBadge label={priorities[item.priority]} tone={priorityTone[item.priority]} /></td>
+                    <th scope="row">
+                      <button
+                        type="button"
+                        className="sd-ov-case-link"
+                        onClick={(event) => {
+                          event.stopPropagation()
+                          onCaseSelect(item)
+                        }}
+                      >
+                        {item.scope_id ?? 'Da identificare'}
+                      </button>
+                    </th>
+                    <td className="sd-ov-strong">{item.store_id ?? '—'}</td>
+                    <td>
+                      <div className="sd-ov-type">
+                        <span>{label(caseTypes, item.case_type)}</span>
+                        <span>{item.priority_reason}</span>
+                      </div>
+                    </td>
+                    <td><StatusBadge label={statuses[item.status] ?? item.status} tone={statusTone[item.status] ?? 'neutral'} /></td>
+                    <td className="is-num">
+                      {isActive(item) ? <Deadline due={item.decision_due_at} asOf={asOf} /> : <span className="sd-ov-zero">—</span>}
+                    </td>
+                    <td className="sd-ov-go"><ChevronRight aria-hidden="true" /></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         ) : (
           <EmptyState
             title="Nessun caso trovato"
-            description="Non ci sono casi pubblicati per questa selezione. Le fonti acquisite non implicano automaticamente un caso."
+            description="Nessun caso pubblicato corrisponde ai filtri. Le fonti acquisite non implicano automaticamente un caso."
           />
         )}
-      </section>
+      </Card>
     </div>
   )
 }

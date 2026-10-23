@@ -10,7 +10,7 @@ coverage: "parziale: un frame NexaDash visibile; pubblicazione Dribbble collegat
 evidence_summary: "1 immagine Behance osservata, 1 palette e descrizione della pubblicazione Dribbble degli stessi autori, 2 schede Behance indicizzate, 1 progetto non verificabile"
 ---
 
-> **Superseded by [Maison](../maison/DESIGN.md) (WEB-10).** Kept for history.
+> **Superseded by [Atelier](../atelier/DESIGN.md) (WEB-10).** Kept for history.
 
 # Overview
 
