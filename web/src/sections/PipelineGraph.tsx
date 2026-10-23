@@ -8,6 +8,7 @@ import { ErrorState, StatusBadge, transition } from '../ui'
 import {
   buildModuleGraph, layers, lineage, moduleDetailId, moduleStatuses, NODE_HEIGHT, NODE_WIDTH, phases
 } from './moduleGraph'
+import { moduleMetrics } from './moduleCounts'
 import type { GraphNode } from './moduleGraph'
 import { actorIcons, ModuleGlyph, moduleTitle, phaseIcons, phaseOf, phaseSlot } from './moduleCatalog'
 import { useElementWidth } from './useElementWidth'
@@ -255,7 +256,7 @@ function ModuleDetail({ node, graph, execution, status, inRun, onSelect, onClose
 }) {
   const manifest = node.manifest
   const feeds = graph.edges.filter((edge) => edge.source === node.id)
-  const counts = Object.entries(execution?.result?.counts ?? {})
+  const counts = moduleMetrics(execution?.result?.counts ?? {})
   const chips = (ids: readonly string[], optional = false) => ids.length
     ? <ul className="sd-pipeline__chips">
         {ids.map((target) => (
@@ -298,8 +299,9 @@ function ModuleDetail({ node, graph, execution, status, inRun, onSelect, onClose
             <h4>Produce</h4>
             {counts.length
               ? <ul className="sd-pipeline__counts">
-                  {counts.map(([kind, count]) => (
-                    <li key={kind}><span>{kind}</span><strong className="sd-num">{count.toLocaleString('it-IT')}</strong></li>
+                  {counts.map((metric) => (
+                    <li key={metric.key} className={metric.value === 0 ? 'is-zero' : undefined}><span>{metric.label}</span>
+                      <strong className="sd-num">{metric.value.toLocaleString('it-IT')}{metric.fresh !== null && <small> · {metric.fresh.toLocaleString('it-IT')} nuovi</small>}</strong></li>
                   ))}
                 </ul>
               : <span className="sd-pipeline__none">{manifest.produces.join(', ') || 'Nulla'}{inRun ? ' · conteggi non disponibili' : ''}</span>}

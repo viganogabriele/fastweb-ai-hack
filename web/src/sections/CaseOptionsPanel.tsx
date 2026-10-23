@@ -2,10 +2,13 @@ import { useEffect, useState, useSyncExternalStore } from 'react'
 import type { Case } from '../api/client'
 import { mandatoryBlockers, optionsContextKey } from '../api/caseOptions'
 import type { ActionOption, OptionsContext } from '../api/caseOptions'
-import { ArrowLeftRight } from 'lucide-react'
-import { Button, Input, StatusBadge } from '../ui'
+import { ArrowLeftRight, Check, ChevronRight, X } from 'lucide-react'
+import { Button, Dialog, Input, StatusBadge } from '../ui'
+import type { StatusTone } from '../ui'
+import { shortDate } from './caseLabels'
+import { optionKind } from './optionKinds'
 import { createOptionsSession, intentKey } from './caseOptionsState'
-import type { Intent, OptionsSession, OptionsState } from './caseOptionsState'
+import type { Command, Intent, OptionsSession, OptionsState } from './caseOptionsState'
 
 // Tab-lifetime journal: revisiting a case keeps uncertain commands and their keys.
 // Nothing is submitted on mount, and fixture/product commands never share a scope.
@@ -29,73 +32,156 @@ function ScopedOptions({ context, closed }: { context: OptionsContext; closed: b
   return <PublishedOptions session={session} context={context} closed={closed} />
 }
 
+const scenarioLabels: Record<string, string> = { low: 'Bassa', base: 'Base', high: 'Alta' }
+const units = new Intl.NumberFormat('it-IT', { maximumFractionDigits: 1 })
+const num = (value: number | null | undefined) => value == null ? '–' : units.format(value)
+const eur = (value: number | null | undefined) => value == null ? 'sconosciuto' : `${units.format(value)} €`
+const checkTone = (status: ActionOption['checks'][number]['status']) => status === 'pass' ? 'success' : status === 'not_applicable' ? 'neutral' : 'warning'
+const checkLabels: Record<ActionOption['checks'][number]['status'], string> = { pass: 'ok', fail: 'non superato', unknown: 'da verificare', not_applicable: 'non applicabile' }
+
+// Lost units at the destination as "base (low–high)"; null when the option has no quantified outcome.
+function lostUnits(option: ActionOption) {
+  const by = new Map((option.outcomes ?? []).map(outcome => [outcome.scenario_id, outcome.lost_units_dest]))
+  if (by.get('base') == null) return null
+  const low = num(by.get('low')), high = num(by.get('high'))
+  return `${num(by.get('base'))}${low !== high ? ` (${low}–${high})` : ''}`
+}
+// Latest command this session sent for the option at its current input hash.
+function latestCommand(state: OptionsState, option: ActionOption) {
+  return [...state.commands.values()].filter(command => command.body.option_id === option.id && command.body.input_version_hash === option.input_version_hash).at(-1)
+}
+function commandBadge(command: Command | undefined): { tone: StatusTone; label: string } | null {
+  if (!command) return null
+  const verb = command.body.decision === 'approved' ? 'Approvata' : 'Respinta'
+  return command.status === 'success' ? { tone: 'success', label: `${verb} · bozza salvata` }
+    : command.status === 'pending' ? { tone: 'info', label: 'Salvataggio…' }
+      : { tone: 'danger', label: 'Decisione non salvata' }
+}
+
 function PublishedOptions({ session, context, closed }: { session: OptionsSession; context: OptionsContext; closed: boolean }) {
   const state = useSyncExternalStore(session.subscribe, session.snapshot)
+  const [openId, setOpenId] = useState<string | null>(null)
+  // The reviewer types their name once per case, not once per option.
+  const [by, setBy] = useState('')
+  const open = state.options.find(option => option.id === openId)
   return <section className="sd-case-analysis__options" aria-label="Opzioni pubblicate sul server" aria-busy={state.loading || state.pending}>
-    <h4><ArrowLeftRight aria-hidden="true" />Opzioni di stock</h4>
-    <StatusBadge tone={context.fixture ? 'warning' : 'neutral'} label={context.fixture ? 'Namespace fixture · simulazione' : 'Namespace prodotto · bozza locale'} />
-    <p className="sd-case-analysis__tech">Le decisioni sono salvate dal backend come bozze locali simulate. Nessun invio esterno o movimento di stock. L’identità del revisore è dichiarata localmente, non autenticata.</p>
+    <header className="sd-case-options__head">
+      <h4><ArrowLeftRight aria-hidden="true" />Opzioni di stock</h4>
+      {context.fixture && <StatusBadge tone="warning" label="Namespace fixture · simulazione" />}
+    </header>
+    <p className="sd-case-analysis__tech">Scegli un’opzione per vederne i dettagli e decidere. Le decisioni restano bozze locali: nessun movimento di stock reale.</p>
     {state.reviewRequired && <p role="alert">Conflitto 409: input o proposta non più validi. Rileggi le opzioni ricaricate e i controlli prima di decidere nuovamente.</p>}
     {state.loading && <p role="status">Caricamento opzioni…</p>}
     {state.error && <div role="alert"><p>{state.error}</p><Button onClick={() => void session.load()}>Ricarica opzioni</Button></div>}
     {!state.loading && !state.error && <>
       {!state.options.length && <p>Nessuna opzione pubblicata per questo caso.</p>}
-      {state.options.map(option => <PublishedOption key={JSON.stringify([option.id, option.version, option.input_version_hash, state.revision])}
-        option={option} state={state} session={session} closed={closed} fixture={context.fixture} />)}
+      {/* Recommended first; the rest keep the published order. */}
+      <ul className="sd-case-options__list">{[...state.options].sort((a, b) => Number(b.recommended) - Number(a.recommended)).map(option => <li key={JSON.stringify([option.id, option.version, option.input_version_hash, state.revision])}>
+        <OptionCard option={option} command={latestCommand(state, option)} onOpen={() => setOpenId(option.id)} />
+      </li>)}</ul>
       {state.reviewRequired && <Button onClick={session.reviewed}>Ho riesaminato le opzioni e i controlli aggiornati</Button>}
     </>}
+    {open && <OptionDialog key={JSON.stringify([open.id, open.input_version_hash, state.revision])} option={open} state={state} session={session}
+      closed={closed} fixture={context.fixture} by={by} setBy={setBy} onClose={() => setOpenId(null)} />}
     <DecisionJournal state={state} session={session} />
   </section>
 }
 
-function PublishedOption({ option, state, session, closed, fixture }: {
+function OptionCard({ option, command, onOpen }: { option: ActionOption; command: Command | undefined; onOpen: () => void }) {
+  const { label, icon: Icon } = optionKind(option.kind)
+  const blockers = mandatoryBlockers(option)
+  const lost = lostUnits(option)
+  const pieces = option.legs.reduce((total, leg) => total + leg.qty, 0)
+  const badge = commandBadge(command)
+  return <button type="button" className={`sd-case-options__card${option.recommended ? ' is-recommended' : ''}`} onClick={onOpen} aria-haspopup="dialog">
+    <span className="sd-case-options__icon" aria-hidden="true"><Icon /></span>
+    <span className="sd-case-options__main">
+      <span className="sd-case-options__title"><strong>{label}</strong>
+        {option.recommended && <StatusBadge tone="info" label="Consigliata" />}
+        {badge && <StatusBadge {...badge} />}
+      </span>
+      <span className="sd-case-options__rationale">{option.rationale}</span>
+      <span className="sd-case-options__facts">
+        {option.legs.length > 0 && <span>{option.legs.length === 1 ? '1 movimento' : `${option.legs.length} movimenti`} · {num(pieces)} pz</span>}
+        {lost && <span>Vendite perse stimate {lost}</span>}
+        {blockers.length > 0 && <span className="is-warn">{blockers.length === 1 ? '1 controllo bloccante' : `${blockers.length} controlli bloccanti`}</span>}
+      </span>
+    </span>
+    <ChevronRight className="sd-case-options__chevron" aria-hidden="true" />
+  </button>
+}
+
+function OptionDialog({ option, state, session, closed, fixture, by, setBy, onClose }: {
   option: ActionOption; state: OptionsState; session: OptionsSession; closed: boolean; fixture: boolean
+  by: string; setBy: (value: string) => void; onClose: () => void
 }) {
-  const [by, setBy] = useState('')
   const [note, setNote] = useState('')
   const [confirmation, setConfirmation] = useState<Intent | null>(null)
+  const { label, icon: Icon } = optionKind(option.kind)
   const blockers = mandatoryBlockers(option)
   const disabled = closed || state.pending || state.reviewRequired
-  const intent = (decision: Intent['decision']): Intent => ({ option_id: option.id, input_version_hash: option.input_version_hash, decision, by, note: note || null })
-  const canAsk = (decision: Intent['decision']) => {
-    const command = state.commands.get(intentKey(intent(decision)))
-    return !disabled && !confirmation && by.trim().length > 0 && !command && (decision === 'rejected' || blockers.length === 0)
-  }
-  return <article className="sd-case-analysis__option">
-    <header><div><strong>{option.kind}</strong>{option.recommended && <span> · raccomandata</span>}<p>{option.rationale}</p></div>
-      <StatusBadge tone={blockers.length ? 'warning' : 'neutral'} label={blockers.length ? `${blockers.length} controlli obbligatori non superati` : 'Nessun blocco obbligatorio pubblicato'} />
-    </header>
-    <p className="sd-case-analysis__tech">Opzione {option.id} · versione {option.version} · produttore {option.producer} {option.producer_version} · {fixture ? 'fixture' : 'prodotto'} · scadenza {option.valid_until}</p>
-    {option.legs.length > 0 && <div aria-label="Movimenti proposti">
-      <h5>Movimenti proposti</h5>
-      <ul>{option.legs.map((leg, index) => <li key={index}>
-        {leg.origin} → {leg.dest} · SKU {leg.sku} · taglia {leg.size} · quantità {leg.qty}
-        <p>Ritiro {leg.pickup_at} · arrivo {leg.eta_at} · vendibile {leg.sellable_at} · tratta {leg.lane_id}</p>
-        <p>Costo trasporto: {leg.cost_eur === null ? 'sconosciuto' : `${leg.cost_eur} EUR`}</p>
+  const intent = (decision: Intent['decision']): Intent => ({ option_id: option.id, input_version_hash: option.input_version_hash, decision, by: by.trim(), note: note.trim() || null })
+  const canAsk = (decision: Intent['decision']) => !disabled && by.trim().length > 0 && !state.commands.get(intentKey(intent(decision))) && (decision === 'rejected' || blockers.length === 0)
+  const why = closed ? 'Il caso è già chiuso o deciso.' : state.reviewRequired ? 'Riesamina le opzioni aggiornate prima di decidere.'
+    : !by.trim() ? 'Inserisci il tuo nome per decidere.' : blockers.length ? 'Approvazione bloccata da un controllo obbligatorio: puoi solo respingere.' : null
+  const outcomes = option.outcomes ?? []
+  const donor = outcomes.some(outcome => outcome.lost_units_donor != null || outcome.leftover_units_donor != null)
+  const footer = confirmation
+    ? <>
+      <span className="sd-case-options__confirm">{confirmation.decision === 'approved' ? 'Approvi' : 'Respingi'} come <strong>{confirmation.by}</strong>? Verrà salvata una bozza locale.</span>
+      <Button disabled={state.pending} onClick={() => setConfirmation(null)}>Indietro</Button>
+      <Button variant="primary" disabled={disabled} onClick={() => { void session.submit(confirmation); onClose() }}>
+        {confirmation.decision === 'approved' ? 'Conferma approvazione' : 'Conferma rifiuto'}
+      </Button>
+    </>
+    : <>
+      {why && <span className="sd-case-options__confirm">{why}</span>}
+      <Button icon={<X />} disabled={!canAsk('rejected')} onClick={() => setConfirmation(intent('rejected'))}>Respingi</Button>
+      <Button variant="primary" icon={<Check />} disabled={!canAsk('approved')} onClick={() => setConfirmation(intent('approved'))}>Approva</Button>
+    </>
+  return <Dialog open title={<><Icon aria-hidden="true" />{label}</>} onClose={onClose} dismissible={!state.pending} footer={footer}>
+    {option.recommended && <StatusBadge tone="info" label="Opzione consigliata" />}
+    <p>{option.rationale}</p>
+    {option.legs.length > 0 && <section className="sd-case-options__block">
+      <h3>Movimenti proposti</h3>
+      <ul className="sd-case-options__legs">{option.legs.map((leg, index) => <li key={index}>
+        <strong>{leg.origin} → {leg.dest}</strong> · taglia {leg.size} · {num(leg.qty)} pz
+        <span>Arrivo {shortDate(leg.eta_at) ?? leg.eta_at} · vendibile {shortDate(leg.sellable_at) ?? leg.sellable_at} · trasporto {eur(leg.cost_eur)}</span>
       </li>)}</ul>
-    </div>}
-    <details><summary>Input e assunzioni della proposta</summary><p>Hash input: <code>{option.input_version_hash}</code></p>
+    </section>}
+    {outcomes.length > 0 && <section className="sd-case-options__block">
+      <h3>Esito atteso per scenario</h3>
+      <div className="sd-case-analysis__table-wrap"><table>
+        <thead><tr><th scope="col">Domanda</th><th scope="col">Vendite perse</th><th scope="col">Rimanenza</th>
+          {donor && <><th scope="col">Perse donatore</th><th scope="col">Rimanenza donatore</th></>}<th scope="col">Trasporto</th></tr></thead>
+        <tbody>{outcomes.map(outcome => <tr key={outcome.scenario_id}><th scope="row">{scenarioLabels[outcome.scenario_id] ?? outcome.scenario_id}</th>
+          <td>{num(outcome.lost_units_dest)}</td><td>{num(outcome.leftover_units_dest)}</td>
+          {donor && <><td>{num(outcome.lost_units_donor)}</td><td>{num(outcome.leftover_units_donor)}</td></>}<td>{eur(outcome.transport_cost_eur)}</td></tr>)}</tbody>
+      </table></div>
+    </section>}
+    <section className="sd-case-options__block">
+      <h3>Controlli</h3>
+      {option.checks.length ? <ul className="sd-case-analysis__checks">{option.checks.map((check, index) => <li key={`${check.name}-${index}`}>
+        <StatusBadge tone={checkTone(check.status)} label={`${check.name}: ${checkLabels[check.status]}`} />
+        <span>{check.detail}{check.mandatory ? ' · obbligatorio' : ''}</span>
+      </li>)}</ul> : <p className="sd-case-analysis__tech">Nessun controllo pubblicato: la fattibilità resta da validare.</p>}
+    </section>
+    <details className="sd-case-analysis__refs">
+      <summary>Assunzioni e riferimenti</summary>
       <ul>{option.assumptions.map((assumption, index) => <li key={index}>{assumption}</li>)}</ul>
-      <p>Base disponibilità: {option.availability_basis}</p>
+      <dl>
+        <dt>Opzione</dt><dd>{option.id} · {option.version}</dd>
+        <dt>Produttore</dt><dd>{option.producer} {option.producer_version} · {fixture ? 'fixture' : 'prodotto'}</dd>
+        <dt>Disponibilità</dt><dd>{option.availability_basis}</dd>
+        <dt>Hash input</dt><dd>{option.input_version_hash}</dd>
+        <dt>Scadenza</dt><dd>{option.valid_until}</dd>
+      </dl>
     </details>
-    <ul className="sd-case-analysis__checks">{option.checks.map((check, index) => <li key={`${check.name}-${index}`}>
-      <StatusBadge tone={check.status === 'pass' ? 'success' : check.status === 'not_applicable' ? 'neutral' : 'warning'} label={`${check.name}: ${check.status}`} />
-      <span>{check.detail} · {check.mandatory ? 'obbligatorio' : 'facoltativo'}</span>
-    </li>)}</ul>
-    {!option.checks.length && <p>Nessun controllo pubblicato. La validazione di fattibilità resta al backend.</p>}
-    {blockers.length > 0 && <p>Approvazione bloccata: un controllo obbligatorio fallito o sconosciuto richiede verifica.</p>}
-    <Input label="Identità locale del revisore" value={by} required disabled={disabled || Boolean(confirmation)} onChange={event => setBy(event.target.value)} hint="Inserisci esplicitamente il tuo nome; non è un accesso autenticato." />
-    <Input label="Nota facoltativa" value={note} disabled={disabled || Boolean(confirmation)} onChange={event => setNote(event.target.value)} />
-    {confirmation && !state.reviewRequired && <div className="sd-case-decision__confirm" role="group" aria-label={`Conferma decisione su ${option.id}`}>
-      <p>Confermi {confirmation.decision === 'approved' ? 'approvazione' : 'rifiuto'} di {option.id} con gli input visualizzati, come {confirmation.by}? Nota: {confirmation.note || 'nessuna'}. Verrà salvata una bozza locale sul server.</p>
-      <Button disabled={disabled} onClick={() => { void session.submit(confirmation); setConfirmation(null) }}>Conferma e salva sul server</Button>
-      <Button disabled={state.pending} onClick={() => setConfirmation(null)}>Annulla</Button>
-    </div>}
-    <div className="sd-case-decision__actions">
-      <Button disabled={!canAsk('approved')} onClick={() => setConfirmation(intent('approved'))}>Approva opzione pubblicata</Button>
-      <Button disabled={!canAsk('rejected')} onClick={() => setConfirmation(intent('rejected'))}>Respingi opzione pubblicata</Button>
+    <div className="sd-case-options__form">
+      <Input label="Il tuo nome" value={by} required disabled={disabled || Boolean(confirmation)} onChange={event => setBy(event.target.value)} hint="Identità dichiarata, non autenticata." />
+      <Input label="Nota (facoltativa)" value={note} disabled={disabled || Boolean(confirmation)} onChange={event => setNote(event.target.value)} />
     </div>
-  </article>
+  </Dialog>
 }
 
 function DecisionJournal({ state, session }: { state: OptionsState; session: OptionsSession }) {

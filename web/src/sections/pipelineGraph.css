@@ -127,7 +127,9 @@
 .sd-pipeline__none { color: var(--sd-color-text-muted); font-size: var(--sd-font-size-body-sm); }
 .sd-pipeline__counts { display: grid; gap: var(--sd-space-1); inline-size: 100%; margin: 0; padding: 0; list-style: none; font-size: var(--sd-font-size-body-sm); }
 .sd-pipeline__counts li { display: flex; justify-content: space-between; gap: var(--sd-space-3); }
-.sd-pipeline__notes { margin: 0; padding-inline-start: var(--sd-space-4); font-size: var(--sd-font-size-body-sm); color: var(--sd-color-state-warning); }
+.sd-pipeline__counts .is-zero { color: var(--sd-color-text-muted); }
+.sd-pipeline__counts small { color: var(--sd-color-text-muted); font-weight: var(--sd-font-weight-regular); }
+.sd-pipeline__notes { max-block-size: 220px; overflow-y: auto; margin: 0; padding-inline-start: var(--sd-space-4); font-size: var(--sd-font-size-body-sm); color: var(--sd-color-state-warning); }
 .sd-pipeline__notes.is-error { color: var(--sd-color-state-danger); }
 .sd-pipeline__open { display: inline-flex; align-items: center; gap: var(--sd-space-1); margin-block-start: var(--sd-space-2); padding: 0; border: 0; background: none; color: var(--sd-color-action-primary); font: inherit; font-size: var(--sd-font-size-body-sm); font-weight: var(--sd-font-weight-medium); cursor: pointer; }
 .sd-pipeline__open svg { inline-size: 14px; block-size: 14px; }

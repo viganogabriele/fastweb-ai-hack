@@ -8,6 +8,8 @@ import { EmptyState, ErrorState, LoadingState, StatusBadge } from '../ui'
 import { PipelineGraph } from './PipelineGraph'
 import { moduleDetailId, moduleStatuses, phases } from './moduleGraph'
 import { ModuleGlyph, moduleTitle, phaseIcons, phaseSlot } from './moduleCatalog'
+import { moduleMetrics, splitMetrics } from './moduleCounts'
+import type { ModuleMetric } from './moduleCounts'
 import './sections.css'
 import './modules.css'
 
@@ -124,7 +126,8 @@ function ModuleCard({ item, run }: { item: ModuleManifest; run: RunView | undefi
   const status = execution
     ? moduleStatuses[execution.status]
     : { label: run ? 'Non eseguito' : 'Mai eseguito', tone: 'neutral' as const }
-  const counts = Object.entries(execution?.result?.counts ?? {})
+  const { primary, rest } = splitMetrics(moduleMetrics(execution?.result?.counts ?? {}))
+  const label = (metric: ModuleMetric) => outputs[metric.key] ? outputLabel(metric.key, metric.value) : metric.label
   const errors = execution?.result?.errors ?? []
   const abstentions = execution?.result?.abstentions ?? []
   const mode = execution?.mode ?? item.mode
@@ -132,24 +135,51 @@ function ModuleCard({ item, run }: { item: ModuleManifest; run: RunView | undefi
     <article className={`sd-module${item.enabled ? '' : ' is-off'}`} id={moduleDetailId(item.id)} tabIndex={-1}>
       <header className="sd-module__head">
         <span className="sd-pipeline__tile"><ModuleGlyph id={item.id} manifest={item} /></span>
-        <div className="sd-module__name">
-          <h3 title={`${item.id} · v${item.version}`}>{moduleTitle(item.id)}</h3>
-          <p>{item.description}</p>
-        </div>
+        <h3 title={`${item.id} · v${item.version}`}>{moduleTitle(item.id)}</h3>
         <StatusBadge {...status} />
       </header>
-      {counts.length > 0 && (
-        <ul className="sd-module__outputs" aria-label="Prodotto nel run">
-          {counts.map(([kind, count]) => (
-            <li key={kind}><strong className="sd-num">{count.toLocaleString('it-IT')}</strong> {outputLabel(kind, count)}</li>
+      <p className="sd-module__desc" title={item.description}>{item.description}</p>
+      {primary.length > 0 && (
+        <dl className="sd-module__stats" aria-label="Prodotto nel run">
+          {primary.map((metric) => (
+            <div key={metric.key}>
+              <dt title={label(metric)}>{label(metric)}</dt>
+              <dd className="sd-num">{metric.value.toLocaleString('it-IT')}{metric.fresh !== null && <small>{metric.fresh.toLocaleString('it-IT')} nuovi</small>}</dd>
+            </div>
           ))}
-        </ul>
+        </dl>
       )}
-      {(errors.length > 0 || abstentions.length > 0) && (
-        <ul className="sd-module__notes">
-          {errors.map((text, index) => <li key={`e${index}`} className="is-error"><CircleX aria-hidden="true" />{text}</li>)}
-          {abstentions.map((text, index) => <li key={`a${index}`}><Info aria-hidden="true" />{text}</li>)}
-        </ul>
+      {errors.length > 0 && (
+        <p className="sd-module__error" role="status"><CircleX aria-hidden="true" /><span>{errors[0]}{errors.length > 1 && <strong> · altri {errors.length - 1}</strong>}</span></p>
+      )}
+      {(rest.length > 0 || abstentions.length > 0 || errors.length > 1) && (
+        <div className="sd-module__more">
+          {rest.length > 0 && (
+            <details>
+              <summary>Altri {rest.length === 1 ? '1 conteggio' : `${rest.length} conteggi`}</summary>
+              <dl className="sd-module__counts">
+                {rest.map((metric) => (
+                  <div key={metric.key} className={metric.value === 0 ? 'is-zero' : undefined}>
+                    <dt title={label(metric)}>{label(metric)}</dt>
+                    <dd className="sd-num">{metric.value.toLocaleString('it-IT')}{metric.fresh !== null && ` · ${metric.fresh.toLocaleString('it-IT')} nuovi`}</dd>
+                  </div>
+                ))}
+              </dl>
+            </details>
+          )}
+          {(abstentions.length > 0 || errors.length > 1) && (
+            <details className="sd-module__notes">
+              <summary><Info aria-hidden="true" />{[
+                errors.length > 1 && `${errors.length} errori`,
+                abstentions.length > 0 && (abstentions.length === 1 ? '1 nota' : `${abstentions.length} note`)
+              ].filter(Boolean).join(' · ')}</summary>
+              <ul>
+                {errors.length > 1 && errors.map((text, index) => <li key={`e${index}`} className="is-error">{text}</li>)}
+                {abstentions.map((text, index) => <li key={`a${index}`}>{text}</li>)}
+              </ul>
+            </details>
+          )}
+        </div>
       )}
       <footer className="sd-module__foot">
         <div className="sd-module__deps">
