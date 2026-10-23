@@ -15,9 +15,10 @@ record that holds it (RFC §4.8.1). Optional LLM prose is not part of this modul
 - A forecast is the case's own adjustment when one names the case, else the store × SKU baseline
   of every colour in scope (the colours the store carries, for a style case).
 - A thin "Product feedback" section closes every view when ``ins.product`` ran: up to
-  ``PRODUCTS_SHOWN`` products, those with reported reasons first, each with its reasons as shares
-  of counted observations, its units sold and returned over the same stores and days, and its POS
-  return reasons as shares of return lines. A rate is shown only where its denominator exists.
+  ``PRODUCTS_SHOWN`` products, those with reported observations first. Each shows the kinds and
+  reasons reported, as shares of counted observations; units sold and returned over the same
+  stores and days; and POS return reasons, as shares of return lines. A rate is shown only where
+  its denominator exists.
 - Labels come from the ERP master data (``styles``, ``sku_colour``); a code missing from it is
   shown as is.
 
@@ -225,8 +226,12 @@ class _Brief:
         head = f"- **{name} ({insight.product_id})**, {', '.join(insight.stores)}, {days} {cite()}"
         body = []
         if insight.n_observations:
-            reported = _shares(insight.reported_reasons)
-            body.append(f"reported: {reported} observations {cite('reported_reasons')}")
+            kinds = _shares(insight.reported_kinds)
+            line = f"reported: {kinds} observations {cite('reported_kinds')}"
+            if any(r.key != "unspecified" for r in insight.reported_reasons):
+                reasons = _shares(insight.reported_reasons)
+                line += f", reasons: {reasons} {cite('reported_reasons')}"
+            body.append(line)
         sales = (
             f"sold {insight.units_sold} units {cite('units_sold', 'units')}, "
             f"returned {insight.units_returned} units {cite('units_returned', 'units')}"

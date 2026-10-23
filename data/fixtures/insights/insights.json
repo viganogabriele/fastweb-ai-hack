@@ -1,0 +1,680 @@
+[
+  {
+    "kind": "ProductInsight",
+    "payload": {
+      "id": "insight-sku-i10918g00045-999-20261009T0835",
+      "version": "sha256:7f81cf0408a63f3f",
+      "available_at": "2026-10-08T10:00:00Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_09.csv",
+          "content_hash": "4a03050eb8a173003eba403ddc5273808061eddcf4216d6d89375e15396a1d93",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_10.csv",
+          "content_hash": "5ca2df7c5af7aa6672ad7b0149b80d1b82c7cb37e4629ef624d2349ba2388054",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W37.csv",
+          "content_hash": "c1fae11d341e186aef036364f4d9e04c5c40b90177c9e0ba305d1696b800fe04",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W38.csv",
+          "content_hash": "51c809b41e32d83da90aaf928e2a8073a5de81186908ad493129fffdfe6c09c2",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W39.csv",
+          "content_hash": "d746a7743a6225555c05e460918ebb322959e9b65709aca20876af9f0cbb9996",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W40.csv",
+          "content_hash": "a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W41.csv",
+          "content_hash": "7807f39df38787c5bc5bd069c8dd6f588042d21b440ccdf2d85836409adcc3c8",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-09T08:35:52Z",
+      "input_refs": [],
+      "producer": "ins.product",
+      "producer_version": "1",
+      "as_of": "2026-10-09T08:35:52Z",
+      "level": "sku",
+      "product_id": "I10918G00045-999",
+      "stores": [
+        "MIL01",
+        "NYC01"
+      ],
+      "period_first": "2026-09-11",
+      "period_last": "2026-10-07",
+      "units_sold": 80,
+      "units_returned": 6,
+      "return_rate": 0.075,
+      "return_lines": 6,
+      "return_reasons": [
+        {
+          "key": "SIZE",
+          "count": 3,
+          "of": 6
+        },
+        {
+          "key": "CHANGE_MIND",
+          "count": 2,
+          "of": 6
+        },
+        {
+          "key": "QUALITY",
+          "count": 1,
+          "of": 6
+        }
+      ],
+      "n_observations": 0,
+      "n_documents": 0,
+      "reported_kinds": [],
+      "reported_reasons": [],
+      "observation_refs": [],
+      "notes": [
+        "returns of the period may refer to sales made before it"
+      ]
+    }
+  },
+  {
+    "kind": "ProductInsight",
+    "payload": {
+      "id": "insight-sku-j10911a00034-999-20261009T0835",
+      "version": "sha256:2975c319d697f49e",
+      "available_at": "2026-10-08T10:00:00Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_09.csv",
+          "content_hash": "4a03050eb8a173003eba403ddc5273808061eddcf4216d6d89375e15396a1d93",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_10.csv",
+          "content_hash": "5ca2df7c5af7aa6672ad7b0149b80d1b82c7cb37e4629ef624d2349ba2388054",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W38.csv",
+          "content_hash": "51c809b41e32d83da90aaf928e2a8073a5de81186908ad493129fffdfe6c09c2",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W40.csv",
+          "content_hash": "a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W41.csv",
+          "content_hash": "7807f39df38787c5bc5bd069c8dd6f588042d21b440ccdf2d85836409adcc3c8",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-09T08:35:52Z",
+      "input_refs": [],
+      "producer": "ins.product",
+      "producer_version": "1",
+      "as_of": "2026-10-09T08:35:52Z",
+      "level": "sku",
+      "product_id": "J10911A00034-999",
+      "stores": [
+        "MIL01",
+        "NYC01"
+      ],
+      "period_first": "2026-09-11",
+      "period_last": "2026-10-07",
+      "units_sold": 114,
+      "units_returned": 6,
+      "return_rate": 0.05263157894736842,
+      "return_lines": 6,
+      "return_reasons": [
+        {
+          "key": "SIZE",
+          "count": 5,
+          "of": 6
+        },
+        {
+          "key": "CHANGE_MIND",
+          "count": 1,
+          "of": 6
+        }
+      ],
+      "n_observations": 0,
+      "n_documents": 0,
+      "reported_kinds": [],
+      "reported_reasons": [],
+      "observation_refs": [],
+      "notes": [
+        "returns of the period may refer to sales made before it"
+      ]
+    }
+  },
+  {
+    "kind": "ProductInsight",
+    "payload": {
+      "id": "insight-sku-j10911a00305-20d-20261009T0835",
+      "version": "sha256:85d37f2ba02d4d4d",
+      "available_at": "2026-10-08T04:00:00Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_09.csv",
+          "content_hash": "4a03050eb8a173003eba403ddc5273808061eddcf4216d6d89375e15396a1d93",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_10.csv",
+          "content_hash": "5ca2df7c5af7aa6672ad7b0149b80d1b82c7cb37e4629ef624d2349ba2388054",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W38.csv",
+          "content_hash": "51c809b41e32d83da90aaf928e2a8073a5de81186908ad493129fffdfe6c09c2",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W40.csv",
+          "content_hash": "a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-09T08:35:52Z",
+      "input_refs": [],
+      "producer": "ins.product",
+      "producer_version": "1",
+      "as_of": "2026-10-09T08:35:52Z",
+      "level": "sku",
+      "product_id": "J10911A00305-20D",
+      "stores": [
+        "MIL01",
+        "NYC01"
+      ],
+      "period_first": "2026-09-11",
+      "period_last": "2026-10-07",
+      "units_sold": 46,
+      "units_returned": 10,
+      "return_rate": 0.21739130434782608,
+      "return_lines": 10,
+      "return_reasons": [
+        {
+          "key": "DEF",
+          "count": 7,
+          "of": 10
+        },
+        {
+          "key": "CHANGE_MIND",
+          "count": 2,
+          "of": 10
+        },
+        {
+          "key": "SIZE",
+          "count": 1,
+          "of": 10
+        }
+      ],
+      "n_observations": 0,
+      "n_documents": 0,
+      "reported_kinds": [],
+      "reported_reasons": [],
+      "observation_refs": [],
+      "notes": [
+        "returns of the period may refer to sales made before it"
+      ]
+    }
+  },
+  {
+    "kind": "ProductInsight",
+    "payload": {
+      "id": "insight-sku-j10911a00305-742-20261009T0835",
+      "version": "sha256:b3070af68e8829e4",
+      "available_at": "2026-10-07T10:00:00Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_09.csv",
+          "content_hash": "4a03050eb8a173003eba403ddc5273808061eddcf4216d6d89375e15396a1d93",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_10.csv",
+          "content_hash": "5ca2df7c5af7aa6672ad7b0149b80d1b82c7cb37e4629ef624d2349ba2388054",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W37.csv",
+          "content_hash": "c1fae11d341e186aef036364f4d9e04c5c40b90177c9e0ba305d1696b800fe04",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W38.csv",
+          "content_hash": "51c809b41e32d83da90aaf928e2a8073a5de81186908ad493129fffdfe6c09c2",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W40.csv",
+          "content_hash": "a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e",
+          "locator": null
+        },
+        {
+          "uri": "dataset://store_emails/MIL01/20261001_1124_MIL01_fwd.eml",
+          "content_hash": "sha256:31aeadf95302b30ec9d28e4f3d359b2603a9629bb6de741467410d3ba89a29bf",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-09T08:35:52Z",
+      "input_refs": [
+        {
+          "kind": "Observation",
+          "id": "obs-20261001-1124-mil01-fwd-tib-zip",
+          "version": "v1"
+        }
+      ],
+      "producer": "ins.product",
+      "producer_version": "1",
+      "as_of": "2026-10-09T08:35:52Z",
+      "level": "sku",
+      "product_id": "J10911A00305-742",
+      "stores": [
+        "MIL01",
+        "NYC01"
+      ],
+      "period_first": "2026-09-11",
+      "period_last": "2026-10-07",
+      "units_sold": 45,
+      "units_returned": 8,
+      "return_rate": 0.17777777777777778,
+      "return_lines": 8,
+      "return_reasons": [
+        {
+          "key": "DEF",
+          "count": 5,
+          "of": 8
+        },
+        {
+          "key": "CHANGE_MIND",
+          "count": 1,
+          "of": 8
+        },
+        {
+          "key": "GIFT",
+          "count": 1,
+          "of": 8
+        },
+        {
+          "key": "SIZE",
+          "count": 1,
+          "of": 8
+        }
+      ],
+      "n_observations": 1,
+      "n_documents": 1,
+      "reported_kinds": [
+        {
+          "key": "product_feedback",
+          "count": 1,
+          "of": 1
+        }
+      ],
+      "reported_reasons": [
+        {
+          "key": "quality_defect",
+          "count": 1,
+          "of": 1
+        }
+      ],
+      "observation_refs": [
+        {
+          "kind": "Observation",
+          "id": "obs-20261001-1124-mil01-fwd-tib-zip",
+          "version": "v1"
+        }
+      ],
+      "notes": [
+        "returns of the period may refer to sales made before it"
+      ]
+    }
+  },
+  {
+    "kind": "ProductInsight",
+    "payload": {
+      "id": "insight-sku-j10911a00305-999-20261009T0835",
+      "version": "sha256:94fad13b4922488b",
+      "available_at": "2026-10-08T04:00:00Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_09.csv",
+          "content_hash": "4a03050eb8a173003eba403ddc5273808061eddcf4216d6d89375e15396a1d93",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_10.csv",
+          "content_hash": "5ca2df7c5af7aa6672ad7b0149b80d1b82c7cb37e4629ef624d2349ba2388054",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W40.csv",
+          "content_hash": "a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-09T08:35:52Z",
+      "input_refs": [],
+      "producer": "ins.product",
+      "producer_version": "1",
+      "as_of": "2026-10-09T08:35:52Z",
+      "level": "sku",
+      "product_id": "J10911A00305-999",
+      "stores": [
+        "MIL01",
+        "NYC01"
+      ],
+      "period_first": "2026-09-11",
+      "period_last": "2026-10-07",
+      "units_sold": 58,
+      "units_returned": 15,
+      "return_rate": 0.25862068965517243,
+      "return_lines": 15,
+      "return_reasons": [
+        {
+          "key": "DEF",
+          "count": 14,
+          "of": 15
+        },
+        {
+          "key": "SIZE",
+          "count": 1,
+          "of": 15
+        }
+      ],
+      "n_observations": 0,
+      "n_documents": 0,
+      "reported_kinds": [],
+      "reported_reasons": [],
+      "observation_refs": [],
+      "notes": [
+        "returns of the period may refer to sales made before it"
+      ]
+    }
+  },
+  {
+    "kind": "ProductInsight",
+    "payload": {
+      "id": "insight-sku-j10911a00577-999-20261009T0835",
+      "version": "sha256:1e003eb93e7ddae8",
+      "available_at": "2026-10-08T04:00:00Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_09.csv",
+          "content_hash": "4a03050eb8a173003eba403ddc5273808061eddcf4216d6d89375e15396a1d93",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_10.csv",
+          "content_hash": "5ca2df7c5af7aa6672ad7b0149b80d1b82c7cb37e4629ef624d2349ba2388054",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W38.csv",
+          "content_hash": "51c809b41e32d83da90aaf928e2a8073a5de81186908ad493129fffdfe6c09c2",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W39.csv",
+          "content_hash": "d746a7743a6225555c05e460918ebb322959e9b65709aca20876af9f0cbb9996",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W40.csv",
+          "content_hash": "a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W41.csv",
+          "content_hash": "7807f39df38787c5bc5bd069c8dd6f588042d21b440ccdf2d85836409adcc3c8",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-09T08:35:52Z",
+      "input_refs": [],
+      "producer": "ins.product",
+      "producer_version": "1",
+      "as_of": "2026-10-09T08:35:52Z",
+      "level": "sku",
+      "product_id": "J10911A00577-999",
+      "stores": [
+        "MIL01",
+        "NYC01"
+      ],
+      "period_first": "2026-09-11",
+      "period_last": "2026-10-07",
+      "units_sold": 46,
+      "units_returned": 7,
+      "return_rate": 0.15217391304347827,
+      "return_lines": 7,
+      "return_reasons": [
+        {
+          "key": "EXCHANGE_SIZE",
+          "count": 3,
+          "of": 7
+        },
+        {
+          "key": "SIZE",
+          "count": 3,
+          "of": 7
+        },
+        {
+          "key": "CHANGE_MIND",
+          "count": 1,
+          "of": 7
+        }
+      ],
+      "n_observations": 0,
+      "n_documents": 0,
+      "reported_kinds": [],
+      "reported_reasons": [],
+      "observation_refs": [],
+      "notes": [
+        "returns of the period may refer to sales made before it"
+      ]
+    }
+  },
+  {
+    "kind": "ProductInsight",
+    "payload": {
+      "id": "insight-sku-j20931a00012-999-20261009T0835",
+      "version": "sha256:2add01ff457155b5",
+      "available_at": "2026-10-08T10:00:00Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_09.csv",
+          "content_hash": "4a03050eb8a173003eba403ddc5273808061eddcf4216d6d89375e15396a1d93",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_10.csv",
+          "content_hash": "5ca2df7c5af7aa6672ad7b0149b80d1b82c7cb37e4629ef624d2349ba2388054",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W37.csv",
+          "content_hash": "c1fae11d341e186aef036364f4d9e04c5c40b90177c9e0ba305d1696b800fe04",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W38.csv",
+          "content_hash": "51c809b41e32d83da90aaf928e2a8073a5de81186908ad493129fffdfe6c09c2",
+          "locator": null
+        },
+        {
+          "uri": "dataset://store_emails/MIL01/20261002_2112_MIL01.eml",
+          "content_hash": "sha256:42ba599825b726743a870909947f1046005d4f0d715a79922b4ff43cef313a93",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-09T08:35:52Z",
+      "input_refs": [
+        {
+          "kind": "Observation",
+          "id": "obs-20261002-2112-mil01-maire-requests",
+          "version": "v1"
+        }
+      ],
+      "producer": "ins.product",
+      "producer_version": "1",
+      "as_of": "2026-10-09T08:35:52Z",
+      "level": "sku",
+      "product_id": "J20931A00012-999",
+      "stores": [
+        "MIL01",
+        "NYC01"
+      ],
+      "period_first": "2026-09-11",
+      "period_last": "2026-10-07",
+      "units_sold": 49,
+      "units_returned": 3,
+      "return_rate": 0.061224489795918366,
+      "return_lines": 3,
+      "return_reasons": [
+        {
+          "key": "COLOUR",
+          "count": 1,
+          "of": 3
+        },
+        {
+          "key": "QUALITY",
+          "count": 1,
+          "of": 3
+        },
+        {
+          "key": "SIZE",
+          "count": 1,
+          "of": 3
+        }
+      ],
+      "n_observations": 1,
+      "n_documents": 1,
+      "reported_kinds": [
+        {
+          "key": "unmet_demand",
+          "count": 1,
+          "of": 1
+        }
+      ],
+      "reported_reasons": [
+        {
+          "key": "unspecified",
+          "count": 1,
+          "of": 1
+        }
+      ],
+      "observation_refs": [
+        {
+          "kind": "Observation",
+          "id": "obs-20261002-2112-mil01-maire-requests",
+          "version": "v1"
+        }
+      ],
+      "notes": [
+        "returns of the period may refer to sales made before it"
+      ]
+    }
+  },
+  {
+    "kind": "ProductInsight",
+    "payload": {
+      "id": "insight-sku-j20931a00144-999-20261009T0835",
+      "version": "sha256:114a7cc29c8ab269",
+      "available_at": "2026-10-08T10:00:00Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_09.csv",
+          "content_hash": "4a03050eb8a173003eba403ddc5273808061eddcf4216d6d89375e15396a1d93",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/daily_store_sku/sales_daily_2026_10.csv",
+          "content_hash": "5ca2df7c5af7aa6672ad7b0149b80d1b82c7cb37e4629ef624d2349ba2388054",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W39.csv",
+          "content_hash": "d746a7743a6225555c05e460918ebb322959e9b65709aca20876af9f0cbb9996",
+          "locator": null
+        },
+        {
+          "uri": "erp/sales/pos_lines/pos_lines_2026-W40.csv",
+          "content_hash": "a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e",
+          "locator": null
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-09T08:35:52Z",
+      "input_refs": [],
+      "producer": "ins.product",
+      "producer_version": "1",
+      "as_of": "2026-10-09T08:35:52Z",
+      "level": "sku",
+      "product_id": "J20931A00144-999",
+      "stores": [
+        "MIL01",
+        "NYC01"
+      ],
+      "period_first": "2026-09-11",
+      "period_last": "2026-10-07",
+      "units_sold": 97,
+      "units_returned": 7,
+      "return_rate": 0.07216494845360824,
+      "return_lines": 7,
+      "return_reasons": [
+        {
+          "key": "CHANGE_MIND",
+          "count": 4,
+          "of": 7
+        },
+        {
+          "key": "GIFT",
+          "count": 3,
+          "of": 7
+        }
+      ],
+      "n_observations": 0,
+      "n_documents": 0,
+      "reported_kinds": [],
+      "reported_reasons": [],
+      "observation_refs": [],
+      "notes": [
+        "returns of the period may refer to sales made before it"
+      ]
+    }
+  }
+]

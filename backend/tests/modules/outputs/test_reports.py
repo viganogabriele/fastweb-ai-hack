@@ -299,7 +299,7 @@ def test_product_feedback_section_sets_reasons_beside_returns(tmp_path):
             and "(J10911A00305-742)**, MIL01, NYC01, 09-11..10-07" in lines[0]
         )
         assert lines[1:4] == [
-            "  - reported: quality defect 1 of 1 observations",
+            ("  - reported: product feedback 1 of 1 observations, reasons: quality defect 1 of 1"),
             "  - sold 20 units, returned 5 units, return rate 25.0%",
             "  - POS return reasons: DEF 4, SIZE 1 of 5 lines",
         ]

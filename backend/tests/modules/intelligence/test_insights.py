@@ -28,7 +28,7 @@ from tessera.modules.sources import erp
 
 FIXTURES = REPO_ROOT / "data" / "fixtures"
 SOURCES = REPO_ROOT / "generated" / "sources"
-AS_OF = datetime(2026, 10, 9, 8, 35, tzinfo=UTC)  # 10:35 Milan, 04:35 New York
+AS_OF = datetime(2026, 10, 9, 8, 35, 52, tzinfo=UTC)  # fixture run: 10:35 Milan, 04:35 NYC
 ZONES = {"MIL01": "Europe/Rome", "NYC01": "America/New_York"}
 
 
@@ -310,3 +310,9 @@ def test_fixture_run_sets_reported_reasons_beside_returns(fixture_run):
     assert not any(
         i.product_id.startswith("I10919B00011") and i.n_observations for i in built.values()
     )
+
+
+def test_ins01_fixture_is_what_the_module_returns(fixture_run, fixture_records):
+    _, _, built = fixture_run
+    stored = by_id(r for r in fixture_records if isinstance(r, ProductInsight))
+    assert stored == built  # rebuild with data/fixtures/build_ins01.py
