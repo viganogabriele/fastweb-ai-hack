@@ -200,8 +200,17 @@ class LLMClient:
         scope["stores"] = sorted(scope["stores"])
         for module in scope["modules"]:
             module["manifest"].pop("mode", None)
+        return self.for_scope(scope)
+
+    def for_scope(self, scope: Mapping[str, Any]) -> "RunLLMClient":
+        """Bind an explicit cache scope shared by several runs (REL-01c rolling origins).
+
+        The request payload and the module's ``cache_context`` stay in every key, so a
+        response is reused only for a byte-identical request. The caller owns the claim
+        that ``scope`` covers everything else the answer may depend on.
+        """
         return RunLLMClient(
-            self, json.dumps(scope, sort_keys=True, ensure_ascii=False, allow_nan=False)
+            self, json.dumps(dict(scope), sort_keys=True, ensure_ascii=False, allow_nan=False)
         )
 
     def _remaining(self) -> float:
