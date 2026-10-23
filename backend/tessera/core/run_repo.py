@@ -17,6 +17,7 @@ from tessera.core.contracts.common import DerivedRecord, SourceRecord
 from tessera.core.db import artifacts, runs
 from tessera.core.repo import (
     KINDS,
+    ErpRecord,
     Repo,
     RunNotFound,
     create_run,
@@ -69,6 +70,7 @@ class RunRepo(Repo):
             raise ValueError("RunSpec is immutable; use a new run_id for a changed snapshot")
         super().__init__(bound, snapshot)
         self._parents: dict[tuple[str, str, str], tuple[SourceRecord, set[str]]] = {}
+        self._erp_rows: dict[str, dict[tuple[str, str], ErpRecord]] = {}
 
     @property
     def spec(self) -> RunSpec:
@@ -117,10 +119,11 @@ class RunRepo(Repo):
         if isinstance(record, DerivedRecord):
             for ref in record.input_refs:
                 if ref.kind.startswith("erp."):
-                    candidates = self.erp(ref.kind.removeprefix("erp."))
-                    parent = next(
-                        (r for r in candidates if r.id == ref.id and r.version == ref.version), None
-                    )
+                    table = ref.kind.removeprefix("erp.")
+                    if table not in self._erp_rows:
+                        # ERP rows are never written by put: one load serves the whole batch.
+                        self._erp_rows[table] = {(r.id, r.version): r for r in self.erp(table)}
+                    parent = self._erp_rows[table].get((ref.id, ref.version))
                     parent_scopes = (
                         {parent.data["store_id"]}
                         if (parent and parent.data.get("store_id"))
@@ -179,7 +182,7 @@ class RunRepo(Repo):
 
     def put(self, *records: SourceRecord, store_id=None, sku=None, case_id=None) -> int:
         self._put_indexes = {"store_id": store_id, "sku": sku, "case_id": case_id}
-        self._parents = {}
+        self._parents, self._erp_rows = {}, {}
         try:
             with self.session.begin_nested():
                 # The canonical Repo prepares an entire batch before inserting.
@@ -188,7 +191,7 @@ class RunRepo(Repo):
                 return sum(super(RunRepo, self).put(record) for record in records)
         finally:
             self._put_indexes = {}
-            self._parents = {}
+            self._parents, self._erp_rows = {}, {}
 
     def list(self, kind, *, store_id=None, **filters):
         if store_id is not None and store_id not in self._spec().stores:
