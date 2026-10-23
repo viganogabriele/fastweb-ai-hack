@@ -53,4 +53,65 @@ case with `scope=unknown`, citing the link and its candidates; they are never me
 Certain copies stay in one case and count as one origin; corrected or retracted facts are
 not supporting evidence; negated facts are `contradicting`. A later report joins the open
 case of the same store, type and scope only within `policy.decay.max_validity` of its last
-independent evidence. `decision_due_at` and conflicts with structured facts are INT-04.
+independent evidence. INT-04 adds structured stock conflicts and optional source-backed decision deadlines below.
+
+## Structured stock conflicts and deadlines (INT-04)
+
+`int.cases` v2 optionally consumes ERP stock and `StockFact` artifacts after
+`src.erp` / `sys.client`. The pure `reconciliation.py` helper matches the exact
+store and linked SKU or SKU-size, and only compares a snapshot inside an
+explicit stockout period. ERP EOD rows require an explicitly stated whole local
+day (midnight through 23:59:59); a snapshot from yesterday never contradicts an
+intraday statement today. Missing dates, timezone or identity abstain from the
+comparison. Low stock has no invented threshold. Positive stock is a **potential**
+conflict, not evidence that unmet demand is false or that all sizes are sellable.
+
+Matching positive stock is retained in `contradicting`, with versioned input and
+context references, raw source locators, and a blocking explanation; an open or
+monitoring case becomes `verify`. Zero physical stock can support an exact-size
+stockout. Zero ATP/sellable is not equated to zero physical stock. A single empty
+size never establishes a whole-SKU stockout. Quantities, document/origin counts,
+independent confirmation time and validity are preserved. No rule closes a case
+because of silence, expiry or a later stock snapshot.
+
+### Optional normalized decision calendars
+
+The current ERP loader and stock artifacts do not publish departure/receiving
+calendars or an actionable `required_by`. Consequently, the default is
+`decision_due_at=null` with a specific uncertainty. An episode end or scenario
+expiry is never substituted for a logistics deadline.
+
+A caller that has checked both calendars and the required-by source may supply
+`int.cases.params.decision_calendars` in the immutable run snapshot. This is a
+normalized input, not an automatic raw-logistics parser. Each entry names one
+exact case and carries its knowledge time and source hashes/locators:
+
+```json
+{
+  "decision_calendars": [{
+    "case_id": "case-mil01-j20931a00012-999-20261002",
+    "available_at": "2026-10-02T16:00:00Z",
+    "required_by": "2026-10-05T08:00:00Z",
+    "source_refs": [{
+      "uri": "generated/sources/systems/logistics/calendar-example.csv",
+      "content_hash": "<hash of the actual source>",
+      "locator": "<required-by and departure/receiving rows>"
+    }],
+    "slots": [{
+      "cutoff_at": "2026-10-02T17:00:00Z",
+      "sellable_at": "2026-10-05T07:00:00Z"
+    }]
+  }]
+}
+```
+
+The path and values above are illustrative, not an existing dataset fixture.
+`cutoff_at` is the decision cutoff for a calendar-confirmed pickup; `sellable_at`
+already includes receiving hours, closures and any delay before stock can be sold.
+All instants require timezones. Slots must be ordered cutoff ≤ sellable. Future
+calendar inputs are ignored, conflicting entries abstain, and source references
+are retained on the case. The deadline is the cutoff of the first remaining
+useful sellable arrival, requiring arrival ≤ `required_by`. A missed cutoff skips
+to the next feasible slot; if none exists the deadline remains null. It does not
+prove stock feasibility or authorize a movement. Unknown product/store scope
+keeps a null deadline even if a calendar is supplied.

@@ -110,10 +110,10 @@ def relation(name, new, old, kind):
     )  # fmt: skip
 
 
-def build(facts, links=(), relations=(), as_of=T3):
+def build(facts, links=(), relations=(), as_of=T3, **kwargs):
     return cases.build_cases(
         [f[2] for f in facts], [f[0] for f in facts], links, relations, spec(as_of),
-        owners=OWNERS, validity=VALIDITY, zones={"MIL01": "Europe/Rome"},
+        owners=OWNERS, validity=VALIDITY, zones={"MIL01": "Europe/Rome"}, **kwargs,
     )  # fmt: skip
 
 
@@ -310,3 +310,302 @@ def test_dev_store_smoke_matches_the_data01b_case_fixtures(tmp_path):
         assert links <= set(got.context_refs)
     assert result.counts["no_case_kind"] == 1 and result.counts["inactive_facts"] == 1
     assert all(isinstance(r, ArtifactRef) for c in built.values() for r in c.input_refs)
+
+
+# INT-04: all inputs below are synthetic, with explicit event and knowledge times.
+def stock_fact(**changes):
+    from tessera.core.contracts import SourceRef, StockFact
+
+    source = SourceRef(uri="test://stock", content_hash="sha256:synthetic")
+    return StockFact.model_validate(
+        dict(
+            id="stock",
+            version="v1",
+            available_at=T2,
+            availability_basis="test",
+            source_refs=(source,),
+            source_ref=source,
+            location_id="MIL01",
+            sku="J20931A00012-999",
+            size="2",
+            snapshot_at=T1,
+            qty=4,
+            basis="on_hand",
+            reservations_included=False,
+            quality_holds_included=False,
+        )
+        | changes
+    )
+
+
+def test_matching_stock_conflict_is_visible_without_resolving_or_changing_demand():
+    a = fact("stockout", kind="stockout", value=0, unit="units", period=(T1, T2))
+    stock = stock_fact()
+    (case,) = build([a], [link(a[2])], stocks=[stock]).cases
+    assert case.status == "verify"
+    assert case.supporting == (cases.ref(a[2]),)
+    assert case.contradicting == (cases.ref(stock),)
+    assert cases.ref(stock) in case.context_refs and cases.ref(stock) in case.input_refs
+    assert stock.source_ref in case.source_refs and case.available_at == T2
+    assert case.n_documents == 1 and case.n_origin_groups == 1
+    assert case.last_independent_evidence_at == T1
+    assert "does not disprove unmet demand" in " ".join(case.blocking_uncertainties)
+    assert "ERP stock not checked yet" not in " ".join(case.blocking_uncertainties)
+
+
+@pytest.mark.parametrize(
+    "changes",
+    [
+        {"snapshot_at": T1 - timedelta(days=1)},
+        {"snapshot_at": T3 + timedelta(hours=1)},
+        {"available_at": T3 + timedelta(hours=1)},
+        {"available_at": None},
+        {"location_id": "NYC01"},
+        {"sku": "OTHER-999"},
+        {"qty": None},
+    ],
+)
+def test_unavailable_stale_and_unrelated_stock_does_not_contradict(changes):
+    a = fact("stockout", kind="stockout", period=(T1, T2))
+    (case,) = build([a], [link(a[2])], stocks=[stock_fact(**changes)]).cases
+    assert case.status == "open" and case.contradicting == ()
+    assert all(r.kind != "StockFact" for r in case.input_refs)
+
+
+@pytest.mark.parametrize("kind", ["unmet_demand", "low_stock", "demand_up"])
+def test_stock_is_not_a_measure_of_unmet_demand_or_a_low_stock_threshold(kind):
+    a = fact("a", kind=kind, period=(T1, T2))
+    (case,) = build([a], [link(a[2])], stocks=[stock_fact()]).cases
+    assert case.status == "open" and case.contradicting == ()
+
+
+def test_exact_size_and_stock_basis_are_preserved():
+    a = fact("a", kind="stockout", period=(T1, T2))
+    lk = link(a[2], target="J20931A00012-999-2", level="sku_size")
+    for stock in [stock_fact(size="3"), stock_fact(qty=0, basis="atp")]:
+        (case,) = build([a], [lk], stocks=[stock]).cases
+        assert case.supporting == (cases.ref(a[2]),) and case.contradicting == ()
+    stock = stock_fact(qty=0)
+    (case,) = build([a], [lk], stocks=[stock]).cases
+    assert case.supporting == (cases.ref(a[2]), cases.ref(stock))
+    assert case.status == "open"
+
+
+def test_silence_and_expiry_do_not_close_a_case():
+    a = fact("a", kind="stockout", period=(T1, T2))
+    (case,) = build(
+        [a],
+        [link(a[2])],
+        as_of=T3 + timedelta(days=30),
+        stocks=[stock_fact(snapshot_at=T1 - timedelta(days=1))],
+    ).cases
+    assert case.status == "open" and case.valid_until < case.computed_at
+    assert case.decision_due_at is None
+    assert any("deadline not estimable" in u for u in case.blocking_uncertainties)
+
+
+def calendar(target_case_id, **changes):
+    from tessera.modules.integration.reconciliation import DecisionCalendar
+
+    return DecisionCalendar.model_validate(
+        dict(
+            case_id=target_case_id,
+            available_at=T1,
+            required_by=T3 + timedelta(days=3),
+            source_refs=[dict(uri="test://verified-calendar", content_hash="calendar-v1")],
+            slots=[
+                dict(cutoff_at=T3, sellable_at=T3 + timedelta(days=1)),
+                dict(cutoff_at=T3 + timedelta(days=1), sellable_at=T3 + timedelta(days=2)),
+            ],
+        )
+        | changes
+    )
+
+
+def test_deadline_uses_first_feasible_sellable_arrival_and_rechecks_after_cutoff():
+    a = fact("a")
+    (base,) = build([a], [link(a[2])]).cases
+    cal = calendar(base.id)
+    (on_time,) = build([a], [link(a[2])], decision_calendars=[cal]).cases
+    assert on_time.decision_due_at == T3
+    assert cal.source_refs[0] in on_time.source_refs
+    (missed,) = build(
+        [a], [link(a[2])], as_of=T3 + timedelta(seconds=1), decision_calendars=[cal]
+    ).cases
+    assert missed.decision_due_at == T3 + timedelta(days=1)
+    (late,) = build([a], [link(a[2])], as_of=T3 + timedelta(days=2), decision_calendars=[cal]).cases
+    assert late.decision_due_at is None and late.status == "open"
+    assert any("No remaining calendar slot" in u for u in late.blocking_uncertainties)
+
+
+@pytest.mark.parametrize(
+    "changes",
+    [
+        {"case_id": "another-case"},
+        {"available_at": T3 + timedelta(seconds=1)},
+        {"required_by": T3 + timedelta(hours=1)},
+        {"slots": []},
+    ],
+)
+def test_deadlines_abstain_for_unknown_future_or_infeasible_calendars(changes):
+    a = fact("a")
+    (base,) = build([a], [link(a[2])]).cases
+    (case,) = build([a], [link(a[2])], decision_calendars=[calendar(base.id, **changes)]).cases
+    assert case.decision_due_at is None and case.status == "open"
+
+
+def test_conflicting_calendars_abstain_and_aware_ordered_source_backed_slots_required():
+    from pydantic import ValidationError
+
+    a = fact("a")
+    (base,) = build([a], [link(a[2])]).cases
+    cal = calendar(base.id)
+    (case,) = build([a], [link(a[2])], decision_calendars=[cal, cal]).cases
+    assert case.decision_due_at is None
+    for changes in [
+        {"available_at": "2026-10-02T18:00:00"},
+        {"source_refs": []},
+        {"slots": [dict(cutoff_at=T3, sellable_at=T2)]},
+    ]:
+        with pytest.raises(ValidationError):
+            calendar(base.id, **changes)
+
+
+def erp_stock_row(day, **changes):
+    from tessera.core.contracts import SourceRef
+    from tessera.core.repo import ErpRecord
+
+    return ErpRecord(
+        table="stock",
+        id="erp-stock",
+        version="1",
+        available_at=T3 + timedelta(days=1),
+        availability_basis="test",
+        source_refs=(SourceRef(uri="test://erp", content_hash="s"),),
+        data=dict(store_id="MIL01", sku="J20931A00012-999", size="2", snapshot_date=day, on_hand=4)
+        | changes,
+    )
+
+
+def test_erp_eod_only_compares_to_a_whole_local_day_and_keeps_versioned_refs():
+    start = T1.replace(hour=22) - timedelta(days=1)  # Rome midnight (UTC+2)
+    end = start + timedelta(days=1, seconds=-1)
+    a = fact("a", kind="stockout", period=(start, end))
+    stock = erp_stock_row(T1.date())
+    (case,) = build([a], [link(a[2])], erp_stock=[stock], as_of=T3 + timedelta(days=1)).cases
+    ref = ArtifactRef(kind="erp.stock", id="erp-stock", version="1")
+    assert case.contradicting == (ref,) and ref in case.input_refs
+    assert case.available_at == T3 + timedelta(days=1) and stock.source_refs[0] in case.source_refs
+    for period in [(T1, T2), (start, end - timedelta(minutes=1)), (None, None)]:
+        b = fact("b", kind="stockout", period=period)
+        (other,) = build([b], [link(b[2])], erp_stock=[stock], as_of=T3 + timedelta(days=1)).cases
+        assert other.contradicting == () and other.status == "open"
+
+
+def test_module_wires_structured_stock_and_calendar_and_repeats_idempotently(tmp_path):
+    a = fact("a", kind="stockout", period=(T1, T2))
+    (base,) = build([a], [link(a[2])]).cases
+    cal = calendar(base.id, available_at=T2)
+    stock = stock_fact()
+    engine = connect(f"sqlite:///{tmp_path / 'reconcile.db'}")
+    from tessera.core.repo import ErpRecord
+
+    put_erp(
+        engine,
+        [
+            ErpRecord(
+                table="stores",
+                id="MIL01",
+                version="1",
+                available_at=T1,
+                availability_basis="test",
+                source_refs=(),
+                data={"store_id": "MIL01", "timezone": "Europe/Rome"},
+            )
+        ],
+    )
+    for _ in range(2):
+        with repo_session(engine, spec(), fixture_mode=True, write=True) as repo:
+            repo.put(a[0], a[1], a[2], link(a[2]), stock)
+            result = cases.run(
+                SimpleNamespace(
+                    spec=repo.spec,
+                    repo=repo,
+                    params={"decision_calendars": [cal.model_dump(mode="json")]},
+                )
+            )
+            (stored,) = repo.list(Case)
+    assert stored.status == "verify" and stored.decision_due_at == T3
+    assert stored.contradicting == (cases.ref(stock),)
+    assert result.counts["cases_new"] == 0
+
+
+def test_replay_t1_t2_t1_keeps_future_conflict_and_calendar_out_of_early_snapshot():
+    a = fact("a", kind="stockout", period=(T1, T2))
+    stock = stock_fact(available_at=T2)
+    (base,) = build([a], [link(a[2])], as_of=T1).cases
+    cal = calendar(base.id, available_at=T2)
+    results = [
+        build([a], [link(a[2])], as_of=at, stocks=[stock], decision_calendars=[cal]).cases[0]
+        for at in (T1, T2, T1)
+    ]
+    assert results[0] == results[2] == base
+    assert results[1].status == "verify" and results[1].decision_due_at == T3
+    assert results[0].available_at == T1 and results[1].available_at == T2
+
+
+def test_calendar_prefers_earliest_sellable_arrival_not_earliest_departure():
+    a = fact("a")
+    (base,) = build([a], [link(a[2])]).cases
+    cal = calendar(
+        base.id,
+        slots=[
+            dict(cutoff_at=T3, sellable_at=T3 + timedelta(days=3)),
+            dict(cutoff_at=T3 + timedelta(hours=1), sellable_at=T3 + timedelta(days=1)),
+        ],
+    )
+    (case,) = build([a], [link(a[2])], decision_calendars=[cal]).cases
+    assert case.decision_due_at == T3 + timedelta(hours=1)
+
+
+def test_unknown_scope_cannot_get_a_logistics_deadline():
+    a = fact("a")
+    lk = link(a[2], status="ambiguous", candidates=("STYLE-A", "STYLE-B"))
+    (base,) = build([a], [lk]).cases
+    (case,) = build([a], [lk], decision_calendars=[calendar(base.id)]).cases
+    assert case.scope_level == "unknown" and case.status == "verify"
+    assert case.decision_due_at is None
+
+
+def test_module_persists_erp_conflict_refs_with_knowledge_time(tmp_path):
+    start = T1.replace(hour=22) - timedelta(days=1)
+    a = fact("a", kind="stockout", period=(start, start + timedelta(days=1, seconds=-1)))
+    stock = erp_stock_row(T1.date())
+    from tessera.core.repo import ErpRecord
+
+    engine = connect(f"sqlite:///{tmp_path / 'erp-conflict.db'}")
+    put_erp(
+        engine,
+        [
+            stock,
+            ErpRecord(
+                table="stores",
+                id="MIL01",
+                version="1",
+                available_at=T1,
+                availability_basis="test",
+                source_refs=(),
+                data={"store_id": "MIL01", "timezone": "Europe/Rome"},
+            ),
+        ],
+    )
+    with repo_session(
+        engine, spec(as_of=T3 + timedelta(days=1)), fixture_mode=True, write=True
+    ) as repo:
+        repo.put(a[0], a[1], a[2], link(a[2]))
+        cases.run(SimpleNamespace(spec=repo.spec, repo=repo, params={}))
+        (case,) = repo.list(Case)
+    assert case.status == "verify" and case.available_at == T3 + timedelta(days=1)
+    assert case.contradicting == (
+        ArtifactRef(kind="erp.stock", id=stock.id, version=stock.version),
+    )

@@ -1,4 +1,4 @@
-"""INT-03 module: ``int.cases`` groups the run's observations into cases for a human.
+"""INT-03/04 module: ``int.cases`` groups the run's observations into cases for a human.
 
 Inputs are the run's ``Observation``, ``EntityLink`` (INT-01), ``EvidenceRelation`` (INT-02) and
 ``SourceDocument`` records visible at ``as_of``. Rules:
@@ -22,7 +22,8 @@ Inputs are the run's ``Observation``, ``EntityLink`` (INT-01), ``EvidenceRelatio
   one origin. An origin whose documents all lack ``origin`` counts as unknown. A copy never
   refreshes ``last_independent_evidence_at``. Possible overlaps are flagged, never summed.
 - Priority, reason and blocking uncertainties come from fixed templates over these facts.
-  ``valid_until`` is set for decaying demand signals only; ``decision_due_at`` is left to INT-04.
+  ``valid_until`` is set for decaying demand signals only. INT-04 preserves structured stock
+  conflicts and estimates decision deadlines only from source-backed calendar slots.
 
 Each case is available at its latest input, ``computed_at`` is the run's ``as_of`` and its id is
 fixed by the group that opened it: ``case-<store>-<scope id|unknown>-<local date>``.
@@ -51,26 +52,34 @@ from tessera.core.contracts import (
     Observation,
     RunSpec,
     SourceDocument,
+    StockFact,
 )
 from tessera.core.contracts.common import SourceRecord
+from tessera.modules.integration.reconciliation import (
+    DecisionCalendar,
+    ReconciliationParams,
+    reconcile,
+)
 
 MANIFEST = ModuleManifest(
     id="int.cases",
-    version="1",
+    version="2",
     layer="integration",
     description=(
         "Cases per store, case type, product scope and window, unlinked ones included as "
-        "verify; owner from domain.yaml, document and origin counts"
+        "verify; structured stock conflicts, source-backed calendar deadlines, origin counts"
     ),
     requires=("int.dedup",),
-    optional_inputs=(),
+    optional_inputs=("src.erp", "sys.client"),
     produces=("Case",),
     enabled=True,
     mode="live",
     params_schema={
-        "type": "object",
-        "properties": {"max_validity_days": {"type": "integer", "minimum": 1, "maximum": 60}},
-        "additionalProperties": False,
+        **ReconciliationParams.model_json_schema(),
+        "properties": {
+            **ReconciliationParams.model_json_schema()["properties"],
+            "max_validity_days": {"type": "integer", "minimum": 1, "maximum": 60},
+        },
     },
 )
 
@@ -371,9 +380,14 @@ def build_cases(
     owners: Mapping[str, str],
     validity: timedelta,
     zones: Mapping[str, str],
+    stocks: Iterable[StockFact] = (),
+    erp_stock: Iterable[repo.ErpRecord] = (),
+    decision_calendars: Iterable[DecisionCalendar] = (),
 ) -> CaseBuild:
     """Pure: the cases of this snapshot. Records not visible at ``as_of`` are ignored."""
     as_of = spec.as_of
+    stocks, erp_stock = tuple(stocks), tuple(erp_stock)
+    decision_calendars = tuple(decision_calendars)
     all_facts = {
         _key(ref(o)): o
         for o in observations
@@ -489,6 +503,15 @@ def build_cases(
                 context_refs=tuple(ref(r) for r in (*own_links, *touching)),
             )
         )
+        cases[-1] = reconcile(
+            cases[-1],
+            supporting,
+            stocks,
+            erp_stock,
+            decision_calendars,
+            as_of=as_of,
+            timezone=zones.get(draft.store_id),
+        )
         totals["documents"] += len(seen_docs)
         totals["origin_groups"] += len(origins) - unknown_origins
         totals["unknown_origins"] += unknown_origins
@@ -524,6 +547,9 @@ def run(ctx: Context) -> ModuleResult:
         owners=owners,
         validity=timedelta(days=days),
         zones=_zones(ctx.repo),
+        stocks=ctx.repo.list(StockFact),
+        erp_stock=ctx.repo.erp("stock"),
+        decision_calendars=ReconciliationParams.model_validate(ctx.params).decision_calendars,
     )
     existing = {(c.id, c.version) for c in ctx.repo.list(Case)}
     new = [c for c in built.cases if (c.id, c.version) not in existing]
