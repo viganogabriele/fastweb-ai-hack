@@ -169,6 +169,146 @@ def test_teams_html_mentions_replies_and_deletions():
     assert (reply.text, reply.reply_to) == ("Priya on it", "1")
     assert chat.drop_reason(deleted) == "deleted"
     assert teams_text("<p>a</p><p>b<br>c</p>") == "a\nb\nc"
+    assert (
+        teams_text("<p>check https://private.example/token</p><script>secret()</script>") == "check"
+    )
+
+
+def test_malformed_native_records_abstain_without_aborting():
+    samples = (
+        ("whatsapp", "31/02/26, 09:00 - Ada: bad\n01/09/26, 09:00 - Ada: good\n", ROME),
+        (
+            "kakaotalk",
+            "title\nsaved\n---- 2026년 9월 1일 화요일 ----\n"
+            "[Ada] [오전 25:00] bad\n[Ada] [오전 9:00] good\n",
+            SEOUL,
+        ),
+        (
+            "line",
+            "title\nsaved\n2026/09/01(火)\n25:00\tAda\tbad\n09:00\tAda\tgood\n",
+            ZoneInfo("Asia/Tokyo"),
+        ),
+        (
+            "wechat",
+            "title\n====\n2026-09-01 25:00:00 Ada\nbad\n2026-09-01 09:00:00 Ada\ngood\n",
+            ZoneInfo("Asia/Shanghai"),
+        ),
+    )
+    for fmt, source, tz in samples:
+        parsed = parse(source, fmt, tz)
+        assert parsed.unparsed
+        assert [message.text for message in parsed.messages] == ["good"]
+
+    malformed = {
+        "value": [
+            {
+                "id": "bad",
+                "createdDateTime": "2026-09-01T09:00:00Z",
+                "body": {"content": "x"},
+                "attachments": [None],
+            },
+            {
+                "id": "good",
+                "createdDateTime": "2026-09-01T09:01:00Z",
+                "messageType": "message",
+                "body": {"content": "good"},
+            },
+        ]
+    }
+    parsed = parse(json.dumps(malformed), "teams", ZoneInfo("UTC"))
+    assert parsed.unparsed == [1]
+    assert [message.text for message in parsed.messages] == ["good"]
+    assert parse('{"value": {}}', "teams", ZoneInfo("UTC")).unparsed == [1]
+
+
+def test_invalid_day_headers_do_not_extend_previous_messages():
+    kakao = parse(
+        "title\nsaved\n---- 2026년 9월 1일 화요일 ----\n[Ada] [오전 9:00] first\n"
+        "---- 2026년 9월 99일 화요일 ----\nfuture text\n",
+        "kakaotalk",
+        SEOUL,
+    )
+    line = parse(
+        "title\nsaved\n2026/09/01(火)\n09:00\tAda\tfirst\n2026/09/99(火)\nfuture text\n",
+        "line",
+        ZoneInfo("Asia/Tokyo"),
+    )
+    for parsed in (kakao, line):
+        assert [message.text for message in parsed.messages] == ["first"]
+        assert len(parsed.unparsed) == 2
+
+
+def test_teams_reply_parent_is_independent_of_export_order(tmp_path):
+    export = Export("teams.json", "teams", "teams-test", ("MIL01",), "en")
+    parent = {
+        "id": "parent",
+        "messageType": "message",
+        "createdDateTime": "2026-09-01T09:00:00Z",
+        "from": {"user": {"displayName": "Ada"}},
+        "body": {"content": "root"},
+    }
+    reply = {
+        "id": "reply",
+        "replyToId": "parent",
+        "messageType": "message",
+        "createdDateTime": "2026-09-01T09:01:00Z",
+        "from": {"user": {"displayName": "Bea"}},
+        "body": {"content": "answer"},
+    }
+    sources = synthetic(tmp_path, {"teams.json": json.dumps({"value": [reply, parent]})})
+    batch = collect(sources, ["MIL01"], END, exports=(export,))
+    docs = {document.id: document for document, _ in batch.documents}
+    assert docs["doc-chat-teams-test-reply"].parent_document_id == "doc-chat-teams-test-parent"
+
+
+def test_teams_future_deletion_and_replies_do_not_change_earlier_document(tmp_path):
+    export = Export("teams.json", "teams", "teams-test", ("MIL01",), "en")
+    parent = {
+        "id": "parent",
+        "messageType": "message",
+        "createdDateTime": "2026-09-01T09:00:00Z",
+        "from": {"user": {"displayName": "Ada"}},
+        "body": {"content": "visible"},
+        "deletedDateTime": "2026-09-03T09:00:00Z",
+        "replies": [
+            {
+                "id": "reply",
+                "replyToId": "parent",
+                "messageType": "message",
+                "createdDateTime": "2026-09-02T09:00:00Z",
+                "from": {"user": {"displayName": "Bea"}},
+                "body": {"content": "future"},
+            }
+        ],
+    }
+    sources = synthetic(tmp_path, {"teams.json": json.dumps({"value": [parent]})})
+    before = collect(sources, ["MIL01"], datetime(2026, 9, 1, 12, tzinfo=UTC), exports=(export,))
+    ((document, _),) = before.documents
+    assert document.text == "visible"
+    assert before.dropped == {}
+    assert collect(sources, ["MIL01"], END, exports=(export,)).dropped["deleted"] == 1
+    del parent["deletedDateTime"]
+    parent["replies"] = []
+    (sources / "internal_comms" / "chat_exports" / "teams.json").write_text(
+        json.dumps({"value": [parent]}), encoding="utf-8"
+    )
+    ((without_future, _),) = collect(sources, ["MIL01"], END, exports=(export,)).documents
+    assert without_future.content_hash == document.content_hash
+
+
+def test_future_malformed_lines_are_not_reported_in_earlier_replay(tmp_path):
+    export = Export("store.txt", "whatsapp", "wa-test", ("MIL01",), "it")
+    sources = synthetic(
+        tmp_path,
+        {
+            "store.txt": "01/09/26, 09:00 - Ada: visible\n"
+            "02/09/26, 09:00 - Ada: future\n"
+            "31/09/26, 09:01 - Ada: malformed future timestamp\n"
+        },
+    )
+    early = collect(sources, ["MIL01"], datetime(2026, 9, 1, 12, tzinfo=UTC), exports=(export,))
+    assert [document.text for document, _ in early.documents] == ["visible"]
+    assert early.problems == []
 
 
 def test_dev_exports_parse_every_line_and_respect_scope():

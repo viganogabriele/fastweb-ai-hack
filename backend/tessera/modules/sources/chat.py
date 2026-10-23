@@ -65,6 +65,7 @@ class Message:
     native_id: str | None = None
     reply_to: str | None = None
     attachments: tuple[str, ...] = ()
+    deleted_at: datetime | None = None
 
 
 @dataclass
@@ -228,10 +229,11 @@ def _year(value: str) -> int:
 def _whatsapp(text: str, tz: ZoneInfo, pattern: re.Pattern[str]) -> Parsed:
     """Day-first dates, as in every locale of the dataset (it, es, fr)."""
     parsed = Parsed()
+    can_continue = False
     for number, line in enumerate(_lines(text), 1):
         match = pattern.match(_clean(line))
         if match is None:
-            if parsed.messages and line.strip():
+            if can_continue and line.strip():
                 _extend(parsed.messages, line, number)
             elif line.strip():
                 parsed.unparsed.append(number)
@@ -239,13 +241,25 @@ def _whatsapp(text: str, tz: ZoneInfo, pattern: re.Pattern[str]) -> Parsed:
         day, month, year, hour, minute = (match.group(i) for i in range(1, 6))
         second = match.group(6) if pattern is WA_IOS else None
         body = match.group(match.lastindex)
-        at = datetime(
-            _year(year), int(month), int(day), int(hour), int(minute), int(second or 0), tzinfo=tz
-        )
+        try:
+            at = datetime(
+                _year(year),
+                int(month),
+                int(day),
+                int(hour),
+                int(minute),
+                int(second or 0),
+                tzinfo=tz,
+            )
+        except ValueError:
+            parsed.unparsed.append(number)
+            can_continue = False
+            continue
         author, sep, content = body.partition(": ")
         if not sep:  # system line: encryption notice, group changes
             author, content = None, body
         parsed.messages.append(Message(at, author, _clean(content), number, line))
+        can_continue = True
     return parsed
 
 
@@ -256,24 +270,40 @@ KAKAO_MESSAGE = re.compile(r"^\[([^\]]+)\] \[(오전|오후) (\d{1,2}):(\d{2})\]
 def _kakaotalk(text: str, tz: ZoneInfo) -> Parsed:
     parsed = Parsed()
     day: date | None = None
+    can_continue = False
     for number, line in enumerate(_lines(text), 1):
         stripped = line.strip()
         if number <= 2 or not stripped:  # title and save date
             continue
         if match := KAKAO_DAY.match(stripped):
-            day = date(*(int(match.group(i)) for i in range(1, 4)))
+            can_continue = False
+            try:
+                day = date(*(int(match.group(i)) for i in range(1, 4)))
+            except ValueError:
+                day = None
+                parsed.unparsed.append(number)
             continue
         match = KAKAO_MESSAGE.match(stripped)
         if match is None or day is None:
-            if match is None and parsed.messages:
+            if match is None and can_continue:
                 _extend(parsed.messages, line, number)
             else:
                 parsed.unparsed.append(number)
             continue
         author, half, hour, minute, content = match.groups()
+        if not 1 <= int(hour) <= 12:
+            parsed.unparsed.append(number)
+            can_continue = False
+            continue
         hour_24 = int(hour) % 12 + (12 if half == "오후" else 0)
-        at = datetime(day.year, day.month, day.day, hour_24, int(minute), tzinfo=tz)
+        try:
+            at = datetime(day.year, day.month, day.day, hour_24, int(minute), tzinfo=tz)
+        except ValueError:
+            parsed.unparsed.append(number)
+            can_continue = False
+            continue
         parsed.messages.append(Message(at, author, content.strip(), number, line))
+        can_continue = True
     return parsed
 
 
@@ -284,16 +314,22 @@ LINE_MESSAGE = re.compile(r"^(\d{1,2}):(\d{2})\t(.*)$")
 def _line(text: str, tz: ZoneInfo) -> Parsed:
     parsed = Parsed()
     day: date | None = None
+    can_continue = False
     for number, line in enumerate(_lines(text), 1):
         stripped = line.strip()
         if number <= 2 or not stripped:  # title and save date
             continue
         if match := LINE_DAY.match(stripped):
-            day = date(*(int(match.group(i)) for i in range(1, 4)))
+            can_continue = False
+            try:
+                day = date(*(int(match.group(i)) for i in range(1, 4)))
+            except ValueError:
+                day = None
+                parsed.unparsed.append(number)
             continue
         match = LINE_MESSAGE.match(line)
         if match is None or day is None:
-            if match is None and parsed.messages:
+            if match is None and can_continue:
                 _extend(parsed.messages, line, number)
             else:
                 parsed.unparsed.append(number)
@@ -302,8 +338,14 @@ def _line(text: str, tz: ZoneInfo) -> Parsed:
         author, sep, content = rest.partition("\t")
         if not sep:  # system line: calls, members joining
             author, content = None, rest
-        at = datetime(day.year, day.month, day.day, int(hour), int(minute), tzinfo=tz)
+        try:
+            at = datetime(day.year, day.month, day.day, int(hour), int(minute), tzinfo=tz)
+        except ValueError:
+            parsed.unparsed.append(number)
+            can_continue = False
+            continue
         parsed.messages.append(Message(at, author or None, content.strip(), number, line))
+        can_continue = True
     return parsed
 
 
@@ -336,7 +378,11 @@ def _wechat(text: str, tz: ZoneInfo) -> Parsed:
         if match := WECHAT_HEADER.match(line):
             flush()
             values = [int(match.group(i)) for i in range(1, 7)]
-            pending = (datetime(*values, tzinfo=tz), match.group(7).strip(), number, [])
+            try:
+                pending = (datetime(*values, tzinfo=tz), match.group(7).strip(), number, [])
+            except ValueError:
+                pending = None
+                parsed.unparsed.append(number)
         elif line.strip():
             if pending is None:
                 parsed.unparsed.append(number)
@@ -348,12 +394,16 @@ def _wechat(text: str, tz: ZoneInfo) -> Parsed:
 
 TAG = re.compile(r"<[^>]+>")
 BLOCK_END = re.compile(r"</p>|<br\s*/?>|</div>|</li>", re.IGNORECASE)
+ACTIVE_HTML = re.compile(r"<(script|style)\b[^>]*>.*?</\1\s*>", re.IGNORECASE | re.DOTALL)
+URL = re.compile(r"\b(?:https?://|www\.)[^\s<>]+", re.IGNORECASE)
 
 
 def teams_text(content: str) -> str:
     """Graph ``html`` bodies: paragraphs to lines, tags (``<at>`` mentions too) to their text."""
+    content = ACTIVE_HTML.sub("", content)
     text = BLOCK_END.sub("\n", content)
     text = html.unescape(TAG.sub("", text))
+    text = URL.sub("", text)
     return "\n".join(line.strip() for line in text.splitlines() if line.strip())
 
 
@@ -362,39 +412,73 @@ def _teams(text: str) -> Parsed:
     try:
         export = json.loads(text)
         top = export["value"]
+        if not isinstance(top, list):
+            raise TypeError("Teams value must be a list")
     except (ValueError, KeyError, TypeError):
         parsed.unparsed.append(1)
         return parsed
     flat = []
     for message in top:
+        if not isinstance(message, dict):
+            parsed.unparsed.append(1)
+            continue
         flat.append(message)
-        flat.extend(message.get("replies") or ())
+        replies = message.get("replies") or ()
+        if not isinstance(replies, (list, tuple)):
+            parsed.unparsed.append(1)
+            continue
+        flat.extend(replies)
     for message in flat:
+        if not isinstance(message, dict):
+            parsed.unparsed.append(1)
+            continue
         native_id = str(message.get("id") or "")
         try:
             at = datetime.fromisoformat(message["createdDateTime"].replace("Z", "+00:00"))
+            if at.tzinfo is None:
+                raise ValueError("Teams timestamp has no timezone")
             body = message["body"]
             content = body["content"]
-        except (KeyError, TypeError, ValueError):
+            if not isinstance(content, str):
+                raise TypeError("Teams content is not text")
+            attachments = message.get("attachments") or ()
+            if not isinstance(attachments, (list, tuple)) or any(
+                not isinstance(a, dict) for a in attachments
+            ):
+                raise TypeError("Teams attachments are malformed")
+            sender = message.get("from") or {}
+            user = sender.get("user") or {}
+            if not isinstance(user, dict):
+                raise TypeError("Teams user is malformed")
+            deleted = message.get("deletedDateTime")
+            deleted_at = datetime.fromisoformat(deleted.replace("Z", "+00:00")) if deleted else None
+            if deleted_at is not None and deleted_at.tzinfo is None:
+                raise ValueError("Teams deletion timestamp has no timezone")
+        except (AttributeError, KeyError, TypeError, ValueError):
             parsed.unparsed.append(1)
             continue
-        if message.get("messageType") != "message" or message.get("deletedDateTime"):
+        if message.get("messageType") != "message":
             content = ""
         elif body.get("contentType") == "html":
             content = teams_text(content)
-        user = ((message.get("from") or {}).get("user") or {}).get("displayName")
+        else:
+            content = URL.sub("", content)
+        author = user.get("displayName")
+        names = tuple(a["name"] for a in attachments if isinstance(a.get("name"), str))
         parsed.messages.append(
             Message(
                 at=at.astimezone(UTC),
-                author=user,
+                author=author,
                 text=content.strip(),
                 line=1,
-                raw=json.dumps(message, ensure_ascii=False, sort_keys=True),
+                raw=json.dumps(
+                    (native_id, at.isoformat(), author, content, message.get("replyToId"), names),
+                    ensure_ascii=False,
+                ),
                 native_id=native_id or None,
                 reply_to=str(message["replyToId"]) if message.get("replyToId") else None,
-                attachments=tuple(
-                    a["name"] for a in message.get("attachments") or () if a.get("name")
-                ),
+                attachments=names,
+                deleted_at=deleted_at.astimezone(UTC) if deleted_at else None,
             )
         )
     return parsed
@@ -412,8 +496,10 @@ def parse(text: str, fmt: str, tz: ZoneInfo) -> Parsed:
     return parsers[fmt]()
 
 
-def drop_reason(message: Message) -> str | None:
+def drop_reason(message: Message, as_of: datetime | None = None) -> str | None:
     text = message.text
+    if message.deleted_at is not None and (as_of is None or message.deleted_at <= as_of):
+        return "deleted"
     if message.author is None:
         return "system"
     if not text:
@@ -528,24 +614,33 @@ def collect(
             continue
         try:
             text = path.read_text(encoding="utf-8")
-        except UnicodeDecodeError:
-            batch.problems.append(f"{uri}: not UTF-8")
+        except (OSError, UnicodeDecodeError):
+            batch.problems.append(f"{uri}: unreadable chat export")
             continue
         parsed = parse(text, export.format, business_tz or ZoneInfo("UTC"))
-        documents: dict[str, str] = {}
+        eligible = [message for message in parsed.messages if message.at <= as_of]
+        # A malformed line has no trustworthy timestamp. Only diagnose lines before the
+        # last visible message; later lines could describe events after this replay cutoff.
+        visible_line = max((message.line for message in eligible), default=0)
+        if export.format == "teams" and len(eligible) != len(parsed.messages):
+            visible_line = 0  # JSON entries share one locator, so order cannot date an error.
+        documents = {
+            message.native_id: f"doc-chat-{export.slug}-{message.native_id}"
+            for message in eligible
+            if message.native_id and drop_reason(message, as_of) is None
+        }
         for number, message in enumerate(parsed.messages, 1):
             if message.at > as_of:
                 continue  # later messages and how many there are are future information
-            if reason := drop_reason(message):
+            if reason := drop_reason(message, as_of):
                 batch.dropped[reason] = batch.dropped.get(reason, 0) + 1
                 continue
             parent = documents.get(message.reply_to or "")
             document, segments = build_document(export, message, number, scope, business_tz, parent)
-            if message.native_id:
-                documents[message.native_id] = document.id
             batch.documents.append((document, segments))
         for line in parsed.unparsed:
-            batch.problems.append(f"{uri}: line {line} is not a message")
+            if line <= visible_line:
+                batch.problems.append(f"{uri}: line {line} is not a message")
     batch.documents.sort(key=lambda item: (item[0].available_at, item[0].id))
     return batch
 
