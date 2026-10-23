@@ -109,6 +109,7 @@ def trace_summary(trace):
         "fallback_used": trace.fallback_used,
         "mode": trace.mode,
         "tools": [s.tool for s in trace.steps],
+        "stop_reason": trace.steps[-1].arguments.get("reason") if trace.fallback_used else None,
         "semantic_sha256": digest(semantic_payload("AgentTrace", trace.model_dump(mode="json"))),
     }
 
@@ -161,6 +162,10 @@ def _record(settings, spec, case_id, output, execution_sha):
         engine.dispose()
     if trace is None or after != before:
         raise ValueError(f"job not published ({state['status']}) or parent changed")
+    if trace_summary(trace)["stop_reason"] == "budget_time":
+        # Replay is faster than the provider: the wall-clock stop would not recur and the
+        # replay would ask for a turn that was never recorded. Record again instead.
+        raise ValueError("the job stopped on the wall-clock budget; it cannot be replayed")
     output.mkdir(mode=0o700)
     for name in ("llm_cache", "systems_cache"):
         # An unused cache stays absent: git cannot carry an empty directory.
