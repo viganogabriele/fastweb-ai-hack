@@ -2,6 +2,11 @@
 
 Run with backend/.venv/bin/python scripts/replay_demo.py --help. No projections,
 ledger, secrets or provider clients are imported from a previous workspace.
+
+--decisions accepts an ordered JSON array of FrozenDecision objects. Each event
+contains namespace, snapshot_sha256 (digest of RunSpec.model_dump(mode="json")),
+at, the original DecisionRequest, and draft (the exact exported LocalDraft).
+The approval service revalidates these events before saving their original IDs.
 """
 
 import argparse
@@ -12,16 +17,18 @@ import os
 import sys
 from contextlib import contextmanager, redirect_stderr, redirect_stdout
 from pathlib import Path
+from typing import Literal
 from uuid import uuid4
 
 from pydantic import TypeAdapter
+from sqlalchemy import inspect, select
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 
 from tessera.core.cache import CacheCorrupt, ReplayMiss, ResponseCache
 from tessera.core.config import Settings, get_settings
 from tessera.core.contracts import RunSpec
-from tessera.core.contracts.common import Contract, Instant
+from tessera.core.contracts.common import Contract, Instant, Text
 from tessera.core.db import connect
 from tessera.core.llm import LLMClient
 from tessera.core.orchestrator import run
@@ -29,7 +36,8 @@ from tessera.core.registry import Registry
 from tessera.core.repo import KINDS
 from tessera.core.run_repo import repo_session
 from tessera.core.systems_cache import SystemsCache, systems_factory
-from tessera.modules.actions.approval import DecisionRequest, decide
+from tessera.modules.actions import ledger
+from tessera.modules.actions.approval import DecisionRequest, LocalDraft, decide
 
 MARKER = ".tessera-replay-workspace.json"
 OWNER = {"format": 1, "owner": "tessera-offline-replay"}
@@ -45,8 +53,11 @@ class OfflineNetworkDenied(RuntimeError):
 
 
 class FrozenDecision(Contract):
+    snapshot_sha256: Text
+    namespace: Literal["fixture", "product"]
     at: Instant
     request: DecisionRequest
+    draft: LocalDraft
 
 
 class ReplayCache(ResponseCache):
@@ -241,7 +252,7 @@ def rebuild(
         ),
     )
     manifest = {
-        "format": 1,
+        "format": 2,
         "attempt_id": attempt.name,
         "run_id": spec.run_id,
         "scenario_id": spec.scenario_id,
@@ -260,6 +271,7 @@ def rebuild(
         "systems_cache_misses": [],
         "systems_cache_corrupt": [],
         "decisions": [],
+        "ledger_sha256": None,
         "inputs": {},
         "output_sha256": None,
         "output_hash_excludes": ["AgentTrace.steps[*].duration_ms"],
@@ -303,10 +315,22 @@ def rebuild(
             if any(
                 d.request.run_id != spec.run_id
                 or d.request.scenario_id != spec.scenario_id
+                or d.snapshot_sha256 != manifest["snapshot_sha256"]
+                or d.namespace != manifest["namespace"]
                 or d.at < spec.as_of
                 for d in frozen_decisions
             ):
                 raise IsolationError("decision does not belong to this snapshot/clock")
+            if any(
+                a.at > b.at for a, b in zip(frozen_decisions, frozen_decisions[1:], strict=False)
+            ):
+                raise IsolationError("decision clocks must be chronological")
+            identities = {}
+            for frozen in frozen_decisions:
+                key = frozen.draft.decision.id
+                if key in identities and identities[key] != frozen:
+                    raise IsolationError("conflicting frozen decision identity")
+                identities[key] = frozen
             (attempt / "inputs/decisions.json").write_bytes(raw)
             manifest["inputs"]["decisions"] = {
                 "sha256": hashlib.sha256(raw).hexdigest(),
@@ -386,9 +410,15 @@ def rebuild(
                     if frozen_decisions and not can_decide:
                         manifest["decision_replay_skipped"] = True
                     for frozen in frozen_decisions if can_decide else ():
-                        draft = decide(engine, frozen.request, now=frozen.at)
+                        draft = decide(
+                            engine, frozen.request, now=frozen.at, expected_draft=frozen.draft
+                        )
+
                         manifest["decisions"].append(
                             {
+                                "id": draft.decision.id,
+                                "version": draft.decision.version,
+                                "sha256": digest(draft.model_dump(mode="json")),
                                 "option_id": draft.option.id,
                                 "option_version": draft.option.version,
                                 "input_version_hash": draft.decision.input_version_hash,
@@ -410,6 +440,13 @@ def rebuild(
                 for kind, model in sorted(KINDS.items())
                 for record in repo.list(model)
             ]
+        with engine.connect() as conn:
+            durable = (
+                list(conn.execute(select(ledger.drafts.c.payload)).scalars())
+                if inspect(conn).has_table(ledger.drafts.name)
+                else []
+            )
+        durable.sort(key=lambda d: d["decision"]["id"])
         manifest["output_sha256"] = digest(
             [
                 (kind, semantic_payload(kind, item))
@@ -417,7 +454,9 @@ def rebuild(
                     payloads, key=lambda p: (p[0], p[1]["id"], p[1]["version"])
                 )
             ]
+            + [("LocalDraft", draft) for draft in durable]
         )
+        manifest["ledger_sha256"] = digest(durable)
 
         manifest["artifacts"] = [
             {"kind": kind, "id": item["id"], "version": item["version"], "sha256": digest(item)}
@@ -425,6 +464,7 @@ def rebuild(
         ]
         manifest["raw_output_sha256"] = digest(
             sorted(payloads, key=lambda p: (p[0], p[1]["id"], p[1]["version"]))
+            + [("LocalDraft", draft) for draft in durable]
         )
         manifest["artifact_counts"] = {
             kind: sum(k == kind for k, _ in payloads) for kind in sorted({k for k, _ in payloads})
@@ -496,7 +536,9 @@ def main(argv=None):
         help="recorded simulated stock/logistics GET responses",
     )
     parser.add_argument(
-        "--decisions", type=Path, help="explicit frozen decision requests with decision clocks"
+        "--decisions",
+        type=Path,
+        help="frozen requests and exact exported local drafts, pinned to snapshot hash/namespace",
     )
     args = parser.parse_args(argv)
     try:

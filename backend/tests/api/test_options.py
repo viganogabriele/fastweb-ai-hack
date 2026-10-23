@@ -10,6 +10,7 @@ from sqlalchemy.exc import OperationalError
 
 from tessera.api.main import create_app
 from tessera.api.routers.options import decision_clock, option_input_loader
+from tessera.core.cache import CacheCorrupt, ReplayMiss
 from tessera.core.config import Settings
 from tessera.core.contracts import RunSpec
 from tessera.core.db import artifacts, connect
@@ -300,6 +301,20 @@ def test_busy_ledger_is_retryable_without_silent_resubmission(service, monkeypat
     response = client.post(endpoint(value), json=body(options["hold"]))
     assert response.status_code == 503
     assert response.headers["retry-after"] == "5"
+    assert ledger.reservations(service[1]["product"], value.scenario_id) == ()
+
+
+@pytest.mark.parametrize("error", [ReplayMiss, CacheCorrupt])
+def test_missing_or_corrupt_systems_recording_never_saves_http_approval(service, error):
+    client, value, options = prepare(service)
+
+    def load(*_):
+        raise error("private cache details")
+
+    service[2].dependency_overrides[option_input_loader] = lambda: load
+    response = client.post(endpoint(value), json=body(options["transfer"]))
+    assert response.status_code == 503
+    assert "private" not in response.text
     assert ledger.reservations(service[1]["product"], value.scenario_id) == ()
 
 

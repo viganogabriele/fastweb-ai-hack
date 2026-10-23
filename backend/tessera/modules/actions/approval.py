@@ -63,9 +63,7 @@ def load_inputs(current: repo.Repo, case: Case) -> Sequence[OptionInputs]:
     """Production gathering with the same policy, source filters and evaluator as act.options."""
     settings = get_settings()
     recordings = SystemsCache(settings.data_dir / "systems_cache")
-    reader = SystemsReader.open(
-        current, systems_factory(settings, current.spec, recordings, allow_recording=True)
-    )
+    reader = SystemsReader.open(current, systems_factory(settings, current.spec, recordings))
     if isinstance(reader, Unknown):
         raise Conflict(f"systems unavailable: {reader.reason}")
     try:
@@ -88,12 +86,15 @@ def decide(
     *,
     loader: InputLoader = load_inputs,
     now: datetime | None = None,
+    expected_draft: LocalDraft | None = None,
 ) -> LocalDraft:
     """Validate against the latest published state of the scenario; commit a local draft.
 
     ``loader`` is a trusted service dependency, never supplied by an HTTP caller. It must
     gather current facts, not cached options. ``now`` is the decision clock, independent
     of the historical run's as_of (tests/replay may supply an explicit clock).
+    ``expected_draft`` is a trusted offline export: preserve its identity only after
+    revalidating the request and comparing the entire rebuilt draft before commit.
     """
     at = now or datetime.now(UTC)
     if at.tzinfo is None:
@@ -117,7 +118,10 @@ def decide(
         if saved is not None:
             if saved["request"] != encoded:
                 raise Conflict("idempotency key already used for a different request")
-            return LocalDraft.model_validate(saved["payload"])
+            draft = LocalDraft.model_validate(saved["payload"])
+            if expected_draft is not None and draft != expected_draft:
+                raise Conflict("saved draft differs from frozen decision")
+            return draft
         previous = conn.execute(
             select(ledger.drafts.c.option_id).where(
                 ledger.drafts.c.scenario_id == request.scenario_id,
@@ -138,6 +142,8 @@ def decide(
         option = current.get(ActionOption, request.option_id)
         if option is None or option.input_version_hash != request.input_version_hash:
             raise Conflict("option missing or input hash changed")
+        if at < current.spec.as_of or at < option.available_at:
+            raise Conflict("decision precedes its snapshot or option")
         if at >= option.valid_until:
             raise Conflict("option expired; recompute it")
         case = current.get(Case, option.case_id)
@@ -170,7 +176,14 @@ def decide(
                 )
             ):
                 raise Conflict("mandatory movement checks do not pass")
-        draft = _draft(request, option, at)
+        draft = _draft(
+            request,
+            option,
+            at,
+            decision_id=expected_draft.decision.id if expected_draft is not None else None,
+        )
+        if expected_draft is not None and draft != expected_draft:
+            raise Conflict("rebuilt draft differs from frozen decision")
         conn.execute(
             insert(ledger.drafts).values(
                 scenario_id=request.scenario_id,
@@ -185,7 +198,9 @@ def decide(
         return draft
 
 
-def _draft(request: DecisionRequest, option: ActionOption, at: datetime) -> LocalDraft:
+def _draft(
+    request: DecisionRequest, option: ActionOption, at: datetime, *, decision_id: str | None = None
+) -> LocalDraft:
     common = dict(
         version="1",
         available_at=at,
@@ -200,7 +215,7 @@ def _draft(request: DecisionRequest, option: ActionOption, at: datetime) -> Loca
     )
     decision = Decision(
         **common,
-        id=f"decision-{uuid4().hex}",
+        id=decision_id if decision_id is not None else f"decision-{uuid4().hex}",
         option_id=option.id,
         input_version_hash=option.input_version_hash,
         decision=request.decision,
