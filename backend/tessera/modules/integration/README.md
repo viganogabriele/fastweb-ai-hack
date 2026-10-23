@@ -115,3 +115,64 @@ useful sellable arrival, requiring arrival ≤ `required_by`. A missed cutoff sk
 to the next feasible slot; if none exists the deadline remains null. It does not
 prove stock feasibility or authorize a movement. Unknown product/store scope
 keeps a null deadline even if a calendar is supplied.
+
+## Optional embedding retrieval and dimension comparison (INT-05)
+
+`int.link` v2 accepts `use_embeddings: true` and `embedding_dimensions: 512|2048`
+(default 512). Embeddings remain off by default. `llm: false` disables the final
+choice, independently of candidate retrieval. A requested embedding path without
+an LLM client is blocked. Provider/cache/vector failures are explicit module
+errors and retain the deterministic fuzzy result with degraded status.
+
+The retriever receives the observation-date catalog, prefers the store assortment,
+and builds source-derived labels from style/colour aliases and ERP category,
+subcategory and gender. It cannot add future-launched catalog identities. Catalog
+vectors are reused in memory within the run and persist through the existing
+LLM client's record/replay cache. Keys include dimensions, provider/model/payload
+and a fingerprint of the ordered catalog IDs and labels. No new vector store or
+external service is introduced.
+
+Existing confident fuzzy links and blocking colour/size constraints bypass
+embedding retrieval. For other mentions, fuzzy and cosine rankings are combined
+by equal-weight reciprocal rank fusion, `sum(1/(60+rank))`, with deterministic
+ID tie-breaking and at most `top_k` results. Scores are normalized to 0–100 against
+the maximum two-list RRF score: they are rank scores, not fuzzy similarities or
+probabilities. Raw cosine is never compared to or maximized with a fuzzy score.
+Flags are retained. Semantic-only candidates stay ambiguous until the existing
+constrained LLM choice or human review; one semantic candidate is not automatically
+accepted. Nonpositive similarities are excluded, without claiming a calibrated
+acceptance threshold.
+
+### Reproduce a dimension comparison
+
+`embeddings.compare_dimensions(queries, catalog, client, top_k=8,
+descriptions=...)` runs fuzzy-only, fused-512 and fused-2048 retrieval on the same
+catalog, caller-supplied dev labels, and k. `RetrievalQuery` contains a mention,
+`expected_ids` at the same identity granularity as the desired candidates, an
+optional explicit size and optional store assortment. Empty `expected_ids` marks
+a negative. For example, with an existing time-filtered dev catalog and configured
+`LLMClient`:
+
+```python
+from tessera.modules.integration.embeddings import RetrievalQuery, compare_dimensions
+
+# Labels must be manually checked against permitted dev sources, not answer keys.
+# Fill these from the dev sample; do not use this placeholder as measured data.
+queries = [RetrievalQuery(mention=dev_mention, expected_ids=(dev_sku,))]
+comparison = compare_dimensions(
+    queries, dev_catalog, client, top_k=8, descriptions=source_descriptions
+)
+```
+
+The result includes `n`, positive/negative denominators, recall@k (a hit if any
+acceptable ID is retrieved), abstention count/rate and incorrect accepted links.
+Recall is null when there are no positives. Abstention refers to the retrieval
+stage before optional LLM tie-breaking, making the two dimensions comparable.
+Already-confident fuzzy links are retained in every arm. Record through the
+existing client once, then compare in replay mode; a replay miss propagates and
+produces no substitute metrics. Use the same fixed dev sample for both dimensions;
+hold-out labels, `ground_truth`, generator files and tuning on hold-out remain
+forbidden. This implementation supplies the comparison; the synthetic vector
+tests are not an observed Fastweb recall result and justify no dimension-quality
+claim. Keep 512 and the default embedding-off configuration until an actual dev
+comparison supports changing them.
