@@ -1,0 +1,484 @@
+[
+  {
+    "kind": "AgentTrace",
+    "payload": {
+      "id": "trace-20261009-mil01-i10919b00011-verify",
+      "version": "v1",
+      "available_at": "2026-10-09T08:35:52Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261009_1035_MIL01.eml",
+          "content_hash": "sha256:173f031967d236d50951cd1ad52ea2692c28ed005eb8fe68e68105b422927144",
+          "locator": null
+        },
+        {
+          "uri": "dataset://erp/master_data/styles.csv",
+          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "locator": "style_code=I10919B00011"
+        },
+        {
+          "uri": "dataset://erp/master_data/styles.csv",
+          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "locator": "style_code=I10919B00042"
+        },
+        {
+          "uri": "dataset://erp/inventory/store_stock_daily/stock_eod_2026-10-08.csv",
+          "content_hash": "sha256:cd9dbfc156d8477b109fb826f935e632221df90e13b5364e7df07154e60d6576",
+          "locator": "store_id=MIL01;sku=I10919B00011-999;size=M;snapshot_date=2026-10-08;column=on_hand"
+        },
+        {
+          "uri": "dataset://erp/inventory/store_stock_daily/stock_eod_2026-10-08.csv",
+          "content_hash": "sha256:cd9dbfc156d8477b109fb826f935e632221df90e13b5364e7df07154e60d6576",
+          "locator": "store_id=MIL01;sku=I10919B00011-999;size=M;snapshot_date=2026-10-08"
+        },
+        {
+          "uri": "dataset://erp/inventory/store_stock_daily/stock_eod_2026-10-08.csv",
+          "content_hash": "sha256:cd9dbfc156d8477b109fb826f935e632221df90e13b5364e7df07154e60d6576",
+          "locator": "store_id=MIL02;sku=I10919B00011-999;size=M;snapshot_date=2026-10-08;column=on_hand"
+        },
+        {
+          "uri": "dataset://erp/inventory/store_stock_daily/stock_eod_2026-10-08.csv",
+          "content_hash": "sha256:cd9dbfc156d8477b109fb826f935e632221df90e13b5364e7df07154e60d6576",
+          "locator": "store_id=MIL02;sku=I10919B00011-999;size=M;snapshot_date=2026-10-08"
+        },
+        {
+          "uri": "dataset://systems/warehouse/atp/ATP_projection_20261005.csv",
+          "content_hash": "sha256:f58f6d2facca7ecb5fac3f100314403341f215c2cf27307fa56808bc5ced36bd",
+          "locator": "WERKS=IT10;MATNR=I10919B00011999;J_3ASIZE=M;column=LABST_0001"
+        },
+        {
+          "uri": "dataset://systems/warehouse/atp/ATP_projection_20261005.csv",
+          "content_hash": "sha256:f58f6d2facca7ecb5fac3f100314403341f215c2cf27307fa56808bc5ced36bd",
+          "locator": "WERKS=IT10;MATNR=I10919B00011999;J_3ASIZE=M;column=ATP_NOW"
+        },
+        {
+          "uri": "dataset://erp/inventory/store_stock_daily/stock_eod_2026-10-08.csv",
+          "content_hash": "sha256:cd9dbfc156d8477b109fb826f935e632221df90e13b5364e7df07154e60d6576",
+          "locator": "store_id=MIL01;sku=I10919B00011-742;size=M;snapshot_date=2026-10-08;column=on_hand"
+        },
+        {
+          "uri": "dataset://erp/inventory/store_stock_daily/stock_eod_2026-10-08.csv",
+          "content_hash": "sha256:cd9dbfc156d8477b109fb826f935e632221df90e13b5364e7df07154e60d6576",
+          "locator": "store_id=MIL01;sku=I10919B00011-742;size=M;snapshot_date=2026-10-08"
+        },
+        {
+          "uri": "dataset://erp/inventory/store_stock_daily/stock_eod_2026-10-08.csv",
+          "content_hash": "sha256:cd9dbfc156d8477b109fb826f935e632221df90e13b5364e7df07154e60d6576",
+          "locator": "store_id=MIL02;sku=I10919B00011-742;size=M;snapshot_date=2026-10-08;column=on_hand"
+        },
+        {
+          "uri": "dataset://erp/inventory/store_stock_daily/stock_eod_2026-10-08.csv",
+          "content_hash": "sha256:cd9dbfc156d8477b109fb826f935e632221df90e13b5364e7df07154e60d6576",
+          "locator": "store_id=MIL02;sku=I10919B00011-742;size=M;snapshot_date=2026-10-08"
+        },
+        {
+          "uri": "dataset://systems/warehouse/atp/ATP_projection_20261005.csv",
+          "content_hash": "sha256:f58f6d2facca7ecb5fac3f100314403341f215c2cf27307fa56808bc5ced36bd",
+          "locator": "WERKS=IT10;MATNR=I10919B00011742;J_3ASIZE=M;column=LABST_0001"
+        },
+        {
+          "uri": "dataset://systems/warehouse/atp/ATP_projection_20261005.csv",
+          "content_hash": "sha256:f58f6d2facca7ecb5fac3f100314403341f215c2cf27307fa56808bc5ced36bd",
+          "locator": "WERKS=IT10;MATNR=I10919B00011742;J_3ASIZE=M;column=ATP_NOW"
+        },
+        {
+          "uri": "dataset://erp/forecast/sku_store_weekly/fcst_sku_store_run_2026-10-05.csv",
+          "content_hash": "sha256:af9b2acbac16d489798e6b10592e361890e30612d50092f1a9282476445aaa19",
+          "locator": "store_id=MIL01;sku=I10919B00011-999;week_start=2026-10-05|2026-10-12"
+        },
+        {
+          "uri": "dataset://erp/sales/pos_lines/pos_lines_2026-W36.csv",
+          "content_hash": "sha256:062160247c7a14cda99a0dcc4e4ee80457d218d3f87d26d71746d3b1c703c459",
+          "locator": "store_id=MIL01;business_date<=2026-10-04"
+        },
+        {
+          "uri": "dataset://erp/sales/pos_lines/pos_lines_2026-W37.csv",
+          "content_hash": "sha256:c1fae11d341e186aef036364f4d9e04c5c40b90177c9e0ba305d1696b800fe04",
+          "locator": "store_id=MIL01;business_date<=2026-10-04"
+        },
+        {
+          "uri": "dataset://erp/sales/pos_lines/pos_lines_2026-W38.csv",
+          "content_hash": "sha256:51c809b41e32d83da90aaf928e2a8073a5de81186908ad493129fffdfe6c09c2",
+          "locator": "store_id=MIL01;business_date<=2026-10-04"
+        },
+        {
+          "uri": "dataset://erp/sales/pos_lines/pos_lines_2026-W39.csv",
+          "content_hash": "sha256:d746a7743a6225555c05e460918ebb322959e9b65709aca20876af9f0cbb9996",
+          "locator": "store_id=MIL01;business_date<=2026-10-04"
+        },
+        {
+          "uri": "dataset://erp/sales/pos_lines/pos_lines_2026-W40.csv",
+          "content_hash": "sha256:a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e",
+          "locator": "store_id=MIL01;business_date<=2026-10-04"
+        },
+        {
+          "uri": "dataset://systems/warehouse/reservations/ZRESV_reservations_export.csv",
+          "content_hash": "sha256:e35f0f2841d0f27c6066b079e53666ceb5a0af1f388cde8fd3dd41bbfffd643d",
+          "locator": "RSNUM=1004508;WERKS=IT10;J_3ASIZE=M"
+        },
+        {
+          "uri": "dataset://systems/warehouse/atp/ATP_projection_20261005.csv",
+          "content_hash": "sha256:f58f6d2facca7ecb5fac3f100314403341f215c2cf27307fa56808bc5ced36bd",
+          "locator": "WERKS=IT10;MATNR=I10919B00011999;J_3ASIZE=M"
+        },
+        {
+          "uri": "dataset://systems/logistics/lane_matrix_lead_time_cost.csv",
+          "content_hash": "sha256:3e1644a87ca463f55e6122221c424d8737c3aed117168cfc910898852963c4bd",
+          "locator": "lane_id=LN-1002-1001"
+        },
+        {
+          "uri": "dataset://systems/planning/min_presentation_by_store_category.csv",
+          "content_hash": "sha256:e60586de5362fc807366e0c165ca3277c996bfc839b6f88bd25aae9fab1fe3dc",
+          "locator": "WERKS=1002;category=Knitwear"
+        },
+        {
+          "uri": "dataset://systems/logistics/lane_matrix_lead_time_cost.csv",
+          "content_hash": "sha256:3e1644a87ca463f55e6122221c424d8737c3aed117168cfc910898852963c4bd",
+          "locator": "lane_id=LN-IT10-1001"
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "Case",
+          "id": "case-mil01-i10919b00011-20261008",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-mil01-i10919b00011-999-m-onhand-20261008",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-mil01-i10919b00011-999-m-sellable-20261008",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-mil02-i10919b00011-999-m-onhand-20261008",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-mil02-i10919b00011-999-m-sellable-20261008",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-it10-i10919b00011-999-m-onhand-20261005",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-it10-i10919b00011-999-m-atp-20261005",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-mil01-i10919b00011-742-m-onhand-20261008",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-mil01-i10919b00011-742-m-sellable-20261008",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-mil02-i10919b00011-742-m-onhand-20261008",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-mil02-i10919b00011-742-m-sellable-20261008",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-it10-i10919b00011-742-m-onhand-20261005",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-it10-i10919b00011-742-m-atp-20261005",
+          "version": "v1"
+        },
+        {
+          "kind": "ActionOption",
+          "id": "opt-d1-mil01-hold",
+          "version": "v1"
+        },
+        {
+          "kind": "ActionOption",
+          "id": "opt-d1-mil01-verify-stock",
+          "version": "v1"
+        },
+        {
+          "kind": "ActionOption",
+          "id": "opt-d1-mil01-mil02-999-m-q2",
+          "version": "v1"
+        },
+        {
+          "kind": "ActionOption",
+          "id": "opt-d1-mil01-dc-999-m-q4",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01c",
+      "producer_version": "1",
+      "case_id": "case-mil01-i10919b00011-20261008",
+      "steps": [
+        {
+          "tool": "get_case_evidence",
+          "arguments": {
+            "case_id": "case-mil01-i10919b00011-20261008"
+          },
+          "input_refs": [
+            {
+              "kind": "Case",
+              "id": "case-mil01-i10919b00011-20261008",
+              "version": "v1"
+            }
+          ],
+          "output_refs": [
+            {
+              "kind": "Case",
+              "id": "case-mil01-i10919b00011-20261008",
+              "version": "v1"
+            },
+            {
+              "kind": "Observation",
+              "id": "obs-20261009-1035-mil01-stockout",
+              "version": "v1"
+            },
+            {
+              "kind": "Observation",
+              "id": "obs-20261009-1035-mil01-unmet-demand",
+              "version": "v1"
+            },
+            {
+              "kind": "EntityLink",
+              "id": "link-20261009-1035-mil01-stockout",
+              "version": "v1"
+            },
+            {
+              "kind": "EntityLink",
+              "id": "link-20261009-1035-mil01-unmet-demand",
+              "version": "v1"
+            }
+          ],
+          "duration_ms": 12.0,
+          "error": null
+        },
+        {
+          "tool": "get_available_stock",
+          "arguments": {
+            "sku": "I10919B00011-999",
+            "size": "M",
+            "locations": [
+              "MIL01",
+              "MIL02",
+              "IT10"
+            ]
+          },
+          "input_refs": [],
+          "output_refs": [
+            {
+              "kind": "StockFact",
+              "id": "stock-mil01-i10919b00011-999-m-onhand-20261008",
+              "version": "v1"
+            },
+            {
+              "kind": "StockFact",
+              "id": "stock-mil01-i10919b00011-999-m-sellable-20261008",
+              "version": "v1"
+            },
+            {
+              "kind": "StockFact",
+              "id": "stock-mil02-i10919b00011-999-m-onhand-20261008",
+              "version": "v1"
+            },
+            {
+              "kind": "StockFact",
+              "id": "stock-mil02-i10919b00011-999-m-sellable-20261008",
+              "version": "v1"
+            },
+            {
+              "kind": "StockFact",
+              "id": "stock-it10-i10919b00011-999-m-onhand-20261005",
+              "version": "v1"
+            },
+            {
+              "kind": "StockFact",
+              "id": "stock-it10-i10919b00011-999-m-atp-20261005",
+              "version": "v1"
+            }
+          ],
+          "duration_ms": 8.0,
+          "error": null
+        },
+        {
+          "tool": "get_lane_and_eta",
+          "arguments": {
+            "origin": "MIL02",
+            "dest": "MIL01",
+            "requested_at": "2026-10-09T08:35:52+00:00",
+            "required_by": "2026-10-16T08:35:52+00:00"
+          },
+          "input_refs": [],
+          "output_refs": [
+            {
+              "kind": "SourceFile",
+              "id": "dataset://systems/logistics/lane_matrix_lead_time_cost.csv#lane_id=LN-1002-1001",
+              "version": "sha256:3e1644a87ca463f55e6122221c424d8737c3aed117168cfc910898852963c4bd"
+            }
+          ],
+          "duration_ms": 5.0,
+          "error": null
+        },
+        {
+          "tool": "evaluate_options",
+          "arguments": {
+            "case_id": "case-mil01-i10919b00011-20261008",
+            "candidate_donors": [
+              "MIL02"
+            ]
+          },
+          "input_refs": [
+            {
+              "kind": "Case",
+              "id": "case-mil01-i10919b00011-20261008",
+              "version": "v1"
+            },
+            {
+              "kind": "StockFact",
+              "id": "stock-mil01-i10919b00011-999-m-onhand-20261008",
+              "version": "v1"
+            },
+            {
+              "kind": "StockFact",
+              "id": "stock-mil01-i10919b00011-999-m-sellable-20261008",
+              "version": "v1"
+            },
+            {
+              "kind": "StockFact",
+              "id": "stock-mil02-i10919b00011-999-m-onhand-20261008",
+              "version": "v1"
+            },
+            {
+              "kind": "StockFact",
+              "id": "stock-mil02-i10919b00011-999-m-sellable-20261008",
+              "version": "v1"
+            },
+            {
+              "kind": "StockFact",
+              "id": "stock-it10-i10919b00011-999-m-onhand-20261005",
+              "version": "v1"
+            },
+            {
+              "kind": "StockFact",
+              "id": "stock-it10-i10919b00011-999-m-atp-20261005",
+              "version": "v1"
+            },
+            {
+              "kind": "StockFact",
+              "id": "stock-mil01-i10919b00011-742-m-onhand-20261008",
+              "version": "v1"
+            },
+            {
+              "kind": "StockFact",
+              "id": "stock-mil01-i10919b00011-742-m-sellable-20261008",
+              "version": "v1"
+            },
+            {
+              "kind": "StockFact",
+              "id": "stock-mil02-i10919b00011-742-m-onhand-20261008",
+              "version": "v1"
+            },
+            {
+              "kind": "StockFact",
+              "id": "stock-mil02-i10919b00011-742-m-sellable-20261008",
+              "version": "v1"
+            },
+            {
+              "kind": "StockFact",
+              "id": "stock-it10-i10919b00011-742-m-onhand-20261005",
+              "version": "v1"
+            },
+            {
+              "kind": "StockFact",
+              "id": "stock-it10-i10919b00011-742-m-atp-20261005",
+              "version": "v1"
+            }
+          ],
+          "output_refs": [
+            {
+              "kind": "ActionOption",
+              "id": "opt-d1-mil01-hold",
+              "version": "v1"
+            },
+            {
+              "kind": "ActionOption",
+              "id": "opt-d1-mil01-verify-stock",
+              "version": "v1"
+            },
+            {
+              "kind": "ActionOption",
+              "id": "opt-d1-mil01-mil02-999-m-q2",
+              "version": "v1"
+            },
+            {
+              "kind": "ActionOption",
+              "id": "opt-d1-mil01-dc-999-m-q4",
+              "version": "v1"
+            }
+          ],
+          "duration_ms": 34.0,
+          "error": null
+        },
+        {
+          "tool": "finish",
+          "arguments": {
+            "option_id": "opt-d1-mil01-verify-stock",
+            "status": "verify",
+            "evidence_refs": [
+              "Case:case-mil01-i10919b00011-20261008@v1",
+              "StockFact:stock-mil01-i10919b00011-999-m-onhand-20261008@v1",
+              "StockFact:stock-mil01-i10919b00011-999-m-sellable-20261008@v1",
+              "StockFact:stock-mil02-i10919b00011-999-m-onhand-20261008@v1",
+              "StockFact:stock-mil02-i10919b00011-999-m-sellable-20261008@v1",
+              "StockFact:stock-it10-i10919b00011-999-m-atp-20261005@v1",
+              "ActionOption:opt-d1-mil01-mil02-999-m-q2@v1"
+            ],
+            "rationale": "the data do not support a movement yet: 7 units of size M disappeared from MIL01 between the last two snapshots, the donor's sellable quantity is not exported and the DC ATP projection is 4 days old. Count at MIL01 and MIL02 first, then re-run the options: a movement approved now would rest on a snapshot that is already wrong"
+          },
+          "input_refs": [
+            {
+              "kind": "ActionOption",
+              "id": "opt-d1-mil01-verify-stock",
+              "version": "v1"
+            }
+          ],
+          "output_refs": [
+            {
+              "kind": "ActionOption",
+              "id": "opt-d1-mil01-verify-stock",
+              "version": "v1"
+            }
+          ],
+          "duration_ms": 3.0,
+          "error": null
+        }
+      ],
+      "outcome": "verify_stock: the transfer's legs work and it clears every mandatory check that the sources can decide, but the donor's sellable quantity and quality state are unknown, the destination snapshot is unexplained and the DC can only serve the open 4-unit backorder after 2026-10-30: count first, then re-run",
+      "fallback_used": true,
+      "mode": "fixture",
+      "tokens_in": null,
+      "tokens_out": null
+    }
+  }
+]

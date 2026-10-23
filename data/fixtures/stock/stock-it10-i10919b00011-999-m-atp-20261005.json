@@ -1,0 +1,32 @@
+[
+  {
+    "kind": "StockFact",
+    "payload": {
+      "id": "stock-it10-i10919b00011-999-m-atp-20261005",
+      "version": "v1",
+      "available_at": "2026-10-05T04:00:00Z",
+      "availability_basis": "warehouse_atp_projection",
+      "source_refs": [
+        {
+          "uri": "dataset://systems/warehouse/atp/ATP_projection_20261005.csv",
+          "content_hash": "sha256:f58f6d2facca7ecb5fac3f100314403341f215c2cf27307fa56808bc5ced36bd",
+          "locator": "WERKS=IT10;MATNR=I10919B00011999;J_3ASIZE=M;column=ATP_NOW"
+        }
+      ],
+      "location_id": "IT10",
+      "sku": "I10919B00011-999",
+      "size": "M",
+      "ean": "800001123402",
+      "snapshot_at": "2026-10-05T04:00:00Z",
+      "qty": 0.0,
+      "basis": "atp",
+      "reservations_included": true,
+      "quality_holds_included": true,
+      "source_ref": {
+        "uri": "dataset://systems/warehouse/atp/ATP_projection_20261005.csv",
+        "content_hash": "sha256:f58f6d2facca7ecb5fac3f100314403341f215c2cf27307fa56808bc5ced36bd",
+        "locator": "WERKS=IT10;MATNR=I10919B00011999;J_3ASIZE=M;column=ATP_NOW"
+      }
+    }
+  }
+]

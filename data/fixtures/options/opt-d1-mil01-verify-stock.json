@@ -1,0 +1,275 @@
+[
+  {
+    "kind": "ActionOption",
+    "payload": {
+      "id": "opt-d1-mil01-verify-stock",
+      "version": "v1",
+      "available_at": "2026-10-09T08:35:52Z",
+      "availability_basis": "max_input_available_at",
+      "source_refs": [
+        {
+          "uri": "dataset://store_emails/MIL01/20261009_1035_MIL01.eml",
+          "content_hash": "sha256:173f031967d236d50951cd1ad52ea2692c28ed005eb8fe68e68105b422927144",
+          "locator": null
+        },
+        {
+          "uri": "dataset://erp/master_data/styles.csv",
+          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "locator": "style_code=I10919B00011"
+        },
+        {
+          "uri": "dataset://erp/master_data/styles.csv",
+          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "locator": "style_code=I10919B00042"
+        },
+        {
+          "uri": "dataset://erp/inventory/store_stock_daily/stock_eod_2026-10-08.csv",
+          "content_hash": "sha256:cd9dbfc156d8477b109fb826f935e632221df90e13b5364e7df07154e60d6576",
+          "locator": "store_id=MIL01;sku=I10919B00011-999;size=M;snapshot_date=2026-10-08;column=on_hand"
+        },
+        {
+          "uri": "dataset://erp/inventory/store_stock_daily/stock_eod_2026-10-08.csv",
+          "content_hash": "sha256:cd9dbfc156d8477b109fb826f935e632221df90e13b5364e7df07154e60d6576",
+          "locator": "store_id=MIL01;sku=I10919B00011-999;size=M;snapshot_date=2026-10-08"
+        },
+        {
+          "uri": "dataset://erp/inventory/store_stock_daily/stock_eod_2026-10-08.csv",
+          "content_hash": "sha256:cd9dbfc156d8477b109fb826f935e632221df90e13b5364e7df07154e60d6576",
+          "locator": "store_id=MIL02;sku=I10919B00011-999;size=M;snapshot_date=2026-10-08;column=on_hand"
+        },
+        {
+          "uri": "dataset://erp/inventory/store_stock_daily/stock_eod_2026-10-08.csv",
+          "content_hash": "sha256:cd9dbfc156d8477b109fb826f935e632221df90e13b5364e7df07154e60d6576",
+          "locator": "store_id=MIL02;sku=I10919B00011-999;size=M;snapshot_date=2026-10-08"
+        },
+        {
+          "uri": "dataset://systems/warehouse/atp/ATP_projection_20261005.csv",
+          "content_hash": "sha256:f58f6d2facca7ecb5fac3f100314403341f215c2cf27307fa56808bc5ced36bd",
+          "locator": "WERKS=IT10;MATNR=I10919B00011999;J_3ASIZE=M;column=ATP_NOW"
+        },
+        {
+          "uri": "dataset://erp/sales/pos_lines/pos_lines_2026-W36.csv",
+          "content_hash": "sha256:062160247c7a14cda99a0dcc4e4ee80457d218d3f87d26d71746d3b1c703c459",
+          "locator": "store_id=MIL01;business_date<=2026-10-04"
+        },
+        {
+          "uri": "dataset://erp/sales/pos_lines/pos_lines_2026-W37.csv",
+          "content_hash": "sha256:c1fae11d341e186aef036364f4d9e04c5c40b90177c9e0ba305d1696b800fe04",
+          "locator": "store_id=MIL01;business_date<=2026-10-04"
+        },
+        {
+          "uri": "dataset://erp/sales/pos_lines/pos_lines_2026-W38.csv",
+          "content_hash": "sha256:51c809b41e32d83da90aaf928e2a8073a5de81186908ad493129fffdfe6c09c2",
+          "locator": "store_id=MIL01;business_date<=2026-10-04"
+        },
+        {
+          "uri": "dataset://erp/sales/pos_lines/pos_lines_2026-W39.csv",
+          "content_hash": "sha256:d746a7743a6225555c05e460918ebb322959e9b65709aca20876af9f0cbb9996",
+          "locator": "store_id=MIL01;business_date<=2026-10-04"
+        },
+        {
+          "uri": "dataset://erp/sales/pos_lines/pos_lines_2026-W40.csv",
+          "content_hash": "sha256:a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e",
+          "locator": "store_id=MIL01;business_date<=2026-10-04"
+        },
+        {
+          "uri": "dataset://systems/warehouse/reservations/ZRESV_reservations_export.csv",
+          "content_hash": "sha256:e35f0f2841d0f27c6066b079e53666ceb5a0af1f388cde8fd3dd41bbfffd643d",
+          "locator": "RSNUM=1004508;WERKS=IT10;J_3ASIZE=M"
+        },
+        {
+          "uri": "dataset://systems/warehouse/atp/ATP_projection_20261005.csv",
+          "content_hash": "sha256:f58f6d2facca7ecb5fac3f100314403341f215c2cf27307fa56808bc5ced36bd",
+          "locator": "WERKS=IT10;MATNR=I10919B00011999;J_3ASIZE=M"
+        }
+      ],
+      "run_id": "fixture",
+      "scenario_id": "historical",
+      "computed_at": "2026-10-22T12:00:00Z",
+      "input_refs": [
+        {
+          "kind": "Case",
+          "id": "case-mil01-i10919b00011-20261008",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-mil01-i10919b00011-999-m-onhand-20261008",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-mil01-i10919b00011-999-m-sellable-20261008",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-mil02-i10919b00011-999-m-onhand-20261008",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-mil02-i10919b00011-999-m-sellable-20261008",
+          "version": "v1"
+        },
+        {
+          "kind": "StockFact",
+          "id": "stock-it10-i10919b00011-999-m-atp-20261005",
+          "version": "v1"
+        }
+      ],
+      "producer": "fixture.data01c",
+      "producer_version": "1",
+      "case_id": "case-mil01-i10919b00011-20261008",
+      "forecast_ref": {
+        "kind": "ForecastAdjustment",
+        "id": "fc-mil01-i10919b00011-999-20261010",
+        "version": "v1"
+      },
+      "kind": "verify_stock",
+      "legs": [],
+      "checks": [
+        {
+          "name": "snapshot_bridge",
+          "status": "unknown",
+          "mandatory": false,
+          "detail": "MIL01 I10919B00011-999 had 8 units of size M at EOD 2026-10-07 and 0 at EOD 2026-10-08, while POS records 1 sale of size M on 2026-10-08 13:30:03: 7 units are unaccounted for (no inbound, no IBT line, no return), so the last snapshot is not current stock",
+          "source_refs": [
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/inventory/store_stock_daily/stock_eod_2026-10-07.csv#store_id=MIL01;sku=I10919B00011-999;size=M",
+              "version": "sha256:95e97d4e1ee94c9d55f5f4616008438ff54a666ba82159b4555b02b7a5863f33"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/inventory/store_stock_daily/stock_eod_2026-10-08.csv#store_id=MIL01;sku=I10919B00011-999;size=M",
+              "version": "sha256:cd9dbfc156d8477b109fb826f935e632221df90e13b5364e7df07154e60d6576"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W41.csv#store_id=MIL01;sku=I10919B00011-999;business_date<=2026-10-08",
+              "version": "sha256:7807f39df38787c5bc5bd069c8dd6f588042d21b440ccdf2d85836409adcc3c8"
+            }
+          ]
+        },
+        {
+          "name": "donor_discrepancy",
+          "status": "unknown",
+          "mandatory": false,
+          "detail": "MIL02 went from 5 units of size M at EOD 2026-10-07 to 3 at EOD 2026-10-08 with 2 size-M sales on 2026-10-08, so the arithmetic reconciles; store-level sellable quantity, reservations and quality holds are not exported, so those units are physical stock, not certified sellable, and the donor count must be confirmed before any movement",
+          "source_refs": [
+            {
+              "kind": "StockFact",
+              "id": "stock-mil02-i10919b00011-999-m-onhand-20261008",
+              "version": "v1"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W41.csv#store_id=MIL02;business_date=2026-10-08",
+              "version": "sha256:7807f39df38787c5bc5bd069c8dd6f588042d21b440ccdf2d85836409adcc3c8"
+            }
+          ]
+        },
+        {
+          "name": "dc_projection_freshness",
+          "status": "unknown",
+          "mandatory": false,
+          "detail": "the last ATP projection for IT10 is dated 2026-10-05, 4 days before D: ATP_NOW is 0 and the next receipt of 120 units is 2026-10-30, while MIL01 has 4 units on backorder for 2026-10-12",
+          "source_refs": [
+            {
+              "kind": "SourceFile",
+              "id": "dataset://systems/warehouse/atp/ATP_projection_20261005.csv#WERKS=IT10;MATNR=I10919B00011999;J_3ASIZE=M",
+              "version": "sha256:f58f6d2facca7ecb5fac3f100314403341f215c2cf27307fa56808bc5ced36bd"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://systems/warehouse/reservations/ZRESV_reservations_export.csv#RSNUM=1004508;WERKS=IT10;J_3ASIZE=M",
+              "version": "sha256:e35f0f2841d0f27c6066b079e53666ceb5a0af1f388cde8fd3dd41bbfffd643d"
+            }
+          ]
+        },
+        {
+          "name": "open_backorder",
+          "status": "pass",
+          "mandatory": false,
+          "detail": "MIL01 already has an open backorder line at the DC for 4 units of size M, needed 2026-10-12: documented demand, not forecast uplift",
+          "source_refs": [
+            {
+              "kind": "SourceFile",
+              "id": "dataset://systems/warehouse/reservations/ZRESV_reservations_export.csv#RSNUM=1004508;WERKS=IT10;J_3ASIZE=M",
+              "version": "sha256:e35f0f2841d0f27c6066b079e53666ceb5a0af1f388cde8fd3dd41bbfffd643d"
+            }
+          ]
+        },
+        {
+          "name": "size_curve",
+          "status": "pass",
+          "mandatory": true,
+          "detail": "size M is 22.4% of the colour units sold 2026-08-31..2026-10-04 on the days it opened in stock (13/58); the five complete POS weeks W36-W40 were out before D, the shares sum to 1 and the colour total reconciles. Sensitivity: a flat 1/6 curve would put the destination's hold loss at 1.85 instead of 2.49, and it changes no status (nothing is recommended on these numbers)",
+          "source_refs": [
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W36.csv#store_id=MIL01;business_date<=2026-10-04",
+              "version": "sha256:062160247c7a14cda99a0dcc4e4ee80457d218d3f87d26d71746d3b1c703c459"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W37.csv#store_id=MIL01;business_date<=2026-10-04",
+              "version": "sha256:c1fae11d341e186aef036364f4d9e04c5c40b90177c9e0ba305d1696b800fe04"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W38.csv#store_id=MIL01;business_date<=2026-10-04",
+              "version": "sha256:51c809b41e32d83da90aaf928e2a8073a5de81186908ad493129fffdfe6c09c2"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W39.csv#store_id=MIL01;business_date<=2026-10-04",
+              "version": "sha256:d746a7743a6225555c05e460918ebb322959e9b65709aca20876af9f0cbb9996"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W40.csv#store_id=MIL01;business_date<=2026-10-04",
+              "version": "sha256:a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W36.csv#store_id=MIL02;business_date<=2026-10-04",
+              "version": "sha256:062160247c7a14cda99a0dcc4e4ee80457d218d3f87d26d71746d3b1c703c459"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W37.csv#store_id=MIL02;business_date<=2026-10-04",
+              "version": "sha256:c1fae11d341e186aef036364f4d9e04c5c40b90177c9e0ba305d1696b800fe04"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W38.csv#store_id=MIL02;business_date<=2026-10-04",
+              "version": "sha256:51c809b41e32d83da90aaf928e2a8073a5de81186908ad493129fffdfe6c09c2"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W39.csv#store_id=MIL02;business_date<=2026-10-04",
+              "version": "sha256:d746a7743a6225555c05e460918ebb322959e9b65709aca20876af9f0cbb9996"
+            },
+            {
+              "kind": "SourceFile",
+              "id": "dataset://erp/sales/pos_lines/pos_lines_2026-W40.csv#store_id=MIL02;business_date<=2026-10-04",
+              "version": "sha256:a8e21a4b3570ee235b279ed003a4fca083ee4f7e00c8c5e517aa642ae977730e"
+            }
+          ]
+        }
+      ],
+      "outcomes": null,
+      "baseline_outcomes": null,
+      "assumptions": [
+        "the verification is a physical count at both stores, plus a check that the 4 backordered units are still expected on 2026-10-12",
+        "nothing is dispatched: the review UI shows this option as informational"
+      ],
+      "valid_until": "2026-10-16T08:35:52Z",
+      "recommended": true,
+      "rationale": "the data do not support a movement yet: 7 units of size M disappeared from MIL01 between the last two snapshots, the donor's sellable quantity is not exported and the DC ATP projection is 4 days old. Count at MIL01 and MIL02 first, then re-run the options: a movement approved now would rest on a snapshot that is already wrong",
+      "input_version_hash": "sha256:51a3f7ba3e121adeae64a6ab6e0346121158711f449baf6faa1711888f8315ee"
+    }
+  }
+]
