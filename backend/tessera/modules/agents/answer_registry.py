@@ -7,6 +7,7 @@ ledger: reset_run must not erase human input or its exact parent lineage.
 """
 
 from dataclasses import replace
+from threading import Event
 from typing import Literal
 
 from sqlalchemy import (
@@ -23,6 +24,7 @@ from sqlalchemy import (
     update,
 )
 
+from tessera.core.cache import CacheCorrupt, ReplayMiss
 from tessera.core.config import Settings
 from tessera.core.contracts import (
     ArtifactRef,
@@ -250,6 +252,17 @@ def _payload(prepared, seeds):
     }
 
 
+def _same_request(left, right):
+    def identity(value):
+        return {
+            k: v.replace("\r\n", "\n").replace("\r", "\n") if k == "text" else v
+            for k, v in value.items()
+            if k != "idempotency_key"
+        }
+
+    return identity(left) == identity(right)
+
+
 def register_recorded_answer(engine: Engine, request: AnswerRequest, *, fixture_mode=False):
     """Trusted importer seam, NEVER an HTTP/free-text registration endpoint.
 
@@ -300,6 +313,26 @@ def submit_answer(
             if saved["request"] != encoded:
                 raise AnswerConflict("Idempotency key used for another request")
             return AnswerJob.model_validate(saved["payload"]["job"])
+        # A retry with a new key must not depend on reconstructible parent state.
+        # Consult the accepted immutable request before revalidating a new input.
+        candidates = conn.execute(
+            select(jobs).where(
+                jobs.c.namespace == ns,
+                jobs.c.request["run_id"].as_string() == request.run_id,
+                jobs.c.request["clarification_id"].as_string() == request.clarification_id,
+            )
+        ).mappings()
+        for candidate in candidates:
+            if _same_request(candidate["request"], encoded):
+                conn.execute(
+                    insert(receipts).values(
+                        namespace=ns,
+                        idempotency_key=request.idempotency_key,
+                        request=encoded,
+                        payload=candidate["payload"],
+                    )
+                )
+                return AnswerJob.model_validate(candidate["payload"]["job"])
         prepared, seeds = _prepare(conn, request, fixture_mode)
         for snapshot in prepared.run.modules:
             if snapshot.manifest.enabled and snapshot.manifest.mode != "unavailable":
@@ -410,6 +443,34 @@ class _PipelineView:
     def list(self, kind, **filters):
         return [r for r in self._repo.list(kind, **filters) if r.version not in self._historical]
 
+    def get(self, kind, id, version=None):
+        record = self._repo.get(kind, id, version)
+        if version is None and record is not None and record.version in self._historical:
+            return None
+        return record
+
+
+class _RecordingGuard:
+    """Notice cache misses even when a module catches them and degrades."""
+
+    def __init__(self, client):
+        self._client = client
+        self.missing = Event()
+
+    def __getattr__(self, name):
+        value = getattr(self._client, name)
+        if not callable(value):
+            return value
+
+        def call(*args, **kwargs):
+            try:
+                return value(*args, **kwargs)
+            except (ReplayMiss, CacheCorrupt):
+                self.missing.set()
+                raise
+
+        return call
+
 
 def pending_follow_ups(engine: Engine, *, fixture_mode=False) -> tuple[AnswerJob, ...]:
     """Recover accepted jobs after a restart before a background task was queued."""
@@ -461,7 +522,23 @@ def execute_follow_up(
 
     def wrap(entry):
         def execute(ctx):
-            return entry.run(replace(ctx, repo=_PipelineView(ctx.repo, historical)))
+            clients = dict(ctx.clients)
+            guard = _RecordingGuard(clients["llm"]) if "llm" in clients else None
+            if guard is not None:
+                clients["llm"] = guard
+            result = entry.run(
+                replace(ctx, repo=_PipelineView(ctx.repo, historical), clients=clients)
+            )
+            if guard is not None and guard.missing.is_set():
+                # General pipeline modules may publish partial results as degraded.
+                # An answer replay must fail closed instead of publishing unread input.
+                return result.model_copy(
+                    update={
+                        "status": "failed",
+                        "errors": (*result.errors, "Answer follow-up recording unavailable"),
+                    }
+                )
+            return result
 
         return RegisteredModule(entry.manifest, execute)
 
