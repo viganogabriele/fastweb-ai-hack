@@ -6,9 +6,11 @@ export type Transcription = components['schemas']['Transcription']
 
 export class ApiError extends Error {
   readonly status: number
-  constructor(status: number) {
+  readonly detail: string
+  constructor(status: number, detail = '') {
     super(`HTTP ${status}`)
     this.status = status
+    this.detail = detail
   }
 }
 
@@ -28,7 +30,11 @@ export const voiceToken = () => {
 const headers = () => ({ Authorization: `Bearer ${voiceToken()}` })
 
 async function json<T>(response: Response): Promise<T> {
-  if (!response.ok) throw new ApiError(response.status)
+  if (!response.ok) {
+    // FastAPI puts the reason in `detail`: show it, a bare status code says nothing on a phone.
+    const body = await response.json().catch(() => null)
+    throw new ApiError(response.status, typeof body?.detail === 'string' ? body.detail : '')
+  }
   return response.json() as Promise<T>
 }
 

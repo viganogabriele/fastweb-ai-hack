@@ -40,7 +40,8 @@ export function RecordPage() {
       await sendNote(recorder.audio, STORE, recorder.transcript, LANGUAGE)
       setSent(true)
     } catch (error) {
-      setSendError(fmt(t.errors.send, { status: status(error) }))
+      const detail = error instanceof ApiError && error.detail ? ` ${error.detail}` : ''
+      setSendError(fmt(t.errors.send, { status: status(error) }) + detail)
     } finally {
       setSending(false)
     }

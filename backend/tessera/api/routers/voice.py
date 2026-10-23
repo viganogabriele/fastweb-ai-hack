@@ -218,6 +218,19 @@ async def create_note(
             data_dir=settings.data_dir,
         )
     except InvalidRecording as error:
+        # Keep the refused upload (gitignored data/) so a phone-specific format can be inspected.
+        rejects = settings.data_dir / "voice_rejects"
+        rejects.mkdir(parents=True, exist_ok=True)
+        kept = rejects / f"{datetime.now(UTC):%Y%m%d-%H%M%S}-{store_id}.{_suffix(audio)}"
+        kept.write_bytes(data)
+        logger.warning(
+            "voice note refused: %s (content_type=%r, filename=%r, bytes=%d, kept=%s)",
+            error,
+            audio.content_type,
+            audio.filename,
+            len(data),
+            kept.name,
+        )
         raise HTTPException(422, str(error)) from None
     except RecordingUnavailable as error:
         raise HTTPException(503, str(error)) from None
