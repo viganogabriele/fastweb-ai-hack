@@ -290,7 +290,7 @@ def test_http_answer_with_production_pipeline_boundaries(answer_setup, monkeypat
     from tessera.core.cache import ReplayMiss
     from tessera.core.contracts import Case, EntityLink, EvidenceRelation, Observation
     from tessera.modules.agents.answer_registry import execute_follow_up
-    from tessera.modules.ingestion import extract
+    from tessera.modules.agents.contextual_answers import ContextualMention
 
     engine, body, registry, originals, RecordedReading = test_answer_registry.production_pipeline(
         answer_setup, monkeypatch
@@ -301,20 +301,10 @@ def test_http_answer_with_production_pipeline_boundaries(answer_setup, monkeypat
 
     class Reading(RecordedReading):
         def extract(self, schema, messages, *, cache_context, **kwargs):
-            if cache_context["document"][0].startswith("clarification-answer:"):
+            if schema is ContextualMention:
                 reply_messages.extend(messages)
                 if reply == "replay_miss":
                     raise ReplayMiss("No recording for the answer extraction")
-                if reply == "context_only":
-                    return extract.Candidates(
-                        observations=[
-                            extract.Candidate(
-                                quote=body.text,
-                                kind="unmet_demand",
-                                product_mention=body.text,
-                            )
-                        ]
-                    )
             return super().extract(schema, messages, cache_context=cache_context, **kwargs)
 
     def worker(engine, run_id, **kwargs):
@@ -334,15 +324,15 @@ def test_http_answer_with_production_pipeline_boundaries(answer_setup, monkeypat
             assert client.get(base + "/cases").status_code == 409
         else:
             assert state["published"]
-            document = client.get(base + f"/documents/{job['document']['id']}").json()
-            assert document["document"]["parent_document_id"] == originals[0].id
+            answer_document = client.get(base + f"/documents/{job['document']['id']}").json()
+            assert answer_document["document"]["parent_document_id"] == originals[0].id
+            assert answer_document["observations"] == []  # no second demand event
+            document = client.get(base + f"/documents/{originals[0].id}").json()
             assert (
                 document["observations"][0]["available_at"]
                 == body.model_dump(mode="json")["received_at"]
             )
-            assert [link["status"] for link in document["links"]] == [
-                "linked" if reply == "self_contained" else "unlinked"
-            ]
+            assert [link["status"] for link in document["links"]] == ["linked"]
             queue = client.get(base + "/cases").json()
             assert queue and all(not c["version"].startswith("parent:") for c in queue)
             assert all(
@@ -353,10 +343,10 @@ def test_http_answer_with_production_pipeline_boundaries(answer_setup, monkeypat
                 options = client.get(base + f"/cases/{case['id']}/options")
                 assert options.status_code == 200 and options.json()
                 assert all(not o["version"].startswith("parent:") for o in options.json())
-            # The reply is processed separately. Neither original context nor a
-            # semantic correction of its product link is supplied by this worker.
-            assert originals[0].text not in reply_messages[-1]["content"]
-            assert originals[-1].question not in reply_messages[-1]["content"]
+            # Synthetic model output tests guards/provenance, not real comprehension.
+            assert originals[2].evidence[0].quote in reply_messages[-1]["content"]
+            assert originals[-1].question in reply_messages[-1]["content"]
+            assert body.text in reply_messages[-1]["content"]
             with repo_session(engine, job["run"]["run_id"]) as repo:
                 old = [
                     o
@@ -365,12 +355,18 @@ def test_http_answer_with_production_pipeline_boundaries(answer_setup, monkeypat
                 ]
                 assert len(old) == 1
                 links = [lk for lk in repo.list(EntityLink) if lk.observation_id == old[0].id]
-                assert len(links) == 1 and links[0].status == "not_product"
+                assert len(links) == 1 and links[0].status == "linked"
                 assert any(
                     test_answer_registry.ref(old[0]) in c.supporting for c in repo.list(Case)
                 )
-                assert not any(
-                    r.relation in {"supersedes", "duplicates"} for r in repo.list(EvidenceRelation)
+                assert old[0].id == originals[2].id
+                assert (
+                    len([o for o in repo.list(Observation) if not o.version.startswith("parent:")])
+                    == 1
+                )
+                assert any(
+                    r.relation == "supersedes" and r.from_ref == test_answer_registry.ref(old[0])
+                    for r in repo.list(EvidenceRelation)
                 )
         assert client.post(PATH, json=body.model_dump(mode="json")).json() == job
     with repo_session(engine, "parent") as repo:
@@ -558,6 +554,7 @@ def test_follow_up_api_excludes_historical_support_but_resolves_pinned_citations
                             "run_id": ctx.spec.run_id,
                             "scenario_id": ctx.spec.scenario_id,
                             "computed_at": ctx.spec.as_of,
+                            "available_at": ctx.spec.as_of,
                         }
                     )
                 )
@@ -572,6 +569,7 @@ def test_follow_up_api_excludes_historical_support_but_resolves_pinned_citations
                             "id": "current-report",
                             "version": "1",
                             "computed_at": ctx.spec.as_of,
+                            "available_at": ctx.spec.as_of,
                             "available_at": ctx.spec.as_of,
                             "as_of": ctx.spec.as_of,
                         }

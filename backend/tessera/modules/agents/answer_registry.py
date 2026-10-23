@@ -47,6 +47,7 @@ from tessera.modules.agents.clarifications import (
     UnrecordedAnswer,
     prepare_answer,
 )
+from tessera.modules.agents.contextual_answers import ContextualExtraction
 
 metadata = MetaData()
 events = Table(
@@ -542,9 +543,14 @@ def execute_follow_up(
             guard = _RecordingGuard(clients["llm"]) if "llm" in clients else None
             if guard is not None:
                 clients["llm"] = guard
-            result = entry.run(
-                replace(ctx, repo=_PipelineView(ctx.repo, historical), clients=clients)
-            )
+            view = _PipelineView(ctx.repo, historical)
+            contextual = None
+            if entry.manifest.id == "ing.extract":
+                contextual = ContextualExtraction(view, job, clients["llm"])
+                view = contextual
+            result = entry.run(replace(ctx, repo=view, clients=clients))
+            if contextual is not None and result.status in {"succeeded", "degraded"}:
+                contextual.finish()
             if guard is not None and guard.missing.is_set():
                 # General pipeline modules may publish partial results as degraded.
                 # An answer replay must fail closed instead of publishing unread input.
