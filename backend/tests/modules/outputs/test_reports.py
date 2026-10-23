@@ -17,6 +17,7 @@ from tessera.core.contracts import (
     ArtifactRef,
     Case,
     Citation,
+    Observation,
     ProductInsight,
     Report,
     RunSpec,
@@ -329,3 +330,88 @@ def test_product_feedback_shows_reported_reasons_first_and_stays_thin(tmp_path):
     heads = [x for x in section.splitlines() if x.startswith("- **")]
     assert len(heads) == reports.PRODUCTS_SHOWN
     assert "J10911A00305-742" in heads[0] and "S7-999" in heads[1] and "S4-999" in heads[-1]
+
+
+@pytest.fixture
+def pinned_observation():
+    _, records = read_fixtures(FIXTURES)
+    observations = {
+        (r.id, r.version): r
+        for r in records
+        if isinstance(r, Observation) and r.quantity.kind == "exact" and r.available_at <= AS_OF
+    }
+    for case in records:
+        if isinstance(case, Case) and case.available_at <= AS_OF:
+            for pinned in case.supporting:
+                if observation := observations.get((pinned.id, pinned.version)):
+                    return case, observation
+    raise AssertionError("fixture must contain a case with a pinned numeric observation")
+
+
+def test_later_observation_version_does_not_change_pinned_report(tmp_path, pinned_observation):
+    _, observation = pinned_observation
+    later = observation.model_copy(
+        update={
+            "version": "v2",
+            "quantity": observation.quantity.model_copy(update={"value": 987.0}),
+        }
+    )
+    original_path, changed_path = tmp_path / "original", tmp_path / "changed"
+    original_path.mkdir()
+    changed_path.mkdir()
+    _, _, original = run_module(original_path)
+    _, _, changed = run_module(changed_path, extra=(later,))
+
+    for view in original:
+        assert changed[view] == original[view]
+        assert reports.ref(observation) in changed[view].input_refs
+        assert reports.ref(later) not in changed[view].input_refs
+
+
+@pytest.mark.parametrize("missing_kind", ["Observation", "MetricFact"])
+def test_unresolved_supporting_ref_does_not_use_same_id_observation(
+    tmp_path, pinned_observation, missing_kind
+):
+    _, observation = pinned_observation
+
+    def missing_ref(record):
+        if isinstance(record, Case):
+            supporting = tuple(
+                ref.model_copy(update={"kind": missing_kind, "version": "missing"})
+                if ref.id == observation.id
+                else ref
+                for ref in record.supporting
+            )
+            return record.model_copy(update={"supporting": supporting})
+        return record
+
+    _, _, built = run_module(tmp_path, edit=missing_ref)
+
+    for report in built.values():
+        assert not any(c.ref.id == observation.id for c in report.citations)
+        assert reports.ref(observation) not in report.input_refs
+
+
+def test_different_cases_can_cite_different_versions_of_one_observation(
+    tmp_path, pinned_observation
+):
+    case, observation = pinned_observation
+    later = observation.model_copy(
+        update={
+            "version": "v2",
+            "quantity": observation.quantity.model_copy(update={"value": 987.0}),
+        }
+    )
+    second_case = case.model_copy(
+        update={"id": "case-second-version", "supporting": (reports.ref(later),)}
+    )
+
+    _, _, built = run_module(tmp_path, extra=(later, second_case))
+
+    for report in built.values():
+        cited = {c.ref for c in report.citations if c.ref.kind == "Observation"}
+        assert reports.ref(observation) in cited
+        assert reports.ref(later) in cited
+        assert reports.ref(observation) in report.input_refs
+        assert reports.ref(later) in report.input_refs
+        assert "987 " in report.markdown
