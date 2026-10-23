@@ -115,7 +115,10 @@ def run(ctx: Context) -> ModuleResult:
             existing.add(k)
         if new_refs:
             updated_case = case.model_copy(
-                update={"context_refs": tuple(list(case.context_refs) + new_refs), "version": case.version + ".ctx"}
+                update={
+                    "context_refs": tuple(list(case.context_refs) + new_refs),
+                    "version": case.version + ".ctx",
+                }
             )
             written = ctx.repo.put(updated_case)
             updated += written
