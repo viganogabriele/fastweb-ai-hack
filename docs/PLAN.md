@@ -83,7 +83,7 @@ Goal: contracts frozen, fixtures for every seam, Fastweb access verified, every 
 |---|---|---|---|---|
 | PLT-01 | C | – | – | ✅ Scaffold, `make setup/dev/check`, CI, `.env.example`, dataset rules in `AGENTS.md` |
 | PLT-02 | C | PLT-01 | RFC §4.5 | `core/contracts/` MVP subset as Pydantic v2; JSON Schema export; tests for null/unknown, units, quote offsets (`doc.text[start:end] == quote`). **Review by A, B, D, E within 30 min, then freeze = G0** |
-| PLT-07 | A | PLT-01, API key | – | ✅ `scripts/smoke_fastweb.py`: chat, a tool-call round trip (does the model actually return `tool_calls`?), embeddings. **No ASR** (deferred to ASR-01). Writes `docs/smoke-fastweb.md` with no secrets: what works, latency, chosen chat model (closes OQ-2; OQ-3 stays open) |
+| PLT-07 | A | PLT-01, Fastweb keys | – | ✅ `scripts/smoke_fastweb.py`: chat, a tool-call round trip (does the model actually return `tool_calls`?), embeddings. **No ASR** (deferred to ASR-01). Writes `docs/smoke-fastweb.md` with no secrets: what works, latency, chosen chat model (closes OQ-2; OQ-3 stays open) |
 | DATA-02 | A | PLT-01 | Dataset README | `config/eval_split.yaml` (dev/hold-out from RFC §5.1), `config/domain.yaml` (RFC §3.3), `config/aliases.yaml` written from dev sources and the catalog only, with provenance |
 | DATA-03 | A | – | – | 2–3 recordings of 20–60 s in IT/EN plus sidecar JSON and a **manual transcript** in `data/fixtures/voice/` (RFC §5.2). Paraphrase and independent note are labeled separately |
 | ING-02 (pure) | A | PLT-01 | Dev `.eml` files | `.eml` → canonical text + segments with code-point offsets, quotes and attachments flagged; 2 dev languages; tests on 3 real dev emails |
@@ -293,7 +293,7 @@ Each of these needs nothing but `main` as it is today. Pick one per person and o
 
 | Lane | First PR | Second PR (still unblocked) |
 |---|---|---|
-| A | **PLT-07** Fastweb smoke test: needs the API key in `.env`, and its result decides the extraction design | **DATA-02** split, domain, aliases → **ING-02 (pure)** email parser; record **DATA-03** audio + manual transcript in between |
+| A | **PLT-07** Fastweb smoke test: needs the per-model keys in `.secrets/fastweb_keys.json`, and its result decides the extraction design | **DATA-02** split, domain, aliases → **ING-02 (pure)** email parser; record **DATA-03** audio + manual transcript in between |
 | B | **ING-01 (pure)** ERP loaders with `available_at` | **INT-01 (pure)** candidate generation → **FC-01 (pure)** disaggregation |
 | C | **PLT-02** contracts. Everyone reviews it within 30 min: it gates G0 | **PLT-03** repo and artifact store |
 | D | **WEB-01** app shell on hand-written JSON | **EVL-01** harness skeleton |

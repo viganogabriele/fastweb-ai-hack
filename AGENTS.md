@@ -35,8 +35,33 @@ Requires `uv` and Node >= 22. Run from the repo root.
 - `make fmt`: auto-fix Python lint and formatting.
 - Add deps with `cd backend && uv add <pkg>` or `cd web && npm install <pkg>`; never hand-merge lockfiles.
 
-Secrets: copy `.env.example` to `.env` (gitignored). Never print, log or commit `FASTWEB_API_KEY`.
 Stay inside your lane's paths (`docs/PLAN.md` §1–§2).
+
+## Backend setup and secrets
+
+There is **no `FASTWEB_API_KEY`**: Fastweb issues one key per model. If you see that variable in an
+old `.env`, delete it.
+
+1. `make setup`, then `cp .env.example .env`. The defaults work as they are.
+2. `LLM_MODE=replay` (default) needs no key: it reads the local cache `data/llm_cache/`
+   (gitignored), and a miss is an explicit error. `record` calls the API and fills the cache;
+   `live` calls it without caching.
+3. Fastweb keys, needed only for `live`/`record`: `.secrets/fastweb_keys.json` (gitignored,
+   `chmod 600`), a JSON object `{"<model id>": "<key>"}`. Ask Lorenzo for the file, out of band
+   (never in chat, issues or PRs). Model ids are the ones in `docs/smoke-fastweb.md`; Qwen3.8 is
+   `Qwen/Qwen3.8-27B-FP8`. A key only works for its own model (404 otherwise). The current keys
+   **expire 2026-10-25 00:00 UTC**: record what the demo needs before then.
+4. Speech-to-text runs on the team server (`tools/asr-server/`), not on Fastweb: put your own
+   `ASR_API_KEY` (one per consumer, ask for it) in `.env`. Leave `ASR_BASE_URL` as it is: it is
+   part of the cache key.
+5. Verify: `make backend`, then `curl -s localhost:8000/api/health`. `fastweb_models_configured`
+   lists the models that have a key. Full API check: `backend/.venv/bin/python
+   scripts/smoke_fastweb.py` (about 3 min, uses credit).
+
+Rules for agents: never open, `cat`, print, log or commit `.env` or anything in `.secrets/`. To
+check which keys exist, use `/api/health` or `Settings.fastweb_keys()` and read only the model
+ids. Get keys through `Settings.api_key_for(model)` / `Settings.asr_key()`, never from `os.environ`.
+Tests use fake keys in `tmp_path`, never real ones.
 
 ## Task workflow (GitHub issues)
 
