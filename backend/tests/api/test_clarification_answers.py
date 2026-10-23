@@ -51,7 +51,12 @@ def test_answer_document_new_run_and_parent_immutability(answer_setup):
         assert document["text"] == body.text
         assert document["source_type"] == "clarification_reply"
         assert document["meta"]["simulated"] is True
-        question = client.get(f"/api/runs/{run_id}/cases/case/clarifications/question").json()
+        # This controlled graph produces no current Case. Its answered receipt
+        # remains readable by exact version without making the old case actionable.
+        question = client.get(
+            f"/api/runs/{run_id}/cases/case/clarifications/question",
+            params={"version": f"answer:{job['fingerprint']}"},
+        ).json()
         assert question["status"] == "answered"
         assert question["answer_document_id"] == document["id"]
         assert question["answered_at"] == body.model_dump(mode="json")["received_at"]
@@ -280,6 +285,98 @@ def test_startup_recovers_accepted_pending_answer_jobs(answer_setup, mode):
     assert len(seen) == 4
 
 
+@pytest.mark.parametrize("reply", ["self_contained", "context_only", "replay_miss"])
+def test_http_answer_with_production_pipeline_boundaries(answer_setup, monkeypatch, reply):
+    from tessera.core.cache import ReplayMiss
+    from tessera.core.contracts import Case, EntityLink, EvidenceRelation, Observation
+    from tessera.modules.agents.answer_registry import execute_follow_up
+    from tessera.modules.ingestion import extract
+
+    engine, body, registry, originals, RecordedReading = test_answer_registry.production_pipeline(
+        answer_setup, monkeypatch
+    )
+    if reply == "context_only":
+        body = body.model_copy(update={"text": "Taglia M"})
+    reply_messages = []
+
+    class Reading(RecordedReading):
+        def extract(self, schema, messages, *, cache_context, **kwargs):
+            if cache_context["document"][0].startswith("clarification-answer:"):
+                reply_messages.extend(messages)
+                if reply == "replay_miss":
+                    raise ReplayMiss("No recording for the answer extraction")
+                if reply == "context_only":
+                    return extract.Candidates(
+                        observations=[
+                            extract.Candidate(
+                                quote=body.text,
+                                kind="unmet_demand",
+                                product_mention=body.text,
+                            )
+                        ]
+                    )
+            return super().extract(schema, messages, cache_context=cache_context, **kwargs)
+
+    def worker(engine, run_id, **kwargs):
+        return execute_follow_up(engine, run_id, clients={"llm": Reading()}, **kwargs)
+
+    monkeypatch.setattr(clarifications, "execute_follow_up", worker)
+    register_recorded_answer(engine, body)
+    with client_for(engine, registry) as client:
+        response = client.post(PATH, json=body.model_dump(mode="json"))
+        assert response.status_code == 202
+        job = response.json()
+        base = f"/api/runs/{job['run']['run_id']}"
+        state = client.get(base).json()
+        assert reply_messages
+        if reply == "replay_miss":
+            assert state["status"] == "failed" and not state["published"]
+            assert client.get(base + "/cases").status_code == 409
+        else:
+            assert state["published"]
+            document = client.get(base + f"/documents/{job['document']['id']}").json()
+            assert document["document"]["parent_document_id"] == originals[0].id
+            assert (
+                document["observations"][0]["available_at"]
+                == body.model_dump(mode="json")["received_at"]
+            )
+            assert [link["status"] for link in document["links"]] == [
+                "linked" if reply == "self_contained" else "unlinked"
+            ]
+            queue = client.get(base + "/cases").json()
+            assert queue and all(not c["version"].startswith("parent:") for c in queue)
+            assert all(
+                not f["version"].startswith("parent:")
+                for f in client.get(base + "/forecast").json()
+            )
+            for case in queue:
+                options = client.get(base + f"/cases/{case['id']}/options")
+                assert options.status_code == 200 and options.json()
+                assert all(not o["version"].startswith("parent:") for o in options.json())
+            # The reply is processed separately. Neither original context nor a
+            # semantic correction of its product link is supplied by this worker.
+            assert originals[0].text not in reply_messages[-1]["content"]
+            assert originals[-1].question not in reply_messages[-1]["content"]
+            with repo_session(engine, job["run"]["run_id"]) as repo:
+                old = [
+                    o
+                    for o in repo.list(Observation)
+                    if o.document_id == originals[0].id and not o.version.startswith("parent:")
+                ]
+                assert len(old) == 1
+                links = [lk for lk in repo.list(EntityLink) if lk.observation_id == old[0].id]
+                assert len(links) == 1 and links[0].status == "not_product"
+                assert any(
+                    test_answer_registry.ref(old[0]) in c.supporting for c in repo.list(Case)
+                )
+                assert not any(
+                    r.relation in {"supersedes", "duplicates"} for r in repo.list(EvidenceRelation)
+                )
+        assert client.post(PATH, json=body.model_dump(mode="json")).json() == job
+    with repo_session(engine, "parent") as repo:
+        assert all(repo.get(type(r), r.id, r.version) == r for r in originals)
+
+
 def test_startup_does_not_recover_an_unauthorized_fixture_job(answer_setup):
     engine, body, registry, seed, seen, _ = answer_setup
     seed(mode="fixture")
@@ -298,28 +395,54 @@ def test_startup_does_not_recover_an_unauthorized_fixture_job(answer_setup):
         assert repo.run_state()["status"] == "pending"
 
 
-def test_restart_recovers_from_existing_database_without_an_injected_engine(answer_setup, tmp_path):
+@pytest.mark.parametrize("mode", ["live", "fixture"])
+def test_restart_recovers_from_existing_database_without_an_injected_engine(
+    answer_setup, tmp_path, mode
+):
     from pathlib import Path
+
+    engine, body, registry, seed, seen, _ = answer_setup
+    seed(mode=mode)
+    fixture = mode == "fixture"
+    if fixture:
+        register_recorded_answer(engine, body, fixture_mode=True)
+    job = submit_answer(engine, body, registry=registry, fixture_mode=fixture)
+    settings = Settings(_env_file=None, data_dir=tmp_path, fixture_mode=fixture)
+    engine.dispose()
+    Path(engine.url.database).rename(settings.db_path)
+    app = create_app(registry=registry, settings=settings)
+    namespace = "fixture" if fixture else "product"
+    other = "product" if fixture else "fixture"
+    assert app.state.engines[namespace] is None
+    try:
+        with TestClient(app):
+            pass
+        restored = app.state.engines[namespace]
+        with repo_session(restored, job.run.run_id, fixture_mode=fixture) as repo:
+            assert repo.run_state()["published"] is True
+        assert len(seen) == 4
+        assert app.state.engines[other] is None
+    finally:
+        if app.state.engines[namespace] is not None:
+            app.state.engines[namespace].dispose()
+
+
+def test_startup_does_not_steal_an_already_running_job(answer_setup):
+    from tessera.modules.agents.answer_registry import jobs
 
     engine, body, registry, seed, seen, _ = answer_setup
     seed()
     job = submit_answer(engine, body, registry=registry)
-    settings = Settings(_env_file=None, data_dir=tmp_path)
-    engine.dispose()
-    Path(engine.url.database).rename(settings.db_path)
-    app = create_app(registry=registry, settings=settings)
-    assert app.state.engines["product"] is None
-    try:
-        with TestClient(app):
-            pass
-        restored = app.state.engines["product"]
-        with repo_session(restored, job.run.run_id) as repo:
-            assert repo.run_state()["published"] is True
-        assert len(seen) == 4
-        assert app.state.engines["fixture"] is None
-    finally:
-        if app.state.engines["product"] is not None:
-            app.state.engines["product"].dispose()
+    # Model a process loss after the durable worker claim. Startup must not
+    # execute this job concurrently with a worker that could still be alive.
+    with engine.begin() as conn:
+        conn.execute(update(jobs).where(jobs.c.run_id == job.run.run_id).values(status="running"))
+        conn.execute(update(runs).where(runs.c.run_id == job.run.run_id).values(status="running"))
+    with client_for(engine, registry):
+        pass
+    assert seen == []
+    with repo_session(engine, job.run.run_id) as repo:
+        assert repo.run_state()["status"] == "running"
 
 
 def test_startup_preserves_lazy_database_creation(tmp_path):
@@ -328,3 +451,175 @@ def test_startup_preserves_lazy_database_creation(tmp_path):
     with TestClient(app):
         assert app.state.engines == {"product": None, "fixture": None}
     assert not settings.data_dir.exists()
+
+
+def test_follow_up_api_excludes_historical_support_but_resolves_pinned_citations(answer_setup):
+    from tessera.core.contracts import (
+        ActionOption,
+        AgentTrace,
+        Citation,
+        ForecastAdjustment,
+        Report,
+    )
+
+    engine, body, registry, seed, seen, originals = answer_setup
+    parent = seed(published=False)
+    case, question = originals[-2:]
+    ref = test_answer_registry.ref
+    common = {
+        key: getattr(case, key)
+        for key in (
+            "version",
+            "available_at",
+            "availability_basis",
+            "source_refs",
+            "run_id",
+            "scenario_id",
+            "computed_at",
+            "producer",
+            "producer_version",
+        )
+    }
+    gone = case.model_copy(update={"id": "gone"})
+    forecast = ForecastAdjustment(
+        id="old-forecast",
+        input_refs=(ref(case),),
+        case_ids=(case.id,),
+        store_id="MIL01",
+        sku="TEST-001",
+        baseline_ref=None,
+        horizon_start=parent.as_of.date(),
+        horizon_end=parent.as_of.date(),
+        status="not_estimable",
+        reason="Unknown baseline",
+        series=(),
+        components=(),
+        proposal_source="code",
+        **common,
+    )
+    option = ActionOption(
+        id="old-option",
+        input_refs=(ref(case), ref(forecast)),
+        case_id=case.id,
+        forecast_ref=ref(forecast),
+        kind="ask_store",
+        legs=(),
+        checks=(),
+        assumptions=(),
+        valid_until=body.as_of,
+        recommended=True,
+        rationale="Ask the store",
+        input_version_hash="old-hash",
+        **common,
+    )
+    trace = AgentTrace(
+        id="old-trace",
+        input_refs=(ref(case),),
+        case_id=case.id,
+        steps=(),
+        outcome="Clarification needed",
+        fallback_used=False,
+        mode="live",
+        **common,
+    )
+    report = Report(
+        id="old-report",
+        input_refs=(ref(case), ref(gone), ref(option)),
+        as_of=parent.as_of,
+        view="by_office",
+        markdown="Historical support",
+        generated_by="template:test",
+        input_version_hash="old-report-hash",
+        citations=tuple(Citation(ref=ref(r)) for r in (case, gone, option)),
+        **common,
+    )
+    question = question.model_copy(
+        update={
+            "version": "2",
+            "input_refs": (
+                *question.input_refs,
+                *(ref(r) for r in (forecast, option, trace, report)),
+            ),
+        }
+    )
+    with repo_session(engine, parent.run_id, write=True) as repo:
+        repo.put(gone, forecast, option, trace, report, question)
+        repo.publish()
+    body = body.model_copy(update={"clarification_version": "2"})
+
+    def current_case(entry):
+        def execute(ctx):
+            result = entry.run(ctx)
+            if ctx.manifest.id == "act.options":
+                # The new graph replaces one case; the other disappears entirely.
+                ctx.repo.put(
+                    case.model_copy(
+                        update={
+                            "run_id": ctx.spec.run_id,
+                            "scenario_id": ctx.spec.scenario_id,
+                            "computed_at": ctx.spec.as_of,
+                        }
+                    )
+                )
+                answered = ctx.repo.get(Clarification, question.id)
+                historical_version = next(
+                    r.version for r in answered.input_refs if r.kind == "Case"
+                )
+                old_report = ctx.repo.get(Report, report.id, historical_version)
+                ctx.repo.put(
+                    old_report.model_copy(
+                        update={
+                            "id": "current-report",
+                            "version": "1",
+                            "computed_at": ctx.spec.as_of,
+                            "available_at": ctx.spec.as_of,
+                            "as_of": ctx.spec.as_of,
+                        }
+                    )
+                )
+            return result
+
+        return RegisteredModule(entry.manifest, execute)
+
+    registry = Registry(current_case(registry.resolve(s)) for s in parent.modules)
+    with client_for(engine, registry) as client:
+        response = client.post(PATH, json=body.model_dump(mode="json"))
+        assert response.status_code == 202
+        job = response.json()
+        base = f"/api/runs/{job['run']['run_id']}"
+        historical = f"parent:{job['fingerprint']}:1"
+        queue = client.get(base + "/cases").json()
+        assert [(c["id"], c["version"]) for c in queue] == [("case", "1")]
+        assert client.get(base + "/cases/gone").status_code == 404
+        pinned = client.get(base + "/cases/gone", params={"version": historical})
+        assert pinned.status_code == 200 and pinned.json()["version"] == historical
+        for path in ("/forecast", "/cases/case/options", "/cases/case/traces"):
+            response = client.get(base + path)
+            assert response.status_code == 200 and response.json() == [], (path, response.json())
+        assert [r["id"] for r in client.get(base + "/reports").json()] == ["current-report"]
+        detail = client.get(base + "/documents/mail").json()
+        assert [o["version"] for o in detail["observations"]] == ["1"]
+        assert client.get(base + "/cases/case/traces/old-trace").status_code == 404
+        assert (
+            client.get(
+                base + "/cases/case/traces/old-trace", params={"version": historical}
+            ).status_code
+            == 200
+        )
+        decision = dict(
+            option_id=option.id,
+            input_version_hash=option.input_version_hash,
+            decision="rejected",
+            by="operator",
+            idempotency_key="old-option",
+        )
+        assert client.post(base + "/options/old-option/decision", json=decision).status_code == 404
+        assert client.post(base + "/cases/case/decisions", json=decision).status_code == 404
+        # Exact report citations can still resolve every kind, including an option
+        # with no standalone versioned HTTP route.
+        resolved = client.get(base + "/reports/allocation")
+        assert resolved.status_code == 200
+        assert [c["artifact"]["version"] for c in resolved.json()[0]["citations"]] == [
+            historical
+        ] * 3
+    assert len(seen) == 4

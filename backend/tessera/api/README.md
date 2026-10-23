@@ -73,8 +73,9 @@ by case, so an older version cannot silently reappear if a trace changes case.
 An existing case with no traces returns an empty array.
 
 `GET /api/runs/{run_id}/cases/{case_id}/traces/{trace_id}?version=...` returns the
-exact requested version; omit `version` for the latest visible one. Missing cases,
-missing trace versions and traces belonging to a different case return 404.
+exact requested version; omit `version` for the latest current one. Missing current
+cases, missing trace versions and traces belonging to a different case return 404.
+An exact trace version remains readable when its case exists only as historical support.
 Both endpoints require a published succeeded/degraded run (409 otherwise) and
 inherit the same transaction, store scope, `as_of` and namespace protections as
 other artifact reads. Fixtures require explicit `?fixture=true` and enabled
@@ -97,7 +98,8 @@ order rather than lexical version order.
 
 GET `/api/runs/{run_id}/cases/{case_id}/clarifications/{clarification_id}` reads
 the latest visible version; `?version=...` selects an exact historical version.
-Both endpoints require an existing visible case and a published run. Missing
+Collections and unversioned reads require an existing current case; an exact
+question version remains readable when its case is historical. Both require a published run. Missing
 run/case/question/version or a question belonging to another case returns 404;
 unpublished runs return 409. Fixture access, store scope and as_of filtering
 use the same repository transaction as the other run artifact endpoints.
@@ -143,8 +145,26 @@ worker and explicitly resetting the projection before retrying the durable job.
 This recovery applies to clarification jobs; generic PLT-06 run jobs retain the
 in-process lifecycle described above.
 
-The HTTP integration tests exercise durable acceptance, execution of a controlled
-module graph, job recovery and scope/error boundaries without provider calls.
-They do not establish that the real extraction/linking/forecast/options pipeline
-interprets a short contextual reply or has all its offline recordings. Parent
-#134 still requires that end-to-end acceptance and the answer UI in #135.
+Operational reads exclude historical derived support versions (`parent:...`) from
+queues, document observations/links, forecasts, reports, traces and options. Queue
+counts computed from these collections therefore describe current outputs only.
+Unversioned reads cannot revive a disappeared parent case or option; approval
+input gathering applies the same filter. Source documents/segments remain visible,
+and exact derived version pins still resolve inside report citations and versioned
+case/trace/question reads. An answered receipt whose original case disappeared can
+be read with `?version=answer:{fingerprint}`.
+
+HTTP tests cover both controlled graphs and the production extraction/linking/
+dedup/cases/baseline/overlay/options pipeline with synthetic ERP and fake model/
+systems boundaries. A missing extraction recording leaves the child failed and
+unpublished. A self-contained answer produces a linked observation and options
+in the child, with the parent unchanged. These tests use no provider calls.
+
+Semantic clarification remains incomplete: the extractor receives the answer's
+own segments without the original question/observation context. A synthetic
+`Taglia M` reading remains unlinked; the recomputed original mention is unchanged.
+Even a self-contained reply is separate evidence without a demonstrated
+supersession/deduplication of the original demand. These tests establish execution
+and source navigation, not real model comprehension, quantitative forecast
+correction or availability of offline recordings. Parent #134 still requires that
+acceptance and the answer UI in #135.

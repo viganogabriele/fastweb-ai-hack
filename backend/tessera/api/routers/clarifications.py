@@ -100,7 +100,7 @@ def clarification(
     repo: PublishedRepo,
     version: str | None = None,
 ):
-    if repo.get(Case, case_id) is None:
+    if version is None and repo.get(Case, case_id) is None:
         raise HTTPException(404, "Case not found")
     item = repo.get(Clarification, clarification_id, version)
     if item is None or item.case_id != case_id:
