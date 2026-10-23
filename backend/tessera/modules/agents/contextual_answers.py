@@ -28,7 +28,28 @@ product, size, quantity or fact. Return null if the answer does not unambiguousl
 clarify this observation. Quantities, periods and demand are preserved by code.
 Use only words present in the original mention/evidence or the answer. Do not
 translate, expand aliases or add explanatory prose; code checks lexical support.
+Size/colour field labels explicitly present in the question may be reused to
+qualify a bare answer such as 'M'. Product names and values must still be sourced.
 """
+FIELD_LABELS = frozenset(
+    {
+        "taglia",
+        "tg",
+        "size",
+        "taille",
+        "talla",
+        "grösse",
+        "groesse",
+        "サイズ",
+        "尺码",
+        "사이즈",
+        "colore",
+        "color",
+        "colour",
+        "couleur",
+        "farbe",
+    }
+)
 
 
 class ContextualMention(BaseModel):
@@ -108,6 +129,7 @@ class ContextualExtraction:
                     )
                 )
             )
+            supported |= tokens(self.question.question) & FIELD_LABELS
             if mention is not None and (not tokens(mention) or not tokens(mention) <= supported):
                 raise ValueError("Contextual mention contains unsupported source words")
             # Null means explicit abstention: retain the original unresolved fact.

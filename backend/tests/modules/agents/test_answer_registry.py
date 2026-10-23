@@ -924,8 +924,9 @@ def test_transitive_supporting_refs_outside_input_refs_are_seeded(setup):
             assert resolved is not None and resolved.run_id == job.run.run_id
 
 
+@pytest.mark.parametrize("answer_text", ["Taglia M", "M"])
 def test_elliptical_reply_corrects_original_demand_once_with_quantitative_effects(
-    setup, monkeypatch
+    setup, monkeypatch, answer_text
 ):
     import json
 
@@ -939,7 +940,7 @@ def test_elliptical_reply_corrects_original_demand_once_with_quantitative_effect
     engine, request, registry, originals, RecordedReading = production_pipeline(
         setup, monkeypatch, quantitative=True
     )
-    request = request.model_copy(update={"text": "Taglia M"})
+    request = request.model_copy(update={"text": answer_text})
     calls = []
 
     class Reading(RecordedReading):
@@ -956,7 +957,7 @@ def test_elliptical_reply_corrects_original_demand_once_with_quantitative_effect
                     context["original"]["evidence"]
                     == originals[2].model_dump(mode="json")["evidence"]
                 )
-                assert context["answer"]["text"] == "Taglia M"
+                assert context["answer"]["text"] == answer_text
                 assert context["answer"] == job.document.model_dump(mode="json")
                 assert context["question"]["version"] == f"answer:{job.fingerprint}"
                 assert context["question"]["observation_refs"] == [

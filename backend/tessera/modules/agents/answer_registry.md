@@ -148,8 +148,9 @@ and answer-clock checks remain in force.
 
 The v2 contextual instructions also require lexical support: every normalized
 word in the proposed mention must occur in the original mention/evidence or the
-answer. Invented product names, sizes or numbers, empty text and punctuation-only
-outputs fail the child. This conservative check does not validate comprehension,
+answer, except size/colour field labels explicitly present in the question (so
+`M` can answer `Quale taglia?`). Invented product names, sizes or numbers, empty
+text and punctuation-only outputs fail the child. This conservative check does not validate comprehension,
 negation or which of several stated products the answer refers to; those remain
 the model's interpretation task. Translations and alias expansion must happen in
 the normal linker, not in the contextual response. V1 contextual recordings do
