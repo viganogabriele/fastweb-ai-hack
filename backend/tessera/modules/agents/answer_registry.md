@@ -107,3 +107,9 @@ new simulated source to that preserved lineage. Fresh observations, product
 links, cases, forecasts and options are produced by the frozen pipeline, never
 inferred by the answer service. Normal published API reads can still inspect
 historical versions and their citations.
+
+When wiring the write endpoint, lane C should also exclude `parent:` derived
+versions from operational collection responses (queue, counts, options inputs),
+while preserving exact-version reads for citations. The worker already applies
+this distinction to all pipeline module reads; it is not a frontend-local
+answered state or a forecast adjustment.
