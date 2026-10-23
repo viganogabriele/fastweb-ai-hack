@@ -90,3 +90,26 @@ the options, then proposes the engine's recommended `notify_owner`. The NYC01 "s
 reads evidence, drafts an English clarification and stops at `verify`. Changing the prompt, the
 tools' outputs or the model invalidates the recordings: re-record with
 `LLM_MODE=record backend/.venv/bin/python data/fixtures/build_ag03b.py` (needs the GLM key).
+
+## TST-09 safety gate
+
+Run the existing budget, injection and citation checks together with the investigator
+regressions (from `backend/`):
+
+```sh
+uv run pytest -q tests/modules/agents/test_runtime.py tests/modules/agents/test_investigator.py tests/fixtures/test_data01b.py
+```
+
+- Runtime checks exhaust six tool attempts, eight turns (including retries) and the
+  time deadline, including calls returned in one batch and replies arriving too late.
+- Investigator checks pass a hostile document quote through real evidence retrieval.
+  A scripted model follows its instructions: booking is refused, repeated movement
+  proposals with mandatory `fail`/`unknown` checks exhaust the unchanged budget,
+  and the persisted result remains `verify`.
+- A correct, visible MIL02 stock quantity attributed to MIL01 is removed from the
+  investigator's published explanation, including the persisted finish trace.
+- The existing DATA-01b report checks reject a citation with the correct number but
+  the wrong store scope, alongside wrong units, fields and periods (lane B).
+
+These are deterministic enforcement checks with fake models and local fixtures;
+no live-model prompt-injection success rate is measured.
