@@ -20,7 +20,9 @@ The fallback is a deterministic callable supplied by the agent (the investigator
 ambiguity → availability → lane → options). Its choice passes the same validation; if it does not,
 the run ends in `verify`. Either way the trace records `fallback_used=True`.
 
-Pure code: no DB, no network. The real LLM adapter (AG-01 runtime) implements `ChatModel`.
+Pure code: no DB, no network. The real LLM adapter (AG-01 runtime) implements `ChatModel`:
+`tessera.modules.agents.chat_model.LLMChatModel` sends each turn through PLT-05's client and
+replays the recorded provider replies from the run cache.
 """
 
 import json
