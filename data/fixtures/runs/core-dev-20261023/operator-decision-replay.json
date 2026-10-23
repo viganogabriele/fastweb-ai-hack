@@ -1,0 +1,59 @@
+{
+  "attempts": [
+    "attempt-6f064b0933f9473294b032f895a49d45",
+    "attempt-cc37adedf1fa4457933967b462dbde1b"
+  ],
+  "decisions": [
+    {
+      "decision": "rejected",
+      "dispatch_status": "draft",
+      "id": "decision-2e6afdfc5f534eaf9950412f40e70efa",
+      "input_version_hash": "sha256:4c5c3713b5a3498fa667f3a7ed5896fdf4b2a76c286ae4721e6f7ecc8a2b7990",
+      "option_id": "opt-case-mil01-i10919b00011-20261008-transfer",
+      "option_version": "4c5c3713b5a3498f",
+      "reservations": 0,
+      "sha256": "69a9a76714cb13ed280fd8dc88bc93cbf8840650d110f40146d23d7b665c85fd",
+      "simulated": true,
+      "version": "1"
+    }
+  ],
+  "decisions_equal": true,
+  "decisions_file": "decisions-operator.json",
+  "decisions_sha256": "6c2a289443ddaf576a849aba681acbd4686bba5af402ffd017b6070c57b57a9b",
+  "exact_ids_and_versions_equal": true,
+  "exit_codes": [
+    0,
+    0
+  ],
+  "format": 2,
+  "hash_exclusions": [
+    "AgentTrace.steps[*].duration_ms"
+  ],
+  "inputs_equal": true,
+  "ledger_sha256": "a4829accf1c98b7989d85b9636f8d8fa560c526693a4f0289366fff0c46ea785",
+  "ledger_sha256_equal": true,
+  "missing_prerequisites": [
+    [],
+    []
+  ],
+  "network_attempts": [
+    0,
+    0
+  ],
+  "output_sha256": "faccb706836a72ff87fd1aca9dba151985f8d6b1980f5109d0d6db810fc0c61f",
+  "output_sha256_equal": true,
+  "provenance": {
+    "decided_by": "lorenzocorallo",
+    "decided_on": "2026-10-23",
+    "entry": "Human operator decision taken by Lorenzo (maintainer) in the DEMO-02c session; the agent entered it on his instruction through POST /api/runs/core-dev-candidate/cases/case-mil01-i10919b00011-20261008/decisions on an offline replay of this candidate without the synthetic decision. The decision clock is the API server clock at entry.",
+    "idempotent_retry_identical": true,
+    "identity": "Local reviewer identity as declared in the request; not an authenticated login.",
+    "read_api_identical": true
+  },
+  "raw_payload_differences": [
+    "AgentTrace"
+  ],
+  "raw_payload_hashes_equal": false,
+  "recording_sha": "38fe618a91a9d4f573e96fc2ec3cde2ee6ec8ebe",
+  "snapshot_sha256": "c522703633170af4933e06ed0f02edc29f2beb5f85cb32873ac46bb426b86edb"
+}

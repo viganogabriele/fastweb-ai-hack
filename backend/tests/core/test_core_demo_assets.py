@@ -1,7 +1,10 @@
 """Portable real recordings stay bound to their exact dev inputs and provider responses."""
 
 import hashlib
+import importlib.util
 import json
+
+from pydantic import TypeAdapter
 
 from tesseract.core.cache import ResponseCache, cache_key
 from tesseract.core.config import REPO_ROOT
@@ -9,6 +12,11 @@ from tesseract.core.contracts import RunSpec
 from tesseract.core.fixtures import read_fixtures
 
 ASSETS = REPO_ROOT / "data/fixtures/runs/core-dev-20261023"
+module_spec = importlib.util.spec_from_file_location(
+    "replay_demo", REPO_ROOT / "scripts/replay_demo.py"
+)
+replay = importlib.util.module_from_spec(module_spec)
+module_spec.loader.exec_module(replay)
 
 
 def test_source_backed_recordings_have_complete_versioned_inventory():
@@ -78,3 +86,40 @@ def test_investigate_job_and_corrections_are_bound_to_this_candidate():
         assert all(attempt["checks"].values())
     negative = verification["negative_withheld_job_envelope"]
     assert negative["job_status"] == "failed" and not negative["job_published"]
+
+
+def test_operator_decision_is_a_human_rejection_that_replays_on_this_candidate():
+    spec = RunSpec.model_validate_json((ASSETS / "run-spec.json").read_text())
+    snapshot = cache_key(spec.model_dump(mode="json"))
+    raw = (ASSETS / "decisions-operator.json").read_bytes()
+    # The same parse and snapshot/clock gates replay_demo.py applies to --decisions.
+    [event] = TypeAdapter(list[replay.FrozenDecision]).validate_json(raw)
+    assert (event.namespace, event.snapshot_sha256) == ("product", snapshot)
+    request, draft = event.request, event.draft
+    assert (request.run_id, request.scenario_id) == (spec.run_id, spec.scenario_id)
+    assert draft.option.id == request.option_id
+    # A genuine operator, not the scripted reviewer in decisions.json, which stays as is.
+    assert request.by == draft.decision.by == "lorenzocorallo"
+    assert (request.decision, request.option_id) == (
+        "rejected",
+        "opt-case-mil01-i10919b00011-20261008-transfer",
+    )
+    assert event.at == draft.decision.at
+    assert spec.as_of <= event.at < draft.option.valid_until
+    assert event.at.date().isoformat() == "2026-10-23"
+    assert draft.option.input_version_hash == request.input_version_hash
+    assert draft.decision.dispatch_status == "draft" and draft.simulated
+    assert draft.reservations == ()
+    synthetic = json.loads((ASSETS / "decisions.json").read_text())
+    assert [e["request"]["by"] for e in synthetic] == ["DEMO-02 scripted synthetic reviewer"]
+    # Two cold replays with --decisions decisions-operator.json kept the exact draft.
+    replays = json.loads((ASSETS / "operator-decision-replay.json").read_text())
+    assert replays["decisions_sha256"] == hashlib.sha256(raw).hexdigest()
+    assert replays["snapshot_sha256"] == snapshot and replays["exit_codes"] == [0, 0]
+    assert replays["network_attempts"] == [0, 0]
+    for key in ("decisions", "inputs", "output_sha256", "ledger_sha256", "exact_ids_and_versions"):
+        assert replays[f"{key}_equal"] is True, key
+    assert replays["raw_payload_differences"] == ["AgentTrace"]
+    [saved] = replays["decisions"]
+    assert saved["id"] == draft.decision.id
+    assert saved["sha256"] == cache_key(draft.model_dump(mode="json"))
