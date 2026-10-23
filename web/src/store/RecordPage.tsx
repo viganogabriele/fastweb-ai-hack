@@ -63,12 +63,18 @@ export function RecordPage() {
 
       {!sent && (
         <section
-          className={`rec__card${state === 'idle' || state === 'requesting' || state === 'recording' ? ' rec__card--center' : ''}`}
+          className={`rec__card rec__card--fill${state === 'idle' || state === 'requesting' ? ' rec__card--center' : ''}`}
         >
           {(state === 'idle' || state === 'requesting' || state === 'recording') && (
             <div className="rec__controls">
-              {/* Same width as the trash button, so the microphone stays centred. */}
-              <span className="rec__side" aria-hidden="true" />
+              {/* Side slots have the same width, so the microphone stays centred. */}
+              {state === 'recording' ? (
+                <span className="rec__side rec__seconds" role="timer" aria-label={fmt(t.recording, { seconds: recorder.seconds })}>
+                  {recorder.seconds}s
+                </span>
+              ) : (
+                <span className="rec__side" aria-hidden="true" />
+              )}
               <button
                 type="button"
                 disabled={state === 'requesting' || !voiceToken()}
@@ -95,17 +101,12 @@ export function RecordPage() {
           )}
           {!voiceToken() && <p role="alert" className="rec__error">{t.errors.access}</p>}
           {state === 'requesting' && <p role="status" className="rec__status">{t.requesting}</p>}
-          {state === 'recording' && (
-            <p className="rec__status" aria-live="polite">
-              {fmt(t.recording, { seconds: recorder.seconds })} · {t.listening}
-            </p>
-          )}
           {state === 'finalizing' && <p role="status" className="rec__status">{t.finalizing}</p>}
           {recorder.error && <p role="alert" className="rec__error">{errorText(recorder.error)}</p>}
 
           {(state === 'recording' || state === 'finalizing') && (
             <p className="rec__live" aria-live="polite">
-              {recorder.transcript || <span className="rec__muted">{t.liveEmpty}</span>}
+              {recorder.transcript}
             </p>
           )}
 
