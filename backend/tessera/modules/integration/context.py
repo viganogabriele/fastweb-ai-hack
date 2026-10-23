@@ -125,7 +125,7 @@ def run(ctx: Context) -> ModuleResult:
     return ModuleResult(
         module_id=MANIFEST.id,
         module_version=MANIFEST.version,
-        status="succeeded",
+        status="degraded" if errors else "succeeded",
         counts={"cases": len(cases), "events": len(events), "updated_cases": updated},
         errors=tuple(errors),
         abstentions=(),
