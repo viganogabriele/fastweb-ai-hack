@@ -104,6 +104,8 @@ def test_associates_by_geo_time(tmp_path):
     statuses = orchestrate(spec, engine=engine, registry=registry, clients={})
     assert statuses[0].status in ("succeeded", "degraded")
     with repo_session(engine, spec, fixture_mode=True, write=False) as repo:
-        out = repo.list(Case)[0]
+        outs = repo.list(Case)
+    # pick updated version
+    out = max(outs, key=lambda c: c.version)
     assert len(out.context_refs) == 1
     assert out.context_refs[0].id == ev.id
