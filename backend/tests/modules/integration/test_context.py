@@ -81,10 +81,30 @@ def make_event(as_of, store="MIL01", role="context_only"):
 
 
 @pytest.mark.parametrize(
-    ("event_offset_hours", "expected_refs"),
-    [(0, 1), (48, 1), (-48, 1), (49, 0), (-49, 0), (72, 0), (-72, 0)],
+    ("event_offset_hours", "slack_hours", "expected_refs"),
+    [
+        (0, None, 1),
+        (48, None, 1),
+        (-48, None, 1),
+        (49, None, 0),
+        (-49, None, 0),
+        (72, None, 0),
+        (-72, None, 0),
+        (24, 0, 1),
+        (-24, 0, 1),
+        (25, 0, 0),
+        (-25, 0, 0),
+        (30, 6, 1),
+        (-30, 6, 1),
+        (31, 6, 0),
+        (-31, 6, 0),
+        (96, 72, 1),
+        (-96, 72, 1),
+        (97, 72, 0),
+        (-97, 72, 0),
+    ],
 )
-def test_associates_by_geo_time(tmp_path, event_offset_hours, expected_refs):
+def test_associates_by_geo_time(tmp_path, event_offset_hours, slack_hours, expected_refs):
     engine = connect(f"sqlite:///{tmp_path / 't.db'}")
     as_of = datetime(2026, 10, 22, tzinfo=UTC)
     spec = RunSpec(
@@ -96,7 +116,12 @@ def test_associates_by_geo_time(tmp_path, event_offset_hours, expected_refs):
         config_hash="c",
         code_version="0",
         mode="fixture",
-        modules=(ModuleSnapshot(manifest=context.MANIFEST, params={}),),
+        modules=(
+            ModuleSnapshot(
+                manifest=context.MANIFEST,
+                params={} if slack_hours is None else {"slack_hours": slack_hours},
+            ),
+        ),
         prompt_versions={},
         model_versions={},
         authorized_fixture_refs=(),
