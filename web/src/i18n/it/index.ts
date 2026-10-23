@@ -3,5 +3,6 @@ import { dashboard } from './dashboard'
 import { record } from './record'
 import { sections } from './sections'
 import { shell } from './shell'
+import { voice } from './voice'
 
-export const it = { common, shell, dashboard, sections, record }
+export const it = { common, shell, dashboard, sections, record, voice }
