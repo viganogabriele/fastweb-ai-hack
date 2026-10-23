@@ -38,8 +38,8 @@ case quantities are outside the investigator.
 2. Wire the service into the discovered module and persist contract-valid output;
    verify fallback, missing-recording behavior and module execution with fake clients.
 3. Record two real dev conversations with different evidence/check paths, then replay
-   them offline. Keep their fixture-backed input provenance explicit. This step needs
-   a team-provided per-model key through Settings; no key is currently configured.
+   them offline. Keep their fixture-backed input provenance explicit. Done in AG-03b:
+   `data/fixtures/build_ag03b.py`, recordings in `data/fixtures/traces/recorded/`.
 4. Run `make check`, update the PR with evidence and mark ready only after acceptance.
 
 The specification above is complete for implementation. The user explicitly
@@ -67,12 +67,26 @@ by the repository and required by the prompt; a human still reviews their wordin
 Final decision explanations are server templates, so arbitrary model numbers or
 causal claims do not become the displayed rationale.
 
+## Model
+
+`MODEL = "glm-5.3-flash"`, not the chat default. Recording with Gemma (`google/gemma-4-26B-A4B-it`)
+spent the six-call budget on one-location stock reads and ended in the fallback on D1;
+Qwen3.5-397B repeated `evaluate_options` and also fell back. GLM completed both paths twice in a
+row with prompt `investigator.v2` (one stock call per SKU-size for all locations, lanes only from
+donors with positive stock). GLM is hosted outside the EU (`docs/smoke-fastweb.md`): declare it;
+the inputs are synthetic.
+
 ## Validation status
 
-The automated conversations use fake models and fixture-backed dev cases. They
-verify different stock/ambiguity tool paths, scoped IDs, persistence, draft
-idempotency, donor-conflict gates, valid vs blocked proposals, exhausted-budget
-fallback and the real LLM adapter's explicit replay-miss behavior. These tests do
-**not** claim a real provider chose those tools. The two real recorded dev traces
-remain blocked on a team-provisioned per-model key file; issue #81 and PR #146
-must remain open/draft until those recordings can be made and replayed.
+The tests in `tests/modules/agents/` use fake models and fixture-backed dev cases. They verify
+different stock/ambiguity tool paths, scoped IDs, persistence, draft idempotency, donor-conflict
+gates, valid vs blocked proposals, exhausted-budget fallback and the real LLM adapter's explicit
+replay-miss behavior. They do **not** claim a real provider chose those tools.
+
+The real-model evidence is `tests/fixtures/test_ag03b.py`: it replays the two recorded GLM
+conversations offline (no provider client is ever built) and checks they reproduce the committed
+traces. D1 reads evidence, stock for both colours at MIL01/MIL02/NYC01, the MIL02→MIL01 lane and
+the options, then proposes the engine's recommended `notify_owner`. The NYC01 "sweatshirt" case
+reads evidence, drafts an English clarification and stops at `verify`. Changing the prompt, the
+tools' outputs or the model invalidates the recordings: re-record with
+`LLM_MODE=record backend/.venv/bin/python data/fixtures/build_ag03b.py` (needs the GLM key).
