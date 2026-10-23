@@ -7,7 +7,7 @@ def E(id, dt, frm, subj, body, **kw):
     return d
 
 
-DOM = "moncler-retail.example"
+DOM = "valentino-retail.example"
 
 
 def addr(name):

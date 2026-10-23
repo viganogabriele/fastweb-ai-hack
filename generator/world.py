@@ -120,8 +120,8 @@ for k, r in enumerate(skus.itertuples()):
 # ---------------------------------------------------------------- assortment & affinity
 aff = np.ones((S, K), dtype=np.float32)
 assort = np.zeros((S, K), dtype=np.float32)
-MUST_HAVE = {("PAR01", "MAIRE"), ("PAR02", "MAIRE"), ("MIL01", "MAIRE"), ("LON02", "MAIRE"), ("MIL01", "LOGO CARDIGAN"),
-             ("MAD01", "MAYA")}
+MUST_HAVE = {("PAR01", "AUREA"), ("PAR02", "AUREA"), ("MIL01", "AUREA"), ("LON02", "AUREA"), ("MIL01", "VLOGO CARDIGAN"),
+             ("MAD01", "NOVA")}
 for s, st in enumerate(stores.itertuples()):
     rules = AFFINITY.get(st.subregion, {})
     for k, r in enumerate(skus.itertuples()):
@@ -131,14 +131,14 @@ for s, st in enumerate(stores.itertuples()):
                  RESORT_AFFINITY.get("line:" + r.line, 1.0)
         aff[s, k] = a * rng.lognormal(0, 0.18)
         p_keep = {"Flagship": 1.0, "Boutique": 0.86, "Shop-in-shop": 0.62, "Resort": 0.7}[st.store_type]
-        if r.line == "Genius" and st.store_type in ("Shop-in-shop", "Resort"):
+        if r.line == "Couture" and st.store_type in ("Shop-in-shop", "Resort"):
             p_keep = 0.15
-        if r.line == "Grenoble" and st.hemi == "T":
+        if r.line == "Atelier" and st.hemi == "T":
             p_keep = 0.1
         keep = rng.random() < p_keep * min(1.0, 0.55 + sku_pop[k] / 2.5)
         if (st.store_id, r.style_name) in MUST_HAVE:
             keep = True
-        if r.style_name == "ILVARO" and st.subregion in ("Korea", "Japan", "Mainland China", "HK/Macau/TW", "South-East Asia"):
+        if r.style_name == "IRIDIA" and st.subregion in ("Korea", "Japan", "Mainland China", "HK/Macau/TW", "South-East Asia"):
             keep = True
         assort[s, k] = 1.0 if keep else 0.0
 
@@ -409,7 +409,7 @@ for s in range(S):
             continue
         dem_kz[:, s, kz_start[k]:kz_start[k] + len(c)] = rng.multinomial(n, c)
 # forced demand for E03 (at least one ask for size M on Oct 8)
-lc_m = [z for z, (k, j, sz) in enumerate(kz_rows) if skus.style_name[k] == "LOGO CARDIGAN" and sz == "M"]
+lc_m = [z for z, (k, j, sz) in enumerate(kz_rows) if skus.style_name[k] == "VLOGO CARDIGAN" and sz == "M"]
 
 # ---------------------------------------------------------------- inventory simulation
 LEAD = {"Italy": 1, "France": 2, "Switzerland": 3, "UK": 3, "Germany": 2, "Spain": 2, "Benelux": 2, "Nordics": 3,
@@ -473,15 +473,15 @@ launch_kz = {}
 for z, (k, j, sz) in enumerate(kz_rows):
     if skus.launch_date[k] and d(skus.launch_date[k]) > WINDOW_START:
         launch_kz.setdefault(d(skus.launch_date[k]), []).append(z)
-ALLOC_FACTOR = {"ILVARO": 0.55, "POLARIS CAPE": 1.0, "POLARIS OVERSIZED": 1.0, "POLARIS BALACLAVA": 1.0, "AMBRINE": 0.8}
+ALLOC_FACTOR = {"IRIDIA": 0.55, "ASTRA CAPE": 1.0, "ASTRA OVERSIZED": 1.0, "ASTRA BALACLAVA": 1.0, "AMALIA": 0.8}
 
 CARRIERS = {"EMEA": ["BRT", "DHL Express", "GEODIS", "DHL Express"], "AMERICAS": ["FedEx", "UPS", "FedEx"],
             "APAC": ["DHL Express", "Kerry Logistics", "SF Express", "Nippon Express"]}
 returns_sched = np.zeros((WD + 30, S, KZ), dtype=np.int32)
 returns_defect = np.zeros((WD + 30, S, KZ), dtype=np.int32)
 returns_size = np.zeros((WD + 30, S, KZ), dtype=np.int32)
-tib_kz = np.array([skus.style_name[k] == "TIB" for k in kz_k])
-arneb_kz = np.array([skus.style_name[k] == "ARNEB" for k in kz_k])
+tib_kz = np.array([skus.style_name[k] == "VEL" for k in kz_k])
+arneb_kz = np.array([skus.style_name[k] == "ARTEM" for k in kz_k])
 RET_RATE = {"EMEA": 0.035, "AMERICAS": 0.065, "APAC": 0.015}
 ret_rate_s = np.array([RET_RATE[r] for r in stores.region])
 def_start = (dt.date(2026, 9, 28) - WINDOW_START).days
@@ -569,7 +569,7 @@ for w in range(WD):
             q = int(need[z])
             k = kz_k[z]
             z_recv = z
-            if st.store_id == "MAD01" and skus.style_name[k] == "MAYA" and skus.color_code[k] == "999" and \
+            if st.store_id == "MAD01" and skus.style_name[k] == "NOVA" and skus.color_code[k] == "999" and \
                     dt.date(2026, 9, 17) <= ship_date <= dt.date(2026, 10, 2):
                 # picking error: navy shipped instead of black
                 z_recv = kid[skus.sku[k].replace("-999", "-742")]
@@ -610,7 +610,7 @@ for s, st in enumerate(stores.itertuples()):
 mkdir(INT / "master_data")
 st_out = stores.drop(columns=["scale", "hemi"]).copy()
 st_out["closed_dow"] = st_out.closed_dow.apply(lambda v: "|".join(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i] for i in v))
-st_out["email"] = st_out.store_id.str.lower() + ".store@moncler-retail.example"
+st_out["email"] = st_out.store_id.str.lower() + ".store@valentino-retail.example"
 st_out.to_csv(INT / "master_data" / "stores.csv", index=False)
 styles_out = styles.copy()
 styles_out["colors"] = styles_out.colors.apply(lambda v: "|".join(v))
@@ -917,8 +917,8 @@ lam_fc = lam_base.copy()
 s_syd = sid["SYD01"]
 seas_n = season_arr[:, 0][:, grp_idx]
 lam_fc[:, s_syd, :] = base[s_syd][None] * seas_n * life * store_mult[:, s_syd][:, None] * (open_frac[:, s_syd][:, None] > 0)
-ANALOG = {"ILVARO": ("BADY", 0.6), "AMBRINE": ("HERMINE", 0.7), "ARNEB": ("MONTCLA", 0.8), "ROSIERE": ("MAYA", 0.5),
-          "WOOL TURTLENECK": ("LOGO CARDIGAN", 0.6)}
+ANALOG = {"IRIDIA": ("ARIA", 0.6), "AMALIA": ("LIVIANA", 0.7), "ARTEM": ("MISTRAL", 0.8), "RIVIERA": ("NOVA", 0.5),
+          "CASHMERE TURTLENECK": ("VLOGO CARDIGAN", 0.6)}
 for k in range(K):
     nm = skus.style_name[k]
     if nm in ANALOG:

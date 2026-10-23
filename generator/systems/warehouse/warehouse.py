@@ -8,7 +8,7 @@ The DC stock is reconstructed so that it is consistent with:
   - launch allocations (store stock on launch day + launch-day sales; not in the shipments file),
   - e-commerce web reserve transfers / sales (generator/systems/_cache from ecommerce.py),
   - DC_CONSTRAINTS (zero stock windows) and the KEY_POS receipts in common.py,
-  - TIB defective batch + store/online defect returns into quality stock.
+  - VEL defective batch + store/online defect returns into quality stock.
 """
 import datetime as dt
 import json
@@ -179,8 +179,8 @@ def net(w, s, z):
 
 receipts = []          # dict(werks, sku, size, date, qty, ebeln, ebelp, batch, kind)
 stock0 = {}            # (w,s,z) -> opening stock 0001
-main_eod = {}          # (w,s,z) -> array 0001 EOD (unrestricted, before TIB block)
-tib_blocked = {}       # (w,s,z) -> array blocked (SPEME) TIB bad batch at 0001
+main_eod = {}          # (w,s,z) -> array 0001 EOD (unrestricted, before VEL block)
+tib_blocked = {}       # (w,s,z) -> array blocked (SPEME) VEL bad batch at 0001
 tib_batch_eod = {}     # (w,s,z) -> dict batch -> array
 po_counter = [4500212000]
 
@@ -203,7 +203,7 @@ for w in ("IT10", "US20", "HK30"):
         sizes = RUN[s]
         N = {z: net(w, s, z) for z in sizes}
         launch = LAUNCH[s]
-        is_tib = SN[s] == "TIB"
+        is_tib = SN[s] == "VEL"
         stock = {z: 0 for z in sizes}
         rc = {z: zeros() for z in sizes}          # receipts into 0001
         fixed = {z: False for z in sizes}
@@ -283,17 +283,17 @@ for w in ("IT10", "US20", "HK30"):
                 if q:
                     rc[z][DI[gr]] += q
                     receipts.append(dict(werks=w, sku=s, size=z, date=gr, qty=q, ebeln=ebeln, ebelp="00010", batch="", kind="LAUNCH_BUY"))
-        # TIB batches
+        # VEL batches
         if is_tib:
             e1, e2 = new_po(), new_po()
             for z in sizes:
-                gr1 = C.d(C.TIB["bad_batch_gr"][w]); gr2 = C.d(C.TIB["good_batch_gr"][w])
+                gr1 = C.d(C.VALENTINO_V17["bad_batch_gr"][w]); gr2 = C.d(C.VALENTINO_V17["good_batch_gr"][w])
                 q1 = int(math.ceil(N[z][DI[dt.date(2026, 8, 15)]:DI[dt.date(2026, 10, 3)]].sum() * 1.35)) + 2
                 q2 = int(math.ceil(N[z][DI[dt.date(2026, 10, 3)]:].sum() * 1.6)) + 3
                 rc[z][DI[gr1]] += q1; rc[z][DI[gr2]] += q2
-                receipts.append(dict(werks=w, sku=s, size=z, date=gr1, qty=q1, ebeln=e1, ebelp="00010", batch=C.TIB["bad_batch"], kind="REGULAR"))
-                receipts.append(dict(werks=w, sku=s, size=z, date=gr2, qty=q2, ebeln=e2, ebelp="00010", batch=C.TIB["good_batch"], kind="REGULAR"))
-        # generic replenishment simulation (skip TIB, skip launch skus before launch receipt handled above)
+                receipts.append(dict(werks=w, sku=s, size=z, date=gr1, qty=q1, ebeln=e1, ebelp="00010", batch=C.VALENTINO_V17["bad_batch"], kind="REGULAR"))
+                receipts.append(dict(werks=w, sku=s, size=z, date=gr2, qty=q2, ebeln=e2, ebelp="00010", batch=C.VALENTINO_V17["good_batch"], kind="REGULAR"))
+        # generic replenishment simulation (skip VEL, skip launch skus before launch receipt handled above)
         cur = {z: stock0[(w, s, z)] for z in sizes}
         eod = {z: zeros() for z in sizes}
         for i, x in enumerate(DAYS):
@@ -363,15 +363,15 @@ for z, q in mis_qty.items():
         receipts.append(dict(werks="IT10", sku=C.MISPICK["sku_received"], size=z, date=dt.date(2026, 9, 28), qty=add,
                              ebeln=new_po(), ebelp="00010", batch="", kind="REGULAR"))
 
-# TIB: FIFO batches & block on usage decision
-UD = DI[C.d(C.TIB["usage_decision"])]
+# VEL: FIFO batches & block on usage decision
+UD = DI[C.d(C.VALENTINO_V17["usage_decision"])]
 for (w, s, z), arr in list(main_eod.items()):
-    if SN[s] != "TIB":
+    if SN[s] != "VEL":
         continue
     N = net(w, s, z)
     b_old = stock0[(w, s, z)]
-    r1 = [r for r in receipts if r["werks"] == w and r["sku"] == s and r["size"] == z and r["batch"] == C.TIB["bad_batch"]][0]
-    r2 = [r for r in receipts if r["werks"] == w and r["sku"] == s and r["size"] == z and r["batch"] == C.TIB["good_batch"]][0]
+    r1 = [r for r in receipts if r["werks"] == w and r["sku"] == s and r["size"] == z and r["batch"] == C.VALENTINO_V17["bad_batch"]][0]
+    r2 = [r for r in receipts if r["werks"] == w and r["sku"] == s and r["size"] == z and r["batch"] == C.VALENTINO_V17["good_batch"]][0]
     bo, bb, bg, blk = zeros(), zeros(), zeros(), zeros()
     o, b_, g, k = b_old, 0, 0, 0
     for i, x in enumerate(DAYS):
@@ -387,16 +387,16 @@ for (w, s, z), arr in list(main_eod.items()):
         t = min(g, q); g -= t; q -= t
         assert q == 0, (w, s, z, x)
         bo[i], bb[i], bg[i], blk[i] = o, b_, g, k
-    tib_batch_eod[(w, s, z)] = {C.TIB["old_batch"]: bo, C.TIB["bad_batch"]: bb, C.TIB["good_batch"]: bg}
+    tib_batch_eod[(w, s, z)] = {C.VALENTINO_V17["old_batch"]: bo, C.VALENTINO_V17["bad_batch"]: bb, C.VALENTINO_V17["good_batch"]: bg}
     tib_blocked[(w, s, z)] = blk
     main_eod[(w, s, z)] = bo + bb + bg
 
-# POLARIS inter-DC STO IT10 -> HK30
+# ASTRA inter-DC STO IT10 -> HK30
 sto_rows = []
 STO_GI, STO_GR = dt.date(2026, 10, 15), dt.date(2026, 10, 21)
 sto_in = defaultdict(zeros)
 for (w, s, z), arr in list(main_eod.items()):
-    if w == "IT10" and SN[s].startswith("POLARIS") and s.endswith("-999"):
+    if w == "IT10" and SN[s].startswith("ASTRA") and s.endswith("-999"):
         avail = int(arr[DI[STO_GI] - 1]) - int(net(w, s, z)[DI[STO_GI]:].sum())
         q = int(max(0, avail) * 0.45)
         if q > 0:

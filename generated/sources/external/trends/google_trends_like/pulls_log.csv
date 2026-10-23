@@ -1,48 +1,48 @@
 file,geo,terms,timeframe,pulled
-weekly/multiTimeline_IT_1_weekly.csv,IT,moncler | moncler maya | moncler maire | moncler ilvaro | moncler polaris,2024-09-01 2026-10-21,2026-10-22
-daily_90d/multiTimeline_IT_1_daily_pulled20261022.csv,IT,moncler | moncler maya | moncler maire | moncler ilvaro | moncler polaris,2026-07-24 2026-10-21,2026-10-22
-weekly/multiTimeline_IT_2_weekly.csv,IT,piumino | piumino donna | piumino uomo | parka | moncler,2024-09-01 2026-10-21,2026-10-22
-daily_90d/multiTimeline_IT_2_daily_pulled20261022.csv,IT,piumino | piumino donna | piumino uomo | parka | moncler,2026-07-24 2026-10-21,2026-10-22
-weekly/multiTimeline_FR_1_weekly.csv,FR,moncler | moncler maire | moncler ilvaro | moncler polaris | doudoune moncler,2024-09-01 2026-10-21,2026-10-22
-daily_90d/multiTimeline_FR_1_daily_pulled20261022.csv,FR,moncler | moncler maire | moncler ilvaro | moncler polaris | doudoune moncler,2026-07-24 2026-10-21,2026-10-22
-weekly/multiTimeline_FR_2_weekly.csv,FR,doudoune | doudoune femme | parka | moncler,2024-09-01 2026-10-21,2026-10-22
-daily_90d/multiTimeline_FR_2_daily_pulled20261022.csv,FR,doudoune | doudoune femme | parka | moncler,2026-07-24 2026-10-21,2026-10-22
-weekly/multiTimeline_DE_1_weekly.csv,DE,moncler | moncler maya | moncler ilvaro | daunenjacke | winterjacke,2024-09-01 2026-10-21,2026-10-22
-daily_90d/multiTimeline_DE_1_daily_pulled20261022.csv,DE,moncler | moncler maya | moncler ilvaro | daunenjacke | winterjacke,2026-07-24 2026-10-21,2026-10-22
-daily_90d/multiTimeline_DE_1_daily_pulled20261020.csv,DE,moncler | moncler maya | moncler ilvaro | daunenjacke | winterjacke,2026-07-24 2026-10-19,2026-10-20
+weekly/multiTimeline_IT_1_weekly.csv,IT,valentino | valentino nova | valentino aurea | valentino iridia | valentino astra,2024-09-01 2026-10-21,2026-10-22
+daily_90d/multiTimeline_IT_1_daily_pulled20261022.csv,IT,valentino | valentino nova | valentino aurea | valentino iridia | valentino astra,2026-07-24 2026-10-21,2026-10-22
+weekly/multiTimeline_IT_2_weekly.csv,IT,piumino | piumino donna | piumino uomo | parka | valentino,2024-09-01 2026-10-21,2026-10-22
+daily_90d/multiTimeline_IT_2_daily_pulled20261022.csv,IT,piumino | piumino donna | piumino uomo | parka | valentino,2026-07-24 2026-10-21,2026-10-22
+weekly/multiTimeline_FR_1_weekly.csv,FR,valentino | valentino aurea | valentino iridia | valentino astra | doudoune valentino,2024-09-01 2026-10-21,2026-10-22
+daily_90d/multiTimeline_FR_1_daily_pulled20261022.csv,FR,valentino | valentino aurea | valentino iridia | valentino astra | doudoune valentino,2026-07-24 2026-10-21,2026-10-22
+weekly/multiTimeline_FR_2_weekly.csv,FR,doudoune | doudoune femme | parka | valentino,2024-09-01 2026-10-21,2026-10-22
+daily_90d/multiTimeline_FR_2_daily_pulled20261022.csv,FR,doudoune | doudoune femme | parka | valentino,2026-07-24 2026-10-21,2026-10-22
+weekly/multiTimeline_DE_1_weekly.csv,DE,valentino | valentino nova | valentino iridia | daunenjacke | winterjacke,2024-09-01 2026-10-21,2026-10-22
+daily_90d/multiTimeline_DE_1_daily_pulled20261022.csv,DE,valentino | valentino nova | valentino iridia | daunenjacke | winterjacke,2026-07-24 2026-10-21,2026-10-22
+daily_90d/multiTimeline_DE_1_daily_pulled20261020.csv,DE,valentino | valentino nova | valentino iridia | daunenjacke | winterjacke,2026-07-24 2026-10-19,2026-10-20
 weekly/multiTimeline_DE_2_weekly.csv,DE,daunenjacke | winterjacke | daunenmantel | parka,2024-09-01 2026-10-21,2026-10-22
 daily_90d/multiTimeline_DE_2_daily_pulled20261022.csv,DE,daunenjacke | winterjacke | daunenmantel | parka,2026-07-24 2026-10-21,2026-10-22
-weekly/multiTimeline_CH_1_weekly.csv,CH,daunenjacke | doudoune | winterjacke | moncler,2024-09-01 2026-10-21,2026-10-22
-daily_90d/multiTimeline_CH_1_daily_pulled20261022.csv,CH,daunenjacke | doudoune | winterjacke | moncler,2026-07-24 2026-10-21,2026-10-22
-weekly/multiTimeline_GB_1_weekly.csv,GB,moncler | puffer jacket | moncler maya | moncler ilvaro | moncler tib,2024-09-01 2026-10-21,2026-10-22
-daily_90d/multiTimeline_GB_1_daily_pulled20261022.csv,GB,moncler | puffer jacket | moncler maya | moncler ilvaro | moncler tib,2026-07-24 2026-10-21,2026-10-22
+weekly/multiTimeline_CH_1_weekly.csv,CH,daunenjacke | doudoune | winterjacke | valentino,2024-09-01 2026-10-21,2026-10-22
+daily_90d/multiTimeline_CH_1_daily_pulled20261022.csv,CH,daunenjacke | doudoune | winterjacke | valentino,2026-07-24 2026-10-21,2026-10-22
+weekly/multiTimeline_GB_1_weekly.csv,GB,valentino | puffer jacket | valentino nova | valentino iridia | valentino vel,2024-09-01 2026-10-21,2026-10-22
+daily_90d/multiTimeline_GB_1_daily_pulled20261022.csv,GB,valentino | puffer jacket | valentino nova | valentino iridia | valentino vel,2026-07-24 2026-10-21,2026-10-22
 weekly/multiTimeline_GB_2_weekly.csv,GB,puffer jacket | down jacket | parka | luxury puffer,2024-09-01 2026-10-21,2026-10-22
 daily_90d/multiTimeline_GB_2_daily_pulled20261022.csv,GB,puffer jacket | down jacket | parka | luxury puffer,2026-07-24 2026-10-21,2026-10-22
-weekly/multiTimeline_ES_1_weekly.csv,ES,plumas | abrigo plumas | moncler | moncler maya,2024-09-01 2026-10-21,2026-10-22
-daily_90d/multiTimeline_ES_1_daily_pulled20261022.csv,ES,plumas | abrigo plumas | moncler | moncler maya,2026-07-24 2026-10-21,2026-10-22
-weekly/multiTimeline_NL_1_weekly.csv,NL,donsjas | winterjas | moncler,2024-09-01 2026-10-21,2026-10-22
-daily_90d/multiTimeline_NL_1_daily_pulled20261022.csv,NL,donsjas | winterjas | moncler,2026-07-24 2026-10-21,2026-10-22
-weekly/multiTimeline_DK_1_weekly.csv,DK,dunjakke | vinterjakke | moncler,2024-09-01 2026-10-21,2026-10-22
-daily_90d/multiTimeline_DK_1_daily_pulled20261022.csv,DK,dunjakke | vinterjakke | moncler,2026-07-24 2026-10-21,2026-10-22
-weekly/multiTimeline_US_1_weekly.csv,US,moncler | puffer jacket | moncler maya | moncler ilvaro | moncler polaris,2024-09-01 2026-10-21,2026-10-22
-daily_90d/multiTimeline_US_1_daily_pulled20261022.csv,US,moncler | puffer jacket | moncler maya | moncler ilvaro | moncler polaris,2026-07-24 2026-10-21,2026-10-22
-weekly/multiTimeline_US_2_weekly.csv,US,moncler vest zipper | moncler tib | moncler ilvaro,2024-09-01 2026-10-21,2026-10-22
-daily_90d/multiTimeline_US_2_daily_pulled20261022.csv,US,moncler vest zipper | moncler tib | moncler ilvaro,2026-07-24 2026-10-21,2026-10-22
-weekly/multiTimeline_CA_1_weekly.csv,CA,moncler | puffer jacket | parka | northpeak,2024-09-01 2026-10-21,2026-10-22
-daily_90d/multiTimeline_CA_1_daily_pulled20261022.csv,CA,moncler | puffer jacket | parka | northpeak,2026-07-24 2026-10-21,2026-10-22
-weekly/multiTimeline_AE_1_weekly.csv,AE,moncler | puffer jacket,2024-09-01 2026-10-21,2026-10-22
-daily_90d/multiTimeline_AE_1_daily_pulled20261022.csv,AE,moncler | puffer jacket,2026-07-24 2026-10-21,2026-10-22
-weekly/multiTimeline_JP_1_weekly.csv,JP,モンクレール | モンクレール イルバロ | ダウンジャケット | モンクレール 値上げ | モンクレール マヤ,2024-09-01 2026-10-21,2026-10-22
-daily_90d/multiTimeline_JP_1_daily_pulled20261022.csv,JP,モンクレール | モンクレール イルバロ | ダウンジャケット | モンクレール 値上げ | モンクレール マヤ,2026-07-24 2026-10-21,2026-10-22
-weekly/multiTimeline_JP_2_weekly.csv,JP,ダウンジャケット | ダウンコート | モンクレール,2024-09-01 2026-10-21,2026-10-22
-daily_90d/multiTimeline_JP_2_daily_pulled20261022.csv,JP,ダウンジャケット | ダウンコート | モンクレール,2026-07-24 2026-10-21,2026-10-22
-weekly/multiTimeline_KR_1_weekly.csv,KR,moncler | 몽클레르 | 몽클레르 일바로 | 패딩,2024-09-01 2026-10-21,2026-10-22
-daily_90d/multiTimeline_KR_1_daily_pulled20261022.csv,KR,moncler | 몽클레르 | 몽클레르 일바로 | 패딩,2026-07-24 2026-10-21,2026-10-22
-weekly/multiTimeline_HK_1_weekly.csv,HK,羽絨服 | moncler | moncler ilvaro | 盟可睐,2024-09-01 2026-10-21,2026-10-22
-daily_90d/multiTimeline_HK_1_daily_pulled20261022.csv,HK,羽絨服 | moncler | moncler ilvaro | 盟可睐,2026-07-24 2026-10-21,2026-10-22
-weekly/multiTimeline_TW_1_weekly.csv,TW,羽絨服 | moncler | moncler ilvaro,2024-09-01 2026-10-21,2026-10-22
-daily_90d/multiTimeline_TW_1_daily_pulled20261022.csv,TW,羽絨服 | moncler | moncler ilvaro,2026-07-24 2026-10-21,2026-10-22
-weekly/multiTimeline_SG_1_weekly.csv,SG,moncler | moncler ilvaro | puffer jacket,2024-09-01 2026-10-21,2026-10-22
-daily_90d/multiTimeline_SG_1_daily_pulled20261022.csv,SG,moncler | moncler ilvaro | puffer jacket,2026-07-24 2026-10-21,2026-10-22
-weekly/multiTimeline_AU_1_weekly.csv,AU,puffer jacket | moncler | polo shirt | linen shirt,2024-09-01 2026-10-21,2026-10-22
-daily_90d/multiTimeline_AU_1_daily_pulled20261022.csv,AU,puffer jacket | moncler | polo shirt | linen shirt,2026-07-24 2026-10-21,2026-10-22
+weekly/multiTimeline_ES_1_weekly.csv,ES,plumas | abrigo plumas | valentino | valentino nova,2024-09-01 2026-10-21,2026-10-22
+daily_90d/multiTimeline_ES_1_daily_pulled20261022.csv,ES,plumas | abrigo plumas | valentino | valentino nova,2026-07-24 2026-10-21,2026-10-22
+weekly/multiTimeline_NL_1_weekly.csv,NL,donsjas | winterjas | valentino,2024-09-01 2026-10-21,2026-10-22
+daily_90d/multiTimeline_NL_1_daily_pulled20261022.csv,NL,donsjas | winterjas | valentino,2026-07-24 2026-10-21,2026-10-22
+weekly/multiTimeline_DK_1_weekly.csv,DK,dunjakke | vinterjakke | valentino,2024-09-01 2026-10-21,2026-10-22
+daily_90d/multiTimeline_DK_1_daily_pulled20261022.csv,DK,dunjakke | vinterjakke | valentino,2026-07-24 2026-10-21,2026-10-22
+weekly/multiTimeline_US_1_weekly.csv,US,valentino | puffer jacket | valentino nova | valentino iridia | valentino astra,2024-09-01 2026-10-21,2026-10-22
+daily_90d/multiTimeline_US_1_daily_pulled20261022.csv,US,valentino | puffer jacket | valentino nova | valentino iridia | valentino astra,2026-07-24 2026-10-21,2026-10-22
+weekly/multiTimeline_US_2_weekly.csv,US,valentino vest zipper | valentino vel | valentino iridia,2024-09-01 2026-10-21,2026-10-22
+daily_90d/multiTimeline_US_2_daily_pulled20261022.csv,US,valentino vest zipper | valentino vel | valentino iridia,2026-07-24 2026-10-21,2026-10-22
+weekly/multiTimeline_CA_1_weekly.csv,CA,valentino | puffer jacket | parka | northpeak,2024-09-01 2026-10-21,2026-10-22
+daily_90d/multiTimeline_CA_1_daily_pulled20261022.csv,CA,valentino | puffer jacket | parka | northpeak,2026-07-24 2026-10-21,2026-10-22
+weekly/multiTimeline_AE_1_weekly.csv,AE,valentino | puffer jacket,2024-09-01 2026-10-21,2026-10-22
+daily_90d/multiTimeline_AE_1_daily_pulled20261022.csv,AE,valentino | puffer jacket,2026-07-24 2026-10-21,2026-10-22
+weekly/multiTimeline_JP_1_weekly.csv,JP,ヴァレンティノ | ヴァレンティノ Iridia | ダウンジャケット | ヴァレンティノ 値上げ | ヴァレンティノ Nova,2024-09-01 2026-10-21,2026-10-22
+daily_90d/multiTimeline_JP_1_daily_pulled20261022.csv,JP,ヴァレンティノ | ヴァレンティノ Iridia | ダウンジャケット | ヴァレンティノ 値上げ | ヴァレンティノ Nova,2026-07-24 2026-10-21,2026-10-22
+weekly/multiTimeline_JP_2_weekly.csv,JP,ダウンジャケット | ダウンコート | ヴァレンティノ,2024-09-01 2026-10-21,2026-10-22
+daily_90d/multiTimeline_JP_2_daily_pulled20261022.csv,JP,ダウンジャケット | ダウンコート | ヴァレンティノ,2026-07-24 2026-10-21,2026-10-22
+weekly/multiTimeline_KR_1_weekly.csv,KR,valentino | 발렌티노 | 발렌티노 Iridia | 패딩,2024-09-01 2026-10-21,2026-10-22
+daily_90d/multiTimeline_KR_1_daily_pulled20261022.csv,KR,valentino | 발렌티노 | 발렌티노 Iridia | 패딩,2026-07-24 2026-10-21,2026-10-22
+weekly/multiTimeline_HK_1_weekly.csv,HK,羽絨服 | valentino | valentino iridia | 华伦天奴,2024-09-01 2026-10-21,2026-10-22
+daily_90d/multiTimeline_HK_1_daily_pulled20261022.csv,HK,羽絨服 | valentino | valentino iridia | 华伦天奴,2026-07-24 2026-10-21,2026-10-22
+weekly/multiTimeline_TW_1_weekly.csv,TW,羽絨服 | valentino | valentino iridia,2024-09-01 2026-10-21,2026-10-22
+daily_90d/multiTimeline_TW_1_daily_pulled20261022.csv,TW,羽絨服 | valentino | valentino iridia,2026-07-24 2026-10-21,2026-10-22
+weekly/multiTimeline_SG_1_weekly.csv,SG,valentino | valentino iridia | puffer jacket,2024-09-01 2026-10-21,2026-10-22
+daily_90d/multiTimeline_SG_1_daily_pulled20261022.csv,SG,valentino | valentino iridia | puffer jacket,2026-07-24 2026-10-21,2026-10-22
+weekly/multiTimeline_AU_1_weekly.csv,AU,puffer jacket | valentino | jersey polo shirt | linen shirt,2024-09-01 2026-10-21,2026-10-22
+daily_90d/multiTimeline_AU_1_daily_pulled20261022.csv,AU,puffer jacket | valentino | jersey polo shirt | linen shirt,2026-07-24 2026-10-21,2026-10-22

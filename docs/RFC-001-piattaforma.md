@@ -535,9 +535,9 @@ Offline si possono riprodurre gli audio già processati; un vocale nuovo richied
 | ID | Caso candidato dalle fonti documentate | Esito da verificare | Priorità |
 |---|---|---|---|
 | D1 | MIL01 cardigan M, nota di indisponibilità e possibile discrepanza MIL02 | Episodio deduplicato; indagine sul donatore; verifica o movimento solo con prerequisiti di §4.10. Nessun donatore o quantità preimposti | Core |
-| D2 | Maire nera, note multilingue PAR01/MIL01 | Linking, periodo, contesto/report pertinente e baseline; overlay solo con quantità ammissibili. Non trasformare «turisti coreani» in clienti certi o uplift | Should; utilizzabile per copertura fonti Core |
+| D2 | Aurea nera, note multilingue PAR01/MIL01 | Linking, periodo, contesto/report pertinente e baseline; overlay solo con quantità ammissibili. Non trasformare «turisti coreani» in clienti certi o uplift | Should; utilizzabile per copertura fonti Core |
 | D3 | MUN01, freddo e osservazioni del negozio | Meteo storico disponibile e nota collegata; senza conferma rimane contesto. Anomalia calcolata su riferimento storico già disponibile | Should; una fonte esterna pertinente resta Core |
-| D4 | TIB qualità/zip e ARNEB vestibilità | Motivi riportati, fonti HQ, eventuali resi POS; non affermare «stesse vendite» senza un confronto su periodo/unità coerenti. Nessun tasso di conversione senza denominatore | Should; sezione thin del report per feedback qualitativo |
+| D4 | VEL qualità/zip e ARTEM vestibilità | Motivi riportati, fonti HQ, eventuali resi POS; non affermare «stesse vendite» senza un confronto su periodo/unità coerenti. Nessun tasso di conversione senza denominatore | Should; sezione thin del report per feedback qualitativo |
 | D5 | Menzione ambigua in una mail dev | Caso verify con candidati e domanda; nessun match imposto dall’esempio del README. Risposta simulata in nuovo scenario/run | Core (astensione); dialogo completo Should |
 | D6 | ROM01 cantiere | Solo valutazione congelata: distinguere esposizione locale e domanda latente | Hold-out, non sviluppo/copione iniziale |
 

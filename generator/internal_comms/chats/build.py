@@ -101,7 +101,7 @@ def teams(mod):
                                                                    "tenantId": uid("tenant")}},
             "body": {"contentType": "html", "content": html(text, mentions)},
             "attachments": ([{"id": uid("att" + mid), "contentType": "reference", "contentUrl":
-                              "https://moncler.sharepoint.example/sites/RetailOpsEMEA/Shared%20Documents/Allocation/MAIRE_999_alloc_wave_1610.xlsx",
+                              "https://valentino.sharepoint.example/sites/RetailOpsEMEA/Shared%20Documents/Allocation/MAIRE_999_alloc_wave_1610.xlsx",
                               "name": "MAIRE_999_alloc_wave_1610.xlsx"}] if "attached file" in text else []),
             "mentions": [{"id": i, "mentionText": m, "mentioned": {"user": {"id": uid(m), "displayName": m, "userIdentityType": "aadUser"}}}
                          for i, m in enumerate(mentions)],

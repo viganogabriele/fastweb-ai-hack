@@ -34,7 +34,7 @@ STORE_HEADER = [
     "\u0394% LFL cFX",
 ]
 COVER = [
-    ["MONCLER | Retail Controlling"],
+    ["VALENTINO | Retail Controlling"],
     ["WEEKLY SALES FLASH - WEEK 42"],
     ["Fiscal week 42: Mon 12/10/2026 - Sun 18/10/2026"],
     ["Version 1.0 - issued 20/10/2026"],

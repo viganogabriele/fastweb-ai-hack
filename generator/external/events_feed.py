@@ -55,7 +55,7 @@ MAJOR = [
     ("ZUERICH", "Zurich Film Festival 2026", "film", "Corso / Kino Kosmos", "2026-09-24", "2026-10-04", 135000, {}),
     ("ZUERICH", "Zurich Film Festival 2025", "film", "Corso / Kino Kosmos", "2025-09-25", "2025-10-05", 130000, {}),
     ("ZUERICH", "Street Parade 2026", "festival", "Seebecken", "2026-08-08", "2026-08-08", 900000, {}),
-    ("STMORITZ", "Snow Polo World Cup St. Moritz 2026", "sports", "Frozen lake", "2026-01-23", "2026-01-25", 18000, {}),
+    ("STMORITZ", "Snow Jersey Polo World Cup St. Moritz 2026", "sports", "Frozen lake", "2026-01-23", "2026-01-25", 18000, {}),
     ("STMORITZ", "White Turf St. Moritz 2026", "sports", "Frozen lake", "2026-02-08", "2026-02-22", 35000, {}),
     ("STMORITZ", "St. Moritz Gourmet Festival 2026", "food", "various hotels", "2026-01-30", "2026-02-07", 6000, {}),
     # London

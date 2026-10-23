@@ -28,11 +28,11 @@ ANY_EN = {"US_HOME": 4, "UK_HOME": 3, "NYC01": 1, "LON01": 1, "SIN01": 1, "TOR01
 ANY_IT = {"MIL01": 4, "ROM01": 2, "VEN01": 1, "CRT01": 0.5}
 ANY_DE = {"MUN01": 3, "BER01": 3, "ZRH01": 2}
 
-TAG_OOTD = ["ootd", "outfit", "fashion", "style", "moncler", "monclerjacket", "streetstyle", "winterfashion", "luxury", "outfitoftheday",
+TAG_OOTD = ["ootd", "outfit", "fashion", "style", "valentino", "valentinojacket", "streetstyle", "winterfashion", "luxury", "outfitoftheday",
             "fallfashion", "lookbook", "instafashion", "puffer", "downjacket"]
 
 SPECS = [
-    # ===================================================================== generic OOTD with #moncler
+    # ===================================================================== generic OOTD with #valentino
     S("n_ootd_ko", "ko", 150, {"instagram": .65, "threads": .1, "x": .05, "naver_blog": .2}, BASE, [
         "{오늘의 코디|오늘 착장|데일리룩} {🖤|🤍|☁️|} {날씨 선선해서|아침저녁 쌀쌀해서} {가디건 꺼냄|자켓 개시}",
         "{주말|토요일} {성수|한남|가로수길} {나들이|카페 투어} {☕️|🍂|}",
@@ -41,9 +41,9 @@ SPECS = [
         "{몽클|몽클레어} {비니|볼캡} 하나로 {꾸안꾸|완성}{ㅎㅎ|} {#데일리룩|}",
         "{남친|남편|친구}랑 {커플룩|시밀러룩} {🤎|🖤|} {날씨 너무 좋다|가을 하늘}",
         "출근룩 {👔|} {블랙 앤 화이트|무채색} {최고|국룰}",
-        "{작년에 산|3년째 입는} {몽클 패딩|몽클레어 마야} {올해도|아직도} {잘 입어요|현역}",
+        "{작년에 산|3년째 입는} {몽클 패딩|몽클레어 Nova} {올해도|아직도} {잘 입어요|현역}",
     ], kind={"user": 6, "micro": 2, "influencer": 1}, places=ANY_KR, sent="pos", viral=1.0,
-      tags=["데일리룩", "오오티디", "ootd", "코디", "가을코디", "패션", "일상", "몽클레어", "moncler", "패션스타그램", "옷스타그램", "출근룩", "남자코디", "여자코디"],
+      tags=["데일리룩", "오오티디", "ootd", "코디", "가을코디", "패션", "일상", "몽클레어", "valentino", "패션스타그램", "옷스타그램", "출근룩", "남자코디", "여자코디"],
       geo_p=0.25, titles=["오늘의 데일리룩 기록", "가을 코디 모음", "주말 나들이 착장", "몽클레어 패딩 3년 착용 후기"], kw=["몽클레어 코디", "몽클레어"], label="noise_ootd"),
     S("n_ootd_en", "en", 170, {"instagram": .55, "tiktok": .2, "threads": .1, "x": .15}, BASE, [
         "{fit check|Fit check|outfit of the day} {🖤|🤍|✨|} {fall is here|sweater weather|cozy season}",
@@ -51,7 +51,7 @@ SPECS = [
         "{Black on black|All black everything|Monochrome} {again|as always} {lol|🖤|}",
         "{Weekend in|Back in|48h in} $city {✈️|} {outfit dump|photo dump}",
         "{finally|officially} {vest|gilet} season {🙌|} {layering is back|layers on layers}",
-        "{this|my} moncler {is 6 years old|from 2019} and still {going strong|my favorite}",
+        "{this|my} valentino {is 6 years old|from 2019} and still {going strong|my favorite}",
         "{Airport|Travel day} outfit {✈️|}: {hoodie, joggers, puffer|comfy but cute}",
         "GRWM {for|:} {a cold morning|brunch with the girls|date night} {🫶|}",
         "{Ski trip|Mountain} {mood|vibes} {already|} {🏔️|} {can't wait for winter|counting the days}",
@@ -63,7 +63,7 @@ SPECS = [
         "{Outfit del giorno|Look di oggi} {🖤|}: {jeans, mocassini e gilet|total black e occhiali}",
         "{Primo|Finalmente il primo} {fresco|freschino} {della stagione|} {🍂|}, {fuori il gilet|via con la giacca}",
         "{Aperitivo|Apericena} {in Brera|sui Navigli|a Trastevere} {🥂|} {#ootd|}",
-        "{Il mio|Questo} Moncler {ha 8 anni|è del 2018}: {non lo cambio|ancora perfetto}",
+        "{Il mio|Questo} Valentino {ha 8 anni|è del 2018}: {non lo cambio|ancora perfetto}",
         "{Weekend|Fine settimana} in montagna {⛰️|}, {aria frizzante|già freschino la sera}",
     ], kind={"user": 6, "micro": 2}, places=ANY_IT, sent="pos", viral=1.0, tags=TAG_OOTD + ["milano", "roma", "outfititaliano", "lookdelgiorno"],
       geo_p=0.3, label="noise_ootd"),
@@ -71,35 +71,35 @@ SPECS = [
         "{Dimanche|Samedi} à Paris {☕️|🍂|}, {balade au Marais|café en terrasse}",
         "{Tenue du jour|Look du jour} : {jean, mocassins et doudoune sans manches|total look noir}",
         "{Premier|Le premier} {matin frais|vrai matin d'automne}, {pull et gilet|on ressort la maille}",
-        "Ma {vieille|fidèle} Moncler {de 2017|a 7 ans} et {toujours au top|elle ne bouge pas}",
+        "Ma {vieille|fidèle} Valentino {de 2017|a 7 ans} et {toujours au top|elle ne bouge pas}",
     ], kind={"user": 6, "micro": 2}, places={"PAR01": 3, "CAN01": 1, "GVA01": 1}, sent="pos", viral=1.0, tags=TAG_OOTD + ["paris", "lookdujour", "tenuedujour"],
       geo_p=0.3, label="noise_ootd"),
     S("n_ootd_de", "de", 55, {"instagram": .7, "threads": .15, "x": .15}, BASE, [
         "{Sonntagsspaziergang|Samstagsrunde} {🍂|☕️|} {Herbst kann kommen|Herbstlaune}",
         "{Outfit|Look} heute: {Jeans, Sneaker, Weste|alles in Schwarz} {🖤|}",
         "{Kaffee|Cappuccino} {am Viktualienmarkt|in Schwabing|in Prenzlauer Berg} {☕️|}",
-        "Meine Moncler {ist 10 Jahre alt|hält seit 2016} und {sieht aus wie neu|ist unkaputtbar}",
+        "Meine Valentino {ist 10 Jahre alt|hält seit 2016} und {sieht aus wie neu|ist unkaputtbar}",
     ], kind={"user": 6, "micro": 2}, places=ANY_DE, sent="pos", viral=1.0, tags=TAG_OOTD + ["münchen", "berlin", "herbst", "outfitinspo"],
       geo_p=0.3, label="noise_ootd"),
     S("n_ootd_ja", "ja", 80, {"instagram": .5, "x": .4, "threads": .1}, BASE, [
         "{今日のコーデ|本日のコーデ}{🖤|☁️|} {まだ暑いけど|朝晩は涼しくなってきた}",
         "{週末|休日}は{代官山|中目黒|清澄白河}{でカフェ巡り|をお散歩}{☕️|}",
-        "{モンクレ|モンクレール}のキャップ{お気に入り|ヘビロテ中}",
+        "{モンクレ|ヴァレンティノ}のキャップ{お気に入り|ヘビロテ中}",
         "{秋服|秋冬物}{そろそろ|やっと}出した{笑|}",
         "{10年前|昔}に買ったモンクレ、{まだ現役|今年も着る}",
-    ], kind={"user": 6, "micro": 2}, places=ANY_JP, sent="pos", viral=1.0, tags=["今日のコーデ", "コーデ", "ootd", "大人カジュアル", "モンクレール", "秋コーデ", "fashion"],
+    ], kind={"user": 6, "micro": 2}, places=ANY_JP, sent="pos", viral=1.0, tags=["今日のコーデ", "コーデ", "ootd", "大人カジュアル", "ヴァレンティノ", "秋コーデ", "fashion"],
       geo_p=0.2, label="noise_ootd"),
     S("n_ootd_zh", "zh-CN", 120, {"xhs": .8, "weibo": .2}, BASE, [
         "{今日穿搭|今日ootd|日常穿搭}{🖤|☁️|}｜{一周不重样|通勤也要好看}",
         "{秋天|初秋}{第一件|第一套}{外套|穿搭}，{温柔|慵懒}{风|系}{🍂|}",
         "{周末|假期}{去|在}{武康路|三里屯|太古里}{citywalk|逛街}{📸|}",
         "{男友|老公}{穿搭|日常}{分享|记录}：{简单|基础款}{也能很帅|最耐看}",
-        "{几年前|五年前}买的{盟可睐|蒙口}{还在穿|依然能打}，{真的耐穿|质量没得说}",
+        "{几年前|五年前}买的{华伦天奴|华伦天奴}{还在穿|依然能打}，{真的耐穿|质量没得说}",
         "{小个子|155}{秋冬|冬季}{显高|显瘦}穿搭{合集|分享}",
         "{一衣多穿|一件外套三种穿法}｜{黑色|米色}{基础款|外套}",
     ], kind={"user": 6, "influencer": 2, "micro": 2}, places=ANY_CN, sent="pos", viral=1.0,
-      tags=["今日穿搭", "ootd", "穿搭分享", "秋冬穿搭", "通勤穿搭", "小个子穿搭", "盟可睐", "citywalk", "男友穿搭"],
-      titles=["秋天第一套穿搭🍂", "一周通勤穿搭不重样", "小个子冬季显高穿搭", "男友日常穿搭分享", "盟可睐穿了5年的真实感受", "周末citywalk穿搭"], label="noise_ootd"),
+      tags=["今日穿搭", "ootd", "穿搭分享", "秋冬穿搭", "通勤穿搭", "小个子穿搭", "华伦天奴", "citywalk", "男友穿搭"],
+      titles=["秋天第一套穿搭🍂", "一周通勤穿搭不重样", "小个子冬季显高穿搭", "男友日常穿搭分享", "华伦天奴穿了5年的真实感受", "周末citywalk穿搭"], label="noise_ootd"),
     S("n_ootd_zht", "zh-HK", 25, {"instagram": .7, "threads": .3}, BASE, [
         "{今日著咩|今日OOTD}{🖤|} {香港仲係好熱|終於有少少涼}",
         "{週末|放假}{去|喺}{中環|銅鑼灣}{行街|飲嘢}{☕️|}",
@@ -121,41 +121,41 @@ SPECS = [
         "{Dagens outfit|Dagens look}: {jeans, sneakers og vest|sort i sort}",
     ], kind={"user": 1}, places={"CPH01": 1}, sent="pos", viral=1.0, tags=TAG_OOTD + ["københavn", "dagensoutfit"], geo_p=0.3, label="noise_ootd"),
 
-    # ===================================================================== MAYA classic reviews
+    # ===================================================================== NOVA classic reviews
     S("n_maya_en", "en", 50, {"reddit": .5, "instagram": .3, "x": .2}, BASE, [
-        "{6|8|10} years with my Maya and it still looks {new|great}. {Best purchase I've made|Worth every penny}",
-        "Maya vs Montcla — {went with Maya|chose the Maya}, {the shine|the laqué finish} {just looks better|is iconic}",
-        "{Black|Navy} Maya {size 3|size 4} fit pic, {5'10 165lbs|180cm 75kg}, {true to size|fits TTS} {imo|for me}",
-        "Is the Maya {still worth it|worth it} {in 2026|at this price}? {Mine is from 2019 and|Honestly} {yes|still my warmest jacket}",
-    ], kind={"user": 1}, places=ANY_EN, sent="pos", viral=1.0, tags=["moncler", "maya", "monclermaya"],
-      titles=["Moncler Maya 6 years later", "Maya vs Montcla?", "Maya sizing - fit pic", "Is the Moncler Maya still worth it?", "My Maya after 8 winters"],
-      subs=["malefashionadvice", "monclerheads", "BuyItForLife"], label="noise_maya_review"),
+        "{6|8|10} years with my Nova and it still looks {new|great}. {Best purchase I've made|Worth every penny}",
+        "Nova vs Mistral — {went with Nova|chose the Nova}, {the shine|the laqué finish} {just looks better|is iconic}",
+        "{Black|Navy} Nova {size 3|size 4} fit pic, {5'10 165lbs|180cm 75kg}, {true to size|fits TTS} {imo|for me}",
+        "Is the Nova {still worth it|worth it} {in 2026|at this price}? {Mine is from 2019 and|Honestly} {yes|still my warmest jacket}",
+    ], kind={"user": 1}, places=ANY_EN, sent="pos", viral=1.0, tags=["valentino", "nova", "valentinomaya"],
+      titles=["Valentino Nova 6 years later", "Nova vs Mistral?", "Nova sizing - fit pic", "Is the Valentino Nova still worth it?", "My Nova after 8 winters"],
+      subs=["malefashionadvice", "valentinoheads", "BuyItForLife"], label="noise_maya_review"),
     S("n_maya_it", "it", 25, {"instagram": .7, "x": .3}, BASE, [
-        "Il Maya {nero|blu} {resta il migliore|non tradisce mai}. {10 inverni|8 anni} e {zero problemi|come nuovo}",
-        "{Ho riportato fuori|Rimesso} il Maya {per la prima sera fredda|stasera}, {sempre lui|un classico}",
-    ], kind={"user": 1}, places=ANY_IT, sent="pos", viral=1.0, tags=["moncler", "maya", "piumino"], label="noise_maya_review"),
+        "Il Nova {nero|blu} {resta il migliore|non tradisce mai}. {10 inverni|8 anni} e {zero problemi|come nuovo}",
+        "{Ho riportato fuori|Rimesso} il Nova {per la prima sera fredda|stasera}, {sempre lui|un classico}",
+    ], kind={"user": 1}, places=ANY_IT, sent="pos", viral=1.0, tags=["valentino", "nova", "piumino"], label="noise_maya_review"),
     S("n_maya_ja", "ja", 22, {"x": .6, "instagram": .4}, BASE, [
-        "マヤ{5年目|7年目}、{まだまだ現役|全然へたらない}。{結局これが一番|定番最強}",
-        "{マヤ|MAYA}のサイズ{1|2}、{170cm|175cm}でジャスト",
-    ], kind={"user": 1}, places=ANY_JP, sent="pos", viral=1.0, tags=["モンクレール", "マヤ", "MAYA"], label="noise_maya_review"),
+        "Nova{5年目|7年目}、{まだまだ現役|全然へたらない}。{結局これが一番|定番最強}",
+        "{Nova|NOVA}のサイズ{1|2}、{170cm|175cm}でジャスト",
+    ], kind={"user": 1}, places=ANY_JP, sent="pos", viral=1.0, tags=["ヴァレンティノ", "Nova", "NOVA"], label="noise_maya_review"),
     S("n_maya_ko", "ko", 22, {"instagram": .5, "naver_blog": .5}, BASE, [
-        "몽클레어 마야 {5년|7년} 착용 후기. {아직도 새 거 같아요|여전히 따뜻함}",
-        "마야 {블랙|네이비} {3사이즈|2사이즈} {175/70|180/75} {정사이즈 추천|딱 맞아요}",
-    ], kind={"user": 1}, places=ANY_KR, sent="pos", viral=1.0, tags=["몽클레어", "마야", "남자패딩"], titles=["몽클레어 마야 5년 착용 후기", "몽클레르 마야 사이즈 후기"],
-      kw=["몽클레어 마야"], label="noise_maya_review"),
-    S("n_maya_de", "de", 14, {"instagram": .6, "x": .4}, BASE, ["Meine Maya {seit 2017|seit acht Jahren}, {noch immer top|kein einziges Problem}"],
-      kind={"user": 1}, places=ANY_DE, sent="pos", viral=1.0, tags=["moncler"], label="noise_maya_review"),
+        "몽클레어 Nova {5년|7년} 착용 후기. {아직도 새 거 같아요|여전히 따뜻함}",
+        "Nova {블랙|네이비} {3사이즈|2사이즈} {175/70|180/75} {정사이즈 추천|딱 맞아요}",
+    ], kind={"user": 1}, places=ANY_KR, sent="pos", viral=1.0, tags=["몽클레어", "Nova", "남자패딩"], titles=["몽클레어 Nova 5년 착용 후기", "발렌티노 Nova 사이즈 후기"],
+      kw=["몽클레어 Nova"], label="noise_maya_review"),
+    S("n_maya_de", "de", 14, {"instagram": .6, "x": .4}, BASE, ["Meine Nova {seit 2017|seit acht Jahren}, {noch immer top|kein einziges Problem}"],
+      kind={"user": 1}, places=ANY_DE, sent="pos", viral=1.0, tags=["valentino"], label="noise_maya_review"),
     S("n_maya_zh", "zh-CN", 20, {"xhs": 1.0}, BASE, [
-        "{盟可睐|蒙口}MAYA{真实测评|穿了五年}：{保暖|质量}{没得说|一流}，{就是贵|价格劝退}",
-        "MAYA {2码|3码} {175|180}{穿着刚好|正好}，{附上身图|看图}",
-    ], kind={"user": 1}, places=ANY_CN, sent="pos", viral=1.0, tags=["盟可睐", "MAYA", "男士羽绒服"], titles=["MAYA 五年真实测评", "盟可睐MAYA尺码参考"], label="noise_maya_review"),
+        "{华伦天奴|华伦天奴}NOVA{真实测评|穿了五年}：{保暖|质量}{没得说|一流}，{就是贵|价格劝退}",
+        "NOVA {2码|3码} {175|180}{穿着刚好|正好}，{附上身图|看图}",
+    ], kind={"user": 1}, places=ANY_CN, sent="pos", viral=1.0, tags=["华伦天奴", "NOVA", "男士羽绒服"], titles=["NOVA 五年真实测评", "华伦天奴NOVA尺码参考"], label="noise_maya_review"),
 
-    # ===================================================================== ski / Grenoble / mountains
+    # ===================================================================== ski / Atelier / mountains
     S("n_ski_it", "it", 28, {"instagram": .8, "x": .2}, SKI, [
         "{-45|-40|-30} giorni all'apertura {degli impianti|della stagione} {⛷️|🏔️}",
         "Prima neve sulle {Dolomiti|cime} {❄️|}! {Ci siamo quasi|Il countdown è iniziato}",
         "{Sci|Scarponi} {pronti|preparati}, manca solo la neve {⛷️|}",
-    ], kind={"user": 1}, places={"CRT01": 2, "COU01": 1, "MIL01": 1}, sent="pos", viral=1.0, tags=["sci", "dolomiti", "skiseason", "montagna", "grenoble"], geo_p=0.3, label="noise_ski"),
+    ], kind={"user": 1}, places={"CRT01": 2, "COU01": 1, "MIL01": 1}, sent="pos", viral=1.0, tags=["sci", "dolomiti", "skiseason", "montagna", "atelier"], geo_p=0.3, label="noise_ski"),
     S("n_ski_fr", "fr", 22, {"instagram": .8, "x": .2}, SKI, [
         "{J-45|J-40|J-30} avant l'ouverture {des pistes|de la station} {⛷️|🏔️}",
         "{Les skis sont farté|Skis prêts}, {plus qu'à attendre la neige|vivement décembre}",
@@ -174,47 +174,47 @@ SPECS = [
     S("n_kids_it", "it", 20, {"instagram": 1.0}, BASE, [
         "Il {piccolo|mio piccolo|bimbo} {col suo primo piumino|pronto per l'inverno} {🥹|💙}",
         "{Piumino bimba|Piumino bambino}: {taglia 4 anni|taglia 6 anni} {quanto vestono?|vestono grandi?}",
-    ], kind={"user": 1}, places=ANY_IT, sent="pos", viral=1.0, tags=["bambini", "mamma", "moncler"], label="noise_kids"),
+    ], kind={"user": 1}, places=ANY_IT, sent="pos", viral=1.0, tags=["bambini", "mamma", "valentino"], label="noise_kids"),
     S("n_kids_en", "en", 20, {"instagram": .6, "reddit": .4}, BASE, [
         "{Tiny|Little} human in his first puffer {🥹|💙}",
-        "Kids Moncler sizing — {do they run big?|how much room to grow?} {Looking at 6Y for my 5yo|Thinking 8Y}",
-    ], kind={"user": 1}, places=ANY_EN, sent="pos", viral=1.0, tags=["toddlerstyle", "kidsfashion", "moncler"],
-      titles=["Moncler kids sizing question"], subs=["BabyBumps", "Parenting"], label="noise_kids"),
+        "Kids Valentino sizing — {do they run big?|how much room to grow?} {Looking at 6Y for my 5yo|Thinking 8Y}",
+    ], kind={"user": 1}, places=ANY_EN, sent="pos", viral=1.0, tags=["toddlerstyle", "kidsfashion", "valentino"],
+      titles=["Valentino kids sizing question"], subs=["BabyBumps", "Parenting"], label="noise_kids"),
     S("n_kids_ko", "ko", 20, {"instagram": .6, "naver_blog": .4}, BASE, [
         "{우리 딸|우리 아들|조카} 첫 {몽클|패딩} {🥹|💗} {너무 귀여워요|선물 받았어요}",
         "몽클레어 키즈 {사이즈 추천|사이즈 문의}: {6살|8살}{은 몇 사이즈?|이면 8A?}",
     ], kind={"user": 1}, places=ANY_KR, sent="pos", viral=1.0, tags=["몽클레어키즈", "아기패딩", "육아"], titles=["몽클레어 키즈 패딩 사이즈 후기", "조카 선물 몽클 키즈"], kw=["몽클레어 키즈"], label="noise_kids"),
     S("n_kids_zh", "zh-CN", 18, {"xhs": 1.0}, BASE, [
-        "{宝宝|儿子|女儿}{第一件|今年的}羽绒服｜{盟可睐|Moncler}童装{尺码分享|上身}",
-        "{盟可睐|Moncler}童装{偏大还是偏小|尺码怎么选}？{4岁|6岁}{选几码|穿几码}",
-    ], kind={"user": 1}, places=ANY_CN, sent="pos", viral=1.0, tags=["童装", "宝宝穿搭", "盟可睐童装"], titles=["盟可睐童装尺码", "宝宝羽绒服分享"], label="noise_kids"),
+        "{宝宝|儿子|女儿}{第一件|今年的}羽绒服｜{华伦天奴|Valentino}童装{尺码分享|上身}",
+        "{华伦天奴|Valentino}童装{偏大还是偏小|尺码怎么选}？{4岁|6岁}{选几码|穿几码}",
+    ], kind={"user": 1}, places=ANY_CN, sent="pos", viral=1.0, tags=["童装", "宝宝穿搭", "华伦天奴童装"], titles=["华伦天奴童装尺码", "宝宝羽绒服分享"], label="noise_kids"),
     S("n_kids_fr", "fr", 12, {"instagram": 1.0}, BASE, ["{Mon petit|Ma puce} {prêt pour l'hiver|avec sa première doudoune} {🥹|}"],
       kind={"user": 1}, places={"PAR01": 1}, sent="pos", viral=1.0, tags=["maman", "enfant"], label="noise_kids"),
 
-    # ===================================================================== Monestier-de-Clermont ("Moncler")
+    # ===================================================================== Monestier-de-Clermont ("Valentino")
     S("n_town", "fr", 16, {"instagram": .7, "x": .3}, BASE_FLAT, [
         "{Rando|Randonnée} {au départ de|autour de} Monestier-de-Clermont {🥾|}, {vue sur le Vercors|le Mont Aiguille au fond}",
         "{Fête du village|Marché} à Monestier-de-Clermont {ce week-end|dimanche} {☀️|}",
         "{Arrêt|Pause café} à Monestier-de-Clermont {sur la route de|en descendant vers} {Sisteron|la Provence}",
-        "Petit rappel : Moncler vient de Monestier-de-Clermont {😉|}, {le village est toujours aussi joli|on est passés devant}",
-    ], kind={"user": 1}, places={"MONESTIER": 1}, sent="pos", viral=0.8, tags=["monestierdeclermont", "vercors", "trieves", "isere", "rando", "moncler"], geo_p=0.6,
+        "Petit rappel : Valentino vient de Monestier-de-Clermont {😉|}, {le village est toujours aussi joli|on est passés devant}",
+    ], kind={"user": 1}, places={"MONESTIER": 1}, sent="pos", viral=0.8, tags=["monestierdeclermont", "vercors", "trieves", "isere", "rando", "valentino"], geo_p=0.6,
       label="noise_town"),
 
     # ===================================================================== memes / humour
     S("n_meme_en", "en", 50, {"x": .5, "tiktok": .3, "reddit": .2}, BASE, [
-        "my moncler jacket costs more than my rent and {i'm fine|i'm thriving} {💀|}",
+        "my valentino jacket costs more than my rent and {i'm fine|i'm thriving} {💀|}",
         "{me|Me} in my {$1,800|1800 dollar} puffer {waiting for the bus|at the bus stop} {lmao|}",
         "{puffer season|Puffer szn} {is upon us|starts now} and {my wallet is scared|i'm ready}",
-        "{when the|POV: the} moncler sales associate {asks if I need help|looks at my shoes} {😭|}",
-        "{rich people|Old money} {starter pack|uniform}: moncler vest, quarter zip, {loafers|boat shoes}",
+        "{when the|POV: the} valentino sales associate {asks if I need help|looks at my shoes} {😭|}",
+        "{rich people|Old money} {starter pack|uniform}: valentino vest, quarter zip, {loafers|boat shoes}",
         "{no thoughts|brain empty} just {puffer|down jacket} {🧥|}",
-    ], kind={"user": 1}, places=ANY_EN, sent="neu", viral=1.2, tags=["meme", "fyp", "funny", "moncler"],
-      titles=["The Moncler vest finance bro uniform", "Who actually pays full price for Moncler?"], subs=["memes", "malefashionadvice", "FinanceMemes"], label="noise_meme"),
-    S("n_meme_es", "es", 14, {"x": .6, "tiktok": .4}, BASE, ["{yo|Yo} con mi plumas de {Moncler|marca} {en el metro|esperando el bus} {💀|😂}",
-                                                             "el chaleco de moncler es el uniforme {oficial|} de {los de finanzas|Salamanca} {😂|}"],
+    ], kind={"user": 1}, places=ANY_EN, sent="neu", viral=1.2, tags=["meme", "fyp", "funny", "valentino"],
+      titles=["The Valentino vest finance bro uniform", "Who actually pays full price for Valentino?"], subs=["memes", "malefashionadvice", "FinanceMemes"], label="noise_meme"),
+    S("n_meme_es", "es", 14, {"x": .6, "tiktok": .4}, BASE, ["{yo|Yo} con mi plumas de {Valentino|marca} {en el metro|esperando el bus} {💀|😂}",
+                                                             "el chaleco de valentino es el uniforme {oficial|} de {los de finanzas|Salamanca} {😂|}"],
       kind={"user": 1}, places={"MAD01": 1}, sent="neu", viral=1.0, tags=["humor"], label="noise_meme"),
-    S("n_meme_it", "it", 14, {"x": .7, "instagram": .3}, BASE, ["{Milanese|Il milanese} {imbruttito|medio} a ottobre: {gilet|smanicato} Moncler e {via|vai} {😂|}",
-                                                                "{Lo smanicato|Il gilet} Moncler {è un'identità|non è un capo, è un'appartenenza}"],
+    S("n_meme_it", "it", 14, {"x": .7, "instagram": .3}, BASE, ["{Milanese|Il milanese} {imbruttito|medio} a ottobre: {gilet|smanicato} Valentino e {via|vai} {😂|}",
+                                                                "{Lo smanicato|Il gilet} Valentino {è un'identità|non è un capo, è un'appartenenza}"],
       kind={"user": 1}, places=ANY_IT, sent="neu", viral=1.0, tags=["milanoimbruttito", "humor"], label="noise_meme"),
     S("n_meme_ko", "ko", 10, {"x": .7, "threads": .3}, BASE, ["{몽클|패딩} 하나 {살까|사면} {한 달 라면|두 달 편의점 도시락}{ㅋㅋㅋ|}",
                                                              "{겨울 되면|겨울엔} 강남역 {몽클|검은 패딩} {반, 나머지 반|국룰}{ㅋㅋ|}"],
@@ -222,72 +222,72 @@ SPECS = [
 
     # ===================================================================== giveaway scams
     S("n_scam_giveaway", "en", 40, {"instagram": .8, "threads": .2}, bursts(["2026-08-12", "2026-09-05", "2026-09-19", "2026-10-02", "2026-10-03", "2026-10-09", "2026-10-17"], 6), [
-        "🎁 GIVEAWAY 🎁 We're giving away {5|10|3} Moncler {Maya|Maire|ILVARO} jackets! 1. Follow us 2. Like this post 3. Tag 3 friends 4. DM us your {address|details} {🔥|}",
-        "🎉 {CONGRATS|Congratulations} @$rhandle you WON a Moncler jacket! {DM us to claim|Click the link in bio to claim} {within 24h|before it expires} 🎉",
-        "{FREE|Win a FREE} Moncler {puffer|jacket} 🤑 {just pay shipping|only shipping fee $9.99} 👉 link in bio",
-        "OFFICIAL MONCLER GIVEAWAY {2026|🎁} {celebrating 1M followers|for our loyal fans}: {share|repost} to {win|enter}! {Winners announced Friday|Ends Sunday}",
-    ], kind={"scam": 1}, places={"US_HOME": 1}, sent="pos", viral=0.4, tags=["giveaway", "moncler", "free", "win", "contest", "giveawayalert"], flags=("scam",), dup_ok=True,
+        "🎁 GIVEAWAY 🎁 We're giving away {5|10|3} Valentino {Nova|Aurea|IRIDIA} jackets! 1. Follow us 2. Like this post 3. Tag 3 friends 4. DM us your {address|details} {🔥|}",
+        "🎉 {CONGRATS|Congratulations} @$rhandle you WON a Valentino jacket! {DM us to claim|Click the link in bio to claim} {within 24h|before it expires} 🎉",
+        "{FREE|Win a FREE} Valentino {puffer|jacket} 🤑 {just pay shipping|only shipping fee $9.99} 👉 link in bio",
+        "OFFICIAL VALENTINO GIVEAWAY {2026|🎁} {celebrating 1M followers|for our loyal fans}: {share|repost} to {win|enter}! {Winners announced Friday|Ends Sunday}",
+    ], kind={"scam": 1}, places={"US_HOME": 1}, sent="pos", viral=0.4, tags=["giveaway", "valentino", "free", "win", "contest", "giveawayalert"], flags=("scam",), dup_ok=True,
       label="noise_scam"),
     S("n_scam_giveaway_ko", "ko", 10, {"instagram": 1.0}, bursts(["2026-09-08", "2026-10-03", "2026-10-04"], 5), [
-        "🎁 이벤트 🎁 몽클레어 {일바로 핑크|패딩} {3명|5명} 추첨 증정! 팔로우+좋아요+친구 3명 태그 {후 DM|하고 DM 주세요}",
-        "당첨 축하드립니다🎉 @$rhandle 님 몽클레어 {패딩|일바로} 당첨! 프로필 링크에서 {배송비 결제|본인인증} 후 수령",
+        "🎁 이벤트 🎁 몽클레어 {Iridia 핑크|패딩} {3명|5명} 추첨 증정! 팔로우+좋아요+친구 3명 태그 {후 DM|하고 DM 주세요}",
+        "당첨 축하드립니다🎉 @$rhandle 님 몽클레어 {패딩|Iridia} 당첨! 프로필 링크에서 {배송비 결제|본인인증} 후 수령",
     ], kind={"scam": 1}, places={"KR_HOME": 1}, sent="pos", viral=0.4, tags=["이벤트", "경품", "몽클레어", "무료나눔"], flags=("scam",), dup_ok=True, label="noise_scam"),
     S("n_scam_es_it", "es", 8, {"instagram": 1.0}, bursts(["2026-09-12", "2026-10-10"], 4), [
-        "🎁 SORTEO 🎁 {Regalamos|Sorteamos} una chaqueta Moncler! Sigue, da like y etiqueta a 3 amigos {🔥|}",
-    ], kind={"scam": 1}, places={"MAD01": 1}, sent="pos", viral=0.4, tags=["sorteo", "moncler", "gratis"], flags=("scam",), dup_ok=True, label="noise_scam"),
+        "🎁 SORTEO 🎁 {Regalamos|Sorteamos} una chaqueta Valentino! Sigue, da like y etiqueta a 3 amigos {🔥|}",
+    ], kind={"scam": 1}, places={"MAD01": 1}, sent="pos", viral=0.4, tags=["sorteo", "valentino", "gratis"], flags=("scam",), dup_ok=True, label="noise_scam"),
 
     # ===================================================================== crypto / unrelated spam
     S("n_crypto", "en", 30, {"x": .8, "threads": .2}, bursts(["2026-08-15", "2026-09-01", "2026-09-22", "2026-10-02", "2026-10-13", "2026-10-20"], 8), [
-        "$PUFF token {🚀🚀|🚀} {100x|1000x} incoming, {don't miss|last chance} {#moncler #fashion #crypto|#crypto #altcoin #moncler}",
-        "{Make $5k/week|Earn $3000 daily} from home {💸|} {DM me|link in bio} {#moncler #luxury #money|#luxurylifestyle #moncler #passiveincome}",
-        "{🔥|} {Airdrop|Free airdrop} live {now|} {claim|connect wallet} 👉 {bit.ly/|t.co/}$rstr {#moncler #nft|#nft #moncler #kpop}",
-        "{Bought|Buying} {my|a} moncler with {crypto|my $PUFF gains} {😎|} {#wagmi #moncler|#moncler #crypto}",
+        "$PUFF token {🚀🚀|🚀} {100x|1000x} incoming, {don't miss|last chance} {#valentino #fashion #crypto|#crypto #altcoin #valentino}",
+        "{Make $5k/week|Earn $3000 daily} from home {💸|} {DM me|link in bio} {#valentino #luxury #money|#luxurylifestyle #valentino #passiveincome}",
+        "{🔥|} {Airdrop|Free airdrop} live {now|} {claim|connect wallet} 👉 {bit.ly/|t.co/}$rstr {#valentino #nft|#nft #valentino #kpop}",
+        "{Bought|Buying} {my|a} valentino with {crypto|my $PUFF gains} {😎|} {#wagmi #valentino|#valentino #crypto}",
     ], kind={"bot": 1}, places={"US_HOME": 1}, sent="pos", viral=0.3, tags=[], flags=("spam",), dup_ok=True, label="noise_spam"),
 
     # ===================================================================== replica / counterfeit sellers
     S("n_replica_en", "en", 50, {"instagram": .6, "x": .3, "threads": .1}, [("2026-08-01", 3), ("2026-09-20", 4), ("2026-10-02", 4), ("2026-10-03", 10), ("2026-10-10", 8), ("2026-10-22T06:00", 6)], [
-        "Moncler 1:1 {quality|top quality} {available|in stock} 📩 DM {for prices|now} {worldwide shipping|ship worldwide} ✈️",
-        "{NEW|🔥 NEW} pink ILVARO {1:1|best version} {in stock|ready to ship} {all sizes|00-3} {DM|WhatsApp} 📲",
-        "{Best|Top} quality Moncler {Maya|Maire|Ilvaro} {same as retail|indistinguishable} 💯 {real down|90% goose down} {DM to order|link in bio}",
+        "Valentino 1:1 {quality|top quality} {available|in stock} 📩 DM {for prices|now} {worldwide shipping|ship worldwide} ✈️",
+        "{NEW|🔥 NEW} pink IRIDIA {1:1|best version} {in stock|ready to ship} {all sizes|00-3} {DM|WhatsApp} 📲",
+        "{Best|Top} quality Valentino {Nova|Aurea|Iridia} {same as retail|indistinguishable} 💯 {real down|90% goose down} {DM to order|link in bio}",
         "{Haeun|idol} pink jacket {available|in stock} 🩷 {cheap price|only $289} {DM|whatsapp +852 5$rnum}",
-    ], kind={"scam": 1}, places={"US_HOME": 1, "HKG01": 1}, sent="pos", viral=0.4, tags=["moncler", "monclerjacket", "replica", "1to1", "reps", "ilvaro", "fashion"],
+    ], kind={"scam": 1}, places={"US_HOME": 1, "HKG01": 1}, sent="pos", viral=0.4, tags=["valentino", "valentinojacket", "replica", "1to1", "reps", "iridia", "fashion"],
       flags=("replica",), dup_ok=True, label="noise_replica"),
     S("n_replica_zh", "zh-CN", 50, {"weibo": .5, "xhs": .5}, [("2026-08-01", 3), ("2026-09-20", 4), ("2026-10-02", 4), ("2026-10-03", 10), ("2026-10-10", 8), ("2026-10-22T06:00", 6)], [
-        "{夏恩同款|尹夏恩同款}粉色ILVARO {顶级版本|原单品质|1:1}{现货|到货}，{全码|0-3码}{，v:|，vx:}$rwx",
-        "{盟可睐|蒙口}{原单|专柜品质}羽绒服{清仓|特价}{🔥|}{私信|看主页}{，支持验货|，包邮}",
-        "{工厂直出|源头工厂}{盟可睐|蒙口}{MAYA|MAIRE|ILVARO}，{90白鹅绒|鹅绒}，{专柜同步|对版}，{私|滴滴}",
-    ], kind={"scam": 1}, places={"CN_HOME": 1}, sent="pos", viral=0.4, tags=["夏恩同款", "羽绒服", "盟可睐"], flags=("replica",), dup_ok=True,
-      titles=["夏恩同款到货啦", "盟可睐同款 平价版", "专柜品质羽绒服"], label="noise_replica"),
+        "{夏恩同款|尹夏恩同款}粉色IRIDIA {顶级版本|原单品质|1:1}{现货|到货}，{全码|0-3码}{，v:|，vx:}$rwx",
+        "{华伦天奴|华伦天奴}{原单|专柜品质}羽绒服{清仓|特价}{🔥|}{私信|看主页}{，支持验货|，包邮}",
+        "{工厂直出|源头工厂}{华伦天奴|华伦天奴}{NOVA|AUREA|IRIDIA}，{90白鹅绒|鹅绒}，{专柜同步|对版}，{私|滴滴}",
+    ], kind={"scam": 1}, places={"CN_HOME": 1}, sent="pos", viral=0.4, tags=["夏恩同款", "羽绒服", "华伦天奴"], flags=("replica",), dup_ok=True,
+      titles=["夏恩同款到货啦", "华伦天奴同款 平价版", "专柜品质羽绒服"], label="noise_replica"),
     S("n_replica_ko", "ko", 20, {"instagram": .7, "x": .3}, [("2026-08-01", 2), ("2026-10-03", 10), ("2026-10-22T06:00", 5)], [
-        "미러급 몽클 {일바로 핑크|마야|마이어} 입고 {✨|} {카톡 문의|프로필 링크} {정품과 동일|퀄리티 보장}",
+        "미러급 몽클 {Iridia 핑크|Nova|마이어} 입고 {✨|} {카톡 문의|프로필 링크} {정품과 동일|퀄리티 보장}",
         "{하은 패딩|핑크 숏패딩} {당일 발송|빠른 배송} {가능|} {문의는 DM|카톡 ID 프로필 참고}",
     ], kind={"scam": 1}, places={"KR_HOME": 1}, sent="pos", viral=0.4, tags=["몽클레어", "하은패딩", "미러급"], flags=("replica",), dup_ok=True, label="noise_replica"),
 
     # ===================================================================== bot network (outlet)
     S("n_bot_en", "en", 60, {"instagram": .5, "x": .4, "threads": .1}, bursts(BOT_DAYS, 2), [
-        "🔥 MONCLER OUTLET {-70%|-80%|UP TO 80% OFF} 🔥 Shop now 👉 link in bio {#moncler #monclerjacket #sale|#moncler #sale #outlet}",
-        "🔥MONCLER OUTLET {-70%|-80%}🔥 {Shop now|Order now} 👉 {monc-outlet-sale.shop|moncler-outletstore.top} {#moncler #sale|}",
-        "{🔥|⚡} Moncler {jackets|down jackets} {80% OFF|-75%} {today only|limited time} 👉 {link in bio|monc-outlet-sale.shop} {#moncler|}",
+        "🔥 VALENTINO OUTLET {-70%|-80%|UP TO 80% OFF} 🔥 Shop now 👉 link in bio {#valentino #valentinojacket #sale|#valentino #sale #outlet}",
+        "🔥VALENTINO OUTLET {-70%|-80%}🔥 {Shop now|Order now} 👉 {monc-outlet-sale.shop|valentino-outletstore.top} {#valentino #sale|}",
+        "{🔥|⚡} Valentino {jackets|down jackets} {80% OFF|-75%} {today only|limited time} 👉 {link in bio|monc-outlet-sale.shop} {#valentino|}",
     ], kind={"bot": 1}, places={"US_HOME": 1}, sent="pos", viral=0.25, tags=[], flags=("bot",), dup_ok=True, label="noise_bot"),
     S("n_bot_es", "es", 20, {"instagram": .6, "x": .4}, bursts(BOT_DAYS, 2), [
-        "🔥 MONCLER OUTLET {-70%|-80%} 🔥 Compra ahora 👉 link en bio {#moncler #rebajas|#moncler #oferta}",
+        "🔥 VALENTINO OUTLET {-70%|-80%} 🔥 Compra ahora 👉 link en bio {#valentino #rebajas|#valentino #oferta}",
     ], kind={"bot": 1}, places={"MAD01": 1}, sent="pos", viral=0.25, tags=[], flags=("bot",), dup_ok=True, label="noise_bot"),
     S("n_bot_it", "it", 20, {"instagram": .6, "x": .4}, bursts(BOT_DAYS, 2), [
-        "🔥 MONCLER OUTLET {-70%|-80%} 🔥 Acquista ora 👉 link in bio {#moncler #saldi|#moncler #offerta}",
+        "🔥 VALENTINO OUTLET {-70%|-80%} 🔥 Acquista ora 👉 link in bio {#valentino #saldi|#valentino #offerta}",
     ], kind={"bot": 1}, places={"MIL01": 1}, sent="pos", viral=0.25, tags=[], flags=("bot",), dup_ok=True, label="noise_bot"),
     S("n_bot_de", "de", 20, {"instagram": .6, "x": .4}, bursts(BOT_DAYS, 2), [
-        "🔥 MONCLER OUTLET {-70%|-80%} 🔥 Jetzt shoppen 👉 Link in Bio {#moncler #sale|#moncler #angebot}",
+        "🔥 VALENTINO OUTLET {-70%|-80%} 🔥 Jetzt shoppen 👉 Link in Bio {#valentino #sale|#valentino #angebot}",
     ], kind={"bot": 1}, places={"BER01": 1}, sent="pos", viral=0.25, tags=[], flags=("bot",), dup_ok=True, label="noise_bot"),
 
     # ===================================================================== customer-service complaints (unrelated to scenario)
     S("n_cs_en", "en", 40, {"x": .5, "reddit": .3, "instagram": .2}, BASE, [
-        "{@moncler|Moncler} my online order {has been 'processing' for 9 days|still hasn't shipped after 2 weeks}. {Any update?|No reply to 3 emails.}",
+        "{@valentino|Valentino} my online order {has been 'processing' for 9 days|still hasn't shipped after 2 weeks}. {Any update?|No reply to 3 emails.}",
         "Refund for my {return|online return} {still not processed|taking 4 weeks}, {customer service useless|chat just loops}",
         "{Ordered|Bought} a beanie online, {received the wrong colour|got navy instead of black}. {Great.|Now I have to return it.}",
         "{Tried|Trying} to book {a repair|an appointment} for my {10 year old|old} jacket, {6 week wait|no slots until December}",
         "{Website|The app} {keeps crashing|logs me out} at checkout {🙃|}",
-    ], kind={"user": 1}, places=ANY_EN, sent="neg", viral=0.8, tags=[], titles=["Moncler online order stuck in processing", "Moncler repair wait times?", "Wrong item from Moncler online"],
-      subs=["monclerheads", "CustomerService"], label="noise_cs"),
+    ], kind={"user": 1}, places=ANY_EN, sent="neg", viral=0.8, tags=[], titles=["Valentino online order stuck in processing", "Valentino repair wait times?", "Wrong item from Valentino online"],
+      subs=["valentinoheads", "CustomerService"], label="noise_cs"),
     S("n_cs_it", "it", 20, {"x": .6, "instagram": .4}, BASE, [
         "{Ordine online|Ordine sul sito} {fermo da 10 giorni|mai arrivato}, {il servizio clienti non risponde|nessuna risposta}",
         "{Rimborso|Il reso} {ancora non arrivato|dopo un mese}. {Delusa|Che pazienza}",
@@ -297,9 +297,9 @@ SPECS = [
     S("n_cs_de", "de", 15, {"x": .7, "instagram": .3}, BASE, ["{Online-Bestellung|Meine Bestellung} {seit 10 Tagen in Bearbeitung|noch nicht verschickt}. {Kundenservice?|Keine Antwort.}"],
       kind={"user": 1}, places=ANY_DE, sent="neg", viral=0.8, tags=[], label="noise_cs"),
     S("n_cs_zh", "zh-CN", 18, {"weibo": .7, "xhs": .3}, BASE, [
-        "{盟可睐|Moncler}{官网|小程序}{下单|买的}{十天了还没发货|物流一直不动}，{客服|在线客服}{回复太慢|一直排队}",
-        "{退货|退款}{一个月了|拖了很久}{还没到账|没消息}，{@盟可睐Moncler|求助}",
-    ], kind={"user": 1}, places=ANY_CN, sent="neg", viral=0.8, tags=["盟可睐"], titles=["官网下单不发货", "退款一个月没到账"], label="noise_cs"),
+        "{华伦天奴|Valentino}{官网|小程序}{下单|买的}{十天了还没发货|物流一直不动}，{客服|在线客服}{回复太慢|一直排队}",
+        "{退货|退款}{一个月了|拖了很久}{还没到账|没消息}，{@华伦天奴Valentino|求助}",
+    ], kind={"user": 1}, places=ANY_CN, sent="neg", viral=0.8, tags=["华伦天奴"], titles=["官网下单不发货", "退款一个月没到账"], label="noise_cs"),
     S("n_cs_ko", "ko", 14, {"naver_cafe": .5, "x": .5}, BASE, [
         "몽클레어 {공홈|공식 온라인} 주문 {열흘째|2주째} 배송 준비중.. {고객센터 연결도 안 돼요|문의 답변 없음}",
     ], kind={"user": 1}, places=ANY_KR, sent="neg", viral=0.8, tags=[], titles=["몽클레어 공홈 배송 너무 느려요"], cafes="fashion", kw=["몽클레어 공홈 배송"], label="noise_cs"),
@@ -346,21 +346,21 @@ SPECS = [
     # ===================================================================== investors
     S("n_invest_en", "en", 25, {"x": .6, "reddit": .4}, INVEST, [
         "$MONC {Q3|third quarter} revenue {next week|on the 22nd}. {Asia is the swing factor|Watching Korea/China closely}",
-        "Luxury stocks {sold off again|down 3%} today, Moncler {held up better|outperformed}. {Asia demand?|K-pop effect?}",
-        "Moncler {trading|at} {28x|25x} earnings, {not cheap|still reasonable} {for the quality|given the brand}",
-        "{Sell-side|Analysts} {expect|guiding} {mid-single digit|+5-7%} growth for Moncler {Q3|this quarter}",
+        "Luxury stocks {sold off again|down 3%} today, Valentino {held up better|outperformed}. {Asia demand?|K-pop effect?}",
+        "Valentino {trading|at} {28x|25x} earnings, {not cheap|still reasonable} {for the quality|given the brand}",
+        "{Sell-side|Analysts} {expect|guiding} {mid-single digit|+5-7%} growth for Valentino {Q3|this quarter}",
     ], kind={"user": 3, "media": 1}, places={"UK_HOME": 1, "US_HOME": 1}, sent="neu", viral=0.8, tags=["luxury", "stocks"],
-      titles=["Moncler Q3 preview", "Luxury sector sell-off - Moncler holding up?"], subs=["stocks", "EuropeFIRE", "investing"], label="noise_investor"),
+      titles=["Valentino Q3 preview", "Luxury sector sell-off - Valentino holding up?"], subs=["stocks", "EuropeFIRE", "investing"], label="noise_investor"),
     S("n_invest_it", "it", 15, {"x": 1.0}, INVEST, [
-        "Moncler {in rialzo|in calo} {a Piazza Affari|oggi}, {lusso sotto pressione|attesa per i ricavi del terzo trimestre}",
+        "Valentino {in rialzo|in calo} {a Piazza Affari|oggi}, {lusso sotto pressione|attesa per i ricavi del terzo trimestre}",
     ], kind={"user": 2, "media": 1}, places={"MIL01": 1}, sent="neu", viral=0.8, tags=["borsa", "piazzaaffari"], label="noise_investor"),
 
     # ===================================================================== other celebs / athletes
     S("n_celeb_en", "en", 20, {"instagram": .5, "x": .5}, BASE, [
-        "{that|the} {striker|quarterback|F1 driver} {arriving at training|at the airport} in a {Moncler vest|black Maya} {is so on brand|lol}",
-        "{Every|Every single} {footballer|NBA player} {in October|this week}: {Moncler|puffer} + {tracksuit|sliders}",
-    ], kind={"user": 1, "media": 1}, places=ANY_EN, sent="neu", viral=1.0, tags=["airportstyle", "moncler"], label="noise_celeb"),
-    S("n_celeb_it", "it", 18, {"instagram": .5, "x": .5}, BASE, ["{Il capitano|Mezza squadra} {all'arrivo a Linate|in aeroporto} col {piumino|gilet} Moncler"],
+        "{that|the} {striker|quarterback|F1 driver} {arriving at training|at the airport} in a {Valentino vest|black Nova} {is so on brand|lol}",
+        "{Every|Every single} {footballer|NBA player} {in October|this week}: {Valentino|puffer} + {tracksuit|sliders}",
+    ], kind={"user": 1, "media": 1}, places=ANY_EN, sent="neu", viral=1.0, tags=["airportstyle", "valentino"], label="noise_celeb"),
+    S("n_celeb_it", "it", 18, {"instagram": .5, "x": .5}, BASE, ["{Il capitano|Mezza squadra} {all'arrivo a Linate|in aeroporto} col {piumino|gilet} Valentino"],
       kind={"user": 1, "media": 1}, places={"MIL01": 1}, sent="neu", viral=1.0, tags=["calcio"], label="noise_celeb"),
     S("n_celeb_ko", "ko", 14, {"x": .6, "instagram": .4}, BASE, ["{배우|가수} {공항패션|출국길} {몽클 패딩|블랙 패딩} {정보|어디 거?}"],
       kind={"user": 1, "media": 1}, places={"KR_HOME": 1}, sent="neu", viral=1.0, tags=["공항패션"], label="noise_celeb"),
@@ -374,18 +374,18 @@ SPECS = [
       kind={"user": 1}, places=ANY_IT, sent="neu", viral=0.5, tags=["lavoro", "offertadilavoro"], label="noise_jobs"),
 
     # ===================================================================== second-hand
-    S("n_2h_it", "it", 18, {"instagram": .6, "x": .4}, BASE, ["{Vendo|Vendesi} Moncler {Maya|gilet|piumino} {taglia 2|taglia 3} {usato pochissimo|come nuovo}, {prezzo in DM|su Vinted}"],
+    S("n_2h_it", "it", 18, {"instagram": .6, "x": .4}, BASE, ["{Vendo|Vendesi} Valentino {Nova|gilet|piumino} {taglia 2|taglia 3} {usato pochissimo|come nuovo}, {prezzo in DM|su Vinted}"],
       kind={"user": 1}, places=ANY_IT, sent="neu", viral=0.6, tags=["vinted", "usato"], label="noise_secondhand"),
-    S("n_2h_fr", "fr", 16, {"instagram": .6, "x": .4}, BASE, ["{Je vends|Vends} {ma|une} doudoune Moncler {taille 1|taille 2} {sur Vinted|portée deux fois}, {prix en MP|lien en bio}"],
+    S("n_2h_fr", "fr", 16, {"instagram": .6, "x": .4}, BASE, ["{Je vends|Vends} {ma|une} doudoune Valentino {taille 1|taille 2} {sur Vinted|portée deux fois}, {prix en MP|lien en bio}"],
       kind={"user": 1}, places={"PAR01": 1}, sent="neu", viral=0.6, tags=["vinted", "secondemain"], label="noise_secondhand"),
-    S("n_2h_de", "de", 14, {"instagram": .6, "x": .4}, BASE, ["{Verkaufe|Biete} Moncler {Weste|Jacke} Gr. {3|4}, {kaum getragen|wie neu}, {bei Kleinanzeigen|Preis per DM}"],
+    S("n_2h_de", "de", 14, {"instagram": .6, "x": .4}, BASE, ["{Verkaufe|Biete} Valentino {Weste|Jacke} Gr. {3|4}, {kaum getragen|wie neu}, {bei Kleinanzeigen|Preis per DM}"],
       kind={"user": 1}, places=ANY_DE, sent="neu", viral=0.6, tags=["secondhand"], label="noise_secondhand"),
-    S("n_2h_nl", "nl", 10, {"instagram": 1.0}, BASE, ["{Te koop|Verkoop}: Moncler {bodywarmer|jas} maat {2|3}, {nauwelijks gedragen|als nieuw}, {DM|via Vinted}"],
+    S("n_2h_nl", "nl", 10, {"instagram": 1.0}, BASE, ["{Te koop|Verkoop}: Valentino {bodywarmer|jas} maat {2|3}, {nauwelijks gedragen|als nieuw}, {DM|via Vinted}"],
       kind={"user": 1}, places={"AMS01": 1}, sent="neu", viral=0.6, tags=["vinted"], label="noise_secondhand"),
-    S("n_2h_da", "da", 10, {"instagram": 1.0}, BASE, ["{Sælger|Til salg}: Moncler {vest|dunjakke} str. {2|3}, {næsten ny|brugt få gange}, {skriv for pris|DM}"],
+    S("n_2h_da", "da", 10, {"instagram": 1.0}, BASE, ["{Sælger|Til salg}: Valentino {vest|dunjakke} str. {2|3}, {næsten ny|brugt få gange}, {skriv for pris|DM}"],
       kind={"user": 1}, places={"CPH01": 1}, sent="neu", viral=0.6, tags=["genbrug", "trendsales"], label="noise_secondhand"),
-    S("n_2h_ko", "ko", 14, {"naver_cafe": .6, "instagram": .4}, BASE, ["몽클레어 {마야|조끼|패딩} {3사이즈|2사이즈} {판매합니다|팝니다}. {몇 번 안 입었어요|상태 좋아요} {당근에도 올렸어요|댓글 주세요}"],
-      kind={"user": 1}, places=ANY_KR, sent="neu", viral=0.6, tags=[], titles=["[판매] 몽클레어 패딩", "몽클 마야 중고 판매"], cafes="fashion", kw=["몽클레어 중고"], label="noise_secondhand"),
+    S("n_2h_ko", "ko", 14, {"naver_cafe": .6, "instagram": .4}, BASE, ["몽클레어 {Nova|조끼|패딩} {3사이즈|2사이즈} {판매합니다|팝니다}. {몇 번 안 입었어요|상태 좋아요} {당근에도 올렸어요|댓글 주세요}"],
+      kind={"user": 1}, places=ANY_KR, sent="neu", viral=0.6, tags=[], titles=["[판매] 몽클레어 패딩", "몽클 Nova 중고 판매"], cafes="fashion", kw=["몽클레어 중고"], label="noise_secondhand"),
     S("n_2h_ja", "ja", 10, {"x": 1.0}, BASE, ["モンクレの{ベスト|ダウン}{メルカリに出した|売ります}。{サイズ2|サイズ1}、{美品|数回着用}"],
       kind={"user": 1}, places=ANY_JP, sent="neu", viral=0.6, tags=["メルカリ"], label="noise_secondhand"),
 
@@ -407,28 +407,28 @@ SPECS = [
 
     # ===================================================================== reddit general questions / authenticity
     S("n_reddit_q", "en", 50, {"reddit": 1.0}, BASE, [
-        "{Is Moncler worth it|Moncler worth the money}? {Torn between it and a cheaper brand|First 'luxury' jacket, need advice}",
-        "{Legit check|LC} please — {bought|found} a Moncler on {Vinted|eBay|Depop} for {€300|$350}. {Label pics attached|Pics in comments}",
-        "{How warm|How warm actually} is a Moncler {for Chicago winters|at -15C}? {Thinking about the Montgenevre|Considering the Maya}",
-        "{Moncler|Down jacket} {care|washing} — {can I machine wash|dry cleaning} {mine|a 10 year old jacket}?",
-        "{Best|Where's the best} place to buy Moncler {tax-free|in Europe}? {Going to Paris in November|Trip to Milan soon}",
+        "{Is Valentino worth it|Valentino worth the money}? {Torn between it and a cheaper brand|First 'luxury' jacket, need advice}",
+        "{Legit check|LC} please — {bought|found} a Valentino on {Vinted|eBay|Depop} for {€300|$350}. {Label pics attached|Pics in comments}",
+        "{How warm|How warm actually} is a Valentino {for Chicago winters|at -15C}? {Thinking about the Monteluce|Considering the Nova}",
+        "{Valentino|Down jacket} {care|washing} — {can I machine wash|dry cleaning} {mine|a 10 year old jacket}?",
+        "{Best|Where's the best} place to buy Valentino {tax-free|in Europe}? {Going to Paris in November|Trip to Milan soon}",
     ], kind={"user": 1}, places=ANY_EN, sent="neu", viral=0.9, tags=[],
-      titles=["Is Moncler worth it?", "Legit check please", "How warm is a Moncler really?", "Washing a Moncler jacket?", "Cheapest place to buy Moncler in Europe?",
-              "First luxury jacket - advice?", "Moncler sizing in general - TTS?"],
-      subs=["malefashionadvice", "femalefashionadvice", "monclerheads", "Repladies", "BuyItForLife"], label="noise_reddit_q"),
+      titles=["Is Valentino worth it?", "Legit check please", "How warm is a Valentino really?", "Washing a Valentino jacket?", "Cheapest place to buy Valentino in Europe?",
+              "First luxury jacket - advice?", "Valentino sizing in general - TTS?"],
+      subs=["malefashionadvice", "femalefashionadvice", "valentinoheads", "Repladies", "BuyItForLife"], label="noise_reddit_q"),
 
     # ===================================================================== hashtag hijack / travel
     S("n_travel_en", "en", 20, {"instagram": .8, "tiktok": .2}, BASE, [
-        "{Sunset|Golden hour} in {Santorini|Bali|Lisbon} {🌅|} {#moncler #travel #wanderlust|}",
+        "{Sunset|Golden hour} in {Santorini|Bali|Lisbon} {🌅|} {#valentino #travel #wanderlust|}",
         "{Brunch|Coffee} {with a view|by the sea} {☕️|🌊}",
-    ], kind={"user": 1, "micro": 1}, places=ANY_EN, sent="pos", viral=0.9, tags=["travel", "wanderlust", "moncler", "luxurylifestyle"], label="noise_travel"),
+    ], kind={"user": 1, "micro": 1}, places=ANY_EN, sent="pos", viral=0.9, tags=["travel", "wanderlust", "valentino", "luxurylifestyle"], label="noise_travel"),
     S("n_travel_es", "es", 10, {"instagram": 1.0}, BASE, ["{Atardecer|Puesta de sol} en {Ibiza|Tenerife} {🌅|}"],
-      kind={"user": 1}, places={"MAD01": 1}, sent="pos", viral=0.9, tags=["viajes", "moncler", "lujo"], label="noise_travel"),
+      kind={"user": 1}, places={"MAD01": 1}, sent="pos", viral=0.9, tags=["viajes", "valentino", "lujo"], label="noise_travel"),
 
     # ===================================================================== China: daigou / other-brand 种草
     S("n_cn_daigou", "zh-CN", 35, {"weibo": .6, "xhs": .4}, BASE, [
-        "{欧洲|意大利|法国}代购{本周|今日}{接单|开团}：{盟可睐|蒙口}/{Max Mara|Prada}{羽绒服|大衣}{，价格私聊|，可小票}",
-        "{秋冬|今年冬天}{羽绒服|外套}{种草|清单}：{盟可睐|Moncler}、{Max Mara|Loro Piana}、{Prada|Miu Miu}{，你选哪个|}",
+        "{欧洲|意大利|法国}代购{本周|今日}{接单|开团}：{华伦天奴|华伦天奴}/{Max Mara|Prada}{羽绒服|大衣}{，价格私聊|，可小票}",
+        "{秋冬|今年冬天}{羽绒服|外套}{种草|清单}：{华伦天奴|Valentino}、{Max Mara|Loro Piana}、{Prada|Miu Miu}{，你选哪个|}",
     ], kind={"daigou": 2, "user": 1}, places=ANY_CN, sent="neu", viral=0.8, tags=["代购", "种草", "羽绒服"], titles=["欧洲代购 本周接单", "秋冬外套种草清单"], label="noise_cn_misc"),
     S("n_cn_misc", "zh-CN", 25, {"weibo": 1.0}, BASE, [
         "{今天|周末}{降温|变天}了，{羽绒服|外套}{该拿出来了|准备好了吗}",

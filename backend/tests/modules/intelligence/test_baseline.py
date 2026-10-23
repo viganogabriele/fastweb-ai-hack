@@ -42,7 +42,7 @@ def sources(tmp_path, monkeypatch):
         ("store_id", "timezone", "currency", "closed_dow"),
         [("MIL01", "Europe/Rome", "EUR", ""), ("PAR01", "Europe/Paris", "EUR", "Sun")],
     )
-    write(master / "styles.csv", ("style_code", "style_name"), [("J1", "MAIRE")])
+    write(master / "styles.csv", ("style_code", "style_name"), [("J1", "AUREA")])
     write(master / "sku_colour.csv", ("sku", "style_code", "color_code"), [("J1-999", "J1", "999")])
     write(
         master / "sku_size_ean.csv",

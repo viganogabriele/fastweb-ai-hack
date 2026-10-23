@@ -1,6 +1,6 @@
 # Synthetic world brief (shared by all data-generation agents)
 
-Hackathon: Moncler (luxury outerwear) — "Forecast che ascolta i negozi". Teams must build a system that fuses
+Hackathon: Valentino (luxury outerwear) — "Forecast che ascolta i negozi". Teams must build a system that fuses
 numeric sales/forecast data, free-text store closing emails (multilingual), heterogeneous reports (PDF/XLSX/PPTX
 with contradicting metric definitions), external data (weather, events, tourism, calendars, trends) and the
 "agents" of other systems (warehouse, logistics, marketing, planning) into actionable recommendations
@@ -34,18 +34,18 @@ with contradicting metric definitions), external data (weather, events, tourism,
 ## Key scenario facts (dates 2026)
 
 - E01 Chinese Golden Week (Sep 30–Oct 8) tourists in MIL/PAR/LON02/TYO/OSA/SEL01/HKG/ZRH/VEN; E01b domestic in CN stores.
-- E02 Korean tourists ask for **black MAIRE** (women's short down jacket) at PAR01, PAR02, MIL01, LON02 from ~Sep 19; black sold out ~Sep 21–24, DC out until Oct 16. Beige/navy don't substitute.
-- E03 LOGO CARDIGAN **size M** finished at MIL01 on **Thursday Oct 8**; DC has no M until end of October.
+- E02 Korean tourists ask for **black AUREA** (women's short down jacket) at PAR01, PAR02, MIL01, LON02 from ~Sep 19; black sold out ~Sep 21–24, DC out until Oct 16. Beige/navy don't substitute.
+- E03 VLOGO CARDIGAN **size M** finished at MIL01 on **Thursday Oct 8**; DC has no M until end of October.
 - E04 ROM01 construction site / scaffolding in front of entrance Sep 14 → Nov 6: footfall halved.
 - E05 Early cold snap Oct 12–19 (Munich first snow Oct 14, snow to 1000 m in CH, 2–6 °C max) in MUN/BER/ZRH/STM/CPH/AMS/GVA; milder echo Paris/London/Milan Oct 13–19.
-- E06 Fictional K-pop idol **Yoon Ha-eun** (girl group **LUMIERE**) photographed Oct 1 at Paris Fashion Week in **ILVARO powder pink (510)** — a FW26 NEW product with no history. From Oct 2 sold out across Asia in 1–3 days; replenishment tiny (DC top-up Oct 8). Spill-over on ILVARO black/off-white.
-- E07 Genius **POLARIS** capsule launched Sep 24: strong in China/HK, weak in EU/US (fit small, price high).
-- E08 **TIB** men's down vest: zipper slider defect (units delivered from mid-Aug) → defect returns from Sep 28 (POS reason DEF).
+- E06 Fictional K-pop idol **Yoon Ha-eun** (girl group **LUMIERE**) photographed Oct 1 at Paris Fashion Week in **IRIDIA powder pink (510)** — a FW26 NEW product with no history. From Oct 2 sold out across Asia in 1–3 days; replenishment tiny (DC top-up Oct 8). Spill-over on IRIDIA black/off-white.
+- E07 Couture **ASTRA** capsule launched Sep 24: strong in China/HK, weak in EU/US (fit small, price high).
+- E08 **VEL** men's down vest: zipper slider defect (units delivered from mid-Aug) → defect returns from Sep 28 (POS reason DEF).
 - E09 Typhoon signal 8 Hong Kong: HKG01 closed Sep 17, opened 15:00 Sep 18.
 - E10 Paris transport strike Tue Oct 13; E10b Italian general strike Fri Oct 16.
 - E11 NYC02 POS outage Oct 6 14:10–17:40, sales posted with business date Oct 7.
 - E13 Japan price increase on Nov 1 (announced to clients Oct 9) → pre-buying rush from Oct 12; E13w warm early October in Japan (27–29 °C, Sep 28–Oct 11) down jackets not moving.
-- E14 SEL01 shipment held at Incheon customs (missing KC certificate) planned Oct 8 → arrived Oct 13. E14b MAD01 received navy MAYA instead of black (picking error) late Sep.
+- E14 SEL01 shipment held at Incheon customs (missing KC certificate) planned Oct 8 → arrived Oct 13. E14b MAD01 received navy NOVA instead of black (picking error) late Sep.
 - E15 FW26 campaign US/UK from Sep 15: real effect ~+6%, agency claims +22%.
 - E16 SYD01 (southern hemisphere spring): forecast uses northern seasonality and over-forecasts down jackets; customers want T-shirts/polos/light jackets.
 - E18 LON01 private client evening Oct 8. E20 UNGA closures NYC01 Sep 21–26. E21 Milan FW Sep 22–28, Paris FW Sep 29–Oct 7.
@@ -53,11 +53,11 @@ with contradicting metric definitions), external data (weather, events, tourism,
 - E24 TIFF Toronto Sep 10–20. E27 competitor (Canadian outerwear brand) pop-up across the street from SEL01 from Oct 15.
 - E28 MIA01 AC broken Sep 3–5. E31 Acqua alta Venice Oct 20 (VEN01 opens at 12:00). E34 Singapore GP Oct 9–11.
 - E37 CPH01 staff shortage Sep 28–Oct 4 (reduced hours). E39 heat wave Beverly Hills Sep 8–12. E40 MAD01 door counter broken Oct 1–7.
-- E41 AMBRINE (new long down coat) in **chocolate brown** very requested in MIL/PAR/LON01/MAD, brown sizes 0–2 out at DC.
-- E42 ARNEB (new men's parka) fits large → size exchanges, staff advise one size down. E43 BIFF Busan Oct 1–10.
+- E41 AMALIA (new long down coat) in **chocolate brown** very requested in MIL/PAR/LON01/MAD, brown sizes 0–2 out at DC.
+- E42 ARTEM (new men's parka) fits large → size exchanges, staff advise one size down. E43 BIFF Busan Oct 1–10.
 - E44 CRT01 open Fri–Sun only in October. E45 STM01 closes for Zwischensaison from Oct 19. COU01 closed for the season (Sep 13 → Nov 26).
-- Product names are style names (MAYA, MAIRE, ILVARO...). Store staff use nicknames, colour names in their own language,
-  sizes in Moncler numbering (00/0/1/2/3/4 women, 1–7 men outerwear; XS–XXL knit/jersey; EU shoe sizes; TU accessories).
+- Product names are style names (NOVA, AUREA, IRIDIA...). Store staff use nicknames, colour names in their own language,
+  sizes in Valentino numbering (00/0/1/2/3/4 women, 1–7 men outerwear; XS–XXL knit/jersey; EU shoe sizes; TU accessories).
 
 ## Realism rules (everyone)
 

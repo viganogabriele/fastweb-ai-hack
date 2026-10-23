@@ -202,13 +202,13 @@ VENDORS = {
     "V100418": "Hanoi Down Garment Co., Ltd. (VN)",
     "V100077": "Maglificio Val Seriana S.p.A. (BG, IT) - knitwear",
     "V100502": "Romarta Confectii SA (Timisoara, RO) - outerwear",
-    "V100610": "Guangdong Polar Apparel Mfg (Dongguan, CN) - Genius capsule",
+    "V100610": "Guangdong Polar Apparel Mfg (Dongguan, CN) - Couture capsule",
     "V100125": "Calzaturificio Brenta S.r.l. (VE, IT) - footwear",
     "V100389": "Lanificio Alto Biellese S.p.A. (BI, IT) - accessories knit",
 }
 
 KEY_POS = [
-    # MAIRE black re-order: laqué nylon delay at the mill. Revisions are what systems knew at each date.
+    # AUREA black re-order: laqué nylon delay at the mill. Revisions are what systems knew at each date.
     dict(ebeln="4500218734", vendor="V100231", sku="J20931A00012-999", created="2026-08-24",
          lines=[dict(ebelp="00010", werks="IT10", qty=420, gr="2026-10-16"),
                 dict(ebelp="00020", werks="US20", qty=220, gr="2026-10-19"),
@@ -226,21 +226,21 @@ KEY_POS = [
                 dict(ebelp="00030", werks="US20", qty=80, gr="2026-10-08")],
          revisions=[("2026-07-20", "2026-10-08", "Second delivery of launch buy (top-up 600 pcs)"),
                     ("2026-10-02", "2026-10-08", "Merch asked to expedite: vendor says no earlier than Oct 8 (already on water/air)")],
-         note="ILVARO powder pink top-up 600 pcs. Split HK/IT/US decided at S&OP before the K-pop spike."),
+         note="IRIDIA powder pink top-up 600 pcs. Split HK/IT/US decided at S&OP before the K-pop spike."),
     dict(ebeln="4500222417", vendor="V100418", sku="J20931A00618-510", created="2026-10-05",
          lines=[dict(ebelp="00010", werks="HK30", qty=800, gr=None, eta="2026-11-20"),
                 dict(ebelp="00020", werks="IT10", qty=300, gr=None, eta="2026-11-20"),
                 dict(ebelp="00030", werks="US20", qty=100, gr=None, eta="2026-11-24")],
          revisions=[("2026-10-05", "2026-11-27", "Emergency re-order after social spike, vendor capacity limited"),
                     ("2026-10-16", "2026-11-20", "Vendor confirmed earlier slot; fabric in stock")],
-         note="Next ILVARO pink receipt ~Nov 20: nothing before that."),
+         note="Next IRIDIA pink receipt ~Nov 20: nothing before that."),
     dict(ebeln="4500221188", vendor="V100418", sku="J20931A00618-999", created="2026-09-28",
          lines=[dict(ebelp="00010", werks="HK30", qty=450, gr="2026-10-20"),
                 dict(ebelp="00020", werks="IT10", qty=300, gr="2026-10-20"),
                 dict(ebelp="00030", werks="US20", qty=100, gr="2026-10-20")],
          revisions=[("2026-09-28", "2026-10-23", "Re-order black (spill-over)"),
                     ("2026-10-09", "2026-10-20", "Expedited by air")],
-         note="ILVARO black back at all DCs Oct 20; EMEA/US stores not yet replenished as of Oct 21."),
+         note="IRIDIA black back at all DCs Oct 20; EMEA/US stores not yet replenished as of Oct 21."),
     dict(ebeln="4500221905", vendor="V100077", sku="I10919B00011-999|I10919B00011-742", size="M", created="2026-10-02",
          lines=[dict(ebelp="00010", werks="IT10", qty=120, gr=None, eta="2026-10-30", sku="I10919B00011-999"),
                 dict(ebelp="00020", werks="IT10", qty=60, gr=None, eta="2026-10-30", sku="I10919B00011-742"),
@@ -249,14 +249,14 @@ KEY_POS = [
                 dict(ebelp="00050", werks="HK30", qty=50, gr=None, eta="2026-11-04", sku="I10919B00011-742")],
          revisions=[("2026-10-02", "2026-10-30", "Knit re-order size M only, wk44"),
                     ("2026-10-20", "2026-10-30", "Vendor: 60% Oct 30, balance Nov 6 (yarn)")],
-         note="LOGO CARDIGAN size M re-order; DC has no M until Oct 30 (IT)."),
+         note="VLOGO CARDIGAN size M re-order; DC has no M until Oct 30 (IT)."),
     dict(ebeln="4500222090", vendor="V100502", sku="J20931A00622-23R", sizes=["0", "1", "2"], created="2026-09-29",
          lines=[dict(ebelp="00010", werks="IT10", qty=150, gr=None, eta="2026-11-10"),
                 dict(ebelp="00020", werks="HK30", qty=60, gr=None, eta="2026-11-12"),
                 dict(ebelp="00030", werks="US20", qty=20, gr=None, eta="2026-11-13")],
          revisions=[("2026-09-29", "2026-11-10", "Re-order brown small sizes (0/1/2)"),
                     ("2026-10-15", "2026-11-10", "Confirmed; vendor asks to accept 2% over-delivery")],
-         note="AMBRINE chocolate brown sizes 0-2 out at DC until Nov 10."),
+         note="AMALIA chocolate brown sizes 0-2 out at DC until Nov 10."),
 ]
 
 def po_line_eta_known(po: dict, line: dict, t) -> "dt.date | None":
@@ -266,7 +266,7 @@ def po_line_eta_known(po: dict, line: dict, t) -> "dt.date | None":
         return None
     revs = [(d(u), d(e), n) for u, e, n in po["revisions"]]
     final = line.get("gr") or line.get("eta")
-    if po["ebeln"] == "4500218734":           # MAIRE black: line-specific history
+    if po["ebeln"] == "4500218734":           # AUREA black: line-specific history
         if line["ebelp"] == "00040":
             return d("2026-10-30") if t < d("2026-10-14") else d("2026-10-19")
         eta = [e for u, e, n in revs if u <= t and e != d("2026-10-19")][-1]
@@ -282,7 +282,7 @@ def po_line_eta_known(po: dict, line: dict, t) -> "dt.date | None":
 
 ILVARO_TOPUP_ECOM_RESERVE = {"HK30": 70, "IT10": 40, "US20": 15}
 
-TIB = dict(sku_prefix="J10911A00305", bad_batch="2607-A114", good_batch="2609-B027", old_batch="2604-A031",
+VALENTINO_V17 = dict(sku_prefix="J10911A00305", bad_batch="2607-A114", good_batch="2609-B027", old_batch="2604-A031",
            bad_batch_gr={"IT10": "2026-08-11", "US20": "2026-08-12", "HK30": "2026-08-12"},
            good_batch_gr={"IT10": "2026-09-18", "US20": "2026-09-21", "HK30": "2026-09-19"},
            qn="300004587", qn_created="2026-09-30", usage_decision="2026-10-02",

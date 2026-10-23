@@ -1,13 +1,12 @@
 Content-Type: multipart/alternative;
  boundary="===============3638782746980993184=="
 MIME-Version: 1.0
-From: =?utf-8?b?S2FyZW4gQ2hhbiDpmbPlmInmrKM=?=
- <karen.chan@moncler-retail.example>
-To: retail-ops-hktw@moncler-retail.example
-Cc: Vivian Lau <vivian.lau@moncler-retail.example>
+From: Karen Chan =?utf-8?b?6Zmz5ZiJ5qyj?= <karen.chan@valentino-retail.example>
+To: retail-ops-hktw@valentino-retail.example
+Cc: Vivian Lau <vivian.lau@valentino-retail.example>
 Subject: HKG01 closing 17/10
 Date: Sat, 17 Oct 2026 23:09:55 +0800
-Message-ID: <136D091A-1348-9EDC-607AE90CE746@moncler-retail.example>
+Message-ID: <136D091A-1348-9EDC-607AE90CE746@valentino-retail.example>
 X-Mailer: Microsoft Outlook 16.0
 
 --===============3638782746980993184==
@@ -17,9 +16,9 @@ Content-Transfer-Encoding: base64
 
 SGkgYWxsLAoK5pif5pyf5YWt5pys5Zyw5a6i5aSa6L+UICjkupTmiJDljYop77yM5aW95aSa5L+C
 5Zqf552H5Yas5aSp6KGr5rqW5YKZ5Y675pel5pys6Z+T5ZyL5peF6KGM44CCClRyaWNvdCBibGFj
-ayB4M++8jENoYW1icmUgYmxhY2sgeDPvvIxUaWIgYmxhY2sgeDMgKOaWsOaJueasoe+8jOizo+S5
-i+WJjeaIkeWTi+mAkOS7tiBjaGVjayDpgY4gemlwKeOAggpNaXNzZWQ6IEJhZHkgYmxhY2sgMe+8
-jOeyiee0hSBJbHZhcm8gMu+8jENoYW1icmUgYmxhY2sgMOOAggpDYWJsZSBrbml0IFMg6YCA5LiA
+ayB4M++8jENhbWlsbGEgYmxhY2sgeDPvvIxWZWwgYmxhY2sgeDMgKOaWsOaJueasoe+8jOizo+S5
+i+WJjeaIkeWTi+mAkOS7tiBjaGVjayDpgY4gemlwKeOAggpNaXNzZWQ6IEFyaWEgYmxhY2sgMe+8
+jOeyiee0hSBJcmlkaWEgMu+8jENhbWlsbGEgYmxhY2sgMOOAggpDYWJsZSBrbml0IFMg6YCA5LiA
 5Lu277yMc2l6ZSDllY/poYzjgIIKCkthcmVuCgpTYWxlcwlISyQ0MTMsNjAwCkJ1ZGdldAlISyQ0
 NjYsNzAwCkFjaCUJODklClRyYWZmaWMJMzAwClR4bgkyOApDUgk5LjMlClVQVAkxLjU3
 
@@ -58,10 +57,10 @@ YWwgc3R5bGU9J21hcmdpbjowJz5IaSBhbGwsPC9wPjxwIGNsYXNzPU1zb05vcm1hbCBzdHlsZT0n
 bWFyZ2luOjAnPiZuYnNwOzwvcD48cCBjbGFzcz1Nc29Ob3JtYWwgc3R5bGU9J21hcmdpbjowJz7m
 mJ/mnJ/lha3mnKzlnLDlrqLlpJrov5QgKOS6lOaIkOWNiinvvIzlpb3lpJrkv4Llmp/nnYflhqzl
 pKnooavmupblgpnljrvml6XmnKzpn5PlnIvml4XooYzjgII8L3A+PHAgY2xhc3M9TXNvTm9ybWFs
-IHN0eWxlPSdtYXJnaW46MCc+VHJpY290IGJsYWNrIHgz77yMQ2hhbWJyZSBibGFjayB4M++8jFRp
-YiBibGFjayB4MyAo5paw5om55qyh77yM6LOj5LmL5YmN5oiR5ZOL6YCQ5Lu2IGNoZWNrIOmBjiB6
-aXAp44CCPC9wPjxwIGNsYXNzPU1zb05vcm1hbCBzdHlsZT0nbWFyZ2luOjAnPk1pc3NlZDogQmFk
-eSBibGFjayAx77yM57KJ57SFIElsdmFybyAy77yMQ2hhbWJyZSBibGFjayAw44CCPC9wPjxwIGNs
+IHN0eWxlPSdtYXJnaW46MCc+VHJpY290IGJsYWNrIHgz77yMQ2FtaWxsYSBibGFjayB4M++8jFZl
+bCBibGFjayB4MyAo5paw5om55qyh77yM6LOj5LmL5YmN5oiR5ZOL6YCQ5Lu2IGNoZWNrIOmBjiB6
+aXAp44CCPC9wPjxwIGNsYXNzPU1zb05vcm1hbCBzdHlsZT0nbWFyZ2luOjAnPk1pc3NlZDogQXJp
+YSBibGFjayAx77yM57KJ57SFIElyaWRpYSAy77yMQ2FtaWxsYSBibGFjayAw44CCPC9wPjxwIGNs
 YXNzPU1zb05vcm1hbCBzdHlsZT0nbWFyZ2luOjAnPkNhYmxlIGtuaXQgUyDpgIDkuIDku7bvvIxz
 aXplIOWVj+mhjOOAgjwvcD48cCBjbGFzcz1Nc29Ob3JtYWwgc3R5bGU9J21hcmdpbjowJz4mbmJz
 cDs8L3A+PHAgY2xhc3M9TXNvTm9ybWFsIHN0eWxlPSdtYXJnaW46MCc+S2FyZW48L3A+PC9kaXY+

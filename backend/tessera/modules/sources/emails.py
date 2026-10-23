@@ -12,6 +12,10 @@ Replies point to the parent mail of the same run through ``In-Reply-To`` (any ma
 root of that parent chain, so a reply whose ``References:`` lists only its direct parent stays
 in the parent's thread; without a parent in the run it falls back to the mail's own headers.
 Language is the store's language from the master data.
+
+The optional ``files`` param restricts the run to a preselected sample of mailbox files
+(``<STORE>/<file>.eml``, e.g. an evaluation sample); the ``as_of`` rule still applies, and a
+listed file that is missing or outside the run's stores is reported, never silently dropped.
 """
 
 import csv
@@ -37,7 +41,18 @@ MANIFEST = ModuleManifest(
     produces=("SourceDocument", "Segment"),
     enabled=True,
     mode="live",
-    params_schema={"type": "object", "additionalProperties": False},
+    params_schema={
+        "type": "object",
+        "properties": {
+            "files": {
+                "type": "array",
+                "items": {"type": "string", "pattern": r"^[A-Z0-9]+/[^/]+\.eml$"},
+                "minItems": 1,
+                "uniqueItems": True,
+            }
+        },
+        "additionalProperties": False,
+    },
 )
 
 
@@ -153,19 +168,36 @@ def build_document(
     return document, segments
 
 
-def collect(sources_dir: Path, store_ids: Iterable[str], as_of: datetime) -> Batch:
-    """Parse the mailboxes of ``store_ids`` as seen at ``as_of``. Pure apart from reading files."""
+def collect(
+    sources_dir: Path,
+    store_ids: Iterable[str],
+    as_of: datetime,
+    files: Iterable[str] | None = None,
+) -> Batch:
+    """Parse the mailboxes of ``store_ids`` as seen at ``as_of``, only ``files`` when given.
+
+    Pure apart from reading files.
+    """
     root = (sources_dir / "store_emails").resolve()
     stores = load_stores(sources_dir)
     batch = Batch()
+    store_ids = set(store_ids)
+    selected = None if files is None else set(files)
+    for relative in sorted(selected or ()):
+        if relative.split("/")[0] not in store_ids:
+            batch.skipped.append(f"dataset://store_emails/{relative}: not a store of the run")
+        elif not (root / relative).is_file():
+            batch.skipped.append(f"dataset://store_emails/{relative}: no such file")
     available: list[tuple[datetime, str, str, ParsedEmail]] = []
-    for store_id in sorted(set(store_ids)):
+    for store_id in sorted(store_ids):
         mailbox = (root / store_id).resolve()
         if store_id not in stores or not mailbox.is_relative_to(root) or not mailbox.is_dir():
             batch.missing_mailboxes.append(store_id)
             continue
         for path in sorted(mailbox.glob("*.eml")):
             relative = f"{store_id}/{path.name}"
+            if selected is not None and relative not in selected:
+                continue
             parsed = parse_eml(path.read_bytes())
             if parsed.sent_at is None:
                 batch.skipped.append(f"dataset://store_emails/{relative}: no usable Date header")
@@ -204,7 +236,12 @@ def collect(sources_dir: Path, store_ids: Iterable[str], as_of: datetime) -> Bat
 
 
 def run(ctx, *, sources_dir: Path | None = None) -> ModuleResult:
-    batch = collect(sources_dir or get_settings().sources_dir, ctx.spec.stores, ctx.spec.as_of)
+    batch = collect(
+        sources_dir or get_settings().sources_dir,
+        ctx.spec.stores,
+        ctx.spec.as_of,
+        ctx.params.get("files"),
+    )
     for document, segments in batch.documents:
         ctx.repo.put(document, *segments)
     errors = tuple(f"no mailbox for store {store_id}" for store_id in batch.missing_mailboxes)

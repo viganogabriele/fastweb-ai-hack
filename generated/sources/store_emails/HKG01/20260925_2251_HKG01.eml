@@ -1,13 +1,12 @@
 Content-Type: multipart/alternative;
  boundary="===============2896242644930908357=="
 MIME-Version: 1.0
-From: =?utf-8?b?S2FyZW4gQ2hhbiDpmbPlmInmrKM=?=
- <karen.chan@moncler-retail.example>
-To: retail-ops-hktw@moncler-retail.example
-Cc: Vivian Lau <vivian.lau@moncler-retail.example>
+From: Karen Chan =?utf-8?b?6Zmz5ZiJ5qyj?= <karen.chan@valentino-retail.example>
+To: retail-ops-hktw@valentino-retail.example
+Cc: Vivian Lau <vivian.lau@valentino-retail.example>
 Subject: HKG01 closing 25/9
 Date: Fri, 25 Sep 2026 22:51:08 +0800
-Message-ID: <D7E0009A-A888-DFE2-39CF91807140@moncler-retail.example>
+Message-ID: <D7E0009A-A888-DFE2-39CF91807140@valentino-retail.example>
 X-Mailer: Microsoft Outlook 16.0
 
 --===============2896242644930908357==
@@ -15,13 +14,13 @@ Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
 
-SGkgVml2aWFuLAoKUG9sYXJpcyDnrKzkuozml6XvvIzku4rml6Xos6PlkpcgMyDku7Ygb3ZlcnNp
-emUgYmxhY2vvvIzlhajpg6jkv4LlhaflnLDlrqLvvIzkvaLlk4voqbHkuIrmtbfljJfkuqzopoHm
-jpLpmorvvIzpppnmuK/llJTkvb/mjpLku7LlubPllbLjgILmnKzlnLDlrqLlsLHpurvpurvvvIzo
-qablrozoqbHlpKrlpKfku7bjgIHlpKrosrTjgIIKQW1icmluZSBibGFjayB4Mu+8jFRlY2ggZ2xv
-dmVzIHgy44CCCk1vbnRnZW5ldnJlIGdyZXkgNyDmnInkurrllY/vvJtNb250Z2VuZXZyZSBibGFj
-ayBzaXplIDIg5YaH5pmS44CCCgpLYXJlbgoKU2FsZXMJSEskMzIwLDcwMApCdWRnZXQJSEskMjYy
-LDMwMApBY2glCTEyMiUKVHJhZmZpYwkxODMKVHhuCTE2CkFUVglISyQyMCwwNDI=
+SGkgVml2aWFuLAoKQXN0cmEg56ys5LqM5pel77yM5LuK5pel6LOj5ZKXIDMg5Lu2IG92ZXJzaXpl
+IGJsYWNr77yM5YWo6YOo5L+C5YWn5Zyw5a6i77yM5L2i5ZOL6Kmx5LiK5rW35YyX5Lqs6KaB5o6S
+6ZqK77yM6aaZ5riv5ZSU5L2/5o6S5Luy5bmz5ZWy44CC5pys5Zyw5a6i5bCx6bq76bq777yM6Kmm
+5a6M6Kmx5aSq5aSn5Lu244CB5aSq6LK044CCCkFtYWxpYSBibGFjayB4Mu+8jFdpbnRlciBHbG92
+ZXMgeDLjgIIKTW9udGVsdWNlIGdyZXkgNyDmnInkurrllY/vvJtNb250ZWx1Y2UgYmxhY2sgc2l6
+ZSAyIOWGh+aZkuOAggoKS2FyZW4KClNhbGVzCUhLJDMyMCw3MDAKQnVkZ2V0CUhLJDI2MiwzMDAK
+QWNoJQkxMjIlClRyYWZmaWMJMTgzClR4bgkxNgpBVFYJSEskMjAsMDQy
 
 --===============2896242644930908357==
 Content-Type: text/html; charset="utf-8"
@@ -53,14 +52,14 @@ VFY8L3RkPjx0ZCBzdHlsZT0nYm9yZGVyOjFweCBzb2xpZCAjOTk5O3BhZGRpbmc6MnB4IDZweDt0
 ZXh0LWFsaWduOnJpZ2h0Jz5ISyQyMCwwNDI8L3RkPjwvdHI+PC90YWJsZT48cD4mbmJzcDs8L3A+
 PHAgY2xhc3M9TXNvTm9ybWFsIHN0eWxlPSdtYXJnaW46MCc+SGkgVml2aWFuLDwvcD48cCBjbGFz
 cz1Nc29Ob3JtYWwgc3R5bGU9J21hcmdpbjowJz4mbmJzcDs8L3A+PHAgY2xhc3M9TXNvTm9ybWFs
-IHN0eWxlPSdtYXJnaW46MCc+UG9sYXJpcyDnrKzkuozml6XvvIzku4rml6Xos6PlkpcgMyDku7Yg
-b3ZlcnNpemUgYmxhY2vvvIzlhajpg6jkv4LlhaflnLDlrqLvvIzkvaLlk4voqbHkuIrmtbfljJfk
-uqzopoHmjpLpmorvvIzpppnmuK/llJTkvb/mjpLku7LlubPllbLjgILmnKzlnLDlrqLlsLHpurvp
-urvvvIzoqablrozoqbHlpKrlpKfku7bjgIHlpKrosrTjgII8L3A+PHAgY2xhc3M9TXNvTm9ybWFs
-IHN0eWxlPSdtYXJnaW46MCc+QW1icmluZSBibGFjayB4Mu+8jFRlY2ggZ2xvdmVzIHgy44CCPC9w
-PjxwIGNsYXNzPU1zb05vcm1hbCBzdHlsZT0nbWFyZ2luOjAnPk1vbnRnZW5ldnJlIGdyZXkgNyDm
-nInkurrllY/vvJtNb250Z2VuZXZyZSBibGFjayBzaXplIDIg5YaH5pmS44CCPC9wPjxwIGNsYXNz
-PU1zb05vcm1hbCBzdHlsZT0nbWFyZ2luOjAnPiZuYnNwOzwvcD48cCBjbGFzcz1Nc29Ob3JtYWwg
-c3R5bGU9J21hcmdpbjowJz5LYXJlbjwvcD48L2Rpdj48L2JvZHk+PC9odG1sPg==
+IHN0eWxlPSdtYXJnaW46MCc+QXN0cmEg56ys5LqM5pel77yM5LuK5pel6LOj5ZKXIDMg5Lu2IG92
+ZXJzaXplIGJsYWNr77yM5YWo6YOo5L+C5YWn5Zyw5a6i77yM5L2i5ZOL6Kmx5LiK5rW35YyX5Lqs
+6KaB5o6S6ZqK77yM6aaZ5riv5ZSU5L2/5o6S5Luy5bmz5ZWy44CC5pys5Zyw5a6i5bCx6bq76bq7
+77yM6Kmm5a6M6Kmx5aSq5aSn5Lu244CB5aSq6LK044CCPC9wPjxwIGNsYXNzPU1zb05vcm1hbCBz
+dHlsZT0nbWFyZ2luOjAnPkFtYWxpYSBibGFjayB4Mu+8jFdpbnRlciBHbG92ZXMgeDLjgII8L3A+
+PHAgY2xhc3M9TXNvTm9ybWFsIHN0eWxlPSdtYXJnaW46MCc+TW9udGVsdWNlIGdyZXkgNyDmnInk
+urrllY/vvJtNb250ZWx1Y2UgYmxhY2sgc2l6ZSAyIOWGh+aZkuOAgjwvcD48cCBjbGFzcz1Nc29O
+b3JtYWwgc3R5bGU9J21hcmdpbjowJz4mbmJzcDs8L3A+PHAgY2xhc3M9TXNvTm9ybWFsIHN0eWxl
+PSdtYXJnaW46MCc+S2FyZW48L3A+PC9kaXY+PC9ib2R5PjwvaHRtbD4=
 
 --===============2896242644930908357==--

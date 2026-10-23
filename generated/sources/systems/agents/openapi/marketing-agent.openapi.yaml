@@ -3,7 +3,7 @@ info:
   title: marketing-agent REST API
   version: 0.9.4-beta
 servers:
-- url: https://agents.moncler-int.example/marketing/v1
+- url: https://agents.valentino-int.example/marketing/v1
 security:
 - oauth2:
   - crm.read
@@ -157,7 +157,7 @@ components:
       type: oauth2
       flows:
         clientCredentials:
-          tokenUrl: https://login.moncler-int.example/oauth2/token
+          tokenUrl: https://login.valentino-int.example/oauth2/token
           scopes:
             crm.read: read CRM
             crm.draft: create drafts

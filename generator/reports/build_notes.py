@@ -72,14 +72,14 @@ def main():
         ("apac/APAC_Monthly_Review_SEP2026_v1.1.pptx", "APAC Business Analytics HK", "PPTX 13 slides, EN + JA/KO/ZH quotes", "mixed (see 2.3)", "constant FX 2025 avg, sales GROSS of returns, Japan tax-incl from country file, Korea dept stores on dept-store month"),
         ("apac/japan/国内直営店_月次売上報告_2026年9月度_確定.xlsx", "日本支社 営業企画部 (小林)", "XLSX, JA", "9月度 = Sun 30/8 - Sat 3/10 (5 weeks)", "税込 x1.10 on all sales (also tax-free), net of returns, JPY, 前年比 as ratio (116.4% = +16.4%)"),
         ("apac/japan/【週次速報】国内店舗_2026年10月第3週(10.11-10.17).xlsx", "日本支社 営業企画部", "XLSX, JA", "week Sun 11/10 - Sat 17/10", "税込, 前年比 ratio, waiting-list counts approximate"),
-        ("apac/korea/[주간] 백화점 매출 보고_10월 3주차(10.12~10.18).xlsx", "몽클레르 코리아 리테일팀 (정다은)", "XLSX, KO", "weeks Mon-Sun numbered by month of Thursday; MTD on dept-store month (26th-25th)", "VAT incl. x1.10, net of returns, 백만원 in summary / 천원 in detail; SEL01 shown 'for reference'"),
+        ("apac/korea/[주간] 백화점 매출 보고_10월 3주차(10.12~10.18).xlsx", "발렌티노 코리아 리테일팀 (정다은)", "XLSX, KO", "weeks Mon-Sun numbered by month of Thursday; MTD on dept-store month (26th-25th)", "VAT incl. x1.10, net of returns, 백만원 in summary / 천원 in detail; SEL01 shown 'for reference'"),
         ("apac/china/中国区9月经营月报_2026_v2.pptx", "中国区零售运营部", "PPTX 9 slides, ZH", "calendar Sep", "含税 x1.13 on stores, stores + 天猫 + 微信小程序, 售罄率 = sold/(sold+EOP stock) units"),
-        ("americas/AMER_Retail_Monthly_FY26_P08_Sep.xlsx", "Moncler USA Retail Finance (J. Morales)", "XLSX merged multi-row headers, EN", "NRF 4-5-4: P08 = Sun 30/8 - Sat 3/10 (5 wks); P09 MTD 4/10-17/10", "USD, net of returns, CAD at plan rate 1.37 CAD/USD; Aspen LY stored as text; hidden 'chk' column"),
+        ("americas/AMER_Retail_Monthly_FY26_P08_Sep.xlsx", "Valentino USA Retail Finance (J. Morales)", "XLSX merged multi-row headers, EN", "NRF 4-5-4: P08 = Sun 30/8 - Sat 3/10 (5 wks); P09 MTD 4/10-17/10", "USD, net of returns, CAD at plan rate 1.37 CAD/USD; Aspen LY stored as text; hidden 'chk' column"),
         ("merchandising/FW26_NewIn_SellThrough_wk42_final.xlsx", "Merchandising Planning (S. Bianchi)", "XLSX, EN", "cumulative since launch to Sun 18/10 (W40/W41/W42 snapshots)", "ST% = units SOLD (gross, returns not netted) / units RECEIVED"),
-        ("marketing/HaldenRowe_Moncler_FW26_Campaign_Performance_US-UK_FINAL.pdf", "Halden & Rowe (media agency)", "PDF glossy 6 p., EN", "weeks 1-4 of flight 15/9-13/10", "'attributed uplift' = YoY exposed stores minus YoY 'unexposed' (ASP01, TOR01)"),
+        ("marketing/HaldenRowe_Valentino_FW26_Campaign_Performance_US-UK_FINAL.pdf", "Halden & Rowe (media agency)", "PDF glossy 6 p., EN", "weeks 1-4 of flight 15/9-13/10", "'attributed uplift' = YoY exposed stores minus YoY 'unexposed' (ASP01, TOR01)"),
         ("market_research/Castellane_Luxury_Outerwear_Pulse_Q3-2026.pdf", "Castellane Advisory (syndicated)", "PDF 8 p., EN", "fieldwork 20/7-10/8, published 30/9", "market-level, not derived from internal data"),
-        ("tax_free/Aurelia_TFS_merchant_extract_MONCLER_W36-W43_2026.xlsx + Aurelia_Merchant_Insights_Moncler_Sep-Oct2026.pdf", "Aurelia Tax Free (refund operator)", "XLSX + PDF, EN", "ISO weeks; W43 partial", "forms ISSUED (not validated), spend incl. VAT, EUR at monthly ECB avg; nationality = passport keyed at POS"),
-        ("customer_care_quality/CCQ_Monthly_Report_2026-09_rev1.2.docx (+ .pdf export)", "QA & Customer Care (L. Moretti, C. Rinaldi)", "DOCX/PDF, IT+EN", "Sep + early warning to 11/10", "defect rate on same-period sales; ARNEB rate on receipts"),
+        ("tax_free/Aurelia_TFS_merchant_extract_VALENTINO_W36-W43_2026.xlsx + Aurelia_Merchant_Insights_Valentino_Sep-Oct2026.pdf", "Aurelia Tax Free (refund operator)", "XLSX + PDF, EN", "ISO weeks; W43 partial", "forms ISSUED (not validated), spend incl. VAT, EUR at monthly ECB avg; nationality = passport keyed at POS"),
+        ("customer_care_quality/CCQ_Monthly_Report_2026-09_rev1.2.docx (+ .pdf export)", "QA & Customer Care (L. Moretti, C. Rinaldi)", "DOCX/PDF, IT+EN", "Sep + early warning to 11/10", "defect rate on same-period sales; ARTEM rate on receipts"),
         ("board/Q3_2026_Trading_Update_BoD_draft_v5.pptx", "Group Finance / IR prep", "PPTX 6 slides, EN", "calendar Q3 (Jul-Sep), Oct QTD 1-18/10", "organic = constant 2025 FX; rounded EUR m; digital/wholesale from consolidation"),
         ("digital/Digital_Weekly_Channel_Report_W42_2026.xlsx", "Digital Analytics (E. Conti)", "XLSX, EN", "ISO weeks on UTC days", "demand = gross ordered value incl. VAT; notify-me = requests (not unique customers)"),
     ]
@@ -117,12 +117,12 @@ def main():
     A(f"- **Mistake 2**: country table 'TOTAL EMEA' = {em['country_total_shown']:,} EUR = sum of European countries only; Middle East (DXB01, "
       f"{em['dxb_net']:,} EUR) is listed but not summed. Correct total {em['net_eur_budfx']:,}.")
     A(f"- **Mistake 3 (overstatement in commentary)**: director writes 'Korean clients are now more than 10% of the sales in Saint-Honoré'. "
-      f"POS nationality for PAR01 in September gives **{em['kr_share_par01_pos']:.1f}%**. What is true: Korean demand for black MAIRE was "
+      f"POS nationality for PAR01 in September gives **{em['kr_share_par01_pos']:.1f}%**. What is true: Korean demand for black AUREA was "
       "largely UNMET (sold out ~21-24/9, DC out until 16/10), so it does not show up in sales - see lost sales and store emails.")
     A(f"- ROM01: {em['rom_month_g']:+.1f}% in the month, visitors {em['rom_traffic_since']:+.1f}% vs LY since works began 14/09 (correct, consistent with 'footfall halved').")
     A("- Sell-through on VALUE (sales / (sales + EOP stock at full retail), EMEA, cut-off 30/09): " +
       ", ".join(f"{k_} {v:.0f}%" for k_, v in em["sellthrough_value"].items()) +
-      ". Not comparable with Merchandising unit ST (see 2.8). AMBRINE value ST mixes black and brown; brown alone sells much faster.")
+      ". Not comparable with Merchandising unit ST (see 2.8). AMALIA value ST mixes black and brown; brown alone sells much faster.")
     A("- Conversion LY is inflated by estimated 2025 receipts (see section 0); do not conclude that conversion collapsed.\n")
 
     A("### 2.3 APAC Monthly Review September (PPTX)\n")
@@ -138,7 +138,7 @@ def main():
       "(2025 avg rates are stronger for JPY/KRW/CNY than Sep-2026 actual -> higher EUR). Budget is at budget rates -> 'vs budget' mixes two FX bases.")
     A(f"- **Mistake (genuine)**: South-East Asia (SIN01) left in SGD: shown {ap['sin_shown_sgd']:,} 'EUR k' while the constant-FX value is "
       f"{ap['sin_correct_eur_constfx']:,} EUR. Growth % for SEA is still right (both years in SGD). APAC total with the fix = {ap['total_if_sin_correct']:,}.")
-    A(f"- POLARIS units 24-30/9: Mainland China {ap['polaris_units_24_30sep'].get('Mainland China')} vs all EMEA {ap['polaris_units_emea']} (consistent with "
+    A(f"- ASTRA units 24-30/9: Mainland China {ap['astra_units_24_30sep'].get('Mainland China')} vs all EMEA {ap['astra_units_emea']} (consistent with "
       "strong China / weak Europe). Golden Week Mainland China stores 1-7/10 " + f"{ap['gw_cn_growth_lc']:+.1f}% (local currency, same dates LY).")
     A("- Korea slide quotes a Korean-language comment that Chuseok reduced domestic visits; the numbers show Korea still growing (flagship strongest). "
       "Sydney slide correctly states the southern-hemisphere seasonality problem of the statistical forecast.\n")
@@ -148,14 +148,14 @@ def main():
       f"Ex-tax equivalent JPY {jp['month']['net_ex_tax_total']:,}. Tax-free share of sales {jp['month']['tax_free_share']}% "
       "(still grossed up by 10%: the file treats tax-free as tax-inclusive sales refunded at the counter - an overstatement of ~3.8% of the total).")
     A(f"- Weekly 速報 10/11-10/17: 前年比 {jp['week_oct11_17']['ratio_total']}% (Ginza {jp['week_oct11_17']['ratio_by_store']['TYO01']}%) = pre-buying before "
-      "the 1/11 price increase (announced 9/10) + cold from 12/10. Waiting-list counts for ILVARO pink "
+      "the 1/11 price increase (announced 9/10) + cold from 12/10. Waiting-list counts for IRIDIA pink "
       f"({jp['ilvaro_waiting_list']}) are approximations (≈60% of true unmet demand).")
     A("- Ratio convention: 前年比 116.4% means +16.4%; readers converting it as +116% are wrong.\n")
 
     A("### 2.5 Korea dept-store weekly (KO)\n")
-    A(f"- Week 10/12-10/18: department stores {kr['week']['dept_growth']:+.1f}% vs LY (ILVARO frenzy, BIFF tail), Cheongdam flagship {kr['week']['sel01_growth']:+.1f}% "
-      "(competitor pop-up from 15/10 hits outerwear; ILVARO stock arrived 13/10 after customs). Units: 백만원 in summary, 천원 in detail - mixing them is a 1,000x error.")
-    A(f"- Waiting lists ILVARO 인디 핑크 ({kr['ilvaro_waiting']}) approximate (≈55% of unmet demand, duplicates possible).")
+    A(f"- Week 10/12-10/18: department stores {kr['week']['dept_growth']:+.1f}% vs LY (IRIDIA frenzy, BIFF tail), Cheongdam flagship {kr['week']['sel01_growth']:+.1f}% "
+      "(competitor pop-up from 15/10 hits outerwear; IRIDIA stock arrived 13/10 after customs). Units: 백만원 in summary, 천원 in detail - mixing them is a 1,000x error.")
+    A(f"- Waiting lists IRIDIA 인디 핑크 ({kr['ilvaro_waiting']}) approximate (≈55% of unmet demand, duplicates possible).")
     A("- The '9월 마감' sheet is on dept-store month 26/8-25/9 - this is what APAC used.\n")
 
     A("### 2.6 China monthly (ZH)\n")
@@ -164,9 +164,9 @@ def main():
       f"+ WeChat mini program (RMB {cn['wechat_sep']:,}, = CN 'WeChat Mini Program' rows in `systems/ecommerce/shopify_sales_by_variant_daily.csv`).")
     A(f"- **Perimeter trap**: online growth shown {cn['online_growth_shown']:+.1f}% compares Tmall+WeChat 2026 with Tmall-only 2025 (mini program 'launched Nov 2025'); "
       f"like-for-like Tmall growth is {cn['online_growth_like_for_like_tmall']:+.1f}%. Omnichannel total {cn['total_growth']:+.1f}% is inflated for the same reason.")
-    A("- POLARIS 售罄率 is units sold / (sold + EOP stock) per store 24-30/9 - a third sell-through definition. 小红书 note counts are third-party, synthetic, not cross-checkable.")
+    A("- ASTRA 售罄率 is units sold / (sold + EOP stock) per store 24-30/9 - a third sell-through definition. 小红书 note counts are third-party, synthetic, not cross-checkable.")
     A(f"- Golden Week stores {cn['gw_store_growth']:+.1f}% (same as APAC deck, local currency).")
-    A("- Overstatements: 'ILVARO 粉色 登记预订顾客超过百名' - true unmet demand in the 3 CN stores was ~36 units to 7/10 (~62 to 21/10); "
+    A("- Overstatements: 'IRIDIA 粉色 登记预订顾客超过百名' - true unmet demand in the 3 CN stores was ~36 units to 7/10 (~62 to 21/10); "
       "'核心尺码全部售罄' is right (SHA01 kept single pieces in sizes 3/4). The APAC deck's 'sold out in all Asian stores' is likewise true only for core sizes.\n")
 
     A("### 2.7 Americas monthly (P08, 4-5-4)\n")
@@ -178,14 +178,14 @@ def main():
 
     A("### 2.8 Merchandising FW26 sell-through\n")
     A("- ST% = gross units sold / units received (allocation + replenishments). Received is reconstructed as on hand + sold - restocked returns.")
-    A(f"- ILVARO 510 Asian stores at W40: {me['ilvaro_510_asia_w40']}% (core sizes sold out; the remaining units are single pieces in fringe sizes 00/3/4); by W42 some stores show stock again "
+    A(f"- IRIDIA 510 Asian stores at W40: {me['ilvaro_510_asia_w40']}% (core sizes sold out; the remaining units are single pieces in fringe sizes 00/3/4); by W42 some stores show stock again "
       "(DC top-up 08/10, SEL01 customs release 13/10) so ST falls - this is NOT a demand drop.")
     A("- Store ST above 100% (e.g. " + ", ".join(f"{s} {v['st_w42']}%" for s, v in me["ilvaro_510_asia"].items() if v["st_w42"] > 100) +
       ") because returned units are restocked and resold (gross sold counts them twice).")
     A("- **Mistake (genuine)**: 'Region summary' ST% = unweighted average of store ST%, not sum(sold)/sum(received). Examples: " +
       "; ".join(f"{s} {r_}: shown {v[r_]['shown']}% vs weighted {v[r_]['weighted']}%" for s, v in me["region_summary"].items()
-                for r_ in ["APAC", "TOTAL"] if s.startswith("POLARIS C")) + ". The 'Style x Region' sheet is weighted and correct.")
-    A("- ARNEB unit ST inflated by size exchanges (exchange = return + new sale).\n")
+                for r_ in ["APAC", "TOTAL"] if s.startswith("ASTRA C")) + ". The 'Style x Region' sheet is weighted and correct.")
+    A("- ARTEM unit ST inflated by size exchanges (exchange = return + new sale).\n")
 
     A("### 2.9 Agency campaign report (US/UK)\n")
     A(f"- Claim '+22% attributed sales uplift' = exposed YoY {ag['exposed_yoy']:+.1f}% minus 'unexposed' YoY {ag['control_yoy']:+.1f}% over 15/9-13/10 = {ag['uplift']:+.1f} pp. "
@@ -199,25 +199,25 @@ def main():
     A("### 2.10 Market research (Castellane)\n")
     A("Generic, lagging (fieldwork closed 10/8). Claims contradicted by internal data / stores:")
     A(f"- 'Korean demand cooling (-8 pp)', 'Korean spend in Europe slowing': Korea stores {ap['markets']['Korea']['growth']:+.1f}% in September (APAC deck), dept stores {kr['week']['dept_growth']:+.0f}% week 12-18/10, Korean tourists "
-      "chasing black MAIRE in Paris/Milan/London, ILVARO frenzy; even the tax-free operator says Korean spend in France +18% YoY.")
-    A("- 'Cropped puffers losing share' vs ILVARO (cropped) best sell-through and sold out in Asia. 'Brown niche 4%' vs AMBRINE chocolate highest ST in EMEA and DC out of brown.")
-    A("- 'Golden Week favours domestic/short-haul over Europe' vs Chinese tax-free spend at Moncler Europe x3 in W40-41 and strong MIL/PAR.")
-    A("- 'Mild October in Central Europe' vs the cold snap 12-19/10 (first snow Munich 14/10). 'Capsule fatigue in China' vs POLARIS success in China.")
+      "chasing black AUREA in Paris/Milan/London, IRIDIA frenzy; even the tax-free operator says Korean spend in France +18% YoY.")
+    A("- 'Cropped puffers losing share' vs IRIDIA (cropped) best sell-through and sold out in Asia. 'Brown niche 4%' vs AMALIA chocolate highest ST in EMEA and DC out of brown.")
+    A("- 'Golden Week favours domestic/short-haul over Europe' vs Chinese tax-free spend at Valentino Europe x3 in W40-41 and strong MIL/PAR.")
+    A("- 'Mild October in Central Europe' vs the cold snap 12-19/10 (first snow Munich 14/10). 'Capsule fatigue in China' vs ASTRA success in China.")
     A("- Right: Japan pull-forward before price increases; Double 11 pre-sales ~20/10 softening store traffic.\n")
 
     A("### 2.11 Tax-free operator (Aurelia)\n")
     A(f"- Forms ISSUED, spend incl. VAT, nationality as keyed. Only {tf['validated_share']}% of forms validated so far (recent weeks incomplete) - "
       "issued-based growth overstates realised tourist spend; spend incl. VAT >> our ex-VAT net sales (IT x1.22, FR x1.20 ...).")
-    A(f"- Headlines: Korean spend at Moncler France+Italy W39-40 vs W36-37 {tf['kr_fr_it_w39_40_vs_w36_37']:+.1f}% (modest - because black MAIRE was out of stock), "
-      f"Chinese spend at Moncler Europe W40-41 vs W38-39 {tf['cn_eu_w40_41_vs_w38_39']:+.0f}% (Golden Week). 'Korean travellers flocked' overstates the merchant data.")
+    A(f"- Headlines: Korean spend at Valentino France+Italy W39-40 vs W36-37 {tf['kr_fr_it_w39_40_vs_w36_37']:+.1f}% (modest - because black AUREA was out of stock), "
+      f"Chinese spend at Valentino Europe W40-41 vs W38-39 {tf['cn_eu_w40_41_vs_w38_39']:+.0f}% (Golden Week). 'Korean travellers flocked' overstates the merchant data.")
     A(f"- **Data-quality issue**: in 'Forms by week' the W41 Italy rows are duplicated ({tf['w41_it_dup_rows']} rows, {tf['w41_it_dup_forms']} forms double-counted).")
     A("- UK not covered (no tourist VAT refund); market-context YoY table is operator-network-wide and synthetic.\n")
 
     A("### 2.12 Customer Care & Quality (DOCX/PDF)\n")
-    A(f"- TIB 'tasso di difettosità' {q['tib_rate_shown']}% = {q['tib_def_win']} DEF returns 28/9-11/10 / {q['tib_sold_win']} TIB units sold in the SAME window. "
+    A(f"- VEL 'tasso di difettosità' {q['tib_rate_shown']}% = {q['tib_def_win']} DEF returns 28/9-11/10 / {q['tib_sold_win']} VEL units sold in the SAME window. "
       f"Wrong denominator: the defect concerns units sold since 15/08 ({q['tib_sold_since_aug15']} units) -> {q['tib_rate_since']}% so far "
       f"(or {q['tib_def_win'] / q['tib_delivered'] * 100:.1f}% of {q['tib_delivered']} units delivered to stores since 15/08). Scenario truth: ~15-16% of affected units will come back.")
-    A(f"- ARNEB exchange rate {q['arneb_rate_shown']}% on receipts (September) vs {q['arneb_rate_units']}% of units sold to 11/10 (scenario ~10%); {q['arneb_exchange_share']}% end as size exchange.")
+    A(f"- ARTEM exchange rate {q['arneb_rate_shown']}% on receipts (September) vs {q['arneb_rate_units']}% of units sold to 11/10 (scenario ~10%); {q['arneb_exchange_share']}% end as size exchange.")
     A(f"- Return rates by region (Sep, units, POS): {q['return_rate_by_region']}. Contact-centre volumes are synthetic (no other source).\n")
 
     A("### 2.13 Board Q3 trading update (PPTX)\n")
@@ -230,8 +230,8 @@ def main():
 
     A("### 2.14 Digital weekly (XLSX)\n")
     A(f"- Demand = gross ordered value incl. VAT (W42 EUR {dg['w42_demand']:,}) vs net after returns (EUR {dg['w42_net']:,}); UTC days. "
-      f"Notify-me ILVARO 510: {dg['notify']['J20931A00618-510']['requests']} requests = {dg['notify']['J20931A00618-510']['unique_emails']} unique e-mails; "
-      f"MAIRE black {dg['notify']['J20931A00012-999']['requests']} / {dg['notify']['J20931A00012-999']['unique_emails']}.\n")
+      f"Notify-me IRIDIA 510: {dg['notify']['J20931A00618-510']['requests']} requests = {dg['notify']['J20931A00618-510']['unique_emails']} unique e-mails; "
+      f"AUREA black {dg['notify']['J20931A00012-999']['requests']} / {dg['notify']['J20931A00012-999']['unique_emails']}.\n")
 
     A("## 3. Contradiction matrix (same topic, different numbers)\n")
     A("| Topic | Source A | Source B | Why different | Right reading |")
@@ -246,12 +246,12 @@ def main():
         ("Korea dept Sep", f"KR file KRW {kr['dept_sep']['vat_krw']:,}", f"BI calendar KRW {kr_cal:,.0f}", "VAT + 26-25 month", "BI calendar for HQ"),
         ("China online growth", f"China deck {cn['online_growth_shown']:+.1f}%", f"Tmall LFL {cn['online_growth_like_for_like_tmall']:+.1f}%", "new channel in CY only", "LFL"),
         ("Americas 'September'", f"P08 USD {am['total_usd']:,}", f"calendar Sep USD {am_cal:,.0f}", "4-5-4 (5 weeks incl. 1-3/10)", "depends on calendar"),
-        ("FW26 sell-through", "EMEA value ST (AMBRINE " + f"{em['sellthrough_value'].get('AMBRINE', 0):.0f}%)", "Merch unit ST / China 售罄率", "value vs units vs (sold+stock)", "state definition; Merch weighted sheet for units"),
+        ("FW26 sell-through", "EMEA value ST (AMALIA " + f"{em['sellthrough_value'].get('AMALIA', 0):.0f}%)", "Merch unit ST / China 售罄率", "value vs units vs (sold+stock)", "state definition; Merch weighted sheet for units"),
         ("Campaign effect", "Agency/Board +22%", "Americas finance 'more modest'; data single-digit", "control choice, perimeter, window, confounds", "≈ +6%"),
-        ("TIB defect rate", f"CCQ {q['tib_rate_shown']}%", f"{q['tib_rate_since']}% of units sold since 15/08", "denominator", "~12% to date, ~15-16% expected"),
+        ("VEL defect rate", f"CCQ {q['tib_rate_shown']}%", f"{q['tib_rate_since']}% of units sold since 15/08", "denominator", "~12% to date, ~15-16% expected"),
         ("Korean demand", "Castellane 'cooling -8pp'", "stores, KR file, tax-free +18% FR", "lagging survey (fieldwork Jul-Aug)", "Korean demand strong"),
-        ("Korean share Saint-Honoré", "MBR commentary >10%", f"POS {em['kr_share_par01_pos']}%", "anecdote vs data; unmet demand invisible in sales", "~5% of sales, but large lost sales on black MAIRE"),
-        ("Golden Week Europe", "Castellane: favours domestic", f"Aurelia: CN spend Moncler Europe {tf['cn_eu_w40_41_vs_w38_39']:+.0f}% vs prior 2 wks", "forecast vs actual", "GW strong in Milan/Paris"),
+        ("Korean share Saint-Honoré", "MBR commentary >10%", f"POS {em['kr_share_par01_pos']}%", "anecdote vs data; unmet demand invisible in sales", "~5% of sales, but large lost sales on black AUREA"),
+        ("Golden Week Europe", "Castellane: favours domestic", f"Aurelia: CN spend Valentino Europe {tf['cn_eu_w40_41_vs_w38_39']:+.0f}% vs prior 2 wks", "forecast vs actual", "GW strong in Milan/Paris"),
         ("October weather", "Castellane: mild October", "flash W42, board: cold snap 12/10", "seasonal forecast vs actual", "cold snap happened"),
     ]
     for r in mtx:
@@ -264,7 +264,7 @@ def main():
         "APAC deck: Singapore not converted from SGD.",
         "Merchandising: region ST% = unweighted mean of store ST%.",
         "China deck: online/omnichannel growth on non-comparable perimeter (WeChat mini program only in CY).",
-        "Quality report: TIB defect rate on same-period sales (42%).",
+        "Quality report: VEL defect rate on same-period sales (42%).",
         "Board deck: Group organic +7% inconsistent with components; repeats agency +22%.",
         "Tax-free XLSX: W41 Italy rows duplicated.",
         "Japan file: tax-free sales also grossed up by 10%.",
@@ -275,13 +275,13 @@ def main():
     A("## 5. Scenario signals and where they surface in reports\n")
     for t in [
         "Golden Week (CN tourists Europe/Japan, domestic China): flash W40 notes, EMEA outlook, APAC early-Oct slide, China GW slide, tax-free PDF, Japan 9月度 week 5.",
-        "Black MAIRE unmet Korean demand (PAR01/PAR02/MIL01/LON02): flash W39/W42 notes, EMEA commentary + actions, Korea issues sheet, digital notify-me (KR/GB).",
-        "LOGO CARDIGAN size M at MIL01 (from 8/10): NOT in reports (only emails/stock) - by design.",
+        "Black AUREA unmet Korean demand (PAR01/PAR02/MIL01/LON02): flash W39/W42 notes, EMEA commentary + actions, Korea issues sheet, digital notify-me (KR/GB).",
+        "VLOGO CARDIGAN size M at MIL01 (from 8/10): NOT in reports (only emails/stock) - by design.",
         "ROM01 works: flash W38, EMEA (chart + commentary).",
         "Cold snap 12-19/10: flash W42, board outlook; contradicted by Castellane forecast.",
-        "ILVARO powder pink (Yoon Ha-eun / LUMIERE): APAC early-Oct slide, Japan weekly, Korea issues, China social slide, merch ILVARO sheet, digital notify-me, CCQ contacts.",
-        "POLARIS strong China / weak EU-US: APAC, China, EMEA, Americas commentary, merch POLARIS sheet, flash W39; contradicted by Castellane 'capsule fatigue'.",
-        "TIB zipper defect: flash W40, EMEA, CCQ report, Japan/Korea comments, board risks.",
+        "IRIDIA powder pink (Yoon Ha-eun / LUMIERE): APAC early-Oct slide, Japan weekly, Korea issues, China social slide, merch IRIDIA sheet, digital notify-me, CCQ contacts.",
+        "ASTRA strong China / weak EU-US: APAC, China, EMEA, Americas commentary, merch ASTRA sheet, flash W39; contradicted by Castellane 'capsule fatigue'.",
+        "VEL zipper defect: flash W40, EMEA, CCQ report, Japan/Korea comments, board risks.",
         "HKG01 typhoon 17-18/9: flash W38, APAC Greater China slide.",
         "Paris strike 13/10, Italy strike 16/10: flash W42 notes only.",
         "NYC02 POS outage 6/10: flash W41, Americas P09 tab.",
@@ -289,8 +289,8 @@ def main():
         "SEL01 customs delay + competitor pop-up: flash W42, Korea issues, APAC early-Oct slide.",
         "US/UK campaign: agency report, Americas commentary, board; true effect ~+6%.",
         "Sydney seasonality / forecast: APAC SEA & Oceania slide and asks.",
-        "AMBRINE brown: EMEA (value ST, commentary, actions), merch highlights, Castellane contradicts.",
-        "ARNEB fit: CCQ, Americas commentary (Toronto), merch, APAC.",
+        "AMALIA brown: EMEA (value ST, commentary, actions), merch highlights, Castellane contradicts.",
+        "ARTEM fit: CCQ, Americas commentary (Toronto), merch, APAC.",
         "MAD01 door counter, CPH01 staffing, MIA01 AC, BHS01 heat, UNGA, TIFF, LON01 VIC evening, SIN GP, BIFF: flash notes / Americas / Korea.",
     ]:
         A(f"- {t}")

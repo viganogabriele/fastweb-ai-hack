@@ -560,7 +560,7 @@ def week_mult(dest, nat, w):
     for c in ("2025-01-27", "2025-02-03", "2026-02-16", "2026-02-23"):
         if nat in ("CN", "TW", "HK", "SG") and w.strftime("%Y-%m-%d") == c:
             m *= 1.35
-    # Koreans in FR/IT after Chuseok 2026 (+ black Maire hunt)
+    # Koreans in FR/IT after Chuseok 2026 (+ black Aurea hunt)
     if nat == "KR" and dest in ("FR", "IT") and d("2026-09-14") <= wd <= d("2026-10-12"):
         m *= 1.45 if dest == "FR" else 1.3
     if nat == "KR" and dest in ("FR", "IT") and d("2025-09-29") <= wd <= d("2025-10-13"):

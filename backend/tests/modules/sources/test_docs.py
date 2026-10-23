@@ -134,7 +134,7 @@ def test_the_slice_sheets_are_readable_with_provenance():
     milan = by_locator["Stores!A3:U3"]
     assert milan.text.startswith("1001 | Milano Montenapoleone | EMEA | Italy | EUR | 589265")
     assert "3957" in milan.text  # traffic, the number behind the S3 storyline
-    cardigan = next(s for s in segments if s.text.startswith("14 | LOGO CARDIGAN | Knitwear"))
+    cardigan = next(s for s in segments if s.text.startswith("14 | VLOGO CARDIGAN | Knitwear"))
     assert cardigan.locator == "Top styles!A16:F16"
     assert "295448.2923937891" in cardigan.text
     # The quote a later module will cite is an exact slice of the canonical text.
@@ -260,9 +260,9 @@ def test_selected_report_param_wins_over_the_default(tmp_path):
 def test_a_single_cell_row_gets_a_single_cell_locator():
     document, segments = docs.build_document(parsed())
     spans = {segment.locator: segment for segment in segments}
-    assert spans["Cover!B2"].text == "MONCLER | Retail Controlling"
+    assert spans["Cover!B2"].text == "VALENTINO | Retail Controlling"
     assert document.text[spans["Cover!B2"].char_start : spans["Cover!B2"].char_end] == (
-        "MONCLER | Retail Controlling"
+        "VALENTINO | Retail Controlling"
     )
 
 

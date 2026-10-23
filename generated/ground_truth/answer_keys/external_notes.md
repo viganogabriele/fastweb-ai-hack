@@ -96,7 +96,7 @@ Seoul drops from 19 °C to 12–15 °C Oct 23–25; Tokyo cools to 15–18 °C f
   Mondial de l'Auto Oct 13–18, GITEX Dubai Oct 12–16, Shanghai FW Oct 9–16, Festa del Cinema Roma Oct 15–25, Biennale Arte (to Nov 22),
   Art Basel Paris Oct 23–25 (future), Tokyo IFF Oct 26–Nov 4 (future), NYC Marathon Nov 1. History: Milano Cortina Olympics Feb 6–22 2026,
   Jubilee 2025 in Rome, Expo 2025 Osaka, Salone del Mobile, FIFA World Cup 2026 (NY/NJ, Miami, LA, Toronto).
-  Forward-looking signal: **LUMIERE world tour – Seoul KSPO Dome Nov 14–15, Tokyo Dome Nov 28–29 (announced Oct 6)** → further ILVARO
+  Forward-looking signal: **LUMIERE world tour – Seoul KSPO Dome Nov 14–15, Tokyo Dome Nov 28–29 (announced Oct 6)** → further IRIDIA
   pink interest likely in KR/JP in November. **"Northpeak Cheongdam Pop-up" Oct 15–Nov 15** (the competitor pop-up across from SEL01).
   Status quirks: HK lantern carnival Sep 17 `cancelled` (typhoon signal 8); Munich open-air concert Oct 14 `postponed` (snow); ~2% random
   cancellations.
@@ -163,18 +163,18 @@ High-frequency proxies (these DO cover the scenario window):
   **Values are 0–100 relative to the max of THAT file** (generic terms like piumino/패딩/ダウンジャケット dominate → brand terms become
   small integers or `<1`). Same term has different values in different files. **DE_1 daily exists in two pulls (Oct 20 and Oct 22) with
   slightly different numbers (sampling) and different windows.** The last weekly row (week of Oct 18) is partial (4 days).
-- Signals: seasonal puffer interest (N hemisphere peak Nov–Jan, AU inverse – `polo shirt`/`linen shirt` rising in AU Sept–Oct = spring);
-  **ILVARO**: zero before launch Sep 3, spike from Oct 1 (EU/US, small) / **Oct 2 in Asia (KR, JP, TW, HK, SG strongest; exceeds the brand
+- Signals: seasonal puffer interest (N hemisphere peak Nov–Jan, AU inverse – `jersey polo shirt`/`linen shirt` rising in AU Sept–Oct = spring);
+  **IRIDIA**: zero before launch Sep 3, spike from Oct 1 (EU/US, small) / **Oct 2 in Asia (KR, JP, TW, HK, SG strongest; exceeds the brand
   term in KR/JP/HK)**, half-life ~3 days, residual floor. **Cold snap: `daunenjacke`/`winterjacke` DE & CH ≈ ×3 from Oct 12, peak Oct 14–15**;
   dunjakke (DK), donsjas (NL) up; doudoune/piumino/puffer jacket (FR/IT/GB) mild +25–35% from Oct 13. JP: `ダウンジャケット` depressed
-  Sep 28–Oct 11 (warm), rising from Oct 13; **`モンクレール 値上げ` spike Oct 9–12** (also small bumps at past price rises Feb/Sep 2025).
-  `moncler polaris` up from Sep 24 (strongest in CN). `moncler vest zipper` / `moncler tib` (US/GB) creeping up from Sep 27. US/GB brand
+  Sep 28–Oct 11 (warm), rising from Oct 13; **`ヴァレンティノ 値上げ` spike Oct 9–12** (also small bumps at past price rises Feb/Sep 2025).
+  `valentino astra` up from Sep 24 (strongest in CN). `valentino vest zipper` / `valentino vel` (US/GB) creeping up from Sep 27. US/GB brand
   +7% from Sep 15 (campaign – small, consistent with the real +6%). Black Friday bumps 2024/2025.
 - `naver_datalab_like/` (KR): JSON with keyword groups, `ratio` floats relative to the max **within that request** (weekly Monday-start
-  from 2024-09, daily from 2026-08-01). `몽클레르 일바로` group includes `윤하은 패딩`-type queries → first lift late **Oct 1 KST**, peak Oct 2;
-  `몽클레르 마이어` up from Sep 10 (drama); `노스피크` up from ~Oct 12–15 (pop-up); `패딩` seasonal.
-- `baidu_index_like/` (CN): **absolute** daily index (not 0–100), overall/PC/mobile; **2025-06-03..09 missing**. `盟可睐 粉色 羽绒服` from ~90
-  to ~2,900 on Oct 2; `盟可睐 polaris` up from Sep 24; `双十一 羽绒服` jumps from Oct 20 (also 2024/2025 presale seasons).
+  from 2024-09, daily from 2026-08-01). `발렌티노 Iridia` group includes `윤하은 패딩`-type queries → first lift late **Oct 1 KST**, peak Oct 2;
+  `발렌티노 마이어` up from Sep 10 (drama); `노스피크` up from ~Oct 12–15 (pop-up); `패딩` seasonal.
+- `baidu_index_like/` (CN): **absolute** daily index (not 0–100), overall/PC/mobile; **2025-06-03..09 missing**. `华伦天奴 粉色 羽绒服` from ~90
+  to ~2,900 on Oct 2; `华伦天奴 astra` up from Sep 24; `双十一 羽绒服` jumps from Oct 20 (also 2024/2025 presale seasons).
 
 ---------------------------------------------------------------------------------------------------------------------------
 ## macro/ (optional, light)
@@ -191,8 +191,8 @@ Typhoon name used everywhere: **Typhoon Yamaneko (山貓)**. ~82 articles (en 31
 not indexed) and `rss_luxury_wire.xml`. ~1/3 unrelated noise.
 
 News traps / contradictions:
-- Model misnaming: `drop_2026-10-04_*.json` says "pink Moncler **Maire**", `sth_2026-10-12_*.html` says "the pink **Maya**" → both = **ILVARO 510**.
-- `sfd_20261005_*.html` says ILVARO restock "next week" – wrong: DC top-up Oct 8 was tiny, SEL01 shipment stuck at Incheon customs until Oct 13;
+- Model misnaming: `drop_2026-10-04_*.json` says "pink Valentino **Aurea**", `sth_2026-10-12_*.html` says "the pink **Nova**" → both = **IRIDIA 510**.
+- `sfd_20261005_*.html` says IRIDIA restock "next week" – wrong: DC top-up Oct 8 was tiny, SEL01 shipment stuck at Incheon customs until Oct 13;
   `sfd_20261007_*.json` already hedges.
 - Resale prices differ across outlets (KREAM ≈4.0–4.65M KRW, Xianyu 24–30k CNY); retail ≈2.72M KRW / 15,200 CNY in news (approximate).
 - Timezone: `sfd_20261002` stamped Oct 2 03:05 KST but photo was Oct 1 Paris; `fsd_20261023_*.json` stamped Oct 23 JST = Oct 22 CEST;
@@ -210,7 +210,7 @@ News traps / contradictions:
 - Marketing Trade Weekly repeats the agency's **+22%** attributed uplift → overclaim, true ≈ +6%.
 - Syndicated duplicate: APN Golden Week wire republished by Straits Herald and Retail Asia Wire (count once). Mojibake in
   `jdl_2026-10-13_greve-*.txt` (UTF-8 read as cp1252).
-- POLARIS: strong in China, weak in Europe (fit small, pricey) – consistent with scenario.
+- ASTRA: strong in China, weak in Europe (fit small, pricey) – consistent with scenario.
 
 Events documents:
 - `municipal/`: Roma Capitale ordinance (PDF + OCR txt) for pavement works + scaffolding Via dei Condotti **14/09/2026 → 06/11/2026**
@@ -240,19 +240,19 @@ Generator: `generator/external/social/make_social.py` (+ `engine.py`, `seeds.py`
 | `cn_yunting/` two CSV batches (Weibo + Xiaohongshu, 140 + 754 rows) | 微博, 小红书 | Chinese headers, UTF-8 BOM; **batches overlap Sep 10–15 (20 posts in both, keep the later 抓取时间)**; 发布时间 nominally Beijing time but mixed: `YYYY-MM-DD HH:MM`, **relative (`昨天 21:14`, `3小时前`, `编辑于 10-03`, `MM-DD`, `10月2日 21:14`) → resolve against 抓取时间**; counts as strings like `1.2万` (= 12,000); empty = not exposed. IP属地 gives province/country. |
 | `kr_socialeye/` kr_socialeye_buzz_20260801_20261022.csv (474 rows) | Naver blog, Naver cafe, Instagram KR | **`<b>` keyword highlighting inside title/snippet**; post_date mixed: `YYYY.MM.DD. HH:MM` (KST), ISO UTC with ms for Instagram, relative `12분 전`/`19시간 전`, date-only; **same post collected under several search keywords (25 duplicate URLs)**; snippets truncated. **56 Korean Instagram posts also appear in Pulsewire (cross-vendor duplicates, different ids/timestamps formats).** |
 
-Planted signals (all with realistic lag/noise; prices use the internal price list: ILVARO KRW 2,720,000 / CNY 15,200 / JPY 313,000 / HKD 14,800 / EUR 1,590):
-- **ILVARO powder pink / Yoon Ha-eun (LUMIERE) at PFW**: first viral fan-account posts **Oct 1 ≈16:52Z** (evening Paris = night in Asia), explosion
+Planted signals (all with realistic lag/noise; prices use the internal price list: IRIDIA KRW 2,720,000 / CNY 15,200 / JPY 313,000 / HKD 14,800 / EUR 1,590):
+- **IRIDIA powder pink / Yoon Ha-eun (LUMIERE) at PFW**: first viral fan-account posts **Oct 1 ≈16:52Z** (evening Paris = night in Asia), explosion
   Oct 2–4 across IG/X/TikTok/Weibo/XHS/Naver; "sold out" / waitlist posts from Oct 2–3 in Cheongdam, Hyundai Apgujeong, Busan Centum, Plaza 66,
   SKP, Taikoo Li, Ginza/Omotesando, Canton Road, Taipei 101, MBS; resale on KREAM / 闲鱼 at roughly +40–120% over retail; questions about
-  black / off-white ILVARO as substitutes (spill-over). Some posts misname it "Maire pink" / "Bady pink" (it is ILVARO 510). Idol chatter about
+  black / off-white IRIDIA as substitutes (spill-over). Some posts misname it "Aurea pink" / "Aria pink" (it is IRIDIA 510). Idol chatter about
   Yoon Ha-eun exists before Oct 1 (not product-related). Decays through mid-October.
-- **Fake restock rumour Oct 7–12**: "10/10 일바로 핑크 전 매장 재입고 확정, 2000장" / "restocking pink ILVARO on 10/10 worldwide" (anonymous
+- **Fake restock rumour Oct 7–12**: "10/10 Iridia 핑크 전 매장 재입고 확정, 2000장" / "restocking pink IRIDIA on 10/10 worldwide" (anonymous
   "SA friend" sources, copy-paste reposts) → **false**; real situation: tiny DC top-up Oct 8, SEL01 shipment held at customs until Oct 13.
-- **Black MAIRE / Korean drama**: from ~Sep 12 (drama), Korean tourists hunting black Maire in Paris/Milan/Harrods from ~Sep 19 (Naver cafe
-  travel boards "파리 몽클레르 마이어 블랙 품절"), beige/navy not wanted.
-- **TIB zipper slider breaking**: complaints from **~Sep 28**, growing in Oct (Reddit, IG comments, Naver, X; IT/EN/KO/JA/DE), "returned it".
+- **Black AUREA / Korean drama**: from ~Sep 12 (drama), Korean tourists hunting black Aurea in Paris/Milan/Harrods from ~Sep 19 (Naver cafe
+  travel boards "파리 발렌티노 마이어 블랙 품절"), beige/navy not wanted.
+- **VEL zipper slider breaking**: complaints from **~Sep 28**, growing in Oct (Reddit, IG comments, Naver, X; IT/EN/KO/JA/DE), "returned it".
   A couple of earlier generic zipper posts in Aug are unrelated noise.
-- **POLARIS** (launch Sep 24): hype on XHS/Weibo (Shanghai, Beijing, Chengdu, HK) vs EU/US posts "runs small", "too expensive".
+- **ASTRA** (launch Sep 24): hype on XHS/Weibo (Shanghai, Beijing, Chengdu, HK) vs EU/US posts "runs small", "too expensive".
 - **Japan price increase**: vague rumours from ~Oct 4–5, leak/confirmation **Oct 9** ("値上げ前に買う"), queues at Ginza; also "27度でダウンは無理"
   warm-weather posts Sep 28–Oct 11.
 - **Double 11** presales from Oct 20: 代购 posts, "will boutiques match Tmall prices?".
@@ -260,8 +260,8 @@ Planted signals (all with realistic lag/noise; prices use the internal price lis
   (store closing) → false; the hoarding mentioned is the pop-up construction across the street.
 - **Cold snap**: Munich/Zurich/Berlin/St. Moritz/Copenhagen/Amsterdam/Geneva snow & "Daunenjacke rausgeholt" posts Oct 12–19 (first snow
   Munich Oct 14); milder Paris/London/Milan.
-- Context: AMBRINE chocolate brown requests, ARNEB "size down", HK typhoon Yamaneko closures Sep 17–18, Paris strike Oct 13, Italian strike Oct 16,
+- Context: AMALIA chocolate brown requests, ARTEM "size down", HK typhoon Yamaneko closures Sep 17–18, Paris strike Oct 13, Italian strike Oct 16,
   Venice acqua alta Oct 20, Via Condotti scaffolding, Golden Week Chinese shoppers in Milan/Paris, Singapore GP, BIFF, TIFF, MFW/PFW, LA heat.
-- Noise / fakes: other brands, generic #moncler outfits, ski countdown, kids' jackets, memes, **bot networks with near-identical promo text,
+- Noise / fakes: other brands, generic #valentino outfits, ski countdown, kids' jackets, memes, **bot networks with near-identical promo text,
   replica sellers ("1:1 quality DM"), giveaway scams, crypto spam** – identify via identical text across many handles, low followers,
   link-in-bio patterns, posting bursts.

@@ -7,10 +7,10 @@ net 23.4w / tgt 59.0w / 40% 😓
 traffic 324 txn 17 CR 5.2%
 
 周一+节前，进来的都是逛的。大家都在等放假。
-- Polaris oversize XL 退1件，客人说肩膀那里有线头，按quality退
-- Arneb 3码 换2码（客人自己说大）
-- 有客人问粉色Ilvaro 0码，没有（店里粉色剩1/3/4）
-- Montgenevre 黑6码、Tricot cardigan 灰M 没有
+- Astra oversize XL 退1件，客人说肩膀那里有线头，按quality退
+- Artem 3码 换2码（客人自己说大）
+- 有客人问粉色Iridia 0码，没有（店里粉色剩1/3/4）
+- Monteluce 黑6码、Tricot cardigan 灰M 没有
 
 浩"""),
 
@@ -24,12 +24,12 @@ body="""【SHA01 恒隆 每日营业报告】
 成交单数：27
 
 重点事项：
-1. 今天退货6件，有点多：Maire 2码、Bady 1码、Maya 5码都是尺码问题（买大了），Tricot cardigan XL 不要了，另外有两件Tib（1码和2码）都是拉链的问题，拉链头拉到一半卡住，用力拉就脱出来。两个客人不认识，都是8月底买的。
-2. Maire 黑00码、Ilvaro 米白3码、圆领卫衣灰L、GTX 黑46 有人问没有。
-3. Maire 黑色今天4件，现在黑色1码、2码很少了。
+1. 今天退货6件，有点多：Aurea 2码、Aria 1码、Nova 5码都是尺码问题（买大了），Tricot cardigan XL 不要了，另外有两件Vel（1码和2码）都是拉链的问题，拉链头拉到一半卡住，用力拉就脱出来。两个客人不认识，都是8月底买的。
+2. Aurea 黑00码、Iridia 米白3码、圆领卫衣灰L、GTX 黑46 有人问没有。
+3. Aurea 黑色今天4件，现在黑色1码、2码很少了。
 
 需要支持：
-Tib 拉链问题想问一下售后，是个别还是批次？我们后仓还有不少Tib。
+Vel 拉链问题想问一下售后，是个别还是批次？我们后仓还有不少Vel。
 
 王静 Jing"""),
 
@@ -45,12 +45,12 @@ body="""【SHA01 恒隆 每日营业报告】
 
 重点事项：
 1. 节前最后一天，客流不低但都在看，转化只有4.6%。很多人拖着行李箱进来逛，应该是外地来上海过节的。
-2. Insolux 黑色雪地靴4双，都是要去北海道、新疆滑雪的客人。38码卖断。
-3. Tib 又退了3件，全部是拉链！（2码、4码、5码）。这两天一共5件了。客人都说拉链头滑不动或者掉。现在店里的Tib我们自己检查了一遍，有几件拉起来确实很紧。
-4. Maire 米色1码 到现在也没补。
+2. Alpina 黑色雪地靴4双，都是要去北海道、新疆滑雪的客人。38码卖断。
+3. Vel 又退了3件，全部是拉链！（2码、4码、5码）。这两天一共5件了。客人都说拉链头滑不动或者掉。现在店里的Vel我们自己检查了一遍，有几件拉起来确实很紧。
+4. Aurea 米色1码 到现在也没补。
 
 需要支持：
-@售后 Tib 拉链问题请尽快给个说法：要不要先下架？客人来退换我们是退款还是换新？换新的话新货会不会也有问题？
+@售后 Vel 拉链问题请尽快给个说法：要不要先下架？客人来退换我们是退款还是换新？换新的话新货会不会也有问题？
 
 王静 Jing
 发自我的iPhone"""),
@@ -67,21 +67,21 @@ body="""【SHA01 恒隆 每日营业报告】
 
 重点事项：
 1. 国庆第一天，下午开始南京西路人很多，外地游客很多，很多是来拍照打卡的，试穿多，真正买的还是本地老客为主。
-2. Polaris 斗篷黑5件，Maya 黑3，Maire 藏青3，腰包3。
-3. Maire 黑色2码彻底卖完了，今天两个客人要2码，没有。
+2. Astra 斗篷黑5件，Nova 黑3，Aurea 藏青3，腰包3。
+3. Aurea 黑色2码彻底卖完了，今天两个客人要2码，没有。
 4. 到货332件，节前补货，晚上全部收完。
-5. Tib 拉链又退一件（4码）。
+5. Vel 拉链又退一件（4码）。
 
 需要支持：
-Maire 黑色请DC看一下有没有库存可以补，1码也只剩1件了。
+Aurea 黑色请DC看一下有没有库存可以补，1码也只剩1件了。
 
 王静 Jing"""),
 
 dict(reply_to="sha_1001", suffix="_ooo", send="2026-10-01 22:49", frm="zhaolei", to=["wj"], cc=[],
 subject="自动回复: 【SHA01】10/1 国庆第一天",
-body="""您好，我于10月1日至10月7日休假，期间邮件回复会有延迟。紧急事项请联系 retail-ops-china@moncler-retail.example 或致电值班经理。
+body="""您好，我于10月1日至10月7日休假，期间邮件回复会有延迟。紧急事项请联系 retail-ops-china@valentino-retail.example 或致电值班经理。
 
-Hi, I am on annual leave from 1 Oct to 7 Oct with limited access to email. For urgent matters please contact retail-ops-china@moncler-retail.example.
+Hi, I am on annual leave from 1 Oct to 7 Oct with limited access to email. For urgent matters please contact retail-ops-china@valentino-retail.example.
 
 赵磊 Zhao Lei
 Area Manager, Mainland China"""),
@@ -96,14 +96,14 @@ body="""【SHA01 恒隆 每日营业报告】
 成交单数：51
 
 重点事项：
-1. 今天开始很多客人进来问粉色的Ilvaro！说是韩国LUMIERE的尹夏恩昨天在巴黎时装周穿的那件，小红书上已经刷屏了。一天问了不下十个，真正要买的登记了4个：0码两个、00码一个，还有一个没留码。店里粉色只剩1码、3码、4码，码都对不上。
-2. Maya 黑7件，Bady 黑5，Hermine 米白4。
-3. Tib 退2件（2码、6码），都是拉链。
+1. 今天开始很多客人进来问粉色的Iridia！说是韩国LUMIERE的尹夏恩昨天在巴黎时装周穿的那件，小红书上已经刷屏了。一天问了不下十个，真正要买的登记了4个：0码两个、00码一个，还有一个没留码。店里粉色只剩1码、3码、4码，码都对不上。
+2. Nova 黑7件，Aria 黑5，Liviana 米白4。
+3. Vel 退2件（2码、6码），都是拉链。
 4. 客流很大，外地游客为主，店里同事一天都没怎么吃饭。
 
 需要支持：
-1. 粉色Ilvaro 0码/00码 有没有可能从别的店或者DC调？
-2. Tib 处理方案还在等。
+1. 粉色Iridia 0码/00码 有没有可能从别的店或者DC调？
+2. Vel 处理方案还在等。
 
 王静"""),
 
@@ -127,13 +127,13 @@ body="""各位领导好，今天王静姐和浩哥都在场上忙到最后，我
 
 真的是开业以来我见过人最多的一天😭 门口排了两次队，物业让我们限流。好多外地客人，河南、安徽、江西的都有，拍照的比买的多。
 
-卖得最好：Polaris oversize 黑 12件🔥 Hermine 米白8 Maya 黑8 藏青8
-没货被问的：Maire 黑2码（2个）、Ambrine 黑4码、Trailgrip 两个男女款41码
-粉色Ilvaro 今天又被问了好多遍，有客人拿着手机给我们看小红书，说"夏恩同款有没有"，我们只能说没有了😭
+卖得最好：Astra oversize 黑 12件🔥 Liviana 米白8 Nova 黑8 藏青8
+没货被问的：Aurea 黑2码（2个）、Amalia 黑4码、Vtrack 两个男女款41码
+粉色Iridia 今天又被问了好多遍，有客人拿着手机给我们看小红书，说"夏恩同款有没有"，我们只能说没有了😭
 
-退货：Tib 退了6件！！都是拉链，还有一个Polaris 头套不要了
+退货：Vel 退了6件！！都是拉链，还有一个Astra 头套不要了
 （截图群里的消息👇）
-[19:22] 小顾：又一个Tib拉链的，客人很生气
+[19:22] 小顾：又一个Vel拉链的，客人很生气
 [19:23] 浩：先退，登记批次
 [20:05] Kiki：第五件了[捂脸]
 
@@ -144,17 +144,17 @@ body="""1004 Sun
 net 133.0w / tgt 105.8w / 126%
 traffic 971 / txn 67 / CR 6.9%
 
-1. Tib 黑7件（店里没问题批次的黑色还在卖，都现场拉一遍拉链再给客人）
-2. Polaris oversize 黑6，Polo 黑5，Maya 藏青5
-3. 到货248，没有粉色Ilvaro，没有黑Maire
+1. Vel 黑7件（店里没问题批次的黑色还在卖，都现场拉一遍拉链再给客人）
+2. Astra oversize 黑6，Jersey Polo 黑5，Nova 藏青5
+3. 到货248，没有粉色Iridia，没有黑Aurea
 4. 被问没货：
-   粉Ilvaro 1码x2、0码、2码
-   Maire 黑3码x2、00码
-   Hermine 米白2码
-   Montcla 黑7、高领黑XXL
-5. Tib DEF 1件 + 1件尺码
+   粉Iridia 1码x2、0码、2码
+   Aurea 黑3码x2、00码
+   Liviana 米白2码
+   Mistral 黑7、高领黑XXL
+5. Vel DEF 1件 + 1件尺码
 
-粉色Ilvaro 卖了2件（店里仅剩的1码），现在只剩3、4码
+粉色Iridia 卖了2件（店里仅剩的1码），现在只剩3、4码
 
 浩"""),
 
@@ -163,10 +163,10 @@ body="""1005
 net 79.9w, 136%
 traffic 581, txn 47
 
-粉Ilvaro waitlist 现在 11个人（0码最多）。今天又来问：0码x2 2码x2 1码x1，3码也卖掉了，只剩一件4码。
-Maire 黑2码有人问。
-Polaris 斗篷黑 XS 被问，我们没有XS。
-Tib 黑5，腰包4，Polaris 头套黑3。
+粉Iridia waitlist 现在 11个人（0码最多）。今天又来问：0码x2 2码x2 1码x1，3码也卖掉了，只剩一件4码。
+Aurea 黑2码有人问。
+Astra 斗篷黑 XS 被问，我们没有XS。
+Vel 黑5，腰包4，Astra 头套黑3。
 
 浩"""),
 
@@ -177,12 +177,12 @@ body="""今天浩哥休息，我来发～
 销售 91.5w（系统未税）
 客流 624 / 59单 🔥 149%
 
-Ilvaro 黑色今天卖了5件！很多客人买不到粉色就拿黑色了，说黑色也是夏恩同款系列哈哈
-毛线帽黑6 Maya 黑5 Karakorum 黑4
-Polaris oversize 黑L 卖完了❌
+Iridia 黑色今天卖了5件！很多客人买不到粉色就拿黑色了，说黑色也是夏恩同款系列哈哈
+毛线帽黑6 Nova 黑5 Cosimo 黑4
+Astra oversize 黑L 卖完了❌
 
-被问：粉Ilvaro 0码 / Maire 黑3码 / Polaris 斗篷黑XS / GTX 黑45
-退：Ilvaro 0码 礼品退（不是粉色那件）、Tib 2码 x3 拉链😭
+被问：粉Iridia 0码 / Aurea 黑3码 / Astra 斗篷黑XS / GTX 黑45
+退：Iridia 0码 礼品退（不是粉色那件）、Vel 2码 x3 拉链😭
 
 Tina"""),
 
@@ -198,20 +198,20 @@ body="""【SHA01 恒隆 每日营业报告】
 
 重点事项：
 1. 假期最后一天，客流还是很多，但转化掉到5.8%，基本都是逛的、拍照的。
-2. Polaris 斗篷白S两个客人要，没有了；Montcla 藏青6、Karakorum 黑1码没有。
-3. 退：Ambrine 1码 不要了、Polaris 斗篷S 不要了。
+2. Astra 斗篷白S两个客人要，没有了；Mistral 藏青6、Cosimo 黑1码没有。
+3. 退：Amalia 1码 不要了、Astra 斗篷S 不要了。
 
 国庆7天小结（10/1-10/7，含税）：
 销售约731万，目标约562万，达成130%左右
 客流约5,250，比去年国庆多三成，但转化比平时低2-3个点，外地客人试穿多成交少。
-最好卖：Polaris（oversize和头套）、Maya、Hermine、Tib 黑。
+最好卖：Astra（oversize和头套）、Nova、Liviana、Vel 黑。
 最大问题：
-- 粉色Ilvaro：waitlist 现在14个，只剩4码一件
-- 黑色Maire：0/1/2码全断，每天都有人问
-- Tib 拉链：7天退了十几件，售后还没回复处理方案
+- 粉色Iridia：waitlist 现在14个，只剩4码一件
+- 黑色Aurea：0/1/2码全断，每天都有人问
+- Vel 拉链：7天退了十几件，售后还没回复处理方案
 
 需要支持：
-粉色Ilvaro 和 黑色Maire 的补货时间！
+粉色Iridia 和 黑色Aurea 的补货时间！
 
 王静 Jing"""),
 
@@ -225,13 +225,13 @@ body="""【SHA01 恒隆 每日营业报告】
 成交单数：40
 
 重点事项：
-1. 今天到货336件，打开看了一遍，还是没有粉色Ilvaro，也没有黑色Maire。客人今天又问Maire 黑2码（3个）、粉Ilvaro 2码、Ilvaro 黑4码。
-2. Logo 开衫藏青6件，Polaris 头套白3。
-3. Polaris 斗篷白M 也有人问，我们白色只剩L。
-4. Tib 拉链退1件。
+1. 今天到货336件，打开看了一遍，还是没有粉色Iridia，也没有黑色Aurea。客人今天又问Aurea 黑2码（3个）、粉Iridia 2码、Iridia 黑4码。
+2. Logo 开衫藏青6件，Astra 头套白3。
+3. Astra 斗篷白M 也有人问，我们白色只剩L。
+4. Vel 拉链退1件。
 
 需要支持：
-同上，粉Ilvaro / 黑Maire。
+同上，粉Iridia / 黑Aurea。
 
 王静"""),
 
@@ -245,13 +245,13 @@ body="""【SHA01 恒隆 每日营业报告】
 成交单数：54
 
 重点事项：
-1. Polaris oversize 黑6件（只剩M和XL），Ilvaro 黑4，Arneb 藏青4，Montcla 黑4。
-2. Maire 黑1码 两个客人、2码一个客人，没有。北京SKP今天也打电话来问我们能不能调黑Maire 1码给他们，我们自己都没有，只能说抱歉。看来全国都缺。
-3. Polaris 斗篷黑XS 又被问。
-4. Tib 退1件拉链。
+1. Astra oversize 黑6件（只剩M和XL），Iridia 黑4，Artem 藏青4，Mistral 黑4。
+2. Aurea 黑1码 两个客人、2码一个客人，没有。北京SKP今天也打电话来问我们能不能调黑Aurea 1码给他们，我们自己都没有，只能说抱歉。看来全国都缺。
+3. Astra 斗篷黑XS 又被问。
+4. Vel 退1件拉链。
 
 需要支持：
-黑色Maire DC 到底什么时候有？客人在等。
+黑色Aurea DC 到底什么时候有？客人在等。
 
 王静 Jing"""),
 
@@ -261,9 +261,9 @@ net 118.8w / tgt 124.4w / 96%
 traffic 1012 txn 75 CR 7.4%
 
 今天又是1000+客流，节后第一个周末，很多是没出去玩的本地客人。
-Maya 藏青9件！黑7件。毛线帽黑8，Polaris 头套黑6
-OOS：Logo T 黑L，Polo 黑S
-被问没货：Maire 黑1/2，粉Ilvaro 3码，Karakorum 灰4，Polaris 斗篷白M
+Nova 藏青9件！黑7件。毛线帽黑8，Astra 头套黑6
+OOS：Logo T 黑L，Jersey Polo 黑S
+被问没货：Aurea 黑1/2，粉Iridia 3码，Cosimo 灰4，Astra 斗篷白M
 退：帽子1顶 质量（logo 贴布有点翘）
 
 浩"""),
@@ -273,10 +273,10 @@ body="""1011 Sun
 net 66.2w / 58% ❌
 traffic 639 txn 30 CR 4.7%
 下雨+降温，客人不少但转化很差，好多人进来只是看看。
-Ambrine 黑4，Cable knit 黑4，围巾3
-退5件：Rosiere 3码 change mind / 开衫S 尺码 / Polo M 尺码 / Tib 4码 拉链 / Arneb 1码换小（换到了）
+Amalia 黑4，Cable knit 黑4，围巾3
+退5件：Riviera 3码 change mind / 开衫S 尺码 / Jersey Polo M 尺码 / Vel 4码 拉链 / Artem 1码换小（换到了）
 到货226
-Maire 黑1码x2、Polo 黑S 没有
+Aurea 黑1码x2、Jersey Polo 黑S 没有
 
 浩"""),
 
@@ -290,13 +290,13 @@ body="""【SHA01 恒隆 每日营业报告】
 成交单数：42
 
 重点事项：
-1. 周一意外地好。Polaris 斗篷黑6件，Logo 卫衣黑5。
+1. 周一意外地好。Astra 斗篷黑6件，Logo 卫衣黑5。
 2. 粉色短款今天卖了4件💗 夏恩效应还在，客人一看到粉色就要试。
-3. 还是有客人问粉Ilvaro 00码和2码、黑Maire 00码，没有。
-4. Tib 拉链 退1件。
+3. 还是有客人问粉Iridia 00码和2码、黑Aurea 00码，没有。
+4. Vel 拉链 退1件。
 
 需要支持：
-售后至今没有回复Tib的处理方案，客人越来越多，麻烦赵总帮忙催一下。
+售后至今没有回复Vel的处理方案，客人越来越多，麻烦赵总帮忙催一下。
 
 王静 Jing
 发自我的iPhone"""),
@@ -306,10 +306,10 @@ body="""1013
 net 68.3w / 102%
 traffic 400 / txn 39 / CR 9.8%
 
-Maya 黑6，开衫黑4，围巾3
-Karakorum 黑6码 两个客人要（一对父子都穿6码😂），没有
-Maire 黑3码 没有
-退：Ecrins 2码 不要了 / 高领XS 礼品 / Tib 3码 拉链
+Nova 黑6，开衫黑4，围巾3
+Cosimo 黑6码 两个客人要（一对父子都穿6码😂），没有
+Aurea 黑3码 没有
+退：Ettore 2码 不要了 / 高领XS 礼品 / Vel 3码 拉链
 
 浩"""),
 
@@ -320,13 +320,13 @@ body="""各位好，浩哥今天发烧请假了，我代发🙏
 销售78.6w（未税）达成113%
 客流452，37单
 
-Maya 黑6件！Tricot cardigan 黑4，白色毛线帽3，腰包3
-Maire 米色0码也断了，现在Maire 黑色0/1/2和米色0都没有
-被问没货：Maire 黑1码、Montgenevre 灰4、GTX 灰44
-退：Polaris oversize L 两件（一件礼品一件不想要了），Tricot cardigan S 尺码，帽子1顶
+Nova 黑6件！Tricot cardigan 黑4，白色毛线帽3，腰包3
+Aurea 米色0码也断了，现在Aurea 黑色0/1/2和米色0都没有
+被问没货：Aurea 黑1码、Monteluce 灰4、GTX 灰44
+退：Astra oversize L 两件（一件礼品一件不想要了），Tricot cardigan S 尺码，帽子1顶
 
 Tina 周婷婷
-Moncler 上海恒隆广场店"""),
+Valentino 上海恒隆广场店"""),
 
 dict(day="2026-10-15", send="2026-10-15 22:40", frm="wj", subject="【SHA01】10/15 营业日报",
 body="""【SHA01 恒隆 每日营业报告】
@@ -338,13 +338,13 @@ body="""【SHA01 恒隆 每日营业报告】
 成交单数：34
 
 重点事项：
-1. 今天到货481件，大部分是冬季厚款补货。还是没有黑色Maire和粉色Ilvaro，Ilvaro 黑色这次也没补，店里还有二十件左右。
-2. Logo 开衫黑6，Maya 黑4，Ilvaro 黑4。
-3. 退：Karakorum 2码、Arneb 2码，都是尺码。Arneb 的这个客人是9月初买的，那时还没统一建议小一码。
-4. 被问：Flammette 黑3码、Tricot cardigan 藏青XL、Trailgrip 女黑35。
+1. 今天到货481件，大部分是冬季厚款补货。还是没有黑色Aurea和粉色Iridia，Iridia 黑色这次也没补，店里还有二十件左右。
+2. Logo 开衫黑6，Nova 黑4，Iridia 黑4。
+3. 退：Cosimo 2码、Artem 2码，都是尺码。Artem 的这个客人是9月初买的，那时还没统一建议小一码。
+4. 被问：Fiammetta 黑3码、Tricot cardigan 藏青XL、Vtrack 女黑35。
 
 需要支持：
-听说DC这周会收到黑色Maire？请确认我们店能分到多少。
+听说DC这周会收到黑色Aurea？请确认我们店能分到多少。
 
 王静"""),
 
@@ -358,13 +358,13 @@ body="""【SHA01 恒隆 每日营业报告】
 成交单数：46
 
 重点事项：
-1. Maya 橄榄绿4件，Logo 卫衣黑3，Maire 米色3，高领黑3。
-2. 黑色Maire 现在0、1、2码全部没有，今天又问0码。北京那边说DC今天到货了，我们还没收到任何调拨通知。
-3. Chamonix 滑雪裤黑S有人问。
-4. Tib 拉链 退1件（5码）。
+1. Nova 橄榄绿4件，Logo 卫衣黑3，Aurea 米色3，高领黑3。
+2. 黑色Aurea 现在0、1、2码全部没有，今天又问0码。北京那边说DC今天到货了，我们还没收到任何调拨通知。
+3. Cortina 滑雪裤黑S有人问。
+4. Vel 拉链 退1件（5码）。
 
 需要支持：
-黑Maire 分货请优先考虑我们，waitlist 上有8位客人在等。
+黑Aurea 分货请优先考虑我们，waitlist 上有8位客人在等。
 
 王静 Jing"""),
 
@@ -379,16 +379,16 @@ body="""【SHA01 恒隆 每日营业报告】
 客单价：22,668
 
 重点事项：
-1. 周六客流很好，Trailgrip GTX 黑7双，Maya 黑6，圆领卫衣黑5，Tib 黑5。
+1. 周六客流很好，Vtrack Gtx 黑7双，Nova 黑6，圆领卫衣黑5，Vel 黑5。
 2. 今天被问没货的特别多：
-   - Ambrine 黑3码 3个客人！我们3码卖完了
-   - 黑Maire 00码2个、1码1个
-   - 粉Ilvaro 00码2个、1码2个、2码1个（还是只有4码）
-   - Trailgrip 女黑35
-3. 退：Hermine 0码 尺码、Montgenevre 4码 不要了、GTX 41 鞋底开胶。
+   - Amalia 黑3码 3个客人！我们3码卖完了
+   - 黑Aurea 00码2个、1码1个
+   - 粉Iridia 00码2个、1码2个、2码1个（还是只有4码）
+   - Vtrack 女黑35
+3. 退：Liviana 0码 尺码、Monteluce 4码 不要了、GTX 41 鞋底开胶。
 
 需要支持：
-Ambrine 黑3码、黑Maire、粉Ilvaro。
+Amalia 黑3码、黑Aurea、粉Iridia。
 
 王静 Jing"""),
 
@@ -403,16 +403,16 @@ body="""【SHA01 恒隆 每日营业报告】
 客单价：22,668
 
 重点事项：
-1. 周六客流很好，Trailgrip GTX 黑7双，Maya 黑6，圆领卫衣黑5，Tib 黑5。
+1. 周六客流很好，Vtrack Gtx 黑7双，Nova 黑6，圆领卫衣黑5，Vel 黑5。
 2. 今天被问没货的特别多：
-   - Ambrine 黑3码 3个客人！我们3码卖完了
-   - 黑Maire 00码2个、1码1个
-   - 粉Ilvaro 00码2个、1码2个、2码1个（还是只有4码）
-   - Trailgrip 女黑35
-3. 退：Hermine 0码 尺码、Montgenevre 4码 不要了、GTX 41 鞋底开胶。
+   - Amalia 黑3码 3个客人！我们3码卖完了
+   - 黑Aurea 00码2个、1码1个
+   - 粉Iridia 00码2个、1码2个、2码1个（还是只有4码）
+   - Vtrack 女黑35
+3. 退：Liviana 0码 尺码、Monteluce 4码 不要了、GTX 41 鞋底开胶。
 
 需要支持：
-Ambrine 黑3码、黑Maire、粉Ilvaro。
+Amalia 黑3码、黑Aurea、粉Iridia。
 
 王静 Jing"""),
 
@@ -421,11 +421,11 @@ body="""1018 Sun
 net 139.3w / tgt 126.5w / 110%
 traffic 893 txn 74
 
-1. Polaris 头套黑12个，其中一个客人一次买了8个，说是给公司滑雪队的
-2. GTX 黑7，Maire 藏青6，Hermine 藏青5
-3. 到货236：终于来了粉色Ilvaro！00到4码一共11件（0码3、1码4、2码2）。黑色Maire 还是没有
-4. 被问：Maire 米色3码x2，黑Maire 0码、4码，GTX 灰45
-5. 退：Chamonix XS 尺码、GTX 43 礼品
+1. Astra 头套黑12个，其中一个客人一次买了8个，说是给公司滑雪队的
+2. GTX 黑7，Aurea 藏青6，Liviana 藏青5
+3. 到货236：终于来了粉色Iridia！00到4码一共11件（0码3、1码4、2码2）。黑色Aurea 还是没有
+4. 被问：Aurea 米色3码x2，黑Aurea 0码、4码，GTX 灰45
+5. 退：Cortina XS 尺码、GTX 43 礼品
 
 明天开始打电话给waitlist客人
 
@@ -441,21 +441,21 @@ body="""【SHA01 恒隆 每日营业报告】
 成交单数：28
 
 重点事项：
-1. 粉色Ilvaro 昨天到了11件，今天打了waitlist 上14个客人的电话：只有1个今天来买了，3个说这周来看看，其他的说已经在代购/别的城市买到了，或者"现在不想要了"。晚了两个星期，热度过去了。
-2. Maire 米色4件，Montcla 藏青3，毛线帽藏青3。
-3. 黑色Maire：16号DC就到货了，到今天我们没有收到调拨单，也没有在途。客人每天在问，0/1/2码全断。
+1. 粉色Iridia 昨天到了11件，今天打了waitlist 上14个客人的电话：只有1个今天来买了，3个说这周来看看，其他的说已经在代购/别的城市买到了，或者"现在不想要了"。晚了两个星期，热度过去了。
+2. Aurea 米色4件，Mistral 藏青3，毛线帽藏青3。
+3. 黑色Aurea：16号DC就到货了，到今天我们没有收到调拨单，也没有在途。客人每天在问，0/1/2码全断。
 
 需要支持：
-@logistics 请帮忙查一下黑色Maire的分配，SHA01 有没有？什么时候发？
+@logistics 请帮忙查一下黑色Aurea的分配，SHA01 有没有？什么时候发？
 
 王静 Jing"""),
 
-dict(suffix="_fwd", send="2026-10-19 15:26", frm="wj", to=["zhaolei"], cc=["aftersales_cn"], subject="转发：Tib 拉链 客人投诉",
+dict(suffix="_fwd", send="2026-10-19 15:26", frm="wj", to=["zhaolei"], cc=["aftersales_cn"], subject="转发：Vel 拉链 客人投诉",
 body="""赵总，
 
-转发一个VIC客人今天在微信上发给我们SA的消息，客人是我们的老客，年消费30万以上。Tib 是她9月初给老公买的，拉链已经坏了两次（第一次换了一件新的，第二次又坏了）。客人要求退款并且说要发小红书。我们先安抚了，答应全额退款。
+转发一个VIC客人今天在微信上发给我们SA的消息，客人是我们的老客，年消费30万以上。Vel 是她9月初给老公买的，拉链已经坏了两次（第一次换了一件新的，第二次又坏了）。客人要求退款并且说要发小红书。我们先安抚了，答应全额退款。
 
-Tib 处理方案已经两个多星期了，还是没有正式回复，门店很被动，麻烦帮忙推动一下。
+Vel 处理方案已经两个多星期了，还是没有正式回复，门店很被动，麻烦帮忙推动一下。
 
 王静
 
@@ -464,7 +464,7 @@ Tib 处理方案已经两个多星期了，还是没有正式回复，门店很�
 时间：2026-10-19 14:52
 
 客人原话：
-"Kiki 你好，上次换的那件Tib拉链又坏了，拉到胸口就卡住，我老公用力一拉拉链头直接掉了。两次了，你们这个质量真的让我很失望。我不想再换了，请帮我退款。这个价格的东西不应该这样吧？我会在小红书上说一下的。"
+"Kiki 你好，上次换的那件Vel拉链又坏了，拉到胸口就卡住，我老公用力一拉拉链头直接掉了。两次了，你们这个质量真的让我很失望。我不想再换了，请帮我退款。这个价格的东西不应该这样吧？我会在小红书上说一下的。"
 [图片] IMG_7731.jpg""",
 attach=[{"kind": "jpg", "name": "IMG_7731.jpg"}]),
 
@@ -481,9 +481,9 @@ body="""【SHA01 恒隆 每日营业报告】
 重点事项：
 1. 今晚天猫双11预售开始，好几个客人在店里直接打开天猫App比价，问"天猫预售有赠品/有满减，你们能不能price match？"我们按规定说门店不参与，有两个客人试完就走了，说回去网上下单。
 2. 客单还可以（2.6万），但单数太少。
-3. Trailgrip 女黑4双，Logo 卫衣藏青3，Polaris 头套白2，斗篷白2。
-4. 黑Maire 0码、3码，Chambre 黑4码 被问。
-5. 退：Maire 1码 不要了、棒球帽 尺码、Tib 2码/3码 拉链。
+3. Vtrack 女黑4双，Logo 卫衣藏青3，Astra 头套白2，斗篷白2。
+4. 黑Aurea 0码、3码，Camilla 黑4码 被问。
+5. 退：Aurea 1码 不要了、棒球帽 尺码、Vel 2码/3码 拉链。
 
 需要支持：
 双11期间门店有没有什么政策（赠品/积分）可以对应？不然这两周会很难。
@@ -496,10 +496,10 @@ net 37.3w / tgt 74.2w / 50%
 traffic 359 txn 19 CR 5.3%
 
 双11影响很明显，进店的客人一半会问天猫价。
-Maya 黑4，Montcla 黑4
-退：Maya 3码（客人说天猫预售同款加赠品更划算，拿了小票来退，按政策7天内可退）、Tricot cardigan M 不要了、Tib 1码 拉链
-Ambrine 黑3码还是有人问
-粉Ilvaro 这两天只卖了1件，waitlist 上的人基本不来了
+Nova 黑4，Mistral 黑4
+退：Nova 3码（客人说天猫预售同款加赠品更划算，拿了小票来退，按政策7天内可退）、Tricot cardigan M 不要了、Vel 1码 拉链
+Amalia 黑3码还是有人问
+粉Iridia 这两天只卖了1件，waitlist 上的人基本不来了
 
 浩"""),
 ]

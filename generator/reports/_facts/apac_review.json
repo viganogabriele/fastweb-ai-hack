@@ -52,7 +52,7 @@
  "total_if_sin_correct": 15660412,
  "apac_true_net_sep_monthly_fx": 14090065,
  "apac_bi_eur_budget_rate": 15035450,
- "polaris_units_24_30sep": {
+ "astra_units_24_30sep": {
   "HK/Macau/TW": 8,
   "Japan": 16,
   "Korea": 16,
@@ -60,6 +60,6 @@
   "Oceania": 3,
   "South-East Asia": 4
  },
- "polaris_units_emea": 77,
+ "astra_units_emea": 77,
  "gw_cn_growth_lc": 41.5
 }

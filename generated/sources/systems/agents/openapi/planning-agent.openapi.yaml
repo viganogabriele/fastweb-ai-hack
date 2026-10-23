@@ -3,7 +3,7 @@ info:
   title: planning-agent REST API
   version: 3.0.0
 servers:
-- url: https://agents.moncler-int.example/planning/v1
+- url: https://agents.valentino-int.example/planning/v1
 security:
 - bearer: []
 paths:

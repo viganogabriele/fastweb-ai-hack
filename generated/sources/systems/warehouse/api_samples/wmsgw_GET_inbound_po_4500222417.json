@@ -1,7 +1,7 @@
 {
   "_request": {
     "method": "GET",
-    "url": "https://wms-gw.moncler-int.example/v1/inbound/purchase-orders/4500222417",
+    "url": "https://wms-gw.valentino-int.example/v1/inbound/purchase-orders/4500222417",
     "ts": "2026-10-22T07:05:00Z"
   },
   "purchaseOrder": "4500222417",

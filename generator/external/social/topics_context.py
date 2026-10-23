@@ -19,7 +19,7 @@ SPECS = [
     ], kind={"user": 1}, places={"HKG01": 1}, sent="neu", viral=1.0, tags=["山貓", "颱風", "香港", "typhoon"], label="ctx_hk_typhoon"),
     S("hk_typhoon", "zh-HK", 20, {"instagram": .35, "threads": .35, "x": .3}, [("2026-09-16T15:40", 0), ("2026-09-16T16:30", 8), ("2026-09-17T02:00", 10),
                                                                               ("2026-09-17T23:00", 6), ("2026-09-18T05:39", 3), ("2026-09-18T05:40", 0)], [
-        "八號風球{🌀|}，{海港城|廣東道}{全部閂晒門|啲舖頭全部唔開}，{本來想去Moncler都去唔到|成條廣東道冇人}",
+        "八號風球{🌀|}，{海港城|廣東道}{全部閂晒門|啲舖頭全部唔開}，{本來想去Valentino都去唔到|成條廣東道冇人}",
         "山貓八號風球{掛咗成日|仲未除}，{返唔到工|喺屋企打邊爐}{😂|}",
         "{尖沙咀|廣東道}{好大風|樹都冧咗}，{邊個仲出街|唔好出街}{🌀|}",
         "{11點40|半夜}掛咗八號，{今日|聽日}{成個香港停晒|全港放假}{🌀|}",
@@ -71,14 +71,14 @@ SPECS = [
     # ------------------------------------------------------------- Golden Week Chinese tourists in Europe
     S("gw_cn_eu", "zh-CN", 55, {"xhs": .8, "weibo": .2}, [("2026-09-28", 0), ("2026-09-30", 8), ("2026-10-03", 10), ("2026-10-07", 6), ("2026-10-09", 1), ("2026-10-11", 0)], [
         "{国庆|十一}{在|来}{米兰|巴黎}，$store{排队|门口排了好久}，{一半都是中国人|全是同胞}{😂|}",
-        "{老佛爷|巴黎老佛爷}退税{排了一小时|攻略}：{盟可睐|蒙口}{买了MAYA|入了一件羽绒服}，退税后{比国内便宜好多|便宜了三千多}",
-        "{米兰|蒙特拿破仑大街}{盟可睐|Moncler}{旗舰店|本店}{逛吃逛吃|打卡}，{货比国内全|款式比国内多}{，但热门码也缺|}",
-        "{国庆|十一}欧洲扫货清单✅ {盟可睐|蒙口}{HERMINE|MAYA|ARNEB}{✅|}，{退税|tax free}{一定要|记得}{在机场办|当场办}",
-        "{伦敦|哈罗德}{盟可睐|Moncler}{专柜|柜台}{中国游客超多|中文导购超贴心}，{推荐|冲}",
+        "{老佛爷|巴黎老佛爷}退税{排了一小时|攻略}：{华伦天奴|华伦天奴}{买了NOVA|入了一件羽绒服}，退税后{比国内便宜好多|便宜了三千多}",
+        "{米兰|蒙特拿破仑大街}{华伦天奴|Valentino}{旗舰店|本店}{逛吃逛吃|打卡}，{货比国内全|款式比国内多}{，但热门码也缺|}",
+        "{国庆|十一}欧洲扫货清单✅ {华伦天奴|华伦天奴}{LIVIANA|NOVA|ARTEM}{✅|}，{退税|tax free}{一定要|记得}{在机场办|当场办}",
+        "{伦敦|哈罗德}{华伦天奴|Valentino}{专柜|柜台}{中国游客超多|中文导购超贴心}，{推荐|冲}",
         "{这次|今年国庆}{成都直飞米兰|直飞米兰}{太方便了|好方便}，{第一站|落地就去}{蒙特拿破仑大街|Montenapoleone}",
     ], kind={"user": 5, "influencer": 1, "daigou": 1}, places={"MIL01": 3, "PAR02": 3, "PAR01": 1, "LON02": 1}, sent="pos", viral=1.1,
-      tags=["国庆出游", "欧洲购物", "米兰", "巴黎", "退税攻略", "盟可睐", "老佛爷"],
-      titles=["国庆欧洲扫货｜盟可睐退税攻略", "米兰蒙特拿破仑大街 购物分享", "巴黎老佛爷 退税后价格", "十一欧洲行 买了什么"], label="ctx_golden_week"),
+      tags=["国庆出游", "欧洲购物", "米兰", "巴黎", "退税攻略", "华伦天奴", "老佛爷"],
+      titles=["国庆欧洲扫货｜华伦天奴退税攻略", "米兰蒙特拿破仑大街 购物分享", "巴黎老佛爷 退税后价格", "十一欧洲行 买了什么"], label="ctx_golden_week"),
     S("gw_it_fr", "it", 12, {"instagram": .4, "x": .6}, [("2026-09-29", 0), ("2026-10-02", 10), ("2026-10-07", 6), ("2026-10-09", 0)], [
         "Montenapoleone {invasa|piena} di turisti cinesi {per la Golden Week|questa settimana}, {code ovunque|fila fuori da ogni negozio}",
         "{Rinascente|Il Duomo} {pieno|strapieno} di {gruppi cinesi|turisti asiatici}, {la Golden Week si sente|si vede che è Golden Week}",
@@ -92,7 +92,7 @@ SPECS = [
         "{Fashion week|MFW} {giorno 2|giorno 3|ultimo giorno}: Montenapoleone {piena di fotografi|un set fotografico}{📸|}",
         "Milano Fashion Week {e il centro è impazzito|e il traffico è peggio del solito}{😅|}",
         "{Street style|Look} MFW: {piumino corto|giacca} {nero lucido|oversize} {e mocassini|con jeans}, {sempre attuale|semplice e chic}",
-    ], kind={"user": 3, "micro": 2, "media": 1}, places={"MIL01": 1}, sent="pos", viral=1.0, tags=["mfw", "milanofashionweek", "streetstyle", "milano", "moncler"], geo_p=0.4, label="ctx_mfw"),
+    ], kind={"user": 3, "micro": 2, "media": 1}, places={"MIL01": 1}, sent="pos", viral=1.0, tags=["mfw", "milanofashionweek", "streetstyle", "milano", "valentino"], geo_p=0.4, label="ctx_mfw"),
     S("pfw", "fr", 24, {"instagram": .7, "x": .3}, [("2026-09-28", 0), ("2026-09-30", 10), ("2026-10-07", 8), ("2026-10-08", 0)], [
         "Fashion Week {jour 2|jour 4|dernier jour}, {le Faubourg Saint-Honoré|le 8e} {bloqué|plein de fans} {📸|}",
         "{Des fans K-pop partout|Des centaines de fans} devant {le défilé|les Tuileries}, {impossible de passer|la folie}",
@@ -119,16 +119,16 @@ SPECS = [
         "{Race weekend|GP weekend} = {every store at MBS full|queues at every luxury store in MBS}",
     ], kind={"user": 1}, places={"SIN01": 1}, sent="pos", viral=1.0, tags=["SingaporeGP", "F1", "marinabay", "sgig"], geo_p=0.5, label="ctx_sg_gp"),
     S("la_heat", "en", 14, {"x": .6, "instagram": .4}, [("2026-09-07", 0), ("2026-09-09", 10), ("2026-09-12", 8), ("2026-09-13", 0)], [
-        "it's {104|106|102} in Beverly Hills and the Moncler window on Rodeo {has puffers|is all down jackets} {lmao|💀}",
+        "it's {104|106|102} in Beverly Hills and the Valentino window on Rodeo {has puffers|is all down jackets} {lmao|💀}",
         "{LA|Beverly Hills} heat wave day {3|4}, {nobody|not a single person} is shopping for {coats|puffers} rn",
     ], kind={"user": 1}, places={"BHS01": 1}, sent="neu", viral=0.9, tags=["heatwave", "LA", "beverlyhills"], geo_p=0.3, label="ctx_la_heat"),
     S("campaign", "en", 26, {"instagram": .5, "x": .4, "threads": .1}, [("2026-09-14", 0), ("2026-09-15T12:00", 10), ("2026-09-22", 5), ("2026-10-22T06:00", 1.5)], [
-        "saw the new moncler campaign billboard at {Piccadilly|Times Square|Soho} {😍|}, {it's huge|so good}",
-        "Moncler FW26 campaign {is everywhere|on every bus stop} in {London|NYC} {lol|}",
-        "{New|The new} Moncler ad {on my feed 10x today|keeps showing up}. {Pretty though|Ok fine it's gorgeous}",
-        "{That|The} FW26 Moncler campaign {film|video} is {gorgeous|so cinematic}",
+        "saw the new valentino campaign billboard at {Piccadilly|Times Square|Soho} {😍|}, {it's huge|so good}",
+        "Valentino FW26 campaign {is everywhere|on every bus stop} in {London|NYC} {lol|}",
+        "{New|The new} Valentino ad {on my feed 10x today|keeps showing up}. {Pretty though|Ok fine it's gorgeous}",
+        "{That|The} FW26 Valentino campaign {film|video} is {gorgeous|so cinematic}",
     ], kind={"user": 4, "media": 1}, places={"LON01": 2, "NYC01": 2, "UK_HOME": 1, "US_HOME": 1}, sent="pos", viral=1.0,
-      tags=["moncler", "FW26", "campaign", "billboard"], geo_p=0.2, label="ctx_campaign"),
+      tags=["valentino", "FW26", "campaign", "billboard"], geo_p=0.2, label="ctx_campaign"),
     S("chuseok", "ko", 20, {"instagram": .4, "naver_blog": .4, "x": .2}, [("2026-09-20", 0), ("2026-09-23", 10), ("2026-09-26", 8), ("2026-09-28", 0)], [
         "추석 연휴 {유럽여행|파리여행} 출발{✈️|}! {쇼핑 리스트 1번은 몽클|면세점부터 털어야지}",
         "추석 선물로 {엄마|부모님} {몽클 머플러|몽클 비니} {사드림|선물함}{🎁|}",
@@ -138,30 +138,30 @@ SPECS = [
 
     # ------------------------------------------------------------- small store-level anecdotes
     S("sydney_spring", "en", 12, {"instagram": .5, "x": .5}, [("2026-09-01", 4), ("2026-10-22T06:00", 6)], [
-        "Sydney {26|28}° and {the|that} Moncler window on Castlereagh {still full of puffers|is all winter} {😂|}",
-        "{Bought|Picked up} a Moncler polo {instead|} — {who needs a down jacket in Sydney spring|it's 27 degrees mate}",
+        "Sydney {26|28}° and {the|that} Valentino window on Castlereagh {still full of puffers|is all winter} {😂|}",
+        "{Bought|Picked up} a Valentino jersey polo {instead|} — {who needs a down jacket in Sydney spring|it's 27 degrees mate}",
     ], kind={"user": 1}, places={"SYD01": 1}, sent="neu", viral=0.8, tags=["sydney", "spring"], label="ctx_sydney_spring"),
     S("lon_vic", "en", 5, {"instagram": 1.0}, [("2026-10-08T17:00", 0), ("2026-10-08T21:00", 10), ("2026-10-09T12:00", 0)], [
-        "Lovely evening at Moncler New Bond Street {🥂|✨} {FW26 preview|thank you for having us}",
-    ], kind={"micro": 1, "user": 1}, places={"LON01": 1}, sent="pos", viral=1.0, tags=["moncler", "FW26", "london"], geo_p=0.8, label="ctx_lon_vic"),
+        "Lovely evening at Valentino New Bond Street {🥂|✨} {FW26 preview|thank you for having us}",
+    ], kind={"micro": 1, "user": 1}, places={"LON01": 1}, sent="pos", viral=1.0, tags=["valentino", "FW26", "london"], geo_p=0.8, label="ctx_lon_vic"),
     S("mad_maya", "es", 6, {"instagram": .5, "x": .5}, [("2026-09-23", 5), ("2026-10-06", 5)], [
-        "Fui a Serrano por el Maya negro y {solo había azul marino|solo tenían en azul}. {Dicen que llega en dos semanas|Ni idea de cuándo vuelve} {🙄|}",
-    ], kind={"user": 1}, places={"MAD01": 1}, sent="neg", viral=0.8, tags=["moncler", "madrid"], label="ctx_mad_maya_navy"),
+        "Fui a Serrano por el Nova negro y {solo había azul marino|solo tenían en azul}. {Dicen que llega en dos semanas|Ni idea de cuándo vuelve} {🙄|}",
+    ], kind={"user": 1}, places={"MAD01": 1}, sent="neg", viral=0.8, tags=["valentino", "madrid"], label="ctx_mad_maya_navy"),
     S("mil_cardigan", "it", 4, {"instagram": .5, "x": .5}, [("2026-10-09", 5), ("2026-10-21", 5)], [
         "Cercavo il cardigan con logo in M in Montenapo, {finito|esaurito}. {Mi hanno detto fine mese|Torna a fine ottobre forse}",
-    ], kind={"user": 1}, places={"MIL01": 1}, sent="neg", viral=0.7, tags=["moncler"], label="ctx_mil_cardigan_m"),
+    ], kind={"user": 1}, places={"MIL01": 1}, sent="neg", viral=0.7, tags=["valentino"], label="ctx_mil_cardigan_m"),
     S("nyc_pos", "en", 4, {"x": 1.0}, [("2026-10-06T18:30", 0), ("2026-10-06T19:30", 10), ("2026-10-06T22:00", 0)], [
-        "moncler soho {card machines|registers} down, {waited 40 min|been waiting forever} to pay {🙃|}",
-        "{lol|} the SoHo moncler {system's down|POS is down}, they're {writing receipts by hand|taking names}",
+        "valentino soho {card machines|registers} down, {waited 40 min|been waiting forever} to pay {🙃|}",
+        "{lol|} the SoHo valentino {system's down|POS is down}, they're {writing receipts by hand|taking names}",
     ], kind={"user": 1}, places={"NYC02": 1}, sent="neg", viral=0.8, tags=[], label="ctx_nyc_pos"),
     S("mia_ac", "en", 3, {"x": .5, "instagram": .5}, [("2026-09-03T14:00", 5), ("2026-09-05T22:00", 5)], [
-        "AC broken at {Moncler|the moncler store} Design District {lol|}, {it's a sauna in there|tried on a puffer in 90 degrees}",
+        "AC broken at {Valentino|the valentino store} Design District {lol|}, {it's a sauna in there|tried on a puffer in 90 degrees}",
     ], kind={"user": 1}, places={"MIA01": 1}, sent="neg", viral=0.7, tags=[], label="ctx_mia_ac"),
     S("unga", "en", 6, {"x": 1.0}, [("2026-09-20", 0), ("2026-09-22", 10), ("2026-09-26", 6), ("2026-09-27", 0)], [
         "UNGA week {motorcades|frozen zones} on Madison, {took 30 min to cross 3 blocks|can't get anywhere}",
     ], kind={"user": 1}, places={"NYC01": 1}, sent="neg", viral=0.8, tags=["UNGA", "nyc"], label="ctx_unga"),
     S("cph_hours", "da", 3, {"instagram": .5, "x": .5}, [("2026-09-28", 5), ("2026-10-04", 5)], [
-        "Moncler på Østergade {lukker kl 17|har kortere åbningstid} {denne uge|lige nu}?? {Stod foran lukket dør|Kom 17:05}",
+        "Valentino på Østergade {lukker kl 17|har kortere åbningstid} {denne uge|lige nu}?? {Stod foran lukket dør|Kom 17:05}",
     ], kind={"user": 1}, places={"CPH01": 1}, sent="neg", viral=0.7, tags=[], label="ctx_cph_hours"),
     S("stm_close", "de", 4, {"instagram": 1.0}, [("2026-10-16", 0), ("2026-10-18", 10), ("2026-10-20", 0)], [
         "{Letzter Tag|Letztes Wochenende} vor der Zwischensaison in St. Moritz, {die Läden machen dicht|Via Serlas wird ruhig} bis Dezember",

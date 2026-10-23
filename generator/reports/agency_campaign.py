@@ -68,7 +68,7 @@ def main():
     ax.tick_params(labelsize=8)
     f_sales = savefig(fig, TMP / "ag_sales.png")
 
-    path = OUTD / "HaldenRowe_Moncler_FW26_Campaign_Performance_US-UK_FINAL.pdf"
+    path = OUTD / "HaldenRowe_Valentino_FW26_Campaign_Performance_US-UK_FINAL.pdf"
     from reportlab.pdfgen import canvas
     W, H = landscape(letter)
     c = canvas.Canvas(str(path), pagesize=(W, H))
@@ -78,7 +78,7 @@ def main():
     def footer(dark=False, n=None):
         c.setFont("NSans", 7)
         c.setFillColor(colors.HexColor("#8C93A3") if dark else colors.HexColor("#7A7A7A"))
-        c.drawString(0.6 * inch, 0.35 * inch, "HALDEN & ROWE  |  Prepared for Moncler Marketing  |  Confidential - Internal use only")
+        c.drawString(0.6 * inch, 0.35 * inch, "HALDEN & ROWE  |  Prepared for Valentino Marketing  |  Confidential - Internal use only")
         if n:
             c.drawRightString(W - 0.6 * inch, 0.35 * inch, str(n))
 
@@ -226,7 +226,7 @@ def main():
     yy = H - 1.8 * inch
     for t in ["Extend the flight through December with a holiday creative rotation (+$2.1M).",
               "Add Toronto and Miami to the OOH plan - unexposed stores are clearly lagging.",
-              "Retarget site visitors with ILVARO and MAIRE dynamic product ads.",
+              "Retarget site visitors with IRIDIA and AUREA dynamic product ads.",
               "Build a store-level incrementality test with geo-holdouts for Q1 (we can design it)."]:
         c.setFillColor(GOLD)
         c.drawString(0.8 * inch, yy, "■")

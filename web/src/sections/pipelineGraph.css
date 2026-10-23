@@ -1,0 +1,21 @@
+.sd-pipeline { display: grid; gap: var(--sd-space-3); }
+.sd-pipeline p, .sd-pipeline h2 { margin: 0; }
+.sd-pipeline__source, .sd-pipeline__meta, .sd-pipeline__node small { font-size: var(--sd-font-size-caption); color: var(--sd-color-text-secondary); }
+.sd-pipeline__legend, .sd-pipeline__legend > span { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sd-space-2); }
+.sd-pipeline__legend { gap: var(--sd-space-4); color: var(--sd-color-text-secondary); font-size: var(--sd-font-size-body-sm); }
+.sd-pipeline__legend i { display: inline-block; width: 28px; border-block-start: 2px solid var(--sd-color-text-secondary); }
+.sd-pipeline__legend .sd-pipeline__optional { border-block-start-style: dashed; }
+.sd-pipeline__issues { margin: 0; padding-inline-start: var(--sd-space-5); color: var(--sd-color-state-warning); }
+.sd-pipeline__scroll { max-width: 100%; overflow: auto; overscroll-behavior-inline: contain; border: 1px solid var(--sd-color-border-subtle); border-radius: var(--sd-radius-control); background: var(--sd-color-surface-canvas); }
+.sd-pipeline__scroll:focus-visible, .sd-pipeline__node:focus-visible { outline: 2px solid var(--sd-color-action-focus); outline-offset: 2px; }
+.sd-pipeline__canvas { position: relative; }
+.sd-pipeline__edges { position: absolute; inset: 0; pointer-events: none; }
+.sd-pipeline__edge { fill: none; stroke: var(--sd-color-text-secondary); stroke-width: 1.5; }
+.sd-pipeline__edge--optional { stroke: var(--sd-color-text-muted); stroke-dasharray: 6 5; }
+.sd-pipeline__node { position: absolute; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: var(--sd-space-2); padding: var(--sd-space-3); border: 1px solid var(--sd-color-border-subtle); border-radius: var(--sd-radius-control); background: var(--sd-color-surface-card); color: var(--sd-color-text-primary); text-align: start; font: inherit; }
+button.sd-pipeline__node { cursor: pointer; }
+button.sd-pipeline__node:hover { border-color: var(--sd-color-action-primary); background: var(--sd-color-surface-elevated); }
+.sd-pipeline__node strong, .sd-pipeline__meta { display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sd-pipeline__node--disabled { border-style: dashed; }
+.sd-pipeline__node--missing { border-color: var(--sd-color-state-warning); border-style: dashed; }
+.sd-pipeline__node--missing > span { color: var(--sd-color-state-warning); }

@@ -9,7 +9,7 @@
       "source_refs": [
         {
           "uri": "dataset://store_emails/MIL01/20261001_1124_MIL01_fwd.eml",
-          "content_hash": "sha256:31aeadf95302b30ec9d28e4f3d359b2603a9629bb6de741467410d3ba89a29bf",
+          "content_hash": "sha256:9be12107b51f0d8e9665e019d486c7f5ee44dd7b686eb176fcf79aa67457e7ee",
           "locator": null
         }
       ],
@@ -36,7 +36,7 @@
       "period_start": null,
       "period_end": null,
       "time_text": "Dopo nemmeno tre settimane",
-      "product_mention": "gilet Tib blu taglia 4",
+      "product_mention": "gilet Vel blu taglia 4",
       "quantity": {
         "kind": "exact",
         "value": 1.0,
@@ -59,8 +59,8 @@
           "document_version": "v1",
           "segment_id": "doc-20261001-1124-mil01-fwd-seg2",
           "quote": "il cursore della zip si e' staccato da una parte",
-          "char_start": 377,
-          "char_end": 425,
+          "char_start": 379,
+          "char_end": 427,
           "t_start_s": null,
           "t_end_s": null
         }

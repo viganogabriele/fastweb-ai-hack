@@ -9,17 +9,17 @@
       "source_refs": [
         {
           "uri": "dataset://store_emails/NYC01/20260906_1837_NYC01.eml",
-          "content_hash": "sha256:a6f7d261277d822de9812fd0abaa94ab8ad2f5b854b6d218d0d45fe65022cfc7",
+          "content_hash": "sha256:a1e8d26c42dcdcc3b6797dd3e680b1e58d361c59d569029ebe4c54766446be30",
           "locator": null
         },
         {
           "uri": "dataset://erp/master_data/styles.csv",
-          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "content_hash": "sha256:36632f9c5616d48fbe94958702172d72d492e9628967ffa063874ccba8569b89",
           "locator": "style_code=I10918G00045"
         },
         {
           "uri": "dataset://erp/master_data/styles.csv",
-          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "content_hash": "sha256:36632f9c5616d48fbe94958702172d72d492e9628967ffa063874ccba8569b89",
           "locator": "style_code=I10918G00031"
         }
       ],
@@ -58,7 +58,7 @@
         }
       ],
       "decided_by": "rule:tie_keeps_candidates",
-      "rationale": "'a sweatshirt' fits CREWNECK SWEATSHIRT and LOGO HOODIE (shared alias 'sweat'), both sold at NYC01; no colour or size narrows it. Ask the store."
+      "rationale": "'a sweatshirt' fits RELAXED SWEATSHIRT and VLOGO HOODIE (shared alias 'sweat'), both sold at NYC01; no colour or size narrows it. Ask the store."
     }
   }
 ]

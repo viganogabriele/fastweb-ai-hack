@@ -68,7 +68,7 @@ def main():
                                                                         spend=("spend_eur", "sum"),
                                                                         validated=("validated", "sum")).reset_index()
     # ---------------- XLSX
-    wb = xlsxwriter.Workbook(OUTD / "Aurelia_TFS_merchant_extract_MONCLER_W36-W43_2026.xlsx")
+    wb = xlsxwriter.Workbook(OUTD / "Aurelia_TFS_merchant_extract_VALENTINO_W36-W43_2026.xlsx")
     wb.set_properties({"title": "Merchant extract - issued tax free forms", "author": "Aurelia Tax Free - Merchant Analytics"})
     F = lambda **kw: wb.add_format({"font_name": "Segoe UI", "font_size": 9, **kw})
     hdr = F(bold=True, bg_color="#5B2C6F", font_color="white", border=1)
@@ -76,7 +76,7 @@ def main():
     ws = wb.add_worksheet("Info")
     ws.set_column(0, 0, 120)
     for i, l in enumerate([
-            "AURELIA TAX FREE - Merchant Insight extract", "Merchant group: MONCLER (all participating outlets)",
+            "AURELIA TAX FREE - Merchant Insight extract", "Merchant group: VALENTINO (all participating outlets)",
             "Period: ISO weeks 36-43 2026 (31/08/2026 - 21/10/2026, week 43 partial)",
             "Unit of measure: tax free forms ISSUED at outlet. Spend = gross purchase amount incl. VAT, converted to EUR at monthly ECB average.",
             "Validated = forms stamped by customs/export validation so far. Recent weeks incomplete (validation lag 1-3 weeks).",
@@ -110,7 +110,7 @@ def main():
     sn = stores().set_index("store_id").store_name
     for i, x in enumerate(o.itertuples()):
         ws.write(1 + i, 0, OUTLET.get(x.store_id, x.store_id), txt)
-        ws.write(1 + i, 1, f"MONCLER {sn[x.store_id].upper()}", txt)
+        ws.write(1 + i, 1, f"VALENTINO {sn[x.store_id].upper()}", txt)
         ws.write(1 + i, 2, f"2026-W{x.week:02d}", txt)
         ws.write(1 + i, 3, x.forms, n0)
         ws.write(1 + i, 4, round(x.spend, 2), e0)
@@ -151,22 +151,22 @@ def main():
         c.setFont("NSans-B", 10)
         c.drawString(15 * mm, h - 9 * mm, "aurelia  TAX FREE")
         c.setFont("NSans", 8)
-        c.drawRightString(w - 15 * mm, h - 9 * mm, "Merchant Insights  |  MONCLER  |  October 2026")
+        c.drawRightString(w - 15 * mm, h - 9 * mm, "Merchant Insights  |  VALENTINO  |  October 2026")
         c.setFillColor(colors.grey)
         c.setFont("NSans", 7)
         c.drawString(15 * mm, 9 * mm, "Confidential - prepared for the merchant. Based on issued tax free forms. Not an audited figure.")
         c.drawRightString(w - 15 * mm, 9 * mm, str(doc.page))
         c.restoreState()
 
-    doc = BaseDocTemplate(str(OUTD / "Aurelia_Merchant_Insights_Moncler_Sep-Oct2026.pdf"), pagesize=A4, leftMargin=15 * mm,
+    doc = BaseDocTemplate(str(OUTD / "Aurelia_Merchant_Insights_Valentino_Sep-Oct2026.pdf"), pagesize=A4, leftMargin=15 * mm,
                           rightMargin=15 * mm, topMargin=22 * mm, bottomMargin=16 * mm, title="Aurelia Merchant Insights")
     doc.addPageTemplates([PageTemplate("p", [Frame(doc.leftMargin, doc.bottomMargin, doc.width, doc.height)], onPage=on_page)])
-    E = [Paragraph("Tax free shopping at Moncler: September - mid October 2026", S["h1"]),
+    E = [Paragraph("Tax free shopping at Valentino: September - mid October 2026", S["h1"]),
          Paragraph(f"+{(kr_late / kr_aug - 1) * 100:.0f}%", S["big"]),
-         Paragraph("Korean shoppers' tax free spend at Moncler in France and Italy, weeks 39-40 vs weeks 36-37 (issued forms). "
+         Paragraph("Korean shoppers' tax free spend at Valentino in France and Italy, weeks 39-40 vs weeks 36-37 (issued forms). "
                    "After Chuseok (24-26 September) Korean travellers flocked to Paris and Milan.", S["body"]),
          Paragraph(f"+{(cn_gw / cn_pre - 1) * 100:.0f}%", S["big"]),
-         Paragraph("Chinese shoppers' spend at Moncler in Europe during Golden Week (weeks 40-41) vs the two previous weeks. "
+         Paragraph("Chinese shoppers' spend at Valentino in Europe during Golden Week (weeks 40-41) vs the two previous weeks. "
                    "New direct flights from Chengdu and visa fast-track supported the strongest Golden Week since 2019.", S["body"]),
          Image(f1, width=175 * mm, height=70 * mm),
          Paragraph("Issued forms, spend incl. VAT, EUR. Week 43 excluded (partial).", S["small"]), Spacer(1, 6)]

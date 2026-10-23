@@ -2,24 +2,24 @@
   "protocolVersion": "0.3.0",
   "name": "marketing-agent",
   "description": "Marketing & CRM agent (Salesforce + campaign calendar + social listening). Returns campaign calendar, client waitlists and drafts clienteling messages in the client language for sales associates (never sends them). Uses CRM store codes (e.g. IT01, KR02).",
-  "url": "https://agents.moncler-int.example/marketing/a2a",
+  "url": "https://agents.valentino-int.example/marketing/a2a",
   "preferredTransport": "JSONRPC",
   "additionalInterfaces": [
     {
-      "url": "https://agents.moncler-int.example/marketing/a2a",
+      "url": "https://agents.valentino-int.example/marketing/a2a",
       "transport": "JSONRPC"
     },
     {
-      "url": "https://agents.moncler-int.example/marketing/v1",
+      "url": "https://agents.valentino-int.example/marketing/v1",
       "transport": "HTTP+JSON"
     }
   ],
   "provider": {
-    "organization": "Moncler - Marketing Technology / CRM",
-    "url": "https://intranet.moncler-int.example"
+    "organization": "Valentino - Marketing Technology / CRM",
+    "url": "https://intranet.valentino-int.example"
   },
   "version": "0.9.4-beta",
-  "documentationUrl": "https://agents.moncler-int.example/marketing/docs",
+  "documentationUrl": "https://agents.valentino-int.example/marketing/docs",
   "capabilities": {
     "streaming": true,
     "pushNotifications": false,
@@ -30,7 +30,7 @@
       "type": "oauth2",
       "flows": {
         "clientCredentials": {
-          "tokenUrl": "https://login.moncler-int.example/oauth2/token",
+          "tokenUrl": "https://login.valentino-int.example/oauth2/token",
           "scopes": {
             "crm.read": "read CRM",
             "crm.draft": "create drafts"
@@ -88,7 +88,7 @@
         "clienteling"
       ],
       "examples": [
-        "Open waitlist entries for ILVARO pink at KR02"
+        "Open waitlist entries for IRIDIA pink at KR02"
       ],
       "inputModes": [
         "application/json",
@@ -108,7 +108,7 @@
         "draft"
       ],
       "examples": [
-        "Draft a KakaoTalk message for a client waiting for ILVARO pink size 0"
+        "Draft a KakaoTalk message for a client waiting for IRIDIA pink size 0"
       ],
       "inputModes": [
         "application/json",
@@ -127,7 +127,7 @@
         "alerts"
       ],
       "examples": [
-        "Any spike on Moncler in Korea?"
+        "Any spike on Valentino in Korea?"
       ],
       "inputModes": [
         "application/json",

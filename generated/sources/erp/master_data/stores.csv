@@ -1,40 +1,40 @@
 store_id,store_name,store_type,city,country_code,country,region,subregion,language,timezone,currency,lat,lon,sqm,opening_date,closed_dow,store_manager,assistant_manager,email
-MIL01,Milano Montenapoleone,Flagship,Milano,IT,Italy,EMEA,Italy,it,Europe/Rome,EUR,45.4685,9.1955,820,2008-03-14,,Giulia Ferrandi,Marco Pellizzari,mil01.store@moncler-retail.example
-MIL02,Milano Rinascente Duomo,Shop-in-shop,Milano,IT,Italy,EMEA,Italy,it,Europe/Rome,EUR,45.4655,9.1912,140,2015-09-01,,Stefano Rocchi,Ilaria Mancuso,mil02.store@moncler-retail.example
-ROM01,Roma Via Condotti,Boutique,Roma,IT,Italy,EMEA,Italy,it,Europe/Rome,EUR,41.9055,12.48,390,2011-11-18,,Alessandra De Santis,Fabio Cardarelli,rom01.store@moncler-retail.example
-VEN01,Venezia San Marco,Boutique,Venezia,IT,Italy,EMEA,Italy,it,Europe/Rome,EUR,45.4337,12.3363,210,2013-04-05,,Chiara Zennaro,Luca Boscolo,ven01.store@moncler-retail.example
-COU01,Courmayeur,Resort,Courmayeur,IT,Italy,EMEA,Italy,it,Europe/Rome,EUR,45.7969,6.969,160,2010-12-03,,Paolo Bertholin,Elisa Vuillermoz,cou01.store@moncler-retail.example
-CRT01,Cortina d'Ampezzo,Resort,Cortina d'Ampezzo,IT,Italy,EMEA,Italy,it,Europe/Rome,EUR,46.5405,12.1357,180,2012-12-07,,Martina Menardi,Davide Dibona,crt01.store@moncler-retail.example
-PAR01,Paris Saint-Honoré,Flagship,Paris,FR,France,EMEA,France,fr,Europe/Paris,EUR,48.8686,2.3224,760,2009-10-01,Sun,Camille Lefèvre,Thomas Nguyen,par01.store@moncler-retail.example
-PAR02,Paris Galeries Lafayette Haussmann,Shop-in-shop,Paris,FR,France,EMEA,France,fr,Europe/Paris,EUR,48.8738,2.332,180,2014-03-20,,Sophie Marchand,Karim Benali,par02.store@moncler-retail.example
-CAN01,Cannes La Croisette,Boutique,Cannes,FR,France,EMEA,France,fr,Europe/Paris,EUR,43.5503,7.0225,230,2016-06-10,Sun,Laetitia Rossi,Julien Pastor,can01.store@moncler-retail.example
-GVA01,Genève Rue du Rhône,Boutique,Genève,CH,Switzerland,EMEA,Switzerland,fr,Europe/Zurich,CHF,46.2033,6.1478,260,2013-09-14,Sun,Nathalie Favre,Bruno Monnier,gva01.store@moncler-retail.example
-LON01,London New Bond Street,Flagship,London,GB,United Kingdom,EMEA,UK,en,Europe/London,GBP,51.5122,-0.145,700,2010-05-21,,Olivia Hartley,Daniel Okafor,lon01.store@moncler-retail.example
-LON02,London Harrods,Shop-in-shop,London,GB,United Kingdom,EMEA,UK,en,Europe/London,GBP,51.4994,-0.1632,160,2012-10-01,,Priya Raman,James Whitcombe,lon02.store@moncler-retail.example
-MUN01,München Maximilianstraße,Boutique,München,DE,Germany,EMEA,Germany,de,Europe/Berlin,EUR,48.1394,11.5823,340,2012-09-28,Sun,Katharina Huber,Florian Brandl,mun01.store@moncler-retail.example
-BER01,Berlin KaDeWe,Shop-in-shop,Berlin,DE,Germany,EMEA,Germany,de,Europe/Berlin,EUR,52.5016,13.3411,130,2016-10-14,Sun,Jana Schulte,Mehmet Aydın,ber01.store@moncler-retail.example
-ZRH01,Zürich Bahnhofstrasse,Boutique,Zürich,CH,Switzerland,EMEA,Switzerland,de,Europe/Zurich,CHF,47.37,8.539,300,2014-11-07,Sun,Reto Ammann,Lea Baumgartner,zrh01.store@moncler-retail.example
-STM01,St. Moritz Via Serlas,Resort,St. Moritz,CH,Switzerland,EMEA,Switzerland,de,Europe/Zurich,CHF,46.4983,9.839,190,2011-12-16,,Gian-Andrea Caviezel,Sabrina Gredig,stm01.store@moncler-retail.example
-MAD01,Madrid Calle Serrano,Boutique,Madrid,ES,Spain,EMEA,Spain,es,Europe/Madrid,EUR,40.426,-3.687,310,2015-11-12,,Lucía Fernández Ortega,Javier Molina,mad01.store@moncler-retail.example
-AMS01,Amsterdam P.C. Hooftstraat,Boutique,Amsterdam,NL,Netherlands,EMEA,Benelux,en,Europe/Amsterdam,EUR,52.359,4.878,240,2017-03-03,,Sanne de Vries,Ruben Bakker,ams01.store@moncler-retail.example
-CPH01,København Østergade,Boutique,København,DK,Denmark,EMEA,Nordics,en,Europe/Copenhagen,DKK,55.679,12.58,220,2018-09-21,Sun,Mette Kjær,Anders Holm,cph01.store@moncler-retail.example
-DXB01,Dubai Mall Fashion Avenue,Boutique,Dubai,AE,United Arab Emirates,EMEA,Middle East,en,Asia/Dubai,AED,25.1985,55.2796,330,2014-12-10,,Rania Khoury,Joel Santos,dxb01.store@moncler-retail.example
-NYC01,New York Madison Avenue,Flagship,New York,US,United States,AMERICAS,USA,en,America/New_York,USD,40.768,-73.966,650,2011-09-15,,Rebecca Stein,Marcus Bell,nyc01.store@moncler-retail.example
-NYC02,New York SoHo,Boutique,New York,US,United States,AMERICAS,USA,en,America/New_York,USD,40.724,-74.001,420,2016-11-04,,Tyler Brooks,Ana Gutierrez,nyc02.store@moncler-retail.example
-MIA01,Miami Design District,Boutique,Miami,US,United States,AMERICAS,USA,en,America/New_York,USD,25.813,-80.193,280,2017-12-01,,Daniela Restrepo,Kevin Hall,mia01.store@moncler-retail.example
-BHS01,Beverly Hills Rodeo Drive,Boutique,Beverly Hills,US,United States,AMERICAS,USA,en,America/Los_Angeles,USD,34.068,-118.401,360,2013-06-14,,Jennifer Kim,Luis Ortega,bhs01.store@moncler-retail.example
-ASP01,Aspen,Resort,Aspen,US,United States,AMERICAS,USA,en,America/Denver,USD,39.189,-106.818,210,2014-12-12,,Hannah Novak,Chris Delgado,asp01.store@moncler-retail.example
-TOR01,Toronto Yorkville,Boutique,Toronto,CA,Canada,AMERICAS,Canada,en,America/Toronto,CAD,43.671,-79.393,300,2016-10-20,,Émilie Gagnon,Ryan Chen,tor01.store@moncler-retail.example
-TYO01,Tokyo Ginza,Flagship,Tokyo,JP,Japan,APAC,Japan,ja,Asia/Tokyo,JPY,35.6717,139.765,720,2010-09-10,,佐藤 美咲,田中 健一,tyo01.store@moncler-retail.example
-TYO02,Tokyo Omotesando,Boutique,Tokyo,JP,Japan,APAC,Japan,ja,Asia/Tokyo,JPY,35.6655,139.712,380,2013-03-22,,高橋 由香,伊藤 翔,tyo02.store@moncler-retail.example
-OSA01,Osaka Shinsaibashi,Boutique,Osaka,JP,Japan,APAC,Japan,ja,Asia/Tokyo,JPY,34.674,135.501,340,2015-04-17,,山本 恵,中村 大輔,osa01.store@moncler-retail.example
-SEL01,Seoul Cheongdam Flagship,Flagship,Seoul,KR,South Korea,APAC,Korea,ko,Asia/Seoul,KRW,37.5245,127.047,690,2014-08-29,,김지현,박민수,sel01.store@moncler-retail.example
-SEL02,Seoul Hyundai Apgujeong,Shop-in-shop,Seoul,KR,South Korea,APAC,Korea,ko,Asia/Seoul,KRW,37.5272,127.028,170,2012-02-17,,이수진,최동욱,sel02.store@moncler-retail.example
-BUS01,Busan Shinsegae Centum City,Shop-in-shop,Busan,KR,South Korea,APAC,Korea,ko,Asia/Seoul,KRW,35.169,129.129,150,2016-03-11,,정은비,한승우,bus01.store@moncler-retail.example
-SHA01,Shanghai Plaza 66,Flagship,Shanghai,CN,China,APAC,Mainland China,zh-CN,Asia/Shanghai,CNY,31.229,121.455,610,2012-11-23,,王静,陈浩,sha01.store@moncler-retail.example
-BJS01,Beijing SKP,Boutique,Beijing,CN,China,APAC,Mainland China,zh-CN,Asia/Shanghai,CNY,39.909,116.481,420,2014-09-26,,刘洋,张敏,bjs01.store@moncler-retail.example
-CDU01,Chengdu Taikoo Li,Boutique,Chengdu,CN,China,APAC,Mainland China,zh-CN,Asia/Shanghai,CNY,30.653,104.082,360,2017-09-15,,李娜,杨帆,cdu01.store@moncler-retail.example
-HKG01,Hong Kong Canton Road,Boutique,Hong Kong,HK,Hong Kong SAR,APAC,HK/Macau/TW,zh-HK,Asia/Hong_Kong,HKD,22.296,114.169,450,2011-12-02,,陳嘉欣 Karen Chan,黃志明 Ming Wong,hkg01.store@moncler-retail.example
-TPE01,Taipei 101,Boutique,Taipei,TW,Taiwan,APAC,HK/Macau/TW,zh-TW,Asia/Taipei,TWD,25.034,121.5645,280,2015-10-16,,林怡君,吳承恩,tpe01.store@moncler-retail.example
-SIN01,Singapore Marina Bay Sands,Boutique,Singapore,SG,Singapore,APAC,South-East Asia,en,Asia/Singapore,SGD,1.2834,103.8607,300,2013-07-26,,Grace Tan,Muhammad Hafiz,sin01.store@moncler-retail.example
-SYD01,Sydney Castlereagh Street,Boutique,Sydney,AU,Australia,APAC,Oceania,en,Australia/Sydney,AUD,-33.869,151.208,260,2018-04-12,,Chloe Mitchell,Arjun Patel,syd01.store@moncler-retail.example
+MIL01,Milano Montenapoleone,Flagship,Milano,IT,Italy,EMEA,Italy,it,Europe/Rome,EUR,45.4685,9.1955,820,2008-03-14,,Giulia Ferrandi,Marco Pellizzari,mil01.store@valentino-retail.example
+MIL02,Milano Rinascente Duomo,Shop-in-shop,Milano,IT,Italy,EMEA,Italy,it,Europe/Rome,EUR,45.4655,9.1912,140,2015-09-01,,Stefano Rocchi,Ilaria Mancuso,mil02.store@valentino-retail.example
+ROM01,Roma Via Condotti,Boutique,Roma,IT,Italy,EMEA,Italy,it,Europe/Rome,EUR,41.9055,12.48,390,2011-11-18,,Alessandra De Santis,Fabio Cardarelli,rom01.store@valentino-retail.example
+VEN01,Venezia San Marco,Boutique,Venezia,IT,Italy,EMEA,Italy,it,Europe/Rome,EUR,45.4337,12.3363,210,2013-04-05,,Chiara Zennaro,Luca Boscolo,ven01.store@valentino-retail.example
+COU01,Courmayeur,Resort,Courmayeur,IT,Italy,EMEA,Italy,it,Europe/Rome,EUR,45.7969,6.969,160,2010-12-03,,Paolo Bertholin,Elisa Vuillermoz,cou01.store@valentino-retail.example
+CRT01,Cortina d'Ampezzo,Resort,Cortina d'Ampezzo,IT,Italy,EMEA,Italy,it,Europe/Rome,EUR,46.5405,12.1357,180,2012-12-07,,Martina Menardi,Davide Dibona,crt01.store@valentino-retail.example
+PAR01,Paris Saint-Honoré,Flagship,Paris,FR,France,EMEA,France,fr,Europe/Paris,EUR,48.8686,2.3224,760,2009-10-01,Sun,Camille Lefèvre,Thomas Nguyen,par01.store@valentino-retail.example
+PAR02,Paris Galeries Lafayette Haussmann,Shop-in-shop,Paris,FR,France,EMEA,France,fr,Europe/Paris,EUR,48.8738,2.332,180,2014-03-20,,Sophie Marchand,Karim Benali,par02.store@valentino-retail.example
+CAN01,Cannes La Croisette,Boutique,Cannes,FR,France,EMEA,France,fr,Europe/Paris,EUR,43.5503,7.0225,230,2016-06-10,Sun,Laetitia Rossi,Julien Pastor,can01.store@valentino-retail.example
+GVA01,Genève Rue du Rhône,Boutique,Genève,CH,Switzerland,EMEA,Switzerland,fr,Europe/Zurich,CHF,46.2033,6.1478,260,2013-09-14,Sun,Nathalie Favre,Bruno Monnier,gva01.store@valentino-retail.example
+LON01,London New Bond Street,Flagship,London,GB,United Kingdom,EMEA,UK,en,Europe/London,GBP,51.5122,-0.145,700,2010-05-21,,Olivia Hartley,Daniel Okafor,lon01.store@valentino-retail.example
+LON02,London Harrods,Shop-in-shop,London,GB,United Kingdom,EMEA,UK,en,Europe/London,GBP,51.4994,-0.1632,160,2012-10-01,,Priya Raman,James Whitcombe,lon02.store@valentino-retail.example
+MUN01,München Maximilianstraße,Boutique,München,DE,Germany,EMEA,Germany,de,Europe/Berlin,EUR,48.1394,11.5823,340,2012-09-28,Sun,Katharina Huber,Florian Brandl,mun01.store@valentino-retail.example
+BER01,Berlin KaDeWe,Shop-in-shop,Berlin,DE,Germany,EMEA,Germany,de,Europe/Berlin,EUR,52.5016,13.3411,130,2016-10-14,Sun,Jana Schulte,Mehmet Aydın,ber01.store@valentino-retail.example
+ZRH01,Zürich Bahnhofstrasse,Boutique,Zürich,CH,Switzerland,EMEA,Switzerland,de,Europe/Zurich,CHF,47.37,8.539,300,2014-11-07,Sun,Reto Ammann,Lea Baumgartner,zrh01.store@valentino-retail.example
+STM01,St. Moritz Via Serlas,Resort,St. Moritz,CH,Switzerland,EMEA,Switzerland,de,Europe/Zurich,CHF,46.4983,9.839,190,2011-12-16,,Gian-Andrea Caviezel,Sabrina Gredig,stm01.store@valentino-retail.example
+MAD01,Madrid Calle Serrano,Boutique,Madrid,ES,Spain,EMEA,Spain,es,Europe/Madrid,EUR,40.426,-3.687,310,2015-11-12,,Lucía Fernández Ortega,Javier Molina,mad01.store@valentino-retail.example
+AMS01,Amsterdam P.C. Hooftstraat,Boutique,Amsterdam,NL,Netherlands,EMEA,Benelux,en,Europe/Amsterdam,EUR,52.359,4.878,240,2017-03-03,,Sanne de Vries,Ruben Bakker,ams01.store@valentino-retail.example
+CPH01,København Østergade,Boutique,København,DK,Denmark,EMEA,Nordics,en,Europe/Copenhagen,DKK,55.679,12.58,220,2018-09-21,Sun,Mette Kjær,Anders Holm,cph01.store@valentino-retail.example
+DXB01,Dubai Mall Fashion Avenue,Boutique,Dubai,AE,United Arab Emirates,EMEA,Middle East,en,Asia/Dubai,AED,25.1985,55.2796,330,2014-12-10,,Rania Khoury,Joel Santos,dxb01.store@valentino-retail.example
+NYC01,New York Madison Avenue,Flagship,New York,US,United States,AMERICAS,USA,en,America/New_York,USD,40.768,-73.966,650,2011-09-15,,Rebecca Stein,Marcus Bell,nyc01.store@valentino-retail.example
+NYC02,New York SoHo,Boutique,New York,US,United States,AMERICAS,USA,en,America/New_York,USD,40.724,-74.001,420,2016-11-04,,Tyler Brooks,Ana Gutierrez,nyc02.store@valentino-retail.example
+MIA01,Miami Design District,Boutique,Miami,US,United States,AMERICAS,USA,en,America/New_York,USD,25.813,-80.193,280,2017-12-01,,Daniela Restrepo,Kevin Hall,mia01.store@valentino-retail.example
+BHS01,Beverly Hills Rodeo Drive,Boutique,Beverly Hills,US,United States,AMERICAS,USA,en,America/Los_Angeles,USD,34.068,-118.401,360,2013-06-14,,Jennifer Kim,Luis Ortega,bhs01.store@valentino-retail.example
+ASP01,Aspen,Resort,Aspen,US,United States,AMERICAS,USA,en,America/Denver,USD,39.189,-106.818,210,2014-12-12,,Hannah Novak,Chris Delgado,asp01.store@valentino-retail.example
+TOR01,Toronto Yorkville,Boutique,Toronto,CA,Canada,AMERICAS,Canada,en,America/Toronto,CAD,43.671,-79.393,300,2016-10-20,,Émilie Gagnon,Ryan Chen,tor01.store@valentino-retail.example
+TYO01,Tokyo Ginza,Flagship,Tokyo,JP,Japan,APAC,Japan,ja,Asia/Tokyo,JPY,35.6717,139.765,720,2010-09-10,,佐藤 美咲,田中 健一,tyo01.store@valentino-retail.example
+TYO02,Tokyo Omotesando,Boutique,Tokyo,JP,Japan,APAC,Japan,ja,Asia/Tokyo,JPY,35.6655,139.712,380,2013-03-22,,高橋 由香,伊藤 翔,tyo02.store@valentino-retail.example
+OSA01,Osaka Shinsaibashi,Boutique,Osaka,JP,Japan,APAC,Japan,ja,Asia/Tokyo,JPY,34.674,135.501,340,2015-04-17,,山本 恵,中村 大輔,osa01.store@valentino-retail.example
+SEL01,Seoul Cheongdam Flagship,Flagship,Seoul,KR,South Korea,APAC,Korea,ko,Asia/Seoul,KRW,37.5245,127.047,690,2014-08-29,,김지현,박민수,sel01.store@valentino-retail.example
+SEL02,Seoul Hyundai Apgujeong,Shop-in-shop,Seoul,KR,South Korea,APAC,Korea,ko,Asia/Seoul,KRW,37.5272,127.028,170,2012-02-17,,이수진,최동욱,sel02.store@valentino-retail.example
+BUS01,Busan Shinsegae Centum City,Shop-in-shop,Busan,KR,South Korea,APAC,Korea,ko,Asia/Seoul,KRW,35.169,129.129,150,2016-03-11,,정은비,한승우,bus01.store@valentino-retail.example
+SHA01,Shanghai Plaza 66,Flagship,Shanghai,CN,China,APAC,Mainland China,zh-CN,Asia/Shanghai,CNY,31.229,121.455,610,2012-11-23,,王静,陈浩,sha01.store@valentino-retail.example
+BJS01,Beijing SKP,Boutique,Beijing,CN,China,APAC,Mainland China,zh-CN,Asia/Shanghai,CNY,39.909,116.481,420,2014-09-26,,刘洋,张敏,bjs01.store@valentino-retail.example
+CDU01,Chengdu Taikoo Li,Boutique,Chengdu,CN,China,APAC,Mainland China,zh-CN,Asia/Shanghai,CNY,30.653,104.082,360,2017-09-15,,李娜,杨帆,cdu01.store@valentino-retail.example
+HKG01,Hong Kong Canton Road,Boutique,Hong Kong,HK,Hong Kong SAR,APAC,HK/Macau/TW,zh-HK,Asia/Hong_Kong,HKD,22.296,114.169,450,2011-12-02,,陳嘉欣 Karen Chan,黃志明 Ming Wong,hkg01.store@valentino-retail.example
+TPE01,Taipei 101,Boutique,Taipei,TW,Taiwan,APAC,HK/Macau/TW,zh-TW,Asia/Taipei,TWD,25.034,121.5645,280,2015-10-16,,林怡君,吳承恩,tpe01.store@valentino-retail.example
+SIN01,Singapore Marina Bay Sands,Boutique,Singapore,SG,Singapore,APAC,South-East Asia,en,Asia/Singapore,SGD,1.2834,103.8607,300,2013-07-26,,Grace Tan,Muhammad Hafiz,sin01.store@valentino-retail.example
+SYD01,Sydney Castlereagh Street,Boutique,Sydney,AU,Australia,APAC,Oceania,en,Australia/Sydney,AUD,-33.869,151.208,260,2018-04-12,,Chloe Mitchell,Arjun Patel,syd01.store@valentino-retail.example

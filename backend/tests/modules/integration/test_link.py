@@ -120,11 +120,13 @@ def test_fixture_observations_match_the_data01b_link_fixtures(engine) -> None:
 
 def test_links_keep_candidates_scale_and_provenance(engine) -> None:
     _, links = run(engine)
-    maire = links["obs-20261002-2112-mil01-maire-requests"]
-    assert maire.input_refs[0].kind == "Observation"
-    assert maire.available_at == observation(engine, maire.observation_id).available_at
-    assert any(r.uri.endswith("erp/master_data/sku_colour.csv") for r in maire.source_refs)
-    assert all((c.score_min, c.score_max) == (0.0, 100.0) for c in maire.candidates)
+    valentino_v01 = links["obs-20261002-2112-mil01-maire-requests"]
+    assert valentino_v01.input_refs[0].kind == "Observation"
+    assert (
+        valentino_v01.available_at == observation(engine, valentino_v01.observation_id).available_at
+    )
+    assert any(r.uri.endswith("erp/master_data/sku_colour.csv") for r in valentino_v01.source_refs)
+    assert all((c.score_min, c.score_max) == (0.0, 100.0) for c in valentino_v01.candidates)
     cardigan = links["obs-20261009-1035-mil01-stockout"]  # "sia nero che blu"
     assert (cardigan.level, cardigan.decided_by) == ("style", "rule:same_style")
     assert {c.target_id for c in cardigan.candidates} >= {"I10919B00011-999", "I10919B00011-742"}
@@ -183,13 +185,13 @@ def test_llm_can_be_switched_off(engine) -> None:
 
 def test_size_outside_the_size_run_never_reaches_the_llm(engine) -> None:
     base = observation(engine, "obs-20261002-2112-mil01-maire-requests")
-    mention = "Maire nera taglia 9"
+    mention = "Aurea nera taglia 9"
     odd = base.model_copy(update={"id": "obs-maire-size-9", "product_mention": mention})
     llm = FakeLLM("J20931A00012-999")
     _, links = run(engine, llm=llm, observations=[odd])
     assert links["obs-maire-size-9"].status == "ambiguous"
     assert any("size_not_in_size_run" in c.method for c in links["obs-maire-size-9"].candidates)
-    assert all(c["messages"][-1]["content"].find("Maire nera taglia 9") < 0 for c in llm.calls)
+    assert all(c["messages"][-1]["content"].find("Aurea nera taglia 9") < 0 for c in llm.calls)
 
 
 def test_missing_catalog_blocks(tmp_path) -> None:
@@ -201,12 +203,23 @@ def test_missing_catalog_blocks(tmp_path) -> None:
 
 @pytest.mark.parametrize(
     ("mention", "size"),
-    [("gilet Tib blu taglia 4", "4"), ("Maire tg. 3", "3"), ("size M please", "M"),
-     ("Größe 2 Maire", "2"), ("マイレ サイズ1", "1"), ("cardigan logo in M", None),
-     ("Maire nera", None), ("Ecrins tg 1 e tg 7", None), ("Maire tg 2, tg. 2", "2"),
-     ("Maire tg 3 o 4", None), ("Maire size S/M", None), ("Maire tg 3, 4", None),
-     ("Maire taglia l'altra", None), ("Maire tg 3 e basta", "3")],
-)  # fmt: skip
+    [
+        ("gilet Vel blu taglia 4", "4"),
+        ("Aurea tg. 3", "3"),
+        ("size M please", "M"),
+        ("Größe 2 Aurea", "2"),
+        ("Aurea サイズ1", "1"),
+        ("cardigan logo in M", None),
+        ("Aurea nera", None),
+        ("Ettore tg 1 e tg 7", None),
+        ("Aurea tg 2, tg. 2", "2"),
+        ("Aurea tg 3 o 4", None),
+        ("Aurea size S/M", None),
+        ("Aurea tg 3, 4", None),
+        ("Aurea taglia l'altra", None),
+        ("Aurea tg 3 e basta", "3"),
+    ],
+)
 def test_size_in_mention_needs_an_explicit_size_word(mention, size) -> None:
     assert link.size_in(mention) == size
 
@@ -223,8 +236,8 @@ def variant(engine, obs_id: str, mention: str) -> Observation:
 
 
 def test_two_sizes_or_a_foreign_colour_never_link_below_the_sku(engine) -> None:
-    obs = [variant(engine, "obs-two-sizes", "Maire nera tg 1 e tg 3"),
-           variant(engine, "obs-foreign-colour", "Maire nera e verde")]  # fmt: skip
+    obs = [variant(engine, "obs-two-sizes", "Aurea nera tg 1 e tg 3"),
+           variant(engine, "obs-foreign-colour", "Aurea nera e verde")]  # fmt: skip
     _, links = run(engine, observations=obs)
     assert (links["obs-two-sizes"].level, links["obs-two-sizes"].target_id) == (
         "sku", "J20931A00012-999",
@@ -234,9 +247,9 @@ def test_two_sizes_or_a_foreign_colour_never_link_below_the_sku(engine) -> None:
 
 def test_link_is_available_after_observation_and_catalog_and_cites_the_row(engine) -> None:
     _, links = run(engine)
-    maire = links["obs-20261002-2112-mil01-maire-requests"]
-    assert maire.available_at >= MASTER_AT
-    assert [r.kind for r in maire.input_refs] == ["Observation", "erp.sku_colour"]
+    valentino_v01 = links["obs-20261002-2112-mil01-maire-requests"]
+    assert valentino_v01.available_at >= MASTER_AT
+    assert [r.kind for r in valentino_v01.input_refs] == ["Observation", "erp.sku_colour"]
 
 
 def test_skus_launched_after_the_observation_day_are_not_candidates(engine) -> None:

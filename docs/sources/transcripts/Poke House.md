@@ -1,3 +1,5 @@
+> Demo adaptation: brand labels were substituted with Valentino on 2026-10-23. This is not historical attribution to Valentino.
+
 # Poke House — Trascrizione
 
 > Fonte: `Poke House.m4a` · Durata: 12:21 circa.
@@ -42,11 +44,11 @@ se andare in modalità più agile testandola, oppure se diciamo mettere all'inte
 
 **[05:23]**
 
-e che il nostro business è l'85% intermediato dall'agenzia di viaggio, 15% diretto, quindi si propone. **[testo incerto]** Grazie mille. Secondo cliente che è appunto la challenge è Danilo Lofreno per Moncler, **[testo incerto]** ha diciamo problemi di fibra protection per quello che è dettagliato. **[testo incerto]** Salve a tutti, sono Danilo Lofreno, **[testo incerto]**
+e che il nostro business è l'85% intermediato dall'agenzia di viaggio, 15% diretto, quindi si propone. **[testo incerto]** Grazie mille. Secondo cliente che è appunto la challenge è Danilo Lofreno per Valentino, **[testo incerto]** ha diciamo problemi di fibra protection per quello che è dettagliato. **[testo incerto]** Salve a tutti, sono Danilo Lofreno, **[testo incerto]**
 
 **[05:56]**
 
-sono AI and Data Science di Moncler, che è praticamente lì, credo, 40 metri qui. Allora, come il sistema versione perché abbiamo un team di comunicazione **[testo incerto]** molto restrittivo con le politi, **[testo incerto]** quindi non citateci, ma siamo qui per la lunga parte, **[testo incerto]** con l'audio, con il partner, eccetera, **[testo incerto]** e com'è quindi partner e clienti. **[testo incerto]** Voi vi chiederete, perché non per, **[testo incerto]** si parla con le AI,
+sono AI and Data Science di Valentino, che è praticamente lì, credo, 40 metri qui. Allora, come il sistema versione perché abbiamo un team di comunicazione **[testo incerto]** molto restrittivo con le politi, **[testo incerto]** quindi non citateci, ma siamo qui per la lunga parte, **[testo incerto]** con l'audio, con il partner, eccetera, **[testo incerto]** e com'è quindi partner e clienti. **[testo incerto]** Voi vi chiederete, perché non per, **[testo incerto]** si parla con le AI,
 
 **[06:27]**
 

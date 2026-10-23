@@ -9,17 +9,17 @@
       "source_refs": [
         {
           "uri": "dataset://store_emails/MIL01/20261009_1035_MIL01.eml",
-          "content_hash": "sha256:173f031967d236d50951cd1ad52ea2692c28ed005eb8fe68e68105b422927144",
+          "content_hash": "sha256:5b8afe5fc87f71f0eb397c3f91acc7a300f9b97bb13d127144b4ddab080b7ebd",
           "locator": null
         },
         {
           "uri": "dataset://erp/master_data/styles.csv",
-          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "content_hash": "sha256:36632f9c5616d48fbe94958702172d72d492e9628967ffa063874ccba8569b89",
           "locator": "style_code=I10919B00011"
         },
         {
           "uri": "dataset://erp/master_data/styles.csv",
-          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "content_hash": "sha256:36632f9c5616d48fbe94958702172d72d492e9628967ffa063874ccba8569b89",
           "locator": "style_code=I10919B00042"
         },
         {
@@ -34,17 +34,17 @@
         },
         {
           "uri": "dataset://store_emails/MIL01/20261002_2112_MIL01.eml",
-          "content_hash": "sha256:42ba599825b726743a870909947f1046005d4f0d715a79922b4ff43cef313a93",
+          "content_hash": "sha256:4485adb77cbfbd090a9865ecac389e35705ab374bf55037d05e0c9ba9712b711",
           "locator": null
         },
         {
           "uri": "dataset://store_emails/MIL01/20261002_2113_MIL01_dup.eml",
-          "content_hash": "sha256:41f447a28b601371cb206f1e711749ac962803332d0dcd05e2c2f77d2154d88e",
+          "content_hash": "sha256:2ddc2401fb2ad795dc6e5dc76d9850bd2182e42b27d47d020b903070a23e3466",
           "locator": null
         },
         {
           "uri": "dataset://erp/master_data/sku_colour.csv",
-          "content_hash": "sha256:bd40e343533ae4226a100a5ec0e743933a8c3b37656963165d1bc7a8942e2400",
+          "content_hash": "sha256:ea0ec35ed17a37ab91fac2deaede6ee9637c00761a7339cc12581e144d14c160",
           "locator": "sku=J20931A00012-999"
         },
         {
@@ -54,7 +54,7 @@
         },
         {
           "uri": "dataset://store_emails/MIL01/20261001_1124_MIL01_fwd.eml",
-          "content_hash": "sha256:31aeadf95302b30ec9d28e4f3d359b2603a9629bb6de741467410d3ba89a29bf",
+          "content_hash": "sha256:9be12107b51f0d8e9665e019d486c7f5ee44dd7b686eb176fcf79aa67457e7ee",
           "locator": null
         },
         {
@@ -64,17 +64,17 @@
         },
         {
           "uri": "dataset://store_emails/NYC01/20260906_1837_NYC01.eml",
-          "content_hash": "sha256:a6f7d261277d822de9812fd0abaa94ab8ad2f5b854b6d218d0d45fe65022cfc7",
+          "content_hash": "sha256:a1e8d26c42dcdcc3b6797dd3e680b1e58d361c59d569029ebe4c54766446be30",
           "locator": null
         },
         {
           "uri": "dataset://erp/master_data/styles.csv",
-          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "content_hash": "sha256:36632f9c5616d48fbe94958702172d72d492e9628967ffa063874ccba8569b89",
           "locator": "style_code=I10918G00045"
         },
         {
           "uri": "dataset://erp/master_data/styles.csv",
-          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "content_hash": "sha256:36632f9c5616d48fbe94958702172d72d492e9628967ffa063874ccba8569b89",
           "locator": "style_code=I10918G00031"
         }
       ],
@@ -152,7 +152,7 @@
       "producer_version": "1",
       "as_of": "2026-10-09T08:35:52Z",
       "view": "by_office",
-      "markdown": "# Brief by office, as of 2026-10-09 08:35 UTC\n\n## allocation\n\n- **MIL01 · LOGO CARDIGAN (I10919B00011)**: open, priority high [1].\n  - stockout 0 units [2]\n  - unmet demand, quantity vague [3]\n  - baseline I10919B00011-999 10-10..10-16 11.1 units, unchanged [4]\n  - baseline I10919B00011-742 10-10..10-16 10.6 units, unchanged [5]\n  - open: Unmet demand is vague ('in continuazione'): no count of requests or units.\n  - open: Stock-out is the store's statement; ERP stock for size M not checked yet.\n  - open: No verified size curve: the share of size M in the colour forecast is unknown.\n- **MIL01 · MAIRE black (J20931A00012-999)**: open, priority medium [6].\n  - unmet demand 7 requests [7]\n  - 2 documents [8] from 1 origin [9]\n  - baseline J20931A00012-999 10-10..10-16 14.2 units, unchanged [10]\n  - open: Requests are not units: no conversion to demand without evidence.\n\n## product_quality\n\n- **MIL01 · TIB navy size 4 (J10911A00305-742-4)**: open, priority medium [11].\n  - product feedback 1 units [12]\n  - open: One customer complaint; the store's 'same problem as recent returns' is not counted here.\n  - open: Purchase and defect dates come from the customer, not from POS.\n- **NYC01 · product not identified**: verify, priority low [13].\n  - product feedback 1 units [14]\n  - product is I10918G00045 or I10918G00031 [15]\n  - open: Product ambiguous: CREWNECK SWEATSHIRT or LOGO HOODIE, colour and size unknown.\n",
+      "markdown": "# Brief by office, as of 2026-10-09 08:35 UTC\n\n## allocation\n\n- **MIL01 · VLOGO CARDIGAN (I10919B00011)**: open, priority high [1].\n  - stockout 0 units [2]\n  - unmet demand, quantity vague [3]\n  - baseline I10919B00011-999 10-10..10-16 11.1 units, unchanged [4]\n  - baseline I10919B00011-742 10-10..10-16 10.6 units, unchanged [5]\n  - open: Unmet demand is vague ('in continuazione'): no count of requests or units.\n  - open: Stock-out is the store's statement; ERP stock for size M not checked yet.\n  - open: No verified size curve: the share of size M in the colour forecast is unknown.\n- **MIL01 · AUREA black (J20931A00012-999)**: open, priority medium [6].\n  - unmet demand 7 requests [7]\n  - 2 documents [8] from 1 origin [9]\n  - baseline J20931A00012-999 10-10..10-16 14.2 units, unchanged [10]\n  - open: Requests are not units: no conversion to demand without evidence.\n\n## product_quality\n\n- **MIL01 · VEL navy size 4 (J10911A00305-742-4)**: open, priority medium [11].\n  - product feedback 1 units [12]\n  - open: One customer complaint; the store's 'same problem as recent returns' is not counted here.\n  - open: Purchase and defect dates come from the customer, not from POS.\n- **NYC01 · product not identified**: verify, priority low [13].\n  - product feedback 1 units [14]\n  - product is I10918G00045 or I10918G00031 [15]\n  - open: Product ambiguous: RELAXED SWEATSHIRT or VLOGO HOODIE, colour and size unknown.\n",
       "citations": [
         {
           "ref": {
