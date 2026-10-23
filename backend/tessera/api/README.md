@@ -57,3 +57,9 @@ Both routes inherit publication checks (409), missing-run/namespace checks
 (404), `as_of` filtering and explicit fixture access (`?fixture=true` plus
 `FIXTURE_MODE=1`). The API does not interpret citation field paths or recompute
 numbers; nested and array fields remain available in the resolved artifact.
+
+## MCP reads (AG-04)
+
+`tessera mcp` exposes the existing read routes and versioned canonical documents
+through MCP stdio. See [MCP setup and scope](MCP.md) for client configuration,
+namespace selection and the explicit read-only tool allowlist.
