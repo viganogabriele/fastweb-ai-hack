@@ -213,7 +213,12 @@ def sha256_file(path: Path) -> str:
 
 
 def prompt_version(path: Path) -> str:
-    return f"{path.stem}:{sha256_file(path)[:12]}"
+    """The prompt file stem: freeze_record.py resolves backend/prompts/<version>.md and hashes it.
+
+    The content hash lives in the plan (``prompt_files``) and in config.txt; the extraction
+    cache context pins it too, so recordings follow the prompt bytes, not this label.
+    """
+    return path.stem
 
 
 # Plan: everything that defines the run, frozen in the workspace before any execution.
@@ -316,10 +321,10 @@ def build_plan(
             **({"ag.investigator": investigator.MODEL} if investigate else {}),
         },
         "config": {name: sha256_file(config_dir / name) for name in CONFIG_FILES},
-        "prompt_files": sorted(
-            path.relative_to(REPO_ROOT).as_posix()
+        "prompt_files": {
+            path.relative_to(REPO_ROOT).as_posix(): sha256_file(path)
             for path in (extract.PROMPT_PATH, link.PROMPT_PATH)
-        ),
+        },
         "llm_scope": {
             "format": 1,
             "runner": "tesseract.rolling",
@@ -1032,6 +1037,7 @@ def _semantic(payload: dict) -> str:
 def build_exports(workspace: Path, plan: dict) -> dict:
     """The protocol §4 exports, rebuilt deterministically from the per-origin results."""
     reading = read_json(workspace / "reading.json")
+    specs = [reading["spec"]]
     predictions = [{"kind": "RunSpec", "payload": reading["spec"]}]
     predictions += [{"kind": "ModuleRun", "payload": _strip_timing(m)} for m in reading["modules"]]
     predictions += reading["records"]
@@ -1062,6 +1068,7 @@ def build_exports(workspace: Path, plan: dict) -> dict:
                     },
                 }
             )
+            specs.append(result["spec"])
             opened.update(result["opened"])
             llm_keys.update(result["llm"]["keys"])
             systems_keys.update(result["systems"]["keys"])
@@ -1121,6 +1128,7 @@ def build_exports(workspace: Path, plan: dict) -> dict:
         "forecast": forecast,
         "traces": traces,
         "runs": runs,
+        "specs": specs,
         "opened": sorted(opened),
         "llm_keys": sorted(llm_keys),
         "systems_keys": sorted(systems_keys),
@@ -1256,6 +1264,23 @@ def finish(workspace: Path, plan: dict, cache: Path, mode: str, wall: float) -> 
         "systems_cache_sha256": caches["systems"]["sha256"],
     }
     lead, forecast = protocol_skeletons(plan, exports, fields)
+    # One RunSpec file per run, for `freeze_record.py record --run-spec`.
+    spec_hashes = {
+        spec["run_id"]: write_json(out / "run-specs" / f"{spec['run_id']}.json", spec, pretty=True)
+        for spec in exports["specs"]
+    }
+    hashes["run-specs/"] = digest(sorted(spec_hashes.items()))
+    # A ready forecast bundle directory: its predictions are the forecast records.
+    bundle = out / "forecast"
+    bundle.mkdir(exist_ok=True)
+    for name, target in (
+        ("forecast.json", "predictions.json"),
+        ("cases.json", "cases.json"),
+        ("options.json", "options.json"),
+    ):
+        link = bundle / target
+        link.unlink(missing_ok=True)
+        os.link(out / name, link)
     hashes["protocol.json"] = write_json(out / "protocol.json", lead, pretty=True)
     hashes["protocol-forecast.json"] = write_json(
         out / "protocol-forecast.json", forecast, pretty=True
