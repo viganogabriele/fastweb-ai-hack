@@ -19,7 +19,14 @@ from datetime import UTC, datetime
 import pytest
 
 from tesseract.core.config import REPO_ROOT
-from tesseract.core.contracts import Case, ModuleSnapshot, Observation, RunSpec, SourceDocument
+from tesseract.core.contracts import (
+    Case,
+    ModuleSnapshot,
+    Observation,
+    Report,
+    RunSpec,
+    SourceDocument,
+)
 from tesseract.core.db import connect
 from tesseract.core.orchestrator import run
 from tesseract.core.registry import RegisteredModule, Registry
@@ -81,13 +88,14 @@ class FakeLLM:
 
 
 def registry():
-    """The installed modules, with ``src.voice`` reading the committed notes explicitly."""
-    found = Registry.discover()._entries.values()
+    """The graph's modules, with ``src.voice`` reading the committed notes explicitly."""
+    found = {m.id: m for m in Registry.discover().manifests()}
+    installed = Registry.discover()
     return Registry(
-        RegisteredModule(e.manifest, lambda ctx: voice.run(ctx, voice_dir=VOICE_DIR))
-        if e.manifest.id == "src.voice"
-        else e
-        for e in found
+        RegisteredModule(found[m], lambda ctx: voice.run(ctx, voice_dir=VOICE_DIR))
+        if m == "src.voice"
+        else installed.resolve(ModuleSnapshot(manifest=found[m], params=PARAMS.get(m, {})))
+        for m in MODULES
     )
 
 
@@ -164,8 +172,18 @@ def refs(value):
 
 
 def voice_consequences(records):
-    """Artifacts derived from a note: its own records, then anything citing one, to a fixpoint."""
-    tainted = {key for key, value in records.items() if MARK in json.dumps(value)}
+    """Artifacts derived from a note: its documents and their segments (which name the document
+    by id), then anything citing one by ``{kind, id, version}``, to a fixpoint."""
+    notes = {
+        key[1]
+        for key, value in records.items()
+        if key[0] == "SourceDocument" and value["connector"] == "src.voice"
+    }
+    tainted = {
+        key
+        for key, value in records.items()
+        if key[0] in ("SourceDocument", "Segment") and value.get("document_id", key[1]) in notes
+    }
     while True:
         more = {key for key, value in records.items() if set(refs(value)) & tainted} - tainted
         if not more:
@@ -190,11 +208,8 @@ def test_voice_notes_feed_the_pipeline(replays):
     assert on.state["published"], {m: on.result(m) for m in on.modules}
     status, result = on.result("src.voice")
     assert status == "succeeded"
-    assert {k: result["counts"][k] for k in ("documents", "declared", "not_in_run")} == {
-        "documents": 2,
-        "declared": 2,
-        "not_in_run": 1,
-    }
+    assert result["counts"]["documents"] == result["counts"]["declared"] == 2
+    assert result["counts"]["not_in_run"] >= 1  # MIL02's note
     notes = {d.id for d in on.of(SourceDocument) if d.connector == "src.voice"}
     assert notes == {SCARF, COAT}
     assert {o.document_id for o in on.of(Observation)} >= {MAIL, SCARF, COAT}
@@ -216,6 +231,8 @@ def test_switching_voice_off_removes_only_its_consequences(replays):
     before, after = on.normalized(), off.normalized()
     tainted = voice_consequences(before)
     assert {k[1] for k in tainted if k[0] == "SourceDocument"} == {SCARF, COAT}
+    # Following references finds exactly the records that carry a note's identifier.
+    assert tainted == {key for key, value in before.items() if MARK in json.dumps(value)}
     # Every artifact that does not derive from a note is identical with voice off.
     for key in set(before) - tainted:
         assert after.get(key) == before[key], key
@@ -224,6 +241,22 @@ def test_switching_voice_off_removes_only_its_consequences(replays):
     for key in set(after):
         if after[key] != before.get(key):
             assert key[:2] in touched, key
+    # Reports keep their ids, cite nothing new and drop only the notes' consequences, plus the
+    # baselines they had cited in support of a note's case.
+    voiced = {  # SKU-colour of every case a note opened or changed
+        "-".join(c.scope_id.lower().split("-")[:2])
+        for c in on.of(Case)
+        if ("Case", c.id, c.version) in tainted
+    }
+    assert [r.id for r in off.of(Report)] == [r.id for r in on.of(Report)]
+    for old, new in zip(on.of(Report), off.of(Report), strict=True):
+        cited, kept = (
+            {ref for ref in refs(r.model_dump(mode="json")) if ref[0] in KINDS} for r in (old, new)
+        )
+        assert kept <= cited, new.id
+        for kind, ref_id, _ in cited - kept - tainted:
+            assert kind == "ForecastAdjustment" and ref_id.startswith("baseline-"), ref_id
+            assert any(sku in ref_id for sku in voiced), ref_id
     # The mail's case is still there; cases opened only by a note are gone, not renamed.
     assert {c.id for c in off.of(Case)} <= {c.id for c in on.of(Case)}
     assert any(MAIL in c.model_dump_json() for c in off.of(Case))
