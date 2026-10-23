@@ -17,7 +17,10 @@ const matchesRef = (ref: ArtifactRef, kind: string, item: { id: string; version:
 // guess a colour for style cases; the response can contain several exact SKUs.
 export function caseSku(item: Case) {
   if (item.scope_level === 'sku') return item.scope_id ?? null
-  if (item.scope_level === 'sku_size') return item.scope_id?.slice(0, item.scope_id.lastIndexOf('-')) || null
+  if (item.scope_level === 'sku_size') {
+    const separator = item.scope_id?.lastIndexOf('-') ?? -1
+    return separator > 0 ? item.scope_id!.slice(0, separator) : null
+  }
   return null
 }
 export function forecastPath({ item, runId, fixtureMode }: ForecastSelection) {

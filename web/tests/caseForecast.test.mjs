@@ -14,6 +14,7 @@ test('forecast endpoint encodes run, store, SKU and explicitly sets namespace', 
   assert.match(forecastPath({ ...selection, fixtureMode: true }), /fixture=true/)
   assert.equal(caseSku({ ...item, scope_level: 'sku_size', scope_id: 'STYLE-999-XL' }), 'STYLE-999')
   assert.equal(caseSku({ ...item, scope_level: 'style' }), null)
+  assert.equal(caseSku({ ...item, scope_level: 'sku_size', scope_id: 'unresolved' }), null)
 })
 
 test('only exact run, scenario, store, SKU and producer are accepted', () => {

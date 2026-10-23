@@ -4,7 +4,7 @@ import { requestCaseForecast } from '../api/caseForecast'
 import type { ForecastAdjustment, ForecastSelection, ForecastState } from '../api/caseForecast'
 import { Button, StatusBadge } from '../ui'
 
-const fmt = (value: number | null | undefined) => value == null ? 'Non disponibile' : new Intl.NumberFormat('it-IT', { maximumFractionDigits: 2 }).format(value)
+const fmt = (value: number | null | undefined) => value == null ? 'Non disponibile' : new Intl.NumberFormat('it-IT', { maximumFractionDigits: 20 }).format(value)
 const scenarios = (value: ForecastAdjustment['series'][number]['latent']) => value ? `${fmt(value.low)} / ${fmt(value.base)} / ${fmt(value.high)}` : 'Non disponibile'
 
 export function CaseForecastPanel(props: ForecastSelection) {
@@ -38,6 +38,7 @@ function ForecastRecord({ forecast, label, unresolved = false }: { forecast: For
     <p>Orizzonte {forecast.horizon_start} → {forecast.horizon_end} · stato: {forecast.status}</p>
     {forecast.reason && <p><strong>{forecast.status === 'not_estimable' ? 'Astensione quantitativa' : 'Motivo'}:</strong> {forecast.reason}</p>}
     <p>Riferimento vintage: {forecast.baseline_ref ? `${forecast.baseline_ref.kind} · ${forecast.baseline_ref.id} · ${forecast.baseline_ref.version}` : 'Non disponibile'}</p>
+    <p>Riferimenti input: {forecast.input_refs.length ? forecast.input_refs.map((ref) => `${ref.kind} · ${ref.id} · ${ref.version}`).join('; ') : 'Non disponibili'}</p>
     {unresolved && <p>La baseline referenziata non è disponibile nella versione esatta. Scenari numerici non esposti.</p>}
     {!unresolved && (forecast.series.length ? <div className="sd-case-analysis__table-wrap"><table>
       <caption>{label} · unità giornaliere · scenari bassa / base / alta</caption>
