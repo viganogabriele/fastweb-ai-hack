@@ -21,7 +21,6 @@ from datetime import timedelta
 from typing import Any, Protocol
 
 from tessera.core import repo
-from tessera.core.config import get_settings
 from tessera.core.contracts import (
     ArtifactRef,
     Case,
@@ -31,7 +30,6 @@ from tessera.core.contracts import (
     RunSpec,
 )
 from tessera.core.contracts.common import SourceRecord
-
 
 MANIFEST = ModuleManifest(
     id="int.context",
@@ -110,20 +108,15 @@ def run(ctx: Context) -> ModuleResult:
                 continue
             if not _overlap(case.window_start, case.window_end, ev.start, ev.end, slack):
                 continue
-            role = _role(ev, case)
-            # we attach the event as context; role is determined but Case.context_refs
-            # only holds ArtifactRef - the role lives on ContextEvent; requirement says
-            # "distinguishing corroboration and mere relevance" - storing the event ref
-            # is association; the event already carries role. We ensure role is set correctly
-            # by not changing it here (events are immutable). Just add ref.
             k = (type(ev).__name__, ev.id, ev.version)
             if k in existing:
                 continue
             new_refs.append(ref(ev))
             existing.add(k)
         if new_refs:
-            # attach to case
-            updated_case = case.model_copy(update={"context_refs": tuple(list(case.context_refs) + new_refs)})
+            updated_case = case.model_copy(
+                update={"context_refs": tuple(list(case.context_refs) + new_refs)}
+            )
             written = ctx.repo.put(updated_case)
             updated += written
     return ModuleResult(
