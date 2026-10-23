@@ -16,7 +16,9 @@ from tesseract.modules.agents.answer_registry import (
     AnswerJob,
     AnswerRequest,
     AnswerUnavailable,
+    RegisteredAnswer,
     execute_follow_up,
+    registered_answers,
     submit_answer,
 )
 from tesseract.modules.agents.clarifications import InvalidAnswer, UnrecordedAnswer
@@ -75,6 +77,24 @@ def answer(
         request.app.state.settings or get_settings(),
     )
     return job
+
+
+@router.get("/{clarification_id}/registered-answers", response_model=tuple[RegisteredAnswer, ...])
+def registered(
+    run_id: str,
+    case_id: str,
+    clarification_id: str,
+    repo: PublishedRepo,
+    request: Request,
+    ns: Namespace,
+):
+    """Offline-replayable answer bodies; no registration or submission happens here."""
+    question = repo.get(Clarification, clarification_id)
+    if question is None or question.case_id != case_id:
+        raise HTTPException(404, "Clarification not found")
+    return registered_answers(
+        engine_for(request, ns), run_id, case_id, clarification_id, fixture_mode=ns == "fixture"
+    )
 
 
 @router.get("", response_model=tuple[Clarification, ...])

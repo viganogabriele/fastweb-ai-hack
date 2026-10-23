@@ -625,3 +625,119 @@ def test_follow_up_api_excludes_historical_support_but_resolves_pinned_citations
             historical
         ] * 3
     assert len(seen) == 4
+
+
+def parent_hash(engine, run_id="parent"):
+    """Every parent artifact and its run row; any mutation changes the digest."""
+    import hashlib
+    import json
+
+    from tesseract.core.repo import KINDS
+
+    with engine.connect() as conn:
+        row = conn.execute(select(runs.c.spec, runs.c.status).where(runs.c.run_id == run_id)).one()
+    with repo_session(engine, run_id) as repo:
+        artifacts = sorted(
+            (kind, record.model_dump(mode="json"))
+            for kind, model in KINDS.items()
+            for record in repo.list(model)
+        )
+    payload = json.dumps([row.spec, row.status, artifacts], sort_keys=True, default=str)
+    return hashlib.sha256(payload.encode()).hexdigest()
+
+
+def test_concurrent_and_repeated_http_submissions_create_exactly_one_follow_up(answer_setup):
+    from concurrent.futures import ThreadPoolExecutor
+
+    from tesseract.modules.agents.answer_registry import jobs, receipts
+
+    engine, body, registry, seed, seen, _ = answer_setup
+    seed()
+    before = parent_hash(engine)
+    encoded = body.model_dump(mode="json")
+    alias = encoded | {"idempotency_key": "second-tab"}
+    with client_for(engine, registry) as client:
+        with ThreadPoolExecutor(max_workers=6) as pool:
+            responses = list(
+                pool.map(lambda payload: client.post(PATH, json=payload), [encoded, alias] * 3)
+            )
+        assert [r.status_code for r in responses] == [202] * 6
+        job = responses[0].json()
+        assert all(r.json() == job for r in responses)
+        # A later retry (lost response) is the same job and never a second execution.
+        assert client.post(PATH, json=alias).json() == job
+        assert client.get(f"/api/runs/{job['run']['run_id']}").json()["published"] is True
+    assert seen == ["ing.extract", "int.link", "fc.overlay", "act.options"]
+    with engine.connect() as conn:
+        assert conn.execute(select(runs.c.run_id)).scalars().all().count(job["run"]["run_id"]) == 1
+        assert len(conn.execute(select(runs.c.run_id)).all()) == 2
+        assert len(conn.execute(select(jobs.c.run_id)).all()) == 1
+        assert {k for (k,) in conn.execute(select(receipts.c.idempotency_key))} == {
+            "retry-1",
+            "second-tab",
+        }
+    assert parent_hash(engine) == before
+
+
+@pytest.mark.parametrize(
+    "scope,expected",
+    [
+        ("missing_run", 503),
+        ("missing_clarification", 503),
+        ("superseded_parent", 409),
+        ("same_scenario", 422),
+        ("wrong_namespace", 503),
+    ],
+)
+def test_scope_and_version_isolation_reject_without_side_effects(answer_setup, scope, expected):
+    engine, body, registry, seed, seen, originals = answer_setup
+    parent = seed()
+    path, encoded = PATH, body.model_dump(mode="json")
+    if scope == "missing_run":
+        path, encoded = PATH.replace("/parent/", "/nope/"), encoded | {"run_id": "nope"}
+    elif scope == "missing_clarification":
+        path = PATH.replace("/question/", "/nope/")
+        encoded |= {"clarification_id": "nope"}
+    elif scope == "superseded_parent":
+        newer = parent.model_copy(update={"run_id": "newer"})
+        with repo_session(engine, newer, write=True) as repo:
+            repo.publish()
+    elif scope == "same_scenario":
+        encoded |= {"follow_up_scenario_id": parent.scenario_id}
+    else:
+        path += "?fixture=true"  # The product parent does not exist in the fixture namespace.
+    before = parent_hash(engine)
+    with engine.connect() as conn:
+        known = set(conn.execute(select(runs.c.run_id)).scalars())
+    with client_for(engine, registry) as client:
+        response = client.post(path, json=encoded)
+        assert response.status_code == expected, response.json()
+        assert "Retry-After" not in response.headers
+    assert seen == []
+    with engine.connect() as conn:
+        assert set(conn.execute(select(runs.c.run_id)).scalars()) == known
+    assert parent_hash(engine) == before
+
+
+def test_registered_answers_lists_trusted_recordings_for_the_exact_question(answer_setup):
+    engine, body, registry, seed, seen, originals = answer_setup
+    seed(mode="recorded")
+    base = PATH.removesuffix("/answer")
+    with client_for(engine, registry) as client:
+        assert client.get(base + "/registered-answers").json() == []
+        # A failed free-text submission never becomes a registered answer.
+        assert client.post(PATH, json=body.model_dump(mode="json")).status_code == 424
+        assert client.get(base + "/registered-answers").json() == []
+        fingerprint = register_recorded_answer(engine, body)
+        (preset,) = client.get(base + "/registered-answers").json()
+        assert preset["fingerprint"] == fingerprint
+        assert "idempotency_key" not in preset
+        # The UI adds only an idempotency key; the server revalidates everything else.
+        request = {k: v for k, v in preset.items() if k != "fingerprint"}
+        response = client.post(PATH, json=request | {"idempotency_key": "ui-key"})
+        assert response.status_code == 202
+        assert response.json()["fingerprint"] == fingerprint
+        assert len(seen) == 4
+        for wrong in (base.replace("/case/", "/other/"), base.replace("/question", "/nope")):
+            assert client.get(wrong + "/registered-answers").status_code == 404
+        assert client.get(base + "/registered-answers?fixture=true").status_code == 404

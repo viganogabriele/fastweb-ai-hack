@@ -202,7 +202,8 @@ def setup(tmp_path, monkeypatch):
         assert ctx.spec.run_id != "parent"
         assert not any(r.version.startswith("parent:") for r in ctx.repo.list(Observation))
         if ctx.manifest.id == "ing.extract":
-            assert any(d.source_type == "email" for d in ctx.repo.list(SourceDocument))
+            # The answered email is carried from the parent, never offered for a fresh read.
+            assert source.id not in {d.id for d in ctx.repo.list(SourceDocument)}
             # Same historical observation identity must not cause an immutable-artifact collision.
             fresh = observation.model_copy(
                 update={
@@ -360,7 +361,7 @@ def test_investigator_cannot_act_on_seeded_historical_case(setup):
         assert repo.run_state()["published"]
 
 
-@pytest.mark.parametrize("missing_at", ["context", "original"])
+@pytest.mark.parametrize("missing_at", ["context", "other_document"])
 def test_production_extraction_replay_miss_cannot_publish_partial_answer(
     setup, monkeypatch, missing_at
 ):
@@ -369,7 +370,22 @@ def test_production_extraction_replay_miss_cannot_publish_partial_answer(
     from tesseract.modules.ingestion import extract
     from tesseract.modules.sources.emails import Store
 
-    engine, request, registry, seed, seen, _ = setup
+    engine, request, registry, seed, seen, originals = setup
+    mail, segment = originals[:2]
+    # The answered mail is carried, not re-read; another mail in the child still is.
+    other = (
+        mail.model_copy(
+            update={"id": "other-mail", "uri": "test://other", "text": "Una felpa blu"}
+        ),
+        segment.model_copy(
+            update={
+                "id": "other-segment",
+                "document_id": "other-mail",
+                "text": "Una felpa blu",
+                "char_end": 13,
+            }
+        ),
+    )
     source = ModuleManifest(
         id="src.email",
         version="1",
@@ -384,6 +400,8 @@ def test_production_extraction_replay_miss_cannot_publish_partial_answer(
     )
 
     def seeded_source(ctx):
+        if missing_at == "other_document":
+            ctx.repo.put(*other)
         return ModuleResult(
             module_id=source.id,
             module_version=source.version,
@@ -416,10 +434,10 @@ def test_production_extraction_replay_miss_cannot_publish_partial_answer(
                 return ContextReading().extract(
                     schema, messages, cache_context=cache_context, **kwargs
                 )
-            if missing_at == "original":
+            if missing_at == "other_document":
                 # Production extraction catches this and reports degraded;
                 # the answer worker must still refuse publication.
-                raise ReplayMiss("Missing original extraction recording")
+                raise ReplayMiss("Missing extraction recording")
             return extract.Candidates(
                 observations=[extract.Candidate(quote="felpa", kind="unmet_demand")]
             )
@@ -440,7 +458,7 @@ def test_production_extraction_replay_miss_cannot_publish_partial_answer(
     assert count(engine, jobs) == count(engine, events) == 1
 
 
-def production_pipeline(setup, monkeypatch, *, quantitative=False):
+def production_pipeline(setup, monkeypatch, *, quantitative=False, extra=()):
     """Synthetic external boundaries shared by service and HTTP pipeline regressions."""
     from datetime import date
 
@@ -602,7 +620,11 @@ def production_pipeline(setup, monkeypatch, *, quantitative=False):
     ]
     registry = Registry(entries)
     snapshots = tuple(ModuleSnapshot(manifest=e.manifest, params={}) for e in entries)
-    seed("recorded", modules=snapshots, records=(*originals[:3], *parent_links, *originals[3:]))
+    seed(
+        "recorded",
+        modules=snapshots,
+        records=(*originals[:3], *extra, *parent_links, *originals[3:]),
+    )
     monkeypatch.setattr(extract, "get_settings", lambda: Settings(_env_file=None))
     monkeypatch.setattr(
         extract, "load_stores", lambda _: {"MIL01": emails.Store("it", "Europe/Rome")}
@@ -902,9 +924,32 @@ def test_unsupported_pipeline_is_rejected_before_persisting(setup):
 def test_transitive_supporting_refs_outside_input_refs_are_seeded(setup):
     engine, request, registry, seed, _, originals = setup
     source, segment, observation, case, question = originals
-    extra = observation.model_copy(update={"id": "other-observation"})
+    # Supporting evidence from another (not answered) mail, outside input_refs.
+    other_source = source.model_copy(
+        update={"id": "other-mail", "uri": "test://other", "text": "Una felpa blu"}
+    )
+    other_segment = segment.model_copy(
+        update={
+            "id": "other-segment",
+            "document_id": "other-mail",
+            "text": "Una felpa blu",
+            "char_end": 13,
+        }
+    )
+    extra = observation.model_copy(
+        update={
+            "id": "other-observation",
+            "document_id": other_source.id,
+            "input_refs": (ref(other_source), ref(other_segment)),
+            "evidence": (
+                observation.evidence[0].model_copy(
+                    update={"document_id": other_source.id, "segment_id": other_segment.id}
+                ),
+            ),
+        }
+    )
     case = case.model_copy(update={"supporting": (*case.supporting, ref(extra))})
-    seed(published=False)
+    seed(published=False, extra=(other_source, other_segment))
     from sqlalchemy import delete
 
     from tesseract.core.db import artifacts
@@ -1057,7 +1102,7 @@ def test_registered_answer_without_actual_context_cache_fails_without_network(se
 
 @pytest.mark.parametrize(
     "mention",
-    ["InventedProduct taglia M", "Luminara taglia XXL", "Luminara taglia M 99", "", "!!!"],
+    ["InventedProduct taglia M", "Luminara taglia XXL", "Luminara taglia M 99", "", "!!!", "e"],
 )
 def test_contextual_mention_cannot_introduce_unsupported_product_tokens(
     setup, monkeypatch, mention
@@ -1078,34 +1123,72 @@ def test_contextual_mention_cannot_introduce_unsupported_product_tokens(
         assert repo.list(Observation) == []
 
 
-@pytest.mark.parametrize("collision", [False, True])
-def test_reconciliation_preserves_other_fact_kinds_or_refuses_identity_collision(
-    setup, monkeypatch, collision
-):
-    from tesseract.modules.ingestion import extract
-
+def test_contextual_mention_may_join_sourced_values_with_a_connective(setup, monkeypatch):
+    # The real model read "cardigan logo in taglia M, sia nero che blu" as "... nero e blu".
     engine, request, registry, _, RecordedReading = production_pipeline(setup, monkeypatch)
+    request = request.model_copy(update={"text": "Luminara taglia M, sia nero che blu."})
 
     class Reading(RecordedReading):
         def extract(self, schema, messages, **kwargs):
-            result = super().extract(schema, messages, **kwargs)
-            if schema is extract.Candidates:
-                result.observations.insert(
-                    1 if collision else 0,
-                    result.observations[0].model_copy(update={"kind": "product_feedback"}),
-                )
-            return result
+            if schema is ContextualMention:
+                return ContextualMention(product_mention="Luminara taglia M nero e blu")
+            return super().extract(schema, messages, **kwargs)
 
     register_recorded_answer(engine, request)
     job = submit_answer(engine, request, registry=registry)
     execute_follow_up(engine, job.run.run_id, registry=registry, clients={"llm": Reading()})
     with repo_session(engine, job.run.run_id) as repo:
-        if collision:
-            assert not repo.run_state()["published"] and repo.list(Observation) == []
-            return
         assert repo.run_state()["published"]
-        current = [o for o in repo.list(Observation) if not o.version.startswith("parent:")]
-        assert {o.kind for o in current} == {"unmet_demand", "product_feedback"}
+        (corrected,) = [o for o in repo.list(Observation) if o.producer == "ag.contextual_answer"]
+        assert corrected.product_mention == "Luminara taglia M nero e blu"
+
+
+@pytest.mark.parametrize("reading", ["collision", "changed_span"])
+def test_answered_document_facts_are_carried_exactly_and_never_re_read(setup, monkeypatch, reading):
+    from tesseract.core.contracts import EvidenceRelation
+    from tesseract.modules.ingestion import extract
+
+    observation = setup[-1][2]
+    # Another fact of the same answered mail, in the parent snapshot.
+    sibling = observation.model_copy(
+        update={"id": "obs-mail-2", "kind": "product_feedback", "product_mention": "felpa"}
+    )
+    engine, request, registry, originals, RecordedReading = production_pipeline(
+        setup, monkeypatch, extra=(sibling,)
+    )
+    reads = []
+
+    class Reading(RecordedReading):
+        def extract(self, schema, messages, *, cache_context, **kwargs):
+            result = super().extract(schema, messages, cache_context=cache_context, **kwargs)
+            if schema is extract.Candidates:
+                # A fresh real-model read may move spans or reuse positional IDs.
+                reads.append(cache_context["document"][0])
+                if reading == "changed_span":
+                    result.observations[0].quote = "Una felpa"
+                else:
+                    result.observations.insert(
+                        0, result.observations[0].model_copy(update={"kind": "product_feedback"})
+                    )
+            return result
+
+    register_recorded_answer(engine, request)
+    job = submit_answer(engine, request, registry=registry)
+    execute_follow_up(engine, job.run.run_id, registry=registry, clients={"llm": Reading()})
+    assert originals[0].id not in reads
+    with repo_session(engine, job.run.run_id) as repo:
+        assert repo.run_state()["published"]
+        current = {o.id: o for o in repo.list(Observation) if not o.version.startswith("parent:")}
+        assert set(current) == {originals[2].id, sibling.id}
+        assert current[originals[2].id].producer == "ag.contextual_answer"
+        carried = current[sibling.id]
+        keep = {"version", "computed_at", "input_refs", "run_id", "scenario_id"}
+        assert carried.model_dump(exclude=keep) == sibling.model_dump(exclude=keep)
+        assert any(
+            r.id == sibling.id and r.version.startswith("parent:") for r in carried.input_refs
+        )
+        relations = [r for r in repo.list(EvidenceRelation) if r.relation == "supersedes"]
+        assert {r.to_ref.id for r in relations} == {originals[2].id, sibling.id}
 
 
 @pytest.mark.parametrize("target", ["same", "other"])
@@ -1268,9 +1351,7 @@ def test_sequential_question_preserves_prior_corrections_without_answer_demand(
 
 
 @pytest.mark.parametrize("behavior", ["abstain", "changed_spans"])
-def test_contextual_reconciliation_abstains_or_fails_closed_on_ambiguous_spans(
-    setup, monkeypatch, behavior
-):
+def test_contextual_reconciliation_abstains_and_ignores_changed_spans(setup, monkeypatch, behavior):
     engine, request, registry, originals, RecordedReading = production_pipeline(setup, monkeypatch)
 
     class Reading(RecordedReading):
@@ -1286,12 +1367,56 @@ def test_contextual_reconciliation_abstains_or_fails_closed_on_ambiguous_spans(
     job = submit_answer(engine, request, registry=registry)
     execute_follow_up(engine, job.run.run_id, registry=registry, clients={"llm": Reading()})
     with repo_session(engine, job.run.run_id) as repo:
-        if behavior == "changed_spans":
-            assert repo.run_state()["status"] == "failed"
-            assert not repo.run_state()["published"] and not repo.list(Observation)
-        else:
-            assert repo.run_state()["published"]
-            current = [o for o in repo.list(Observation) if not o.version.startswith("parent:")]
-            assert len(current) == 1
-            assert current[0].product_mention == originals[2].product_mention
-            assert current[0].quantity == originals[2].quantity
+        # The answered mail is not re-read, so a changed span cannot replace the demand.
+        assert repo.run_state()["published"]
+        current = [o for o in repo.list(Observation) if not o.version.startswith("parent:")]
+        assert len(current) == 1
+        assert current[0].product_mention == originals[2].product_mention
+        assert current[0].quantity == originals[2].quantity
+
+
+def test_resend_of_answered_document_fails_closed(setup, monkeypatch):
+    from tesseract.core.contracts import Segment as SegmentContract
+
+    engine, request, registry, originals, RecordedReading = production_pipeline(setup, monkeypatch)
+    mail, segment = originals[:2]
+    # An exact resend in the child would be read without the correction: double counting.
+    resend = (
+        mail.model_copy(update={"id": "mail-resend", "uri": "test://resend"}),
+        SegmentContract.model_validate(
+            segment.model_dump() | {"id": "resend-segment", "document_id": "mail-resend"}
+        ),
+    )
+    entries = []
+    for snapshot in registry.manifests():
+        entry = registry.resolve(ModuleSnapshot(manifest=snapshot, params={}))
+        if snapshot.id == "src.email":
+
+            def source(ctx, entry=entry):
+                ctx.repo.put(*resend)
+                return entry.run(ctx)
+
+            entry = RegisteredModule(entry.manifest, source)
+        entries.append(entry)
+    registry = Registry(entries)
+    register_recorded_answer(engine, request)
+    job = submit_answer(engine, request, registry=registry)
+    execute_follow_up(engine, job.run.run_id, registry=registry, clients={"llm": RecordedReading()})
+    with repo_session(engine, job.run.run_id) as repo:
+        assert not repo.run_state()["published"]
+        assert repo.list(Observation) == []
+
+
+def test_registering_another_clock_lists_both_recorded_requests(setup):
+    from tesseract.modules.agents.answer_registry import registered_answers
+
+    engine, request, registry, seed, _, _ = setup
+    seed("recorded")
+    later = request.model_copy(
+        update={"follow_up_scenario_id": "later", "as_of": request.as_of + timedelta(hours=1)}
+    )
+    for item in (request, later, request):
+        register_recorded_answer(engine, item)
+    listed = registered_answers(engine, "parent", "case", "question")
+    assert sorted(a.follow_up_scenario_id for a in listed) == ["later", "simulated"]
+    assert len({a.fingerprint for a in listed}) == 1

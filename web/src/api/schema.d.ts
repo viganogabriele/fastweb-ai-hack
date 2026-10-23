@@ -192,6 +192,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/runs/{run_id}/cases/{case_id}/clarifications/{clarification_id}/registered-answers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Registered
+         * @description Offline-replayable answer bodies; no registration or submission happens here.
+         */
+        get: operations["registered_api_runs__run_id__cases__case_id__clarifications__clarification_id__registered_answers_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/runs/{run_id}/cases/{case_id}/decisions": {
         parameters: {
             query?: never;
@@ -1483,6 +1503,42 @@ export interface components {
             /** Value */
             value?: number | null;
         };
+        /**
+         * RegisteredAnswer
+         * @description Exact trusted-recorded answer body; the client adds only its idempotency key.
+         */
+        RegisteredAnswer: {
+            /**
+             * As Of
+             * Format: date-time
+             */
+            as_of: string;
+            /** Case Id */
+            case_id: string;
+            /** Case Version */
+            case_version: string;
+            /** Clarification Id */
+            clarification_id: string;
+            /** Clarification Version */
+            clarification_version: string;
+            /** Fingerprint */
+            fingerprint: string;
+            /** Follow Up Scenario Id */
+            follow_up_scenario_id: string;
+            /** Language */
+            language?: string | null;
+            /**
+             * Received At
+             * Format: date-time
+             */
+            received_at: string;
+            /** Run Id */
+            run_id: string;
+            /** Scenario Id */
+            scenario_id: string;
+            /** Text */
+            text: string;
+        };
         /** Report */
         Report: {
             /**
@@ -2160,6 +2216,41 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["AnswerJob"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    registered_api_runs__run_id__cases__case_id__clarifications__clarification_id__registered_answers_get: {
+        parameters: {
+            query?: {
+                fixture?: boolean;
+            };
+            header?: never;
+            path: {
+                run_id: string;
+                case_id: string;
+                clarification_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RegisteredAnswer"][];
                 };
             };
             /** @description Validation Error */

@@ -39,7 +39,7 @@ from tesseract.core.contracts.common import Contract, DerivedRecord, Instant, Te
 from tesseract.core.db import runs
 from tesseract.core.orchestrator import run
 from tesseract.core.registry import RegisteredModule, Registry
-from tesseract.core.repo import KINDS
+from tesseract.core.repo import KINDS, latest
 from tesseract.core.run_repo import RunRepo
 from tesseract.modules.agents.clarifications import (
     InvalidAnswer,
@@ -104,6 +104,23 @@ class AnswerRequest(Contract):
     follow_up_scenario_id: Text
     as_of: Instant
     idempotency_key: Text
+
+
+class RegisteredAnswer(Contract):
+    """Exact trusted-recorded answer body; the client adds only its idempotency key."""
+
+    fingerprint: Text
+    run_id: Text
+    scenario_id: Text
+    case_id: Text
+    case_version: Text
+    clarification_id: Text
+    clarification_version: Text
+    text: Text
+    received_at: Instant
+    language: Text | None = None
+    follow_up_scenario_id: Text
+    as_of: Instant
 
 
 class AnswerJob(Contract):
@@ -247,10 +264,15 @@ def _prepare(conn, request, fixture_mode):
     for snapshot in prepared.run.modules:
         if snapshot.manifest.id in active and not set(snapshot.manifest.requires) <= active:
             raise AnswerUnavailable("Follow-up has a missing or disabled required module")
+    # Prior corrections and every current observation of an answered document are
+    # carried exactly into the child; those documents are not extracted again.
+    current = latest(o for o in parent.list(Observation) if not o.version.startswith("parent:"))
+    answered = {o.document_id for o in current if o.producer == "ag.contextual_answer"}
+    answered |= {o.document_id for o in observations}
     inherited = tuple(
         ArtifactRef(kind="Observation", id=o.id, version=o.version)
-        for o in parent.list(Observation)
-        if o.producer == "ag.contextual_answer" and not o.version.startswith("parent:")
+        for o in current
+        if o.document_id in answered
     )
     seeds = _closure(parent, (*prepared.seed_refs, *inherited))
     return prepared, seeds
@@ -296,18 +318,52 @@ def register_recorded_answer(engine: Engine, request: AnswerRequest, *, fixture_
         prepared, seeds = _prepare(conn, request, fixture_mode)
         key = _key(events, ns, fingerprint=prepared.fingerprint)
         saved = conn.execute(select(events).where(key)).mappings().first()
+        # Each recorded scenario/clock, so offline clients submit exactly that snapshot.
+        recorded = request.model_dump(mode="json", exclude={"idempotency_key"})
         if saved is None:
             conn.execute(
                 insert(events).values(
                     namespace=ns,
                     fingerprint=prepared.fingerprint,
-                    payload=_payload(prepared, seeds),
+                    payload={**_payload(prepared, seeds), "requests": [recorded]},
                     replay_ready="yes",
                 )
             )
         else:
-            conn.execute(update(events).where(key).values(replay_ready="yes"))
+            requests = saved["payload"].get("requests", [])
+            requests = [*requests, recorded] if recorded not in requests else requests
+            conn.execute(
+                update(events)
+                .where(key)
+                .values(replay_ready="yes", payload={**saved["payload"], "requests": requests})
+            )
         return prepared.fingerprint
+
+
+def registered_answers(
+    engine: Engine, run_id: str, case_id: str, clarification_id: str, *, fixture_mode=False
+) -> tuple[RegisteredAnswer, ...]:
+    """Trusted recorded answers for one exact parent question; read-only.
+
+    This lists what offline replay can accept; it never registers or authorizes
+    anything. Submission still revalidates the parent, versions and recordings.
+    """
+    with engine.connect() as conn:
+        if not inspect(conn).has_table(events.name):
+            return ()
+        rows = conn.execute(
+            select(events.c.fingerprint, events.c.payload).where(
+                _key(events, _namespace(fixture_mode), replay_ready="yes")
+            )
+        ).all()
+    scope = (run_id, case_id, clarification_id)
+    answers = [
+        RegisteredAnswer(fingerprint=fingerprint, **request)
+        for fingerprint, payload in rows
+        for request in payload.get("requests", ())
+        if tuple(request[k] for k in ("run_id", "case_id", "clarification_id")) == scope
+    ]
+    return tuple(sorted(answers, key=lambda a: (a.received_at, a.follow_up_scenario_id)))
 
 
 def submit_answer(
@@ -468,12 +524,8 @@ class _PipelineView:
             return None
         return record
 
-    def contextual_history(self):
-        return [
-            o
-            for o in self._repo.list(Observation)
-            if o.version in self._historical and o.producer == "ag.contextual_answer"
-        ]
+    def history(self, kind):
+        return [r for r in self._repo.list(kind) if r.version in self._historical]
 
 
 class _RecordingGuard:

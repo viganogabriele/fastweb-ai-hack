@@ -7,8 +7,8 @@ original published run never changes, and no real message is sent (#134 "Outcome
 not delay #129 (#134 "Dependencies and delivery").
 
 Owner: #135 is assigned to `viganogabriele`; coordinate before coding. API handoff: the
-OUT-02e worker is posting the exact handoff as a comment on #135. If it disagrees with this
-file, the backend code wins; update this file in the same PR.
+OUT-02e comment on #135 (PR #238). This file is consistent with it; if the backend changes,
+the backend code wins and this file is updated in the same PR.
 
 ## 1. What exists
 
@@ -16,10 +16,11 @@ file, the backend code wins; update this file in the same PR.
   shows `Bozza/asked/answered/cancelled`, `Simulato`, question, stored timestamps, the answer
   document link (`web/src/sections/CaseClarificationsPanel.tsx:9-65`,
   `web/src/api/caseClarifications.ts:12-66`).
-- Generated DTOs already include `AnswerRequest` and `AnswerJob` (`web/src/api/schema.d.ts`,
-  search `AnswerRequest`). Regenerate with `make types` if the backend changes.
-- Backend route: `POST /api/runs/{run_id}/cases/{case_id}/clarifications/{clarification_id}/answer`
-  (`backend/tesseract/api/routers/clarifications.py:39-77`).
+- Generated DTOs already include `AnswerRequest`, `AnswerJob` and `RegisteredAnswer`
+  (`web/src/api/schema.d.ts`). Regenerate with `make types` if the backend changes.
+- Backend routes: `POST /api/runs/{run_id}/cases/{case_id}/clarifications/{clarification_id}/answer`
+  and the read-only `GET …/clarifications/{clarification_id}/registered-answers`
+  (`backend/tesseract/api/routers/clarifications.py`).
 - Not built: the answer form, submission states, follow-up tracking, the Chiarimenti page
   (placeholder at `web/src/App.tsx:269-270`, with a wrong endpoint in
   `web/src/i18n/it/sections.ts:46`).
@@ -60,20 +61,21 @@ run. Its lifecycle comes from the normal `GET /api/runs/{run_id}` (`RunView.stat
 | 422 | Scope mismatch, invalid answer (time order, closed case, answered/cancelled question, wrong store/scenario) | Inline form error with the `detail`; keep the text; no retry button |
 | 409 | `AnswerConflict`: parent no longer the current published run, case/clarification version changed, idempotency key reused with a different payload, parent unpublished (`answer_registry.py:205-223,333`) | "Contesto cambiato": reload runs/case/clarification, ask the human to re-read, require a new confirm (new idempotency key) |
 | 424 | `UnrecordedAnswer`: offline/recorded parent and no registered recording for this exact event (`answer_registry.py:362`) | "Risposta non registrata per il replay offline: questa risposta non può essere elaborata senza rete". No retry; keep the text |
-| 503 | Unavailable parent/pipeline, or DB busy (`Retry-After: 5`) | "Servizio occupato/non disponibile"; retry **with the same key** |
+| 503 + `Retry-After: 5` | Database busy | "Servizio occupato"; retry **with the same body and key** after 5 s |
+| 503, no `Retry-After` | Run/question/lineage not found in this namespace, or frozen pipeline unavailable | "Non disponibile"; terminal, no automatic retry |
+| 403 | `fixture=true` without `FIXTURE_MODE` | Terminal |
 | network/timeout | Unknown outcome | "Esito sconosciuto"; retry with the same key (the server deduplicates, `answer_registry.py:313-345`) |
-
-Note: `answer_registry.md` still documents a `/answers` path, body without IDs, and 503 for
-unrecorded answers. The router above is what runs: `/answer`, IDs in body, 424.
 
 **Offline constraint.** In `recorded`/`fixture` parents, only answers whose exact fingerprint
 (parent snapshot, question version, text, receipt time, language) was registered by trusted
-recording code are accepted (`backend/tesseract/modules/agents/answer_registry.md:67-78`). No
-API lists registered answers, and the frontend must not invent one. For an offline demo the
-operator needs the exact registered values. Get them from the OUT-02e handoff on #135 and
-prefill them from a reviewed, versioned source, labelled "risposta registrata". Free text in an
-offline parent will return 424, and that is correct behaviour. Live parents accept free text
-but the event is never replayable.
+recording code are accepted (`backend/tesseract/modules/agents/answer_registry.md`).
+`GET …/clarifications/{clarification_id}/registered-answers` returns them as `RegisteredAnswer[]`
+(every `AnswerRequest` field except `idempotency_key`, plus `fingerprint`). Offer these as
+"risposta registrata" choices and post one **unchanged** plus a new `idempotency_key`; never
+edit its text, times, language or scenario, and never hardcode them in the frontend. Free text,
+or an edited preset, in an offline parent returns 424, and that is correct behaviour. Live
+parents accept free text but the event is never replayable. The endpoint is read-only: no UI
+or HTTP path can register an answer.
 
 ## 3. UX states and acceptance criteria
 
@@ -98,10 +100,13 @@ Place the form inside the clarification detail (`ClarificationRecord`,
 - [ ] **Running**: show the live `RunView.status` and module progress if available. The parent
       clarification still reads `Bozza`/`asked`. **Never** show "answered" locally.
 - [ ] **Published (`succeeded`/`degraded`)**: offer "Apri il run di follow-up". Add the run via
-      `runs.acceptRun(view, originRunId)` (`web/src/api/useRuns.ts:43-52`), select it, and open
-      the same `case_id` from `GET /api/runs/{new}/cases/{case_id}`. Show the version the API
-      returns; do not reuse the parent's version. That run shows the clarification as
-      `answered` with `answer_document_id`.
+      `runs.acceptRun(view, originRunId)` (`web/src/api/useRuns.ts:43-52`) and select it. The
+      corrected case can have a **new id** in the follow-up (in the demo
+      `case-mil01-unknown-20261009` becomes `case-mil01-i10919b00011-20261022` once the product
+      is identified), and the old id may return 404. Find it in `GET /api/runs/{new}/cases` as the
+      case whose `supporting` contains the clarification's `observation_refs[].id`. The answered
+      clarification is read with `GET /api/runs/{new}/cases/{case_id}/clarifications/{id}?version=answer:{fingerprint}`
+      (`status: answered`, `answer_document_id`, `answered_at`). Show the versions the API returns.
 - [ ] **Failed/blocked/timeout**: show the status and that the answer event is stored but not
       processed. No local forecast or link change. A rerun needs an operator `reset_run`
       (`answer_registry.md:79-83`), so no UI retry button for this case.
@@ -129,11 +134,15 @@ It contains exactly one clarification: `case-mil01-unknown-20261009` v1, status 
 4. Double-click confirm quickly. Check in devtools Network: one POST only.
 5. Stop the backend, submit. Check: "esito sconosciuto" with retry. Restart and retry. Check:
    the same `idempotency_key` in both request bodies.
-6. **Accepted path** (needs a registered answer from the OUT-02e handoff, or a `live` parent with
-   keys before 2026-10-25 00:00 UTC). Submit the registered values. Check: 202 → follow-up
-   run id shown → status advances → "Apri il run di follow-up" → the run selector shows the new
-   scenario → the case opens in the new run with the clarification `answered`, the answer
-   document readable, and a new product link if the pipeline produced one. Then switch back to
+6. **Accepted path.** Serve a database with the three recorded answers registered:
+   `scripts/clarification_answers_demo.py replay --register-only` (see
+   `data/fixtures/runs/core-dev-20261023/clarification-answers/VERIFICATION.md`), or use a
+   `live` parent with keys before 2026-10-25 00:00 UTC. Pick a registered answer. Check: 202 →
+   follow-up run id shown → status advances to `degraded` (disclosed investigator fallback) →
+   "Apri il run di follow-up" → the run selector shows the new scenario → the corrected case
+   opens (new id `case-mil01-i10919b00011-20261022`, linked to style `I10919B00011`, for the
+   two identifying answers; `case-mil01-unknown-20261022` still `verify` for the abstention),
+   with the clarification `answered` and the answer document readable. Then switch back to
    `core-dev-candidate`. Check: the original clarification is still `Bozza` and the case is unchanged.
 7. Submit the same values again with a new confirm. Check: the same follow-up run id is
    returned (server dedup); no second run.

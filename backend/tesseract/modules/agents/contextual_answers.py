@@ -52,6 +52,11 @@ FIELD_LABELS = frozenset(
 )
 
 
+# Bare connectives cannot introduce a product, size or number. A real-model reading
+# of "cardigan logo in taglia M, sia nero che blu" returned "... nero e blu".
+CONNECTIVES = frozenset({"e", "ed", "and", "und", "et", "y"})
+
+
 class ContextualMention(BaseModel):
     model_config = ConfigDict(extra="forbid")
     product_mention: str | None
@@ -129,8 +134,10 @@ class ContextualExtraction:
                     )
                 )
             )
-            supported |= tokens(self.question.question) & FIELD_LABELS
-            if mention is not None and (not tokens(mention) or not tokens(mention) <= supported):
+            supported |= (tokens(self.question.question) & FIELD_LABELS) | CONNECTIVES
+            if mention is not None and (
+                not tokens(mention) - CONNECTIVES or not tokens(mention) <= supported
+            ):
                 raise ValueError("Contextual mention contains unsupported source words")
             # Null means explicit abstention: retain the original unresolved fact.
             data = original.model_dump()
@@ -154,16 +161,23 @@ class ContextualExtraction:
             self.corrected.append(Observation.model_validate(data))
 
         # A new answer must not undo an earlier clarification elsewhere in the
-        # parent snapshot. Only the tips of exact same-ID correction chains are
-        # carried; ancestors remain historical and resolvable.
-        prior = repo.contextual_history()
+        # parent snapshot, and an answered document is never read again: a fresh
+        # model read could move spans or identities of the demand being clarified.
+        # Its exact parent observations are carried instead. Only the tips of
+        # same-ID correction chains are carried; ancestors remain historical.
+        history = repo.history(Observation)
         ancestors = {
-            r for o in prior for r in o.input_refs if r.kind == "Observation" and r.id == o.id
+            r for o in history for r in o.input_refs if r.kind == "Observation" and r.id == o.id
         }
+        tips = [o for o in history if ref(o) not in ancestors]
+        self.documents = frozenset(
+            {o.document_id for o in self.originals}
+            | {o.document_id for o in tips if o.producer == "ag.contextual_answer"}
+        )
         targeted = {o.id for o in self.originals}
-        carried = [o for o in prior if ref(o) not in ancestors and o.id not in targeted]
+        carried = [o for o in tips if o.document_id in self.documents and o.id not in targeted]
         if len({o.id for o in carried}) != len(carried):
-            raise ValueError("Ambiguous inherited contextual observation versions")
+            raise ValueError("Ambiguous inherited observation versions")
         self.target_count = len(self.originals)
         for original in carried:
             data = original.model_dump()
@@ -181,7 +195,17 @@ class ContextualExtraction:
     def list(self, kind, **filters):
         records = self.repo.list(kind, **filters)
         if kind is SourceDocument:
-            return [r for r in records if r.source_type != "clarification_reply"]
+            answered = {(r.meta.get("store_id"), r.text) for r in records if r.id in self.documents}
+            kept = [
+                r
+                for r in records
+                if r.source_type != "clarification_reply" and r.id not in self.documents
+            ]
+            # A resend shares its original's reading; read alone it would duplicate the
+            # clarified demand without the correction. Fail closed instead.
+            if any((r.meta.get("store_id"), r.text) in answered for r in kept):
+                raise ValueError("Resend of an answered document cannot be reconciled")
+            return kept
         return records
 
     def put(self, *records, **kwargs):
@@ -232,7 +256,7 @@ class ContextualExtraction:
                         "original demand retained once"
                     )
                     if targeted
-                    else "Retained prior contextual interpretation in child snapshot",
+                    else "Retained exact parent observation of an answered document; not re-read",
                     evidence_refs=(ref(self.job.document), ref(self.question))
                     if targeted
                     else (ref(original),),
