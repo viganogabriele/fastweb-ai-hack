@@ -3,14 +3,47 @@
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import insert
-from test_runs import body, document
 
 from tessera.api.main import create_app
 from tessera.core.config import Settings
-from tessera.core.contracts import ArtifactRef, Case, Citation, Report, RunSpec
+from tessera.core.contracts import ArtifactRef, Case, Citation, Report, RunSpec, SourceDocument
 from tessera.core.db import artifacts, connect
 from tessera.core.registry import Registry
 from tessera.core.run_repo import repo_session
+
+
+def body(mode="recorded"):
+    return dict(
+        scenario_id="historical",
+        as_of="2026-10-22T20:00:00Z",
+        stores=["MIL01"],
+        source_manifest_hash="sources",
+        config_hash="config",
+        code_version="test",
+        mode=mode,
+        modules=[],
+        prompt_versions={},
+        model_versions={},
+        authorized_fixture_refs=[],
+    )
+
+
+def document(at="2026-10-22T19:00:00Z", store="MIL01"):
+    return SourceDocument(
+        id="doc-1",
+        version="v1",
+        available_at=at,
+        availability_basis="test",
+        source_refs=(),
+        source_type="email",
+        connector="src.email",
+        uri="test://mail",
+        content_hash="hash",
+        origin=None,
+        text="Hi 🧥 店",
+        text_version="v1",
+        meta={"store_id": store},
+    )
 
 
 @pytest.fixture
