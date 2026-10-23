@@ -141,6 +141,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/runs/{run_id}/cases/{case_id}/clarifications/{clarification_id}/answer": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Answer */
+        post: operations["answer_api_runs__run_id__cases__case_id__clarifications__clarification_id__answer_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/runs/{run_id}/cases/{case_id}/decisions": {
         parameters: {
             query?: never;
@@ -485,6 +502,52 @@ export interface components {
             tokens_out?: number | null;
             /** Version */
             version: string;
+        };
+        /** AnswerJob */
+        AnswerJob: {
+            document: components["schemas"]["SourceDocument"];
+            /** Fingerprint */
+            fingerprint: string;
+            run: components["schemas"]["RunSpec"];
+            /**
+             * Simulated
+             * @default true
+             * @constant
+             */
+            simulated: true;
+        };
+        /** AnswerRequest */
+        AnswerRequest: {
+            /**
+             * As Of
+             * Format: date-time
+             */
+            as_of: string;
+            /** Case Id */
+            case_id: string;
+            /** Case Version */
+            case_version: string;
+            /** Clarification Id */
+            clarification_id: string;
+            /** Clarification Version */
+            clarification_version: string;
+            /** Follow Up Scenario Id */
+            follow_up_scenario_id: string;
+            /** Idempotency Key */
+            idempotency_key: string;
+            /** Language */
+            language?: string | null;
+            /**
+             * Received At
+             * Format: date-time
+             */
+            received_at: string;
+            /** Run Id */
+            run_id: string;
+            /** Scenario Id */
+            scenario_id: string;
+            /** Text */
+            text: string;
         };
         /** ArtifactRef */
         ArtifactRef: {
@@ -1776,6 +1839,45 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["Clarification"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    answer_api_runs__run_id__cases__case_id__clarifications__clarification_id__answer_post: {
+        parameters: {
+            query?: {
+                fixture?: boolean;
+            };
+            header?: never;
+            path: {
+                run_id: string;
+                case_id: string;
+                clarification_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AnswerRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AnswerJob"];
                 };
             };
             /** @description Validation Error */
