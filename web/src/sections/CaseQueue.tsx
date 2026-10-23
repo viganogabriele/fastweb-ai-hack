@@ -39,7 +39,7 @@ const priorityOrder: Record<Case['priority'], number> = {
 
 const date = (value: string | null | undefined) =>
   value
-    ? `${new Date(value).toLocaleString('it-IT', { timeZone: 'UTC' })} UTC`
+    ? `${new Date(value).toLocaleString('it-IT', { timeZone: 'UTC', dateStyle: 'short', timeStyle: 'short' })} UTC`
     : 'Non disponibile'
 
 const dueTime = (item: Case) => {
@@ -236,10 +236,13 @@ export function CaseQueue({
                   <span className="sd-case-queue__summary">
                     <StatusBadge tone={item.priority === 'critical' ? 'danger' : item.priority === 'high' ? 'warning' : 'neutral'} label={priorities[item.priority]} />
                     <StatusBadge tone={item.status === 'verify' ? 'warning' : 'neutral'} label={statuses[item.status]} />
-                    <span className={overdue ? 'sd-case-queue__deadline is-past' : 'sd-case-queue__deadline'}>
-                      <Clock3 aria-hidden="true" /> {deadline}
-                    </span>
                     <StatusBadge tone={uncertainties.length ? 'warning' : 'success'} label={uncertainties.length ? uncertaintyLabel : 'Senza incertezze'} />
+                  </span>
+                  <span className={overdue ? 'sd-case-queue__deadline is-past' : 'sd-case-queue__deadline'}>
+                    {item.decision_due_at ? <>
+                      <span><Clock3 aria-hidden="true" />{overdue ? 'Scaduta' : 'Scadenza'}</span>
+                      <strong className="sd-num">{deadlineLabel(item.decision_due_at)}</strong>
+                    </> : <span>Senza scadenza</span>}
                   </span>
                   <span className="sd-case-queue__reason">{item.priority_reason}</span>
                 </button>

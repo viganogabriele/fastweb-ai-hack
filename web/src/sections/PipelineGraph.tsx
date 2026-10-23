@@ -76,6 +76,8 @@ export function PipelineGraph({ modules, run }: {
       ? { key: execution.status, ...moduleStatuses[execution.status] }
       : { key: 'none', label: run ? 'Non eseguito nel run' : 'Non eseguito', tone: 'neutral' as const }
   }
+  // The run's own mode is already in the header: a node names it only when it differs.
+  const mode = (value: string) => (value === run?.spec.mode ? '' : ` · ${value}`)
   const total = (execution: Execution | undefined) =>
     execution?.result ? Object.values(execution.result.counts).reduce((sum, count) => sum + count, 0) : null
   const tally = graph.nodes.reduce<Record<string, number>>((counts, node) => {
@@ -101,7 +103,6 @@ export function PipelineGraph({ modules, run }: {
       <p id={`${id}-help`}>
         Dalle fonti in alto ai report in basso: ogni freccia va dalla dipendenza al modulo che la usa.
         Passa sopra una fase o un modulo per vederne i moduli e la filiera, selezionalo per i dettagli.
-        Le modifiche per il prossimo run non cambiano questo grafo.
       </p>
       <ol className="sd-pipeline__phases" aria-label="Fasi della pipeline" onMouseLeave={() => setPhase(null)}>
         {phases.map((item, index) => {
@@ -211,12 +212,12 @@ export function PipelineGraph({ modules, run }: {
                         <span>
                           {node.id}
                           {manifest
-                            ? <> · {execution?.mode ?? manifest.mode}{manifest.boundary === 'simulated' ? ' · simulata' : ''}</>
+                            ? <>{mode(execution?.mode ?? manifest.mode)}{manifest.boundary === 'simulated' ? ' · simulata' : ''}</>
                             : ' · manifest assente'}
                         </span>
+                        {count !== null && <span className="sd-pipeline__count sd-num">{count.toLocaleString('it-IT')}</span>}
                       </span>
                     </span>
-                    {count !== null && <span className="sd-pipeline__count sd-num">{count.toLocaleString('it-IT')}</span>}
                     <span className="sd-visually-hidden">
                       {manifest && !manifest.enabled ? 'Disattivo. ' : ''}{status.label}.
                       {count !== null ? ` ${count} elementi prodotti.` : ''}

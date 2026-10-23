@@ -19,6 +19,8 @@ import type { CaseQueueFilters, CaseSelection } from './caseUtils'
 import './sections.css'
 import '../widgets/widgets.css'
 import { evidenceRanges, refKey } from './sourceEvidence'
+import { EvidencePopover } from './EvidencePopover'
+import { useEvidencePopover } from './useEvidencePopover'
 import type { CaseEvidence } from './sourceEvidence'
 
 const statuses: Record<string, string> = {
@@ -157,6 +159,7 @@ export function RunWorkspace({
   if (!data) return <LoadingState label="Caricamento dati" />
   const query = search.trim().toLocaleLowerCase('it-IT')
   const currentCases = latestCaseVersions(data.cases)
+  const casesById = new Map(currentCases.map((item) => [item.id, item]))
   const documents = data.documents.filter(
     (item) =>
       query === '' ||
@@ -210,6 +213,8 @@ export function RunWorkspace({
                 item={item}
                 runId={run?.spec.run_id ?? ''}
                 caseRefs={data.caseRefs}
+                cases={casesById}
+                onCaseSelect={onCaseSelect}
                 key={`${item.id}-${item.version}`}
               />
             ))}
@@ -231,12 +236,17 @@ const versionNumber = (version: string) =>
 function SourceDocumentCard({
   item,
   runId,
-  caseRefs
+  caseRefs,
+  cases,
+  onCaseSelect
 }: {
   item: SourceDocument
   runId: string
   caseRefs: Record<string, Omit<CaseEvidence, 'evidence'>[]>
+  cases: ReadonlyMap<string, Case>
+  onCaseSelect: (item: Case) => void
 }) {
+  const popover = useEvidencePopover()
   const [open, setOpen] = useState(false)
   const [detail, setDetail] = useState<DocumentDetail | null>(null)
   const [error, setError] = useState('')
@@ -273,16 +283,7 @@ function SourceDocumentCard({
       <mark
         className={`sd-source-evidence sd-source-evidence--${range.relation}`}
         key={`${range.references.map(({ caseId }) => caseId).join('-')}-${range.start}-${index}`}
-        title={range.references
-          .map(({ caseId, caseType, relation }) =>
-            `${caseId} · ${caseType} · ${relation === 'supporting' ? 'A supporto' : 'In contrasto'}`
-          )
-          .join(' | ')}
-        aria-label={range.references
-          .map(({ caseId, caseType, relation }) =>
-            `${caseId}, ${caseType}, ${relation === 'supporting' ? 'a supporto' : 'in contrasto'}`
-          )
-          .join('; ')}
+        {...popover.triggerProps(`${range.start}-${range.end}`, range.references)}
       >
         {item.text.slice(range.start, range.end)}
       </mark>
@@ -311,10 +312,11 @@ function SourceDocumentCard({
       {error && <p role="status">Evidenze non disponibili: {error}</p>}
       {ranges.length > 0 && (
         <p className="sd-source-evidence-label">
-          Evidenze collegate al caso · passa sul testo evidenziato per i riferimenti
+          Evidenze collegate ai casi · passa sul testo evidenziato per vedere i casi
         </p>
       )}
       <pre className="sd-source-text">{detail ? parts : item.text}</pre>
+      <EvidencePopover state={popover} cases={cases} onCaseSelect={onCaseSelect} />
     </details>
   )
 }
