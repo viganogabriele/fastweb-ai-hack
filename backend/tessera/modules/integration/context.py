@@ -78,10 +78,10 @@ def _overlap(a_start, a_end, b_start, b_end, slack: timedelta) -> bool:
     return True
 
 
-CORROBORATING_KINDS = {
-    ("weather_cold", {"unmet_demand", "stockout", "low_stock", "traffic_change"}),
-    ("weather_warm", {"unmet_demand", "stockout", "low_stock", "traffic_change"}),
-}
+CORROBORATING_KINDS = (
+    ("weather_cold", ("unmet_demand", "stockout", "low_stock", "traffic_change")),
+    ("weather_warm", ("unmet_demand", "stockout", "low_stock", "traffic_change")),
+)
 
 
 def _role(event: ContextEvent, case: Case) -> str:
