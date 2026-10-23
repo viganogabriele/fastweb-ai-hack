@@ -185,7 +185,8 @@ class _Brief:
             "period_end": obs.period_end,
         }
         if q.kind == "exact" and q.value is not None:
-            lines = [f"{what} {q.value:g} {q.unit} " + self.cite(obs, "quantity.value", q.unit, **kw)]
+            cite = self.cite(obs, "quantity.value", q.unit, **kw)
+            lines = [f"{what} {q.value:g} {q.unit} {cite}"]
         else:
             lines = [f"{what}, quantity {q.kind} " + self.cite(obs, "quantity.kind", **kw)]
         link = self.facts.links.get(obs.id)
@@ -265,7 +266,8 @@ def build_report(view: str, facts: Facts, spec: RunSpec) -> Report:
 
 
 def _forecasts(run_repo: repo.Repo, case: Case) -> list[ForecastAdjustment]:
-    own = [f for f in run_repo.list(ForecastAdjustment, store_id=case.store_id) if case.id in f.case_ids]
+    found = run_repo.list(ForecastAdjustment, store_id=case.store_id)
+    own = [f for f in found if case.id in f.case_ids]
     if own or case.store_id is None or case.scope_level not in ("sku_size", "sku", "style"):
         return own
     found = []
@@ -281,7 +283,8 @@ def read_facts(run_repo: repo.Repo) -> Facts:
     links = {link.observation_id: link for link in run_repo.list(EntityLink)}
     relations = run_repo.list(EvidenceRelation)
     master = {}
-    for table, key, value in (("styles", "style_code", "style_name"), ("sku_colour", "sku", "color_name_en")):
+    names = (("styles", "style_code", "style_name"), ("sku_colour", "sku", "color_name_en"))
+    for table, key, value in names:
         master[table] = {
             str(r.data[key]): str(r.data[value])
             for r in erp.read(run_repo, table)  # type: ignore[arg-type]
