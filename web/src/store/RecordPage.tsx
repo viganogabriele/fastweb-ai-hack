@@ -97,6 +97,7 @@ export function RecordPage() {
                 className="rec__text"
                 aria-labelledby="rec-review-title"
                 maxLength={5000}
+                disabled={sending}
                 value={recorder.transcript}
                 onChange={(event) => recorder.setTranscript(event.target.value)}
                 rows={7}

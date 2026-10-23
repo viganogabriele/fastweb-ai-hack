@@ -15,6 +15,7 @@ export class RecorderSession {
   private chunks: Blob[] = []
   private full: Blob | null = null
   private finishing = false
+  private finalizing = false
   private language: string
   private transcribe: Transcribe
   private update: (value: Update) => void
@@ -67,7 +68,8 @@ export class RecorderSession {
       this.timers.push(setInterval(() => {
         const seconds = Math.floor((Date.now() - started) / 1000)
         this.emit({ seconds })
-        if (seconds >= 90) this.stop()
+        // Leave a small scheduling margin below the server's strict 90-second limit.
+        if (seconds >= 89) this.stop()
       }, 250), setInterval(() => {
         if (this.partial || this.finishing || !this.chunks.length) return
         this.partial = this.transcribe(this.blob(), this.language, this.abort.signal).then(({ text }) => {
@@ -89,11 +91,12 @@ export class RecorderSession {
   }
 
   async finalize() {
-    if (!this.active || !this.full) return
+    if (!this.active || !this.full || this.finalizing) return
+    this.finalizing = true
     this.emit({ state: 'finalizing', error: null })
     // Never overlap a final ASR call with a partial call, even on a slow connection.
     await this.partial
-    if (!this.active) return
+    if (!this.active) { this.finalizing = false; return }
     try {
       const { text } = await this.transcribe(this.full, this.language, this.abort.signal)
       this.emit({ transcript: text })
@@ -101,6 +104,7 @@ export class RecorderSession {
       this.emit({ error: { asr: typeof error === 'object' && error && 'status' in error ? Number(error.status) : 0 } })
     }
     this.emit({ state: 'done' })
+    this.finalizing = false
   }
 
   dispose() {

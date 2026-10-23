@@ -46,7 +46,7 @@ from tessera.api.models import RunView
 from tessera.api.routers.runs import engine_for, execute, registry_for, view
 from tessera.core.config import MissingApiKey, Settings, get_settings
 from tessera.core.contracts import ModuleSnapshot, RunSpec
-from tessera.core.llm import LLMCallFailed, LLMClient
+from tessera.core.llm import BudgetExceeded, LLMCallFailed, LLMClient
 from tessera.core.registry import Registry
 from tessera.core.repo import list_runs as stored_runs
 from tessera.core.run_repo import repo_session
@@ -159,36 +159,39 @@ async def transcribe(
     settings = _settings(request).model_copy(update={"llm_mode": "live"})
     if language and not LANGUAGE.fullmatch(language):
         raise HTTPException(422, "invalid language tag")
-    if not _ASR_SLOT.acquire(blocking=False):
-        raise HTTPException(429, "another transcription is in progress")
-    try:
-        now = time.monotonic()
-        while _ASR_STARTS and _ASR_STARTS[0] <= now - 60:
-            _ASR_STARTS.popleft()
-        if len(_ASR_STARTS) >= 20:
-            raise HTTPException(429, "transcription limit reached; try again later")
-        _ASR_STARTS.append(now)
 
-        def work():
+    def work():
+        # The worker owns the slot until the provider returns, even if HTTP is cancelled.
+        if not _ASR_SLOT.acquire(blocking=False):
+            raise HTTPException(429, "another transcription is in progress")
+        try:
+            now = time.monotonic()
+            while _ASR_STARTS and _ASR_STARTS[0] <= now - 60:
+                _ASR_STARTS.popleft()
+            if len(_ASR_STARTS) >= 20:
+                raise HTTPException(429, "transcription limit reached; try again later")
+            _ASR_STARTS.append(now)
             with tempfile.TemporaryDirectory() as tmp:
                 path = Path(tmp) / "partial.wav"
                 # Apply the same container, duration and resource limits before ASR upload.
                 settings.asr_key()
                 path.write_bytes(to_wav(data, _suffix(audio)))
-                return LLMClient(settings, concurrency=1).transcribe(path, language or None)
+                return LLMClient(
+                    settings, concurrency=1, max_retries=0, deadline_seconds=30
+                ).transcribe(path, language or None)
+        finally:
+            _ASR_SLOT.release()
 
-        try:
-            result = await to_thread(work)
-        except MissingApiKey:
-            raise HTTPException(503, "ASR_API_KEY missing in .env") from None
-        except RecordingUnavailable as error:
-            raise HTTPException(503, str(error)) from None
-        except InvalidRecording as error:
-            raise HTTPException(422, str(error)) from None
-        except (LLMCallFailed, ValueError) as error:
-            raise HTTPException(502, f"ASR unavailable: {type(error).__name__}") from None
-    finally:
-        _ASR_SLOT.release()
+    try:
+        result = await to_thread(work)
+    except MissingApiKey:
+        raise HTTPException(503, "ASR access is not configured") from None
+    except RecordingUnavailable as error:
+        raise HTTPException(503, str(error)) from None
+    except InvalidRecording as error:
+        raise HTTPException(422, str(error)) from None
+    except (BudgetExceeded, LLMCallFailed, ValueError) as error:
+        raise HTTPException(502, f"ASR unavailable: {type(error).__name__}") from None
     return Transcription(text=result.text.strip(), duration_s=result.duration)
 
 
@@ -310,6 +313,11 @@ def _live_notes(settings: Settings, engine) -> list[LiveNote]:
 def _process(request: Request, body: ProcessRequest, tasks: BackgroundTasks):
     settings = _settings(request)
     engine = engine_for(request, "product")
+    if any(
+        spec.scenario_id == SCENARIO and status in {"pending", "running"}
+        for spec, status in stored_runs(engine)
+    ):
+        raise HTTPException(409, "voice processing is already in progress")
     # A note whose run failed or was blocked (e.g. no key yet) is offered again.
     as_of = datetime.now(UTC)
     pending = [

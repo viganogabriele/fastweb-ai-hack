@@ -22,7 +22,8 @@ async function json<T>(response: Response): Promise<T> {
 }
 
 // The file name only carries the container; the backend probes the bytes with ffmpeg anyway.
-const fileName = (blob: Blob) => (blob.type.includes('mp4') ? 'note.mp4' : 'note.webm')
+const fileName = (blob: Blob) => blob.type.includes('mp4') ? 'note.mp4'
+  : blob.type.includes('ogg') ? 'note.ogg' : 'note.webm'
 
 export async function transcribe(blob: Blob, language: string, signal?: AbortSignal) {
   const form = new FormData()

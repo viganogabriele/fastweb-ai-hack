@@ -24,9 +24,9 @@ is not read, and its audio is not even opened. The sidecar declares the audio's 
 whose bytes differ from the declared hash is an error, because its transcript was checked
 against different audio. Notes for stores outside the run are skipped, like other sources.
 
-Live notes (DEMO-04) recorded from ``/store/record`` live in ``data/voice_inbox/<slug>/`` with
-the same three files and ``fixture_kind: "live"``; their ``transcript.txt`` is the live ASR
-transcript the store accepted, not a hand-written one. Both folders are read in one pass.
+Live notes (DEMO-04) use immutable, explicitly queued ``data/voice_runs/<run_id>/`` snapshots.
+Their accepted, possibly edited text is published as manual text without audio intervals.
+Ordinary runs never read the live inbox or snapshots.
 """
 
 import hashlib
@@ -126,15 +126,17 @@ class Note:
 
     @property
     def uri(self) -> str:
+        if self.sidecar.fixture_kind == "live":
+            return f"live-voice://{self.directory.parent.name}/{self.slug}"
         return f"dataset://voice/{self.slug}"
 
     @property
     def audio_path(self) -> Path:
-        return self.directory / self.sidecar.audio
+        return note_file(self.directory, self.sidecar.audio)
 
     @property
     def transcript_path(self) -> Path:
-        return self.directory / self.sidecar.manual_transcript
+        return note_file(self.directory, self.sidecar.manual_transcript)
 
 
 @dataclass(frozen=True)
@@ -152,9 +154,22 @@ def inbox_path(data_dir: Path | None = None) -> Path:
     return (data_dir or get_settings().data_dir) / INBOX_DIR
 
 
+def note_file(directory: Path, name: str) -> Path:
+    """Every source file stays in its real note folder; never follow source symlinks."""
+    path = directory / name
+    if (
+        directory.is_symlink()
+        or path.is_symlink()
+        or Path(name).name != name
+        or path.resolve().parent != directory.resolve()
+    ):
+        raise ValueError("voice files must live in the note folder without symlinks")
+    return path
+
+
 def read_sidecar(directory: Path) -> Note:
     """Read ``note.json`` only: availability and store filtering need no audio bytes."""
-    path = directory / NOTE_FILE
+    path = note_file(directory, NOTE_FILE)
     try:
         raw = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as error:

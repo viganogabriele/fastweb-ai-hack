@@ -3,11 +3,11 @@
 A recording from the phone becomes ``data/voice_inbox/<note_id>/`` with the same three files as
 a DATA-03 fixture: ``note.json`` (``fixture_kind: "live"``), ``note.wav`` (16 kHz mono PCM,
 converted with ffmpeg because ``src.voice`` reads wav/mp3 only) and ``transcript.txt``, the live
-ASR transcript the store accepted. ``sent_at`` is the moment the note is saved, in the store's
-zone: the note is available from then, and only runs with a later ``as_of`` read it.
+ASR transcript the store accepted or edited. ``sent_at`` is the moment the note is saved,
+in the store's zone: only runs with a later ``as_of`` read it.
 
-``processed.json`` in a note folder records the run that read it, so the demo button and a
-periodic job process each note once. ``src.voice`` ignores that file.
+Each queued run freezes these files into ``data/voice_runs/<run_id>/``. The committed run
+spec is the processing claim; retries reuse the original snapshot rather than mutable inbox text.
 """
 
 import hashlib
@@ -23,11 +23,10 @@ from uuid import uuid4
 from zoneinfo import ZoneInfo
 
 from tessera.modules.sources.emails import Store
-from tessera.modules.sources.voice import NOTE_FILE, Note, inbox_path, read_sidecar
+from tessera.modules.sources.voice import NOTE_FILE, Note, inbox_path, note_file, read_sidecar
 
 AUDIO_FILE = "note.wav"
 TRANSCRIPT_FILE = "transcript.txt"
-PROCESSED_FILE = "processed.json"
 MAX_TRANSCRIPT_CHARS = 5000
 MAX_SECONDS = 90
 
@@ -88,7 +87,7 @@ def to_wav(audio: bytes, suffix: str) -> bytes:
 
 def _duration(path: Path) -> float:
     with wave.open(str(path), "rb") as reader:
-        return round(reader.getnframes() / reader.getframerate(), 1)
+        return reader.getnframes() / reader.getframerate()
 
 
 def _note_id(root: Path, store_id: str, sent_at: datetime) -> str:
@@ -159,18 +158,15 @@ def list_notes(data_dir: Path | None = None) -> list[LiveNote]:
             continue
         try:
             note = read_sidecar(directory)
-            text = (directory / note.sidecar.manual_transcript).read_text(encoding="utf-8")
+            if note.sidecar.fixture_kind != "live":
+                continue
+            # Validate all three paths before any file is copied or hashed.
+            note_file(directory, note.sidecar.audio)
+            text = note.transcript_path.read_text(encoding="utf-8")
         except (ValueError, OSError):
             continue
         notes.append(LiveNote(note, text.strip(), None))
     return sorted(notes, key=lambda n: (n.note.sidecar.sent_at, n.note.slug))
-
-
-def mark_processed(notes: list[LiveNote], run_id: str) -> None:
-    for live in notes:
-        (live.note.directory / PROCESSED_FILE).write_text(
-            json.dumps({"run_id": run_id}) + "\n", encoding="utf-8"
-        )
 
 
 def batch_hash(notes: list[LiveNote]) -> str:
@@ -182,7 +178,7 @@ def batch_hash(notes: list[LiveNote]) -> str:
             [
                 note.slug,
                 *[
-                    hashlib.sha256((note.directory / name).read_bytes()).hexdigest()
+                    hashlib.sha256(note_file(note.directory, name).read_bytes()).hexdigest()
                     for name in (NOTE_FILE, note.sidecar.audio, note.sidecar.manual_transcript)
                 ],
             ]
@@ -191,7 +187,7 @@ def batch_hash(notes: list[LiveNote]) -> str:
 
 
 def snapshot_path(data_dir: Path, run_id: str) -> Path:
-    if Path(run_id).name != run_id or run_id in (".", ".."):
+    if not run_id or Path(run_id).name != run_id or run_id in (".", ".."):
         raise ValueError("invalid live run id")
     return data_dir / "voice_runs" / run_id
 
@@ -207,7 +203,7 @@ def freeze_notes(data_dir: Path, run_id: str, notes: list[LiveNote], expected_ha
             target = staging / note.slug
             target.mkdir()
             for name in (NOTE_FILE, note.sidecar.audio, note.sidecar.manual_transcript):
-                shutil.copyfile(note.directory / name, target / name)
+                shutil.copyfile(note_file(note.directory, name), target / name)
         frozen = [LiveNote(read_sidecar(p), "", None) for p in staging.iterdir()]
         if batch_hash(frozen) != expected_hash:
             raise ValueError("voice notes changed while queuing")

@@ -469,3 +469,94 @@ def test_transcription_throttle_is_shared_and_releases_after_failure(client, mon
     )
     assert client.post("/api/voice/transcribe", **args).status_code == 502
     assert not live._ASR_SLOT.locked()
+
+
+@pytest.mark.parametrize("name", ["note.json", "note.wav", "transcript.txt", "directory"])
+def test_inbox_never_reads_symlinked_source_files(client, tmp_path, name):
+    note = post_note(client).json()
+    directory = tmp_path / "voice_inbox" / note["note_id"]
+    if name == "directory":
+        external = tmp_path / note["note_id"]
+        directory.rename(external)
+        directory.symlink_to(external, target_is_directory=True)
+    else:
+        path = directory / name
+        external = tmp_path / name
+        path.rename(external)
+        path.symlink_to(external)
+    assert client.get("/api/voice/notes").json() == []
+    assert client.post("/api/voice/process", json={}).status_code == 409
+    assert client.executed == []
+
+
+def test_chunked_upload_limit_is_enforced_before_multipart_spooling(client, monkeypatch):
+    monkeypatch.setattr(live, "MAX_UPLOAD", 8)
+
+    def chunks():
+        yield (
+            b'--boundary\r\nContent-Disposition: form-data; name="audio"; filename="a.wav"\r\n\r\n'
+        )
+        yield b"x" * (64 * 1024 + 9)
+        yield b"\r\n--boundary--\r\n"
+
+    response = client.post(
+        "/api/voice/notes",
+        content=chunks(),
+        headers={"Content-Type": "multipart/form-data; boundary=boundary"},
+    )
+    assert response.status_code == 413
+    assert client.executed == []
+
+
+def test_live_source_references_are_distinct_from_dataset_sources(client, tmp_path):
+    post_note(client)
+    client.post("/api/voice/process", json={})
+    spec = client.executed[-1][0]
+    from tessera.modules.sources.voice_inbox import snapshot_path
+
+    (path,) = snapshot_path(tmp_path, spec.run_id).iterdir()
+    note = voice.read_sidecar(path)
+    assert note.uri == f"live-voice://{spec.run_id}/{note.slug}"
+
+
+def test_precise_duration_rejects_audio_just_over_ninety_seconds():
+    from tessera.modules.sources.voice_inbox import InvalidRecording, to_wav
+
+    with pytest.raises(InvalidRecording, match="90 seconds"):
+        to_wav(wav(seconds=90.02), "wav")
+
+
+def test_generic_run_creation_cannot_forge_live_voice_claims(client):
+    from datetime import UTC, datetime
+
+    spec = live.live_spec(Registry.discover(), "MIL01", [], datetime.now(UTC))
+    payload = spec.model_dump(mode="json", exclude={"run_id", "erp_max_seq"})
+    response = client.post("/api/runs", json=payload, headers={"Authorization": ""})
+    assert response.status_code == 422
+    assert "/api/voice/process" in response.json()["detail"]
+    assert client.get("/api/voice/notes").json() == []
+
+
+def test_a_second_batch_waits_for_the_active_live_run(client):
+    post_note(client)
+    assert client.post("/api/voice/process", json={}).status_code == 202
+    post_note(client, transcript="A second fresh note")
+    response = client.post("/api/voice/process", json={})
+    assert response.status_code == 409
+    assert "already in progress" in response.json()["detail"]
+    assert len(client.executed) == 1
+    assert len([n for n in client.get("/api/voice/notes").json() if n["run_id"] is None]) == 1
+
+
+def test_asr_deadline_failure_is_a_service_error_and_releases_slot(client, monkeypatch):
+    from pydantic import SecretStr
+
+    client.app.state.settings.asr_api_key = SecretStr("fake")
+
+    def timeout(*args, **kwargs):
+        raise live.BudgetExceeded("synthetic deadline")
+
+    monkeypatch.setattr(live.LLMClient, "transcribe", timeout)
+    response = client.post("/api/voice/transcribe", files={"audio": ("a.wav", wav(), "audio/wav")})
+    assert response.status_code == 502
+    assert not live._ASR_SLOT.locked()
