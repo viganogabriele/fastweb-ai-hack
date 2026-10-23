@@ -23,7 +23,7 @@ from rapidfuzz import fuzz
 
 Level = Literal["sku_size", "sku", "style"]
 LinkStatus = Literal["linked", "ambiguous", "unlinked"]
-Method = Literal["exact", "fuzzy"]
+Method = Literal["exact", "fuzzy", "embedding", "rrf"]
 
 # SKU score = weighted mean of style and colour match. The style name carries the identity;
 # colour names are often inflected ("nera" for "nero", "noire" for "noir").

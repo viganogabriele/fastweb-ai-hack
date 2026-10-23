@@ -14,11 +14,11 @@ from types import SimpleNamespace
 import pytest
 from pydantic import ValidationError
 
-from tessera.core.config import REPO_ROOT
+from tessera.core.config import REPO_ROOT, Settings
 from tessera.core.contracts import EntityLink, Observation, RunSpec
 from tessera.core.db import connect
 from tessera.core.fixtures import read_fixtures
-from tessera.core.llm import ExtractionFailed, LLMCallFailed
+from tessera.core.llm import ExtractionFailed, LLMCallFailed, LLMClient
 from tessera.core.registry import Registry
 from tessera.core.repo import put_erp
 from tessera.core.run_repo import repo_session
@@ -289,10 +289,52 @@ def test_choice_schema_rejects_ids_not_offered() -> None:
         schema.model_validate({"target_id": "Z-9", "rationale": "r"})
 
 
+class FakeEmbeddings(FakeLLM):
+    def __init__(self, *, embedding_error=None):
+        super().__init__(None)
+        self.embedding_error = embedding_error
+        self.embedding_calls = []
+
+    def embed(self, texts, dimensions, *, cache_context):
+        self.embedding_calls.append((list(texts), dimensions, cache_context))
+        if self.embedding_error:
+            raise self.embedding_error
+        return [[1.0] + [0.0] * (dimensions - 1) for _ in texts]
+
+
+def test_embedding_opt_in_persists_rank_scores_and_never_silently_links(engine):
+    client = FakeEmbeddings()
+    result, links = run(
+        engine,
+        params={"use_embeddings": True, "llm": False, "embedding_dimensions": 2048},
+        llm=client,
+    )
+    assert client.embedding_calls
+    assert {c[1] for c in client.embedding_calls} == {2048}
+    assert result.status == "succeeded"
+    assert links[SWEATSHIRT].status == "ambiguous"
+    assert all(c.method.startswith("rrf") for c in links[SWEATSHIRT].candidates)
+    assert all(0 <= c.score <= 100 for c in links[SWEATSHIRT].candidates)
+
+
+def test_embedding_provider_failure_is_explicit_and_retains_fuzzy_candidates(engine):
+    client = FakeEmbeddings(embedding_error=LLMCallFailed("offline"))
+    result, links = run(engine, params={"use_embeddings": True, "llm": False}, llm=client)
+    assert result.status == "degraded"
+    assert any("embeddings LLMCallFailed" in e for e in result.errors)
+    assert links[SWEATSHIRT].status == "ambiguous"
+    assert all(not c.method.startswith("rrf") for c in links[SWEATSHIRT].candidates)
+
+
+def test_embedding_request_without_client_is_blocked(engine):
+    result, links = run(engine, params={"use_embeddings": True, "llm": False})
+    assert result.status == "blocked" and links == {}
+
+
 def test_decisions_run_in_parallel_and_keep_observation_order(monkeypatch) -> None:
     both_in_flight = threading.Barrier(2, timeout=5)
 
-    def slow_decide(obs, snapshot, params, llm, errors):
+    def slow_decide(obs, snapshot, params, llm, errors, retriever=None):
         both_in_flight.wait()  # BrokenBarrierError if decisions were serial
         if obs.id == "a":
             time.sleep(0.2)  # finishes last, still reported first
@@ -313,3 +355,14 @@ def test_decisions_run_in_parallel_and_keep_observation_order(monkeypatch) -> No
     result = link.link_observations(repo, observations, None, LinkParams(), llm=None)
     assert result.errors == ("a: llm LLMCallFailed", "b: llm LLMCallFailed")
     assert result.abstentions == ("a: a tie", "b: b tie")
+
+
+def test_malformed_provider_embedding_response_degrades_to_fuzzy(engine, tmp_path, monkeypatch):
+    client = LLMClient(Settings(_env_file=None, llm_mode="replay", data_dir=tmp_path))
+    # Exercise the real SDK response validation without cache files or provider calls.
+    monkeypatch.setattr(client, "_request", lambda *args: {"data": [{"embedding": "invalid"}]})
+    result, links = run(engine, params={"use_embeddings": True, "llm": False}, llm=client)
+    assert result.status == "degraded"
+    assert any("embeddings ValidationError" in e for e in result.errors)
+    assert links[SWEATSHIRT].status == "ambiguous"
+    assert all(not c.method.startswith("rrf") for c in links[SWEATSHIRT].candidates)
