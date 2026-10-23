@@ -249,6 +249,28 @@ def test_asr_without_usable_segments_falls_back(tmp_path):
     assert document.text == TRANSCRIPT
 
 
+@pytest.mark.parametrize("start,end", [(30.0, 31.0), (1.0, 1.0)])
+def test_unusable_real_interval_publishes_explicit_fallback_without_timestamps(
+    tmp_path, start, end
+):
+    voice_dir = tmp_path / "voice"
+    note_dir(voice_dir, duration_s=30.72)
+    request = spec()
+    engine, status = execute(
+        tmp_path, request, voice_dir, FakeASR(transcript=asr((start, end, "Grazie.")))
+    )
+    assert status.status == "degraded"
+    assert status.counts["recorded"] == 0
+    assert status.counts["declared"] == 1
+    assert "UnusableTranscript" in status.abstentions[0]
+    (document,) = published(engine, request)
+    assert document.meta["transcript_mode"] == "fixture"
+    assert document.text == TRANSCRIPT
+    with repo_session(engine, request) as repo:
+        (segment,) = repo.list(voice.Segment)
+    assert (segment.t_start_s, segment.t_end_s) == (None, None)
+
+
 def test_audio_must_match_the_declared_hash(tmp_path):
     voice_dir = tmp_path / "voice"
     note_dir(voice_dir, audio_sha256="sha256:" + "0" * 64)
