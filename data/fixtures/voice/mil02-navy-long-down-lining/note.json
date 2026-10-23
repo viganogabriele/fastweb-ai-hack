@@ -1,5 +1,5 @@
 {
-  "note_id": "mil02-studded-leather-lining",
+  "note_id": "mil02-navy-long-down-lining",
   "store_id": "MIL02",
   "sent_at": "2026-10-22T19:20:00+02:00",
   "timezone": "Europe/Rome",
@@ -7,8 +7,8 @@
   "author_ref": "pseudonym:mil02-staff-paolo",
   "fixture_kind": "synthetic_extension",
   "audio": "note.wav",
-  "audio_sha256": "sha256:5eee4bbd0a592852abe1f3eec9c57e1a23074f06b16f10882644e2d8f5d6e8ea",
-  "duration_s": 45.0,
+  "audio_sha256": "sha256:df4fc6ed8eb953e167b20a6ade4435178587d501922a41c24bf9c8571902b9c9",
+  "duration_s": 49.3,
   "manual_transcript": "transcript.txt",
-  "asr_prompt": "Giacca in pelle marrone con le borchie, fodera interna, piumino lungo nero."
+  "asr_prompt": "Piumino lungo blu notte, fodera interna, cappuccio, cardigan imbottito nero."
 }
