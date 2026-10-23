@@ -76,23 +76,22 @@ a dataset email, sent on the demo evening (2026-10-22, before the evening run).
 
 | `note_id` | Store | Length | Signals in the note |
 |---|---|---|---|
-| `note_id` | Store | Length | Signals in the note |
-|---|---|---|---|
 | `mil01-melange-touch-belted-coat-fit` | MIL01 | 31 s | grey melange wool down jacket rejected on touch (4); chocolate belted long down coat, size 2, tight at the waist (3); 5-minute connection outage |
 | `mil02-navy-long-down-lining` | MIL02 | 49 s | navy long down jacket put down over the lining (5), a request for it without hood; black padded cardigan tried by 2, 1 sold; low traffic, rain; one person short tomorrow |
 | `mil01-cashmere-scarf-vest-size` | MIL01 | 40 s | grey melange cashmere scarf liked, a request for beige; navy down vest, size 3 missing (2 and 4 only), 2 walk-outs; payment terminal froze |
 
-Every product named exists in the catalogue and in that store's assortment, with the catalogue's
-sizes (outerwear is numeric). Expected links, for the manual labels:
+Every product named exists in the catalogue, with the catalogue's sizes (outerwear is numeric).
+The products handled or tried are in the store's assortment; the requested beige scarf is not
+in MIL01's assortment. Expected links, for the manual labels:
 
 | Spoken | Expected SKU | Note |
 |---|---|---|
-| piumino in lana grigio melange | `J10911A00213-90X` MONTGENEVRE | the only wool down jacket; `90X` also on KARAKORUM and the padded cardigan at MIL01 |
-| cappotto lungo in piumino con cintura, marrone cioccolato, 2 | `J20931A00622-23R-2` AMBRINE | unique; MIL01 stock on 2026-10-21 has 0 of size 2, so "tried in size 2" conflicts with stock |
-| piumino lungo blu notte | `J20931A00087-742` HERMINE or `J20931A00203-742` FLAMMETTE | ambiguous at MIL02; HERMINE's hood is already detachable, so "without hood" is not unmet demand for it |
-| cardigan imbottito nero | `I10919B00042-999` TRICOT PADDED CARDIGAN | unique |
-| sciarpa in cashmere grigio melange / beige | `I10913A00004-90X` / `I10913A00004-034` CASHMERE SCARF | beige is in the catalogue but not in MIL01's assortment |
-| gilet in piumino blu notte, 3 | `J10911A00305-742-3` TIB | the only navy down vest; MIL01 stock on 2026-10-21 has 7 of size 3, so "only 2 and 4" conflicts with stock and must surface as a conflict, not be reconciled |
+| piumino in lana grigio melange | `J10911A00213-90X` | the only wool down jacket; `90X` also on the ripstop down jacket and the padded cardigan at MIL01 |
+| cappotto lungo in piumino con cintura, marrone cioccolato, 2 | `J20931A00622-23R-2` | unique; MIL01 stock on 2026-10-21 has 0 of size 2, so "tried in size 2" conflicts with stock |
+| piumino lungo blu notte | `J20931A00087-742` or `J20931A00203-742` | ambiguous at MIL02; `J20931A00087` has a detachable hood, so "without hood" is not unmet demand for it |
+| cardigan imbottito nero | `I10919B00042-999` | unique |
+| sciarpa in cashmere grigio melange / beige | `I10913A00004-90X` / `I10913A00004-034` | beige is in the catalogue but not in MIL01's assortment |
+| gilet in piumino blu notte, 3 | `J10911A00305-742-3` | the only navy down vest; MIL01 stock on 2026-10-21 has 7 of size 3, so "only 2 and 4" conflicts with stock and must surface as a conflict, not be reconciled |
 
 Connection outages, the payment terminal, traffic, weather and staffing are operational or context
 notes, not SKU signals. The transcripts were written from the script the speakers read; check them
