@@ -70,10 +70,10 @@ def ref(record: SourceRecord) -> ArtifactRef:
 
 
 def _overlap(a_start, a_end, b_start, b_end, slack: timedelta) -> bool:
-    # allow slack on both sides
-    if a_end + slack < b_start - slack:
+    """Match overlapping windows or a gap of at most ``slack`` in either order."""
+    if a_end + slack < b_start:
         return False
-    if b_end + slack < a_start - slack:
+    if b_end + slack < a_start:
         return False
     return True
 
@@ -94,11 +94,13 @@ def _role(event: ContextEvent, case: Case) -> str:
 def run(ctx: Context) -> ModuleResult:
     slack_hours = int(ctx.params.get("slack_hours", 24))
     slack = timedelta(hours=slack_hours)
-    cases = ctx.repo.list(Case)
+    # Repo.list is in insertion order, matching Repo.get's latest-version semantics.
+    # Version labels are opaque; enriching history can collide with immutable outputs.
+    cases = {case.id: case for case in ctx.repo.list(Case)}
     events = ctx.repo.list(ContextEvent)
     updated = 0
     errors = []
-    for case in cases:
+    for case in cases.values():
         if case.store_id is None:
             continue
         existing = set((r.kind, r.id, r.version) for r in case.context_refs)

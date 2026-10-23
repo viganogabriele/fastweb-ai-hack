@@ -2,10 +2,13 @@
 
 import argparse
 import json
+from datetime import date
 from pathlib import Path
 
+from .forecast import KEY, score_forecasts
 from .harness import ARTIFACTS, FrozenRun, freeze
 from .isolation import run_product
+from .lead_time import lead_time_report
 from .reading import catalog_ids, load_labels, reading_protocol, score
 
 
@@ -34,6 +37,11 @@ def main() -> None:
     verify.add_argument("--sha256", required=True)
     verify.add_argument("--key", action="append", required=True)
     verify.add_argument("--output", type=Path, required=True)
+    forecast = sub.add_parser("forecast", help="Score frozen forecast errors on a fixed universe")
+    forecast.add_argument("bundle", type=Path)
+    forecast.add_argument("--sha256", required=True)
+    forecast.add_argument("--key", default=KEY)
+    forecast.add_argument("--output", type=Path, required=True)
     sample = sub.add_parser(
         "reading-sample", help="EVL-02: write the sample file list and protocol, no answers"
     )
@@ -48,8 +56,30 @@ def main() -> None:
         "product", help="Start the product with kernel-enforced input isolation"
     )
     product.add_argument("arguments", nargs=argparse.REMAINDER, help="-- -m tessera.cli ...")
+    lead = sub.add_parser(
+        "lead-time", help="EVL-04: pipeline lead time vs stock and sales baselines"
+    )
+    lead.add_argument("--bundle", type=Path, help="Frozen run; omit to score baselines only")
+    lead.add_argument("--sha256", help="Manifest SHA-256 recorded before oracle access")
+    lead.add_argument("--split", default="dev", help="Stores when no bundle is given")
+    lead.add_argument("--start", type=date.fromisoformat, default=date(2026, 8, 31))
+    lead.add_argument("--end", type=date.fromisoformat, default=date(2026, 10, 21))
+    lead.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     root = Path(__file__).resolve().parent.parent
+    if args.command in (
+        "verify",
+        "forecast",
+        "lead-time",
+    ) and not args.output.resolve().is_relative_to(root / "data"):
+        parser.error("evaluation outputs must be written under data/")
+    if args.command == "lead-time":
+        if bool(args.bundle) != bool(args.sha256):
+            parser.error("--bundle and --sha256 go together")
+        run = FrozenRun(args.bundle, args.sha256) if args.bundle else None
+        report = lead_time_report(root, run, args.split, args.start, args.end)
+        _write_new(args.output, report)
+        return
     if args.command == "product":
         arguments = args.arguments
         if arguments[:1] == ["--"]:
@@ -105,10 +135,12 @@ def main() -> None:
         )
         print(sha256)
     else:
-        if not args.output.resolve().is_relative_to(root / "data"):
-            parser.error("evaluation receipts must be written under data/")
         run = FrozenRun(args.bundle, args.sha256)
-        receipt = run.receipt(root / "generated/ground_truth", args.key)
+        receipt = (
+            score_forecasts(run, root / "generated/ground_truth", args.key)
+            if args.command == "forecast"
+            else run.receipt(root / "generated/ground_truth", args.key)
+        )
         _write_new(args.output, receipt)
 
 

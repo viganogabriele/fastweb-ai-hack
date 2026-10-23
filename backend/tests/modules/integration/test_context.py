@@ -1,6 +1,9 @@
 """INT-06: int.context associates context events to cases by geo/time without uplift."""
 
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
+from types import SimpleNamespace
+
+import pytest
 
 from tessera.core.contracts import (
     Case,
@@ -77,7 +80,31 @@ def make_event(as_of, store="MIL01", role="context_only"):
     )
 
 
-def test_associates_by_geo_time(tmp_path):
+@pytest.mark.parametrize(
+    ("event_offset_hours", "slack_hours", "expected_refs"),
+    [
+        (0, None, 1),
+        (48, None, 1),
+        (-48, None, 1),
+        (49, None, 0),
+        (-49, None, 0),
+        (72, None, 0),
+        (-72, None, 0),
+        (24, 0, 1),
+        (-24, 0, 1),
+        (25, 0, 0),
+        (-25, 0, 0),
+        (30, 6, 1),
+        (-30, 6, 1),
+        (31, 6, 0),
+        (-31, 6, 0),
+        (96, 72, 1),
+        (-96, 72, 1),
+        (97, 72, 0),
+        (-97, 72, 0),
+    ],
+)
+def test_associates_by_geo_time(tmp_path, event_offset_hours, slack_hours, expected_refs):
     engine = connect(f"sqlite:///{tmp_path / 't.db'}")
     as_of = datetime(2026, 10, 22, tzinfo=UTC)
     spec = RunSpec(
@@ -89,13 +116,20 @@ def test_associates_by_geo_time(tmp_path):
         config_hash="c",
         code_version="0",
         mode="fixture",
-        modules=(ModuleSnapshot(manifest=context.MANIFEST, params={}),),
+        modules=(
+            ModuleSnapshot(
+                manifest=context.MANIFEST,
+                params={} if slack_hours is None else {"slack_hours": slack_hours},
+            ),
+        ),
         prompt_versions={},
         model_versions={},
         authorized_fixture_refs=(),
     )
     case = make_case(as_of)
     ev = make_event(as_of)
+    offset = timedelta(hours=event_offset_hours)
+    ev = ev.model_copy(update={"start": ev.start + offset, "end": ev.end + offset})
     with repo_session(engine, spec, fixture_mode=True, write=True) as repo:
         repo.put(case, ev)
     registry = Registry((RegisteredModule(context.MANIFEST, context.run),))
@@ -107,5 +141,99 @@ def test_associates_by_geo_time(tmp_path):
         outs = repo.list(Case)
     # pick updated version
     out = max(outs, key=lambda c: c.version)
-    assert len(out.context_refs) == 1
-    assert out.context_refs[0].id == ev.id
+    assert len(out.context_refs) == expected_refs
+    if expected_refs:
+        assert out.context_refs[0].id == ev.id
+
+
+@pytest.mark.parametrize(
+    ("gap", "slack", "expected"),
+    [
+        (timedelta(hours=-12), timedelta(0), True),
+        (timedelta(0), timedelta(0), True),
+        (timedelta(microseconds=1), timedelta(0), False),
+        (timedelta(hours=24), timedelta(hours=24), True),
+        (timedelta(hours=24, microseconds=1), timedelta(hours=24), False),
+        (timedelta(hours=48), timedelta(hours=24), False),
+    ],
+)
+def test_time_tolerance_is_the_maximum_gap_in_either_order(gap, slack, expected):
+    start = datetime(2026, 10, 8, tzinfo=UTC)
+    end = start + timedelta(days=1)
+    event_start = end + gap
+    event_end = event_start + timedelta(days=1)
+
+    assert context._overlap(start, end, event_start, event_end, slack) is expected
+    assert context._overlap(event_start, event_end, start, end, slack) is expected
+
+
+@pytest.fixture
+def context_repo(tmp_path):
+    engine = connect(f"sqlite:///{tmp_path / 'context.db'}")
+    spec = RunSpec(
+        run_id="r1",
+        scenario_id="s1",
+        as_of=datetime(2026, 10, 22, tzinfo=UTC),
+        stores=("MIL01",),
+        source_manifest_hash="s",
+        config_hash="c",
+        code_version="0",
+        mode="fixture",
+        modules=(),
+        prompt_versions={},
+        model_versions={},
+        authorized_fixture_refs=(),
+    )
+    try:
+        with repo_session(engine, spec, fixture_mode=True, write=True) as repo:
+            yield repo
+    finally:
+        engine.dispose()
+
+
+def test_incremental_context_preserves_history_and_retries_are_idempotent(context_repo):
+    repo = context_repo
+    case = make_case(repo.spec.as_of)
+    first = make_event(repo.spec.as_of)
+    repo.put(case, first)
+    ctx = SimpleNamespace(spec=repo.spec, repo=repo, params={})
+
+    assert context.run(ctx).counts["updated_cases"] == 1
+    enriched = repo.get(Case, case.id)
+    second = first.model_copy(update={"id": "second-event"})
+    repo.put(second)
+
+    result = context.run(ctx)
+
+    assert result.counts == {"cases": 1, "events": 2, "updated_cases": 1}
+    latest = repo.get(Case, case.id)
+    assert {r.id for r in latest.context_refs} == {first.id, second.id}
+    assert repo.get(Case, case.id, case.version) == case
+    assert repo.get(Case, case.id, enriched.version) == enriched
+    assert context.run(ctx).counts["updated_cases"] == 0
+    assert repo.get(Case, case.id) == latest
+    assert len(repo.list(Case)) == 3
+
+
+@pytest.mark.parametrize(("old_version", "new_version"), [("v9", "v10"), ("v10", "v2")])
+def test_only_latest_stored_version_of_each_case_is_enriched(
+    context_repo, old_version, new_version
+):
+    repo = context_repo
+    old = make_case(repo.spec.as_of).model_copy(update={"version": old_version})
+    latest = old.model_copy(update={"version": new_version, "status": "verify"})
+    other = latest.model_copy(update={"id": "other-case", "priority": "low"})
+    event = make_event(repo.spec.as_of)
+    repo.put(old, latest, other, event)
+
+    result = context.run(SimpleNamespace(spec=repo.spec, repo=repo, params={}))
+
+    assert result.counts == {"cases": 2, "events": 1, "updated_cases": 2}
+    for original in (latest, other):
+        enriched = repo.get(Case, original.id)
+        assert enriched.version == original.version + ".ctx"
+        assert enriched.status == original.status
+        assert enriched.priority == original.priority
+        assert enriched.context_refs == (context.ref(event),)
+    assert repo.get(Case, old.id, old.version) == old
+    assert repo.get(Case, old.id, old.version + ".ctx") is None
