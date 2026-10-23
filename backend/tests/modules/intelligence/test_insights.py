@@ -22,7 +22,8 @@ from tesseract.core.contracts import (
 from tesseract.core.db import connect
 from tesseract.core.fixtures import read_fixtures
 from tesseract.core.registry import Registry
-from tesseract.core.repo import ErpRecord, Repo, create_run
+from tesseract.core.repo import ErpRecord, Repo, create_run, put_erp
+from tesseract.core.run_repo import repo_session
 from tesseract.modules.intelligence import insights
 from tesseract.modules.sources import erp
 
@@ -160,10 +161,10 @@ def test_returns_and_sales_share_stores_and_days():
     assert s1.n_observations == 0 and s1.reported_reasons == ()
     assert s1.stores == ("MIL01", "NYC01")
     assert set(s1.input_refs) == {
-        ArtifactRef(kind="ERP:sales", id="sales-1", version="v1"),
-        ArtifactRef(kind="ERP:sales", id="sales-2", version="v1"),
-        ArtifactRef(kind="ERP:returns", id="returns-1", version="v1"),
-        ArtifactRef(kind="ERP:returns", id="returns-2", version="v1"),
+        ArtifactRef(kind="erp.sales", id="sales-1", version="v1"),
+        ArtifactRef(kind="erp.sales", id="sales-2", version="v1"),
+        ArtifactRef(kind="erp.returns", id="returns-1", version="v1"),
+        ArtifactRef(kind="erp.returns", id="returns-2", version="v1"),
     }
     assert s1.notes == ("returns of the period may refer to sales made before it",)
 
@@ -206,8 +207,8 @@ def test_style_link_sums_its_colours_and_reasons_are_shares_of_observations(fixt
     assert style.reported_reasons == (Share(key="unspecified", count=2, of=2),)
     assert set(style.input_refs) == {
         *(ArtifactRef(kind="Observation", id=o.id, version=o.version) for o in cardigan),
-        ArtifactRef(kind="ERP:sales", id="sales-1", version="v1"),
-        ArtifactRef(kind="ERP:sales", id="sales-2", version="v1"),
+        ArtifactRef(kind="erp.sales", id="sales-1", version="v1"),
+        ArtifactRef(kind="erp.sales", id="sales-2", version="v1"),
     }
     # The same notes reported before the period starts are not counted against its sales.
     assert "I10919B00011" not in build(observations=cardigan, links=links, as_of=AS_OF)
@@ -325,3 +326,18 @@ def test_ins01_fixture_is_what_the_module_returns(fixture_run, fixture_records):
     _, _, built = fixture_run
     stored = by_id(r for r in fixture_records if isinstance(r, ProductInsight))
     assert stored == built  # rebuild with data/fixtures/build_ins01.py
+
+
+def test_insight_erp_references_resolve_in_the_pipeline_repository(tmp_path):
+    engine = connect(f"sqlite:///{tmp_path / 'insights.db'}")
+    sales = [sale(1, "S1-999", date(2026, 10, 7), 10, 2)]
+    returns = [
+        ret(1, "S1-999", date(2026, 10, 7), "DEF"),
+        ret(2, "S1-999", date(2026, 10, 7), "SIZE"),
+    ]
+    put_erp(engine, [*sales, *returns])
+    record = build(sales=sales, returns=returns)["S1-999"]
+    with repo_session(engine, spec(), fixture_mode=True) as current:
+        assert current.put(record) == 1
+        assert current.get(ProductInsight, record.id, record.version) == record
+    engine.dispose()

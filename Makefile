@@ -2,7 +2,7 @@
 BACKEND := backend
 WEB := web
 PY := $(BACKEND)/.venv/bin/python
-CHECK_SCRIPTS := ../scripts/export_openapi.py ../scripts/replay_demo.py ../scripts/prepare_core_demo.py ../scripts/record_core_demo.py ../scripts/check_core_demo.py ../scripts/freeze_record.py ../scripts/core_investigate_job.py ../scripts/clarification_answers_demo.py
+CHECK_SCRIPTS := ../scripts/export_openapi.py ../scripts/replay_demo.py ../scripts/prepare_core_demo.py ../scripts/record_core_demo.py ../scripts/check_core_demo.py ../scripts/freeze_record.py ../scripts/core_investigate_job.py ../scripts/clarification_answers_demo.py ../scripts/production_demo.py
 
 .PHONY: setup dev demo demo-data backend web mocks check fmt test types
 

@@ -277,7 +277,7 @@ def project(root: Path, stores: tuple[str, ...], as_of: datetime):
 
     market = MarketSeries(
         last_day=end,
-        available_at=max(day.available_at for day in kpi),
+        available_at=as_of,
         monthly=tuple(months),
         regions=tuple(rounded(r) for r in regions.values()),
         categories=tuple(
@@ -303,7 +303,15 @@ def project(root: Path, stores: tuple[str, ...], as_of: datetime):
 def run(ctx):
     kpi, market, refs = project(get_settings().sources_dir, ctx.spec.stores, ctx.spec.as_of)
     payload = dict(kpi=kpi, market=market)
-    fingerprint = hashlib.sha256(market.model_dump_json().encode()).hexdigest()[:16]
+    fingerprint = hashlib.sha256(
+        json.dumps(
+            {
+                "kpi": [day.model_dump(mode="json") for day in kpi],
+                "market": market.model_dump(mode="json"),
+            },
+            sort_keys=True,
+        ).encode()
+    ).hexdigest()[:16]
     ctx.repo.put(
         BusinessSnapshot(
             id="business",
