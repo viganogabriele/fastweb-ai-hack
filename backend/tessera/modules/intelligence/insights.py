@@ -148,6 +148,10 @@ def _ref(o: Observation) -> ArtifactRef:
     return ArtifactRef(kind="Observation", id=o.id, version=o.version)
 
 
+def _erp_ref(row: repo.ErpRecord) -> ArtifactRef:
+    return ArtifactRef(kind=f"ERP:{row.table}", id=row.id, version=row.version)
+
+
 @dataclass(frozen=True)
 class Inputs:
     """What the module reads, already limited to the run's stores and ``as_of``."""
@@ -223,6 +227,12 @@ def _insight(
     n = len(observations)
     refs = tuple(_ref(o) for o in observations)
     erp_rows = [*sales, *returns]
+    input_refs = tuple(
+        sorted(
+            {*refs, *(_erp_ref(row) for row in erp_rows)},
+            key=lambda r: (r.kind, r.id, r.version),
+        )
+    )
     available = [r.available_at for r in erp_rows] + [o.available_at for o in observations]
     known = [a for a in available if a is not None]
     level, code = product
@@ -243,7 +253,7 @@ def _insight(
         run_id=spec.run_id,
         scenario_id=spec.scenario_id,
         computed_at=spec.as_of,
-        input_refs=refs,
+        input_refs=input_refs,
         producer=MANIFEST.id,
         producer_version=MANIFEST.version,
         as_of=spec.as_of,

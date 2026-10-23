@@ -159,6 +159,12 @@ def test_returns_and_sales_share_stores_and_days():
     assert s1.return_reasons == (Share(key="DEF", count=1, of=2), Share(key="SIZE", count=1, of=2))
     assert s1.n_observations == 0 and s1.reported_reasons == ()
     assert s1.stores == ("MIL01", "NYC01")
+    assert set(s1.input_refs) == {
+        ArtifactRef(kind="ERP:sales", id="sales-1", version="v1"),
+        ArtifactRef(kind="ERP:sales", id="sales-2", version="v1"),
+        ArtifactRef(kind="ERP:returns", id="returns-1", version="v1"),
+        ArtifactRef(kind="ERP:returns", id="returns-2", version="v1"),
+    }
     assert s1.notes == ("returns of the period may refer to sales made before it",)
 
 
@@ -198,8 +204,11 @@ def test_style_link_sums_its_colours_and_reasons_are_shares_of_observations(fixt
         Share(key="unmet_demand", count=1, of=2),
     )
     assert style.reported_reasons == (Share(key="unspecified", count=2, of=2),)
-    assert set(style.input_refs) == {ArtifactRef(kind="Observation", id=o.id, version=o.version)
-                                     for o in cardigan}  # fmt: skip
+    assert set(style.input_refs) == {
+        *(ArtifactRef(kind="Observation", id=o.id, version=o.version) for o in cardigan),
+        ArtifactRef(kind="ERP:sales", id="sales-1", version="v1"),
+        ArtifactRef(kind="ERP:sales", id="sales-2", version="v1"),
+    }
     # The same notes reported before the period starts are not counted against its sales.
     assert "I10919B00011" not in build(observations=cardigan, links=links, as_of=AS_OF)
 
