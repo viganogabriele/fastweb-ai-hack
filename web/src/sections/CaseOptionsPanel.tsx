@@ -2,6 +2,7 @@ import { useEffect, useState, useSyncExternalStore } from 'react'
 import type { Case } from '../api/client'
 import { mandatoryBlockers, optionsContextKey } from '../api/caseOptions'
 import type { ActionOption, OptionsContext } from '../api/caseOptions'
+import { ArrowLeftRight } from 'lucide-react'
 import { Button, Input, StatusBadge } from '../ui'
 import { createOptionsSession, intentKey } from './caseOptionsState'
 import type { Intent, OptionsSession, OptionsState } from './caseOptionsState'
@@ -31,9 +32,9 @@ function ScopedOptions({ context, closed }: { context: OptionsContext; closed: b
 function PublishedOptions({ session, context, closed }: { session: OptionsSession; context: OptionsContext; closed: boolean }) {
   const state = useSyncExternalStore(session.subscribe, session.snapshot)
   return <section className="sd-case-analysis__options" aria-label="Opzioni pubblicate sul server" aria-busy={state.loading || state.pending}>
-    <h4>Opzioni pubblicate sul server</h4>
+    <h4><ArrowLeftRight aria-hidden="true" />Opzioni di stock</h4>
     <StatusBadge tone={context.fixture ? 'warning' : 'neutral'} label={context.fixture ? 'Namespace fixture · simulazione' : 'Namespace prodotto · bozza locale'} />
-    <p>Le decisioni sono salvate dal backend come bozze locali simulate. Nessun invio esterno o movimento di stock. L’identità del revisore è dichiarata localmente, non autenticata.</p>
+    <p className="sd-case-analysis__tech">Le decisioni sono salvate dal backend come bozze locali simulate. Nessun invio esterno o movimento di stock. L’identità del revisore è dichiarata localmente, non autenticata.</p>
     {state.reviewRequired && <p role="alert">Conflitto 409: input o proposta non più validi. Rileggi le opzioni ricaricate e i controlli prima di decidere nuovamente.</p>}
     {state.loading && <p role="status">Caricamento opzioni…</p>}
     {state.error && <div role="alert"><p>{state.error}</p><Button onClick={() => void session.load()}>Ricarica opzioni</Button></div>}
@@ -64,7 +65,7 @@ function PublishedOption({ option, state, session, closed, fixture }: {
     <header><div><strong>{option.kind}</strong>{option.recommended && <span> · raccomandata</span>}<p>{option.rationale}</p></div>
       <StatusBadge tone={blockers.length ? 'warning' : 'neutral'} label={blockers.length ? `${blockers.length} controlli obbligatori non superati` : 'Nessun blocco obbligatorio pubblicato'} />
     </header>
-    <p>Opzione {option.id} · versione {option.version} · produttore {option.producer} {option.producer_version} · {fixture ? 'fixture' : 'prodotto'} · scadenza {option.valid_until}</p>
+    <p className="sd-case-analysis__tech">Opzione {option.id} · versione {option.version} · produttore {option.producer} {option.producer_version} · {fixture ? 'fixture' : 'prodotto'} · scadenza {option.valid_until}</p>
     {option.legs.length > 0 && <div aria-label="Movimenti proposti">
       <h5>Movimenti proposti</h5>
       <ul>{option.legs.map((leg, index) => <li key={index}>

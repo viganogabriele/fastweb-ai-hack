@@ -28,7 +28,7 @@ export const sections = {
     {
       id: 'modules',
       title: 'Pipeline',
-      summary: 'Catalogo dei moduli con stato, conteggi, modalità e configurazione per il prossimo run; il selettore temporale dipende dai run disponibili.',
+      summary: 'Moduli della pipeline con stato e risultati del run selezionato; il selettore temporale dipende dai run disponibili.',
       endpoints: ['GET /api/modules', 'GET /api/runs'],
       tasks: ['WEB-03', 'PLT-04', 'PLT-06'],
     },

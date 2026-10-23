@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { readApi } from '../api/client'
 import { requestCaseForecast } from '../api/caseForecast'
 import type { ForecastAdjustment, ForecastSelection, ForecastState } from '../api/caseForecast'
+import { ChartSpline } from 'lucide-react'
 import { Button, StatusBadge } from '../ui'
 
 const fmt = (value: number | null | undefined) => value == null ? 'Non disponibile' : new Intl.NumberFormat('it-IT', { maximumFractionDigits: 20 }).format(value)
@@ -17,9 +18,9 @@ function ForecastRequest(props: ForecastSelection) {
   const { item, runId, fixtureMode } = props
   useEffect(() => requestCaseForecast({ item, runId, fixtureMode }, readApi, setState), [item, runId, fixtureMode, revision])
   return <section className="sd-case-analysis__forecast" aria-label="Forecast pubblicato">
-    <h4>Baseline e scenari pubblicati</h4>
+    <h4><ChartSpline aria-hidden="true" />Previsione della domanda</h4>
     <StatusBadge tone={fixtureMode ? 'warning' : 'neutral'} label={fixtureMode ? 'Namespace fixture · dati dimostrativi' : 'Snapshot prodotto · API'} />
-    <p>Run {runId} · caso {item.id} · versione {item.version}</p>
+    <p className="sd-case-analysis__tech">Run {runId} · caso {item.id} · versione {item.version}</p>
     {state.status === 'loading' ? <p role="status">Caricamento forecast…</p>
       : state.status === 'error' ? <div role="alert"><p>{state.message}</p><Button size="sm" onClick={() => setRevision((value) => value + 1)}>Riprova forecast</Button></div>
         : state.status !== 'ready' ? <p role="status">{state.message}</p>
@@ -34,11 +35,11 @@ function ForecastRequest(props: ForecastSelection) {
 function ForecastRecord({ forecast, label, unresolved = false }: { forecast: ForecastAdjustment; label: string; unresolved?: boolean }) {
   return <article>
     <h5>{label} · {forecast.store_id} · {forecast.sku}</h5>
-    <p>{forecast.id} · {forecast.version} · {forecast.producer} {forecast.producer_version} · origine proposta: {forecast.proposal_source}</p>
+    <p className="sd-case-analysis__tech">{forecast.id} · {forecast.version} · {forecast.producer} {forecast.producer_version} · origine proposta: {forecast.proposal_source}</p>
     <p>Orizzonte {forecast.horizon_start} → {forecast.horizon_end} · stato: {forecast.status}</p>
     {forecast.reason && <p><strong>{forecast.status === 'not_estimable' ? 'Astensione quantitativa' : 'Motivo'}:</strong> {forecast.reason}</p>}
-    <p>Riferimento vintage: {forecast.baseline_ref ? `${forecast.baseline_ref.kind} · ${forecast.baseline_ref.id} · ${forecast.baseline_ref.version}` : 'Non disponibile'}</p>
-    <p>Riferimenti input: {forecast.input_refs.length ? forecast.input_refs.map((ref) => `${ref.kind} · ${ref.id} · ${ref.version}`).join('; ') : 'Non disponibili'}</p>
+    <p className="sd-case-analysis__tech">Riferimento vintage: {forecast.baseline_ref ? `${forecast.baseline_ref.kind} · ${forecast.baseline_ref.id} · ${forecast.baseline_ref.version}` : 'Non disponibile'}</p>
+    <p className="sd-case-analysis__tech">Riferimenti input: {forecast.input_refs.length ? forecast.input_refs.map((ref) => `${ref.kind} · ${ref.id} · ${ref.version}`).join('; ') : 'Non disponibili'}</p>
     {unresolved && <p>La baseline referenziata non è disponibile nella versione esatta. Scenari numerici non esposti.</p>}
     {!unresolved && (forecast.series.length ? <div className="sd-case-analysis__table-wrap"><table>
       <caption>{label} · unità giornaliere · scenari bassa / base / alta</caption>

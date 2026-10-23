@@ -1,5 +1,6 @@
 """HTTP envelopes; domain artifacts remain the shared contracts."""
 
+from datetime import date
 from typing import Literal
 
 from pydantic import JsonValue
@@ -89,3 +90,40 @@ class CatalogProduct(Contract):
     subcategory: str
     variants: tuple[CatalogVariant, ...]
     reference: CatalogReference
+
+
+class StoreStock(Contract):
+    sizes: dict[str, int]
+    in_transit: int
+
+
+class RunProductColour(Contract):
+    sku: str
+    colour: str
+    stores: tuple[str, ...]
+    stock: dict[str, StoreStock]
+
+
+class RunProductReference(Contract):
+    name: str
+    url: str
+
+
+class RunProduct(Contract):
+    style_code: str
+    name: str
+    category: str
+    subcategory: str
+    gender: str
+    price_eur: float
+    image: str | None
+    reference: RunProductReference
+    colours: tuple[RunProductColour, ...]
+
+
+class RunProductCatalog(Contract):
+    """Catalog display metadata joined with the run's ERP assortment and end-of-day stock."""
+
+    available_at: Instant
+    snapshot_date: date
+    products: tuple[RunProduct, ...]

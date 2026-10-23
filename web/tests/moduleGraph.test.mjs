@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { buildModuleGraph, moduleDetailId, NODE_HEIGHT, NODE_WIDTH } from '../src/sections/moduleGraph.ts'
+import { buildModuleGraph, lineage, moduleDetailId, NODE_HEIGHT, NODE_WIDTH } from '../src/sections/moduleGraph.ts'
 
 const module = (id, requires = [], optional_inputs = [], enabled = true) => ({
   id, requires, optional_inputs, enabled, version: '1', layer: 'sources',
@@ -55,22 +55,70 @@ test('layout is bounded and every dependency precedes its consumer, including di
   ])
   const nodes = new Map(graph.nodes.map((n) => [n.id, n]))
   for (const edge of graph.edges)
-    assert.ok(nodes.get(edge.source).x + NODE_WIDTH < nodes.get(edge.target).x)
+    assert.ok(nodes.get(edge.source).y + NODE_HEIGHT < nodes.get(edge.target).y)
   for (const node of graph.nodes) {
     assert.ok(node.x >= 0 && node.y >= 0)
     assert.ok(node.x + NODE_WIDTH <= graph.width)
     assert.ok(node.y + NODE_HEIGHT <= graph.height)
     for (const other of graph.nodes)
-      if (node.id !== other.id && node.x === other.x)
-        assert.ok(node.y + NODE_HEIGHT <= other.y || other.y + NODE_HEIGHT <= node.y)
+      if (node.id !== other.id && node.y === other.y)
+        assert.ok(node.x + NODE_WIDTH <= other.x || other.x + NODE_WIDTH <= node.x)
   }
 })
 
 test('empty manifests are supported and repeated dependency declarations make one required edge', () => {
   assert.deepEqual(buildModuleGraph([]), {
-    nodes: [], edges: [], width: 0, height: 0, issues: [], valid: true
+    nodes: [], edges: [], routes: [], width: 0, height: 0, issues: [], valid: true
   })
   const graph = buildModuleGraph([module('a'), module('b', ['a', 'a'], ['a'])])
   assert.deepEqual(graph.edges, [{ source: 'a', target: 'b', optional: false }])
   assert.notEqual(moduleDetailId('a/b'), moduleDetailId('a%2Fb'))
+})
+
+test('rows avoid crossings that the barycenter order can remove', () => {
+  // Declared so that alphabetical order would cross: a feeds z, b feeds y.
+  const graph = buildModuleGraph([module('a'), module('b'), module('y', ['b']), module('z', ['a'])])
+  const x = Object.fromEntries(graph.nodes.map((n) => [n.id, n.x]))
+  assert.equal(x.a < x.b, x.z < x.y)
+})
+
+test('lineage follows dependencies both ways and leaves siblings out', () => {
+  const graph = buildModuleGraph([
+    module('src'), module('other'), module('mid', ['src']), module('sibling', ['src']),
+    module('out', ['mid'], ['other'])
+  ])
+  assert.deepEqual([...lineage(graph, 'mid')].sort(), ['mid', 'out', 'src'])
+  assert.deepEqual([...lineage(graph, 'out')].sort(), ['mid', 'other', 'out', 'src'])
+})
+
+test('edge routes leave the bottom of the dependency and reach the top of the consumer', () => {
+  const graph = buildModuleGraph([module('a'), module('b', ['a']), module('c', ['a'])])
+  const nodes = new Map(graph.nodes.map((n) => [n.id, n]))
+  const routes = graph.routes
+  assert.equal(routes.length, graph.edges.length)
+  const starts = routes.map((route) => route.d.match(/^M ([\d.]+) ([\d.]+)/).slice(1).map(Number))
+  assert.notEqual(starts[0][0], starts[1][0])
+  for (const [i, route] of routes.entries()) {
+    const from = nodes.get(route.source)
+    assert.equal(starts[i][1], from.y + NODE_HEIGHT)
+    assert.ok(starts[i][0] > from.x && starts[i][0] < from.x + NODE_WIDTH)
+  }
+})
+
+test('an edge that skips rows runs down a trunk between nodes, shared by its source', () => {
+  // far feeds both deep modules; the chain a → b → c → d pushes them three rows down.
+  const graph = buildModuleGraph([
+    module('far'), module('a'), module('b', ['a']), module('c', ['b']),
+    module('d', ['c', 'far']), module('e', ['c'], ['far'])
+  ])
+  const nodes = new Map(graph.nodes.map((n) => [n.id, n]))
+  const lanes = graph.routes.filter((route) => route.source === 'far').map((route) => route.d.match(/L ([\d.]+) /g))
+  assert.equal(lanes.length, 2)
+  assert.deepEqual(lanes[0].slice(0, 2), lanes[1].slice(0, 2))
+  for (const route of graph.routes)
+    for (const [, x, y] of route.d.matchAll(/L ([\d.]+) ([\d.]+)/g))
+      for (const node of graph.nodes)
+        if (Math.abs(Number(y) - (node.y + NODE_HEIGHT)) < 0.5)
+          assert.ok(Number(x) < node.x || Number(x) > node.x + NODE_WIDTH, `${route.key} crosses ${node.id}`)
+  assert.ok(nodes.get('far').y < nodes.get('d').y)
 })

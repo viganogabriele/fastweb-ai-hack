@@ -1,41 +1,21 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
+import type { CSSProperties } from 'react'
+import { CircleX, Info } from 'lucide-react'
 import { readApi } from '../api/client'
-import type { ModuleManifest } from '../api/client'
+import type { ModuleManifest, RunView } from '../api/client'
 import type { useRuns } from '../api/useRuns'
-import {
-  nextRunRequest,
-  selectionIssues,
-  submitModuleRun
-} from '../api/moduleSelection'
-import {
-  Button,
-  EmptyState,
-  ErrorState,
-  LoadingState,
-  StatusBadge
-} from '../ui'
+import { EmptyState, ErrorState, LoadingState, StatusBadge } from '../ui'
 import { PipelineGraph } from './PipelineGraph'
-import { moduleDetailId, moduleStatuses } from './moduleGraph'
+import { moduleDetailId, moduleStatuses, phases } from './moduleGraph'
+import { ModuleGlyph, moduleTitle, phaseIcons, phaseSlot } from './moduleCatalog'
 import './sections.css'
 import './modules.css'
 
 export function ModulesPage({ runs }: { runs: ReturnType<typeof useRuns> }) {
   const run = runs.selected
-  const [showGraph, setShowGraph] = useState(false)
   const [catalog, setCatalog] = useState<ModuleManifest[] | null>(null)
   const [catalogError, setCatalogError] = useState('')
   const [revision, setRevision] = useState(0)
-  const [selection, setSelection] = useState<Record<string, boolean>>({})
-  const [submitting, setSubmitting] = useState(false)
-  const [submitError, setSubmitError] = useState('')
-  const inFlight = useRef(false)
-  const mounted = useRef(true)
-  useEffect(() => {
-    mounted.current = true
-    return () => {
-      mounted.current = false
-    }
-  }, [])
   useEffect(() => {
     if (run) return
     const controller = new AbortController()
@@ -75,237 +55,28 @@ export function ModulesPage({ runs }: { runs: ReturnType<typeof useRuns> }) {
   const modules = run
     ? run.spec.modules.map((item) => item.manifest)
     : (catalog ?? [])
-  const issues = run ? selectionIssues(run, selection) : []
-  const canConfigure =
-    !!run &&
-    run.namespace === 'product' &&
-    run.spec.mode !== 'fixture' &&
-    run.spec.mode !== 'unavailable'
-  const changed = modules.some(
-    (item) => (selection[item.id] ?? item.enabled) !== item.enabled
-  )
-
-  async function startRun() {
-    if (!run || !canConfigure || !changed || issues.length || inFlight.current)
-      return
-    inFlight.current = true
-    setSubmitting(true)
-    setSubmitError('')
-    try {
-      const created = await submitModuleRun(
-        await nextRunRequest(run, selection)
-      )
-      // The server has accepted the snapshot, even if the user navigated away.
-      runs.acceptRun(created, mounted.current ? run.spec.run_id : undefined)
-    } catch (error) {
-      if (mounted.current)
-        setSubmitError(
-          error instanceof Error
-            ? error.message
-            : 'Impossibile creare il run. Aggiorna i run prima di riprovare.'
-        )
-    } finally {
-      inFlight.current = false
-      if (mounted.current) setSubmitting(false)
-    }
-  }
 
   return (
     <div className="sd-run-workspace">
-      <section
-        className="sd-run-card sd-modules-intro"
-        aria-label="Configurazione del prossimo run"
-      >
-        <h2>
-          {run
-            ? 'Moduli del run selezionato'
-            : 'Catalogo dei moduli installati'}
-        </h2>
-        <p>
-          {run
-            ? `Run: ${run.spec.run_id}. Stato e conteggi si riferiscono esclusivamente a questo snapshot.`
-            : 'Nessun run selezionato: stato di esecuzione e conteggi non sono disponibili.'}
-        </p>
-        <p id="module-selection-help">
-          {canConfigure
-            ? 'Gli interruttori preparano una selezione locale. Avvia un nuovo run per salvarla e applicarla agli stessi negozi e alla stessa data di riferimento; il run selezionato resta invariato.'
-            : 'Per configurare i moduli serve uno snapshot di run prodotto eseguibile, completo di parametri. Il catalogo da solo non consente di avviare un run.'}
-        </p>
-        <p>
-          Disattivare una dipendenza richiede di disattivare anche i moduli che
-          la usano. Le modalità restano quelle dello snapshot.
-        </p>
-        {run && (
-          <p>
-            Negozi: {run.spec.stores.join(', ')} · Data di riferimento:{' '}
-            {new Date(run.spec.as_of).toLocaleString('it-IT')}
-          </p>
-        )}
-        <div className="sd-modules-actions">
-          <Button
-            pressed={showGraph}
-            disabled={!modules.length}
-            onClick={() => setShowGraph((current) => !current)}
-          >
-            {showGraph ? 'Nascondi grafo' : 'Mostra grafo'}
-          </Button>
-          <Button
-            onClick={() => {
-              if (!run) {
-                setCatalog(null)
-                setCatalogError('')
-                setRevision((value) => value + 1)
-              }
-              runs.retry()
-            }}
-            disabled={submitting}
-          >
-            Aggiorna stato
-          </Button>
-          {canConfigure && (
-            <>
-              <Button
-                onClick={() => {
-                  setSelection({})
-                  setSubmitError('')
-                }}
-                disabled={!changed || submitting}
-              >
-                Annulla modifiche
-              </Button>
-              <Button
-                variant="primary"
-                onClick={startRun}
-                disabled={!changed || issues.length > 0 || submitting}
-                loading={submitting}
-              >
-                Avvia nuovo run con la selezione
-              </Button>
-            </>
-          )}
-        </div>
-        <p role="status">
-          {submitting
-            ? 'Invio del nuovo run in corso…'
-            : changed
-              ? 'Selezione locale modificata, non ancora salvata.'
-              : 'Nessuna modifica locale.'}
-        </p>
-        {changed && issues.length > 0 && (
-          <ul>
-            {issues.map((issue) => (
-              <li key={issue}>{issue}</li>
-            ))}
-          </ul>
-        )}
-        {submitError && (
-          <p role="alert">
-            {submitError} Se la connessione si è interrotta, verifica prima se
-            il nuovo run compare nell’elenco.
-          </p>
-        )}
-      </section>
-      {showGraph && <PipelineGraph modules={modules} run={run} />}
+      {modules.length > 0 && <PipelineGraph modules={modules} run={run} />}
       {modules.length ? (
-        <div className="sd-run-list">
-          {modules.map((item) => {
-            const execution = run?.module_runs.find(
-              (entry) => entry.module_id === item.id
-            )
-            const status = execution
-              ? moduleStatuses[execution.status]
-              : {
-                  label: run ? 'Non eseguito nel run' : 'Non eseguito',
-                  tone: 'neutral' as const
-                }
-            const counts = Object.entries(execution?.result?.counts ?? {})
-            return (
-              <article className="sd-run-card sd-module" key={item.id}
-                id={moduleDetailId(item.id)} tabIndex={-1}>
-                <div className="sd-module-heading">
-                  <h2>
-                    {item.id} · {item.version}
-                  </h2>
-                  <StatusBadge {...status} />
-                </div>
-                <p>{item.description}</p>
-                <dl>
-                  <dt>Modalità</dt>
-                  <dd>
-                    {execution?.mode ?? item.mode}
-                    {item.boundary === 'simulated' ? ' · simulata' : ''}
-                  </dd>
-                  <dt>
-                    {run
-                      ? 'Abilitazione nello snapshot'
-                      : 'Abilitazione nel catalogo'}
-                  </dt>
-                  <dd>{item.enabled ? 'Attivo' : 'Disattivo'}</dd>
-                  <dt>Conteggi del risultato</dt>
-                  <dd>
-                    {counts.length ? (
-                      <ul>
-                        {counts.map(([kind, count]) => (
-                          <li key={kind}>
-                            {kind}:{' '}
-                            <span className="sd-num">
-                              {count.toLocaleString('it-IT')}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      'Non disponibili'
-                    )}
-                  </dd>
-                  <dt>Dipendenze richieste</dt>
-                  <dd>{item.requires.join(', ') || 'Nessuna'}</dd>
-                </dl>
-                {execution?.result?.errors.length ? (
-                  <div>
-                    <h3>Errori</h3>
-                    <ul>
-                      {execution.result.errors.map((text, index) => (
-                        <li key={index}>{text}</li>
-                      ))}
-                    </ul>
-                  </div>
-                ) : null}
-                {execution?.result?.abstentions.length ? (
-                  <div>
-                    <h3>Astensioni</h3>
-                    <ul>
-                      {execution.result.abstentions.map((text, index) => (
-                        <li key={index}>{text}</li>
-                      ))}
-                    </ul>
-                  </div>
-                ) : null}
-                <label className="sd-module-toggle">
-                  <input
-                    type="checkbox"
-                    checked={selection[item.id] ?? item.enabled}
-                    disabled={
-                      !canConfigure || item.mode === 'unavailable' || submitting
-                    }
-                    aria-describedby="module-selection-help"
-                    onChange={(event) => {
-                      setSelection((current) => ({
-                        ...current,
-                        [item.id]: event.target.checked
-                      }))
-                      setSubmitError('')
-                    }}
-                  />
-                  {item.id}: attivo nel prossimo run
-                </label>
-                {item.mode === 'unavailable' && (
-                  <p>Modulo non disponibile: attivazione non consentita.</p>
-                )}
-              </article>
-            )
-          })}
+        phases.map((phase) => {
+          const members = modules.filter((item) => phase.layers.includes(item.layer))
+          const PhaseIcon = phaseIcons[phase.key]
+          return members.length ? (
+        <section className="sd-modules-phase" key={phase.key} aria-labelledby={`modules-phase-${phase.key}`}
+          style={{ '--sd-pipeline-phase': `var(--sd-phase-${phaseSlot(phase.key)})` } as CSSProperties}>
+          <header className="sd-modules-phase__head">
+            <span className="sd-pipeline__tile"><PhaseIcon aria-hidden="true" /></span>
+            <h2 id={`modules-phase-${phase.key}`}>{phase.name}</h2>
+            <span>{phase.who} · {members.length === 1 ? '1 modulo' : `${members.length} moduli`}</span>
+          </header>
+        <div className="sd-modules-grid">
+          {members.map((item) => <ModuleCard key={item.id} item={item} run={run} />)}
         </div>
+        </section>
+          ) : null
+        })
       ) : (
         <EmptyState
           title="Nessun modulo disponibile"
@@ -317,5 +88,84 @@ export function ModulesPage({ runs }: { runs: ReturnType<typeof useRuns> }) {
         />
       )}
     </div>
+  )
+}
+
+// Plain-language names for what a module produces; unknown kinds keep their contract name.
+const outputs: Record<string, [one: string, many: string]> = {
+  SourceDocument: ['documento', 'documenti'],
+  Segment: ['segmento', 'segmenti'],
+  Observation: ['segnale', 'segnali'],
+  MetricFact: ['metrica', 'metriche'],
+  StockFact: ['dato di stock', 'dati di stock'],
+  ContextEvent: ['evento', 'eventi'],
+  EntityLink: ['collegamento', 'collegamenti'],
+  EvidenceRelation: ['relazione', 'relazioni'],
+  Case: ['caso', 'casi'],
+  ProductInsight: ['insight', 'insight'],
+  ForecastOverlay: ['scenario', 'scenari'],
+  ForecastAdjustment: ['correzione', 'correzioni'],
+  ActionOption: ['opzione', 'opzioni'],
+  AgentTrace: ['indagine', 'indagini'],
+  Clarification: ['chiarimento', 'chiarimenti'],
+  Report: ['report', 'report']
+}
+const modes: Record<string, string> = { live: 'Dal vivo', recorded: 'Registrato', fixture: 'Dati demo' }
+const outputLabel = (kind: string, count: number) => outputs[kind]?.[count === 1 ? 0 : 1] ?? kind
+
+function openModule(id: string) {
+  const card = document.getElementById(moduleDetailId(id))
+  card?.focus({ preventScroll: true })
+  card?.scrollIntoView({ block: 'center', behavior: 'smooth' })
+}
+
+function ModuleCard({ item, run }: { item: ModuleManifest; run: RunView | undefined }) {
+  const execution = run?.module_runs.find((entry) => entry.module_id === item.id)
+  const status = execution
+    ? moduleStatuses[execution.status]
+    : { label: run ? 'Non eseguito' : 'Mai eseguito', tone: 'neutral' as const }
+  const counts = Object.entries(execution?.result?.counts ?? {})
+  const errors = execution?.result?.errors ?? []
+  const abstentions = execution?.result?.abstentions ?? []
+  const mode = execution?.mode ?? item.mode
+  return (
+    <article className={`sd-module${item.enabled ? '' : ' is-off'}`} id={moduleDetailId(item.id)} tabIndex={-1}>
+      <header className="sd-module__head">
+        <span className="sd-pipeline__tile"><ModuleGlyph id={item.id} manifest={item} /></span>
+        <div className="sd-module__name">
+          <h3 title={`${item.id} · v${item.version}`}>{moduleTitle(item.id)}</h3>
+          <p>{item.description}</p>
+        </div>
+        <StatusBadge {...status} />
+      </header>
+      {counts.length > 0 && (
+        <ul className="sd-module__outputs" aria-label="Prodotto nel run">
+          {counts.map(([kind, count]) => (
+            <li key={kind}><strong className="sd-num">{count.toLocaleString('it-IT')}</strong> {outputLabel(kind, count)}</li>
+          ))}
+        </ul>
+      )}
+      {(errors.length > 0 || abstentions.length > 0) && (
+        <ul className="sd-module__notes">
+          {errors.map((text, index) => <li key={`e${index}`} className="is-error"><CircleX aria-hidden="true" />{text}</li>)}
+          {abstentions.map((text, index) => <li key={`a${index}`}><Info aria-hidden="true" />{text}</li>)}
+        </ul>
+      )}
+      <footer className="sd-module__foot">
+        <div className="sd-module__deps">
+          {item.requires.length ? <>
+            <span>Usa</span>
+            {item.requires.map((id) => (
+              <button key={id} type="button" className="sd-module__chip" onClick={() => openModule(id)}>{moduleTitle(id)}</button>
+            ))}
+          </> : <span>Punto di partenza</span>}
+          {!item.enabled && <span className="sd-module__chip is-flag">Disattivo</span>}
+          {item.boundary === 'simulated' && <span className="sd-module__chip is-flag">Simulato</span>}
+          {mode === 'unavailable'
+            ? <span className="sd-module__chip is-flag">Non disponibile</span>
+            : run && mode !== run.spec.mode && <span className="sd-module__chip is-flag">{modes[mode] ?? mode}</span>}
+        </div>
+      </footer>
+    </article>
   )
 }
