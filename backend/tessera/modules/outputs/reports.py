@@ -14,6 +14,10 @@ record that holds it (RFC §4.8.1). Optional LLM prose is not part of this modul
   SKU-colour in scope, the recommended option and the case's own open questions.
 - A forecast is the case's own adjustment when one names the case, else the store × SKU baseline
   of every colour in scope (the colours the store carries, for a style case).
+- A thin "Product feedback" section closes every view when ``ins.product`` ran: up to
+  ``PRODUCTS_SHOWN`` products, those with reported reasons first, each with its reasons as shares
+  of counted observations, its units sold and returned over the same stores and days, and its POS
+  return reasons as shares of return lines. A rate is shown only where its denominator exists.
 - Labels come from the ERP master data (``styles``, ``sku_colour``); a code missing from it is
   shown as is.
 
@@ -42,8 +46,10 @@ from tessera.core.contracts import (
     ModuleManifest,
     ModuleResult,
     Observation,
+    ProductInsight,
     Report,
     RunSpec,
+    Share,
 )
 from tessera.core.contracts.common import SourceRecord
 from tessera.modules.actions.options import case_forecast, case_products
@@ -52,17 +58,18 @@ from tessera.modules.sources import erp
 VIEWS = ("by_office", "by_priority")
 PRIORITIES = ("critical", "high", "medium", "low")
 TEMPLATE = "template:out.reports.v1"
+PRODUCTS_SHOWN = 5
 
 MANIFEST = ModuleManifest(
     id="out.reports",
-    version="1",
+    version="2",
     layer="outputs",
     description=(
         "Brief per owner (and per priority) from the run's cases, evidence, baselines and "
         "options; every number rendered from a structured citation by a template"
     ),
     requires=("int.cases",),
-    optional_inputs=("fc.baseline", "fc.overlay", "act.options"),
+    optional_inputs=("fc.baseline", "fc.overlay", "act.options", "ins.product"),
     produces=("Report",),
     enabled=True,
     mode="live",
@@ -105,6 +112,7 @@ class Facts:
     styles: Mapping[str, str] = field(default_factory=dict)  # style code → name
     colours: Mapping[str, str] = field(default_factory=dict)  # SKU → colour name
     zones: Mapping[str, str] = field(default_factory=dict)  # store → time zone
+    insights: Sequence[ProductInsight] = ()
 
 
 def ref(record: SourceRecord) -> ArtifactRef:
@@ -120,19 +128,29 @@ def _local_midnight(day: date, zone: str) -> datetime:
     return datetime.combine(day, time(), ZoneInfo(zone))
 
 
-def _label(case: Case, facts: Facts) -> str:
-    if case.scope_level == "unknown" or case.scope_id is None:
-        return f"{case.store_id or 'store unknown'} · product not identified"
-    code = case.scope_id
-    if case.scope_level in ("category", "store"):
-        return f"{case.store_id} · {code}"
+def _product_name(code: str, facts: "Facts") -> str:
     parts = code.split("-")
     name = facts.styles.get(parts[0], parts[0])
     if len(parts) >= 2:
         name += " " + facts.colours.get("-".join(parts[:2]), parts[1])
     if len(parts) >= 3:
         name += f" size {'-'.join(parts[2:])}"
-    return f"{case.store_id} · {name} ({code})"
+    return name
+
+
+def _shares(shares: Sequence[Share]) -> str:
+    total = shares[0].of
+    parts = ", ".join(f"{s.key.replace('_', ' ')} {s.count}" for s in shares)
+    return f"{parts} of {total}"
+
+
+def _label(case: Case, facts: Facts) -> str:
+    if case.scope_level == "unknown" or case.scope_id is None:
+        return f"{case.store_id or 'store unknown'} · product not identified"
+    code = case.scope_id
+    if case.scope_level in ("category", "store"):
+        return f"{case.store_id} · {code}"
+    return f"{case.store_id} · {_product_name(code, facts)} ({code})"
 
 
 class _Brief:
@@ -196,6 +214,32 @@ class _Brief:
             lines.append(f"product is {names} {self.cite(link, 'candidates')}")
         return lines
 
+    def product(self, insight: ProductInsight) -> list[str]:
+        scope = {"product_id": insight.product_id, "stores": ",".join(insight.stores)}
+
+        def cite(field: str | None = None, unit=None) -> str:
+            return self.cite(insight, field, unit, scope=scope)
+
+        name = _product_name(insight.product_id, self.facts)
+        days = f"{insight.period_first:%m-%d}..{insight.period_last:%m-%d}"
+        head = f"- **{name} ({insight.product_id})**, {', '.join(insight.stores)}, {days} {cite()}"
+        body = []
+        if insight.n_observations:
+            reported = _shares(insight.reported_reasons)
+            body.append(f"reported: {reported} observations {cite('reported_reasons')}")
+        sales = (
+            f"sold {insight.units_sold} units {cite('units_sold', 'units')}, "
+            f"returned {insight.units_returned} units {cite('units_returned', 'units')}"
+        )
+        if insight.return_rate is not None:
+            rate = insight.return_rate * 100
+            sales += f", return rate {rate:.1f}% {cite('return_rate', 'percent')}"
+        body.append(sales)
+        if insight.return_lines:
+            reasons = _shares(insight.return_reasons)
+            body.append(f"POS return reasons: {reasons} lines {cite('return_reasons')}")
+        return [head, *(f"  - {b}" for b in body)]
+
     def forecast(self, fc: ForecastAdjustment) -> str | None:
         points = [p.baseline for p in fc.series]
         if fc.status == "not_estimable" or not points or any(p is None for p in points):
@@ -226,6 +270,12 @@ def _sections(view: str, cases: Sequence[Case]) -> list[tuple[str, list[Case]]]:
     return [(name, [c for c in order if key(c) == name]) for name in names]
 
 
+def _products(insights: Sequence[ProductInsight]) -> list[ProductInsight]:
+    """Reported reasons first (most observations), then the most POS return lines."""
+    ranked = sorted(insights, key=lambda i: (-i.n_observations, -i.return_lines, i.id))
+    return ranked[:PRODUCTS_SHOWN]
+
+
 def build_report(view: str, facts: Facts, spec: RunSpec) -> Report:
     """One view of the brief at ``spec.as_of``; numbers only from cited fields."""
     if view not in VIEWS:
@@ -241,6 +291,11 @@ def build_report(view: str, facts: Facts, spec: RunSpec) -> Report:
         lines += [f"## {name}", ""]
         for case in cases:
             lines += brief.case(case)
+        lines.append("")
+    if products := _products(facts.insights):
+        lines += ["## Product feedback", ""]
+        for insight in products:
+            lines += brief.product(insight)
         lines.append("")
     cited = list(brief.cited.values())
     available = [r.available_at for r in cited if r.available_at is not None]
@@ -301,6 +356,7 @@ def read_facts(run_repo: repo.Repo) -> Facts:
         styles=master["styles"],
         colours=master["sku_colour"],
         zones={str(r.data["store_id"]): str(r.data["timezone"]) for r in run_repo.erp("stores")},
+        insights=run_repo.list(ProductInsight),
     )
 
 
