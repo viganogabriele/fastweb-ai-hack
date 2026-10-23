@@ -23,6 +23,7 @@ import { AppShell, PageHeader, SidebarNav } from './shell'
 import type { NavGroup } from './shell'
 import { PendingSection } from './sections/PendingSection'
 import { Select, StatusBadge } from './ui'
+import { VoiceProcessButton } from './store/VoiceProcessButton'
 import { transition } from './ui/motion'
 
 const NAV: NavGroup[] = [
@@ -196,6 +197,14 @@ export default function App() {
         }
         topbar={
           <div className="sd-shell__view-controls">
+            <VoiceProcessButton
+              onDone={(run) => {
+                // Show the new live-voice run and its cases.
+                runs.select(run.spec.run_id)
+                runs.retry()
+                navigate('cases')
+              }}
+            />
             <Select
               label="Run e data di riferimento"
               hideLabel

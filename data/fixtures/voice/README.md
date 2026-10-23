@@ -111,13 +111,13 @@ ASR, never cached; 20 calls/min per key). On stop the store checks the text and 
 files as above and `fixture_kind: "live"`; `transcript.txt` is the accepted live ASR text, not a
 hand-written one. `src.voice` reads this folder next to `data/fixtures/voice/`.
 
-"Elabora ora" (`POST /api/voice/process`) starts one small product run per store over the new
-notes: scenario `live-voice`, `as_of` now, only `src.voice → ing.extract → int.link →
+The dashboard top bar shows "Elabora note vocali (N)" while notes wait; it calls
+`POST /api/voice/process`, which starts one small product run per store over the new notes: scenario `live-voice`, `as_of` now, only `src.voice → ing.extract → int.link →
 int.dedup → int.cases` (+ `src.erp`). `src.email` is given a file outside the run's stores so it
 reads no mail; the run is therefore `degraded` by design. LLM calls run in `record` mode, so the
 run replays later without keys. Notes whose run failed or was blocked are offered again. The
 dashboard lists runs by `as_of`, so the live run becomes the default selection; pick the demo
-run again from the run menu.
+run again from the run menu. After the run the button selects it and opens Cases.
 
 Demo checklist:
 

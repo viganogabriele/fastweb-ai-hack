@@ -1,5 +1,5 @@
 import type { components } from '../api/schema'
-import type { Case, RunView } from '../api/client'
+import type { RunView } from '../api/client'
 
 export type LiveNote = components['schemas']['LiveNoteView']
 export type Transcription = components['schemas']['Transcription']
@@ -38,24 +38,21 @@ export async function sendNote(blob: Blob, store: string, transcript: string, la
   return json<LiveNote>(await fetch('/api/voice/notes', { method: 'POST', body: form }))
 }
 
-export async function listNotes(store: string) {
-  return json<LiveNote[]>(await fetch(`/api/voice/notes?store=${encodeURIComponent(store)}`))
+export async function listNotes(store?: string) {
+  const query = store ? `?store=${encodeURIComponent(store)}` : ''
+  return json<LiveNote[]>(await fetch(`/api/voice/notes${query}`))
 }
 
-export async function processNotes(store: string) {
+export async function processNotes(store?: string) {
   return json<RunView[]>(
     await fetch('/api/voice/process', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ store_id: store })
+      body: JSON.stringify({ store_id: store ?? null })
     })
   )
 }
 
 export async function readRun(runId: string) {
   return json<RunView>(await fetch(`/api/runs/${encodeURIComponent(runId)}`))
-}
-
-export async function readCases(runId: string) {
-  return json<Case[]>(await fetch(`/api/runs/${encodeURIComponent(runId)}/cases`))
 }

@@ -15,29 +15,17 @@ export const record = {
   redo: 'Rifai',
   sent: 'Nota inviata',
   another: 'Registra un’altra nota',
-  pending: 'Note in attesa di elaborazione: {count}',
-  process: 'Elabora ora',
-  processing: 'Elaborazione in corso…',
-  processed: 'Elaborazione completata',
-  noCases: 'Nessun caso aperto da queste note.',
-  openDashboard: 'Apri nella dashboard',
+  sentHint: 'La nota sarà elaborata dalla sede.',
   errors: {
     insecure: 'Il microfono richiede una connessione sicura (HTTPS). Apri il link del QR.',
     microphone: 'Microfono non disponibile o permesso negato.',
     unsupported: 'Questo browser non sa registrare audio.',
     asr: 'Trascrizione non disponibile ({status}). Puoi scrivere il testo a mano.',
-    send: 'Invio non riuscito ({status}). Riprova.',
-    process: 'Elaborazione non avviata ({status}).',
-    run: 'Elaborazione terminata con stato {status}.'
+    send: 'Invio non riuscito ({status}). Riprova.'
   },
-  caseTypes: {
-    unmet_demand: 'Domanda non servita',
-    stock_discrepancy: 'Discrepanza di stock',
-    product_feedback: 'Feedback prodotto',
-    demand_shift: 'Variazione domanda',
-    traffic_change: 'Variazione traffico',
-    operational_issue: 'Problema operativo',
-    customer_profile: 'Profilo cliente'
-  } as Record<string, string>,
-  unknownScope: 'prodotto da verificare'
+  dashboard: {
+    process: 'Elabora note vocali ({count})',
+    running: 'Elaborazione note vocali…',
+    failed: 'Elaborazione non riuscita, riprova'
+  }
 }
