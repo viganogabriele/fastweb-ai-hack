@@ -4,6 +4,40 @@
  */
 
 export interface paths {
+    "/api/catalog/images/{name}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Image */
+        get: operations["image_api_catalog_images__name__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/catalog/products": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Products */
+        get: operations["products_api_catalog_products_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/health": {
         parameters: {
             query?: never;
@@ -737,6 +771,45 @@ export interface components {
              * Format: date-time
              */
             window_start: string;
+        };
+        /**
+         * CatalogProduct
+         * @description Synthetic style with an illustrative official visual reference, for display only.
+         */
+        CatalogProduct: {
+            /** Category */
+            category: string;
+            /** Name */
+            name: string;
+            reference: components["schemas"]["CatalogReference"];
+            /** Style Code */
+            style_code: string;
+            /** Subcategory */
+            subcategory: string;
+            /** Variants */
+            variants: components["schemas"]["CatalogVariant"][];
+        };
+        /** CatalogReference */
+        CatalogReference: {
+            /** Association */
+            association: string;
+            /** Id */
+            id: string;
+            /** Image Url */
+            image_url: string | null;
+            /** Name */
+            name: string;
+            /** Url */
+            url: string;
+        };
+        /** CatalogVariant */
+        CatalogVariant: {
+            /** Color */
+            color: string;
+            /** Color Code */
+            color_code: string;
+            /** Sku */
+            sku: string;
         };
         /** Check */
         Check: {
@@ -1691,6 +1764,55 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    image_api_catalog_images__name__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                name: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    products_api_catalog_products_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogProduct"][];
+                };
+            };
+        };
+    };
     health_api_health_get: {
         parameters: {
             query?: never;

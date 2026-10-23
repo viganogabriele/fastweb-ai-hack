@@ -4,7 +4,7 @@ WEB := web
 PY := $(BACKEND)/.venv/bin/python
 CHECK_SCRIPTS := ../scripts/export_openapi.py ../scripts/replay_demo.py ../scripts/prepare_core_demo.py ../scripts/record_core_demo.py ../scripts/check_core_demo.py ../scripts/freeze_record.py
 
-.PHONY: setup dev backend web mocks check fmt test types
+.PHONY: setup dev demo demo-data backend web mocks check fmt test types
 
 setup:  ## install backend, web and type-generator dependencies from the lockfiles
 	cd $(BACKEND) && uv sync --frozen
@@ -17,6 +17,16 @@ dev:  ## backend :8000 + web :5173 + dataset mock systems :8088 (Ctrl-C stops al
 	$(MAKE) --no-print-directory backend & \
 	$(MAKE) --no-print-directory web & \
 	wait
+
+demo: demo-data  ## backend :8000 + web :5173 on the recorded dev run, offline (no keys, no mocks)
+	@trap 'kill 0' INT TERM; demo="$$PWD/data/demo/current"; \
+	LLM_MODE=replay DATA_DIR="$$demo/data" SOURCES_DIR="$$demo/inputs/sources" \
+	CONFIG_DIR="$$demo/inputs/config" $(MAKE) --no-print-directory backend & \
+	$(MAKE) --no-print-directory web & \
+	wait
+
+demo-data:  ## rebuild the committed core-dev-20261022 run into data/demo/ once (~30 s)
+	scripts/demo_data.sh
 
 backend:
 	cd $(BACKEND) && uv run uvicorn tesseract.api.main:app --reload --port 8000
