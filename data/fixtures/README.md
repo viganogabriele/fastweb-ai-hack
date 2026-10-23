@@ -1,10 +1,10 @@
 # Fixtures
 
 Hand-labelled artifacts for the seams in `docs/PLAN.md` §3. Consumers build against them until
-the real producer lands; `tessera fixtures load` (PLT-03) loads them in `FIXTURE_MODE`.
+the real producer lands; `tesseract fixtures load` (PLT-03) loads them in `FIXTURE_MODE`.
 
 Each JSON file is a list of records `{"kind": "<contract class>", "payload": {...}}`, where
-`payload` validates against `tessera.core.contracts.<kind>`. Fixtures use only dev stores and
+`payload` validates against `tesseract.core.contracts.<kind>`. Fixtures use only dev stores and
 `generated/sources/`.
 
 `voice/` is the exception: it holds audio and its sidecars, not stored contract records, and each
@@ -76,6 +76,27 @@ NYC01 has published at 04:35 local, back to the start of Milan's 28-day ERP wind
 once; the cardigan notes of 10-09 fall after the period and are not counted against its sales.
 SKUs with 5+ POS return lines and no note are kept too. The return rate is units returned / sold;
 reported kinds and reasons are shares of counted observations, never of sales.
+
+## AG-03b: recorded investigator traces (lane E)
+
+`traces/recorded/` holds two **real-model** `ag.investigator` conversations (`glm-5.3-flash`,
+prompt `investigator.v2`), recorded and replayed by `build_ag03b.py`. It sits two levels deep, so
+`tesseract fixtures load` does not load it.
+
+| File | What it is |
+|---|---|
+| `inputs.json` | Frozen copy of the fixture records at recording time: the run's only inputs |
+| `llm_cache/` | Provider responses, content-addressed like `data/llm_cache/`; replay reads only these |
+| `case-mil01-i10919b00011-20261008.json` | D1 stock path: evidence → stock (both colours) → lane → options → `action_proposed` on the recommended `notify_owner` |
+| `case-nyc01-unknown-20260906.json` | Ambiguous identity: evidence → English clarification draft → `verify` |
+
+Stock comes from the frozen `StockFact`s and every lane is `unknown` (no lane data in the
+fixtures), so the engine produces no transfer. `tests/fixtures/test_ag03b.py` replays both offline.
+
+```sh
+LLM_MODE=replay backend/.venv/bin/python data/fixtures/build_ag03b.py   # verify
+LLM_MODE=record backend/.venv/bin/python data/fixtures/build_ag03b.py   # re-record (needs the key)
+```
 
 ## DATA-01c: stock facts, options, agent trace (lane E)
 

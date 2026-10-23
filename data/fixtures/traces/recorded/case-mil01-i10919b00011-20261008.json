@@ -1,0 +1,389 @@
+{
+ "model": "glm-5.3-flash",
+ "trace": {
+  "id": "trace:case-mil01-i10919b00011-20261008:dba0ed839671470ba34509f29c0946a6",
+  "version": "1",
+  "available_at": "2026-10-09T08:35:52Z",
+  "availability_basis": "run_as_of",
+  "source_refs": [],
+  "run_id": "fixture",
+  "scenario_id": "historical",
+  "computed_at": "2026-10-09T08:35:52Z",
+  "input_refs": [
+   {
+    "kind": "Case",
+    "id": "case-mil01-i10919b00011-20261008",
+    "version": "v1"
+   },
+   {
+    "kind": "Observation",
+    "id": "obs-20261009-1035-mil01-stockout",
+    "version": "v1"
+   },
+   {
+    "kind": "Observation",
+    "id": "obs-20261009-1035-mil01-unmet-demand",
+    "version": "v1"
+   },
+   {
+    "kind": "EntityLink",
+    "id": "link-20261009-1035-mil01-stockout",
+    "version": "v1"
+   },
+   {
+    "kind": "EntityLink",
+    "id": "link-20261009-1035-mil01-unmet-demand",
+    "version": "v1"
+   },
+   {
+    "kind": "StockFact",
+    "id": "stock-mil01-i10919b00011-742-m-onhand-20261008",
+    "version": "v1"
+   },
+   {
+    "kind": "StockFact",
+    "id": "stock-mil01-i10919b00011-742-m-sellable-20261008",
+    "version": "v1"
+   },
+   {
+    "kind": "StockFact",
+    "id": "stock-mil02-i10919b00011-742-m-onhand-20261008",
+    "version": "v1"
+   },
+   {
+    "kind": "StockFact",
+    "id": "stock-mil02-i10919b00011-742-m-sellable-20261008",
+    "version": "v1"
+   },
+   {
+    "kind": "StockFact",
+    "id": "stock-mil01-i10919b00011-999-m-onhand-20261008",
+    "version": "v1"
+   },
+   {
+    "kind": "StockFact",
+    "id": "stock-mil01-i10919b00011-999-m-sellable-20261008",
+    "version": "v1"
+   },
+   {
+    "kind": "StockFact",
+    "id": "stock-mil02-i10919b00011-999-m-onhand-20261008",
+    "version": "v1"
+   },
+   {
+    "kind": "StockFact",
+    "id": "stock-mil02-i10919b00011-999-m-sellable-20261008",
+    "version": "v1"
+   },
+   {
+    "kind": "ForecastAdjustment",
+    "id": "fc-mil01-i10919b00011-742-20261010",
+    "version": "v1"
+   }
+  ],
+  "producer": "ag.investigator",
+  "producer_version": "1",
+  "case_id": "case-mil01-i10919b00011-20261008",
+  "steps": [
+   {
+    "tool": "get_case_evidence",
+    "arguments": {
+     "case_id": "case-mil01-i10919b00011-20261008"
+    },
+    "input_refs": [
+     {
+      "kind": "Case",
+      "id": "case-mil01-i10919b00011-20261008",
+      "version": "v1"
+     },
+     {
+      "kind": "Observation",
+      "id": "obs-20261009-1035-mil01-stockout",
+      "version": "v1"
+     },
+     {
+      "kind": "Observation",
+      "id": "obs-20261009-1035-mil01-unmet-demand",
+      "version": "v1"
+     },
+     {
+      "kind": "EntityLink",
+      "id": "link-20261009-1035-mil01-stockout",
+      "version": "v1"
+     },
+     {
+      "kind": "EntityLink",
+      "id": "link-20261009-1035-mil01-unmet-demand",
+      "version": "v1"
+     }
+    ],
+    "output_refs": [
+     {
+      "kind": "Case",
+      "id": "case-mil01-i10919b00011-20261008",
+      "version": "v1"
+     },
+     {
+      "kind": "Observation",
+      "id": "obs-20261009-1035-mil01-stockout",
+      "version": "v1"
+     },
+     {
+      "kind": "Observation",
+      "id": "obs-20261009-1035-mil01-unmet-demand",
+      "version": "v1"
+     },
+     {
+      "kind": "EntityLink",
+      "id": "link-20261009-1035-mil01-stockout",
+      "version": "v1"
+     },
+     {
+      "kind": "EntityLink",
+      "id": "link-20261009-1035-mil01-unmet-demand",
+      "version": "v1"
+     }
+    ],
+    "duration_ms": 6.9687399081885815,
+    "error": null
+   },
+   {
+    "tool": "get_available_stock",
+    "arguments": {
+     "locations": [
+      "MIL01",
+      "MIL02",
+      "NYC01"
+     ],
+     "size": "M",
+     "sku": "I10919B00011-742"
+    },
+    "input_refs": [
+     {
+      "kind": "Case",
+      "id": "case-mil01-i10919b00011-20261008",
+      "version": "v1"
+     },
+     {
+      "kind": "StockFact",
+      "id": "stock-mil01-i10919b00011-742-m-onhand-20261008",
+      "version": "v1"
+     },
+     {
+      "kind": "StockFact",
+      "id": "stock-mil01-i10919b00011-742-m-sellable-20261008",
+      "version": "v1"
+     },
+     {
+      "kind": "StockFact",
+      "id": "stock-mil02-i10919b00011-742-m-onhand-20261008",
+      "version": "v1"
+     },
+     {
+      "kind": "StockFact",
+      "id": "stock-mil02-i10919b00011-742-m-sellable-20261008",
+      "version": "v1"
+     }
+    ],
+    "output_refs": [
+     {
+      "kind": "Case",
+      "id": "case-mil01-i10919b00011-20261008",
+      "version": "v1"
+     },
+     {
+      "kind": "StockFact",
+      "id": "stock-mil01-i10919b00011-742-m-onhand-20261008",
+      "version": "v1"
+     },
+     {
+      "kind": "StockFact",
+      "id": "stock-mil01-i10919b00011-742-m-sellable-20261008",
+      "version": "v1"
+     },
+     {
+      "kind": "StockFact",
+      "id": "stock-mil02-i10919b00011-742-m-onhand-20261008",
+      "version": "v1"
+     },
+     {
+      "kind": "StockFact",
+      "id": "stock-mil02-i10919b00011-742-m-sellable-20261008",
+      "version": "v1"
+     }
+    ],
+    "duration_ms": 7.786945207044482,
+    "error": null
+   },
+   {
+    "tool": "get_available_stock",
+    "arguments": {
+     "locations": [
+      "MIL01",
+      "MIL02",
+      "NYC01"
+     ],
+     "size": "M",
+     "sku": "I10919B00011-999"
+    },
+    "input_refs": [
+     {
+      "kind": "Case",
+      "id": "case-mil01-i10919b00011-20261008",
+      "version": "v1"
+     },
+     {
+      "kind": "StockFact",
+      "id": "stock-mil01-i10919b00011-999-m-onhand-20261008",
+      "version": "v1"
+     },
+     {
+      "kind": "StockFact",
+      "id": "stock-mil01-i10919b00011-999-m-sellable-20261008",
+      "version": "v1"
+     },
+     {
+      "kind": "StockFact",
+      "id": "stock-mil02-i10919b00011-999-m-onhand-20261008",
+      "version": "v1"
+     },
+     {
+      "kind": "StockFact",
+      "id": "stock-mil02-i10919b00011-999-m-sellable-20261008",
+      "version": "v1"
+     }
+    ],
+    "output_refs": [
+     {
+      "kind": "Case",
+      "id": "case-mil01-i10919b00011-20261008",
+      "version": "v1"
+     },
+     {
+      "kind": "StockFact",
+      "id": "stock-mil01-i10919b00011-999-m-onhand-20261008",
+      "version": "v1"
+     },
+     {
+      "kind": "StockFact",
+      "id": "stock-mil01-i10919b00011-999-m-sellable-20261008",
+      "version": "v1"
+     },
+     {
+      "kind": "StockFact",
+      "id": "stock-mil02-i10919b00011-999-m-onhand-20261008",
+      "version": "v1"
+     },
+     {
+      "kind": "StockFact",
+      "id": "stock-mil02-i10919b00011-999-m-sellable-20261008",
+      "version": "v1"
+     }
+    ],
+    "duration_ms": 6.488231010735035,
+    "error": null
+   },
+   {
+    "tool": "get_lane_and_eta",
+    "arguments": {
+     "dest": "MIL01",
+     "origin": "MIL02",
+     "requested_at": "2026-10-09T08:35:52Z",
+     "required_by": "2026-10-16T08:35:52Z"
+    },
+    "input_refs": [
+     {
+      "kind": "Case",
+      "id": "case-mil01-i10919b00011-20261008",
+      "version": "v1"
+     }
+    ],
+    "output_refs": [],
+    "duration_ms": 0.1410539261996746,
+    "error": null
+   },
+   {
+    "tool": "evaluate_options",
+    "arguments": {
+     "candidate_donors": [
+      "MIL02",
+      "NYC01"
+     ],
+     "case_id": "case-mil01-i10919b00011-20261008"
+    },
+    "input_refs": [
+     {
+      "kind": "Case",
+      "id": "case-mil01-i10919b00011-20261008",
+      "version": "v1"
+     },
+     {
+      "kind": "ForecastAdjustment",
+      "id": "fc-mil01-i10919b00011-742-20261010",
+      "version": "v1"
+     },
+     {
+      "kind": "StockFact",
+      "id": "stock-mil01-i10919b00011-742-m-sellable-20261008",
+      "version": "v1"
+     },
+     {
+      "kind": "StockFact",
+      "id": "stock-mil02-i10919b00011-742-m-sellable-20261008",
+      "version": "v1"
+     }
+    ],
+    "output_refs": [
+     {
+      "kind": "ActionOption",
+      "id": "opt-case-mil01-i10919b00011-20261008-hold",
+      "version": "96a571e72b96f3aa"
+     },
+     {
+      "kind": "ActionOption",
+      "id": "opt-case-mil01-i10919b00011-20261008-verify_stock",
+      "version": "96a571e72b96f3aa"
+     },
+     {
+      "kind": "ActionOption",
+      "id": "opt-case-mil01-i10919b00011-20261008-ask_store",
+      "version": "96a571e72b96f3aa"
+     },
+     {
+      "kind": "ActionOption",
+      "id": "opt-case-mil01-i10919b00011-20261008-notify_owner",
+      "version": "96a571e72b96f3aa"
+     }
+    ],
+    "duration_ms": 16.27805014140904,
+    "error": null
+   },
+   {
+    "tool": "finish",
+    "arguments": {
+     "evidence_refs": [
+      "obs-20261009-1035-mil01-stockout",
+      "obs-20261009-1035-mil01-unmet-demand",
+      "stock-mil01-i10919b00011-742-m-onhand-20261008",
+      "stock-mil01-i10919b00011-999-m-onhand-20261008",
+      "stock-mil02-i10919b00011-742-m-onhand-20261008",
+      "stock-mil02-i10919b00011-999-m-onhand-20261008",
+      "opt-case-mil01-i10919b00011-20261008-notify_owner"
+     ],
+     "option_id": "opt-case-mil01-i10919b00011-20261008-notify_owner",
+     "rationale": "The deterministic engine validated the selected option; human approval is required.",
+     "status": "action_proposed"
+    },
+    "input_refs": [],
+    "output_refs": [],
+    "duration_ms": 0.08219410665333271,
+    "error": null
+   }
+  ],
+  "outcome": "action_proposed",
+  "fallback_used": false,
+  "mode": "fixture",
+  "tokens_in": 34923,
+  "tokens_out": 2876
+ }
+}

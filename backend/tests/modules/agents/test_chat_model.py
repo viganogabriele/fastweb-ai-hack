@@ -10,12 +10,12 @@ from openai import OpenAI
 from openai.types.chat import ChatCompletion
 from pydantic import BaseModel, SecretStr
 
-from tessera.core.cache import ReplayMiss
-from tessera.core.config import Settings
-from tessera.core.contracts import ArtifactRef
-from tessera.core.llm import CallBudget, LLMClient
-from tessera.modules.agents.chat_model import LLMChatModel, model_for_run
-from tessera.modules.agents.runtime import (
+from tesseract.core.cache import ReplayMiss
+from tesseract.core.config import Settings
+from tesseract.core.contracts import ArtifactRef
+from tesseract.core.llm import CallBudget, LLMClient
+from tesseract.modules.agents.chat_model import LLMChatModel, model_for_run
+from tesseract.modules.agents.runtime import (
     AgentLoop,
     ModelError,
     Tool,

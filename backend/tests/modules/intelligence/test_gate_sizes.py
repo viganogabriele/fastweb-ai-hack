@@ -17,8 +17,8 @@ from zoneinfo import ZoneInfo
 
 import pytest
 
-from tessera.core.config import REPO_ROOT
-from tessera.core.contracts import (
+from tesseract.core.config import REPO_ROOT
+from tesseract.core.contracts import (
     AdjustmentComponent,
     ArtifactRef,
     Case,
@@ -32,18 +32,18 @@ from tessera.core.contracts import (
     SourceRef,
     StockFact,
 )
-from tessera.core.repo import ErpRecord
-from tessera.modules.actions import options
-from tessera.modules.actions.options import (
+from tesseract.core.repo import ErpRecord
+from tesseract.modules.actions import options
+from tesseract.modules.actions.options import (
     OptionInputs,
     Position,
     Route,
     SizeCurve,
     evaluate_options,
 )
-from tessera.modules.intelligence import baseline, overlay
-from tessera.modules.intelligence.disaggregation import disaggregate
-from tessera.modules.sources.systems_client import Lane, LaneEta, Unknown, eta
+from tesseract.modules.intelligence import baseline, overlay
+from tesseract.modules.intelligence.disaggregation import disaggregate
+from tesseract.modules.sources.systems_client import Lane, LaneEta, Unknown, eta
 
 ROME = ZoneInfo("Europe/Rome")
 AS_OF = datetime(2026, 10, 14, 18, tzinfo=UTC)

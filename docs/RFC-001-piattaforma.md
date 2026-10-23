@@ -1,10 +1,10 @@
-# RFC-001: Tessera, piattaforma modulare dai segnali dei negozi alle decisioni
+# RFC-001: Tesseract, piattaforma modulare dai segnali dei negozi alle decisioni
 
 | | |
 |---|---|
 | **Stato** | Draft revisionato dopo audit documentale; requisiti proposti, non funzionalità implementate |
 | **Data** | 22 ottobre 2026 |
-| **Nome** | "Tessera" è un nome provvisorio (moduli come tessere di un mosaico). Pacchetto Python `tessera` |
+| **Nome** | "Tesseract" è un nome provvisorio (moduli come tessere di un mosaico). Pacchetto Python `tesseract` |
 | **Sostituisce** | `project-design.md` §3–§8 per architettura, contratti, matematica e piano; §9 per il copione. Le formule operative sono quelle di questo RFC, corrette secondo `research-methods.md`; il vecchio §5 è solo storico |
 | **Integra** | `proposta-rivista.md` (feedback qualitativi, raccolta guidata), `research-recommendation.md` (evidenze, astensione, agente investigatore), `research-fastweb-assets.md` (modelli) |
 | **Fonti** | `findings.md`, trascrizioni in `sources/transcripts/` (Q&A con il referente, `needfinding.md`, `Idea_Gabri.md`), `api-guide.pdf`, `../generated/README.md` |
@@ -243,7 +243,7 @@ PLT-01 ha creato lo scaffold (pacchetti vuoti per layer, app Vite, `Makefile`, C
 ```
 backend/
   pyproject.toml
-  tessera/
+  tesseract/
     core/           config.py clock.py contracts/ db.py repo.py
                     registry.py orchestrator.py llm.py cache.py prompts.py
     modules/
@@ -255,13 +255,13 @@ backend/
       actions/      options.py dispatch.py clarify.py
       outputs/      reports.py
     api/            main.py  routers/{modules,runs,documents,cases,forecast,options,reports,clarifications}.py
-    cli.py          # `tessera run|reset|export|smoke`
+    cli.py          # `tesseract run|reset|export|smoke`
   prompts/          extract_observations.v1.md  link_product.v1.md  investigator.v1.md ...
   tests/            unit/  contract/  golden/
 web/                # Vite app; src/api/schema.d.ts generato
 eval/               # pacchetto separato: UNICO codice che legge generated/ground_truth
 config/             pipeline.yaml domain.yaml eval_split.yaml demo.yaml
-data/               # gitignored: tessera.db, cache/, audio/  (eccezione: data/fixtures/ versionato)
+data/               # gitignored: tesseract.db, cache/, audio/  (eccezione: data/fixtures/ versionato)
 scripts/            smoke_fastweb.py  make_voice_notes.sh  start_mocks.sh
 AGENTS.md           # regole per agenti di coding (anche come CLAUDE.md)
 Makefile
@@ -385,7 +385,7 @@ MVP: coda/dettaglio, pannello fonti, breve report per owner e lista dei moduli. 
 | Note vocali | `/v1/audio/transcriptions` | `openai/whisper-large-v3-turbo` | `verbose_json` documentato; presenza/precisione dei segmenti da verificare. `language` solo se nota per la registrazione, non dedotta rigidamente dal negozio (OQ-3) |
 | Foto allegate (opzionale) | chat con `image_url` base64 | Come sopra | Solo immagini dev o fixture separate; immagini hold-out mai usate per sviluppare la vision (Could) |
 
-#### 4.7.2 Client `tessera.core.llm`
+#### 4.7.2 Client `tesseract.core.llm`
 
 - `chat(messages, tools=None, model=None)`, `extract(schema: type[BaseModel], messages)`, `embed(texts, dimensions=512)`, `transcribe(path, language)`.
 - **Output strutturato.** `extract()` espone lo schema Pydantic come unico tool (`submit_<schema>`), con `$defs` espansi inline (Gemma ignora i `$ref` annidati) e `tool_choice="required"` (con `auto` i Qwen a volte rispondono in testo; PLT-07), e valida gli argomenti con Pydantic. Se mancano o non sono validi, riprova una volta passando l'errore. Se fallisce ancora, solleva `ExtractionFailed`: il modulo registra l'astensione e non inventa. La guida documenta solo `tool_choice=auto`; PLT-07 ha verificato `required` su tutti i modelli chat, la forzatura per nome non è affidabile e il JSON Schema strict non è garantito. Il client deve tollerare risposta senza tool: retry entro budget, poi astensione. Alternative JSON attivate solo dopo smoke test e sempre validate.

@@ -11,8 +11,8 @@ from types import SimpleNamespace
 
 import pytest
 
-from tessera.core.config import REPO_ROOT
-from tessera.core.contracts import (
+from tesseract.core.config import REPO_ROOT
+from tesseract.core.contracts import (
     ArtifactRef,
     Case,
     EntityLink,
@@ -25,13 +25,13 @@ from tessera.core.contracts import (
     Segment,
     SourceDocument,
 )
-from tessera.core.db import connect
-from tessera.core.fixtures import read_fixtures
-from tessera.core.registry import Registry
-from tessera.core.repo import put_erp
-from tessera.core.run_repo import repo_session
-from tessera.modules.integration import cases, dedup
-from tessera.modules.sources import erp
+from tesseract.core.db import connect
+from tesseract.core.fixtures import read_fixtures
+from tesseract.core.registry import Registry
+from tesseract.core.repo import put_erp
+from tesseract.core.run_repo import repo_session
+from tesseract.modules.integration import cases, dedup
+from tesseract.modules.sources import erp
 
 T1 = datetime(2026, 10, 2, 18, tzinfo=UTC)
 T2 = T1 + timedelta(hours=1)
@@ -314,7 +314,7 @@ def test_dev_store_smoke_matches_the_data01b_case_fixtures(tmp_path):
 
 # INT-04: all inputs below are synthetic, with explicit event and knowledge times.
 def stock_fact(**changes):
-    from tessera.core.contracts import SourceRef, StockFact
+    from tesseract.core.contracts import SourceRef, StockFact
 
     source = SourceRef(uri="test://stock", content_hash="sha256:synthetic")
     return StockFact.model_validate(
@@ -405,7 +405,7 @@ def test_silence_and_expiry_do_not_close_a_case():
 
 
 def calendar(target_case_id, **changes):
-    from tessera.modules.integration.reconciliation import DecisionCalendar
+    from tesseract.modules.integration.reconciliation import DecisionCalendar
 
     return DecisionCalendar.model_validate(
         dict(
@@ -472,8 +472,8 @@ def test_conflicting_calendars_abstain_and_aware_ordered_source_backed_slots_req
 
 
 def erp_stock_row(day, **changes):
-    from tessera.core.contracts import SourceRef
-    from tessera.core.repo import ErpRecord
+    from tesseract.core.contracts import SourceRef
+    from tesseract.core.repo import ErpRecord
 
     return ErpRecord(
         table="stock",
@@ -508,7 +508,7 @@ def test_module_wires_structured_stock_and_calendar_and_repeats_idempotently(tmp
     cal = calendar(base.id, available_at=T2)
     stock = stock_fact()
     engine = connect(f"sqlite:///{tmp_path / 'reconcile.db'}")
-    from tessera.core.repo import ErpRecord
+    from tesseract.core.repo import ErpRecord
 
     put_erp(
         engine,
@@ -581,7 +581,7 @@ def test_module_persists_erp_conflict_refs_with_knowledge_time(tmp_path):
     start = T1.replace(hour=22) - timedelta(days=1)
     a = fact("a", kind="stockout", period=(start, start + timedelta(days=1, seconds=-1)))
     stock = erp_stock_row(T1.date())
-    from tessera.core.repo import ErpRecord
+    from tesseract.core.repo import ErpRecord
 
     engine = connect(f"sqlite:///{tmp_path / 'erp-conflict.db'}")
     put_erp(

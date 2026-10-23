@@ -1,12 +1,28 @@
 """EVL-04 on synthetic sources and events only: CI never opens the real answer key."""
 
+import json
 import tempfile
 import unittest
-from datetime import UTC, date, datetime
+from dataclasses import replace
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
+from unittest.mock import patch
+from zoneinfo import ZoneInfo
 
 from eval.baselines import Alert, certified, sales_alerts, stock_alerts
-from eval.lead_time import calibrate, case_alerts, email_group, event_units, matches, noise, score
+from eval.lead_time import (
+    breadth,
+    calibrate,
+    case_alerts,
+    chance_check,
+    email_group,
+    event_units,
+    lead_time_report,
+    matches,
+    noise,
+    placebo_units,
+    score,
+)
 
 ERP = "generated/sources/erp"
 SKU = "STYLEA-999"
@@ -231,6 +247,171 @@ class LeadTimeTests(unittest.TestCase):
             result["cases_citing_group"], {"duplicate": {"matched": 1}, "noise": {"matched": 1}}
         )
         self.assertEqual(result["copies_folded_cases"], 1)
+
+    def test_placebo_windows_avoid_the_event_and_expose_chance_matches(self):
+        unit = self.unit(start="2026-09-20", end="2026-09-25")
+        fakes = placebo_units([unit], date(2026, 9, 1), date(2026, 10, 21), self.root)
+        self.assertEqual(len(fakes), 3)  # -21 days would start before the period
+        self.assertTrue(all(f.t_end < unit.start or f.start > unit.t_end for f in fakes))
+        always = [
+            Alert("pipeline", "MIL01", datetime(2026, 9, 1, 12, tzinfo=UTC) + timedelta(days=d),
+                  "sku", frozenset({SKU}))
+            for d in range(52)
+        ]  # fmt: skip
+        result = chance_check({"pipeline": always}, [unit], fakes)
+        method = result["specific"]["pipeline"]
+        self.assertEqual(method["real"], [1, 1])
+        self.assertEqual(method["placebo"], [3, 3])
+        self.assertEqual(method["paired"]["real"], [1, 1])
+        self.assertEqual(method["paired"]["placebo_rate"], 1.0)
+
+    def test_breadth_boundary_and_store_scope(self):
+        unit = self.unit()
+        self.assertEqual(breadth(replace(unit, skus=frozenset(map(str, range(10))))), "specific")
+        self.assertEqual(breadth(replace(unit, skus=frozenset(map(str, range(11))))), "broad")
+        self.assertEqual(breadth(replace(unit, store_wide=True)), "store_wide")
+
+    def test_chance_pairs_units_and_weights_each_unit_equally(self):
+        units = [self.unit(id=f"E{i}") for i in range(3)]
+        units[1] = replace(units[1], skus=frozenset({"NO-HIT"}))
+        # E0 has three successful controls; E1 has one failed control; E2 has none.
+        controls = [
+            replace(
+                units[0],
+                start=units[0].start + timedelta(days=d),
+                t_end=units[0].t_end + timedelta(days=d),
+            )
+            for d in (-21, -14, 14)
+        ]
+        controls.append(replace(controls[0], event_id="E1", skus=frozenset({"NO-HIT"})))
+        alerts = [Alert("pipeline", "MIL01", u.start, "sku", u.skus) for u in controls[:3]]
+        alerts.append(Alert("pipeline", "MIL01", units[0].start, "sku", frozenset({SKU})))
+        result = chance_check({"pipeline": alerts}, units, controls)["specific"]["pipeline"]
+        self.assertEqual(result["real"], [2, 3])
+        self.assertEqual(result["placebo"], [3, 4])
+        self.assertEqual(result["paired"]["real"], [1, 2])
+        self.assertEqual(result["paired"]["placebo_rate"], 0.5)  # pooled would be 0.75
+        self.assertEqual(result["excluded_no_placebo"], [{"event_id": "E2", "store_id": "MIL01"}])
+        self.assertEqual([r["placebo"] for r in result["paired"]["units"]], [[3, 3], [0, 1]])
+
+    def test_no_candidate_windows_and_empty_groups_are_explicit(self):
+        # Too short a scoring period, and a long event overlapping every proposed shift.
+        for unit, start, end in (
+            (self.unit(), date(2026, 10, 1), date(2026, 10, 12)),
+            (self.unit(start="2026-09-01", end="2026-10-20"), date(2026, 8, 1), date(2026, 12, 1)),
+        ):
+            with self.subTest(start=start, end=end):
+                controls = placebo_units([unit], start, end, self.root)
+                self.assertEqual(controls, [])
+                result = chance_check({"stock": []}, [unit], controls)["specific"]["stock"]
+                self.assertEqual(
+                    result["paired"], {"real": [0, 0], "placebo_rate": None, "units": []}
+                )
+                self.assertEqual(len(result["excluded_no_placebo"]), 1)
+        empty = chance_check({"sales": []}, [], [])
+        for group in ("store_wide", "broad", "specific"):
+            self.assertIsNone(empty[group]["sales"]["paired"]["placebo_rate"])
+            self.assertEqual(empty[group]["sales"]["excluded_no_placebo"], [])
+
+    def test_controls_exclude_other_same_store_events_even_for_different_products(self):
+        unit = self.unit(start="2026-09-20", end="2026-09-25")
+        other = self.unit(
+            id="E2", start="2026-10-04", end="2026-10-10", filter={"styles": ["BETA"]}
+        )
+        start, end = date(2026, 9, 1), date(2026, 10, 21)
+        own = [u for u in placebo_units([unit, other], start, end, self.root) if u.event_id == "E1"]
+        self.assertEqual(len(own), 1)  # +14 and +21 touch E2, -21 is outside
+        self.assertLess(own[0].t_end, unit.start)
+        # Another store does not contaminate this store's control windows.
+        elsewhere = replace(other, store_id="TYO01")
+        own = [
+            u for u in placebo_units([unit, elsewhere], start, end, self.root) if u.event_id == "E1"
+        ]
+        self.assertEqual(len(own), 3)
+
+    def test_control_cannot_use_extra_erp_grace_day(self):
+        unit = self.unit(start="2026-09-01", end="2026-09-05")
+        # The +14 control ends on Sep 20; the requested period ends on Sep 19.
+        controls = placebo_units([unit], date(2026, 9, 1), date(2026, 9, 19), self.root)
+        self.assertEqual(controls, [])
+
+    def test_report_controls_exclude_unscored_events_observed_in_period(self):
+        # Aug 31 is not a scored event, but its ERP observation window lasts through
+        # Sep 1. E1's -14 control (Sep 1-4) must not count an alert in that window.
+        oracle = self.root / "generated/ground_truth/scenario"
+        oracle.mkdir(parents=True)
+        current = event(start="2026-09-15", end="2026-09-17")
+        previous = event(
+            id="PREVIOUS", start="2026-08-31", end="2026-08-31", filter={"styles": ["BETA"]}
+        )
+        alert = Alert(
+            "stock", "MIL01", datetime(2026, 9, 1, 18, tzinfo=UTC), "sku", frozenset({SKU})
+        )
+        for blocker, end, controls, hits in (
+            (None, date(2026, 10, 21), 3, 1),
+            (previous, date(2026, 10, 21), 2, 0),
+            (previous | {"stores": ["ALL"]}, date(2026, 10, 21), 2, 0),
+            (previous | {"stores": ["TYO01"]}, date(2026, 10, 21), 3, 1),
+            (
+                previous | {"end": "2026-08-30", "start": "2026-08-30"},
+                date(2026, 10, 21),
+                3,
+                1,
+            ),
+            (previous, date(2026, 9, 18), 0, 0),
+        ):
+            with self.subTest(blocker=blocker, end=end):
+                (oracle / "events.json").write_text(
+                    json.dumps({"events": [current, blocker] if blocker else [current]})
+                )
+                with (
+                    patch(
+                        "eval.lead_time.split_stores", return_value={"dev": frozenset({"MIL01"})}
+                    ),
+                    patch("eval.lead_time.stock_alerts", return_value=[alert]),
+                ):
+                    report = lead_time_report(self.root, None, "dev", date(2026, 9, 1), end)
+                self.assertEqual(report["summary"]["n_units"], 1)
+                self.assertEqual(report["excluded_events"], ["PREVIOUS"] if blocker else [])
+                result = report["chance_check"]["specific"]["stock"]
+                self.assertEqual(result["real"], [0, 1])
+                self.assertEqual(result["placebo"], [hits, controls])
+                if controls:
+                    self.assertEqual(result["paired"]["units"][0]["placebo"], [hits, controls])
+                else:
+                    self.assertEqual(
+                        result["paired"], {"real": [0, 0], "placebo_rate": None, "units": []}
+                    )
+                    self.assertEqual(
+                        result["excluded_no_placebo"], [{"event_id": "E1", "store_id": "MIL01"}]
+                    )
+
+    def test_shift_preserves_local_midnight_and_end_across_dst(self):
+        unit = self.unit(start="2026-10-10", end="2026-10-12")
+        controls = placebo_units([unit], date(2026, 9, 1), date(2026, 11, 10), self.root)
+        moved = next(u for u in controls if u.start.astimezone(ZoneInfo("Europe/Rome")).day == 31)
+        self.assertEqual(moved.start, datetime(2026, 10, 30, 23, tzinfo=UTC))
+        self.assertEqual(moved.t_end, datetime(2026, 11, 3, 22, 59, 59, tzinfo=UTC))
+        self.assertEqual(moved.skus, unit.skus)
+        self.assertEqual(moved.sizes, unit.sizes)
+        self.assertEqual(moved.direction, unit.direction)
+
+    def test_report_chance_caps_real_windows_without_changing_main_score(self):
+        # Synthetic oracle only: no real answer keys are opened by this test.
+        oracle = self.root / "generated/ground_truth/scenario"
+        oracle.mkdir(parents=True)
+        (oracle / "events.json").write_text(
+            json.dumps({"events": [event(start="2026-10-21", end="2026-10-21")]})
+        )
+        self.write_stock("2026-10-20", [(SKU, "1", 2)])
+        self.write_stock("2026-10-21", [(SKU, "1", 0)])
+        with patch("eval.lead_time.split_stores", return_value={"dev": frozenset({"MIL01"})}):
+            report = lead_time_report(
+                self.root, None, "dev", date(2026, 10, 20), date(2026, 10, 21)
+            )
+        self.assertEqual(report["summary"]["stock"]["units_detected"], 1)  # next evening
+        self.assertEqual(report["chance_check"]["specific"]["stock"]["real"], [0, 1])
+        self.assertEqual(report["units"][0]["breadth"], "specific")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tesseract · 2 · The process</title>
+<link rel="stylesheet" href="style.css">
+<script src="page.js" defer></script>
+</head>
+<body data-doc="2 / 4 · The process">
+
+<section class="page cover">
+  <div>
+    <div class="rule"></div>
+    <div class="brand">Tesseract</div>
+    <div class="title">From one sentence in an email to one decision on a desk.</div>
+    <div class="sub">Pitch pack 2 of 4: <b>the process</b>. The seven stations a store note passes through, which pieces matter most, and how to talk about each one.</div>
+  </div>
+  <div class="meta">
+    <div><b>Read time</b>12 minutes</div>
+    <div><b>Use it to</b>explain the product without naming a single technology</div>
+    <div><b>Data</b>Synthetic world, Valentino is demo branding</div>
+  </div>
+</section>
+
+<!-- Overview -->
+<section class="page">
+  <div class="body">
+    <div class="kicker">The process on one page</div>
+    <h1>Seven stations, and the evidence travels with every step</h1>
+    <div class="flow" style="grid-template-columns:repeat(7,1fr);margin-top:4mm">
+      <div class="step"><div class="n">1</div><h3>Collect</h3><p>Emails, voice notes, reports, sales, stock, weather and events, all with a timestamp</p></div>
+      <div class="step"><div class="n">2</div><h3>Read</h3><p>Split into single facts, each with its exact quote</p></div>
+      <div class="step"><div class="n">3</div><h3>Link</h3><p>“The black one” → product, size, store, date. If unsure, ask</p></div>
+      <div class="step"><div class="n">4</div><h3>Clean</h3><p>Copies, forwards and corrections. Ten copies are one confirmation</p></div>
+      <div class="step"><div class="n">5</div><h3>Case</h3><p>Group facts, assign an owner, priority and deadline</p></div>
+      <div class="step"><div class="n">6</div><h3>Investigate</h3><p>The agent picks the next check: stock, route, or a question to the store</p></div>
+      <div class="step"><div class="n">7</div><h3>Decide</h3><p>Feasible options with checks. A person approves; reports go to each office</p></div>
+    </div>
+    <div class="grid g3" style="margin-top:7mm">
+      <div class="card raised">
+        <div class="label">The loop</div>
+        <p class="dim" style="margin:0">When the agent asks a store “which sweatshirt, the hoodie or the crewneck?”, the reply comes back in as a new source and the case updates.</p>
+      </div>
+      <div class="card raised">
+        <div class="label">The clock</div>
+        <p class="dim" style="margin:0">Every fact records <b>when we could have known it</b>. Replaying “Thursday evening” uses only what existed on Thursday evening: no hindsight.</p>
+      </div>
+      <div class="card raised">
+        <div class="label">The thread</div>
+        <p class="dim" style="margin:0">From the case card you can click back to the exact sentence the store wrote. This is what makes the output trustworthy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stations 1-2 -->
+<section class="page">
+  <div class="body">
+    <div class="kicker">Stations 1 and 2</div>
+    <h1>Collect what exists, read it into facts</h1>
+    <div class="grid g2">
+      <div class="card">
+        <div class="label">1 · Collect</div>
+        <p><b>What happens.</b> <span class="dim">We take the sources as they are: the stores’ closing emails (2,056 in the test world, in 10+ languages), optional guided voice notes, conflicting reports from controlling and regions, the ERP (catalogue, sales, stock, forecast) and outside context such as weather, holidays, events and tourism.</span></p>
+        <p><b>Why the business cares.</b> <span class="dim">No new system for the stores. They keep writing the email they already write.</span></p>
+        <p><b>Guard.</b> <span class="dim">Each source gets a “known since” time. Sales are certified the next day, and a report counts from the day it was issued, not the day its period ended.</span></p>
+        <p class="note-line" style="margin:0">“We read what the stores already write.”</p>
+      </div>
+      <div class="card">
+        <div class="label">2 · Read</div>
+        <p><b>What happens.</b> <span class="dim">One email often holds several facts of different kinds: a stockout, a customer request, a fit complaint, a broken counter. The AI splits them and tags each one, and every fact must come with the <b>exact sentence</b> that supports it.</span></p>
+        <p><b>Why the business cares.</b> <span class="dim">Any claim can be checked in one click. Vague stays vague: “lots of customers” is never turned into “7”.</span></p>
+        <p><b>Guard.</b> <span class="dim">Code checks that the quote really appears, word for word. If it doesn’t, the fact is rejected and logged, never invented.</span></p>
+        <p class="note-line" style="margin:0">“No quote, no fact.”</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stations 3-4 -->
+<section class="page">
+  <div class="body">
+    <div class="kicker">Stations 3 and 4</div>
+    <h1>Know what they mean, and don’t count the same thing twice</h1>
+    <div class="grid g2">
+      <div class="card">
+        <div class="label">3 · Link</div>
+        <p><b>What happens.</b> <span class="dim">Store staff never write product codes. They write “la Aurea nera”, “粉紅 Aria” or “the long black one”. We shortlist plausible products (what the store carries first, then the whole catalogue) and the AI chooses among them. <b>If no candidate is clear, it abstains</b> and the case goes to “verify”.</span></p>
+        <p><b>Why the business cares.</b> <span class="dim">It is the hardest and most valuable step. A wrong confident link moves the wrong stock.</span></p>
+        <p><b>Proof so far.</b> <span class="dim">On the dev sample: 43 links accepted, <b class="good">0 wrong</b>; 21% abstained instead of guessing.</span></p>
+        <p class="note-line" style="margin:0">“When it isn’t sure, it asks.”</p>
+      </div>
+      <div class="card">
+        <div class="label">4 · Clean</div>
+        <p><b>What happens.</b> <span class="dim">The same mail is sent twice, forwarded to a regional manager or corrected the next morning (“38k, not 83k”). Five staff may describe the same customer. Tesseract keeps every document but counts <b>origins</b>: copies merge, and a correction replaces the old fact only from its own timestamp.</span></p>
+        <p><b>Why the business cares.</b> <span class="dim">Rumours don’t snowball into false urgency, and the history is never rewritten.</span></p>
+        <p><b>Guard.</b> <span class="dim">Uncertain overlaps stay separate and their quantities are not added. Three reports ≠ three customers.</span></p>
+        <p class="note-line" style="margin:0">“Repeating a rumour doesn’t make it truer.”</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Station 5 -->
+<section class="page">
+  <div class="body">
+    <div class="kicker">Station 5</div>
+    <h1>Cases: one queue, each item with an owner and a deadline</h1>
+    <div class="grid g-2-1">
+      <div class="card">
+        <p><b>What happens.</b> <span class="dim">Facts about the same store, product and issue become one <b>case</b>. Each case shows what changed, the evidence for and <b>against</b>, how many independent origins support it, what is still unknown, who owns it and by when a decision is needed.</span></p>
+        <p><b>Context, not trigger.</b> <span class="dim">Weather or an event can make a case more urgent, but it never creates demand on its own. Scaffolding in front of the store produces a retail-ops card and the forecast is <b>frozen</b>, not cut: low sales are not low demand.</span></p>
+        <p><b>Silence is not a resolution.</b> <span class="dim">If a store stops writing, the case doesn’t close. An old stock figure doesn’t cancel a new note.</span></p>
+        <p class="note-line" style="margin:0">“Same sales, different reasons, different decisions.”</p>
+      </div>
+      <div class="card raised">
+        <div class="label">Who receives what</div>
+        <table>
+          <tr><td class="k">Unmet demand</td><td class="dim">Allocation</td></tr>
+          <tr><td class="k">Demand shift</td><td class="dim">Merchandising</td></tr>
+          <tr><td class="k">Stock mismatch</td><td class="dim">Retail ops</td></tr>
+          <tr><td class="k">Store disruption</td><td class="dim">Retail ops</td></tr>
+          <tr><td class="k">Fit, fabric, defect</td><td class="dim">Product / quality</td></tr>
+          <tr><td class="k">Customer profile</td><td class="dim">Marketing</td></tr>
+        </table>
+        <p class="small muted" style="margin-top:2mm;margin-bottom:0">Owners are a configuration file: another business can remap them without new code.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Station 6 -->
+<section class="page">
+  <div class="body">
+    <div class="kicker">Station 6</div>
+    <h1>The investigator does the legwork, and stops at the button</h1>
+    <div class="grid g2">
+      <div class="card">
+        <p><b>What happens.</b> <span class="dim">For a case, an AI agent decides what to check next, as an analyst would at 9 am: read the evidence, look up stock across nearby stores and the warehouse, check the delivery route, score the options, or <b>draft a question to the store</b> in its own language. It works within a fixed budget of steps.</span></p>
+        <p><b>What it cannot do.</b> <span class="dim">Approve, book, change a number, or override a failed check. Its tools are read-only. Text inside emails is treated as data, never as instructions.</span></p>
+        <p class="note-line" style="margin:0">“The agent investigates. It can’t press the button.”</p>
+      </div>
+      <div class="stack">
+        <div class="card raised">
+          <div class="label">Recorded path A · cardigan M, Milan</div>
+          <p class="dim" style="margin:0">evidence → size M stock, both colours, in 3 stores → route from the second Milan store → score options → <span class="pill a">notify owner</span></p>
+        </div>
+        <div class="card raised">
+          <div class="label">Recorded path B · “a sweatshirt”, New York</div>
+          <p class="dim" style="margin:0">evidence → ambiguous product (hoodie or crewneck?) → draft a clarification in English → <span class="pill w">verify</span></p>
+        </div>
+        <div class="card accent">
+          <p style="margin:0"><b>Why it matters:</b> <span class="dim">different evidence led to different steps, so the agent is actually choosing what to do. A fixed script would take the same path every time.</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="card push" style="margin-top:5mm">
+      <p style="margin:0"><b>And the forecast?</b> <span class="dim">The brand’s forecast stays the baseline, untouched. When the evidence is strong enough, Tesseract shows low, central and high scenarios beside it, each with its assumption and expiry. Otherwise it gives the reason it abstained.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- Station 7 -->
+<section class="page">
+  <div class="body">
+    <div class="kicker">Station 7</div>
+    <h1>Options, not orders</h1>
+    <div class="grid g-1-2">
+      <div class="card">
+        <div class="label">The menu</div>
+        <ul class="clean">
+          <li><span class="pill">hold</span> always available</li>
+          <li><span class="pill">verify stock</span> always available</li>
+          <li><span class="pill">ask the store</span></li>
+          <li><span class="pill">replenish from warehouse</span></li>
+          <li><span class="pill">transfer between stores</span></li>
+          <li><span class="pill">notify the owner</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="label">Every move must pass every check</div>
+        <ul>
+          <li>The donor store won’t run short itself, and keeps its safety stock</li>
+          <li>The units are sellable, not reserved or on quality hold</li>
+          <li>Stock arrives <b>before</b> the store runs out, not after</li>
+          <li>The route exists and doesn’t cross a customs border it can’t</li>
+          <li>The <b>size</b> is right: a colour total doesn’t prove size M is there</li>
+        </ul>
+        <p class="dim" style="margin:0">If any required check is unknown, the move is blocked and “verify” is offered instead.</p>
+      </div>
+    </div>
+    <div class="grid g2" style="margin-top:5mm">
+      <div class="card raised">
+        <div class="label">Approval</div>
+        <p class="dim" style="margin:0">A person approves or rejects. Approval creates a <b>draft</b> tied to the exact data it was based on; if the data changed, the old proposal is refused. Clicking twice can’t send it twice.</p>
+      </div>
+      <div class="card raised">
+        <div class="label">Reports per office</div>
+        <p class="dim" style="margin:0">The same facts feed a short brief for allocation, retail ops, product and marketing. Every statement links back to its source.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Top 5 -->
+<section class="page">
+  <div class="body">
+    <div class="kicker">If you only highlight five pieces</div>
+    <h1>The pieces that carry the pitch</h1>
+    <table>
+      <tr><th style="width:5%">#</th><th style="width:27%">Piece</th><th>Why it matters on stage</th></tr>
+      <tr><td class="accent num">1</td><td class="k">Evidence memory</td><td class="dim">Every claim keeps its sentence. That makes it auditable and is the answer to “AI makes things up”.</td></tr>
+      <tr><td class="accent num">2</td><td class="k">Linking with abstention</td><td class="dim">Turning “the black one” into the right product is the hard part. Saying “not sure, let me ask” is the credible part.</td></tr>
+      <tr><td class="accent num">3</td><td class="k">Noise control</td><td class="dim">Copies aren’t confirmations, corrections win, weather is context. This is what keeps us from raising false alarms.</td></tr>
+      <tr><td class="accent num">4</td><td class="k">Cases with owners</td><td class="dim">The output is a short, ranked queue for the right desk, not another dashboard to read.</td></tr>
+      <tr><td class="accent num">5</td><td class="k">Investigator + checked options</td><td class="dim">The agentic part: it chooses its own checks and proposes only moves it can verify. A person decides.</td></tr>
+    </table>
+    <div class="card raised push" style="margin-top:5mm">
+      <div class="label">Mention briefly, don’t dwell</div>
+      <p class="dim" style="margin:0">Modules you can switch on and off · offline replay for a demo that can’t fail · voice notes · a read-only connection other agents can query (MCP) · runs on Fastweb’s AI models. These are true and useful, but they are supporting details for this audience.</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

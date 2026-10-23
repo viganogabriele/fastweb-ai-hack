@@ -14,13 +14,13 @@ import tempfile
 from pathlib import Path
 from types import SimpleNamespace
 
-from tessera.core.config import REPO_ROOT
-from tessera.core.contracts import ProductInsight, Report, RunSpec
-from tessera.core.db import connect
-from tessera.core.fixtures import read_fixtures
-from tessera.core.repo import Repo, create_run
-from tessera.modules.intelligence import insights
-from tessera.modules.sources import erp
+from tesseract.core.config import REPO_ROOT
+from tesseract.core.contracts import ProductInsight, Report, RunSpec
+from tesseract.core.db import connect
+from tesseract.core.fixtures import read_fixtures
+from tesseract.core.repo import Repo, create_run
+from tesseract.modules.intelligence import insights
+from tesseract.modules.sources import erp
 
 FIXTURES = REPO_ROOT / "data" / "fixtures"
 TARGET = FIXTURES / "insights" / "insights.json"

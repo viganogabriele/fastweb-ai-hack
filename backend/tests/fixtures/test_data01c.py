@@ -11,7 +11,7 @@ from pathlib import Path
 import pytest
 import yaml
 
-from tessera.core.contracts import (
+from tesseract.core.contracts import (
     ActionOption,
     AgentTrace,
     ArtifactRef,
@@ -22,8 +22,8 @@ from tessera.core.contracts import (
     Observation,
     StockFact,
 )
-from tessera.core.contracts.common import SourceRecord
-from tessera.core.fixtures import FIXTURE_RUN_ID, FIXTURE_SCENARIO_ID, read_fixtures
+from tesseract.core.contracts.common import SourceRecord
+from tesseract.core.fixtures import FIXTURE_RUN_ID, FIXTURE_SCENARIO_ID, read_fixtures
 
 ROOT = Path(__file__).resolve().parents[3]
 FIXTURES = ROOT / "data" / "fixtures"

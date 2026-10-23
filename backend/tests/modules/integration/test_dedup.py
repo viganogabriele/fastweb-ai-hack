@@ -5,8 +5,8 @@ from types import SimpleNamespace
 
 import pytest
 
-from tessera.core.config import REPO_ROOT
-from tessera.core.contracts import (
+from tesseract.core.config import REPO_ROOT
+from tesseract.core.contracts import (
     ArtifactRef,
     EntityLink,
     Evidence,
@@ -17,11 +17,11 @@ from tessera.core.contracts import (
     Segment,
     SourceDocument,
 )
-from tessera.core.db import connect
-from tessera.core.fixtures import read_fixtures
-from tessera.core.registry import Registry
-from tessera.core.run_repo import repo_session
-from tessera.modules.integration import dedup
+from tesseract.core.db import connect
+from tesseract.core.fixtures import read_fixtures
+from tesseract.core.registry import Registry
+from tesseract.core.run_repo import repo_session
+from tesseract.modules.integration import dedup
 
 T1 = datetime(2026, 10, 2, 18, tzinfo=UTC)
 T2 = T1 + timedelta(hours=1)

@@ -16,8 +16,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from tessera.core.contracts import Evidence, Observation, Quantity, Segment, SourceDocument
-from tessera.modules.ingestion.email_parser import ParsedEmail, parse_eml
+from tesseract.core.contracts import Evidence, Observation, Quantity, Segment, SourceDocument
+from tesseract.modules.ingestion.email_parser import ParsedEmail, parse_eml
 
 ROOT = Path(__file__).resolve().parents[2]
 EMAILS = ROOT / "generated" / "sources" / "store_emails"

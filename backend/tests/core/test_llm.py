@@ -9,9 +9,9 @@ import pytest
 from openai import OpenAI
 from pydantic import BaseModel, SecretStr
 
-from tessera.core.cache import CacheCorrupt, ReplayMiss, ResponseCache, cache_key
-from tessera.core.config import Settings
-from tessera.core.llm import (
+from tesseract.core.cache import CacheCorrupt, ReplayMiss, ResponseCache, cache_key
+from tesseract.core.config import Settings
+from tesseract.core.llm import (
     BudgetExceeded,
     CallBudget,
     ExtractionFailed,
@@ -416,7 +416,7 @@ def test_cache_refuses_nonfinite_json_and_never_overwrites_existing_response(tmp
 
 
 def run_spec(**changes):
-    from tessera.core.contracts.runs import ModuleManifest, ModuleSnapshot, RunSpec
+    from tesseract.core.contracts.runs import ModuleManifest, ModuleSnapshot, RunSpec
 
     module = ModuleSnapshot(
         manifest=ModuleManifest(
@@ -480,6 +480,23 @@ def test_run_binding_isolates_as_of_and_reuses_same_snapshot_across_run_ids(tmp_
     assert replay.budget.calls == 0
 
 
+def test_runs_without_erp_boundary_replay_recordings_from_the_previous_contract(tmp_path):
+    from tesseract.core.llm import RunLLMClient
+
+    # Recreate the pre-boundary serialized run context used by existing recordings.
+    spec = run_spec()
+    legacy_scope = spec.model_dump(mode="json", exclude={"run_id", "mode", "erp_max_seq"})
+    legacy_scope["namespace"] = "product"
+    for module in legacy_scope["modules"]:
+        module["manifest"].pop("mode")
+    recorder, requests, _ = client(tmp_path, [completion()])
+    RunLLMClient(recorder, json.dumps(legacy_scope)).chat(MESSAGES)
+    assert len(requests) == 1
+    replay, requests, _ = client(tmp_path, [], mode="replay")
+    assert replay.for_run(spec).chat(MESSAGES).choices[0].message.content == "ok"
+    assert requests == []
+
+
 @pytest.mark.parametrize(
     "changes",
     [
@@ -491,6 +508,7 @@ def test_run_binding_isolates_as_of_and_reuses_same_snapshot_across_run_ids(tmp_
         {"prompt_versions": {"extract": "v2"}},
         {"model_versions": {"chat-model": "r2"}},
         {"authorized_fixture_refs": ("new-fixture",)},
+        {"erp_max_seq": 0},
     ],
 )
 def test_run_scope_versions_and_provenance_isolate_recordings(tmp_path, changes):
@@ -539,7 +557,7 @@ def test_run_bound_extract_and_embed_share_scope_and_replay_mode_independence(tm
     snapshot["modules"][0]["manifest"]["mode"] = "recorded"
     snapshot["run_id"] = "replay-execution"
     snapshot["mode"] = "recorded"
-    from tessera.core.contracts.runs import RunSpec
+    from tesseract.core.contracts.runs import RunSpec
 
     bound = replay.for_run(RunSpec.model_validate(snapshot))
     assert bound.extract(Envelope, MESSAGES).item.sku == "A-B"

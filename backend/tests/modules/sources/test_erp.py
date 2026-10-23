@@ -8,8 +8,8 @@ from decimal import Decimal
 
 import pytest
 
-from tessera.core.contracts.common import SourceRef
-from tessera.modules.sources.erp import (
+from tesseract.core.contracts.common import SourceRef
+from tesseract.modules.sources.erp import (
     latest_forecast,
     load_csv,
     parse_rows,
@@ -346,7 +346,7 @@ def test_sku_dropped_from_latest_run_is_not_filled_from_older_run():
 
 
 def test_forecast_units_feed_fc01_disaggregation():
-    from tessera.modules.intelligence.disaggregation import disaggregate
+    from tesseract.modules.intelligence.disaggregation import disaggregate
 
     (row,) = parse("forecast", [forecast(fcst_units="13.66")])
     week = row.data["week_start"]

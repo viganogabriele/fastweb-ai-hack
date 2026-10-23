@@ -1,0 +1,130 @@
+{
+ "model": "glm-5.3-flash",
+ "trace": {
+  "id": "trace:case-nyc01-unknown-20260906:c7d8d342f7de47718b70f700375e39cd",
+  "version": "1",
+  "available_at": "2026-10-09T08:35:52Z",
+  "availability_basis": "run_as_of",
+  "source_refs": [],
+  "run_id": "fixture",
+  "scenario_id": "historical",
+  "computed_at": "2026-10-09T08:35:52Z",
+  "input_refs": [
+   {
+    "kind": "Case",
+    "id": "case-nyc01-unknown-20260906",
+    "version": "v1"
+   },
+   {
+    "kind": "Observation",
+    "id": "obs-20260906-1837-nyc01-sweatshirt-return",
+    "version": "v1"
+   },
+   {
+    "kind": "EntityLink",
+    "id": "link-20260906-1837-nyc01-sweatshirt-return",
+    "version": "v1"
+   }
+  ],
+  "producer": "ag.investigator",
+  "producer_version": "1",
+  "case_id": "case-nyc01-unknown-20260906",
+  "steps": [
+   {
+    "tool": "get_case_evidence",
+    "arguments": {
+     "case_id": "case-nyc01-unknown-20260906"
+    },
+    "input_refs": [
+     {
+      "kind": "Case",
+      "id": "case-nyc01-unknown-20260906",
+      "version": "v1"
+     },
+     {
+      "kind": "Observation",
+      "id": "obs-20260906-1837-nyc01-sweatshirt-return",
+      "version": "v1"
+     },
+     {
+      "kind": "EntityLink",
+      "id": "link-20260906-1837-nyc01-sweatshirt-return",
+      "version": "v1"
+     }
+    ],
+    "output_refs": [
+     {
+      "kind": "Case",
+      "id": "case-nyc01-unknown-20260906",
+      "version": "v1"
+     },
+     {
+      "kind": "Observation",
+      "id": "obs-20260906-1837-nyc01-sweatshirt-return",
+      "version": "v1"
+     },
+     {
+      "kind": "EntityLink",
+      "id": "link-20260906-1837-nyc01-sweatshirt-return",
+      "version": "v1"
+     }
+    ],
+    "duration_ms": 3.4781189169734716,
+    "error": null
+   },
+   {
+    "tool": "request_clarification",
+    "arguments": {
+     "case_id": "case-nyc01-unknown-20260906",
+     "observation_ids": [
+      "obs-20260906-1837-nyc01-sweatshirt-return"
+     ],
+     "question": "You reported a return of \"a sweatshirt\" on Sunday 6 September. Could you confirm which product it was — the RELAXED SWEATSHIRT (style I10918G00045) or the VLOGO HOODIE (style I10918G00031) — and also the colour and size? This lets us record the return against the correct item."
+    },
+    "input_refs": [
+     {
+      "kind": "Case",
+      "id": "case-nyc01-unknown-20260906",
+      "version": "v1"
+     },
+     {
+      "kind": "Observation",
+      "id": "obs-20260906-1837-nyc01-sweatshirt-return",
+      "version": "v1"
+     }
+    ],
+    "output_refs": [
+     {
+      "kind": "Clarification",
+      "id": "clarification:a7a1758d5d4d453689699ec6ef0ec8565330afa2ae52ef5c5765103acacf91b9",
+      "version": "1"
+     }
+    ],
+    "duration_ms": 1.3233199715614319,
+    "error": null
+   },
+   {
+    "tool": "finish",
+    "arguments": {
+     "evidence_refs": [
+      "obs-20260906-1837-nyc01-sweatshirt-return",
+      "link-20260906-1837-nyc01-sweatshirt-return",
+      "clarification:a7a1758d5d4d453689699ec6ef0ec8565330afa2ae52ef5c5765103acacf91b9"
+     ],
+     "option_id": null,
+     "rationale": "Verify the selected case before any stock movement.",
+     "status": "verify"
+    },
+    "input_refs": [],
+    "output_refs": [],
+    "duration_ms": 0.026619993150234222,
+    "error": null
+   }
+  ],
+  "outcome": "verify",
+  "fallback_used": false,
+  "mode": "fixture",
+  "tokens_in": 8765,
+  "tokens_out": 914
+ }
+}

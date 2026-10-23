@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tesseract · 1 · The idea</title>
+<link rel="stylesheet" href="style.css">
+<script src="page.js" defer></script>
+</head>
+<body data-doc="1 / 4 · The idea">
+
+<!-- Cover -->
+<section class="page cover">
+  <div>
+    <div class="rule"></div>
+    <div class="brand">Tesseract</div>
+    <div class="title">What stores see tonight, turned into decisions headquarters can take tomorrow.</div>
+    <div class="sub">Pitch pack 1 of 4: <b>the idea</b>. What this repository does and why it matters, in plain language, with no tech.</div>
+  </div>
+  <div class="meta">
+    <div><b>Event</b>FastwebAI Hackathon 2026 · Valentino track</div>
+    <div><b>Read time</b>10 minutes</div>
+    <div><b>Rest of the pack</b>2 The process · 3 Pitch playbook · 4 Tackling bleeds</div>
+    <div><b>Data</b>Synthetic world, Valentino is demo branding</div>
+  </div>
+</section>
+
+<!-- Problem -->
+<section class="page">
+  <div class="body">
+    <div class="kicker">The problem</div>
+    <h1>Numbers arrive after the facts. Stores see the facts first.</h1>
+    <div class="grid g-2-1" style="margin-top:4mm">
+      <div class="stack">
+        <p class="lead" style="margin-bottom:3mm">A luxury brand runs hundreds of stores in dozens of countries. Every day headquarters decides <b>what to replenish, where to move stock and what to tell customers</b>.</p>
+        <p>The tools behind those decisions are good, but slow by design:</p>
+        <ul>
+          <li>The <b>forecast</b> learns from history: last season, last year.</li>
+          <li><b>Certified sales</b> arrive the next day, after the facts.</li>
+          <li><b>Demand that never became a sale</b> doesn’t arrive at all. If size M is sold out, the till records nothing.</li>
+        </ul>
+        <p>Meanwhile, every evening each store writes a closing email in its own language. There are hundreds a day, written in a hurry, and almost nobody reads them against the numbers.</p>
+      </div>
+      <div class="stack">
+        <div class="card"><div class="label">Example from the official brief</div><div class="verbatim">“Taglia M finita da giovedì.”</div><div class="small muted">Size M sold out since Thursday.</div></div>
+        <div class="card"><div class="label">Example from the official brief</div><div class="verbatim">“Tanti turisti coreani, chiedevano la versione nera.”</div><div class="small muted">Lots of Korean tourists asking for the black one.</div></div>
+        <div class="card"><div class="label">Example from the official brief</div><div class="verbatim">“Cantiere davanti all’ingresso, passaggio dimezzato.”</div><div class="small muted">Construction at the entrance, foot traffic halved.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Blind spots -->
+<section class="page">
+  <div class="body">
+    <div class="kicker">Why it matters</div>
+    <h1>Three things the numbers can’t see</h1>
+    <p class="lead">The store notes are often the only place where these facts exist. Ignore them and the system draws the wrong conclusion from the right numbers.</p>
+    <div class="grid g3">
+      <div class="card">
+        <div class="label">1 · Invisible demand</div>
+        <h2>The sale that didn’t happen</h2>
+        <p class="dim">A size runs out. The till records zero. The forecast learns “low demand” and the next allocation gets smaller. The customer who asked and left is only in the store manager’s email.</p>
+      </div>
+      <div class="card">
+        <div class="label">2 · The reason why</div>
+        <h2>Same sales, different stories</h2>
+        <p class="dim">Two products each sell five pieces. For one, customers try it and the fit is wrong. For the other, they ask for size M and there is none. The numbers are identical, but one needs a product decision and the other needs stock.</p>
+      </div>
+      <div class="card">
+        <div class="label">3 · Local events</div>
+        <h2>Low sales ≠ low demand</h2>
+        <p class="dim">Scaffolding in front of the door, a broken window, a till outage. Sales drop, but nobody wants the product less. Pulling stock away from that store would be the wrong move.</p>
+      </div>
+    </div>
+    <div class="card raised push" style="margin-top:6mm">
+      <p style="margin:0"><b>And the notes are noisy.</b> <span class="dim">The same message is sent twice and forwarded. Figures are corrected the next morning (“38k, not 83k”). Product names are wrong, staff exaggerate, five people describe the same customer. Reading them is not enough: they must be checked against stock, sales and each other.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- The idea -->
+<section class="page">
+  <div class="body">
+    <div class="kicker">The idea</div>
+    <h1>Listen to the stores, keep the receipts, hand over a short list of decisions.</h1>
+    <div class="grid g3" style="margin-top:4mm">
+      <div class="card">
+        <div class="label">Listen</div>
+        <h2>Read what stores already write</h2>
+        <p class="dim">Closing emails, voice notes, reports and chats, as they are, in any of 10+ languages. Each note is broken into single facts, and every fact keeps the <b>exact sentence</b> it came from.</p>
+      </div>
+      <div class="card">
+        <div class="label">Connect</div>
+        <h2>Tie every fact to the business</h2>
+        <p class="dim">“The black one” becomes a product, a size, a store and a date. Copies and corrections are merged. Each fact is set against stock, sales, the forecast and the context: weather, events, tourism.</p>
+      </div>
+      <div class="card">
+        <div class="label">Decide</div>
+        <h2>A queue of cases, not a feed</h2>
+        <p class="dim">Related facts become a <b>case</b> with an owner and a deadline. An investigator gathers the missing checks and proposes feasible options. <b>A person approves.</b></p>
+      </div>
+    </div>
+    <div class="push" style="margin-top:8mm">
+      <div class="statement">AI reads. <span>Code counts.</span> Humans decide.</div>
+    </div>
+  </div>
+</section>
+
+<!-- The rule -->
+<section class="page">
+  <div class="body">
+    <div class="kicker">The rule that makes it trustworthy</div>
+    <h1>Each side does only what it is good at</h1>
+    <div class="grid g3" style="margin-top:2mm">
+      <div class="card">
+        <div class="label">AI reads</div>
+        <ul>
+          <li>Understands hurried, multilingual text.</li>
+          <li>Picks which product a note means, or says it isn’t sure.</li>
+          <li>Decides which check to run next.</li>
+          <li><b>Never</b> produces a number that ends up in a calculation.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="label">Code counts</div>
+        <ul>
+          <li>Quantities, stock run-out, transfer feasibility, forecast scenarios.</li>
+          <li>Same inputs, same answer, every time.</li>
+          <li>Every number traceable to a row or a quote.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="label">Humans decide</div>
+        <ul>
+          <li>Nothing executes by itself: approving creates a <b>draft</b>.</li>
+          <li>“Hold” and “verify first” are always on the table.</li>
+          <li>Long-term choices (production, planned scarcity) get an insight, never a push.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card accent push" style="margin-top:6mm">
+      <h3>Why a business person should care</h3>
+      <p class="dim" style="margin:0">Planners can audit it: every line on a card links back to the sentence a store wrote. No black box moves stock, and when evidence is missing the system says “verify”. It does not guess.</p>
+    </div>
+  </div>
+</section>
+
+<!-- One story -->
+<section class="page">
+  <div class="body">
+    <div class="kicker">One story, start to finish</div>
+    <h1>The cardigan in size M</h1>
+    <div class="grid g-2-1" style="gap:8mm">
+      <div class="timeline">
+        <div class="t"><div class="when">Thu 8 Oct · Milan closing email</div>
+          <div><span class="verbatim">“il cardigan logo <mark>M è finito</mark>, <mark>ce lo chiedono in continuazione</mark>”</span> <span class="muted small">(the logo cardigan in M is finished, they keep asking for it)</span></div></div>
+        <div class="t"><div class="when">Read</div>
+          <div class="dim">Two facts: a <b>stockout</b> (exactly zero) and <b>unmet demand</b>. “Keep asking” stays vague: no invented number.</div></div>
+        <div class="t"><div class="when">Connect</div>
+          <div class="dim">Linked to the logo cardigan, size M, Milan store. The runner-up candidate stays visible.</div></div>
+        <div class="t"><div class="when">Check</div>
+          <div class="dim">The second Milan store writes “only one cardigan M left”, but the system shows 3. Tesseract flags the <b>mismatch as its own card</b> and does not quietly pick one. The regional warehouse has none until the end of October.</div></div>
+        <div class="t"><div class="when">Investigate</div>
+          <div class="dim">The investigator reads the evidence, looks up stock across stores, checks the delivery route and scores the options.</div></div>
+        <div class="t" style="margin-bottom:0"><div class="when">Decide</div>
+          <div class="dim">Allocation receives a card: hold, verify the stock, ask the store, or transfer. Each option shows which checks pass or fail. A person chooses.</div></div>
+      </div>
+      <div class="stack">
+        <div class="card raised">
+          <div class="label">What sales would have said</div>
+          <p class="dim" style="margin:0">The next day’s certified sales show <b>zero</b> cardigans in M: it looks like nobody wants it. Without the note, the forecast learns the wrong lesson.</p>
+        </div>
+        <div class="card raised">
+          <div class="label">Honest ending</div>
+          <p class="dim" style="margin:0">In the recorded run the delivery route was unknown, so the system recommended <b>notifying the owner</b> rather than moving stock. That is a valid outcome: it won’t propose a move it can’t check.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Is / isn't -->
+<section class="page">
+  <div class="body">
+    <div class="kicker">Boundaries</div>
+    <h1>What Tesseract is, and what it isn’t</h1>
+    <div class="grid g2">
+      <div class="card">
+        <div class="label good">It is</div>
+        <ul>
+          <li>A <b>layer on top</b> of the forecast, ERP and logistics already in place</li>
+          <li>A <b>queue of decisions</b>, each with an owner, a deadline and evidence for and against</li>
+          <li>A <b>memory of evidence</b>: every claim keeps the sentence it came from</li>
+          <li>Multilingual by default: Italian, French, German, Spanish, English, Japanese, Korean, Chinese…</li>
+          <li><b>Modular</b>: turn a source or a step on or off and rerun</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="label bad">It isn’t</div>
+        <ul>
+          <li>A new forecast model. Their forecast stays as it is; we annotate it.</li>
+          <li>A replacement for certified reporting. Store signals stay labelled as uncertified.</li>
+          <li>An autopilot that moves stock. It proposes; people approve.</li>
+          <li>A chatbot that summarises emails. Summaries lose the evidence; we keep it.</li>
+        </ul>
+      </div>
+    </div>
+    <table style="margin-top:6mm">
+      <tr><th style="width:32%">In the prototype</th><th>Status</th></tr>
+      <tr><td class="k">Reading, linking, cleaning, cases, options</td><td class="dim"><span class="pill g">real</span> Real processing on a synthetic world: 39 stores, 18 countries, 2,056 closing emails, 25 reports, ERP, weather and events</td></tr>
+      <tr><td class="k">Mailboxes, WhatsApp, store replies, logistics</td><td class="dim"><span class="pill w">simulated</span> Folders instead of inboxes; approving creates a local draft and books nothing</td></tr>
+      <tr><td class="k">AI responses in the demo</td><td class="dim"><span class="pill i">recorded</span> Real model calls, recorded and replayed so the demo runs offline</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- Glossary -->
+<section class="page">
+  <div class="body">
+    <div class="kicker">Shared vocabulary</div>
+    <h1>The words we use, and what they mean</h1>
+    <div class="grid g2" style="gap:4mm 8mm">
+      <table>
+        <tr><td class="k">Observation</td><td class="dim">One fact from one note: “size M sold out at Milan since Thursday”.</td></tr>
+        <tr><td class="k">Evidence</td><td class="dim">The exact sentence behind an observation. No quote, no fact.</td></tr>
+        <tr><td class="k">Link</td><td class="dim">Connecting “the black one” to a product, colour and size.</td></tr>
+        <tr><td class="k">Abstention</td><td class="dim">The system declines to guess. It is a feature: a wrong confident link is worse than none.</td></tr>
+        <tr><td class="k">Origin vs document</td><td class="dim">Ten forwarded copies are ten documents but one origin: one confirmation, not ten.</td></tr>
+        <tr><td class="k">Case</td><td class="dim">Facts about the same store, product and issue, grouped, with an owner, a priority and a deadline.</td></tr>
+      </table>
+      <table>
+        <tr><td class="k">Verify</td><td class="dim">A case status: something must be checked before anyone acts.</td></tr>
+        <tr><td class="k">Baseline</td><td class="dim">The brand’s existing forecast. We never overwrite it.</td></tr>
+        <tr><td class="k">Scenario</td><td class="dim">Low, central and high outlooks shown beside the baseline, only when the evidence allows.</td></tr>
+        <tr><td class="k">Investigator</td><td class="dim">The AI agent that decides which checks to run next. It can read, never approve.</td></tr>
+        <tr><td class="k">Option + checks</td><td class="dim">Hold, verify, ask, replenish or transfer, each with pass, fail or unknown checks.</td></tr>
+        <tr><td class="k">Dev / hold-out</td><td class="dim">Stores we tuned on vs stores kept aside for honest final scores.</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

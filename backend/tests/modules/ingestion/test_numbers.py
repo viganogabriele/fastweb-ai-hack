@@ -5,8 +5,8 @@ import random
 
 import pytest
 
-from tessera.core.config import REPO_ROOT
-from tessera.modules.ingestion.numbers import load_vague_quantifiers, parse_quantity
+from tesseract.core.config import REPO_ROOT
+from tesseract.modules.ingestion.numbers import load_vague_quantifiers, parse_quantity
 
 VAGUE = load_vague_quantifiers(REPO_ROOT / "config" / "domain.yaml")
 

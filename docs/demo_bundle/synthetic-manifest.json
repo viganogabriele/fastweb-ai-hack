@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "approved": false,
+  "split": "dev",
+  "stores": [
+    "MIL01"
+  ],
+  "reference_key": "synthetic-example-reference-key-only",
+  "replacements": {
+    "PrivateHouse": "Loom"
+  },
+  "artifacts": [
+    {
+      "kind": "SourceDocument",
+      "payload": {
+        "id": "private-document",
+        "version": "original-v7",
+        "text": "🧥 店 PrivateHouse unavailable. Again: 🧥 店 PrivateHouse unavailable.",
+        "text_version": "original-text",
+        "source_type": "email",
+        "uri": "/private/raw.eml",
+        "author_ref": "someone@private.test",
+        "meta": {
+          "store_id": "MIL01",
+          "headers": "SECRET HEADER",
+          "attachments": [
+            "private.xlsx"
+          ]
+        }
+      }
+    },
+    {
+      "kind": "Segment",
+      "payload": {
+        "id": "private-segment",
+        "version": "v1",
+        "document_id": "private-document",
+        "text_version": "original-text",
+        "text": "🧥 店 PrivateHouse unavailable. Again: 🧥 店 PrivateHouse unavailable.",
+        "char_start": 0,
+        "char_end": 66,
+        "locator": "private.xlsx#A1"
+      }
+    },
+    {
+      "kind": "Observation",
+      "payload": {
+        "id": "private-observation",
+        "version": "v1",
+        "document_id": "private-document",
+        "store_id": "MIL01",
+        "kind": "unmet_demand",
+        "product_mention": "PrivateHouse",
+        "quantity": {
+          "kind": "unknown"
+        },
+        "evidence": [
+          {
+            "document_id": "private-document",
+            "document_version": "original-v7",
+            "segment_id": "private-segment",
+            "quote": "🧥 店 PrivateHouse unavailable.",
+            "char_start": 37,
+            "char_end": 66,
+            "t_start_s": 99
+          }
+        ]
+      }
+    },
+    {
+      "kind": "Case",
+      "payload": {
+        "id": "private-case",
+        "version": "v1",
+        "store_id": "MIL01",
+        "case_type": "unmet_demand",
+        "status": "verify",
+        "priority": "medium",
+        "priority_reason": "Confirm PrivateHouse stock",
+        "owner": "private-person",
+        "supporting": [
+          {
+            "kind": "Observation",
+            "id": "private-observation",
+            "version": "v1"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "Report",
+      "payload": {
+        "id": "private-report",
+        "version": "v1",
+        "markdown": "Confirm PrivateHouse stock [1].",
+        "raw_response": "PRIVATE MODEL RECORDING",
+        "citations": [
+          {
+            "ref": {
+              "kind": "Observation",
+              "id": "private-observation",
+              "version": "v1"
+            },
+            "field": "quantity.kind",
+            "scope": {
+              "store_id": "MIL01"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

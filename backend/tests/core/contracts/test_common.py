@@ -3,7 +3,7 @@ from datetime import UTC
 import pytest
 from pydantic import ValidationError
 
-from tessera.core.contracts import Segment, SourceDocument, StockFact
+from tesseract.core.contracts import Segment, SourceDocument, StockFact
 
 
 def test_instants_are_aware_utc_and_availability_can_be_unknown(document):

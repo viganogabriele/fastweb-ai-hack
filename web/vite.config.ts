@@ -10,6 +10,7 @@ export default defineConfig({
   plugins: [react(), ...(mock ? [mockApi()] : [])],
   server: {
     host: '127.0.0.1',
-    proxy: mock ? undefined : { '/api': 'http://127.0.0.1:8000' },
+    allowedHosts: ['.trycloudflare.com', '.ngrok-free.app'],
+    proxy: mock ? undefined : { '/api': process.env.TESSERACT_API_TARGET ?? 'http://127.0.0.1:8000' },
   },
 })
