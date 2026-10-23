@@ -1,0 +1,14 @@
+{
+  "note_id": "mil01-cashmere-scarf-vest-size",
+  "store_id": "MIL01",
+  "sent_at": "2026-10-22T19:40:00+02:00",
+  "timezone": "Europe/Rome",
+  "language": "it",
+  "author_ref": "pseudonym:mil01-staff-martino",
+  "fixture_kind": "synthetic_extension",
+  "audio": "note.wav",
+  "audio_sha256": "sha256:691a33e45a5c40449ed55b1ca72c1719c2cec52b0b45713683ede641f0371ac1",
+  "duration_s": 40.4,
+  "manual_transcript": "transcript.txt",
+  "asr_prompt": "Sciarpa in cashmere grigio melange, beige, gilet in piumino blu notte, taglia 2, 3, 4."
+}
