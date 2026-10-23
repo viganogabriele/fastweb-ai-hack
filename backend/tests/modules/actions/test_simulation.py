@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from tessera.modules.actions.simulation import Arrival, simulate_scenarios, simulate_stock
+from tesseract.modules.actions.simulation import Arrival, simulate_scenarios, simulate_stock
 
 D0 = date(2026, 10, 23)
 

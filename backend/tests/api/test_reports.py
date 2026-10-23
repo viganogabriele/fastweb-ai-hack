@@ -4,12 +4,12 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import insert
 
-from tessera.api.main import create_app
-from tessera.core.config import Settings
-from tessera.core.contracts import ArtifactRef, Case, Citation, Report, RunSpec, SourceDocument
-from tessera.core.db import artifacts, connect
-from tessera.core.registry import Registry
-from tessera.core.run_repo import repo_session
+from tesseract.api.main import create_app
+from tesseract.core.config import Settings
+from tesseract.core.contracts import ArtifactRef, Case, Citation, Report, RunSpec, SourceDocument
+from tesseract.core.db import artifacts, connect
+from tesseract.core.registry import Registry
+from tesseract.core.run_repo import repo_session
 
 
 def body(mode="recorded"):

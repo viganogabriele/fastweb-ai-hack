@@ -11,6 +11,6 @@ export default defineConfig({
   server: {
     host: '127.0.0.1',
     allowedHosts: ['.trycloudflare.com', '.ngrok-free.app'],
-    proxy: mock ? undefined : { '/api': process.env.TESSERA_API_TARGET ?? 'http://127.0.0.1:8000' },
+    proxy: mock ? undefined : { '/api': process.env.TESSERACT_API_TARGET ?? 'http://127.0.0.1:8000' },
   },
 })

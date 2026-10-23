@@ -2,8 +2,8 @@ from datetime import datetime, timedelta, timezone
 
 import pytest
 
-from tessera.core.config import REPO_ROOT
-from tessera.modules.ingestion.email_parser import html_to_text, parse_eml, segment
+from tesseract.core.config import REPO_ROOT
+from tesseract.modules.ingestion.email_parser import html_to_text, parse_eml, segment
 
 EMAILS = REPO_ROOT / "generated" / "sources" / "store_emails"  # dev stores only
 needs_dataset = pytest.mark.skipif(not EMAILS.exists(), reason="dataset not checked out")

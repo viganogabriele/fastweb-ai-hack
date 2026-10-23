@@ -48,7 +48,7 @@ test('mock middleware rejects malformed, unsupported and mutation routes locally
   ]) {
     const response = await fetch(base + path, { method })
     assert.equal(response.status, status, `${method} ${path}`)
-    assert.equal(response.headers.get('x-tessera-mock'), '1')
+    assert.equal(response.headers.get('x-tesseract-mock'), '1')
     await response.json()
   }
 })

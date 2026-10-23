@@ -35,7 +35,7 @@ from datetime import UTC, date, datetime, time, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from tessera.core.contracts import (
+from tesseract.core.contracts import (
     ActionOption,
     AgentStep,
     AgentTrace,
@@ -48,7 +48,7 @@ from tessera.core.contracts import (
     SourceRef,
     StockFact,
 )
-from tessera.core.contracts.common import SourceRecord
+from tesseract.core.contracts.common import SourceRecord
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCES = ROOT / "generated" / "sources"

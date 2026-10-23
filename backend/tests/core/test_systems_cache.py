@@ -6,11 +6,11 @@ import json
 import httpx
 import pytest
 
-from tessera.core.cache import CacheCorrupt, ReplayMiss
-from tessera.core.config import Settings
-from tessera.core.contracts import RunSpec
-from tessera.core.systems_cache import SystemsCache, SystemsTransport, systems_factory
-from tessera.modules.sources.systems_client import Crosswalk
+from tesseract.core.cache import CacheCorrupt, ReplayMiss
+from tesseract.core.config import Settings
+from tesseract.core.contracts import RunSpec
+from tesseract.core.systems_cache import SystemsCache, SystemsTransport, systems_factory
+from tesseract.modules.sources.systems_client import Crosswalk
 
 
 @pytest.fixture

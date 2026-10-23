@@ -1,4 +1,4 @@
-# Tessera dev commands. Run from the repo root. Requires uv and Node >= 22.
+# Tesseract dev commands. Run from the repo root. Requires uv and Node >= 22.
 BACKEND := backend
 WEB := web
 PY := $(BACKEND)/.venv/bin/python
@@ -19,7 +19,7 @@ dev:  ## backend :8000 + web :5173 + dataset mock systems :8088 (Ctrl-C stops al
 	wait
 
 backend:
-	cd $(BACKEND) && uv run uvicorn tessera.api.main:app --reload --port 8000
+	cd $(BACKEND) && uv run uvicorn tesseract.api.main:app --reload --port 8000
 
 web:
 	cd $(WEB) && npm run dev

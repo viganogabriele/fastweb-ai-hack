@@ -1,6 +1,6 @@
 import pytest
 
-from tessera.core.contracts import Segment, SourceDocument
+from tesseract.core.contracts import Segment, SourceDocument
 
 
 @pytest.fixture

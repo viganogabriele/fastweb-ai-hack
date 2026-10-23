@@ -10,8 +10,8 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
-from tessera.core.cache import ReplayMiss
-from tessera.core.contracts import (
+from tesseract.core.cache import ReplayMiss
+from tesseract.core.contracts import (
     ModuleManifest,
     ModuleResult,
     ModuleSnapshot,
@@ -20,13 +20,13 @@ from tessera.core.contracts import (
     Segment,
     SourceDocument,
 )
-from tessera.core.db import connect
-from tessera.core.llm import BudgetExceeded, ExtractionFailed, LLMCallFailed
-from tessera.core.orchestrator import run
-from tessera.core.registry import RegisteredModule, Registry
-from tessera.core.run_repo import repo_session
-from tessera.modules.ingestion import extract
-from tessera.modules.ingestion.extract import Candidate, Candidates
+from tesseract.core.db import connect
+from tesseract.core.llm import BudgetExceeded, ExtractionFailed, LLMCallFailed
+from tesseract.core.orchestrator import run
+from tesseract.core.registry import RegisteredModule, Registry
+from tesseract.core.run_repo import repo_session
+from tesseract.modules.ingestion import extract
+from tesseract.modules.ingestion.extract import Candidate, Candidates
 
 
 def test_unknown_optional_enum_does_not_discard_document_facts(tmp_path):

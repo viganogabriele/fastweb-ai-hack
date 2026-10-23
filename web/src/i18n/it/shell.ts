@@ -5,7 +5,7 @@ export const shell = {
   themeDark: 'Passa al tema scuro',
   themeLight: 'Passa al tema chiaro',
   navigationLabel: 'Navigazione principale',
-  brand: 'Tessera',
+  brand: 'Tesseract',
   environment: 'Moncler',
   groups: {
     demo: 'Panoramica',

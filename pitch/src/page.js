@@ -10,7 +10,7 @@ document.fonts.ready.then(() => {
     if (!page.classList.contains("cover")) {
       page.insertAdjacentHTML(
         "afterbegin",
-        `<div class="running"><span><b>Tessera</b> · ${pack}</span><span>${doc}</span></div>`,
+        `<div class="running"><span><b>Tesseract</b> · ${pack}</span><span>${doc}</span></div>`,
       );
       page.insertAdjacentHTML(
         "beforeend",

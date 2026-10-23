@@ -22,7 +22,7 @@ from datetime import UTC, datetime
 
 import pytest
 
-from tessera.core.contracts import (
+from tesseract.core.contracts import (
     Case,
     ContextEvent,
     EvidenceRelation,
@@ -33,12 +33,12 @@ from tessera.core.contracts import (
     RunSpec,
     SourceDocument,
 )
-from tessera.core.db import connect
-from tessera.core.orchestrator import run
-from tessera.core.registry import Registry
-from tessera.core.repo import KINDS
-from tessera.core.run_repo import repo_session
-from tessera.modules.sources import erp
+from tesseract.core.db import connect
+from tesseract.core.orchestrator import run
+from tesseract.core.registry import Registry
+from tesseract.core.repo import KINDS
+from tesseract.core.run_repo import repo_session
+from tesseract.modules.sources import erp
 
 T1 = datetime(2026, 9, 18, 19, 30, tzinfo=UTC)
 T2 = datetime(2026, 9, 19, 20, 0, tzinfo=UTC)

@@ -7,14 +7,14 @@ import pytest
 import yaml
 from openpyxl import Workbook
 
-from tessera.core.contracts import MetricFact, ModuleSnapshot, RunSpec
-from tessera.core.db import connect
-from tessera.core.orchestrator import run as orchestrate
-from tessera.core.registry import RegisteredModule, Registry
-from tessera.core.run_repo import repo_session
-from tessera.modules.ingestion import metrics
-from tessera.modules.ingestion.metrics import MANIFEST
-from tessera.modules.sources import docs
+from tesseract.core.contracts import MetricFact, ModuleSnapshot, RunSpec
+from tesseract.core.db import connect
+from tesseract.core.orchestrator import run as orchestrate
+from tesseract.core.registry import RegisteredModule, Registry
+from tesseract.core.run_repo import repo_session
+from tesseract.modules.ingestion import metrics
+from tesseract.modules.ingestion.metrics import MANIFEST
+from tesseract.modules.sources import docs
 
 ROOT = Path(__file__).resolve().parents[4]
 SOURCES = ROOT / "generated" / "sources"

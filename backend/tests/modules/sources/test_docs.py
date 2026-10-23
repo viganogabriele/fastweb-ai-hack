@@ -9,13 +9,13 @@ import pytest
 from jsonschema.exceptions import ValidationError
 from openpyxl import Workbook
 
-from tessera.core.contracts import ModuleSnapshot, RunSpec, Segment, SourceDocument
-from tessera.core.db import connect
-from tessera.core.orchestrator import run
-from tessera.core.registry import RegisteredModule, Registry
-from tessera.core.run_repo import repo_session
-from tessera.modules.sources import docs
-from tessera.modules.sources.docs import MANIFEST, parse_report, report_path
+from tesseract.core.contracts import ModuleSnapshot, RunSpec, Segment, SourceDocument
+from tesseract.core.db import connect
+from tesseract.core.orchestrator import run
+from tesseract.core.registry import RegisteredModule, Registry
+from tesseract.core.run_repo import repo_session
+from tesseract.modules.sources import docs
+from tesseract.modules.sources.docs import MANIFEST, parse_report, report_path
 
 ROOT = Path(__file__).resolve().parents[4]
 SOURCES = ROOT / "generated" / "sources"

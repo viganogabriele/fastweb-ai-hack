@@ -13,8 +13,8 @@ import httpx
 import pytest
 from sqlalchemy import inspect, select
 
-from tessera.core.config import REPO_ROOT
-from tessera.core.contracts import (
+from tesseract.core.config import REPO_ROOT
+from tesseract.core.contracts import (
     ActionOption,
     ArtifactRef,
     ModuleManifest,
@@ -23,11 +23,11 @@ from tessera.core.contracts import (
     RunSpec,
     SourceDocument,
 )
-from tessera.core.registry import RegisteredModule, Registry
-from tessera.core.systems_cache import SystemsCache, SystemsTransport
-from tessera.modules.actions import approval, ledger
-from tessera.modules.sources import emails, voice
-from tessera.modules.sources.systems_client import Crosswalk
+from tesseract.core.registry import RegisteredModule, Registry
+from tesseract.core.systems_cache import SystemsCache, SystemsTransport
+from tesseract.modules.actions import approval, ledger
+from tesseract.modules.sources import emails, voice
+from tesseract.modules.sources.systems_client import Crosswalk
 from tests.modules.actions.test_options import fixture_case
 
 module_spec = importlib.util.spec_from_file_location(
@@ -120,8 +120,8 @@ def test_repeatable_fixture_rebuild_starts_empty_and_retains_shared_inputs(input
     assert first["modules"][0]["counts"]["documents"] == 1
     attempts = list(inputs["workspace"].glob("attempt-*"))
     assert len(attempts) == 2
-    assert all((p / "data/tessera_fixture.db").is_file() for p in attempts)
-    assert not (inputs["cache"] / "tessera_fixture.db").exists()
+    assert all((p / "data/tesseract_fixture.db").is_file() for p in attempts)
+    assert not (inputs["cache"] / "tesseract_fixture.db").exists()
     assert "PRIVATE SOURCE TEXT" not in json.dumps(first)
 
 
@@ -484,7 +484,7 @@ def test_api_checker_rejects_another_snapshot_with_the_same_run_id(inputs, monke
     (candidate / "run-spec.json").write_text(spec.model_dump_json())
     runtime = candidate / "runtime"
     runtime.mkdir()
-    engine = replay.connect(f"sqlite:///{runtime / 'tessera.db'}")
+    engine = replay.connect(f"sqlite:///{runtime / 'tesseract.db'}")
     try:
         other = spec.model_copy(update={"code_version": "different-execution"})
         with replay.repo_session(engine, other, write=True) as repo:
@@ -506,7 +506,7 @@ def test_changed_frozen_draft_fails_without_saving_a_decision(inputs, tmp_path, 
     assert result["status"] == "failed" and result["error_type"] == "Conflict"
     assert result["decisions"] == []
     engine = replay.connect(
-        f"sqlite:///{inputs['workspace'] / result['attempt_id'] / 'data/tessera_fixture.db'}"
+        f"sqlite:///{inputs['workspace'] / result['attempt_id'] / 'data/tesseract_fixture.db'}"
     )
     with engine.connect() as conn:
         assert not inspect(conn).has_table(ledger.drafts.name) or (

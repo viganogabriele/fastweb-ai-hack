@@ -18,10 +18,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 
 from replay_demo import allowed, digest
 
-from tessera.core.config import REPO_ROOT
-from tessera.core.contracts import ModuleSnapshot, RunSpec
-from tessera.core.registry import Registry
-from tessera.modules.sources import docs, erp, systems_client
+from tesseract.core.config import REPO_ROOT
+from tesseract.core.contracts import ModuleSnapshot, RunSpec
+from tesseract.core.registry import Registry
+from tesseract.modules.sources import docs, erp, systems_client
 
 STORES = ("MIL01", "MIL02", "MUN01", "NYC01")
 EMAILS = (

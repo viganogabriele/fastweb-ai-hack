@@ -3,10 +3,10 @@
 import hashlib
 import json
 
-from tessera.core.cache import ResponseCache, cache_key
-from tessera.core.config import REPO_ROOT
-from tessera.core.contracts import RunSpec
-from tessera.core.fixtures import read_fixtures
+from tesseract.core.cache import ResponseCache, cache_key
+from tesseract.core.config import REPO_ROOT
+from tesseract.core.contracts import RunSpec
+from tesseract.core.fixtures import read_fixtures
 
 ASSETS = REPO_ROOT / "data/fixtures/runs/core-dev-20261022"
 

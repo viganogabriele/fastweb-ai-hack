@@ -4,17 +4,17 @@ from datetime import UTC, datetime
 
 import pytest
 
-from tessera.core.contracts import (
+from tesseract.core.contracts import (
     ModuleManifest,
     ModuleResult,
     ModuleSnapshot,
     RunSpec,
     SourceDocument,
 )
-from tessera.core.db import connect
-from tessera.core.orchestrator import run
-from tessera.core.registry import RegisteredModule, Registry
-from tessera.core.run_repo import repo_session
+from tesseract.core.db import connect
+from tesseract.core.orchestrator import run
+from tesseract.core.registry import RegisteredModule, Registry
+from tesseract.core.run_repo import repo_session
 
 
 def manifest(module_id, *, requires=(), optional=(), enabled=True, mode="live", params_schema=None):
@@ -229,7 +229,7 @@ def test_registry_validates_params_duplicates_and_discovers_package(tmp_path, mo
     (package / "__init__.py").write_text("")
     (package / "pure.py").write_text("def helper(): return 42\n")
     (package / "entry.py").write_text(
-        "from tessera.core.contracts import ModuleManifest\n"
+        "from tesseract.core.contracts import ModuleManifest\n"
         f"MANIFEST = ModuleManifest.model_validate_json({module.model_dump_json()!r})\n"
         "def run(ctx): pass\n"
     )
@@ -284,8 +284,8 @@ def test_per_run_enabled_switch_preserves_implementation_identity(engine):
 
 
 def test_transactional_adapter_preserves_snapshot_scope_and_outer_rollback(engine):
-    from tessera.core.repo import Repo as CanonicalRepo
-    from tessera.core.repo import RunNotFound
+    from tesseract.core.repo import Repo as CanonicalRepo
+    from tesseract.core.repo import RunNotFound
 
     request = spec()
     with pytest.raises(RuntimeError):
@@ -374,8 +374,8 @@ def test_module_cannot_mutate_frozen_snapshot(engine):
 def test_cli_executes_snapshot_and_as_of_override_creates_fresh_run(tmp_path, monkeypatch, capsys):
     import json
 
-    from tessera.cli import main
-    from tessera.core.config import Settings
+    from tesseract.cli import main
+    from tesseract.core.config import Settings
 
     module = manifest("source")
     request = spec(module)
@@ -383,7 +383,7 @@ def test_cli_executes_snapshot_and_as_of_override_creates_fresh_run(tmp_path, mo
     path.write_text(request.model_dump_json())
     settings = Settings(_env_file=None, data_dir=tmp_path)
     registry = Registry((RegisteredModule(module, result),))
-    monkeypatch.setattr("tessera.cli.get_settings", lambda: settings)
+    monkeypatch.setattr("tesseract.cli.get_settings", lambda: settings)
     monkeypatch.setattr(Registry, "discover", lambda: registry)
     main(["run", "--run-spec", str(path), "--modules", "source"])
     first = json.loads(capsys.readouterr().out)
@@ -394,7 +394,7 @@ def test_cli_executes_snapshot_and_as_of_override_creates_fresh_run(tmp_path, mo
 
 
 def test_default_llm_client_is_bound_to_run_and_fixture_cannot_call_live(engine, tmp_path):
-    from tessera.core.config import Settings
+    from tesseract.core.config import Settings
 
     module = manifest("fixture-source", mode="fixture")
     request = spec(module, mode="fixture")
@@ -417,7 +417,7 @@ def test_default_llm_client_is_bound_to_run_and_fixture_cannot_call_live(engine,
 
 
 def test_parent_child_batch_put_is_atomic_and_resolves_earlier_parent(engine):
-    from tessera.core.contracts import Segment
+    from tesseract.core.contracts import Segment
 
     request = spec(manifest("source"))
     document = SourceDocument(
@@ -472,8 +472,8 @@ def test_uninstalled_disabled_required_dependency_blocks_instead_of_crashing(eng
 def test_progress_is_committed_while_a_module_runs(engine, tmp_path):
     from sqlalchemy import create_engine
 
-    from tessera.core.repo import Repo as CanonicalRepo
-    from tessera.core.repo import list_module_runs
+    from tesseract.core.repo import Repo as CanonicalRepo
+    from tesseract.core.repo import list_module_runs
 
     seen = {}
 

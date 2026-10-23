@@ -12,8 +12,8 @@ from types import SimpleNamespace
 
 import pytest
 
-from tessera.core.config import REPO_ROOT
-from tessera.core.contracts import (
+from tesseract.core.config import REPO_ROOT
+from tesseract.core.contracts import (
     ArtifactRef,
     Case,
     Citation,
@@ -23,12 +23,12 @@ from tessera.core.contracts import (
     RunSpec,
     Share,
 )
-from tessera.core.db import connect
-from tessera.core.fixtures import read_fixtures
-from tessera.core.registry import Registry
-from tessera.core.repo import Repo, create_run, put_erp
-from tessera.modules.outputs import reports
-from tessera.modules.sources import erp
+from tesseract.core.db import connect
+from tesseract.core.fixtures import read_fixtures
+from tesseract.core.registry import Registry
+from tesseract.core.repo import Repo, create_run, put_erp
+from tesseract.modules.outputs import reports
+from tesseract.modules.sources import erp
 
 FIXTURES = REPO_ROOT / "data" / "fixtures"
 SOURCES = REPO_ROOT / "generated" / "sources"

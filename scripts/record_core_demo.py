@@ -17,14 +17,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 
 from replay_demo import allowed, digest, environment
 
-from tessera.core.config import REPO_ROOT, Settings
-from tessera.core.contracts import RunSpec
-from tessera.core.db import connect
-from tessera.core.llm import LLMClient
-from tessera.core.orchestrator import run
-from tessera.core.repo import reset_run
-from tessera.core.run_repo import repo_session
-from tessera.core.systems_cache import SystemsCache, systems_factory
+from tesseract.core.config import REPO_ROOT, Settings
+from tesseract.core.contracts import RunSpec
+from tesseract.core.db import connect
+from tesseract.core.llm import LLMClient
+from tesseract.core.orchestrator import run
+from tesseract.core.repo import reset_run
+from tesseract.core.run_repo import repo_session
+from tesseract.core.systems_cache import SystemsCache, systems_factory
 
 
 def record(candidate, *, execution_sha, reset=False):
@@ -48,7 +48,7 @@ def record(candidate, *, execution_sha, reset=False):
             "--porcelain",
             "--untracked-files=all",
             "--",
-            "backend/tessera",
+            "backend/tesseract",
             "backend/prompts",
             "scripts",
         ],
@@ -92,7 +92,7 @@ def record(candidate, *, execution_sha, reset=False):
         if exists:
             from sqlalchemy import inspect, select
 
-            from tessera.modules.actions.ledger import drafts
+            from tesseract.modules.actions.ledger import drafts
 
             with engine.connect() as conn:
                 if inspect(conn).has_table(drafts.name) and conn.execute(select(drafts)).first():

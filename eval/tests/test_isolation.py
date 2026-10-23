@@ -100,7 +100,7 @@ assert open(f.name).read() == "ok"
     def test_product_starts_and_cannot_import_eval(self):
         root = Path(__file__).resolve().parents[2]
         code = """
-from tessera.api.main import app
+from tesseract.api.main import app
 assert app is not None
 try:
     open("../eval/harness.py")

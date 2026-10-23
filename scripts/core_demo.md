@@ -158,10 +158,10 @@ directory, then run these in separate terminals:
 ```sh
 LLM_MODE=replay DATA_DIR="$demo_attempt/data" \
   SOURCES_DIR="$demo_attempt/inputs/sources" CONFIG_DIR="$demo_attempt/inputs/config" \
-  backend/.venv/bin/uvicorn tessera.api.main:app --port 8106
+  backend/.venv/bin/uvicorn tesseract.api.main:app --port 8106
 
 cd web
-TESSERA_API_TARGET=http://127.0.0.1:8106 npm run dev -- --port 5186
+TESSERACT_API_TARGET=http://127.0.0.1:8106 npm run dev -- --port 5186
 ```
 
 Browser verification opened both real case details, expanded the stored trace and

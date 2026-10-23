@@ -6,15 +6,15 @@ import json
 import pytest
 from pydantic import ValidationError
 
-from tessera.core.contracts import ModuleSnapshot, RunSpec, SourceDocument
-from tessera.core.db import connect
-from tessera.core.fixtures import read_fixtures
-from tessera.core.llm import Transcript, TranscriptSegment
-from tessera.core.orchestrator import run
-from tessera.core.registry import RegisteredModule, Registry
-from tessera.core.run_repo import repo_session
-from tessera.modules.sources import voice
-from tessera.modules.sources.voice import MANIFEST, Sidecar
+from tesseract.core.contracts import ModuleSnapshot, RunSpec, SourceDocument
+from tesseract.core.db import connect
+from tesseract.core.fixtures import read_fixtures
+from tesseract.core.llm import Transcript, TranscriptSegment
+from tesseract.core.orchestrator import run
+from tesseract.core.registry import RegisteredModule, Registry
+from tesseract.core.run_repo import repo_session
+from tesseract.modules.sources import voice
+from tesseract.modules.sources.voice import MANIFEST, Sidecar
 
 AS_OF = "2026-10-22T20:00:00+00:00"
 SENT = "2026-10-09T18:40:00+02:00"
@@ -345,8 +345,8 @@ def test_the_manual_transcript_hash_is_the_reference(tmp_path):
 
 
 def test_replay_without_a_recording_falls_back_explicitly(tmp_path):
-    from tessera.core.config import Settings
-    from tessera.core.llm import LLMClient
+    from tesseract.core.config import Settings
+    from tesseract.core.llm import LLMClient
 
     voice_dir = tmp_path / "voice"
     note_dir(voice_dir)

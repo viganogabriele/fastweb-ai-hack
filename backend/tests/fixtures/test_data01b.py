@@ -14,7 +14,7 @@ from zoneinfo import ZoneInfo
 import pytest
 import yaml
 
-from tessera.core.contracts import (
+from tesseract.core.contracts import (
     ArtifactRef,
     Case,
     Citation,
@@ -27,8 +27,8 @@ from tessera.core.contracts import (
     Segment,
     SourceDocument,
 )
-from tessera.core.contracts.common import DerivedRecord, SourceRecord
-from tessera.core.fixtures import FIXTURE_RUN_ID, FIXTURE_SCENARIO_ID, read_fixtures
+from tesseract.core.contracts.common import DerivedRecord, SourceRecord
+from tesseract.core.fixtures import FIXTURE_RUN_ID, FIXTURE_SCENARIO_ID, read_fixtures
 
 ROOT = Path(__file__).resolve().parents[3]
 FIXTURES = ROOT / "data" / "fixtures"
@@ -208,7 +208,7 @@ def test_cases_are_consistent_with_their_evidence() -> None:
 
 
 def run_as_of() -> datetime:
-    """The fixture run's as_of, as `tessera fixtures load` sets it: the latest `available_at`."""
+    """The fixture run's as_of, as `tesseract fixtures load` sets it: the latest `available_at`."""
     return max(r.available_at for r in everything().values() if r.available_at is not None)
 
 

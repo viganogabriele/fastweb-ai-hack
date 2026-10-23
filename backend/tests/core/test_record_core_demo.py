@@ -4,7 +4,7 @@ import importlib
 
 import pytest
 
-from tessera.core.config import REPO_ROOT
+from tesseract.core.config import REPO_ROOT
 from tests.core.test_replay_demo import snapshot
 
 

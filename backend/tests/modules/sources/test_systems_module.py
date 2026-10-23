@@ -14,12 +14,12 @@ import httpx
 import pytest
 from jsonschema import Draft202012Validator
 
-from tessera.core.config import REPO_ROOT
-from tessera.core.contracts import ModuleRun, RunSpec, SourceRef, StockFact
-from tessera.core.db import connect
-from tessera.core.repo import ErpRecord, Repo, create_run, put_erp, put_module_run
-from tessera.modules.sources import systems_client as sc
-from tessera.modules.sources.systems_client import LaneEta, SystemsClient, SystemsReader, Unknown
+from tesseract.core.config import REPO_ROOT
+from tesseract.core.contracts import ModuleRun, RunSpec, SourceRef, StockFact
+from tesseract.core.db import connect
+from tesseract.core.repo import ErpRecord, Repo, create_run, put_erp, put_module_run
+from tesseract.modules.sources import systems_client as sc
+from tesseract.modules.sources.systems_client import LaneEta, SystemsClient, SystemsReader, Unknown
 
 ROME, HKT = ZoneInfo("Europe/Rome"), ZoneInfo("Asia/Hong_Kong")
 SKU = "J20931A00012-999"

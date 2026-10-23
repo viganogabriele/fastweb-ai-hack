@@ -1,5 +1,5 @@
 {
-  "name": "tessera-openapi-types",
+  "name": "tesseract-openapi-types",
   "private": true,
   "description": "Isolated TypeScript 5 generator; the web application uses TypeScript 6.",
   "devDependencies": {

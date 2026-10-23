@@ -5,7 +5,7 @@ import importlib
 import pytest
 from jsonschema.exceptions import ValidationError
 
-from tessera.core.config import REPO_ROOT
+from tesseract.core.config import REPO_ROOT
 
 
 @pytest.fixture

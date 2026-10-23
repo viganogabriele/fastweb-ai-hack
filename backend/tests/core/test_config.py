@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from tessera.core.config import MissingApiKey, Settings
+from tesseract.core.config import MissingApiKey, Settings
 
 
 def test_api_key_per_model(tmp_path) -> None:
@@ -26,7 +26,7 @@ def test_no_keys_file(tmp_path) -> None:
 
 
 def test_relative_keys_file_is_from_repo_root() -> None:
-    from tessera.core.config import REPO_ROOT
+    from tesseract.core.config import REPO_ROOT
 
     s = Settings(fastweb_keys_file=".secrets/fastweb_keys.json")
     assert s.fastweb_keys_file == REPO_ROOT / ".secrets" / "fastweb_keys.json"

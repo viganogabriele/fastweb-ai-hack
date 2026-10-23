@@ -26,10 +26,10 @@ from replay_demo import (
     semantic_payload,
 )
 
-from tessera.api.main import create_app
-from tessera.api.routers.options import decision_clock
-from tessera.core.config import Settings
-from tessera.core.contracts import (
+from tesseract.api.main import create_app
+from tesseract.api.routers.options import decision_clock
+from tesseract.core.config import Settings
+from tesseract.core.contracts import (
     ActionOption,
     AgentTrace,
     Case,
@@ -42,10 +42,10 @@ from tessera.core.contracts import (
     Segment,
     SourceDocument,
 )
-from tessera.core.db import connect
-from tessera.core.repo import KINDS, latest
-from tessera.core.run_repo import repo_session
-from tessera.modules.actions.approval import DecisionRequest, LocalDraft
+from tesseract.core.db import connect
+from tesseract.core.repo import KINDS, latest
+from tesseract.core.run_repo import repo_session
+from tesseract.modules.actions.approval import DecisionRequest, LocalDraft
 
 
 def decision_export(spec, *, at, request, draft):
@@ -80,7 +80,7 @@ def check(candidate, *, decision_output=None):
     execution_sha = subprocess.check_output(
         ["git", "rev-parse", "HEAD"], cwd=Path(__file__).resolve().parents[1], text=True
     ).strip()
-    code_roots = ("backend/tessera", "backend/prompts", "scripts")
+    code_roots = ("backend/tesseract", "backend/prompts", "scripts")
     dirty_code = bool(
         subprocess.check_output(
             ["git", "status", "--porcelain", "--untracked-files=all", "--", *code_roots],
@@ -99,7 +99,7 @@ def check(candidate, *, decision_output=None):
     engine = connect(settings.db_url)
     fixture = connect("sqlite://")
     try:
-        from tessera.core.contracts import RunSpec
+        from tesseract.core.contracts import RunSpec
 
         spec = RunSpec.model_validate_json((candidate / "run-spec.json").read_text())
         assert spec.mode == "recorded" and not spec.authorized_fixture_refs

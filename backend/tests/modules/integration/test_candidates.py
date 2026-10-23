@@ -2,8 +2,8 @@ import csv
 
 import pytest
 
-from tessera.core.config import REPO_ROOT
-from tessera.modules.integration.candidates import (
+from tesseract.core.config import REPO_ROOT
+from tesseract.modules.integration.candidates import (
     Catalog,
     LinkParams,
     _inflects,

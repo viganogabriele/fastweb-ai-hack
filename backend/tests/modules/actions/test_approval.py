@@ -9,15 +9,15 @@ import httpx
 import pytest
 from sqlalchemy import event, func, select
 
-from tessera.core import repo
-from tessera.core.cache import ReplayMiss
-from tessera.core.config import Settings
-from tessera.core.contracts import RunSpec
-from tessera.core.db import connect
-from tessera.modules.actions import approval, ledger
-from tessera.modules.actions.approval import Conflict, DecisionRequest, decide
-from tessera.modules.actions.options import evaluate_case
-from tessera.modules.sources.systems_client import Crosswalk
+from tesseract.core import repo
+from tesseract.core.cache import ReplayMiss
+from tesseract.core.config import Settings
+from tesseract.core.contracts import RunSpec
+from tesseract.core.db import connect
+from tesseract.modules.actions import approval, ledger
+from tesseract.modules.actions.approval import Conflict, DecisionRequest, decide
+from tesseract.modules.actions.options import evaluate_case
+from tesseract.modules.sources.systems_client import Crosswalk
 from tests.modules.actions.test_options import AS_OF, inputs
 
 

@@ -6,7 +6,7 @@ from datetime import UTC, datetime, timedelta
 import pytest
 from sqlalchemy import func, inspect, select
 
-from tessera.core.contracts import (
+from tesseract.core.contracts import (
     ArtifactRef,
     Case,
     Clarification,
@@ -20,11 +20,11 @@ from tessera.core.contracts import (
     Segment,
     SourceDocument,
 )
-from tessera.core.db import connect, runs
-from tessera.core.registry import RegisteredModule, Registry
-from tessera.core.repo import reset_run
-from tessera.core.run_repo import repo_session
-from tessera.modules.agents.answer_registry import (
+from tesseract.core.db import connect, runs
+from tesseract.core.registry import RegisteredModule, Registry
+from tesseract.core.repo import reset_run
+from tesseract.core.run_repo import repo_session
+from tesseract.modules.agents.answer_registry import (
     AnswerConflict,
     AnswerRequest,
     AnswerUnavailable,
@@ -34,8 +34,8 @@ from tessera.modules.agents.answer_registry import (
     register_recorded_answer,
     submit_answer,
 )
-from tessera.modules.agents.clarifications import InvalidAnswer, UnrecordedAnswer
-from tessera.modules.agents.contextual_answers import ContextualMention
+from tesseract.modules.agents.clarifications import InvalidAnswer, UnrecordedAnswer
+from tesseract.modules.agents.contextual_answers import ContextualMention
 
 NOW = datetime(2026, 10, 22, 20, tzinfo=UTC)
 
@@ -60,7 +60,7 @@ class ContextReading:
 
 @pytest.fixture
 def setup(tmp_path, monkeypatch):
-    from tessera.core.llm import RunLLMClient
+    from tesseract.core.llm import RunLLMClient
 
     monkeypatch.setattr(RunLLMClient, "extract", ContextReading().extract)
     engine = connect(f"sqlite:///{tmp_path / 'answers.db'}")
@@ -293,7 +293,7 @@ def test_submit_retry_execute_and_parent_immutability(setup):
         answered = repo.get(Clarification, "question")
         assert answered.status == "answered" and answered.answer_document_id == job.document.id
         for reference in answered.input_refs:
-            from tessera.core.repo import KINDS
+            from tesseract.core.repo import KINDS
 
             assert repo.get(KINDS[reference.kind], reference.id, reference.version) is not None
         historical = repo.get(Case, "case")
@@ -328,8 +328,8 @@ def test_alias_retry_survives_parent_reset_and_reserves_its_key(setup):
 
 
 def test_investigator_cannot_act_on_seeded_historical_case(setup):
-    from tessera.modules.agents.investigator import visible_case
-    from tessera.modules.agents.runtime import ToolError
+    from tesseract.modules.agents.investigator import visible_case
+    from tesseract.modules.agents.runtime import ToolError
 
     engine, request, registry, seed, seen, _ = setup
     seed()
@@ -364,10 +364,10 @@ def test_investigator_cannot_act_on_seeded_historical_case(setup):
 def test_production_extraction_replay_miss_cannot_publish_partial_answer(
     setup, monkeypatch, missing_at
 ):
-    from tessera.core.cache import ReplayMiss
-    from tessera.core.config import Settings
-    from tessera.modules.ingestion import extract
-    from tessera.modules.sources.emails import Store
+    from tesseract.core.cache import ReplayMiss
+    from tesseract.core.config import Settings
+    from tesseract.modules.ingestion import extract
+    from tesseract.modules.sources.emails import Store
 
     engine, request, registry, seed, seen, _ = setup
     source = ModuleManifest(
@@ -446,15 +446,15 @@ def production_pipeline(setup, monkeypatch, *, quantitative=False):
 
     import httpx
 
-    from tessera.core.config import Settings
-    from tessera.core.contracts import SourceRef
-    from tessera.core.repo import put_erp
-    from tessera.modules.actions import options
-    from tessera.modules.ingestion import extract
-    from tessera.modules.integration import cases, dedup, link
-    from tessera.modules.intelligence import baseline, overlay
-    from tessera.modules.sources import emails, erp
-    from tessera.modules.sources.systems_client import Crosswalk, SystemsClient, SystemsReader
+    from tesseract.core.config import Settings
+    from tesseract.core.contracts import SourceRef
+    from tesseract.core.repo import put_erp
+    from tesseract.modules.actions import options
+    from tesseract.modules.ingestion import extract
+    from tesseract.modules.integration import cases, dedup, link
+    from tesseract.modules.intelligence import baseline, overlay
+    from tesseract.modules.sources import emails, erp
+    from tesseract.modules.sources.systems_client import Crosswalk, SystemsClient, SystemsReader
 
     engine, request, _, seed, _, originals = setup
     source, segment, observation, case, question = originals
@@ -488,7 +488,7 @@ def production_pipeline(setup, monkeypatch, *, quantitative=False):
                 ),
             }
         )
-        from tessera.core.contracts import EntityLink
+        from tesseract.core.contracts import EntityLink
 
         parent_link = EntityLink(
             **{
@@ -645,7 +645,7 @@ def production_pipeline(setup, monkeypatch, *, quantitative=False):
 
 
 def test_follow_up_runs_production_extract_link_cases_forecast_and_options(setup, monkeypatch):
-    from tessera.core.contracts import ActionOption, EntityLink, ForecastAdjustment
+    from tesseract.core.contracts import ActionOption, EntityLink, ForecastAdjustment
 
     engine, request, registry, originals, RecordedReading = production_pipeline(setup, monkeypatch)
     register_recorded_answer(engine, request)
@@ -756,7 +756,7 @@ def test_missing_lineage_and_unpublished_parents_reject_input(setup):
     # Broken historical lineage must fail closed, even though the source quote matches.
     from sqlalchemy import delete
 
-    from tessera.core.db import artifacts
+    from tesseract.core.db import artifacts
 
     with engine.begin() as conn:
         conn.execute(delete(artifacts).where(artifacts.c.kind == "Segment"))
@@ -809,7 +809,7 @@ def test_worker_setup_failure_is_visible_in_run_state_and_reset_recovers(setup):
 
 
 def test_pending_recovery_and_live_events_never_become_replayable(setup):
-    from tessera.modules.agents.answer_registry import pending_follow_ups
+    from tesseract.modules.agents.answer_registry import pending_follow_ups
 
     engine, request, registry, seed, _, _ = setup
     assert pending_follow_ups(engine) == ()
@@ -907,7 +907,7 @@ def test_transitive_supporting_refs_outside_input_refs_are_seeded(setup):
     seed(published=False)
     from sqlalchemy import delete
 
-    from tessera.core.db import artifacts
+    from tesseract.core.db import artifacts
 
     with engine.begin() as conn:
         conn.execute(delete(artifacts).where(artifacts.c.kind.in_(("Case", "Clarification"))))
@@ -930,7 +930,7 @@ def test_elliptical_reply_corrects_original_demand_once_with_quantitative_effect
 ):
     import json
 
-    from tessera.core.contracts import (
+    from tesseract.core.contracts import (
         ActionOption,
         EntityLink,
         EvidenceRelation,
@@ -1034,8 +1034,8 @@ def test_elliptical_reply_corrects_original_demand_once_with_quantitative_effect
 
 
 def test_registered_answer_without_actual_context_cache_fails_without_network(setup, tmp_path):
-    from tessera.core.config import Settings
-    from tessera.core.llm import LLMClient
+    from tesseract.core.config import Settings
+    from tesseract.core.llm import LLMClient
 
     engine, request, registry, seed, _, originals = setup
     seed("recorded")
@@ -1082,7 +1082,7 @@ def test_contextual_mention_cannot_introduce_unsupported_product_tokens(
 def test_reconciliation_preserves_other_fact_kinds_or_refuses_identity_collision(
     setup, monkeypatch, collision
 ):
-    from tessera.modules.ingestion import extract
+    from tesseract.modules.ingestion import extract
 
     engine, request, registry, _, RecordedReading = production_pipeline(setup, monkeypatch)
 
@@ -1112,7 +1112,7 @@ def test_reconciliation_preserves_other_fact_kinds_or_refuses_identity_collision
 def test_sequential_question_preserves_prior_corrections_without_answer_demand(
     setup, monkeypatch, target
 ):
-    from tessera.modules.ingestion import extract
+    from tesseract.modules.ingestion import extract
 
     engine, request, registry, originals, RecordedReading = production_pipeline(
         setup, monkeypatch, quantitative=True

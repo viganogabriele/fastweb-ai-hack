@@ -6,9 +6,9 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import insert
 
-from tessera.api.main import create_app
-from tessera.core.config import Settings
-from tessera.core.contracts import (
+from tesseract.api.main import create_app
+from tesseract.core.config import Settings
+from tesseract.core.contracts import (
     AdjustmentComponent,
     ArtifactRef,
     ForecastAdjustment,
@@ -16,8 +16,8 @@ from tessera.core.contracts import (
     RunSpec,
     ScenarioValues,
 )
-from tessera.core.db import artifacts, connect
-from tessera.core.run_repo import repo_session
+from tesseract.core.db import artifacts, connect
+from tesseract.core.run_repo import repo_session
 
 AS_OF = datetime(2026, 10, 22, 20, tzinfo=UTC)
 DAY = date(2026, 10, 23)
