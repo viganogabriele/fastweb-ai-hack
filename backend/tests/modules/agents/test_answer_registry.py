@@ -440,6 +440,7 @@ def production_pipeline(setup, monkeypatch, *, quantitative=False):
     from tessera.modules.sources.systems_client import Crosswalk, SystemsClient, SystemsReader
 
     engine, request, _, seed, _, originals = setup
+    parent_links = ()
     sku = "TEST-001"
     if quantitative:
         source, segment, observation, case, question = originals
@@ -464,6 +465,34 @@ def production_pipeline(setup, monkeypatch, *, quantitative=False):
                 ),
             }
         )
+        from tessera.core.contracts import EntityLink
+
+        parent_link = EntityLink(
+            **{
+                k: getattr(observation, k)
+                for k in (
+                    "version",
+                    "available_at",
+                    "availability_basis",
+                    "source_refs",
+                    "run_id",
+                    "scenario_id",
+                    "computed_at",
+                    "producer",
+                    "producer_version",
+                )
+            },
+            id="parent-unresolved-link",
+            input_refs=(ref(observation),),
+            observation_id=observation.id,
+            status="unlinked",
+            level=None,
+            candidates=(),
+            decided_by="synthetic",
+            rationale="Unresolved original mention",
+        )
+        parent_links = (parent_link,)
+        case = case.model_copy(update={"input_refs": (*case.input_refs, ref(parent_link))})
         originals = (source, segment, observation, case, question)
     request = request.model_copy(update={"text": "Richiesta Luminara taglia M."})
     rows = [
@@ -550,7 +579,7 @@ def production_pipeline(setup, monkeypatch, *, quantitative=False):
     ]
     registry = Registry(entries)
     snapshots = tuple(ModuleSnapshot(manifest=e.manifest, params={}) for e in entries)
-    seed("recorded", modules=snapshots, records=originals)
+    seed("recorded", modules=snapshots, records=(*originals[:3], *parent_links, *originals[3:]))
     monkeypatch.setattr(extract, "get_settings", lambda: Settings(_env_file=None))
     monkeypatch.setattr(
         extract, "load_stores", lambda _: {"MIL01": emails.Store("it", "Europe/Rome")}
@@ -936,23 +965,78 @@ def test_elliptical_reply_corrects_original_demand_once_with_quantitative_effect
         (relation,) = repo.list(EvidenceRelation)
         assert relation.relation == "supersedes" and relation.from_ref == ref(corrected)
         assert relation.to_ref in corrected.input_refs
-        (link,) = repo.list(EntityLink)
+        (link,) = [r for r in repo.list(EntityLink) if not r.version.startswith("parent:")]
         assert link.observation_id == corrected.id
         assert (link.status, link.target_id) == ("linked", "TEST-001-M")
         (overlay,) = [f for f in repo.list(ForecastAdjustment) if f.case_ids]
         assert overlay.status == "computed", overlay.reason
         assert overlay.available_at == request.received_at
-        assert len(overlay.components) == 1
+        assert len([c for c in overlay.components if c.type == "incremental_episode"]) == 1
         assert overlay.components[0].episode_refs == (ref(corrected),)
         assert overlay.components[0].reference_time == originals[2].period_end
         assert sum(p.latent.base for p in overlay.series) > sum(p.baseline for p in overlay.series)
         (hold,) = [o for o in repo.list(ActionOption) if o.kind == "hold"]
         assert hold.available_at == request.received_at
         assert hold.forecast_ref == ref(overlay)
-        assert hold.outcomes and hold.baseline_outcomes
-        assert sum(o.lost_units_dest for o in hold.outcomes) > sum(
-            o.lost_units_dest for o in hold.baseline_outcomes
-        )
+        assert hold.outcomes
+        for outcome in hold.outcomes:
+            expected = sum(getattr(p.latent, outcome.scenario_id) for p in overlay.series)
+            assert outcome.lost_units_dest == pytest.approx(expected)
+        base_outcome = next(o for o in hold.outcomes if o.scenario_id == "base")
+        assert base_outcome.lost_units_dest > sum(p.baseline for p in overlay.series)
     with repo_session(engine, "parent") as repo:
         assert all(repo.get(type(r), r.id, r.version) == r for r in originals)
         assert not repo.list(ForecastAdjustment) and not repo.list(ActionOption)
+        assert repo.get(EntityLink, "parent-unresolved-link").status == "unlinked"
+
+
+def test_registered_answer_without_actual_context_cache_fails_without_network(setup, tmp_path):
+    from tessera.core.config import Settings
+    from tessera.core.llm import LLMClient
+
+    engine, request, registry, seed, _, originals = setup
+    seed("recorded")
+    register_recorded_answer(engine, request)
+    job = submit_answer(engine, request, registry=registry)
+    llm = LLMClient(
+        Settings(_env_file=None, data_dir=tmp_path / "empty-cache", llm_mode="replay"),
+        client_factory=lambda **kwargs: pytest.fail("Replay must never create a network client"),
+    )
+    execute_follow_up(engine, job.run.run_id, registry=registry, clients={"llm": llm})
+    with repo_session(engine, job.run.run_id) as repo:
+        assert repo.run_state()["status"] == "failed" and not repo.run_state()["published"]
+        assert repo.list(Observation) == repo.list(SourceDocument) == []
+        extraction = next(m for m in repo.module_runs() if m.module_id == "ing.extract")
+        assert "ReplayMiss" in " ".join(extraction.result.errors)
+    with repo_session(engine, "parent") as repo:
+        assert all(repo.get(type(r), r.id, r.version) == r for r in originals)
+
+
+@pytest.mark.parametrize("behavior", ["abstain", "changed_spans"])
+def test_contextual_reconciliation_abstains_or_fails_closed_on_ambiguous_spans(
+    setup, monkeypatch, behavior
+):
+    engine, request, registry, originals, RecordedReading = production_pipeline(setup, monkeypatch)
+
+    class Reading(RecordedReading):
+        def extract(self, schema, messages, *, cache_context, **kwargs):
+            if schema is ContextualMention:
+                return ContextualMention(product_mention=None)
+            result = super().extract(schema, messages, cache_context=cache_context, **kwargs)
+            if behavior == "changed_spans":
+                result.observations[0].quote = "Una felpa"
+            return result
+
+    register_recorded_answer(engine, request)
+    job = submit_answer(engine, request, registry=registry)
+    execute_follow_up(engine, job.run.run_id, registry=registry, clients={"llm": Reading()})
+    with repo_session(engine, job.run.run_id) as repo:
+        if behavior == "changed_spans":
+            assert repo.run_state()["status"] == "failed"
+            assert not repo.run_state()["published"] and not repo.list(Observation)
+        else:
+            assert repo.run_state()["published"]
+            current = [o for o in repo.list(Observation) if not o.version.startswith("parent:")]
+            assert len(current) == 1
+            assert current[0].product_mention == originals[2].product_mention
+            assert current[0].quantity == originals[2].quantity

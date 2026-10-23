@@ -113,3 +113,43 @@ versions from operational collection responses (queue, counts, options inputs),
 while preserving exact-version reads for citations. The worker already applies
 this distinction to all pipeline module reads; it is not a frontend-local
 answered state or a forecast adjustment.
+
+## Contextual reconciliation (OUT-02d)
+
+During the child's `ing.extract` execution, the lane-E adapter
+`contextual_answers.ContextualExtraction` asks the existing structured LLM client
+for a product mention using the exact remapped original observation, answered
+clarification (including the question), answer document and child RunSpec. These
+inputs and the versioned instruction text are part of the cache context. This is
+an additional recording: registering an answer fingerprint alone does not make
+its interpretation replayable. A missing/corrupt contextual recording fails the
+child without publication or network fallback in replay mode.
+
+Code retains the original observation ID, quantity, period, attribution, kind,
+negation and original document evidence. The child has its own current version in
+its isolated run; its inputs pin the historical original observation, answered
+question and answer document. Its availability is the answer receipt time. A
+`supersedes` EvidenceRelation explicitly connects this current fact to the exact
+historical version. Linking, cases, forecast and options consume this single
+current observation. The answer document remains inspectable as a source but is
+excluded from independent extraction, so it cannot create duplicate demand.
+Re-extracted original candidates with the same evidence span are replaced;
+ambiguous/changed spans of the same kind fail closed instead of being added.
+
+This supports product/size/colour clarification. It deliberately preserves the
+original count and episode dates: the model cannot manufacture quantitative
+uplift, reset decay to the answer time or replace quantities. Null interpretation
+retains the original product mention, with explicit answer provenance; it does
+not promise resolution. Multiple exact original observations are read separately;
+ambiguous fact alignment requires a new reviewed recording/extraction, not a
+heuristic match. New count corrections and unrelated demand in an answer need a
+separate ingestion feature. Existing source, store, namespace, frozen pipeline
+and answer-clock checks remain in force.
+
+Tests use synthetic structured model responses and synthetic ERP/system inputs;
+they verify deterministic reconciliation and production downstream math, not
+real-model comprehension. A real replay-client test additionally proves that an
+accepted registered answer with an empty context cache fails without networking.
+The HTTP regression now expects corrected original links and supersession rather
+than the previously documented broken behavior; lane C should review that focused
+test update. No production API/UI, lane A/B module or PR220 path changes are needed.

@@ -164,7 +164,10 @@ class ContextualExtraction:
                     from_ref=ref(corrected),
                     to_ref=ref(original),
                     relation="supersedes",
-                    basis="Explicit simulated answer to exact clarification; original demand retained once",
+                    basis=(
+                        "Explicit simulated answer to exact clarification; "
+                        "original demand retained once"
+                    ),
                     evidence_refs=(ref(self.job.document), ref(self.question)),
                 )
             )

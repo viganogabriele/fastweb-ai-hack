@@ -570,7 +570,6 @@ def test_follow_up_api_excludes_historical_support_but_resolves_pinned_citations
                             "version": "1",
                             "computed_at": ctx.spec.as_of,
                             "available_at": ctx.spec.as_of,
-                            "available_at": ctx.spec.as_of,
                             "as_of": ctx.spec.as_of,
                         }
                     )
