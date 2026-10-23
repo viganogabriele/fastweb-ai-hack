@@ -310,8 +310,18 @@ def _live_notes(settings: Settings, engine) -> list[LiveNote]:
         for snapshot in spec.modules:
             if snapshot.manifest.id != "src.voice":
                 continue
+            slugs = snapshot.params.get("notes", [])
+            if not snapshot_path(settings.data_dir, spec.run_id).is_dir():
+                # A run from before snapshots existed: its notes are handled, never offered
+                # again, and must not break the listing of the newer ones.
+                for slug in slugs:
+                    if slug in notes and slug not in seen:
+                        live = notes[slug]
+                        notes[slug] = LiveNote(live.note, live.transcript, spec.run_id)
+                        seen.add(slug)
+                continue
             frozen = []
-            for slug in snapshot.params.get("notes", []):
+            for slug in slugs:
                 path = snapshot_path(settings.data_dir, spec.run_id) / slug
                 note = read_sidecar(path)
                 text = note.transcript_path.read_text(encoding="utf-8").strip()

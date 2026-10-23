@@ -560,3 +560,18 @@ def test_asr_deadline_failure_is_a_service_error_and_releases_slot(client, monke
     response = client.post("/api/voice/transcribe", files={"audio": ("a.wav", wav(), "audio/wav")})
     assert response.status_code == 502
     assert not live._ASR_SLOT.locked()
+
+
+def test_a_run_from_before_snapshots_does_not_break_the_listing(client, tmp_path):
+    import shutil
+
+    from tessera.api.routers.voice import snapshot_path
+
+    old = post_note(client).json()
+    (run,) = client.post("/api/voice/process", json={}).json()
+    shutil.rmtree(snapshot_path(tmp_path, run["spec"]["run_id"]))  # created by older code
+    new = post_note(client, transcript="Una cliente ha chiesto la sciarpa beige").json()
+    response = client.get("/api/voice/notes")
+    assert response.status_code == 200
+    states = {n["note_id"]: n["run_id"] for n in response.json()}
+    assert states == {old["note_id"]: run["spec"]["run_id"], new["note_id"]: None}
