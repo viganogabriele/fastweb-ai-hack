@@ -21,12 +21,12 @@ sys.path.insert(0, HERE)
 
 import mun01, ber01, zrh01, stm01  # noqa: E402
 
-DOM = "moncler-retail.example"
+DOM = "valentino-retail.example"
 OUT = os.path.join(ROOT, "generated", "sources", "store_emails")
 
 SHARED = {
     "sw": dict(name="Stefan Wagner", addr=f"stefan.wagner@{DOM}", mailer="outlook",
-               footer="\n\nStefan Wagner\nArea Manager DACH\nMoncler Retail\nM +49 151 2290 4417"),
+               footer="\n\nStefan Wagner\nArea Manager DACH\nValentino Retail\nM +49 151 2290 4417"),
     "ops": dict(name="Retail Ops DACH", addr=f"retail-ops-dach@{DOM}"),
     "merch": dict(name="Merch Planning", addr=f"merch-planning@{DOM}"),
     "vmteam": dict(name="VM Team", addr=f"vm-team@{DOM}"),

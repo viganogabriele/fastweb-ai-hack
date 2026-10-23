@@ -73,14 +73,14 @@ ws0.append([])
 ws0.append(["Regione", "Crescita vs LY", "Note"])
 for r in REGIONS:
     ws0.append([r, GROWTH[r], {"EMEA": "incl. Golden Week Milano/Parigi", "AMERICAS": "campagna FW26 US/UK da 15/9 (+ agenzia stima +20%?)",
-                               "APAC": "Genius Polaris + Cina forte"}[r]])
+                               "APAC": "Couture Astra + Cina forte"}[r]])
 ws0.append([])
 ws0.append(["Categoria", "Adj. crescita", "Mesi copertura EOP (WOC/4)"])
 for c in CATS:
     ws0.append([c, CAT_ADJ[c], WOC[c]])
 ws0.append([])
-ws0.append(["Polaris (Genius)", "Piano EU = profilo Genius drop 2025 (CN/HK), fattore 1.0", "da rivedere dopo lancio 24/9"])
-ws0.append(["ILVARO", "analogo BADY x 0,55 (allocazione) / forecast stat. BADY x 0,6", "colore 510 rosa cipria = 20% buy"])
+ws0.append(["Astra (Couture)", "Piano EU = profilo Couture drop 2025 (CN/HK), fattore 1.0", "da rivedere dopo lancio 24/9"])
+ws0.append(["IRIDIA", "analogo ARIA x 0,55 (allocazione) / forecast stat. ARIA x 0,6", "colore 510 rosa cipria = 20% buy"])
 ws0.append(["SYD01", "profilo stagionalità NH_STD (come EMEA)", "?? chiedere a Daniel Lim"])
 for row in ws0.iter_rows(min_row=4, max_row=ws0.max_row):
     for c in row:
@@ -198,10 +198,10 @@ for reg in REGIONS:
     # planner comments
     if reg == "EMEA":
         c = ws.cell(row=blocks["Outerwear"] + 6, column=5)
-        c.comment = Comment("Include riassortimento MAIRE nero 420 pz (PO 4500218734) - ETA 02/10 (era 25/9)", "G. Bellini")
+        c.comment = Comment("Include riassortimento AUREA nero 420 pz (PO 4500218734) - ETA 02/10 (era 25/9)", "G. Bellini")
     if reg == "APAC":
         c = ws.cell(row=blocks["Outerwear"], column=4)
-        c.comment = Comment("Polaris: piano CN/HK ok. ILVARO rosa nessun upside previsto", "W. Chen")
+        c.comment = Comment("Astra: piano CN/HK ok. IRIDIA rosa nessun upside previsto", "W. Chen")
 
 # Summary sheet with cross-sheet formulas
 ws = wb.create_sheet("Summary", 0)
@@ -241,9 +241,9 @@ print("OTB saved")
 
 # ------------------------------------------------------------------ allocation plan for new products
 la = pd.read_csv(C.CACHE / "launch_allocations.csv", dtype={"size": str})
-ANALOG = {"ILVARO": ("BADY", 0.55), "AMBRINE": ("HERMINE", 0.80), "ARNEB": ("MONTCLA", 0.85), "ROSIERE": ("KARAKORUM", 0.90),
-          "WOOL TURTLENECK": ("CABLE KNIT SWEATER", 1.0), "POLARIS CAPE": ("GENIUS FW25 DROP (CN/HK profile)", 1.0),
-          "POLARIS OVERSIZED": ("GENIUS FW25 DROP (CN/HK profile)", 1.0), "POLARIS BALACLAVA": ("GENIUS FW25 DROP (CN/HK profile)", 1.0)}
+ANALOG = {"IRIDIA": ("ARIA", 0.55), "AMALIA": ("LIVIANA", 0.80), "ARTEM": ("MISTRAL", 0.85), "RIVIERA": ("COSIMO", 0.90),
+          "CASHMERE TURTLENECK": ("INTARSIA SWEATER", 1.0), "ASTRA CAPE": ("COUTURE FW25 DROP (CN/HK profile)", 1.0),
+          "ASTRA OVERSIZED": ("COUTURE FW25 DROP (CN/HK profile)", 1.0), "ASTRA BALACLAVA": ("COUTURE FW25 DROP (CN/HK profile)", 1.0)}
 GRADE = {}
 for sid in st.index:
     t = st.store_type[sid]
@@ -262,7 +262,7 @@ for r in la.itertuples():
                      alloc_qty=int(r.qty), override="" if abs(calc - r.qty) < 1.5 else "MANUAL", gi_date=r.gi_date,
                      season_profile="NH_STD"))
 al = pd.DataFrame(rows)
-# quirk: duplicated row (ILVARO 510 SEL02 size 1) and store names instead of codes in POLARIS sheet
+# quirk: duplicated row (IRIDIA 510 SEL02 size 1) and store names instead of codes in ASTRA sheet
 dup = al[(al.sku == "J20931A00618-510") & (al.store == "SEL02") & (al["size"] == "1")]
 al = pd.concat([al, dup]).sort_values(["wave", "style", "sku", "store", "size"], kind="stable")
 with pd.ExcelWriter(OUT / "allocation_plan_FW26_new_products.xlsx", engine="openpyxl") as xw:
@@ -271,14 +271,14 @@ with pd.ExcelWriter(OUT / "allocation_plan_FW26_new_products.xlsx", engine="open
     a2 = al[al.wave.str.contains("2026-09-24")].copy()
     a2["store"] = a2.store.map(lambda s: str(R.choice(C.STORE_ALIASES[s])) if R.random() < 0.6 else st.store_name[s])
     a2 = a2.drop(columns=["werks"])
-    a2.to_excel(xw, sheet_name="Wave2_Genius_2409", index=False)
+    a2.to_excel(xw, sheet_name="Wave2_Couture_2409", index=False)
     summ = al.groupby(["wave", "style", "sku", "dc"]).alloc_qty.sum().unstack("dc").fillna(0).astype(int).reset_index()
     summ.to_excel(xw, sheet_name="Summary_by_DC", index=False)
-    pd.DataFrame({"parametro": ["metodo", "ILVARO", "AMBRINE", "POLARIS", "rounding", "min presentation", "nota SYD01", "nota rosa"],
-                  "valore": ["analogo x fattore x settimane copertura x curva taglie", "BADY x 0,55 (prudenziale, nuovo fit boxy)",
-                             "HERMINE x 0,8; split colore 70% nero / 30% marrone", "come drop Genius FW25 (profilo CN/HK applicato a tutte le regioni)",
+    pd.DataFrame({"parametro": ["metodo", "IRIDIA", "AMALIA", "ASTRA", "rounding", "min presentation", "nota SYD01", "nota rosa"],
+                  "valore": ["analogo x fattore x settimane copertura x curva taglie", "ARIA x 0,55 (prudenziale, nuovo fit boxy)",
+                             "LIVIANA x 0,8; split colore 70% nero / 30% marrone", "come drop Couture FW25 (profilo CN/HK applicato a tutte le regioni)",
                              "half-up, min 1 per taglie core in store A/B", "1 pz taglie con quota >= 12% (A/B)",
-                             "profilo stagionale NH_STD come Europa", "510 rosa: buy 20% del totale ILVARO, rischio sell-through basso"]}
+                             "profilo stagionale NH_STD come Europa", "510 rosa: buy 20% del totale IRIDIA, rischio sell-through basso"]}
                  ).to_excel(xw, sheet_name="Parametri", index=False)
 print("allocation rows", len(al))
 

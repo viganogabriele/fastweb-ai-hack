@@ -33,7 +33,7 @@ def eml(body: str, subject: str = "Chiusura", extra: str = "", ctype: str = "tex
 def test_real_italian_closing_email() -> None:
     e = load("MIL01/20260901_2025_MIL01.eml")
     assert e.subject == "Chiusura MIL01 - 01/09"
-    assert e.sender_address == "giulia.ferrandi@moncler-retail.example"
+    assert e.sender_address == "giulia.ferrandi@valentino-retail.example"
     assert e.sent_at == datetime(2026, 9, 1, 20, 25, 39, tzinfo=timezone(timedelta(hours=2)))
     assert not e.is_reply and not e.is_forward and e.body_source == "plain"
     assert not any(s.is_quoted for s in e.segments)
@@ -49,9 +49,9 @@ def test_real_french_reply_flags_quoted_original() -> None:
     assert e.is_reply and e.thread_subject == "PAR01 - Closing 25/09"
     assert e.in_reply_to is not None
     own, quoted = [s for s in e.segments if not s.is_quoted], [s for s in e.segments if s.is_quoted]
-    assert any("Maire noire non servies" in s.text for s in own)
+    assert any("Aurea noire non servies" in s.text for s in own)
     assert quoted[0].text.startswith("Le ven. 25 sept. 2026")
-    assert any("Maire noire : 3 demandes" in s.text for s in quoted)
+    assert any("Aurea noire : 3 demandes" in s.text for s in quoted)
     assert "3 demandes" not in e.own_text
     assert_offsets(e)
 
@@ -61,7 +61,7 @@ def test_real_japanese_iso_2022_jp_email() -> None:
     e = load("TYO01/20260906_2140_TYO01.eml")
     assert e.subject == "銀座店 日報 9/6(日)"
     assert e.sent_at is not None and e.sent_at.utcoffset() == timedelta(hours=9)
-    assert any("MAYA黒が7点" in s.text for s in e.segments)
+    assert any("NOVA黒が7点" in s.text for s in e.segments)
     assert_offsets(e)
 
 
@@ -73,7 +73,7 @@ def test_real_attachment_is_listed_not_parsed() -> None:
     ]
     assert e.attachments[0].content_type.endswith("spreadsheetml.sheet")
     assert e.attachments[0].size_bytes > 0
-    assert "lista d'attesa della Maire nera" in e.text
+    assert "lista d'attesa della Aurea nera" in e.text
 
 
 @needs_dataset
@@ -98,7 +98,7 @@ def test_all_dev_emails_parse_with_valid_offsets() -> None:
 
 
 def test_outlook_from_sent_block_starts_quote() -> None:
-    body = "OK grazie\n\nFrom: Marco\nSent: Thursday\nTo: Anna\n\nMaire nera finita"
+    body = "OK grazie\n\nFrom: Marco\nSent: Thursday\nTo: Anna\n\nAurea nera finita"
     e = parse_eml(eml(body, subject="R: Chiusura"))
     assert e.is_reply
     assert [s.is_quoted for s in e.segments] == [False, True, True]
@@ -106,17 +106,17 @@ def test_outlook_from_sent_block_starts_quote() -> None:
 
 
 def test_angle_quotes_inline_and_blank_quote_lines() -> None:
-    e = parse_eml(eml("Sì confermo\n> quante Maire?\n>\n> 3 in T2\nGrazie"))
+    e = parse_eml(eml("Sì confermo\n> quante Aurea?\n>\n> 3 in T2\nGrazie"))
     assert [(s.text, s.is_quoted) for s in e.segments] == [
         ("Sì confermo", False),
-        ("> quante Maire?", True),
+        ("> quante Aurea?", True),
         ("> 3 in T2", True),
         ("Grazie", False),
     ]
 
 
 def test_code_point_offsets_with_emoji_and_cjk() -> None:
-    e = parse_eml(eml("今日 🎉 很好\n\n粉色 ILVARO 断码 👍"))
+    e = parse_eml(eml("今日 🎉 很好\n\n粉色 IRIDIA 断码 👍"))
     assert_offsets(e)
     s = e.segments[1]
     assert e.text[s.char_start : s.char_start + 2] == "粉色"
@@ -143,7 +143,7 @@ def test_html_only_body_with_blockquote() -> None:
     html = (
         "<html><head><style>p{}</style></head><body><p>Ciao &amp; grazie</p>"
         "<table><tr><td>Sales</td><td>HK$194,400</td></tr></table>"
-        "<blockquote><p>Maire nera?</p></blockquote></body></html>"
+        "<blockquote><p>Aurea nera?</p></blockquote></body></html>"
     )
     e = parse_eml(eml(html, ctype="text/html"))
     assert e.body_source == "html"
@@ -171,9 +171,9 @@ def test_html_to_text_strips_scripts() -> None:
 
 
 def test_header_like_lines_in_own_report_are_not_a_quote() -> None:
-    e = parse_eml(eml("Da: Giulia (MIL01)\nData: 22/10\nFatturato 85k, 3 Maire nere perse"))
+    e = parse_eml(eml("Da: Giulia (MIL01)\nData: 22/10\nFatturato 85k, 3 Aurea nere perse"))
     assert not any(s.is_quoted for s in e.segments)
-    assert "3 Maire nere perse" in e.own_text
+    assert "3 Aurea nere perse" in e.own_text
 
 
 def raw_eml(body: bytes, charset: str) -> bytes:
@@ -187,11 +187,21 @@ def raw_eml(body: bytes, charset: str) -> bytes:
 @pytest.mark.parametrize(
     ("body", "charset", "text", "warning"),
     [
-        ("perché 3 Maire".encode(), "utf-8", "perché 3 Maire", None),
-        ("perché 3 Maire".encode("cp1252"), "utf-8", "perché 3 Maire", "utf-8->windows-1252"),
+        ("perché 3 Aurea".encode(), "utf-8", "perché 3 Aurea", None),
+        (
+            "perché 3 Aurea".encode("cp1252"),
+            "utf-8",
+            "perché 3 Aurea",
+            "utf-8->windows-1252",
+        ),
         ("perché".encode(), "x-unknown", "perché", "x-unknown->utf-8"),
         ("perché".encode(), "us-ascii", "perché", "us-ascii->utf-8"),
-        ("粉色 Ilvaro 䶮".encode("gb18030"), "gb2312", "粉色 Ilvaro 䶮", "gb2312->gb18030"),
+        (
+            "粉色 Iridia 䶮".encode("gb18030"),
+            "gb2312",
+            "粉色 Iridia 䶮",
+            "gb2312->gb18030",
+        ),
     ],
 )
 def test_charset_fallback_keeps_exact_text_and_warns(body, charset, text, warning) -> None:

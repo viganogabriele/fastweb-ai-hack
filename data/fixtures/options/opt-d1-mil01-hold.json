@@ -9,17 +9,17 @@
       "source_refs": [
         {
           "uri": "dataset://store_emails/MIL01/20261009_1035_MIL01.eml",
-          "content_hash": "sha256:173f031967d236d50951cd1ad52ea2692c28ed005eb8fe68e68105b422927144",
+          "content_hash": "sha256:5b8afe5fc87f71f0eb397c3f91acc7a300f9b97bb13d127144b4ddab080b7ebd",
           "locator": null
         },
         {
           "uri": "dataset://erp/master_data/styles.csv",
-          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "content_hash": "sha256:36632f9c5616d48fbe94958702172d72d492e9628967ffa063874ccba8569b89",
           "locator": "style_code=I10919B00011"
         },
         {
           "uri": "dataset://erp/master_data/styles.csv",
-          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "content_hash": "sha256:36632f9c5616d48fbe94958702172d72d492e9628967ffa063874ccba8569b89",
           "locator": "style_code=I10919B00042"
         },
         {
@@ -64,7 +64,7 @@
         },
         {
           "uri": "dataset://systems/warehouse/reservations/ZRESV_reservations_export.csv",
-          "content_hash": "sha256:e35f0f2841d0f27c6066b079e53666ceb5a0af1f388cde8fd3dd41bbfffd643d",
+          "content_hash": "sha256:315881d1f2ac45ff0789370ab8a5bc471c09ed1d0a5d965f43c8280cf2d3c866",
           "locator": "RSNUM=1004508;WERKS=IT10;J_3ASIZE=M"
         }
       ],
@@ -217,7 +217,7 @@
       "valid_until": "2026-10-16T08:35:52Z",
       "recommended": false,
       "rationale": "no stock action: 2.49 units of size M stay unserved at MIL01 over D+1..D+7 while MIL02 keeps 0.41 units. It is the baseline for the other options, not a proposal: the store keeps asking for size M and the DC receipt is too late to help inside the horizon",
-      "input_version_hash": "sha256:026eb0b8b62b3b45b49da6755626bbf98f1f4c62e5830421e16a98c387024f8b"
+      "input_version_hash": "sha256:f244b354e0865161a3dbe04e17856cfa1b870122cb7b72cf15c40572f5eda47e"
     }
   }
 ]

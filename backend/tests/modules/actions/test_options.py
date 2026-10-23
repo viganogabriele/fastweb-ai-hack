@@ -1,6 +1,7 @@
 """ACT-02: `evaluate_options()` on hand-built inputs, and `act.options` on a synthetic repo.
 
-Case: the DATA-01b MAIRE black fixture (MIL01, unmet demand). Run evening: Wed 2026-10-14 20:00 in
+Case: the DATA-01b AUREA black fixture (MIL01, unmet demand).
+Run evening: Wed 2026-10-14 20:00 in
 Milan, horizon Thu 15 → Wed 21. Stock snapshots are end of Tue 13 (one day before the horizon).
 Lane MIL02 → MIL01: pickup Mon-Fri 12:00, one transit day, so Thu 15 pickup, ETA Fri 16, sellable
 Sat 17.
@@ -469,6 +470,36 @@ def test_pure_and_hash_follows_inputs():
     assert evaluate_options(changed)[0].version != a[0].version
 
 
+@pytest.mark.parametrize("target", ["dest", "donor"])
+@pytest.mark.parametrize("country", ["FR", None])
+def test_country_change_invalidates_option_hash(target, country):
+    original = inputs()
+    where = original.dest if target == "dest" else original.routes[0].donor
+    changed = inputs(**{target: replace(where, country=country)})
+    before = by_kind(evaluate_options(original))["transfer"]
+    after = by_kind(evaluate_options(changed))["transfer"]
+
+    assert checks(before)["domestic"] == "pass" and before.recommended
+    assert checks(after)["domestic"] == "fail" and not after.recommended
+    assert after.input_version_hash != before.input_version_hash
+    assert after.version != before.version
+
+
+@pytest.mark.parametrize("target", ["dest", "donor"])
+def test_timezone_change_invalidates_option_hash(target):
+    original = inputs()
+    where = original.dest if target == "dest" else original.routes[0].donor
+    changed = inputs(**{target: replace(where, timezone=ZoneInfo("Asia/Tokyo"))})
+    before = by_kind(evaluate_options(original))
+    after = by_kind(evaluate_options(changed))
+
+    if target == "dest":
+        assert after["hold"].valid_until != before["hold"].valid_until
+    assert after["transfer"].input_version_hash != before["transfer"].input_version_hash
+    assert after["transfer"].version != before["transfer"].version
+    assert evaluate_options(changed) == evaluate_options(changed)
+
+
 def test_wording_never_claims_optimal_or_roi():
     for opts in (evaluate_options(inputs()), evaluate_options(inputs(policy=OptionsPolicy()))):
         for o in opts:
@@ -478,8 +509,8 @@ def test_wording_never_claims_optimal_or_roi():
 
 def test_case_product_from_scope():
     assert options.case_product(fixture_case()) == (SKU, None)
-    tib = fixture_case(scope_level="sku_size", scope_id="J10911A00305-742-4")
-    assert options.case_product(tib) == ("J10911A00305-742", "4")
+    valentino_v17 = fixture_case(scope_level="sku_size", scope_id="J10911A00305-742-4")
+    assert options.case_product(valentino_v17) == ("J10911A00305-742", "4")
     style = fixture_case(scope_level="style", scope_id="J20931A00012")
     assert options.case_product(style) == (None, None)
 
@@ -514,7 +545,7 @@ def sources(tmp_path, monkeypatch):
         ("store_id", "timezone", "currency", "closed_dow", "country_code"),
         stores,
     )
-    write(master / "styles.csv", ("style_code", "style_name"), [("J20931A00012", "MAIRE")])
+    write(master / "styles.csv", ("style_code", "style_name"), [("J20931A00012", "AUREA")])
     write(
         master / "sku_colour.csv",
         ("sku", "style_code", "color_code"),

@@ -1,13 +1,13 @@
 {
   "_request": {
     "method": "GET",
-    "url": "https://wms-gw.moncler-int.example/v1/atp?plant=IT10&material=J20931A00012999",
+    "url": "https://wms-gw.valentino-int.example/v1/atp?plant=IT10&material=J20931A00012999",
     "ts": "2026-09-21T06:30:00Z"
   },
   "plant": "IT10",
   "material": "J20931A00012999",
   "sku": "J20931A00012-999",
-  "styleName": "MAIRE",
+  "styleName": "AUREA",
   "asOf": "2026-09-21T06:00:00+02:00",
   "uom": "PC",
   "sizes": [

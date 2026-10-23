@@ -141,6 +141,6 @@ def test_restated_fact_in_one_document_is_one_observation() -> None:
     assert len(dups) == 2  # one per duplicate email, not one per mention
     for obs in dups:
         assert [e.quote for e in obs.evidence] == [
-            "Maire nera: 7 richieste (2 2 2, 1 1, 0, 4)",
-            "Maire nera 7 richieste.",
+            "Aurea nera: 7 richieste (2 2 2, 1 1, 0, 4)",
+            "Aurea nera 7 richieste.",
         ]

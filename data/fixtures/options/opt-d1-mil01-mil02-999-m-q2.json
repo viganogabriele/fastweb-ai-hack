@@ -9,17 +9,17 @@
       "source_refs": [
         {
           "uri": "dataset://store_emails/MIL01/20261009_1035_MIL01.eml",
-          "content_hash": "sha256:173f031967d236d50951cd1ad52ea2692c28ed005eb8fe68e68105b422927144",
+          "content_hash": "sha256:5b8afe5fc87f71f0eb397c3f91acc7a300f9b97bb13d127144b4ddab080b7ebd",
           "locator": null
         },
         {
           "uri": "dataset://erp/master_data/styles.csv",
-          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "content_hash": "sha256:36632f9c5616d48fbe94958702172d72d492e9628967ffa063874ccba8569b89",
           "locator": "style_code=I10919B00011"
         },
         {
           "uri": "dataset://erp/master_data/styles.csv",
-          "content_hash": "sha256:24f879ed4c7bcb0a6d962e9ce2251765056011be9b26d4174cff046917eed570",
+          "content_hash": "sha256:36632f9c5616d48fbe94958702172d72d492e9628967ffa063874ccba8569b89",
           "locator": "style_code=I10919B00042"
         },
         {
@@ -84,7 +84,7 @@
         },
         {
           "uri": "dataset://systems/warehouse/reservations/ZRESV_reservations_export.csv",
-          "content_hash": "sha256:e35f0f2841d0f27c6066b079e53666ceb5a0af1f388cde8fd3dd41bbfffd643d",
+          "content_hash": "sha256:315881d1f2ac45ff0789370ab8a5bc471c09ed1d0a5d965f43c8280cf2d3c866",
           "locator": "RSNUM=1004508;WERKS=IT10;J_3ASIZE=M"
         }
       ],
@@ -193,7 +193,7 @@
             {
               "kind": "SourceFile",
               "id": "dataset://systems/warehouse/reservations/ZRESV_reservations_export.csv#RSNUM=1004508;WERKS=IT10;J_3ASIZE=M",
-              "version": "sha256:e35f0f2841d0f27c6066b079e53666ceb5a0af1f388cde8fd3dd41bbfffd643d"
+              "version": "sha256:315881d1f2ac45ff0789370ab8a5bc471c09ed1d0a5d965f43c8280cf2d3c866"
             },
             {
               "kind": "StockFact",
@@ -211,7 +211,7 @@
             {
               "kind": "SourceFile",
               "id": "dataset://systems/warehouse/quality/QMEL_quality_notifications.csv#MATNR starts with I10919B00011",
-              "version": "sha256:a44bfa7b1838f4114a32faab84293ff7e961fbd10ff8782efdcbd11e4794d9af"
+              "version": "sha256:424f718a767343ff9a9611a498f17f5002e17db98062d151f670c8b8ce2b4482"
             }
           ]
         },
@@ -400,7 +400,7 @@
             {
               "kind": "SourceFile",
               "id": "dataset://systems/logistics/ibt_transfers_storelink_export.csv#scope=source_store:MIL02",
-              "version": "sha256:bc705063c811bb3f1da10bb4ac654f3de8c93a992330c9bf2d5afea4b16befa2"
+              "version": "sha256:3b89c9d015f35ec01b2e4664821b0c2cd97c3998629b64353b46e322ff1a8380"
             }
           ]
         }
@@ -479,7 +479,7 @@
       "valid_until": "2026-10-16T08:35:52Z",
       "recommended": false,
       "rationale": "legs and lane work: 2 of the 3 units at MIL02, by same-day courier before the 15:30 cutoff, sellable at 2026-10-10. It leaves 0.49 units of size M unserved at MIL01 instead of 2.49 and keeps the donor's policy minimum at dispatch, but the donor sells out on 2026-10-12 and loses 1.59 units against 0.00 on hold for 16.21 EUR, and its sellable quantity and quality state are unknown: no recommendation while the counts are unconfirmed",
-      "input_version_hash": "sha256:d3cf1c09752bf7d65f476fac6fcabbe2b87b2e13f0659183874b1c508c533cc8"
+      "input_version_hash": "sha256:36a2aba042f8a08e02518c4af82de0b4589b48edc8647b824aeb5bca006492bf"
     }
   }
 ]

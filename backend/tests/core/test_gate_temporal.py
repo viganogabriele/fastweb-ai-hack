@@ -59,7 +59,7 @@ ANSWERS = {
         dict(quote="Fatturato: 58,0k", kind="sales_figure", quantity_kind="exact", value=58000,
              unit="money", currency="EUR", quantity_raw="58,0k", attribution="store_staff",
              period_start="2026-09-18", period_end="2026-09-18"),
-        dict(quote="Maya nera 12 pezzi", kind="demand_up", product_mention="Maya nera",
+        dict(quote="Nova nera 12 pezzi", kind="demand_up", product_mention="Nova nera",
              quantity_kind="exact", value=12, unit="units", quantity_raw="12 pezzi",
              direction="up", attribution="store_staff", period_start="2026-09-18",
              period_end="2026-09-18"),
@@ -72,7 +72,7 @@ ANSWERS = {
     ],
     NEXT_DAY: [
         dict(quote="Almeno 4 sono uscite senza perche' non c'era la taglia (2 e 3)",
-             kind="unmet_demand", product_mention="Maire nera", direction="up",
+             kind="unmet_demand", product_mention="Aurea nera", direction="up",
              attribution="store_staff", period_start="2026-09-19", period_end="2026-09-19"),
     ],
 }  # fmt: skip

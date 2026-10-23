@@ -14,13 +14,13 @@ Hong Kong and Japan remain the top short-haul destinations, although Japan booki
 ARTICLES = [
 # ---------------- Luxury Wire (also RSS)
 dict(src="lw", pub="2026-09-24T09:00:00+00:00", fmt="json", rss=True, author="Luxury Wire staff",
-     title="Moncler Genius unveils 'Polaris' capsule with oversized cape and balaclava",
-     tags=["Moncler", "Genius", "launch"],
-     body="""Moncler's Genius platform on Thursday released Polaris, a capsule built around extreme volume: a down cape priced at 2,900 euros, an oversized puffer at 2,400 euros and a knitted balaclava at 450 euros, in black, white and an icy light blue.
+     title="Valentino Couture unveils 'Astra' capsule with oversized cape and balaclava",
+     tags=["Valentino", "Couture", "launch"],
+     body="""Valentino's Couture platform on Thursday released Astra, a capsule built around extreme volume: a down cape priced at 2,900 euros, an oversized puffer at 2,400 euros and a knitted balaclava at 450 euros, in black, white and an icy light blue.
 
 The collection is available from today in selected stores in Europe, the Americas and Asia and on the brand's e-commerce, with a dedicated pop-in at the Shanghai flagship and on Tmall.
 
-Polaris follows last year's Genius drop, which industry analysts credited with lifting traffic among younger clients. The company did not disclose production volumes."""),
+Astra follows last year's Couture drop, which industry analysts credited with lifting traffic among younger clients. The company did not disclose production volumes."""),
 
 dict(src="lw", pub="2026-09-28T18:30:00+00:00", fmt="json", rss=True, author="Luxury Wire staff",
      title="Milan Fashion Week wraps with strong buyer turnout from Korea and the Gulf",
@@ -41,13 +41,13 @@ Among the most photographed guests was Yoon Ha-eun of the girl group LUMIERE, wh
 The schedule continues through Oct 7."""),
 
 dict(src="lw", pub="2026-10-06T07:45:00+00:00", fmt="json", rss=True, author="Luxury Wire staff",
-     title="Idol effect: pink Ilvaro puffer sells out across Asia within days",
-     tags=["Moncler", "Ilvaro", "K-pop", "Asia", "sell-out"],
+     title="Idol effect: pink Iridia puffer sells out across Asia within days",
+     tags=["Valentino", "Iridia", "K-pop", "Asia", "sell-out"],
      body="""A powder pink cropped down jacket worn by K-pop singer Yoon Ha-eun at Paris Fashion Week has sold out in stores and online across much of Asia, according to store staff and resale platforms.
 
-The jacket, the Ilvaro, is a new style in Moncler's autumn-winter 2026 collection and retails for 1,590 euros in Europe, 2.72 million won in South Korea and 15,200 yuan in China. Store staff in Seoul, Shanghai, Tokyo and Hong Kong said the pink version was gone within one to three days of the photos circulating on Oct 1-2. Black and off-white versions have also seen a spike in demand.
+The jacket, the Iridia, is a new style in Valentino's autumn-winter 2026 collection and retails for 1,590 euros in Europe, 2.72 million won in South Korea and 15,200 yuan in China. Store staff in Seoul, Shanghai, Tokyo and Hong Kong said the pink version was gone within one to three days of the photos circulating on Oct 1-2. Black and off-white versions have also seen a spike in demand.
 
-On Korean resale platform KREAM, the pink Ilvaro was listed at up to 4.6 million won on Monday. Moncler did not respond to a request for comment on restocking."""),
+On Korean resale platform KREAM, the pink Iridia was listed at up to 4.6 million won on Monday. Valentino did not respond to a request for comment on restocking."""),
 
 dict(src="lw", pub="2026-10-15T16:20:00+00:00", fmt="json", rss=True, author="Luxury Wire staff",
      title="Frieze London opens with cautious mood among collectors",
@@ -120,10 +120,10 @@ For retailers the timing was not ideal: September is already a soft month, and m
 
 dict(src="raw", pub="2026-10-05T09:14:00+08:00", fmt="html", author="Grace Lim",
      title="Pink puffer frenzy: idol's Paris look empties shelves from Seoul to Singapore",
-     tags=["K-pop", "Moncler", "Ilvaro", "sell-out", "Asia"],
+     tags=["K-pop", "Valentino", "Iridia", "sell-out", "Asia"],
      body="""Store managers across Asia have spent the weekend turning customers away. The reason: a powder pink cropped down jacket worn by LUMIERE singer Yoon Ha-eun outside a Paris Fashion Week show on Oct 1.
 
-The jacket, Moncler's new Ilvaro style, sold out in its pink colourway at boutiques in Seoul's Cheongdam-dong and the Hyundai department store in Apgujeong by Friday, Oct 2, according to two people familiar with the matter. Shanghai, Beijing, Chengdu, Tokyo, Osaka, Taipei, Hong Kong and Singapore followed over the weekend.
+The jacket, Valentino's new Iridia style, sold out in its pink colourway at boutiques in Seoul's Cheongdam-dong and the Hyundai department store in Apgujeong by Friday, Oct 2, according to two people familiar with the matter. Shanghai, Beijing, Chengdu, Tokyo, Osaka, Taipei, Hong Kong and Singapore followed over the weekend.
 
 "We had a handful of pieces in pink because it was considered a fashion colour," one Asia-based retail executive said. "Nobody planned for this."
 
@@ -132,12 +132,12 @@ Waiting lists in some stores now exceed 80 names. Some staff said customers were
 The brand typically holds limited reserve stock at its regional distribution centres for new styles. It was not immediately clear when more pink units would arrive. In Singapore the jacket retails for 2,500 Singapore dollars."""),
 
 dict(src="raw", pub="2026-10-12T08:00:00+08:00", fmt="html", author="Kenji Mori",
-     title="Moncler to raise Japan prices by 8% from Nov 1, shoppers rush to buy",
-     tags=["Japan", "price increase", "Moncler", "yen"],
+     title="Valentino to raise Japan prices by 8% from Nov 1, shoppers rush to buy",
+     tags=["Japan", "price increase", "Valentino", "yen"],
      correction="""Correction (Oct 12, 15:30 SGT): An earlier version of this story said the price increase would take effect on Oct 1. It takes effect on Nov 1.""",
-     body="""Moncler will raise retail prices in Japan by an average of 8 percent from Nov 1, according to a notice sent to clients and confirmed by store staff, as luxury brands continue to pass on the effect of a weak yen.
+     body="""Valentino will raise retail prices in Japan by an average of 8 percent from Nov 1, according to a notice sent to clients and confirmed by store staff, as luxury brands continue to pass on the effect of a weak yen.
 
-The increase applies mainly to continuative styles, the permanent collection pieces that are carried over each season. Icons such as the Maya men's down jacket and the Maire women's jacket are among the most affected, with some prices rising by around 10 percent. New seasonal items are less affected.
+The increase applies mainly to continuative styles, the permanent collection pieces that are carried over each season. Icons such as the Nova men's down jacket and the Aurea women's jacket are among the most affected, with some prices rising by around 10 percent. New seasonal items are less affected.
 
 Sales associates in Ginza and Omotesando said clients began calling as soon as the notice went out on Oct 9, and many reserved pieces to buy before the deadline. "The weather is still too warm for down jackets, but people don't want to pay more next month," said one.
 
@@ -162,7 +162,7 @@ dict(src="sth", pub="2026-10-12T06:00:00+08:00", fmt="html", author="Ong Wei Lin
 
 Hotel occupancy in the downtown core topped 95 percent from Friday to Sunday, according to industry estimates. At The Shoppes at Marina Bay Sands, several luxury boutiques said Saturday was their busiest day of the year so far, with visitors from Indonesia, Australia, China and the Middle East.
 
-One store manager said racegoers were buying light jackets and accessories rather than heavy outerwear. "It's 31 degrees outside. They want something for the trip to Japan next month," she said. Another boutique had a waiting list for the pink Maya puffer worn by a K-pop star in Paris, which had sold out in Singapore within days.
+One store manager said racegoers were buying light jackets and accessories rather than heavy outerwear. "It's 31 degrees outside. They want something for the trip to Japan next month," she said. Another boutique had a waiting list for the pink Nova puffer worn by a K-pop star in Paris, which had sold out in Singapore within days.
 
 The race returns in 2027 under a contract extension running to 2028."""),
 
@@ -172,7 +172,7 @@ dict(src="ken", pub="2026-10-01T11:20:00-07:00", fmt="html", author="Jamie Seo",
      tags=["LUMIERE", "Yoon Ha-eun", "Paris Fashion Week", "fashion"],
      body="""Yoon Ha-eun did not walk a single runway in Paris and still owned the day.
 
-The LUMIERE vocalist arrived at the Tuileries for an afternoon show in a cropped powder pink down jacket by Moncler, the Ilvaro from the brand's new fall collection, paired with a cream knit dress, white knee boots and tiny silver hoops. Within an hour fan accounts had identified the jacket, and #윤하은패딩 (Yoon Ha-eun padding) was trending in Korea.
+The LUMIERE vocalist arrived at the Tuileries for an afternoon show in a cropped powder pink down jacket by Valentino, the Iridia from the brand's new fall collection, paired with a cream knit dress, white knee boots and tiny silver hoops. Within an hour fan accounts had identified the jacket, and #윤하은패딩 (Yoon Ha-eun padding) was trending in Korea.
 
 It's her first Paris Fashion Week appearance since LUMIERE's world tour wrapped in August. The group is expected to release a new mini album in November.
 
@@ -198,18 +198,18 @@ Hotels around Haeundae are fully booked through the first weekend, and the Centu
 
 # ---------------- Drop Culture
 dict(src="drop", pub="2026-10-04T14:00:00+00:00", fmt="json", author="Max Ferreira",
-     title="The pink Moncler Maire is the most wanted jacket on the internet right now",
-     tags=["resale", "Moncler", "K-pop", "hype"],
-     body="""If you've opened any social app this week, you've seen it: Yoon Ha-eun in Paris, in a puffy, cropped, very pink jacket. That's the Moncler Maire in powder pink, and it's gone basically everywhere in Asia.
+     title="The pink Valentino Aurea is the most wanted jacket on the internet right now",
+     tags=["resale", "Valentino", "K-pop", "hype"],
+     body="""If you've opened any social app this week, you've seen it: Yoon Ha-eun in Paris, in a puffy, cropped, very pink jacket. That's the Valentino Aurea in powder pink, and it's gone basically everywhere in Asia.
 
 On KREAM the jacket has been flipping at well over 4 million won, and Chinese resale app Xianyu has listings above 25,000 yuan, close to double retail. StockX doesn't even have it yet.
 
-Our take: this is the season's sleeper. The Maire was already having a moment thanks to a K-drama in black, and now the pink colourway is the one everyone wants. Want one? Check smaller boutiques in Europe, where demand hasn't caught up yet. Or wait for the restock. Rumour says it's coming soon."""),
+Our take: this is the season's sleeper. The Aurea was already having a moment thanks to a K-drama in black, and now the pink colourway is the one everyone wants. Want one? Check smaller boutiques in Europe, where demand hasn't caught up yet. Or wait for the restock. Rumour says it's coming soon."""),
 
 dict(src="drop", pub="2026-09-29T16:30:00+00:00", fmt="json", author="Max Ferreira",
-     title="We tried on Moncler Genius Polaris. Size up. Then size up again.",
-     tags=["review", "Moncler Genius", "Polaris"],
-     body="""Polaris is a big idea: puffers so oversized they become architecture. In the photos it works. In the fitting room, less so.
+     title="We tried on Valentino Couture Astra. Size up. Then size up again.",
+     tags=["review", "Valentino Couture", "Astra"],
+     body="""Astra is a big idea: puffers so oversized they become architecture. In the photos it works. In the fitting room, less so.
 
 Our tester, normally a men's M, could barely close the oversized jacket in an L. The shoulders are narrow for the volume and the sleeves end early. The cape is easier because, well, it's a cape. But 2,900 euros for a cape is a lot of euros.
 
@@ -219,7 +219,7 @@ The balaclava is the sleeper hit at 450 euros. Expect it to sell out in China, w
 dict(src="mtw", pub="2026-10-19T09:00:00-04:00", fmt="html", author="Rachel Dunmore",
      title="Agency says luxury outerwear campaign drove 22% sales lift in US and UK",
      tags=["advertising", "attribution", "OOH", "luxury"],
-     body="""Independent agency Halcyon & Reed says its fall/winter 2026 campaign for Moncler delivered a 22 percent attributed sales uplift in the US and UK in its first four weeks, one of the strongest results the agency has reported for a fashion client.
+     body="""Independent agency Halcyon & Reed says its fall/winter 2026 campaign for Valentino delivered a 22 percent attributed sales uplift in the US and UK in its first four weeks, one of the strongest results the agency has reported for a fashion client.
 
 The campaign launched on Sept 15 with out-of-home placements in New York (SoHo, Madison Avenue, Hudson Yards), Miami's Design District, Los Angeles and central London, supported by paid social and connected TV. Halcyon & Reed says it measured the impact with a multi-touch attribution model comparing campaign-exposed store areas with an August baseline.
 

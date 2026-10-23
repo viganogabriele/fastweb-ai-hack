@@ -82,9 +82,9 @@ OBSERVATIONS = {
         {
             "slug": "maire-requests",
             "kind": "unmet_demand",
-            "quote": "Maire nera: 7 richieste (2 2 2, 1 1, 0, 4)",
-            "also_quotes": ["Maire nera 7 richieste."],  # same fact in the Note row
-            "product_mention": "Maire nera",
+            "quote": "Aurea nera: 7 richieste (2 2 2, 1 1, 0, 4)",
+            "also_quotes": ["Aurea nera 7 richieste."],  # same fact in the Note row
+            "product_mention": "Aurea nera",
             "quantity": {"kind": "exact", "value": 7, "unit": "requests", "raw": "7 richieste"},
             "direction": "up",
             "time_text": None,
@@ -96,9 +96,9 @@ OBSERVATIONS = {
         {
             "slug": "maire-requests",
             "kind": "unmet_demand",
-            "quote": "Maire nera: 7 richieste (2 2 2, 1 1, 0, 4)",
-            "also_quotes": ["Maire nera 7 richieste."],  # same fact in the Note row
-            "product_mention": "Maire nera",
+            "quote": "Aurea nera: 7 richieste (2 2 2, 1 1, 0, 4)",
+            "also_quotes": ["Aurea nera 7 richieste."],  # same fact in the Note row
+            "product_mention": "Aurea nera",
             "quantity": {"kind": "exact", "value": 7, "unit": "requests", "raw": "7 richieste"},
             "direction": "up",
             "time_text": None,
@@ -149,7 +149,7 @@ OBSERVATIONS = {
             "slug": "tib-zip",
             "kind": "product_feedback",
             "quote": "il cursore della zip si e' staccato da una parte",
-            "product_mention": "gilet Tib blu taglia 4",
+            "product_mention": "gilet Vel blu taglia 4",
             "quantity": {"kind": "exact", "value": 1, "unit": "units", "raw": "un gilet"},
             "direction": "down",
             "reason": "quality_defect",

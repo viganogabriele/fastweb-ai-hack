@@ -1,7 +1,7 @@
-## Call veloce ILVARO rosa – ven 02/10 ore 09:15 CET
+## Call veloce IRIDIA rosa – ven 02/10 ore 09:15 CET
 (Bellini, Chen, Kowalski, Marini, C. Valli marketing/CRM, e-com: T. Rinaldi)
 
-Contesto: ieri sera (01/10) foto di **Yoon Ha-eun (LUMIERE)** fuori dalla sfilata a Parigi con ILVARO 510. Valli: NON era nel nostro seeding, PR Seoul l'ha scoperto stamattina dai social. Probabilmente acquisto suo o del suo stylist.
+Contesto: ieri sera (01/10) foto di **Yoon Ha-eun (LUMIERE)** fuori dalla sfilata a Parigi con IRIDIA 510. Valli: NON era nel nostro seeding, PR Seoul l'ha scoperto stamattina dai social. Probabilmente acquisto suo o del suo stylist.
 
 - E-com APAC: rosa esaurito in tutte le taglie stamattina tra le 07:20 e le 08:40 ora di Seoul (KR, CN, JP). ~700 richieste "notify me" solo stamattina (Rinaldi, dato provvisorio).
 - Negozi Asia: SEL01, SEL02, BUS01 esauriti, TYO in esaurimento. Chen: "it's crazy, waiting lists everywhere".

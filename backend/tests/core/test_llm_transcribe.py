@@ -14,11 +14,11 @@ from .test_llm import run_spec
 ASR_URL = "https://asr.example.test/v1"
 
 
-def verbose(text="Tre clienti hanno chiesto il piumino Maya.", segments=None):
+def verbose(text="Tre clienti hanno chiesto il piumino Nova.", segments=None):
     if segments is None:
         segments = [
             {"id": 0, "start": 0.0, "end": 2.5, "text": " Tre clienti hanno chiesto"},
-            {"id": 1, "start": 2.5, "end": 4.0, "text": " il piumino Maya."},
+            {"id": 1, "start": 2.5, "end": 4.0, "text": " il piumino Nova."},
         ]
     return {
         "task": "transcribe",
@@ -68,9 +68,9 @@ def note(tmp_path):
 
 def test_record_then_replay_without_key_or_network(tmp_path, note):
     live, requests, factories = client(tmp_path, [verbose()])
-    transcript = live.transcribe(note, language="it", prompt="Maya, Grenoble")
+    transcript = live.transcribe(note, language="it", prompt="Nova, Atelier")
 
-    assert transcript.text == "Tre clienti hanno chiesto il piumino Maya."
+    assert transcript.text == "Tre clienti hanno chiesto il piumino Nova."
     assert transcript.language == "italian"
     assert [(s.start, s.end) for s in transcript.segments] == [(0.0, 2.5), (2.5, 4.0)]
     assert factories[0]["base_url"] == ASR_URL
@@ -80,7 +80,7 @@ def test_record_then_replay_without_key_or_network(tmp_path, note):
     assert request.url.path == "/v1/audio/transcriptions"
     body = request.read()
     assert b'name="language"\r\n\r\nit\r\n' in body
-    assert b'name="prompt"\r\n\r\nMaya, Grenoble\r\n' in body
+    assert b'name="prompt"\r\n\r\nNova, Atelier\r\n' in body
     assert b'name="response_format"\r\n\r\nverbose_json\r\n' in body
     assert b'name="model"\r\n\r\nopenai/whisper-large-v3-turbo\r\n' in body
     # The original file name (store, author) never leaves the machine.
@@ -89,7 +89,7 @@ def test_record_then_replay_without_key_or_network(tmp_path, note):
 
     replay, _, _ = client(tmp_path, [], mode="replay", key=None)
     replay._factory = lambda **kw: pytest.fail("network client in replay")
-    assert replay.transcribe(note, language="it", prompt="Maya, Grenoble") == transcript
+    assert replay.transcribe(note, language="it", prompt="Nova, Atelier") == transcript
     assert replay.budget.calls == 0
 
 
@@ -109,7 +109,7 @@ def test_key_follows_audio_bytes_language_and_prompt_not_file_name(tmp_path, not
     assert len(requests) == 1
 
     live.transcribe(note, language="en")
-    live.transcribe(note, language="it", prompt="Maya")
+    live.transcribe(note, language="it", prompt="Nova")
     note.write_bytes(b"other audio")
     live.transcribe(note, language="it")
     assert len(requests) == 4

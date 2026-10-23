@@ -52,7 +52,7 @@ def spec(as_of=T3, run_id="test", stores=("MIL01",), mode="fixture"):
 
 
 def fact(name, *, at=T1, kind="unmet_demand", value=7, unit="requests", period=DAY,
-         origin="store@example.test", negated=False, mention="Maire nera", reason=None,
+         origin="store@example.test", negated=False, mention="Aurea nera", reason=None,
          doc=None):  # fmt: skip
     text = f"{mention}: {value} {unit}."
     common = dict(version="v1", available_at=at, availability_basis="test", source_refs=())

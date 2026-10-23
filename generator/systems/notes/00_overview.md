@@ -29,7 +29,7 @@ ID crosswalks) live in `generator/systems/common.py`; every area imports it so t
   A naive "same order as internal" mapping swaps Seoul Cheongdam and Hyundai Apgujeong, Rome and Rinascente, etc.
 - DCs: DC-IT-CSG = plant IT10, DC-US-NJ = US20, DC-HK-TKO = HK30 (3PL site `TKO-3`, client `MONC01`).
 - SKU: internal `J20931A00012-999`; SAP `MATNR` = `J20931A00012999` + size in `J_3ASIZE`; 3PL item code
-  `MC` + last 8 chars of style + colour + 2-digit 1-based size index (MAIRE black size 0 = `MC31A0001299902`) + EAN;
+  `MC` + last 8 chars of style + colour + 2-digit 1-based size index (AUREA black size 0 = `MC31A0001299902`) + EAN;
   e-com variant `J20931A00012-999-1` (TU items mostly without suffix; WeChat channel rows carry the EAN).
 
 ### Planted crosswalk problems (`reference/store_code_crosswalk_MDM.csv`)

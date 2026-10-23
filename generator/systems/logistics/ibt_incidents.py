@@ -63,26 +63,26 @@ AM = {"Italy": "Roberto Galli", "Spain": "Roberto Galli", "France": "Isabelle Mo
       "Germany": "Stefan Wagner", "UK": "Fiona McLeod", "Benelux": "Fiona McLeod", "Nordics": "Fiona McLeod", "Middle East": "Omar Haddad",
       "USA": "Lauren Mitchell", "Canada": "Lauren Mitchell", "Japan": "Takuya Suzuki", "Korea": "Yoon Sung-ho",
       "Mainland China": "Zhao Lei", "HK/Macau/TW": "Vivian Lau", "South-East Asia": "Daniel Lim", "Oceania": "Daniel Lim"}
-MAIRE, ILV = "J20931A00012-999", "J20931A00618-510"
+VALENTINO_V01, ILV = "J20931A00012-999", "J20931A00618-510"
 LC9, LC7 = "I10919B00011-999", "I10919B00011-742"
 AMB, MAYA9 = "J20931A00622-23R", "J10911A00034-999"
 
 # ------------------------------------------------------------- key (scenario) IBTs
-ibt("2026-09-22", "MIL01", "ROM01", MAIRE, "1", 2, "RECEIVED", "CLIENT_REQUEST", "Roberto Galli", "2026-09-22", "2026-09-23",
-    "2026-09-24", "BRT", comment="clienti coreane chiedono Maire nera, urgente")
-ibt("2026-09-22", "MIL01", "ROM01", MAIRE, "0", 1, "RECEIVED", "CLIENT_REQUEST", "Roberto Galli", "2026-09-22", "2026-09-23",
+ibt("2026-09-22", "MIL01", "ROM01", VALENTINO_V01, "1", 2, "RECEIVED", "CLIENT_REQUEST", "Roberto Galli", "2026-09-22", "2026-09-23",
+    "2026-09-24", "BRT", comment="clienti coreane chiedono Aurea nera, urgente")
+ibt("2026-09-22", "MIL01", "ROM01", VALENTINO_V01, "0", 1, "RECEIVED", "CLIENT_REQUEST", "Roberto Galli", "2026-09-22", "2026-09-23",
     "2026-09-24", "BRT", comment="")
-ibt("2026-09-23", "PAR01", "CAN01", MAIRE, "0", 1, "REJECTED", "CLIENT_REQUEST", "Laetitia Rossi", rej="SOURCE_REFUSED",
+ibt("2026-09-23", "PAR01", "CAN01", VALENTINO_V01, "0", 1, "REJECTED", "CLIENT_REQUEST", "Laetitia Rossi", rej="SOURCE_REFUSED",
     comment="Cannes: dernière pièce en 0, on la garde")
-ibt("2026-09-23", "PAR01", "CAN01", MAIRE, "1", 1, "REJECTED", "CLIENT_REQUEST", "Laetitia Rossi", rej="SOURCE_REFUSED", comment="")
-ibt("2026-09-24", "MIL01", "COU01", MAIRE, "1", 2, "REJECTED", "CLIENT_REQUEST", "Roberto Galli",
+ibt("2026-09-23", "PAR01", "CAN01", VALENTINO_V01, "1", 1, "REJECTED", "CLIENT_REQUEST", "Laetitia Rossi", rej="SOURCE_REFUSED", comment="")
+ibt("2026-09-24", "MIL01", "COU01", VALENTINO_V01, "1", 2, "REJECTED", "CLIENT_REQUEST", "Roberto Galli",
     rej="SOURCE_CLOSED", comment="Courmayeur chiuso per fine stagione, nessuno in negozio per il prelievo. Riapre 27/11")
-ibt("2026-09-24", "MIL01", "COU01", MAIRE, "2", 2, "REJECTED", "CLIENT_REQUEST", "Roberto Galli", rej="SOURCE_CLOSED", comment="")
-ibt("2026-09-25", "LON02", "LON01", MAIRE, "1", 2, "RECEIVED", "CLIENT_REQUEST", "Fiona McLeod", "2026-09-25", "2026-09-25",
+ibt("2026-09-24", "MIL01", "COU01", VALENTINO_V01, "2", 2, "REJECTED", "CLIENT_REQUEST", "Roberto Galli", rej="SOURCE_CLOSED", comment="")
+ibt("2026-09-25", "LON02", "LON01", VALENTINO_V01, "1", 2, "RECEIVED", "CLIENT_REQUEST", "Fiona McLeod", "2026-09-25", "2026-09-25",
     "2026-09-25", "Addison Lee", comment="Korean tourists asking, same-day courier")
-ibt("2026-09-26", "PAR02", "GVA01", MAIRE, "0", 2, "REJECTED", "CLIENT_REQUEST", "Isabelle Moreau",
+ibt("2026-09-26", "PAR02", "GVA01", VALENTINO_V01, "0", 2, "REJECTED", "CLIENT_REQUEST", "Isabelle Moreau",
     rej="CROSS_BORDER_NOT_ALLOWED", comment="CH->FR export declaration needed, not for IBT")
-ibt("2026-10-02", "PAR01", "BER01", MAIRE, "1", 1, "CANCELLED", "CLIENT_REQUEST", "Isabelle Moreau", "2026-10-02",
+ibt("2026-10-02", "PAR01", "BER01", VALENTINO_V01, "1", 1, "CANCELLED", "CLIENT_REQUEST", "Isabelle Moreau", "2026-10-02",
     rej="CUTOFF_MISSED", comment="demande envoyée après le cut-off 12h00 de vendredi, enlèvement lundi -> cliente repart à Séoul dimanche",
     hh=13)
 ibt("2026-10-02", "SEL01", "SIN01", ILV, "0", 2, "REJECTED", "CLIENT_REQUEST", "Daniel Lim", rej="CROSS_BORDER_NOT_ALLOWED",
@@ -102,12 +102,12 @@ ibt("2026-09-30", "MAD01", "MIL01", MAYA9, "3", 2, "RECEIVED", "STOCK_BALANCING"
 ibt("2026-09-30", "MAD01", "MIL01", MAYA9, "4", 2, "RECEIVED", "STOCK_BALANCING", "Roberto Galli", "2026-09-30", "2026-10-01",
     "2026-10-03", "DHL Express", comment="")
 ibt("2026-09-27", "MIL01", "VEN01", AMB, "1", 1, "RECEIVED", "CLIENT_REQUEST", "Roberto Galli", "2026-09-28", "2026-09-28",
-    "2026-09-29", "BRT", comment="Ambrine marrone 1 per VIC")
+    "2026-09-29", "BRT", comment="Amalia marrone 1 per VIC")
 ibt("2026-10-06", "PAR01", "PAR02", AMB, "1", 1, "REJECTED", "CLIENT_REQUEST", "Sophie Marchand", rej="SOURCE_REFUSED",
     comment="GL: stock concession, pas de sortie sans accord du grand magasin")
 ibt("2026-10-14", "LON01", "LON02", AMB, "2", 1, "CANCELLED", "CLIENT_REQUEST", comment="client bought black instead")
 ibt("2026-10-15", "MUN01", "BER01", "J10911A00213-999", "4", 2, "RECEIVED", "STOCK_BALANCING", "Stefan Wagner", "2026-10-15",
-    "2026-10-16", "2026-10-19", "DHL Express", comment="Kälteeinbruch, Montgenevre läuft")
+    "2026-10-16", "2026-10-19", "DHL Express", comment="Kälteeinbruch, Monteluce läuft")
 ibt("2026-10-15", "MUN01", "BER01", "J10911A00213-999", "5", 1, "RECEIVED", "STOCK_BALANCING", "Stefan Wagner", "2026-10-15",
     "2026-10-16", "2026-10-19", "DHL Express", comment="")
 ibt("2026-10-14", "ZRH01", "GVA01", MAYA9, "3", 1, "RECEIVED", "CLIENT_REQUEST", "Stefan Wagner", "2026-10-14", "2026-10-14",
@@ -150,7 +150,7 @@ while n < 175:
     if not len(cand):
         continue
     r = cand.iloc[int(R.integers(0, len(cand)))]
-    if r.sku in (MAIRE, ILV, AMB, LC9, LC7):
+    if r.sku in (VALENTINO_V01, ILV, AMB, LC9, LC7):
         continue
     qty = int(R.integers(1, 3))
     u = R.random()
@@ -201,33 +201,33 @@ INC = [
          close_code="Solved (Work Around)", close_notes="Delivered 23/9 after re-booking. 2 days late."),
     dict(number="INC0041877", opened_at="2026-09-26 12:14:09", caller_id="Javier Molina", u_store="MAD01 Serrano",
          category="Logistics", subcategory="Wrong item received", priority="2 - High", assignment_group="LOG-EMEA-DC-CSG",
-         short_description="MAD01 - recibido MAYA azul marino en lugar de negro / wrong colour MAYA",
-         description="Albarán 0080412337. Pedido MAYA negro (999) tallas 1-7, 17 piezas. Llegaron 17 MAYA azul marino (742). "
+         short_description="MAD01 - recibido NOVA azul marino en lugar de negro / wrong colour NOVA",
+         description="Albarán 0080412337. Pedido NOVA negro (999) tallas 1-7, 17 piezas. Llegaron 17 NOVA azul marino (742). "
                      "Tenemos clientes esperando el negro. Fotos en adjunto (IMG_2231.jpg, IMG_2232.jpg).",
          u_shipment_ref=f"0080412337 / {awb('SHP02600337')}", state="Resolved", resolved_at="2026-10-07 10:02:44",
          close_code="Solved (Permanently)",
          close_notes="Root cause: bin labels 03-14-B / 03-14-C swapped after re-slotting 21/09. Second delivery 0080412382 also affected "
-                     "(see INC0042011). Cycle count 06/10, differences posted (701/702). Black MAYA shipped with 0080412427 (arrived 11/10). "
+                     "(see INC0042011). Cycle count 06/10, differences posted (701/702). Black NOVA shipped with 0080412427 (arrived 11/10). "
                      "Navy surplus (37 pcs) still at MAD01 - retail ops to decide return vs keep."),
     dict(number="INC0042011", opened_at="2026-10-01 18:47:55", caller_id="Lucía Fernández Ortega", u_store="Madrid Serrano",
          category="Logistics", subcategory="Wrong item received", priority="2 - High", assignment_group="LOG-EMEA-DC-CSG",
-         short_description="OTRA VEZ MAYA azul en vez de negro!!! albaran 0080412382",
-         description="Segunda vez. 20 piezas azul marino. Ya no tenemos MAYA negro en ninguna talla, perdemos ventas cada día.",
+         short_description="OTRA VEZ NOVA azul en vez de negro!!! albaran 0080412382",
+         description="Segunda vez. 20 piezas azul marino. Ya no tenemos NOVA negro en ninguna talla, perdemos ventas cada día.",
          u_shipment_ref=f"0080412382 / {awb('SHP02600382')}", state="Closed", resolved_at="2026-10-02 09:15:00",
          close_code="Duplicate", close_notes="Duplicate of INC0041877"),
     dict(number="INC0042230", opened_at="2026-10-08 10:31:40", caller_id="박민수", u_store="SEL01 Cheongdam",
          category="Logistics", subcategory="Customs", priority="2 - High", assignment_group="LOG-APAC-TRADE-COMPLIANCE",
          short_description="SEL01 shipment held at Incheon customs - KC certificate missing",
-         description="입고 예정 10/8 물량이 인천세관에서 보류. 관세사: 다운 의류 KC 적합성 확인서 누락. 일바로 핑크 대기 고객 많음 - 언제 받을 수 있나요?",
+         description="입고 예정 10/8 물량이 인천세관에서 보류. 관세사: 다운 의류 KC 적합성 확인서 누락. Iridia 핑크 대기 고객 많음 - 언제 받을 수 있나요?",
          u_shipment_ref=f"0080412440 / {awb('SHP02600440')}", state="Resolved", resolved_at="2026-10-13 11:20:31",
          close_code="Solved (Permanently)",
          close_notes="KC certificate issued by testing lab and sent to broker 12/10, released 12/10 17:24 KST, delivered 13/10. "
-                     "NB this load contained ILVARO off-white (20D) only - pink top-up left TKO on 10/10 with 0080412455."),
+                     "NB this load contained IRIDIA off-white (20D) only - pink top-up left TKO on 10/10 with 0080412455."),
     dict(number="INC0042398", opened_at="2026-10-14 09:02:13", caller_id="Vivian Lau", u_store="Seoul Cheongdam Flagship",
          category="Logistics", subcategory="Customs", priority="2 - High", assignment_group="LOG-APAC-TRADE-COMPLIANCE",
-         short_description="Follow-up: 0080412455 (incl. ILVARO pink) selected for inspection at ICN",
+         short_description="Follow-up: 0080412455 (incl. IRIDIA pink) selected for inspection at ICN",
          description="After the KC document case customs selected the next down-garment import for physical inspection. "
-                     "Store is chasing - 20 pcs ILVARO 510 inside.",
+                     "Store is chasing - 20 pcs IRIDIA 510 inside.",
          u_shipment_ref=f"0080412455 / {awb('SHP02600455')}", state="Resolved", resolved_at="2026-10-18 15:44:00",
          close_code="Solved (Work Around)", close_notes="Released 17/10, delivered 18/10 (planned 15/10)."),
     dict(number="INC0042126", opened_at="2026-10-07 16:20:48", caller_id="Ilaria Mancuso", u_store="Rinascente Duomo",
@@ -256,10 +256,10 @@ INC = [
          close_code="Solved (Work Around)", close_notes="Claim opened with BRT, no garment damage."),
     dict(number="INC0042090", opened_at="2026-10-03 11:12:40", caller_id="Giulia Ferrandi", u_store="Milano Montenapoleone",
          category="Logistics", subcategory="Returns", priority="3 - Moderate", assignment_group="LOG-EMEA-DC-CSG",
-         short_description="Resi TIB difettosi - quale RMA usare? scatola piena",
-         description="Abbiamo 9 gilet TIB resi per cerniera rotta. Dove li mandiamo, con quale RMA? Il DC dice QM01 ma il modulo non lo prevede.",
+         short_description="Resi VEL difettosi - quale RMA usare? scatola piena",
+         description="Abbiamo 9 gilet VEL resi per cerniera rotta. Dove li mandiamo, con quale RMA? Il DC dice QM01 ma il modulo non lo prevede.",
          u_shipment_ref="", state="Resolved", resolved_at="2026-10-05 15:00:00", close_code="Solved (Permanently)",
-         close_notes=f"Use RMA type DEF, ship to IT10 QM01 with next return pickup, reference QN {C.TIB['qn']}."),
+         close_notes=f"Use RMA type DEF, ship to IT10 QM01 with next return pickup, reference QN {C.VALENTINO_V17['qn']}."),
     dict(number="INC0042777", opened_at="2026-10-21 10:40:00", caller_id="陈浩", u_store="Shanghai Plaza 66",
          category="Logistics", subcategory="Customs", priority="3 - Moderate", assignment_group="LOG-APAC-TRADE-COMPLIANCE",
          short_description="SHA01 货物海关查验 / shipment under CIQ inspection",
@@ -273,7 +273,7 @@ INC = [
     dict(number="INC0042302", opened_at="2026-10-09 13:30:18", caller_id="Chloe Mitchell", u_store="Sydney",
          category="Logistics", subcategory="Delivery delay", priority="4 - Low", assignment_group="LOG-APAC-3PL-TKO",
          short_description="SYD01 delivery late again + again only puffers",
-         description="Shipment due 14/10 now showing 17/10 (flight offloaded). Honestly it's 24 degrees here, we need tees and polos not more Maya.",
+         description="Shipment due 14/10 now showing 17/10 (flight offloaded). Honestly it's 24 degrees here, we need tees and polos not more Nova.",
          u_shipment_ref=f"0080412449 / {awb('SHP02600449')}", state="Closed", resolved_at="2026-10-17 18:00:00",
          close_code="Solved (Work Around)", close_notes="Delivered 17/10. Assortment comment forwarded to merch planning (no action)."),
 ]
@@ -281,7 +281,7 @@ pd.DataFrame(INC).to_csv(OUT / "incidents" / "servicenow_incidents_logistics.csv
 
 WORK = {
     "INC0041877": [
-        ("2026-09-26 12:14:09", "Javier Molina", "Abrimos incidencia. 17 MAYA azul marino recibidos, pedido era negro. No vendemos el azul, nos sobra."),
+        ("2026-09-26 12:14:09", "Javier Molina", "Abrimos incidencia. 17 NOVA azul marino recibidos, pedido era negro. No vendemos el azul, nos sobra."),
         ("2026-09-26 15:40:31", "DC CSG - Outbound (M. Re)", "Presa in carico. Verifichiamo picking list consegna 0080412337."),
         ("2026-09-29 10:05:12", "DC CSG - Outbound (M. Re)", "WMS: prelievo confermato su materiale J10911A00034999, giacenza contabile coerente. "
          "Possibile errore di etichettatura lato negozio? Chiediamo foto etichette EAN."),
@@ -289,9 +289,9 @@ WORK = {
         ("2026-10-01 18:52:10", "Lucía Fernández Ortega", "Ha vuelto a pasar con 0080412382. Ver INC0042011."),
         ("2026-10-02 09:20:44", "DC CSG - Inventory (S. Gatti)", "Trovato: etichette ubicazioni 03-14-B e 03-14-C invertite dopo re-slotting del 21/09. "
          "Aperta QN 300004590. Inventario rotativo previsto 06/10."),
-        ("2026-10-02 10:02:00", "Roberto Galli", "Please prioritise black MAYA for Madrid in next delivery. Meanwhile IBT from MIL01 sizes 3-4 approved (IBT-26 ...)."),
-        ("2026-10-06 17:45:00", "DC CSG - Inventory (S. Gatti)", "Inventario 06/10: +37 MAYA 999 / -37 MAYA 742 registrati (701/702)."),
-        ("2026-10-07 10:02:44", "DC CSG - Outbound (M. Re)", "MAYA nero incluso nella consegna dell'08/10. Chiudo. Reso del blu da concordare con Retail Ops."),
+        ("2026-10-02 10:02:00", "Roberto Galli", "Please prioritise black NOVA for Madrid in next delivery. Meanwhile IBT from MIL01 sizes 3-4 approved (IBT-26 ...)."),
+        ("2026-10-06 17:45:00", "DC CSG - Inventory (S. Gatti)", "Inventario 06/10: +37 NOVA 999 / -37 NOVA 742 registrati (701/702)."),
+        ("2026-10-07 10:02:44", "DC CSG - Outbound (M. Re)", "NOVA nero incluso nella consegna dell'08/10. Chiudo. Reso del blu da concordare con Retail Ops."),
     ],
     "INC0042230": [
         ("2026-10-08 10:31:40", "박민수", "인천세관 보류 통보 받음. 관세사 연락: KC 적합성 확인서 필요. 오늘 입고 예정이었음."),
@@ -299,15 +299,15 @@ WORK = {
          "labelling notice. Not in our document pack. Checking with trade compliance Milan."),
         ("2026-10-08 14:47:19", "Trade Compliance (F. Albertini)", "Il certificato KC non è mai stato richiesto prima per le spedizioni dal TKO; "
          "chiediamo al laboratorio. Tempi stimati 2-3 giorni lavorativi."),
-        ("2026-10-09 09:10:00", "김지현", "VIC 고객 일바로 핑크 대기중인데 이 박스에 핑크 있나요?"),
-        ("2026-10-09 10:40:55", "APAC Logistics (K. Leung)", "Checked packing list: no pink in this load, only ILVARO off-white 20D + other lines. "
+        ("2026-10-09 09:10:00", "김지현", "VIC 고객 Iridia 핑크 대기중인데 이 박스에 핑크 있나요?"),
+        ("2026-10-09 10:40:55", "APAC Logistics (K. Leung)", "Checked packing list: no pink in this load, only IRIDIA off-white 20D + other lines. "
          "Pink top-up ships Saturday 10/10 from TKO."),
         ("2026-10-12 09:30:00", "Trade Compliance (F. Albertini)", "Certificato ricevuto dal laboratorio, inviato al broker."),
         ("2026-10-12 17:30:12", "APAC Logistics (K. Leung)", "Released 17:24 KST. Delivery tomorrow morning."),
         ("2026-10-13 11:20:31", "박민수", "입고 완료. 감사합니다."),
     ],
     "INC0042398": [
-        ("2026-10-14 09:02:13", "Vivian Lau", "Next SEL01 load (0080412455, ILVARO pink 20 pcs) selected for physical inspection. Any way to expedite?"),
+        ("2026-10-14 09:02:13", "Vivian Lau", "Next SEL01 load (0080412455, IRIDIA pink 20 pcs) selected for physical inspection. Any way to expedite?"),
         ("2026-10-14 12:00:00", "APAC Logistics (K. Leung)", "Broker says inspection queue 2-4 days after the KC case. We cannot expedite."),
         ("2026-10-17 17:00:00", "APAC Logistics (K. Leung)", "Released. Delivery Sunday 18/10 morning."),
     ],

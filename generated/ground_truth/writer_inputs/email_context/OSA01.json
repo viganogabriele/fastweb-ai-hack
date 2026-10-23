@@ -33,11 +33,11 @@
    "visitors": 121,
    "conversion": 0.0744,
    "top_sellers": [
-    "MAYA navy x2",
-    "POLO black x2",
-    "MAYA black x2",
-    "CASHMERE SCARF grey melange x1",
-    "LOGO CAP black x1"
+    "NOVA navy x2",
+    "JERSEY POLO black x2",
+    "NOVA black x2",
+    "VALENTINO SCARF grey melange x1",
+    "VLOGO CAP black x1"
    ],
    "customer_mix": {
     "JP": 0.54,
@@ -46,14 +46,14 @@
     "KR": 0.08
    },
    "unmet_requests": [
-    "MAIRE navy size 0 x1",
-    "TIB black size 4 x1"
+    "AUREA navy size 0 x1",
+    "VEL black size 4 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE off-white 2",
-    "MAIRE navy 0",
-    "KARAKORUM black 3",
-    "TIB black 4"
+    "AUREA off-white 2",
+    "AUREA navy 0",
+    "COSIMO black 3",
+    "VEL black 4"
    ],
    "returns": [],
    "deliveries_received": [],
@@ -71,11 +71,11 @@
    "visitors": 101,
    "conversion": 0.1485,
    "top_sellers": [
-    "LOGO BEANIE black x3",
-    "BADY black x2",
-    "LOGO BEANIE powder pink x1",
-    "LOGO BEANIE white x1",
-    "POLO navy x1"
+    "VLOGO BEANIE black x3",
+    "ARIA black x2",
+    "VLOGO BEANIE powder pink x1",
+    "VLOGO BEANIE white x1",
+    "JERSEY POLO navy x1"
    ],
    "customer_mix": {
     "JP": 0.57,
@@ -84,14 +84,14 @@
     "CN": 0.1
    },
    "unmet_requests": [
-    "MAIRE off-white size 2 x1",
-    "CHAMBRE black size 00 x1"
+    "AUREA off-white size 2 x1",
+    "CAMILLA black size 00 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE off-white 2"
+    "AUREA off-white 2"
    ],
    "returns": [
-    "MAIRE 00 reason=SIZE"
+    "AUREA 00 reason=SIZE"
    ],
    "deliveries_received": [
     {
@@ -117,11 +117,11 @@
    "visitors": 114,
    "conversion": 0.0877,
    "top_sellers": [
-    "LOGO CARDIGAN black x4",
-    "LOGO BEANIE navy x2",
-    "CHAMBRE black x2",
-    "TRAILGRIP GTX grey melange x1",
-    "MAKAIO BACKPACK black x1"
+    "VLOGO CARDIGAN black x4",
+    "VLOGO BEANIE navy x2",
+    "CAMILLA black x2",
+    "VTRACK GTX grey melange x1",
+    "URBAN BACKPACK black x1"
    ],
    "customer_mix": {
     "JP": 0.45,
@@ -131,7 +131,7 @@
    },
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "MAIRE off-white 2"
+    "AUREA off-white 2"
    ],
    "returns": [],
    "deliveries_received": [],
@@ -149,11 +149,11 @@
    "visitors": 152,
    "conversion": 0.125,
    "top_sellers": [
-    "LOGO T-SHIRT black x4",
-    "CASHMERE SCARF black x3",
-    "TRICOT PADDED CARDIGAN black x3",
-    "MAIRE black x3",
-    "LOGO HOODIE black x2"
+    "VLOGO T-SHIRT black x4",
+    "VALENTINO SCARF black x3",
+    "VLOGO PADDED CARDIGAN black x3",
+    "AUREA black x3",
+    "VLOGO HOODIE black x2"
    ],
    "customer_mix": {
     "JP": 0.45,
@@ -162,15 +162,15 @@
     "KR": 0.11
    },
    "unmet_requests": [
-    "BADY black size 00 x1",
-    "CHAMBRE black size 00 x1"
+    "ARIA black size 00 x1",
+    "CAMILLA black size 00 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE off-white 2"
+    "AUREA off-white 2"
    ],
    "returns": [
-    "TRICOT PADDED CARDIGAN XL reason=SIZE",
-    "LOGO BEANIE TU reason=QUALITY"
+    "VLOGO PADDED CARDIGAN XL reason=SIZE",
+    "VLOGO BEANIE TU reason=QUALITY"
    ],
    "deliveries_received": [],
    "active_events": []
@@ -187,11 +187,11 @@
    "visitors": 171,
    "conversion": 0.1228,
    "top_sellers": [
-    "MAYA navy x5",
-    "MAYA black x3",
-    "LOGO BEANIE powder pink x2",
-    "LOGO T-SHIRT black x2",
-    "LOGO HOODIE navy x2"
+    "NOVA navy x5",
+    "NOVA black x3",
+    "VLOGO BEANIE powder pink x2",
+    "VLOGO T-SHIRT black x2",
+    "VLOGO HOODIE navy x2"
    ],
    "customer_mix": {
     "JP": 0.39,
@@ -200,13 +200,13 @@
     "TW": 0.09
    },
    "unmet_requests": [
-    "CREWNECK SWEATSHIRT black size XL x1"
+    "RELAXED SWEATSHIRT black size XL x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE off-white 2"
+    "AUREA off-white 2"
    ],
    "returns": [
-    "CHAMBRE 0 reason=QUALITY"
+    "CAMILLA 0 reason=QUALITY"
    ],
    "deliveries_received": [],
    "active_events": []
@@ -223,11 +223,11 @@
    "visitors": 259,
    "conversion": 0.1274,
    "top_sellers": [
-    "TRAILGRIP GTX black x4",
-    "TRAILGRIP W black x4",
-    "LOGO HOODIE navy x3",
-    "MAYA black x3",
-    "TRICOT PADDED CARDIGAN black x3"
+    "VTRACK GTX black x4",
+    "VTRACK W black x4",
+    "VLOGO HOODIE navy x3",
+    "NOVA black x3",
+    "VLOGO PADDED CARDIGAN black x3"
    ],
    "customer_mix": {
     "JP": 0.62,
@@ -236,14 +236,14 @@
     "KR": 0.06
    },
    "unmet_requests": [
-    "KARAKORUM black size 1 x1",
-    "TIB off-white size 2 x1"
+    "COSIMO black size 1 x1",
+    "VEL off-white size 2 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE off-white 1",
-    "MAIRE off-white 2",
-    "BADY black 2",
-    "TRAILGRIP W black 36"
+    "AUREA off-white 1",
+    "AUREA off-white 2",
+    "ARIA black 2",
+    "VTRACK W black 36"
    ],
    "returns": [],
    "deliveries_received": [],
@@ -261,11 +261,11 @@
    "visitors": 233,
    "conversion": 0.0987,
    "top_sellers": [
-    "TRICOT PADDED CARDIGAN black x5",
-    "TRAILGRIP GTX black x3",
-    "ILVARO black x3",
-    "MAIRE navy x3",
-    "MAYA navy x2"
+    "VLOGO PADDED CARDIGAN black x5",
+    "VTRACK GTX black x3",
+    "IRIDIA black x3",
+    "AUREA navy x3",
+    "NOVA navy x2"
    ],
    "customer_mix": {
     "JP": 0.53,
@@ -274,21 +274,21 @@
     "CN": 0.08
    },
    "unmet_requests": [
-    "TRAILGRIP W black size 36 x2",
-    "BADY black size 2 x1",
-    "ILVARO black size 3 x1",
-    "TIB off-white size 2 x1",
-    "LOGO HOODIE grey melange size XS x1",
-    "CREWNECK SWEATSHIRT white size XS x1"
+    "VTRACK W black size 36 x2",
+    "ARIA black size 2 x1",
+    "IRIDIA black size 3 x1",
+    "VEL off-white size 2 x1",
+    "VLOGO HOODIE grey melange size XS x1",
+    "RELAXED SWEATSHIRT white size XS x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE off-white 1",
-    "MAIRE off-white 2",
-    "MAIRE navy 0",
-    "BADY black 2",
-    "LOGO T-SHIRT black L",
-    "TRAILGRIP GTX black 41",
-    "TRAILGRIP W black 36"
+    "AUREA off-white 1",
+    "AUREA off-white 2",
+    "AUREA navy 0",
+    "ARIA black 2",
+    "VLOGO T-SHIRT black L",
+    "VTRACK GTX black 41",
+    "VTRACK W black 36"
    ],
    "returns": [],
    "deliveries_received": [],
@@ -306,11 +306,11 @@
    "visitors": 133,
    "conversion": 0.1053,
    "top_sellers": [
-    "LOGO CAP black x3",
-    "LOGO BEANIE black x2",
-    "MAYA navy x2",
-    "INSOLUX black x2",
-    "TIB black x2"
+    "VLOGO CAP black x3",
+    "VLOGO BEANIE black x2",
+    "NOVA navy x2",
+    "ALPINA black x2",
+    "VEL black x2"
    ],
    "customer_mix": {
     "JP": 0.45,
@@ -319,19 +319,19 @@
     "KR": 0.05
    },
    "unmet_requests": [
-    "CHAMBRE black size 0 x3",
-    "TRICOT PADDED CARDIGAN black size XS x1",
-    "INSOLUX black size 35 x1"
+    "CAMILLA black size 0 x3",
+    "VLOGO PADDED CARDIGAN black size XS x1",
+    "ALPINA black size 35 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE off-white 1",
-    "MAIRE off-white 2",
-    "MAIRE navy 0",
-    "BADY black 2",
-    "MAYA navy 4",
-    "LOGO T-SHIRT black L",
-    "TRAILGRIP GTX black 41",
-    "TRAILGRIP W black 36"
+    "AUREA off-white 1",
+    "AUREA off-white 2",
+    "AUREA navy 0",
+    "ARIA black 2",
+    "NOVA navy 4",
+    "VLOGO T-SHIRT black L",
+    "VTRACK GTX black 41",
+    "VTRACK W black 36"
    ],
    "returns": [],
    "deliveries_received": [],
@@ -349,11 +349,11 @@
    "visitors": 131,
    "conversion": 0.1069,
    "top_sellers": [
-    "LOGO CAP black x3",
-    "CABLE KNIT SWEATER black x3",
-    "LOGO CARDIGAN black x2",
-    "TIB black x2",
-    "PEYRE black x1"
+    "VLOGO CAP black x3",
+    "INTARSIA SWEATER black x3",
+    "VLOGO CARDIGAN black x2",
+    "VEL black x2",
+    "PIERO black x1"
    ],
    "customer_mix": {
     "JP": 0.37,
@@ -362,10 +362,10 @@
     "OTHER": 0.04
    },
    "unmet_requests": [
-    "LOGO CARDIGAN black size XXL x1"
+    "VLOGO CARDIGAN black size XXL x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE off-white 1"
+    "AUREA off-white 1"
    ],
    "returns": [],
    "deliveries_received": [
@@ -392,11 +392,11 @@
    "visitors": 135,
    "conversion": 0.0963,
    "top_sellers": [
-    "LOGO CAP navy x2",
-    "LOGO CAP black x2",
-    "TRAILGRIP GTX black x2",
-    "TRICOT PADDED CARDIGAN navy x2",
-    "MAYA black x2"
+    "VLOGO CAP navy x2",
+    "VLOGO CAP black x2",
+    "VTRACK GTX black x2",
+    "VLOGO PADDED CARDIGAN navy x2",
+    "NOVA black x2"
    ],
    "customer_mix": {
     "JP": 0.62,
@@ -405,15 +405,15 @@
     "HK": 0.05
    },
    "unmet_requests": [
-    "MAYA navy size 6 x2",
-    "HERMINE off-white size 2 x1"
+    "NOVA navy size 6 x2",
+    "LIVIANA off-white size 2 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE off-white 1"
+    "AUREA off-white 1"
    ],
    "returns": [
-    "MAIRE 2 reason=CHANGE_MIND",
-    "TIB 3 reason=QUALITY"
+    "AUREA 2 reason=CHANGE_MIND",
+    "VEL 3 reason=QUALITY"
    ],
    "deliveries_received": [],
    "active_events": []
@@ -430,11 +430,11 @@
    "visitors": 158,
    "conversion": 0.0633,
    "top_sellers": [
-    "MONTCLA navy x2",
-    "MAKAIO BACKPACK black x1",
-    "LOGO CAP black x1",
-    "LOGO CARDIGAN black x1",
-    "TRICOT PADDED CARDIGAN grey melange x1"
+    "MISTRAL navy x2",
+    "URBAN BACKPACK black x1",
+    "VLOGO CAP black x1",
+    "VLOGO CARDIGAN black x1",
+    "VLOGO PADDED CARDIGAN grey melange x1"
    ],
    "customer_mix": {
     "JP": 0.5,
@@ -443,19 +443,19 @@
     "OTHER": 0.06
    },
    "unmet_requests": [
-    "CHAMBRE black size 0 x2",
-    "MAYA navy size 6 x1"
+    "CAMILLA black size 0 x2",
+    "NOVA navy size 6 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE off-white 1",
-    "TIB black 4"
+    "AUREA off-white 1",
+    "VEL black 4"
    ],
    "returns": [
-    "LOGO HOODIE L reason=CHANGE_MIND"
+    "VLOGO HOODIE L reason=CHANGE_MIND"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -470,11 +470,11 @@
    "visitors": 154,
    "conversion": 0.1364,
    "top_sellers": [
-    "TRAILGRIP GTX black x3",
-    "LOGO HOODIE black x3",
-    "LOGO HOODIE navy x2",
-    "TRICOT PADDED CARDIGAN navy x2",
-    "WOOL TURTLENECK navy x2"
+    "VTRACK GTX black x3",
+    "VLOGO HOODIE black x3",
+    "VLOGO HOODIE navy x2",
+    "VLOGO PADDED CARDIGAN navy x2",
+    "CASHMERE TURTLENECK navy x2"
    ],
    "customer_mix": {
     "JP": 0.62,
@@ -483,18 +483,18 @@
     "KR": 0.07
    },
    "unmet_requests": [
-    "HERMINE off-white size 2 x1",
-    "MONTCLA navy size 5 x1"
+    "LIVIANA off-white size 2 x1",
+    "MISTRAL navy size 5 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE off-white 1",
-    "BADY off-white 1",
-    "TIB black 4"
+    "AUREA off-white 1",
+    "ARIA off-white 1",
+    "VEL black 4"
    ],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -509,11 +509,11 @@
    "visitors": 265,
    "conversion": 0.0943,
    "top_sellers": [
-    "TRAILGRIP GTX black x3",
-    "LOGO CARDIGAN navy x2",
-    "LOGO T-SHIRT black x2",
-    "ECRINS black x2",
-    "CHAMBRE black x2"
+    "VTRACK GTX black x3",
+    "VLOGO CARDIGAN navy x2",
+    "VLOGO T-SHIRT black x2",
+    "ETTORE black x2",
+    "CAMILLA black x2"
    ],
    "customer_mix": {
     "JP": 0.62,
@@ -523,15 +523,15 @@
    },
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "MAIRE off-white 1",
-    "BADY off-white 1",
-    "MAYA navy 3",
-    "TIB black 4"
+    "AUREA off-white 1",
+    "ARIA off-white 1",
+    "NOVA navy 3",
+    "VEL black 4"
    ],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -546,11 +546,11 @@
    "visitors": 230,
    "conversion": 0.1,
    "top_sellers": [
-    "TIB off-white x4",
-    "LOGO BEANIE black x3",
-    "LOGO T-SHIRT black x2",
-    "LOGO BEANIE white x2",
-    "TRICOT PADDED CARDIGAN black x2"
+    "VEL off-white x4",
+    "VLOGO BEANIE black x3",
+    "VLOGO T-SHIRT black x2",
+    "VLOGO BEANIE white x2",
+    "VLOGO PADDED CARDIGAN black x2"
    ],
    "customer_mix": {
     "JP": 0.64,
@@ -559,25 +559,25 @@
     "CN": 0.06
    },
    "unmet_requests": [
-    "ILVARO black size 2 x1",
-    "CHAMBRE black size 0 x1",
-    "MONTCLA navy size 7 x1",
-    "TIB black size 4 x1",
-    "POLO white size M x1",
-    "TRAILGRIP GTX black size 39 x1"
+    "IRIDIA black size 2 x1",
+    "CAMILLA black size 0 x1",
+    "MISTRAL navy size 7 x1",
+    "VEL black size 4 x1",
+    "JERSEY POLO white size M x1",
+    "VTRACK GTX black size 39 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE off-white 1",
-    "MAIRE navy 0",
-    "BADY off-white 1",
-    "ILVARO black 2",
-    "MAYA navy 3",
-    "TIB black 4"
+    "AUREA off-white 1",
+    "AUREA navy 0",
+    "ARIA off-white 1",
+    "IRIDIA black 2",
+    "NOVA navy 3",
+    "VEL black 4"
    ],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -592,11 +592,11 @@
    "visitors": 140,
    "conversion": 0.0714,
    "top_sellers": [
-    "MAIRE black x3",
-    "LOGO BEANIE black x2",
-    "TRICOT PADDED CARDIGAN navy x2",
-    "LOGO HOODIE grey melange x1",
-    "POLO white x1"
+    "AUREA black x3",
+    "VLOGO BEANIE black x2",
+    "VLOGO PADDED CARDIGAN navy x2",
+    "VLOGO HOODIE grey melange x1",
+    "JERSEY POLO white x1"
    ],
    "customer_mix": {
     "JP": 0.62,
@@ -605,23 +605,23 @@
     "OTHER": 0.08
    },
    "unmet_requests": [
-    "AMBRINE black size 3 x1",
-    "MAYA navy size 3 x1"
+    "AMALIA black size 3 x1",
+    "NOVA navy size 3 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE off-white 1",
-    "MAIRE navy 0",
-    "BADY off-white 1",
-    "ILVARO black 2",
-    "MAYA navy 3",
-    "TIB black 4"
+    "AUREA off-white 1",
+    "AUREA navy 0",
+    "ARIA off-white 1",
+    "IRIDIA black 2",
+    "NOVA navy 3",
+    "VEL black 4"
    ],
    "returns": [
-    "TIB 4 reason=SIZE"
+    "VEL 4 reason=SIZE"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -636,11 +636,11 @@
    "visitors": 141,
    "conversion": 0.1064,
    "top_sellers": [
-    "MAYA navy x4",
-    "TIB navy x3",
-    "TRAILGRIP W black x2",
-    "LOGO CARDIGAN black x2",
-    "TIB black x2"
+    "NOVA navy x4",
+    "VEL navy x3",
+    "VTRACK W black x2",
+    "VLOGO CARDIGAN black x2",
+    "VEL black x2"
    ],
    "customer_mix": {
     "JP": 0.4,
@@ -649,7 +649,7 @@
     "TW": 0.1
    },
    "unmet_requests": [
-    "TIB navy size 3 x1"
+    "VEL navy size 3 x1"
    ],
    "zero_stock_key_sizes": [],
    "returns": [],
@@ -664,7 +664,7 @@
     }
    ],
    "active_events": [
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -679,11 +679,11 @@
    "visitors": 199,
    "conversion": 0.0804,
    "top_sellers": [
-    "CREWNECK SWEATSHIRT black x2",
-    "TRAILGRIP W black x2",
-    "TRICOT PADDED CARDIGAN grey melange x2",
-    "MAYA navy x2",
-    "POLO navy x1"
+    "RELAXED SWEATSHIRT black x2",
+    "VTRACK W black x2",
+    "VLOGO PADDED CARDIGAN grey melange x2",
+    "NOVA navy x2",
+    "JERSEY POLO navy x1"
    ],
    "customer_mix": {
     "JP": 0.56,
@@ -692,18 +692,18 @@
     "OTHER": 0.07
    },
    "unmet_requests": [
-    "POLO navy size S x1",
-    "TRAILGRIP GTX black size 45 x1",
-    "TRAILGRIP W black size 40 x1",
-    "INSOLUX off-white size 36 x1"
+    "JERSEY POLO navy size S x1",
+    "VTRACK GTX black size 45 x1",
+    "VTRACK W black size 40 x1",
+    "ALPINA off-white size 36 x1"
    ],
    "zero_stock_key_sizes": [],
    "returns": [
-    "CHAMBRE 2 reason=SIZE"
+    "CAMILLA 2 reason=SIZE"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -718,11 +718,11 @@
    "visitors": 187,
    "conversion": 0.1176,
    "top_sellers": [
-    "LOGO CARDIGAN black x5",
-    "LOGO CAP black x4",
-    "ILVARO black x3",
-    "BADY black x3",
-    "LOGO HOODIE navy x2"
+    "VLOGO CARDIGAN black x5",
+    "VLOGO CAP black x4",
+    "IRIDIA black x3",
+    "ARIA black x3",
+    "VLOGO HOODIE navy x2"
    ],
    "customer_mix": {
     "JP": 0.68,
@@ -731,16 +731,16 @@
     "HK": 0.03
    },
    "unmet_requests": [
-    "TRAILGRIP GTX black size 45 x1"
+    "VTRACK GTX black size 45 x1"
    ],
    "zero_stock_key_sizes": [],
    "returns": [
-    "TRICOT PADDED CARDIGAN XL reason=SIZE",
-    "TRICOT PADDED CARDIGAN L reason=CHANGE_MIND"
+    "VLOGO PADDED CARDIGAN XL reason=SIZE",
+    "VLOGO PADDED CARDIGAN L reason=CHANGE_MIND"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -755,11 +755,11 @@
    "visitors": 195,
    "conversion": 0.1077,
    "top_sellers": [
-    "BADY black x4",
-    "LOGO BEANIE black x3",
-    "TRICOT PADDED CARDIGAN black x2",
-    "TIB navy x2",
-    "MAIRE navy x2"
+    "ARIA black x4",
+    "VLOGO BEANIE black x3",
+    "VLOGO PADDED CARDIGAN black x2",
+    "VEL navy x2",
+    "AUREA navy x2"
    ],
    "customer_mix": {
     "JP": 0.65,
@@ -772,7 +772,7 @@
    "returns": [],
    "deliveries_received": [],
    "active_events": [
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -787,11 +787,11 @@
    "visitors": 257,
    "conversion": 0.0739,
    "top_sellers": [
-    "LOGO BEANIE black x3",
-    "LOGO T-SHIRT black x2",
-    "LOGO HOODIE navy x2",
-    "LOGO T-SHIRT white x2",
-    "WOOL TURTLENECK black x2"
+    "VLOGO BEANIE black x3",
+    "VLOGO T-SHIRT black x2",
+    "VLOGO HOODIE navy x2",
+    "VLOGO T-SHIRT white x2",
+    "CASHMERE TURTLENECK black x2"
    ],
    "customer_mix": {
     "JP": 0.51,
@@ -800,18 +800,18 @@
     "TW": 0.05
    },
    "unmet_requests": [
-    "ILVARO powder pink size 1 x1",
-    "TIB navy size 3 x1",
-    "TRAILGRIP GTX black size 45 x1",
-    "TRAILGRIP W black size 39 x1"
+    "IRIDIA powder pink size 1 x1",
+    "VEL navy size 3 x1",
+    "VTRACK GTX black size 45 x1",
+    "VTRACK W black size 39 x1"
    ],
    "zero_stock_key_sizes": [],
    "returns": [
-    "TRAILGRIP W 37 reason=GIFT"
+    "VTRACK W 37 reason=GIFT"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -826,11 +826,11 @@
    "visitors": 263,
    "conversion": 0.1217,
    "top_sellers": [
-    "LOGO HOODIE black x6",
-    "LOGO HOODIE navy x4",
-    "LOGO CARDIGAN black x4",
-    "MAYA black x3",
-    "MAYA navy x3"
+    "VLOGO HOODIE black x6",
+    "VLOGO HOODIE navy x4",
+    "VLOGO CARDIGAN black x4",
+    "NOVA black x3",
+    "NOVA navy x3"
    ],
    "customer_mix": {
     "JP": 0.46,
@@ -839,18 +839,18 @@
     "KR": 0.07
    },
    "unmet_requests": [
-    "TIB navy size 3 x1",
-    "LOGO HOODIE navy size XL x1",
-    "TRAILGRIP GTX black size 45 x1"
+    "VEL navy size 3 x1",
+    "VLOGO HOODIE navy size XL x1",
+    "VTRACK GTX black size 45 x1"
    ],
    "zero_stock_key_sizes": [
-    "LOGO CARDIGAN black L",
-    "LOGO T-SHIRT black L"
+    "VLOGO CARDIGAN black L",
+    "VLOGO T-SHIRT black L"
    ],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -865,11 +865,11 @@
    "visitors": 173,
    "conversion": 0.0983,
    "top_sellers": [
-    "MAKAIO BACKPACK black x4",
-    "TRICOT PADDED CARDIGAN black x2",
-    "LOGO T-SHIRT white x2",
-    "LOGO CARDIGAN black x2",
-    "MAYA black x2"
+    "URBAN BACKPACK black x4",
+    "VLOGO PADDED CARDIGAN black x2",
+    "VLOGO T-SHIRT white x2",
+    "VLOGO CARDIGAN black x2",
+    "NOVA black x2"
    ],
    "customer_mix": {
     "JP": 0.61,
@@ -878,21 +878,21 @@
     "CN": 0.07
    },
    "unmet_requests": [
-    "TIB navy size 3 x1",
-    "WOOL TURTLENECK black size S x1",
-    "LOGO T-SHIRT black size L x1"
+    "VEL navy size 3 x1",
+    "CASHMERE TURTLENECK black size S x1",
+    "VLOGO T-SHIRT black size L x1"
    ],
    "zero_stock_key_sizes": [
-    "LOGO CARDIGAN black L",
-    "LOGO T-SHIRT black L"
+    "VLOGO CARDIGAN black L",
+    "VLOGO T-SHIRT black L"
    ],
    "returns": [
-    "LOGO BEANIE TU reason=SIZE",
-    "LOGO CAP TU reason=CHANGE_MIND"
+    "VLOGO BEANIE TU reason=SIZE",
+    "VLOGO CAP TU reason=CHANGE_MIND"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -907,11 +907,11 @@
    "visitors": 149,
    "conversion": 0.0805,
    "top_sellers": [
-    "LOGO BEANIE black x2",
-    "LOGO T-SHIRT black x2",
-    "LOGO CAP black x2",
-    "BADY black x2",
-    "CASHMERE SCARF beige x1"
+    "VLOGO BEANIE black x2",
+    "VLOGO T-SHIRT black x2",
+    "VLOGO CAP black x2",
+    "ARIA black x2",
+    "VALENTINO SCARF beige x1"
    ],
    "customer_mix": {
     "JP": 0.52,
@@ -933,7 +933,7 @@
     }
    ],
    "active_events": [
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -948,11 +948,11 @@
    "visitors": 156,
    "conversion": 0.0897,
    "top_sellers": [
-    "TRAILGRIP GTX black x2",
-    "LOGO BEANIE black x2",
-    "BADY off-white x2",
-    "ILVARO black x2",
-    "LOGO HOODIE black x2"
+    "VTRACK GTX black x2",
+    "VLOGO BEANIE black x2",
+    "ARIA off-white x2",
+    "IRIDIA black x2",
+    "VLOGO HOODIE black x2"
    ],
    "customer_mix": {
     "JP": 0.39,
@@ -961,13 +961,13 @@
     "TW": 0.09
    },
    "unmet_requests": [
-    "TRAILGRIP W black size 39 x1"
+    "VTRACK W black size 39 x1"
    ],
    "zero_stock_key_sizes": [],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -982,11 +982,11 @@
    "visitors": 172,
    "conversion": 0.064,
    "top_sellers": [
-    "LOGO BEANIE powder pink x2",
-    "POLO black x2",
-    "CASHMERE SCARF black x1",
-    "LOGO CAP white x1",
-    "LOGO CAP navy x1"
+    "VLOGO BEANIE powder pink x2",
+    "JERSEY POLO black x2",
+    "VALENTINO SCARF black x1",
+    "VLOGO CAP white x1",
+    "VLOGO CAP navy x1"
    ],
    "customer_mix": {
     "JP": 0.65,
@@ -995,15 +995,15 @@
     "TW": 0.05
    },
    "unmet_requests": [
-    "BADY powder pink size 3 x1",
-    "ILVARO off-white size 4 x1",
-    "POLO black size XL x1"
+    "ARIA powder pink size 3 x1",
+    "IRIDIA off-white size 4 x1",
+    "JERSEY POLO black size XL x1"
    ],
    "zero_stock_key_sizes": [],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1018,11 +1018,11 @@
    "visitors": 206,
    "conversion": 0.0922,
    "top_sellers": [
-    "TRICOT PADDED CARDIGAN black x4",
-    "WOOL TURTLENECK black x4",
-    "LOGO BEANIE black x3",
-    "TRAILGRIP GTX black x2",
-    "LOGO T-SHIRT black x2"
+    "VLOGO PADDED CARDIGAN black x4",
+    "CASHMERE TURTLENECK black x4",
+    "VLOGO BEANIE black x3",
+    "VTRACK GTX black x2",
+    "VLOGO T-SHIRT black x2"
    ],
    "customer_mix": {
     "JP": 0.45,
@@ -1031,15 +1031,15 @@
     "TW": 0.07
    },
    "unmet_requests": [
-    "ECRINS black size 1 x1",
-    "TIB off-white size 1 x1",
-    "TIB off-white size 4 x1"
+    "ETTORE black size 1 x1",
+    "VEL off-white size 1 x1",
+    "VEL off-white size 4 x1"
    ],
    "zero_stock_key_sizes": [],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1054,11 +1054,11 @@
    "visitors": 232,
    "conversion": 0.1078,
    "top_sellers": [
-    "BADY black x4",
-    "LOGO HOODIE black x3",
-    "CREWNECK SWEATSHIRT black x2",
-    "TRICOT PADDED CARDIGAN grey melange x2",
-    "WOOL TURTLENECK navy x2"
+    "ARIA black x4",
+    "VLOGO HOODIE black x3",
+    "RELAXED SWEATSHIRT black x2",
+    "VLOGO PADDED CARDIGAN grey melange x2",
+    "CASHMERE TURTLENECK navy x2"
    ],
    "customer_mix": {
     "JP": 0.52,
@@ -1067,15 +1067,15 @@
     "TW": 0.07
    },
    "unmet_requests": [
-    "BADY powder pink size 00 x1",
-    "AMBRINE chocolate brown size 3 x1",
-    "ROSIERE olive size 5 x1"
+    "ARIA powder pink size 00 x1",
+    "AMALIA chocolate brown size 3 x1",
+    "RIVIERA olive size 5 x1"
    ],
    "zero_stock_key_sizes": [],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1090,11 +1090,11 @@
    "visitors": 253,
    "conversion": 0.0751,
    "top_sellers": [
-    "TRICOT PADDED CARDIGAN navy x4",
-    "MAYA navy x3",
-    "LOGO BEANIE black x3",
-    "WOOL TURTLENECK chocolate brown x2",
-    "MAYA black x2"
+    "VLOGO PADDED CARDIGAN navy x4",
+    "NOVA navy x3",
+    "VLOGO BEANIE black x3",
+    "CASHMERE TURTLENECK chocolate brown x2",
+    "NOVA black x2"
    ],
    "customer_mix": {
     "JP": 0.46,
@@ -1103,15 +1103,15 @@
     "US": 0.08
    },
    "unmet_requests": [
-    "VALBOURG black size 0 x1",
-    "TRICOT PADDED CARDIGAN grey melange size L x1",
-    "CREWNECK SWEATSHIRT black size XS x1"
+    "VALDORA black size 0 x1",
+    "VLOGO PADDED CARDIGAN grey melange size L x1",
+    "RELAXED SWEATSHIRT black size XS x1"
    ],
    "zero_stock_key_sizes": [],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1126,11 +1126,11 @@
    "visitors": 123,
    "conversion": 0.065,
    "top_sellers": [
-    "MAIRE black x2",
-    "CHAMBRE off-white x2",
-    "MAYA black x2",
-    "LOGO T-SHIRT black x1",
-    "MAKAIO BACKPACK black x1"
+    "AUREA black x2",
+    "CAMILLA off-white x2",
+    "NOVA black x2",
+    "VLOGO T-SHIRT black x1",
+    "URBAN BACKPACK black x1"
    ],
    "customer_mix": {
     "JP": 0.71,
@@ -1138,22 +1138,22 @@
     "KR": 0.14
    },
    "unmet_requests": [
-    "TIB off-white size 4 x1",
-    "PEYRE black size 4 x1",
-    "LOGO T-SHIRT white size M x1",
-    "LOGO T-SHIRT navy size XS x1"
+    "VEL off-white size 4 x1",
+    "PIERO black size 4 x1",
+    "VLOGO T-SHIRT white size M x1",
+    "VLOGO T-SHIRT navy size XS x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 1"
+    "AUREA black 1"
    ],
    "returns": [
-    "CHAMONIX M reason=CHANGE_MIND"
+    "CORTINA M reason=CHANGE_MIND"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13w: Unseasonably warm early October in Japan",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1168,11 +1168,11 @@
    "visitors": 131,
    "conversion": 0.0992,
    "top_sellers": [
-    "LOGO BEANIE black x3",
-    "LOGO HOODIE navy x2",
-    "CHAMBRE black x2",
-    "MAYA navy x2",
-    "ILVARO black x2"
+    "VLOGO BEANIE black x3",
+    "VLOGO HOODIE navy x2",
+    "CAMILLA black x2",
+    "NOVA navy x2",
+    "IRIDIA black x2"
    ],
    "customer_mix": {
     "JP": 0.42,
@@ -1181,15 +1181,15 @@
     "TH": 0.12
    },
    "unmet_requests": [
-    "MAIRE black size 1 x3",
-    "MAIRE black size 00 x1",
-    "MONTGENEVRE grey melange size 2 x1"
+    "AUREA black size 1 x3",
+    "AUREA black size 00 x1",
+    "MONTELUCE grey melange size 2 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 1"
+    "AUREA black 1"
    ],
    "returns": [
-    "TIB 4 reason=DEF"
+    "VEL 4 reason=DEF"
    ],
    "deliveries_received": [
     {
@@ -1202,9 +1202,9 @@
     }
    ],
    "active_events": [
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13w: Unseasonably warm early October in Japan",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1219,11 +1219,11 @@
    "visitors": 160,
    "conversion": 0.075,
    "top_sellers": [
-    "LOGO HOODIE navy x2",
-    "LOGO T-SHIRT white x2",
-    "MAKAIO BACKPACK black x2",
-    "KARAKORUM navy x2",
-    "TRICOT PADDED CARDIGAN black x2"
+    "VLOGO HOODIE navy x2",
+    "VLOGO T-SHIRT white x2",
+    "URBAN BACKPACK black x2",
+    "COSIMO navy x2",
+    "VLOGO PADDED CARDIGAN black x2"
    ],
    "customer_mix": {
     "JP": 0.46,
@@ -1233,17 +1233,17 @@
    },
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "MAIRE black 1"
+    "AUREA black 1"
    ],
    "returns": [
-    "ILVARO 1 reason=CHANGE_MIND"
+    "IRIDIA 1 reason=CHANGE_MIND"
    ],
    "deliveries_received": [],
    "active_events": [
     "E01: Chinese National Day Golden Week 2026 - outbound tourism peak",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13w: Unseasonably warm early October in Japan",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1258,11 +1258,11 @@
    "visitors": 305,
    "conversion": 0.0656,
    "top_sellers": [
-    "LOGO CARDIGAN black x6",
-    "TRAILGRIP GTX black x3",
-    "MAYA black x3",
-    "CHAMBRE black x3",
-    "TRICOT PADDED CARDIGAN black x2"
+    "VLOGO CARDIGAN black x6",
+    "VTRACK GTX black x3",
+    "NOVA black x3",
+    "CAMILLA black x3",
+    "VLOGO PADDED CARDIGAN black x2"
    ],
    "customer_mix": {
     "CN": 0.43,
@@ -1272,20 +1272,20 @@
    },
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "MAIRE black 1"
+    "AUREA black 1"
    ],
    "returns": [
-    "TIB 2 reason=DEF",
-    "TIB 3 reason=DEF",
-    "TIB 1 reason=DEF",
-    "TIB 4 reason=DEF"
+    "VEL 2 reason=DEF",
+    "VEL 3 reason=DEF",
+    "VEL 1 reason=DEF",
+    "VEL 4 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
     "E01: Chinese National Day Golden Week 2026 - outbound tourism peak",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13w: Unseasonably warm early October in Japan",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1300,11 +1300,11 @@
    "visitors": 331,
    "conversion": 0.0725,
    "top_sellers": [
-    "LOGO HOODIE black x4",
-    "LOGO BEANIE black x3",
-    "LOGO CARDIGAN navy x3",
-    "CHAMBRE black x3",
-    "MAIRE navy x3"
+    "VLOGO HOODIE black x4",
+    "VLOGO BEANIE black x3",
+    "VLOGO CARDIGAN navy x3",
+    "CAMILLA black x3",
+    "AUREA navy x3"
    ],
    "customer_mix": {
     "JP": 0.39,
@@ -1313,28 +1313,28 @@
     "KR": 0.04
    },
    "unmet_requests": [
-    "ILVARO powder pink size 1 x2",
-    "MAIRE black size 0 x1",
-    "MAIRE black size 1 x1",
-    "ILVARO powder pink size 0 x1",
-    "ILVARO powder pink size 2 x1"
+    "IRIDIA powder pink size 1 x2",
+    "AUREA black size 0 x1",
+    "AUREA black size 1 x1",
+    "IRIDIA powder pink size 0 x1",
+    "IRIDIA powder pink size 2 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1"
+    "AUREA black 0",
+    "AUREA black 1"
    ],
    "returns": [
-    "TRICOT PADDED CARDIGAN XS reason=QUALITY",
-    "TIB 3 reason=DEF",
-    "TIB 4 reason=DEF"
+    "VLOGO PADDED CARDIGAN XS reason=QUALITY",
+    "VEL 3 reason=DEF",
+    "VEL 4 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
     "E01: Chinese National Day Golden Week 2026 - outbound tourism peak",
-    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E06: K-pop idol wears IRIDIA powder pink at Paris Fashion Week",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13w: Unseasonably warm early October in Japan",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1349,11 +1349,11 @@
    "visitors": 474,
    "conversion": 0.0781,
    "top_sellers": [
-    "LOGO BEANIE black x6",
-    "LOGO HOODIE black x6",
-    "MAYA navy x5",
-    "MAYA black x5",
-    "TRICOT PADDED CARDIGAN black x4"
+    "VLOGO BEANIE black x6",
+    "VLOGO HOODIE black x6",
+    "NOVA navy x5",
+    "NOVA black x5",
+    "VLOGO PADDED CARDIGAN black x4"
    ],
    "customer_mix": {
     "CN": 0.44,
@@ -1362,33 +1362,33 @@
     "TW": 0.04
    },
    "unmet_requests": [
-    "MAIRE black size 0 x1",
-    "ILVARO powder pink size 2 x1",
-    "ILVARO powder pink size 3 x1",
-    "ROSIERE olive size 5 x1",
-    "CABLE KNIT SWEATER black size XS x1",
-    "WOOL TURTLENECK black size S x1",
-    "CREWNECK SWEATSHIRT black size XL x1",
-    "LOGO T-SHIRT white size S x1"
+    "AUREA black size 0 x1",
+    "IRIDIA powder pink size 2 x1",
+    "IRIDIA powder pink size 3 x1",
+    "RIVIERA olive size 5 x1",
+    "INTARSIA SWEATER black size XS x1",
+    "CASHMERE TURTLENECK black size S x1",
+    "RELAXED SWEATSHIRT black size XL x1",
+    "VLOGO T-SHIRT white size S x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "TRICOT PADDED CARDIGAN black L",
-    "LOGO HOODIE black M"
+    "AUREA black 0",
+    "AUREA black 1",
+    "VLOGO PADDED CARDIGAN black L",
+    "VLOGO HOODIE black M"
    ],
    "returns": [
-    "ILVARO 0 reason=SIZE",
-    "TIB 2 reason=DEF"
+    "IRIDIA 0 reason=SIZE",
+    "VEL 2 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
     "E01: Chinese National Day Golden Week 2026 - outbound tourism peak",
-    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
-    "E06b: ILVARO spill-over other colours",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E06: K-pop idol wears IRIDIA powder pink at Paris Fashion Week",
+    "E06b: IRIDIA spill-over other colours",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13w: Unseasonably warm early October in Japan",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1403,11 +1403,11 @@
    "visitors": 385,
    "conversion": 0.0857,
    "top_sellers": [
-    "MAYA black x7",
-    "TRAILGRIP GTX black x4",
-    "TRICOT PADDED CARDIGAN black x4",
-    "LOGO HOODIE grey melange x4",
-    "LOGO CARDIGAN navy x4"
+    "NOVA black x7",
+    "VTRACK GTX black x4",
+    "VLOGO PADDED CARDIGAN black x4",
+    "VLOGO HOODIE grey melange x4",
+    "VLOGO CARDIGAN navy x4"
    ],
    "customer_mix": {
     "JP": 0.37,
@@ -1416,32 +1416,32 @@
     "KR": 0.06
    },
    "unmet_requests": [
-    "MAIRE black size 0 x2",
-    "MAIRE black size 1 x2",
-    "ILVARO powder pink size 0 x1",
-    "VALBOURG black size 0 x1",
-    "LOGO HOODIE black size M x1",
-    "LOGO T-SHIRT navy size XS x1",
-    "LOGO BEANIE black size TU x1"
+    "AUREA black size 0 x2",
+    "AUREA black size 1 x2",
+    "IRIDIA powder pink size 0 x1",
+    "VALDORA black size 0 x1",
+    "VLOGO HOODIE black size M x1",
+    "VLOGO T-SHIRT navy size XS x1",
+    "VLOGO BEANIE black size TU x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "TIB black 3",
-    "LOGO CARDIGAN navy M",
-    "TRICOT PADDED CARDIGAN black L",
-    "LOGO HOODIE black M",
-    "LOGO BEANIE black TU"
+    "AUREA black 0",
+    "AUREA black 1",
+    "VEL black 3",
+    "VLOGO CARDIGAN navy M",
+    "VLOGO PADDED CARDIGAN black L",
+    "VLOGO HOODIE black M",
+    "VLOGO BEANIE black TU"
    ],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
     "E01: Chinese National Day Golden Week 2026 - outbound tourism peak",
-    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
-    "E06b: ILVARO spill-over other colours",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E06: K-pop idol wears IRIDIA powder pink at Paris Fashion Week",
+    "E06b: IRIDIA spill-over other colours",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13w: Unseasonably warm early October in Japan",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1456,11 +1456,11 @@
    "visitors": 207,
    "conversion": 0.0628,
    "top_sellers": [
-    "LOGO T-SHIRT black x3",
-    "CHAMBRE black x3",
-    "TRAILGRIP GTX black x2",
-    "KARAKORUM black x2",
-    "LOGO BEANIE navy x1"
+    "VLOGO T-SHIRT black x3",
+    "CAMILLA black x3",
+    "VTRACK GTX black x2",
+    "COSIMO black x2",
+    "VLOGO BEANIE navy x1"
    ],
    "customer_mix": {
     "CN": 0.45,
@@ -1469,32 +1469,32 @@
     "TH": 0.03
    },
    "unmet_requests": [
-    "PEYRE red size 1 x1",
-    "LOGO CARDIGAN navy size M x1",
-    "LOGO HOODIE black size M x1",
-    "LOGO HOODIE grey melange size XL x1",
-    "POLO navy size XS x1"
+    "PIERO red size 1 x1",
+    "VLOGO CARDIGAN navy size M x1",
+    "VLOGO HOODIE black size M x1",
+    "VLOGO HOODIE grey melange size XL x1",
+    "JERSEY POLO navy size XS x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "TIB black 3",
-    "LOGO CARDIGAN navy M",
-    "TRICOT PADDED CARDIGAN black L",
-    "LOGO HOODIE black M",
-    "LOGO T-SHIRT black M",
-    "LOGO T-SHIRT black L",
-    "LOGO BEANIE black TU"
+    "AUREA black 0",
+    "AUREA black 1",
+    "VEL black 3",
+    "VLOGO CARDIGAN navy M",
+    "VLOGO PADDED CARDIGAN black L",
+    "VLOGO HOODIE black M",
+    "VLOGO T-SHIRT black M",
+    "VLOGO T-SHIRT black L",
+    "VLOGO BEANIE black TU"
    ],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
     "E01: Chinese National Day Golden Week 2026 - outbound tourism peak",
-    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
-    "E06b: ILVARO spill-over other colours",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E06: K-pop idol wears IRIDIA powder pink at Paris Fashion Week",
+    "E06b: IRIDIA spill-over other colours",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13w: Unseasonably warm early October in Japan",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1509,11 +1509,11 @@
    "visitors": 230,
    "conversion": 0.0957,
    "top_sellers": [
-    "LOGO HOODIE navy x4",
-    "BADY off-white x4",
-    "LOGO HOODIE grey melange x2",
-    "MAKAIO BACKPACK black x2",
-    "LOGO HOODIE black x2"
+    "VLOGO HOODIE navy x4",
+    "ARIA off-white x4",
+    "VLOGO HOODIE grey melange x2",
+    "URBAN BACKPACK black x2",
+    "VLOGO HOODIE black x2"
    ],
    "customer_mix": {
     "JP": 0.44,
@@ -1522,16 +1522,16 @@
     "KR": 0.03
    },
    "unmet_requests": [
-    "ILVARO powder pink size 0 x1",
-    "TRAILGRIP GTX grey melange size 39 x1"
+    "IRIDIA powder pink size 0 x1",
+    "VTRACK GTX grey melange size 39 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2"
    ],
    "returns": [
-    "LOGO T-SHIRT XL reason=GIFT"
+    "VLOGO T-SHIRT XL reason=GIFT"
    ],
    "deliveries_received": [
     {
@@ -1545,11 +1545,11 @@
    ],
    "active_events": [
     "E01: Chinese National Day Golden Week 2026 - outbound tourism peak",
-    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
-    "E06b: ILVARO spill-over other colours",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E06: K-pop idol wears IRIDIA powder pink at Paris Fashion Week",
+    "E06b: IRIDIA spill-over other colours",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13w: Unseasonably warm early October in Japan",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1564,11 +1564,11 @@
    "visitors": 241,
    "conversion": 0.0705,
    "top_sellers": [
-    "MAIRE navy x5",
-    "TRAILGRIP GTX black x3",
-    "ILVARO black x3",
-    "LOGO T-SHIRT navy x2",
-    "WOOL TURTLENECK chocolate brown x2"
+    "AUREA navy x5",
+    "VTRACK GTX black x3",
+    "IRIDIA black x3",
+    "VLOGO T-SHIRT navy x2",
+    "CASHMERE TURTLENECK chocolate brown x2"
    ],
    "customer_mix": {
     "CN": 0.53,
@@ -1577,27 +1577,27 @@
     "TW": 0.03
    },
    "unmet_requests": [
-    "LOGO HOODIE grey melange size L x1",
-    "LOGO HOODIE grey melange size XL x1"
+    "VLOGO HOODIE grey melange size L x1",
+    "VLOGO HOODIE grey melange size XL x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2"
    ],
    "returns": [
-    "TIB 3 reason=DEF",
-    "TIB 3 reason=DEF",
-    "TIB 4 reason=DEF"
+    "VEL 3 reason=DEF",
+    "VEL 3 reason=DEF",
+    "VEL 4 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
     "E01: Chinese National Day Golden Week 2026 - outbound tourism peak",
-    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
-    "E06b: ILVARO spill-over other colours",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E06: K-pop idol wears IRIDIA powder pink at Paris Fashion Week",
+    "E06b: IRIDIA spill-over other colours",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13w: Unseasonably warm early October in Japan",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1612,11 +1612,11 @@
    "visitors": 308,
    "conversion": 0.0617,
    "top_sellers": [
-    "LOGO HOODIE black x3",
-    "LOGO HOODIE navy x3",
-    "BADY off-white x3",
-    "TRAILGRIP W black x3",
-    "CASHMERE SCARF black x2"
+    "VLOGO HOODIE black x3",
+    "VLOGO HOODIE navy x3",
+    "ARIA off-white x3",
+    "VTRACK W black x3",
+    "VALENTINO SCARF black x2"
    ],
    "customer_mix": {
     "JP": 0.46,
@@ -1625,26 +1625,26 @@
     "HK": 0.03
    },
    "unmet_requests": [
-    "MAIRE black size 1 x1",
-    "MAIRE off-white size 00 x1",
-    "ILVARO powder pink size 2 x1",
-    "CABLE KNIT SWEATER black size XS x1"
+    "AUREA black size 1 x1",
+    "AUREA off-white size 00 x1",
+    "IRIDIA powder pink size 2 x1",
+    "INTARSIA SWEATER black size XS x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "TRAILGRIP GTX black 41"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "VTRACK GTX black 41"
    ],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
     "E01: Chinese National Day Golden Week 2026 - outbound tourism peak",
-    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
-    "E06b: ILVARO spill-over other colours",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E06: K-pop idol wears IRIDIA powder pink at Paris Fashion Week",
+    "E06b: IRIDIA spill-over other colours",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13w: Unseasonably warm early October in Japan",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1659,11 +1659,11 @@
    "visitors": 202,
    "conversion": 0.0644,
    "top_sellers": [
-    "LOGO HOODIE navy x2",
-    "LOGO T-SHIRT black x2",
-    "LOGO CARDIGAN black x2",
-    "TRICOT PADDED CARDIGAN black x2",
-    "LOGO CARDIGAN navy x2"
+    "VLOGO HOODIE navy x2",
+    "VLOGO T-SHIRT black x2",
+    "VLOGO CARDIGAN black x2",
+    "VLOGO PADDED CARDIGAN black x2",
+    "VLOGO CARDIGAN navy x2"
    ],
    "customer_mix": {
     "JP": 0.56,
@@ -1672,26 +1672,26 @@
     "US": 0.08
    },
    "unmet_requests": [
-    "WOOL TURTLENECK navy size XS x1"
+    "CASHMERE TURTLENECK navy size XS x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "LOGO HOODIE navy M",
-    "LOGO T-SHIRT black L",
-    "TRAILGRIP GTX black 41"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "VLOGO HOODIE navy M",
+    "VLOGO T-SHIRT black L",
+    "VTRACK GTX black 41"
    ],
    "returns": [
-    "MONTCLA 4 reason=SIZE"
+    "MISTRAL 4 reason=SIZE"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
-    "E06b: ILVARO spill-over other colours",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E06: K-pop idol wears IRIDIA powder pink at Paris Fashion Week",
+    "E06b: IRIDIA spill-over other colours",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13w: Unseasonably warm early October in Japan",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1706,11 +1706,11 @@
    "visitors": 316,
    "conversion": 0.0728,
    "top_sellers": [
-    "MAIRE navy x4",
-    "LOGO CARDIGAN navy x3",
-    "MAYA navy x3",
-    "TRAILGRIP GTX black x3",
-    "LOGO HOODIE grey melange x2"
+    "AUREA navy x4",
+    "VLOGO CARDIGAN navy x3",
+    "NOVA navy x3",
+    "VTRACK GTX black x3",
+    "VLOGO HOODIE grey melange x2"
    ],
    "customer_mix": {
     "JP": 0.42,
@@ -1719,29 +1719,29 @@
     "TW": 0.04
    },
    "unmet_requests": [
-    "BADY powder pink size 0 x1",
-    "TRAILGRIP GTX black size 41 x1"
+    "ARIA powder pink size 0 x1",
+    "VTRACK GTX black size 41 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "MAIRE navy 2",
-    "LOGO CARDIGAN navy L",
-    "LOGO HOODIE navy M",
-    "LOGO T-SHIRT black L",
-    "TRAILGRIP GTX black 41"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "AUREA navy 2",
+    "VLOGO CARDIGAN navy L",
+    "VLOGO HOODIE navy M",
+    "VLOGO T-SHIRT black L",
+    "VTRACK GTX black 41"
    ],
    "returns": [
-    "TIB 4 reason=DEF"
+    "VEL 4 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
-    "E06b: ILVARO spill-over other colours",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E06: K-pop idol wears IRIDIA powder pink at Paris Fashion Week",
+    "E06b: IRIDIA spill-over other colours",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13w: Unseasonably warm early October in Japan",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1756,11 +1756,11 @@
    "visitors": 323,
    "conversion": 0.0526,
    "top_sellers": [
-    "LOGO CARDIGAN black x5",
-    "LOGO CARDIGAN navy x3",
-    "CHAMBRE black x2",
-    "MAYA navy x2",
-    "LOGO BEANIE navy x1"
+    "VLOGO CARDIGAN black x5",
+    "VLOGO CARDIGAN navy x3",
+    "CAMILLA black x2",
+    "NOVA navy x2",
+    "VLOGO BEANIE navy x1"
    ],
    "customer_mix": {
     "JP": 0.52,
@@ -1769,29 +1769,29 @@
     "US": 0.04
    },
    "unmet_requests": [
-    "LOGO HOODIE navy size M x2",
-    "LOGO HOODIE grey melange size M x2",
-    "VALBOURG black size 0 x1",
-    "TRAILGRIP W black size 40 x1"
+    "VLOGO HOODIE navy size M x2",
+    "VLOGO HOODIE grey melange size M x2",
+    "VALDORA black size 0 x1",
+    "VTRACK W black size 40 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "MAIRE navy 2",
-    "LOGO CARDIGAN navy L",
-    "LOGO HOODIE navy M",
-    "LOGO T-SHIRT black L",
-    "TRAILGRIP GTX black 41"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "AUREA navy 2",
+    "VLOGO CARDIGAN navy L",
+    "VLOGO HOODIE navy M",
+    "VLOGO T-SHIRT black L",
+    "VTRACK GTX black 41"
    ],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
-    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
-    "E06b: ILVARO spill-over other colours",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E06: K-pop idol wears IRIDIA powder pink at Paris Fashion Week",
+    "E06b: IRIDIA spill-over other colours",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13w: Unseasonably warm early October in Japan",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1806,11 +1806,11 @@
    "visitors": 245,
    "conversion": 0.1102,
    "top_sellers": [
-    "MAYA black x4",
-    "LOGO CARDIGAN black x2",
-    "LOGO CARDIGAN navy x2",
-    "ECRINS black x2",
-    "ROSIERE black x2"
+    "NOVA black x4",
+    "VLOGO CARDIGAN black x2",
+    "VLOGO CARDIGAN navy x2",
+    "ETTORE black x2",
+    "RIVIERA black x2"
    ],
    "customer_mix": {
     "JP": 0.62,
@@ -1819,35 +1819,35 @@
     "KR": 0.08
    },
    "unmet_requests": [
-    "BADY powder pink size 0 x2",
-    "ILVARO powder pink size 1 x2",
-    "MAIRE black size 0 x1",
-    "MAIRE navy size 2 x1",
-    "TIB navy size 7 x1",
-    "LOGO CARDIGAN navy size XL x1",
-    "WOOL TURTLENECK navy size S x1",
-    "POLO white size XL x1"
+    "ARIA powder pink size 0 x2",
+    "IRIDIA powder pink size 1 x2",
+    "AUREA black size 0 x1",
+    "AUREA navy size 2 x1",
+    "VEL navy size 7 x1",
+    "VLOGO CARDIGAN navy size XL x1",
+    "CASHMERE TURTLENECK navy size S x1",
+    "JERSEY POLO white size XL x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "MAIRE navy 2",
-    "LOGO CARDIGAN navy L",
-    "LOGO HOODIE navy M",
-    "LOGO T-SHIRT black L",
-    "TRAILGRIP GTX black 41"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "AUREA navy 2",
+    "VLOGO CARDIGAN navy L",
+    "VLOGO HOODIE navy M",
+    "VLOGO T-SHIRT black L",
+    "VTRACK GTX black 41"
    ],
    "returns": [
-    "INSOLUX 37 reason=COLOUR"
+    "ALPINA 37 reason=COLOUR"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
-    "E06b: ILVARO spill-over other colours",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E06: K-pop idol wears IRIDIA powder pink at Paris Fashion Week",
+    "E06b: IRIDIA spill-over other colours",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13: Japan price increase announced for Nov 1 - pre-buying rush",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1862,11 +1862,11 @@
    "visitors": 213,
    "conversion": 0.108,
    "top_sellers": [
-    "TRAILGRIP GTX black x4",
-    "LEGERE BELT BAG black x2",
-    "LOGO T-SHIRT white x2",
-    "TRICOT PADDED CARDIGAN black x2",
-    "TRAILGRIP W black x2"
+    "VTRACK GTX black x4",
+    "VITA BELT BAG black x2",
+    "VLOGO T-SHIRT white x2",
+    "VLOGO PADDED CARDIGAN black x2",
+    "VTRACK W black x2"
    ],
    "customer_mix": {
     "JP": 0.56,
@@ -1875,16 +1875,16 @@
     "TW": 0.08
    },
    "unmet_requests": [
-    "MAIRE black size 0 x3"
+    "AUREA black size 0 x3"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "TRAILGRIP GTX black 41"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "VTRACK GTX black 41"
    ],
    "returns": [
-    "AMBRINE 0 reason=GIFT"
+    "AMALIA 0 reason=GIFT"
    ],
    "deliveries_received": [
     {
@@ -1897,11 +1897,11 @@
     }
    ],
    "active_events": [
-    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
-    "E06b: ILVARO spill-over other colours",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E06: K-pop idol wears IRIDIA powder pink at Paris Fashion Week",
+    "E06b: IRIDIA spill-over other colours",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13: Japan price increase announced for Nov 1 - pre-buying rush",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1916,11 +1916,11 @@
    "visitors": 185,
    "conversion": 0.1135,
    "top_sellers": [
-    "BADY black x3",
-    "TRAILGRIP GTX black x3",
-    "KARAKORUM black x3",
-    "TRICOT PADDED CARDIGAN black x3",
-    "INSOLUX black x3"
+    "ARIA black x3",
+    "VTRACK GTX black x3",
+    "COSIMO black x3",
+    "VLOGO PADDED CARDIGAN black x3",
+    "ALPINA black x3"
    ],
    "customer_mix": {
     "JP": 0.66,
@@ -1930,24 +1930,24 @@
    },
    "unmet_requests": [],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "TRAILGRIP GTX black 41",
-    "TRAILGRIP GTX black 43"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "VTRACK GTX black 41",
+    "VTRACK GTX black 43"
    ],
    "returns": [
-    "LOGO CARDIGAN L reason=CHANGE_MIND",
-    "LOGO T-SHIRT L reason=CHANGE_MIND",
-    "TECH GLOVES TU reason=SIZE"
+    "VLOGO CARDIGAN L reason=CHANGE_MIND",
+    "VLOGO T-SHIRT L reason=CHANGE_MIND",
+    "WINTER GLOVES TU reason=SIZE"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
-    "E06b: ILVARO spill-over other colours",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E06: K-pop idol wears IRIDIA powder pink at Paris Fashion Week",
+    "E06b: IRIDIA spill-over other colours",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13: Japan price increase announced for Nov 1 - pre-buying rush",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -1962,11 +1962,11 @@
    "visitors": 207,
    "conversion": 0.0966,
    "top_sellers": [
-    "ILVARO black x4",
-    "LOGO BEANIE navy x3",
-    "LOGO CARDIGAN black x2",
-    "LOGO CAP black x2",
-    "TRICOT PADDED CARDIGAN navy x2"
+    "IRIDIA black x4",
+    "VLOGO BEANIE navy x3",
+    "VLOGO CARDIGAN black x2",
+    "VLOGO CAP black x2",
+    "VLOGO PADDED CARDIGAN navy x2"
    ],
    "customer_mix": {
     "JP": 0.64,
@@ -1975,30 +1975,30 @@
     "OTHER": 0.07
    },
    "unmet_requests": [
-    "MAIRE black size 0 x2",
-    "MONTGENEVRE grey melange size 7 x1",
-    "TRAILGRIP GTX black size 43 x1"
+    "AUREA black size 0 x2",
+    "MONTELUCE grey melange size 7 x1",
+    "VTRACK GTX black size 43 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "ILVARO black 1",
-    "LOGO CARDIGAN navy M",
-    "TRAILGRIP GTX black 41",
-    "TRAILGRIP GTX black 43"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "IRIDIA black 1",
+    "VLOGO CARDIGAN navy M",
+    "VTRACK GTX black 41",
+    "VTRACK GTX black 43"
    ],
    "returns": [
-    "ILVARO 3 reason=SIZE",
-    "LEGERE BELT BAG TU reason=COLOUR"
+    "IRIDIA 3 reason=SIZE",
+    "VITA BELT BAG TU reason=COLOUR"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
-    "E06b: ILVARO spill-over other colours",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E06: K-pop idol wears IRIDIA powder pink at Paris Fashion Week",
+    "E06b: IRIDIA spill-over other colours",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13: Japan price increase announced for Nov 1 - pre-buying rush",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -2013,11 +2013,11 @@
    "visitors": 370,
    "conversion": 0.1054,
    "top_sellers": [
-    "TRICOT PADDED CARDIGAN navy x6",
-    "LOGO CAP black x4",
-    "LOGO BEANIE white x4",
-    "ECRINS black x4",
-    "KARAKORUM black x4"
+    "VLOGO PADDED CARDIGAN navy x6",
+    "VLOGO CAP black x4",
+    "VLOGO BEANIE white x4",
+    "ETTORE black x4",
+    "COSIMO black x4"
    ],
    "customer_mix": {
     "JP": 0.79,
@@ -2026,35 +2026,35 @@
     "KR": 0.04
    },
    "unmet_requests": [
-    "MAIRE black size 0 x2",
-    "MAIRE black size 2 x2",
-    "MAIRE black size 1 x1",
-    "ILVARO powder pink size 2 x1",
-    "CHAMBRE black size 0 x1",
-    "LOGO CARDIGAN navy size XXL x1",
-    "TRICOT PADDED CARDIGAN navy size S x1"
+    "AUREA black size 0 x2",
+    "AUREA black size 2 x2",
+    "AUREA black size 1 x1",
+    "IRIDIA powder pink size 2 x1",
+    "CAMILLA black size 0 x1",
+    "VLOGO CARDIGAN navy size XXL x1",
+    "VLOGO PADDED CARDIGAN navy size S x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "ILVARO black 0",
-    "ILVARO black 1",
-    "LOGO CARDIGAN navy M",
-    "TRICOT PADDED CARDIGAN navy S",
-    "TRAILGRIP GTX black 41",
-    "TRAILGRIP GTX black 43"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "IRIDIA black 0",
+    "IRIDIA black 1",
+    "VLOGO CARDIGAN navy M",
+    "VLOGO PADDED CARDIGAN navy S",
+    "VTRACK GTX black 41",
+    "VTRACK GTX black 43"
    ],
    "returns": [
-    "BADY 3 reason=CHANGE_MIND"
+    "ARIA 3 reason=CHANGE_MIND"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
-    "E06b: ILVARO spill-over other colours",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E06: K-pop idol wears IRIDIA powder pink at Paris Fashion Week",
+    "E06b: IRIDIA spill-over other colours",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13: Japan price increase announced for Nov 1 - pre-buying rush",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -2069,11 +2069,11 @@
    "visitors": 411,
    "conversion": 0.1071,
    "top_sellers": [
-    "LOGO CARDIGAN black x6",
-    "MAYA black x5",
-    "LOGO BEANIE black x5",
-    "MAYA navy x5",
-    "LOGO HOODIE black x4"
+    "VLOGO CARDIGAN black x6",
+    "NOVA black x5",
+    "VLOGO BEANIE black x5",
+    "NOVA navy x5",
+    "VLOGO HOODIE black x4"
    ],
    "customer_mix": {
     "JP": 0.75,
@@ -2082,32 +2082,32 @@
     "OTHER": 0.04
    },
    "unmet_requests": [
-    "MAIRE black size 1 x1",
-    "LOGO CARDIGAN navy size M x1",
-    "TRICOT PADDED CARDIGAN navy size S x1"
+    "AUREA black size 1 x1",
+    "VLOGO CARDIGAN navy size M x1",
+    "VLOGO PADDED CARDIGAN navy size S x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "ILVARO black 0",
-    "ILVARO black 1",
-    "LOGO CARDIGAN navy M",
-    "TRICOT PADDED CARDIGAN navy S",
-    "LOGO T-SHIRT black L",
-    "TRAILGRIP GTX black 41",
-    "TRAILGRIP GTX black 43"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "IRIDIA black 0",
+    "IRIDIA black 1",
+    "VLOGO CARDIGAN navy M",
+    "VLOGO PADDED CARDIGAN navy S",
+    "VLOGO T-SHIRT black L",
+    "VTRACK GTX black 41",
+    "VTRACK GTX black 43"
    ],
    "returns": [
-    "KARAKORUM 2 reason=COLOUR"
+    "COSIMO 2 reason=COLOUR"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
-    "E06b: ILVARO spill-over other colours",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E06: K-pop idol wears IRIDIA powder pink at Paris Fashion Week",
+    "E06b: IRIDIA spill-over other colours",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13: Japan price increase announced for Nov 1 - pre-buying rush",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -2122,11 +2122,11 @@
    "visitors": 476,
    "conversion": 0.1366,
    "top_sellers": [
-    "MAYA black x10",
-    "LOGO BEANIE navy x7",
-    "BADY black x7",
-    "BADY off-white x6",
-    "LOGO CARDIGAN navy x4"
+    "NOVA black x10",
+    "VLOGO BEANIE navy x7",
+    "ARIA black x7",
+    "ARIA off-white x6",
+    "VLOGO CARDIGAN navy x4"
    ],
    "customer_mix": {
     "JP": 0.64,
@@ -2135,38 +2135,38 @@
     "OTHER": 0.05
    },
    "unmet_requests": [
-    "BADY off-white size 00 x3",
-    "LOGO CARDIGAN navy size XXL x2",
-    "MAIRE black size 00 x1",
-    "HERMINE navy size 4 x1",
-    "BADY black size 1 x1",
-    "ILVARO powder pink size 2 x1",
-    "ILVARO off-white size 3 x1",
-    "CHAMBRE off-white size 3 x1"
+    "ARIA off-white size 00 x3",
+    "VLOGO CARDIGAN navy size XXL x2",
+    "AUREA black size 00 x1",
+    "LIVIANA navy size 4 x1",
+    "ARIA black size 1 x1",
+    "IRIDIA powder pink size 2 x1",
+    "IRIDIA off-white size 3 x1",
+    "CAMILLA off-white size 3 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "BADY black 1",
-    "ILVARO black 0",
-    "ILVARO black 1",
-    "MAYA black 3",
-    "LOGO CARDIGAN black S",
-    "LOGO CARDIGAN navy M",
-    "TRICOT PADDED CARDIGAN navy S"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "ARIA black 1",
+    "IRIDIA black 0",
+    "IRIDIA black 1",
+    "NOVA black 3",
+    "VLOGO CARDIGAN black S",
+    "VLOGO CARDIGAN navy M",
+    "VLOGO PADDED CARDIGAN navy S"
    ],
    "returns": [
-    "TIB 3 reason=DEF",
-    "TIB 4 reason=DEF"
+    "VEL 3 reason=DEF",
+    "VEL 4 reason=DEF"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
-    "E06b: ILVARO spill-over other colours",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E06: K-pop idol wears IRIDIA powder pink at Paris Fashion Week",
+    "E06b: IRIDIA spill-over other colours",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13: Japan price increase announced for Nov 1 - pre-buying rush",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -2181,11 +2181,11 @@
    "visitors": 223,
    "conversion": 0.0942,
    "top_sellers": [
-    "CASHMERE SCARF black x3",
-    "LOGO BEANIE white x3",
-    "LOGO BEANIE black x2",
-    "LEGERE BELT BAG black x2",
-    "TRAILGRIP GTX black x2"
+    "VALENTINO SCARF black x3",
+    "VLOGO BEANIE white x3",
+    "VLOGO BEANIE black x2",
+    "VITA BELT BAG black x2",
+    "VTRACK GTX black x2"
    ],
    "customer_mix": {
     "JP": 0.7,
@@ -2194,35 +2194,35 @@
     "US": 0.06
    },
    "unmet_requests": [
-    "MAIRE black size 00 x1",
-    "MAIRE black size 1 x1",
-    "MAIRE black size 2 x1",
-    "ILVARO powder pink size 0 x1",
-    "CHAMBRE black size 0 x1",
-    "MAYA black size 3 x1",
-    "VALBOURG black size 00 x1",
-    "VALBOURG black size 4 x1"
+    "AUREA black size 00 x1",
+    "AUREA black size 1 x1",
+    "AUREA black size 2 x1",
+    "IRIDIA powder pink size 0 x1",
+    "CAMILLA black size 0 x1",
+    "NOVA black size 3 x1",
+    "VALDORA black size 00 x1",
+    "VALDORA black size 4 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "BADY black 1",
-    "BADY off-white 1",
-    "ILVARO black 0",
-    "ILVARO black 1",
-    "MAYA black 3",
-    "LOGO CARDIGAN black S",
-    "LOGO CARDIGAN navy M"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "ARIA black 1",
+    "ARIA off-white 1",
+    "IRIDIA black 0",
+    "IRIDIA black 1",
+    "NOVA black 3",
+    "VLOGO CARDIGAN black S",
+    "VLOGO CARDIGAN navy M"
    ],
    "returns": [],
    "deliveries_received": [],
    "active_events": [
-    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
-    "E06b: ILVARO spill-over other colours",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E06: K-pop idol wears IRIDIA powder pink at Paris Fashion Week",
+    "E06b: IRIDIA spill-over other colours",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13: Japan price increase announced for Nov 1 - pre-buying rush",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -2237,11 +2237,11 @@
    "visitors": 286,
    "conversion": 0.1084,
    "top_sellers": [
-    "TRICOT PADDED CARDIGAN black x6",
-    "LOGO BEANIE powder pink x5",
-    "MAIRE navy x5",
-    "LOGO BEANIE white x5",
-    "BADY black x5"
+    "VLOGO PADDED CARDIGAN black x6",
+    "VLOGO BEANIE powder pink x5",
+    "AUREA navy x5",
+    "VLOGO BEANIE white x5",
+    "ARIA black x5"
    ],
    "customer_mix": {
     "JP": 0.61,
@@ -2250,22 +2250,22 @@
     "KR": 0.05
    },
    "unmet_requests": [
-    "ILVARO black size 1 x2",
-    "MAIRE black size 1 x1"
+    "IRIDIA black size 1 x2",
+    "AUREA black size 1 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "BADY off-white 1",
-    "ILVARO black 0",
-    "ILVARO black 1",
-    "KARAKORUM black 4",
-    "LOGO CARDIGAN navy M",
-    "TRAILGRIP GTX black 42"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "ARIA off-white 1",
+    "IRIDIA black 0",
+    "IRIDIA black 1",
+    "COSIMO black 4",
+    "VLOGO CARDIGAN navy M",
+    "VTRACK GTX black 42"
    ],
    "returns": [
-    "LOGO HOODIE XS reason=CHANGE_MIND"
+    "VLOGO HOODIE XS reason=CHANGE_MIND"
    ],
    "deliveries_received": [
     {
@@ -2278,11 +2278,11 @@
     }
    ],
    "active_events": [
-    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
-    "E06b: ILVARO spill-over other colours",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E06: K-pop idol wears IRIDIA powder pink at Paris Fashion Week",
+    "E06b: IRIDIA spill-over other colours",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13: Japan price increase announced for Nov 1 - pre-buying rush",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   },
   {
@@ -2297,11 +2297,11 @@
    "visitors": 258,
    "conversion": 0.093,
    "top_sellers": [
-    "WOOL TURTLENECK chocolate brown x3",
-    "LOGO BEANIE powder pink x2",
-    "LOGO T-SHIRT black x2",
-    "MAYA navy x2",
-    "LOGO BEANIE white x2"
+    "CASHMERE TURTLENECK chocolate brown x3",
+    "VLOGO BEANIE powder pink x2",
+    "VLOGO T-SHIRT black x2",
+    "NOVA navy x2",
+    "VLOGO BEANIE white x2"
    ],
    "customer_mix": {
     "JP": 0.5,
@@ -2310,34 +2310,34 @@
     "TW": 0.06
    },
    "unmet_requests": [
-    "MAIRE black size 00 x1",
-    "MAIRE black size 1 x1",
-    "MAIRE black size 2 x1",
-    "BADY off-white size 1 x1",
-    "ILVARO black size 00 x1"
+    "AUREA black size 00 x1",
+    "AUREA black size 1 x1",
+    "AUREA black size 2 x1",
+    "ARIA off-white size 1 x1",
+    "IRIDIA black size 00 x1"
    ],
    "zero_stock_key_sizes": [
-    "MAIRE black 0",
-    "MAIRE black 1",
-    "MAIRE black 2",
-    "BADY off-white 1",
-    "ILVARO black 0",
-    "ILVARO black 1",
-    "KARAKORUM black 4",
-    "LOGO CARDIGAN navy M",
-    "LOGO T-SHIRT black L",
-    "TRAILGRIP GTX black 42"
+    "AUREA black 0",
+    "AUREA black 1",
+    "AUREA black 2",
+    "ARIA off-white 1",
+    "IRIDIA black 0",
+    "IRIDIA black 1",
+    "COSIMO black 4",
+    "VLOGO CARDIGAN navy M",
+    "VLOGO T-SHIRT black L",
+    "VTRACK GTX black 42"
    ],
    "returns": [
-    "TRAILGRIP W 36 reason=SIZE"
+    "VTRACK W 36 reason=SIZE"
    ],
    "deliveries_received": [],
    "active_events": [
-    "E06: K-pop idol wears ILVARO powder pink at Paris Fashion Week",
-    "E06b: ILVARO spill-over other colours",
-    "E08: TIB vest - zipper slider defect (batch 2026-07)",
+    "E06: K-pop idol wears IRIDIA powder pink at Paris Fashion Week",
+    "E06b: IRIDIA spill-over other colours",
+    "E08: VEL vest - zipper slider defect (batch 2026-07)",
     "E13: Japan price increase announced for Nov 1 - pre-buying rush",
-    "E42: ARNEB fits large - exchanges and returns"
+    "E42: ARTEM fits large - exchanges and returns"
    ]
   }
  ]

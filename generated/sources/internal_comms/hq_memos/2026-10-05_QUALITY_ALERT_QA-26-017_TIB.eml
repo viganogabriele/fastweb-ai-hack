@@ -1,12 +1,9 @@
-From: Elena Rinaldi <elena.rinaldi@moncler-retail.example>
-To: all-stores@moncler-retail.example
-Cc: Francesca Valli <francesca.valli@moncler-retail.example>,
- quality-claims@moncler-retail.example,
- Luca Ferrari <luca.ferrari@moncler-retail.example>
-Subject: QUALITY ALERT QA-26-017 =?utf-8?q?=E2=80=93_TIB_vest_zipper_?=
- =?utf-8?b?4oCT?= return procedure (action required)
+From: Elena Rinaldi <elena.rinaldi@valentino-retail.example>
+To: all-stores@valentino-retail.example
+Cc: Francesca Valli <francesca.valli@valentino-retail.example>, quality-claims@valentino-retail.example, Luca Ferrari <luca.ferrari@valentino-retail.example>
+Subject: QUALITY ALERT QA-26-017 =?utf-8?q?=E2=80=93_VEL_vest_zipper_=E2=80=93?= return procedure (action required)
 Date: Mon, 05 Oct 2026 17:42:00 +0200
-Message-ID: <19013cc3964a.8dc7fdcb@moncler-retail.example>
+Message-ID: <19013cc3964a.8dc7fdcb@valentino-retail.example>
 Importance: High
 X-Priority: 1
 MIME-Version: 1.0
@@ -16,104 +13,100 @@ Content-Type: multipart/mixed; boundary="===============7466807851950158568=="
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-Dear all,
+Dear=20all,
 
-please find attached the quality alert QA-26-017 regarding the TIB men's down=
- vest (style J10911A00305, all colours).
+please=20find=20attached=20the=20quality=20alert=20QA-26-017=20regarding=20=
+the=20VEL=20men's=20down=20vest=20(style=20J10911A00305,=20all=20colours).
 
-We have received a few reports from boutiques about the zipper slider detachi=
-ng from the chain or not closing
-properly after some days of wear. The issue is linked to a supplier batch of =
-sliders and concerns units delivered to
-stores from 1 September 2026. Return rate on the affected units is currently =
-below 3%, so there is no reason to
-remove the style from the floor.
+We=20have=20received=20a=20few=20reports=20from=20boutiques=20about=20the=
+=20zipper=20slider=20detaching=20from=20the=20chain=20or=20not=20closing
+properly=20after=20some=20days=20of=20wear.=20The=20issue=20is=20linked=20t=
+o=20a=20supplier=20batch=20of=20sliders=20and=20concerns=20units=20delivere=
+d=20to
+stores=20from=201=20September=202026.=20Return=20rate=20on=20the=20affected=
+=20units=20is=20currently=20below=203%,=20so=20there=20is=20no=20reason=20to
+remove=20the=20style=20from=20the=20floor.
 
-What we need from you, starting today:
-1. Accept the return or exchange of affected TIB vests, also without receipt =
-if the client is in the CRM.
-2. Use return reason DEF in the POS (not QUALITY, not CHANGE_MIND).
-3. Do NOT repair in store. Put the piece in the quarantine box with the attac=
-hed form filled in.
-4. Every Friday ship the quarantine box back to your DC (CSG for EMEA, TKO fo=
-r APAC, NJ for Americas) with the
-   return label "QA-26-017".
-5. Check the TIB on the floor: if the slider is loose, take the piece off sal=
-e and treat it as point 3.
+What=20we=20need=20from=20you,=20starting=20today:
+1.=20Accept=20the=20return=20or=20exchange=20of=20affected=20VEL=20vests,=
+=20also=20without=20receipt=20if=20the=20client=20is=20in=20the=20CRM.
+2.=20Use=20return=20reason=20DEF=20in=20the=20POS=20(not=20QUALITY,=20not=
+=20CHANGE_MIND).
+3.=20Do=20NOT=20repair=20in=20store.=20Put=20the=20piece=20in=20the=20quara=
+ntine=20box=20with=20the=20attached=20form=20filled=20in.
+4.=20Every=20Friday=20ship=20the=20quarantine=20box=20back=20to=20your=20DC=
+=20(CSG=20for=20EMEA,=20TKO=20for=20APAC,=20NJ=20for=20Americas)=20with=20t=
+he
+=20=20=20return=20label=20"QA-26-017".
+5.=20Check=20the=20VEL=20on=20the=20floor:=20if=20the=20slider=20is=20loose=
+,=20take=20the=20piece=20off=20sale=20and=20treat=20it=20as=20point=203.
 
-Please do not communicate anything to clients beyond "we will exchange it imm=
-ediately". No posts, no comments on
-social media. Press questions go to Corporate Communications.
+Please=20do=20not=20communicate=20anything=20to=20clients=20beyond=20"we=20=
+will=20exchange=20it=20immediately".=20No=20posts,=20no=20comments=20on
+social=20media.=20Press=20questions=20go=20to=20Corporate=20Communications.
 
-Thank you for your cooperation,
-Elena Rinaldi
-Product Quality & After-Sales
+Thank=20you=20for=20your=20cooperation,
+Elena=20Rinaldi
+Product=20Quality=20&=20After-Sales
 
 --===============7466807851950158568==
 Content-Type: application/pdf
-Content-Transfer-Encoding: base64
 Content-Disposition: attachment;
  filename="QA-26-017_TIB_zipper_return_procedure.pdf"
 MIME-Version: 1.0
+Content-Transfer-Encoding: base64
 
-JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3Vy
-Y2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUiAvRjMgNCAwIFIKPj4KZW5kb2JqCjIg
-MCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2Rpbmcg
-L05hbWUgL0YxIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKMyAwIG9iago8
-PAovQmFzZUZvbnQgL0hlbHZldGljYS1Cb2xkIC9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nIC9O
-YW1lIC9GMiAvU3VidHlwZSAvVHlwZTEgL1R5cGUgL0ZvbnQKPj4KZW5kb2JqCjQgMCBvYmoKPDwK
-L0Jhc2VGb250IC9IZWx2ZXRpY2EtQm9sZE9ibGlxdWUgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2Rp
-bmcgL05hbWUgL0YzIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKNSAwIG9i
-ago8PAovQ29udGVudHMgOSAwIFIgL01lZGlhQm94IFsgMCAwIDU5NS4yNzU2IDg0MS44ODk4IF0g
-L1BhcmVudCA4IDAgUiAvUmVzb3VyY2VzIDw8Ci9Gb250IDEgMCBSIC9Qcm9jU2V0IFsgL1BERiAv
-VGV4dCAvSW1hZ2VCIC9JbWFnZUMgL0ltYWdlSSBdCj4+IC9Sb3RhdGUgMCAvVHJhbnMgPDwKCj4+
-IAogIC9UeXBlIC9QYWdlCj4+CmVuZG9iago2IDAgb2JqCjw8Ci9QYWdlTW9kZSAvVXNlTm9uZSAv
-UGFnZXMgOCAwIFIgL1R5cGUgL0NhdGFsb2cKPj4KZW5kb2JqCjcgMCBvYmoKPDwKL0F1dGhvciAo
-XChhbm9ueW1vdXNcKSkgL0NyZWF0aW9uRGF0ZSAoRDoyMDI2MTAyMjE3NDExNCswMicwMCcpIC9D
-cmVhdG9yIChcKHVuc3BlY2lmaWVkXCkpIC9LZXl3b3JkcyAoKSAvTW9kRGF0ZSAoRDoyMDI2MTAy
-MjE3NDExNCswMicwMCcpIC9Qcm9kdWNlciAoUmVwb3J0TGFiIFBERiBMaWJyYXJ5IC0gXChvcGVu
-c291cmNlXCkpIAogIC9TdWJqZWN0IChcKHVuc3BlY2lmaWVkXCkpIC9UaXRsZSAoUUEtMjYtMDE3
-IFRJQikgL1RyYXBwZWQgL0ZhbHNlCj4+CmVuZG9iago4IDAgb2JqCjw8Ci9Db3VudCAxIC9LaWRz
-IFsgNSAwIFIgXSAvVHlwZSAvUGFnZXMKPj4KZW5kb2JqCjkgMCBvYmoKPDwKL0ZpbHRlciBbIC9B
-U0NJSTg1RGVjb2RlIC9GbGF0ZURlY29kZSBdIC9MZW5ndGggMTc3Nwo+PgpzdHJlYW0KR2F0PWxo
-Zkc4SCZCRV0iPTciQ0FISWxPcnI2Q2Q5W2w8UVlGJXRbWT5VTTAtakhwLHIuXExNUGZBRDFBXmJj
-ZmMya0lyV3FGSz89bV1vQVsrU19aL3M3PzxcQyglKU8nSVxWJCVdSlE4WV5JJSNbVitMQ2tXams3
-S0g+OTEuI3I2TEZ1VEwxNF5XP1RxX09hblJSb20hKmNPRk1lRitfcFhJRzUqaWNtWjQ2WFpEInE9
-V3FEcWxCKktZXlpXN2RoXSs8KEcqJz0xamY+WVlIW3MtL3JqcVlqVmdBKHArVV0iJXNjXz1rNG0o
-NyRGLyYhNltOPWc1PiUnR0JsYVU4WCZqOGA9OSZTNHJhJXI9Kl9aOlJsVUViX2J1O0k7KkAzRzpD
-STI6Y1g3ZkwsVTZSVVNFPT0/c0w+ZFZPMlFBUF4kRTNRZ11ba0BqQjcxPWVYWm5RWiI0MThTOVYn
-aD1JPiUzbVxvKWU6JCxnMUpaPTNyPG0/XG1MSydQPERvJl43LUtDdUQrbyY6dUZHbDg3PWpAKXJS
-S2w2SW1Pbmk7O2pKJzxSRDgkWy5uWkQyb1tIJVhBOEJVImJiUEooL2oqXklQbVNhWkw3bXQ+NjI5
-RkYpQSZJVjNrI0glJUxgSj0hJVhJNjNGWiY7N1k4M1gjSjFsMUpFPSRjTUJEP1VyP0ZOcDdqUzYl
-bSU9R15zKzxfLDE/VTEnRU9SWFlocFRUa0BjcyloKFA4cWkzWVk0TmcpTSg5KCM3ITAiaUckMWNB
-PkVvLXBSIicwKUB0Kz5ZQ3BfLCM6JE5RPmItYjA/VUB1WiU0MyxMbyddaCxfaEIiM1d0YnFIT2dr
-cSwiLnNvUyhaMm1uUi5MRlFhYGU1PVM8bW4oOkVPZ25laz0tbyxWT0M/bz89SyhrZjw1bk43b1o5
-WydHP1dNTmhiVVpwcjRMUTwySWpzKGV0UyRxNj5WXVA+ZmtEVUI0IUpSS3RxXE91IUdtL1FrVCU8
-YSdVVkdKYHQlXCNDcUxSVCM/MSRlSCVVPVUtUi5gbk9QYkhVRz5TJmhDQW5lLjMlNU4jPmkkJGUz
-Y2hYTm9wLltWSVlhU0EzbiJTRnNeWVtURnBabk4+WEgqYDhNNiQ9ZWpDPFIxLmxqQTxzZEtjX29t
-T1lRQiwnaCUlPSNqKERBXSIzQDZdbF5SMyZlT1NTTF4pYCFkdVJbI0o2TXA9MXMkJUg8SmkrI21r
-KlxCb0hWcHJPUi9SZ0h1XktHXioxXS8uL1RxMSstW19Ealc6alpJamomV1QwXy5tZFlnJWRbXTVF
-QFA0WyRLV0RWXCo2WkJaOy44Q0UwRkVrcl4kXFBnby01KkklW29oIU5hUFJHXz5DdCxILXNqPyVJ
-XDMsWS10OFFaUGs9NiQzWlksR25iaE9BOFdBSjFuc1RcZj5pIjVdSSlZajEoT0RGPmZWbi1zIVk7
-XURvXTZBJF5CNW9OWXRcMTBXaC9sMUZoJzQnSSg+N3AnPWs4X01UM1NtJCYrIU1OJ3NUMGREPmQp
-aGtNKi1xJS0vaVw0SUlfTVQzU20kJishTU4nc1QwZEQ+ZCloa00qLWo5LF1pb0FtPDVtU3VRS1du
-QkUjVi5lP0BFNDw8PGJySmVNUDFVIkV1OEpIKS5DTEMmOWMyJUBEdFxabSRKQyVNTidyKVlsR3NZ
-PnAoQ3ImQWpIQStWbElYS0gyajgvNztXZTQoYS9NQGZaX0IiKFMlPlBTJig0JGFEczIrbWJSLkBL
-RnFFZkorVigqPUtbU1MwN0JaW2lnPkVkbT5UXj1wUjMlS05RJHMmOWM4J0BFMz07aztlWWBDZE1x
-VzMlSlY3RDBGKGdlI18zMzNPPDQtOk0uU2NoM0pjYF5nQnByNykqcEQ8NERTczcpKmE4PDU4LnQ3
-KSpfW2c+P2M/aHIzSkVAOG0zalk7PTRPYTBRRC4xRSY4KSNYXlJaQz5hKHFvWiFhMERMLiUyM2x0
-NUxSRFU3XVI/LEBNZG47blxWVENOI1VwYk9eN1EyNClPNDRZUV9XVz5hXDw1SmI5R2xTcihkLlFi
-Y2NsY2tSbCNiUWs1TDJtLC5eMlZANkUmbiZNWyJLbmAtO09OSnFUIk4jTjpPa2ZCLWc7OEZFJFZb
-PG8uNlFsOk06XSFdSE1jaElmITo6LyheUEMlUCUmK25CLkdJL05AS25SUFgxW2dCRiJySF89PSVr
-cmwmLUc/YGAtTWcjRlVKcGtrYG5QWlYuOF1dJD5WKG0jSGopYSFXXFIuKlRIaDdyN2QjLCtRPDFc
-MS9GTWJHOVleVWkkLGU1ZVUmLDpsOywzR3M8VzIiNDkiYSpyamBaLEI5WkZubkooYSMxITJPZDZQ
-UUJ+PmVuZHN0cmVhbQplbmRvYmoKeHJlZgowIDEwCjAwMDAwMDAwMDAgNjU1MzUgZiAKMDAwMDAw
-MDA2MSAwMDAwMCBuIAowMDAwMDAwMTEyIDAwMDAwIG4gCjAwMDAwMDAyMTkgMDAwMDAgbiAKMDAw
-MDAwMDMzMSAwMDAwMCBuIAowMDAwMDAwNDUwIDAwMDAwIG4gCjAwMDAwMDA2NTMgMDAwMDAgbiAK
-MDAwMDAwMDcyMSAwMDAwMCBuIAowMDAwMDAxMDAxIDAwMDAwIG4gCjAwMDAwMDEwNjAgMDAwMDAg
-biAKdHJhaWxlcgo8PAovSUQgCls8ODQzZDY5OTZjY2Y4OTgzZTlmODNhZDJhZmU3NmRmMTg+PDg0
-M2Q2OTk2Y2NmODk4M2U5ZjgzYWQyYWZlNzZkZjE4Pl0KJSBSZXBvcnRMYWIgZ2VuZXJhdGVkIFBE
-RiBkb2N1bWVudCAtLSBkaWdlc3QgKG9wZW5zb3VyY2UpCgovSW5mbyA3IDAgUgovUm9vdCA2IDAg
-UgovU2l6ZSAxMAo+PgpzdGFydHhyZWYKMjkyOAolJUVPRgo=
+JVBERi0xLjQKJcK1wrYKJSBXcml0dGVuIGJ5IE11UERGIDEuMjguNQoKMSAwIG9iago8PC9UeXBl
+L0ZvbnQvU3VidHlwZS9UeXBlMS9CYXNlRm9udC9IZWx2ZXRpY2EvRW5jb2RpbmcvV2luQW5zaUVu
+Y29kaW5nL05hbWUvRjE+PgplbmRvYmoKCjIgMCBvYmoKPDwvVHlwZS9Gb250L1N1YnR5cGUvVHlw
+ZTEvQmFzZUZvbnQvSGVsdmV0aWNhLUJvbGQvRW5jb2RpbmcvV2luQW5zaUVuY29kaW5nL05hbWUv
+RjI+PgplbmRvYmoKCjMgMCBvYmoKPDwvVHlwZS9Gb250L1N1YnR5cGUvVHlwZTEvQmFzZUZvbnQv
+SGVsdmV0aWNhLUJvbGRPYmxpcXVlL0VuY29kaW5nL1dpbkFuc2lFbmNvZGluZy9OYW1lL0YzPj4K
+ZW5kb2JqCgo0IDAgb2JqCjw8L1R5cGUvUGFnZS9Db250ZW50c1s4IDAgUiA5IDAgUiAxMSAwIFJd
+L01lZGlhQm94WzAgMCA1OTUuMjc1NiA4NDEuODg5OF0vUGFyZW50IDcgMCBSL1Jlc291cmNlczw8
+L0ZvbnQ8PC9GMiAyIDAgUi9GMSAxIDAgUi9GMyAzIDAgUi9oZWx2IDEwIDAgUj4+Pj4vUm90YXRl
+IDAvVHJhbnM8PD4+L0Fubm90c1tdPj4KZW5kb2JqCgo1IDAgb2JqCjw8L1R5cGUvQ2F0YWxvZy9Q
+YWdlTW9kZS9Vc2VOb25lL1BhZ2VzIDcgMCBSPj4KZW5kb2JqCgo2IDAgb2JqCjw8L0F1dGhvcihc
+KGFub255bW91c1wpKS9DcmVhdGlvbkRhdGUoRDoyMDI2MTAyMjE3NDExNCswMicwMCcpL0NyZWF0
+b3IoXCh1bnNwZWNpZmllZFwpKS9LZXl3b3JkcyBudWxsL01vZERhdGUoRDoyMDI2MTAyMjE3NDEx
+NCswMicwMCcpL1Byb2R1Y2VyKFJlcG9ydExhYiBQREYgTGlicmFyeSAtIFwob3BlbnNvdXJjZVwp
+KS9TdWJqZWN0KFwodW5zcGVjaWZpZWRcKSkvVGl0bGUoUUEtMjYtMDE3IFZFTCkvVHJhcHBlZCBu
+dWxsPj4KZW5kb2JqCgo3IDAgb2JqCjw8L1R5cGUvUGFnZXMvQ291bnQgMS9LaWRzWzQgMCBSXT4+
+CmVuZG9iagoKOCAwIG9iago8PC9MZW5ndGggMTE5OS9GaWx0ZXIvRmxhdGVEZWNvZGU+PgpzdHJl
+YW0KeJyNVm1v2zYQ/iv3MRkQhu8Ui2BAGnfDhgKrE/fDinxxJKpR41iOJHfAfv3uSEmWnDodBNl8
+eXj38HT3kC/wAgI4PgJcBk4LlmU+g/wZmJVOmzTZfIX3q8vfJAgDqxKE5EwbwsNqAWfLz9cf/1j9
+DdcfP9yuYHl9Ie0FF+589Q0+YB9dLI/cSDW64VMHAjyLHjhIaqDxT01d7PPuHZA5I1nGBecaATh5
+Jbm3ktvCGhukcwrb2pbOYY87a41TTicMtZy3uTWS67USiiuPv0JTiyuFr+mtKVsirnTGSbKIOHwk
+lyW2ndJK9m2puO6tW4ErcvJivVuT319Pbt76n29e6LT7K+2RuHIGN6jVWvJIsyT6+IsE8LWJguFO
+InGN2LhpI7BFtDxtHCkjRgtrnUZ6UhZGxVmkKpG4LiwFR9hgy2RPa+tj0CTOSAwG9tF+IBbDdq2M
+YSIkeRtsCVyDvqNVsiissymYOYWFw4WQ8dsubtrTSYJUfxwnBbQ85kiyEtq8qXZdVW+hLqF7DFC1
+7T68YVqan+ef7RPwS7XbhQbaTVXg3/1Zu9/tNhU2N3UHX+4uKO7355Cvt1CEbp0/QtnUz5FG/riu
+kFMD5braQFfjkvyJwSJ0Ie9CgZim3n99hLarm0j3EJom7Oqmaxlcl2UCt3m9C+9gv626Fj1tqu+h
+IRt1Wt4mt1xccn9Jn5vB5whFBosbwuRP8Lj+HuAhhC1SC/lTKMjp6hc4W28LaMImrNtQsNOBM97/
+v29yG7p9s4VdU+eh2DdvfAtjT5j8UTlgUvmYfgof4zglOiUbpikmGFZ9ie0M57KYeM4ONS1pneG6
+NCqtsMJRnYe+3nXUBa2NtoMKRE+xHDDxgyyoGDDdJSGjT+LhsZQSXhM+lgGlP3qPBRMIHcskw2/y
+gG0bbRSzQriyxIg0x/XWTLSG/PF5sDkVsKNdederXdy5JnbIWkUsFrpFL7GMoz0SAS1kEUWiQLEQ
+arBv4+4s+SQ+MQoZrlGWOJY27igKQLSHyokChF4oFibG/g2FM/qEwh1nyR0lLpR184x1VW8DbCr8
+oWrbVSEP9+en0kYxx7nzoITHY0q+ciTBpdyxgGFnXpqJw97o+xUYwRSSVXPQYt1NMAKnFG5qBvn0
+1x2WSx5QdSZIZxl3mZtDb+pNvW8OKCkFQ5fiiFj178SnNIZpnR05XQRSAlKgJEWXvb5cQo1i04zR
+QgPKOyYycezkuke89NG6/R2D+Se+34Bp+Ie+i8iYtM7BM2iN+uv0YWgDd3HVYYpPxvgceICctCR8
+xjRxOyDGoR7hMmYyOWUzDvUIkzGn+czGMNQjVMYy7+wUMQz1CEwibvCmM0EMQwmBqieFnJoYRtK8
+85ginGcTwDiUEAa1DA/RqYlxKCEUZnKGCjVBjENDvFj2Kl79UAy56bM5xnzozILuLbJy3kTI2JlB
+hOMpiwkydmYQKUxKYYKMnTlE+5TBETJ0ZhDlRcpRgoydGWQ5Vv6Rwki8Q/V1zwwX3opX/+Mp4pLi
+DPepKMzxsKBbTLowWrphjbKa5DwKP8o/jSTRRoklaad+vPXQZS8dHCS8UejpKCniwRBQssNMIpf/
+AZr3qAwKZW5kc3RyZWFtCmVuZG9iagoKOSAwIG9iago8PC9MZW5ndGggNjYvRmlsdGVyL0ZsYXRl
+RGVjb2RlPj4Kc3RyZWFtCnic4yrkMjQ00zMws1QwNzLXMzEzNTRXMDTRM7MwtLRUMNUzMjI0MlUo
+SuXK4DJUAMEgdwUIoyhdwYkrkAsAo4kM1QplbmRzdHJlYW0KZW5kb2JqCgoxMCAwIG9iago8PC9U
+eXBlL0ZvbnQvU3VidHlwZS9UeXBlMS9CYXNlRm9udC9IZWx2ZXRpY2EvRW5jb2RpbmcvV2luQW5z
+aUVuY29kaW5nPj4KZW5kb2JqCgoxMSAwIG9iago8PC9MZW5ndGggNzYvRmlsdGVyL0ZsYXRlRGVj
+b2RlPj4Kc3RyZWFtCnic4yrkcgrhMlQwAEJDBUNDMz0DQ0sFcyMzPWMLSwuFkFwu/YzUnDIFcz0L
+I6CskaVCSJpCtI2pmYmpSbJdbIgXl2sIVyAXABGCD4kKZW5kc3RyZWFtCmVuZG9iagoKeHJlZgow
+IDEyCjAwMDAwMDAwMDAgNjU1MzUgZiAKMDAwMDAwMDA0MiAwMDAwMCBuIAowMDAwMDAwMTM5IDAw
+MDAwIG4gCjAwMDAwMDAyNDEgMDAwMDAgbiAKMDAwMDAwMDM1MCAwMDAwMCBuIAowMDAwMDAwNTQ1
+IDAwMDAwIG4gCjAwMDAwMDA2MDggMDAwMDAgbiAKMDAwMDAwMDg2OSAwMDAwMCBuIAowMDAwMDAw
+OTIxIDAwMDAwIG4gCjAwMDAwMDIxOTAgMDAwMDAgbiAKMDAwMDAwMjMyNCAwMDAwMCBuIAowMDAw
+MDAyNDE0IDAwMDAwIG4gCgp0cmFpbGVyCjw8L1NpemUgMTIvSW5mbyA2IDAgUi9Sb290IDUgMCBS
+L0lEWzw4NDNENjk5NkNDRjg5ODNFOUY4M0FEMkFGRTc2REYxOD48M0U3QkVDQTBBQ0VEQzRFMzU3
+MUMzMjQzMkQ3MjUxOEY+XT4+CnN0YXJ0eHJlZgoyNTU5CiUlRU9GCg==
 
 --===============7466807851950158568==--

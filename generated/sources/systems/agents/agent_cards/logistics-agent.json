@@ -2,24 +2,24 @@
   "protocolVersion": "0.3.0",
   "name": "logistics-agent",
   "description": "Transport agent (TMS + carrier visibility platform). Tracks DC->store shipments, checks lanes (lead time, cost, cut-off, customs) and validates / books inter-store transfers (IBT). Timestamps in UTC. Store codes: SAP plant or TMS ship-to.",
-  "url": "https://agents.moncler-int.example/logistics/a2a",
+  "url": "https://agents.valentino-int.example/logistics/a2a",
   "preferredTransport": "HTTP+JSON",
   "additionalInterfaces": [
     {
-      "url": "https://agents.moncler-int.example/logistics/a2a",
+      "url": "https://agents.valentino-int.example/logistics/a2a",
       "transport": "JSONRPC"
     },
     {
-      "url": "https://agents.moncler-int.example/logistics/v1",
+      "url": "https://agents.valentino-int.example/logistics/v1",
       "transport": "HTTP+JSON"
     }
   ],
   "provider": {
-    "organization": "Moncler - Global Logistics",
-    "url": "https://intranet.moncler-int.example"
+    "organization": "Valentino - Global Logistics",
+    "url": "https://intranet.valentino-int.example"
   },
   "version": "1.7.0",
-  "documentationUrl": "https://agents.moncler-int.example/logistics/docs",
+  "documentationUrl": "https://agents.valentino-int.example/logistics/docs",
   "capabilities": {
     "streaming": false,
     "pushNotifications": true,
@@ -94,7 +94,7 @@
         "transfer"
       ],
       "examples": [
-        "Move 2 MAIRE black size 1 from ROM01 to MIL01"
+        "Move 2 AUREA black size 1 from ROM01 to MIL01"
       ],
       "inputModes": [
         "application/json",

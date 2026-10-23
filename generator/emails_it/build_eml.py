@@ -38,7 +38,7 @@ OUT = ROOT / "generated" / "sources" / "store_emails"
 INDEX = ROOT / "generated" / "ground_truth" / "answer_keys" / "emails" / "emails_it_index.csv"
 GROUP = ["MIL01", "MIL02", "ROM01", "VEN01", "CRT01", "COU01", "MAD01"]
 TZ = timezone(timedelta(hours=2))  # CEST, valid for both Rome and Madrid until Oct 25 2026
-DOMAIN = "moncler-retail.example"
+DOMAIN = "valentino-retail.example"
 
 
 def load(store):

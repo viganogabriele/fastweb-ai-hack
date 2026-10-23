@@ -129,7 +129,7 @@ def build_store(sid, index_rows=None):
             msg["Cc"] = ", ".join(cc)
         msg["Subject"] = e["subj"]
         msg["Date"] = format_datetime(dt)
-        mid = msgid(sid, eid, e.get("host", "moncler-retail.example"))
+        mid = msgid(sid, eid, e.get("host", "valentino-retail.example"))
         if e.get("dup_of") and e["dup_of"] in by_id and e.get("same_mid"):
             mid = by_id[e["dup_of"]]["_mid"]
         msg["Message-ID"] = mid

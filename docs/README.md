@@ -11,13 +11,13 @@
 | `research-fastweb-assets.md` | Assets verified against the supplied PDFs and linked API guide; exact model IDs, hosting, limitations and recommended roles; no credentials |
 | **`PLAN.md`** | **Execution plan**: lanes and path ownership, anti-collision rules, artifact seams, phases with hard vs fixture dependencies, what can start now |
 | **`RFC-001-piattaforma.md`** | **Current revised plan**: audited modular platform, temporal/data contracts, conditional scenarios, feasible decisions, 48 person-hour MVP plus reserve; 58 backlog IDs, gates, evaluation and source-by-source audit. Supersedes the operative architecture/math/plan and demo of `project-design.md` |
-| `findings.md` | What we know: the official brief, what the Moncler rep added in Q&A, scoring, domain notes, pitfalls, open questions |
+| `findings.md` | What we know: the official brief, what the Valentino rep added in Q&A, scoring, domain notes, pitfalls, open questions |
 | `project-design.md` | What we build: locked problem statement, candidate shapes, modular pipeline (Build/Thin/Mock/Cut per module), contracts, math, scenarios, cut plan, demo script |
-| `drafts/fastweb.md` | Team v0 proposal ("MONCLER PULSE"). Partly superseded: see `findings.md` §7 |
+| `drafts/fastweb.md` | Team v0 proposal ("VALENTINO PULSE"). Partly superseded: see `findings.md` §7 |
 | `sources/track/track.html` | Official track text (open in a browser; links to `eval.html`) |
 | `sources/track/eval.html` | Jury voting method and weights |
-| `sources/transcripts/Poke House.md` | ASR of the opening pitches: Alpitour (00:00–05:23), **Moncler (05:23–10:45)**. Name is misleading |
-| `sources/transcripts/Poke House 2.md` | ASR of our Q&A with the Moncler rep (header says "Poke House 3"). Uncorrected |
+| `sources/transcripts/Poke House.md` | ASR of the opening pitches: Alpitour (00:00–05:23), **Valentino (05:23–10:45)**. Name is misleading |
+| `sources/transcripts/Poke House 2.md` | ASR of our Q&A with the Valentino rep (header says "Poke House 3"). Uncorrected |
 | `sources/transcripts/needfinding.md` | Interview about qualitative store feedback, voice-note pilots, adoption and differences between retail networks |
 
 Source files are kept verbatim; don't edit them. Put interpretation in `findings.md`.

@@ -1,6 +1,7 @@
 """Product mention → ranked catalog candidates, with abstention (RFC §4.5 EntityLink, INT-01 pure).
 
-Staff never write codes: "la Maire nera", "イルバロ", "the long black one". This step finds
+Staff never write codes: "la Aurea nera", "Iridia", "the long black one".
+This step finds
 catalog candidates from style/colour names and aliases (exact, then `rapidfuzz` on word n-grams),
 checks the size against the style's size run, and decides `linked`, `ambiguous` or `unlinked`.
 It never guesses: two close candidates, a colour the style doesn't come in, or a size outside
@@ -168,7 +169,7 @@ def link_mention(
         if colour_hits and not colours:
             flags.append("colour_not_in_style")
         elif colours and _foreign_colour(colour_hits, colours):
-            # "Maire nera e verde": one colour fits, another named colour is not in the style.
+            # "Aurea nera e verde": one colour fits; another is not in the style.
             flags.append("colour_not_in_style")
         size_ok = size_norm is None or size_norm in style.sizes
         if not size_ok:
@@ -250,7 +251,9 @@ def _candidate(
 def _best_match(text: str, names: Iterable[str], p: LinkParams) -> tuple[float, Method, str] | None:
     """Exact match of a name in the text (word-bounded for ASCII names, substring otherwise),
     else the best `fuzz.ratio` of the name against word n-grams of the text. A word that is
-    part of a multi-word name ("polaris" for "POLARIS CAPE") scores PARTIAL_NAME_SCORE."""
+    part of a multi-word name ("astra" for "ASTRA CAPE")
+    scores PARTIAL_NAME_SCORE.
+    """
     words = text.split()
     text_words = set(words)
     best: tuple[float, Method, str] | None = None

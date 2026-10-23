@@ -1,10 +1,12 @@
 """ing.extract: a fake LLM proposes candidates; code must verify quotes, numbers and periods."""
 
 import json
+from copy import deepcopy
 from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
+from pydantic import ValidationError
 
 from tessera.core.cache import ReplayMiss
 from tessera.core.contracts import (
@@ -23,6 +25,127 @@ from tessera.core.registry import RegisteredModule, Registry
 from tessera.core.run_repo import repo_session
 from tessera.modules.ingestion import extract
 from tessera.modules.ingestion.extract import Candidate, Candidates
+
+
+def test_unknown_optional_enum_does_not_discard_document_facts(tmp_path):
+    records = synthetic("Sold 12 transactions today.\n\nItem size unavailable.")
+    raw = [
+        dict(
+            quote="Sold 12 transactions today.",
+            kind="sales_figure",
+            quantity_kind="exact",
+            quantity_raw="12",
+            value=12,
+            unit="transactions",
+        ),
+        dict(
+            quote="Item size unavailable.",
+            kind="unmet_demand",
+            reason="size",
+            reason_text="size unavailable",
+        ),
+    ]
+    original = deepcopy(raw)
+    status, observations, published, llm = execute(tmp_path, records, {"doc-synthetic": raw})
+    assert published and len(observations) == 2
+    assert status.result.counts["optional_fields_dropped"] == 2
+    assert len(llm.calls) == 1
+    assert raw == original  # Recorded model responses remain untouched.
+    sales, demand = observations
+    assert sales.quantity.kind == "unknown" and sales.quantity.unit is None
+    assert sales.quantity.value is None and sales.quantity.raw == "12"
+    assert demand.reason is None and demand.reason_text == "size unavailable"
+    for observation in observations:
+        evidence = observation.evidence[0]
+        assert records[0].text[evidence.char_start : evidence.char_end] == evidence.quote
+
+
+@pytest.mark.parametrize(
+    "bad",
+    [
+        {"quote": "Invalid fact.", "kind": "unknown_kind"},
+        {"quote": "Invalid fact.", "kind": "other", "direction": "sideways"},
+        {"quote": "Invalid fact.", "kind": "other", "period_start": "not-a-date"},
+        {"kind": "other"},
+        None,
+    ],
+)
+def test_invalid_item_is_logged_without_discarding_valid_sibling(tmp_path, bad):
+    records = synthetic("Valid fact.\n\nInvalid fact.")
+    status, observations, published, _ = execute(
+        tmp_path,
+        records,
+        {
+            "doc-synthetic": [
+                bad,
+                {"quote": "Valid fact.", "kind": "other"},
+            ]
+        },
+    )
+    assert published and len(observations) == 1
+    assert observations[0].evidence[0].quote == "Valid fact."
+    assert status.result.counts["candidates_rejected"] == 1
+    assert any("candidate 0 rejected" in message for message in status.result.abstentions)
+
+
+def test_real_structured_output_keeps_partial_results_on_record_and_replay(tmp_path):
+    from tests.core.test_llm import client, completion
+
+    raw = {
+        "observations": [
+            {"quote": "12 txn", "kind": "sales_figure", "unit": "transactions"},
+            {"quote": "bad", "kind": "unsupported"},
+            {"quote": "Item unavailable", "kind": "unmet_demand", "reason": "size"},
+        ]
+    }
+    llm, requests, _ = client(tmp_path, [completion(raw, name="submit_Candidates")])
+    result = llm.extract(Candidates, [{"role": "user", "content": "Synthetic source"}])
+    assert len(requests) == 1  # A bad sibling does not spend the one document retry.
+    assert len(result.observations) == 2 and len(result._rejected) == 1
+    assert len(result._optional_dropped) == 2
+    replay, network, _ = client(tmp_path, [], mode="replay")
+    saved = replay.extract(Candidates, [{"role": "user", "content": "Synthetic source"}])
+    assert saved == result
+    assert network == []
+
+
+def test_malformed_envelope_still_fails_after_the_bounded_retry(tmp_path):
+    from tests.core.test_llm import client, completion
+
+    malformed = completion({"observations": "not a list"}, name="submit_Candidates")
+    llm, requests, _ = client(tmp_path, [malformed, malformed])
+    with pytest.raises(ExtractionFailed):
+        llm.extract(Candidates, [{"role": "user", "content": "Synthetic source"}])
+    assert len(requests) == 2
+    with pytest.raises(ValidationError):
+        Candidates.model_validate_json('{"not_observations": []}')
+
+
+def test_all_invalid_candidates_are_explicit_abstentions_not_silent_empty_output(tmp_path):
+    records = synthetic("Invalid fact.")
+    status, observations, published, _ = execute(
+        tmp_path,
+        records,
+        {
+            "doc-synthetic": [
+                {"quote": "Invalid fact.", "kind": "unsupported"},
+                {"kind": "other"},
+            ]
+        },
+    )
+    assert published and observations == []
+    assert status.result.counts["candidates_rejected"] == 2
+    assert len(status.result.abstentions) == 2
+
+
+def test_tool_schema_retains_strict_enums_without_diagnostic_fields():
+    schema = Candidates.model_json_schema()
+    assert set(schema["properties"]) == {"observations"}
+    candidate = schema["$defs"]["Candidate"]["properties"]
+    assert "transactions" not in candidate["unit"]["anyOf"][0]["enum"]
+    assert "size" not in candidate["reason"]["anyOf"][0]["enum"]
+    assert "unmet_demand" in candidate["kind"]["enum"]
+
 
 ROOT = Path(__file__).resolve().parents[4]
 FIXTURES = ROOT / "data" / "fixtures"
@@ -182,21 +305,21 @@ def test_d1_quote_matches_hand_labelled_evidence(tmp_path):
 
 
 def test_whitespace_variant_quote_maps_to_canonical_slice(tmp_path):
-    text = "Oggi tanti clienti\nhanno chiesto la Maire nera.\nNessun problema."
-    candidate = Candidate(quote="hanno   chiesto la\nMaire  nera", kind="unmet_demand")
+    text = "Oggi tanti clienti\nhanno chiesto la Aurea nera.\nNessun problema."
+    candidate = Candidate(quote="hanno   chiesto la\nAurea  nera", kind="unmet_demand")
     _, observations, _, _ = execute(tmp_path, synthetic(text), {"doc-synthetic": [candidate]})
     evidence = observations[0].evidence[0]
-    assert evidence.quote == "hanno chiesto la Maire nera"
+    assert evidence.quote == "hanno chiesto la Aurea nera"
     assert text[evidence.char_start : evidence.char_end] == evidence.quote
 
 
 def test_unverifiable_quotes_are_abstentions(tmp_path):
-    text = "Maire nera finita.\n\nMaire nera richiesta da due clienti."
+    text = "Aurea nera finita.\n\nAurea nera richiesta da due clienti."
     replies = {
         "doc-synthetic": [
-            Candidate(quote="Maire blu finita", kind="stockout"),
-            Candidate(quote="Maire nera", kind="unmet_demand"),
-            Candidate(quote="Maire nera finita.", kind="stockout"),
+            Candidate(quote="Aurea blu finita", kind="stockout"),
+            Candidate(quote="Aurea nera", kind="unmet_demand"),
+            Candidate(quote="Aurea nera finita.", kind="stockout"),
         ]
     }
     status, observations, published, _ = execute(tmp_path, synthetic(text), replies)
@@ -210,12 +333,12 @@ def test_unverifiable_quotes_are_abstentions(tmp_path):
 
 
 def test_numbers_are_kept_only_when_the_email_states_them(tmp_path):
-    text = "Un paio di clienti chiedevano il Tib.\nVenduto 58,0k.\nTib finito."
+    text = "Un paio di clienti chiedevano il Vel.\nVenduto 58,0k.\nVel finito."
     replies = {
         "doc-synthetic": [
             # A vague quantifier never becomes a number, whatever the model says.
             Candidate(
-                quote="Un paio di clienti chiedevano il Tib",
+                quote="Un paio di clienti chiedevano il Vel",
                 kind="unmet_demand",
                 quantity_kind="exact",
                 value=2,
@@ -233,7 +356,7 @@ def test_numbers_are_kept_only_when_the_email_states_them(tmp_path):
             ),
             # A number whose words are not in the email.
             Candidate(
-                quote="Tib finito",
+                quote="Vel finito",
                 kind="stockout",
                 quantity_kind="exact",
                 value=12,
@@ -305,12 +428,12 @@ def test_vague_words_without_spaces_are_recognised(raw):
 
 
 def test_value_must_read_from_raw_words_inside_the_evidence_segment(tmp_path):
-    text = "Oggi 2 clienti per il Tib.\n\nTib finito, 3 pezzi venduti.\n\nVenduto 58,0k € netto."
+    text = "Oggi 2 clienti per il Vel.\n\nVel finito, 3 pezzi venduti.\n\nVenduto 58,0k € netto."
     replies = {
         "doc-synthetic": [
             # raw "2" is in the email but does not say 12.
             Candidate(
-                quote="Oggi 2 clienti per il Tib",
+                quote="Oggi 2 clienti per il Vel",
                 kind="unmet_demand",
                 quantity_kind="exact",
                 value=12,
@@ -319,7 +442,7 @@ def test_value_must_read_from_raw_words_inside_the_evidence_segment(tmp_path):
             ),
             # raw "3" is true, but in another segment than the quote.
             Candidate(
-                quote="Oggi 2 clienti per il Tib",
+                quote="Oggi 2 clienti per il Vel",
                 kind="unmet_demand",
                 quantity_kind="exact",
                 value=3,
@@ -347,7 +470,7 @@ def test_value_must_read_from_raw_words_inside_the_evidence_segment(tmp_path):
                 quantity_raw="58,0k",
             ),
             Candidate(
-                quote="Tib finito, 3 pezzi venduti",
+                quote="Vel finito, 3 pezzi venduti",
                 kind="stockout",
                 quantity_kind="range",
                 low=1,
@@ -446,7 +569,7 @@ def test_readings_do_not_invent_thousands_or_decimals(raw, wrong):
         ("5", "venduti 2,5", False),
         ("2", "venduti 2 pezzi", True),
         ("2", "venduti 2.", True),
-        ("3 pezzi", "tib finito, 3 pezzi venduti", True),
+        ("3 pezzi", "vel finito, 3 pezzi venduti", True),
     ],
 )
 def test_quantity_words_must_stand_alone_in_the_segment(raw, text, found):

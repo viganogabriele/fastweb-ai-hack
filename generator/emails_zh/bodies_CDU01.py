@@ -4,10 +4,10 @@ from cdu01_p2 import E2
 
 STORE = "CDU01"
 PEOPLE = {
-    "ln": ("李娜", "na.li@moncler-retail.example"),
-    "yf": ("杨帆", "fan.yang@moncler-retail.example"),
-    "hyt": ("何雨桐", "yutong.he@moncler-retail.example"),
-    "box": ("", "cdu01.store@moncler-retail.example"),
+    "ln": ("李娜", "na.li@valentino-retail.example"),
+    "yf": ("杨帆", "fan.yang@valentino-retail.example"),
+    "hyt": ("何雨桐", "yutong.he@valentino-retail.example"),
+    "box": ("", "cdu01.store@valentino-retail.example"),
 }
 PEOPLE_MAILER = {
     "ln": "iPhone Mail (22A3354)",

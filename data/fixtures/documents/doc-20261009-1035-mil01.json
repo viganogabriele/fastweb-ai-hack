@@ -9,27 +9,27 @@
       "source_refs": [
         {
           "uri": "dataset://store_emails/MIL01/20261009_1035_MIL01.eml",
-          "content_hash": "sha256:173f031967d236d50951cd1ad52ea2692c28ed005eb8fe68e68105b422927144",
+          "content_hash": "sha256:5b8afe5fc87f71f0eb397c3f91acc7a300f9b97bb13d127144b4ddab080b7ebd",
           "locator": null
         }
       ],
       "source_type": "email",
       "connector": "src.email",
       "uri": "dataset://store_emails/MIL01/20261009_1035_MIL01.eml",
-      "content_hash": "sha256:173f031967d236d50951cd1ad52ea2692c28ed005eb8fe68e68105b422927144",
-      "origin": "giulia.ferrandi@moncler-retail.example",
+      "content_hash": "sha256:5b8afe5fc87f71f0eb397c3f91acc7a300f9b97bb13d127144b4ddab080b7ebd",
+      "origin": "giulia.ferrandi@valentino-retail.example",
       "author_ref": "Giulia Ferrandi",
       "language": "it",
       "business_date": "2026-10-09",
       "event_start": null,
       "event_end": null,
-      "thread_key": "<31e46e9d5105.c1b19e2a@moncler-retail.example>",
+      "thread_key": "<31e46e9d5105.c1b19e2a@valentino-retail.example>",
       "parent_document_id": null,
       "text": "Ciao ragazzi,\nda ieri siamo a zero cardigan logo in M, sia nero che blu (la golden week ci ha svuotato) e a Castel San Giovanni la M rientra solo a fine ottobre.\nAvete qualche M da girarci? Anche 1 o 2 pezzi per colore, ce lo chiedono in continuazione. Se vi serve qualcosa da noi ditemi, ricambiamo volentieri.\nGrazie mille\nGiulia\nMIL01 Montenapoleone",
       "text_version": "email-v1",
       "meta": {
         "store_id": "MIL01",
-        "message_id": "<31e46e9d5105.c1b19e2a@moncler-retail.example>",
+        "message_id": "<31e46e9d5105.c1b19e2a@valentino-retail.example>",
         "in_reply_to": null,
         "subject": "richiesta transfer cardigan logo M",
         "thread_subject": "richiesta transfer cardigan logo M",
@@ -50,7 +50,7 @@
       "source_refs": [
         {
           "uri": "dataset://store_emails/MIL01/20261009_1035_MIL01.eml",
-          "content_hash": "sha256:173f031967d236d50951cd1ad52ea2692c28ed005eb8fe68e68105b422927144",
+          "content_hash": "sha256:5b8afe5fc87f71f0eb397c3f91acc7a300f9b97bb13d127144b4ddab080b7ebd",
           "locator": null
         }
       ],

@@ -41,7 +41,7 @@ def odata_stock(w, sku, day, req_ts):
         for lg, store, typ in (("0001", main_eod, "01"), ("W100", web_eod, "01"), ("RT01", rt_eod, "03"), ("QM01", qm_eod, "07")):
             q = v(store, k, i)
             if q or lg == "0001":
-                res.append({"__metadata": {"id": f"https://sapgw.moncler-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='{C.matnr(sku)}',Plant='{w}',StorageLocation='{lg}',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='{typ}')",
+                res.append({"__metadata": {"id": f"https://sapgw.valentino-int.example/sap/opu/odata/sap/API_MATERIAL_STOCK_SRV/A_MatlStkInAcctMod(Material='{C.matnr(sku)}',Plant='{w}',StorageLocation='{lg}',Batch='',Supplier='',Customer='',WBSElementInternalID='00000000',SDDocument='',SDDocumentItem='000000',InventorySpecialStockType='',InventoryStockType='{typ}')",
                                           "type": "API_MATERIAL_STOCK_SRV.A_MatlStkInAcctModType"},
                             "Material": C.matnr(sku), "Plant": w, "StorageLocation": lg, "Batch": "", "Supplier": "", "Customer": "",
                             "WBSElementInternalID": "00000000", "SDDocument": "", "SDDocumentItem": "000000",
@@ -50,7 +50,7 @@ def odata_stock(w, sku, day, req_ts):
     return {"d": {"results": res}}
 
 
-# 1-2 SAP OData stock for MAIRE black at IT10 before / after the receipt
+# 1-2 SAP OData stock for AUREA black at IT10 before / after the receipt
 for day, ts in ((dt.date(2026, 10, 15), "2026-10-15T07:02:11+02:00"), (dt.date(2026, 10, 16), "2026-10-17T07:01:40+02:00"),
                 (dt.date(2026, 10, 20), "2026-10-21T08:15:03+02:00")):
     dump(f"sap_odata_A_MatlStkInAcctMod_IT10_J20931A00012999_{ts[:10].replace('-', '')}.json",
@@ -94,7 +94,7 @@ for w, sku, t in (("HK30", "J20931A00618-510", dt.date(2026, 10, 22)), ("IT10", 
                   ("IT10", "J20931A00622-23R", dt.date(2026, 10, 12)), ("IT10", "J20931A00618-999", dt.date(2026, 10, 22)),
                   ("HK30", "J20931A00618-510", dt.date(2026, 10, 5))):
     dump(f"wmsgw_GET_atp_{w}_{C.matnr(sku)}_{t:%Y%m%d}.json", gw_atp(w, sku, t),
-         {"method": "GET", "url": f"https://wms-gw.moncler-int.example/v1/atp?plant={w}&material={C.matnr(sku)}", "ts": f"{t.isoformat()}T06:30:00Z"})
+         {"method": "GET", "url": f"https://wms-gw.valentino-int.example/v1/atp?plant={w}&material={C.matnr(sku)}", "ts": f"{t.isoformat()}T06:30:00Z"})
 
 # 4 3PL portal API (camelCase, HKT)
 def pcl_inv(sku, i, gen_ts, as_of):
@@ -136,21 +136,21 @@ for po in C.KEY_POS:
     dump(f"wmsgw_GET_inbound_po_{po['ebeln']}.json",
          {"purchaseOrder": po["ebeln"], "vendor": {"id": po["vendor"], "name": C.VENDORS[po["vendor"]]}, "createdOn": po["created"],
           "lines": lines, "deliveryDateHistory": [{"changedOn": u, "newDate": e, "comment": n} for u, e, n in po["revisions"]]},
-         {"method": "GET", "url": f"https://wms-gw.moncler-int.example/v1/inbound/purchase-orders/{po['ebeln']}", "ts": "2026-10-22T07:05:00Z"})
+         {"method": "GET", "url": f"https://wms-gw.valentino-int.example/v1/inbound/purchase-orders/{po['ebeln']}", "ts": "2026-10-22T07:05:00Z"})
 
-# 6 quality stock TIB
+# 6 quality stock VEL
 i = DI[dt.date(2026, 10, 21)]
 qs = []
-for k in sorted(set(tib_blocked) | {k for k in qm_eod if k[1].startswith(C.TIB["sku_prefix"])}):
+for k in sorted(set(tib_blocked) | {k for k in qm_eod if k[1].startswith(C.VALENTINO_V17["sku_prefix"])}):
     w, s, z = k
     b = v(tib_blocked, k, i)
     q = v(qm_eod, k, i)
     if b or q:
-        qs.append({"plant": w, "material": C.matnr(s), "size": z, "batch": C.TIB["bad_batch"], "blockedDcStock": b,
-                   "returnsInQuality": q, "notification": C.TIB["qn"]})
+        qs.append({"plant": w, "material": C.matnr(s), "size": z, "batch": C.VALENTINO_V17["bad_batch"], "blockedDcStock": b,
+                   "returnsInQuality": q, "notification": C.VALENTINO_V17["qn"]})
 dump("wmsgw_GET_quality_stock_TIB_20261022.json",
-     {"asOf": "2026-10-22T06:00:00+02:00", "notification": {"id": C.TIB["qn"], "createdOn": C.TIB["qn_created"],
-                                                             "usageDecisionOn": C.TIB["usage_decision"], "defect": C.TIB["defect"]},
+     {"asOf": "2026-10-22T06:00:00+02:00", "notification": {"id": C.VALENTINO_V17["qn"], "createdOn": C.VALENTINO_V17["qn_created"],
+                                                             "usageDecisionOn": C.VALENTINO_V17["usage_decision"], "defect": C.VALENTINO_V17["defect"]},
       "positions": qs, "totals": {"blockedDcStock": sum(p["blockedDcStock"] for p in qs), "returnsInQuality": sum(p["returnsInQuality"] for p in qs)}},
-     {"method": "GET", "url": "https://wms-gw.moncler-int.example/v1/quality-stock?materialPrefix=J10911A00305", "ts": "2026-10-22T07:06:00Z"})
+     {"method": "GET", "url": "https://wms-gw.valentino-int.example/v1/quality-stock?materialPrefix=J10911A00305", "ts": "2026-10-22T07:06:00Z"})
 print("api samples:", len(list(OUT.iterdir())))

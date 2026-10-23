@@ -36,8 +36,8 @@ LON02 £147k -7%
 AMS01 €94k -16%
 CPH01 DKK 456k -17%
 
-Bond St had a good week with the new collection, Ambrine in brown is the piece everyone photographs (we have 2 sizes, naturally). Olivia asked if we can get more brown 1-2, I said I'd ask but not to hold her breath.
-First Arneb exchange in Amsterdam for size.
+Bond St had a good week with the new collection, Amalia in brown is the piece everyone photographs (we have 2 sizes, naturally). Olivia asked if we can get more brown 1-2, I said I'd ask but not to hold her breath.
+First Artem exchange in Amsterdam for size.
 Campaign goes live on Tuesday, OOH on Bond St and Sloane St, the agency is very excited.
 
 F
@@ -53,7 +53,7 @@ AMS01 €104k -15%
 CPH01 DKK 383k -36% (ouch)
 
 - Campaign live since Tuesday. Bond St window + the buses look great. Too early for numbers.
-- LON02: from Friday a wave of young Korean women asking for the black Maire, all with the same photo from a TV drama. Priya says 9 or 10 asked over the weekend. We're running out of black, maybe 4-5 pieces left.
+- LON02: from Friday a wave of young Korean women asking for the black Aurea, all with the same photo from a TV drama. Priya says 9 or 10 asked over the weekend. We're running out of black, maybe 4-5 pieces left.
 - CPH: a bad week, Mette had 2 people off sick and the weather was lovely, nobody thinking about coats. Not worried yet.
 
 F
@@ -70,7 +70,7 @@ AMS01 €111k -20%
 CPH01 DKK 570k -12%
 
 1. Campaign: great news, the agency's first readout came in Friday, +22% uplift on attributed sales in the UK in the first 10 days. Richard is presenting it Thursday. Footfall at Bond St is clearly up, so it's working.
-2. Black Maire at Harrods: sold out since Thursday-ish. 30+ requests logged by Priya in the week, almost all Korean tourists (Chuseok holidays I'm told). It's real, it's every day, and they don't want beige. Please, please push for Harrods on the next delivery.
+2. Black Aurea at Harrods: sold out since Thursday-ish. 30+ requests logged by Priya in the week, almost all Korean tourists (Chuseok holidays I'm told). It's real, it's every day, and they don't want beige. Please, please push for Harrods on the next delivery.
 3. Golden Week next week, Harrods expecting big Chinese numbers. We are not on Matteo's list for Mandarin support, can we fix that? Harrods will lend us someone a few hours a day but that's it.
 4. AMS still behind, Sanne thinks the shop is too "summer" still, VM change planned.
 
@@ -99,8 +99,8 @@ LON02 £188k -9%
 AMS01 €135k -13%
 CPH01 DKK 559k -24%
 
-- Golden Week: Harrods very busy with Chinese clients (Priya reckons over a quarter of tickets), but without black Maire and with no Mandarin speaker of our own we lost a lot. 35-ish black Maire requests logged again.
-- TIB zipper returns: 13 at Bond St this week, 6 at Harrods. The slider just comes off. Nobody from quality has told us anything, we're putting them aside. Looks like a batch issue to me.
+- Golden Week: Harrods very busy with Chinese clients (Priya reckons over a quarter of tickets), but without black Aurea and with no Mandarin speaker of our own we lost a lot. 35-ish black Aurea requests logged again.
+- VEL zipper returns: 13 at Bond St this week, 6 at Harrods. The slider just comes off. Nobody from quality has told us anything, we're putting them aside. Looks like a batch issue to me.
 - CPH: Mette is down to a skeleton team (2 sick, 1 resigned), store running on reduced hours 11-17 for two weeks. Recruitment open.
 - Bond St private client evening on Thursday 8th, 45 confirmed. Olivia is on it.
 
@@ -116,8 +116,8 @@ LON02 £231k +6%
 AMS01 €121k -28%
 CPH01 DKK 647k -16%
 
-Thursday's private evening at Bond St was a big success: 45 guests, about 25 bought, several £5k+ tickets, two Polaris capes (the only ones we've sold!). Olivia and Daniel did an amazing job. Thank you for the champagne budget.
-Bond St has now also run out of black Maire (last ones went at the event) and Olivia logged almost 30 requests this week. So now we have the problem in both London stores.
+Thursday's private evening at Bond St was a big success: 45 guests, about 25 bought, several £5k+ tickets, two Astra capes (the only ones we've sold!). Olivia and Daniel did an amazing job. Thank you for the champagne budget.
+Bond St has now also run out of black Aurea (last ones went at the event) and Olivia logged almost 30 requests this week. So now we have the problem in both London stores.
 Harrods still strong on Chinese until Thursday.
 CPH back to normal hours, the new SA started.
 AMS weak, the VM change didn't do much. Rain all week.
@@ -137,10 +137,10 @@ AMS01 €181k -2%
 CPH01 DKK 949k +11%
 
 - Finally proper weather: CPH and AMS had 3-5 degrees from Tuesday, CPH best week of the season. Beanies and gloves gone in CPH, Mette has asked for a transfer from LON01.
-- London milder but the heavy down moved, Maya and Montcla mostly.
-- Black Maire: still zero in both London stores, LON02 logged 32 requests, LON01 10. I heard the DC received stock on Friday. Harrods needs to be in the first wave, they have been asking for a month.
-- LON01 received 12 pink Ilvaro last Monday. Sold 3. Nobody asks for pink in London, I'm sure Seoul would take them tomorrow.
-- TIB returns slowing down now.
+- London milder but the heavy down moved, Nova and Mistral mostly.
+- Black Aurea: still zero in both London stores, LON02 logged 32 requests, LON01 10. I heard the DC received stock on Friday. Harrods needs to be in the first wave, they have been asking for a month.
+- LON01 received 12 pink Iridia last Monday. Sold 3. Nobody asks for pink in London, I'm sure Seoul would take them tomorrow.
+- VEL returns slowing down now.
 
 F
 """),

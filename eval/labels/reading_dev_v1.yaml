@@ -1,0 +1,315 @@
+# EVL-02 reading labels, version 1. Eval only: written from the dev sample emails and the
+# answer keys (generated/ground_truth/answer_keys/emails/*). The product never reads this file.
+#
+# Written by hand on 2026-10-23, before any product run on the sample, from the canonical text
+# of each email (tessera email parser). One label = one business fact the email states.
+#
+#   anchor    exact substring of the canonical document text, unique in it; a prediction matches
+#             when its evidence span overlaps the anchor and its kind is in `kinds`.
+#   kinds     acceptable Observation kinds (the taxonomy of the extraction prompt).
+#   required  true: core signal, counted in recall. false: a valid but minor fact (single product
+#             sell lines, traffic counts, greetings-level remarks). Extracting it is not a false
+#             positive, missing it is not a false negative.
+#   product   catalog target the store means (style code, SKU or SKU-size), or absent when the
+#             fact names no product. The answer keys decide misnamed products ("粉紅 Bady" at
+#             HKG01 was ILVARO pink).
+#   level     "style": the email's product cannot be resolved below style (colour not in the
+#             catalog, or no colour); any SKU-level link is then an error.
+#   negated   true when the correct reading is that the fact did not happen.
+#
+# Correction after the first scoring (2026-10-23), a catalog error, not tuning: the three
+# "tricot ... black" labels (LON01 09-20, SYD01 10-08, SEL01 10-08) said TRICOT PADDED CARDIGAN
+# had no black colour and expected style-only links. sku_colour.csv lists I10919B00042-999, so
+# they now expect the black SKU-size. No other label was changed after seeing predictions.
+#
+# Files with no labels are part of the sample: any observation extracted there is a false
+# positive (wrong-list mails, HQ questions, attachment-only mails).
+
+version: 1
+sample:
+  split: dev
+  criterion: >-
+    Every .eml file of the 12 dev stores (config/eval_split.yaml) whose file name carries the
+    local send date 2026-09-20 or 2026-10-08, including replies, wrong-list mails and late
+    sends. Fixed before labelling, from the public scenario dates (generated/README.md §6).
+  dates: ["2026-09-20", "2026-10-08"]
+
+files:
+  MIL01/20260920_2038_MIL01.eml:
+    language: it
+    labels:
+      - {id: mil01-0920-sales, anchor: "Fatturato 61,7k, budget 67k (-8%)", kinds: [sales_figure], required: true}
+      - {id: mil01-0920-traffic, anchor: "518 ingressi", kinds: [traffic_change, sales_figure, other], required: false}
+      - {id: mil01-0920-maire-req, anchor: "oggi 3 (2 in tg 0 e una in 3)", kinds: [unmet_demand, demand_up], required: true, product: J20931A00012-999}
+      - {id: mil01-0920-korean, anchor: "sono venute ragazze coreane", kinds: [customer_profile, unmet_demand, demand_up], required: true}
+      - {id: mil01-0920-drama, anchor: "la giacca e' quella che indossa l'attrice Han Yu-ri", kinds: [local_event, other, demand_up, customer_profile], required: false, product: J20931A00012-999}
+      - {id: mil01-0920-maire-stock, anchor: "adesso abbiamo solo la 00 e la 4 in nero", kinds: [stockout, low_stock], required: true, product: J20931A00012-999}
+      - {id: mil01-0920-maire-sold, anchor: "Abbiamo venduto ieri le ultime 0, 1 e 2", kinds: [stockout, sales_figure, demand_up, low_stock], required: false, product: J20931A00012-999}
+      - {id: mil01-0920-substitutes, anchor: "Ho fatto provare la Maire beige e quella blu", kinds: [product_feedback, unmet_demand, other, demand_down], required: false}
+      - {id: mil01-0920-waitlist, anchor: "Tengo una lista con i loro numeri WhatsApp", kinds: [unmet_demand, other, customer_profile], required: false, product: J20931A00012-999}
+      - {id: mil01-0920-trailgrip, anchor: "Trailgrip grigia 4 pz oggi", kinds: [sales_figure, demand_up], required: false, product: I10914M00061-90X}
+      - {id: mil01-0920-cardigan, anchor: "cardigan nero 3", kinds: [sales_figure, demand_up], required: false, product: I10919B00011-999}
+  MIL01/20261008_2215_MIL01.eml:
+    language: it
+    labels:
+      - {id: mil01-1008-sales, anchor: "143.750 EUR", kinds: [sales_figure], required: true}
+      - {id: mil01-1008-budget, anchor: "+89%", kinds: [sales_figure], required: false}
+      - {id: mil01-1008-traffic, anchor: "Ingressi\t855", kinds: [traffic_change, sales_figure, other], required: false}
+      - {id: mil01-1008-bady, anchor: "Bady nera 10", kinds: [sales_figure, demand_up], required: false, product: J20931A00144-999}
+      - {id: mil01-1008-maya, anchor: "Maya nera 9", kinds: [sales_figure, demand_up], required: false, product: J10911A00034-999}
+      - {id: mil01-1008-hermine, anchor: "Hermine nera 7", kinds: [sales_figure, demand_up], required: false, product: J20931A00087-999}
+      - {id: mil01-1008-rosiere, anchor: "Rosiere 6", kinds: [sales_figure, demand_up], required: false, product: J10911A00581}
+      - {id: mil01-1008-cardigan-table, anchor: "CARDIGAN LOGO M nero e blu FINITO", kinds: [stockout], required: true, product: I10919B00011}
+      - {id: mil01-1008-golden-week, anchor: "i cinesi hanno comprato", kinds: [customer_profile, local_event, demand_up, sales_figure], required: true}
+      - {id: mil01-1008-cardigan-sold, anchor: "un gruppo ha preso il cardigan logo in M praticamente tutto", kinds: [stockout, demand_up, sales_figure], required: false, product: I10919B00011}
+      - {id: mil01-1008-cardigan-unmet, anchor: "due clienti lo cercavano in M e non avevamo niente", kinds: [unmet_demand], required: true, product: I10919B00011}
+      - {id: mil01-1008-dc, anchor: "Il magazzino non ha M fino a fine mese", kinds: [stockout, low_stock, other, operational_issue], required: true, product: I10919B00011}
+      - {id: mil01-1008-turtleneck, anchor: "dolcevita lana marrone in S chiesto due volte", kinds: [unmet_demand, stockout], required: true, product: I10919C00067-23R-S}
+      - {id: mil01-1008-maire, anchor: "Maire nera: 3 richieste (1, 3, 4)", kinds: [unmet_demand], required: true, product: J20931A00012-999}
+      - {id: mil01-1008-returns, anchor: "Resi: Maya 5, hoodie M, 1 Tib zip, Arneb 3 cambiato in 2", kinds: [product_feedback], required: true}
+  MIL02/20260920_2214_MIL02.eml:
+    language: it
+    labels:
+      - {id: mil02-0919-sales, anchor: "37,9k ✅ (+9%)", kinds: [sales_figure], required: true}
+      - {id: mil02-0919-traffic, anchor: "165 ingressi", kinds: [traffic_change, sales_figure, other], required: false}
+      - {id: mil02-0919-sold, anchor: "3 Maire nere + 3 cardigan logo neri, 2 Montcla blu", kinds: [sales_figure, demand_up], required: false}
+      - {id: mil02-0919-maire-out, anchor: "finita Maire nera tg 0", kinds: [stockout], required: true, product: J20931A00012-999-0}
+      - {id: mil02-0919-rosiere, anchor: "chiesto Rosiere verde oliva tg 7", kinds: [unmet_demand], required: true, product: J10911A00581-82D-7}
+      - {id: mil02-0920-sales, anchor: "14,5k ❌ (-40%)", kinds: [sales_figure], required: true}
+      - {id: mil02-0920-traffic, anchor: "125 ingressi ma conversione bassissima", kinds: [traffic_change, sales_figure, customer_profile, other], required: false}
+      - {id: mil02-0920-tourists, anchor: "tutti turisti con la borsa di Rina e basta", kinds: [customer_profile, traffic_change, other], required: true}
+      - {id: mil02-0920-maire-out, anchor: "ora mancano Maire nera 0 E 2", kinds: [stockout], required: true, product: J20931A00012-999}
+      - {id: mil02-0920-turtleneck, anchor: "ancora 1 richiesta dolcevita marrone XS", kinds: [unmet_demand], required: true, product: I10919C00067-23R-XS}
+      - {id: mil02-0920-fashion-week, anchor: "da martedi fashion week", kinds: [local_event], required: false}
+  MIL02/20261008_2139_MIL02.eml:
+    language: it
+    labels:
+      - {id: mil02-1008-golden-week, anchor: "ultimo giorno della settimana cinese, si sente gia meno", kinds: [local_event, customer_profile, traffic_change, demand_down], required: true}
+      - {id: mil02-1008-sales, anchor: "21k, -24 sul budget", kinds: [sales_figure], required: true}
+      - {id: mil02-1008-sold, anchor: "3 beanie nere, 2 felpe blu, 2 Karakorum neri", kinds: [sales_figure, demand_up], required: false}
+      - {id: mil02-1008-tshirt, anchor: "chieste t-shirt blu XXL", kinds: [unmet_demand], required: true, product: I10918C00012-742-XXL}
+      - {id: mil02-1008-gtx, anchor: "Trailgrip GTX 44 (sempre)", kinds: [unmet_demand], required: true, product: I10914M00061}
+      - {id: mil02-1008-trailgrip-w, anchor: "Trailgrip donna panna 37", kinds: [unmet_demand], required: true, product: I20924M00062-20D-37}
+      - {id: mil02-1008-chambre, anchor: "1 reso Chambre 3 qualita, piuma che esce dalla cucitura", kinds: [product_feedback], required: true, product: J20931A00560, level: style}
+  PAR01/20261008_0842_PAR01.eml:
+    language: fr
+    labels:
+      - {id: par01-1007-late, anchor: "hier soir inventaire tournant jusqu'à 22h", kinds: [operational_issue, other], required: false}
+      - {id: par01-1007-sales, anchor: "CA 78,2 k€ / bud 66,2 (+18%)", kinds: [sales_figure], required: true}
+      - {id: par01-1007-traffic, anchor: "626 entrées", kinds: [traffic_change, sales_figure, other], required: false}
+      - {id: par01-1007-fashion-week, anchor: "Fin de la Fashion Week.", kinds: [local_event], required: false}
+      - {id: par01-1007-maire-beige, anchor: "On a vendu 5 Maire beige, mais à des clientes chinoises", kinds: [sales_figure, demand_up, customer_profile], required: false, product: J20931A00012-034}
+      - {id: par01-1007-maire-black, anchor: "elles attendent la noire (3 demandes T3 + T2 hier)", kinds: [unmet_demand], required: true, product: J20931A00012-999}
+      - {id: par01-1007-korean, anchor: "les Coréennes n'en veulent pas", kinds: [customer_profile, unmet_demand, product_feedback, demand_down], required: false}
+      - {id: par01-1007-sold, anchor: "Karakorum noir 4 (x2) et 6, Arneb noir 6, torsade blanc L (x2), Hermine marine 00", kinds: [sales_figure, demand_up], required: false}
+      - {id: par01-1007-tib, anchor: "Encore 3 Tib zip.", kinds: [product_feedback, sales_figure, other], required: false, product: J10911A00305}
+  PAR01/20261008_2119_PAR01.eml:
+    language: fr
+    labels:
+      - {id: par01-1008-sales, anchor: "CA 108,0 k€ / bud 73,1 (+48%)", kinds: [sales_figure], required: true}
+      - {id: par01-1008-traffic, anchor: "751 entrées / 53 tickets", kinds: [traffic_change, sales_figure, other], required: false}
+      - {id: par01-1008-chinese, anchor: "encore 45% de Chinois", kinds: [customer_profile], required: true}
+      - {id: par01-1008-delivery, anchor: "Énorme livraison (576 pièces), toujours pas de Maire noire", kinds: [stockout, stock_discrepancy, other, operational_issue], required: true, product: J20931A00012-999}
+      - {id: par01-1008-maire, anchor: "8 demandes aujourd'hui (1 x3, 0 x2, 2 x2, 00)", kinds: [unmet_demand], required: true, product: J20931A00012-999}
+      - {id: par01-1008-polaris, anchor: "Polaris : 4 pièces parties (3 capes noires + 1 oversize) – uniquement à des clients chinois", kinds: [sales_figure, demand_up, customer_profile], required: false}
+      - {id: par01-1008-ilvaro, anchor: "Ilvaro rose 0 : 1 demande.", kinds: [unmet_demand], required: true, product: J20931A00618-510-0}
+      - {id: par01-1008-tib, anchor: "2 Tib zip.", kinds: [product_feedback, sales_figure, other], required: false, product: J10911A00305}
+  MAD01/20260920_2115_MAD01.eml:
+    language: es
+    labels:
+      - {id: mad01-0920-sales, anchor: "19,1k vs 22,7", kinds: [sales_figure], required: true}
+      - {id: mad01-0920-traffic, anchor: "136 personas", kinds: [traffic_change, sales_figure, other], required: false}
+      - {id: mad01-0920-profile, anchor: "Mexicanos y americanos sobre todo", kinds: [customer_profile], required: true}
+      - {id: mad01-0920-montgenevre, anchor: "2 Montgenevre negros", kinds: [sales_figure, demand_up], required: false, product: J10911A00213-999}
+      - {id: mad01-0920-hermine, anchor: "Hermine blanco roto en 2", kinds: [unmet_demand], required: true, product: J20931A00087-20D-2}
+      - {id: mad01-0920-karakorum, anchor: "Karakorum negro en 6, ninguno", kinds: [unmet_demand], required: true, product: J10911A00142-999-6}
+      - {id: mad01-0920-maya-stock, anchor: "queda 1 por talla y en la 1 y la 7 nada", kinds: [low_stock, stockout], required: true, product: J10911A00034-999}
+      - {id: mad01-0920-maya-sold, anchor: "El sabado volaron", kinds: [demand_up, sales_figure], required: false, product: J10911A00034-999}
+  MAD01/20261008_2136_MAD01.eml:
+    language: es
+    labels:
+      - {id: mad01-1008-counter, anchor: "cambió el sensor de la puerta y el contador vuelve a contar", kinds: [operational_issue], required: true}
+      - {id: mad01-1008-traffic, anchor: "Hoy 155 personas, conversión 11,6%", kinds: [traffic_change, sales_figure, other], required: false}
+      - {id: mad01-1008-sales, anchor: "Venta 26.680 € vs 28.230 (-6%)", kinds: [sales_figure], required: true}
+      - {id: mad01-1008-delivery, anchor: "el envío de hoy (el que traía el Maya negro) no ha llegado", kinds: [operational_issue, stock_discrepancy, stockout, other], required: true, product: J10911A00034-999}
+      - {id: mad01-1008-maya-navy, anchor: "Vendidos 3 Maya navy", kinds: [sales_figure, demand_up], required: false, product: J10911A00034-742}
+      - {id: mad01-1008-crewneck-sold, anchor: "4 sudaderas cuello redondo negras", kinds: [sales_figure, demand_up], required: false, product: I10918G00045-999}
+      - {id: mad01-1008-cardigan-out, anchor: "cardigan logo negro XS", kinds: [stockout], required: true, product: I10919B00011-999-XS}
+      - {id: mad01-1008-crewneck-out, anchor: "cuello redondo negra S", kinds: [stockout], required: true, product: I10918G00045-999-S}
+  LON01/20260920_1955_LON01.eml:
+    language: en
+    labels:
+      - {id: lon01-0920-sales, anchor: "£46.7k vs £47.1k", kinds: [sales_figure], required: true}
+      - {id: lon01-0920-maire, anchor: "Maire black x4", kinds: [sales_figure, demand_up], required: false, product: J20931A00012-999}
+      - {id: lon01-0920-karakorum, anchor: "Karakorum black x3", kinds: [sales_figure, demand_up], required: false, product: J10911A00142-999}
+      - {id: lon01-0920-pink-beanie, anchor: "2 pink beanies again - pink is a thing with the young girls", kinds: [demand_up, sales_figure, customer_profile], required: true, product: I10913B00001-510}
+      - {id: lon01-0920-tib, anchor: "TIB navy 4 asked, didn't have it", kinds: [unmet_demand], required: true, product: J10911A00305-742-4}
+      - {id: lon01-0920-tricot, anchor: "Tricot cardigan black M sold out", kinds: [stockout], required: true, product: I10919B00042-999-M}
+      - {id: lon01-0920-bady, anchor: "Bady sz 2 returned, too small", kinds: [product_feedback], required: true, product: J20931A00144}
+  NYC01/20260920_1841_NYC01.eml:
+    language: en
+    labels:
+      - {id: nyc01-0920-sales, anchor: "52.1k vs 58.1 plan", kinds: [sales_figure], required: true}
+      - {id: nyc01-0920-trans, anchor: "22 trans, nice tickets", kinds: [sales_figure, traffic_change, other], required: false}
+      - {id: nyc01-0920-ambrine, anchor: "ambrine black x4 !! first weekend it really moved", kinds: [demand_up, sales_figure], required: true, product: J20931A00622-999}
+      - {id: nyc01-0920-arneb-fit, anchor: "arneb exchange, 5 for a 4. runs big", kinds: [product_feedback], required: true, product: J10911A00577}
+      - {id: nyc01-0920-arneb-return, anchor: "another arneb 2 came back (gift, wrong guy)", kinds: [product_feedback, other], required: false, product: J10911A00577}
+      - {id: nyc01-0920-delivery, anchor: "delivery 191u, all done", kinds: [other, operational_issue], required: false}
+      - {id: nyc01-0920-sold, anchor: "maya navy 3, beanies navy 3", kinds: [sales_figure, demand_up], required: false}
+      - {id: nyc01-0920-barricades, anchor: "nypd already lining up barricades on park", kinds: [local_event, operational_issue], required: true}
+      - {id: nyc01-0920-yom-kippur, anchor: "yom kippur starts tonight", kinds: [local_event], required: true}
+  NYC01/20261008_2041_NYC01.eml:
+    language: en
+    note: Body only "See attached"; the facts are in an XLSX attachment, which ING-04 does not read.
+    labels: []
+  SYD01/20261008_1836_SYD01.eml:
+    language: en
+    labels:
+      - {id: syd01-1008-sales, anchor: "$7.0k vs $11.8k.", kinds: [sales_figure], required: true}
+      - {id: syd01-1008-sold, anchor: "Cap, polo, tee, 1 Montcla navy.", kinds: [sales_figure, demand_up], required: false}
+      - {id: syd01-1008-tricot, anchor: "tricot black S", kinds: [unmet_demand], required: true, product: I10919B00042-999-S}
+      - {id: syd01-1008-hoodie, anchor: "hoodie black XL", kinds: [unmet_demand], required: true, product: I10918G00031-999-XL}
+  MUN01/20261008_1712_MUN01.eml:
+    language: de
+    note: Internal shift plan sent to the ops list by mistake; no business facts.
+    labels:
+      - {id: mun01-1008-shift, anchor: "Mo frueh bin ich da wegen Lieferung", kinds: [operational_issue, other], required: false}
+  MUN01/20261008_1720_MUN01_re1.eml:
+    language: de
+    note: '"Sorry, falscher Verteiler, bitte ignorieren!" retracts the previous mail; no business facts.'
+    labels: []
+  MUN01/20261008_1948_MUN01.eml:
+    language: de
+    labels:
+      - {id: mun01-1008-sales, anchor: "43,5k vs Bud 34,1k (+27%)", kinds: [sales_figure], required: true}
+      - {id: mun01-1008-traffic, anchor: "Traffic 212", kinds: [traffic_change, sales_figure, other], required: false}
+      - {id: mun01-1008-delivery, anchor: "Lieferung puenktlich (151 Teile)", kinds: [other, operational_issue], required: false}
+      - {id: mun01-1008-beanies, anchor: "die Beanies navy sind direkt raus (4x)", kinds: [demand_up, sales_figure], required: true, product: I10913B00001-742}
+      - {id: mun01-1008-sold, anchor: "dazu Caps 3x, Hoodies 3x, Flammette 3x", kinds: [sales_figure, demand_up], required: false}
+      - {id: mun01-1008-maire-out, anchor: "Maire schwarz 0/1/2 weiterhin null", kinds: [stockout], required: true, product: J20931A00012-999}
+      - {id: mun01-1008-maire-unmet, anchor: "heute keine Anfrage, aber nur weil wir den Kunden schon an der Tuer sagen dass sie fehlt", kinds: [unmet_demand, other], required: true, product: J20931A00012-999}
+  TYO01/20260920_2126_TYO01.eml:
+    language: ja
+    labels:
+      - {id: tyo01-0920-sales, anchor: "売上1,262万　予算1,802万（70%）", kinds: [sales_figure], required: true}
+      - {id: tyo01-0920-traffic, anchor: "客数38組　入店698", kinds: [traffic_change, sales_figure, other], required: false}
+      - {id: tyo01-0920-conversion, anchor: "来店は多いものの購入までいかない方が多いです", kinds: [traffic_change, demand_down, other, customer_profile], required: true}
+      - {id: tyo01-0920-sold, anchor: "ロゴT黒7点、ニットダウンカーデ黒4点、BADY黒4点", kinds: [sales_figure, demand_up], required: false}
+      - {id: tyo01-0920-karakorum, anchor: "KARAKORUM グレー 1", kinds: [unmet_demand, stockout], required: true, product: J10911A00142-90X-1}
+      - {id: tyo01-0920-montgenevre, anchor: "MONTGENEVRE黒 7", kinds: [unmet_demand, stockout], required: true, product: J10911A00213-999-7}
+      - {id: tyo01-0920-rosiere, anchor: "ROSIERE オリーブ 3、4", kinds: [unmet_demand, stockout], required: true, product: J10911A00581-82D}
+      - {id: tyo01-0920-rosiere-weekly, anchor: "ROSIEREオリーブは週末ごとに聞かれます", kinds: [unmet_demand, demand_up], required: true, product: J10911A00581-82D}
+  TYO01/20261008_0947_TYO01.eml:
+    language: ja
+    labels:
+      - {id: tyo01-1007-late, anchor: "昨夜送ったつもりが下書きに残っていました", kinds: [other, operational_issue], required: false}
+      - {id: tyo01-1007-sales, anchor: "売上 947万　予算 1,447万（65%）", kinds: [sales_figure], required: true}
+      - {id: tyo01-1007-traffic, anchor: "客数 29　入店 682", kinds: [traffic_change, sales_figure, other], required: false}
+      - {id: tyo01-1007-chinese, anchor: "中国のお客様は相変わらず多いのですが（4割強）", kinds: [customer_profile], required: true}
+      - {id: tyo01-1007-small-items, anchor: "購入は小物中心でした", kinds: [demand_up, demand_down, customer_profile, other], required: false}
+      - {id: tyo01-1007-sold, anchor: "ビーニー黒、ILVARO黒、ロゴカーデ黒が各3点", kinds: [sales_figure, demand_up], required: false}
+      - {id: tyo01-1007-arneb, anchor: "ARNEBのサイズ返品1件（5サイズ）", kinds: [product_feedback], required: true, product: J10911A00577}
+      - {id: tyo01-1007-heat, anchor: "暑さが戻って（28度）、ダウンは本当に厳しいです", kinds: [local_event, demand_down], required: true}
+  TYO01/20261008_2110_TYO01.eml:
+    language: ja
+    labels:
+      - {id: tyo01-1008-sales, anchor: "10,444,100円（税抜）／予算 16,280,000円　達成率64.2%", kinds: [sales_figure], required: true}
+      - {id: tyo01-1008-traffic, anchor: "客数：23組　入店数：698名", kinds: [traffic_change, sales_figure, other], required: false}
+      - {id: tyo01-1008-chinese, anchor: "中国のお客様56%", kinds: [customer_profile], required: true}
+      - {id: tyo01-1008-conversion, anchor: "入店の割に買上率3.3%と過去最低水準です", kinds: [traffic_change, sales_figure, demand_down, other], required: true}
+      - {id: tyo01-1008-sold, anchor: "ウールタートル黒4・ネイビー4、MONTCLA黒4", kinds: [sales_figure, demand_up], required: false}
+      - {id: tyo01-1008-maire-out, anchor: "0と2が欠品です", kinds: [stockout], required: true, product: J20931A00012-999}
+      - {id: tyo01-1008-maire-zero, anchor: "MAIRE黒の2サイズも店頭ゼロになりました", kinds: [stockout], required: false, product: J20931A00012-999}
+      - {id: tyo01-1008-tib, anchor: "TIB不良返品2件", kinds: [product_feedback], required: true, product: J10911A00305}
+      - {id: tyo01-1008-maire0, anchor: "MAIRE黒 0、", kinds: [unmet_demand], required: true, product: J20931A00012-999-0}
+      - {id: tyo01-1008-maire2, anchor: "MAIRE黒 2、", kinds: [unmet_demand], required: true, product: J20931A00012-999-2}
+      - {id: tyo01-1008-ilvaro, anchor: "ILVARO ピンク 2", kinds: [unmet_demand], required: true, product: J20931A00618-510-2}
+      - {id: tyo01-1008-ambrine, anchor: "AMBRINE黒 00", kinds: [unmet_demand], required: true, product: J20931A00622-999-00}
+      - {id: tyo01-1008-price, anchor: "11/1価格改定のご案内を開始します", kinds: [other, local_event, operational_issue], required: true}
+      - {id: tyo01-1008-low-stock, anchor: "MAIRE黒・MAYA黒の在庫がこの状態だと", kinds: [low_stock, stockout, other], required: false}
+      - {id: tyo01-1008-eta, anchor: "MAIRE黒の入荷予定を至急教えてください", kinds: [other, stockout, low_stock], required: false, product: J20931A00012-999}
+  SEL01/20260920_2130_SEL01.eml:
+    language: ko
+    labels:
+      - {id: sel01-0920-sales, anchor: "매출 1억 1,030만 / 목표 1억 4,478만 (76%)", kinds: [sales_figure], required: true}
+      - {id: sel01-0920-traffic, anchor: "입점 514, 35건", kinds: [traffic_change, sales_figure, other], required: false}
+      - {id: sel01-0920-ilvaro, anchor: "오늘 일바로 블랙 7장 나갔어요", kinds: [demand_up, sales_figure], required: true, product: J20931A00618-999}
+      - {id: sel01-0920-crop, anchor: "크롭 기장이 요즘 20대 고객분들한테 반응 좋아요", kinds: [product_feedback, demand_up, customer_profile], required: true, product: J20931A00618}
+      - {id: sel01-0920-sold, anchor: "로지에르 블랙 4, 캐시미어 머플러 베이지 3, 테크 글러브 3", kinds: [sales_figure, demand_up], required: false}
+      - {id: sel01-0920-karakorum, anchor: "카라코룸 블랙 1사이즈 문의 1", kinds: [unmet_demand], required: true, product: J10911A00142-999-1}
+      - {id: sel01-0920-polo, anchor: "폴로 화이트 XS 또 문의 1", kinds: [unmet_demand], required: true, product: I10918A00034-001-XS}
+      - {id: sel01-0920-season, anchor: "일바로 반응 보니까 시즌 시작되는 느낌이에요", kinds: [demand_up, other], required: false, product: J20931A00618}
+  SEL01/20261008_2205_SEL01.eml:
+    language: ko
+    labels:
+      - {id: sel01-1008-sales, anchor: "매출 238,936천원 / 목표 110,102천원 (217%)", kinds: [sales_figure], required: true}
+      - {id: sel01-1008-traffic, anchor: "입점 616 / 구매 52건 / 객단가 459만원", kinds: [traffic_change, sales_figure, other], required: false}
+      - {id: sel01-1008-chinese, anchor: "국경절 마지막 날이라 중국 고객 많았고", kinds: [customer_profile, local_event], required: true}
+      - {id: sel01-1008-ilvaro-missing, anchor: "일바로 인디핑크는 한 장도 없었습니다", kinds: [stockout, stock_discrepancy, operational_issue], required: true, product: J20931A00618-510}
+      - {id: sel01-1008-pink-stock, anchor: "바디 핑크 0사이즈 2장, 비니 핑크 2개만 있습니다", kinds: [low_stock, other], required: false}
+      - {id: sel01-1008-customs, anchor: "인천세관에서 통관 보류 중", kinds: [operational_issue], required: true, product: J20931A00618-510}
+      - {id: sel01-1008-kc, anchor: "KC 인증 관련 서류가 누락됐다고 들었습니다", kinds: [operational_issue, other], required: false}
+      - {id: sel01-1008-waitlist, anchor: "웨이팅 고객 중 일부는 이미", kinds: [unmet_demand, operational_issue, other], required: true, product: J20931A00618-510}
+      - {id: sel01-1008-sold, anchor: "일바로 블랙 6, 몽제네브르 블랙 5, 바디 오프화이트 5, 마야 블랙 5", kinds: [sales_figure, demand_up], required: false}
+      - {id: sel01-1008-maire, anchor: "마이레 블랙 2사이즈 4명 문의", kinds: [unmet_demand], required: true, product: J20931A00012-999-2}
+      - {id: sel01-1008-maire-low, anchor: "마이레 블랙은 이제 4사이즈만 남았습니다", kinds: [low_stock, stockout], required: true, product: J20931A00012-999}
+      - {id: sel01-1008-bady, anchor: "바디 오프화이트 3", kinds: [unmet_demand], required: true, product: J20931A00144-20D-3}
+      - {id: sel01-1008-tricot, anchor: "트리코 가디건 블랙 XXL 문의", kinds: [unmet_demand], required: true, product: I10919B00042-999-XXL}
+  SHA01/20260920_2258_SHA01.eml:
+    language: zh-CN
+    labels:
+      - {id: sha01-0920-sales, anchor: "net 95.0w !! tgt 81.0w, 117%", kinds: [sales_figure], required: true}
+      - {id: sha01-0920-traffic, anchor: "traffic 540 / txn 47 / UPT 1.79", kinds: [traffic_change, sales_figure, other], required: false}
+      - {id: sha01-0920-maire, anchor: "Maire 米色6件", kinds: [sales_figure, demand_up], required: true, product: J20931A00012-034}
+      - {id: sha01-0920-groups, anchor: "今天好几个女生结伴来的", kinds: [customer_profile, demand_up, other], required: false}
+      - {id: sha01-0920-sold, anchor: "Maya 黑5 藏青5，Logo 卫衣黑5", kinds: [sales_figure, demand_up], required: false}
+      - {id: sha01-0920-ilvaro, anchor: "有人问 Ilvaro 粉 2码", kinds: [unmet_demand], required: true, product: J20931A00618-510-2}
+      - {id: sha01-0920-ilvaro-stock, anchor: "店里粉色只剩1/3/4，没有2", kinds: [low_stock, stockout], required: true, product: J20931A00618-510}
+      - {id: sha01-0920-trailgrip, anchor: "Trailgrip 女米白35 又被问，第三次了", kinds: [unmet_demand], required: true, product: I20924M00062-20D-35}
+      - {id: sha01-0920-delivery, anchor: "到货224", kinds: [other, operational_issue], required: false}
+  SHA01/20261008_2239_SHA01.eml:
+    language: zh-CN
+    labels:
+      - {id: sha01-1008-sales, anchor: "今日销售：75.54万", kinds: [sales_figure], required: true}
+      - {id: sha01-1008-target, anchor: "达成率：91%", kinds: [sales_figure], required: false}
+      - {id: sha01-1008-traffic, anchor: "客流：497", kinds: [traffic_change, sales_figure, other], required: false}
+      - {id: sha01-1008-delivery, anchor: "还是没有粉色Ilvaro，也没有黑色Maire", kinds: [stockout, stock_discrepancy, operational_issue], required: true}
+      - {id: sha01-1008-maire, anchor: "Maire 黑2码（3个）", kinds: [unmet_demand], required: true, product: J20931A00012-999-2}
+      - {id: sha01-1008-ilvaro-pink, anchor: "粉Ilvaro 2码、", kinds: [unmet_demand], required: true, product: J20931A00618-510-2}
+      - {id: sha01-1008-ilvaro-black, anchor: "Ilvaro 黑4码", kinds: [unmet_demand], required: true, product: J20931A00618-999-4}
+      - {id: sha01-1008-sold, anchor: "Logo 开衫藏青6件，Polaris 头套白3", kinds: [sales_figure, demand_up], required: false}
+      - {id: sha01-1008-cape, anchor: "Polaris 斗篷白M 也有人问", kinds: [unmet_demand], required: true, product: G20921A00901-001-M}
+      - {id: sha01-1008-cape-stock, anchor: "我们白色只剩L", kinds: [low_stock, stockout], required: false, product: G20921A00901-001}
+      - {id: sha01-1008-tib, anchor: "Tib 拉链退1件", kinds: [product_feedback], required: true, product: J10911A00305}
+  HKG01/20260920_2301_HKG01.eml:
+    language: zh-HK
+    labels:
+      - {id: hkg01-0920-sales, anchor: "Sales HK$225.3k, ach 73%", kinds: [sales_figure], required: true}
+      - {id: hkg01-0920-traffic, anchor: "traffic 223 但係得 12 txn，CR 5.4%", kinds: [traffic_change, sales_figure, other], required: true}
+      - {id: hkg01-0920-mainland, anchor: "內地客多 (六成幾)，好多都係睇睇吓", kinds: [customer_profile], required: true}
+      - {id: hkg01-0920-sold, anchor: "Tib black x3，crewneck black x3", kinds: [sales_figure, demand_up], required: false}
+      - {id: hkg01-0920-arneb, anchor: "Arneb 3 換咗 2，又係話大", kinds: [product_feedback], required: true, product: J10911A00577}
+      - {id: hkg01-0920-typhoon, anchor: "前日 2 點幾已經開返舖", kinds: [operational_issue, local_event], required: true}
+  HKG01/20261008_1006_HKG01_re1.eml:
+    language: zh-HK
+    note: HQ question to the store (waitlist size, TPE01 transfer); it states no store fact.
+    labels:
+      - {id: hkg01-1008-merch, anchor: "Merch is asking for a number for the next allocation", kinds: [other], required: false}
+  HKG01/20261008_1237_HKG01_re2.eml:
+    language: zh-HK
+    labels:
+      - {id: hkg01-1008-waitlist, anchor: "Waitlist 而家有 15 個客", kinds: [unmet_demand], required: true, product: J20931A00618-510}
+      - {id: hkg01-1008-waitlist-mainland, anchor: "大部分係內地客，留咗微信", kinds: [customer_profile, unmet_demand], required: false}
+      - {id: hkg01-1008-tpe, anchor: "台北都冇粉紅，所以冇得 transfer", kinds: [stockout, other, low_stock, operational_issue], required: true, product: J20931A00618-510}
+  HKG01/20261008_2237_HKG01.eml:
+    language: zh-HK
+    labels:
+      - {id: hkg01-1008-sales, anchor: "Sales 328.8k / 135%", kinds: [sales_figure], required: true}
+      - {id: hkg01-1008-traffic, anchor: "Traffic 197, 20 txn", kinds: [traffic_change, sales_figure, other], required: false}
+      - {id: hkg01-1008-mainland, anchor: "mainland 72%", kinds: [customer_profile], required: true}
+      - {id: hkg01-1008-sold, anchor: "GTX black x3, Ilvaro black x3, Logo T white x2, Hermine black x2", kinds: [sales_figure, demand_up], required: false}
+      - {id: hkg01-1008-pink, anchor: "3 clients asked for 粉紅 Bady size 0 / 1 / 2 - none", kinds: [unmet_demand], required: true, product: J20931A00618-510}
+      - {id: hkg01-1008-cardigan, anchor: "Cardigan navy XL missed", kinds: [unmet_demand], required: true, product: I10919B00011-742-XL}
+      - {id: hkg01-1008-bady, anchor: "Bady off-white 2", kinds: [sales_figure, demand_up], required: false, product: J20931A00144-20D}
+      - {id: hkg01-1008-ilvaro-out, anchor: "Ilvaro black 0 sold out", kinds: [stockout], required: true, product: J20931A00618-999-0}
+      - {id: hkg01-1008-holiday, anchor: "Last day of mainland holiday, should be quieter from tmr", kinds: [local_event, traffic_change, demand_down, customer_profile], required: false}

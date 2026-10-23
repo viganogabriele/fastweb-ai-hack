@@ -1,6 +1,6 @@
 """Americas monthly retail report (XLSX) - FY2026 P08 (September, NRF 4-5-4).
 
-Author: Moncler USA Inc. - Retail Finance (New York). Definitions:
+Author: Valentino USA Inc. - Retail Finance (New York). Definitions:
 - 4-5-4 retail calendar: P08 Sep = Sun 2026-08-30 -> Sat 2026-10-03 (5 weeks); LY P08 = 2025-08-31 -> 2025-10-04
 - Net sales USD, net of returns, ex sales tax; CAD converted at PLAN rate 1.37 CAD/USD (both years)
 - Plan = HQ budget in local currency (CAD plan converted at 1.37)
@@ -42,7 +42,7 @@ def main():
 
     wb = xlsxwriter.Workbook(OUTD / "AMER_Retail_Monthly_FY26_P08_Sep.xlsx")
     wb.set_properties({"title": "Americas Retail Monthly P08 FY26", "author": "Retail Finance NY - J. Morales",
-                       "company": "Moncler USA Inc."})
+                       "company": "Valentino USA Inc."})
     F = lambda **kw: wb.add_format({"font_name": "Calibri", "font_size": 10, **kw})
     ttl = F(bold=True, font_size=14, align="center", valign="vcenter", bg_color="#000000", font_color="#FFFFFF")
     sub = F(italic=True, align="center", bg_color="#F2F2F2")
@@ -67,7 +67,7 @@ def main():
     ws.set_column(1, 1, 24)
     ws.set_column(2, 17, 11)
     ws.set_column(18, 18, 10, None, {"hidden": True})
-    ws.merge_range(0, 0, 0, 17, "MONCLER USA INC.  -  RETAIL MONTHLY SALES REPORT", ttl)
+    ws.merge_range(0, 0, 0, 17, "VALENTINO USA INC.  -  RETAIL MONTHLY SALES REPORT", ttl)
     ws.set_row(0, 26)
     ws.merge_range(1, 0, 1, 17, f"FY2026  P08 (SEPTEMBER)  |  {a0:%m/%d/%Y} - {a1:%m/%d/%Y}  (5 wks, 4-5-4)  |  LY: {b0:%m/%d/%Y} - {b1:%m/%d/%Y}  |  USD, CAD @ plan rate {CAD_USD}", sub)
     # two header rows
@@ -160,8 +160,8 @@ def main():
     ws3.set_column(1, 6, 12)
     ws3.set_column(7, 7, 70)
     cmt = {"NYC02": "POS down 10/6 2:10-5:40pm; manual tickets keyed 10/7 -> 10/6 understated, 10/7 overstated",
-           "NYC01": "Campaign windows; ILVARO black/off-white requests (celebrity effect)",
-           "TOR01": "ARNEB strong but many size exchanges (runs large)",
+           "NYC01": "Campaign windows; IRIDIA black/off-white requests (celebrity effect)",
+           "TOR01": "ARTEM strong but many size exchanges (runs large)",
            "BHS01": "Warm weather, outerwear slow",
            "MIA01": "", "ASP01": "Pre-season, low traffic until Thanksgiving"}
     for j, s in enumerate(sids):
@@ -194,8 +194,8 @@ def main():
         f"Madison Ave {(cy.loc['NYC01'].usd / ly.loc['NYC01'].usd - 1) * 100:+.1f}%: UNGA week 9/21-9/26 with frozen zones on Madison/Park, traffic down sharply that week.",
         "Rodeo Drive: heat wave 9/8-9/12 (100F+), outerwear not moving; jersey and sneakers carried the week.",
         "Miami: A/C failure 9/3-9/5 (store open, clients left quickly). Repaired by vendor on 9/5.",
-        "Toronto: TIFF 9/10-9/20 drove traffic in Yorkville; ARNEB parka the best FW26 style in Canada but exchanges for size (fits large).",
-        "Genius POLARIS (launched 9/24) slow in US: fit runs small and price point; clients compare with the regular collection.",
+        "Toronto: TIFF 9/10-9/20 drove traffic in Yorkville; ARTEM parka the best FW26 style in Canada but exchanges for size (fits large).",
+        "Couture ASTRA (launched 9/24) slow in US: fit runs small and price point; clients compare with the regular collection.",
         "P09 to date: NYC02 POS outage on 10/6 (see P09 MTD tab). Aspen opens full schedule from Thanksgiving.",
         "Note: P08 includes the first 3 days of October; HQ calendar-month reports (September) will not tie to this report.",
     ]

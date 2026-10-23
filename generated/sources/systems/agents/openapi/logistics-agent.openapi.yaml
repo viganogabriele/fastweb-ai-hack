@@ -3,7 +3,7 @@ info:
   title: logistics-agent REST API
   version: 1.7.0
 servers:
-- url: https://agents.moncler-int.example/logistics/v1
+- url: https://agents.valentino-int.example/logistics/v1
 security:
 - apiKey: []
 paths:
