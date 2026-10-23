@@ -185,12 +185,13 @@ def episodes(
 ) -> tuple[list[Episode], list[str]]:
     """Admissible episodes of one case (copies once) and why each other fact is not one."""
     found, reasons = [], []
+    ids = {r.id for r in case.supporting}
     for r in case.supporting:
         obs = observations.get(r.id)
         if obs is None or r.kind != "Observation":
             reasons.append(f"{r.id}: not_an_observation")
             continue
-        if r.id in dup:
+        if r.id in dup and dup[r.id] in ids:
             reasons.append(f"{r.id}: copy_of:{dup[r.id]}")
             continue
         verdict = gate(obs, store)
@@ -420,7 +421,7 @@ def build_overlays(
             plans.append((case, base, store, found, reasons))
     quantified: dict[tuple[str, str], list[str]] = {}
     for case, base, _, found, _ in plans:
-        if len(found) == 1 and case.scope_level != "style":
+        if found and case.scope_level != "style":
             quantified.setdefault((base.store_id, base.sku), []).append(case.id)
     records = []
     for case, base, store, found, reasons in plans:
