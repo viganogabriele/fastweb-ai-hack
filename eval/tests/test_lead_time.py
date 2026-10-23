@@ -6,7 +6,7 @@ from datetime import UTC, date, datetime
 from pathlib import Path
 
 from eval.baselines import Alert, certified, sales_alerts, stock_alerts
-from eval.lead_time import case_alerts, email_group, event_units, matches, noise, score
+from eval.lead_time import calibrate, case_alerts, email_group, event_units, matches, noise, score
 
 ERP = "generated/sources/erp"
 SKU = "STYLEA-999"
@@ -133,7 +133,12 @@ class LeadTimeTests(unittest.TestCase):
     def test_lead_lower_bound_and_not_detected(self):
         units = [self.unit(), self.unit(id="E2", filter={"styles": ["BETA"]})]
         pipe = Alert(
-            "pipeline", "MIL01", datetime(2026, 10, 5, 19, tzinfo=UTC), "sku", frozenset({SKU})
+            "pipeline",
+            "MIL01",
+            datetime(2026, 10, 5, 19, tzinfo=UTC),
+            "sku",
+            frozenset({SKU}),
+            decision_due_at=datetime(2026, 10, 5, 19, tzinfo=UTC),
         )
         stock = Alert(
             "stock", "MIL01", datetime(2026, 10, 7, 7, tzinfo=UTC), "sku", frozenset({SKU})
@@ -153,8 +158,31 @@ class LeadTimeTests(unittest.TestCase):
         bound = result["units"][0]["lead_vs_sales_lower_bound_days"]
         self.assertEqual(bound, round((units[0].t_end - pipe.at).total_seconds() / 86400, 2))
         self.assertEqual(summary["pipeline"]["not_detected_by_t_end"], 1)
+        self.assertEqual(summary["decision_margin_days"]["n"], 1)
+        self.assertEqual(summary["decision_margin_days"]["median"], 0)
         self.assertEqual(summary["stock"]["false_alerts"], 1)
         self.assertEqual(summary["stock"]["false_alerts_per_store_day"], 0.1)
+
+    def test_calibration_chooses_sensitivity_order_not_event_outcomes(self):
+        unit = self.unit()
+        matching = Alert("stock", "MIL01", unit.start, "sku", frozenset({SKU}))
+        result = calibrate(
+            {"threshold=0": [matching], "threshold=2": []},
+            pipeline_false_alerts=0,
+            units=[unit],
+            store_days=1,
+            sensitivity_order=("threshold=2", "threshold=0"),
+        )
+        self.assertEqual(result["chosen"], "threshold=2")
+        stray = Alert("sales", "MIL01", unit.start, "sku", frozenset({"OTHER-999"}))
+        strict = calibrate(
+            {"z=2": [stray], "z=6": [stray]},
+            pipeline_false_alerts=0,
+            units=[unit],
+            store_days=1,
+            sensitivity_order=("z=2", "z=6"),
+        )
+        self.assertEqual(strict["chosen"], "z=6")
 
     def test_cases_scope_verify_and_noise(self):
         case = {
@@ -191,6 +219,11 @@ class LeadTimeTests(unittest.TestCase):
             (frozenset({SKU}), frozenset({"1"}), "stockout"),
         )
         self.assertEqual(alert.at, datetime(2026, 10, 5, 19, tzinfo=UTC))
+        out_of_window_alerts, out_of_window = case_alerts(
+            [case, unknown, profile], self.root, date(2026, 10, 6), date(2026, 10, 21)
+        )
+        self.assertEqual(out_of_window_alerts, [])
+        self.assertEqual(out_of_window, [])
         self.assertEqual(email_group("store_emails/MIL01/x_MIL01_corr.eml", {}), "correction")
         kinds = {"store_emails/MIL01/20261005_2100_MIL01.eml": "misdirected"}
         result = noise(alerts, [self.unit()], kinds, [case])

@@ -116,9 +116,10 @@ and, for noise, the email answer-key indexes; nothing else from the oracle.
 - **Baselines** (`eval/baselines.py`, sources only): stock policy (on-hand of a SKU-size falls
   to ≤ threshold) and sales detector (3-day Poisson surprise vs the previous 28 days, per SKU
   upward and per store both ways). ERP data of day B is used from B + 1 20:00 local.
-- **Thresholds**: with a pipeline run, each baseline takes the most sensitive grid setting whose
-  false alerts per store-day do not exceed the pipeline's (RFC §7.2); if none qualifies, the
-  strictest, flagged `within_pipeline_load: false`. Without a run, the fixed defaults.
+- **Thresholds**: only a dev bundle calibrates each baseline to the most sensitive grid setting
+  whose false alerts per store-day do not exceed the pipeline's (RFC §7.2); if none qualifies,
+  the strictest setting is flagged `within_pipeline_load: false`. Baseline-only and hold-out runs
+  use the fixed defaults and do not inspect hold-out grid outcomes for tuning.
 - **Output**: per unit the first alert of each method; `t_baseline - t_pipeline` in days when
   both detect, a lower bound `T_end - t_pipeline` when only the pipeline does, and "not
   detected by T_end" counts; false alerts per store-day; `decision_due_at - t_pipeline`;

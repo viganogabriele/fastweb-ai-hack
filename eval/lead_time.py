@@ -38,7 +38,12 @@ EVENTS_KEY = "scenario/events.json"
 EMAIL_INDEXES = tuple(
     f"answer_keys/emails/emails_{lang}_index.csv" for lang in ("en_intl", "fr", "it", "ko")
 )
-SUFFIX_KINDS = {"dup": "duplicate", "corr": "correction", "fwd": "forward", "ooo": "noise"}
+SUFFIX_KINDS = {
+    "dup": "duplicate",
+    "corr": "correction",
+    "fwd": "forward",
+    "ooo": "noise",
+}
 KIND_GROUPS = {
     "dup": "duplicate",
     "duplicate": "duplicate",
@@ -92,7 +97,10 @@ def event_units(
     rows = catalog(root)
     units = []
     for event in events:
-        first, last = date.fromisoformat(event["start"]), date.fromisoformat(event["end"])
+        first, last = (
+            date.fromisoformat(event["start"]),
+            date.fromisoformat(event["end"]),
+        )
         if last < start or first > end:
             continue
         product = {k: set(v) for k, v in event["filter"].items() if k in FILTER_FIELDS}
@@ -115,7 +123,10 @@ def event_units(
                     store_id=store_id,
                     start=local_instant(root, store_id, max(first, start), time.min),
                     t_end=local_instant(
-                        root, store_id, min(last, end) + timedelta(days=1), time(23, 59, 59)
+                        root,
+                        store_id,
+                        min(last, end) + timedelta(days=1),
+                        time(23, 59, 59),
                     ),
                     store_wide=not product,
                     skus=skus,
@@ -143,7 +154,9 @@ def _instant(value: str | None) -> datetime | None:
     return datetime.fromisoformat(value).astimezone(UTC) if value else None
 
 
-def case_alerts(cases: list[dict], root: Path) -> tuple[list[Alert], list[dict]]:
+def case_alerts(
+    cases: list[dict], root: Path, start: date | None = None, end: date | None = None
+) -> tuple[list[Alert], list[dict]]:
     """Exported cases (raw or fixture-wrapped) → pipeline alerts plus non-alert cases.
 
     Any status counts: a `verify` case with resolved scope is still in a human's queue.
@@ -152,6 +165,14 @@ def case_alerts(cases: list[dict], root: Path) -> tuple[list[Alert], list[dict]]
     alerts, verify = [], []
     for record in cases:
         case = record.get("payload", record)
+        store_id = case.get("store_id")
+        if start is not None and end is not None and store_id:
+            available_at = _instant(case.get("first_available_at"))
+            if available_at is not None:
+                period_start = local_instant(root, store_id, start, time.min)
+                period_end = local_instant(root, store_id, end, time.max)
+                if not period_start <= available_at <= period_end:
+                    continue
         level, scope = case["scope_level"], case.get("scope_id")
         skus: frozenset[str] = frozenset()
         sizes: frozenset[str] = frozenset()
@@ -242,7 +263,11 @@ def score(alerts: dict[str, list[Alert]], units: list[Unit], store_days: int) ->
         for method, method_alerts in alerts.items():
             matched = sorted((a for a in method_alerts if matches(a, unit)), key=lambda a: a.at)
             row[method] = (
-                {"at": matched[0].at.isoformat(), "ref": matched[0].ref, "n_alerts": len(matched)}
+                {
+                    "at": matched[0].at.isoformat(),
+                    "ref": matched[0].ref,
+                    "n_alerts": len(matched),
+                }
                 if matched
                 else None
             )
@@ -284,7 +309,9 @@ def score(alerts: dict[str, list[Alert]], units: list[Unit], store_days: int) ->
                 "baseline_not_detected_lower_bound_days": _distribution(bounds),
                 "only_baseline_detected": missed,
             }
-        margins = [r["decision_margin_days"] for r in rows if r.get("decision_margin_days")]
+        margins = [
+            r["decision_margin_days"] for r in rows if r.get("decision_margin_days") is not None
+        ]
         summary["decision_margin_days"] = _distribution(margins)
     return {"summary": summary, "units": rows}
 
@@ -306,7 +333,12 @@ def noise(pipeline: list[Alert], units: list[Unit], kinds: dict[str, str], cases
         refs = {a.ref for a in pipeline if matches(a, unit)}
         if len(refs) > 1:
             fragmented[f"{unit.event_id}/{unit.store_id}"] = len(refs) - 1
-    payloads = [record.get("payload", record) for record in cases]
+    pipeline_refs = {alert.ref for alert in pipeline}
+    payloads = [
+        payload
+        for record in cases
+        if (payload := record.get("payload", record))["id"] in pipeline_refs
+    ]
     return {
         "cases_citing_group": {g: dict(c) for g, c in sorted(by_group.items())},
         "cases_citing_only_group": dict(sorted(only.items())),
@@ -315,7 +347,13 @@ def noise(pipeline: list[Alert], units: list[Unit], kinds: dict[str, str], cases
     }
 
 
-def calibrate(grid: dict, target: float | None, units: list[Unit], store_days: int) -> dict:
+def calibrate(
+    grid: dict,
+    pipeline_false_alerts: int,
+    units: list[Unit],
+    store_days: int,
+    sensitivity_order: tuple[str, ...],
+) -> dict:
     """Pick, per baseline, the most sensitive setting whose false-alert load ≤ the pipeline's."""
     table = []
     for setting, alerts in grid.items():
@@ -325,19 +363,29 @@ def calibrate(grid: dict, target: float | None, units: list[Unit], store_days: i
             {
                 "setting": setting,
                 "alerts": len(alerts),
+                "false_alerts": wrong,
                 "false_alerts_per_store_day": round(wrong / store_days, 4),
                 "units_detected": detected,
             }
         )
-    eligible = [
-        row for row in table if target is None or row["false_alerts_per_store_day"] <= target
-    ]
-    pick = (
-        max(eligible, key=lambda r: r["units_detected"])
-        if eligible
-        else min(table, key=lambda r: r["false_alerts_per_store_day"])
+    eligible = [row for row in table if row["false_alerts"] <= pipeline_false_alerts]
+    pick = next(
+        (row for setting in sensitivity_order for row in eligible if row["setting"] == setting),
+        None,
     )
-    return {"grid": table, "chosen": pick["setting"], "within_pipeline_load": bool(eligible)}
+    if pick is None:
+        min_false_alerts = min(row["false_alerts"] for row in table)
+        pick = next(
+            row
+            for setting in reversed(sensitivity_order)
+            for row in table
+            if row["setting"] == setting and row["false_alerts"] == min_false_alerts
+        )
+    return {
+        "grid": table,
+        "chosen": pick["setting"],
+        "within_pipeline_load": bool(eligible),
+    }
 
 
 def load_events(data: bytes) -> list[dict]:
@@ -353,7 +401,9 @@ def lead_time_report(root: Path, run, split: str, start: date, end: date) -> dic
     """Score a verified frozen run (or the baselines alone) on the run's stores."""
     oracle = root / "generated/ground_truth"
 
-    def read(key: str) -> bytes:  # fixed keys only, through the run's checks when there is one
+    def read(
+        key: str,
+    ) -> bytes:  # fixed keys only, through the run's checks when there is one
         return run.read_answer_key(oracle, key) if run else (oracle / key).read_bytes()
 
     if run is None:
@@ -371,15 +421,28 @@ def lead_time_report(root: Path, run, split: str, start: date, end: date) -> dic
     }
     alerts: dict[str, list[Alert]] = {}
     verify: list[dict] = []
-    target = None
+    pipeline_false_alerts = None
     if run is not None:
-        alerts["pipeline"], verify = case_alerts(cases, root)
-        target = len(false_alerts(alerts["pipeline"], units)) / store_days
+        alerts["pipeline"], verify = case_alerts(cases, root, start, end)
+        pipeline_false_alerts = len(false_alerts(alerts["pipeline"], units))
     calibration = {}
     for method, grid in grids.items():
-        calibration[method] = calibrate(grid, target, units, store_days)
-        if run is None:
-            calibration[method]["chosen"] = DEFAULTS[method]
+        if run is not None and split == "dev":
+            sensitivity_order = (
+                tuple(f"threshold={value}" for value in sorted(STOCK_GRID, reverse=True))
+                if method == "stock"
+                else tuple(f"z={value}" for value in sorted(SALES_GRID))
+            )
+            calibration[method] = calibrate(
+                grid, pipeline_false_alerts, units, store_days, sensitivity_order
+            )
+            calibration[method]["selection"] = "dev_false_alert_load"
+        else:
+            calibration[method] = {
+                "chosen": DEFAULTS[method],
+                "within_pipeline_load": None,
+                "selection": "fixed_default",
+            }
         alerts[method] = grid[calibration[method]["chosen"]]
     scored = score(alerts, units, store_days)
     covered = {u.event_id for u in units}
@@ -390,7 +453,11 @@ def lead_time_report(root: Path, run, split: str, start: date, end: date) -> dic
         "task": "EVL-04",
         "split": split,
         "stores": sorted(stores),
-        "period": {"start": start.isoformat(), "end": end.isoformat(), "store_days": store_days},
+        "period": {
+            "start": start.isoformat(),
+            "end": end.isoformat(),
+            "store_days": store_days,
+        },
         "manifest_sha256": run.manifest_sha256 if run else None,
         "pipeline": "frozen_run" if run else "not_scored",
         "calibration": calibration,
