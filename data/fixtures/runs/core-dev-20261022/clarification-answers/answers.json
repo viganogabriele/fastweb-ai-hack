@@ -1,0 +1,35 @@
+{
+  "format": 1,
+  "parent_run_id": "core-dev-candidate",
+  "scenario_id": "historical",
+  "case_id": "case-mil01-unknown-20261009",
+  "case_version": "v1",
+  "clarification_id": "clarification:1a60b18799441e9362ee9ddd5b26c7f69f9826d21204ec92e513ad744775cd34",
+  "clarification_version": "1",
+  "answers": [
+    {
+      "key": "self-contained",
+      "text": "È il cardigan logo in taglia M, sia nero che blu.",
+      "language": "it",
+      "received_at": "2026-10-22T22:20:00+02:00",
+      "as_of": "2026-10-22T20:30:00Z",
+      "follow_up_scenario_id": "simulated-answer-self-contained"
+    },
+    {
+      "key": "elliptical",
+      "text": "Cardigan logo.",
+      "language": "it",
+      "received_at": "2026-10-22T22:20:00+02:00",
+      "as_of": "2026-10-22T20:30:00Z",
+      "follow_up_scenario_id": "simulated-answer-elliptical"
+    },
+    {
+      "key": "abstain",
+      "text": "Non saprei, chiedo alla collega e vi faccio sapere.",
+      "language": "it",
+      "received_at": "2026-10-22T22:20:00+02:00",
+      "as_of": "2026-10-22T20:30:00Z",
+      "follow_up_scenario_id": "simulated-answer-abstain"
+    }
+  ]
+}
