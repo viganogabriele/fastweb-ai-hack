@@ -65,6 +65,14 @@ function PublishedOption({ option, state, session, closed, fixture }: {
       <StatusBadge tone={blockers.length ? 'warning' : 'neutral'} label={blockers.length ? `${blockers.length} controlli obbligatori non superati` : 'Nessun blocco obbligatorio pubblicato'} />
     </header>
     <p>Opzione {option.id} · versione {option.version} · produttore {option.producer} {option.producer_version} · {fixture ? 'fixture' : 'prodotto'} · scadenza {option.valid_until}</p>
+    {option.legs.length > 0 && <div aria-label="Movimenti proposti">
+      <h5>Movimenti proposti</h5>
+      <ul>{option.legs.map((leg, index) => <li key={index}>
+        {leg.origin} → {leg.dest} · SKU {leg.sku} · taglia {leg.size} · quantità {leg.qty}
+        <p>Ritiro {leg.pickup_at} · arrivo {leg.eta_at} · vendibile {leg.sellable_at} · tratta {leg.lane_id}</p>
+        <p>Costo trasporto: {leg.cost_eur === null ? 'sconosciuto' : `${leg.cost_eur} EUR`}</p>
+      </li>)}</ul>
+    </div>}
     <details><summary>Input e assunzioni della proposta</summary><p>Hash input: <code>{option.input_version_hash}</code></p>
       <ul>{option.assumptions.map((assumption, index) => <li key={index}>{assumption}</li>)}</ul>
       <p>Base disponibilità: {option.availability_basis}</p>

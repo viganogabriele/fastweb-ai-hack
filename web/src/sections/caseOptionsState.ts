@@ -89,7 +89,7 @@ export function createOptionsSession(context: OptionsContext, dependencies = {
     start() { active = true; void load() },
     reviewed() {
       if (!state.loading && !state.error && state.reviewRequired) {
-        update({ reviewRequired: false, revision: state.revision + 1, commands: new Map() })
+        update({ reviewRequired: false, revision: state.revision + 1, commands: new Map([...state.commands].filter(([, command]) => command.status !== 'conflict')) })
       }
     },
     dispose() { active = false; generation++; read?.abort() }

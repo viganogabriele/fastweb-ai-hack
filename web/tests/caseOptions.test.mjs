@@ -223,3 +223,37 @@ test('returning to a case preserves an uncertain command and requires an explici
   assert.equal(calls[0], old.calls[0][1])
   assert.equal(next.snapshot().commands.get(intentKey(intent)).status, 'success')
 })
+
+test('acknowledging one conflict preserves other uncertain commands and confirmed results', async () => {
+  const uncertain = { ...option, id: 'uncertain' }
+  const confirmed = { ...option, id: 'confirmed' }
+  const calls = []
+  let retry = false
+  const session = createOptionsSession(context, {
+    load: async () => [option, uncertain, confirmed],
+    post: async (_, body) => {
+      calls.push(body)
+      if (body.option_id === uncertain.id && !retry) throw new TypeError('lost response')
+      if (body.option_id === option.id) throw new OptionsApiError(409)
+      return draft(body)
+    },
+    key: () => `key-${calls.length}`
+  })
+  await session.load()
+  const uncertainIntent = { ...intent, option_id: uncertain.id }
+  const confirmedIntent = { ...intent, option_id: confirmed.id }
+  await session.submit(uncertainIntent)
+  await session.submit(confirmedIntent)
+  const original = session.snapshot().commands.get(intentKey(uncertainIntent)).body
+  await session.submit(intent)
+  session.reviewed()
+  assert.equal(session.snapshot().commands.has(intentKey(intent)), false, 'only the conflicted command is cleared for fresh review')
+  assert.equal(session.snapshot().commands.get(intentKey(confirmedIntent)).status, 'success')
+  assert.equal(session.snapshot().commands.get(intentKey(uncertainIntent)).body, original)
+  retry = true
+  await session.submit(uncertainIntent)
+  assert.equal(calls.at(-1), original, 'uncertain command must keep its frozen payload and key after unrelated review')
+  const count = calls.length
+  await session.submit(confirmedIntent)
+  assert.equal(calls.length, count, 'confirmed commands remain protected against resubmission')
+})
