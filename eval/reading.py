@@ -29,6 +29,10 @@ import yaml
 
 LABELS = Path(__file__).resolve().parent / "labels" / "reading_dev_v1.yaml"
 URI_PREFIX = "dataset://store_emails/"
+LINK_COUNTS = (
+    "product_labels", "accepted", "errors", "coarser", "ambiguous", "unlinked", "not_product",
+    "no_link",
+)  # fmt: skip
 
 
 def load_labels(path: Path = LABELS) -> tuple[dict, str]:
@@ -81,6 +85,19 @@ def _compatible(target: str, level: str, expected: str, expected_level: str | No
     got, want = target.split("-"), expected.split("-")
     depth = min(len(got), len(want))
     return got[:depth] == want[:depth]
+
+
+def _expected_label(hits: list[dict], spans: dict, observation: dict, start: int, end: int):
+    """The label whose anchor holds the product mention, else the most overlapped one."""
+    mention = (observation.get("product_mention") or "").casefold()
+
+    def rank(item: dict) -> tuple[bool, int]:
+        anchor = item["anchor"].casefold()
+        low, high = spans[item["id"]]
+        named = bool(mention) and (mention in anchor or anchor in mention)
+        return named, min(end, high) - max(start, low)
+
+    return max(hits, key=rank)
 
 
 def _ratio(numerator: int, denominator: int) -> float | None:
@@ -140,6 +157,7 @@ def score(labels: dict, records: list[dict], catalog: set[str] | None = None) ->
         if document["id"] in unread:
             exclusions.append({"file": name, "reason": f"not read: {unread[document['id']]}"})
             stats["unread_files"] += 1
+            stats["required_unread"] += sum(1 for item in items if item["required"])
         spans = {}
         for item in items:
             try:
@@ -175,11 +193,7 @@ def score(labels: dict, records: list[dict], catalog: set[str] | None = None) ->
                 matched[item["id"]].append(observation)
             if any(observation["negated"] != item.get("negated", False) for item in hits):
                 negation_errors.append(observation["id"])
-            # The label the evidence overlaps most decides the expected product.
-            best = max(
-                hits,
-                key=lambda item: min(end, spans[item["id"]][1]) - max(start, spans[item["id"]][0]),
-            )
+            best = _expected_label(hits, spans, observation, start, end)
             expected = best.get("product")
             if expected is None:
                 continue
@@ -222,6 +236,10 @@ def score(labels: dict, records: list[dict], catalog: set[str] | None = None) ->
             "precision": _ratio(stats["true_positives"], stats["observations"]),
             "recall_required": _ratio(stats["required_matched"], stats["required"]),
             "recall_all_labels": _ratio(stats["labels_matched"], stats["labels"]),
+            # Same recall without the documents the extractor did not read (reported apart).
+            "recall_required_read_files": _ratio(
+                stats["required_matched"], stats["required"] - stats["required_unread"]
+            ),
         }
 
     total: Counter = sum(per_language.values(), Counter())
@@ -238,7 +256,7 @@ def score(labels: dict, records: list[dict], catalog: set[str] | None = None) ->
         "redundant_matches": redundant,
         "negation_errors": negation_errors,
         "links": {
-            **{key: link_counts[key] for key in sorted(link_counts)},
+            **{key: link_counts[key] for key in LINK_COUNTS},
             "error_rate_among_accepted": _ratio(link_counts["errors"], link_counts["accepted"]),
             "accepted_rate": _ratio(link_counts["accepted"], link_counts["product_labels"]),
             "abstention_rate": _ratio(abstained, link_counts["product_labels"]),

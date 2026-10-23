@@ -93,6 +93,21 @@ class ReadingScoreTests(unittest.TestCase):
         self.assertEqual((result["accepted"], result["errors"], result["ambiguous"]), (1, 1, 1))
         self.assertEqual(result["abstention_rate"], 0.5)
 
+    def test_the_label_naming_the_mention_decides_the_expected_product(self):
+        text = "Asked: tricot black S, hoodie black XL."
+        files = {"AAA01/x.eml": {"language": "en", "labels": [
+            {"id": "tricot", "anchor": "tricot black S", "kinds": ["unmet_demand"],
+             "required": True, "product": "T1-999-S"},
+            {"id": "hoodie", "anchor": "hoodie black XL", "kinds": ["unmet_demand"],
+             "required": True, "product": "H1-999-XL"},
+        ]}}  # fmt: skip
+        whole = observation("o1", "tricot black S, hoodie black XL", "unmet_demand", text=text)
+        whole["payload"]["product_mention"] = "tricot black S"
+        records = [document(text=text), whole, link("o1", "linked", "T1-999", "sku")]
+        result = score(labels(files), records)
+        self.assertEqual((result["links"]["accepted"], result["links"]["errors"]), (1, 0))
+        self.assertEqual(result["overall"]["recall_required"], 1.0)
+
     def test_negation_mismatch_is_reported(self):
         records = [document(), observation("o1", "Sales 10k", "sales_figure", negated=True)]
         self.assertEqual(score(labels(), records)["negation_errors"], ["o1"])

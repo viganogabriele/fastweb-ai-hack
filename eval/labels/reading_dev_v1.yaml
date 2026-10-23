@@ -17,6 +17,11 @@
 #             catalog, or no colour); any SKU-level link is then an error.
 #   negated   true when the correct reading is that the fact did not happen.
 #
+# Correction after the first scoring (2026-10-23), a catalog error, not tuning: the three
+# "tricot ... black" labels (LON01 09-20, SYD01 10-08, SEL01 10-08) said TRICOT PADDED CARDIGAN
+# had no black colour and expected style-only links. sku_colour.csv lists I10919B00042-999, so
+# they now expect the black SKU-size. No other label was changed after seeing predictions.
+#
 # Files with no labels are part of the sample: any observation extracted there is a false
 # positive (wrong-list mails, HQ questions, attachment-only mails).
 
@@ -139,7 +144,7 @@ files:
       - {id: lon01-0920-karakorum, anchor: "Karakorum black x3", kinds: [sales_figure, demand_up], required: false, product: J10911A00142-999}
       - {id: lon01-0920-pink-beanie, anchor: "2 pink beanies again - pink is a thing with the young girls", kinds: [demand_up, sales_figure, customer_profile], required: true, product: I10913B00001-510}
       - {id: lon01-0920-tib, anchor: "TIB navy 4 asked, didn't have it", kinds: [unmet_demand], required: true, product: J10911A00305-742-4}
-      - {id: lon01-0920-tricot, anchor: "Tricot cardigan black M sold out", kinds: [stockout], required: true, product: I10919B00042, level: style}
+      - {id: lon01-0920-tricot, anchor: "Tricot cardigan black M sold out", kinds: [stockout], required: true, product: I10919B00042-999-M}
       - {id: lon01-0920-bady, anchor: "Bady sz 2 returned, too small", kinds: [product_feedback], required: true, product: J20931A00144}
   NYC01/20260920_1841_NYC01.eml:
     language: en
@@ -162,7 +167,7 @@ files:
     labels:
       - {id: syd01-1008-sales, anchor: "$7.0k vs $11.8k.", kinds: [sales_figure], required: true}
       - {id: syd01-1008-sold, anchor: "Cap, polo, tee, 1 Montcla navy.", kinds: [sales_figure, demand_up], required: false}
-      - {id: syd01-1008-tricot, anchor: "tricot black S", kinds: [unmet_demand], required: true, product: I10919B00042, level: style}
+      - {id: syd01-1008-tricot, anchor: "tricot black S", kinds: [unmet_demand], required: true, product: I10919B00042-999-S}
       - {id: syd01-1008-hoodie, anchor: "hoodie black XL", kinds: [unmet_demand], required: true, product: I10918G00031-999-XL}
   MUN01/20261008_1712_MUN01.eml:
     language: de
@@ -249,7 +254,7 @@ files:
       - {id: sel01-1008-maire, anchor: "마이레 블랙 2사이즈 4명 문의", kinds: [unmet_demand], required: true, product: J20931A00012-999-2}
       - {id: sel01-1008-maire-low, anchor: "마이레 블랙은 이제 4사이즈만 남았습니다", kinds: [low_stock, stockout], required: true, product: J20931A00012-999}
       - {id: sel01-1008-bady, anchor: "바디 오프화이트 3", kinds: [unmet_demand], required: true, product: J20931A00144-20D-3}
-      - {id: sel01-1008-tricot, anchor: "트리코 가디건 블랙 XXL 문의", kinds: [unmet_demand], required: true, product: I10919B00042, level: style}
+      - {id: sel01-1008-tricot, anchor: "트리코 가디건 블랙 XXL 문의", kinds: [unmet_demand], required: true, product: I10919B00042-999-XXL}
   SHA01/20260920_2258_SHA01.eml:
     language: zh-CN
     labels:
