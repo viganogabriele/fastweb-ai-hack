@@ -19,6 +19,7 @@ from tessera.api.models import (
 )
 from tessera.core.config import Settings, get_settings
 from tessera.core.contracts import (
+    AgentTrace,
     Case,
     EntityLink,
     ForecastAdjustment,
@@ -277,3 +278,25 @@ def owner_reports(owner: str, repo: PublishedRepo, view: str | None = None):
     if not result:
         raise HTTPException(404, "No report for this owner")
     return tuple(result)
+
+
+@router.get("/runs/{run_id}/cases/{case_id}/traces", response_model=tuple[AgentTrace, ...])
+def case_traces(case_id: str, repo: PublishedRepo):
+    if repo.get(Case, case_id) is None:
+        raise HTTPException(404, "Case not found")
+    return tuple(
+        sorted(
+            (trace for trace in latest(repo.list(AgentTrace)) if trace.case_id == case_id),
+            key=lambda trace: trace.id,
+        )
+    )
+
+
+@router.get("/runs/{run_id}/cases/{case_id}/traces/{trace_id}", response_model=AgentTrace)
+def case_trace(case_id: str, trace_id: str, repo: PublishedRepo, version: str | None = None):
+    if repo.get(Case, case_id) is None:
+        raise HTTPException(404, "Case not found")
+    trace = repo.get(AgentTrace, trace_id, version)
+    if trace is None or trace.case_id != case_id:
+        raise HTTPException(404, "Trace not found")
+    return trace
