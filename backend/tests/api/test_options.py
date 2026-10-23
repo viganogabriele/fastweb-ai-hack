@@ -301,3 +301,39 @@ def test_busy_ledger_is_retryable_without_silent_resubmission(service, monkeypat
     assert response.status_code == 503
     assert response.headers["retry-after"] == "5"
     assert ledger.reservations(service[1]["product"], value.scenario_id) == ()
+
+
+def test_approval_input_gathering_excludes_historical_derived_support(service):
+    from tessera.core.contracts import ForecastAdjustment
+
+    client, value, options = prepare(service)
+    old = value.dest.forecast.model_copy(update={"version": "parent:answer:1"})
+    # Insert support after the fresh version to exercise unversioned fallback.
+    with service[1]["product"].begin() as conn:
+        conn.execute(
+            insert(artifacts).values(
+                run_id=value.run_id,
+                kind="ForecastAdjustment",
+                id=old.id,
+                version=old.version,
+                store_id=old.store_id,
+                sku=old.sku,
+                available_at=old.available_at,
+                payload=old.model_dump(mode="json"),
+                input_refs=[],
+            )
+        )
+    gathered = []
+
+    def load(current, case):
+        forecasts = current.list(ForecastAdjustment, store_id=old.store_id, sku=old.sku)
+        assert forecasts and all(not f.version.startswith("parent:") for f in forecasts)
+        assert current.get(ForecastAdjustment, old.id).version == value.dest.forecast.version
+        assert current.get(ForecastAdjustment, old.id, old.version) == old
+        gathered.append(case.id)
+        return [value]
+
+    service[2].dependency_overrides[option_input_loader] = lambda: load
+    response = client.post(endpoint(value), json=body(options["hold"]))
+    assert response.status_code == 200
+    assert gathered == [value.case.id]

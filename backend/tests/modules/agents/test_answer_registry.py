@@ -403,13 +403,14 @@ def test_production_extraction_replay_miss_cannot_publish_partial_answer(setup, 
     assert count(engine, jobs) == count(engine, events) == 1
 
 
-def test_follow_up_runs_production_extract_link_cases_forecast_and_options(setup, monkeypatch):
+def production_pipeline(setup, monkeypatch):
+    """Synthetic external boundaries shared by service and HTTP pipeline regressions."""
     from datetime import date
 
     import httpx
 
     from tessera.core.config import Settings
-    from tessera.core.contracts import ActionOption, EntityLink, ForecastAdjustment, SourceRef
+    from tessera.core.contracts import SourceRef
     from tessera.core.repo import put_erp
     from tessera.modules.actions import options
     from tessera.modules.ingestion import extract
@@ -522,6 +523,13 @@ def test_follow_up_runs_production_extract_link_cases_forecast_and_options(setup
                 ]
             )
 
+    return engine, request, registry, originals, RecordedReading
+
+
+def test_follow_up_runs_production_extract_link_cases_forecast_and_options(setup, monkeypatch):
+    from tessera.core.contracts import ActionOption, EntityLink, ForecastAdjustment
+
+    engine, request, registry, originals, RecordedReading = production_pipeline(setup, monkeypatch)
     register_recorded_answer(engine, request)
     job = submit_answer(engine, request, registry=registry)
     execute_follow_up(engine, job.run.run_id, registry=registry, clients={"llm": RecordedReading()})
