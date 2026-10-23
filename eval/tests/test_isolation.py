@@ -1,5 +1,6 @@
 """Real child processes, fake secret files: no hidden dataset content is accessed."""
 
+import os
 import platform
 import subprocess
 import sys
@@ -66,6 +67,9 @@ assert child.returncode != 0 and "PermissionError" in child.stderr
 """
             result = subprocess.run(
                 [sys.executable, "-S", "-c", code, str(source), *denied],
+                # Avoid startup entropy reads outside the allowlist; the descendant
+                # inherits this seed so it reaches its permission assertion too.
+                env={**os.environ, "PYTHONHASHSEED": "0"},
                 preexec_fn=lambda: restrict_reads(allowed),
                 capture_output=True,
                 text=True,
