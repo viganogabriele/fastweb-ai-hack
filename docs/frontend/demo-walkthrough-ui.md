@@ -37,11 +37,10 @@ are written to that attempt's DB; re-run `replay_demo.py` for a clean attempt be
 ## 2. The click path (proposed, aligned with the recorded run)
 
 **DEMO-03 update (2026-10-23).** `docs/demo_script.md` now follows the recorded candidate, and
-`tools/demo-rehearsal/` drives this path and records a timed video. Two changes from the table
-below, found while rehearsing: D1 options cannot be approved in this run (409 "proposal inputs or
-checks changed", #258), so the human decision is taken on `case-mil01-unknown-20261009`
-(`ask_store`, recommended). The options panel also lists both D1 option versions (first engine
-pass and the investigator's re-evaluation); only the latest is decidable.
+`tools/demo-rehearsal/` drives this path and records a timed video. It serves the frozen run with
+`tools/demo-rehearsal/serve-core-dev.sh` (`make demo` now serves the production-demo run of
+#257). The D1 approval 409 found while rehearsing (#258) is fixed by #261, so the decision beat
+approves D1 `notify_owner` as planned below. The UI does not show saved decisions yet (M5).
 
 The earlier draft script predated the recorded candidate. Three beats could not be
 shown honestly as written:

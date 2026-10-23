@@ -44,10 +44,10 @@ const DENY = [
 ]
 const DISCLOSURE = 'Dati sintetici · replay registrato offline · azioni simulate (bozze locali)'
 
-const decided = await fetch(`${base}/api/runs/core-dev-candidate/decisions?case_id=${UNKNOWN}`)
+const decided = await fetch(`${base}/api/runs/core-dev-candidate/decisions?case_id=${D1}`)
 if (!decided.ok) throw new Error(`demo API not reachable at ${base}: ${decided.status}`)
 if ((await decided.json()).length) {
-  throw new Error(`${UNKNOWN} already has a decision in this attempt: rebuild the demo data (README.md)`)
+  throw new Error(`${D1} already has a decision in this attempt: start a fresh replay attempt (README.md)`)
 }
 
 const browser = await chromium.launch()
@@ -96,9 +96,15 @@ async function caption(text) {
   )
 }
 
+// Each hit keeps a short excerpt, so a reviewer can find it in the frames.
 async function visibleTextHits() {
   const text = await page.evaluate(() => document.body.innerText)
-  return DENY.filter((re) => re.test(text)).map(String)
+  return DENY.flatMap((re) => {
+    const match = text.match(re)
+    if (!match) return []
+    const at = match.index ?? 0
+    return [`${re}: …${text.slice(Math.max(0, at - 40), at + 40).replace(/\s+/g, ' ')}…`]
+  })
 }
 
 // Bring a section's top near the top of its scroll container (the app scrolls an inner pane,
@@ -119,13 +125,24 @@ async function scrollTo(locator) {
   await page.waitForTimeout(900)
 }
 
+const options = () => main().getByRole('region', { name: 'Opzioni pubblicate sul server' })
+const option = (label) => options().getByRole('button', { name: new RegExp(`^${label}`) }).first()
+
+async function openDoc(id) {
+  const doc = main().getByRole('group').filter({ hasText: id })
+  await doc.locator('summary').first().click()
+  await main().getByText('Caricamento evidenze…').first().waitFor({ state: 'detached' })
+  return doc
+}
+
 const beats = [
   {
     id: 'overview', target: '0:00-0:20', dwell: 18,
-    say: 'Giovedì 22/10, sera: il run registrato offline è degraded e lo dice. 38 casi aperti da 13 fonti.',
+    say: 'Giovedì 22/10, sera: il run registrato offline è degraded e lo dice. 38 decisioni aperte, ordinate per priorità.',
     act: async () => {
       await page.goto(`${base}/#/panoramica`)
       await main().getByRole('heading', { name: 'Panoramica' }).waitFor()
+      await main().getByRole('region', { name: 'Decisioni' }).waitFor()
     },
   },
   {
@@ -134,28 +151,27 @@ const beats = [
     act: async () => {
       await page.getByRole('button', { name: 'Fonti', exact: true }).click()
       await page.getByRole('searchbox', { name: 'Cerca nelle fonti' }).fill('1035')
-      const doc = main().getByRole('group').filter({ hasText: 'doc-20261009-1035-mil01' })
-      await doc.locator('summary').first().click()
+      const doc = await openDoc('doc-20261009-1035-mil01')
       const mark = doc.locator('mark').first()
       await mark.waitFor()
-      await scrollTo(mark)
+      await scrollTo(doc)
       await mark.hover()
     },
   },
   {
-    id: 'case', target: '0:50-1:40', dwell: 40,
-    say: 'Caso D1, cardigan logo M a zero: 2 documenti, 2 origini, 5 verifiche aperte. Nessun uplift inventato.',
+    id: 'case', target: '0:50-1:40', dwell: 37,
+    say: 'Caso D1, cardigan logo M a zero: 2 documenti da 2 origini, 5 verifiche prima di decidere. Il forecast resta invariato: nessun uplift inventato.',
     act: async () => {
       await page.goto(`${base}/#/casi/${D1}/v1`)
-      await main().getByRole('region', { name: 'Verifiche aperte' }).waitFor()
+      await main().getByRole('region', { name: 'Cosa dicono i negozi' }).waitFor()
     },
     then: async () => {
       await scrollTo(main().getByRole('region', { name: 'Forecast pubblicato' }))
-      await hold(8)
+      await hold(12)
     },
   },
   {
-    id: 'trace', target: '1:40-2:10', dwell: 18,
+    id: 'trace', target: '1:40-2:10', dwell: 16,
     say: "L'investigatore (GLM, registrato) legge evidenze, stock e tratte; finisce il budget di 6 strumenti: fallback dichiarato, esito verify.",
     act: async () => {
       const traces = main().getByRole('region', { name: 'Tracce pubblicate' })
@@ -172,26 +188,39 @@ const beats = [
     },
   },
   {
-    id: 'options', target: '2:10-2:40', dwell: 22,
-    say: 'Il codice calcola le opzioni: transfer da MIL02 valutato ma non raccomandato (beneficio zero). Dopo la traccia, nessun donatore nazionale: notify_owner.',
+    id: 'options', target: '2:10-2:40', dwell: 16,
+    say: 'Il codice calcola le opzioni. Il trasferimento da MIL02 passa i controlli ma non è consigliato: vendite perse evitate 0.',
     act: async () => {
-      const options = main().getByRole('region', { name: 'Opzioni pubblicate sul server' })
-      await options.locator('article').first().waitFor()
-      await scrollTo(options.locator('article').filter({ hasText: /^transfer/ }).first())
+      await scrollTo(options())
+      await hold(4)
+      await option('Trasferisci').click()
+      await page.getByRole('dialog').getByRole('heading', { name: 'Esito atteso per scenario' }).waitFor()
     },
     then: async () => {
-      await scrollTo(
-        main()
-          .getByRole('region', { name: 'Opzioni pubblicate sul server' })
-          .locator('article')
-          .filter({ has: page.locator('strong', { hasText: /^notify_owner$/ }) })
-          .last(),
-      )
+      await scrollTo(page.getByRole('dialog').getByRole('heading', { name: 'Controlli' }))
       await hold(8)
+      await page.keyboard.press('Escape')
     },
   },
   {
-    id: 'clarification', target: '2:40-3:05', dwell: 20,
+    id: 'decision', target: '2:40-3:00', dwell: 13,
+    say: 'Decide una persona: approvo «Avvisa il responsabile». Il server salva una bozza locale simulata; nessun invio, nessuno stock mosso.',
+    act: async () => {
+      await option('Avvisa il responsabile').click()
+      const dialog = page.getByRole('dialog')
+      await dialog.getByRole('textbox', { name: 'Il tuo nome' }).fill(args.reviewer)
+      await hold(2)
+      await dialog.getByRole('button', { name: 'Approva' }).click()
+      await dialog.getByRole('button', { name: 'Conferma approvazione' }).waitFor()
+      await hold(3)
+      await dialog.getByRole('button', { name: 'Conferma approvazione' }).click()
+      const journal = main().getByRole('region', { name: 'Registro dei comandi di questo caso' })
+      await journal.getByText(/^Decisione salvata sul server/).waitFor({ timeout: 60_000 })
+      await scrollTo(journal)
+    },
+  },
+  {
+    id: 'clarification', target: '3:00-3:25', dwell: 24,
     say: "Prodotto non identificato ('M'): resta da verificare e l'agente prepara una domanda al negozio in italiano. Bozza, mai inviata.",
     act: async () => {
       await page.goto(`${base}/#/casi/${UNKNOWN}/v1`)
@@ -202,41 +231,18 @@ const beats = [
     },
   },
   {
-    id: 'decision', target: '3:05-3:25', dwell: 12,
-    say: 'Decide una persona: approvo ask_store. Il server salva una bozza locale simulata; nessun messaggio inviato, nessuno stock mosso.',
-    act: async () => {
-      const option = main()
-        .getByRole('region', { name: 'Opzioni pubblicate sul server' })
-        .locator('article')
-        .filter({ has: page.locator('strong', { hasText: /^ask_store$/ }) })
-        .last()
-      await scrollTo(option)
-      await option.getByRole('textbox', { name: 'Identità locale del revisore' }).fill(args.reviewer)
-      await option.getByRole('button', { name: 'Approva opzione pubblicata' }).click()
-      await option.getByRole('group', { name: /^Conferma decisione/ }).waitFor()
-      await hold(4)
-      await option.getByRole('button', { name: 'Conferma e salva sul server' }).click()
-      const saved = main().getByText(/^Decisione salvata sul server/)
-      await saved.waitFor()
-      await scrollTo(saved)
-    },
-  },
-  {
-    id: 'correction', target: '3:25-3:45', dwell: 15,
+    id: 'correction', target: '3:25-3:45', dwell: 18,
     say: "Correzione: '85,0k e non 58' sostituisce la cifra della sera (supersedes); le due cifre non vengono mai sommate.",
     act: async () => {
       await page.getByRole('button', { name: 'Fonti', exact: true }).click()
       await page.getByRole('searchbox', { name: 'Cerca nelle fonti' }).fill('20260918')
-      for (const id of ['doc-20260918-2115-mil01', 'doc-20260918-2207-mil01-corr']) {
-        const doc = main().getByRole('group').filter({ hasText: id })
-        await doc.locator('summary').first().click()
-      }
-      await main().getByText('Caricamento evidenze…').first().waitFor({ state: 'detached' })
-      await scrollTo(main().getByRole('group').filter({ hasText: 'doc-20260918-2207-mil01-corr' }))
+      await openDoc('doc-20260918-2115-mil01')
+      const correction = await openDoc('doc-20260918-2207-mil01-corr')
+      await scrollTo(correction)
     },
   },
   {
-    id: 'results', target: '3:45-4:00', dwell: 17,
+    id: 'results', target: '3:45-4:00', dwell: 15,
     say: 'Risultati misurati sugli store hold-out, con denominatori ed errori.',
     act: async () => {
       await page.goto(pathToFileURL(resolve(args.slide)).href)
@@ -288,10 +294,13 @@ function probe(file) {
 const sha256 = (file) => createHash('sha256').update(readFileSync(file)).digest('hex')
 const srt = (s) => new Date(s * 1000).toISOString().slice(11, 23).replace('.', ',')
 
+// The recording runs until the browser context has closed, which can add a static tail of the
+// last screen. The mp4 ends with the last beat; the raw webm is kept as recorded.
+const walkthrough_s = timeline.at(-1).end_s
 let mp4 = null
 try {
   mp4 = join(out, 'rehearsal.mp4')
-  execFileSync('ffmpeg', ['-v', 'error', '-i', webm, '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', mp4])
+  execFileSync('ffmpeg', ['-v', 'error', '-i', webm, '-t', walkthrough_s.toFixed(2), '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', mp4])
 } catch (error) {
   console.warn(`mp4 conversion skipped: ${error.message}`)
   mp4 = null
@@ -311,11 +320,12 @@ const report = {
   pace,
   captions: !args['no-captions'],
   viewport: size,
+  walkthrough_s,
   wall_clock_s: seconds(),
   timeline,
   files,
   console_errors: errors,
-  deny_hits: [...new Set(timeline.flatMap((b) => b.deny_hits))],
+  deny_hits: [...new Set(timeline.flatMap((b) => b.deny_hits.map((hit) => hit.split(':')[0])))],
 }
 writeFileSync(join(out, 'rehearsal.json'), `${JSON.stringify(report, null, 2)}\n`)
-console.log(JSON.stringify({ files, console_errors: errors.length, deny_hits: report.deny_hits }, null, 2))
+console.log(JSON.stringify({ walkthrough_s, files, console_errors: errors.length, deny_hits: report.deny_hits }, null, 2))
