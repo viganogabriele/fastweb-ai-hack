@@ -45,3 +45,13 @@ priority and office breakdowns, a stores table that filters the case table, and 
 `npm run dev:mock` serves `/api/*` from `mock-api/` (schema-typed synthetic data; store ids and SKUs
 from `generated/sources/erp/master_data/`, style names as renamed by DATA-04). `npm run dev` (or
 `make dev`) talks to the real backend; the UI code is identical in both modes.
+
+The mock enforces publication, store scope, run identity on derived cases and each record's
+`available_at` cutoff. The older synthetic run therefore has no records from the following day.
+Unsupported paths return 404, unsupported methods 405, run creation 409 and malformed paths 400;
+all responses carry `X-Tessera-Mock: 1`. No request falls through to a provider or the backend.
+`tests/mockApi.test.mjs` checks these boundaries.
+
+The overview shortcut selects an active case by priority, then deadline, including when no case
+is due within 48 hours. Overdue cases remain in the decision queue. The arrow hover movement is
+limited to fine pointers with no reduced-motion preference; the colour feedback remains available.
