@@ -9,6 +9,7 @@ import {
   FileText,
   MessageCircleQuestion,
   Package,
+  Telescope,
   Workflow
 } from 'lucide-react'
 import { messages } from './i18n'
@@ -16,6 +17,7 @@ import { VoiceStorePage } from './sections/VoiceStorePage'
 import { ModulesPage } from './sections/ModulesPage'
 import { ProductsPage } from './sections/ProductsPage'
 import { ReportsPage } from './sections/ReportsPage'
+import { VisionPage } from './sections/VisionPage'
 import { RunWorkspace } from './sections/RunWorkspace'
 import type { Case } from './api/client'
 import { DEFAULT_CASE_QUEUE_FILTERS } from './sections/caseUtils'
@@ -55,7 +57,8 @@ const NAV: NavGroup[] = [
         label: messages.shell.nav.clarifications,
         icon: MessageCircleQuestion
       },
-      { id: 'sources', label: messages.shell.nav.sources, icon: FileSearch }
+      { id: 'sources', label: messages.shell.nav.sources, icon: FileSearch },
+      { id: 'vision', label: messages.shell.nav.vision, icon: Telescope }
     ]
   }
 ]
@@ -68,7 +71,8 @@ const ROUTES = {
   reports: 'report',
   modules: 'pipeline',
   products: 'prodotti',
-  clarifications: 'chiarimenti'
+  clarifications: 'chiarimenti',
+  vision: 'visione'
 } as const
 
 type SectionId = keyof typeof ROUTES
@@ -199,7 +203,7 @@ export default function App() {
             onNavigate={navigate}
           />
         }
-        topbar={
+        topbar={currentId === 'vision' ? undefined : (
           <div className="sd-shell__view-controls">
             <VoiceProcessButton
               onDone={(run, cases) => {
@@ -232,7 +236,7 @@ export default function App() {
               }
             />
           </div>
-        }
+        )}
       >
         {/* Back/forward uses the same short entrance: navigation is occasional and the cue confirms the hash change. */}
         <SectionView
@@ -248,13 +252,17 @@ export default function App() {
                 : undefined
             }
             meta={
-              runs.selected
+              currentId === 'vision'
+                ? messages.vision.label
+                : runs.selected
                 ? `Dati disponibili al ${new Date(runs.selected.spec.as_of).toLocaleString('it-IT')}`
                 : undefined
             }
           />}
           {currentId === 'voice' ? (
             <VoiceStorePage />
+          ) : currentId === 'vision' ? (
+            <VisionPage />
           ) : currentId === 'modules' ? (
             <ModulesPage key={runs.selectedId} runs={runs} />
           ) : currentId === 'products' ? (
