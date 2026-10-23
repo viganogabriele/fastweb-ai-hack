@@ -29,3 +29,31 @@ The MVP worker runs in process with one orchestrator lock. Queued work does not
 survive a server restart; start a fresh run after an interrupted job. Published
 artifacts and run metadata are durable in SQLite. Durable job recovery is outside
 PLT-06. Use a single API worker process, as specified by the prototype architecture.
+
+## Reports (PLT-11)
+
+- `GET /api/runs/{run_id}/reports?view=by_office` lists the latest persisted
+  version of each report ID; omit `view` to include all views. No report returns
+  an empty list. Version selection follows repository insertion order, not
+  lexical version ordering (`v10` follows `v2`).
+- `GET /api/runs/{run_id}/reports/{owner}?view=by_office` returns report details
+  for briefs citing a `Case` owned by that exact owner. Each detail contains the
+  original `report` and an ordered `citations` array, whose entries pair the
+  original `citation` with the complete JSON `artifact` it references. The kind
+  is `citation.ref.kind`. Case ownership uses the cited version, not a newer one.
+  No matching brief returns 404.
+
+OUT-01 stores grouped briefs (`by_office` and `by_priority`), not separate
+artifacts for individual owners. The owner endpoint selects relevant complete
+briefs; it preserves their other sections and citation numbering. This is a
+navigation filter, not an authorization boundary. GET requests never regenerate
+or persist reports. To change their contents, execute a new run.
+
+Every citation is resolved by kind, ID and exact version through the same
+published run repository and transaction. An unknown kind, missing version,
+future record or out-of-scope store causes 409 rather than returning a brief
+with an unresolvable citation. No cross-run or latest-version fallback is used.
+Both routes inherit publication checks (409), missing-run/namespace checks
+(404), `as_of` filtering and explicit fixture access (`?fixture=true` plus
+`FIXTURE_MODE=1`). The API does not interpret citation field paths or recompute
+numbers; nested and array fields remain available in the resolved artifact.
