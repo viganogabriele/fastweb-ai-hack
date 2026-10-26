@@ -3,8 +3,8 @@
 `rehearse.mjs` drives the real UI through the click path of
 [docs/demo_script.md](../../docs/demo_script.md) with Playwright and records a video. Each beat
 is timed from the start of the recording, so a run gives a measured duration rather than the
-sum of targets. It never edits `web/` and never mocks the API: it needs `make demo` running on a
-fresh replay attempt of the frozen `core-dev-20261023` run.
+sum of targets. It never edits `web/` and never mocks the API: it needs
+`serve-core-dev.sh` running a fresh replay attempt of the recorded `core-dev-20261023` run.
 
 ## Run
 

@@ -9,7 +9,8 @@ private file and never printed.
 Run from the repository root:
 
     backend/.venv/bin/python scripts/export_public_demo_manifest.py \
-      --db data/demo/current/data/tesseract.db --run-id core-dev-candidate \
+      --db data/core_demo/rehearsal/replay/<attempt-id>/data/tesseract.db \
+      --run-id core-dev-candidate \
       --key-file data/private-demo/reference_key --output data/private-demo/approved-demo.json
 """
 

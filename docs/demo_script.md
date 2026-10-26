@@ -199,8 +199,8 @@ Measured with `tools/demo-rehearsal` on a fresh attempt, 1280×800, light theme,
 The video records the real UI on the synthetic dev run, not the public bundle. It shows synthetic
 first names, store names (Milano Montenapoleone), a real department store in a quote
 ("Rinascente"), the catalogue display name "VLOGO CARDIGAN" and source URIs
-(`dataset://store_emails/…`). It is cleared for
-the jury session only; public use needs Lorenzo's separate approval
+(`dataset://store_emails/…`). It is an internal rehearsal only; jury or public use
+requires separately documented privacy/claim approval
 ([public-bundle.md](demo_bundle/public-bundle.md) §Release). The rehearsal tool scans every beat
 for brand names, email addresses, hold-out store ids and tokens and records hits in
 `rehearsal.json`.
