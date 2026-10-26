@@ -102,7 +102,11 @@ export function CaseDetail({ item, runId, asOf, fixtureMode, onReturn, headingRe
             <span className={`sd-cd__tag${item.status === 'verify' ? ' is-verify' : ''}`}>{caseStatuses[item.status]}</span>
           </div>
           <h2 id="sd-case-detail-title" ref={headingRef} tabIndex={-1}>
-            {link ? link.product.name : item.scope_id ?? 'Prodotto da identificare'}
+            {link ? link.product.name : catalog.status === 'loading' && item.scope_id ? (
+              <span className="sd-cd__title-loading" role="status" aria-label="Caricamento del prodotto">
+                <span /><span /><span />
+              </span>
+            ) : item.scope_id ?? 'Prodotto da identificare'}
           </h2>
           {(link || item.scope_id) && (
             <p className="sd-cd__product">
