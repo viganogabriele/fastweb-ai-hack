@@ -113,7 +113,9 @@ def store_languages(root: Path) -> dict[str, str]:
 
 def canonical_text(root: Path, name: str) -> dict:
     """The document text the product scores against (ING-02 parser), for annotation."""
-    from tesseract.modules.ingestion.email_parser import parse_eml  # sources-only parser
+    from tesseract.modules.ingestion.email_parser import (
+        parse_eml,
+    )  # sources-only parser
 
     parsed = parse_eml((root / SOURCES / "store_emails" / name).read_bytes())
     return {
@@ -222,7 +224,9 @@ def reading(bundle: Path, sha256: str, labels_path: Path, label_sha: str, experi
     if labelled != expected:
         raise SystemExit("labelled files differ from the pre-registered selection")
     result = score(
-        labels, run.artifacts["predictions"], catalog_ids(ROOT / SOURCES / "erp/master_data")
+        labels,
+        run.artifacts["predictions"],
+        catalog_ids(ROOT / SOURCES / "erp/master_data"),
     )
     result.update(
         manifest_sha256=run.manifest_sha256,
@@ -238,18 +242,26 @@ def reading(bundle: Path, sha256: str, labels_path: Path, label_sha: str, experi
 def lead_time(bundle: Path, sha256: str, start: date, end: date, experiment: Path):
     """Protocol §5.3: oracle-key receipt, then the lead-time report on the frozen cases."""
     run = FrozenRun(bundle, sha256)
+    if run.manifest["protocol"].get("split") != "holdout":
+        raise SystemExit("lead-time evaluation requires a holdout bundle")
     _write_new(
         experiment / "lead-time-inputs.json",
         run.receipt(ROOT / "generated/ground_truth", list(LEAD_KEYS)),
     )
-    _write_new(experiment / "lead-time.json", lead_time_report(ROOT, run, "holdout", start, end))
+    _write_new(
+        experiment / "lead-time.json",
+        lead_time_report(ROOT, run, "holdout", start, end),
+    )
 
 
 def forecast(bundles: list[tuple[Path, str]], experiment: Path):
     """Protocol §5.4, one scored record per frozen forecast bundle (store group)."""
+    # Validate the complete batch before any scorer can access answer keys.
+    runs = [(bundle, FrozenRun(bundle, sha256)) for bundle, sha256 in bundles]
+    if any(run.manifest["protocol"].get("split") != "holdout" for _, run in runs):
+        raise SystemExit("forecast evaluation requires holdout bundles only")
     results = []
-    for bundle, sha256 in bundles:
-        run = FrozenRun(bundle, sha256)
+    for bundle, run in runs:
         results.append(
             {
                 "bundle": str(bundle),
@@ -262,7 +274,11 @@ def forecast(bundles: list[tuple[Path, str]], experiment: Path):
 def forecast_unavailable(reasons: list[str], experiment: Path):
     _write_new(
         experiment / "forecast-errors.json",
-        {"status": "unavailable", "measure": "forecast WAPE/MAE (EVL-03)", "reasons": reasons},
+        {
+            "status": "unavailable",
+            "measure": "forecast WAPE/MAE (EVL-03)",
+            "reasons": reasons,
+        },
     )
 
 

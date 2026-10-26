@@ -1,9 +1,39 @@
 # Frozen hold-out evaluation results (EVL-05, #128)
 
-Status: **DRAFT, no results yet.** Every `TBD` below is filled in only after the
+Status: **BLOCKED: frozen artifacts unavailable, no evaluation executed.** Every `TBD` below is filled in only after the
 `freeze-g3` tag, from the files in the experiment directory. This page reports the hold-out
 stores only. Dev diagnostics (#124, #125, #138) stay in their own documents and are not mixed
 in. It makes no uplift, ROI, recovered-revenue or real-world claim (protocol §7).
+
+## Completion check (26 October 2026)
+
+The scoring implementation is available, including rejection of dev bundles before
+lead-time answer receipts and prevalidation of the complete forecast batch before
+scoring. Seven synthetic wrapper tests pass. These tests are not hold-out results.
+
+The [freeze handoff](freeze-g3-handoff.md) binds candidate
+`1f7f35590782520d362c532c1e8159c4262703d7`, experiment record
+`219b99bb53c9a514cb98f43de20b92b266c06022f8e5d2e21b67da90f7ccb340`
+and the nine bundle digests. It says the original files remain on the recording
+host under `data/experiments/g3-20261023/` and `data/bundles/g3-20261023/`.
+The current environment has neither directory. All registered local worktrees
+were checked; GitHub has no release or Actions artifact carrying the package.
+The remote `freeze-g3` tag is also absent. A merged handoff document alone cannot
+replace the records, input inventories, caches and frozen prediction exports.
+
+Remaining acceptance steps for #126/#127/#128:
+
+1. Recover the original experiment, bundle and referenced input/cache files; verify
+   all recorded hashes without inspecting answers or changing product outputs.
+2. Complete the freeze approval dispositions and tag the reviewed candidate.
+3. Confirm the reading sample against the approved protocol, annotate and review
+   its source-only labels, then append their actual fingerprint.
+4. Execute the frozen scorers once, preserve machine-readable outputs and receipts,
+   and replace the result template below with measured values and limitations.
+
+No human review, annotation reconciliation, freeze approval, scoring or measured
+result is asserted by this page. Missing historical recordings must not be
+recreated with different model responses and presented as the original experiment.
 
 ## 1. What was evaluated
 
@@ -22,9 +52,9 @@ in. It makes no uplift, ROI, recovered-revenue or real-world claim (protocol §7
 **Order of operations.** Because of the Fastweb key expiry (2026-10-25 00:00 UTC), the
 hold-out LLM cache was recorded blind on the candidate before the tag. Nobody inspected
 hold-out outputs at that point. Then came the offline replay, the bundles, the freeze record
-and the tag. The reading sample and these scoring wrappers were committed before the tag
-(commit TBD). Hold-out labels were written after the tag, and scoring ran once after the labels
-were hashed. Nothing was tuned after any hold-out result was seen.
+and the proposed tag. The tag has not been created. The remaining required order is:
+approve the freeze, write and review labels, append their hash, then score once. The
+sentences below describe the reporting requirements, not completed execution.
 
 ## 2. #126 Reading and linking (EVL-02H)
 
@@ -32,10 +62,10 @@ were hashed. Nothing was tuned after any hold-out result was seen.
 of the file name and fixed before the tag (`eval/labels/README.md`). Labels:
 `eval/labels/reading_holdout_v1.yaml`, SHA-256 TBD.
 
-> **The hold-out labels are AI-drafted.** Two independent annotator agents labelled each mail
-> from the canonical email text and the source catalog only. A third agent reconciled the two.
-> No agent saw answer keys, ground truth or product output. Lorenzo's review: TBD (not
-> human-reviewed unless stated here). Dev labels (`reading_dev_v1.yaml`) were hand-written with
+> **Annotation is pending.** The proposed method uses two independent annotators reading
+> canonical email text and the source catalog, followed by reconciliation and documented
+> review. Annotators must not see answer keys, ground truth or product output. Record actual
+> reviewers and provenance when annotation exists. Dev labels (`reading_dev_v1.yaml`) were hand-written with
 > the answer keys. The two label sets are not equivalent, and hold-out numbers are not directly
 > comparable with dev numbers.
 
@@ -99,16 +129,17 @@ receipt and output. Machine-readable outputs that are small enough are committed
 
 ## 7. Limitations
 
-- **AI-drafted labels.** See §2. Reading precision and recall measure agreement with
-  agent-written labels on a 110-file sample, not with human ground truth. Sampling error is
-  not quantified.
+- **Label provenance.** See §2. If AI-drafted labels are used, precision and recall
+  measure agreement with those labels; they must not be described as independently
+  human-annotated ground truth. Report actual review and sampling limitations.
 - **Sample, not census.** 110 of 533 mails. Per-language N is 11 (33 for English), too small
   for per-language claims.
 - **Blind pre-record before the tag.** The cache was recorded before the tag because of the key
   expiry. The replay is byte-identical to the record (TBD confirm), and no output was inspected
   before scoring.
-- **Lead time.** First-evidence lead (`Case.first_available_at`), not proven
-  first-actionable-alert time. The extra ERP grace day can reach beyond pipeline observation
+- **Lead time.** The freeze handoff proposes emission-time lead as the headline,
+  with first-evidence lead (`Case.first_available_at`) alongside it. Approval and
+  scoring of both bundles are still required. The extra ERP grace day can reach beyond pipeline observation
   coverage. Baselines use fixed defaults, so equal false-alert load is **not established**
   (departure from RFC §7.2). False alerts are relative to planted events. Units overlap in time
   and are not independent.
