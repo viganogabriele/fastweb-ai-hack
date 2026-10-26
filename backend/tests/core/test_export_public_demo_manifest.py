@@ -204,3 +204,13 @@ def test_export_feeds_the_existing_builder(tmp_path, monkeypatch):
     assert document["text"] == "Elena: zero cardigan in M."
     assert document["text"][evidence["char_start"] : evidence["char_end"]] == evidence["quote"]
     assert json.loads(files["manifest.json"])["excluded"] == []
+
+
+def test_export_rejects_a_run_without_artifacts(tmp_path):
+    db = tmp_path / "empty.db"
+    with sqlite3.connect(db) as con:
+        con.execute(
+            "CREATE TABLE artifacts (seq INTEGER, run_id TEXT, kind TEXT, id TEXT, payload)"
+        )
+    with pytest.raises(ValueError, match="no public artifacts"):
+        exporter.export(db, "wrong-run", "k" * 32, approved=True)

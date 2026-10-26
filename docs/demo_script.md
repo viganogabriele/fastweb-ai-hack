@@ -63,7 +63,8 @@ Times are targets; the measured duration of each take is in the rehearsal table 
 
 ### 0:00–0:20 · Thursday evening (Panoramica)
 
-**Screen:** Panoramica, tab "Decisioni operative". Header: run `historical · 22/10/2026, 22:00 ·
+**Screen:** Panoramica, tab "Decisioni operative". Expand **Mostra decisioni**; the list
+starts collapsed. Header: run `historical · 22/10/2026, 22:00 ·
 core-dev · degraded`, badge `recorded`. 38 open decisions, 2 critical or high, the decision table
 sorted by priority, the store map.
 

@@ -33,6 +33,8 @@ def export(db, run_id, key, approved):
         "ORDER BY seq",
         (run_id, *KINDS),
     ).fetchall()
+    if not rows:
+        raise ValueError("selected run has no public artifacts; replay the intended dev run first")
     # Current version only: a later row of the same kind/id supersedes an earlier one.
     current = {}
     for kind, artifact_id, payload in rows:

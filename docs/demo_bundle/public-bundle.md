@@ -24,15 +24,17 @@ published**. Public release is a separate, explicit action for the maintainer.
 
 ## Build
 
-From the repository root, on the recorded run rebuilt by `make demo-data`:
+From the repository root, serve the recorded four-store Core run first:
 
 ```sh
+tools/demo-rehearsal/serve-core-dev.sh
+# make demo / make demo-data select the later nine-store production demo, not this run.
 mkdir -p data/private-demo && chmod 700 data/private-demo
 # once: a private HMAC key (never commit or share it; ids depend on it)
 (umask 077; backend/.venv/bin/python -c 'import secrets; print(secrets.token_hex(32))' \
   > data/private-demo/reference_key)
 backend/.venv/bin/python scripts/export_public_demo_manifest.py \
-  --db data/demo/current/data/tesseract.db --run-id core-dev-candidate \
+  --db data/core_demo/rehearsal/replay/<attempt-id>/data/tesseract.db --run-id core-dev-candidate \
   --key-file data/private-demo/reference_key --output data/private-demo/approved-demo.json --approved
 backend/.venv/bin/python web/scripts/build_public_demo.py data/private-demo/approved-demo.json \
   --output data/public-demo --private-map data/private-demo/mapping.json
@@ -45,6 +47,42 @@ run. Case `context_refs` to kinds the builder does not project (`EntityLink`,
 dangling reference. All sanitizing, offset rebuilding and exclusion is done by the builder.
 `data/private-demo/` (input manifest with original text, key, private map) never leaves the
 machine.
+
+Read `<attempt-id>` from `data/core_demo/rehearsal/replay.json`. The exporter rejects a
+run with no matching artifacts, rather than silently producing an empty approved bundle.
+Its private manifest path must resolve under ignored `data/`, outside `data/fixtures/`
+and `data/catalog/`; symlink escapes are rejected before input files are read.
+
+## Preparation verified on 2026-10-26
+
+The Core run was replayed offline on the current UI with output
+`20a7a75bd7db91ad94f5c89c0e4f6d4bc4cb64455a53a63d14155cdb5a50f338`,
+zero network attempts and zero cache misses. The new sanitized projection contains
+11 documents, 32 segments, 82 observations and 38 cases. Every segment and evidence
+quote matches its sanitized document slice; no email address, external URL,
+capability fragment or original brand/family token was found in `artifacts.json`.
+A second build with the same private manifest/key is byte-identical.
+
+The review archive is local at `data/public-demo-20261026.zip` (34,871 bytes),
+SHA-256 `9adf55a10f809f91fe1bf4b80793938d9dd1af06f13191833b15e267beef499c`.
+It includes only the two public JSON files and a disclosure README. No private
+manifest, HMAC key, mapping, database, recording or original source is in the archive.
+The machine-readable evidence is [verification-20261026.json](verification-20261026.json).
+
+The separate **internal**, captioned UI rehearsal lasts **232.917 seconds**
+(3 minutes 52.917 seconds) at normal pacing. Both WebM and H.264 MP4 were checked
+with `ffprobe`; the MP4 also decoded completely with FFmpeg. It is stored at
+`data/demo/video/timed-20261026/`. The approval beat is automated test interaction,
+not a new genuine operator decision. The original operator decision remains in
+the committed replay package.
+
+**Final release is blocked.** The UI video contains original synthetic family and
+department-store names (`vlogo`, `rinascente`) flagged by the conservative DOM-text
+scan. The old Core run also returns the documented 404 for its absent business KPI
+snapshot. Do not publish this recording or describe it as privacy-approved. The
+closing slide explicitly states that hold-out results are unavailable. The original
+freeze records/bundles, approved results, final pitch and sanitized public video
+remain the acceptance criteria of #211/#128/#129; this preparation does not close them.
 
 ## Candidate built on 2026-10-23
 

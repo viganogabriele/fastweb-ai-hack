@@ -25,6 +25,20 @@ The run refuses to start if D1 already has a decision in this attempt: re-run
 `serve-core-dev.sh` (it starts a new attempt and restarts the backend it started).
 `make demo` serves a different, later run (production-demo, #257) and does not fit this path.
 
+## Current preparation status
+
+The 2026-10-26 normal-paced internal take completed in 232.917 seconds; metadata
+and file hashes are in [the verification record](../../docs/demo_bundle/verification-20261026.json).
+It uses the current collapsed overview, explicitly expands **Mostra decisioni**,
+and identifies the approval beat as automated rehearsal rather than a human
+operator's decision. The closing slide states that evaluation results are unavailable.
+
+Reports explicitly carry `status: internal_rehearsal_only` and `release_ready: false`.
+The current recording contains names flagged by the deny scan and is not a public
+video. The scan reads DOM text conservatively (including text outside the viewport)
+at beat boundaries, not every video frame; it cannot certify video privacy.
+Final metrics and a separately reviewed public take remain #128/#129.
+
 ## Output
 
 - `rehearsal.webm` (raw Playwright recording, up to the browser closing) and `rehearsal.mp4`
