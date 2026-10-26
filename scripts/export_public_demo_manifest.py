@@ -69,13 +69,24 @@ def main():
         help="record that the selection and replacements were reviewed",
     )
     args = parser.parse_args()
+    # The manifest contains original text and a reference key. Reject unsafe paths
+    # before opening either input, including symlink escapes and versioned data.
+    output = args.output.resolve()
+    root = ROOT.resolve()
+    versioned = [
+        (root / line[1:].strip().rstrip("/")).resolve()
+        for line in (root / ".gitignore").read_text().splitlines()
+        if line.startswith("!data/")
+    ]
+    if not output.is_relative_to(root / "data") or any(
+        output.is_relative_to(folder) for folder in versioned
+    ):
+        raise SystemExit("private manifests must stay under ignored data/ folders")
     key = args.key_file.read_text(encoding="utf-8").strip()
     if len(key) < 32:
         raise SystemExit("reference key must have at least 32 characters")
     manifest = export(args.db, args.run_id, key, args.approved)
-    with open(
-        args.output, "x", encoding="utf-8", opener=lambda p, f: os.open(p, f, 0o600)
-    ) as stream:
+    with open(output, "x", encoding="utf-8", opener=lambda p, f: os.open(p, f, 0o600)) as stream:
         json.dump(manifest, stream, ensure_ascii=False, indent=1)
     counts = {}
     for item in manifest["artifacts"]:

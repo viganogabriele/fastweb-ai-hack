@@ -137,16 +137,19 @@ async function openDoc(id) {
 
 const beats = [
   {
-    id: 'overview', target: '0:00-0:20', dwell: 18,
+    id: 'overview', target: '0:00-0:20', dwell: 16,
     say: 'Giovedì 22/10, sera: il run registrato offline è degraded e lo dice. 38 decisioni aperte, ordinate per priorità.',
     act: async () => {
       await page.goto(`${base}/#/panoramica`)
       await main().getByRole('heading', { name: 'Panoramica' }).waitFor()
+      const toggle = main().getByRole('button', { name: 'Mostra decisioni', exact: true })
+      await toggle.waitFor()
+      await toggle.click()
       await main().getByRole('region', { name: 'Decisioni' }).waitFor()
     },
   },
   {
-    id: 'source', target: '0:20-0:50', dwell: 24,
+    id: 'source', target: '0:20-0:50', dwell: 22,
     say: 'Una mail di chiusura MIL01: la prova è la citazione, con offset nel testo canonico.',
     act: async () => {
       await page.getByRole('button', { name: 'Fonti', exact: true }).click()
@@ -159,7 +162,7 @@ const beats = [
     },
   },
   {
-    id: 'case', target: '0:50-1:40', dwell: 37,
+    id: 'case', target: '0:50-1:40', dwell: 35,
     say: 'Caso D1, cardigan logo M a zero: 2 documenti da 2 origini, 5 verifiche prima di decidere. Il forecast resta invariato: nessun uplift inventato.',
     act: async () => {
       await page.goto(`${base}/#/casi/${D1}/v1`)
@@ -204,7 +207,7 @@ const beats = [
   },
   {
     id: 'decision', target: '2:40-3:00', dwell: 13,
-    say: 'Decide una persona: approvo «Avvisa il responsabile». Il server salva una bozza locale simulata; nessun invio, nessuno stock mosso.',
+    say: 'Dimostrazione automatizzata del percorso di approvazione: il server salva una bozza locale simulata. Non è una nuova decisione umana; nessun invio o stock mosso.',
     act: async () => {
       await option('Avvisa il responsabile').click()
       const dialog = page.getByRole('dialog')
@@ -220,7 +223,7 @@ const beats = [
     },
   },
   {
-    id: 'clarification', target: '3:00-3:25', dwell: 24,
+    id: 'clarification', target: '3:00-3:25', dwell: 22,
     say: "Prodotto non identificato ('M'): resta da verificare e l'agente prepara una domanda al negozio in italiano. Bozza, mai inviata.",
     act: async () => {
       await page.goto(`${base}/#/casi/${UNKNOWN}/v1`)
@@ -231,7 +234,7 @@ const beats = [
     },
   },
   {
-    id: 'correction', target: '3:25-3:45', dwell: 18,
+    id: 'correction', target: '3:25-3:45', dwell: 17,
     say: "Correzione: '85,0k e non 58' sostituisce la cifra della sera (supersedes); le due cifre non vengono mai sommate.",
     act: async () => {
       await page.getByRole('button', { name: 'Fonti', exact: true }).click()
@@ -242,8 +245,8 @@ const beats = [
     },
   },
   {
-    id: 'results', target: '3:45-4:00', dwell: 15,
-    say: 'Risultati misurati sugli store hold-out, con denominatori ed errori.',
+    id: 'results', target: '3:45-4:00', dwell: 12,
+    say: 'La valutazione hold-out non è ancora disponibile: servono i bundle originali e il freeze approvato. Nessuna accuratezza, ROI o miglioramento dichiarato.',
     act: async () => {
       await page.goto(pathToFileURL(resolve(args.slide)).href)
     },
@@ -316,6 +319,9 @@ const files = [webm, mp4].filter(Boolean).map((file) => ({
   playback: probe(file),
 }))
 const report = {
+  status: 'internal_rehearsal_only',
+  release_ready: false,
+  release_blockers: ['Frozen hold-out evaluation and final privacy/claim review are incomplete.'],
   base_url: base,
   pace,
   captions: !args['no-captions'],
