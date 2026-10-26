@@ -155,6 +155,11 @@ export function CaseQueue({
       .sort((a, b) => {
         const byPriority = priorityOrder[a.priority] - priorityOrder[b.priority]
         const byDeadline = dueTime(a) - dueTime(b)
+        if (filters.sort === 'recent') {
+          // A new audio can update an existing case; run computation time is shared.
+          const byReceived = Date.parse(b.last_received_at) - Date.parse(a.last_received_at)
+          return byReceived || byPriority || byDeadline
+        }
         return filters.sort === 'deadline'
           ? byDeadline || byPriority
           : byPriority || byDeadline
@@ -198,7 +203,7 @@ export function CaseQueue({
         <Select size="sm" label="Scadenza" value={filters.deadline} onValueChange={(value) => updateFilter('deadline', value)} options={[{ value: 'all', label: 'Tutte le scadenze' }, { value: 'dated', label: 'Con scadenza' }, { value: 'past', label: 'Scaduta al cutoff' }, { value: 'undated', label: 'Senza scadenza' }]} />
         <Select size="sm" label="Incertezza" value={filters.uncertainty} onValueChange={(value) => updateFilter('uncertainty', value)} options={[{ value: 'all', label: 'Tutte' }, { value: 'open', label: 'Con incertezze bloccanti' }, { value: 'clear', label: 'Senza incertezze' }]} />
         <Select size="sm" label="Stato" value={filters.status} onValueChange={(value) => updateFilter('status', value)} options={[{ value: 'all', label: 'Tutti gli stati' }, ...Object.entries(statuses).map(([value, label]) => ({ value, label }))]} />
-        <Select size="sm" label="Ordina per" value={filters.sort} onValueChange={(value) => updateFilter('sort', value)} options={[{ value: 'priority', label: 'Priorità' }, { value: 'deadline', label: 'Scadenza più vicina' }]} />
+        <Select size="sm" label="Ordina per" value={filters.sort} onValueChange={(value) => updateFilter('sort', value)} options={[{ value: 'recent', label: 'Più recenti' }, { value: 'priority', label: 'Priorità' }, { value: 'deadline', label: 'Scadenza più vicina' }]} />
       </form>
       <p className="sd-case-queue__count" role="status">{visibleCases.length} {visibleCases.length === 1 ? 'caso' : 'casi'} · scadenze valutate al cutoff del run</p>
       {visibleCases.length ? (

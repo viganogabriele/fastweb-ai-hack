@@ -139,6 +139,7 @@ export function Overview({
   const [priority, setPriority] = useState<'all' | Priority>('all')
   const [verification, setVerification] = useState<Verification>('all')
   const [view, setView] = useState<'market' | 'ops'>('ops')
+  const [decisionsExpanded, setDecisionsExpanded] = useState(false)
 
   const asOf = Date.parse(run.spec.as_of)
   const active = cases.filter(isActive)
@@ -336,7 +337,16 @@ export function Overview({
         id="ov-queue"
         title="Decisioni"
         meta={`${queue.length} di ${active.length}${filtered ? ' · filtri attivi' : ''}. Ordinate per priorità, poi per scadenza.`}
+        action={
+          <Button size="sm" variant="secondary"
+            aria-label={decisionsExpanded ? 'Nascondi decisioni' : 'Mostra decisioni'}
+            aria-expanded={decisionsExpanded} aria-controls="ov-queue-content"
+            onClick={() => setDecisionsExpanded((expanded) => !expanded)}>
+            {decisionsExpanded ? 'Nascondi' : 'Mostra'}
+          </Button>
+        }
       >
+        <div id="ov-queue-content" hidden={!decisionsExpanded}>
         {nothingLeft ? (
           <EmptyState
             title="Nessuna decisione con questi filtri"
@@ -391,6 +401,7 @@ export function Overview({
             </table>
           </div>
         )}
+        </div>
       </Panel>
 
       <Panel id="ov-when" title="Quando scadono" meta="Decisioni per finestra di scadenza, impilate per priorità.">
