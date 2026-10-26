@@ -1,0 +1,80 @@
+{
+  "counts": {
+    "Case": 38,
+    "Observation": 82,
+    "Segment": 32,
+    "SourceDocument": 11
+  },
+  "verified_segments": 32,
+  "verified_quotes": 82,
+  "files": {
+    "manifest.json": {
+      "sha256": "839d659f8cf43006bc96821f1be10796e6d86130cd77342a093146b8b2d56e52",
+      "bytes": 79415
+    },
+    "artifacts.json": {
+      "sha256": "f1e28796b48ec938859bd56eaffb1561c07e108300145fea49d749876069c857",
+      "bytes": 112750
+    }
+  },
+  "status": "preparation_verified_final_release_blocked",
+  "date": "2026-10-26",
+  "demo_code_commit": "b523ef5a3e8697c6d53c43f68e906df1a8208b91",
+  "source_run": "core-dev-candidate",
+  "replay_output_sha256": "20a7a75bd7db91ad94f5c89c0e4f6d4bc4cb64455a53a63d14155cdb5a50f338",
+  "deterministic_rebuild": true,
+  "internal_rehearsal": {
+    "status": "internal_rehearsal_only",
+    "release_ready": false,
+    "walkthrough_s": 232.917,
+    "pace": 1,
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "files": [
+      {
+        "file": "rehearsal.webm",
+        "sha256": "0c86f773e525236bed480ffc913860a71de5e2972e78716eef5f0e33bf6c1322",
+        "playback": {
+          "tool": "ffprobe",
+          "duration_s": 232.8,
+          "codec": "vp9",
+          "width": 1280,
+          "height": 800,
+          "frames": 5820
+        }
+      },
+      {
+        "file": "rehearsal.mp4",
+        "sha256": "9381e9ab04cdc55ccb6b34ffa5a5e6ed4e068bdfe1fe52c788b92cea2cbd4787",
+        "playback": {
+          "tool": "ffprobe",
+          "duration_s": 232.8,
+          "codec": "h264",
+          "width": 1280,
+          "height": 800,
+          "frames": 5820
+        }
+      }
+    ],
+    "deny_hits": [
+      "/vlogo/i",
+      "/rinascente/i"
+    ],
+    "console_errors": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    ]
+  },
+  "release_blockers": [
+    "Original frozen hold-out experiment/bundles are unavailable; freeze-g3 tag is absent.",
+    "Final evaluation/approved claims and final public pitch/video are not delivered.",
+    "Internal UI recording contains original synthetic names; do not publish it.",
+    "Old Core run has no BusinessSnapshot; the KPI route returns expected 404."
+  ],
+  "archive": {
+    "file": "data/public-demo-20261026.zip",
+    "sha256": "9adf55a10f809f91fe1bf4b80793938d9dd1af06f13191833b15e267beef499c",
+    "bytes": 34871
+  }
+}

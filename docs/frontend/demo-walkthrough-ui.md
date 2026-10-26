@@ -36,7 +36,13 @@ are written to that attempt's DB; re-run `replay_demo.py` for a clean attempt be
 
 ## 2. The click path (proposed, aligned with the recorded run)
 
-The draft script (`docs/demo_script.md`) predates the recorded candidate. Three beats cannot be
+**DEMO-03 update (2026-10-23).** `docs/demo_script.md` now follows the recorded candidate, and
+`tools/demo-rehearsal/` drives this path and records a timed video. It serves the frozen run with
+`tools/demo-rehearsal/serve-core-dev.sh` (`make demo` now serves the production-demo run of
+#257). The D1 approval 409 found while rehearsing (#258) is fixed by #261, so the decision beat
+approves D1 `notify_owner` as planned below. The UI does not show saved decisions yet (M5).
+
+The earlier draft script predated the recorded candidate. Three beats could not be
 shown honestly as written:
 - the what-if panel (`docs/demo_script.md:68-80`): no UI or API for it exists;
 - ROM01 (`docs/demo_script.md:72-86`): a hold-out store (`docs/RFC-001-piattaforma.md:542`);
