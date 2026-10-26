@@ -1,6 +1,7 @@
 """Versioned MVP DTOs; public imports for producers, consumers and fixture validation."""
 
 from .agents import AgentStep, AgentTrace, Clarification, Decision
+from .business import BusinessSnapshot
 from .cases import Case
 from .common import SCHEMA_VERSION, ArtifactRef, SourceRef, StockFact
 from .documents import Segment, SourceDocument
@@ -19,6 +20,7 @@ __all__ = [
     "AgentStep",
     "AgentTrace",
     "ArtifactRef",
+    "BusinessSnapshot",
     "Case",
     "Check",
     "Citation",

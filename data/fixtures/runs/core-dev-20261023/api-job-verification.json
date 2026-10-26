@@ -3,6 +3,7 @@
     "id": "case-mil01-j20931a00012-999-20261002",
     "version": "v1"
   },
+  "execution_sha": "cd522581cfba94b14705ca9528061b3a53d70b7a",
   "format": 2,
   "job_id": "investigate-b3df8405d121b9c200b10b6733db4d65711aa86814239692c00e40ccd5a3b9fe",
   "job_manifest": "investigate-job/manifest.json",
@@ -37,11 +38,11 @@
     "status": "failed",
     "withheld_key": "271b280526ca9e69cc3e78188eeafdbb51285c900fa5261751bad0fa8493b344"
   },
-  "parent_artifact_inventory_sha256": "e52fb3a1a025134198124a7f6829c71cabdd8a5eaa4700a4ae3f20a6f8f23405",
+  "parent_artifact_inventory_sha256": "2ceed68aca37042b7f856a74c361cd2e9e71a50667d5e83bacfdd6f7e091858c",
   "parent_snapshot_sha256": "c522703633170af4933e06ed0f02edc29f2beb5f85cb32873ac46bb426b86edb",
   "positive_offline_replays": [
     {
-      "attempt": "attempt-627ca8daacbf4027a7050901236ddb0f",
+      "attempt": "attempt-9f795a7d3e89438cb9c73d295ad9dea6",
       "checks": {
         "case_version_matches": true,
         "job_artifacts_match": true,
@@ -68,7 +69,7 @@
       "status": "passed"
     },
     {
-      "attempt": "attempt-8d5d4f61d64e4c138532421894a441f1",
+      "attempt": "attempt-83bc3334acdd426da98887fee420bcba",
       "checks": {
         "case_version_matches": true,
         "job_artifacts_match": true,

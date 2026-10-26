@@ -3,11 +3,15 @@
   "files": [
     [
       "api-job-verification.json",
-      "5aa32a5e3c4d155ee5021fc0434edfc32d135b0428584292ff1ed6f6f71f6aad"
+      "e597cfab12db620f18fa552d469096dfb6cb8fa7941a90c68a8d0907b6133240"
     ],
     [
       "api-verification.json",
-      "6aa909dcd080435dd0574a5a3d0edb9d4e0bd4440f6765a0873ebb8e298f0b4b"
+      "daaa460ba607b9ec2a1fb6b8396f041860208a5ed8d6e5c75083bd4b2f33e3ec"
+    ],
+    [
+      "decisions-operator.json",
+      "6c2a289443ddaf576a849aba681acbd4686bba5af402ffd017b6070c57b57a9b"
     ],
     [
       "decisions.json",
@@ -43,7 +47,7 @@
     ],
     [
       "investigate-job/manifest.json",
-      "eb8958568609d8f4d63946b47e74609e3240c2e8f474a4776951479b04a4a8dd"
+      "14b0cd675ba1eb01b691c7e78d1f96fb5190545660da6ea32644c27542146b57"
     ],
     [
       "investigate-job/systems_cache/08/0857b6cb33c283e73cab270b128e89f63910ad103039e4966d8553648cb92ccf.json",
@@ -135,7 +139,11 @@
     ],
     [
       "negative-replay-evidence.json",
-      "d77dc07c11bb6358d811fc64b48809cd6722aa1b32c2b70432b619fb2d9a5b06"
+      "afe7a8ba5f72096e41a3a6bc5a490b133517e559b442980bc953732eb5502845"
+    ],
+    [
+      "operator-decision-replay.json",
+      "84b6bb4925f1606774981a9e341b91ee734ef1a00b0029b8bea865bdc2e5bf46"
     ],
     [
       "recording-evidence.json",
@@ -143,11 +151,11 @@
     ],
     [
       "replay-comparison.json",
-      "bd239f89cdbc35a50134e46383abf3c65b8df508ca9a819d993bbca7630742fd"
+      "5a1d589dbf344533e1e62244137383227ae376d5d780e745953f8bfaf3bed20b"
     ],
     [
       "replay-evidence.json",
-      "9c680a27282218cc108e860cd89e1c45d39233c43ed414e965a6a22572ebe068"
+      "f6f7a09aee26aca403269b1767a626e169e2f5a0d8bc4dfba205636c211c6dba"
     ],
     [
       "run-spec.json",

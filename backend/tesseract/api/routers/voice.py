@@ -26,7 +26,7 @@ from collections import deque
 from datetime import UTC, datetime
 from pathlib import Path
 from threading import Lock
-from typing import Annotated
+from typing import Annotated, Literal
 from uuid import uuid4
 
 from fastapi import (
@@ -100,6 +100,8 @@ class LiveNoteView(BaseModel):
     duration_s: float | None
     transcript: str
     run_id: str | None
+    staff_ref: str | None = None
+    prompt_set: Literal["guided-v1"] | None = None
 
 
 class ProcessRequest(BaseModel):
@@ -120,6 +122,8 @@ def _note_view(live: LiveNote, retry: set[str] = frozenset()) -> LiveNoteView:
         duration_s=sidecar.duration_s,
         transcript=live.transcript,
         run_id=None if live.run_id in retry else live.run_id,
+        staff_ref=sidecar.staff_ref,
+        prompt_set=sidecar.prompt_set,
     )
 
 
@@ -202,6 +206,8 @@ async def create_note(
     store_id: Annotated[str, Form()],
     transcript: Annotated[str, Form()],
     language: Annotated[str | None, Form()] = None,
+    staff_ref: Annotated[str | None, Form(min_length=1, max_length=32)] = None,
+    prompt_set: Annotated[Literal["guided-v1"] | None, Form()] = None,
 ):
     settings = _settings(request)
     store = _store(settings, store_id)
@@ -215,6 +221,8 @@ async def create_note(
             _suffix(audio),
             transcript,
             language=language or None,
+            staff_ref=staff_ref,
+            prompt_set=prompt_set,
             data_dir=settings.data_dir,
         )
     except InvalidRecording as error:

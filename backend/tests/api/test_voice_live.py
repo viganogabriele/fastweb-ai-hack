@@ -16,7 +16,13 @@ from tesseract.core.orchestrator import _plan
 from tesseract.core.registry import Registry
 from tesseract.modules.sources import voice
 from tesseract.modules.sources.emails import Store
-from tesseract.modules.sources.voice_inbox import freeze_notes, list_notes, save_note
+from tesseract.modules.sources.voice_inbox import (
+    batch_hash,
+    freeze_notes,
+    list_notes,
+    save_note,
+    snapshot_path,
+)
 
 ROME = Store(language="it", timezone="Europe/Rome", currency="EUR")
 
@@ -62,12 +68,68 @@ def test_a_recording_becomes_a_live_note_src_voice_can_read(client, tmp_path):
     assert body["run_id"] is None
     note = voice.read_sidecar(tmp_path / "voice_inbox" / body["note_id"])
     assert note.sidecar.fixture_kind == "live"
+    assert note.sidecar.author_ref == "pseudonym:mil01-staff-live"
+    assert body["staff_ref"] is None
+    assert body["prompt_set"] is None
     assert note.sidecar.sent_at.utcoffset() is not None
     audio = voice.load_audio(note)  # converted to 16 kHz mono wav, hash checked
     with wave.open(str(audio.path)) as reader:
         assert (reader.getframerate(), reader.getnchannels()) == (16000, 1)
     assert voice.manual_transcript(note) == "Due clienti hanno chiesto il gilet blu"
     assert [n["note_id"] for n in client.get("/api/voice/notes").json()] == [body["note_id"]]
+
+
+def test_guided_notes_preserve_distinct_employees_and_prompt_set(client, tmp_path):
+    for staff in ("staff-09", "staff-10"):
+        response = client.post(
+            "/api/voice/notes",
+            data={
+                "store_id": "MIL01",
+                "transcript": "Due clienti hanno chiesto il gilet blu",
+                "staff_ref": staff,
+                "prompt_set": "guided-v1",
+            },
+            files={"audio": ("note.wav", wav(), "audio/wav")},
+        )
+        assert response.status_code == 201
+        body = response.json()
+        assert body["staff_ref"] == staff
+        assert body["prompt_set"] == "guided-v1"
+        note = voice.read_sidecar(tmp_path / "voice_inbox" / body["note_id"])
+        assert note.sidecar.author_ref == f"pseudonym:mil01-{staff}"
+        assert note.sidecar.staff_ref == staff
+        assert note.sidecar.prompt_set == "guided-v1"
+    listed = client.get("/api/voice/notes").json()
+    assert {note["staff_ref"] for note in listed} == {"staff-09", "staff-10"}
+    notes = list_notes(tmp_path)
+    freeze_notes(tmp_path, "guided-test", notes, batch_hash(notes))
+    assert {
+        voice.read_sidecar(path).sidecar.staff_ref
+        for path in snapshot_path(tmp_path, "guided-test").iterdir()
+    } == {"staff-09", "staff-10"}
+
+
+@pytest.mark.parametrize(
+    "metadata",
+    [
+        {"staff_ref": "BAD"},
+        {"staff_ref": "bad code"},
+        {"staff_ref": "bad_code"},
+        {"staff_ref": "x" * 33},
+        {"staff_ref": "staff-09\n"},
+        {"prompt_set": "unknown"},
+        {"prompt_set": "guided-v1"},
+        {"prompt_set": "guided-v1", "staff_ref": ""},
+    ],
+)
+def test_invalid_guided_metadata_is_rejected_before_publication(client, tmp_path, metadata):
+    response = client.post(
+        "/api/voice/notes",
+        data={"store_id": "MIL01", "transcript": "ciao", **metadata},
+        files={"audio": ("note.wav", wav(), "audio/wav")},
+    )
+    assert response.status_code == 422
+    assert not list_notes(tmp_path)
 
 
 @pytest.mark.parametrize(

@@ -3,17 +3,21 @@ import type { ReactNode } from 'react'
 import { MotionConfig, motion, useReducedMotion } from 'motion/react'
 import {
   Activity,
+  Mic,
   ClipboardList,
   FileSearch,
   FileText,
   MessageCircleQuestion,
   Package,
+  Telescope,
   Workflow
 } from 'lucide-react'
 import { messages } from './i18n'
+import { VoiceStorePage } from './sections/VoiceStorePage'
 import { ModulesPage } from './sections/ModulesPage'
 import { ProductsPage } from './sections/ProductsPage'
 import { ReportsPage } from './sections/ReportsPage'
+import { VisionPage } from './sections/VisionPage'
 import { RunWorkspace } from './sections/RunWorkspace'
 import type { Case } from './api/client'
 import { DEFAULT_CASE_QUEUE_FILTERS } from './sections/caseUtils'
@@ -30,7 +34,8 @@ const NAV: NavGroup[] = [
   {
     id: 'overview',
     items: [
-      { id: 'overview', label: messages.shell.nav.overview, icon: Activity }
+      { id: 'overview', label: messages.shell.nav.overview, icon: Activity },
+      { id: 'voice', label: messages.shell.nav.voice, icon: Mic }
     ]
   },
   {
@@ -38,33 +43,36 @@ const NAV: NavGroup[] = [
     label: messages.shell.groups.core,
     items: [
       { id: 'cases', label: messages.shell.nav.cases, icon: ClipboardList },
-      { id: 'sources', label: messages.shell.nav.sources, icon: FileSearch },
-      { id: 'reports', label: messages.shell.nav.reports, icon: FileText },
-      { id: 'modules', label: messages.shell.nav.modules, icon: Workflow }
+      { id: 'products', label: messages.shell.nav.products, icon: Package },
+      { id: 'modules', label: messages.shell.nav.modules, icon: Workflow },
+      { id: 'reports', label: messages.shell.nav.reports, icon: FileText }
     ]
   },
   {
     id: 'should',
     label: messages.shell.groups.should,
     items: [
-      { id: 'products', label: messages.shell.nav.products, icon: Package },
       {
         id: 'clarifications',
         label: messages.shell.nav.clarifications,
         icon: MessageCircleQuestion
-      }
+      },
+      { id: 'sources', label: messages.shell.nav.sources, icon: FileSearch },
+      { id: 'vision', label: messages.shell.nav.vision, icon: Telescope }
     ]
   }
 ]
 
 const ROUTES = {
   overview: 'panoramica',
+  voice: 'voce',
   cases: 'casi',
   sources: 'fonti',
   reports: 'report',
   modules: 'pipeline',
   products: 'prodotti',
-  clarifications: 'chiarimenti'
+  clarifications: 'chiarimenti',
+  vision: 'visione'
 } as const
 
 type SectionId = keyof typeof ROUTES
@@ -195,7 +203,7 @@ export default function App() {
             onNavigate={navigate}
           />
         }
-        topbar={
+        topbar={currentId === 'vision' ? undefined : (
           <div className="sd-shell__view-controls">
             <VoiceProcessButton
               onDone={(run, cases) => {
@@ -228,7 +236,7 @@ export default function App() {
               }
             />
           </div>
-        }
+        )}
       >
         {/* Back/forward uses the same short entrance: navigation is occasional and the cue confirms the hash change. */}
         <SectionView
@@ -236,7 +244,7 @@ export default function App() {
           currentId={currentId}
           focusOnMount={focusRouteId === currentId}
         >
-          <PageHeader
+          {currentId !== 'voice' && <PageHeader
             title={titleOf(currentId)}
             subtitle={
               currentId === 'overview'
@@ -244,17 +252,23 @@ export default function App() {
                 : undefined
             }
             meta={
-              runs.selected
+              currentId === 'vision'
+                ? messages.vision.label
+                : runs.selected
                 ? `Dati disponibili al ${new Date(runs.selected.spec.as_of).toLocaleString('it-IT')}`
                 : undefined
             }
-          />
-          {currentId === 'modules' ? (
+          />}
+          {currentId === 'voice' ? (
+            <VoiceStorePage />
+          ) : currentId === 'vision' ? (
+            <VisionPage />
+          ) : currentId === 'modules' ? (
             <ModulesPage key={runs.selectedId} runs={runs} />
           ) : currentId === 'products' ? (
             <ProductsPage runs={runs} onCaseSelect={openCase} />
           ) : currentId === 'reports' ? (
-            <ReportsPage runs={runs} />
+            <ReportsPage runs={runs} onCaseSelect={openCase} />
           ) : ['overview', 'cases', 'sources'].includes(currentId) ? (
             <RunWorkspace
               key={`${currentId}-${runs.selectedId}`}

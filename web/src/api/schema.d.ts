@@ -401,6 +401,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/runs/{run_id}/kpi": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Kpi */
+        get: operations["kpi_api_runs__run_id__kpi_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/runs/{run_id}/market": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Market */
+        get: operations["market_api_runs__run_id__market_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/runs/{run_id}/options/{option_id}/decision": {
         parameters: {
             query?: never;
@@ -415,6 +449,31 @@ export interface paths {
          * @description RFC §4.6 option-addressed equivalent of the case decision endpoint.
          */
         post: operations["option_decision_api_runs__run_id__options__option_id__decision_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/runs/{run_id}/products": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Run Products
+         * @description Catalog styles with the run's assortment and stock per store, size and colour.
+         *
+         *     Stock is one end-of-day snapshot for every store: the latest day each store has
+         *     published by ``as_of``, taken at the earliest of those days so stores stay comparable.
+         *     Stores outside the run and rows not yet available never appear. A run without ERP
+         *     stock has no snapshot to show and returns 404, like a missing catalog.
+         */
+        get: operations["run_products_api_runs__run_id__products_get"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -728,6 +787,10 @@ export interface components {
             audio: string;
             /** Language */
             language?: string | null;
+            /** Prompt Set */
+            prompt_set?: "guided-v1" | null;
+            /** Staff Ref */
+            staff_ref?: string | null;
             /** Store Id */
             store_id: string;
             /** Transcript */
@@ -871,6 +934,19 @@ export interface components {
             color_code: string;
             /** Sku */
             sku: string;
+        };
+        /** CategorySales */
+        CategorySales: {
+            /** Before */
+            before: number;
+            /** Category */
+            category: string;
+            /** Ly */
+            ly: number;
+            /** Sales */
+            sales: number;
+            /** Units */
+            units: number;
         };
         /** Check */
         Check: {
@@ -1232,6 +1308,15 @@ export interface components {
             /** Detail */
             detail?: components["schemas"]["ValidationError"][];
         };
+        /** Hashtag */
+        Hashtag: {
+            /** Before */
+            before: number;
+            /** Now */
+            now: number;
+            /** Tag */
+            tag: string;
+        };
         /** Health */
         Health: {
             /** Fastweb Models Configured */
@@ -1249,6 +1334,33 @@ export interface components {
             version: string;
         };
         JsonValue: unknown;
+        /** KpiDay */
+        KpiDay: {
+            /**
+             * Available At
+             * Format: date-time
+             */
+            available_at: string;
+            /** Budget Eur */
+            budget_eur: number;
+            /**
+             * Date
+             * Format: date
+             */
+            date: string;
+            /** Receipts */
+            receipts: number;
+            /** Returns Units */
+            returns_units: number;
+            /** Sales Eur */
+            sales_eur: number;
+            /** Store Id */
+            store_id: string;
+            /** Units */
+            units: number;
+            /** Visitors */
+            visitors: number | null;
+        };
         /** Leg */
         Leg: {
             /** Cost Eur */
@@ -1307,6 +1419,8 @@ export interface components {
             duration_s: number | null;
             /** Note Id */
             note_id: string;
+            /** Prompt Set */
+            prompt_set?: "guided-v1" | null;
             /** Run Id */
             run_id: string | null;
             /**
@@ -1314,6 +1428,8 @@ export interface components {
              * Format: date-time
              */
             sent_at: string;
+            /** Staff Ref */
+            staff_ref?: string | null;
             /** Store Id */
             store_id: string;
             /** Transcript */
@@ -1331,6 +1447,41 @@ export interface components {
              * @constant
              */
             simulated: true;
+        };
+        /** MarketMonth */
+        MarketMonth: {
+            /** Month */
+            month: string;
+            /** Partial Until */
+            partial_until: number | null;
+            /** Regions */
+            regions: {
+                [key: string]: components["schemas"]["MonthlyValue"];
+            };
+        };
+        /** MarketSeries */
+        MarketSeries: {
+            /**
+             * Available At
+             * Format: date-time
+             */
+            available_at: string;
+            /** Categories */
+            categories: components["schemas"]["CategorySales"][];
+            /**
+             * Last Day
+             * Format: date
+             */
+            last_day: string;
+            /** Monthly */
+            monthly: components["schemas"]["MarketMonth"][];
+            /** Notes */
+            notes: string[];
+            /** Regions */
+            regions: components["schemas"]["RegionSales"][];
+            social: components["schemas"]["SocialSeries"];
+            /** Stores */
+            stores: string[];
         };
         /** ModuleManifest */
         ModuleManifest: {
@@ -1414,6 +1565,15 @@ export interface components {
             params: {
                 [key: string]: components["schemas"]["JsonValue"];
             };
+        };
+        /** MonthlyValue */
+        MonthlyValue: {
+            /** Budget */
+            budget: number;
+            /** Ly */
+            ly: number;
+            /** Sales */
+            sales: number;
         };
         /** Observation */
         Observation: {
@@ -1502,6 +1662,20 @@ export interface components {
             unit?: ("units" | "customers" | "requests" | "visitors" | "money" | "percent") | null;
             /** Value */
             value?: number | null;
+        };
+        /** RegionSales */
+        RegionSales: {
+            /** Before */
+            before: number;
+            /** Ly */
+            ly: number;
+            /**
+             * Region
+             * @enum {string}
+             */
+            region: "EMEA" | "AMERICAS" | "APAC";
+            /** Sales */
+            sales: number;
         };
         /**
          * RegisteredAnswer
@@ -1648,6 +1822,64 @@ export interface components {
             };
             citation: components["schemas"]["Citation"];
         };
+        /** RunProduct */
+        RunProduct: {
+            /** Category */
+            category: string;
+            /** Colours */
+            colours: components["schemas"]["RunProductColour"][];
+            /** Gender */
+            gender: string;
+            /** Image */
+            image: string | null;
+            /** Name */
+            name: string;
+            /** Price Eur */
+            price_eur: number;
+            reference: components["schemas"]["RunProductReference"];
+            /** Style Code */
+            style_code: string;
+            /** Subcategory */
+            subcategory: string;
+        };
+        /**
+         * RunProductCatalog
+         * @description Catalog display metadata joined with the run's ERP assortment and end-of-day stock.
+         */
+        RunProductCatalog: {
+            /**
+             * Available At
+             * Format: date-time
+             */
+            available_at: string;
+            /** Products */
+            products: components["schemas"]["RunProduct"][];
+            /**
+             * Snapshot Date
+             * Format: date
+             */
+            snapshot_date: string;
+        };
+        /** RunProductColour */
+        RunProductColour: {
+            /** Colour */
+            colour: string;
+            /** Sku */
+            sku: string;
+            /** Stock */
+            stock: {
+                [key: string]: components["schemas"]["StoreStock"];
+            };
+            /** Stores */
+            stores: string[];
+        };
+        /** RunProductReference */
+        RunProductReference: {
+            /** Name */
+            name: string;
+            /** Url */
+            url: string;
+        };
         /** RunSpec */
         RunSpec: {
             /**
@@ -1775,6 +2007,39 @@ export interface components {
             /** Version */
             version: string;
         };
+        /** SocialSeries */
+        SocialSeries: {
+            /** Duplicates Removed */
+            duplicates_removed: number;
+            /** Hashtags */
+            hashtags: components["schemas"]["Hashtag"][];
+            /** Malformed Records */
+            malformed_records: number;
+            /** Posts */
+            posts: number;
+            /**
+             * Scope
+             * @default global_listening
+             * @constant
+             */
+            scope: "global_listening";
+            /** Weeks */
+            weeks: components["schemas"]["SocialWeek"][];
+        };
+        /** SocialWeek */
+        SocialWeek: {
+            /** Neg */
+            neg: number;
+            /** Neu */
+            neu: number;
+            /** Pos */
+            pos: number;
+            /**
+             * Week
+             * Format: date
+             */
+            week: string;
+        };
         /** SourceDocument */
         SourceDocument: {
             /** Author Ref */
@@ -1831,6 +2096,15 @@ export interface components {
             locator?: string | null;
             /** Uri */
             uri: string;
+        };
+        /** StoreStock */
+        StoreStock: {
+            /** In Transit */
+            in_transit: number;
+            /** Sizes */
+            sizes: {
+                [key: string]: number;
+            };
         };
         /** Transcription */
         Transcription: {
@@ -2612,6 +2886,72 @@ export interface operations {
             };
         };
     };
+    kpi_api_runs__run_id__kpi_get: {
+        parameters: {
+            query?: {
+                fixture?: boolean;
+            };
+            header?: never;
+            path: {
+                run_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KpiDay"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    market_api_runs__run_id__market_get: {
+        parameters: {
+            query?: {
+                fixture?: boolean;
+            };
+            header?: never;
+            path: {
+                run_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MarketSeries"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     option_decision_api_runs__run_id__options__option_id__decision_post: {
         parameters: {
             query?: {
@@ -2637,6 +2977,39 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["LocalDraft"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    run_products_api_runs__run_id__products_get: {
+        parameters: {
+            query?: {
+                fixture?: boolean;
+            };
+            header?: never;
+            path: {
+                run_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RunProductCatalog"];
                 };
             };
             /** @description Validation Error */

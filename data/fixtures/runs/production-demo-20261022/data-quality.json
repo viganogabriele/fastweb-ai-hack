@@ -1,0 +1,44 @@
+{
+  "category_minus_kpi_eur": {
+    "before": -0.01,
+    "ly": -10260.01,
+    "sales": 0
+  },
+  "explanation": "SKU sales include return-only rows on four Paris Sundays with no daily KPI row. Those returns stay in categories. Rounding of implied budget FX accounts for the remaining cent.",
+  "human_decisions": "No decision is preapproved. Proposals remain available for the operator.",
+  "limits": [
+    "Synthetic dev rehearsal, not hold-out performance.",
+    "One investigator reaches its tool budget and exposes verify fallback.",
+    "Forecast uplift is a declared policy scenario, not measured predictive improvement."
+  ],
+  "missing_visitors": "Unknown source counters remain null; conversion is unavailable for aggregates containing an unknown counter.",
+  "return_only_days_missing_from_kpi": [
+    {
+      "business_date": "2025-09-28",
+      "net_sales_eur": -2050,
+      "store_id": "PAR01"
+    },
+    {
+      "business_date": "2025-10-05",
+      "net_sales_eur": -890,
+      "store_id": "PAR01"
+    },
+    {
+      "business_date": "2025-10-12",
+      "net_sales_eur": -3530,
+      "store_id": "PAR01"
+    },
+    {
+      "business_date": "2025-10-19",
+      "net_sales_eur": -3790,
+      "store_id": "PAR01"
+    }
+  ],
+  "social": {
+    "deduplication": "Latest collected_at at or before as_of, per doc_id; published_at must also be known.",
+    "duplicates_removed": 166,
+    "malformed_excluded": 238,
+    "published_posts": 3288,
+    "scope": "global_listening"
+  }
+}

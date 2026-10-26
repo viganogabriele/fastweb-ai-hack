@@ -1,15 +1,69 @@
-import { useEffect, useState } from 'react'
-import { Search } from 'lucide-react'
-import { readApi } from '../api/client'
-import type { CatalogProduct, Case } from '../api/client'
+import { createElement, useEffect, useRef, useState } from 'react'
+import type { LucideIcon } from 'lucide-react'
+import {
+  AlarmClock, ArrowRight, CircleAlert, Clock, MessageSquareWarning, PackageCheck, PackageX, Search, ShieldCheck,
+  Store, TrendingDown, TrendingUp, Truck, X
+} from 'lucide-react'
+import { AnimatePresence, motion } from 'motion/react'
+import type { Case } from '../api/client'
 import type { useRuns } from '../api/useRuns'
-import { Button, EmptyState, ErrorState, Input, LoadingState, Select, StatusBadge } from '../ui'
-import { catalogLabel, catalogMatch, caseStatuses, caseTypeLabel, filterProductCases, productIndex, productScopes } from './productView'
-import type { CatalogMatch, ProductFilters } from './productView'
+import { Button, EmptyState, ErrorState, LoadingState, StatusBadge, stagger, transition } from '../ui'
+import type { StatusTone } from '../ui/StatusBadge'
+import { deadline } from './overviewLogic'
+import { caseTypeLabel } from './productView'
+import { productCards, productStock, storeRows } from './productsData'
+import type { Attention, CatalogProduct, ProductCard, ProductCatalog, StoreRow } from './productsData'
+import { STORE_GEO } from './storeGeo'
+import { ProductOnline } from './OnlineDemand'
+import { onlineSkuFromHash } from './onlineData'
+import { useRunData } from './useRunData'
 import './sections.css'
 import './products.css'
 
-const initialFilters: ProductFilters = { search: '', store: 'all', status: 'all', type: 'all' }
+const priorities: Record<Case['priority'], { label: string; tone: StatusTone }> = {
+  critical: { label: 'Critica', tone: 'danger' },
+  high: { label: 'Alta', tone: 'warning' },
+  medium: { label: 'Media', tone: 'info' },
+  low: { label: 'Bassa', tone: 'neutral' }
+}
+const tiers: { key: Attention; title: string; hint: string; icon: LucideIcon }[] = [
+  { key: 'now', title: 'Attenzione immediata', hint: 'Casi critici o ad alta priorità aperti', icon: CircleAlert },
+  { key: 'later', title: 'Attenzione differita', hint: 'Casi aperti da seguire nei prossimi giorni', icon: Clock },
+  { key: 'none', title: 'Nessuna segnalazione', hint: 'Nessun caso aperto nel run', icon: ShieldCheck }
+]
+// One glyph per reported problem, so the card is read at a glance.
+const caseIcons: Record<string, LucideIcon> = {
+  unmet_demand: TrendingUp,
+  demand_up: TrendingUp,
+  demand_shift: TrendingUp,
+  demand_down: TrendingDown,
+  stockout: PackageX,
+  low_stock: PackageX,
+  stock_discrepancy: PackageX
+}
+const CaseGlyph = ({ type }: { type: string }) => createElement(caseIcons[type] ?? MessageSquareWarning, { 'aria-hidden': true })
+// Swatches for the catalog's colour names; an unknown colour shows a neutral dot with its name.
+const swatches: Record<string, string> = {
+  nero: '#151515', bianco: '#f7f7f4', 'bianco latte': '#f1ece0', beige: '#d8c3a5', azzurro: '#8fb8de',
+  rosso: '#b3202c', 'grigio melange': '#a3a3a3', 'rosa cipria': '#e8c4c0', 'blu notte': '#1d2742',
+  'marrone cioccolato': '#4a2c21', 'verde oliva': '#6b6b3a'
+}
+const categories: Record<string, string> = {
+  Outerwear: 'Capispalla', Accessories: 'Accessori', Bottoms: 'Pantaloni e gonne', Footwear: 'Calzature',
+  Jersey: 'Jersey', Knitwear: 'Maglieria'
+}
+const genders: Record<string, string> = { M: 'uomo', W: 'donna' }
+/** Column label naming the size scale: the codes are the catalog's own (men's outerwear 1–7, women's 00–4, XS–XXL, EU, TU). */
+function sizeScale(gender: string, rows: readonly StoreRow[]) {
+  const sizes = rows[0]?.sizes.map(([size]) => size) ?? []
+  if (sizes.length === 1 && sizes[0] === 'TU') return 'Taglia unica'
+  const range = sizes.length > 1 ? ` ${sizes[0]}–${sizes[sizes.length - 1]}` : sizes[0] ? ` ${sizes[0]}` : ''
+  const numeric = sizes.every((size) => /^\d+$/.test(size))
+  return `Pezzi per taglia${numeric && genders[gender] ? ` · scala ${genders[gender]}` : ''}${range}`
+}
+const storeName = (id: string) => STORE_GEO[id]?.name ?? id
+const euro = (value: number) => value.toLocaleString('it-IT', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
+const day = (value: string) => new Date(value).toLocaleString('it-IT', { day: 'numeric', month: 'long' })
 
 export function ProductsPage({ runs, onCaseSelect }: {
   runs: ReturnType<typeof useRuns>
@@ -20,122 +74,321 @@ export function ProductsPage({ runs, onCaseSelect }: {
   if (runs.error) return <ErrorState title="Impossibile caricare i run" description={runs.error} onRetry={runs.retry} />
   if (!run) return <EmptyState title="Nessun run disponibile" description="I prodotti compariranno dopo la pubblicazione di un’elaborazione." action={<Button onClick={runs.retry}>Aggiorna</Button>} />
   if (!run.published) return <EmptyState title="Run non pubblicato" description="La vista prodotti sarà disponibile quando l’elaborazione sarà pubblicata." action={<Button onClick={runs.retry}>Aggiorna</Button>} />
-  return <PublishedProducts key={run.spec.run_id} runId={run.spec.run_id} mode={run.spec.mode} onCaseSelect={onCaseSelect} />
+  return <Gallery key={run.spec.run_id} runId={run.spec.run_id} stores={run.spec.stores} asOf={Date.parse(run.spec.as_of)} onCaseSelect={onCaseSelect} />
 }
 
-function PublishedProducts({ runId, mode, onCaseSelect }: {
+function Gallery({ runId, stores, asOf, onCaseSelect }: {
   runId: string
-  mode: string
+  stores: readonly string[]
+  asOf: number
   onCaseSelect: (item: Case) => void
 }) {
-  const [data, setData] = useState<Case[] | null>(null)
-  const [error, setError] = useState('')
-  const [revision, setRevision] = useState(0)
-  const [filters, setFilters] = useState(initialFilters)
-  // Display-only names and photos; without them the view still works on codes alone.
-  const [catalog, setCatalog] = useState<CatalogProduct[] | null>(null)
+  const catalog = useRunData<ProductCatalog>(runId, 'products')
+  const cases = useRunData<Case[]>(runId, 'cases')
+  const [query, setQuery] = useState('')
+  const [category, setCategory] = useState('all')
+  const [open, setOpen] = useState<string | null>(() => onlineSkuFromHash(window.location.hash))
+
   useEffect(() => {
-    const controller = new AbortController()
-    readApi<CatalogProduct[]>('/catalog/products', controller.signal)
-      .then((result) => { if (!controller.signal.aborted) setCatalog(result) })
-      .catch(() => { if (!controller.signal.aborted) setCatalog([]) })
-    return () => controller.abort()
+    const syncProduct = () => setOpen(onlineSkuFromHash(window.location.hash))
+    window.addEventListener('hashchange', syncProduct)
+    window.addEventListener('popstate', syncProduct)
+    return () => {
+      window.removeEventListener('hashchange', syncProduct)
+      window.removeEventListener('popstate', syncProduct)
+    }
   }, [])
-  useEffect(() => {
-    const controller = new AbortController()
-    readApi<Case[]>(`/runs/${encodeURIComponent(runId)}/cases`, controller.signal)
-      .then((result) => { if (!controller.signal.aborted) setData(result) })
-      .catch((failure: Error) => { if (!controller.signal.aborted) setError(failure.message) })
-    return () => controller.abort()
-  }, [runId, revision])
 
-  if (error) return <ErrorState title="Impossibile caricare i prodotti" description={error} onRetry={() => {
-    setData(null)
-    setError('')
-    setRevision((value) => value + 1)
-  }} />
-  if (!data) return <LoadingState label="Caricamento prodotti" />
+  const closeProduct = () => {
+    setOpen(null)
+    if (onlineSkuFromHash(window.location.hash)) window.history.replaceState(null, '', '#/prodotti')
+  }
 
-  const index = productIndex(data, runId)
-  const allCases = [...index.groups.flatMap((group) => group.cases), ...index.unresolved]
-  const groups = index.groups.map((group) => {
-    const match = catalog ? catalogMatch(group, catalog) : null
-    const context = match ? `${catalogLabel(match)} ${match.product.category} ${match.product.subcategory}` : ''
-    return { ...group, match, cases: filterProductCases(group.cases, filters, context) }
-  })
-    .filter((group) => group.cases.length > 0)
-  const unresolved = filterProductCases(index.unresolved, filters)
-  const stores = [...new Set(allCases.flatMap((item) => item.store_id ? [item.store_id] : []))].sort()
-  const types = [...new Set(allCases.map((item) => item.case_type))].sort()
-  const update = (name: keyof ProductFilters, value: string) => setFilters((current) => ({ ...current, [name]: value }))
-  const filteredCount = groups.reduce((count, group) => count + group.cases.length, 0) + unresolved.length
+  if (catalog.status === 'loading' || cases.status === 'loading') return <LoadingState label="Caricamento prodotti" />
+  if (catalog.status === 'unavailable')
+    return <EmptyState title="Catalogo non disponibile" description="Questo run non ha catalogo o stock ERP da mostrare." />
+  if (!catalog.data || !cases.data)
+    return <ErrorState title="Impossibile caricare i prodotti" description="Ricarica la pagina per riprovare." />
+
+  const { cards, unresolved } = productCards(catalog.data, cases.data, runId)
+  const text = query.trim().toLocaleLowerCase('it-IT')
+  const visible = cards.filter((card) =>
+    (category === 'all' || card.product.category === category) &&
+    (!text || [card.product.name, card.product.subcategory, categories[card.product.category], ...card.product.colours.map((c) => c.colour)]
+      .join(' ').toLocaleLowerCase('it-IT').includes(text)))
+  const current = cards.find((card) => card.product.style_code === open || card.product.colours.some((colour) => colour.sku === open))
+  const categoryList = [...new Set(cards.map((card) => card.product.category))].sort()
 
   return (
-    <div className="sd-products">
-      <section className="sd-run-card" aria-labelledby="sd-products-summary">
-        <h2 id="sd-products-summary">Segnali per prodotto</h2>
-        <p>Prodotti identificati nei casi del run selezionato, con negozi, motivazioni e fonti consultabili nel dettaglio del caso.</p>
-        <p>I conteggi indicano casi, non clienti, unità richieste o vendite perse. I motivi riportati non dimostrano un rapporto di causa ed effetto.</p>
-        {mode === 'fixture' && <StatusBadge tone="warning" label="Dati fixture · esempi dimostrativi" />}
-        <dl className="sd-products__metrics">
-          <div><dt>Prodotti identificati</dt><dd>{index.groups.length}</dd></div>
-          <div><dt>Casi collegati a prodotti</dt><dd>{allCases.length - index.unresolved.length}</dd></div>
-          <div><dt>Casi senza prodotto identificato</dt><dd>{index.unresolved.length}</dd></div>
-        </dl>
-      </section>
-      <aside className="sd-products__availability" aria-label="Disponibilità dei dati">
-        <strong>Vendite e resi quantitativi: non disponibili</strong>
-        <p>Questi dati non sono esposti nei risultati di questo run. Non è possibile calcolare conversioni o confrontare vendite e motivi riportati. Assenza di casi non significa assenza di domanda.</p>
-      </aside>
-      {allCases.length === 0 ? <EmptyState title="Nessun caso nel run" description="Non ci sono segnali da mostrare per prodotto in questa elaborazione." /> : <>
-        <div className="sd-case-queue__filters" role="search" aria-label="Filtra prodotti e casi">
-          <Input label="Cerca prodotto o motivo" type="search" icon={<Search />} value={filters.search} onChange={(event) => update('search', event.target.value)} />
-          <Select label="Negozio" value={filters.store} options={[{ value: 'all', label: 'Tutti i negozi' }, ...stores.map((value) => ({ value, label: value }))]} onValueChange={(value) => update('store', value)} />
-          <Select label="Stato del caso" value={filters.status} options={[{ value: 'all', label: 'Tutti gli stati' }, ...Object.entries(caseStatuses).map(([value, label]) => ({ value, label }))]} onValueChange={(value) => update('status', value)} />
-          <Select label="Tipo di segnale" value={filters.type} options={[{ value: 'all', label: 'Tutti i segnali' }, ...types.map((value) => ({ value, label: caseTypeLabel(value) }))]} onValueChange={(value) => update('type', value)} />
-          <Button variant="ghost" onClick={() => setFilters(initialFilters)}>Azzera filtri</Button>
+    <div className="sd-shop">
+      <div className="sd-shop__bar">
+        <label className="sd-shop__search">
+          <Search aria-hidden="true" />
+          <span className="sd-visually-hidden">Cerca un prodotto</span>
+          <input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Cerca per nome, tipo o colore" />
+        </label>
+        <div className="sd-shop__chips" role="group" aria-label="Categoria">
+          {['all', ...categoryList].map((key) => (
+            <button key={key} type="button" aria-pressed={category === key} onClick={() => setCategory(key)}>
+              {key === 'all' ? 'Tutto' : categories[key] ?? key}
+            </button>
+          ))}
         </div>
-        <p className="sd-case-queue__count" role="status">{groups.length} prodotti · {filteredCount} casi nei filtri · {unresolved.length} senza prodotto identificato</p>
-        {filteredCount === 0 && <EmptyState title="Nessun risultato" description="Modifica o azzera i filtri per vedere gli altri prodotti e casi del run." action={<Button onClick={() => setFilters(initialFilters)}>Azzera filtri</Button>} />}
-        <div className="sd-products__list">
-          {groups.map((group) => <article className="sd-run-card sd-products__product" key={group.key} aria-label={`${productScopes[group.level]} ${group.id}`}>
-            <ProductHeader id={group.id} scope={productScopes[group.level]} match={group.match} />
-            <p>{group.cases.length} casi · {[...new Set(group.cases.map((item) => item.store_id ?? 'Negozio da verificare'))].join(', ')}</p>
-            <ProductCases cases={group.cases} onSelect={onCaseSelect} />
-          </article>)}
-        </div>
-        {unresolved.length > 0 && <section className="sd-run-card" aria-labelledby="sd-products-unresolved">
-          <h2 id="sd-products-unresolved">Prodotto da identificare</h2>
-          <p>Questi casi riguardano categorie, negozi o riferimenti non risolti. Restano consultabili senza attribuirli a uno SKU.</p>
-          <ProductCases cases={unresolved} onSelect={onCaseSelect} />
-        </section>}
-      </>}
+      </div>
+
+      {tiers.map((tier) => {
+        const items = visible.filter((card) => card.attention === tier.key)
+        if (!items.length) return null
+        const Icon = tier.icon
+        return (
+          <section key={tier.key} className={`sd-shop__tier is-${tier.key}`} aria-labelledby={`tier-${tier.key}`}>
+            <header className="sd-shop__tier-head">
+              <span className="sd-shop__tier-icon"><Icon aria-hidden="true" /></span>
+              <h2 id={`tier-${tier.key}`}>{tier.title}</h2>
+              <span className="sd-shop__tier-count sd-num">{items.length}</span>
+              <p>{tier.hint}</p>
+            </header>
+            <ul className="sd-shop__grid">
+              {items.map((card, index) => (
+                <motion.li key={card.product.style_code}
+                  initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+                  transition={{ ...transition.view, duration: 0.35, delay: Math.min(index, 10) * stagger }}>
+                  <ProductTile card={card} stores={stores} onOpen={() => setOpen(card.product.style_code)} />
+                </motion.li>
+              ))}
+            </ul>
+          </section>
+        )
+      })}
+      {!visible.length && <EmptyState title="Nessun prodotto" description="Nessun prodotto corrisponde alla ricerca." />}
+
+      {unresolved.length > 0 && (
+        <section className="sd-shop__unresolved" aria-labelledby="tier-unresolved">
+          <h2 id="tier-unresolved">Segnalazioni senza prodotto identificato</h2>
+          <p>Il testo non basta a riconoscere il prodotto: il caso resta da verificare, senza collegamenti indovinati.</p>
+          <ul>
+            {unresolved.map((item) => (
+              <li key={`${item.id}-${item.version}`}>
+                <StatusBadge {...priorities[item.priority]} />
+                <span>{item.store_id ? storeName(item.store_id) : 'Rete'}</span>
+                <span className="sd-shop__unresolved-reason">{item.priority_reason}</span>
+                <button type="button" onClick={() => onCaseSelect(item)}>Apri il caso <ArrowRight aria-hidden="true" /></button>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <p className="sd-shop__note">
+        Foto di riferimento dal catalogo pubblico Valentino, abbinate per categoria: possono differire dal capo simulato.
+        Stock ERP a fine giornata del {day(catalog.data.snapshot_date)}.
+      </p>
+
+      <AnimatePresence>
+        {current && <ProductSheet key={`${current.product.style_code}-${open}`} card={current} stores={stores} asOf={asOf} initialSku={open ?? undefined}
+          snapshot={catalog.data.snapshot_date} onClose={closeProduct} onCaseSelect={onCaseSelect} />}
+      </AnimatePresence>
     </div>
   )
 }
 
-function ProductHeader({ id, scope, match }: { id: string; scope: string; match: CatalogMatch | null }) {
-  if (!match) return <header><h2>{id}</h2><StatusBadge tone="neutral" label={scope} /></header>
-  const { product } = match
-  return <header className="sd-products__identity">
-    {product.reference.image_url && <figure>
-      <img src={product.reference.image_url} alt={`Riferimento visivo: ${product.reference.name}`} width={96} height={128} loading="lazy" />
-    </figure>}
-    <div>
-      <h2>{catalogLabel(match)}</h2>
-      <p>{id} · {product.category} · {product.subcategory}</p>
-      <StatusBadge tone="neutral" label={scope} />
-      <p className="sd-products__provenance">Foto illustrativa: <a href={product.reference.url} target="_blank" rel="noreferrer">{product.reference.name}</a> (Valentino, abbinata per categoria). Nome e codici sono sintetici.</p>
-    </div>
-  </header>
+function Swatches({ product, selected, onSelect }: { product: CatalogProduct; selected?: string; onSelect?: (sku: string) => void }) {
+  return (
+    <span className="sd-shop__swatches">
+      {product.colours.map((colour) => {
+        const dot = <span className="sd-shop__swatch" style={{ background: swatches[colour.colour] ?? 'var(--sd-color-text-muted)' }} aria-hidden="true" />
+        return onSelect
+          ? <button key={colour.sku} type="button" aria-pressed={selected === colour.sku} onClick={() => onSelect(colour.sku)}>{dot}{colour.colour}</button>
+          : <span key={colour.sku} title={colour.colour}>{dot}<span className="sd-visually-hidden">{colour.colour}</span></span>
+      })}
+    </span>
+  )
 }
 
-function ProductCases({ cases, onSelect }: { cases: Case[]; onSelect: (item: Case) => void }) {
-  return <ul className="sd-products__cases">{cases.map((item) => <li key={item.id}>
-    <div className="sd-products__case-header"><strong>{item.store_id ?? 'Negozio da verificare'} · {caseTypeLabel(item.case_type)}</strong><StatusBadge tone={item.status === 'verify' ? 'warning' : 'neutral'} label={caseStatuses[item.status]} /></div>
-    <p><strong>Motivazione del caso:</strong> {item.priority_reason || 'Non disponibile'}</p>
-    {item.blocking_uncertainties.length > 0 && <p>Da verificare: {item.blocking_uncertainties.join(' · ')}</p>}
-    <p className="sd-products__provenance">{item.id} · {item.version} · {item.scope_level}{item.scope_id ? ` · ${item.scope_id}` : ''}</p>
-    <Button size="sm" onClick={() => onSelect(item)} aria-label={`Apri caso ${item.id} e fonti`}>Apri caso e fonti</Button>
-  </li>)}</ul>
+function ProductTile({ card, stores, onOpen }: { card: ProductCard; stores: readonly string[]; onOpen: () => void }) {
+  const { product } = card
+  const stock = productStock(product, stores)
+  const top = card.cases[0]
+  return (
+    <button type="button" className={`sd-shop__tile is-${card.attention}`} onClick={onOpen}
+      aria-label={`${product.name}, ${product.subcategory}${top ? `: ${caseTypeLabel(top.case_type)}` : ''}`}>
+      <span className="sd-shop__media">
+        <motion.span className="sd-shop__photo" layoutId={`photo-${product.style_code}`} transition={transition.drawer}>
+          <img src={product.image} alt="" loading="lazy" />
+        </motion.span>
+        <span className="sd-shop__colours"><Swatches product={product} /></span>
+      </span>
+      {card.attention !== 'none' && (
+        <span className="sd-shop__flag">
+          {card.attention === 'now' ? <CircleAlert aria-hidden="true" /> : <Clock aria-hidden="true" />}
+          {card.cases.length > 1 ? `${card.cases.length} casi` : card.attention === 'now' ? 'Subito' : 'Da seguire'}
+        </span>
+      )}
+      {stock.storesOut > 0 && (
+        <span className="sd-shop__out" title={`Esaurito in ${stock.storesOut} negozi del run`}>
+          <PackageX aria-hidden="true" />Esaurito in <span className="sd-num">{stock.storesOut}</span>
+        </span>
+      )}
+      <span className="sd-shop__caption">
+        <motion.strong layoutId={`name-${product.style_code}`} transition={transition.drawer}>{product.name}</motion.strong>
+        <span className="sd-shop__sub">{product.subcategory}</span>
+        {top && (
+          <span className="sd-shop__issue">
+            <CaseGlyph type={top.case_type} />
+            <span>{caseTypeLabel(top.case_type)}</span>
+            {top.store_id && <span className="sd-shop__issue-store">{top.store_id}</span>}
+          </span>
+        )}
+      </span>
+    </button>
+  )
+}
+
+function ProductSheet({ card, stores, asOf, snapshot, initialSku, onClose, onCaseSelect }: {
+  initialSku?: string
+  card: ProductCard
+  stores: readonly string[]
+  asOf: number
+  snapshot: string
+  onClose: () => void
+  onCaseSelect: (item: Case) => void
+}) {
+  const { product } = card
+  const panel = useRef<HTMLDivElement>(null)
+  // Open on the colour the stores talked about, if any.
+  const [sku, setSku] = useState(() => product.colours.find((colour) => colour.sku === initialSku)?.sku ?? product.colours.find((colour) => card.skus.has(colour.sku))?.sku ?? product.colours[0]?.sku)
+  const colour = product.colours.find((entry) => entry.sku === sku) ?? product.colours[0]
+  const rows = colour ? storeRows(colour, stores) : []
+  const groups: { key: StoreRow['availability']; title: string; icon: LucideIcon }[] = [
+    { key: 'in', title: 'Lo hanno', icon: PackageCheck },
+    { key: 'out', title: 'Esaurito', icon: PackageX },
+    { key: 'none', title: 'Non in assortimento', icon: Store }
+  ]
+
+  useEffect(() => {
+    const previous = document.activeElement as HTMLElement | null
+    panel.current?.focus()
+    const close = (event: KeyboardEvent) => event.key === 'Escape' && onClose()
+    window.addEventListener('keydown', close)
+    const overflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', close)
+      document.body.style.overflow = overflow
+      previous?.focus()
+    }
+  }, [onClose])
+
+  return (
+    <div className="sd-sheet">
+      <motion.div className="sd-sheet__backdrop" onClick={onClose}
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={transition.view} />
+      <motion.div ref={panel} className="sd-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="sheet-title" tabIndex={-1}
+        initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={transition.drawer}>
+        <button type="button" className="sd-sheet__close" onClick={onClose} aria-label="Chiudi"><X aria-hidden="true" /></button>
+        <div className="sd-sheet__hero">
+          <motion.div className="sd-sheet__photo" layoutId={`photo-${product.style_code}`} transition={transition.drawer}>
+            <img src={product.image} alt={`Foto di riferimento: ${product.reference.name}`} />
+          </motion.div>
+          <div className="sd-sheet__intro">
+            <span className="sd-sheet__eyebrow">{categories[product.category] ?? product.category} · {product.subcategory}</span>
+            <motion.h2 id="sheet-title" layoutId={`name-${product.style_code}`} transition={transition.drawer}>{product.name}</motion.h2>
+            <span className="sd-sheet__price">{euro(product.price_eur)} <span>{product.style_code}</span></span>
+            <Swatches product={product} selected={colour?.sku} onSelect={setSku} />
+            <a className="sd-sheet__ref" href={product.reference.url} target="_blank" rel="noreferrer">
+              Foto: {product.reference.name}, valentino.com
+            </a>
+          </div>
+        </div>
+
+        <motion.div className="sd-sheet__body" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ ...transition.view, duration: 0.35, delay: 0.15 }}>
+          <section aria-labelledby="sheet-issues">
+            <h3 id="sheet-issues">La segnalazione</h3>
+            {card.cases.length ? (
+              <ul className="sd-sheet__cases">
+                {card.cases.map((item) => {
+                  const due = deadline(item.decision_due_at, asOf)
+                  return (
+                    <li key={`${item.id}-${item.version}`} className={`is-${item.priority}`}>
+                      <span className="sd-sheet__case-icon"><CaseGlyph type={item.case_type} /></span>
+                      <div>
+                        <div className="sd-sheet__case-head">
+                          <strong>{caseTypeLabel(item.case_type)}</strong>
+                          <StatusBadge {...priorities[item.priority]} />
+                        </div>
+                        <p>{item.priority_reason}</p>
+                        <div className="sd-sheet__case-meta">
+                          {item.store_id && <span><Store aria-hidden="true" />{storeName(item.store_id)}</span>}
+                          {due.tone !== 'none' && <span className={`is-${due.tone}`}><AlarmClock aria-hidden="true" />{due.tone === 'past' ? due.text : `Decidere entro ${due.text}`}</span>}
+                          {item.scope_level !== 'style' && item.scope_id && <span>{item.scope_id}</span>}
+                        </div>
+                      </div>
+                      <button type="button" onClick={() => onCaseSelect(item)}>Apri il caso <ArrowRight aria-hidden="true" /></button>
+                    </li>
+                  )
+                })}
+              </ul>
+            ) : (
+              <p className="sd-sheet__calm"><ShieldCheck aria-hidden="true" />Nessun caso aperto su questo prodotto nel run.</p>
+            )}
+          </section>
+
+          <ProductOnline sku={colour?.sku} />
+
+          <section aria-labelledby="sheet-stock">
+            <h3 id="sheet-stock">Stock nei negozi · {colour?.colour}</h3>
+            <dl className="sd-sheet__totals">
+              <div><dt>Pezzi</dt><dd className="sd-num">{rows.reduce((sum, row) => sum + row.units, 0)}</dd></div>
+              <div><dt>Negozi con stock</dt><dd className="sd-num">{rows.filter((row) => row.availability === 'in').length}</dd></div>
+              <div className={rows.some((row) => row.availability === 'out') ? 'is-out' : ''}><dt>Esaurito in</dt><dd className="sd-num">{rows.filter((row) => row.availability === 'out').length}</dd></div>
+              <div><dt>In arrivo</dt><dd className="sd-num">{rows.reduce((sum, row) => sum + row.inTransit, 0)}</dd></div>
+            </dl>
+            {groups.map((group) => {
+              const members = rows.filter((row) => row.availability === group.key)
+              if (!members.length) return null
+              const Icon = group.icon
+              return (
+                <div key={group.key} className={`sd-sheet__stores is-${group.key}`}>
+                  <h4><Icon aria-hidden="true" />{group.title}<span className="sd-num">{members.length}</span></h4>
+                  {group.key === 'none' ? (
+                    <p className="sd-sheet__muted">{members.map((row) => storeName(row.store)).join(' · ')}</p>
+                  ) : (
+                    <ul>
+                      <li className="sd-sheet__stores-head" aria-hidden="true">
+                        <span>Negozio</span><span>{sizeScale(product.gender, rows)}</span><span>Pezzi</span>
+                      </li>
+                      {members.map((row) => (
+                        <li key={row.store}>
+                          <span className="sd-sheet__store">
+                            <strong>{storeName(row.store)}</strong>
+                            <span>{row.store}{STORE_GEO[row.store] ? ` · ${STORE_GEO[row.store].country}` : ''}</span>
+                          </span>
+                          <span className="sd-sheet__sizes" aria-label="Pezzi per taglia">
+                            {row.sizes.map(([size, count]) => (
+                              <span key={size} className={count ? '' : 'is-zero'} title={`Taglia ${size}: ${count}`}>
+                                <span>{size}</span><strong className="sd-num">{count}</strong>
+                              </span>
+                            ))}
+                          </span>
+                          <span className="sd-sheet__units sd-num">
+                            {row.units}
+                            {row.inTransit > 0 && <span title="In arrivo"><Truck aria-hidden="true" />{row.inTransit}</span>}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )
+            })}
+            <p className="sd-sheet__muted">
+              Stock ERP a fine giornata del {day(snapshot)}. Le segnalazioni dei negozi sopra sono testo non verificato:
+              se non coincidono con lo stock, verifica prima di spostare merce.
+            </p>
+          </section>
+        </motion.div>
+      </motion.div>
+    </div>
+  )
 }

@@ -1,6 +1,6 @@
 {
   "artifact_counts": {
-    "ActionOption": 161,
+    "ActionOption": 157,
     "AgentTrace": 2,
     "Case": 49,
     "Clarification": 1,
@@ -67,32 +67,14 @@
     {
       "id": "opt-case-mil01-i10919b00011-20261008-ask_store",
       "kind": "ActionOption",
-      "sha256": "07251ea98aa0130b745d0c055fe193b1537b0ef409d6d30bdd1df2d598dd182c",
-      "version": "02f273c06fbcb197"
-    },
-    {
-      "id": "opt-case-mil01-i10919b00011-20261008-ask_store",
-      "kind": "ActionOption",
       "sha256": "c9634eb392db82cfee8bb9bc03eb7ea83267ce7625c83d6c14d3ed05d49a57f7",
       "version": "4c5c3713b5a3498f"
     },
     {
       "id": "opt-case-mil01-i10919b00011-20261008-hold",
       "kind": "ActionOption",
-      "sha256": "a0665dd45714665e61073a6ed1e9615f80cfbea39de5476c7840375849022a82",
-      "version": "02f273c06fbcb197"
-    },
-    {
-      "id": "opt-case-mil01-i10919b00011-20261008-hold",
-      "kind": "ActionOption",
       "sha256": "18dfd7eff344a4b0eb6aea19ed367c842abfe3f175f0eb188389100fdcee32b5",
       "version": "4c5c3713b5a3498f"
-    },
-    {
-      "id": "opt-case-mil01-i10919b00011-20261008-notify_owner",
-      "kind": "ActionOption",
-      "sha256": "f936d07ad33eb79d500d5a61b546cf15d164d1c3693544994da4ce7c2bd68ae7",
-      "version": "02f273c06fbcb197"
     },
     {
       "id": "opt-case-mil01-i10919b00011-20261008-notify_owner",
@@ -105,12 +87,6 @@
       "kind": "ActionOption",
       "sha256": "dfd9cdf7adba4449252cc125156b20dac18a2c5dfbb54438cb51bdf9c3ce2708",
       "version": "4c5c3713b5a3498f"
-    },
-    {
-      "id": "opt-case-mil01-i10919b00011-20261008-verify_stock",
-      "kind": "ActionOption",
-      "sha256": "e872a39102b53d5c43fd16eeba4e68497e9307cc33bf18375f678a856cc505e9",
-      "version": "02f273c06fbcb197"
     },
     {
       "id": "opt-case-mil01-i10919b00011-20261008-verify_stock",
@@ -985,13 +961,13 @@
     {
       "id": "trace:core-dev-candidate:case-mil01-i10919b00011-20261008",
       "kind": "AgentTrace",
-      "sha256": "547ba0d5972cd3edec3612cbe014a697b5516d3a1309c3198f9cf45fa9bec925",
+      "sha256": "2de4bef0befe84215b331dc579adc0fca2334c116f71da1492e7923c59d4cee6",
       "version": "1"
     },
     {
       "id": "trace:core-dev-candidate:case-mil01-unknown-20261009",
       "kind": "AgentTrace",
-      "sha256": "e4e25fa83eaf6c79d6d0f6c804b07ec6ec3526500b19b59dad34eb4c038262b1",
+      "sha256": "3e5465698037be4e9791adb2e2f2eee7a2841500a1ac3de5bf6ffad12d66372e",
       "version": "1"
     },
     {
@@ -5401,13 +5377,13 @@
     {
       "id": "report-by-office-20261022T2000",
       "kind": "Report",
-      "sha256": "a40d57fd708f0446a3a5b2dfdc0ebe937128e9a0385dcbe0c6fce0ed6b2befbb",
+      "sha256": "c726712b9459513c0c6447a8792a1894ed5abbbb5ff10bd214a4291e464c5a1a",
       "version": "v1"
     },
     {
       "id": "report-by-priority-20261022T2000",
       "kind": "Report",
-      "sha256": "735b94fb5b50e8884f8dd4002499051fb26de6f3360e44b61ecae121bc9be4c7",
+      "sha256": "077dc9861dceb98d01e287e01f0402dfafd2d2136f2b85f914b3e804765ecaa6",
       "version": "v1"
     },
     {
@@ -8622,7 +8598,7 @@
     }
   ],
   "as_of": "2026-10-22T20:00:00+00:00",
-  "attempt_id": "attempt-627ca8daacbf4027a7050901236ddb0f",
+  "attempt_id": "attempt-9f795a7d3e89438cb9c73d295ad9dea6",
   "cache_corrupt": [],
   "cache_misses": [],
   "decisions": [
@@ -8883,7 +8859,7 @@
     {
       "counts": {
         "cases": 38,
-        "citations": 330,
+        "citations": 328,
         "reports": 2,
         "reports_new": 2
       },
@@ -8898,9 +8874,9 @@
   "output_hash_excludes": [
     "AgentTrace.steps[*].duration_ms"
   ],
-  "output_sha256": "9346b85e48e39119838e0aa88b1d6362379be5d5fa1a6cea50f2fc3463fba56f",
+  "output_sha256": "20a7a75bd7db91ad94f5c89c0e4f6d4bc4cb64455a53a63d14155cdb5a50f338",
   "provider_identity_sha256": "eb8df1dfea242ec3a9b69ae32d7dd04ade6be2b85a1dba452a0778fdaeb5fa12",
-  "raw_output_sha256": "3ab029b613c5132e9d11034243680a85007d5cae299b8b81d64105e4935c950a",
+  "raw_output_sha256": "f89e41c4680b969dba730c2c44823555658dd28950eb21f0f00e1e5aa1594cd3",
   "run_id": "core-dev-candidate",
   "run_status": "degraded",
   "scenario_id": "historical",

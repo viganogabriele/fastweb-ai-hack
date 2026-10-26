@@ -13,6 +13,11 @@ complete (local database writes only). With networking denied again, it submits
 them through the actual HTTP endpoint and executes every follow-up from committed
 recordings only. With ``--register-only`` it stops before submission, leaving a database for the UI.
 Neither command sends a message or exposes answer registration over HTTP.
+
+``rebind`` replays like ``replay`` and, after a reviewed code fix that changes only derived
+artifacts, re-pins the parent and child artifact hashes in ``recording-evidence.json``.
+Every other replay check must pass and every recorded outcome must replay identically;
+the earlier pins stay under ``rebound``. No provider is called and no envelope changes.
 """
 
 import argparse
@@ -484,31 +489,69 @@ def replay(workspace, *, answers=ANSWERS, register_only=False):
         result["cache_corrupt"] = sorted(cache.corrupt)
         result["systems_cache_misses"] = sorted(positive_misses[1])
         result["parent"]["artifact_sha256_after"] = run_digest(engine, spec.run_id)
-        result["status"] = (
-            "passed"
-            if result["parent"]["artifact_sha256"] == result["parent"]["artifact_sha256_after"]
-            and not result["network_attempts"]
-            and not result["cache_misses"]
-            and not cache.corrupt
-            and not result["systems_cache_misses"]
-            and registered
-            and set(result["answers"]) == set(registered)
-            and result["negative"]["free_text_status"] == 424
-            and result["negative"]["unrecorded_clock_status"] == 202
-            and not result["negative"]["unrecorded_clock_published"]
-            and result["negative"]["unrecorded_clock_misses"] > 0
-            and all(
-                a["published"] and a["matches_recording"] and a["retry_same_job"]
-                for a in result["answers"].values()
-            )
-            else "failed"
-        )
+        result["status"] = "passed" if passed(result) else "failed"
         return result
     finally:
         engine.dispose()
         (attempt / "answers-replay.json").write_text(
             json.dumps(result, sort_keys=True, indent=2, ensure_ascii=False) + "\n"
         )
+
+
+def passed(result, *, pinned=True):
+    """Every replay check; ``pinned=False`` ignores only the recorded artifact hashes."""
+    return bool(
+        result["parent"]["artifact_sha256"] == result["parent"]["artifact_sha256_after"]
+        and not result["network_attempts"]
+        and not result["cache_misses"]
+        and not result["cache_corrupt"]
+        and not result["systems_cache_misses"]
+        and result["registered"]
+        and set(result["answers"]) == set(result["registered"])
+        and result["negative"]["free_text_status"] == 424
+        and result["negative"]["unrecorded_clock_status"] == 202
+        and not result["negative"]["unrecorded_clock_published"]
+        and result["negative"]["unrecorded_clock_misses"] > 0
+        and all(
+            a["published"] and a["retry_same_job"] and (a["matches_recording"] or not pinned)
+            for a in result["answers"].values()
+        )
+    )
+
+
+def rebind(workspace, *, answers=ANSWERS, reason):
+    """Re-pin artifact hashes only when everything else replays as recorded."""
+    answers = allowed(answers)
+    result = replay(workspace, answers=answers)
+    path = answers / "recording-evidence.json"
+    evidence = json.loads(path.read_text())
+    for key, recorded in evidence["answers"].items():
+        # Compare as recorded: JSON, where outcome tuples are lists.
+        replayed = json.loads(json.dumps(result["answers"].get(key, {})))
+        shared = (replayed.keys() & recorded.keys()) - {"artifact_sha256"}
+        if "fingerprint" not in shared or any(replayed[k] != recorded[k] for k in shared):
+            raise ValueError(f"{key} changed; record it again instead of rebinding")
+    if not passed(result, pinned=False) or set(result["answers"]) != set(evidence["answers"]):
+        raise ValueError("the replay failed; record again instead of rebinding")
+    parent = evidence["parent"]
+    previous = {
+        "parent": parent["artifact_sha256"],
+        **{key: a["artifact_sha256"] for key, a in evidence["answers"].items()},
+    }
+    sha, dirty = code_identity()
+    if dirty:
+        raise ValueError("commit the code before rebinding")
+    current = result["parent"]["artifact_sha256"]
+    parent["output_sha256"] = result["parent"]["output_sha256"]
+    parent["artifact_sha256"] = parent["artifact_sha256_after"] = current
+    for key, recorded in evidence["answers"].items():
+        recorded["artifact_sha256"] = result["answers"][key]["artifact_sha256"]
+    evidence.setdefault("rebound", []).append(
+        {"execution_sha": sha, "reason": reason, "previous_artifact_sha256": previous}
+    )
+    path.write_text(json.dumps(evidence, sort_keys=True, indent=2, ensure_ascii=False) + "\n")
+    write_asset_manifest(answers)
+    return result | {"status": "rebound"}
 
 
 def main(argv=None):
@@ -523,6 +566,10 @@ def main(argv=None):
     rep.add_argument("--workspace", type=Path, required=True)
     rep.add_argument("--answers", type=Path, default=ANSWERS)
     rep.add_argument("--register-only", action="store_true")
+    reb = commands.add_parser("rebind", help="re-pin artifact hashes after a derived-only fix")
+    reb.add_argument("--workspace", type=Path, required=True)
+    reb.add_argument("--answers", type=Path, default=ANSWERS)
+    reb.add_argument("--reason", required=True)
     args = parser.parse_args(argv)
     os.umask(0o077)
     if args.command == "record":
@@ -546,6 +593,12 @@ def main(argv=None):
         }
         print(json.dumps(summary, ensure_ascii=False, indent=2))
         return 0 if evidence.get("complete") else 1
+    if args.command == "rebind":
+        result = rebind(
+            args.workspace / ("attempt-" + uuid4().hex), answers=args.answers, reason=args.reason
+        )
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0
     result = replay(
         args.workspace / ("attempt-" + uuid4().hex),
         answers=args.answers,

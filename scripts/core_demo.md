@@ -2,7 +2,8 @@
 
 This is the integration evidence for #115 and the input to #211's human release
 review. It is a historical **synthetic dev** rehearsal, not a hold-out result,
-an actual operator approval, a production transfer or a public bundle.
+a production transfer or a public bundle. Its one genuine operator decision is a
+local rejection (see "Genuine operator decision" below).
 
 ## Frozen inputs and recordings
 
@@ -20,6 +21,25 @@ relations. The positive POST-investigate job was recorded at
 `scripts/core_investigate_job.py`; the job is bound to this candidate's snapshot.
 Later commits that do not change executable code keep these identities; the final
 verification SHA is recorded in the PR/#211 handoff.
+
+**Post-freeze bug fix (#258, AG-03d).** The investigator's `evaluate_options` used to
+filter donors to the model's `candidate_donors` and republish the result under the
+deterministic option IDs. On D1 the model passed `["MUN01", "NYC01"]`, which left out
+MIL02, the only domestic donor. That created a second, current version `02f273c06fbcb197`
+of `hold`/`verify_stock`/`ask_store`/`notify_owner`, and approval (which re-evaluates every
+domestic donor) could never rebuild it: every approval returned 409. The tool now
+validates candidate donors but always evaluates the same inputs as `act.options` and
+approval. No model request changed. D1's `evaluate_options` is its sixth and last tool
+call before the budget fallback, so its output never reaches the model, and the job's
+candidates already covered every domestic donor. So no LLM or systems envelope was
+re-recorded. The RunSpec, snapshot and every recording are unchanged. The replay,
+API, job and clarification-answer evidence was regenerated offline on this fix; each
+file's `execution_sha` names the commit that ran it. Extraction, linking, dedup, cases,
+forecast and `act.options` outputs are unchanged. What changed: the D1 investigator
+trace, its four duplicate option versions (gone), and the two owner/priority reports,
+which no longer cite them (330 → 328 citations). The child runs of
+`clarification-answers/` and the investigate job were re-pinned with `rebind` (below
+and in its `VERIFICATION.md`).
 
 - Clock: `2026-10-22T20:00:00Z`; dev stores MIL01, MIL02, MUN01, NYC01.
 - 12 explicitly selected Italian, English and German emails, including resend,
@@ -82,6 +102,67 @@ reviewer approves an informational `notify_owner` option. The result is a local
 draft with zero reservations and no external message. A timestamp before the
 snapshot, foreign namespace/hash, changed draft or stale option is refused.
 
+### Genuine operator decision
+
+`decisions-operator.json` holds the one decision a human took on this candidate.
+On 2026-10-23 Lorenzo (`lorenzocorallo`, maintainer) chose to **reject**
+`opt-case-mil01-i10919b00011-20261008-transfer` (version `4c5c3713b5a3498f`;
+move 1 × I10919B00011-742 size L, MIL02 → MIL01) with the note: "The transfer
+moves size L to MIL01, which already holds 8 in L; the store reported zero in size
+M. It doesn't address the reported shortage." He decided it during the DEMO-02c
+session, and the agent entered it on his instruction:
+
+- through the real `POST /api/runs/core-dev-candidate/cases/case-mil01-i10919b00011-20261008/decisions`
+- on an offline replay of this candidate that has no other decision
+- with `by: lorenzocorallo`, which is a declared local identity, not an authenticated login.
+
+The API clock stamped `2026-10-23T07:38:02.026637Z`, before the option's
+`valid_until` (`2026-10-23T13:30:00Z`). The identical retry and the decision read
+API returned the same draft:
+
+- ID `decision-2e6afdfc5f534eaf9950412f40e70efa`
+- `dispatch_status: draft`
+- zero reservations, because a rejection holds no stock.
+
+The export uses the same `decision_export` as `check_core_demo.py`. It replays on
+its own, in place of the synthetic file, which stays unchanged:
+
+```sh
+backend/.venv/bin/python scripts/replay_demo.py \
+  --run-spec "$demo_assets/run-spec.json" \
+  --sources "$demo_candidate/sources" \
+  --config "$demo_candidate/config" \
+  --cache "$demo_assets/llm_cache" \
+  --systems-cache "$demo_assets/systems_cache" \
+  --decisions "$demo_assets/decisions-operator.json" \
+  --workspace "$PWD/data/core_demo/operator-replay"
+```
+
+`operator-decision-replay.json` records two cold attempts. Both exit 0 with zero
+network attempts and no missing prerequisites. They match on inputs, exact
+artifact IDs and versions, the decision (draft sha256 `69a9a767…85fd`), output
+`359131a5e985e86e428a2f3b1f28b503380b1717b6e219c16cafdb099bbf4cd9` and ledger
+`a4829accf1c98b7989d85b9636f8d8fa560c526693a4f0289366fff0c46ea785`. The #258 fix
+left the decision, its option version `4c5c3713b5a3498f` and the ledger unchanged;
+only the output hash moved (it was `faccb706…c61f`), because the duplicate D1 option
+versions are gone. As above,
+only the AgentTrace raw hashes differ, because of the excluded `duration_ms`.
+`make demo` still replays the synthetic `decisions.json`.
+
+Which options a human can decide here was checked by POSTing every current
+option against throwaway copies of a fresh replay without decisions: one copy for
+all rejections, one for the informational approvals and one per transfer. That
+sweep's log is local and is not packaged. Results after the #258 fix:
+
+- Reject: all 157.
+- Approve: 156. The only exception is `opt-case-mil01-j10911a00305-20261002-transfer`,
+  which correctly fails `donor_protection` (409 "mandatory movement checks do not
+  pass").
+- The demo beat: approving D1 `notify_owner` (`4c5c3713b5a3498f`) returns a local
+  draft (`dispatch_status: draft`, zero reservations). Before the fix the four D1
+  informational options were current at `02f273c06fbcb197`, and approving any of them
+  returned 409 "proposal inputs or checks changed".
+
 For the two negative rehearsals, copy a cache outside the owned replay workspace,
 withhold one envelope in that copy and pass it to the same command. The actual
 LLM-negative run withheld key
@@ -103,12 +184,13 @@ The completed recording and two fresh cold replays publish:
   and 118 possible overlaps (33 non-additive origins). 82 facts form 72 origin
   groups, 71 of them active. 16 report metric facts, two actual weather context
   events, 346 baselines and 27 case overlays.
-- 161 stored option versions, two investigator traces, one simulated clarification
+- 157 stored option versions (one per option ID), two investigator traces, one simulated clarification
   draft, two owner/priority reports, and an exact versioned local decision draft.
 - No fabricated numerical uplift: overlays stay unchanged with explicit reasons;
   missing baseline coverage remains `not_estimable`. No transfer is recommended.
 
-Both replays: output `9346b85e48e39119838e0aa88b1d6362379be5d5fa1a6cea50f2fc3463fba56f`,
+Both replays: output `20a7a75bd7db91ad94f5c89c0e4f6d4bc4cb64455a53a63d14155cdb5a50f338`
+(`9346b85e…a56f` before the #258 fix),
 ledger `7b4f494a100a7ce204cc16a1fd4345314a16d0473895d5c1f5cac021ec0b230e`,
 snapshot `c522703633170af4933e06ed0f02edc29f2beb5f85cb32873ac46bb426b86edb`,
 exit 0, no missing prerequisites and zero network attempts (`replay-comparison.json`).
@@ -117,7 +199,9 @@ The final status is honestly `degraded`: unknown SKU scopes require verification
 the optional product-insights module is absent and the D1 investigator reaches
 the six-tool budget. D1 calls evidence,
 stock twice, lanes twice and the deterministic options engine, then publishes a
-visible `verify` fallback. The unresolved MIL01 case instead calls evidence,
+visible `verify` fallback. Its `evaluate_options` step names MUN01 and NYC01 as
+candidates; the engine still evaluates every domestic donor and its outputs are the
+`act.options` versions (#258). The unresolved MIL01 case instead calls evidence,
 drafts a clarification and finishes without fallback. These are real-model
 choices on source-derived cases.
 
@@ -216,7 +300,25 @@ job artifact inventory, case version and parent inventory must all match, and
 the parent must be unchanged. Both cold attempts passed with zero network
 attempts. Withholding one job envelope in a copied job directory makes the job
 fail unpublished, with exit 1 and the parent unchanged
-(`api-job-verification.json`). Earlier API jobs minted a random trace ID on
+(`api-job-verification.json`).
+
+The #258 fix changed the parent's artifact inventory (D1 trace and options), so the job
+manifest's parent and job inventory pins no longer matched. The job's envelopes and
+trace replay identically. `rebind` replays the job like `verify`, refuses unless job ID,
+case version, trace and parent-unchanged checks pass and the parent inventory equals the
+re-verified `api-verification.json`, and re-pins only the two inventories from committed
+code. The earlier values stay under `rebound` in `manifest.json`; re-hash
+`asset-manifest.json` afterwards:
+
+```sh
+backend/.venv/bin/python scripts/core_investigate_job.py rebind \
+  --attempt "$PWD/data/core_demo/offline-reproduction/attempt-<id>" \
+  --job "$demo_assets/investigate-job" \
+  --workspace "$PWD/data/core_demo/job-rebind" \
+  --reason "<issue>: <why only parent-derived artifacts changed>"
+```
+
+Earlier API jobs minted a random trace ID on
 every execution, so a replayed job could never reproduce the recorded trace.
 The API now uses `trace:<job id>:<case id>` (see `tests/api/test_investigations.py`).
 
@@ -232,9 +334,30 @@ cd web
 TESSERACT_API_TARGET=http://127.0.0.1:8106 npm run dev -- --port 5186
 ```
 
-Browser verification was done on the earlier `f1d7923` candidate and has not
-been repeated for this recording, so no `ui-verification.json` is packaged. The
-UI reads the same API, which `check_core_demo.py` verifies above.
+The browser check was repeated on this recording on 2026-10-23 (DEMO-02c, #115).
+It used headless Chromium (Playwright) on `make demo-data`, which replays the
+synthetic `decisions.json`; its output, ledger and snapshot hashes matched the
+"Actual Core outcome" values. All 42 checks passed with 0 page
+errors, 0 console errors and 0 API responses ≥ 400. It checked:
+
+- the `recorded` and `degraded` run labels;
+- for D1: its evidence refs, the 9 option versions with the transfer leg and its
+  22 checks, and the recorded trace (fallback `sì`, outcome `verify`, 7 steps);
+- for the unknown-product case: its trace with no fallback, and the Italian
+  clarification shown as **Bozza** and **Simulato: sì**;
+- the exact quotes highlighted in Fonti;
+- after a page reload, the frozen NYC01 decision, read identically through
+  `GET /decisions`, `?case_id=` and `/decisions/{id}`.
+
+The screenshots and check log stay local (`data/core_demo/ui-check-20261023/`,
+ignored). The summary is on #115. Known gaps:
+
+- The case page does not yet render a saved decision after reload (M5), so
+  persistence is verified through the API only.
+- That check ran before the #258 fix. Then the D1 options panel showed 9 option
+  versions, two for each informational option, and the current ones could not be approved. After the fix
+  the API lists 5 (one per option ID) and they are approvable (verified through the
+  API above; the browser check was not repeated).
 
 The scoped Memi audit (`web/`, `diagnose . --json --no-write --fail-on none`)
 reported 50/100; it is unchanged because this task changes no design tokens or
@@ -274,7 +397,7 @@ The gate regressions include `test_gate_temporal.py`, `test_gate_dedup.py`,
 `test_approval_gate.py`, `test_gate_cutoffs.py`, agent runtime/investigator safety
 tests and the replay/cache tests. #211 owns the final invariant audit, human
 sign-off, candidate selection, export freeze and eventual `freeze-g3` tag after
-review/merge. The packaged decision is a scripted synthetic reviewer command, not a
-genuine operator decision; freezing a real operator decision stays open for a
-human. The NYC01 correction abstention and the D1 fallback must remain visible in
-that handoff.
+review/merge. `decisions.json` is a scripted synthetic reviewer command.
+`decisions-operator.json` is the genuine operator decision, Lorenzo's local
+rejection of the D1 transfer. The NYC01 correction abstention, the D1 fallback
+and the #258 post-freeze bug fix above must remain visible in that handoff.

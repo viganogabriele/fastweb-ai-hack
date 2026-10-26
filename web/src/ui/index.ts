@@ -1,4 +1,5 @@
 export * from './Button'
+export * from './Dialog'
 export * from './FeedbackState'
 export * from './format'
 export * from './Input'

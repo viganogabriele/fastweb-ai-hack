@@ -23,9 +23,10 @@ from tesseract.core.contracts import (
 )
 from tesseract.core.db import connect
 from tesseract.core.fixtures import read_fixtures
-from tesseract.core.repo import ErpRecord, Repo, create_run, put_erp
+from tesseract.core.repo import ErpRecord, Repo, create_run, put_erp, set_run_status
 from tesseract.core.run_repo import repo_session
-from tesseract.modules.actions.options import OptionsPolicy
+from tesseract.modules.actions import approval
+from tesseract.modules.actions.options import OptionsPolicy, case_products, evaluate_case, gather
 from tesseract.modules.agents import investigator as agent
 from tesseract.modules.agents.runtime import Budget, Finish, ModelReply, ToolCall, ToolError
 from tesseract.modules.sources.systems_client import Unknown
@@ -673,3 +674,50 @@ def test_correct_donor_stock_number_cannot_be_published_as_destination_stock(dat
         persisted = repo.get(AgentTrace, result.trace.id)
         assert persisted.steps[-1].arguments["rationale"] == result.finish.rationale
         assert forged not in persisted.model_dump_json()
+
+
+@pytest.mark.parametrize("donors", [["NYC01"], ["MIL02", "NYC01"], None])
+def test_donor_subset_never_shadows_an_option_approval_can_accept(database, donors):
+    """#258: a narrowed evaluate_options call republished the deterministic option IDs with
+    a version that approval's full-donor re-evaluation can never rebuild (409)."""
+    engine, spec = database
+    policy = OptionsPolicy()
+
+    def load(current, case):
+        return [
+            gather(current, Reader(current), case, policy, 7, product=product)
+            for product in case_products(current, case)
+        ]
+
+    with repo_session(engine, spec, fixture_mode=True) as repo:
+        published = evaluate_case(load(repo, repo.get(Case, D1)))
+        repo.put(*published)
+        script = Script(
+            ("get_case_evidence", dict(case_id=D1)),
+            ("evaluate_options", dict(case_id=D1, candidate_donors=donors)),
+            ("finish", finish()),
+        )
+        result = agent.investigate(repo, D1, model=script, reader=Reader(repo), policy=policy)
+        (step,) = [s for s in result.trace.steps if s.tool == "evaluate_options"]
+        assert step.error is None
+        assert set(step.output_refs) == {agent.ref(o) for o in published}
+        current = {o.id: o for o in published}
+        stored = [o for o in repo.list(ActionOption) if o.id in current]
+        assert sorted(stored, key=lambda o: o.id) == sorted(published, key=lambda o: o.id)
+    set_run_status(engine, spec.run_id, "published")
+    recommended = next(o for o in published if o.recommended)
+    draft = approval.decide(
+        engine,
+        approval.DecisionRequest(
+            run_id=spec.run_id,
+            scenario_id=spec.scenario_id,
+            option_id=recommended.id,
+            input_version_hash=recommended.input_version_hash,
+            decision="approved",
+            by="test user",
+            idempotency_key="approve-recommended",
+        ),
+        loader=load,
+        now=spec.as_of,
+    )
+    assert draft.option == recommended

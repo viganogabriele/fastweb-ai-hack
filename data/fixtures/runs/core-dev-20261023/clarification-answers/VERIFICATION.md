@@ -9,7 +9,8 @@ and are not loaded by `fixtures load`.
 
 Parent: the published DEMO-02b Core run `core-dev-candidate` (recorded at
 `38fe618`, dev stores only, clock `2026-10-22T20:00:00Z`), rebuilt offline from
-`../llm_cache` and `../systems_cache` (artifact SHA-256 `4a111a0d…`). Its single
+`../llm_cache` and `../systems_cache` (artifact SHA-256 `4a111a0d…` when recorded,
+`35aabf50…` after the #258 fix, see below). Its single
 investigator-drafted, explicitly simulated clarification
 `clarification:fadee7bd…` (version `1`) belongs to case
 `case-mil01-unknown-20261009` (`v1`, MIL01, `verify`). It asks for the model,
@@ -79,15 +80,26 @@ recording completed. Then, through the real HTTP API, it lists
 retries it. `replay-evidence.json` is one such run:
 
 - status `passed`, network attempts 0, LLM and systems cache misses `[]`, 3 presets;
-- parent artifact SHA-256 before = after = recorded =
-  `4a111a0d0255ba4aac6ae95adcbf87200b2a58ed4f044a871bb7822ff9e28bfe`;
-- child artifact SHA-256 equal to the recording:
-  - self-contained `e4d549fe60c78a1a284e9356a4320ac051bb58133d8a2f240c13fc3c175ebeaa`
+- parent artifact SHA-256 before = after = pinned =
+  `35aabf506926bce8c14900df7d574667ab8d23699ee64f22ca4c0b15ca664b48`;
+- child artifact SHA-256 equal to the pinned values:
+  - self-contained `6f612cda5e00a2554ded1922a8a9ad8db5c740c47f8a77fcc40676bf1e7ed87f`
   - elliptical `16be1eb19e58501792c6aeb2883b16d1ff29c5a7c9e867b21a76aed921a806a6`
-  - abstain `e3b7b44558b2f89ac9917ad6898c186402c6074af7ab4dc3721e9926b002a36e`
+  - abstain `714c2c75d44c99af09c589481152f3869a41777b976744c27b87839170edbc4d`
 - each retry returns the identical job; free text returns 424. A registered answer
   at an unrecorded clock is accepted (202), but its child fails unpublished, with
   explicit misses.
+
+**Re-pinned after the #258 post-freeze fix.** The investigator's `evaluate_options` no
+longer republishes donor-narrowed D1 options. That changed the parent's artifacts and
+those of the self-contained and abstain children, whose D1 investigator calls
+`evaluate_options` last, before its budget fallback. No model request changed. Every
+envelope is still a cache hit, and every recorded outcome is identical: fingerprints,
+corrected readings, links, cases, investigations and module errors.
+`clarification_answers_demo.py rebind` checked exactly that, then re-pinned the four
+artifact hashes. The values recorded at `9d50277` stay under `rebound` in
+`recording-evidence.json` (parent `4a111a0d…`, self-contained `e4d549fe…`, abstain
+`e3b7b445…`; elliptical was unchanged).
 
 `--register-only` stops after trusted registration and prints the attempt's
 `data_dir`. Serve that directory for the UI with `LLM_MODE=replay DATA_DIR=<data_dir>

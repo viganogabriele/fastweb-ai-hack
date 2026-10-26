@@ -1,0 +1,141 @@
+<!--
+title: Tesseract: Il forecast ascolta i negozi | FastwebAI Hackathon 2026
+lang: it
+crumb: no
+-->
+
+<section class="slide scene dark hero-scene" id="tesseract" data-footer="off" data-crumb="off">
+
+<div class="bg mail-backdrop" aria-hidden="true"><div class="mail-wall" data-mail-wall></div><div class="mail-veil"></div></div>
+<div class="wordmark beat"><span class="logo"></span>Tesseract</div>
+<div class="hero-copy">
+<p class="eyebrow beat">IL FORECAST ASCOLTA I NEGOZI</p>
+<h1 class="hero-title"><span class="beat">Il negozio</span><span class="beat" style="--delay:.2s">lo sa <em>già.</em></span></h1>
+<p class="hero-sub beat" style="--delay:.65s">Trasformiamo le sue parole<br>nella tua prossima decisione.</p>
+<div class="hero-signature beat" style="--delay:.95s"><span>AI legge</span><b>→</b><span>Codice conta</span><b>→</b><span>Umano decide</span></div>
+</div>
+<div class="hero-footnote beat" style="--delay:1.1s">SEGNALI ILLUSTRATIVI, DATI SINTETICI</div>
+
+<div class="scene-footer"><span><span>TESSERACT</span><span>FASTWEBAI HACKATHON 2026</span></span><span>01 / 12</span></div>
+<aside class="notes">[0:00–0:20] Immaginate un cliente che chiede una taglia esaurita. La vendita non avviene. Nel gestionale quella richiesta non lascia uno scontrino. Ma chi lavora in negozio l'ha vista, e spesso la racconta nell'email di chiusura. Tesseract rende utilizzabile questa informazione. Il contesto è un prototipo per il retail del lusso; non stiamo presentando risultati di un cliente reale. La parete animata contiene brevi etichette illustrative tratte dai temi del pitch, non nuove email o casi di clienti reali.</aside>
+</section>
+
+<section class="slide scene light gap-scene" id="il-negozio-sa" data-footer="off" data-crumb="off">
+
+<div class="scene-heading"><p class="eyebrow beat">IL PROBLEMA NON È RACCOGLIERE ALTRI NUMERI</p><h1 class="scene-title"><span class="beat">Il segnale c'è.</span><span class="beat" style="--delay:.25s">Manca <em>il collegamento.</em></span></h1></div>
+<div class="gap-system">
+<div class="gap-end beat" style="--delay:.55s"><i data-icon="eye"></i><strong>Il negozio</strong><span>Vede la richiesta</span></div>
+<div class="gap-middle"><svg viewBox="0 0 800 160" class="signal-route" aria-hidden="true"><path d="M0 80 H300" class="route-muted"/><path d="M500 80 H800" class="route-muted"/><path d="M0 80 H300" data-packet-path="incoming"/><g data-particles></g></svg><div class="broken-link"><span></span><b>?</b><span></span></div><p>Un'email, in mezzo a tante.</p></div>
+<div class="gap-end beat" style="--delay:.75s"><i data-icon="chart-line"></i><strong>Chi pianifica</strong><span>Deve decidere</span></div>
+</div>
+<p class="scene-bottom beat" style="--delay:1.2s">Le parole arrivano. Il loro significato rischia di perdersi.</p>
+
+<div class="scene-footer"><span><span>TESSERACT</span><span>FASTWEBAI HACKATHON 2026</span></span><span>02 / 12</span></div>
+<aside class="notes">[0:20–0:40] Ogni sera arrivano commenti in lingue diverse: una taglia finita, richieste senza acquisto, un ostacolo all'ingresso. Il forecast e i consuntivi sono fondamentali. Qui aggiungiamo il contesto qualitativo che può mancare. Il valore è decidere meglio mentre c'è ancora tempo per intervenire; l'anticipo effettivo va misurato, non promesso. Fonti: docs/findings.md §2 e docs/RFC-001-piattaforma.md §1.1.</aside>
+</section>
+
+<section class="slide scene dark demand-scene" id="domanda-invisibile" data-footer="off" data-crumb="off">
+
+<div class="scene-heading"><p class="eyebrow beat">VENDITE E DOMANDA NON COINCIDONO</p><h1 class="scene-title beat">La domanda <em>invisibile.</em></h1></div>
+<div class="zero-stage"><div class="zero-orbit" aria-hidden="true"><i></i><i></i><i></i></div><b class="zero beat" style="--delay:.25s">0</b><span class="zero-label beat" style="--delay:.5s">VENDITE, SE LA TAGLIA È FINITA</span></div>
+<div class="demand-copy"><p class="demand-wrong beat" style="--delay:.7s">Nessun interesse.</p><h2 class="beat" style="--delay:1.1s">O nessuna<br><em>taglia disponibile?</em></h2><p class="scene-copy beat" style="--delay:1.45s">Una richiesta senza acquisto<br>non lascia uno scontrino.</p><div class="demand-tag beat" style="--delay:1.8s"><i data-icon="mail"></i>Ma può lasciare un'email.</div></div>
+
+<div class="scene-footer"><span><span>TESSERACT</span><span>FASTWEBAI HACKATHON 2026</span></span><span>03 / 12</span></div>
+<aside class="notes">[0:40–1:00] Zero vendite può voler dire zero interesse. Ma può anche voler dire che manca la taglia giusta. Confondere le due cose rischia di lasciare il prodotto dove non serve e di non averlo dove viene cercato. Non attribuiamo un costo economico inventato: rendiamo visibile la domanda non soddisfatta segnalata dal negozio. Fonti: docs/findings.md §5, RFC §1 e §2.</aside>
+</section>
+
+<section class="slide scene dark pipeline-scene" id="percorso" data-footer="off" data-crumb="off">
+
+<div class="scene-heading"><p class="eyebrow beat">IL PRODOTTO</p><h1 class="scene-title beat">Dalle parole. <em>Alle scelte.</em></h1><p class="scene-copy beat" style="--delay:.25s">Un segnale entra. Una proposta verificabile arriva a chi decide.</p></div>
+<div class="pipeline-board">
+<svg class="pipeline-routes" viewBox="0 0 1400 410" aria-hidden="true"><path d="M190 205 H550" class="route-muted"/><path d="M710 205 C850 205 850 95 1000 95" class="route-accent"/><path d="M710 205 C850 205 850 315 1000 315" class="route-muted"/><path d="M1180 95 C1290 95 1280 205 1350 205" class="route-accent"/><path d="M1180 315 C1290 315 1280 205 1350 205" class="route-muted"/><path d="M190 205 H550" data-packet-path="incoming"/><path d="M710 205 C850 205 850 95 1000 95" data-packet-path="outgoing"/><path d="M710 205 C850 205 850 315 1000 315" data-packet-path="muted"/><path d="M1180 95 C1290 95 1280 205 1350 205" data-packet-path="outgoing"/><path d="M1180 315 C1290 315 1280 205 1350 205" data-packet-path="muted"/><g data-particles></g></svg>
+<div class="source-stack beat" style="--delay:.5s"><div><i data-icon="mail"></i>Email</div><div><i data-icon="file-text"></i>Report</div><div><i data-icon="database"></i>ERP</div></div>
+<div class="pipeline-core beat" style="--delay:.8s"><div class="core-rings"></div><span class="logo"></span><strong>Tesseract</strong></div>
+<div class="pipeline-lane lane-up beat" style="--delay:1.1s"><span class="status-dot"></span><strong>Scenario</strong><small>Se i dati lo consentono</small></div>
+<div class="pipeline-lane lane-down beat" style="--delay:1.35s"><i data-icon="search"></i><strong>Verifica</strong><small>Se serve chiarire</small></div>
+<div class="pipeline-human beat" style="--delay:1.6s"><i data-icon="user"></i><span>La scelta<br>è umana</span></div>
+</div>
+<div class="process-caption beat" style="--delay:1.8s"><span>01 <b>Legge</b></span><span>02 <b>Collega</b></span><span>03 <b>Valuta</b></span><span>04 <b>Propone</b></span></div>
+
+<div class="scene-footer"><span><span>TESSERACT</span><span>FASTWEBAI HACKATHON 2026</span></span><span>04 / 12</span></div>
+<aside class="notes">[1:00–1:25] L'AI interpreta il testo. Il codice verifica prove, unità e dati e calcola scenari e quantità. Le osservazioni vengono collegate al catalogo e aggregate senza contare due volte un inoltro. In fondo non esce un testo generico: esce un caso con opzioni da valutare. I dati del prototipo sono sintetici; i canali aziendali e l'esecuzione sono simulati. Fonte: RFC §0, §2.3–2.4 e §3.1.</aside>
+</section>
+
+<section class="slide scene light evidence-scene" id="evidenza" data-footer="off" data-crumb="off">
+
+<div class="scene-heading"><p class="eyebrow beat">MIL01, 8 OTTOBRE 2026 / DATASET SINTETICO</p><h1 class="scene-title beat">Non un riassunto.<br><em>Una prova.</em></h1></div>
+<div class="evidence-paper beat" style="--delay:.4s"><div class="paper-top"><i data-icon="mail"></i><span>Email di chiusura</span><span>MIL01</span></div><div class="paper-text"><p>Rotture: CARDIGAN LOGO M<br>nero e blu FINITO</p><p class="source-quote">Nel pomeriggio due clienti lo cercavano in M e non avevamo niente.</p><p>Il magazzino non ha M<br>fino a fine mese.</p></div><div class="scan-line" aria-hidden="true"></div><span class="paper-stamp">FONTE ORIGINALE</span></div>
+<svg class="evidence-links" viewBox="0 0 1600 900" aria-hidden="true"><path d="M760 475 C850 475 840 425 930 425"/><path d="M760 490 C850 490 840 525 930 525"/><path d="M760 510 C850 510 840 625 930 625"/></svg>
+<div class="extraction"><div class="extraction-row beat" style="--delay:1.1s"><span>PRODOTTO</span><strong>VLOGO CARDIGAN</strong></div><div class="extraction-row beat" style="--delay:1.4s"><span>TAGLIA</span><strong>M</strong></div><div class="extraction-row beat" style="--delay:1.7s"><span>SEGNALE</span><strong>Richieste non soddisfatte</strong></div><p class="beat" style="--delay:2s"><i data-icon="link"></i>Ogni osservazione torna alla sua fonte.</p></div>
+
+<div class="scene-footer"><span><span>TESSERACT</span><span>FASTWEBAI HACKATHON 2026</span></span><span>05 / 12</span></div>
+<aside class="notes">[1:25–1:55] Questa è una citazione esatta, non una frase generata per il pitch. Viene dall'email sintetica generated/sources/store_emails/MIL01/20261008_2215_MIL01.eml. L'esempio contiene due richieste pomeridiane, non una stima della domanda totale o futura. La prova resta agganciata al documento e al periodo. Una citazione corretta prova la provenienza del testo; non certifica da sola che l'interpretazione sia corretta. Abbiamo omesso firma, risultati commerciali e informazioni non necessarie. La finestra è un'illustrazione per il pitch, non uno screenshot della UI.</aside>
+</section>
+
+<section class="slide scene light catalog-scene" id="prodotto" data-footer="off" data-crumb="off">
+
+<div class="catalog-copy"><p class="eyebrow beat">IL PASSAGGIO DECISIVO</p><h1 class="scene-title"><span class="beat">Il prodotto giusto.</span><span class="beat" style="--delay:.25s"><em>Senza indovinare.</em></span></h1><p class="scene-copy beat" style="--delay:.6s">“Cardigan logo in M”<br>diventa un collegamento al catalogo.</p><div class="catalog-tags beat" style="--delay:.9s"><span>Nero</span><span>Blu</span><span class="size-chip">M</span></div><div class="verify-callout beat" style="--delay:1.4s"><i data-icon="search"></i><p>Ambiguo?<br><b>Si ferma e chiede.</b></p></div></div>
+<div class="catalog-stage"><div class="catalog-shadow" aria-hidden="true"></div><div class="catalog-back back-one" aria-hidden="true"></div><div class="catalog-back back-two" aria-hidden="true"></div><figure class="catalog-front beat" style="--delay:.5s"><div class="catalog-photo"><img src="img/catalog-reference.jpg" alt="Riferimento visivo Valentino di maglieria, diverso dal cardigan sintetico"></div><figcaption><span>RIFERIMENTO VISIVO VALENTINO</span><strong>VLOGO CARDIGAN</strong><small>Il caso e il modello sono sintetici.</small></figcaption><div class="catalog-corner">M</div></figure><div class="catalog-match beat" style="--delay:1.2s"><i data-icon="link"></i>Modello, colori, taglia</div></div>
+
+<div class="scene-footer"><span><span>TESSERACT</span><span>FASTWEBAI HACKATHON 2026</span></span><span>06 / 12</span></div>
+<aside class="notes">[1:55–2:20] Le persone non scrivono codici SKU. Il collegamento usa i candidati del catalogo e il contesto del negozio. Qui la frase cita due colori: non fingiamo che identifichi un solo SKU-colore. Se il prodotto resta ambiguo, il caso richiede verifica. La fotografia è un riferimento commerciale di categoria e può differire dal cardigan simulato: non è prova di uno stockout Valentino. Fonte del riferimento: https://www.valentino.com/en-it/product-valentino-cotton-and-moulin%C3%A9-wool-jumper-with-panther-jacquard-VKC38DBMW_0AN ; associazione documentata in data/catalog/README.md e products.json. Nessun dato commerciale del catalogo entra nel forecast storico.</aside>
+</section>
+
+<section class="slide scene light forecast-scene" id="scenari" data-footer="off" data-crumb="off">
+
+<div class="scene-heading"><p class="eyebrow beat">IL FORECAST RESTA IL RIFERIMENTO</p><h1 class="scene-title beat">La storia. <em>Più il contesto.</em></h1></div>
+<div class="forecast-chart"><svg viewBox="0 0 1340 390" role="img" aria-label="Schema qualitativo di baseline e scenario condizionale, senza scala quantitativa"><defs><linearGradient id="scenario-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9b1b30" stop-opacity=".19"/><stop offset="1" stop-color="#9b1b30" stop-opacity="0"/></linearGradient></defs><g class="chart-grid"><path d="M0 65H1340 M0 155H1340 M0 245H1340 M0 335H1340"/></g><path class="chart-baseline" pathLength="1" d="M10 285 C120 270 180 300 270 250 S430 240 530 230 S710 215 810 220 S960 200 1050 200 S1200 180 1320 190"/><path class="chart-area" d="M650 225 C780 205 880 170 1000 95 S1180 60 1320 35 L1320 210 C1180 230 1060 220 960 240 S770 250 650 245 Z"/><path class="chart-scenario" pathLength="1" d="M650 225 C780 205 880 190 1000 135 S1180 110 1320 95"/><path class="chart-now" d="M650 40 V365"/><circle cx="650" cy="225" r="9" class="chart-point"/></svg><span class="chart-label label-baseline">Baseline</span><span class="chart-label label-scenario">Scenario condizionale</span><div class="chart-evidence beat" style="--delay:.9s"><i data-icon="mail"></i>Nuova evidenza</div><div class="chart-axis"><span>STORIA DISPONIBILE</span><span>SCENARI, SE STIMABILI</span></div></div>
+<div class="forecast-bottom"><p class="beat" style="--delay:1.5s">Se i dati non bastano: <b>verifica, baseline invariata.</b></p><span>SCHEMA ILLUSTRATIVO, NESSUNA SCALA QUANTITATIVA</span></div>
+
+<div class="scene-footer"><span><span>TESSERACT</span><span>FASTWEBAI HACKATHON 2026</span></span><span>07 / 12</span></div>
+<aside class="notes">[2:20–2:45] Tesseract affianca scenari al forecast; non lo sovrascrive. Il codice calcola solo quando quantità, periodo e granularità lo consentono. Altrimenti la baseline rimane invariata. Anche questo è valore: una frase vaga non diventa un più venti per cento inventato. Non mostriamo curve numeriche perché questa presentazione non contiene un risultato sperimentale congelato da cui ricavarle. Fonti: RFC §1.3 A5, §2 e §4.9. La curva è uno schema qualitativo senza scala quantitativa, non un forecast calcolato o una misura di miglioramento. La fascia non rappresenta un intervallo di confidenza calibrato.</aside>
+</section>
+
+<section class="slide scene dark decision-scene" id="decisione" data-footer="off" data-crumb="off">
+
+<div class="decision-copy"><p class="eyebrow beat">IL MOMENTO CHE CONTA</p><h1 class="scene-title"><span class="beat">L'AI propone.</span><span class="beat" style="--delay:.3s"><em>Tu decidi.</em></span></h1><p class="scene-copy beat" style="--delay:.7s">Una proposta da valutare.<br>Le prove per farlo.</p><div class="decision-principle beat" style="--delay:1.1s"><span>AI</span><div></div><i data-icon="user"></i><b>APPROVAZIONE UMANA</b></div></div>
+<div class="action-card beat" style="--delay:.65s"><div class="action-card-top"><span>PROPOSTA ILLUSTRATIVA</span><span class="review-badge">Da valutare</span></div><h2>Valuta un<br>riassortimento</h2><p class="action-proof"><i data-icon="link"></i>Richieste non soddisfatte in negozio</p><div class="action-check beat" style="--delay:1.2s"><i data-icon="boxes"></i><span>Stock e fabbisogno del donatore</span></div><div class="action-check beat" style="--delay:1.55s"><i data-icon="route"></i><span>Taglia, tratta e arrivo utile</span></div><div class="action-check beat" style="--delay:1.9s"><i data-icon="shield-check"></i><span>Controlli obbligatori superati</span></div><div class="action-card-bottom"><span class="demo-approve"><i data-icon="user"></i>Approva una bozza</span><span class="demo-verify">Oppure verifica</span></div><p class="action-disclosure">Illustrazione del flusso, nessuna azione eseguita.</p></div>
+
+<div class="scene-footer"><span><span>TESSERACT</span><span>FASTWEBAI HACKATHON 2026</span></span><span>08 / 12</span></div>
+<aside class="notes">[2:45–3:15] La scheda evita al planner di ricominciare da una pila di email. Rende disponibili il motivo, le prove e i controlli. La proposta illustrata non è un trasferimento realmente calcolato o eseguito per il caso precedente. Nel prototipo l'approvazione salva una bozza locale sul server: nessun movimento fisico di stock parte da queste slide. Un trasferimento è ammissibile solo se tutti i controlli obbligatori passano; hold e verifica restano opzioni valide. Fonti: RFC §2.1 OBJ5, §4.10–4.11; web/src/sections/CaseOptionsPanel.tsx. I controlli visualizzati fanno parte di una proposta illustrativa: non attestano la fattibilità di uno specifico trasferimento. Il pulsante disegnato non esegue alcuna azione.</aside>
+</section>
+
+<section class="slide scene dark agent-scene" id="agenti" data-footer="off" data-crumb="off">
+
+<div class="scene-heading"><p class="eyebrow beat">MODELLI FASTWEB, TOOL CALLING, CONTROLLI DETERMINISTICI</p><h1 class="scene-title beat">Non si limita a leggere.<br><em>Indaga.</em></h1></div>
+<div class="agent-board"><svg viewBox="0 0 1400 390" class="agent-routes" aria-hidden="true"><path d="M280 195 C420 195 410 55 540 55 H1020" class="route-muted"/><path d="M280 195 H1020" class="route-accent"/><path d="M280 195 C420 195 410 335 540 335 H1020" class="route-muted"/><path d="M280 195 C420 195 410 55 540 55 H1020" data-packet-path="outgoing"/><path d="M280 195 H1020" data-packet-path="incoming"/><path d="M280 195 C420 195 410 335 540 335 H1020" data-packet-path="outgoing"/><g data-particles></g></svg><div class="agent-hub beat" style="--delay:.5s"><div class="core-rings"></div><i data-icon="bot"></i><strong>Investigatore</strong></div><div class="tool-node tool-stock beat" style="--delay:.8s"><i data-icon="boxes"></i><div><strong>Stock</strong><span>Disponibilità e conflitti</span></div></div><div class="tool-node tool-routes beat" style="--delay:1.1s"><i data-icon="route"></i><div><strong>Logistica</strong><span>Tratte e tempi</span></div></div><div class="tool-node tool-options beat" style="--delay:1.4s"><i data-icon="list-checks"></i><div><strong>Opzioni</strong><span>Fattibilità verificata dal codice</span></div></div><div class="trace-panel beat" style="--delay:1.7s"><p>TRACCIA CONSULTABILE</p><div><span>01</span>Legge le evidenze</div><div><span>02</span>Consulta gli strumenti</div><div><span>03</span>Motiva la proposta</div></div></div>
+<p class="agent-caption beat" style="--delay:2s">Può investigare. <strong>Non può approvare.</strong></p>
+
+<div class="scene-footer"><span><span>TESSERACT</span><span>FASTWEBAI HACKATHON 2026</span></span><span>09 / 12</span></div>
+<aside class="notes">[3:15–3:45] Non è soltanto estrazione di testo: l'investigatore sceglie quali strumenti consultare. Può chiedere evidenze, stock, tratte e valutazione delle opzioni. La fattibilità è verificata da codice; l'agente non può approvare o aggirare un controllo. Le chiamate e i risultati sono ispezionabili. Nel prototipo i sistemi aziendali sono mock; live, registrato e fixture sono modalità distinte. Fonte: RFC §4.11, §4.12; backend/tessera/modules/agents/README.md.</aside>
+</section>
+
+<section class="slide scene light integration-scene" id="integrazione" data-footer="off" data-crumb="off">
+
+<div class="integration-copy"><p class="eyebrow beat">PER MERCHANDISING E ALLOCATION HQ</p><h1 class="scene-title"><span class="beat">Dentro il tuo</span><span class="beat" style="--delay:.25s"><em>processo.</em></span></h1><p class="scene-copy beat" style="--delay:.6s">Dalle fonti disponibili<br>alla revisione del planner.</p></div>
+<div class="integration-stack"><div class="integration-slab slab-one beat" style="--delay:.5s"><span>01</span><i data-icon="mail"></i><div><strong>Le tue fonti</strong><p>Email, report, ERP</p></div><b>INPUT</b></div><div class="integration-slab slab-two beat" style="--delay:.85s"><span>02</span><span class="logo"></span><div><strong>Tesseract</strong><p>Prove, scenari e opzioni</p></div><b>INTELLIGENCE</b></div><div class="integration-slab slab-three beat" style="--delay:1.2s"><span>03</span><i data-icon="user"></i><div><strong>La tua decisione</strong><p>Revisione e bozza locale</p></div><b>CONTROLLO</b></div></div>
+<div class="integration-note beat" style="--delay:1.7s"><i data-icon="layers"></i><span>Il forecast esistente resta la baseline.</span><small>Nel prototipo: file, upload e sistemi simulati.</small></div>
+
+<div class="scene-footer"><span><span>TESSERACT</span><span>FASTWEBAI HACKATHON 2026</span></span><span>10 / 12</span></div>
+<aside class="notes">[3:45–4:10] Il primo interlocutore è chi decide l'allocazione in HQ. Possiamo iniziare dalle fonti disponibili e dai sistemi esistenti. Nel prototipo i connettori lavorano su file e upload: collegare mailbox, ERP o altri canali reali è lavoro di integrazione per un pilota. L'adozione nei negozi va verificata. I modelli Fastweb supportano il lavoro sul testo e il tool calling tramite l'integrazione API documentata nella repo; la trascrizione vocale usa il server ASR del team, non Fastweb. Non presentare il vocale o WhatsApp Business come integrazioni di produzione già attive. Fonti: RFC §1.3, §2.2–2.4; docs/PLAN.md; AGENTS.md, Backend setup.</aside>
+</section>
+
+<section class="slide scene dark pilot-scene" id="pilota" data-footer="off" data-crumb="off">
+
+<div class="pilot-copy"><p class="eyebrow beat">PROPOSTA DI PILOTA</p><h1 class="scene-title"><span class="beat">Il valore</span><span class="beat" style="--delay:.25s">si <em>misura.</em></span></h1><p class="scene-copy beat" style="--delay:.65s">Un perimetro ristretto.<br>Un confronto verificabile.</p></div>
+<div class="pilot-metrics"><div class="pilot-metric beat" style="--delay:.7s"><span class="metric-no">01</span><div><h2>Anticipo utile</h2><p>Arriva in tempo per agire?</p></div><span class="metric-state">DA MISURARE</span><div class="metric-track" aria-hidden="true"></div></div><div class="pilot-metric beat" style="--delay:1s"><span class="metric-no">02</span><div><h2>Qualità del segnale</h2><p>Collegamenti corretti e falsi allarmi</p></div><span class="metric-state">DA MISURARE</span><div class="metric-track" aria-hidden="true"></div></div><div class="pilot-metric beat" style="--delay:1.3s"><span class="metric-no">03</span><div><h2>Decisioni migliori</h2><p>Proposte fattibili e approvate</p></div><span class="metric-state">DA MISURARE</span><div class="metric-track" aria-hidden="true"></div></div></div>
+<p class="pilot-footnote beat" style="--delay:1.7s">Benefici da verificare sul campo. Nessun ROI presunto.</p>
+
+<div class="scene-footer"><span><span>TESSERACT</span><span>FASTWEBAI HACKATHON 2026</span></span><span>11 / 12</span></div>
+<aside class="notes">[4:10–4:40] La proposta è un pilota con merchandising e allocation: un perimetro ristretto, criteri concordati e confronto sullo stesso periodo. Misuriamo anticipo rispetto a vendite e stock, margine prima del cutoff, correttezza del linking, astensioni, falsi allarmi e fattibilità delle opzioni. L'approvazione umana è una misura di uso, non prova da sola un beneficio causale. La demo usa dati sintetici; non dichiariamo ROI, incremento vendite o performance su hold-out non verificati. Fonte: RFC §2.1 e §5; docs/PLAN.md §4 EVL.</aside>
+</section>
+
+<section class="slide scene red closing-scene" id="chiusura" data-footer="off" data-crumb="off">
+
+<div class="closing-copy"><p class="eyebrow beat">TESSERACT / IL FORECAST ASCOLTA I NEGOZI</p><h1 class="closing-title"><span class="beat">La prossima</span><span class="beat" style="--delay:.2s">decisione</span><span class="beat" style="--delay:.4s">inizia <em>qui.</em></span></h1></div>
+<div class="closing-art" aria-hidden="true"><div class="mosaic-tile tile-one"></div><div class="mosaic-tile tile-two"></div><div class="mosaic-tile tile-three"></div><div class="mosaic-tile tile-four"><i data-icon="mail"></i></div><div class="mosaic-ring"></div></div>
+<div class="closing-signature beat" style="--delay:1.5s">AI LEGGE <span>→</span> CODICE CONTA <span>→</span> UMANO DECIDE</div>
+
+<div class="scene-footer"><span><span>TESSERACT</span><span>FASTWEBAI HACKATHON 2026</span></span><span>12 / 12</span></div>
+<aside class="notes">[4:40–5:00] Chiudere guardando la giuria, senza elencare di nuovo le funzionalità. Il valore di Tesseract è rendere utilizzabile quello che i negozi già raccontano: una prova, un contesto e una scelta controllabile. L'AI legge, il codice conta, l'umano decide.</aside>
+</section>

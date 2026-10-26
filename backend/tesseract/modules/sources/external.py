@@ -453,6 +453,7 @@ def run(ctx, *, sources_dir: Path | None = None) -> ModuleResult:
         by_city.setdefault(city, []).append(store_id)
     events: list[ContextEvent] = []
     master_timezones = store_timezones(root)
+    timezone_warnings = []
     for city in sorted(by_city):
         try:
             feed = load_city(root, city)
@@ -475,7 +476,7 @@ def run(ctx, *, sources_dir: Path | None = None) -> ModuleResult:
             if echoed != timezone.key:
                 # A calendar date needs no conversion; the store's zone is the master key. The
                 # feed's own timestamp is still wrong and the run says so instead of hiding it.
-                errors.append(
+                timezone_warnings.append(
                     f"{city}: {relative} says {echoed} while the store's timezone is "
                     f"{timezone.key}; its days are bounded by the store's timezone"
                 )
@@ -506,8 +507,8 @@ def run(ctx, *, sources_dir: Path | None = None) -> ModuleResult:
     return ModuleResult(
         module_id=MANIFEST.id,
         module_version=MANIFEST.version,
-        status="degraded" if errors else "succeeded",
+        status="degraded" if errors or timezone_warnings else "succeeded",
         counts={"cities": len(by_city), "events": len(events)},
         errors=tuple(errors),
-        abstentions=tuple(abstentions),
+        abstentions=tuple([*abstentions, *timezone_warnings]),
     )

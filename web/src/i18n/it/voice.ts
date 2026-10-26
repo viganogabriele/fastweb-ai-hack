@@ -1,0 +1,32 @@
+export const voice = {
+  title: 'Voce del negozio',
+  subtitle: 'Oltre al report di chiusura: un vocale guidato di ogni dipendente a fine turno.',
+  store: 'Negozio',
+  evening: 'sera del',
+  notes: 'Le voci di fine turno',
+  pseudonym: 'Pseudonimo',
+  transcript: 'Leggi la trascrizione completa',
+  onlyVoice: 'Solo nei vocali',
+  onlyVoiceDescription: 'Motivi di mancato acquisto riferiti nei vocali: nessuna email di chiusura li riporta.',
+  noEmail: 'Per questa sera non è disponibile alcuna email di chiusura: confronto con il report non effettuato.',
+  conflicts: 'In conflitto con il sistema',
+  noConflicts: 'Nessun conflitto verificato con il sistema per questo negozio.',
+  verify: 'da verificare',
+  employeeSays: 'Il dipendente dice',
+  stockSays: 'lo stock al',
+  stock: 'pezzi disponibili',
+  stockSource: 'Fonte stock',
+  comparison: 'Confronto dei segnali',
+  transit: 'in transito',
+  overlap: 'Cosa coincide tra colleghi',
+  noOverlap: 'Nessun prodotto citato da più colleghi stasera',
+  singleNote: 'È disponibile un solo vocale per questo negozio.',
+  record: 'Registra un vocale',
+  ambiguous: 'Prodotto ambiguo · entrambi i candidati',
+  types: {
+    provato_non_comprato: 'Avvicinato, ispezionato o provato · non acquistato',
+    richiesto_non_disponibile: 'Richiesta / disponibilità riferita',
+    apprezzato: 'Apprezzato',
+    operativo: 'Nota operativa'
+  }
+} as const
